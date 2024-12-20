@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Scm._Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The ExtendsModelArrayAdditionalProperties. </summary>
+    /// <summary> The model extends from Record&lt;ModelForRecord[]&gt; type. </summary>
     public partial class ExtendsModelArrayAdditionalProperties
     {
         /// <summary>

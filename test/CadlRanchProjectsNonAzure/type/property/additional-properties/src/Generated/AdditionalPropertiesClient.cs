@@ -9,7 +9,7 @@ using System.Threading;
 namespace Scm._Type.Property.AdditionalProperties
 {
     // Data plane generated client.
-    /// <summary> The AdditionalProperties service client. </summary>
+    /// <summary> Tests for additional properties of models. </summary>
     public partial class AdditionalPropertiesClient
     {
         private readonly ClientPipeline _pipeline;
@@ -24,7 +24,7 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary> Initializes a new instance of AdditionalPropertiesClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public AdditionalPropertiesClient(Uri endpoint, AdditionalPropertiesClientOptions options)

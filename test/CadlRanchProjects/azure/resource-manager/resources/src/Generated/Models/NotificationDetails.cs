@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Azure.ResourceManager.Resources.Models
 {
-    /// <summary> The NotificationDetails. </summary>
+    /// <summary> The details of a user notification. </summary>
     public partial class NotificationDetails
     {
         /// <summary>
@@ -46,8 +46,8 @@ namespace _Azure.ResourceManager.Resources.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="NotificationDetails"/>. </summary>
-        /// <param name="message"></param>
-        /// <param name="urgent"></param>
+        /// <param name="message"> The notification message. </param>
+        /// <param name="urgent"> If true, the notification is urgent. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public NotificationDetails(string message, bool urgent)
         {
@@ -58,8 +58,8 @@ namespace _Azure.ResourceManager.Resources.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="NotificationDetails"/>. </summary>
-        /// <param name="message"></param>
-        /// <param name="urgent"></param>
+        /// <param name="message"> The notification message. </param>
+        /// <param name="urgent"> If true, the notification is urgent. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal NotificationDetails(string message, bool urgent, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -73,9 +73,9 @@ namespace _Azure.ResourceManager.Resources.Models
         {
         }
 
-        /// <summary> Gets the message. </summary>
+        /// <summary> The notification message. </summary>
         public string Message { get; }
-        /// <summary> Gets the urgent. </summary>
+        /// <summary> If true, the notification is urgent. </summary>
         public bool Urgent { get; }
     }
 }

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.ValueTypes.Models
 {
-    /// <summary> The Decimal128Property. </summary>
+    /// <summary> Model with a decimal128 property. </summary>
     public partial class Decimal128Property
     {
         /// <summary>
@@ -46,14 +46,14 @@ namespace _Type.Property.ValueTypes.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Decimal128Property"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         public Decimal128Property(decimal property)
         {
             Property = property;
         }
 
         /// <summary> Initializes a new instance of <see cref="Decimal128Property"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal Decimal128Property(decimal property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -66,7 +66,7 @@ namespace _Type.Property.ValueTypes.Models
         {
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public decimal Property { get; set; }
     }
 }

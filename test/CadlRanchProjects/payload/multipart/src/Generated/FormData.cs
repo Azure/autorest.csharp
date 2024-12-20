@@ -38,7 +38,7 @@ namespace Payload.MultiPart
         /// <summary> Initializes a new instance of FormData. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal FormData(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -46,7 +46,7 @@ namespace Payload.MultiPart
             _endpoint = endpoint;
         }
 
-        /// <summary> Basic. </summary>
+        /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -61,7 +61,7 @@ namespace Payload.MultiPart
             return response;
         }
 
-        /// <summary> Basic. </summary>
+        /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -77,7 +77,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Basic.
+        /// [Protocol Method] Test content-type: multipart/form-data
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -117,7 +117,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Basic.
+        /// [Protocol Method] Test content-type: multipart/form-data
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -156,7 +156,7 @@ namespace Payload.MultiPart
             }
         }
 
-        /// <summary> File array and basic. </summary>
+        /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
         /// <param name="body"> The <see cref="ComplexPartsRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -171,7 +171,7 @@ namespace Payload.MultiPart
             return response;
         }
 
-        /// <summary> File array and basic. </summary>
+        /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
         /// <param name="body"> The <see cref="ComplexPartsRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -187,7 +187,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] File array and basic.
+        /// [Protocol Method] Test content-type: multipart/form-data for mixed scenarios
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -227,7 +227,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] File array and basic.
+        /// [Protocol Method] Test content-type: multipart/form-data for mixed scenarios
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -266,7 +266,7 @@ namespace Payload.MultiPart
             }
         }
 
-        /// <summary> Json part. </summary>
+        /// <summary> Test content-type: multipart/form-data for scenario contains json part and binary part. </summary>
         /// <param name="body"> The <see cref="JsonPartRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -281,7 +281,7 @@ namespace Payload.MultiPart
             return response;
         }
 
-        /// <summary> Json part. </summary>
+        /// <summary> Test content-type: multipart/form-data for scenario contains json part and binary part. </summary>
         /// <param name="body"> The <see cref="JsonPartRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -297,7 +297,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Json part.
+        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains json part and binary part
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -337,7 +337,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Json part.
+        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains json part and binary part
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -376,7 +376,7 @@ namespace Payload.MultiPart
             }
         }
 
-        /// <summary> Binary array parts. </summary>
+        /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
         /// <param name="body"> The <see cref="BinaryArrayPartsRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -391,7 +391,7 @@ namespace Payload.MultiPart
             return response;
         }
 
-        /// <summary> Binary array parts. </summary>
+        /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
         /// <param name="body"> The <see cref="BinaryArrayPartsRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -407,7 +407,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Binary array parts.
+        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi binary parts
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -447,7 +447,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Binary array parts.
+        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi binary parts
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -486,7 +486,7 @@ namespace Payload.MultiPart
             }
         }
 
-        /// <summary> Multi binary parts. </summary>
+        /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
         /// <param name="body"> The <see cref="MultiBinaryPartsRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -501,7 +501,7 @@ namespace Payload.MultiPart
             return response;
         }
 
-        /// <summary> Multi binary parts. </summary>
+        /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
         /// <param name="body"> The <see cref="MultiBinaryPartsRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -517,7 +517,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Multi binary parts.
+        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi binary parts
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -557,7 +557,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Multi binary parts.
+        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi binary parts
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -596,7 +596,7 @@ namespace Payload.MultiPart
             }
         }
 
-        /// <summary> Check file name and content type. </summary>
+        /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -611,7 +611,7 @@ namespace Payload.MultiPart
             return response;
         }
 
-        /// <summary> Check file name and content type. </summary>
+        /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -627,7 +627,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Check file name and content type.
+        /// [Protocol Method] Test content-type: multipart/form-data
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -667,7 +667,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Check file name and content type.
+        /// [Protocol Method] Test content-type: multipart/form-data
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -706,7 +706,7 @@ namespace Payload.MultiPart
             }
         }
 
-        /// <summary> Anonymous model. </summary>
+        /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="profileImage"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
@@ -722,7 +722,7 @@ namespace Payload.MultiPart
             return response;
         }
 
-        /// <summary> Anonymous model. </summary>
+        /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="profileImage"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
@@ -739,7 +739,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Anonymous model.
+        /// [Protocol Method] Test content-type: multipart/form-data
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -779,7 +779,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Anonymous model.
+        /// [Protocol Method] Test content-type: multipart/form-data
         /// <list type="bullet">
         /// <item>
         /// <description>

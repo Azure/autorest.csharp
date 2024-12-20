@@ -10,11 +10,11 @@ using System.Collections.Generic;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The MultipleSpreadRecord. </summary>
+    /// <summary> The model spread Record&lt;string&gt; and Record&lt;float32&gt;. </summary>
     public partial class MultipleSpreadRecord
     {
         /// <summary> Initializes a new instance of <see cref="MultipleSpreadRecord"/>. </summary>
-        /// <param name="flag"></param>
+        /// <param name="flag"> The name property. </param>
         public MultipleSpreadRecord(bool flag)
         {
             Flag = flag;
@@ -22,7 +22,7 @@ namespace _Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="MultipleSpreadRecord"/>. </summary>
-        /// <param name="flag"></param>
+        /// <param name="flag"> The name property. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         internal MultipleSpreadRecord(bool flag, IDictionary<string, BinaryData> additionalProperties)
         {
@@ -35,7 +35,7 @@ namespace _Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> Gets or sets the flag. </summary>
+        /// <summary> The name property. </summary>
         public bool Flag { get; set; }
         /// <summary>
         /// Additional Properties

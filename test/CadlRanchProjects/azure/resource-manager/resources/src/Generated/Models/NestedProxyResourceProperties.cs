@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Azure.ResourceManager.Resources.Models
 {
-    /// <summary> The NestedProxyResourceProperties. </summary>
+    /// <summary> Nested Proxy Resource Properties. </summary>
     public partial class NestedProxyResourceProperties
     {
         /// <summary>
@@ -51,8 +51,8 @@ namespace _Azure.ResourceManager.Resources.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="NestedProxyResourceProperties"/>. </summary>
-        /// <param name="provisioningState"></param>
-        /// <param name="description"></param>
+        /// <param name="provisioningState"> Provisioning State of the nested child Resource. </param>
+        /// <param name="description"> Nested resource description. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal NestedProxyResourceProperties(ProvisioningState? provisioningState, string description, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -61,9 +61,9 @@ namespace _Azure.ResourceManager.Resources.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets the provisioning state. </summary>
+        /// <summary> Provisioning State of the nested child Resource. </summary>
         public ProvisioningState? ProvisioningState { get; }
-        /// <summary> Gets or sets the description. </summary>
+        /// <summary> Nested resource description. </summary>
         public string Description { get; set; }
     }
 }

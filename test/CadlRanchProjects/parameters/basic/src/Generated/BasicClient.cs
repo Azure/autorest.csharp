@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 namespace Parameters.Basic
 {
     // Data plane generated client.
-    /// <summary> The Basic service client. </summary>
+    /// <summary> Test for basic parameters cases. </summary>
     public partial class BasicClient
     {
         private readonly HttpPipeline _pipeline;
@@ -31,7 +31,7 @@ namespace Parameters.Basic
         }
 
         /// <summary> Initializes a new instance of BasicClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public BasicClient(Uri endpoint, BasicClientOptions options)

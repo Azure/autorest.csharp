@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Model.Inheritance.Recursive.Models
 {
-    /// <summary> The Element. </summary>
+    /// <summary> element. </summary>
     public partial class Element
     {
         /// <summary>

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.Nullable.Models
 {
-    /// <summary> The DatetimeProperty. </summary>
+    /// <summary> Model with a datetime property. </summary>
     public partial class DatetimeProperty
     {
         /// <summary>
@@ -43,8 +43,8 @@ namespace Scm._Type.Property.Nullable.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DatetimeProperty"/>. </summary>
-        /// <param name="requiredProperty"></param>
-        /// <param name="nullableProperty"></param>
+        /// <param name="requiredProperty"> Required property. </param>
+        /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
         internal DatetimeProperty(string requiredProperty, DateTimeOffset? nullableProperty)
         {
@@ -55,8 +55,8 @@ namespace Scm._Type.Property.Nullable.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="DatetimeProperty"/>. </summary>
-        /// <param name="requiredProperty"></param>
-        /// <param name="nullableProperty"></param>
+        /// <param name="requiredProperty"> Required property. </param>
+        /// <param name="nullableProperty"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal DatetimeProperty(string requiredProperty, DateTimeOffset? nullableProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -70,9 +70,9 @@ namespace Scm._Type.Property.Nullable.Models
         {
         }
 
-        /// <summary> Gets the required property. </summary>
+        /// <summary> Required property. </summary>
         public string RequiredProperty { get; }
-        /// <summary> Gets the nullable property. </summary>
+        /// <summary> Property. </summary>
         public DateTimeOffset? NullableProperty { get; }
     }
 }

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.ValueTypes.Models
 {
-    /// <summary> The StringProperty. </summary>
+    /// <summary> Model with a string property. </summary>
     public partial class StringProperty
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace _Type.Property.ValueTypes.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StringProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public StringProperty(string property)
         {
@@ -56,7 +56,7 @@ namespace _Type.Property.ValueTypes.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="StringProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal StringProperty(string property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -69,7 +69,7 @@ namespace _Type.Property.ValueTypes.Models
         {
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public string Property { get; set; }
     }
 }

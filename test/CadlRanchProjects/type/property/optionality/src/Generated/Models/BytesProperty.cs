@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.Optionality.Models
 {
-    /// <summary> The BytesProperty. </summary>
+    /// <summary> Template type for testing models with optional property. Pass in the type of the property you are looking for. </summary>
     public partial class BytesProperty
     {
         /// <summary>
@@ -51,7 +51,7 @@ namespace _Type.Property.Optionality.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="BytesProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal BytesProperty(BinaryData property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -60,7 +60,7 @@ namespace _Type.Property.Optionality.Models
         }
 
         /// <summary>
-        /// Gets or sets the property
+        /// Property
         /// <para>
         /// To assign a byte[] to this property use <see cref="BinaryData.FromBytes(byte[])"/>.
         /// The byte[] will be serialized to a Base64 encoded string.

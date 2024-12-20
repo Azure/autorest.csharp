@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Azure.ResourceManager.Resources.Models
 {
-    /// <summary> The SingletonTrackedResourceProperties. </summary>
+    /// <summary> Singleton Arm Resource Properties. </summary>
     public partial class SingletonTrackedResourceProperties
     {
         /// <summary>
@@ -51,8 +51,8 @@ namespace _Azure.ResourceManager.Resources.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="SingletonTrackedResourceProperties"/>. </summary>
-        /// <param name="provisioningState"></param>
-        /// <param name="description"></param>
+        /// <param name="provisioningState"> The status of the last operation. </param>
+        /// <param name="description"> The description of the resource. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal SingletonTrackedResourceProperties(ProvisioningState? provisioningState, string description, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -61,9 +61,9 @@ namespace _Azure.ResourceManager.Resources.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets the provisioning state. </summary>
+        /// <summary> The status of the last operation. </summary>
         public ProvisioningState? ProvisioningState { get; }
-        /// <summary> Gets or sets the description. </summary>
+        /// <summary> The description of the resource. </summary>
         public string Description { get; set; }
     }
 }

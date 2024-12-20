@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 namespace Encode.Numeric
 {
     // Data plane generated client.
-    /// <summary> The Numeric service client. </summary>
+    /// <summary> Test for encode decorator on integer. </summary>
     public partial class NumericClient
     {
         private readonly HttpPipeline _pipeline;
@@ -31,7 +31,7 @@ namespace Encode.Numeric
         }
 
         /// <summary> Initializes a new instance of NumericClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NumericClient(Uri endpoint, NumericClientOptions options)

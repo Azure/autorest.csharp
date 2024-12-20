@@ -27,21 +27,21 @@ namespace Scm._Type._Enum.Fixed
 
         /// <summary> Initializes a new instance of String. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal String(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
-        /// <summary> Get known value. </summary>
+        /// <summary> getKnownValue. </summary>
         public virtual async Task<ClientResult<DaysOfWeekEnum>> GetKnownValueAsync()
         {
             ClientResult result = await GetKnownValueAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(result.GetRawResponse().Content.ToObjectFromJson<string>().ToDaysOfWeekEnum(), result.GetRawResponse());
         }
 
-        /// <summary> Get known value. </summary>
+        /// <summary> getKnownValue. </summary>
         public virtual ClientResult<DaysOfWeekEnum> GetKnownValue()
         {
             ClientResult result = GetKnownValue(null);
@@ -49,7 +49,7 @@ namespace Scm._Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method] Get known value.
+        /// [Protocol Method] getKnownValue
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -73,7 +73,7 @@ namespace Scm._Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method] Get known value.
+        /// [Protocol Method] getKnownValue
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -96,8 +96,8 @@ namespace Scm._Type._Enum.Fixed
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Put known value. </summary>
-        /// <param name="body"> The <see cref="DaysOfWeekEnum"/> to use. </param>
+        /// <summary> putKnownValue. </summary>
+        /// <param name="body"> _. </param>
         public virtual async Task<ClientResult> PutKnownValueAsync(DaysOfWeekEnum body)
         {
             using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToSerialString()));
@@ -105,8 +105,8 @@ namespace Scm._Type._Enum.Fixed
             return result;
         }
 
-        /// <summary> Put known value. </summary>
-        /// <param name="body"> The <see cref="DaysOfWeekEnum"/> to use. </param>
+        /// <summary> putKnownValue. </summary>
+        /// <param name="body"> _. </param>
         public virtual ClientResult PutKnownValue(DaysOfWeekEnum body)
         {
             using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToSerialString()));
@@ -115,7 +115,7 @@ namespace Scm._Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method] Put known value.
+        /// [Protocol Method] putKnownValue
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -143,7 +143,7 @@ namespace Scm._Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method] Put known value.
+        /// [Protocol Method] putKnownValue
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -170,8 +170,8 @@ namespace Scm._Type._Enum.Fixed
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Put unknown value. </summary>
-        /// <param name="body"> The <see cref="DaysOfWeekEnum"/> to use. </param>
+        /// <summary> putUnknownValue. </summary>
+        /// <param name="body"> _. </param>
         public virtual async Task<ClientResult> PutUnknownValueAsync(DaysOfWeekEnum body)
         {
             using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToSerialString()));
@@ -179,8 +179,8 @@ namespace Scm._Type._Enum.Fixed
             return result;
         }
 
-        /// <summary> Put unknown value. </summary>
-        /// <param name="body"> The <see cref="DaysOfWeekEnum"/> to use. </param>
+        /// <summary> putUnknownValue. </summary>
+        /// <param name="body"> _. </param>
         public virtual ClientResult PutUnknownValue(DaysOfWeekEnum body)
         {
             using BinaryContent content = BinaryContent.Create(BinaryData.FromObjectAsJson(body.ToSerialString()));
@@ -189,7 +189,7 @@ namespace Scm._Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method] Put unknown value.
+        /// [Protocol Method] putUnknownValue
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -217,7 +217,7 @@ namespace Scm._Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method] Put unknown value.
+        /// [Protocol Method] putUnknownValue
         /// <list type="bullet">
         /// <item>
         /// <description>

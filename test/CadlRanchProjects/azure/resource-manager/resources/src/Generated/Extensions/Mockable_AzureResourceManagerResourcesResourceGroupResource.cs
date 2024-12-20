@@ -43,7 +43,7 @@ namespace _Azure.ResourceManager.Resources.Mocking
         }
 
         /// <summary>
-        /// Get.
+        /// Get a TopLevelTrackedResource
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -63,7 +63,7 @@ namespace _Azure.ResourceManager.Resources.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="topLevelTrackedResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -74,7 +74,7 @@ namespace _Azure.ResourceManager.Resources.Mocking
         }
 
         /// <summary>
-        /// Get.
+        /// Get a TopLevelTrackedResource
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -94,7 +94,7 @@ namespace _Azure.ResourceManager.Resources.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="topLevelTrackedResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>

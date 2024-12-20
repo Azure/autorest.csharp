@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm.Parameters.Spread.Models
 {
-    /// <summary> The BodyParameter. </summary>
+    /// <summary> This is a simple model. </summary>
     public partial class BodyParameter
     {
         /// <summary>

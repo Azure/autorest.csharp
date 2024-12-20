@@ -13,7 +13,10 @@ using _Azure.ResourceManager.Resources.Models;
 
 namespace _Azure.ResourceManager.Resources
 {
-    /// <summary> A class representing the NestedProxyResource data model. </summary>
+    /// <summary>
+    /// A class representing the NestedProxyResource data model.
+    /// Nested child of Top Level Tracked Resource.
+    /// </summary>
     public partial class NestedProxyResourceData : ResourceData
     {
         /// <summary>
@@ -58,7 +61,7 @@ namespace _Azure.ResourceManager.Resources
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
-        /// <param name="properties"></param>
+        /// <param name="properties"> The resource-specific properties for this resource. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal NestedProxyResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, NestedProxyResourceProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
@@ -66,7 +69,7 @@ namespace _Azure.ResourceManager.Resources
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets or sets the properties. </summary>
+        /// <summary> The resource-specific properties for this resource. </summary>
         public NestedProxyResourceProperties Properties { get; set; }
     }
 }

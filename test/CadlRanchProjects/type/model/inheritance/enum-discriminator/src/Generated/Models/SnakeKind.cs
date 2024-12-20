@@ -7,10 +7,10 @@
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
-    /// <summary> The SnakeKind. </summary>
+    /// <summary> fixed enum type for discriminator. </summary>
     internal enum SnakeKind
     {
-        /// <summary> cobra. </summary>
+        /// <summary> Species cobra. </summary>
         Cobra
     }
 }

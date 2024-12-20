@@ -36,7 +36,7 @@ namespace _Type.Property.ValueTypes
         /// <summary> Initializes a new instance of UnionIntLiteral. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal UnionIntLiteral(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -44,7 +44,7 @@ namespace _Type.Property.ValueTypes
             _endpoint = endpoint;
         }
 
-        /// <summary> Get union int literal. </summary>
+        /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UnionIntLiteral.xml" path="doc/members/member[@name='GetUnionIntLiteralAsync(CancellationToken)']/*" />
         public virtual async Task<Response<UnionIntLiteralProperty>> GetUnionIntLiteralAsync(CancellationToken cancellationToken = default)
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes
             return Response.FromValue(UnionIntLiteralProperty.FromResponse(response), response);
         }
 
-        /// <summary> Get union int literal. </summary>
+        /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/UnionIntLiteral.xml" path="doc/members/member[@name='GetUnionIntLiteral(CancellationToken)']/*" />
         public virtual Response<UnionIntLiteralProperty> GetUnionIntLiteral(CancellationToken cancellationToken = default)
@@ -65,7 +65,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method] Get union int literal.
+        /// [Protocol Method] Get call
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -100,7 +100,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method] Get union int literal.
+        /// [Protocol Method] Get call
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -134,8 +134,8 @@ namespace _Type.Property.ValueTypes
             }
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="UnionIntLiteralProperty"/> to use. </param>
+        /// <summary> Put operation. </summary>
+        /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/UnionIntLiteral.xml" path="doc/members/member[@name='PutAsync(UnionIntLiteralProperty,CancellationToken)']/*" />
@@ -149,8 +149,8 @@ namespace _Type.Property.ValueTypes
             return response;
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="UnionIntLiteralProperty"/> to use. </param>
+        /// <summary> Put operation. </summary>
+        /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/UnionIntLiteral.xml" path="doc/members/member[@name='Put(UnionIntLiteralProperty,CancellationToken)']/*" />
@@ -165,7 +165,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] Put operation
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -204,7 +204,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] Put operation
         /// <list type="bullet">
         /// <item>
         /// <description>

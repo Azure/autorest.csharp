@@ -17,7 +17,7 @@ using Azure.Core.Pipeline;
 namespace _Type._Array
 {
     // Data plane generated sub-client.
-    /// <summary> The DurationValue sub-client. </summary>
+    /// <summary> Array of duration values. </summary>
     public partial class DurationValue
     {
         private readonly HttpPipeline _pipeline;
@@ -37,7 +37,7 @@ namespace _Type._Array
         /// <summary> Initializes a new instance of DurationValue. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal DurationValue(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;

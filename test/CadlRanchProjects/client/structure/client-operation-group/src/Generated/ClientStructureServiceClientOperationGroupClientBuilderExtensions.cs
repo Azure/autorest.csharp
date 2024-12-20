@@ -17,8 +17,8 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="FirstClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="client"> The <see cref="ClientType"/> to use. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
         public static IAzureClientBuilder<FirstClient, ClientStructureServiceClientOperationGroupClientOptions> AddFirstClient<TBuilder>(this TBuilder builder, Uri endpoint, ClientType client)
         where TBuilder : IAzureClientFactoryBuilder
         {
@@ -27,8 +27,8 @@ namespace Microsoft.Extensions.Azure
 
         /// <summary> Registers a <see cref="SubNamespaceSecondClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="client"> The <see cref="ClientType"/> to use. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
         public static IAzureClientBuilder<SubNamespaceSecondClient, ClientStructureServiceClientOperationGroupClientOptions> AddSubNamespaceSecondClient<TBuilder>(this TBuilder builder, Uri endpoint, ClientType client)
         where TBuilder : IAzureClientFactoryBuilder
         {

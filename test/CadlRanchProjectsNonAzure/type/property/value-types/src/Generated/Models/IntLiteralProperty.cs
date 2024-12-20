@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.ValueTypes.Models
 {
-    /// <summary> The IntLiteralProperty. </summary>
+    /// <summary> Model with a int literal property. </summary>
     public partial class IntLiteralProperty
     {
         /// <summary>
@@ -48,7 +48,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="IntLiteralProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal IntLiteralProperty(IntLiteralPropertyProperty property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -56,7 +56,7 @@ namespace Scm._Type.Property.ValueTypes.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets the property. </summary>
+        /// <summary> Property. </summary>
         public IntLiteralPropertyProperty Property { get; } = IntLiteralPropertyProperty._42;
     }
 }

@@ -36,7 +36,7 @@ namespace _Type.Property.Nullable
         /// <summary> Initializes a new instance of Datetime. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Datetime(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -44,7 +44,7 @@ namespace _Type.Property.Nullable
             _endpoint = endpoint;
         }
 
-        /// <summary> Get non null. </summary>
+        /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetNonNullAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DatetimeProperty>> GetNonNullAsync(CancellationToken cancellationToken = default)
@@ -54,7 +54,7 @@ namespace _Type.Property.Nullable
             return Response.FromValue(DatetimeProperty.FromResponse(response), response);
         }
 
-        /// <summary> Get non null. </summary>
+        /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetNonNull(CancellationToken)']/*" />
         public virtual Response<DatetimeProperty> GetNonNull(CancellationToken cancellationToken = default)
@@ -65,7 +65,7 @@ namespace _Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Get non null.
+        /// [Protocol Method] Get models that will return all properties in the model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -100,7 +100,7 @@ namespace _Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Get non null.
+        /// [Protocol Method] Get models that will return all properties in the model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -134,7 +134,7 @@ namespace _Type.Property.Nullable
             }
         }
 
-        /// <summary> Get null. </summary>
+        /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetNullAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DatetimeProperty>> GetNullAsync(CancellationToken cancellationToken = default)
@@ -144,7 +144,7 @@ namespace _Type.Property.Nullable
             return Response.FromValue(DatetimeProperty.FromResponse(response), response);
         }
 
-        /// <summary> Get null. </summary>
+        /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetNull(CancellationToken)']/*" />
         public virtual Response<DatetimeProperty> GetNull(CancellationToken cancellationToken = default)
@@ -155,7 +155,7 @@ namespace _Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Get null.
+        /// [Protocol Method] Get models that will return the default object
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -190,7 +190,7 @@ namespace _Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Get null.
+        /// [Protocol Method] Get models that will return the default object
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -225,7 +225,7 @@ namespace _Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Patch non null.
+        /// [Protocol Method] Put a body with all properties present.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -259,7 +259,7 @@ namespace _Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Patch non null.
+        /// [Protocol Method] Put a body with all properties present.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -293,7 +293,7 @@ namespace _Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Patch null.
+        /// [Protocol Method] Put a body with default properties.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -327,7 +327,7 @@ namespace _Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Patch null.
+        /// [Protocol Method] Put a body with default properties.
         /// <list type="bullet">
         /// <item>
         /// <description>

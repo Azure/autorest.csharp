@@ -11,7 +11,7 @@ using Scm._Type.Model.Inheritance.EnumDiscriminator.Models;
 namespace Scm._Type.Model.Inheritance.EnumDiscriminator
 {
     // Data plane generated client.
-    /// <summary> The EnumDiscriminator service client. </summary>
+    /// <summary> Illustrates inheritance with enum discriminator. </summary>
     public partial class EnumDiscriminatorClient
     {
         private readonly ClientPipeline _pipeline;
@@ -26,7 +26,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary> Initializes a new instance of EnumDiscriminatorClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public EnumDiscriminatorClient(Uri endpoint, EnumDiscriminatorClientOptions options)
@@ -38,14 +38,14 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
             _endpoint = endpoint;
         }
 
-        /// <summary> Get extensible model. </summary>
+        /// <summary> Receive model with extensible enum discriminator type. </summary>
         public virtual async Task<ClientResult<Dog>> GetExtensibleModelAsync()
         {
             ClientResult result = await GetExtensibleModelAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(Dog.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get extensible model. </summary>
+        /// <summary> Receive model with extensible enum discriminator type. </summary>
         public virtual ClientResult<Dog> GetExtensibleModel()
         {
             ClientResult result = GetExtensibleModel(null);
@@ -53,7 +53,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get extensible model.
+        /// [Protocol Method] Receive model with extensible enum discriminator type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -77,7 +77,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get extensible model.
+        /// [Protocol Method] Receive model with extensible enum discriminator type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -100,8 +100,8 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Put extensible model. </summary>
-        /// <param name="input"> The <see cref="Dog"/> to use. </param>
+        /// <summary> Send model with extensible enum discriminator type. </summary>
+        /// <param name="input"> Dog to create. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         public virtual async Task<ClientResult> PutExtensibleModelAsync(Dog input)
         {
@@ -112,8 +112,8 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
             return result;
         }
 
-        /// <summary> Put extensible model. </summary>
-        /// <param name="input"> The <see cref="Dog"/> to use. </param>
+        /// <summary> Send model with extensible enum discriminator type. </summary>
+        /// <param name="input"> Dog to create. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         public virtual ClientResult PutExtensibleModel(Dog input)
         {
@@ -125,7 +125,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Put extensible model.
+        /// [Protocol Method] Send model with extensible enum discriminator type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -153,7 +153,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Put extensible model.
+        /// [Protocol Method] Send model with extensible enum discriminator type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -180,14 +180,14 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Get extensible model missing discriminator. </summary>
+        /// <summary> Get a model omitting the discriminator. </summary>
         public virtual async Task<ClientResult<Dog>> GetExtensibleModelMissingDiscriminatorAsync()
         {
             ClientResult result = await GetExtensibleModelMissingDiscriminatorAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(Dog.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get extensible model missing discriminator. </summary>
+        /// <summary> Get a model omitting the discriminator. </summary>
         public virtual ClientResult<Dog> GetExtensibleModelMissingDiscriminator()
         {
             ClientResult result = GetExtensibleModelMissingDiscriminator(null);
@@ -195,7 +195,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get extensible model missing discriminator.
+        /// [Protocol Method] Get a model omitting the discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -219,7 +219,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get extensible model missing discriminator.
+        /// [Protocol Method] Get a model omitting the discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -242,14 +242,14 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Get extensible model wrong discriminator. </summary>
+        /// <summary> Get a model containing discriminator value never defined. </summary>
         public virtual async Task<ClientResult<Dog>> GetExtensibleModelWrongDiscriminatorAsync()
         {
             ClientResult result = await GetExtensibleModelWrongDiscriminatorAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(Dog.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get extensible model wrong discriminator. </summary>
+        /// <summary> Get a model containing discriminator value never defined. </summary>
         public virtual ClientResult<Dog> GetExtensibleModelWrongDiscriminator()
         {
             ClientResult result = GetExtensibleModelWrongDiscriminator(null);
@@ -257,7 +257,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get extensible model wrong discriminator.
+        /// [Protocol Method] Get a model containing discriminator value never defined.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -281,7 +281,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get extensible model wrong discriminator.
+        /// [Protocol Method] Get a model containing discriminator value never defined.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -304,14 +304,14 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Get fixed model. </summary>
+        /// <summary> Receive model with fixed enum discriminator type. </summary>
         public virtual async Task<ClientResult<Snake>> GetFixedModelAsync()
         {
             ClientResult result = await GetFixedModelAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(Snake.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get fixed model. </summary>
+        /// <summary> Receive model with fixed enum discriminator type. </summary>
         public virtual ClientResult<Snake> GetFixedModel()
         {
             ClientResult result = GetFixedModel(null);
@@ -319,7 +319,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get fixed model.
+        /// [Protocol Method] Receive model with fixed enum discriminator type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -343,7 +343,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get fixed model.
+        /// [Protocol Method] Receive model with fixed enum discriminator type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -366,8 +366,8 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Put fixed model. </summary>
-        /// <param name="input"> The <see cref="Snake"/> to use. </param>
+        /// <summary> Send model with fixed enum discriminator type. </summary>
+        /// <param name="input"> Snake to create. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         public virtual async Task<ClientResult> PutFixedModelAsync(Snake input)
         {
@@ -378,8 +378,8 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
             return result;
         }
 
-        /// <summary> Put fixed model. </summary>
-        /// <param name="input"> The <see cref="Snake"/> to use. </param>
+        /// <summary> Send model with fixed enum discriminator type. </summary>
+        /// <param name="input"> Snake to create. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         public virtual ClientResult PutFixedModel(Snake input)
         {
@@ -391,7 +391,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Put fixed model.
+        /// [Protocol Method] Send model with fixed enum discriminator type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -419,7 +419,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Put fixed model.
+        /// [Protocol Method] Send model with fixed enum discriminator type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -446,14 +446,14 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Get fixed model missing discriminator. </summary>
+        /// <summary> Get a model omitting the discriminator. </summary>
         public virtual async Task<ClientResult<Snake>> GetFixedModelMissingDiscriminatorAsync()
         {
             ClientResult result = await GetFixedModelMissingDiscriminatorAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(Snake.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get fixed model missing discriminator. </summary>
+        /// <summary> Get a model omitting the discriminator. </summary>
         public virtual ClientResult<Snake> GetFixedModelMissingDiscriminator()
         {
             ClientResult result = GetFixedModelMissingDiscriminator(null);
@@ -461,7 +461,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get fixed model missing discriminator.
+        /// [Protocol Method] Get a model omitting the discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -485,7 +485,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get fixed model missing discriminator.
+        /// [Protocol Method] Get a model omitting the discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -508,14 +508,14 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Get fixed model wrong discriminator. </summary>
+        /// <summary> Get a model containing discriminator value never defined. </summary>
         public virtual async Task<ClientResult<Snake>> GetFixedModelWrongDiscriminatorAsync()
         {
             ClientResult result = await GetFixedModelWrongDiscriminatorAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(Snake.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get fixed model wrong discriminator. </summary>
+        /// <summary> Get a model containing discriminator value never defined. </summary>
         public virtual ClientResult<Snake> GetFixedModelWrongDiscriminator()
         {
             ClientResult result = GetFixedModelWrongDiscriminator(null);
@@ -523,7 +523,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get fixed model wrong discriminator.
+        /// [Protocol Method] Get a model containing discriminator value never defined.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -547,7 +547,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get fixed model wrong discriminator.
+        /// [Protocol Method] Get a model containing discriminator value never defined.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -11,7 +11,7 @@ using Scm.SpecialWords.Models;
 namespace Scm.SpecialWords
 {
     // Data plane generated sub-client.
-    /// <summary> The ModelsOps sub-client. </summary>
+    /// <summary> Verify model names. </summary>
     public partial class ModelsOps
     {
         private readonly ClientPipeline _pipeline;
@@ -27,7 +27,7 @@ namespace Scm.SpecialWords
 
         /// <summary> Initializes a new instance of ModelsOps. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal ModelsOps(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

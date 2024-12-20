@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Scm._Type.Property.ValueTypes.Models
 {
-    /// <summary> The CollectionsStringProperty. </summary>
+    /// <summary> Model with collection string properties. </summary>
     public partial class CollectionsStringProperty
     {
         /// <summary>
@@ -44,7 +44,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CollectionsStringProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public CollectionsStringProperty(IEnumerable<string> property)
         {
@@ -54,7 +54,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CollectionsStringProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CollectionsStringProperty(IList<string> property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -67,7 +67,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         {
         }
 
-        /// <summary> Gets the property. </summary>
+        /// <summary> Property. </summary>
         public IList<string> Property { get; }
     }
 }

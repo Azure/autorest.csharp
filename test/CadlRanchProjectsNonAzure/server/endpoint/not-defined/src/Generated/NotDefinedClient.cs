@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Scm.Server.Endpoint.NotDefined
 {
     // Data plane generated client.
-    /// <summary> The NotDefined service client. </summary>
+    /// <summary> Illustrates server doesn't define endpoint. Client should automatically add an endpoint to let user pass in. </summary>
     public partial class NotDefinedClient
     {
         private readonly ClientPipeline _pipeline;
@@ -25,14 +25,14 @@ namespace Scm.Server.Endpoint.NotDefined
         }
 
         /// <summary> Initializes a new instance of NotDefinedClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NotDefinedClient(Uri endpoint) : this(endpoint, new NotDefinedClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of NotDefinedClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NotDefinedClient(Uri endpoint, NotDefinedClientOptions options)

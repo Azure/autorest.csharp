@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Azure.ResourceManager.CommonProperties.Models
 {
-    /// <summary> The ManagedIdentityTrackedResourceProperties. </summary>
+    /// <summary> Managed Identity Arm Resource Properties. </summary>
     internal partial class ManagedIdentityTrackedResourceProperties
     {
         /// <summary>
@@ -46,14 +46,14 @@ namespace _Azure.ResourceManager.CommonProperties.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ManagedIdentityTrackedResourceProperties"/>. </summary>
-        /// <param name="provisioningState"></param>
+        /// <param name="provisioningState"> The status of the last operation. </param>
         public ManagedIdentityTrackedResourceProperties(string provisioningState)
         {
             ProvisioningState = provisioningState;
         }
 
         /// <summary> Initializes a new instance of <see cref="ManagedIdentityTrackedResourceProperties"/>. </summary>
-        /// <param name="provisioningState"></param>
+        /// <param name="provisioningState"> The status of the last operation. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ManagedIdentityTrackedResourceProperties(string provisioningState, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -66,7 +66,7 @@ namespace _Azure.ResourceManager.CommonProperties.Models
         {
         }
 
-        /// <summary> Gets the provisioning state. </summary>
+        /// <summary> The status of the last operation. </summary>
         public string ProvisioningState { get; }
     }
 }

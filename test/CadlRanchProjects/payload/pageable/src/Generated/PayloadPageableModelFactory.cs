@@ -15,7 +15,7 @@ namespace Payload.Pageable.Models
     public static partial class PayloadPageableModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.User"/>. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> User name. </param>
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
         public static User User(string name = null)
         {

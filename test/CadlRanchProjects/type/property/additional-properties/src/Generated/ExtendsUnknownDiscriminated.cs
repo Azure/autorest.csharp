@@ -36,7 +36,7 @@ namespace _Type.Property.AdditionalProperties
         /// <summary> Initializes a new instance of ExtendsUnknownDiscriminated. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal ExtendsUnknownDiscriminated(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -44,7 +44,7 @@ namespace _Type.Property.AdditionalProperties
             _endpoint = endpoint;
         }
 
-        /// <summary> Get extends unknown discriminated. </summary>
+        /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ExtendsUnknownDiscriminated.xml" path="doc/members/member[@name='GetExtendsUnknownDiscriminatedAsync(CancellationToken)']/*" />
         public virtual async Task<Response<ExtendsUnknownAdditionalPropertiesDiscriminated>> GetExtendsUnknownDiscriminatedAsync(CancellationToken cancellationToken = default)
@@ -54,7 +54,7 @@ namespace _Type.Property.AdditionalProperties
             return Response.FromValue(ExtendsUnknownAdditionalPropertiesDiscriminated.FromResponse(response), response);
         }
 
-        /// <summary> Get extends unknown discriminated. </summary>
+        /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ExtendsUnknownDiscriminated.xml" path="doc/members/member[@name='GetExtendsUnknownDiscriminated(CancellationToken)']/*" />
         public virtual Response<ExtendsUnknownAdditionalPropertiesDiscriminated> GetExtendsUnknownDiscriminated(CancellationToken cancellationToken = default)
@@ -65,7 +65,7 @@ namespace _Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Get extends unknown discriminated.
+        /// [Protocol Method] Get call
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -100,7 +100,7 @@ namespace _Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Get extends unknown discriminated.
+        /// [Protocol Method] Get call
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -134,8 +134,8 @@ namespace _Type.Property.AdditionalProperties
             }
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="ExtendsUnknownAdditionalPropertiesDiscriminated"/> to use. </param>
+        /// <summary> Put operation. </summary>
+        /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ExtendsUnknownDiscriminated.xml" path="doc/members/member[@name='PutAsync(ExtendsUnknownAdditionalPropertiesDiscriminated,CancellationToken)']/*" />
@@ -149,8 +149,8 @@ namespace _Type.Property.AdditionalProperties
             return response;
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="ExtendsUnknownAdditionalPropertiesDiscriminated"/> to use. </param>
+        /// <summary> Put operation. </summary>
+        /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ExtendsUnknownDiscriminated.xml" path="doc/members/member[@name='Put(ExtendsUnknownAdditionalPropertiesDiscriminated,CancellationToken)']/*" />
@@ -165,7 +165,7 @@ namespace _Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] Put operation
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -204,7 +204,7 @@ namespace _Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] Put operation
         /// <list type="bullet">
         /// <item>
         /// <description>

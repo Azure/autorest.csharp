@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.ValueTypes.Models
 {
-    /// <summary> The BooleanProperty. </summary>
+    /// <summary> Model with a boolean property. </summary>
     public partial class BooleanProperty
     {
         /// <summary>
@@ -46,14 +46,14 @@ namespace _Type.Property.ValueTypes.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BooleanProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         public BooleanProperty(bool property)
         {
             Property = property;
         }
 
         /// <summary> Initializes a new instance of <see cref="BooleanProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal BooleanProperty(bool property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -66,7 +66,7 @@ namespace _Type.Property.ValueTypes.Models
         {
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public bool Property { get; set; }
     }
 }

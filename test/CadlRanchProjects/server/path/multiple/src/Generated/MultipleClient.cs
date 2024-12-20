@@ -33,14 +33,14 @@ namespace Server.Path.Multiple
         }
 
         /// <summary> Initializes a new instance of MultipleClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Pass in http://localhost:3000 for endpoint. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public MultipleClient(Uri endpoint) : this(endpoint, new MultipleClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of MultipleClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Pass in http://localhost:3000 for endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public MultipleClient(Uri endpoint, MultipleClientOptions options)

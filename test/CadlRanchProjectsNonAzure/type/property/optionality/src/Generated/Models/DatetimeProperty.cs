@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.Optionality.Models
 {
-    /// <summary> The DatetimeProperty. </summary>
+    /// <summary> Model with a datetime property. </summary>
     public partial class DatetimeProperty
     {
         /// <summary>
@@ -48,7 +48,7 @@ namespace Scm._Type.Property.Optionality.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="DatetimeProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal DatetimeProperty(DateTimeOffset? property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -56,7 +56,7 @@ namespace Scm._Type.Property.Optionality.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public DateTimeOffset? Property { get; set; }
     }
 }

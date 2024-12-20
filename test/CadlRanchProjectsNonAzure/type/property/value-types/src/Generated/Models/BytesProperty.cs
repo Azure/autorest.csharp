@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.ValueTypes.Models
 {
-    /// <summary> The BytesProperty. </summary>
+    /// <summary> Model with a bytes property. </summary>
     public partial class BytesProperty
     {
         /// <summary>
@@ -43,7 +43,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BytesProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public BytesProperty(BinaryData property)
         {
@@ -53,7 +53,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="BytesProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal BytesProperty(BinaryData property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -67,7 +67,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         }
 
         /// <summary>
-        /// Gets or sets the property
+        /// Property
         /// <para>
         /// To assign a byte[] to this property use <see cref="BinaryData.FromBytes(byte[])"/>.
         /// The byte[] will be serialized to a Base64 encoded string.

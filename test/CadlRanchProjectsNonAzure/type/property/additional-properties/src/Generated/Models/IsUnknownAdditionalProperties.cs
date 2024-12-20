@@ -7,11 +7,11 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The IsUnknownAdditionalProperties. </summary>
+    /// <summary> The model is from Record&lt;unknown&gt; type. </summary>
     public partial class IsUnknownAdditionalProperties
     {
         /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalProperties"/>. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> The name property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public IsUnknownAdditionalProperties(string name)
         {
@@ -22,7 +22,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalProperties"/>. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> The name property. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         internal IsUnknownAdditionalProperties(string name, IDictionary<string, BinaryData> additionalProperties)
         {
@@ -35,7 +35,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> Gets or sets the name. </summary>
+        /// <summary> The name property. </summary>
         public string Name { get; set; }
         /// <summary>
         /// Additional Properties

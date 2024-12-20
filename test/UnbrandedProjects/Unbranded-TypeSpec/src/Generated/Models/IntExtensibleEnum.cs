@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace UnbrandedTypeSpec.Models
 {
-    /// <summary> The IntExtensibleEnum. </summary>
+    /// <summary> Int based extensible enum. </summary>
     public readonly partial struct IntExtensibleEnum : IEquatable<IntExtensibleEnum>
     {
         private readonly int _value;

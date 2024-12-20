@@ -47,8 +47,8 @@ namespace Parameters.Spread.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SpreadWithMultipleParametersRequest"/>. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredIntList"></param>
+        /// <param name="requiredString"> required string. </param>
+        /// <param name="requiredIntList"> required int. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> or <paramref name="requiredIntList"/> is null. </exception>
         internal SpreadWithMultipleParametersRequest(string requiredString, IEnumerable<int> requiredIntList)
         {
@@ -61,10 +61,10 @@ namespace Parameters.Spread.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="SpreadWithMultipleParametersRequest"/>. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="optionalInt"></param>
-        /// <param name="requiredIntList"></param>
-        /// <param name="optionalStringList"></param>
+        /// <param name="requiredString"> required string. </param>
+        /// <param name="optionalInt"> optional int. </param>
+        /// <param name="requiredIntList"> required int. </param>
+        /// <param name="optionalStringList"> optional string. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal SpreadWithMultipleParametersRequest(string requiredString, int? optionalInt, IReadOnlyList<int> requiredIntList, IReadOnlyList<string> optionalStringList, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -80,13 +80,13 @@ namespace Parameters.Spread.Models
         {
         }
 
-        /// <summary> Gets the required string. </summary>
+        /// <summary> required string. </summary>
         public string RequiredString { get; }
-        /// <summary> Gets the optional int. </summary>
+        /// <summary> optional int. </summary>
         public int? OptionalInt { get; }
-        /// <summary> Gets the required int list. </summary>
+        /// <summary> required int. </summary>
         public IReadOnlyList<int> RequiredIntList { get; }
-        /// <summary> Gets the optional string list. </summary>
+        /// <summary> optional string. </summary>
         public IReadOnlyList<string> OptionalStringList { get; }
     }
 }

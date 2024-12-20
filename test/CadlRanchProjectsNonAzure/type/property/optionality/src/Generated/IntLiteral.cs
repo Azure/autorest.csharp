@@ -27,21 +27,21 @@ namespace Scm._Type.Property.Optionality
 
         /// <summary> Initializes a new instance of IntLiteral. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal IntLiteral(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
-        /// <summary> Get all. </summary>
+        /// <summary> Get models that will return all properties in the model. </summary>
         public virtual async Task<ClientResult<IntLiteralProperty>> GetAllAsync()
         {
             ClientResult result = await GetAllAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(IntLiteralProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get all. </summary>
+        /// <summary> Get models that will return all properties in the model. </summary>
         public virtual ClientResult<IntLiteralProperty> GetAll()
         {
             ClientResult result = GetAll(null);
@@ -49,7 +49,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get all.
+        /// [Protocol Method] Get models that will return all properties in the model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -73,7 +73,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get all.
+        /// [Protocol Method] Get models that will return all properties in the model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -96,14 +96,14 @@ namespace Scm._Type.Property.Optionality
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Get default. </summary>
+        /// <summary> Get models that will return the default object. </summary>
         public virtual async Task<ClientResult<IntLiteralProperty>> GetDefaultAsync()
         {
             ClientResult result = await GetDefaultAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(IntLiteralProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get default. </summary>
+        /// <summary> Get models that will return the default object. </summary>
         public virtual ClientResult<IntLiteralProperty> GetDefault()
         {
             ClientResult result = GetDefault(null);
@@ -111,7 +111,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get default.
+        /// [Protocol Method] Get models that will return the default object
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -135,7 +135,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get default.
+        /// [Protocol Method] Get models that will return the default object
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -158,7 +158,7 @@ namespace Scm._Type.Property.Optionality
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Put all. </summary>
+        /// <summary> Put a body with all properties present. </summary>
         /// <param name="body"> The <see cref="IntLiteralProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> PutAllAsync(IntLiteralProperty body)
@@ -170,7 +170,7 @@ namespace Scm._Type.Property.Optionality
             return result;
         }
 
-        /// <summary> Put all. </summary>
+        /// <summary> Put a body with all properties present. </summary>
         /// <param name="body"> The <see cref="IntLiteralProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult PutAll(IntLiteralProperty body)
@@ -183,7 +183,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put all.
+        /// [Protocol Method] Put a body with all properties present.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -211,7 +211,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put all.
+        /// [Protocol Method] Put a body with all properties present.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -238,7 +238,7 @@ namespace Scm._Type.Property.Optionality
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Put default. </summary>
+        /// <summary> Put a body with default properties. </summary>
         /// <param name="body"> The <see cref="IntLiteralProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> PutDefaultAsync(IntLiteralProperty body)
@@ -250,7 +250,7 @@ namespace Scm._Type.Property.Optionality
             return result;
         }
 
-        /// <summary> Put default. </summary>
+        /// <summary> Put a body with default properties. </summary>
         /// <param name="body"> The <see cref="IntLiteralProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult PutDefault(IntLiteralProperty body)
@@ -263,7 +263,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put default.
+        /// [Protocol Method] Put a body with default properties.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -291,7 +291,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put default.
+        /// [Protocol Method] Put a body with default properties.
         /// <list type="bullet">
         /// <item>
         /// <description>

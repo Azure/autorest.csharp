@@ -27,21 +27,21 @@ namespace Scm._Type.Property.ValueTypes
 
         /// <summary> Initializes a new instance of UnionFloatLiteral. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal UnionFloatLiteral(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
-        /// <summary> Get union float literal. </summary>
+        /// <summary> Get call. </summary>
         public virtual async Task<ClientResult<UnionFloatLiteralProperty>> GetUnionFloatLiteralAsync()
         {
             ClientResult result = await GetUnionFloatLiteralAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(UnionFloatLiteralProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get union float literal. </summary>
+        /// <summary> Get call. </summary>
         public virtual ClientResult<UnionFloatLiteralProperty> GetUnionFloatLiteral()
         {
             ClientResult result = GetUnionFloatLiteral(null);
@@ -49,7 +49,7 @@ namespace Scm._Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method] Get union float literal.
+        /// [Protocol Method] Get call
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -73,7 +73,7 @@ namespace Scm._Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method] Get union float literal.
+        /// [Protocol Method] Get call
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -96,8 +96,8 @@ namespace Scm._Type.Property.ValueTypes
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="UnionFloatLiteralProperty"/> to use. </param>
+        /// <summary> Put operation. </summary>
+        /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> PutAsync(UnionFloatLiteralProperty body)
         {
@@ -108,8 +108,8 @@ namespace Scm._Type.Property.ValueTypes
             return result;
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="UnionFloatLiteralProperty"/> to use. </param>
+        /// <summary> Put operation. </summary>
+        /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult Put(UnionFloatLiteralProperty body)
         {
@@ -121,7 +121,7 @@ namespace Scm._Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] Put operation
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,7 +149,7 @@ namespace Scm._Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] Put operation
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -24,7 +24,7 @@ namespace _Azure.ResourceManager.Resources.Models
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="properties"></param>
+        /// <param name="properties"> The resource-specific properties for this resource. </param>
         /// <returns> A new <see cref="Resources.SingletonTrackedResourceData"/> instance for mocking. </returns>
         public static SingletonTrackedResourceData SingletonTrackedResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, SingletonTrackedResourceProperties properties = null)
         {
@@ -42,8 +42,8 @@ namespace _Azure.ResourceManager.Resources.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SingletonTrackedResourceProperties"/>. </summary>
-        /// <param name="provisioningState"></param>
-        /// <param name="description"></param>
+        /// <param name="provisioningState"> The status of the last operation. </param>
+        /// <param name="description"> The description of the resource. </param>
         /// <returns> A new <see cref="Models.SingletonTrackedResourceProperties"/> instance for mocking. </returns>
         public static SingletonTrackedResourceProperties SingletonTrackedResourceProperties(ProvisioningState? provisioningState = null, string description = null)
         {
@@ -55,7 +55,7 @@ namespace _Azure.ResourceManager.Resources.Models
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
-        /// <param name="properties"></param>
+        /// <param name="properties"> The resource-specific properties for this resource. </param>
         /// <returns> A new <see cref="Resources.NestedProxyResourceData"/> instance for mocking. </returns>
         public static NestedProxyResourceData NestedProxyResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, NestedProxyResourceProperties properties = null)
         {
@@ -69,8 +69,8 @@ namespace _Azure.ResourceManager.Resources.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NestedProxyResourceProperties"/>. </summary>
-        /// <param name="provisioningState"></param>
-        /// <param name="description"></param>
+        /// <param name="provisioningState"> Provisioning State of the nested child Resource. </param>
+        /// <param name="description"> Nested resource description. </param>
         /// <returns> A new <see cref="Models.NestedProxyResourceProperties"/> instance for mocking. </returns>
         public static NestedProxyResourceProperties NestedProxyResourceProperties(ProvisioningState? provisioningState = null, string description = null)
         {
@@ -84,7 +84,7 @@ namespace _Azure.ResourceManager.Resources.Models
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="properties"></param>
+        /// <param name="properties"> The resource-specific properties for this resource. </param>
         /// <returns> A new <see cref="Resources.TopLevelTrackedResourceData"/> instance for mocking. </returns>
         public static TopLevelTrackedResourceData TopLevelTrackedResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, TopLevelTrackedResourceProperties properties = null)
         {
@@ -102,8 +102,8 @@ namespace _Azure.ResourceManager.Resources.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TopLevelTrackedResourceProperties"/>. </summary>
-        /// <param name="provisioningState"></param>
-        /// <param name="description"></param>
+        /// <param name="provisioningState"> The status of the last operation. </param>
+        /// <param name="description"> The description of the resource. </param>
         /// <returns> A new <see cref="Models.TopLevelTrackedResourceProperties"/> instance for mocking. </returns>
         public static TopLevelTrackedResourceProperties TopLevelTrackedResourceProperties(ProvisioningState? provisioningState = null, string description = null)
         {

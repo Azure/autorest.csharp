@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The DifferentSpreadStringRecord. </summary>
+    /// <summary> The model spread Record&lt;string&gt; with the different known property type. </summary>
     public partial class DifferentSpreadStringRecord
     {
         /// <summary>
@@ -43,7 +43,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadStringRecord"/>. </summary>
-        /// <param name="id"></param>
+        /// <param name="id"> The name property. </param>
         public DifferentSpreadStringRecord(float id)
         {
             Id = id;
@@ -51,7 +51,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadStringRecord"/>. </summary>
-        /// <param name="id"></param>
+        /// <param name="id"> The name property. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal DifferentSpreadStringRecord(float id, IDictionary<string, string> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -66,7 +66,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> Gets or sets the id. </summary>
+        /// <summary> The name property. </summary>
         public float Id { get; set; }
         /// <summary> Additional Properties. </summary>
         public IDictionary<string, string> AdditionalProperties { get; }

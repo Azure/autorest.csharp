@@ -33,7 +33,7 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "No managed identity.",
+     "doc": "No managed identity.",
      "decorators": []
     },
     {
@@ -51,7 +51,7 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "System assigned managed identity.",
+     "doc": "System assigned managed identity.",
      "decorators": []
     },
     {
@@ -69,7 +69,7 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "User assigned managed identity.",
+     "doc": "User assigned managed identity.",
      "decorators": []
     },
     {
@@ -87,11 +87,11 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "System and user assigned managed identity.",
+     "doc": "System and user assigned managed identity.",
      "decorators": []
     }
    ],
-   "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
+   "doc": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -125,7 +125,7 @@
      "enumType": {
       "$ref": "12"
      },
-     "description": "The entity was created by a user.",
+     "doc": "The entity was created by a user.",
      "decorators": []
     },
     {
@@ -143,7 +143,7 @@
      "enumType": {
       "$ref": "12"
      },
-     "description": "The entity was created by an application.",
+     "doc": "The entity was created by an application.",
      "decorators": []
     },
     {
@@ -161,7 +161,7 @@
      "enumType": {
       "$ref": "12"
      },
-     "description": "The entity was created by a managed identity.",
+     "doc": "The entity was created by a managed identity.",
      "decorators": []
     },
     {
@@ -179,11 +179,11 @@
      "enumType": {
       "$ref": "12"
      },
-     "description": "The entity was created by a key.",
+     "doc": "The entity was created by a key.",
      "decorators": []
     }
    ],
-   "description": "The kind of entity that created the resource.",
+   "doc": "The kind of entity that created the resource.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -217,11 +217,11 @@
      "enumType": {
       "$ref": "22"
      },
-     "description": "Preview API version 2023-12-01-preview.",
+     "doc": "Preview API version 2023-12-01-preview.",
      "decorators": []
     }
    ],
-   "description": "Azure API versions.",
+   "doc": "Azure API versions.",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -235,7 +235,7 @@
    "name": "ManagedIdentityTrackedResource",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonProperties.ManagedIdentityTrackedResource",
    "usage": "Input,Output,Json",
-   "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+   "doc": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
    "decorators": [],
    "baseModel": {
     "$id": "27",
@@ -243,7 +243,7 @@
     "name": "TrackedResource",
     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
     "usage": "Input,Output,Json",
-    "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+    "doc": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
     "decorators": [],
     "baseModel": {
      "$id": "28",
@@ -251,7 +251,7 @@
      "name": "Resource",
      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
      "usage": "Input,Output,Json",
-     "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+     "doc": "Common fields that are returned in the response for all Azure Resource Manager resources",
      "decorators": [],
      "properties": [
       {
@@ -259,7 +259,7 @@
        "kind": "property",
        "name": "id",
        "serializedName": "id",
-       "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+       "doc": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
        "type": {
         "$id": "30",
         "kind": "string",
@@ -279,7 +279,7 @@
        "kind": "property",
        "name": "name",
        "serializedName": "name",
-       "description": "The name of the resource",
+       "doc": "The name of the resource",
        "type": {
         "$id": "32",
         "kind": "string",
@@ -299,7 +299,7 @@
        "kind": "property",
        "name": "type",
        "serializedName": "type",
-       "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+       "doc": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
        "type": {
         "$id": "34",
         "kind": "string",
@@ -326,14 +326,14 @@
        "kind": "property",
        "name": "systemData",
        "serializedName": "systemData",
-       "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+       "doc": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
        "type": {
         "$id": "37",
         "kind": "model",
         "name": "SystemData",
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData",
         "usage": "Output,Json",
-        "description": "Metadata pertaining to creation and last modification of the resource.",
+        "doc": "Metadata pertaining to creation and last modification of the resource.",
         "decorators": [],
         "properties": [
          {
@@ -341,7 +341,7 @@
           "kind": "property",
           "name": "createdBy",
           "serializedName": "createdBy",
-          "description": "The identity that created the resource.",
+          "doc": "The identity that created the resource.",
           "type": {
            "$id": "39",
            "kind": "string",
@@ -361,7 +361,7 @@
           "kind": "property",
           "name": "createdByType",
           "serializedName": "createdByType",
-          "description": "The type of identity that created the resource.",
+          "doc": "The type of identity that created the resource.",
           "type": {
            "$ref": "12"
           },
@@ -377,7 +377,7 @@
           "kind": "property",
           "name": "createdAt",
           "serializedName": "createdAt",
-          "description": "The timestamp of resource creation (UTC).",
+          "doc": "The timestamp of resource creation (UTC).",
           "type": {
            "$id": "42",
            "kind": "utcDateTime",
@@ -405,7 +405,7 @@
           "kind": "property",
           "name": "lastModifiedBy",
           "serializedName": "lastModifiedBy",
-          "description": "The identity that last modified the resource.",
+          "doc": "The identity that last modified the resource.",
           "type": {
            "$id": "45",
            "kind": "string",
@@ -425,7 +425,7 @@
           "kind": "property",
           "name": "lastModifiedByType",
           "serializedName": "lastModifiedByType",
-          "description": "The type of identity that last modified the resource.",
+          "doc": "The type of identity that last modified the resource.",
           "type": {
            "$ref": "12"
           },
@@ -441,7 +441,7 @@
           "kind": "property",
           "name": "lastModifiedAt",
           "serializedName": "lastModifiedAt",
-          "description": "The timestamp of resource last modification (UTC)",
+          "doc": "The timestamp of resource last modification (UTC)",
           "type": {
            "$id": "48",
            "kind": "utcDateTime",
@@ -481,7 +481,7 @@
       "kind": "property",
       "name": "tags",
       "serializedName": "tags",
-      "description": "Resource tags.",
+      "doc": "Resource tags.",
       "type": {
        "$id": "51",
        "kind": "dict",
@@ -513,7 +513,7 @@
       "kind": "property",
       "name": "location",
       "serializedName": "location",
-      "description": "The geo-location where the resource lives",
+      "doc": "The geo-location where the resource lives",
       "type": {
        "$id": "55",
        "kind": "string",
@@ -536,14 +536,14 @@
      "kind": "property",
      "name": "properties",
      "serializedName": "properties",
-     "description": "The resource-specific properties for this resource.",
+     "doc": "The resource-specific properties for this resource.",
      "type": {
       "$id": "57",
       "kind": "model",
       "name": "ManagedIdentityTrackedResourceProperties",
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonProperties.ManagedIdentityTrackedResourceProperties",
       "usage": "Input,Output,Json",
-      "description": "Managed Identity Arm Resource Properties.",
+      "doc": "Managed Identity Arm Resource Properties.",
       "decorators": [],
       "properties": [
        {
@@ -551,7 +551,7 @@
         "kind": "property",
         "name": "provisioningState",
         "serializedName": "provisioningState",
-        "description": "The status of the last operation.",
+        "doc": "The status of the last operation.",
         "type": {
          "$id": "59",
          "kind": "string",
@@ -580,14 +580,14 @@
      "kind": "property",
      "name": "identity",
      "serializedName": "identity",
-     "description": "The managed service identities assigned to this resource.",
+     "doc": "The managed service identities assigned to this resource.",
      "type": {
       "$id": "61",
       "kind": "model",
       "name": "ManagedServiceIdentity",
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity",
       "usage": "Input,Output,Json",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "doc": "Managed service identity (system assigned and/or user assigned identities)",
       "decorators": [],
       "properties": [
        {
@@ -595,7 +595,7 @@
         "kind": "property",
         "name": "principalId",
         "serializedName": "principalId",
-        "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+        "doc": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
         "type": {
          "$id": "63",
          "kind": "string",
@@ -622,7 +622,7 @@
         "kind": "property",
         "name": "tenantId",
         "serializedName": "tenantId",
-        "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+        "doc": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
         "type": {
          "$id": "66",
          "kind": "string",
@@ -649,7 +649,7 @@
         "kind": "property",
         "name": "type",
         "serializedName": "type",
-        "description": "The type of managed identity assigned to this resource.",
+        "doc": "The type of managed identity assigned to this resource.",
         "type": {
          "$ref": "2"
         },
@@ -665,7 +665,7 @@
         "kind": "property",
         "name": "userAssignedIdentities",
         "serializedName": "userAssignedIdentities",
-        "description": "The identities assigned to this resource by the user.",
+        "doc": "The identities assigned to this resource by the user.",
         "type": {
          "$id": "70",
          "kind": "dict",
@@ -682,7 +682,7 @@
           "name": "UserAssignedIdentity",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity",
           "usage": "Input,Output,Json",
-          "description": "User assigned identity properties",
+          "doc": "User assigned identity properties",
           "decorators": [],
           "properties": [
            {
@@ -690,7 +690,7 @@
             "kind": "property",
             "name": "principalId",
             "serializedName": "principalId",
-            "description": "The principal ID of the assigned identity.",
+            "doc": "The principal ID of the assigned identity.",
             "type": {
              "$id": "74",
              "kind": "string",
@@ -717,7 +717,7 @@
             "kind": "property",
             "name": "clientId",
             "serializedName": "clientId",
-            "description": "The client ID of the assigned identity.",
+            "doc": "The client ID of the assigned identity.",
             "type": {
              "$id": "77",
              "kind": "string",
@@ -785,7 +785,7 @@
    "name": "ErrorResponse",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
    "usage": "Error,Json,Exception",
-   "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+   "doc": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
    "decorators": [],
    "properties": [
     {
@@ -793,14 +793,14 @@
      "kind": "property",
      "name": "error",
      "serializedName": "error",
-     "description": "The error object.",
+     "doc": "The error object.",
      "type": {
       "$id": "81",
       "kind": "model",
       "name": "ErrorDetail",
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
       "usage": "Json,Exception",
-      "description": "The error detail.",
+      "doc": "The error detail.",
       "decorators": [],
       "properties": [
        {
@@ -808,7 +808,7 @@
         "kind": "property",
         "name": "code",
         "serializedName": "code",
-        "description": "The error code.",
+        "doc": "The error code.",
         "type": {
          "$id": "83",
          "kind": "string",
@@ -828,7 +828,7 @@
         "kind": "property",
         "name": "message",
         "serializedName": "message",
-        "description": "The error message.",
+        "doc": "The error message.",
         "type": {
          "$id": "85",
          "kind": "string",
@@ -848,7 +848,7 @@
         "kind": "property",
         "name": "target",
         "serializedName": "target",
-        "description": "The error target.",
+        "doc": "The error target.",
         "type": {
          "$id": "87",
          "kind": "string",
@@ -868,7 +868,7 @@
         "kind": "property",
         "name": "details",
         "serializedName": "details",
-        "description": "The error details.",
+        "doc": "The error details.",
         "type": {
          "$id": "89",
          "kind": "array",
@@ -891,7 +891,7 @@
         "kind": "property",
         "name": "additionalInfo",
         "serializedName": "additionalInfo",
-        "description": "The error additional info.",
+        "doc": "The error additional info.",
         "type": {
          "$id": "91",
          "kind": "array",
@@ -902,7 +902,7 @@
           "name": "ErrorAdditionalInfo",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
           "usage": "Json,Exception",
-          "description": "The resource management error additional info.",
+          "doc": "The resource management error additional info.",
           "decorators": [],
           "properties": [
            {
@@ -910,7 +910,7 @@
             "kind": "property",
             "name": "type",
             "serializedName": "type",
-            "description": "The additional info type.",
+            "doc": "The additional info type.",
             "type": {
              "$id": "94",
              "kind": "string",
@@ -930,7 +930,7 @@
             "kind": "property",
             "name": "info",
             "serializedName": "info",
-            "description": "The additional info.",
+            "doc": "The additional info.",
             "type": {
              "$id": "96",
              "kind": "model",
@@ -984,7 +984,7 @@
   {
    "$id": "97",
    "Name": "CommonPropertiesClient",
-   "Description": "Arm Managed Identity Provider management API.",
+   "Doc": "Arm Managed Identity Provider management API.",
    "Operations": [],
    "Protocol": {
     "$id": "98"
@@ -994,7 +994,7 @@
      "$id": "99",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "100",
       "kind": "url",
@@ -1032,14 +1032,14 @@
      "$id": "104",
      "Name": "get",
      "ResourceName": "ManagedIdentityTrackedResource",
-     "Description": "Get a ManagedIdentityTrackedResource",
+     "Doc": "Get a ManagedIdentityTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "105",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "106",
         "kind": "string",
@@ -1071,7 +1071,7 @@
        "$id": "109",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "110",
         "kind": "string",
@@ -1093,7 +1093,7 @@
        "$id": "111",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "112",
         "kind": "string",
@@ -1115,7 +1115,7 @@
        "$id": "113",
        "Name": "managedIdentityTrackedResourceName",
        "NameInRequest": "managedIdentityTrackedResourceName",
-       "Description": "arm resource name for path",
+       "Doc": "arm resource name for path",
        "Type": {
         "$id": "114",
         "kind": "string",
@@ -1192,14 +1192,14 @@
      "$id": "119",
      "Name": "createWithSystemAssigned",
      "ResourceName": "ManagedIdentityTrackedResource",
-     "Description": "Create a ManagedIdentityTrackedResource",
+     "Doc": "Create a ManagedIdentityTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "120",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "121",
         "kind": "string",
@@ -1231,7 +1231,7 @@
        "$id": "124",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "125",
         "kind": "string",
@@ -1253,7 +1253,7 @@
        "$id": "126",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "127",
         "kind": "string",
@@ -1275,7 +1275,7 @@
        "$id": "128",
        "Name": "managedIdentityTrackedResourceName",
        "NameInRequest": "managedIdentityTrackedResourceName",
-       "Description": "arm resource name for path",
+       "Doc": "arm resource name for path",
        "Type": {
         "$id": "129",
         "kind": "string",
@@ -1297,7 +1297,7 @@
        "$id": "130",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "131",
         "kind": "constant",
@@ -1352,7 +1352,7 @@
        "$id": "136",
        "Name": "resource",
        "NameInRequest": "resource",
-       "Description": "Resource create parameters.",
+       "Doc": "Resource create parameters.",
        "Type": {
         "$ref": "26"
        },
@@ -1416,14 +1416,14 @@
      "$id": "139",
      "Name": "updateWithUserAssignedAndSystemAssigned",
      "ResourceName": "ManagedIdentityTrackedResource",
-     "Description": "Update a ManagedIdentityTrackedResource",
+     "Doc": "Update a ManagedIdentityTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "140",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "141",
         "kind": "string",
@@ -1455,7 +1455,7 @@
        "$id": "144",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "145",
         "kind": "string",
@@ -1477,7 +1477,7 @@
        "$id": "146",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "147",
         "kind": "string",
@@ -1499,7 +1499,7 @@
        "$id": "148",
        "Name": "managedIdentityTrackedResourceName",
        "NameInRequest": "managedIdentityTrackedResourceName",
-       "Description": "arm resource name for path",
+       "Doc": "arm resource name for path",
        "Type": {
         "$id": "149",
         "kind": "string",
@@ -1521,7 +1521,7 @@
        "$id": "150",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "151",
         "kind": "constant",
@@ -1576,7 +1576,7 @@
        "$id": "156",
        "Name": "properties",
        "NameInRequest": "properties",
-       "Description": "The resource properties to be updated.",
+       "Doc": "The resource properties to be updated.",
        "Type": {
         "$ref": "26"
        },
@@ -1631,7 +1631,7 @@
      "$id": "159",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "160",
       "kind": "url",

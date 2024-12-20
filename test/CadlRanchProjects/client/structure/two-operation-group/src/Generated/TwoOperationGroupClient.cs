@@ -33,16 +33,16 @@ namespace Client.Structure.Service.TwoOperationGroup
         }
 
         /// <summary> Initializes a new instance of TwoOperationGroupClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="client"> The <see cref="ClientType"/> to use. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public TwoOperationGroupClient(Uri endpoint, ClientType client) : this(endpoint, client, new TwoOperationGroupClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of TwoOperationGroupClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="client"> The <see cref="ClientType"/> to use. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public TwoOperationGroupClient(Uri endpoint, ClientType client, TwoOperationGroupClientOptions options)

@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
     /// <summary>
-    /// The Dinosaur.
+    /// Define a base class in the legacy way. Discriminator property is not explicitly defined in the model.
     /// Please note <see cref="Dinosaur"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="TRex"/>.
     /// </summary>
@@ -57,7 +57,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Dinosaur"/>. </summary>
-        /// <param name="kind"></param>
+        /// <param name="kind"> Discriminator property for Dinosaur. </param>
         /// <param name="size"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal Dinosaur(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -72,7 +72,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         {
         }
 
-        /// <summary> Gets or sets the kind. </summary>
+        /// <summary> Discriminator property for Dinosaur. </summary>
         internal string Kind { get; set; }
         /// <summary> Gets the size. </summary>
         public int Size { get; }

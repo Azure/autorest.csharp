@@ -35,7 +35,7 @@ namespace _Type.Scalar
         /// <summary> Initializes a new instance of Boolean. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Boolean(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -43,7 +43,7 @@ namespace _Type.Scalar
             _endpoint = endpoint;
         }
 
-        /// <summary> Get boolean. </summary>
+        /// <summary> get boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='GetBooleanAsync(CancellationToken)']/*" />
         public virtual async Task<Response<bool>> GetBooleanAsync(CancellationToken cancellationToken = default)
@@ -53,7 +53,7 @@ namespace _Type.Scalar
             return Response.FromValue(response.Content.ToObjectFromJson<bool>(), response);
         }
 
-        /// <summary> Get boolean. </summary>
+        /// <summary> get boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='GetBoolean(CancellationToken)']/*" />
         public virtual Response<bool> GetBoolean(CancellationToken cancellationToken = default)
@@ -64,7 +64,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Get boolean.
+        /// [Protocol Method] get boolean value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -99,7 +99,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Get boolean.
+        /// [Protocol Method] get boolean value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -133,8 +133,8 @@ namespace _Type.Scalar
             }
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="bool"/> to use. </param>
+        /// <summary> put boolean value. </summary>
+        /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='PutAsync(bool,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(bool body, CancellationToken cancellationToken = default)
@@ -145,8 +145,8 @@ namespace _Type.Scalar
             return response;
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="bool"/> to use. </param>
+        /// <summary> put boolean value. </summary>
+        /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='Put(bool,CancellationToken)']/*" />
         public virtual Response Put(bool body, CancellationToken cancellationToken = default)
@@ -158,7 +158,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] put boolean value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -197,7 +197,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] put boolean value
         /// <list type="bullet">
         /// <item>
         /// <description>

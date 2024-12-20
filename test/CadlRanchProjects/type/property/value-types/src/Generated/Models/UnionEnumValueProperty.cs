@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.ValueTypes.Models
 {
-    /// <summary> The UnionEnumValueProperty. </summary>
+    /// <summary> Template type for testing models with specific properties. Pass in the type of the property you are looking for. </summary>
     public partial class UnionEnumValueProperty
     {
         /// <summary>
@@ -51,7 +51,7 @@ namespace _Type.Property.ValueTypes.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="UnionEnumValueProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal UnionEnumValueProperty(ExtendedEnum property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -59,7 +59,7 @@ namespace _Type.Property.ValueTypes.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets the property. </summary>
+        /// <summary> Property. </summary>
         public ExtendedEnum Property { get; } = ExtendedEnum.EnumValue2;
     }
 }

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Scm._Type.Model.Inheritance.EnumDiscriminator.Models
 {
     /// <summary>
-    /// The Snake.
+    /// Test fixed enum type for discriminator
     /// Please note <see cref="Snake"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="Cobra"/>.
     /// </summary>
@@ -47,15 +47,15 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator.Models
         private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Snake"/>. </summary>
-        /// <param name="length"></param>
+        /// <param name="length"> Length of the snake. </param>
         protected Snake(int length)
         {
             Length = length;
         }
 
         /// <summary> Initializes a new instance of <see cref="Snake"/>. </summary>
-        /// <param name="kind"></param>
-        /// <param name="length"></param>
+        /// <param name="kind"> discriminator property. </param>
+        /// <param name="length"> Length of the snake. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal Snake(SnakeKind kind, int length, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -69,9 +69,9 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator.Models
         {
         }
 
-        /// <summary> Gets or sets the kind. </summary>
+        /// <summary> discriminator property. </summary>
         internal SnakeKind Kind { get; set; }
-        /// <summary> Gets or sets the length. </summary>
+        /// <summary> Length of the snake. </summary>
         public int Length { get; set; }
     }
 }

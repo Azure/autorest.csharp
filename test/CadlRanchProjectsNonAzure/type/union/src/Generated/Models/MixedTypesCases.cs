@@ -44,11 +44,11 @@ namespace Scm._Type.Union.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MixedTypesCases"/>. </summary>
-        /// <param name="model"></param>
-        /// <param name="literal"></param>
-        /// <param name="int"></param>
-        /// <param name="boolean"></param>
-        /// <param name="array"></param>
+        /// <param name="model"> This should be receive/send the Cat variant. </param>
+        /// <param name="literal"> This should be receive/send the "a" variant. </param>
+        /// <param name="int"> This should be receive/send the int variant. </param>
+        /// <param name="boolean"> This should be receive/send the boolean variant. </param>
+        /// <param name="array"> This should be receive/send 4 element with Cat, "a", int, and boolean. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/>, <paramref name="literal"/>, <paramref name="int"/>, <paramref name="boolean"/> or <paramref name="array"/> is null. </exception>
         public MixedTypesCases(BinaryData model, BinaryData literal, BinaryData @int, BinaryData boolean, IEnumerable<BinaryData> array)
         {
@@ -66,11 +66,11 @@ namespace Scm._Type.Union.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="MixedTypesCases"/>. </summary>
-        /// <param name="model"></param>
-        /// <param name="literal"></param>
-        /// <param name="int"></param>
-        /// <param name="boolean"></param>
-        /// <param name="array"></param>
+        /// <param name="model"> This should be receive/send the Cat variant. </param>
+        /// <param name="literal"> This should be receive/send the "a" variant. </param>
+        /// <param name="int"> This should be receive/send the int variant. </param>
+        /// <param name="boolean"> This should be receive/send the boolean variant. </param>
+        /// <param name="array"> This should be receive/send 4 element with Cat, "a", int, and boolean. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal MixedTypesCases(BinaryData model, BinaryData literal, BinaryData @int, BinaryData boolean, IList<BinaryData> array, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -88,7 +88,7 @@ namespace Scm._Type.Union.Models
         }
 
         /// <summary>
-        /// Gets or sets the model
+        /// This should be receive/send the Cat variant
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -136,7 +136,7 @@ namespace Scm._Type.Union.Models
         /// </summary>
         public BinaryData Model { get; set; }
         /// <summary>
-        /// Gets or sets the literal
+        /// This should be receive/send the "a" variant
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -184,7 +184,7 @@ namespace Scm._Type.Union.Models
         /// </summary>
         public BinaryData Literal { get; set; }
         /// <summary>
-        /// Gets or sets the int
+        /// This should be receive/send the int variant
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -232,7 +232,7 @@ namespace Scm._Type.Union.Models
         /// </summary>
         public BinaryData Int { get; set; }
         /// <summary>
-        /// Gets or sets the boolean
+        /// This should be receive/send the boolean variant
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -280,7 +280,7 @@ namespace Scm._Type.Union.Models
         /// </summary>
         public BinaryData Boolean { get; set; }
         /// <summary>
-        /// Gets the array
+        /// This should be receive/send 4 element with Cat, "a", int, and boolean
         /// <para>
         /// To assign an object to the element of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>

@@ -26,8 +26,8 @@ namespace _Azure.ResourceManager.Resources
         /// <summary> Initializes a new instance of NestedRestOperations. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="applicationId"> The application id to use for user agent. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
         public NestedRestOperations(HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
         {
@@ -75,11 +75,11 @@ namespace _Azure.ResourceManager.Resources
             return message;
         }
 
-        /// <summary> Get. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
+        /// <summary> Get a NestedProxyResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
+        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="nextedProxyResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -108,11 +108,11 @@ namespace _Azure.ResourceManager.Resources
             }
         }
 
-        /// <summary> Get. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
+        /// <summary> Get a NestedProxyResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
+        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="nextedProxyResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -183,12 +183,12 @@ namespace _Azure.ResourceManager.Resources
             return message;
         }
 
-        /// <summary> Create or replace. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="data"> The <see cref="NestedProxyResourceData"/> to use. </param>
+        /// <summary> Create a NestedProxyResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
+        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
+        /// <param name="data"> Resource create parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/>, <paramref name="nextedProxyResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -212,12 +212,12 @@ namespace _Azure.ResourceManager.Resources
             }
         }
 
-        /// <summary> Create or replace. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="data"> The <see cref="NestedProxyResourceData"/> to use. </param>
+        /// <summary> Create a NestedProxyResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
+        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
+        /// <param name="data"> Resource create parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/>, <paramref name="nextedProxyResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -283,12 +283,12 @@ namespace _Azure.ResourceManager.Resources
             return message;
         }
 
-        /// <summary> Update. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="data"> The <see cref="NestedProxyResourceData"/> to use. </param>
+        /// <summary> Update a NestedProxyResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
+        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
+        /// <param name="data"> The resource properties to be updated. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/>, <paramref name="nextedProxyResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -312,12 +312,12 @@ namespace _Azure.ResourceManager.Resources
             }
         }
 
-        /// <summary> Update. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="data"> The <see cref="NestedProxyResourceData"/> to use. </param>
+        /// <summary> Update a NestedProxyResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
+        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
+        /// <param name="data"> The resource properties to be updated. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/>, <paramref name="nextedProxyResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -379,11 +379,11 @@ namespace _Azure.ResourceManager.Resources
             return message;
         }
 
-        /// <summary> Delete. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
+        /// <summary> Delete a NestedProxyResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
+        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="nextedProxyResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -406,11 +406,11 @@ namespace _Azure.ResourceManager.Resources
             }
         }
 
-        /// <summary> Delete. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
+        /// <summary> Delete a NestedProxyResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
+        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="nextedProxyResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -469,10 +469,10 @@ namespace _Azure.ResourceManager.Resources
             return message;
         }
 
-        /// <summary> List by top level tracked resource. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <summary> List NestedProxyResource resources by TopLevelTrackedResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -498,10 +498,10 @@ namespace _Azure.ResourceManager.Resources
             }
         }
 
-        /// <summary> List by top level tracked resource. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <summary> List NestedProxyResource resources by TopLevelTrackedResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -549,11 +549,11 @@ namespace _Azure.ResourceManager.Resources
             return message;
         }
 
-        /// <summary> List by top level tracked resource. </summary>
+        /// <summary> List NestedProxyResource resources by TopLevelTrackedResource. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -580,11 +580,11 @@ namespace _Azure.ResourceManager.Resources
             }
         }
 
-        /// <summary> List by top level tracked resource. </summary>
+        /// <summary> List NestedProxyResource resources by TopLevelTrackedResource. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>

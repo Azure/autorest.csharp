@@ -11,12 +11,12 @@ using System.Linq;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The DifferentSpreadModelArrayDerived. </summary>
+    /// <summary> The model extends from a model that spread Record&lt;ModelForRecord[]&gt; with the different known property type. </summary>
     public partial class DifferentSpreadModelArrayDerived : DifferentSpreadModelArrayRecord
     {
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadModelArrayDerived"/>. </summary>
         /// <param name="knownProp"></param>
-        /// <param name="derivedProp"></param>
+        /// <param name="derivedProp"> The index property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="knownProp"/> or <paramref name="derivedProp"/> is null. </exception>
         public DifferentSpreadModelArrayDerived(string knownProp, IEnumerable<ModelForRecord> derivedProp) : base(knownProp)
         {
@@ -30,7 +30,7 @@ namespace _Type.Property.AdditionalProperties.Models
         /// <param name="knownProp"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        /// <param name="derivedProp"></param>
+        /// <param name="derivedProp"> The index property. </param>
         internal DifferentSpreadModelArrayDerived(string knownProp, IDictionary<string, IList<BinaryData>> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<ModelForRecord> derivedProp) : base(knownProp, additionalProperties, serializedAdditionalRawData)
         {
             DerivedProp = derivedProp;
@@ -41,7 +41,7 @@ namespace _Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> Gets the derived prop. </summary>
+        /// <summary> The index property. </summary>
         public IList<ModelForRecord> DerivedProp { get; }
     }
 }

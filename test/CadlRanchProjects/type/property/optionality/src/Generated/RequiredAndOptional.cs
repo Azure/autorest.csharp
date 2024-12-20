@@ -16,7 +16,7 @@ using _Type.Property.Optionality.Models;
 namespace _Type.Property.Optionality
 {
     // Data plane generated sub-client.
-    /// <summary> The RequiredAndOptional sub-client. </summary>
+    /// <summary> Test optional and required properties. </summary>
     public partial class RequiredAndOptional
     {
         private readonly HttpPipeline _pipeline;
@@ -36,7 +36,7 @@ namespace _Type.Property.Optionality
         /// <summary> Initializes a new instance of RequiredAndOptional. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal RequiredAndOptional(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -44,7 +44,7 @@ namespace _Type.Property.Optionality
             _endpoint = endpoint;
         }
 
-        /// <summary> Get all. </summary>
+        /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetAllAsync(CancellationToken)']/*" />
         public virtual async Task<Response<RequiredAndOptionalProperty>> GetAllAsync(CancellationToken cancellationToken = default)
@@ -54,7 +54,7 @@ namespace _Type.Property.Optionality
             return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
         }
 
-        /// <summary> Get all. </summary>
+        /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetAll(CancellationToken)']/*" />
         public virtual Response<RequiredAndOptionalProperty> GetAll(CancellationToken cancellationToken = default)
@@ -65,7 +65,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get all.
+        /// [Protocol Method] Get models that will return all properties in the model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -100,7 +100,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get all.
+        /// [Protocol Method] Get models that will return all properties in the model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -134,7 +134,7 @@ namespace _Type.Property.Optionality
             }
         }
 
-        /// <summary> Get required only. </summary>
+        /// <summary> Get models that will return only the required properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetRequiredOnlyAsync(CancellationToken)']/*" />
         public virtual async Task<Response<RequiredAndOptionalProperty>> GetRequiredOnlyAsync(CancellationToken cancellationToken = default)
@@ -144,7 +144,7 @@ namespace _Type.Property.Optionality
             return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
         }
 
-        /// <summary> Get required only. </summary>
+        /// <summary> Get models that will return only the required properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetRequiredOnly(CancellationToken)']/*" />
         public virtual Response<RequiredAndOptionalProperty> GetRequiredOnly(CancellationToken cancellationToken = default)
@@ -155,7 +155,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get required only.
+        /// [Protocol Method] Get models that will return only the required properties
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -190,7 +190,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get required only.
+        /// [Protocol Method] Get models that will return only the required properties
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -224,7 +224,7 @@ namespace _Type.Property.Optionality
             }
         }
 
-        /// <summary> Put all. </summary>
+        /// <summary> Put a body with all properties present. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -239,7 +239,7 @@ namespace _Type.Property.Optionality
             return response;
         }
 
-        /// <summary> Put all. </summary>
+        /// <summary> Put a body with all properties present. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -255,7 +255,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put all.
+        /// [Protocol Method] Put a body with all properties present.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -294,7 +294,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put all.
+        /// [Protocol Method] Put a body with all properties present.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -332,7 +332,7 @@ namespace _Type.Property.Optionality
             }
         }
 
-        /// <summary> Put required only. </summary>
+        /// <summary> Put a body with only required properties. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -347,7 +347,7 @@ namespace _Type.Property.Optionality
             return response;
         }
 
-        /// <summary> Put required only. </summary>
+        /// <summary> Put a body with only required properties. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -363,7 +363,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put required only.
+        /// [Protocol Method] Put a body with only required properties.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -402,7 +402,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put required only.
+        /// [Protocol Method] Put a body with only required properties.
         /// <list type="bullet">
         /// <item>
         /// <description>

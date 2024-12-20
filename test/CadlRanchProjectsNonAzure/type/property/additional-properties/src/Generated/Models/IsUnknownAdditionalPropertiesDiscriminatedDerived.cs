@@ -7,12 +7,12 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The IsUnknownAdditionalPropertiesDiscriminatedDerived. </summary>
+    /// <summary> The derived discriminated type. </summary>
     public partial class IsUnknownAdditionalPropertiesDiscriminatedDerived : IsUnknownAdditionalPropertiesDiscriminated
     {
         /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalPropertiesDiscriminatedDerived"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="index"></param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="index"> The index property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public IsUnknownAdditionalPropertiesDiscriminatedDerived(string name, int index) : base(name)
         {
@@ -23,11 +23,11 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalPropertiesDiscriminatedDerived"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="kind"></param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="kind"> The discriminator. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
-        /// <param name="index"></param>
-        /// <param name="age"></param>
+        /// <param name="index"> The index property. </param>
+        /// <param name="age"> The age property. </param>
         internal IsUnknownAdditionalPropertiesDiscriminatedDerived(string name, string kind, IDictionary<string, BinaryData> additionalProperties, int index, float? age) : base(name, kind, additionalProperties)
         {
             Index = index;
@@ -39,9 +39,9 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> Gets or sets the index. </summary>
+        /// <summary> The index property. </summary>
         public int Index { get; set; }
-        /// <summary> Gets or sets the age. </summary>
+        /// <summary> The age property. </summary>
         public float? Age { get; set; }
     }
 }

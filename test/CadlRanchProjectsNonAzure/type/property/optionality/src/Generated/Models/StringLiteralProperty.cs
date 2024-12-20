@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.Optionality.Models
 {
-    /// <summary> The StringLiteralProperty. </summary>
+    /// <summary> Model with string literal property. </summary>
     public partial class StringLiteralProperty
     {
         /// <summary>
@@ -48,7 +48,7 @@ namespace Scm._Type.Property.Optionality.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="StringLiteralProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal StringLiteralProperty(StringLiteralPropertyProperty? property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -56,7 +56,7 @@ namespace Scm._Type.Property.Optionality.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public StringLiteralPropertyProperty? Property { get; set; }
     }
 }

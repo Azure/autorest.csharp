@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The ExtendsFloatAdditionalProperties. </summary>
+    /// <summary> The model extends from Record&lt;float32&gt; type. </summary>
     public partial class ExtendsFloatAdditionalProperties
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace _Type.Property.AdditionalProperties.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ExtendsFloatAdditionalProperties"/>. </summary>
-        /// <param name="id"></param>
+        /// <param name="id"> The id property. </param>
         public ExtendsFloatAdditionalProperties(float id)
         {
             Id = id;
@@ -54,7 +54,7 @@ namespace _Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ExtendsFloatAdditionalProperties"/>. </summary>
-        /// <param name="id"></param>
+        /// <param name="id"> The id property. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ExtendsFloatAdditionalProperties(float id, IDictionary<string, float> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -69,7 +69,7 @@ namespace _Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> Gets or sets the id. </summary>
+        /// <summary> The id property. </summary>
         public float Id { get; set; }
         /// <summary> Additional Properties. </summary>
         public IDictionary<string, float> AdditionalProperties { get; }

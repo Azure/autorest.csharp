@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Model.Empty.Models
 {
-    /// <summary> The EmptyInput. </summary>
+    /// <summary> Empty model used in operation parameters. </summary>
     public partial class EmptyInput
     {
         /// <summary>

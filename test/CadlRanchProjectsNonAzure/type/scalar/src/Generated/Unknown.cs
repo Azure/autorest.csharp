@@ -26,21 +26,21 @@ namespace Scm._Type.Scalar
 
         /// <summary> Initializes a new instance of Unknown. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Unknown(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
-        /// <summary> Get unknown. </summary>
+        /// <summary> get unknown value. </summary>
         public virtual async Task<ClientResult<BinaryData>> GetUnknownAsync()
         {
             ClientResult result = await GetUnknownAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(result.GetRawResponse().Content, result.GetRawResponse());
         }
 
-        /// <summary> Get unknown. </summary>
+        /// <summary> get unknown value. </summary>
         public virtual ClientResult<BinaryData> GetUnknown()
         {
             ClientResult result = GetUnknown(null);
@@ -48,7 +48,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Get unknown.
+        /// [Protocol Method] get unknown value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -72,7 +72,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Get unknown.
+        /// [Protocol Method] get unknown value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -95,8 +95,8 @@ namespace Scm._Type.Scalar
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="BinaryData"/> to use. </param>
+        /// <summary> put unknown value. </summary>
+        /// <param name="body"> _. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> PutAsync(BinaryData body)
         {
@@ -107,8 +107,8 @@ namespace Scm._Type.Scalar
             return result;
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="BinaryData"/> to use. </param>
+        /// <summary> put unknown value. </summary>
+        /// <param name="body"> _. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult Put(BinaryData body)
         {
@@ -120,7 +120,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] put unknown value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -148,7 +148,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] put unknown value
         /// <list type="bullet">
         /// <item>
         /// <description>

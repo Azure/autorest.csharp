@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
     /// <summary>
-    /// The Dog.
+    /// Test extensible enum type for discriminator
     /// Please note <see cref="Dog"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="Golden"/>.
     /// </summary>
@@ -50,15 +50,15 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Dog"/>. </summary>
-        /// <param name="weight"></param>
+        /// <param name="weight"> Weight of the dog. </param>
         protected Dog(int weight)
         {
             Weight = weight;
         }
 
         /// <summary> Initializes a new instance of <see cref="Dog"/>. </summary>
-        /// <param name="kind"></param>
-        /// <param name="weight"></param>
+        /// <param name="kind"> discriminator property. </param>
+        /// <param name="weight"> Weight of the dog. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal Dog(DogKind kind, int weight, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -72,9 +72,9 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         {
         }
 
-        /// <summary> Gets or sets the kind. </summary>
+        /// <summary> discriminator property. </summary>
         internal DogKind Kind { get; set; }
-        /// <summary> Gets or sets the weight. </summary>
+        /// <summary> Weight of the dog. </summary>
         public int Weight { get; set; }
     }
 }

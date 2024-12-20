@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Scm.Authentication.ApiKey
 {
     // Data plane generated client.
-    /// <summary> The ApiKey service client. </summary>
+    /// <summary> Illustrates clients generated with ApiKey authentication. </summary>
     public partial class ApiKeyClient
     {
         private const string AuthorizationHeader = "x-ms-api-key";
@@ -34,7 +34,7 @@ namespace Scm.Authentication.ApiKey
         }
 
         /// <summary> Initializes a new instance of ApiKeyClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
@@ -51,7 +51,7 @@ namespace Scm.Authentication.ApiKey
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Valid.
+        /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -71,7 +71,7 @@ namespace Scm.Authentication.ApiKey
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Valid.
+        /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -91,7 +91,7 @@ namespace Scm.Authentication.ApiKey
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Invalid.
+        /// [Protocol Method] Check whether client is authenticated.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -111,7 +111,7 @@ namespace Scm.Authentication.ApiKey
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Invalid.
+        /// [Protocol Method] Check whether client is authenticated.
         /// <list type="bullet">
         /// <item>
         /// <description>

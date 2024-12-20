@@ -46,8 +46,8 @@ namespace _Type.Union.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="EnumsOnlyCases"/>. </summary>
-        /// <param name="lr"></param>
-        /// <param name="ud"></param>
+        /// <param name="lr"> This should be receive/send the left variant. </param>
+        /// <param name="ud"> This should be receive/send the up variant. </param>
         public EnumsOnlyCases(EnumsOnlyCasesLr lr, EnumsOnlyCasesUd ud)
         {
             Lr = lr;
@@ -55,8 +55,8 @@ namespace _Type.Union.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="EnumsOnlyCases"/>. </summary>
-        /// <param name="lr"></param>
-        /// <param name="ud"></param>
+        /// <param name="lr"> This should be receive/send the left variant. </param>
+        /// <param name="ud"> This should be receive/send the up variant. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal EnumsOnlyCases(EnumsOnlyCasesLr lr, EnumsOnlyCasesUd ud, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -70,9 +70,9 @@ namespace _Type.Union.Models
         {
         }
 
-        /// <summary> Gets or sets the lr. </summary>
+        /// <summary> This should be receive/send the left variant. </summary>
         public EnumsOnlyCasesLr Lr { get; set; }
-        /// <summary> Gets or sets the ud. </summary>
+        /// <summary> This should be receive/send the up variant. </summary>
         public EnumsOnlyCasesUd Ud { get; set; }
     }
 }

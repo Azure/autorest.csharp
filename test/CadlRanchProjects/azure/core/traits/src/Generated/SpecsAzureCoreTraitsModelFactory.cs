@@ -11,8 +11,8 @@ namespace _Specs_.Azure.Core.Traits.Models
     public static partial class SpecsAzureCoreTraitsModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.User"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
+        /// <param name="id"> The user's id. </param>
+        /// <param name="name"> The user's name. </param>
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
         public static User User(int id = default, string name = null)
         {
@@ -20,7 +20,7 @@ namespace _Specs_.Azure.Core.Traits.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UserActionResponse"/>. </summary>
-        /// <param name="userActionResult"></param>
+        /// <param name="userActionResult"> User action result. </param>
         /// <returns> A new <see cref="Models.UserActionResponse"/> instance for mocking. </returns>
         public static UserActionResponse UserActionResponse(string userActionResult = null)
         {

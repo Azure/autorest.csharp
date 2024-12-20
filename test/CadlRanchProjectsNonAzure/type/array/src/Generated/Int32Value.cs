@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Scm._Type._Array
 {
     // Data plane generated sub-client.
-    /// <summary> The Int32Value sub-client. </summary>
+    /// <summary> Array of int32 values. </summary>
     public partial class Int32Value
     {
         private readonly ClientPipeline _pipeline;
@@ -28,7 +28,7 @@ namespace Scm._Type._Array
 
         /// <summary> Initializes a new instance of Int32Value. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Int32Value(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

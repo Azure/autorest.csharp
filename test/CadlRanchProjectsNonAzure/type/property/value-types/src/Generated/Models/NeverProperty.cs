@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.ValueTypes.Models
 {
-    /// <summary> The NeverProperty. </summary>
+    /// <summary> Model with a property never. (This property should not be included). </summary>
     public partial class NeverProperty
     {
         /// <summary>

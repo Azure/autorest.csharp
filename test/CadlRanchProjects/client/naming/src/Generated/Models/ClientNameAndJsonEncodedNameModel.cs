@@ -46,14 +46,14 @@ namespace Client.Naming.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ClientNameAndJsonEncodedNameModel"/>. </summary>
-        /// <param name="clientName"></param>
+        /// <param name="clientName"> Pass in true. </param>
         public ClientNameAndJsonEncodedNameModel(bool clientName)
         {
             ClientName = clientName;
         }
 
         /// <summary> Initializes a new instance of <see cref="ClientNameAndJsonEncodedNameModel"/>. </summary>
-        /// <param name="clientName"></param>
+        /// <param name="clientName"> Pass in true. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ClientNameAndJsonEncodedNameModel(bool clientName, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -66,7 +66,7 @@ namespace Client.Naming.Models
         {
         }
 
-        /// <summary> Gets the client name. </summary>
+        /// <summary> Pass in true. </summary>
         public bool ClientName { get; }
     }
 }

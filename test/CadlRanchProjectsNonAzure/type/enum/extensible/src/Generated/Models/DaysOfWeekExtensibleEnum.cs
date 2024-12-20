@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace Scm._Type._Enum.Extensible.Models
 {
-    /// <summary> The DaysOfWeekExtensibleEnum. </summary>
+    /// <summary> Days of the week. </summary>
     public readonly partial struct DaysOfWeekExtensibleEnum : IEquatable<DaysOfWeekExtensibleEnum>
     {
         private readonly string _value;

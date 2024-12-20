@@ -36,7 +36,7 @@ namespace _Specs_.Azure.Core.Scalar
         /// <summary> Initializes a new instance of AzureLocationScalar. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal AzureLocationScalar(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -44,7 +44,7 @@ namespace _Specs_.Azure.Core.Scalar
             _endpoint = endpoint;
         }
 
-        /// <summary> Get azure location scalar. </summary>
+        /// <summary> get azureLocation value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='GetAzureLocationScalarAsync(CancellationToken)']/*" />
         public virtual async Task<Response<AzureLocation>> GetAzureLocationScalarAsync(CancellationToken cancellationToken = default)
@@ -54,7 +54,7 @@ namespace _Specs_.Azure.Core.Scalar
             return Response.FromValue(new AzureLocation(response.Content.ToObjectFromJson<string>()), response);
         }
 
-        /// <summary> Get azure location scalar. </summary>
+        /// <summary> get azureLocation value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='GetAzureLocationScalar(CancellationToken)']/*" />
         public virtual Response<AzureLocation> GetAzureLocationScalar(CancellationToken cancellationToken = default)
@@ -65,7 +65,7 @@ namespace _Specs_.Azure.Core.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Get azure location scalar.
+        /// [Protocol Method] get azureLocation value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -100,7 +100,7 @@ namespace _Specs_.Azure.Core.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Get azure location scalar.
+        /// [Protocol Method] get azureLocation value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -134,8 +134,8 @@ namespace _Specs_.Azure.Core.Scalar
             }
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="AzureLocation"/> to use. </param>
+        /// <summary> put azureLocation value. </summary>
+        /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='PutAsync(AzureLocation,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(AzureLocation body, CancellationToken cancellationToken = default)
@@ -146,8 +146,8 @@ namespace _Specs_.Azure.Core.Scalar
             return response;
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="AzureLocation"/> to use. </param>
+        /// <summary> put azureLocation value. </summary>
+        /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='Put(AzureLocation,CancellationToken)']/*" />
         public virtual Response Put(AzureLocation body, CancellationToken cancellationToken = default)
@@ -159,7 +159,7 @@ namespace _Specs_.Azure.Core.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] put azureLocation value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -198,7 +198,7 @@ namespace _Specs_.Azure.Core.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] put azureLocation value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -236,8 +236,8 @@ namespace _Specs_.Azure.Core.Scalar
             }
         }
 
-        /// <summary> Post. </summary>
-        /// <param name="body"> The <see cref="AzureLocationModel"/> to use. </param>
+        /// <summary> post a model which has azureLocation property. </summary>
+        /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='PostAsync(AzureLocationModel,CancellationToken)']/*" />
@@ -251,8 +251,8 @@ namespace _Specs_.Azure.Core.Scalar
             return Response.FromValue(AzureLocationModel.FromResponse(response), response);
         }
 
-        /// <summary> Post. </summary>
-        /// <param name="body"> The <see cref="AzureLocationModel"/> to use. </param>
+        /// <summary> post a model which has azureLocation property. </summary>
+        /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/AzureLocationScalar.xml" path="doc/members/member[@name='Post(AzureLocationModel,CancellationToken)']/*" />
@@ -267,7 +267,7 @@ namespace _Specs_.Azure.Core.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Post.
+        /// [Protocol Method] post a model which has azureLocation property
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -306,7 +306,7 @@ namespace _Specs_.Azure.Core.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Post.
+        /// [Protocol Method] post a model which has azureLocation property
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -346,7 +346,7 @@ namespace _Specs_.Azure.Core.Scalar
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Header.
+        /// [Protocol Method] azureLocation value header
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -355,7 +355,7 @@ namespace _Specs_.Azure.Core.Scalar
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="region"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="region"> _. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -378,7 +378,7 @@ namespace _Specs_.Azure.Core.Scalar
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Header.
+        /// [Protocol Method] azureLocation value header
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -387,7 +387,7 @@ namespace _Specs_.Azure.Core.Scalar
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="region"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="region"> _. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -410,7 +410,7 @@ namespace _Specs_.Azure.Core.Scalar
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Query.
+        /// [Protocol Method] azureLocation value query
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -419,7 +419,7 @@ namespace _Specs_.Azure.Core.Scalar
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="region"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="region"> _. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -442,7 +442,7 @@ namespace _Specs_.Azure.Core.Scalar
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Query.
+        /// [Protocol Method] azureLocation value query
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -451,7 +451,7 @@ namespace _Specs_.Azure.Core.Scalar
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="region"> The <see cref="AzureLocation"/> to use. </param>
+        /// <param name="region"> _. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

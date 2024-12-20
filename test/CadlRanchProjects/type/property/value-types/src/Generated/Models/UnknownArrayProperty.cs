@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.ValueTypes.Models
 {
-    /// <summary> The UnknownArrayProperty. </summary>
+    /// <summary> Model with a property unknown, and the data is an array. </summary>
     public partial class UnknownArrayProperty
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace _Type.Property.ValueTypes.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UnknownArrayProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public UnknownArrayProperty(BinaryData property)
         {
@@ -56,7 +56,7 @@ namespace _Type.Property.ValueTypes.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="UnknownArrayProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal UnknownArrayProperty(BinaryData property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -70,7 +70,7 @@ namespace _Type.Property.ValueTypes.Models
         }
 
         /// <summary>
-        /// Gets or sets the property
+        /// Property
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>

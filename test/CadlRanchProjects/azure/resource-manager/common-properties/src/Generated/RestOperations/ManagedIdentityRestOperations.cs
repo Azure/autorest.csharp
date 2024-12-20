@@ -25,8 +25,8 @@ namespace _Azure.ResourceManager.CommonProperties
         /// <summary> Initializes a new instance of ManagedIdentityRestOperations. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="applicationId"> The application id to use for user agent. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
         public ManagedIdentityRestOperations(HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
         {
@@ -70,10 +70,10 @@ namespace _Azure.ResourceManager.CommonProperties
             return message;
         }
 
-        /// <summary> Get. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="managedIdentityTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <summary> Get a ManagedIdentityTrackedResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="managedIdentityTrackedResourceName"> arm resource name for path. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="managedIdentityTrackedResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="managedIdentityTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -101,10 +101,10 @@ namespace _Azure.ResourceManager.CommonProperties
             }
         }
 
-        /// <summary> Get. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="managedIdentityTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <summary> Get a ManagedIdentityTrackedResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="managedIdentityTrackedResourceName"> arm resource name for path. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="managedIdentityTrackedResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="managedIdentityTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -170,11 +170,11 @@ namespace _Azure.ResourceManager.CommonProperties
             return message;
         }
 
-        /// <summary> Create with system assigned. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="managedIdentityTrackedResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="data"> The <see cref="ManagedIdentityTrackedResourceData"/> to use. </param>
+        /// <summary> Create a ManagedIdentityTrackedResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="managedIdentityTrackedResourceName"> arm resource name for path. </param>
+        /// <param name="data"> Resource create parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="managedIdentityTrackedResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="managedIdentityTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -202,11 +202,11 @@ namespace _Azure.ResourceManager.CommonProperties
             }
         }
 
-        /// <summary> Create with system assigned. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="managedIdentityTrackedResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="data"> The <see cref="ManagedIdentityTrackedResourceData"/> to use. </param>
+        /// <summary> Create a ManagedIdentityTrackedResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="managedIdentityTrackedResourceName"> arm resource name for path. </param>
+        /// <param name="data"> Resource create parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="managedIdentityTrackedResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="managedIdentityTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -272,11 +272,11 @@ namespace _Azure.ResourceManager.CommonProperties
             return message;
         }
 
-        /// <summary> Update with user assigned and system assigned. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="managedIdentityTrackedResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="data"> The <see cref="ManagedIdentityTrackedResourceData"/> to use. </param>
+        /// <summary> Update a ManagedIdentityTrackedResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="managedIdentityTrackedResourceName"> arm resource name for path. </param>
+        /// <param name="data"> The resource properties to be updated. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="managedIdentityTrackedResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="managedIdentityTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -303,11 +303,11 @@ namespace _Azure.ResourceManager.CommonProperties
             }
         }
 
-        /// <summary> Update with user assigned and system assigned. </summary>
-        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
-        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
-        /// <param name="managedIdentityTrackedResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="data"> The <see cref="ManagedIdentityTrackedResourceData"/> to use. </param>
+        /// <summary> Update a ManagedIdentityTrackedResource. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="managedIdentityTrackedResourceName"> arm resource name for path. </param>
+        /// <param name="data"> The resource properties to be updated. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="managedIdentityTrackedResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="managedIdentityTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>

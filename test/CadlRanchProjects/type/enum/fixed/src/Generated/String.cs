@@ -36,7 +36,7 @@ namespace _Type._Enum.Fixed
         /// <summary> Initializes a new instance of String. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal String(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -44,7 +44,7 @@ namespace _Type._Enum.Fixed
             _endpoint = endpoint;
         }
 
-        /// <summary> Get known value. </summary>
+        /// <summary> getKnownValue. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetKnownValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DaysOfWeekEnum>> GetKnownValueAsync(CancellationToken cancellationToken = default)
@@ -54,7 +54,7 @@ namespace _Type._Enum.Fixed
             return Response.FromValue(response.Content.ToObjectFromJson<string>().ToDaysOfWeekEnum(), response);
         }
 
-        /// <summary> Get known value. </summary>
+        /// <summary> getKnownValue. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetKnownValue(CancellationToken)']/*" />
         public virtual Response<DaysOfWeekEnum> GetKnownValue(CancellationToken cancellationToken = default)
@@ -65,7 +65,7 @@ namespace _Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method] Get known value.
+        /// [Protocol Method] getKnownValue
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -100,7 +100,7 @@ namespace _Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method] Get known value.
+        /// [Protocol Method] getKnownValue
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -134,8 +134,8 @@ namespace _Type._Enum.Fixed
             }
         }
 
-        /// <summary> Put known value. </summary>
-        /// <param name="body"> The <see cref="DaysOfWeekEnum"/> to use. </param>
+        /// <summary> putKnownValue. </summary>
+        /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutKnownValueAsync(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutKnownValueAsync(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
@@ -146,8 +146,8 @@ namespace _Type._Enum.Fixed
             return response;
         }
 
-        /// <summary> Put known value. </summary>
-        /// <param name="body"> The <see cref="DaysOfWeekEnum"/> to use. </param>
+        /// <summary> putKnownValue. </summary>
+        /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutKnownValue(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual Response PutKnownValue(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
@@ -159,7 +159,7 @@ namespace _Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method] Put known value.
+        /// [Protocol Method] putKnownValue
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -198,7 +198,7 @@ namespace _Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method] Put known value.
+        /// [Protocol Method] putKnownValue
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -236,8 +236,8 @@ namespace _Type._Enum.Fixed
             }
         }
 
-        /// <summary> Put unknown value. </summary>
-        /// <param name="body"> The <see cref="DaysOfWeekEnum"/> to use. </param>
+        /// <summary> putUnknownValue. </summary>
+        /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutUnknownValueAsync(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutUnknownValueAsync(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
@@ -248,8 +248,8 @@ namespace _Type._Enum.Fixed
             return response;
         }
 
-        /// <summary> Put unknown value. </summary>
-        /// <param name="body"> The <see cref="DaysOfWeekEnum"/> to use. </param>
+        /// <summary> putUnknownValue. </summary>
+        /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutUnknownValue(DaysOfWeekEnum,CancellationToken)']/*" />
         public virtual Response PutUnknownValue(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
@@ -261,7 +261,7 @@ namespace _Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method] Put unknown value.
+        /// [Protocol Method] putUnknownValue
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -300,7 +300,7 @@ namespace _Type._Enum.Fixed
         }
 
         /// <summary>
-        /// [Protocol Method] Put unknown value.
+        /// [Protocol Method] putUnknownValue
         /// <list type="bullet">
         /// <item>
         /// <description>

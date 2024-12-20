@@ -30,11 +30,11 @@ namespace _Azure.ResourceManager.Resources.Models
         private const string DeletingValue = "Deleting";
         private const string AcceptedValue = "Accepted";
 
-        /// <summary> Succeeded. </summary>
+        /// <summary> Resource has been created. </summary>
         public static ProvisioningState Succeeded { get; } = new ProvisioningState(SucceededValue);
-        /// <summary> Failed. </summary>
+        /// <summary> Resource creation failed. </summary>
         public static ProvisioningState Failed { get; } = new ProvisioningState(FailedValue);
-        /// <summary> Canceled. </summary>
+        /// <summary> Resource creation was canceled. </summary>
         public static ProvisioningState Canceled { get; } = new ProvisioningState(CanceledValue);
         /// <summary> Provisioning. </summary>
         public static ProvisioningState Provisioning { get; } = new ProvisioningState(ProvisioningValue);

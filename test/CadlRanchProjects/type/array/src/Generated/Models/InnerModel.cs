@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type._Array.Models
 {
-    /// <summary> The InnerModel. </summary>
+    /// <summary> Array inner model. </summary>
     public partial class InnerModel
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace _Type._Array.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Required string property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public InnerModel(string property)
         {
@@ -57,7 +57,7 @@ namespace _Type._Array.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Required string property. </param>
         /// <param name="children"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal InnerModel(string property, IList<InnerModel> children, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -72,7 +72,7 @@ namespace _Type._Array.Models
         {
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Required string property. </summary>
         public string Property { get; set; }
         /// <summary> Gets the children. </summary>
         public IList<InnerModel> Children { get; }

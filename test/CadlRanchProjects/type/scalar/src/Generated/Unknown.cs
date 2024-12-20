@@ -35,7 +35,7 @@ namespace _Type.Scalar
         /// <summary> Initializes a new instance of Unknown. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Unknown(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -43,7 +43,7 @@ namespace _Type.Scalar
             _endpoint = endpoint;
         }
 
-        /// <summary> Get unknown. </summary>
+        /// <summary> get unknown value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Unknown.xml" path="doc/members/member[@name='GetUnknownAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BinaryData>> GetUnknownAsync(CancellationToken cancellationToken = default)
@@ -53,7 +53,7 @@ namespace _Type.Scalar
             return Response.FromValue(response.Content, response);
         }
 
-        /// <summary> Get unknown. </summary>
+        /// <summary> get unknown value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Unknown.xml" path="doc/members/member[@name='GetUnknown(CancellationToken)']/*" />
         public virtual Response<BinaryData> GetUnknown(CancellationToken cancellationToken = default)
@@ -64,7 +64,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Get unknown.
+        /// [Protocol Method] get unknown value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -99,7 +99,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Get unknown.
+        /// [Protocol Method] get unknown value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -133,8 +133,8 @@ namespace _Type.Scalar
             }
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="BinaryData"/> to use. </param>
+        /// <summary> put unknown value. </summary>
+        /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Unknown.xml" path="doc/members/member[@name='PutAsync(BinaryData,CancellationToken)']/*" />
@@ -148,8 +148,8 @@ namespace _Type.Scalar
             return response;
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="BinaryData"/> to use. </param>
+        /// <summary> put unknown value. </summary>
+        /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Unknown.xml" path="doc/members/member[@name='Put(BinaryData,CancellationToken)']/*" />
@@ -164,7 +164,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] put unknown value
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -203,7 +203,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] put unknown value
         /// <list type="bullet">
         /// <item>
         /// <description>

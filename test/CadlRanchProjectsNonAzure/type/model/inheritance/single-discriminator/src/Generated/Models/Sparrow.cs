@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
 {
-    /// <summary> The Sparrow. </summary>
+    /// <summary> The second level model in polymorphic single level inheritance. </summary>
     public partial class Sparrow : Bird
     {
         /// <summary> Initializes a new instance of <see cref="Sparrow"/>. </summary>

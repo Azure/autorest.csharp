@@ -43,8 +43,8 @@ namespace Scm.Parameters.Spread.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SpreadParameterWithInnerAliasRequest"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="age"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal SpreadParameterWithInnerAliasRequest(string name, int age)
         {
@@ -55,8 +55,8 @@ namespace Scm.Parameters.Spread.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="SpreadParameterWithInnerAliasRequest"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="age"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal SpreadParameterWithInnerAliasRequest(string name, int age, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -70,9 +70,9 @@ namespace Scm.Parameters.Spread.Models
         {
         }
 
-        /// <summary> Gets the name. </summary>
+        /// <summary> name of the Thing. </summary>
         public string Name { get; }
-        /// <summary> Gets the age. </summary>
+        /// <summary> age of the Thing. </summary>
         public int Age { get; }
     }
 }

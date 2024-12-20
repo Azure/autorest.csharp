@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace Server.Versions.Versioned
 {
     // Data plane generated client.
-    /// <summary> The Versioned service client. </summary>
+    /// <summary> Illustrates versioned server. </summary>
     public partial class VersionedClient
     {
         private readonly HttpPipeline _pipeline;
@@ -33,14 +33,14 @@ namespace Server.Versions.Versioned
         }
 
         /// <summary> Initializes a new instance of VersionedClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public VersionedClient(Uri endpoint) : this(endpoint, new VersionedClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of VersionedClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public VersionedClient(Uri endpoint, VersionedClientOptions options)

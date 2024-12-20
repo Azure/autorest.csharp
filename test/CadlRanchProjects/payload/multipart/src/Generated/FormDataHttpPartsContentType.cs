@@ -36,7 +36,7 @@ namespace Payload.MultiPart
         /// <summary> Initializes a new instance of FormDataHttpPartsContentType. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal FormDataHttpPartsContentType(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -44,7 +44,7 @@ namespace Payload.MultiPart
             _endpoint = endpoint;
         }
 
-        /// <summary> Image jpeg content type. </summary>
+        /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="FileWithHttpPartSpecificContentTypeRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -59,7 +59,7 @@ namespace Payload.MultiPart
             return response;
         }
 
-        /// <summary> Image jpeg content type. </summary>
+        /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="FileWithHttpPartSpecificContentTypeRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -75,7 +75,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Image jpeg content type.
+        /// [Protocol Method] Test content-type: multipart/form-data
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +115,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Image jpeg content type.
+        /// [Protocol Method] Test content-type: multipart/form-data
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -154,7 +154,7 @@ namespace Payload.MultiPart
             }
         }
 
-        /// <summary> Required content type. </summary>
+        /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="FileWithHttpPartRequiredContentTypeRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -169,7 +169,7 @@ namespace Payload.MultiPart
             return response;
         }
 
-        /// <summary> Required content type. </summary>
+        /// <summary> Test content-type: multipart/form-data. </summary>
         /// <param name="body"> The <see cref="FileWithHttpPartRequiredContentTypeRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -185,7 +185,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Required content type.
+        /// [Protocol Method] Test content-type: multipart/form-data
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -225,7 +225,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Required content type.
+        /// [Protocol Method] Test content-type: multipart/form-data
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -264,7 +264,7 @@ namespace Payload.MultiPart
             }
         }
 
-        /// <summary> Optional content type. </summary>
+        /// <summary> Test content-type: multipart/form-data for optional content type. </summary>
         /// <param name="body"> The <see cref="FileWithHttpPartOptionalContentTypeRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -279,7 +279,7 @@ namespace Payload.MultiPart
             return response;
         }
 
-        /// <summary> Optional content type. </summary>
+        /// <summary> Test content-type: multipart/form-data for optional content type. </summary>
         /// <param name="body"> The <see cref="FileWithHttpPartOptionalContentTypeRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -295,7 +295,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Optional content type.
+        /// [Protocol Method] Test content-type: multipart/form-data for optional content type
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -335,7 +335,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Optional content type.
+        /// [Protocol Method] Test content-type: multipart/form-data for optional content type
         /// <list type="bullet">
         /// <item>
         /// <description>

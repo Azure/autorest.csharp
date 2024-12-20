@@ -13,7 +13,10 @@ using _Azure.ResourceManager.Resources.Models;
 
 namespace _Azure.ResourceManager.Resources
 {
-    /// <summary> A class representing the TopLevelTrackedResource data model. </summary>
+    /// <summary>
+    /// A class representing the TopLevelTrackedResource data model.
+    /// Concrete tracked resource types can be created by aliasing this type using a specific property type.
+    /// </summary>
     public partial class TopLevelTrackedResourceData : TrackedResourceData
     {
         /// <summary>
@@ -61,7 +64,7 @@ namespace _Azure.ResourceManager.Resources
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="properties"></param>
+        /// <param name="properties"> The resource-specific properties for this resource. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal TopLevelTrackedResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, TopLevelTrackedResourceProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
@@ -74,7 +77,7 @@ namespace _Azure.ResourceManager.Resources
         {
         }
 
-        /// <summary> Gets or sets the properties. </summary>
+        /// <summary> The resource-specific properties for this resource. </summary>
         public TopLevelTrackedResourceProperties Properties { get; set; }
     }
 }

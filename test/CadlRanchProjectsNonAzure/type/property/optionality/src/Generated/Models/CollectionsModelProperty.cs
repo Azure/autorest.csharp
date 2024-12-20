@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.Optionality.Models
 {
-    /// <summary> The CollectionsModelProperty. </summary>
+    /// <summary> Model with collection models properties. </summary>
     public partial class CollectionsModelProperty
     {
         /// <summary>
@@ -49,7 +49,7 @@ namespace Scm._Type.Property.Optionality.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CollectionsModelProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CollectionsModelProperty(IList<StringProperty> property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -57,7 +57,7 @@ namespace Scm._Type.Property.Optionality.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets the property. </summary>
+        /// <summary> Property. </summary>
         public IList<StringProperty> Property { get; }
     }
 }

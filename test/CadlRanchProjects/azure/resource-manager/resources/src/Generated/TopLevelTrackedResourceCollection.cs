@@ -55,7 +55,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Create or replace.
+        /// Create a TopLevelTrackedResource
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -76,8 +76,8 @@ namespace _Azure.ResourceManager.Resources
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="data"> The <see cref="TopLevelTrackedResourceData"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
+        /// <param name="data"> Resource create parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="topLevelTrackedResourceName"/> or <paramref name="data"/> is null. </exception>
@@ -104,7 +104,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Create or replace.
+        /// Create a TopLevelTrackedResource
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -125,8 +125,8 @@ namespace _Azure.ResourceManager.Resources
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
-        /// <param name="data"> The <see cref="TopLevelTrackedResourceData"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
+        /// <param name="data"> Resource create parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="topLevelTrackedResourceName"/> or <paramref name="data"/> is null. </exception>
@@ -153,7 +153,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Get.
+        /// Get a TopLevelTrackedResource
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -173,7 +173,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="topLevelTrackedResourceName"/> is null. </exception>
@@ -198,7 +198,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Get.
+        /// Get a TopLevelTrackedResource
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -218,7 +218,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="topLevelTrackedResourceName"/> is null. </exception>
@@ -243,7 +243,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// List by resource group.
+        /// List TopLevelTrackedResource resources by resource group
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -273,7 +273,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// List by resource group.
+        /// List TopLevelTrackedResource resources by resource group
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -323,7 +323,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="topLevelTrackedResourceName"/> is null. </exception>
@@ -366,7 +366,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="topLevelTrackedResourceName"/> is null. </exception>
@@ -409,7 +409,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="topLevelTrackedResourceName"/> is null. </exception>
@@ -454,7 +454,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="topLevelTrackedResourceName"/> is null. </exception>

@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace _Type.Model.Visibility.Models
 {
-    /// <summary> The VisibilityModel. </summary>
+    /// <summary> Output model with visibility properties. </summary>
     public partial class VisibilityModel
     {
         /// <summary>
@@ -47,10 +47,10 @@ namespace _Type.Model.Visibility.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VisibilityModel"/>. </summary>
-        /// <param name="queryProp"></param>
-        /// <param name="createProp"></param>
-        /// <param name="updateProp"></param>
-        /// <param name="deleteProp"></param>
+        /// <param name="queryProp"> Required int32, illustrating a query property. </param>
+        /// <param name="createProp"> Required string[], illustrating a create property. </param>
+        /// <param name="updateProp"> Required int32[], illustrating a update property. </param>
+        /// <param name="deleteProp"> Required bool, illustrating a delete property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createProp"/> or <paramref name="updateProp"/> is null. </exception>
         public VisibilityModel(int queryProp, IEnumerable<string> createProp, IEnumerable<int> updateProp, bool deleteProp)
         {
@@ -64,11 +64,11 @@ namespace _Type.Model.Visibility.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="VisibilityModel"/>. </summary>
-        /// <param name="readProp"></param>
-        /// <param name="queryProp"></param>
-        /// <param name="createProp"></param>
-        /// <param name="updateProp"></param>
-        /// <param name="deleteProp"></param>
+        /// <param name="readProp"> Required string, illustrating a readonly property. </param>
+        /// <param name="queryProp"> Required int32, illustrating a query property. </param>
+        /// <param name="createProp"> Required string[], illustrating a create property. </param>
+        /// <param name="updateProp"> Required int32[], illustrating a update property. </param>
+        /// <param name="deleteProp"> Required bool, illustrating a delete property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal VisibilityModel(string readProp, int queryProp, IList<string> createProp, IList<int> updateProp, bool deleteProp, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -85,15 +85,15 @@ namespace _Type.Model.Visibility.Models
         {
         }
 
-        /// <summary> Gets the read prop. </summary>
+        /// <summary> Required string, illustrating a readonly property. </summary>
         public string ReadProp { get; }
-        /// <summary> Gets or sets the query prop. </summary>
+        /// <summary> Required int32, illustrating a query property. </summary>
         public int QueryProp { get; set; }
-        /// <summary> Gets the create prop. </summary>
+        /// <summary> Required string[], illustrating a create property. </summary>
         public IList<string> CreateProp { get; }
-        /// <summary> Gets the update prop. </summary>
+        /// <summary> Required int32[], illustrating a update property. </summary>
         public IList<int> UpdateProp { get; }
-        /// <summary> Gets or sets the delete prop. </summary>
+        /// <summary> Required bool, illustrating a delete property. </summary>
         public bool DeleteProp { get; set; }
     }
 }

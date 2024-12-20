@@ -7,12 +7,12 @@
 
 namespace Versioning.ReturnTypeChangedFrom.Models
 {
-    /// <summary> The Versions. </summary>
+    /// <summary> The version of the API. </summary>
     public enum Versions
     {
-        /// <summary> v1. </summary>
+        /// <summary> The version v1. </summary>
         V1,
-        /// <summary> v2. </summary>
+        /// <summary> The version v2. </summary>
         V2
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Scm.Authentication.Http.Custom
 {
     // Data plane generated client.
-    /// <summary> The Custom service client. </summary>
+    /// <summary> Illustrates clients generated with generic HTTP auth. </summary>
     public partial class CustomClient
     {
         private const string AuthorizationHeader = "Authorization";
@@ -35,7 +35,7 @@ namespace Scm.Authentication.Http.Custom
         }
 
         /// <summary> Initializes a new instance of CustomClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
@@ -52,7 +52,7 @@ namespace Scm.Authentication.Http.Custom
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Valid.
+        /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -72,7 +72,7 @@ namespace Scm.Authentication.Http.Custom
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Valid.
+        /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -92,7 +92,7 @@ namespace Scm.Authentication.Http.Custom
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Invalid.
+        /// [Protocol Method] Check whether client is authenticated.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -112,7 +112,7 @@ namespace Scm.Authentication.Http.Custom
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Invalid.
+        /// [Protocol Method] Check whether client is authenticated.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -7,12 +7,12 @@
 
 namespace _Type.Property.ValueTypes.Models
 {
-    /// <summary> The FixedInnerEnum. </summary>
+    /// <summary> Enum that will be used as a property for model EnumProperty. Non-extensible. </summary>
     public enum FixedInnerEnum
     {
-        /// <summary> ValueOne. </summary>
+        /// <summary> First value. </summary>
         ValueOne,
-        /// <summary> ValueTwo. </summary>
+        /// <summary> Second value. </summary>
         ValueTwo
     }
 }

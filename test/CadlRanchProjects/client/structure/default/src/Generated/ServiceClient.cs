@@ -16,7 +16,15 @@ using Client.Structure.Service.Models;
 namespace Client.Structure.Service
 {
     // Data plane generated client.
-    /// <summary> The Service service client. </summary>
+    /// <summary>
+    /// Test that we can use @client and @operationGroup decorators to customize client side code structure, such as:
+    /// 1. have everything as default.
+    /// 2. to rename client or operation group
+    /// 3. one client can have more than one operations groups
+    /// 4. split one interface into two clients
+    /// 5. have two clients with operations come from different interfaces
+    /// 6. have two clients with a hierarchy relation.
+    /// </summary>
     public partial class ServiceClient
     {
         private readonly HttpPipeline _pipeline;
@@ -35,16 +43,16 @@ namespace Client.Structure.Service
         }
 
         /// <summary> Initializes a new instance of ServiceClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="client"> The <see cref="ClientType"/> to use. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ServiceClient(Uri endpoint, ClientType client) : this(endpoint, client, new ServiceClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ServiceClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="client"> The <see cref="ClientType"/> to use. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ServiceClient(Uri endpoint, ClientType client, ServiceClientOptions options)

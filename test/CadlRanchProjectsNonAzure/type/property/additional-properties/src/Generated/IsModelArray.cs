@@ -27,21 +27,21 @@ namespace Scm._Type.Property.AdditionalProperties
 
         /// <summary> Initializes a new instance of IsModelArray. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal IsModelArray(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
-        /// <summary> Get is model array. </summary>
+        /// <summary> Get call. </summary>
         public virtual async Task<ClientResult<IsModelArrayAdditionalProperties>> GetIsModelArrayAsync()
         {
             ClientResult result = await GetIsModelArrayAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(IsModelArrayAdditionalProperties.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get is model array. </summary>
+        /// <summary> Get call. </summary>
         public virtual ClientResult<IsModelArrayAdditionalProperties> GetIsModelArray()
         {
             ClientResult result = GetIsModelArray(null);
@@ -49,7 +49,7 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Get is model array.
+        /// [Protocol Method] Get call
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -73,7 +73,7 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Get is model array.
+        /// [Protocol Method] Get call
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -96,8 +96,8 @@ namespace Scm._Type.Property.AdditionalProperties
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="IsModelArrayAdditionalProperties"/> to use. </param>
+        /// <summary> Put operation. </summary>
+        /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> PutAsync(IsModelArrayAdditionalProperties body)
         {
@@ -108,8 +108,8 @@ namespace Scm._Type.Property.AdditionalProperties
             return result;
         }
 
-        /// <summary> Put. </summary>
-        /// <param name="body"> The <see cref="IsModelArrayAdditionalProperties"/> to use. </param>
+        /// <summary> Put operation. </summary>
+        /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult Put(IsModelArrayAdditionalProperties body)
         {
@@ -121,7 +121,7 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] Put operation
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,7 +149,7 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Put.
+        /// [Protocol Method] Put operation
         /// <list type="bullet">
         /// <item>
         /// <description>

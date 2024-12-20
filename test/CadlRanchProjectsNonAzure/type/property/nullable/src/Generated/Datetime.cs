@@ -27,21 +27,21 @@ namespace Scm._Type.Property.Nullable
 
         /// <summary> Initializes a new instance of Datetime. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Datetime(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
-        /// <summary> Get non null. </summary>
+        /// <summary> Get models that will return all properties in the model. </summary>
         public virtual async Task<ClientResult<DatetimeProperty>> GetNonNullAsync()
         {
             ClientResult result = await GetNonNullAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(DatetimeProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get non null. </summary>
+        /// <summary> Get models that will return all properties in the model. </summary>
         public virtual ClientResult<DatetimeProperty> GetNonNull()
         {
             ClientResult result = GetNonNull(null);
@@ -49,7 +49,7 @@ namespace Scm._Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Get non null.
+        /// [Protocol Method] Get models that will return all properties in the model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -73,7 +73,7 @@ namespace Scm._Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Get non null.
+        /// [Protocol Method] Get models that will return all properties in the model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -96,14 +96,14 @@ namespace Scm._Type.Property.Nullable
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Get null. </summary>
+        /// <summary> Get models that will return the default object. </summary>
         public virtual async Task<ClientResult<DatetimeProperty>> GetNullAsync()
         {
             ClientResult result = await GetNullAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(DatetimeProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get null. </summary>
+        /// <summary> Get models that will return the default object. </summary>
         public virtual ClientResult<DatetimeProperty> GetNull()
         {
             ClientResult result = GetNull(null);
@@ -111,7 +111,7 @@ namespace Scm._Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Get null.
+        /// [Protocol Method] Get models that will return the default object
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -135,7 +135,7 @@ namespace Scm._Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Get null.
+        /// [Protocol Method] Get models that will return the default object
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -159,7 +159,7 @@ namespace Scm._Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Patch non null.
+        /// [Protocol Method] Put a body with all properties present.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -182,7 +182,7 @@ namespace Scm._Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Patch non null.
+        /// [Protocol Method] Put a body with all properties present.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -205,7 +205,7 @@ namespace Scm._Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Patch null.
+        /// [Protocol Method] Put a body with default properties.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -228,7 +228,7 @@ namespace Scm._Type.Property.Nullable
         }
 
         /// <summary>
-        /// [Protocol Method] Patch null.
+        /// [Protocol Method] Put a body with default properties.
         /// <list type="bullet">
         /// <item>
         /// <description>

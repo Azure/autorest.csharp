@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.Optionality.Models
 {
-    /// <summary> The BooleanLiteralProperty. </summary>
+    /// <summary> Model with boolean literal property. </summary>
     public partial class BooleanLiteralProperty
     {
         /// <summary>
@@ -51,7 +51,7 @@ namespace _Type.Property.Optionality.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="BooleanLiteralProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal BooleanLiteralProperty(bool? property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -59,7 +59,7 @@ namespace _Type.Property.Optionality.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets or sets the property. </summary>
+        /// <summary> Property. </summary>
         public bool? Property { get; set; }
     }
 }

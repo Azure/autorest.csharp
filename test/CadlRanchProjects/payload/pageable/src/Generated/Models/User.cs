@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Payload.Pageable.Models
 {
-    /// <summary> The User. </summary>
+    /// <summary> User model. </summary>
     public partial class User
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace Payload.Pageable.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> User name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal User(string name)
         {
@@ -56,7 +56,7 @@ namespace Payload.Pageable.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> User name. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal User(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -69,7 +69,7 @@ namespace Payload.Pageable.Models
         {
         }
 
-        /// <summary> Gets the name. </summary>
+        /// <summary> User name. </summary>
         public string Name { get; }
     }
 }

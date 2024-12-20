@@ -7,19 +7,19 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Model.Inheritance.EnumDiscriminator.Models
 {
-    /// <summary> The Cobra. </summary>
+    /// <summary> Cobra model. </summary>
     public partial class Cobra : Snake
     {
         /// <summary> Initializes a new instance of <see cref="Cobra"/>. </summary>
-        /// <param name="length"></param>
+        /// <param name="length"> Length of the snake. </param>
         public Cobra(int length) : base(length)
         {
             Kind = SnakeKind.Cobra;
         }
 
         /// <summary> Initializes a new instance of <see cref="Cobra"/>. </summary>
-        /// <param name="kind"></param>
-        /// <param name="length"></param>
+        /// <param name="kind"> discriminator property. </param>
+        /// <param name="length"> Length of the snake. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal Cobra(SnakeKind kind, int length, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, length, serializedAdditionalRawData)
         {

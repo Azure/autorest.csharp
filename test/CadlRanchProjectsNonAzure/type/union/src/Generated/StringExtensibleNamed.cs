@@ -12,7 +12,7 @@ using Scm._Type.Union.Models;
 namespace Scm._Type.Union
 {
     // Data plane generated sub-client.
-    /// <summary> The StringExtensibleNamed sub-client. </summary>
+    /// <summary> Describe union of string string | "b" | "c" but where the union is named and some of the variants are named. </summary>
     public partial class StringExtensibleNamed
     {
         private readonly ClientPipeline _pipeline;
@@ -28,7 +28,7 @@ namespace Scm._Type.Union
 
         /// <summary> Initializes a new instance of StringExtensibleNamed. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal StringExtensibleNamed(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

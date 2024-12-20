@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.ValueTypes.Models
 {
-    /// <summary> The DictionaryStringProperty. </summary>
+    /// <summary> Model with dictionary string properties. </summary>
     public partial class DictionaryStringProperty
     {
         /// <summary>
@@ -43,7 +43,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DictionaryStringProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public DictionaryStringProperty(IDictionary<string, string> property)
         {
@@ -53,7 +53,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="DictionaryStringProperty"/>. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal DictionaryStringProperty(IDictionary<string, string> property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -66,7 +66,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         {
         }
 
-        /// <summary> Gets the property. </summary>
+        /// <summary> Property. </summary>
         public IDictionary<string, string> Property { get; }
     }
 }

@@ -29,7 +29,7 @@ namespace Scm.Parameters.Spread
 
         /// <summary> Initializes a new instance of Alias. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Alias(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -319,10 +319,10 @@ namespace Scm.Parameters.Spread
         /// <summary> Spread with multiple parameters. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredIntList"></param>
-        /// <param name="optionalInt"></param>
-        /// <param name="optionalStringList"></param>
+        /// <param name="requiredString"> required string. </param>
+        /// <param name="requiredIntList"> required int. </param>
+        /// <param name="optionalInt"> optional int. </param>
+        /// <param name="optionalStringList"> optional string. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/>, <paramref name="requiredString"/> or <paramref name="requiredIntList"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<ClientResult> SpreadWithMultipleParametersAsync(string id, string xMsTestHeader, string requiredString, IEnumerable<int> requiredIntList, int? optionalInt = null, IEnumerable<string> optionalStringList = null)
@@ -340,10 +340,10 @@ namespace Scm.Parameters.Spread
         /// <summary> Spread with multiple parameters. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredIntList"></param>
-        /// <param name="optionalInt"></param>
-        /// <param name="optionalStringList"></param>
+        /// <param name="requiredString"> required string. </param>
+        /// <param name="requiredIntList"> required int. </param>
+        /// <param name="optionalInt"> optional int. </param>
+        /// <param name="optionalStringList"> optional string. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/>, <paramref name="requiredString"/> or <paramref name="requiredIntList"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual ClientResult SpreadWithMultipleParameters(string id, string xMsTestHeader, string requiredString, IEnumerable<int> requiredIntList, int? optionalInt = null, IEnumerable<string> optionalStringList = null)
@@ -424,11 +424,11 @@ namespace Scm.Parameters.Spread
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Spread parameter with inner alias. </summary>
+        /// <summary> spread an alias with contains another alias property as body. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="name"></param>
-        /// <param name="age"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<ClientResult> SpreadParameterWithInnerAliasAsync(string id, string xMsTestHeader, string name, int age)
@@ -442,11 +442,11 @@ namespace Scm.Parameters.Spread
             return result;
         }
 
-        /// <summary> Spread parameter with inner alias. </summary>
+        /// <summary> spread an alias with contains another alias property as body. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="name"></param>
-        /// <param name="age"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual ClientResult SpreadParameterWithInnerAlias(string id, string xMsTestHeader, string name, int age)
@@ -461,7 +461,7 @@ namespace Scm.Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method] Spread parameter with inner alias.
+        /// [Protocol Method] spread an alias with contains another alias property as body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -494,7 +494,7 @@ namespace Scm.Parameters.Spread
         }
 
         /// <summary>
-        /// [Protocol Method] Spread parameter with inner alias.
+        /// [Protocol Method] spread an alias with contains another alias property as body.
         /// <list type="bullet">
         /// <item>
         /// <description>

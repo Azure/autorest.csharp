@@ -43,14 +43,14 @@ namespace Scm.Client.Naming.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CSModel"/>. </summary>
-        /// <param name="defaultName"></param>
+        /// <param name="defaultName"> Pass in true. </param>
         public CSModel(bool defaultName)
         {
             DefaultName = defaultName;
         }
 
         /// <summary> Initializes a new instance of <see cref="CSModel"/>. </summary>
-        /// <param name="defaultName"></param>
+        /// <param name="defaultName"> Pass in true. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CSModel(bool defaultName, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -63,7 +63,7 @@ namespace Scm.Client.Naming.Models
         {
         }
 
-        /// <summary> Gets the default name. </summary>
+        /// <summary> Pass in true. </summary>
         public bool DefaultName { get; }
     }
 }

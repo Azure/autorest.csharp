@@ -16,7 +16,7 @@ using Versioning.MadeOptional.Models;
 namespace Versioning.MadeOptional
 {
     // Data plane generated client.
-    /// <summary> The MadeOptional service client. </summary>
+    /// <summary> Test for the `@madeOptional` decorator. </summary>
     public partial class MadeOptionalClient
     {
         private readonly HttpPipeline _pipeline;
@@ -35,16 +35,16 @@ namespace Versioning.MadeOptional
         }
 
         /// <summary> Initializes a new instance of MadeOptionalClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="version"> The <see cref="Versions"/> to use. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public MadeOptionalClient(Uri endpoint, Versions version) : this(endpoint, version, new MadeOptionalClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of MadeOptionalClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="version"> The <see cref="Versions"/> to use. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public MadeOptionalClient(Uri endpoint, Versions version, MadeOptionalClientOptions options)

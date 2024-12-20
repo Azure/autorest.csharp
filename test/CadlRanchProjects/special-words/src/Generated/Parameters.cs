@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace SpecialWords
 {
     // Data plane generated sub-client.
-    /// <summary> The Parameters sub-client. </summary>
+    /// <summary> Verify reserved words as parameter name. </summary>
     public partial class Parameters
     {
         private readonly HttpPipeline _pipeline;
@@ -34,7 +34,7 @@ namespace SpecialWords
         /// <summary> Initializes a new instance of Parameters. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Parameters(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;

@@ -12,7 +12,7 @@ using Scm.Client.Naming.Models;
 namespace Scm.Client.Naming
 {
     // Data plane generated client.
-    /// <summary> The Naming service client. </summary>
+    /// <summary> Describe changing names of types in a client with `@clientName`. </summary>
     public partial class NamingClient
     {
         private readonly ClientPipeline _pipeline;
@@ -27,7 +27,7 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Initializes a new instance of NamingClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NamingClient(Uri endpoint, NamingClientOptions options)

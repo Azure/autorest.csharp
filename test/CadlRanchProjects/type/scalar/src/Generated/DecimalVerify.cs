@@ -17,7 +17,7 @@ using Azure.Core.Pipeline;
 namespace _Type.Scalar
 {
     // Data plane generated sub-client.
-    /// <summary> The DecimalVerify sub-client. </summary>
+    /// <summary> Decimal type verification. </summary>
     public partial class DecimalVerify
     {
         private readonly HttpPipeline _pipeline;
@@ -37,7 +37,7 @@ namespace _Type.Scalar
         /// <summary> Initializes a new instance of DecimalVerify. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal DecimalVerify(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;

@@ -28,14 +28,14 @@ namespace Payload.MultiPart
 
         /// <summary> Initializes a new instance of FormDataHttpParts. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal FormDataHttpParts(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
-        /// <summary> Json array and file array. </summary>
+        /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
         /// <param name="body"> The <see cref="ComplexHttpPartsModelRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> JsonArrayAndFileArrayAsync(ComplexHttpPartsModelRequest body)
@@ -47,7 +47,7 @@ namespace Payload.MultiPart
             return result;
         }
 
-        /// <summary> Json array and file array. </summary>
+        /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
         /// <param name="body"> The <see cref="ComplexHttpPartsModelRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult JsonArrayAndFileArray(ComplexHttpPartsModelRequest body)
@@ -60,7 +60,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Json array and file array.
+        /// [Protocol Method] Test content-type: multipart/form-data for mixed scenarios
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -89,7 +89,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Json array and file array.
+        /// [Protocol Method] Test content-type: multipart/form-data for mixed scenarios
         /// <list type="bullet">
         /// <item>
         /// <description>

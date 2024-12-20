@@ -11,7 +11,7 @@ using Scm._Type.Model.Inheritance.Recursive.Models;
 namespace Scm._Type.Model.Inheritance.Recursive
 {
     // Data plane generated client.
-    /// <summary> The Recursive service client. </summary>
+    /// <summary> Illustrates inheritance recursion. </summary>
     public partial class RecursiveClient
     {
         private readonly ClientPipeline _pipeline;
@@ -26,7 +26,7 @@ namespace Scm._Type.Model.Inheritance.Recursive
         }
 
         /// <summary> Initializes a new instance of RecursiveClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RecursiveClient(Uri endpoint, RecursiveClientOptions options)

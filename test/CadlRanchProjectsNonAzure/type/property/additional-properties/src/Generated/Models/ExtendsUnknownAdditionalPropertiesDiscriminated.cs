@@ -8,14 +8,14 @@ using System.Collections.Generic;
 namespace Scm._Type.Property.AdditionalProperties.Models
 {
     /// <summary>
-    /// The ExtendsUnknownAdditionalPropertiesDiscriminated.
+    /// The model extends from Record&lt;unknown&gt; with a discriminator.
     /// Please note <see cref="ExtendsUnknownAdditionalPropertiesDiscriminated"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="ExtendsUnknownAdditionalPropertiesDiscriminatedDerived"/>.
     /// </summary>
     public abstract partial class ExtendsUnknownAdditionalPropertiesDiscriminated
     {
         /// <summary> Initializes a new instance of <see cref="ExtendsUnknownAdditionalPropertiesDiscriminated"/>. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> The name property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         protected ExtendsUnknownAdditionalPropertiesDiscriminated(string name)
         {
@@ -26,8 +26,8 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ExtendsUnknownAdditionalPropertiesDiscriminated"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="kind"></param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="kind"> The discriminator. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         internal ExtendsUnknownAdditionalPropertiesDiscriminated(string name, string kind, IDictionary<string, BinaryData> additionalProperties)
         {
@@ -41,9 +41,9 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> Gets or sets the name. </summary>
+        /// <summary> The name property. </summary>
         public string Name { get; set; }
-        /// <summary> Gets or sets the kind. </summary>
+        /// <summary> The discriminator. </summary>
         internal string Kind { get; set; }
         /// <summary>
         /// Additional Properties

@@ -16,7 +16,7 @@ using _Type.Model.Visibility.Models;
 namespace _Type.Model.Visibility
 {
     // Data plane generated client.
-    /// <summary> The Visibility service client. </summary>
+    /// <summary> Illustrates models with visibility properties. </summary>
     public partial class VisibilityClient
     {
         private readonly HttpPipeline _pipeline;
@@ -34,7 +34,7 @@ namespace _Type.Model.Visibility
         }
 
         /// <summary> Initializes a new instance of VisibilityClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public VisibilityClient(Uri endpoint, VisibilityClientOptions options)
