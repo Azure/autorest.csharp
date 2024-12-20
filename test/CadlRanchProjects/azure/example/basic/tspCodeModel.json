@@ -530,7 +530,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Client.AzureExampleClient.basicAction",
+     "CrossLanguageDefinitionId": "AzureExampleBasicClient.AzureExampleClient.basicAction",
      "Decorators": [],
      "Examples": [
       {

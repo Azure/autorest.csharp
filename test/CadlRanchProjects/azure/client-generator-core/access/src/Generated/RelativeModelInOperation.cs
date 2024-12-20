@@ -191,7 +191,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// Expected query parameter: kind= "real"
+        /// Expected query parameter: kind="real"
         /// Expected response body:
         /// ```json
         /// {
@@ -213,7 +213,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// Expected query parameter: kind= "real"
+        /// Expected query parameter: kind="real"
         /// Expected response body:
         /// ```json
         /// {
@@ -235,7 +235,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method] Expected query parameter: kind= "real"
+        /// [Protocol Method] Expected query parameter: kind="real"
         /// Expected response body:
         /// ```json
         /// {
@@ -280,7 +280,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method] Expected query parameter: kind= "real"
+        /// [Protocol Method] Expected query parameter: kind="real"
         /// Expected response body:
         /// ```json
         /// {

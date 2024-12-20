@@ -299,6 +299,7 @@ namespace CadlRanchProjects.Tests
         }
 
         [Test]
+        [Ignore("https://github.com/microsoft/typespec/issues/5399")]
         public void RequiredNullableListsSerializedAsNull()
         {
             var inputModel = new CollectionsStringProperty("required", null);

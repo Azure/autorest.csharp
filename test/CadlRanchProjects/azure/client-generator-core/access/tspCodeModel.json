@@ -1217,7 +1217,7 @@
      "$id": "119",
      "Name": "discriminator",
      "ResourceName": "RelativeModelInOperation",
-     "Doc": "Expected query parameter: kind= \"real\"\nExpected response body:\n```json\n{\n  \"name\": \"Madge\",\n  \"kind\": \"real\"\n}\n```",
+     "Doc": "Expected query parameter: kind=\"real\"\nExpected response body:\n```json\n{\n  \"name\": \"Madge\",\n  \"kind\": \"real\"\n}\n```",
      "Accessibility": "internal",
      "Parameters": [
       {
