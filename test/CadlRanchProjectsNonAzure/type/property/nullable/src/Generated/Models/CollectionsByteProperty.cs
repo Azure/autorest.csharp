@@ -47,7 +47,7 @@ namespace Scm._Type.Property.Nullable.Models
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
-        internal CollectionsByteProperty(string requiredProperty, IEnumerable<BinaryData> nullableProperty)
+        public CollectionsByteProperty(string requiredProperty, IEnumerable<BinaryData> nullableProperty)
         {
             Argument.AssertNotNull(requiredProperty, nameof(requiredProperty));
 
@@ -59,7 +59,7 @@ namespace Scm._Type.Property.Nullable.Models
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CollectionsByteProperty(string requiredProperty, IReadOnlyList<BinaryData> nullableProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CollectionsByteProperty(string requiredProperty, IList<BinaryData> nullableProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredProperty = requiredProperty;
             NullableProperty = nullableProperty;
@@ -72,7 +72,7 @@ namespace Scm._Type.Property.Nullable.Models
         }
 
         /// <summary> Required property. </summary>
-        public string RequiredProperty { get; }
+        public string RequiredProperty { get; set; }
         /// <summary>
         /// Property
         /// <para>
@@ -89,6 +89,6 @@ namespace Scm._Type.Property.Nullable.Models
         /// </list>
         /// </para>
         /// </summary>
-        public IReadOnlyList<BinaryData> NullableProperty { get; }
+        public IList<BinaryData> NullableProperty { get; set; }
     }
 }

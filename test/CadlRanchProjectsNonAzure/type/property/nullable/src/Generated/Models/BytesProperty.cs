@@ -46,7 +46,7 @@ namespace Scm._Type.Property.Nullable.Models
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
-        internal BytesProperty(string requiredProperty, BinaryData nullableProperty)
+        public BytesProperty(string requiredProperty, BinaryData nullableProperty)
         {
             Argument.AssertNotNull(requiredProperty, nameof(requiredProperty));
 
@@ -71,7 +71,7 @@ namespace Scm._Type.Property.Nullable.Models
         }
 
         /// <summary> Required property. </summary>
-        public string RequiredProperty { get; }
+        public string RequiredProperty { get; set; }
         /// <summary>
         /// Property
         /// <para>
@@ -88,6 +88,6 @@ namespace Scm._Type.Property.Nullable.Models
         /// </list>
         /// </para>
         /// </summary>
-        public BinaryData NullableProperty { get; }
+        public BinaryData NullableProperty { get; set; }
     }
 }

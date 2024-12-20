@@ -45,7 +45,7 @@ namespace Scm._Type.Property.Nullable.Models
         /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
         /// <param name="property"> Inner model property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
-        internal InnerModel(string property)
+        public InnerModel(string property)
         {
             Argument.AssertNotNull(property, nameof(property));
 
@@ -67,6 +67,6 @@ namespace Scm._Type.Property.Nullable.Models
         }
 
         /// <summary> Inner model property. </summary>
-        public string Property { get; }
+        public string Property { get; set; }
     }
 }

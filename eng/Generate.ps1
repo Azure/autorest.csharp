@@ -22,7 +22,8 @@ $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
-$cadlRanchFilePath = Join-Path $repoRoot 'node_modules' '@azure-tools' 'cadl-ranch-specs' 'http'
+$azureSpecsDirectory = Join-Path $repoRoot 'node_modules' '@azure-tools' 'azure-http-specs' 'specs'
+$specsDirectory = Join-Path $repoRoot 'node_modules' '@typespec' 'http-specs' 'specs'
 $typespecEmitOptions = '--option @azure-tools/typespec-csharp.save-inputs=true --option @azure-tools/typespec-csharp.clear-output-folder=true'
 
 function Add-Swagger ([string]$name, [string]$output, [string]$arguments, [string]$launchSettingsArgs = "") {
@@ -70,14 +71,42 @@ function Add-CadlRanch-TypeSpec([string]$testName, [string]$projectPrefix, [stri
         $configString = "--config=$configFile "
     }
     $projectDirectory = Join-Path $projectDirectory "src"
-    $tspMain = Join-Path $cadlRanchFilePath $testName "main.tsp"
-    $clientTsp = Join-Path $cadlRanchFilePath $testName "client.tsp"
-    $mainTypeSpecFile = If (Test-Path $clientTsp) { Resolve-Path $clientTsp } Else { Resolve-Path $tspMain }
+    $azureMainTsp = Join-Path $azureSpecsDirectory $testName "main.tsp"
+    $azureClientTsp = Join-Path $azureSpecsDirectory $testName "client.tsp"
+    $mainTsp = Join-Path $specsDirectory $testName "main.tsp"
+    $clientTsp = Join-Path $specsDirectory $testName "client.tsp"
+    
+    $entryFile = ""
     if ($projectPrefix -eq "typespec-nonAzure-") {
-        Add-TypeSpec "$projectPrefix$testName" $projectDirectory $mainTypeSpecFile "$configString--option @azure-tools/typespec-csharp.new-project=true" "-n"
+        $entryFile = $clientTsp
+        if (!(Test-Path $entryFile)) {
+            $entryFile = $mainTsp
+        }
+        if (!(Test-Path $entryFile)) {
+            $entryFile = $azureClientTsp
+        }
+        if (!(Test-Path $entryFile)) {
+            $entryFile = $azureMainTsp
+        }
     }
     else {
-        Add-TypeSpec "$projectPrefix$testName" $projectDirectory $mainTypeSpecFile "$configString--option @azure-tools/typespec-csharp.new-project=true --option @azure-tools/typespec-csharp.flavor=azure" "-n"
+        $entryFile = $azureClientTsp
+        if (!(Test-Path $entryFile)) {
+            $entryFile = $azureMainTsp
+        }
+        if (!(Test-Path $entryFile)) {
+            $entryFile = $clientTsp
+        }
+        if (!(Test-Path $entryFile)) {
+            $entryFile = $mainTsp
+        }
+    }
+    $entryFile = Resolve-Path $entryFile
+    if ($projectPrefix -eq "typespec-nonAzure-") {
+        Add-TypeSpec "$projectPrefix$testName" $projectDirectory $entryFile "$configString--option @azure-tools/typespec-csharp.new-project=true" "-n"
+    }
+    else {
+        Add-TypeSpec "$projectPrefix$testName" $projectDirectory $entryFile "$configString--option @azure-tools/typespec-csharp.new-project=true --option @azure-tools/typespec-csharp.flavor=azure" "-n"
     }
 }
 

@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 {
     public class TestServerV1 : TestServerBase
     {
-        public TestServerV1(): base(GetBaseDirectory(), $"--port 0 --coverageDirectory {GetCoverageDirectory()}")
+        public TestServerV1(): base(GetProcessPath(), $"--port 0 --coverageDirectory {GetCoverageDirectory()}")
         {
         }
 
@@ -21,6 +21,11 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         {
             var nodeModules = GetNodeModulesDirectory();
             return Path.Combine(nodeModules, "@microsoft.azure", "autorest.testserver");
+        }
+
+        internal static string GetProcessPath()
+        {
+            return Path.Combine(GetBaseDirectory(), "dist", "cli", "cli.js");
         }
 
         public Task<string[]> GetRequests()
