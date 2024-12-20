@@ -153,7 +153,8 @@ namespace AutoRest.CSharp.Generation.Writers
             createPageableParameters.Add($"{itemPropertyName:L}");
             createPageableParameters.Add($"{nextLinkPropertyName:L}");
             string? maxPageSize = methodParameters.Where(s => s.Name == "maxpagesize").FirstOrDefault()?.Name;
-            if (maxPageSize != null)
+            string? maxPageSizeType = methodParameters.Where(s => s.Name == "maxpagesize").FirstOrDefault()?.Type.Name;
+            if (maxPageSize != null && maxPageSizeType != "String")
             {
                 createPageableParameters.Add($"{maxPageSize}");
             }
