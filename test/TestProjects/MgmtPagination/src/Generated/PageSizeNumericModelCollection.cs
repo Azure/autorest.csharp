@@ -265,7 +265,7 @@ namespace MgmtPagination
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="PageSizeNumericModelResource"/> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<PageSizeNumericModelResource> GetAllAsync(float? maxpagesize = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<PageSizeNumericModelResource> GetAllAsync(int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeNumericModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeNumericModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
@@ -295,7 +295,7 @@ namespace MgmtPagination
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="PageSizeNumericModelResource"/> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<PageSizeNumericModelResource> GetAll(float? maxpagesize = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<PageSizeNumericModelResource> GetAll(int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeNumericModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeNumericModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
