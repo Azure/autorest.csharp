@@ -113,10 +113,10 @@ extends:
                   displayName: 'Upload Cadl Ranch Azure Coverage Report'
                   condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
                   inputs:
-                    azureSubscription: "TypeSpec Storage"
+                    azureSubscription: "Cadl Ranch Storage"
                     scriptType: "bash"
                     scriptLocation: "inlineScript"
-                    inlineScript: npx tsp-spector upload-coverage --coverageFile ./artifacts/coverage/tsp-spector-coverage-csharp-azure.json --generatorName csharp --storageAccountName typespec --generatorVersion $(node -p -e "require('./src/TypeSpec.Extension/Emitter.Csharp/package.json').version") --generatorMode azure --containerName coverages
+                    inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp-azure.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/TypeSpec.Extension/Emitter.Csharp/package.json').version") --generatorMode azure
                     workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
               - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
                 - template: new-emitter-package-files.yml
