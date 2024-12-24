@@ -2,11 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -34,6 +37,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         public static readonly Parameter PageSizeHint = new("pageSizeHint", $"The number of items per {typeof(Page<>):C} that should be requested (from service operations that support it). It's not guaranteed that the value will be respected.", new CSharpType(typeof(int), true), null, ValidationType.None, null);
         public static readonly Parameter NextLink = new("nextLink", $"Continuation token", typeof(string), null, ValidationType.None, null);
+
+        public static readonly Parameter MaxPageSize = new("maxpagesize", $"Optional, specifies the maximum number of  {typeof(Page<>):C}  to be included in the list response.", new CSharpType(typeof(int), true), null, ValidationType.None, null);
 
         public static readonly Parameter RequestContent = new("content", $"The content to send as the body of the request.", RequestContentType, null, ValidationType.AssertNotNull, null, RequestLocation: RequestLocation.Body);
         public static readonly Parameter RequestContentNullable = new("content", $"The content to send as the body of the request.", RequestContentNullableType, /*Constant.Default(RequestContentNullableType)*/null, ValidationType.None, null, RequestLocation: RequestLocation.Body);

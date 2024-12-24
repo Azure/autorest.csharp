@@ -154,7 +154,7 @@ namespace AutoRest.CSharp.Generation.Writers
             createPageableParameters.Add($"{nextLinkPropertyName:L}");
             string? maxPageSize = methodParameters.Where(s => s.Name == "maxpagesize").FirstOrDefault()?.Name;
             string? maxPageSizeType = methodParameters.Where(s => s.Name == "maxpagesize").FirstOrDefault()?.Type.Name;
-            if (maxPageSize != null && maxPageSizeType != "String" && isCreateListReques)
+            if (ContainsMaxPageSize(methodParameters))// && isCreateListReques
             {
                 createPageableParameters.Add($"{maxPageSize}");
             }
@@ -196,6 +196,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static bool ContainsRequestContext(IReadOnlyCollection<Parameter>? parameters) =>
             parameters != null && (parameters.Contains(KnownParameters.RequestContext) || parameters.Contains(KnownParameters.RequestContextRequired));
+
+        private static bool ContainsMaxPageSize(IReadOnlyCollection<Parameter>? parameters) => parameters != null && (parameters.Contains(KnownParameters.MaxPageSize, Parameter.TypeAndNameEqualityComparer));
 
         private static FormattableString? GetCreateRequestCall(Reference? restClientReference, RestClientMethod? createRequestMethod, IReadOnlyList<ProtocolToConvenienceParameterConverter>? ProtocolToConvenienceParameterConverters = null)
         {
