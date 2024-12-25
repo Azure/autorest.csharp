@@ -125,6 +125,7 @@ namespace Autorest.CSharp.Core
         {
             return new PageableHelpers.PageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
         }
+
         public static Pageable<T> CreatePageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
             Func<int?, string, HttpMessage>? createNextPageRequest,
