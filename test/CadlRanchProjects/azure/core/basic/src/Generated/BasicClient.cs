@@ -631,7 +631,7 @@ namespace _Specs_.Azure.Core.Basic
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetUsersNextPageRequest(nextLink, maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "BasicClient.GetUsers", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "BasicClient.GetUsers", "value", "nextLink", maxpagesize, context);
         }
 
         /// <summary> Lists all users. </summary>
@@ -650,7 +650,7 @@ namespace _Specs_.Azure.Core.Basic
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetUsersNextPageRequest(nextLink, maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "BasicClient.GetUsers", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "BasicClient.GetUsers", "value", "nextLink", maxpagesize, context);
         }
 
         /// <summary>
@@ -683,7 +683,7 @@ namespace _Specs_.Azure.Core.Basic
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetUsersNextPageRequest(nextLink, maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetUsers", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetUsers", "value", "nextLink", maxpagesize, context);
         }
 
         /// <summary>
@@ -716,7 +716,7 @@ namespace _Specs_.Azure.Core.Basic
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetUsersNextPageRequest(nextLink, maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetUsers", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetUsers", "value", "nextLink", maxpagesize, context);
         }
 
         internal HttpMessage CreateCreateOrUpdateRequest(int id, RequestContent content, RequestContext context)
