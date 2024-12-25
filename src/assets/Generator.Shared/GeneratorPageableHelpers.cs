@@ -41,6 +41,7 @@ namespace Autorest.CSharp.Core
         {
             return new PageableHelpers.AsyncPageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
         }
+
         public static AsyncPageable<T> CreateAsyncPageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
             Func<int?, string, HttpMessage>? createNextPageRequest,
@@ -55,6 +56,7 @@ namespace Autorest.CSharp.Core
         {
             return new PageableHelpers.AsyncPageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, defaultPageSize, cancellationToken, null));
         }
+
         public static AsyncPageable<T> CreateAsyncPageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
             Func<int?, string, HttpMessage>? createNextPageRequest,
@@ -68,6 +70,7 @@ namespace Autorest.CSharp.Core
         {
             return new PageableHelpers.AsyncPageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext?.CancellationToken, requestContext?.ErrorOptions));
         }
+
         public static AsyncPageable<T> CreateAsyncPageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
             Func<int?, string, HttpMessage>? createNextPageRequest,
@@ -136,6 +139,7 @@ namespace Autorest.CSharp.Core
         {
             return new PageableHelpers.PageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, defaultPageSize, cancellationToken, null));
         }
+
         public static Pageable<T> CreatePageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
             Func<int?, string, HttpMessage>? createNextPageRequest,
@@ -149,6 +153,7 @@ namespace Autorest.CSharp.Core
         {
             return new PageableHelpers.PageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext?.CancellationToken, requestContext?.ErrorOptions));
         }
+
         public static Pageable<T> CreatePageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
             Func<int?, string, HttpMessage>? createNextPageRequest,
