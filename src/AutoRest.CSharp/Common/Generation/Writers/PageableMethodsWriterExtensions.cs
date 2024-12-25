@@ -131,8 +131,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 clientDiagnosticsReference.GetReferenceFormattable(),
                 pipelineReference.GetReferenceFormattable()
             };
-            bool isCreateListRequest = firstPageRequest?.GetArguments()[1]?.ToString() == "List";
-            createPageableParameters.AddTrailingPageableParameters(methodParameters, scopeName, itemPropertyName, nextLinkPropertyName, isCreateListRequest);
+
+            createPageableParameters.AddTrailingPageableParameters(methodParameters, scopeName, itemPropertyName, nextLinkPropertyName);
 
             if (firstPageRequestVariable != null)
             {
@@ -147,7 +147,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Line($"return {typeof(GeneratorPageableHelpers)}.{(async ? nameof(GeneratorPageableHelpers.CreateAsyncPageable) : nameof(GeneratorPageableHelpers.CreatePageable))}({createPageableParameters.Join(", ")});");
         }
 
-        private static void AddTrailingPageableParameters(this List<FormattableString> createPageableParameters, IReadOnlyCollection<Parameter> methodParameters, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, bool isCreateListReques = false)
+        private static void AddTrailingPageableParameters(this List<FormattableString> createPageableParameters, IReadOnlyCollection<Parameter> methodParameters, string scopeName, string? itemPropertyName, string? nextLinkPropertyName)
         {
             createPageableParameters.Add($"{scopeName:L}");
             createPageableParameters.Add($"{itemPropertyName:L}");
