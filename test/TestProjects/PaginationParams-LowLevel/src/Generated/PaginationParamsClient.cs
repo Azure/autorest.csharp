@@ -78,8 +78,8 @@ namespace PaginationParams_LowLevel
         /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='GetPaginationParamsAsync(int?,int?,int?,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPaginationParamsAsync(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationParamsRequest(maxCount, skip, maxpagesize, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationParamsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationParamsRequest(maxCount, skip, pageSizeHint, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationParamsNextPageRequest(nextLink, maxCount, skip, pageSizeHint, context);
             return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.GetPaginationParams", "value", "nextLink", maxpagesize, context);
         }
 
@@ -102,8 +102,8 @@ namespace PaginationParams_LowLevel
         /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='GetPaginationParams(int?,int?,int?,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPaginationParams(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationParamsRequest(maxCount, skip, maxpagesize, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationParamsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationParamsRequest(maxCount, skip, pageSizeHint, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationParamsNextPageRequest(nextLink, maxCount, skip, pageSizeHint, context);
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.GetPaginationParams", "value", "nextLink", maxpagesize, context);
         }
 
@@ -126,8 +126,8 @@ namespace PaginationParams_LowLevel
         /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get2sAsync(int?,int?,long?,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> Get2sAsync(int? limit, int? offset, long? maxpagesize, RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet2sRequest(limit, offset, maxpagesize, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet2sNextPageRequest(nextLink, limit, offset, maxpagesize, context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet2sRequest(limit, offset, pageSizeHint, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet2sNextPageRequest(nextLink, limit, offset, pageSizeHint, context);
             return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get2s", "value", "nextLink", context);
         }
 
@@ -150,8 +150,8 @@ namespace PaginationParams_LowLevel
         /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get2s(int?,int?,long?,RequestContext)']/*" />
         public virtual Pageable<BinaryData> Get2s(int? limit, int? offset, long? maxpagesize, RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet2sRequest(limit, offset, maxpagesize, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet2sNextPageRequest(nextLink, limit, offset, maxpagesize, context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet2sRequest(limit, offset, pageSizeHint, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet2sNextPageRequest(nextLink, limit, offset, pageSizeHint, context);
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get2s", "value", "nextLink", context);
         }
 
@@ -174,8 +174,8 @@ namespace PaginationParams_LowLevel
         /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get3sAsync(int?,int?,int?,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> Get3sAsync(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet3sRequest(maxCount, skip, maxpagesize, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet3sNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet3sRequest(maxCount, skip, pageSizeHint, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet3sNextPageRequest(nextLink, maxCount, skip, pageSizeHint, context);
             return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get3s", "value", "nextLink", maxpagesize, context);
         }
 
@@ -198,8 +198,8 @@ namespace PaginationParams_LowLevel
         /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get3s(int?,int?,int?,RequestContext)']/*" />
         public virtual Pageable<BinaryData> Get3s(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet3sRequest(maxCount, skip, maxpagesize, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet3sNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet3sRequest(maxCount, skip, pageSizeHint, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet3sNextPageRequest(nextLink, maxCount, skip, pageSizeHint, context);
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get3s", "value", "nextLink", maxpagesize, context);
         }
 
