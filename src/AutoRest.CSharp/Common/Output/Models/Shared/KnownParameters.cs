@@ -60,5 +60,9 @@ namespace AutoRest.CSharp.Output.Models.Shared
             DefaultValue: null,
             Validation: ValidationType.None,
             Initializer: null);
+        public static bool TypeAndNameMatch(Parameter parameter1, Parameter parameter2)
+        {
+            return parameter1.Name == parameter2.Name && parameter1.Type.Equals(parameter2.Type);
+        }
     }
 }

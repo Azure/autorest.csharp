@@ -214,7 +214,10 @@ namespace AutoRest.CSharp.Generation.Writers
             if (ProtocolToConvenienceParameterConverters == null)
             {
                 FormattableString argumentsFormattableString = createRequestMethod.Parameters.GetIdentifiersFormattable();
-                argumentsFormattableString = ReplaceArgumentValue(argumentsFormattableString, KnownParameters.MaxPageSize.Name, KnownParameters.PageSizeHint.Name);
+                if (ContainsMaxPageSize(createRequestMethod.Parameters))
+                {
+                    argumentsFormattableString = ReplaceArgumentValue(argumentsFormattableString, KnownParameters.MaxPageSize.Name, KnownParameters.PageSizeHint.Name);
+                }
                 return $"{methodName}({argumentsFormattableString})";
             }
 
@@ -233,7 +236,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     throw new InvalidOperationException($"Cannot find corresponding convenience parameter for create request method parameter {parameter.Name}.");
                 }
                 FormattableString? parameterName = convenienceParameter.GetConversionFormattable(parameter.Type, null);
-                if (parameterName.ToString() == KnownParameters.MaxPageSize.Name)
+                if (KnownParameters.TypeAndNameMatch(parameter, KnownParameters.MaxPageSize))
                 {
                     parameterName = $"{KnownParameters.PageSizeHint.Name}";
                 }
