@@ -229,8 +229,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     throw new InvalidOperationException($"Cannot find corresponding convenience parameter for create request method parameter {parameter.Name}.");
                 }
-
-                parameters.Add(convenienceParameter.GetConversionFormattable(parameter.Type, null));
+                FormattableString? parameterName = convenienceParameter.GetConversionFormattable(parameter.Type, null);
+                if (parameterName.ToString() == KnownParameters.MaxPageSize.Name)
+                {
+                    parameterName = $"{KnownParameters.PageSizeHint.Name}";
+                }
+                parameters.Add(parameterName);
             }
             return $"{methodName}({parameters.Join(" ,")})";
         }
