@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
 using Autorest.CSharp.Core;
@@ -212,7 +213,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (ProtocolToConvenienceParameterConverters == null)
             {
-                return $"{methodName}({createRequestMethod.Parameters.GetIdentifiersFormattable()})";
+                FormattableString argumentsFormattableString = createRequestMethod.Parameters.GetIdentifiersFormattable();
+                argumentsFormattableString = ReplaceArgumentValue(argumentsFormattableString, KnownParameters.MaxPageSize.Name, KnownParameters.PageSizeHint.Name);
+                return $"{methodName}({argumentsFormattableString})";
             }
 
             var parameters = new List<FormattableString>();
@@ -237,6 +240,18 @@ namespace AutoRest.CSharp.Generation.Writers
                 parameters.Add(parameterName);
             }
             return $"{methodName}({parameters.Join(" ,")})";
+        }
+
+        private static FormattableString ReplaceArgumentValue(FormattableString original, object oldValue, object newValue)
+        {
+            object?[] updatedArgs = original.GetArguments().ToArray();
+            int indexToReplace = Array.IndexOf(updatedArgs, oldValue);
+            if (indexToReplace == -1)
+            {
+                return original;
+            }
+            updatedArgs[indexToReplace] = newValue;
+            return FormattableStringFactory.Create(original.Format, updatedArgs);
         }
 
         private static FormattableString GetValueFactory(CSharpType? pageItemType)
