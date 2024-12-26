@@ -123,12 +123,12 @@ namespace PaginationParams_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get2sAsync(int?,int?,long?,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> Get2sAsync(int? limit, int? offset, long? maxpagesize, RequestContext context)
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get2sAsync(int?,int?,int?,RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> Get2sAsync(int? limit, int? offset, int? maxpagesize, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet2sRequest(limit, offset, pageSizeHint, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet2sNextPageRequest(nextLink, limit, offset, pageSizeHint, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get2s", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get2s", "value", "nextLink", maxpagesize, context);
         }
 
         /// <summary>
@@ -147,12 +147,12 @@ namespace PaginationParams_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get2s(int?,int?,long?,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> Get2s(int? limit, int? offset, long? maxpagesize, RequestContext context)
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get2s(int?,int?,int?,RequestContext)']/*" />
+        public virtual Pageable<BinaryData> Get2s(int? limit, int? offset, int? maxpagesize, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet2sRequest(limit, offset, pageSizeHint, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet2sNextPageRequest(nextLink, limit, offset, pageSizeHint, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get2s", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get2s", "value", "nextLink", maxpagesize, context);
         }
 
         /// <summary>
@@ -277,7 +277,7 @@ namespace PaginationParams_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGet2sRequest(int? limit, int? offset, long? maxpagesize, RequestContext context)
+        internal HttpMessage CreateGet2sRequest(int? limit, int? offset, int? maxpagesize, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -368,7 +368,7 @@ namespace PaginationParams_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGet2sNextPageRequest(string nextLink, int? limit, int? offset, long? maxpagesize, RequestContext context)
+        internal HttpMessage CreateGet2sNextPageRequest(string nextLink, int? limit, int? offset, int? maxpagesize, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;

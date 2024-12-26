@@ -98,7 +98,7 @@
                         "name": "maxpagesize",
                         "in": "query",
                         "type": "integer",
-                        "format": "int64",
+                        "format": "integer",
                         "description": "Optional. Specified maximum number of containers that can be included in the list."
                     },
                     {

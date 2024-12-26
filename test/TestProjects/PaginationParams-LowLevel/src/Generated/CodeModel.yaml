@@ -14,18 +14,7 @@ schemas: !Schemas
           name: Integer
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_16
-      type: integer
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      precision: 64
-      language: !Languages 
-        default:
-          name: Integer
-          description: ''
-      protocol: !Protocols {}
-    - !NumberSchema &ref_25
+    - !NumberSchema &ref_24
       type: number
       apiVersions:
         - !ApiVersion 
@@ -84,7 +73,7 @@ schemas: !Schemas
           name: PageSizeIntegerModelListResultNextLink
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_20
+    - !StringSchema &ref_19
       type: string
       apiVersions:
         - !ApiVersion 
@@ -343,7 +332,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_8
-          - !Parameter &ref_17
+          - !Parameter &ref_16
             schema: *ref_9
             implementation: Method
             language: !Languages 
@@ -354,7 +343,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_18
+          - !Parameter &ref_17
             schema: *ref_9
             implementation: Method
             language: !Languages 
@@ -365,8 +354,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_19
-            schema: *ref_16
+          - !Parameter &ref_18
+            schema: *ref_9
             implementation: Method
             language: !Languages 
               default:
@@ -404,9 +393,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_16
           - *ref_17
           - *ref_18
-          - *ref_19
         responses:
           - !SchemaResponse 
             schema: *ref_15
@@ -438,8 +427,8 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_8
-          - !Parameter &ref_21
-            schema: *ref_20
+          - !Parameter &ref_20
+            schema: *ref_19
             implementation: Method
             required: true
             language: !Languages 
@@ -450,7 +439,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_22
+          - !Parameter &ref_21
             schema: *ref_9
             implementation: Method
             language: !Languages 
@@ -461,7 +450,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_23
+          - !Parameter &ref_22
             schema: *ref_9
             implementation: Method
             language: !Languages 
@@ -472,7 +461,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_24
+          - !Parameter &ref_23
             schema: *ref_9
             implementation: Method
             language: !Languages 
@@ -511,10 +500,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_20
           - *ref_21
           - *ref_22
           - *ref_23
-          - *ref_24
         responses:
           - !SchemaResponse 
             schema: *ref_15
@@ -546,7 +535,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_8
-          - !Parameter &ref_26
+          - !Parameter &ref_25
             schema: *ref_9
             implementation: Method
             language: !Languages 
@@ -557,7 +546,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_27
+          - !Parameter &ref_26
             schema: *ref_9
             implementation: Method
             language: !Languages 
@@ -568,8 +557,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_28
-            schema: *ref_25
+          - !Parameter &ref_27
+            schema: *ref_24
             implementation: Method
             language: !Languages 
               default:
@@ -607,9 +596,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_25
           - *ref_26
           - *ref_27
-          - *ref_28
         responses:
           - !SchemaResponse 
             schema: *ref_15
