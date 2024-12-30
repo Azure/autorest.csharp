@@ -236,7 +236,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     throw new InvalidOperationException($"Cannot find corresponding convenience parameter for create request method parameter {parameter.Name}.");
                 }
                 FormattableString? parameterName = convenienceParameter.GetConversionFormattable(parameter.Type, null);
-                if (KnownParameters.TypeAndNameMatch(parameter, KnownParameters.MaxPageSize))
+                if (Parameter.TypeAndNameEqualityComparer.Equals(parameter, KnownParameters.MaxPageSize))
                 {
                     parameterName = $"{KnownParameters.PageSizeHint.Name}";
                 }
