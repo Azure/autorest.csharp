@@ -265,11 +265,11 @@ namespace MgmtPagination
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="PageSizeDecimalModelResource"/> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<PageSizeDecimalModelResource> GetAllAsync(decimal? maxpagesize = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<PageSizeDecimalModelResource> GetAllAsync(int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDecimalModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDecimalModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeDecimalModelResource(Client, PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(e)), _pageSizeDecimalModelClientDiagnostics, Pipeline, "PageSizeDecimalModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeDecimalModelResource(Client, PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(e)), _pageSizeDecimalModelClientDiagnostics, Pipeline, "PageSizeDecimalModelCollection.GetAll", "value", "nextLink", maxpagesize, cancellationToken);
         }
 
         /// <summary>
@@ -295,11 +295,11 @@ namespace MgmtPagination
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="PageSizeDecimalModelResource"/> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<PageSizeDecimalModelResource> GetAll(decimal? maxpagesize = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<PageSizeDecimalModelResource> GetAll(int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDecimalModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDecimalModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeDecimalModelResource(Client, PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(e)), _pageSizeDecimalModelClientDiagnostics, Pipeline, "PageSizeDecimalModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeDecimalModelResource(Client, PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(e)), _pageSizeDecimalModelClientDiagnostics, Pipeline, "PageSizeDecimalModelCollection.GetAll", "value", "nextLink", maxpagesize, cancellationToken);
         }
 
         /// <summary>

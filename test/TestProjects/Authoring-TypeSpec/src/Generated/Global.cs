@@ -64,9 +64,9 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Global.xml" path="doc/members/member[@name='GetSupportedLanguagesAsync(int?,int?,int?,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetSupportedLanguagesAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSupportedLanguagesRequest(maxCount, skip, maxpagesize, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSupportedLanguagesNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "Global.GetSupportedLanguages", "value", "nextLink", context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSupportedLanguagesRequest(maxCount, skip, pageSizeHint, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSupportedLanguagesNextPageRequest(nextLink, maxCount, skip, pageSizeHint, context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "Global.GetSupportedLanguages", "value", "nextLink", maxpagesize, context);
         }
 
         /// <summary>
@@ -88,9 +88,9 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Global.xml" path="doc/members/member[@name='GetSupportedLanguages(int?,int?,int?,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetSupportedLanguages(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSupportedLanguagesRequest(maxCount, skip, maxpagesize, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSupportedLanguagesNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "Global.GetSupportedLanguages", "value", "nextLink", context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSupportedLanguagesRequest(maxCount, skip, pageSizeHint, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSupportedLanguagesNextPageRequest(nextLink, maxCount, skip, pageSizeHint, context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "Global.GetSupportedLanguages", "value", "nextLink", maxpagesize, context);
         }
 
         /// <summary>
@@ -112,9 +112,9 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Global.xml" path="doc/members/member[@name='GetTrainingConfigVersionsAsync(int?,int?,int?,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetTrainingConfigVersionsAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTrainingConfigVersionsRequest(maxCount, skip, maxpagesize, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "Global.GetTrainingConfigVersions", "value", "nextLink", context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTrainingConfigVersionsRequest(maxCount, skip, pageSizeHint, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, pageSizeHint, context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "Global.GetTrainingConfigVersions", "value", "nextLink", maxpagesize, context);
         }
 
         /// <summary>
@@ -136,9 +136,9 @@ namespace AuthoringTypeSpec
         /// <include file="Docs/Global.xml" path="doc/members/member[@name='GetTrainingConfigVersions(int?,int?,int?,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetTrainingConfigVersions(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTrainingConfigVersionsRequest(maxCount, skip, maxpagesize, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "Global.GetTrainingConfigVersions", "value", "nextLink", context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTrainingConfigVersionsRequest(maxCount, skip, pageSizeHint, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, pageSizeHint, context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "Global.GetTrainingConfigVersions", "value", "nextLink", maxpagesize, context);
         }
 
         internal HttpMessage CreateGetSupportedLanguagesRequest(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
