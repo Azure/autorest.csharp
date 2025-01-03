@@ -72,6 +72,10 @@ namespace FirstTestTypeSpec.Tests
             {
 "<unionList>"
             },
+                binaryDataRecord = new
+                {
+                    key = new object(),
+                },
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
         }
@@ -102,7 +106,11 @@ namespace FirstTestTypeSpec.Tests
                 new BinaryData[]
             {
 BinaryData.FromObjectAsJson("<unionList>")
-            });
+            },
+                BinaryData.FromObjectAsJson(new
+                {
+                    key = new object(),
+                }));
             Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
         }
 
@@ -192,6 +200,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 "<unionList>"
             },
+                binaryDataRecord = new
+                {
+                    key = new object(),
+                },
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
         }
@@ -231,7 +243,11 @@ BinaryData.FromObjectAsJson("<unionList>")
                 new BinaryData[]
             {
 BinaryData.FromObjectAsJson("<unionList>")
-            })
+            },
+                BinaryData.FromObjectAsJson(new
+                {
+                    key = new object(),
+                }))
             {
                 IntExtensibleEnum = IntExtensibleEnum.One,
                 IntExtensibleEnumCollection = { IntExtensibleEnum.One },
@@ -301,6 +317,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 "<unionList>"
             },
+                binaryDataRecord = new
+                {
+                    key = new object(),
+                },
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
         }
@@ -391,6 +411,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 "<unionList>"
             },
+                binaryDataRecord = new
+                {
+                    key = new object(),
+                },
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
         }

@@ -252,6 +252,15 @@ namespace FirstTestTypeSpec.Models
 #endif
             }
             writer.WriteEndArray();
+            writer.WritePropertyName("binaryDataRecord"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(BinaryDataRecord);
+#else
+            using (JsonDocument document = JsonDocument.Parse(BinaryDataRecord))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
+#endif
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -311,6 +320,7 @@ namespace FirstTestTypeSpec.Models
             IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = default;
             ModelWithRequiredNullableProperties modelWithRequiredNullable = default;
             IList<BinaryData> unionList = default;
+            BinaryData binaryDataRecord = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -563,6 +573,11 @@ namespace FirstTestTypeSpec.Models
                     unionList = array;
                     continue;
                 }
+                if (property.NameEquals("binaryDataRecord"u8))
+                {
+                    binaryDataRecord = BinaryData.FromString(property.Value.GetRawText());
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
@@ -592,6 +607,7 @@ namespace FirstTestTypeSpec.Models
                 readOnlyOptionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(),
                 modelWithRequiredNullable,
                 unionList,
+                binaryDataRecord,
                 serializedAdditionalRawData);
         }
 
