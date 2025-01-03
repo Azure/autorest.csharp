@@ -26,11 +26,7 @@ new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFi
 new BinaryData[]
 {
     BinaryData.FromObjectAsJson("<unionList>")
-},
-BinaryData.FromObjectAsJson(new
-{
-    key = new object(),
-}));
+});
 Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
 ]]></code>
 This sample shows how to call HelloAgainAsync with all parameters.
@@ -65,11 +61,7 @@ new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFi
 new BinaryData[]
 {
     BinaryData.FromObjectAsJson("<unionList>")
-},
-BinaryData.FromObjectAsJson(new
-{
-    key = new object(),
-}))
+})
 {
     IntExtensibleEnum = IntExtensibleEnum.One,
     IntExtensibleEnumCollection = { IntExtensibleEnum.One },
@@ -85,6 +77,10 @@ BinaryData.FromObjectAsJson(new
     {
         ["key"] = BinaryData.FromObjectAsJson(new object())
     },
+    BinaryDataRecord = BinaryData.FromObjectAsJson(new
+    {
+        key = new object(),
+    }),
 };
 Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
 ]]></code></example>
@@ -114,11 +110,7 @@ new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFi
 new BinaryData[]
 {
     BinaryData.FromObjectAsJson("<unionList>")
-},
-BinaryData.FromObjectAsJson(new
-{
-    key = new object(),
-}));
+});
 Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
 ]]></code>
 This sample shows how to call HelloAgain with all parameters.
@@ -153,11 +145,7 @@ new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFi
 new BinaryData[]
 {
     BinaryData.FromObjectAsJson("<unionList>")
-},
-BinaryData.FromObjectAsJson(new
-{
-    key = new object(),
-}))
+})
 {
     IntExtensibleEnum = IntExtensibleEnum.One,
     IntExtensibleEnumCollection = { IntExtensibleEnum.One },
@@ -173,6 +161,10 @@ BinaryData.FromObjectAsJson(new
     {
         ["key"] = BinaryData.FromObjectAsJson(new object())
     },
+    BinaryDataRecord = BinaryData.FromObjectAsJson(new
+    {
+        key = new object(),
+    }),
 };
 Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
 ]]></code></example>
@@ -226,10 +218,6 @@ using RequestContent content = RequestContent.Create(new
     {
         "<unionList>"
     },
-    binaryDataRecord = new
-    {
-        key = new object(),
-    },
 });
 Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
@@ -254,7 +242,6 @@ Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("r
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("unionList")[0].ToString());
-Console.WriteLine(result.GetProperty("binaryDataRecord").GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call HelloAgainAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -438,10 +425,6 @@ using RequestContent content = RequestContent.Create(new
     {
         "<unionList>"
     },
-    binaryDataRecord = new
-    {
-        key = new object(),
-    },
 });
 Response response = client.HelloAgain("<p2>", "<p1>", content);
 
@@ -466,7 +449,6 @@ Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("r
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("unionList")[0].ToString());
-Console.WriteLine(result.GetProperty("binaryDataRecord").GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call HelloAgain with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -650,10 +632,6 @@ using RequestContent content = RequestContent.Create(new
     {
         "<unionList>"
     },
-    binaryDataRecord = new
-    {
-        key = new object(),
-    },
 });
 Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
@@ -678,7 +656,6 @@ Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("r
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("unionList")[0].ToString());
-Console.WriteLine(result.GetProperty("binaryDataRecord").GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call NoContentTypeAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -862,10 +839,6 @@ using RequestContent content = RequestContent.Create(new
     {
         "<unionList>"
     },
-    binaryDataRecord = new
-    {
-        key = new object(),
-    },
 });
 Response response = client.NoContentType("<p2>", "<p1>", content);
 
@@ -890,7 +863,6 @@ Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("r
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("unionList")[0].ToString());
-Console.WriteLine(result.GetProperty("binaryDataRecord").GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call NoContentType with all parameters and request content and parse the result.
 <code><![CDATA[

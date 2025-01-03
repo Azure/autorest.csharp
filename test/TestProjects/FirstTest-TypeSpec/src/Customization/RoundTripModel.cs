@@ -40,6 +40,6 @@ namespace FirstTestTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        public BinaryData BinaryDataRecord { get; }
+        public BinaryData BinaryDataRecord { get; set; }
     }
 }

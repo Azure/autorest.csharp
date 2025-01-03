@@ -2590,7 +2590,7 @@
       },
       "decorators": []
      },
-     "optional": false,
+     "optional": true,
      "readOnly": false,
      "discriminator": false,
      "flatten": false,

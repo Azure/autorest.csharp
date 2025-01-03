@@ -252,15 +252,18 @@ namespace FirstTestTypeSpec.Models
 #endif
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("binaryDataRecord"u8);
+            if (Optional.IsDefined(BinaryDataRecord))
+            {
+                writer.WritePropertyName("binaryDataRecord"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(BinaryDataRecord);
 #else
-            using (JsonDocument document = JsonDocument.Parse(BinaryDataRecord))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(BinaryDataRecord))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -575,6 +578,10 @@ namespace FirstTestTypeSpec.Models
                 }
                 if (property.NameEquals("binaryDataRecord"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
                     binaryDataRecord = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }

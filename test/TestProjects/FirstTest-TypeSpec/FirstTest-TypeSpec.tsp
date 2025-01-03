@@ -236,7 +236,7 @@ model RoundTripModel {
     unionList: (string | int32 | ModelForUnion | ModelForUnion[])[];
 
     @doc("this is a record of unknown to be changed to BinaryData in customized code")
-    binaryDataRecord: Record<unknown>;
+    binaryDataRecord?: Record<unknown>;
 }
 
 @doc("This is a model only used in union types, please do not use it anywhere else.")

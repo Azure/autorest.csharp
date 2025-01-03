@@ -56,9 +56,8 @@ namespace FirstTestTypeSpec.Models
         /// <param name="requiredRecordUnknown"> required record of unknown. </param>
         /// <param name="modelWithRequiredNullable"> this is a model with required nullable properties. </param>
         /// <param name="unionList"> this is a list of union types. </param>
-        /// <param name="binaryDataRecord"> this is a record of unknown to be changed to BinaryData in customized code. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/>, <paramref name="requiredDictionary"/>, <paramref name="requiredModel"/>, <paramref name="requiredUnknown"/>, <paramref name="requiredRecordUnknown"/>, <paramref name="modelWithRequiredNullable"/>, <paramref name="unionList"/> or <paramref name="binaryDataRecord"/> is null. </exception>
-        public RoundTripModel(string requiredString, int requiredInt, IEnumerable<StringFixedEnum> requiredCollection, IDictionary<string, StringExtensibleEnum> requiredDictionary, Thing requiredModel, BinaryData requiredUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, ModelWithRequiredNullableProperties modelWithRequiredNullable, IEnumerable<BinaryData> unionList, BinaryData binaryDataRecord)
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/>, <paramref name="requiredDictionary"/>, <paramref name="requiredModel"/>, <paramref name="requiredUnknown"/>, <paramref name="requiredRecordUnknown"/>, <paramref name="modelWithRequiredNullable"/> or <paramref name="unionList"/> is null. </exception>
+        public RoundTripModel(string requiredString, int requiredInt, IEnumerable<StringFixedEnum> requiredCollection, IDictionary<string, StringExtensibleEnum> requiredDictionary, Thing requiredModel, BinaryData requiredUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, ModelWithRequiredNullableProperties modelWithRequiredNullable, IEnumerable<BinaryData> unionList)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
@@ -68,7 +67,6 @@ namespace FirstTestTypeSpec.Models
             Argument.AssertNotNull(requiredRecordUnknown, nameof(requiredRecordUnknown));
             Argument.AssertNotNull(modelWithRequiredNullable, nameof(modelWithRequiredNullable));
             Argument.AssertNotNull(unionList, nameof(unionList));
-            Argument.AssertNotNull(binaryDataRecord, nameof(binaryDataRecord));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -86,7 +84,6 @@ namespace FirstTestTypeSpec.Models
             ReadOnlyOptionalRecordUnknown = new ChangeTrackingDictionary<string, BinaryData>();
             ModelWithRequiredNullable = modelWithRequiredNullable;
             UnionList = unionList.ToList();
-            BinaryDataRecord = binaryDataRecord;
         }
 
         /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
