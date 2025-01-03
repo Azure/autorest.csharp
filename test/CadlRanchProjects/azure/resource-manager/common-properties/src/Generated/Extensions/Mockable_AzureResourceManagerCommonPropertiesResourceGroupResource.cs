@@ -51,7 +51,7 @@ namespace _Azure.ResourceManager.CommonProperties.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>ManagedIdentityTrackedResource_Get</description>
+        /// <description>ManagedIdentity_get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -82,7 +82,7 @@ namespace _Azure.ResourceManager.CommonProperties.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>ManagedIdentityTrackedResource_Get</description>
+        /// <description>ManagedIdentity_get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>

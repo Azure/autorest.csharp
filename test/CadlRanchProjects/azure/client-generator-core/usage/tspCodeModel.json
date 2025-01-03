@@ -202,6 +202,7 @@
      "$id": "23",
      "Name": "inputToInputOutput",
      "ResourceName": "ModelInOperation",
+     "OperationId": "ModelInOperation_inputToInputOutput",
      "Doc": "Expected body parameter: \n```json\n{\n  \"name\": \"Madge\"\n}\n```",
      "Accessibility": "public",
      "Parameters": [
@@ -279,6 +280,7 @@
      "$id": "29",
      "Name": "outputToInputOutput",
      "ResourceName": "ModelInOperation",
+     "OperationId": "ModelInOperation_outputToInputOutput",
      "Doc": "Expected response body: \n```json\n{\n  \"name\": \"Madge\"\n}\n```",
      "Accessibility": "public",
      "Parameters": [
@@ -341,6 +343,7 @@
      "$id": "34",
      "Name": "modelInReadOnlyProperty",
      "ResourceName": "ModelInOperation",
+     "OperationId": "ModelInOperation_modelInReadOnlyProperty",
      "Doc": "\"ResultModel\" should be usage=output, as it is read-only and does not exist in request body.\n\nExpected body parameter: \n```json\n{\n}\n```\n\nExpected response body: \n```json\n{\n  \"result\": {\n    \"name\": \"Madge\"\n  }\n}\n```",
      "Accessibility": "public",
      "Parameters": [

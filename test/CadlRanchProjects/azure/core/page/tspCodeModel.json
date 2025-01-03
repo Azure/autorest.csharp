@@ -613,6 +613,7 @@
      "$id": "62",
      "Name": "listWithPage",
      "ResourceName": "Page",
+     "OperationId": "listWithPage",
      "Doc": "List with Azure.Core.Page<>.",
      "Accessibility": "public",
      "Parameters": [
@@ -712,6 +713,7 @@
      "$id": "72",
      "Name": "listWithParameters",
      "ResourceName": "Page",
+     "OperationId": "listWithParameters",
      "Doc": "List with extensible enum parameter Azure.Core.Page<>.",
      "Accessibility": "public",
      "Parameters": [
@@ -878,6 +880,7 @@
      "$id": "87",
      "Name": "listWithCustomPageModel",
      "ResourceName": "Page",
+     "OperationId": "listWithCustomPageModel",
      "Doc": "List with custom page model.",
      "Accessibility": "public",
      "Parameters": [
@@ -1020,6 +1023,7 @@
      "$id": "103",
      "Name": "listFirstItem",
      "ResourceName": "TwoModelsAsPageItem",
+     "OperationId": "TwoModelsAsPageItem_listFirstItem",
      "Doc": "Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.",
      "Accessibility": "public",
      "Parameters": [
@@ -1119,6 +1123,7 @@
      "$id": "113",
      "Name": "listSecondItem",
      "ResourceName": "TwoModelsAsPageItem",
+     "OperationId": "TwoModelsAsPageItem_listSecondItem",
      "Doc": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
      "Accessibility": "public",
      "Parameters": [

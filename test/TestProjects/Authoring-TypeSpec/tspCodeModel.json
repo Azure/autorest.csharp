@@ -1779,6 +1779,7 @@
      "$id": "179",
      "Name": "createOrUpdate",
      "ResourceName": "Project",
+     "OperationId": "Projects_createOrUpdate",
      "Doc": "Creates a new project or updates an existing one.",
      "Accessibility": "public",
      "Parameters": [
@@ -2014,6 +2015,7 @@
      "$id": "203",
      "Name": "get",
      "ResourceName": "Project",
+     "OperationId": "Projects_get",
      "Doc": "Gets the details of a project.",
      "Accessibility": "public",
      "Parameters": [
@@ -2129,6 +2131,7 @@
      "$id": "214",
      "Name": "delete",
      "ResourceName": "Project",
+     "OperationId": "Projects_delete",
      "Doc": "Deletes a project.",
      "Accessibility": "public",
      "Parameters": [
@@ -2276,6 +2279,7 @@
      "$id": "230",
      "Name": "list",
      "ResourceName": "Project",
+     "OperationId": "Projects_list",
      "Doc": "Lists the existing projects.",
      "Accessibility": "public",
      "Parameters": [
@@ -2375,6 +2379,7 @@
      "$id": "240",
      "Name": "export",
      "ResourceName": "Projects",
+     "OperationId": "Projects_export",
      "Doc": "Triggers a job to export a project's data.",
      "Accessibility": "public",
      "Parameters": [
@@ -2537,6 +2542,7 @@
      "$id": "258",
      "Name": "importx",
      "ResourceName": "Projects",
+     "OperationId": "Projects_importx",
      "Doc": "Triggers a job to export a project's data.",
      "Accessibility": "public",
      "Parameters": [
@@ -2678,6 +2684,7 @@
      "$id": "274",
      "Name": "train",
      "ResourceName": "Projects",
+     "OperationId": "Projects_train",
      "Doc": "Triggers a training job for a project.",
      "Accessibility": "public",
      "Parameters": [
@@ -2900,6 +2907,7 @@
      "$id": "298",
      "Name": "getDeployment",
      "ResourceName": "Deployment",
+     "OperationId": "Deployments_getDeployment",
      "Doc": "Gets the details of a deployment.",
      "Accessibility": "public",
      "Parameters": [
@@ -3036,6 +3044,7 @@
      "$id": "311",
      "Name": "deployProject",
      "ResourceName": "Deployment",
+     "OperationId": "Deployments_deployProject",
      "Doc": "Creates a new deployment or replaces an existing one.",
      "Accessibility": "public",
      "Parameters": [
@@ -3292,6 +3301,7 @@
      "$id": "337",
      "Name": "deleteDeployment",
      "ResourceName": "Deployment",
+     "OperationId": "Deployments_deleteDeployment",
      "Doc": "Deletes a project deployment.",
      "Accessibility": "public",
      "Parameters": [
@@ -3460,6 +3470,7 @@
      "$id": "355",
      "Name": "list",
      "ResourceName": "Deployment",
+     "OperationId": "Deployments_list",
      "Doc": "Lists the existing deployments.",
      "Accessibility": "public",
      "Parameters": [
@@ -3580,6 +3591,7 @@
      "$id": "367",
      "Name": "swapDeployments",
      "ResourceName": "Deployments",
+     "OperationId": "Deployments_swapDeployments",
      "Doc": "Swaps two existing deployments with each other.",
      "Accessibility": "public",
      "Parameters": [
@@ -3803,6 +3815,7 @@
      "$id": "391",
      "Name": "getDeploymentStatus",
      "ResourceName": "DeploymentJob",
+     "OperationId": "Jobs_getDeploymentStatus",
      "Doc": "Gets the status of an existing deployment job.",
      "Accessibility": "public",
      "Parameters": [
@@ -3960,6 +3973,7 @@
      "$id": "406",
      "Name": "getSwapDeploymentsStatus",
      "ResourceName": "SwapDeploymentsJob",
+     "OperationId": "Jobs_getSwapDeploymentsStatus",
      "Doc": "Gets the status of an existing swap deployment job.",
      "Accessibility": "public",
      "Parameters": [
@@ -4150,6 +4164,7 @@
      "$id": "425",
      "Name": "getSupportedLanguages",
      "ResourceName": "Global",
+     "OperationId": "Global_getSupportedLanguages",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4311,6 +4326,7 @@
      "$id": "441",
      "Name": "listTrainingConfigVersions",
      "ResourceName": "Global",
+     "OperationId": "Global_listTrainingConfigVersions",
      "Accessibility": "public",
      "Parameters": [
       {

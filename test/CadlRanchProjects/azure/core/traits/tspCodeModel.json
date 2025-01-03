@@ -225,6 +225,7 @@
      "$id": "24",
      "Name": "smokeTest",
      "ResourceName": "User",
+     "OperationId": "smokeTest",
      "Doc": "Get a resource, sending and receiving headers.",
      "Accessibility": "public",
      "Parameters": [
@@ -542,6 +543,7 @@
      "$id": "57",
      "Name": "repeatableAction",
      "ResourceName": "Traits",
+     "OperationId": "repeatableAction",
      "Doc": "Test for repeatable requests",
      "Accessibility": "public",
      "Parameters": [

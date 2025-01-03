@@ -1551,6 +1551,7 @@
      "$id": "161",
      "Name": "topAction",
      "ResourceName": "NewProjectTypeSpec",
+     "OperationId": "topAction",
      "Doc": "top level method",
      "Accessibility": "public",
      "Parameters": [
@@ -1642,6 +1643,7 @@
      "$id": "169",
      "Name": "topAction2",
      "ResourceName": "NewProjectTypeSpec",
+     "OperationId": "topAction2",
      "Doc": "top level method2",
      "Accessibility": "public",
      "Parameters": [
@@ -1704,6 +1706,7 @@
      "$id": "174",
      "Name": "patchAction",
      "ResourceName": "NewProjectTypeSpec",
+     "OperationId": "patchAction",
      "Doc": "top level patch",
      "Accessibility": "public",
      "Parameters": [
@@ -1814,6 +1817,7 @@
      "$id": "183",
      "Name": "anonymousBody",
      "ResourceName": "NewProjectTypeSpec",
+     "OperationId": "anonymousBody",
      "Doc": "body parameter without body decorator",
      "Accessibility": "public",
      "Parameters": [
@@ -1924,6 +1928,7 @@
      "$id": "192",
      "Name": "friendlyModel",
      "ResourceName": "NewProjectTypeSpec",
+     "OperationId": "friendlyModel",
      "Doc": "Model can have its friendly name",
      "Accessibility": "public",
      "Parameters": [
@@ -2034,6 +2039,7 @@
      "$id": "201",
      "Name": "addTimeHeader",
      "ResourceName": "NewProjectTypeSpec",
+     "OperationId": "addTimeHeader",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2156,6 +2162,7 @@
      "$id": "214",
      "Name": "sayHi",
      "ResourceName": "Demo",
+     "OperationId": "Demo_sayHi",
      "Doc": "Return hi",
      "Accessibility": "public",
      "Parameters": [
@@ -2314,6 +2321,7 @@
      "$id": "229",
      "Name": "helloAgain",
      "ResourceName": "Demo2",
+     "OperationId": "Demo2_helloAgain",
      "Doc": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
@@ -2465,6 +2473,7 @@
      "$id": "242",
      "Name": "noContentType",
      "ResourceName": "Demo2",
+     "OperationId": "Demo2_noContentType",
      "Doc": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
@@ -2617,6 +2626,7 @@
      "$id": "255",
      "Name": "createLiteral",
      "ResourceName": "Demo2",
+     "OperationId": "Demo2_createLiteral",
      "Doc": "Create with literal value",
      "Accessibility": "public",
      "Parameters": [
@@ -2727,6 +2737,7 @@
      "$id": "264",
      "Name": "helloLiteral",
      "ResourceName": "Demo2",
+     "OperationId": "Demo2_helloLiteral",
      "Doc": "Send literal parameters",
      "Accessibility": "public",
      "Parameters": [
@@ -2903,6 +2914,7 @@
      "$id": "282",
      "Name": "getUnknownValue",
      "ResourceName": "EnumTest",
+     "OperationId": "EnumTest_getUnknownValue",
      "Doc": "create extensible enum",
      "Accessibility": "public",
      "Parameters": [
@@ -3013,6 +3025,7 @@
      "$id": "292",
      "Name": "internalProtocol",
      "ResourceName": "ProtocolAndConvenient",
+     "OperationId": "ProtocolAndConvenient_internalProtocol",
      "Doc": "When set protocol false and convenient true, then the protocol method should be internal",
      "Accessibility": "public",
      "Parameters": [
@@ -3123,6 +3136,7 @@
      "$id": "301",
      "Name": "stillConvenient",
      "ResourceName": "ProtocolAndConvenient",
+     "OperationId": "ProtocolAndConvenient_stillConvenient",
      "Doc": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
      "Accessibility": "public",
      "Parameters": [],

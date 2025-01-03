@@ -51,7 +51,7 @@ namespace _Azure.ResourceManager.Resources.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResource_Get</description>
+        /// <description>TopLevel_get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -82,7 +82,7 @@ namespace _Azure.ResourceManager.Resources.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResource_Get</description>
+        /// <description>TopLevel_get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>

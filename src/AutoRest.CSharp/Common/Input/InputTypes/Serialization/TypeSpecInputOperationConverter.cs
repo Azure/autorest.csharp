@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             var isFirstProperty = id == null && name == null;
             string? resourceName = null;
+            string? operationId = null;
             string? summary = null;
             string? deprecated = null;
             string? accessibility = null;
@@ -56,6 +57,7 @@ namespace AutoRest.CSharp.Common.Input
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputOperation.Name), ref name)
                     || reader.TryReadString(nameof(InputOperation.ResourceName), ref resourceName)
+                    || reader.TryReadString(nameof(InputOperation.OperationId), ref operationId)
                     || reader.TryReadString(nameof(InputOperation.Summary), ref summary)
                     || reader.TryReadString(nameof(InputOperation.Deprecated), ref deprecated)
                     || reader.TryReadString(nameof(InputOperation.Doc), ref doc)
@@ -83,7 +85,8 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            name = name ?? throw new JsonException("Enum must have name");
+            name = name ?? throw new JsonException("InputOperation must have name");
+            operationId = operationId ?? throw new JsonException($"InputOperation '{name}' must have operationId");
             if (string.IsNullOrEmpty(doc) && string.IsNullOrEmpty(summary))
             {
                 Console.Error.WriteLine($"[Warn]: InputOperation '{name}' must have either a summary or description");
@@ -94,7 +97,7 @@ namespace AutoRest.CSharp.Common.Input
             parameters = parameters ?? throw new JsonException("InputOperation must have parameters");
             responses = responses ?? throw new JsonException("InputOperation must have responses");
 
-            var inputOperation = new InputOperation(name, resourceName, summary, deprecated, doc, accessibility, parameters, responses, httpMethod, requestBodyMediaType, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, crossLanguageDefinitionId, keepClientDefaultValue, examples)
+            var inputOperation = new InputOperation(name, resourceName, operationId, summary, deprecated, doc, accessibility, parameters, responses, httpMethod, requestBodyMediaType, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, crossLanguageDefinitionId, keepClientDefaultValue, examples)
             {
                 IsNameChanged = IsNameChanged(crossLanguageDefinitionId, name)
             };

@@ -1528,6 +1528,7 @@
      "$id": "150",
      "Name": "get",
      "ResourceName": "TopLevelTrackedResource",
+     "OperationId": "TopLevel_get",
      "Doc": "Get a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -1695,6 +1696,7 @@
      "$id": "166",
      "Name": "createOrReplace",
      "ResourceName": "TopLevelTrackedResource",
+     "OperationId": "TopLevel_createOrReplace",
      "Doc": "Create a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -1967,6 +1969,7 @@
      "$id": "193",
      "Name": "update",
      "ResourceName": "TopLevelTrackedResource",
+     "OperationId": "TopLevel_update",
      "Doc": "Update a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -2233,6 +2236,7 @@
      "$id": "220",
      "Name": "delete",
      "ResourceName": "TopLevelTrackedResource",
+     "OperationId": "TopLevel_delete",
      "Doc": "Delete a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -2441,6 +2445,7 @@
      "$id": "243",
      "Name": "listByResourceGroup",
      "ResourceName": "TopLevelTrackedResource",
+     "OperationId": "TopLevel_listByResourceGroup",
      "Doc": "List TopLevelTrackedResource resources by resource group",
      "Accessibility": "public",
      "Parameters": [
@@ -2591,6 +2596,7 @@
      "$id": "258",
      "Name": "listBySubscription",
      "ResourceName": "TopLevelTrackedResource",
+     "OperationId": "TopLevel_listBySubscription",
      "Doc": "List TopLevelTrackedResource resources by subscription ID",
      "Accessibility": "public",
      "Parameters": [
@@ -2719,6 +2725,7 @@
      "$id": "271",
      "Name": "actionSync",
      "ResourceName": "TopLevel",
+     "OperationId": "TopLevel_actionSync",
      "Doc": "A synchronous resource action that returns no content.",
      "Accessibility": "public",
      "Parameters": [
@@ -2973,6 +2980,7 @@
      "$id": "297",
      "Name": "get",
      "ResourceName": "NestedProxyResource",
+     "OperationId": "Nested_get",
      "Doc": "Get a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
@@ -3162,6 +3170,7 @@
      "$id": "315",
      "Name": "createOrReplace",
      "ResourceName": "NestedProxyResource",
+     "OperationId": "Nested_createOrReplace",
      "Doc": "Create a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
@@ -3456,6 +3465,7 @@
      "$id": "344",
      "Name": "update",
      "ResourceName": "NestedProxyResource",
+     "OperationId": "Nested_update",
      "Doc": "Update a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
@@ -3744,6 +3754,7 @@
      "$id": "373",
      "Name": "delete",
      "ResourceName": "NestedProxyResource",
+     "OperationId": "Nested_delete",
      "Doc": "Delete a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
@@ -3974,6 +3985,7 @@
      "$id": "398",
      "Name": "listByTopLevelTrackedResource",
      "ResourceName": "NestedProxyResource",
+     "OperationId": "Nested_listByTopLevelTrackedResource",
      "Doc": "List NestedProxyResource resources by TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -4190,6 +4202,7 @@
      "$id": "421",
      "Name": "getByResourceGroup",
      "ResourceName": "SingletonTrackedResource",
+     "OperationId": "Singleton_getByResourceGroup",
      "Doc": "Get a SingletonTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -4335,6 +4348,7 @@
      "$id": "435",
      "Name": "createOrUpdate",
      "ResourceName": "SingletonTrackedResource",
+     "OperationId": "Singleton_createOrUpdate",
      "Doc": "Create a SingletonTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -4585,6 +4599,7 @@
      "$id": "460",
      "Name": "update",
      "ResourceName": "SingletonTrackedResource",
+     "OperationId": "Singleton_update",
      "Doc": "Update a SingletonTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -4779,6 +4794,7 @@
      "$id": "478",
      "Name": "listByResourceGroup",
      "ResourceName": "SingletonTrackedResource",
+     "OperationId": "Singleton_listByResourceGroup",
      "Doc": "List SingletonTrackedResource resources by resource group",
      "Accessibility": "public",
      "Parameters": [

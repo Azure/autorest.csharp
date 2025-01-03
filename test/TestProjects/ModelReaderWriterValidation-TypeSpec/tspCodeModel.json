@@ -2344,6 +2344,7 @@
      "$id": "235",
      "Name": "op1",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "OperationId": "op1",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2453,6 +2454,7 @@
      "$id": "244",
      "Name": "op2",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "OperationId": "op2",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2562,6 +2564,7 @@
      "$id": "253",
      "Name": "op3",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "OperationId": "op3",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2671,6 +2674,7 @@
      "$id": "262",
      "Name": "op4",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "OperationId": "op4",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2780,6 +2784,7 @@
      "$id": "271",
      "Name": "op5",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "OperationId": "op5",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2841,6 +2846,7 @@
      "$id": "276",
      "Name": "op6",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "OperationId": "op6",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2950,6 +2956,7 @@
      "$id": "285",
      "Name": "op7",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "OperationId": "op7",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3059,6 +3066,7 @@
      "$id": "294",
      "Name": "op8",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "OperationId": "op8",
      "Accessibility": "public",
      "Parameters": [
       {
