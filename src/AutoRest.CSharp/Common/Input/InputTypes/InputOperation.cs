@@ -16,6 +16,7 @@ internal record InputOperation
     public InputOperation(
     string name,
     string? resourceName,
+    string operationId,
     string? summary,
     string? deprecated,
     string? doc,
@@ -40,6 +41,7 @@ internal record InputOperation
         Name = name;
         SpecName = name;
         ResourceName = resourceName;
+        OperationId = operationId;
         Summary = summary;
         Deprecated = deprecated;
         Doc = doc;
@@ -65,6 +67,7 @@ internal record InputOperation
     public InputOperation() : this(
         name: string.Empty,
         resourceName: null,
+        operationId: string.Empty,
         summary: null,
         deprecated: null,
         doc: string.Empty,
@@ -93,6 +96,7 @@ internal record InputOperation
         return new InputOperation(
             operation.Name,
             operation.ResourceName,
+            operation.OperationId,
             operation.Summary,
             operation.Deprecated,
             operation.Doc,
@@ -137,6 +141,7 @@ internal record InputOperation
     public bool IsLongRunning => LongRunning != null;
     public string Name { get; internal set; }
     public string? ResourceName { get; }
+    public string OperationId { get; internal set; }
     public string? Summary { get; }
     public string? Deprecated { get; }
     public string? Doc { get; }
@@ -159,7 +164,6 @@ internal record InputOperation
     public string? OperationName { get; }
     public string? OperationVersion { get; }
     public string? OperationType { get; }
-    public string OperationId => ResourceName is null ? Name : $"{ResourceName}_{Name.FirstCharToUpperCase()}";
     public IReadOnlyList<InputDecoratorInfo> Decorators { get; internal set; } = new List<InputDecoratorInfo>();
     //TODO: Remove this until the SDK nullable is enabled, tracking in https://github.com/Azure/autorest.csharp/issues/4780
     internal string SpecName { get; init; }

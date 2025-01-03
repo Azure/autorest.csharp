@@ -592,6 +592,7 @@
      "$id": "61",
      "Name": "sayHi",
      "ResourceName": "NoTestTypeSpec",
+     "OperationId": "sayHi",
      "Doc": "Return hi",
      "Accessibility": "public",
      "Parameters": [
@@ -717,6 +718,7 @@
      "$id": "72",
      "Name": "sayHello",
      "ResourceName": "NoTestTypeSpec",
+     "OperationId": "sayHello",
      "Doc": "Return hello",
      "Accessibility": "public",
      "Parameters": [

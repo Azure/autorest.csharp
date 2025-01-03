@@ -2350,6 +2350,7 @@
      "$id": "242",
      "Name": "topAction",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "topAction",
      "Doc": "top level method",
      "Accessibility": "public",
      "Parameters": [
@@ -2412,6 +2413,7 @@
      "$id": "247",
      "Name": "patchAction",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "patchAction",
      "Doc": "top level patch",
      "Accessibility": "public",
      "Parameters": [
@@ -2522,6 +2524,7 @@
      "$id": "256",
      "Name": "anonymousBody",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "anonymousBody",
      "Doc": "body parameter without body decorator",
      "Accessibility": "public",
      "Parameters": [
@@ -2632,6 +2635,7 @@
      "$id": "265",
      "Name": "friendlyModel",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "friendlyModel",
      "Doc": "Model can have its friendly name",
      "Accessibility": "public",
      "Parameters": [
@@ -2742,6 +2746,7 @@
      "$id": "274",
      "Name": "addTimeHeader",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "addTimeHeader",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2799,6 +2804,7 @@
      "$id": "279",
      "Name": "projectedNameModel",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "projectedNameModel",
      "Doc": "Model can have its projected name",
      "Accessibility": "public",
      "Parameters": [
@@ -2909,6 +2915,7 @@
      "$id": "288",
      "Name": "returnsAnonymousModel",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "returnsAnonymousModel",
      "Doc": "return anonymous model",
      "Accessibility": "public",
      "Parameters": [
@@ -2971,6 +2978,7 @@
      "$id": "293",
      "Name": "headAsBoolean",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "headAsBoolean",
      "Doc": "head as boolean.",
      "Accessibility": "public",
      "Parameters": [
@@ -3021,6 +3029,7 @@
      "$id": "297",
      "Name": "stringBody",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "stringBody",
      "Doc": "The body parameter type is string.",
      "Accessibility": "public",
      "Parameters": [
@@ -3102,6 +3111,7 @@
      "$id": "304",
      "Name": "boolBody",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "boolBody",
      "Doc": "The body parameter type is bool.",
      "Accessibility": "public",
      "Parameters": [
@@ -3183,6 +3193,7 @@
      "$id": "311",
      "Name": "dateTimeBody",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "dateTimeBody",
      "Doc": "The body parameter type is datetime.",
      "Accessibility": "public",
      "Parameters": [
@@ -3272,6 +3283,7 @@
      "$id": "319",
      "Name": "returnString",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "returnString",
      "Doc": "The return type is datetime.",
      "Accessibility": "public",
      "Parameters": [
@@ -3338,6 +3350,7 @@
      "$id": "325",
      "Name": "returnUnknown",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "returnUnknown",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3403,6 +3416,7 @@
      "$id": "331",
      "Name": "recursiveExtension",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "recursiveExtension",
      "Doc": "test parent reference child",
      "Accessibility": "public",
      "Parameters": [
@@ -3480,6 +3494,7 @@
      "$id": "337",
      "Name": "threeLevelRecursive",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "threeLevelRecursive",
      "Doc": "test three level recursive extension",
      "Accessibility": "public",
      "Parameters": [
@@ -3557,6 +3572,7 @@
      "$id": "343",
      "Name": "recursiveModels",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "recursiveModels",
      "Doc": "test child reference parent",
      "Accessibility": "public",
      "Parameters": [
@@ -3634,6 +3650,7 @@
      "$id": "349",
      "Name": "ContainSelfModels",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "ContainSelfModels",
      "Doc": "test contain self models",
      "Accessibility": "public",
      "Parameters": [
@@ -3711,6 +3728,7 @@
      "$id": "355",
      "Name": "enumParameter",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "enumParameter",
      "Doc": "test enum parameter.",
      "Accessibility": "public",
      "Parameters": [
@@ -3757,6 +3775,7 @@
      "$id": "358",
      "Name": "bodyIsModelWithProjectedEnum",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "bodyIsModelWithProjectedEnum",
      "Doc": "test enum parameter.",
      "Accessibility": "public",
      "Parameters": [
@@ -3834,6 +3853,7 @@
      "$id": "364",
      "Name": "optionalDictionary",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "optionalDictionary",
      "Doc": "test optional dictionary.",
      "Accessibility": "public",
      "Parameters": [
@@ -3927,6 +3947,7 @@
      "$id": "373",
      "Name": "azureLocationOp",
      "ResourceName": "NoDocsTypeSpec",
+     "OperationId": "azureLocationOp",
      "Doc": "test optional dictionary.",
      "Accessibility": "public",
      "Parameters": [
@@ -4125,6 +4146,7 @@
      "$id": "393",
      "Name": "sayHi",
      "ResourceName": "Demo",
+     "OperationId": "Demo_sayHi",
      "Doc": "Return hi",
      "Accessibility": "public",
      "Parameters": [
@@ -4283,6 +4305,7 @@
      "$id": "408",
      "Name": "helloAgain",
      "ResourceName": "Demo2",
+     "OperationId": "Demo2_helloAgain",
      "Doc": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
@@ -4434,6 +4457,7 @@
      "$id": "421",
      "Name": "noContentType",
      "ResourceName": "Demo2",
+     "OperationId": "Demo2_noContentType",
      "Doc": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
@@ -4586,6 +4610,7 @@
      "$id": "434",
      "Name": "helloDemoAgain",
      "ResourceName": "Demo2",
+     "OperationId": "Demo2_helloDemoAgain",
      "Doc": "Return hi in demo2",
      "Accessibility": "public",
      "Parameters": [
@@ -4648,6 +4673,7 @@
      "$id": "439",
      "Name": "createLiteral",
      "ResourceName": "Demo2",
+     "OperationId": "Demo2_createLiteral",
      "Doc": "Create with literal value",
      "Accessibility": "public",
      "Parameters": [
@@ -4758,6 +4784,7 @@
      "$id": "448",
      "Name": "helloLiteral",
      "ResourceName": "Demo2",
+     "OperationId": "Demo2_helloLiteral",
      "Doc": "Send literal parameters",
      "Accessibility": "public",
      "Parameters": [
@@ -4934,6 +4961,7 @@
      "$id": "466",
      "Name": "createUnknownValue",
      "ResourceName": "EnumTest",
+     "OperationId": "EnumTest_createUnknownValue",
      "Doc": "get extensible enum",
      "Accessibility": "public",
      "Parameters": [
@@ -5044,6 +5072,7 @@
      "$id": "476",
      "Name": "internalProtocol",
      "ResourceName": "ProtocolAndConvenient",
+     "OperationId": "ProtocolAndConvenient_internalProtocol",
      "Doc": "When set protocol false and convenient true, then the protocol method should be internal",
      "Accessibility": "public",
      "Parameters": [
@@ -5154,6 +5183,7 @@
      "$id": "485",
      "Name": "stillConvenient",
      "ResourceName": "ProtocolAndConvenient",
+     "OperationId": "ProtocolAndConvenient_stillConvenient",
      "Doc": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
      "Accessibility": "public",
      "Parameters": [],
@@ -5215,6 +5245,7 @@
      "$id": "491",
      "Name": "doSomething",
      "ResourceName": "Entity",
+     "OperationId": "Entity_doSomething",
      "Doc": "doSomething for entity",
      "Accessibility": "public",
      "Parameters": [
@@ -5331,6 +5362,7 @@
      "$id": "502",
      "Name": "doSomething",
      "ResourceName": "Glossary",
+     "OperationId": "Glossary_doSomething",
      "Doc": "doSomething for glossary",
      "Accessibility": "public",
      "Parameters": [

@@ -60,7 +60,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>Foo_Get</description>
+        /// <description>Foos_get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -91,7 +91,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>Foo_Get</description>
+        /// <description>Foos_get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -122,7 +122,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>PrivateLinkResource_GetAllPrivateLinkResources</description>
+        /// <description>PrivateLinks_listByMongoCluster</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -148,7 +148,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>PrivateLinkResource_GetAllPrivateLinkResources</description>
+        /// <description>PrivateLinks_listByMongoCluster</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -174,7 +174,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>PrivateLinks_Start</description>
+        /// <description>PrivateLinks_start</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -218,7 +218,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>PrivateLinks_Start</description>
+        /// <description>PrivateLinks_start</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>

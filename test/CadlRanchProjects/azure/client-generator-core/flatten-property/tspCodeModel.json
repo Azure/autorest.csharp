@@ -199,6 +199,7 @@
      "$id": "20",
      "Name": "putFlattenModel",
      "ResourceName": "FlattenProperty",
+     "OperationId": "putFlattenModel",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -308,6 +309,7 @@
      "$id": "29",
      "Name": "putNestedFlattenModel",
      "ResourceName": "FlattenProperty",
+     "OperationId": "putNestedFlattenModel",
      "Accessibility": "public",
      "Parameters": [
       {

@@ -138,6 +138,7 @@ namespace AutoRest.CSharp.Common.Input
                 name: operation.Language.Default.Name,
                 // Keep the behavior for non-mgmt scenarios
                 resourceName: Configuration.AzureArm ? GetResourceName(operationId) : null,
+                operationId: operationId ?? operation.Language.Default.Name,
                 summary: operation.Language.Default.Summary,
                 deprecated: operation.Deprecated?.Reason,
                 doc: operation.Language.Default.Description,

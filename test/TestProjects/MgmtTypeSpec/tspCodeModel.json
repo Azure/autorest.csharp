@@ -2318,6 +2318,7 @@
      "$id": "231",
      "Name": "list",
      "ResourceName": "Operations",
+     "OperationId": "Operations_list",
      "Doc": "List the operations for the provider",
      "Accessibility": "public",
      "Parameters": [
@@ -2461,6 +2462,7 @@
      "$id": "247",
      "Name": "GetAllPrivateLinkResources",
      "ResourceName": "PrivateLinkResource",
+     "OperationId": "PrivateLinks_listByMongoCluster",
      "Doc": "list private links on the given resource",
      "Accessibility": "public",
      "Parameters": [
@@ -2611,6 +2613,7 @@
      "$id": "262",
      "Name": "start",
      "ResourceName": "PrivateLinks",
+     "OperationId": "PrivateLinks_start",
      "Doc": "Starts the SAP Application Server Instance.",
      "Accessibility": "public",
      "Parameters": [
@@ -2921,6 +2924,7 @@
      "$id": "295",
      "Name": "createOrUpdate",
      "ResourceName": "Foo",
+     "OperationId": "Foos_createOrUpdate",
      "Doc": "Create a Foo",
      "Accessibility": "public",
      "Parameters": [
@@ -3409,6 +3413,7 @@
      "$id": "353",
      "Name": "get",
      "ResourceName": "Foo",
+     "OperationId": "Foos_get",
      "Doc": "Get a Foo",
      "Accessibility": "public",
      "Parameters": [
@@ -3698,6 +3703,7 @@
      "$id": "386",
      "Name": "delete",
      "ResourceName": "Foo",
+     "OperationId": "Foos_delete",
      "Doc": "Delete a Foo",
      "Accessibility": "public",
      "Parameters": [
@@ -3906,6 +3912,7 @@
      "$id": "409",
      "Name": "list",
      "ResourceName": "Foo",
+     "OperationId": "Foos_list",
      "Doc": "List Foo resources by resource group",
      "Accessibility": "public",
      "Parameters": [

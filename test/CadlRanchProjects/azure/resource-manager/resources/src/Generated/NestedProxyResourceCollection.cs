@@ -62,7 +62,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResource_CreateOrReplace</description>
+        /// <description>Nested_createOrReplace</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -111,7 +111,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResource_CreateOrReplace</description>
+        /// <description>Nested_createOrReplace</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -160,7 +160,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResource_Get</description>
+        /// <description>Nested_get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -205,7 +205,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResource_Get</description>
+        /// <description>Nested_get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -250,7 +250,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResource_ListByTopLevelTrackedResource</description>
+        /// <description>Nested_listByTopLevelTrackedResource</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -280,7 +280,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResource_ListByTopLevelTrackedResource</description>
+        /// <description>Nested_listByTopLevelTrackedResource</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -310,7 +310,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResource_Get</description>
+        /// <description>Nested_get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -353,7 +353,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResource_Get</description>
+        /// <description>Nested_get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -396,7 +396,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResource_Get</description>
+        /// <description>Nested_get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -441,7 +441,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResource_Get</description>
+        /// <description>Nested_get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>

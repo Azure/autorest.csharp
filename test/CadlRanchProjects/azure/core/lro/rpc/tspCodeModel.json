@@ -543,6 +543,7 @@
      "$id": "51",
      "Name": "longRunningRpc",
      "ResourceName": "Rpc",
+     "OperationId": "longRunningRpc",
      "Summary": "Generate data.",
      "Doc": "Generate data.",
      "Accessibility": "public",

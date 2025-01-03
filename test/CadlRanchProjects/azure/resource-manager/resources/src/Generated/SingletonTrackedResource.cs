@@ -99,7 +99,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>SingletonTrackedResource_GetByResourceGroup</description>
+        /// <description>Singleton_getByResourceGroup</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -139,7 +139,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>SingletonTrackedResource_GetByResourceGroup</description>
+        /// <description>Singleton_getByResourceGroup</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -179,7 +179,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>SingletonTrackedResource_Update</description>
+        /// <description>Singleton_update</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -221,7 +221,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>SingletonTrackedResource_Update</description>
+        /// <description>Singleton_update</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -263,7 +263,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>SingletonTrackedResource_CreateOrUpdate</description>
+        /// <description>Singleton_createOrUpdate</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -309,7 +309,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>SingletonTrackedResource_CreateOrUpdate</description>
+        /// <description>Singleton_createOrUpdate</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -355,7 +355,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>SingletonTrackedResource_GetByResourceGroup</description>
+        /// <description>Singleton_getByResourceGroup</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -417,7 +417,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>SingletonTrackedResource_GetByResourceGroup</description>
+        /// <description>Singleton_getByResourceGroup</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -479,7 +479,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>SingletonTrackedResource_GetByResourceGroup</description>
+        /// <description>Singleton_getByResourceGroup</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -536,7 +536,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>SingletonTrackedResource_GetByResourceGroup</description>
+        /// <description>Singleton_getByResourceGroup</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -593,7 +593,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>SingletonTrackedResource_GetByResourceGroup</description>
+        /// <description>Singleton_getByResourceGroup</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -653,7 +653,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>SingletonTrackedResource_GetByResourceGroup</description>
+        /// <description>Singleton_getByResourceGroup</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>

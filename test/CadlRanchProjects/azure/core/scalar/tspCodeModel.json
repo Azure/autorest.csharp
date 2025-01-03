@@ -133,6 +133,7 @@
      "$id": "17",
      "Name": "get",
      "ResourceName": "AzureLocationScalar",
+     "OperationId": "AzureLocationScalar_get",
      "Doc": "get azureLocation value",
      "Accessibility": "public",
      "Parameters": [
@@ -206,6 +207,7 @@
      "$id": "24",
      "Name": "put",
      "ResourceName": "AzureLocationScalar",
+     "OperationId": "AzureLocationScalar_put",
      "Doc": "put azureLocation value",
      "Accessibility": "public",
      "Parameters": [
@@ -295,6 +297,7 @@
      "$id": "32",
      "Name": "post",
      "ResourceName": "AzureLocationScalar",
+     "OperationId": "AzureLocationScalar_post",
      "Doc": "post a model which has azureLocation property",
      "Accessibility": "public",
      "Parameters": [
@@ -406,6 +409,7 @@
      "$id": "41",
      "Name": "header",
      "ResourceName": "AzureLocationScalar",
+     "OperationId": "AzureLocationScalar_header",
      "Doc": "azureLocation value header",
      "Accessibility": "public",
      "Parameters": [
@@ -464,6 +468,7 @@
      "$id": "46",
      "Name": "query",
      "ResourceName": "AzureLocationScalar",
+     "OperationId": "AzureLocationScalar_query",
      "Doc": "azureLocation value query",
      "Accessibility": "public",
      "Parameters": [

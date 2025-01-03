@@ -50,7 +50,7 @@ namespace _Azure.ResourceManager.Resources.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResource_ListBySubscription</description>
+        /// <description>TopLevel_listBySubscription</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -80,7 +80,7 @@ namespace _Azure.ResourceManager.Resources.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResource_ListBySubscription</description>
+        /// <description>TopLevel_listBySubscription</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>

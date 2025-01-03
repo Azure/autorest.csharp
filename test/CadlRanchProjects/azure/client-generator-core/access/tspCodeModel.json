@@ -428,6 +428,7 @@
      "$id": "45",
      "Name": "noDecoratorInPublic",
      "ResourceName": "PublicOperation",
+     "OperationId": "PublicOperation_noDecoratorInPublic",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -510,6 +511,7 @@
      "$id": "52",
      "Name": "publicDecoratorInPublic",
      "ResourceName": "PublicOperation",
+     "OperationId": "PublicOperation_publicDecoratorInPublic",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -636,6 +638,7 @@
      "$id": "65",
      "Name": "noDecoratorInInternal",
      "ResourceName": "InternalOperation",
+     "OperationId": "InternalOperation_noDecoratorInInternal",
      "Accessibility": "internal",
      "Parameters": [
       {
@@ -718,6 +721,7 @@
      "$id": "72",
      "Name": "internalDecoratorInInternal",
      "ResourceName": "InternalOperation",
+     "OperationId": "InternalOperation_internalDecoratorInInternal",
      "Accessibility": "internal",
      "Parameters": [
       {
@@ -800,6 +804,7 @@
      "$id": "79",
      "Name": "publicDecoratorInInternal",
      "ResourceName": "InternalOperation",
+     "OperationId": "InternalOperation_publicDecoratorInInternal",
      "Accessibility": "internal",
      "Parameters": [
       {
@@ -926,6 +931,7 @@
      "$id": "92",
      "Name": "public",
      "ResourceName": "SharedModelInOperation",
+     "OperationId": "SharedModelInOperation_public",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1008,6 +1014,7 @@
      "$id": "99",
      "Name": "internal",
      "ResourceName": "SharedModelInOperation",
+     "OperationId": "SharedModelInOperation_internal",
      "Accessibility": "internal",
      "Parameters": [
       {
@@ -1134,6 +1141,7 @@
      "$id": "112",
      "Name": "operation",
      "ResourceName": "RelativeModelInOperation",
+     "OperationId": "RelativeModelInOperation_operation",
      "Doc": "Expected query parameter: name=\"Madge\"\nExpected response body:\n```json\n{\n  \"name\": \"Madge\",\n  \"inner\":\n  {\n    \"name\": \"Madge\"\n  }\n}\n```",
      "Accessibility": "internal",
      "Parameters": [
@@ -1217,6 +1225,7 @@
      "$id": "119",
      "Name": "discriminator",
      "ResourceName": "RelativeModelInOperation",
+     "OperationId": "RelativeModelInOperation_discriminator",
      "Doc": "Expected query parameter: kind=\"real\"\nExpected response body:\n```json\n{\n  \"name\": \"Madge\",\n  \"kind\": \"real\"\n}\n```",
      "Accessibility": "internal",
      "Parameters": [
