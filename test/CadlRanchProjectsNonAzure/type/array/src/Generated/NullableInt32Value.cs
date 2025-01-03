@@ -35,7 +35,7 @@ namespace Scm._Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable int 32 value. </summary>
         public virtual async Task<ClientResult<IReadOnlyList<int?>>> GetNullableInt32ValueAsync()
         {
             ClientResult result = await GetNullableInt32ValueAsync(null).ConfigureAwait(false);
@@ -57,7 +57,7 @@ namespace Scm._Type._Array
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable int 32 value. </summary>
         public virtual ClientResult<IReadOnlyList<int?>> GetNullableInt32Value()
         {
             ClientResult result = GetNullableInt32Value(null);
@@ -80,7 +80,7 @@ namespace Scm._Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable int 32 value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -104,7 +104,7 @@ namespace Scm._Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable int 32 value.
         /// <list type="bullet">
         /// <item>
         /// <description>

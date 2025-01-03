@@ -23,7 +23,7 @@ https://westus2.api.cognitive.microsoft.com).
     
     @doc("Api Version")
     @path
-    ApiVersion: APIVersion,
+    ApiVersion: Versions,
   }
 )
 @doc("""
@@ -50,6 +50,3 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v1_1: "v1.1",
 }
-
-@knownValues(Versions)
-scalar APIVersion extends string;

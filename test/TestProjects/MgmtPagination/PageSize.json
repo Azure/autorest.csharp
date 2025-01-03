@@ -170,7 +170,7 @@
                         "name": "maxpagesize",
                         "in": "query",
                         "type": "integer",
-                        "format": "int64",
+                        "format": "int32",
                         "description": "Optional. Specified maximum number of containers that can be included in the list."
                     },
                     {
@@ -409,7 +409,8 @@
                     {
                         "name": "maxpagesize",
                         "in": "query",
-                        "type": "number",
+                        "type": "integer",
+                        "format": "int32",
                         "description": "Optional. Specified maximum number of containers that can be included in the list."
                     },
                     {
@@ -528,8 +529,8 @@
                     {
                         "name": "maxpagesize",
                         "in": "query",
-                        "type": "number",
-                        "format": "float",
+                        "type": "integer",
+                        "format": "int32",
                         "description": "Optional. Specified maximum number of containers that can be included in the list."
                     },
                     {
@@ -648,8 +649,8 @@
                     {
                         "name": "maxpagesize",
                         "in": "query",
-                        "type": "number",
-                        "format": "double",
+                        "type": "integer",
+                        "format": "int32",
                         "description": "Optional. Specified maximum number of containers that can be included in the list."
                     },
                     {
@@ -768,8 +769,8 @@
                     {
                         "name": "maxpagesize",
                         "in": "query",
-                        "type": "number",
-                        "format": "decimal",
+                        "type": "integer",
+                        "format": "int32",
                         "description": "Optional. Specified maximum number of containers that can be included in the list."
                     },
                     {

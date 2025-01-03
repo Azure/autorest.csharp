@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string CrossLanguageDefinitionId, string? Access, string? Deprecation, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, InputModelProperty? DiscriminatorProperty, IReadOnlyDictionary<string, InputModelType> DiscriminatedSubtypes, InputType? AdditionalProperties, IReadOnlyList<InputType>? ArgumentTypes = null)
+    internal record InputModelType(string Name, string CrossLanguageDefinitionId, string? Access, string? Deprecation, string? Summary, string? Doc, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, InputModelProperty? DiscriminatorProperty, IReadOnlyDictionary<string, InputModelType> DiscriminatedSubtypes, InputType? AdditionalProperties, IReadOnlyList<InputType>? ArgumentTypes = null)
         : InputType(Name)
     {
         /// <summary>

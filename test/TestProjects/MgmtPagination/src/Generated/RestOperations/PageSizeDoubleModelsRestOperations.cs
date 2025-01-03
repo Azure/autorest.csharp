@@ -37,7 +37,7 @@ namespace MgmtPagination
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal RequestUriBuilder CreateListRequestUri(string subscriptionId, string resourceGroupName, double? maxpagesize)
+        internal RequestUriBuilder CreateListRequestUri(string subscriptionId, string resourceGroupName, int? maxpagesize)
         {
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -54,7 +54,7 @@ namespace MgmtPagination
             return uri;
         }
 
-        internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, double? maxpagesize)
+        internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, int? maxpagesize)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -83,7 +83,7 @@ namespace MgmtPagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<PageSizeDoubleModelListResult>> ListAsync(string subscriptionId, string resourceGroupName, double? maxpagesize = null, CancellationToken cancellationToken = default)
+        public async Task<Response<PageSizeDoubleModelListResult>> ListAsync(string subscriptionId, string resourceGroupName, int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -110,7 +110,7 @@ namespace MgmtPagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<PageSizeDoubleModelListResult> List(string subscriptionId, string resourceGroupName, double? maxpagesize = null, CancellationToken cancellationToken = default)
+        public Response<PageSizeDoubleModelListResult> List(string subscriptionId, string resourceGroupName, int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -323,7 +323,7 @@ namespace MgmtPagination
             }
         }
 
-        internal RequestUriBuilder CreateListNextPageRequestUri(string nextLink, string subscriptionId, string resourceGroupName, double? maxpagesize)
+        internal RequestUriBuilder CreateListNextPageRequestUri(string nextLink, string subscriptionId, string resourceGroupName, int? maxpagesize)
         {
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -331,7 +331,7 @@ namespace MgmtPagination
             return uri;
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, double? maxpagesize)
+        internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, int? maxpagesize)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -352,7 +352,7 @@ namespace MgmtPagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<PageSizeDoubleModelListResult>> ListNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, double? maxpagesize = null, CancellationToken cancellationToken = default)
+        public async Task<Response<PageSizeDoubleModelListResult>> ListNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
@@ -381,7 +381,7 @@ namespace MgmtPagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<PageSizeDoubleModelListResult> ListNextPage(string nextLink, string subscriptionId, string resourceGroupName, double? maxpagesize = null, CancellationToken cancellationToken = default)
+        public Response<PageSizeDoubleModelListResult> ListNextPage(string nextLink, string subscriptionId, string resourceGroupName, int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));

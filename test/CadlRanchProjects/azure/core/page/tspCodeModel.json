@@ -33,7 +33,7 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "The first enum value.",
+     "doc": "The first enum value.",
      "decorators": []
     },
     {
@@ -51,11 +51,11 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "The second enum value.",
+     "doc": "The second enum value.",
      "decorators": []
     }
    ],
-   "description": "An extensible enum input parameter.",
+   "doc": "An extensible enum input parameter.",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input",
@@ -89,11 +89,11 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The version 2022-12-01-preview.",
+     "doc": "The version 2022-12-01-preview.",
      "decorators": []
     }
    ],
-   "description": "The version of the API.",
+   "doc": "The version of the API.",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -107,7 +107,7 @@
    "name": "User",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.User",
    "usage": "Output,Json",
-   "description": "Details about a user.",
+   "doc": "Details about a user.",
    "decorators": [],
    "properties": [
     {
@@ -115,7 +115,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The user's id.",
+     "doc": "The user's id.",
      "type": {
       "$id": "14",
       "kind": "int32",
@@ -135,7 +135,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The user's name.",
+     "doc": "The user's name.",
      "type": {
       "$id": "16",
       "kind": "string",
@@ -155,7 +155,7 @@
      "kind": "property",
      "name": "orders",
      "serializedName": "orders",
-     "description": "The user's order list",
+     "doc": "The user's order list",
      "type": {
       "$id": "18",
       "kind": "array",
@@ -166,7 +166,7 @@
        "name": "UserOrder",
        "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.UserOrder",
        "usage": "Output,Json",
-       "description": "UserOrder for testing list with expand.",
+       "doc": "UserOrder for testing list with expand.",
        "decorators": [],
        "properties": [
         {
@@ -174,7 +174,7 @@
          "kind": "property",
          "name": "id",
          "serializedName": "id",
-         "description": "The user's id.",
+         "doc": "The user's id.",
          "type": {
           "$id": "21",
           "kind": "int32",
@@ -194,7 +194,7 @@
          "kind": "property",
          "name": "userId",
          "serializedName": "userId",
-         "description": "The user's id.",
+         "doc": "The user's id.",
          "type": {
           "$id": "23",
           "kind": "int32",
@@ -214,7 +214,7 @@
          "kind": "property",
          "name": "detail",
          "serializedName": "detail",
-         "description": "The user's order detail",
+         "doc": "The user's order detail",
          "type": {
           "$id": "25",
           "kind": "string",
@@ -246,7 +246,7 @@
      "kind": "property",
      "name": "etag",
      "serializedName": "etag",
-     "description": "The entity tag for this resource.",
+     "doc": "The entity tag for this resource.",
      "type": {
       "$id": "27",
       "kind": "string",
@@ -279,7 +279,7 @@
    "name": "ListItemInputBody",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.ListItemInputBody",
    "usage": "Input,Json",
-   "description": "The body of the input.",
+   "doc": "The body of the input.",
    "decorators": [],
    "properties": [
     {
@@ -287,7 +287,7 @@
      "kind": "property",
      "name": "inputName",
      "serializedName": "inputName",
-     "description": "The name of the input.",
+     "doc": "The name of the input.",
      "type": {
       "$id": "31",
       "kind": "string",
@@ -317,7 +317,7 @@
      "kind": "property",
      "name": "items",
      "serializedName": "items",
-     "description": "List of items.",
+     "doc": "List of items.",
      "type": {
       "$id": "34",
       "kind": "array",
@@ -340,7 +340,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "description": "Link to fetch more items.",
+     "doc": "Link to fetch more items.",
      "type": {
       "$id": "36",
       "kind": "string",
@@ -363,7 +363,7 @@
    "name": "FirstItem",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.FirstItem",
    "usage": "Output,Json",
-   "description": "First item.",
+   "doc": "First item.",
    "decorators": [],
    "properties": [
     {
@@ -371,7 +371,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The id of the item.",
+     "doc": "The id of the item.",
      "type": {
       "$id": "39",
       "kind": "int32",
@@ -394,7 +394,7 @@
    "name": "SecondItem",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.SecondItem",
    "usage": "Output,Json",
-   "description": "Second item.",
+   "doc": "Second item.",
    "decorators": [],
    "properties": [
     {
@@ -402,7 +402,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The name of the item.",
+     "doc": "The name of the item.",
      "type": {
       "$id": "42",
       "kind": "string",
@@ -425,7 +425,7 @@
    "name": "PagedUser",
    "crossLanguageDefinitionId": "Azure.Core.Page",
    "usage": "Output,Json",
-   "description": "Paged collection of User items",
+   "doc": "Paged collection of User items",
    "decorators": [],
    "properties": [
     {
@@ -433,7 +433,7 @@
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "description": "The User items on this page",
+     "doc": "The User items on this page",
      "type": {
       "$id": "45",
       "kind": "array",
@@ -456,7 +456,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "description": "The link to the next page of items",
+     "doc": "The link to the next page of items",
      "type": {
       "$id": "47",
       "kind": "url",
@@ -486,7 +486,7 @@
    "name": "PagedFirstItem",
    "crossLanguageDefinitionId": "Azure.Core.Page",
    "usage": "Output,Json",
-   "description": "Paged collection of FirstItem items",
+   "doc": "Paged collection of FirstItem items",
    "decorators": [],
    "properties": [
     {
@@ -494,7 +494,7 @@
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "description": "The FirstItem items on this page",
+     "doc": "The FirstItem items on this page",
      "type": {
       "$id": "51",
       "kind": "array",
@@ -517,7 +517,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "description": "The link to the next page of items",
+     "doc": "The link to the next page of items",
      "type": {
       "$id": "53",
       "kind": "url",
@@ -547,7 +547,7 @@
    "name": "PagedSecondItem",
    "crossLanguageDefinitionId": "Azure.Core.Page",
    "usage": "Output,Json",
-   "description": "Paged collection of SecondItem items",
+   "doc": "Paged collection of SecondItem items",
    "decorators": [],
    "properties": [
     {
@@ -555,7 +555,7 @@
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "description": "The SecondItem items on this page",
+     "doc": "The SecondItem items on this page",
      "type": {
       "$id": "57",
       "kind": "array",
@@ -578,7 +578,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "description": "The link to the next page of items",
+     "doc": "The link to the next page of items",
      "type": {
       "$id": "59",
       "kind": "url",
@@ -607,20 +607,20 @@
   {
    "$id": "61",
    "Name": "PageClient",
-   "Description": "Illustrates bodies templated with Azure Core with paging support",
+   "Doc": "Illustrates bodies templated with Azure Core with paging support",
    "Operations": [
     {
      "$id": "62",
      "Name": "listWithPage",
      "ResourceName": "Page",
-     "Description": "List with Azure.Core.Page<>.",
+     "Doc": "List with Azure.Core.Page<>.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "63",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "64",
         "kind": "string",
@@ -712,14 +712,14 @@
      "$id": "72",
      "Name": "listWithParameters",
      "ResourceName": "Page",
-     "Description": "List with extensible enum parameter Azure.Core.Page<>.",
+     "Doc": "List with extensible enum parameter Azure.Core.Page<>.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "73",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "74",
         "kind": "string",
@@ -751,7 +751,7 @@
        "$id": "77",
        "Name": "another",
        "NameInRequest": "another",
-       "Description": "Another query parameter.",
+       "Doc": "Another query parameter.",
        "Type": {
         "$ref": "2"
        },
@@ -769,7 +769,7 @@
        "$id": "78",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "79",
         "kind": "constant",
@@ -824,7 +824,7 @@
        "$id": "84",
        "Name": "bodyInput",
        "NameInRequest": "bodyInput",
-       "Description": "The body of the input.",
+       "Doc": "The body of the input.",
        "Type": {
         "$ref": "29"
        },
@@ -878,14 +878,14 @@
      "$id": "87",
      "Name": "listWithCustomPageModel",
      "ResourceName": "Page",
-     "Description": "List with custom page model.",
+     "Doc": "List with custom page model.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "88",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "89",
         "kind": "string",
@@ -982,7 +982,7 @@
      "$id": "98",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "99",
       "kind": "url",
@@ -1020,14 +1020,14 @@
      "$id": "103",
      "Name": "listFirstItem",
      "ResourceName": "TwoModelsAsPageItem",
-     "Description": "Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.",
+     "Doc": "Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "104",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "105",
         "kind": "string",
@@ -1119,14 +1119,14 @@
      "$id": "113",
      "Name": "listSecondItem",
      "ResourceName": "TwoModelsAsPageItem",
-     "Description": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
+     "Doc": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "114",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "115",
         "kind": "string",
@@ -1224,7 +1224,7 @@
      "$id": "124",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "125",
       "kind": "url",

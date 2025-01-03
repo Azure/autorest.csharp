@@ -67,7 +67,7 @@ namespace PaginationParams_LowLevel.Tests
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = CreatePaginationParamsClient(endpoint, credential);
 
-            await foreach (BinaryData item in client.Get2sAsync(1234, 1234, 1234L, null))
+            await foreach (BinaryData item in client.Get2sAsync(1234, 1234, 1234, null))
             {
             }
         }

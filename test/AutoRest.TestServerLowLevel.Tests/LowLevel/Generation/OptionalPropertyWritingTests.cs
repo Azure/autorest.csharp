@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void RoundTripModel(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/bed837a2e29e55569360206afa3393e044dfb070/packages/cadl-ranch-specs/http/models/optional-properties/main.cadl#L35-L38
-            var model = new InputModelType("RoundTripModel", "Cadl.TestServer.OptionalProperties.Models", "public", null, "Round-trip model with optional properties.", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
+            var model = new InputModelType("RoundTripModel", "Cadl.TestServer.OptionalProperties.Models", "public", null, null, "Round-trip model with optional properties.", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                     OptionalProperties, null, Array.Empty<InputModelType>(), null, null, null, null);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.OptionalProperties.Models", new List<string>(),
@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void InputModel(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/bed837a2e29e55569360206afa3393e044dfb070/packages/cadl-ranch-specs/http/models/optional-properties/main.cadl#L15-L28
-            var model = new InputModelType("InputModel", "Cadl.TestServer.OptionalProperties.Models", "public", null, "Input model with optional properties.", InputModelTypeUsage.Input,
+            var model = new InputModelType("InputModel", "Cadl.TestServer.OptionalProperties.Models", "public", null, null, "Input model with optional properties.", InputModelTypeUsage.Input,
                     OptionalProperties, null, Array.Empty<InputModelType>(), null, null, null, null);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.OptionalProperties.Models", new List<string>(),
@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void OutputModel(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/bed837a2e29e55569360206afa3393e044dfb070/packages/cadl-ranch-specs/http/models/optional-properties/main.cadl#L30-L33
-            var model = new InputModelType("OutputModel", "Cadl.TestServer.OptionalProperties.Models", "public", null, "Output model with optional properties.", InputModelTypeUsage.Output,
+            var model = new InputModelType("OutputModel", "Cadl.TestServer.OptionalProperties.Models", "public", null, null, "Output model with optional properties.", InputModelTypeUsage.Output,
                     OptionalProperties, null, Array.Empty<InputModelType>(), null, null, null, null);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.OptionalProperties.Models", new List<string>(),
@@ -48,12 +48,12 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         }
 
         private static readonly IReadOnlyList<InputModelProperty> OptionalProperties = new List<InputModelProperty>{
-            new InputModelProperty("optionalString", "optionalString", "Optional string, illustrating an optional reference type property.", InputPrimitiveType.String, null, false, false, false),
-            new InputModelProperty("optionalInt", "optionalInt", "Optional int, illustrating an optional reference type property.", InputPrimitiveType.Int32, null, false, false, false),
-            new InputModelProperty("optionalStringList", "optionalStringList", "Optional string collection.", new InputListType("optionalStringList", string.Empty, InputPrimitiveType.String), null, false, false, false),
-            new InputModelProperty("optionalIntList", "optionalIntList", "Optional int collection.", new InputListType("optionalIntList", string.Empty, InputPrimitiveType.Int32), null, false, false, false),
-            new InputModelProperty("optionalModelCollection", "optionalModelCollection", "Optional collection of models.", new InputListType("optionalModelCollection", string.Empty, ElementModelType), null, false, false, false),
-            new InputModelProperty("optionalModelDictionary", "optionalModelDictionary", "Optional dictionary of models.", new InputDictionaryType("optionalModelDictionary", InputPrimitiveType.String, ElementModelType), null, false, false, false)
+            new InputModelProperty("optionalString", "optionalString", null, "Optional string, illustrating an optional reference type property.", InputPrimitiveType.String, null, false, false, false),
+            new InputModelProperty("optionalInt", "optionalInt", null, "Optional int, illustrating an optional reference type property.", InputPrimitiveType.Int32, null, false, false, false),
+            new InputModelProperty("optionalStringList", "optionalStringList", null, "Optional string collection.", new InputListType("optionalStringList", string.Empty, InputPrimitiveType.String), null, false, false, false),
+            new InputModelProperty("optionalIntList", "optionalIntList", null, "Optional int collection.", new InputListType("optionalIntList", string.Empty, InputPrimitiveType.Int32), null, false, false, false),
+            new InputModelProperty("optionalModelCollection", "optionalModelCollection", null, "Optional collection of models.", new InputListType("optionalModelCollection", string.Empty, ElementModelType), null, false, false, false),
+            new InputModelProperty("optionalModelDictionary", "optionalModelDictionary", null, "Optional dictionary of models.", new InputDictionaryType("optionalModelDictionary", InputPrimitiveType.String, ElementModelType), null, false, false, false)
         };
 
         // below are test cases

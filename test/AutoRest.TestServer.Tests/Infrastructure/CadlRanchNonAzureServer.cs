@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
@@ -8,34 +9,42 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 {
     public class CadlRanchNonAzureServer: TestServerBase
     {
-        public CadlRanchNonAzureServer() : base(GetBaseDirectory(), $"serve {GetScenariosPath()} --port 0 --coverageFile {GetCoverageFilePath()}")
+        public CadlRanchNonAzureServer() : base(GetProcessPath(), $"serve {string.Join(" ", GetScenariosPaths())} --port 0 --coverageFile {GetCoverageFilePath()}")
         {
         }
 
-        internal static string GetBaseDirectory()
+        internal static string GetProcessPath()
         {
             var nodeModules = GetNodeModulesDirectory();
-            return Path.Combine(nodeModules, "@azure-tools", "cadl-ranch");
+            return Path.Combine(nodeModules, "@typespec", "spector", "dist", "src", "cli", "cli.js");
         }
 
         internal static string GetSpecDirectory()
         {
             var nodeModules = GetNodeModulesDirectory();
-            return Path.Combine(nodeModules, "@azure-tools", "cadl-ranch-specs");
+            return Path.Combine(nodeModules, "@typespec", "http-specs");
         }
 
-        internal static string GetScenariosPath()
+        internal static string GetAzureSpecDirectory()
         {
-            return Path.Combine(GetSpecDirectory(), "http");
+            var nodeModules = GetNodeModulesDirectory();
+            return Path.Combine(nodeModules, "@azure-tools", "azure-http-specs");
         }
+
+        internal static IEnumerable<string> GetScenariosPaths()
+        {
+            yield return Path.Combine(GetSpecDirectory(), "specs");
+            yield return Path.Combine(GetAzureSpecDirectory(), "specs");
+        }
+
         internal static string GetCoverageFilePath()
         {
-            return Path.Combine(GetCoverageDirectory(), "cadl-ranch-coverage-csharp-standard.json");
+            return Path.Combine(GetCoverageDirectory(), "tsp-spector-coverage-csharp-standard.json");
         }
 
         protected override void Stop(Process process)
         {
-            Process.Start(new ProcessStartInfo("node", $"{Path.Combine(GetNodeModulesDirectory(), "@azure-tools", "cadl-ranch", "dist", "cli", "cli.js")} server stop --port {Port}"));
+            Process.Start(new ProcessStartInfo("node", $"{GetProcessPath()} server stop --port {Port}"));
             process.WaitForExit();
         }
     }

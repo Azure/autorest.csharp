@@ -162,7 +162,7 @@
   {
    "$id": "19",
    "Name": "MultipleMediaTypesClient",
-   "Description": "Play with produces/consumes and media-types in general.",
+   "Doc": "Play with produces/consumes and media-types in general.",
    "Operations": [
     {
      "$id": "20",

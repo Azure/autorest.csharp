@@ -35,14 +35,14 @@ namespace Scm._Type.Union
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get enums only. </summary>
         public virtual async Task<ClientResult<GetResponse3>> GetEnumsOnlyAsync()
         {
             ClientResult result = await GetEnumsOnlyAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(GetResponse3.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get enums only. </summary>
         public virtual ClientResult<GetResponse3> GetEnumsOnly()
         {
             ClientResult result = GetEnumsOnly(null);
@@ -50,7 +50,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get enums only.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -74,7 +74,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get enums only.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -22,7 +22,7 @@
      "kind": "enumvalue",
      "name": "accept",
      "value": "accept",
-     "description": "accept",
+     "doc": "accept",
      "valueType": {
       "$ref": "3"
      },
@@ -32,7 +32,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_requiredLiteralString",
+   "doc": "The Thing_requiredLiteralString",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -55,7 +55,7 @@
      "kind": "enumvalue",
      "name": "123",
      "value": 123,
-     "description": "123",
+     "doc": "123",
      "valueType": {
       "$ref": "6"
      },
@@ -65,7 +65,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_requiredLiteralInt",
+   "doc": "The Thing_requiredLiteralInt",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -88,7 +88,7 @@
      "kind": "enumvalue",
      "name": "1.23",
      "value": 1.23,
-     "description": "1.23",
+     "doc": "1.23",
      "valueType": {
       "$ref": "9"
      },
@@ -98,7 +98,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_requiredLiteralFloat",
+   "doc": "The Thing_requiredLiteralFloat",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -121,7 +121,7 @@
      "kind": "enumvalue",
      "name": "reject",
      "value": "reject",
-     "description": "reject",
+     "doc": "reject",
      "valueType": {
       "$ref": "12"
      },
@@ -131,7 +131,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_optionalLiteralString",
+   "doc": "The Thing_optionalLiteralString",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -154,7 +154,7 @@
      "kind": "enumvalue",
      "name": "456",
      "value": 456,
-     "description": "456",
+     "doc": "456",
      "valueType": {
       "$ref": "15"
      },
@@ -164,7 +164,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_optionalLiteralInt",
+   "doc": "The Thing_optionalLiteralInt",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -187,7 +187,7 @@
      "kind": "enumvalue",
      "name": "4.56",
      "value": 4.56,
-     "description": "4.56",
+     "doc": "4.56",
      "valueType": {
       "$ref": "18"
      },
@@ -197,7 +197,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_optionalLiteralFloat",
+   "doc": "The Thing_optionalLiteralFloat",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -268,7 +268,7 @@
      "decorators": []
     }
    ],
-   "description": "enum with projected name",
+   "doc": "enum with projected name",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input",
@@ -339,7 +339,7 @@
      "decorators": []
     }
    ],
-   "description": "enum with projected name used in a model",
+   "doc": "enum with projected name used in a model",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Json",
@@ -410,7 +410,7 @@
      "decorators": []
     }
    ],
-   "description": "Simple enum",
+   "doc": "Simple enum",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -481,7 +481,7 @@
      "decorators": []
     }
    ],
-   "description": "Extensible enum",
+   "doc": "Extensible enum",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -552,7 +552,7 @@
      "decorators": []
     }
    ],
-   "description": "Int based extensible enum",
+   "doc": "Int based extensible enum",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -623,7 +623,7 @@
      "decorators": []
     }
    ],
-   "description": "Float based extensible enum",
+   "doc": "Float based extensible enum",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -694,7 +694,7 @@
      "decorators": []
     }
    ],
-   "description": "float fixed enum",
+   "doc": "float fixed enum",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -765,7 +765,7 @@
      "decorators": []
     }
    ],
-   "description": "int fixed enum",
+   "doc": "int fixed enum",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -953,7 +953,7 @@
    "name": "Thing",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.Thing",
    "usage": "Input,Output,Spread,Json",
-   "description": "A model with a few properties of literal types",
+   "doc": "A model with a few properties of literal types",
    "decorators": [],
    "properties": [
     {
@@ -961,7 +961,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "name of the Thing",
+     "doc": "name of the Thing",
      "type": {
       "$id": "106",
       "kind": "string",
@@ -981,7 +981,7 @@
      "kind": "property",
      "name": "requiredUnion",
      "serializedName": "requiredUnion",
-     "description": "required Union",
+     "doc": "required Union",
      "type": {
       "$id": "108",
       "kind": "union",
@@ -1030,7 +1030,7 @@
      "kind": "property",
      "name": "requiredLiteralString",
      "serializedName": "requiredLiteralString",
-     "description": "required literal string",
+     "doc": "required literal string",
      "type": {
       "$id": "114",
       "kind": "constant",
@@ -1052,7 +1052,7 @@
      "kind": "property",
      "name": "requiredLiteralInt",
      "serializedName": "requiredLiteralInt",
-     "description": "required literal int",
+     "doc": "required literal int",
      "type": {
       "$id": "116",
       "kind": "constant",
@@ -1074,7 +1074,7 @@
      "kind": "property",
      "name": "requiredLiteralFloat",
      "serializedName": "requiredLiteralFloat",
-     "description": "required literal float",
+     "doc": "required literal float",
      "type": {
       "$id": "118",
       "kind": "constant",
@@ -1096,7 +1096,7 @@
      "kind": "property",
      "name": "requiredLiteralBool",
      "serializedName": "requiredLiteralBool",
-     "description": "required literal bool",
+     "doc": "required literal bool",
      "type": {
       "$id": "120",
       "kind": "constant",
@@ -1122,7 +1122,7 @@
      "kind": "property",
      "name": "optionalLiteralString",
      "serializedName": "optionalLiteralString",
-     "description": "optional literal string",
+     "doc": "optional literal string",
      "type": {
       "$id": "123",
       "kind": "constant",
@@ -1144,7 +1144,7 @@
      "kind": "property",
      "name": "optionalLiteralInt",
      "serializedName": "optionalLiteralInt",
-     "description": "optional literal int",
+     "doc": "optional literal int",
      "type": {
       "$id": "125",
       "kind": "constant",
@@ -1166,7 +1166,7 @@
      "kind": "property",
      "name": "optionalLiteralFloat",
      "serializedName": "optionalLiteralFloat",
-     "description": "optional literal float",
+     "doc": "optional literal float",
      "type": {
       "$id": "127",
       "kind": "constant",
@@ -1188,7 +1188,7 @@
      "kind": "property",
      "name": "optionalLiteralBool",
      "serializedName": "optionalLiteralBool",
-     "description": "optional literal bool",
+     "doc": "optional literal bool",
      "type": {
       "$id": "129",
       "kind": "constant",
@@ -1214,7 +1214,7 @@
      "kind": "property",
      "name": "requiredBadDescription",
      "serializedName": "requiredBadDescription",
-     "description": "description with xml <|endoftext|>",
+     "doc": "description with xml <|endoftext|>",
      "type": {
       "$id": "132",
       "kind": "string",
@@ -1234,7 +1234,7 @@
      "kind": "property",
      "name": "optionalNullableList",
      "serializedName": "optionalNullableList",
-     "description": "optional nullable collection",
+     "doc": "optional nullable collection",
      "type": {
       "$id": "134",
       "kind": "nullable",
@@ -1265,7 +1265,7 @@
      "kind": "property",
      "name": "requiredNullableList",
      "serializedName": "requiredNullableList",
-     "description": "required nullable collection",
+     "doc": "required nullable collection",
      "type": {
       "$id": "138",
       "kind": "nullable",
@@ -1299,7 +1299,7 @@
    "name": "Friend",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.NotFriend",
    "usage": "Output,Spread,Json",
-   "description": "this is not a friendly model but with a friendly name",
+   "doc": "this is not a friendly model but with a friendly name",
    "decorators": [],
    "properties": [
     {
@@ -1307,7 +1307,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "name of the NotFriend",
+     "doc": "name of the NotFriend",
      "type": {
       "$id": "143",
       "kind": "string",
@@ -1330,7 +1330,7 @@
    "name": "ProjectedModel",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithProjectedName",
    "usage": "Output,Spread,Json",
-   "description": "this is a model with a projected name",
+   "doc": "this is a model with a projected name",
    "decorators": [],
    "properties": [
     {
@@ -1338,7 +1338,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "name of the ModelWithProjectedName",
+     "doc": "name of the ModelWithProjectedName",
      "type": {
       "$id": "146",
       "kind": "string",
@@ -1370,7 +1370,7 @@
    "name": "Extension",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.Extension",
    "usage": "Input,Json",
-   "description": "extension",
+   "doc": "extension",
    "decorators": [],
    "baseModel": {
     "$id": "149",
@@ -1378,7 +1378,7 @@
     "name": "Element",
     "crossLanguageDefinitionId": "NoDocsTypeSpec.Element",
     "usage": "Input,Json",
-    "description": "element",
+    "doc": "element",
     "decorators": [],
     "properties": [
      {
@@ -1436,7 +1436,7 @@
    "name": "Extendible",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.Extendible",
    "usage": "Input,Json",
-   "description": "FHIR extendible element",
+   "doc": "FHIR extendible element",
    "decorators": [],
    "properties": [
     {
@@ -1444,7 +1444,7 @@
      "kind": "property",
      "name": "extension",
      "serializedName": "extension",
-     "description": "Additional Content defined by implementations",
+     "doc": "Additional Content defined by implementations",
      "type": {
       "$id": "156",
       "kind": "array",
@@ -1455,7 +1455,7 @@
        "name": "ThereLevelExtension",
        "crossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelExtension",
        "usage": "Input,Json",
-       "description": "extension",
+       "doc": "extension",
        "decorators": [],
        "baseModel": {
         "$id": "158",
@@ -1463,7 +1463,7 @@
         "name": "ThereLevelElement",
         "crossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelElement",
         "usage": "Input,Json",
-        "description": "element",
+        "doc": "element",
         "decorators": [],
         "properties": [
          {
@@ -1536,7 +1536,7 @@
    "name": "ChildModel",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.ChildModel",
    "usage": "Input,Json",
-   "description": "ChildModel",
+   "doc": "ChildModel",
    "decorators": [],
    "baseModel": {
     "$id": "164",
@@ -1544,7 +1544,7 @@
     "name": "BaseModel",
     "crossLanguageDefinitionId": "NoDocsTypeSpec.BaseModel",
     "usage": "Input,Json",
-    "description": "parenetModel",
+    "doc": "parenetModel",
     "decorators": [],
     "properties": [
      {
@@ -1602,7 +1602,7 @@
    "name": "ContainSelf",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.ContainSelf",
    "usage": "Input,Json",
-   "description": "containself",
+   "doc": "containself",
    "decorators": [],
    "properties": [
     {
@@ -1635,7 +1635,7 @@
      "kind": "property",
      "name": "enumProperty",
      "serializedName": "enumProperty",
-     "description": "enum with projected name used in a model",
+     "doc": "enum with projected name used in a model",
      "type": {
       "$ref": "28"
      },
@@ -1690,7 +1690,7 @@
    "name": "RoundTripModel",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel",
    "usage": "Input,Output,Json",
-   "description": "this is a roundtrip model",
+   "doc": "this is a roundtrip model",
    "decorators": [],
    "properties": [
     {
@@ -1698,7 +1698,7 @@
      "kind": "property",
      "name": "requiredString",
      "serializedName": "requiredString",
-     "description": "Required string, illustrating a reference type property.",
+     "doc": "Required string, illustrating a reference type property.",
      "type": {
       "$id": "179",
       "kind": "string",
@@ -1718,7 +1718,7 @@
      "kind": "property",
      "name": "requiredInt",
      "serializedName": "requiredInt",
-     "description": "Required int, illustrating a value type property.",
+     "doc": "Required int, illustrating a value type property.",
      "type": {
       "$id": "181",
       "kind": "int32",
@@ -1738,7 +1738,7 @@
      "kind": "property",
      "name": "requiredCollection",
      "serializedName": "requiredCollection",
-     "description": "Required collection of enums",
+     "doc": "Required collection of enums",
      "type": {
       "$id": "183",
       "kind": "array",
@@ -1761,7 +1761,7 @@
      "kind": "property",
      "name": "requiredDictionary",
      "serializedName": "requiredDictionary",
-     "description": "Required dictionary of enums",
+     "doc": "Required dictionary of enums",
      "type": {
       "$id": "185",
       "kind": "dict",
@@ -1789,7 +1789,7 @@
      "kind": "property",
      "name": "requiredModel",
      "serializedName": "requiredModel",
-     "description": "Required model",
+     "doc": "Required model",
      "type": {
       "$ref": "104"
      },
@@ -1805,7 +1805,7 @@
      "kind": "property",
      "name": "intExtensibleEnum",
      "serializedName": "intExtensibleEnum",
-     "description": "this is an int based extensible enum",
+     "doc": "this is an int based extensible enum",
      "type": {
       "$ref": "52"
      },
@@ -1821,7 +1821,7 @@
      "kind": "property",
      "name": "intExtensibleEnumCollection",
      "serializedName": "intExtensibleEnumCollection",
-     "description": "this is a collection of int based extensible enum",
+     "doc": "this is a collection of int based extensible enum",
      "type": {
       "$id": "190",
       "kind": "array",
@@ -1844,7 +1844,7 @@
      "kind": "property",
      "name": "floatExtensibleEnum",
      "serializedName": "floatExtensibleEnum",
-     "description": "this is a float based extensible enum",
+     "doc": "this is a float based extensible enum",
      "type": {
       "$ref": "60"
      },
@@ -1860,7 +1860,7 @@
      "kind": "property",
      "name": "floatExtensibleEnumCollection",
      "serializedName": "floatExtensibleEnumCollection",
-     "description": "this is a collection of float based extensible enum",
+     "doc": "this is a collection of float based extensible enum",
      "type": {
       "$id": "193",
       "kind": "array",
@@ -1883,7 +1883,7 @@
      "kind": "property",
      "name": "floatFixedEnum",
      "serializedName": "floatFixedEnum",
-     "description": "this is a float based fixed enum",
+     "doc": "this is a float based fixed enum",
      "type": {
       "$ref": "68"
      },
@@ -1899,7 +1899,7 @@
      "kind": "property",
      "name": "floatFixedEnumCollection",
      "serializedName": "floatFixedEnumCollection",
-     "description": "this is a collection of float based fixed enum",
+     "doc": "this is a collection of float based fixed enum",
      "type": {
       "$id": "196",
       "kind": "array",
@@ -1922,7 +1922,7 @@
      "kind": "property",
      "name": "intFixedEnum",
      "serializedName": "intFixedEnum",
-     "description": "this is a int based fixed enum",
+     "doc": "this is a int based fixed enum",
      "type": {
       "$ref": "76"
      },
@@ -1938,7 +1938,7 @@
      "kind": "property",
      "name": "intFixedEnumCollection",
      "serializedName": "intFixedEnumCollection",
-     "description": "this is a collection of int based fixed enum",
+     "doc": "this is a collection of int based fixed enum",
      "type": {
       "$id": "199",
       "kind": "array",
@@ -1961,7 +1961,7 @@
      "kind": "property",
      "name": "stringFixedEnum",
      "serializedName": "stringFixedEnum",
-     "description": "this is a string based fixed enum",
+     "doc": "this is a string based fixed enum",
      "type": {
       "$ref": "36"
      },
@@ -1977,7 +1977,7 @@
      "kind": "property",
      "name": "requiredUnknown",
      "serializedName": "requiredUnknown",
-     "description": "required unknown",
+     "doc": "required unknown",
      "type": {
       "$id": "202",
       "kind": "unknown",
@@ -1997,7 +1997,7 @@
      "kind": "property",
      "name": "optionalUnknown",
      "serializedName": "optionalUnknown",
-     "description": "optional unknown",
+     "doc": "optional unknown",
      "type": {
       "$id": "204",
       "kind": "unknown",
@@ -2017,7 +2017,7 @@
      "kind": "property",
      "name": "requiredRecordUnknown",
      "serializedName": "requiredRecordUnknown",
-     "description": "required record of unknown",
+     "doc": "required record of unknown",
      "type": {
       "$id": "206",
       "kind": "dict",
@@ -2049,7 +2049,7 @@
      "kind": "property",
      "name": "optionalRecordUnknown",
      "serializedName": "optionalRecordUnknown",
-     "description": "optional record of unknown",
+     "doc": "optional record of unknown",
      "type": {
       "$id": "210",
       "kind": "dict",
@@ -2081,7 +2081,7 @@
      "kind": "property",
      "name": "readOnlyRequiredRecordUnknown",
      "serializedName": "readOnlyRequiredRecordUnknown",
-     "description": "required readonly record of unknown",
+     "doc": "required readonly record of unknown",
      "type": {
       "$id": "214",
       "kind": "dict",
@@ -2113,7 +2113,7 @@
      "kind": "property",
      "name": "readOnlyOptionalRecordUnknown",
      "serializedName": "readOnlyOptionalRecordUnknown",
-     "description": "optional readonly record of unknown",
+     "doc": "optional readonly record of unknown",
      "type": {
       "$id": "218",
       "kind": "dict",
@@ -2145,14 +2145,14 @@
      "kind": "property",
      "name": "modelWithRequiredNullable",
      "serializedName": "modelWithRequiredNullable",
-     "description": "this is a model with required nullable properties",
+     "doc": "this is a model with required nullable properties",
      "type": {
       "$id": "222",
       "kind": "model",
       "name": "ModelWithRequiredNullableProperties",
       "crossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithRequiredNullableProperties",
       "usage": "Input,Output,Json",
-      "description": "A model with a few required nullable properties",
+      "doc": "A model with a few required nullable properties",
       "decorators": [],
       "properties": [
        {
@@ -2160,7 +2160,7 @@
         "kind": "property",
         "name": "requiredNullablePrimitive",
         "serializedName": "requiredNullablePrimitive",
-        "description": "required nullable primitive type",
+        "doc": "required nullable primitive type",
         "type": {
          "$id": "224",
          "kind": "nullable",
@@ -2184,7 +2184,7 @@
         "kind": "property",
         "name": "requiredExtensibleEnum",
         "serializedName": "requiredExtensibleEnum",
-        "description": "required nullable extensible enum type",
+        "doc": "required nullable extensible enum type",
         "type": {
          "$id": "227",
          "kind": "nullable",
@@ -2204,7 +2204,7 @@
         "kind": "property",
         "name": "requiredFixedEnum",
         "serializedName": "requiredFixedEnum",
-        "description": "required nullable fixed enum type",
+        "doc": "required nullable fixed enum type",
         "type": {
          "$id": "229",
          "kind": "nullable",
@@ -2233,7 +2233,7 @@
      "kind": "property",
      "name": "unionList",
      "serializedName": "unionList",
-     "description": "this is a list of union types",
+     "doc": "this is a list of union types",
      "type": {
       "$id": "231",
       "kind": "array",
@@ -2263,7 +2263,7 @@
          "name": "ModelForUnion",
          "crossLanguageDefinitionId": "NoDocsTypeSpec.ModelForUnion",
          "usage": "Input,Output,Json",
-         "description": "This is a model only used in union types, please do not use it anywhere else.",
+         "doc": "This is a model only used in union types, please do not use it anywhere else.",
          "decorators": [],
          "properties": [
           {
@@ -2271,7 +2271,7 @@
            "kind": "property",
            "name": "name",
            "serializedName": "name",
-           "description": "name of the ModelForUnion",
+           "doc": "name of the ModelForUnion",
            "type": {
             "$id": "237",
             "kind": "string",
@@ -2291,7 +2291,7 @@
            "kind": "property",
            "name": "age",
            "serializedName": "age",
-           "description": "age of the ModelForUnion",
+           "doc": "age of the ModelForUnion",
            "type": {
             "$id": "239",
             "kind": "int32",
@@ -2344,13 +2344,13 @@
   {
    "$id": "241",
    "Name": "NoDocsTypeSpecClient",
-   "Description": "This is a sample typespec project.",
+   "Doc": "This is a sample typespec project.",
    "Operations": [
     {
      "$id": "242",
      "Name": "topAction",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "top level method",
+     "Doc": "top level method",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2412,14 +2412,14 @@
      "$id": "247",
      "Name": "patchAction",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "top level patch",
+     "Doc": "top level patch",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "248",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "249",
         "kind": "constant",
@@ -2522,14 +2522,14 @@
      "$id": "256",
      "Name": "anonymousBody",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "body parameter without body decorator",
+     "Doc": "body parameter without body decorator",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "257",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "258",
         "kind": "constant",
@@ -2632,14 +2632,14 @@
      "$id": "265",
      "Name": "friendlyModel",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "Model can have its friendly name",
+     "Doc": "Model can have its friendly name",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "266",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "267",
         "kind": "constant",
@@ -2799,14 +2799,14 @@
      "$id": "279",
      "Name": "projectedNameModel",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "Model can have its projected name",
+     "Doc": "Model can have its projected name",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "280",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "281",
         "kind": "constant",
@@ -2909,7 +2909,7 @@
      "$id": "288",
      "Name": "returnsAnonymousModel",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "return anonymous model",
+     "Doc": "return anonymous model",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2971,7 +2971,7 @@
      "$id": "293",
      "Name": "headAsBoolean",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "head as boolean.",
+     "Doc": "head as boolean.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3021,14 +3021,14 @@
      "$id": "297",
      "Name": "stringBody",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "The body parameter type is string.",
+     "Doc": "The body parameter type is string.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "298",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "299",
         "kind": "constant",
@@ -3102,14 +3102,14 @@
      "$id": "304",
      "Name": "boolBody",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "The body parameter type is bool.",
+     "Doc": "The body parameter type is bool.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "305",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "306",
         "kind": "constant",
@@ -3183,14 +3183,14 @@
      "$id": "311",
      "Name": "dateTimeBody",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "The body parameter type is datetime.",
+     "Doc": "The body parameter type is datetime.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "312",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "313",
         "kind": "constant",
@@ -3272,7 +3272,7 @@
      "$id": "319",
      "Name": "returnString",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "The return type is datetime.",
+     "Doc": "The return type is datetime.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3403,14 +3403,14 @@
      "$id": "331",
      "Name": "recursiveExtension",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test parent reference child",
+     "Doc": "test parent reference child",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "332",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "333",
         "kind": "constant",
@@ -3480,14 +3480,14 @@
      "$id": "337",
      "Name": "threeLevelRecursive",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test three level recursive extension",
+     "Doc": "test three level recursive extension",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "338",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "339",
         "kind": "constant",
@@ -3557,14 +3557,14 @@
      "$id": "343",
      "Name": "recursiveModels",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test child reference parent",
+     "Doc": "test child reference parent",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "344",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "345",
         "kind": "constant",
@@ -3634,14 +3634,14 @@
      "$id": "349",
      "Name": "ContainSelfModels",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test contain self models",
+     "Doc": "test contain self models",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "350",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "351",
         "kind": "constant",
@@ -3711,7 +3711,7 @@
      "$id": "355",
      "Name": "enumParameter",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test enum parameter.",
+     "Doc": "test enum parameter.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3757,14 +3757,14 @@
      "$id": "358",
      "Name": "bodyIsModelWithProjectedEnum",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test enum parameter.",
+     "Doc": "test enum parameter.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "359",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "360",
         "kind": "constant",
@@ -3834,14 +3834,14 @@
      "$id": "364",
      "Name": "optionalDictionary",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test optional dictionary.",
+     "Doc": "test optional dictionary.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "365",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "366",
         "kind": "constant",
@@ -3927,7 +3927,7 @@
      "$id": "373",
      "Name": "azureLocationOp",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test optional dictionary.",
+     "Doc": "test optional dictionary.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3990,7 +3990,7 @@
        "$id": "380",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "381",
         "kind": "constant",
@@ -4119,13 +4119,13 @@
   {
    "$id": "392",
    "Name": "HelloDemo",
-   "Description": "Hello world service",
+   "Doc": "Hello world service",
    "Operations": [
     {
      "$id": "393",
      "Name": "sayHi",
      "ResourceName": "Demo",
-     "Description": "Return hi",
+     "Doc": "Return hi",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4283,7 +4283,7 @@
      "$id": "408",
      "Name": "helloAgain",
      "ResourceName": "Demo2",
-     "Description": "Return hi again",
+     "Doc": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4434,7 +4434,7 @@
      "$id": "421",
      "Name": "noContentType",
      "ResourceName": "Demo2",
-     "Description": "Return hi again",
+     "Doc": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4483,7 +4483,7 @@
        "$id": "426",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "427",
         "kind": "constant",
@@ -4586,7 +4586,7 @@
      "$id": "434",
      "Name": "helloDemoAgain",
      "ResourceName": "Demo2",
-     "Description": "Return hi in demo2",
+     "Doc": "Return hi in demo2",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4648,14 +4648,14 @@
      "$id": "439",
      "Name": "createLiteral",
      "ResourceName": "Demo2",
-     "Description": "Create with literal value",
+     "Doc": "Create with literal value",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "440",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "441",
         "kind": "constant",
@@ -4758,7 +4758,7 @@
      "$id": "448",
      "Name": "helloLiteral",
      "ResourceName": "Demo2",
-     "Description": "Send literal parameters",
+     "Doc": "Send literal parameters",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4934,14 +4934,14 @@
      "$id": "466",
      "Name": "createUnknownValue",
      "ResourceName": "EnumTest",
-     "Description": "get extensible enum",
+     "Doc": "get extensible enum",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "467",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "468",
         "kind": "constant",
@@ -5044,14 +5044,14 @@
      "$id": "476",
      "Name": "internalProtocol",
      "ResourceName": "ProtocolAndConvenient",
-     "Description": "When set protocol false and convenient true, then the protocol method should be internal",
+     "Doc": "When set protocol false and convenient true, then the protocol method should be internal",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "477",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "478",
         "kind": "constant",
@@ -5154,7 +5154,7 @@
      "$id": "485",
      "Name": "stillConvenient",
      "ResourceName": "ProtocolAndConvenient",
-     "Description": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
+     "Doc": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
      "Accessibility": "public",
      "Parameters": [],
      "Responses": [
@@ -5215,7 +5215,7 @@
      "$id": "491",
      "Name": "doSomething",
      "ResourceName": "Entity",
-     "Description": "doSomething for entity",
+     "Doc": "doSomething for entity",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -5331,7 +5331,7 @@
      "$id": "502",
      "Name": "doSomething",
      "ResourceName": "Glossary",
-     "Description": "doSomething for glossary",
+     "Doc": "doSomething for glossary",
      "Accessibility": "public",
      "Parameters": [
       {

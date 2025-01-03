@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
@@ -50,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _typeMapping = sourceInputModel?.CreateForModel(ExistingType);
             }
 
-            Description = string.IsNullOrWhiteSpace(input.Description) ? $"The {input.Name}." : input.Description;
+            Description = DocHelpers.GetDescription(input.Summary, input.Doc) ?? $"The {input.Name}.";
             IsExtensible = isExtensible;
             ValueType = typeFactory.CreateType(input.ValueType);
             IsStringValueType = ValueType.Equals(typeof(string));
@@ -94,9 +95,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static string CreateDescription(InputEnumTypeValue value)
         {
-            var description = string.IsNullOrWhiteSpace(value.Description)
-                ? value.GetValueString()
-                : value.Description;
+            var description = DocHelpers.GetDescription(value.Summary, value.Doc) ?? value.GetValueString();
             return BuilderHelpers.EscapeXmlDocDescription(description);
         }
     }

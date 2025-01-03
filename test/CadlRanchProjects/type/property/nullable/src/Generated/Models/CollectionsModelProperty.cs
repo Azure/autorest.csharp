@@ -50,7 +50,7 @@ namespace _Type.Property.Nullable.Models
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
-        internal CollectionsModelProperty(string requiredProperty, IEnumerable<InnerModel> nullableProperty)
+        public CollectionsModelProperty(string requiredProperty, IEnumerable<InnerModel> nullableProperty)
         {
             Argument.AssertNotNull(requiredProperty, nameof(requiredProperty));
 
@@ -62,7 +62,7 @@ namespace _Type.Property.Nullable.Models
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CollectionsModelProperty(string requiredProperty, IReadOnlyList<InnerModel> nullableProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CollectionsModelProperty(string requiredProperty, IList<InnerModel> nullableProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredProperty = requiredProperty;
             NullableProperty = nullableProperty;
@@ -75,8 +75,8 @@ namespace _Type.Property.Nullable.Models
         }
 
         /// <summary> Required property. </summary>
-        public string RequiredProperty { get; }
+        public string RequiredProperty { get; set; }
         /// <summary> Property. </summary>
-        public IReadOnlyList<InnerModel> NullableProperty { get; }
+        public IList<InnerModel> NullableProperty { get; set; }
     }
 }

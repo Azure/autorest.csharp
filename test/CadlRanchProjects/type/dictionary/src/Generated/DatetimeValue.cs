@@ -45,7 +45,7 @@ namespace _Type._Dictionary
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/DatetimeValue.xml" path="doc/members/member[@name='GetDatetimeValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDatetimeValueAsync(CancellationToken cancellationToken = default)
@@ -63,7 +63,7 @@ namespace _Type._Dictionary
             return Response.FromValue(value, response);
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/DatetimeValue.xml" path="doc/members/member[@name='GetDatetimeValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDatetimeValue(CancellationToken cancellationToken = default)
@@ -82,7 +82,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get datetime value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -117,7 +117,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get datetime value.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
@@ -20,16 +21,17 @@ namespace AutoRest.CSharp.Mgmt.Output
             _clientPrefix = inputModel.Name;
         }
 
-        public static ResourceData Empty = new ResourceData(new InputModelType(string.Empty, string.Empty, null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null));
+        public static ResourceData Empty = new ResourceData(new InputModelType(string.Empty, string.Empty, null, null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null));
 
         protected override bool IsResourceType => true;
 
         protected override FormattableString CreateDescription()
         {
             FormattableString baseDescription = $"{BuilderHelpers.EscapeXmlDocDescription($"A class representing the {_clientPrefix} data model.")}";
-            FormattableString extraDescription = string.IsNullOrWhiteSpace(InputModel.Description) ?
+            var modelDescription =  DocHelpers.GetDescription(InputModel.Summary, InputModel.Doc);
+            FormattableString extraDescription = modelDescription is null or "" ?
                 (FormattableString)$"" :
-                $"{Environment.NewLine}{BuilderHelpers.EscapeXmlDocDescription(InputModel.Description)}";
+                $"{Environment.NewLine}{BuilderHelpers.EscapeXmlDocDescription(modelDescription)}";
             return $"{baseDescription}{extraDescription}";
         }
 
