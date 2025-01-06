@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private string GetAssetsJson()
         {
-            string content = GetClobFromEmbeddedResource("AssetJson.txt");
+            string content = GetAssetContent("AssetJson.txt");
             string contentFormatted = string.Format(content, Configuration.Namespace.Split('.').Last().ToLower(), Configuration.Namespace);
             return contentFormatted;
         }
@@ -134,27 +134,27 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private string GetChangeLog()
         {
-            string changeLogContent = GetClobFromEmbeddedResource("CHANGELOG.md");
+            string changeLogContent = GetAssetContent("CHANGELOG.md");
             return changeLogContent;
         }
 
         private string GetReadme()
         {
-            string multipleApiVersionContent = GetClobFromEmbeddedResource("Readme_multipleApiVersionContent_DataPlane.md");
-            string readmeContent = GetClobFromEmbeddedResource("Readme_readmeContent_DataPlane.md");
+            string multipleApiVersionContent = GetAssetContent("Readme_multipleApiVersionContent_DataPlane.md");
+            string readmeContent = GetAssetContent("Readme_readmeContent_DataPlane.md");
             return string.Format(readmeContent, Configuration.Namespace, _serviceDirectoryName, (Configuration.AzureArm || Configuration.Generation1ConvenienceClient) ? "" : multipleApiVersionContent);
         }
 
         private string GetCiYml()
         {
             string safeName = Configuration.Namespace.Replace(".", "");
-            string ciYmlContent = GetClobFromEmbeddedResource("ci.yml");
+            string ciYmlContent = GetAssetContent("ci.yml");
             return string.Format(ciYmlContent, _serviceDirectoryName, Configuration.Namespace, safeName);
         }
 
         private string GetDirectoryBuildProps()
         {
-            string directoryBuildPropsContent = GetClobFromEmbeddedResource("Directory.Build.props");
+            string directoryBuildPropsContent = GetAssetContent("Directory.Build.props");
             return directoryBuildPropsContent;
         }
 
@@ -397,19 +397,19 @@ EndGlobal
 
         private string GetReadmeMgmt()
         {
-            string content = GetClobFromEmbeddedResource("Readme_Mgmt.md");
+            string content = GetAssetContent("Readme_Mgmt.md");
             string contentFormatted = string.Format(content, Configuration.Namespace.Split('.').Last(), Configuration.Namespace);
             return contentFormatted;
         }
         private string GetTestBase()
         {
-            string content = GetClobFromEmbeddedResource("TestBase_Mgmt.cs");
+            string content = GetAssetContent("TestBase_Mgmt.cs");
             string contentFormatted = string.Format(content, Configuration.Namespace, Configuration.Namespace.Split('.').Last());
             return contentFormatted;
         }
         private string GetTestEnvironment()
         {
-            string content = GetClobFromEmbeddedResource("TestEnvironment_Mgmt.cs");
+            string content = GetAssetContent("TestEnvironment_Mgmt.cs");
             string contentFormatted = string.Format(content, Configuration.Namespace, Configuration.Namespace.Split('.').Last());
             return contentFormatted;
         }
@@ -438,7 +438,7 @@ EndGlobal
                 Directory.CreateDirectory(_samplesDirectory);
             await File.WriteAllBytesAsync(Path.Combine(_samplesDirectory, $"{Configuration.Namespace}.Samples.csproj"), Encoding.ASCII.GetBytes(GetSamplesProject()));
         }
-        private string GetClobFromEmbeddedResource(string assetName)
+        private string GetAssetContent(string assetName)
         {
             string content = "";
             string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
