@@ -42,7 +42,7 @@
     <Compile Include="../../src/assets/**/*.cs" />
     <TfmSpecificPackageFile Include="../../src/assets/" PackagePath="content" />
 
-    <Compile Remove="Assets\*.*" />
+    <Compile Remove="Assets/*.*" />
 
     <Content Include="../../node_modules/autorest/**/*" PackagePath="tools\autorest" />
 
