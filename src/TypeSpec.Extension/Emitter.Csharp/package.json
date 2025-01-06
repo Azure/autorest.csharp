@@ -64,7 +64,7 @@
         "@typespec/http": "0.63.0",
         "@typespec/library-linter": "0.63.0",
         "@typespec/openapi": "0.63.0",
-        "@typespec/rest": "0.63.0",
+        "@typespec/rest": "https://artprodcus3.artifacts.visualstudio.com/A0fb41ef4-5012-48a9-bf39-4ee3de03ee35/29ec6040-b234-4e31-b139-33dc4287b756/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL2F6dXJlLXNkay9wcm9qZWN0SWQvMjllYzYwNDAtYjIzNC00ZTMxLWIxMzktMzNkYzQyODdiNzU2L2J1aWxkSWQvNDQzOTUzNC9hcnRpZmFjdE5hbWUvcGFja2FnZXM1/content?format=file&subPath=%2Ftypespec-rest-0.64.0-pr-5455.20241227.6.tgz",
         "@typespec/versioning": "0.63.0",
         "@typespec/xml": "0.63.0",
         "eslint": "^9.15.0",
