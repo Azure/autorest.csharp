@@ -42,6 +42,8 @@
     <Compile Include="../../src/assets/**/*.cs" />
     <TfmSpecificPackageFile Include="../../src/assets/" PackagePath="content" />
 
+    <Compile Remove="Assets\*.*" />
+
     <Content Include="../../node_modules/autorest/**/*" PackagePath="tools\autorest" />
 
     <Content Include="build\CodeGeneration.targets" PackagePath="build\Microsoft.Azure.AutoRest.CSharp.targets" />
@@ -50,42 +52,7 @@
 
   <ItemGroup>
     <None Include="../../src/assets/**/*.cs" CopyToOutputDirectory="PreserveNewest" />
-    <Compile Remove="Assets\TestBase_Mgmt.cs" />
-    <Compile Remove="Assets\TestEnvironment_Mgmt.cs" />
-    <None Remove="Assets\AssetJson.txt" />
-    <None Remove="Assets\CHANGELOG.md" />
-    <None Remove="Assets\ci.yml" />
-    <None Remove="Assets\Directory.Build.props" />
-    <None Remove="Assets\Readme_Mgmt.md" />
-    <None Remove="Assets\Readme_multipleApiVersionContent_DataPlane.md" />
-    <None Remove="Assets\Readme_readmeContent_DataPlane.md" />
-    <EmbeddedResource Include="Assets\AssetJson.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\CHANGELOG.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\ci.yml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\Directory.Build.props">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\Readme_Mgmt.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\Readme_multipleApiVersionContent_DataPlane.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\Readme_readmeContent_DataPlane.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\TestEnvironment_Mgmt.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\TestBase_Mgmt.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <None Include="Assets/*.*" CopyToOutputDirectory="PreserveNewest" />
     <None Include="package.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="readme.md" CopyToOutputDirectory="PreserveNewest" />
     <None Include="index.d.ts" CopyToOutputDirectory="PreserveNewest" />
