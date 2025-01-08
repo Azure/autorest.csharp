@@ -430,9 +430,18 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             var statements = new List<MethodBodyStatement>();
 
             var resourceName = collection.Resource.ResourceName;
-            statements.Add(
-                BuildGetResourceStatement(parent, example, client, out var parentVar)
-                );
+            TypedValueExpression? parentVar;
+            // get parent resource
+            if (parent is MgmtExtension extension && extension.ArmCoreType == typeof(ArmResource))
+            {
+                parentVar = null; // this is an indicator that the parent is another ArmResource, we have to handle differently.
+            }
+            else
+            {
+                statements.Add(
+                    BuildGetResourceStatement(parent, example, client, out parentVar)
+                    );
+            }
 
             // write get collection
             statements.Add(EmptyLine);
@@ -442,8 +451,8 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             var getResourceCollectionMethodName = $"Get{resourceName.ResourceNameToPlural()}";
             var arguments = new List<ValueExpression>();
 
-            // if the extension is on ArmResource, we need an extra "scope" parameter before its actual parameters
-            if (parent is MgmtExtension extension && extension.ArmCoreType == typeof(ArmResource))
+            // if parentVar is null, meaning that we are under a ArmResource as a parent
+            if (parentVar == null)
             {
                 statements.Add(
                     BuildCreateScopeResourceIdentifier(example, example.RequestPath.GetScopePath(), out var scopeId)
@@ -463,9 +472,29 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             }
 
             // call the method to get the collection instance
-            statements.Add(
-                Declare(collection.Type, "collection", parentVar.Invoke(getResourceCollectionMethodName, arguments), out instance)
-                );
+            if (parentVar == null)
+            {
+                // Can't use CSharpType.Equals(typeof(...)) because the CSharpType.Equals(Type) would assume itself is a FrameworkType, but here it's generated when IsArmCore=true
+                if (Configuration.MgmtConfiguration.IsArmCore && parent.Type.Name == nameof(ArmResource))
+                {
+                    // use GenericResource to get the collection
+                    statements.Add(
+                        Declare(collection.Type, "collection", client.Invoke("GetGenericResource", arguments[0]).Invoke(getResourceCollectionMethodName, arguments[1..]), out instance)
+                        );
+                }
+                else
+                {
+                    statements.Add(
+                        Declare(collection.Type, "collection", client.Invoke(getResourceCollectionMethodName, arguments), out instance)
+                        );
+                }
+            }
+            else
+            {
+                statements.Add(
+                    Declare(collection.Type, "collection", parentVar.Invoke(getResourceCollectionMethodName, arguments), out instance)
+                    );
+            }
 
             return statements;
         }
