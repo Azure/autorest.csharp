@@ -51,10 +51,6 @@ extends:
                 displayName: "Install packages"
                 workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
               - script: |
-                  npm ls -a
-                displayName: "List packages"
-                workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-              - script: |
                   npm run prettier
                 displayName: "Emitter format check"
                 workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
