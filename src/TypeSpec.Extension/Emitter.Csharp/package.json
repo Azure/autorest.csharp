@@ -64,7 +64,7 @@
         "@typespec/http": "0.63.0",
         "@typespec/library-linter": "0.63.0",
         "@typespec/openapi": "0.63.0",
-        "@typespec/rest": "0.63.0",
+        "@typespec/rest": "0.63.1",
         "@typespec/versioning": "0.63.0",
         "@typespec/xml": "0.63.0",
         "eslint": "^9.15.0",
