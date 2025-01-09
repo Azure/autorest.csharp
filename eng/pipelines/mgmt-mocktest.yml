@@ -51,6 +51,10 @@ stages:
               npm ci
             displayName: "Install packages"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: |
+              npm ls -a
+            displayName: "List packages"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror -c Release'
             name: Package
             displayName: 'Package'

@@ -54,6 +54,10 @@ extends:
                   npm ci
                 displayName: "Install packages"
                 workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+              - script: |
+                  npm ls -a
+                displayName: "List packages"
+                workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
               - ${{ if eq(parameters.RunTests, 'true') }}:
                 - script: |
                     npm run prettier
