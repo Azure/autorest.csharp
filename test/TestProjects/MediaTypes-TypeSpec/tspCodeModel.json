@@ -7,7 +7,7 @@
    "$id": "2",
    "kind": "enum",
    "name": "OneBinaryBodyTwoContentTypesRequestContentType",
-   "crossLanguageDefinitionId": "oneBinaryBodyTwoContentTypes.RequestContentType.anonymous",
+   "crossLanguageDefinitionId": "MultipleMediaTypes.oneBinaryBodyTwoContentTypes.RequestContentType.anonymous",
    "valueType": {
     "$id": "3",
     "kind": "string",
@@ -60,7 +60,7 @@
    "$id": "8",
    "kind": "enum",
    "name": "OneStringBodyThreeContentTypesRequestContentType",
-   "crossLanguageDefinitionId": "oneStringBodyThreeContentTypes.RequestContentType.anonymous",
+   "crossLanguageDefinitionId": "MultipleMediaTypes.oneStringBodyThreeContentTypes.RequestContentType.anonymous",
    "valueType": {
     "$id": "9",
     "kind": "string",
