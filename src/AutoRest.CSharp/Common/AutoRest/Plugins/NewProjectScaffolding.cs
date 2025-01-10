@@ -94,8 +94,8 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace}.Tests.csproj"), Encoding.ASCII.GetBytes(GetTestCSProj()));
             if (Configuration.AzureArm)
             {
-                await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestBase.cs"), Encoding.ASCII.GetBytes(GetTestBase()));
-                await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestEnvironment.cs"), Encoding.ASCII.GetBytes(GetTestEnvironment()));
+                await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestBase.cs"), Encoding.ASCII.GetBytes(GetAssetContent("TestBase_Mgmt.cs", Configuration.Namespace, Configuration.Namespace.Split('.').Last())));
+                await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestEnvironment.cs"), Encoding.ASCII.GetBytes(GetAssetContent("TestEnvironment_Mgmt.cs", Configuration.Namespace, Configuration.Namespace.Split('.').Last())));
             }
         }
 
@@ -112,7 +112,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             if (_isAzureSdk)
             {
                 await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "Directory.Build.props"), Encoding.ASCII.GetBytes(GetAssetContent("Directory.Build.props")));
-                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "README.md"), Encoding.ASCII.GetBytes(!Configuration.AzureArm ? GetReadme() : GetReadmeMgmt()));
+                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "README.md"), Encoding.ASCII.GetBytes(!Configuration.AzureArm ? GetReadme() : GetAssetContent("Readme_Mgmt.md", Configuration.Namespace.Split('.').Last(), Configuration.Namespace)));
                 await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "CHANGELOG.md"), Encoding.ASCII.GetBytes(GetChangeLog()));
             }
         }
@@ -383,24 +383,6 @@ EndGlobal
             return string.Format(slnContent, Configuration.Namespace);
         }
 
-        private string GetReadmeMgmt()
-        {
-            string content = GetAssetContent("Readme_Mgmt.md");
-            string contentFormatted = string.Format(content, Configuration.Namespace.Split('.').Last(), Configuration.Namespace);
-            return contentFormatted;
-        }
-        private string GetTestBase()
-        {
-            string content = GetAssetContent("TestBase_Mgmt.cs");
-            string contentFormatted = string.Format(content, Configuration.Namespace, Configuration.Namespace.Split('.').Last());
-            return contentFormatted;
-        }
-        private string GetTestEnvironment()
-        {
-            string content = GetAssetContent("TestEnvironment_Mgmt.cs");
-            string contentFormatted = string.Format(content, Configuration.Namespace, Configuration.Namespace.Split('.').Last());
-            return contentFormatted;
-        }
         private string GetSamplesProject()
         {
             var writer = new CSProjWriter();
@@ -440,6 +422,15 @@ EndGlobal
                 throw new Exception($"Assets/{assetName} file not found");
             }
             return content;
+        }
+        private string GetAssetContent(string assetFileName, params object?[] args)
+        {
+            string content = GetAssetContent(assetFileName);
+            if (args is null)
+            {
+                return content;
+            }
+            return string.Format(content, args);
         }
     }
 }
