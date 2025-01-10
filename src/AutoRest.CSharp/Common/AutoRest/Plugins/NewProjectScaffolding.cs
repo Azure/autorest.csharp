@@ -408,29 +408,31 @@ EndGlobal
                 Directory.CreateDirectory(_samplesDirectory);
             await File.WriteAllBytesAsync(Path.Combine(_samplesDirectory, $"{Configuration.Namespace}.Samples.csproj"), Encoding.ASCII.GetBytes(GetSamplesProject()));
         }
-        private string GetAssetContent(string assetName)
-        {
-            string content = "";
-            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string filePath = Path.Combine(currentDirectory, "Assets", assetName);
-            if (File.Exists(filePath))
-            {
-                content = File.ReadAllText(filePath);
-            }
-            else
-            {
-                throw new Exception($"Assets/{assetName} file not found");
-            }
-            return content;
-        }
+
         private string GetAssetContent(string assetFileName, params object?[] args)
         {
-            string content = GetAssetContent(assetFileName);
+            string content = GetAssetContentCore(assetFileName);
             if (args is null)
             {
                 return content;
             }
             return string.Format(content, args);
+
+            string GetAssetContentCore(string assetName)
+            {
+                string val = "";
+                string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                string filePath = Path.Combine(currentDirectory, "Assets", val);
+                if (File.Exists(filePath))
+                {
+                    val = File.ReadAllText(filePath);
+                }
+                else
+                {
+                    throw new Exception($"Assets/{val} file not found");
+                }
+                return val;
+            }
         }
     }
 }
