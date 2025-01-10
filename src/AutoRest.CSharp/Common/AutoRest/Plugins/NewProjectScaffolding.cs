@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         private string _serviceDirectory;
         private string _samplesDirectory;
         private bool _isAzureSdk;
+        private bool _isAzureMgmtSdk;
         private bool _needAzureKeyAuth;
         private bool _includeDfe;
 
@@ -33,6 +34,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             _samplesDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "samples");
             _serviceDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..");
             _isAzureSdk = Configuration.Namespace.StartsWith("Azure.");
+            _isAzureMgmtSdk = Configuration.Namespace.StartsWith("Azure.ResourceManager");
             _needAzureKeyAuth = needAzureKeyAuth;
             _includeDfe = includeDfe;
         }
@@ -293,16 +295,16 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 ";
-
-            string testFrameworkConfig = @"Project(""{{9A19103F-16F7-4668-BE54-9A1E7A4F7556}}"") = ""Azure.Core.TestFramework"", ""..\..\core\Azure.Core.TestFramework\src\Azure.Core.TestFramework.csproj"", ""{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}""
+            if (_isAzureSdk)
+            {
+                string testFrameworkConfig = @"Project(""{{9A19103F-16F7-4668-BE54-9A1E7A4F7556}}"") = ""Azure.Core.TestFramework"", ""..\..\core\Azure.Core.TestFramework\src\Azure.Core.TestFramework.csproj"", ""{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}""
 EndProject
 ";
-
-            string sampleProjectConfig = @"Project(""{{9A19103F-16F7-4668-BE54-9A1E7A4F7556}}"") = ""{0}.Samples"", ""samples\{0}.Samples.csproj"", ""{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}""
+                string sampleProjectConfig = @"Project(""{{9A19103F-16F7-4668-BE54-9A1E7A4F7556}}"") = ""{0}.Samples"", ""samples\{0}.Samples.csproj"", ""{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}""
 EndProject
 ";
-            slnContent += Configuration.AzureArm ? sampleProjectConfig : testFrameworkConfig;
-
+                slnContent += Configuration.AzureArm ? sampleProjectConfig : testFrameworkConfig;
+            }
             slnContent += @"Project(""{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}"") = ""{0}"", ""src\{0}.csproj"", ""{{28FF4005-4467-4E36-92E7-DEA27DEB1519}}""
 EndProject
 ";
@@ -337,7 +339,10 @@ EndProject
 		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Release|Any CPU.Build.0 = Release|Any CPU
 ";
-            slnContent += Configuration.AzureArm ? sampleProjectConfigProfile : testFrameworkConfigProfile;
+            if (_isAzureSdk)
+            {
+                slnContent += Configuration.AzureArm ? sampleProjectConfigProfile : testFrameworkConfigProfile;
+            }
             slnContent += @"		{{A4241C1F-A53D-474C-9E4E-075054407E74}}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{{A4241C1F-A53D-474C-9E4E-075054407E74}}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{{A4241C1F-A53D-474C-9E4E-075054407E74}}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -374,15 +379,7 @@ EndGlobal
         {
             var writer = new CSProjWriter();
             writer.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
-            IReadOnlyList<CSProjWriter.CSProjDependencyPackage> packages;
-            if (Configuration.Namespace.StartsWith("Azure.ResourceManager"))
-            {
-                packages = _brandedSampleDependencyPackagesMgmt;
-            }
-            else
-            {
-                packages = _brandedSampleDependencyPackagesMgmtVersion;
-            }
+            IReadOnlyList<CSProjWriter.CSProjDependencyPackage> packages = _isAzureMgmtSdk ? _brandedSampleDependencyPackagesMgmt : _brandedSampleDependencyPackagesMgmtVersion;
             foreach (var package in packages)
             {
                 writer.PackageReferences.Add(package);
