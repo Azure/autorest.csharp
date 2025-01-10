@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private async Task WriteAssetJson()
         {
-            await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "assets.json"), Encoding.ASCII.GetBytes(GetAssetsJson()));
+            await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "assets.json"), Encoding.ASCII.GetBytes(GetAssetContent("AssetJson.txt", Configuration.Namespace.Split('.').Last().ToLower(), Configuration.Namespace)));
         }
 
         private async Task WriteServiceDirectoryFiles()
@@ -113,15 +113,8 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             {
                 await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "Directory.Build.props"), Encoding.ASCII.GetBytes(GetAssetContent("Directory.Build.props")));
                 await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "README.md"), Encoding.ASCII.GetBytes(!Configuration.AzureArm ? GetReadme() : GetAssetContent("Readme_Mgmt.md", Configuration.Namespace.Split('.').Last(), Configuration.Namespace)));
-                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "CHANGELOG.md"), Encoding.ASCII.GetBytes(GetChangeLog()));
+                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "CHANGELOG.md"), Encoding.ASCII.GetBytes(GetAssetContent("CHANGELOG.md")));
             }
-        }
-
-        private string GetAssetsJson()
-        {
-            string content = GetAssetContent("AssetJson.txt");
-            string contentFormatted = string.Format(content, Configuration.Namespace.Split('.').Last().ToLower(), Configuration.Namespace);
-            return contentFormatted;
         }
 
         private string GetAssemblyInfo()
@@ -132,24 +125,18 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             return string.Format(assemblyInfoContent, Configuration.Namespace, Configuration.IsBranded ? publicKey : string.Empty, _isAzureSdk ? azureResourceProvider : string.Empty);
         }
 
-        private string GetChangeLog()
-        {
-            string changeLogContent = GetAssetContent("CHANGELOG.md");
-            return changeLogContent;
-        }
-
         private string GetReadme()
         {
             string multipleApiVersionContent = GetAssetContent("Readme_multipleApiVersionContent_DataPlane.md");
-            string readmeContent = GetAssetContent("Readme_readmeContent_DataPlane.md");
-            return string.Format(readmeContent, Configuration.Namespace, _serviceDirectoryName, (Configuration.AzureArm || Configuration.Generation1ConvenienceClient) ? "" : multipleApiVersionContent);
+            string readmeContent = GetAssetContent("Readme_readmeContent_DataPlane.md", Configuration.Namespace, _serviceDirectoryName, (Configuration.AzureArm || Configuration.Generation1ConvenienceClient) ? "" : multipleApiVersionContent);
+            return readmeContent;
         }
 
         private string GetCiYml()
         {
             string safeName = Configuration.Namespace.Replace(".", "");
-            string ciYmlContent = GetAssetContent("ci.yml");
-            return string.Format(ciYmlContent, _serviceDirectoryName, Configuration.Namespace, safeName);
+            string ciYmlContent = GetAssetContent("ci.yml", _serviceDirectoryName, Configuration.Namespace, safeName);
+            return ciYmlContent;
         }
 
         private string GetBrandedSrcCSProj()
@@ -412,7 +399,7 @@ EndGlobal
         private string GetAssetContent(string assetFileName, params object?[] args)
         {
             string content = GetAssetContentCore(assetFileName);
-            if (args is null)
+            if (args is null || args.Length == 0)
             {
                 return content;
             }
@@ -429,7 +416,7 @@ EndGlobal
                 }
                 else
                 {
-                    throw new Exception($"Assets/{val} file not found");
+                    throw new Exception($"Assets/{assetName} file not found");
                 }
                 return val;
             }
