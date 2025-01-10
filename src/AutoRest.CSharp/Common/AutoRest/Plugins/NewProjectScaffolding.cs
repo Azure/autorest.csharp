@@ -422,7 +422,7 @@ EndGlobal
             {
                 string val = "";
                 string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                string filePath = Path.Combine(currentDirectory, "Assets", val);
+                string filePath = Path.Combine(currentDirectory, "Assets", assetName);
                 if (File.Exists(filePath))
                 {
                     val = File.ReadAllText(filePath);
