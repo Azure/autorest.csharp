@@ -192,6 +192,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 "<unionList>"
             },
+                binaryDataRecord = new
+                {
+                    key = new object(),
+                },
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
         }
@@ -247,6 +251,10 @@ BinaryData.FromObjectAsJson("<unionList>")
 {
 ["key"] = BinaryData.FromObjectAsJson(new object())
 },
+                BinaryDataRecord = BinaryData.FromObjectAsJson(new
+                {
+                    key = new object(),
+                }),
             };
             Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
         }
@@ -391,6 +399,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 "<unionList>"
             },
+                binaryDataRecord = new
+                {
+                    key = new object(),
+                },
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
         }
