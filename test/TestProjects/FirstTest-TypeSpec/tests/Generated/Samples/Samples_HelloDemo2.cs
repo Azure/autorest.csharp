@@ -312,6 +312,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 "<unionList>"
             },
+                binaryDataRecord = new
+                {
+                    key = new object(),
+                },
             });
             Response response = client.HelloAgain("<p2>", "<p1>", content);
 
@@ -355,6 +359,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
             Console.WriteLine(result.GetProperty("unionList")[0].ToString());
+            Console.WriteLine(result.GetProperty("binaryDataRecord").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -442,6 +447,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 "<unionList>"
             },
+                binaryDataRecord = new
+                {
+                    key = new object(),
+                },
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
@@ -485,6 +494,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
             Console.WriteLine(result.GetProperty("unionList")[0].ToString());
+            Console.WriteLine(result.GetProperty("binaryDataRecord").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -537,6 +547,10 @@ BinaryData.FromObjectAsJson("<unionList>")
 {
 ["key"] = BinaryData.FromObjectAsJson(new object())
 },
+                BinaryDataRecord = BinaryData.FromObjectAsJson(new
+                {
+                    key = new object(),
+                }),
             };
             Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
         }
@@ -591,6 +605,10 @@ BinaryData.FromObjectAsJson("<unionList>")
 {
 ["key"] = BinaryData.FromObjectAsJson(new object())
 },
+                BinaryDataRecord = BinaryData.FromObjectAsJson(new
+                {
+                    key = new object(),
+                }),
             };
             Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
         }
@@ -830,6 +848,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 "<unionList>"
             },
+                binaryDataRecord = new
+                {
+                    key = new object(),
+                },
             });
             Response response = client.NoContentType("<p2>", "<p1>", content);
 
@@ -873,6 +895,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
             Console.WriteLine(result.GetProperty("unionList")[0].ToString());
+            Console.WriteLine(result.GetProperty("binaryDataRecord").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -960,6 +983,10 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 "<unionList>"
             },
+                binaryDataRecord = new
+                {
+                    key = new object(),
+                },
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
@@ -1003,6 +1030,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
             Console.WriteLine(result.GetProperty("unionList")[0].ToString());
+            Console.WriteLine(result.GetProperty("binaryDataRecord").GetProperty("<key>").ToString());
         }
 
         [Test]
