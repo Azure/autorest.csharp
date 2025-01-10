@@ -3,9 +3,6 @@
 
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
-using System;
-using System.Net.Sockets;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Azure.ResourceManager.TestFramework

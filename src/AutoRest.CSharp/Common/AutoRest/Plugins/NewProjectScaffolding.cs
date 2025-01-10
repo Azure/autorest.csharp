@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, $"{Configuration.Namespace}.sln"), Encoding.ASCII.GetBytes(GetSln()));
             if (_isAzureSdk)
             {
-                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "Directory.Build.props"), Encoding.ASCII.GetBytes(GetDirectoryBuildProps()));
+                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "Directory.Build.props"), Encoding.ASCII.GetBytes(GetAssetContent("Directory.Build.props")));
                 await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "README.md"), Encoding.ASCII.GetBytes(!Configuration.AzureArm ? GetReadme() : GetReadmeMgmt()));
                 await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "CHANGELOG.md"), Encoding.ASCII.GetBytes(GetChangeLog()));
             }
@@ -150,12 +150,6 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             string safeName = Configuration.Namespace.Replace(".", "");
             string ciYmlContent = GetAssetContent("ci.yml");
             return string.Format(ciYmlContent, _serviceDirectoryName, Configuration.Namespace, safeName);
-        }
-
-        private string GetDirectoryBuildProps()
-        {
-            string directoryBuildPropsContent = GetAssetContent("Directory.Build.props");
-            return directoryBuildPropsContent;
         }
 
         private string GetBrandedSrcCSProj()
