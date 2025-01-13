@@ -7,7 +7,7 @@
    "$id": "2",
    "kind": "enum",
    "name": "CreateModerationRequestModel",
-   "crossLanguageDefinitionId": "OpenAI.CreateModerationRequest.model.anonymous",
+   "crossLanguageDefinitionId": "CreateModerationRequest.model.anonymous",
    "valueType": {
     "$id": "3",
     "kind": "string",
@@ -60,7 +60,7 @@
    "$id": "8",
    "kind": "enum",
    "name": "CreateImageRequestSize",
-   "crossLanguageDefinitionId": "OpenAI.CreateImageRequest.size.anonymous",
+   "crossLanguageDefinitionId": "CreateImageRequest.size.anonymous",
    "valueType": {
     "$id": "9",
     "kind": "string",
@@ -130,7 +130,7 @@
    "$id": "16",
    "kind": "enum",
    "name": "CreateImageRequestResponseFormat",
-   "crossLanguageDefinitionId": "OpenAI.CreateImageRequest.response_format.anonymous",
+   "crossLanguageDefinitionId": "CreateImageRequest.response_format.anonymous",
    "valueType": {
     "$id": "17",
     "kind": "string",
@@ -216,7 +216,7 @@
    "$id": "25",
    "kind": "enum",
    "name": "CreateFineTuneRequestModel",
-   "crossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.model.anonymous",
+   "crossLanguageDefinitionId": "CreateFineTuneRequest.model.anonymous",
    "valueType": {
     "$id": "26",
     "kind": "string",
@@ -336,7 +336,7 @@
    "$id": "38",
    "kind": "enum",
    "name": "FineTuneStatus",
-   "crossLanguageDefinitionId": "OpenAI.FineTune.status.anonymous",
+   "crossLanguageDefinitionId": "FineTune.status.anonymous",
    "valueType": {
     "$id": "39",
     "kind": "string",
@@ -473,7 +473,7 @@
    "$id": "53",
    "kind": "enum",
    "name": "OpenAIFileStatus",
-   "crossLanguageDefinitionId": "OpenAI.OpenAIFile.status.anonymous",
+   "crossLanguageDefinitionId": "OpenAIFile.status.anonymous",
    "valueType": {
     "$id": "54",
     "kind": "string",
@@ -594,7 +594,7 @@
    "$id": "67",
    "kind": "enum",
    "name": "CreateEmbeddingRequestModel",
-   "crossLanguageDefinitionId": "OpenAI.CreateEmbeddingRequest.model.anonymous",
+   "crossLanguageDefinitionId": "CreateEmbeddingRequest.model.anonymous",
    "valueType": {
     "$id": "68",
     "kind": "string",
@@ -696,7 +696,7 @@
    "$id": "77",
    "kind": "enum",
    "name": "CreateEditRequestModel",
-   "crossLanguageDefinitionId": "OpenAI.CreateEditRequest.model.anonymous",
+   "crossLanguageDefinitionId": "CreateEditRequest.model.anonymous",
    "valueType": {
     "$id": "78",
     "kind": "string",
@@ -782,7 +782,7 @@
    "$id": "86",
    "kind": "enum",
    "name": "CreateEditResponseChoiceFinishReason",
-   "crossLanguageDefinitionId": "OpenAI.CreateEditResponse.choice.finish_reason.anonymous",
+   "crossLanguageDefinitionId": "CreateEditResponse.choice.finish_reason.anonymous",
    "valueType": {
     "$id": "87",
     "kind": "string",
@@ -835,7 +835,7 @@
    "$id": "92",
    "kind": "enum",
    "name": "CreateCompletionRequestModel",
-   "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.model.anonymous",
+   "crossLanguageDefinitionId": "CreateCompletionRequest.model.anonymous",
    "valueType": {
     "$id": "93",
     "kind": "string",
@@ -1007,7 +1007,7 @@
    "$id": "112",
    "kind": "enum",
    "name": "CreateCompletionResponseChoiceFinishReason",
-   "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.finish_reason.anonymous",
+   "crossLanguageDefinitionId": "CreateCompletionResponse.choice.finish_reason.anonymous",
    "valueType": {
     "$id": "113",
     "kind": "string",
@@ -1077,7 +1077,7 @@
    "$id": "120",
    "kind": "enum",
    "name": "CreateFineTuningJobRequestModel",
-   "crossLanguageDefinitionId": "OpenAI.CreateFineTuningJobRequest.model.anonymous",
+   "crossLanguageDefinitionId": "CreateFineTuningJobRequest.model.anonymous",
    "valueType": {
     "$id": "121",
     "kind": "string",
@@ -1180,7 +1180,7 @@
    "$id": "131",
    "kind": "enum",
    "name": "FineTuningJobStatus",
-   "crossLanguageDefinitionId": "OpenAI.FineTuningJob.status.anonymous",
+   "crossLanguageDefinitionId": "FineTuningJob.status.anonymous",
    "valueType": {
     "$id": "132",
     "kind": "string",
@@ -1301,7 +1301,7 @@
    "$id": "145",
    "kind": "enum",
    "name": "FineTuningJobEventLevel",
-   "crossLanguageDefinitionId": "OpenAI.FineTuningJobEvent.level.anonymous",
+   "crossLanguageDefinitionId": "FineTuningJobEvent.level.anonymous",
    "valueType": {
     "$id": "146",
     "kind": "string",
@@ -1371,7 +1371,7 @@
    "$id": "153",
    "kind": "enum",
    "name": "CreateChatCompletionRequestModel",
-   "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.model.anonymous",
+   "crossLanguageDefinitionId": "CreateChatCompletionRequest.model.anonymous",
    "valueType": {
     "$id": "154",
     "kind": "string",
@@ -1577,7 +1577,7 @@
    "$id": "177",
    "kind": "enum",
    "name": "ChatCompletionRequestMessageRole",
-   "crossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage.role.anonymous",
+   "crossLanguageDefinitionId": "ChatCompletionRequestMessage.role.anonymous",
    "valueType": {
     "$id": "178",
     "kind": "string",
@@ -1664,7 +1664,7 @@
    "$id": "187",
    "kind": "enum",
    "name": "ChatCompletionResponseMessageRole",
-   "crossLanguageDefinitionId": "OpenAI.ChatCompletionResponseMessage.role.anonymous",
+   "crossLanguageDefinitionId": "ChatCompletionResponseMessage.role.anonymous",
    "valueType": {
     "$id": "188",
     "kind": "string",
@@ -1751,7 +1751,7 @@
    "$id": "197",
    "kind": "enum",
    "name": "CreateChatCompletionResponseChoiceFinishReason",
-   "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.choice.finish_reason.anonymous",
+   "crossLanguageDefinitionId": "CreateChatCompletionResponse.choice.finish_reason.anonymous",
    "valueType": {
     "$id": "198",
     "kind": "string",
@@ -1838,7 +1838,7 @@
    "$id": "207",
    "kind": "enum",
    "name": "CreateTranslationRequestModel",
-   "crossLanguageDefinitionId": "OpenAI.CreateTranslationRequest.model.anonymous",
+   "crossLanguageDefinitionId": "CreateTranslationRequest.model.anonymous",
    "valueType": {
     "$id": "208",
     "kind": "string",
@@ -1874,7 +1874,7 @@
    "$id": "211",
    "kind": "enum",
    "name": "CreateTranslationRequestResponseFormat",
-   "crossLanguageDefinitionId": "OpenAI.CreateTranslationRequest.response_format.anonymous",
+   "crossLanguageDefinitionId": "CreateTranslationRequest.response_format.anonymous",
    "valueType": {
     "$id": "212",
     "kind": "string",
@@ -1978,7 +1978,7 @@
    "$id": "223",
    "kind": "enum",
    "name": "CreateTranscriptionRequestModel",
-   "crossLanguageDefinitionId": "OpenAI.CreateTranscriptionRequest.model.anonymous",
+   "crossLanguageDefinitionId": "CreateTranscriptionRequest.model.anonymous",
    "valueType": {
     "$id": "224",
     "kind": "string",
@@ -2014,7 +2014,7 @@
    "$id": "227",
    "kind": "enum",
    "name": "CreateTranscriptionRequestResponseFormat",
-   "crossLanguageDefinitionId": "OpenAI.CreateTranscriptionRequest.response_format.anonymous",
+   "crossLanguageDefinitionId": "CreateTranscriptionRequest.response_format.anonymous",
    "valueType": {
     "$id": "228",
     "kind": "string",
