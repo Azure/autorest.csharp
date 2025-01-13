@@ -393,27 +393,27 @@ EndGlobal
             await File.WriteAllBytesAsync(Path.Combine(_samplesDirectory, $"{Configuration.Namespace}.Samples.csproj"), Encoding.ASCII.GetBytes(GetSamplesProject()));
         }
 
-        private string GetAssetContent(string assetFileName, params object?[] args)
+        private string GetAssetContent(string assetFilePath, params object?[] args)
         {
-            string content = GetAssetContentCore(assetFileName);
+            string content = GetAssetContentCore(assetFilePath);
             if (args is null || args.Length == 0)
             {
                 return content;
             }
             return string.Format(content, args);
 
-            string GetAssetContentCore(string assetName)
+            string GetAssetContentCore(string assetFilePath)
             {
                 string val = "";
                 string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                string filePath = Path.Combine(currentDirectory, "Assets", assetName);
+                string filePath = Path.Combine(currentDirectory, "Assets", assetFilePath);
                 if (File.Exists(filePath))
                 {
                     val = File.ReadAllText(filePath);
                 }
                 else
                 {
-                    throw new Exception($"Assets/{assetName} file not found");
+                    throw new Exception($"File Not found: {filePath}");
                 }
                 return val;
             }
