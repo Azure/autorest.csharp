@@ -243,12 +243,11 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private string GetBrandedTestCSProj()
         {
-            var writer = _isAzureResourceManager ? new CSProjWriter() :
-                new CSProjWriter()
-                {
-                    TargetFrameworks = "$(RequiredTargetFrameworks)",
-                    NoWarn = new("$(NoWarn);CS1591", "We don't care about XML doc comments on test types and members")
-                };
+            var writer = !Configuration.AzureArm ? new CSProjWriter()
+            {
+                TargetFrameworks = "$(RequiredTargetFrameworks)",
+                NoWarn = new("$(NoWarn);CS1591", "We don't care about XML doc comments on test types and members")
+            } : new CSProjWriter();
 
             // add the project references
             if (_isAzureSdk)
