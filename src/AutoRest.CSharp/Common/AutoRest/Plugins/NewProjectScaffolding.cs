@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         private string _serviceDirectory;
         private string _samplesDirectory;
         private bool _isAzureSdk;
-        private bool _isAzureMgmtSdk;
+        private bool _isAzureResourceManager;
         private bool _needAzureKeyAuth;
         private bool _includeDfe;
 
@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             _samplesDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "samples");
             _serviceDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..");
             _isAzureSdk = Configuration.Namespace.StartsWith("Azure.");
-            _isAzureMgmtSdk = Configuration.Namespace.StartsWith("Azure.ResourceManager");
+            _isAzureResourceManager = Configuration.Namespace.StartsWith("Azure.ResourceManager");
             _needAzureKeyAuth = needAzureKeyAuth;
             _includeDfe = includeDfe;
         }
@@ -243,11 +243,12 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private string GetBrandedTestCSProj()
         {
-            var writer = !Configuration.AzureArm ? new CSProjWriter()
-            {
-                TargetFrameworks = "$(RequiredTargetFrameworks)",
-                NoWarn = new("$(NoWarn);CS1591", "We don't care about XML doc comments on test types and members")
-            } : new CSProjWriter();
+            var writer = _isAzureResourceManager ? new CSProjWriter() :
+                new CSProjWriter()
+                {
+                    TargetFrameworks = "$(RequiredTargetFrameworks)",
+                    NoWarn = new("$(NoWarn);CS1591", "We don't care about XML doc comments on test types and members")
+                };
 
             // add the project references
             if (_isAzureSdk)
@@ -379,7 +380,7 @@ EndGlobal
         {
             var writer = new CSProjWriter();
             writer.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
-            IReadOnlyList<CSProjWriter.CSProjDependencyPackage> packages = _isAzureMgmtSdk ? _brandedSampleDependencyPackagesMgmt : _brandedSampleDependencyPackagesMgmtVersion;
+            var packages = _isAzureResourceManager ? _brandedSampleDependencyPackagesMgmt : _brandedSampleDependencyPackagesMgmtVersion;
             foreach (var package in packages)
             {
                 writer.PackageReferences.Add(package);
