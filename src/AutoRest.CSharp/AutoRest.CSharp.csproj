@@ -42,6 +42,8 @@
     <Compile Include="../../src/assets/**/*.cs" />
     <TfmSpecificPackageFile Include="../../src/assets/" PackagePath="content" />
 
+    <Compile Remove="Assets/*.*" />
+
     <Content Include="../../node_modules/autorest/**/*" PackagePath="tools\autorest" />
 
     <Content Include="build\CodeGeneration.targets" PackagePath="build\Microsoft.Azure.AutoRest.CSharp.targets" />
@@ -50,6 +52,7 @@
 
   <ItemGroup>
     <None Include="../../src/assets/**/*.cs" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Assets/*.*" CopyToOutputDirectory="PreserveNewest" />
     <None Include="package.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="readme.md" CopyToOutputDirectory="PreserveNewest" />
     <None Include="index.d.ts" CopyToOutputDirectory="PreserveNewest" />

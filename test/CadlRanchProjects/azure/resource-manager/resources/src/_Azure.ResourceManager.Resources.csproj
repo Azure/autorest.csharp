@@ -1,10 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>This is the _Azure.ResourceManager.Resources client library for developing .NET applications with rich experience.</Description>
-    <AssemblyTitle>Azure SDK Code Generation _Azure.ResourceManager.Resources for Azure Data Plane</AssemblyTitle>
+    <Description>Azure Resource Manager client SDK for Azure resource provider Resources.</Description>
     <Version>1.0.0-beta.1</Version>
-    <PackageTags>_Azure.ResourceManager.Resources</PackageTags>
-    <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
-    <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
+    <PackageTags>azure;management;arm;resource manager;resources</PackageTags>
+    <PackageId>_Azure.ResourceManager.Resources</PackageId>
   </PropertyGroup>
 </Project>

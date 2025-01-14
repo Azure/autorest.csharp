@@ -1,12 +1,16 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
+using static AutoRest.CSharp.Generation.Writers.CSProjWriter;
 
 namespace AutoRest.CSharp.Common.AutoRest.Plugins
 {
@@ -16,7 +20,9 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         private string _projectDirectory;
         private string _testDirectory;
         private string _serviceDirectory;
+        private string _samplesDirectory;
         private bool _isAzureSdk;
+        private bool _isAzureResourceManager;
         private bool _needAzureKeyAuth;
         private bool _includeDfe;
 
@@ -25,8 +31,10 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             _serviceDirectoryName = Path.GetFileName(Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..")));
             _projectDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..");
             _testDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "tests");
+            _samplesDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "samples");
             _serviceDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..");
             _isAzureSdk = Configuration.Namespace.StartsWith("Azure.");
+            _isAzureResourceManager = Configuration.Namespace.StartsWith("Azure.ResourceManager");
             _needAzureKeyAuth = needAzureKeyAuth;
             _includeDfe = includeDfe;
         }
@@ -55,7 +63,18 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
             await WriteTestFiles();
 
+            if (Configuration.AzureArm)
+            {
+                await WriteAssetJson();
+                await WriteSamplesProject();
+            }
+
             return true;
+        }
+
+        private async Task WriteAssetJson()
+        {
+            await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "assets.json"), Encoding.ASCII.GetBytes(GetAssetContent("AssetJson.txt", Configuration.Namespace.Split('.').Last().ToLower(), Configuration.Namespace)));
         }
 
         private async Task WriteServiceDirectoryFiles()
@@ -71,14 +90,15 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             if (!Configuration.GenerateTestProject && !Configuration.GenerateSampleProject)
                 return;
 
-            if (_isAzureSdk)
-            {
-                Directory.CreateDirectory(Path.Combine(_testDirectory, "SessionRecords"));
-            }
             if (!Directory.Exists(_testDirectory))
                 Directory.CreateDirectory(_testDirectory);
 
             await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace}.Tests.csproj"), Encoding.ASCII.GetBytes(GetTestCSProj()));
+            if (Configuration.AzureArm)
+            {
+                await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestBase.cs"), Encoding.ASCII.GetBytes(GetAssetContent("TestBase_Mgmt.cs", Configuration.Namespace, Configuration.Namespace.Split('.').Last())));
+                await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestEnvironment.cs"), Encoding.ASCII.GetBytes(GetAssetContent("TestEnvironment_Mgmt.cs", Configuration.Namespace, Configuration.Namespace.Split('.').Last())));
+            }
         }
 
         private async Task WriteProjectFiles()
@@ -93,227 +113,49 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, $"{Configuration.Namespace}.sln"), Encoding.ASCII.GetBytes(GetSln()));
             if (_isAzureSdk)
             {
-                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "Directory.Build.props"), Encoding.ASCII.GetBytes(GetDirectoryBuildProps()));
-                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "README.md"), Encoding.ASCII.GetBytes(GetReadme()));
-                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "CHANGELOG.md"), Encoding.ASCII.GetBytes(GetChangeLog()));
+                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "Directory.Build.props"), Encoding.ASCII.GetBytes(GetAssetContent("Directory.Build.props")));
+                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "README.md"), Encoding.ASCII.GetBytes(!Configuration.AzureArm ? GetReadme() : GetAssetContent("Readme_Mgmt.md", Configuration.Namespace.Split('.').Last(), Configuration.Namespace)));
+                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "CHANGELOG.md"), Encoding.ASCII.GetBytes(GetAssetContent("CHANGELOG.md")));
             }
         }
 
         private string GetAssemblyInfo()
         {
-            const string publicKey = ", PublicKey = 0024000004800000940000000602000000240000525341310004000001000100d15ddcb29688295338af4b7686603fe614abd555e09efba8fb88ee09e1f7b1ccaeed2e8f823fa9eef3fdd60217fc012ea67d2479751a0b8c087a4185541b851bd8b16f8d91b840e51b1cb0ba6fe647997e57429265e85ef62d565db50a69ae1647d54d7bd855e4db3d8a91510e5bcbd0edfbbecaa20a7bd9ae74593daa7b11b4";
-            const string assemblyInfoContent = @"// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo(""{0}.Tests{1}"")]
-{2}";
-            const string azureResourceProvider = @"
-// Replace Microsoft.Test with the correct resource provider namepace for your service and uncomment.
-// See https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
-// for the list of possible values.
-[assembly: Azure.Core.AzureResourceProviderNamespace(""Microsoft.Template"")]
-";
+            const string publicKey = StaticStrings.publicKeyAssemblyInfo;
+            const string assemblyInfoContent = StaticStrings.assemblyInfoContentAssemblyInfo;
+            string azureResourceProvider = string.Format(StaticStrings.resourceProviderAssemblyIfno, !Configuration.AzureArm ? "Microsoft.Template" : Configuration.Namespace.Split('.').Last());
             return string.Format(assemblyInfoContent, Configuration.Namespace, Configuration.IsBranded ? publicKey : string.Empty, _isAzureSdk ? azureResourceProvider : string.Empty);
-        }
-
-        private string GetChangeLog()
-        {
-            const string changeLogContent = @"# Release History
-
-## 1.0.0-beta.1 (Unreleased)
-
-### Features Added
-
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-";
-            return changeLogContent;
         }
 
         private string GetReadme()
         {
-            const string multipleApiVersionContent = @"
-
-### Service API versions
-
-The client library targets the latest service API version by default. A client instance accepts an optional service API version parameter from its options to specify which API version service to communicate.
-
-#### Select a service API version
-
-You have the flexibility to explicitly select a supported service API version when instantiating a client by configuring its associated options. This ensures that the client can communicate with services using the specified API version.
-
-For example,
-
-```C# Snippet:Create<YourService>ClientForSpecificApiVersion
-Uri endpoint = new Uri(""<your endpoint>"");
-DefaultAzureCredential credential = new DefaultAzureCredential();
-<YourService>ClientOptions options = new <YourService>ClientOptions(<YourService>ClientOptions.ServiceVersion.<API Version>)
-var client = new <YourService>Client(endpoint, credential, options);
-```
-
-When selecting an API version, it's important to verify that there are no breaking changes compared to the latest API version. If there are significant differences, API calls may fail due to incompatibility.
-
-Always ensure that the chosen API version is fully supported and operational for your specific use case and that it aligns with the service's versioning policy.";
-            const string readmeContent = @"# {0} client library for .NET
-
-{0} is a managed service that helps developers get secret simply and securely.
-
-Use the client library for to:
-
-* [Get secret](https://docs.microsoft.com/azure)
-
-[Source code][source_root] | [Package (NuGet)][package] | [API reference documentation][reference_docs] | [Product documentation][azconfig_docs] | [Samples][source_samples]
-
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/{1}/{0}/src) | [Package (NuGet)](https://www.nuget.org/packages) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](https://docs.microsoft.com/azure)
-
-## Getting started
-
-This section should include everything a developer needs to do to install and create their first client connection *very quickly*.
-
-### Install the package
-
-First, provide instruction for obtaining and installing the package or library. This section might include only a single line of code, like `dotnet add package package-name`, but should enable a developer to successfully install the package from NuGet, npm, or even cloning a GitHub repository.
-
-Install the client library for .NET with [NuGet](https://www.nuget.org/ ):
-
-```dotnetcli
-dotnet add package {0} --prerelease
-```
-
-### Prerequisites
-
-Include a section after the install command that details any requirements that must be satisfied before a developer can [authenticate](#authenticate-the-client) and test all of the snippets in the [Examples](#examples) section. For example, for Cosmos DB:
-
-> You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/) and [Cosmos DB account](https://docs.microsoft.com/azure/cosmos-db/account-overview) (SQL API). In order to take advantage of the C# 8.0 syntax, it is recommended that you compile using the [.NET Core SDK](https://dotnet.microsoft.com/download) 3.0 or higher with a [language version](https://docs.microsoft.com/dotnet/csharp/language-reference/configure-language-version#override-a-default) of `latest`.  It is also possible to compile with the .NET Core SDK 2.1.x using a language version of `preview`.
-
-### Authenticate the client
-
-If your library requires authentication for use, such as for Azure services, include instructions and example code needed for initializing and authenticating.
-
-For example, include details on obtaining an account key and endpoint URI, setting environment variables for each, and initializing the client object.{2}
-
-## Key concepts
-
-The *Key concepts* section should describe the functionality of the main classes. Point out the most important and useful classes in the package (with links to their reference pages) and explain how those classes work together. Feel free to use bulleted lists, tables, code blocks, or even diagrams for clarity.
-
-Include the *Thread safety* and *Additional concepts* sections below at the end of your *Key concepts* section. You may remove or add links depending on what your library makes use of:
-
-### Thread safety
-
-We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
-
-### Additional concepts
-<!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#mocking) |
-[Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
-<!-- CLIENT COMMON BAR -->
-
-## Examples
-
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/{1}/{0}/samples).
-
-## Troubleshooting
-
-Describe common errors and exceptions, how to ""unpack"" them if necessary, and include guidance for graceful handling and recovery.
-
-Provide information to help developers avoid throttling or other service-enforced errors they might encounter. For example, provide guidance and examples for using retry or connection policies in the API.
-
-If the package or a related package supports it, include tips for logging or enabling instrumentation to help them debug their code.
-
-## Next steps
-
-* Provide a link to additional code examples, ideally to those sitting alongside the README in the package's `/samples` directory.
-* If appropriate, point users to other packages that might be useful.
-* If you think there's a good chance that developers might stumble across your package in error (because they're searching for specific functionality and mistakenly think the package provides that functionality), point them to the packages they might be looking for.
-
-## Contributing
-
-This is a template, but your SDK readme should include details on how to contribute code to the repo/package.
-
-<!-- LINKS -->
-[style-guide-msft]: https://docs.microsoft.com/style-guide/capitalization
-[style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
-
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net/sdk/{1}/{0}/README.png)
-";
-            return string.Format(readmeContent, Configuration.Namespace, _serviceDirectoryName, (Configuration.AzureArm || Configuration.Generation1ConvenienceClient) ? "" : multipleApiVersionContent);
+            string multipleApiVersionContent = GetAssetContent("Readme_multipleApiVersionContent_DataPlane.md");
+            string readmeContent = GetAssetContent("Readme_readmeContent_DataPlane.md", Configuration.Namespace, _serviceDirectoryName, (Configuration.AzureArm || Configuration.Generation1ConvenienceClient) ? "" : multipleApiVersionContent);
+            return readmeContent;
         }
 
         private string GetCiYml()
         {
             string safeName = Configuration.Namespace.Replace(".", "");
-            const string ciYmlContent = @"# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
-
-trigger:
-  branches:
-    include:
-    - main
-    - hotfix/*
-    - release/*
-  paths:
-    include:
-    - sdk/{0}
-    - sdk/{0}/ci.yml
-    - sdk/{0}/{1}
-
-pr:
-  branches:
-    include:
-    - main
-    - feature/*
-    - hotfix/*
-    - release/*
-  paths:
-    include:
-    - sdk/{0}
-    - sdk/{0}/ci.yml
-    - sdk/{0}/{1}
-
-extends:
-  template: /eng/pipelines/templates/stages/archetype-sdk-client.yml
-  parameters:
-    ServiceDirectory: {0}
-    ArtifactName: packages
-    Artifacts:
-    - name: {1}
-      safeName: {2}
-";
-            return string.Format(ciYmlContent, _serviceDirectoryName, Configuration.Namespace, safeName);
-        }
-
-        private string GetDirectoryBuildProps()
-        {
-            const string directoryBuildPropsContent = @"<Project ToolsVersion=""15.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-  <!--
-    Add any shared properties you want for the projects under this package directory that need to be set before the auto imported Directory.Build.props
-  -->
-  <Import Project=""$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory).., Directory.Build.props))\Directory.Build.props"" />
-</Project>
-";
-            return directoryBuildPropsContent;
+            string ciYmlContent = GetAssetContent("ci.yml", _serviceDirectoryName, Configuration.Namespace, safeName);
+            return ciYmlContent;
         }
 
         private string GetBrandedSrcCSProj()
         {
             var builder = new CSProjWriter()
             {
-                Description = $"This is the {Configuration.Namespace} client library for developing .NET applications with rich experience.",
-                AssemblyTitle = $"Azure SDK Code Generation {Configuration.Namespace} for Azure Data Plane",
+                Description = !Configuration.AzureArm ? $"This is the {Configuration.Namespace} client library for developing .NET applications with rich experience." : $"Azure Resource Manager client SDK for Azure resource provider {Configuration.Namespace.Split('.').Last()}.",
+                AssemblyTitle = !Configuration.AzureArm ? new CSProjProperty($"Azure SDK Code Generation {Configuration.Namespace} for Azure Data Plane") : null,
                 Version = "1.0.0-beta.1",
-                PackageTags = Configuration.Namespace,
-                TargetFrameworks = "$(RequiredTargetFrameworks)",
-                IncludeOperationsSharedSource = true,
+                PackageTags = !Configuration.AzureArm ? Configuration.Namespace : $"azure;management;arm;resource manager;{Configuration.Namespace.Split('.').Last().ToLower()}",
+                TargetFrameworks = !Configuration.AzureArm ? new CSProjProperty("$(RequiredTargetFrameworks)") : null,
+                IncludeOperationsSharedSource = !Configuration.AzureArm ? new CSProjProperty("true") : null,
             };
+            if (Configuration.AzureArm)
+            {
+                builder.PackageId = Configuration.Namespace;
+            }
             if (_needAzureKeyAuth)
                 builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs", "Shared/Core"));
             if (!Configuration.AzureArm)
@@ -361,6 +203,7 @@ extends:
             new("Azure.Core"),
             new("System.Text.Json")
         };
+
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
             new("System.ClientModel", "1.1.0-beta.3"),
@@ -375,6 +218,21 @@ extends:
             new("Microsoft.NET.Test.Sdk"),
             new("Moq")
         };
+
+        private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedSampleDependencyPackagesMgmtVersion = new CSProjWriter.CSProjDependencyPackage[]
+        {
+            new("Azure.Identity","1.11.4"),
+            new("NUnit","3.13.2"),
+            new("NUnit3TestAdapter","4.4.2"),
+        };
+
+        private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedSampleDependencyPackagesMgmt = new CSProjWriter.CSProjDependencyPackage[]
+        {
+            new("Azure.Identity"),
+            new("NUnit"),
+            new("NUnit3TestAdapter"),
+        };
+
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedTestDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
             new("NUnit", "3.13.2"),
@@ -385,11 +243,11 @@ extends:
 
         private string GetBrandedTestCSProj()
         {
-            var writer = new CSProjWriter()
+            var writer = !Configuration.AzureArm ? new CSProjWriter()
             {
                 TargetFrameworks = "$(RequiredTargetFrameworks)",
                 NoWarn = new("$(NoWarn);CS1591", "We don't care about XML doc comments on test types and members")
-            };
+            } : new CSProjWriter();
 
             // add the project references
             if (_isAzureSdk)
@@ -439,9 +297,13 @@ MinimumVisualStudioVersion = 10.0.40219.1
 ";
             if (_isAzureSdk)
             {
-                slnContent += @"Project(""{{9A19103F-16F7-4668-BE54-9A1E7A4F7556}}"") = ""Azure.Core.TestFramework"", ""..\..\core\Azure.Core.TestFramework\src\Azure.Core.TestFramework.csproj"", ""{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}""
+                string testFrameworkConfig = @"Project(""{{9A19103F-16F7-4668-BE54-9A1E7A4F7556}}"") = ""Azure.Core.TestFramework"", ""..\..\core\Azure.Core.TestFramework\src\Azure.Core.TestFramework.csproj"", ""{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}""
 EndProject
 ";
+                string sampleProjectConfig = @"Project(""{{9A19103F-16F7-4668-BE54-9A1E7A4F7556}}"") = ""{0}.Samples"", ""samples\{0}.Samples.csproj"", ""{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}""
+EndProject
+";
+                slnContent += Configuration.AzureArm ? sampleProjectConfig : testFrameworkConfig;
             }
             slnContent += @"Project(""{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}"") = ""{0}"", ""src\{0}.csproj"", ""{{28FF4005-4467-4E36-92E7-DEA27DEB1519}}""
 EndProject
@@ -467,13 +329,19 @@ EndProject
 		{{8E9A77AC-792A-4432-8320-ACFD46730401}}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{{8E9A77AC-792A-4432-8320-ACFD46730401}}.Release|Any CPU.Build.0 = Release|Any CPU
 ";
-            if (_isAzureSdk)
-            {
-                slnContent += @"		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+            string testFrameworkConfigProfile = @"		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Release|Any CPU.Build.0 = Release|Any CPU
 ";
+            string sampleProjectConfigProfile = @"		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Release|Any CPU.Build.0 = Release|Any CPU
+";
+            if (_isAzureSdk)
+            {
+                slnContent += Configuration.AzureArm ? sampleProjectConfigProfile : testFrameworkConfigProfile;
             }
             slnContent += @"		{{A4241C1F-A53D-474C-9E4E-075054407E74}}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{{A4241C1F-A53D-474C-9E4E-075054407E74}}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -505,6 +373,50 @@ EndProject
 EndGlobal
 ";
             return string.Format(slnContent, Configuration.Namespace);
+        }
+
+        private string GetSamplesProject()
+        {
+            var writer = new CSProjWriter();
+            writer.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
+            var packages = _isAzureResourceManager ? _brandedSampleDependencyPackagesMgmt : _brandedSampleDependencyPackagesMgmtVersion;
+            foreach (var package in packages)
+            {
+                writer.PackageReferences.Add(package);
+            }
+            return writer.Write();
+        }
+        private async Task WriteSamplesProject()
+        {
+            if (!Directory.Exists(_samplesDirectory))
+                Directory.CreateDirectory(_samplesDirectory);
+            await File.WriteAllBytesAsync(Path.Combine(_samplesDirectory, $"{Configuration.Namespace}.Samples.csproj"), Encoding.ASCII.GetBytes(GetSamplesProject()));
+        }
+
+        private string GetAssetContent(string assetFilePath, params object?[] args)
+        {
+            string content = GetAssetContentCore(assetFilePath);
+            if (args is null || args.Length == 0)
+            {
+                return content;
+            }
+            return string.Format(content, args);
+
+            string GetAssetContentCore(string assetFilePath)
+            {
+                string val = "";
+                string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                string filePath = Path.Combine(currentDirectory, "Assets", assetFilePath);
+                if (File.Exists(filePath))
+                {
+                    val = File.ReadAllText(filePath);
+                }
+                else
+                {
+                    throw new Exception($"File Not found: {filePath}");
+                }
+                return val;
+            }
         }
     }
 }
