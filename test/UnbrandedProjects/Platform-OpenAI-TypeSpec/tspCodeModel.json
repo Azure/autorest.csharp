@@ -11940,6 +11940,7 @@
   "ApiKey": {
    "$id": "1216",
    "Name": "Authorization",
+   "In": "header",
    "Prefix": "Bearer"
   }
  }

@@ -714,7 +714,8 @@
   "$id": "72",
   "ApiKey": {
    "$id": "73",
-   "Name": "my-api-key"
+   "Name": "my-api-key",
+   "In": "header"
   }
  }
 }
