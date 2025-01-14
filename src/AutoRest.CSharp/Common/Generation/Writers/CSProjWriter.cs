@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml;
@@ -57,6 +58,8 @@ internal class CSProjWriter
     public IList<CSProjDependencyPackage> PrivatePackageReferences { get; }
 
     public IList<CSProjCompileInclude> CompileIncludes { get; }
+
+    public CSProjProperty? PackageId { get; set; }
 
     public string Write()
     {
@@ -141,6 +144,7 @@ internal class CSProjWriter
 
     private void WriteProperties(XmlWriter writer)
     {
+        //TODO if the properties is empty, this part will genearet a self -closing tag. And can not be elimitted after trying many ways.
         writer.WriteStartElement("PropertyGroup");
         // this will write those properties in the same order as they are defined in this class
         // introduce this method to save the effort of writing every property one by one

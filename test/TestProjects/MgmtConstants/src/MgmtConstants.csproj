@@ -1,10 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>This is the MgmtConstants client library for developing .NET applications with rich experience.</Description>
-    <AssemblyTitle>Azure SDK Code Generation MgmtConstants for Azure Data Plane</AssemblyTitle>
+    <Description>Azure Resource Manager client SDK for Azure resource provider MgmtConstants.</Description>
     <Version>1.0.0-beta.1</Version>
-    <PackageTags>MgmtConstants</PackageTags>
-    <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
-    <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
+    <PackageTags>azure;management;arm;resource manager;mgmtconstants</PackageTags>
+    <PackageId>MgmtConstants</PackageId>
   </PropertyGroup>
 </Project>

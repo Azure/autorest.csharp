@@ -428,46 +428,80 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
 
             var parentName = GetResourceName(parent);
             var statements = new List<MethodBodyStatement>();
-
-            var resourceName = collection.Resource.ResourceName;
-            statements.Add(
-                BuildGetResourceStatement(parent, example, client, out var parentVar)
-                );
-
-            // write get collection
-            statements.Add(EmptyLine);
-            statements.Add(
-                new SingleLineCommentStatement($"get the collection of this {collection.Resource.Type.Name}")
-                );
-            var getResourceCollectionMethodName = $"Get{resourceName.ResourceNameToPlural()}";
             var arguments = new List<ValueExpression>();
 
-            // if the extension is on ArmResource, we need an extra "scope" parameter before its actual parameters
-            if (parent is MgmtExtension extension && extension.ArmCoreType == typeof(ArmResource))
+            var resourceName = collection.Resource.ResourceName;
+            var getResourceCollectionMethodName = $"Get{resourceName.ResourceNameToPlural()}";
+            var isParentArmResource = parent is MgmtExtension extension && extension.ArmCoreType == typeof(ArmResource);
+
+            // when the parent is ArmResource, we have changed the extension method pattern, therefore this case needs to be handled differently
+            // when the parent is ArmResource, we do not usually generate an extension method on ArmResource, because it will add the extension method to all possible resources.
+            // instead, we generate an extension method for ArmClient with an extra parameter `ResourceIdentifier scope` to avoid this.
+            if (isParentArmResource)
             {
+                // write get collection
+                statements.Add(EmptyLine);
+                statements.Add(
+                    new SingleLineCommentStatement($"get the collection of this {collection.Resource.Type.Name}")
+                    );
+                // build scope id, and add it to the arguments
                 statements.Add(
                     BuildCreateScopeResourceIdentifier(example, example.RequestPath.GetScopePath(), out var scopeId)
                     );
                 arguments.Add(New.Instance(typeof(ResourceIdentifier), scopeId));
-            }
 
-            foreach (var extraParameter in collection.ExtraConstructorParameters)
-            {
-                if (example.ParameterValueMapping.TryGetValue(extraParameter.Name, out var exampleParameterValue))
+                CollectExtraConstructorParameters();
+
+                // in ArmCore, we do not generate extension methods, because those types are generated in this library, therefore here we must handle it differently as well
+                // Can't use CSharpType.Equals(typeof(...)) because the CSharpType.Equals(Type) would assume itself is a FrameworkType, but here it's generated when IsArmCore=true
+                if (Configuration.MgmtConfiguration.IsArmCore && parent.Type.Name == nameof(ArmResource))
+                {
+                    // use GenericResource to get the collection
+                    statements.Add(
+                        Declare(collection.Type, "collection", client.Invoke("GetGenericResource", arguments[0]).Invoke(getResourceCollectionMethodName, arguments[1..]), out instance)
+                        );
+                }
+                else
                 {
                     statements.Add(
-                        Declare(extraParameter.Type, extraParameter.Name, ExampleValueSnippets.GetExpression(exampleParameterValue, extraParameter.SerializationFormat), out var arg)
+                        Declare(collection.Type, "collection", client.Invoke(getResourceCollectionMethodName, arguments), out instance)
                         );
-                    arguments.Add(arg);
                 }
             }
+            else
+            {
+                statements.Add(
+                    BuildGetResourceStatement(parent, example, client, out var parentVar)
+                    );
 
-            // call the method to get the collection instance
-            statements.Add(
-                Declare(collection.Type, "collection", parentVar.Invoke(getResourceCollectionMethodName, arguments), out instance)
-                );
+                // write get collection
+                statements.Add(EmptyLine);
+                statements.Add(
+                    new SingleLineCommentStatement($"get the collection of this {collection.Resource.Type.Name}")
+                    );
+
+                CollectExtraConstructorParameters();
+
+                statements.Add(
+                    Declare(collection.Type, "collection", parentVar.Invoke(getResourceCollectionMethodName, arguments), out instance)
+                    );
+            }
 
             return statements;
+
+            void CollectExtraConstructorParameters()
+            {
+                foreach (var extraParameter in collection.ExtraConstructorParameters)
+                {
+                    if (example.ParameterValueMapping.TryGetValue(extraParameter.Name, out var exampleParameterValue))
+                    {
+                        statements.Add(
+                            Declare(extraParameter.Type, extraParameter.Name, ExampleValueSnippets.GetExpression(exampleParameterValue, extraParameter.SerializationFormat), out var arg)
+                            );
+                        arguments.Add(arg);
+                    }
+                }
+            }
         }
 
         private MethodBodyStatement BuildGetResourceStatement(MgmtTypeProvider carrierResource, OperationExample example, ValueExpression client, out TypedValueExpression instance)
