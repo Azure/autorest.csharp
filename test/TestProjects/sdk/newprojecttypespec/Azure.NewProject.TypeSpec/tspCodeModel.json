@@ -3187,7 +3187,8 @@
   },
   "ApiKey": {
    "$id": "308",
-   "Name": "x-ms-api-key"
+   "Name": "x-ms-api-key",
+   "In": "header"
   }
  }
 }

@@ -26479,7 +26479,8 @@
   "$id": "3499",
   "ApiKey": {
    "$id": "3500",
-   "Name": "Ocp-Apim-Subscription-Key"
+   "Name": "Ocp-Apim-Subscription-Key",
+   "In": "header"
   }
  }
 }
