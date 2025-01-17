@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -33,6 +37,78 @@ namespace _Azure.ResourceManager.Resources.Mocking
         {
             TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of ExtensionsResources in the ArmClient. </summary>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <returns> An object representing collection of ExtensionsResources and their operations over a ExtensionsResource. </returns>
+        public virtual ExtensionsResourceCollection GetExtensionsResources(ResourceIdentifier scope)
+        {
+            return new ExtensionsResourceCollection(Client, scope);
+        }
+
+        /// <summary>
+        /// Get a ExtensionsResource
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{resourceUri}/providers/Azure.ResourceManager.Resources/extensionsResources/{extensionsResourceName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ExtensionsResource_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2023-12-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExtensionsResource"/></description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <param name="extensionsResourceName"> The name of the ExtensionsResource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="extensionsResourceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="extensionsResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public virtual async Task<Response<ExtensionsResource>> GetExtensionsResourceAsync(ResourceIdentifier scope, string extensionsResourceName, CancellationToken cancellationToken = default)
+        {
+            return await GetExtensionsResources(scope).GetAsync(extensionsResourceName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get a ExtensionsResource
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{resourceUri}/providers/Azure.ResourceManager.Resources/extensionsResources/{extensionsResourceName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ExtensionsResource_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2023-12-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExtensionsResource"/></description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <param name="extensionsResourceName"> The name of the ExtensionsResource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="extensionsResourceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="extensionsResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public virtual Response<ExtensionsResource> GetExtensionsResource(ResourceIdentifier scope, string extensionsResourceName, CancellationToken cancellationToken = default)
+        {
+            return GetExtensionsResources(scope).Get(extensionsResourceName, cancellationToken);
         }
 
         /// <summary>
@@ -69,6 +145,30 @@ namespace _Azure.ResourceManager.Resources.Mocking
         {
             SingletonTrackedResource.ValidateResourceId(id);
             return new SingletonTrackedResource(Client, id);
+        }
+
+        /// <summary>
+        /// Gets an object representing an <see cref="ExtensionsResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ExtensionsResource.CreateResourceIdentifier" /> to create an <see cref="ExtensionsResource"/> <see cref="ResourceIdentifier"/> from its components.
+        /// </summary>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="ExtensionsResource"/> object. </returns>
+        public virtual ExtensionsResource GetExtensionsResource(ResourceIdentifier id)
+        {
+            ExtensionsResource.ValidateResourceId(id);
+            return new ExtensionsResource(Client, id);
+        }
+
+        /// <summary>
+        /// Gets an object representing a <see cref="LocationResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="LocationResource.CreateResourceIdentifier" /> to create a <see cref="LocationResource"/> <see cref="ResourceIdentifier"/> from its components.
+        /// </summary>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="LocationResource"/> object. </returns>
+        public virtual LocationResource GetLocationResource(ResourceIdentifier id)
+        {
+            LocationResource.ValidateResourceId(id);
+            return new LocationResource(Client, id);
         }
     }
 }

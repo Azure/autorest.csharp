@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
@@ -39,6 +41,78 @@ namespace _Azure.ResourceManager.Resources.Mocking
         {
             TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of LocationResources in the SubscriptionResource. </summary>
+        /// <param name="location"> The name of the Azure region. </param>
+        /// <returns> An object representing collection of LocationResources and their operations over a LocationResource. </returns>
+        public virtual LocationResourceCollection GetLocationResources(AzureLocation location)
+        {
+            return new LocationResourceCollection(Client, Id, location);
+        }
+
+        /// <summary>
+        /// Get a LocationResource
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.Resources/locations/{location}/locationResources/{locationResourceName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>LocationResource_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2023-12-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="LocationResource"/></description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="location"> The name of the Azure region. </param>
+        /// <param name="locationResourceName"> The name of the LocationResource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="locationResourceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="locationResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public virtual async Task<Response<LocationResource>> GetLocationResourceAsync(AzureLocation location, string locationResourceName, CancellationToken cancellationToken = default)
+        {
+            return await GetLocationResources(location).GetAsync(locationResourceName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get a LocationResource
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.Resources/locations/{location}/locationResources/{locationResourceName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>LocationResource_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2023-12-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="LocationResource"/></description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="location"> The name of the Azure region. </param>
+        /// <param name="locationResourceName"> The name of the LocationResource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="locationResourceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="locationResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public virtual Response<LocationResource> GetLocationResource(AzureLocation location, string locationResourceName, CancellationToken cancellationToken = default)
+        {
+            return GetLocationResources(location).Get(locationResourceName, cancellationToken);
         }
 
         /// <summary>

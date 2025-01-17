@@ -17,6 +17,60 @@ namespace _Azure.ResourceManager.Resources.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmAzureResourceManagerResourcesModelFactory
     {
+        /// <summary> Initializes a new instance of <see cref="Resources.LocationResourceData"/>. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="properties"> The resource-specific properties for this resource. </param>
+        /// <returns> A new <see cref="Resources.LocationResourceData"/> instance for mocking. </returns>
+        public static LocationResourceData LocationResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, LocationResourceProperties properties = null)
+        {
+            return new LocationResourceData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                properties,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.LocationResourceProperties"/>. </summary>
+        /// <param name="description"> The description of the resource. </param>
+        /// <param name="provisioningState"> The status of the last operation. </param>
+        /// <returns> A new <see cref="Models.LocationResourceProperties"/> instance for mocking. </returns>
+        public static LocationResourceProperties LocationResourceProperties(string description = null, ProvisioningState? provisioningState = null)
+        {
+            return new LocationResourceProperties(description, provisioningState, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Resources.ExtensionsResourceData"/>. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="properties"> The resource-specific properties for this resource. </param>
+        /// <returns> A new <see cref="Resources.ExtensionsResourceData"/> instance for mocking. </returns>
+        public static ExtensionsResourceData ExtensionsResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, ExtensionsResourceProperties properties = null)
+        {
+            return new ExtensionsResourceData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                properties,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ExtensionsResourceProperties"/>. </summary>
+        /// <param name="description"> The description of the resource. </param>
+        /// <param name="provisioningState"> The status of the last operation. </param>
+        /// <returns> A new <see cref="Models.ExtensionsResourceProperties"/> instance for mocking. </returns>
+        public static ExtensionsResourceProperties ExtensionsResourceProperties(string description = null, ProvisioningState? provisioningState = null)
+        {
+            return new ExtensionsResourceProperties(description, provisioningState, serializedAdditionalRawData: null);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Resources.SingletonTrackedResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
