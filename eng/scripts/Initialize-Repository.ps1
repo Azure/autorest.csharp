@@ -55,10 +55,8 @@ try {
 
     Invoke-LoggedCommand "npm ls -a" -GroupOutput
 
-    Write-Host "Listing environment variables"
-    Get-ChildItem env: | Sort-Object Name | Format-Table -AutoSize
-
-    $artifactStagingDirectory = $env:Build_ArtifactStagingDirectory
+    #environment variables are case sensitive on linux
+    $artifactStagingDirectory = $env:BUILD_ARTIFACTSTAGINGDIRECTORY
     if ($artifactStagingDirectory -and !$BuildArtifactsPath) {
         $lockFilesPath = "$artifactStagingDirectory/lock-files"
         New-Item -ItemType Directory -Path "$lockFilesPath/emitter" | Out-Null
