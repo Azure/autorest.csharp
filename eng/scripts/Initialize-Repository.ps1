@@ -55,6 +55,9 @@ try {
 
     Invoke-LoggedCommand "npm ls -a" -GroupOutput
 
+    Write-Host "Listing environment variables"
+    Get-ChildItem env: | Sort-Object Name | Format-Table -AutoSize
+
     $artifactStagingDirectory = $env:Build_ArtifactStagingDirectory
     if ($artifactStagingDirectory -and !$BuildArtifactsPath) {
         $lockFilesPath = "$artifactStagingDirectory/lock-files"
