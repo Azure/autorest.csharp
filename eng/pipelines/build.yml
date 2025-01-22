@@ -25,9 +25,9 @@ extends:
     stages:
       - stage: 'Build_and_Test'
         pool:
-          name: $(LINUXPOOL)
-          image: $(LINUXVMIMAGE)
-          os: linux
+          name: $(WINDOWSPOOL)
+          image: $(WINDOWSVMIMAGE)
+          os: windows
         jobs:
           - job: Build
             timeoutInMinutes: 120
