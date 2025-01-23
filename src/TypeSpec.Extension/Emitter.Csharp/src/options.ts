@@ -18,6 +18,10 @@ export const AzureNetEmitterOptionsSchema: JSONSchemaType<AzureNetEmitterOptions
         additionalProperties: false,
         properties: {
             ...NetEmitterOptionsSchema.properties,
+            namespace: {
+                type: "string",
+                required: true
+            },
             csharpGeneratorPath: {
                 type: "string",
                 default: dllFilePath,
@@ -47,6 +51,7 @@ export function resolveAzureEmitterOptions(
             defaultAzureEmitterOptions.csharpGeneratorPath,
         "enable-internal-raw-data":
             context.options["enable-internal-raw-data"] ??
-            defaultAzureEmitterOptions["enable-internal-raw-data"]
+            defaultAzureEmitterOptions["enable-internal-raw-data"],
+        "namespace": context.options.namespace
     };
 }
