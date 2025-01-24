@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Scm.Parameters.BodyOptionality",
-  "library-name": "Scm.Parameters.BodyOptionality",
+  "library-name": "Parameters.BodyOptionality",
   "use-model-reader-writer": true,
   "shared-source-folders": [
     "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",

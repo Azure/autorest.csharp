@@ -53,6 +53,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "CustomizationsInTsp",
    "doc": "Extensible enum to customize operator",
    "isFixed": false,
    "isFlags": false,
@@ -124,6 +125,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "CustomizationsInTsp",
    "doc": "Renamed enum (original name: EnumToRename)",
    "isFixed": true,
    "isFlags": false,
@@ -195,6 +197,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "CustomizationsInTsp",
    "doc": "Enum with renamed value (original name: ValueToRename)",
    "isFixed": true,
    "isFlags": false,
@@ -266,6 +269,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "CustomizationsInTsp",
    "doc": "Extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -320,6 +324,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "CustomizationsInTsp",
    "doc": "A normal enum",
    "isFixed": false,
    "isFlags": false,
@@ -332,6 +337,7 @@
    "$id": "38",
    "kind": "model",
    "name": "RootModel",
+   "clientNamespace": "CustomizationsInTsp",
    "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel",
    "usage": "Input,Output,Json",
    "doc": "Root RoundTrip model to reference all other types to ensure generation",
@@ -363,6 +369,7 @@
       "$id": "41",
       "kind": "model",
       "name": "ModelToMakeInternal",
+      "clientNamespace": "CustomizationsInTsp",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToMakeInternal",
       "usage": "Input,Output,Json",
       "doc": "Public model made internal",
@@ -407,6 +414,7 @@
       "$id": "45",
       "kind": "model",
       "name": "ModelToRename",
+      "clientNamespace": "CustomizationsInTsp",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToRename",
       "usage": "Input,Output,Spread,Json",
       "doc": "Renamed model (original name: ModelToRename)",
@@ -471,6 +479,7 @@
       "$id": "51",
       "kind": "model",
       "name": "ModelToChangeNamespace",
+      "clientNamespace": "CustomizationsInTsp",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToChangeNamespace",
       "usage": "Input,Output,Json",
       "doc": "Model moved into custom namespace",
@@ -515,6 +524,7 @@
       "$id": "55",
       "kind": "model",
       "name": "ModelWithCustomizedProperties",
+      "clientNamespace": "CustomizationsInTsp",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties",
       "usage": "Input,Output,Json",
       "doc": "Model with customized properties",
@@ -896,7 +906,8 @@
           },
           "crossLanguageDefinitionId": "TypeSpec.Array",
           "decorators": []
-         }
+         },
+         "clientNamespace": ""
         },
         "optional": false,
         "readOnly": false,
@@ -927,7 +938,8 @@
           },
           "crossLanguageDefinitionId": "TypeSpec.Array",
           "decorators": []
-         }
+         },
+         "clientNamespace": ""
         },
         "optional": true,
         "readOnly": false,
@@ -1012,7 +1024,8 @@
           },
           "crossLanguageDefinitionId": "TypeSpec.Array",
           "decorators": []
-         }
+         },
+         "clientNamespace": ""
         },
         "optional": false,
         "readOnly": true,
@@ -1043,7 +1056,8 @@
           },
           "crossLanguageDefinitionId": "TypeSpec.Array",
           "decorators": []
-         }
+         },
+         "clientNamespace": ""
         },
         "optional": true,
         "readOnly": true,
@@ -1119,6 +1133,7 @@
       "$id": "121",
       "kind": "model",
       "name": "ModelToAddAdditionalSerializableProperty",
+      "clientNamespace": "CustomizationsInTsp",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToAddAdditionalSerializableProperty",
       "usage": "Input,Output,Json",
       "doc": "Model to add additional serializable property",
@@ -1182,6 +1197,7 @@
       "$id": "126",
       "kind": "model",
       "name": "ModelStruct",
+      "clientNamespace": "CustomizationsInTsp",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct",
       "usage": "Input,Output,Json",
       "doc": "Model to make to a struct",
@@ -1281,6 +1297,7 @@
   {
    "$id": "133",
    "Name": "CustomizationsInTspClient",
+   "ClientNamespace": "CustomizationsInTsp",
    "Doc": "CADL project to test various types of models.",
    "Operations": [
     {

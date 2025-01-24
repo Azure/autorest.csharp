@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "_Type.Union",
-  "library-name": "_Type.Union",
+  "library-name": "Type.Union",
   "flavor": "azure",
   "use-model-reader-writer": true,
   "shared-source-folders": [

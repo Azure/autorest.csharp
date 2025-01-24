@@ -37,6 +37,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "_Specs_.Azure.Core.Basic",
    "doc": "The version of the API.",
    "isFixed": true,
    "isFlags": false,
@@ -49,6 +50,7 @@
    "$id": "6",
    "kind": "model",
    "name": "User",
+   "clientNamespace": "_Specs_.Azure.Core.Basic",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.User",
    "usage": "Input,Output,Json",
    "doc": "Details about a user.",
@@ -108,6 +110,7 @@
        "$id": "13",
        "kind": "model",
        "name": "UserOrder",
+       "clientNamespace": "_Specs_.Azure.Core.Basic",
        "crossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.UserOrder",
        "usage": "Input,Output,Json",
        "doc": "UserOrder for testing list with expand.",
@@ -221,6 +224,7 @@
    "$id": "23",
    "kind": "model",
    "name": "UserList",
+   "clientNamespace": "_Specs_.Azure.Core.Basic",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.UserList",
    "usage": "Output,Json",
    "decorators": [],
@@ -253,6 +257,7 @@
    "$id": "26",
    "kind": "model",
    "name": "PagedUser",
+   "clientNamespace": "Azure.Core.Foundations",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "usage": "Output,Json",
    "doc": "Paged collection of User items",
@@ -315,6 +320,7 @@
   {
    "$id": "32",
    "Name": "BasicClient",
+   "ClientNamespace": "_Specs_.Azure.Core.Basic",
    "Doc": "Illustrates bodies templated with Azure Core",
    "Operations": [
     {

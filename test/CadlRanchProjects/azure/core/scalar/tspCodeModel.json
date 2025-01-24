@@ -37,6 +37,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "_Specs_.Azure.Core.Scalar",
    "doc": "The version of the API.",
    "isFixed": true,
    "isFlags": false,
@@ -49,6 +50,7 @@
    "$id": "6",
    "kind": "model",
    "name": "AzureLocationModel",
+   "clientNamespace": "_Specs_.Azure.Core.Scalar",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationModel",
    "usage": "Input,Output,Json",
    "decorators": [],
@@ -86,6 +88,7 @@
   {
    "$id": "10",
    "Name": "ScalarClient",
+   "ClientNamespace": "_Specs_.Azure.Core.Scalar",
    "Operations": [],
    "Protocol": {
     "$id": "11"
@@ -128,6 +131,7 @@
   {
    "$id": "16",
    "Name": "AzureLocationScalar",
+   "ClientNamespace": "_Specs_.Azure.Core.Scalar",
    "Operations": [
     {
      "$id": "17",

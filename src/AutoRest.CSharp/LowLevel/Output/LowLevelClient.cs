@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             _libraryName = libraryName;
             _typeFactory = typeFactory;
-            DefaultName = name;
+            DefaultName = GetClientName(name);
             Description = description;
             IsSubClient = parentClient != null;
             ParentClient = parentClient;
@@ -76,6 +76,15 @@ namespace AutoRest.CSharp.Output.Models
             _operations = operations;
 
             SubClients = Array.Empty<LowLevelClient>();
+        }
+
+        private static string GetClientName(string name)
+        {
+            if (Configuration.ModelNamespace && name == "Models")
+            {
+                return "ModelsOps"; // Avoid conflict with the Models namespace
+            }
+            return name;
         }
 
         private IReadOnlyList<Parameter>? _parameters;

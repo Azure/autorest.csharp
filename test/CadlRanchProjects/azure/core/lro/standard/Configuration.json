@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "_Azure.Lro.Standard",
-  "library-name": "_Azure.Lro.Standard",
+  "library-name": "_Specs_.Azure.Core.Lro.Standard",
   "flavor": "azure",
   "use-model-reader-writer": true,
   "shared-source-folders": [

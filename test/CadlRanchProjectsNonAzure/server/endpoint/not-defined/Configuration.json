@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Scm.Server.Endpoint.NotDefined",
-  "library-name": "Scm.Server.Endpoint.NotDefined",
+  "library-name": "Server.Endpoint.NotDefined",
   "use-model-reader-writer": true,
   "shared-source-folders": [
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",

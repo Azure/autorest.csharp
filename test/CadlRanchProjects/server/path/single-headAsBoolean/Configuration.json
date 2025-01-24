@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Server.Path.SingleHeadAsBoolean",
-  "library-name": "Server.Path.SingleHeadAsBoolean",
+  "library-name": "Server.Path.Single",
   "head-as-boolean": true,
   "flavor": "azure",
   "use-model-reader-writer": true,

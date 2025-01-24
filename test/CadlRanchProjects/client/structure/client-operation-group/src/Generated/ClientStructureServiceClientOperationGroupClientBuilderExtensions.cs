@@ -19,37 +19,37 @@ namespace Microsoft.Extensions.Azure
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
-        public static IAzureClientBuilder<FirstClient, ClientStructureServiceClientOperationGroupClientOptions> AddFirstClient<TBuilder>(this TBuilder builder, Uri endpoint, ClientType client)
+        public static IAzureClientBuilder<FirstClient, ClientStructureServiceClientOptions> AddFirstClient<TBuilder>(this TBuilder builder, Uri endpoint, ClientType client)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<FirstClient, ClientStructureServiceClientOperationGroupClientOptions>((options) => new FirstClient(endpoint, client, options));
+            return builder.RegisterClientFactory<FirstClient, ClientStructureServiceClientOptions>((options) => new FirstClient(endpoint, client, options));
         }
 
         /// <summary> Registers a <see cref="SubNamespaceSecondClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
-        public static IAzureClientBuilder<SubNamespaceSecondClient, ClientStructureServiceClientOperationGroupClientOptions> AddSubNamespaceSecondClient<TBuilder>(this TBuilder builder, Uri endpoint, ClientType client)
+        public static IAzureClientBuilder<SubNamespaceSecondClient, ClientStructureServiceClientOptions> AddSubNamespaceSecondClient<TBuilder>(this TBuilder builder, Uri endpoint, ClientType client)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<SubNamespaceSecondClient, ClientStructureServiceClientOperationGroupClientOptions>((options) => new SubNamespaceSecondClient(endpoint, client, options));
+            return builder.RegisterClientFactory<SubNamespaceSecondClient, ClientStructureServiceClientOptions>((options) => new SubNamespaceSecondClient(endpoint, client, options));
         }
 
         /// <summary> Registers a <see cref="FirstClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<FirstClient, ClientStructureServiceClientOperationGroupClientOptions> AddFirstClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<FirstClient, ClientStructureServiceClientOptions> AddFirstClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
-            return builder.RegisterClientFactory<FirstClient, ClientStructureServiceClientOperationGroupClientOptions>(configuration);
+            return builder.RegisterClientFactory<FirstClient, ClientStructureServiceClientOptions>(configuration);
         }
         /// <summary> Registers a <see cref="SubNamespaceSecondClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<SubNamespaceSecondClient, ClientStructureServiceClientOperationGroupClientOptions> AddSubNamespaceSecondClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<SubNamespaceSecondClient, ClientStructureServiceClientOptions> AddSubNamespaceSecondClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
-            return builder.RegisterClientFactory<SubNamespaceSecondClient, ClientStructureServiceClientOperationGroupClientOptions>(configuration);
+            return builder.RegisterClientFactory<SubNamespaceSecondClient, ClientStructureServiceClientOptions>(configuration);
         }
     }
 }

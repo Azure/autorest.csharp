@@ -138,6 +138,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "AuthoringTypeSpec",
    "doc": "Represents the job status values.",
    "isFixed": false,
    "isFlags": false,
@@ -175,6 +176,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "AuthoringTypeSpec",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -248,6 +250,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "AuthoringTypeSpec",
    "doc": "Represents the project kind.",
    "isFixed": false,
    "isFlags": false,
@@ -358,6 +361,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "Azure.Core.Foundations",
    "doc": "Enum describing allowed operation states.",
    "isFixed": false,
    "isFlags": false,
@@ -370,6 +374,7 @@
    "$id": "42",
    "kind": "model",
    "name": "DeploymentJob",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.DeploymentJob",
    "usage": "Output,Json",
    "decorators": [],
@@ -508,6 +513,7 @@
        "$id": "57",
        "kind": "model",
        "name": "JobWarning",
+       "clientNamespace": "AuthoringTypeSpec",
        "crossLanguageDefinitionId": "AuthoringTypeSpec.JobWarning",
        "usage": "Output,Json",
        "doc": "Represents a warning that was encountered while executing the request.",
@@ -575,6 +581,7 @@
       "$id": "63",
       "kind": "model",
       "name": "Error",
+      "clientNamespace": "Azure.Core.Foundations",
       "crossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "usage": "Output,Json,Exception",
       "doc": "The error object.",
@@ -673,6 +680,7 @@
          "$id": "73",
          "kind": "model",
          "name": "InnerError",
+         "clientNamespace": "Azure.Core.Foundations",
          "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "usage": "Output,Json,Exception",
          "doc": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
@@ -766,6 +774,7 @@
    "$id": "79",
    "kind": "model",
    "name": "SwapDeploymentsJob",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.SwapDeploymentsJob",
    "usage": "Output,Json",
    "decorators": [],
@@ -954,6 +963,7 @@
    "$id": "97",
    "kind": "model",
    "name": "Project",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.Project",
    "usage": "None",
    "decorators": [],
@@ -1023,6 +1033,7 @@
       "$id": "104",
       "kind": "model",
       "name": "ProjectSettings",
+      "clientNamespace": "AuthoringTypeSpec",
       "crossLanguageDefinitionId": "AuthoringTypeSpec.ProjectSettings",
       "usage": "None",
       "doc": "Represents the settings used to define the project behavior.",
@@ -1224,6 +1235,7 @@
    "$id": "124",
    "kind": "model",
    "name": "OperationStatusError",
+   "clientNamespace": "Azure.Core.Foundations",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "usage": "None",
    "doc": "Provides status details for long running operations.",
@@ -1287,6 +1299,7 @@
    "$id": "129",
    "kind": "model",
    "name": "PagedProject",
+   "clientNamespace": "Azure.Core.Foundations",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "usage": "None",
    "doc": "Paged collection of Project items",
@@ -1348,6 +1361,7 @@
    "$id": "135",
    "kind": "model",
    "name": "TrainingJobOptions",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.TrainingJobOptions",
    "usage": "None",
    "doc": "Training job parameters.",
@@ -1378,6 +1392,7 @@
    "$id": "138",
    "kind": "model",
    "name": "Deployment",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.Deployment",
    "usage": "None",
    "decorators": [],
@@ -1407,6 +1422,7 @@
    "$id": "141",
    "kind": "model",
    "name": "PagedDeployment",
+   "clientNamespace": "Azure.Core.Foundations",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "usage": "None",
    "doc": "Paged collection of Deployment items",
@@ -1468,6 +1484,7 @@
    "$id": "147",
    "kind": "model",
    "name": "SwapDeploymentsOptions",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.SwapDeploymentsOptions",
    "usage": "None",
    "decorators": [],
@@ -1518,6 +1535,7 @@
    "$id": "152",
    "kind": "model",
    "name": "SupportedLanguages",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.SupportedLanguages",
    "usage": "None",
    "doc": "Paged collection of SupportedLanguage items",
@@ -1537,6 +1555,7 @@
        "$id": "155",
        "kind": "model",
        "name": "SupportedLanguage",
+       "clientNamespace": "AuthoringTypeSpec",
        "crossLanguageDefinitionId": "AuthoringTypeSpec.SupportedLanguage",
        "usage": "None",
        "doc": "Represents a supported language.",
@@ -1630,6 +1649,7 @@
    "$id": "163",
    "kind": "model",
    "name": "TrainingConfigVersions",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.TrainingConfigVersions",
    "usage": "None",
    "doc": "Paged collection of TrainingConfigVersion items",
@@ -1649,6 +1669,7 @@
        "$id": "166",
        "kind": "model",
        "name": "TrainingConfigVersion",
+       "clientNamespace": "AuthoringTypeSpec",
        "crossLanguageDefinitionId": "AuthoringTypeSpec.TrainingConfigVersion",
        "usage": "None",
        "doc": "Represents a training config version.",
@@ -1743,6 +1764,7 @@
   {
    "$id": "174",
    "Name": "AuthoringTypeSpecClient",
+   "ClientNamespace": "AuthoringTypeSpec",
    "Operations": [],
    "Protocol": {
     "$id": "175"
@@ -1774,6 +1796,7 @@
   {
    "$id": "178",
    "Name": "Projects",
+   "ClientNamespace": "AuthoringTypeSpec",
    "Operations": [
     {
      "$id": "179",
@@ -2895,6 +2918,7 @@
   {
    "$id": "297",
    "Name": "Deployments",
+   "ClientNamespace": "AuthoringTypeSpec",
    "Operations": [
     {
      "$id": "298",
@@ -3798,6 +3822,7 @@
   {
    "$id": "390",
    "Name": "Jobs",
+   "ClientNamespace": "AuthoringTypeSpec",
    "Operations": [
     {
      "$id": "391",
@@ -4145,6 +4170,7 @@
   {
    "$id": "424",
    "Name": "Global",
+   "ClientNamespace": "AuthoringTypeSpec",
    "Operations": [
     {
      "$id": "425",

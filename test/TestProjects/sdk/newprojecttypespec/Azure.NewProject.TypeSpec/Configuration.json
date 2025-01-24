@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Azure.NewProject.TypeSpec",
-  "library-name": "Azure.NewProject.TypeSpec",
+  "library-name": "NewProjectTypeSpec",
   "flavor": "azure",
   "use-model-reader-writer": true,
   "shared-source-folders": [

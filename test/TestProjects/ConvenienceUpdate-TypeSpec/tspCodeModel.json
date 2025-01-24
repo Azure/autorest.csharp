@@ -8,6 +8,7 @@
    "$id": "2",
    "kind": "model",
    "name": "Model",
+   "clientNamespace": "ConvenienceInCadl",
    "crossLanguageDefinitionId": "ConvenienceInCadl.Model",
    "usage": "Input,Output,Json",
    "doc": "A model.",
@@ -39,6 +40,7 @@
   {
    "$id": "5",
    "Name": "ConvenienceInCadlClient",
+   "ClientNamespace": "ConvenienceInCadl",
    "Doc": "Typespec project to test various types of convenience methods.",
    "Operations": [
     {

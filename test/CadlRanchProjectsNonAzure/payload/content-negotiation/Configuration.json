@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Scm.Payload.ContentNegotiation",
-  "library-name": "Scm.Payload.ContentNegotiation",
+  "library-name": "Payload.ContentNegotiation",
   "use-model-reader-writer": true,
   "shared-source-folders": [
     "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",

@@ -37,6 +37,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "_Specs_.Azure.Core.Lro.Standard",
    "doc": "The API version.",
    "isFixed": true,
    "isFlags": false,
@@ -147,6 +148,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "Azure.Core.Foundations",
    "doc": "Enum describing allowed operation states.",
    "isFixed": false,
    "isFlags": false,
@@ -159,6 +161,7 @@
    "$id": "18",
    "kind": "model",
    "name": "User",
+   "clientNamespace": "_Specs_.Azure.Core.Lro.Standard",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.User",
    "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
    "doc": "Details about a user.",
@@ -210,6 +213,7 @@
    "$id": "23",
    "kind": "model",
    "name": "ExportedUser",
+   "clientNamespace": "_Specs_.Azure.Core.Lro.Standard",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.ExportedUser",
    "usage": "Output,Json,LroInitial,LroPolling,LroFinalEnvelope",
    "doc": "The exported user data.",
@@ -261,6 +265,7 @@
    "$id": "28",
    "kind": "model",
    "name": "OperationStatusError",
+   "clientNamespace": "Azure.Core.Foundations",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "usage": "Json,LroInitial,LroPolling",
    "doc": "Provides status details for long running operations.",
@@ -312,6 +317,7 @@
       "$id": "33",
       "kind": "model",
       "name": "Error",
+      "clientNamespace": "Azure.Core.Foundations",
       "crossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "usage": "Json,Exception,LroInitial,LroPolling,LroFinalEnvelope",
       "doc": "The error object.",
@@ -410,6 +416,7 @@
          "$id": "43",
          "kind": "model",
          "name": "InnerError",
+         "clientNamespace": "Azure.Core.Foundations",
          "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "usage": "Json,Exception,LroInitial,LroPolling,LroFinalEnvelope",
          "doc": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
@@ -481,6 +488,7 @@
    "$id": "47",
    "kind": "model",
    "name": "ResourceOperationStatusUserExportedUserError",
+   "clientNamespace": "Azure.Core",
    "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
    "usage": "Json,LroInitial",
    "doc": "Provides status details for long running operations.",
@@ -560,6 +568,7 @@
    "$id": "53",
    "kind": "model",
    "name": "OperationStatusExportedUserError",
+   "clientNamespace": "Azure.Core.Foundations",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "usage": "LroPolling,LroFinalEnvelope",
    "doc": "Provides status details for long running operations.",
@@ -640,6 +649,7 @@
   {
    "$id": "59",
    "Name": "StandardClient",
+   "ClientNamespace": "_Specs_.Azure.Core.Lro.Standard",
    "Doc": "Illustrates bodies templated with Azure Core with long-running operation",
    "Operations": [
     {

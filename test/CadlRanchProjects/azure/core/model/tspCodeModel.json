@@ -37,6 +37,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "_Specs_.Azure.Core.Model",
    "doc": "The version of the API.",
    "isFixed": true,
    "isFlags": false,
@@ -49,6 +50,7 @@
    "$id": "6",
    "kind": "model",
    "name": "AzureEmbeddingModel",
+   "clientNamespace": "_Specs_.Azure.Core.Model",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureEmbeddingModel",
    "usage": "Input,Output,Json",
    "decorators": [],
@@ -86,6 +88,7 @@
   {
    "$id": "10",
    "Name": "ModelClient",
+   "ClientNamespace": "_Specs_.Azure.Core.Model",
    "Operations": [],
    "Protocol": {
     "$id": "11"
@@ -128,6 +131,7 @@
   {
    "$id": "16",
    "Name": "AzureCoreEmbeddingVector",
+   "ClientNamespace": "_Specs_.Azure.Core.Model",
    "Operations": [
     {
      "$id": "17",

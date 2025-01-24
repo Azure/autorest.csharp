@@ -30,6 +30,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "NoDocsUnbrandedTypeSpec",
    "doc": "The Thing_requiredLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -63,6 +64,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "NoDocsUnbrandedTypeSpec",
    "doc": "The Thing_requiredLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -96,6 +98,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "NoDocsUnbrandedTypeSpec",
    "doc": "The Thing_requiredLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -129,6 +132,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "NoDocsUnbrandedTypeSpec",
    "doc": "The Thing_optionalLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -162,6 +166,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "NoDocsUnbrandedTypeSpec",
    "doc": "The Thing_optionalLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -195,6 +200,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "NoDocsUnbrandedTypeSpec",
    "doc": "The Thing_optionalLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -207,6 +213,7 @@
    "$id": "20",
    "kind": "model",
    "name": "Thing",
+   "clientNamespace": "NoDocsUnbrandedTypeSpec",
    "crossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing",
    "usage": "Output,Json",
    "doc": "A model with a few properties of literal types",
@@ -272,6 +279,7 @@
         "decorators": []
        }
       ],
+      "clientNamespace": "",
       "decorators": []
      },
      "optional": false,
@@ -507,7 +515,8 @@
        },
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
-      }
+      },
+      "clientNamespace": ""
      },
      "optional": true,
      "readOnly": false,
@@ -538,7 +547,8 @@
        },
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
-      }
+      },
+      "clientNamespace": ""
      },
      "optional": false,
      "readOnly": false,
@@ -554,6 +564,7 @@
   {
    "$id": "57",
    "Name": "NoDocsUnbrandedTypeSpecClient",
+   "ClientNamespace": "NoDocsUnbrandedTypeSpec",
    "Doc": "This is a sample typespec project.",
    "Operations": [
     {

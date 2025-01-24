@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "_Azure.SpecialHeaders.XmsClientRequestId",
-  "library-name": "_Azure.SpecialHeaders.XmsClientRequestId",
+  "library-name": "Azure.SpecialHeaders.XmsClientRequestId",
   "flavor": "azure",
   "use-model-reader-writer": true,
   "shared-source-folders": [

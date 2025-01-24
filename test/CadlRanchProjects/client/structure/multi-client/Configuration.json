@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Client.Structure.Service.Multiple.Client",
-  "library-name": "Client.Structure.Service.Multiple.Client",
+  "library-name": "Client.Structure.Service",
   "flavor": "azure",
   "use-model-reader-writer": true,
   "shared-source-folders": [

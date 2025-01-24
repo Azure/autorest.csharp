@@ -9,8 +9,8 @@ using Azure.Core;
 
 namespace Client.Structure.Service.ClientOperationGroup
 {
-    /// <summary> Client options for Client.Structure.Service.ClientOperationGroup library clients. </summary>
-    public partial class ClientStructureServiceClientOperationGroupClientOptions : ClientOptions
+    /// <summary> Client options for Client.Structure.Service library clients. </summary>
+    public partial class ClientStructureServiceClientOptions : ClientOptions
     {
     }
 }

@@ -8,6 +8,7 @@
    "$id": "2",
    "kind": "model",
    "name": "InputModel",
+   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.InputModel",
    "usage": "Input,Output,Json",
    "doc": "Usage override to roundtrip.",
@@ -38,6 +39,7 @@
    "$id": "5",
    "kind": "model",
    "name": "OutputModel",
+   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.OutputModel",
    "usage": "Input,Output,Json",
    "doc": "Usage override to roundtrip.",
@@ -68,6 +70,7 @@
    "$id": "8",
    "kind": "model",
    "name": "RoundTripModel",
+   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.RoundTripModel",
    "usage": "Input,Output,Json",
    "decorators": [],
@@ -81,6 +84,7 @@
       "$id": "10",
       "kind": "model",
       "name": "ResultModel",
+      "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
       "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.ResultModel",
       "usage": "Output,Json",
       "decorators": [],
@@ -122,6 +126,7 @@
    "$id": "13",
    "kind": "model",
    "name": "OrphanModel",
+   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.OrphanModel",
    "access": "public",
    "usage": "Input",
@@ -154,6 +159,7 @@
   {
    "$id": "16",
    "Name": "UsageClient",
+   "ClientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage",
    "Doc": "Test for internal decorator.",
    "Operations": [],
    "Protocol": {
@@ -197,6 +203,7 @@
   {
    "$id": "22",
    "Name": "ModelInOperation",
+   "ClientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
    "Operations": [
     {
      "$id": "23",

@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Scm._Type.Model.Inheritance.EnumDiscriminator",
-  "library-name": "Scm._Type.Model.Inheritance.EnumDiscriminator",
+  "library-name": "Type.Model.Inheritance.EnumDiscriminator",
   "use-model-reader-writer": true,
   "shared-source-folders": [
     "../../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",
