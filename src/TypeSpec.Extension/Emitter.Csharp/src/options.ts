@@ -53,6 +53,6 @@ export function resolveAzureEmitterOptions(
         "enable-internal-raw-data":
             context.options["enable-internal-raw-data"] ??
             defaultAzureEmitterOptions["enable-internal-raw-data"],
-        "model-namespace": context.options["model-namespace"],
+        "model-namespace": context.options["model-namespace"]
     };
 }
