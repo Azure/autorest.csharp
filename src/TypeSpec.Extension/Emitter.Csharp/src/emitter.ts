@@ -75,6 +75,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
                 : undefined);
         configurations["enable-internal-raw-data"] =
             options["enable-internal-raw-data"];
+        configurations["model-namespace"] = options["model-namespace"];
         const examplesDir =
             options["examples-dir"] ?? options["examples-directory"];
         if (examplesDir) {
