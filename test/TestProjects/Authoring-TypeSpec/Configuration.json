@@ -2,9 +2,9 @@
   "output-folder": ".",
   "namespace": "AuthoringTypeSpec",
   "library-name": "AuthoringTypeSpec",
-  "keep-non-overloadable-protocol-signature": true,
   "flavor": "azure",
   "use-model-reader-writer": true,
+  "keep-non-overloadable-protocol-signature": true,
   "shared-source-folders": [
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Azure.Core.Shared"
