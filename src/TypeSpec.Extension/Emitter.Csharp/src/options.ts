@@ -151,6 +151,8 @@ export function resolveAzureEmitterOptions(
             defaultAzureEmitterOptions["single-top-level-client"],
         "keep-non-overloadable-protocol-signature":
             context.options["keep-non-overloadable-protocol-signature"] ??
-            defaultAzureEmitterOptions["keep-non-overloadable-protocol-signature"]
+            defaultAzureEmitterOptions[
+                "keep-non-overloadable-protocol-signature"
+            ]
     };
 }
