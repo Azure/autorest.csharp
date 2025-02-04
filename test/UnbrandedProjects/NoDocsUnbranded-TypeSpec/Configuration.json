@@ -2,10 +2,10 @@
   "output-folder": ".",
   "namespace": "NoDocsUnbrandedTypeSpec",
   "library-name": "NoDocsUnbrandedTypeSpec",
+  "disable-xml-docs": true,
   "head-as-boolean": true,
   "deserialize-null-collection-as-null-value": true,
   "use-model-reader-writer": true,
-  "disable-xml-docs": true,
   "shared-source-folders": [
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Azure.Core.Shared"
