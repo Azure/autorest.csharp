@@ -93,7 +93,12 @@ const defaultAzureEmitterOptions = {
     "deserialize-null-collection-as-null-value": undefined,
     flavor: undefined,
     "generate-test-project": false,
-    "existing-project-folder": undefined
+    "existing-project-folder": undefined,
+    "head-as-boolean": undefined,
+    "generate-sample-project": true,
+    "use-model-reader-writer": true,
+    "single-top-level-client": undefined,
+    "keep-non-overloadable-protocol-signature": undefined
 };
 
 export function resolveAzureEmitterOptions(
@@ -128,6 +133,24 @@ export function resolveAzureEmitterOptions(
         flavor: context.options.flavor ?? defaultAzureEmitterOptions.flavor,
         "existing-project-folder":
             context.options["existing-project-folder"] ??
-            defaultAzureEmitterOptions["existing-project-folder"]
+            defaultAzureEmitterOptions["existing-project-folder"],
+        "head-as-boolean":
+            context.options["head-as-boolean"] ??
+            defaultAzureEmitterOptions["head-as-boolean"],
+        "generate-sample-project":
+            context.options["generate-sample-project"] ??
+            defaultAzureEmitterOptions["generate-sample-project"],
+        "generate-test-project":
+            context.options["generate-test-project"] ??
+            defaultAzureEmitterOptions["generate-test-project"],
+        "use-model-reader-writer":
+            context.options["use-model-reader-writer"] ??
+            defaultAzureEmitterOptions["use-model-reader-writer"],
+        "single-top-level-client":
+            context.options["single-top-level-client"] ??
+            defaultAzureEmitterOptions["single-top-level-client"],
+        "keep-non-overloadable-protocol-signature":
+            context.options["keep-non-overloadable-protocol-signature"] ??
+            defaultAzureEmitterOptions["keep-non-overloadable-protocol-signature"]
     };
 }
