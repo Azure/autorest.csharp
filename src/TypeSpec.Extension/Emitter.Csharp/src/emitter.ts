@@ -67,12 +67,62 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
                     .replaceAll("\\", "/")
             );
         }
-        configurations["shared-source-folders"] = resolvedSharedFolders ?? [];
+
+        configurations["head-as-boolean"] = options["head-as-boolean"];
+        configurations["deserialize-null-collection-as-null-value"] =
+            options["deserialize-null-collection-as-null-value"];
         configurations["flavor"] =
             options["flavor"] ??
             (configurations.namespace.toLowerCase().startsWith("azure.")
                 ? "azure"
                 : undefined);
+
+        //only emit these if they are not the default values
+        configurations["generate-sample-project"] =
+            options["generate-sample-project"] === true
+                ? undefined
+                : options["generate-sample-project"];
+
+        configurations["generate-test-project"] =
+            options["generate-test-project"] === false
+                ? undefined
+                : options["generate-test-project"];
+
+        configurations["use-model-reader-writer"] =
+            options["use-model-reader-writer"];
+
+        configurations["single-top-level-client"] =
+            options["single-top-level-client"];
+
+        configurations["keep-non-overloadable-protocol-signature"] =
+            options["keep-non-overloadable-protocol-signature"];
+
+        configurations["models-to-treat-empty-string-as-null"] =
+            options["models-to-treat-empty-string-as-null"];
+
+        configurations["intrinsic-types-to-treat-empty-string-as-null"] =
+            options["models-to-treat-empty-string-as-null"]
+                ? options[
+                      "additional-intrinsic-types-to-treat-empty-string-as-null"
+                  ].concat(
+                      [
+                          "Uri",
+                          "Guid",
+                          "ResourceIdentifier",
+                          "DateTimeOffset"
+                      ].filter(
+                          (item) =>
+                              options[
+                                  "additional-intrinsic-types-to-treat-empty-string-as-null"
+                              ].indexOf(item) < 0
+                      )
+                  )
+                : undefined;
+
+        configurations["methods-to-keep-client-default-value"] =
+            options["methods-to-keep-client-default-value"];
+        configurations["shared-source-folders"] = resolvedSharedFolders ?? [];
+
         configurations["enable-internal-raw-data"] =
             options["enable-internal-raw-data"];
         configurations["model-namespace"] = options["model-namespace"];
