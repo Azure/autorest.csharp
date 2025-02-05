@@ -11,7 +11,6 @@ import {
     Logger,
     LoggerLevel,
     configurationFileName,
-    resolveOutputFolder,
     tspOutputFileName,
     setSDKContextOptions
 } from "@typespec/http-client-csharp";
@@ -41,7 +40,9 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
     Logger.getInstance().info("Starting Microsoft Generator Csharp emitter.");
     setSDKContextOptions(azureSDKContextOptions);
     await $OnMGCEmit(context);
-    const outputFolder = resolveOutputFolder(context);
+    const outputFolder = resolvePath(
+        context.emitterOutputDir ?? "./tsp-output"
+    );
     const isSrcFolder = path.basename(outputFolder) === "src";
     const generatedFolder = isSrcFolder
         ? resolvePath(outputFolder, "Generated")
