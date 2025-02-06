@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Scm.Authentication.ApiKey",
-  "library-name": "Authentication.ApiKey",
+  "library-name": "Scm.Authentication.ApiKey",
   "use-model-reader-writer": true,
   "shared-source-folders": [
     "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",

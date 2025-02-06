@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Scm.Serialization.EncodedName.Json",
-  "library-name": "Serialization.EncodedName.Json",
+  "library-name": "Scm.Serialization.EncodedName.Json",
   "use-model-reader-writer": true,
   "shared-source-folders": [
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",

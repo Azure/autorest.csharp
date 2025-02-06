@@ -9,8 +9,8 @@ using Azure.Core;
 
 namespace Client.Structure.Service.Multiple.Client
 {
-    /// <summary> Client options for Client.Structure.Service library clients. </summary>
-    public partial class ClientStructureServiceClientOptions : ClientOptions
+    /// <summary> Client options for Client.Structure.Service.Multiple.Client library clients. </summary>
+    public partial class ClientStructureServiceMultipleClientOptions : ClientOptions
     {
     }
 }

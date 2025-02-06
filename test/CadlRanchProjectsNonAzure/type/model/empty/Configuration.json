@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Scm._Type.Model.Empty",
-  "library-name": "Type.Model.Empty",
+  "library-name": "Scm._Type.Model.Empty",
   "use-model-reader-writer": true,
   "shared-source-folders": [
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",

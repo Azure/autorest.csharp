@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Scm.SpecialWords",
-  "library-name": "SpecialWords",
+  "library-name": "Scm.SpecialWords",
   "use-model-reader-writer": true,
   "shared-source-folders": [
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",

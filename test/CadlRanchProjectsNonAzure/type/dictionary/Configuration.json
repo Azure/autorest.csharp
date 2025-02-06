@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Scm._Type._Dictionary",
-  "library-name": "Type.Dictionary",
+  "library-name": "Scm._Type._Dictionary",
   "use-model-reader-writer": true,
   "shared-source-folders": [
     "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",

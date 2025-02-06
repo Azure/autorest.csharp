@@ -131,16 +131,23 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User.id"
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User.id",
+     "serializationOptions": {
+      "$id": "15",
+      "json": {
+       "$id": "16",
+       "name": "id"
+      }
+     }
     },
     {
-     "$id": "15",
+     "$id": "17",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
      "doc": "The user's name.",
      "type": {
-      "$id": "16",
+      "$id": "18",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -151,12 +158,19 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User.name"
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User.name",
+     "serializationOptions": {
+      "$id": "19",
+      "json": {
+       "$id": "20",
+       "name": "name"
+      }
+     }
     }
    ]
   },
   {
-   "$id": "17",
+   "$id": "21",
    "kind": "model",
    "name": "UserActionParam",
    "clientNamespace": "_Specs_.Azure.Core.Traits",
@@ -166,13 +180,13 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "18",
+     "$id": "22",
      "kind": "property",
      "name": "userActionValue",
      "serializedName": "userActionValue",
      "doc": "User action value.",
      "type": {
-      "$id": "19",
+      "$id": "23",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -183,12 +197,19 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam.userActionValue"
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam.userActionValue",
+     "serializationOptions": {
+      "$id": "24",
+      "json": {
+       "$id": "25",
+       "name": "userActionValue"
+      }
+     }
     }
    ]
   },
   {
-   "$id": "20",
+   "$id": "26",
    "kind": "model",
    "name": "UserActionResponse",
    "clientNamespace": "_Specs_.Azure.Core.Traits",
@@ -198,13 +219,13 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "21",
+     "$id": "27",
      "kind": "property",
      "name": "userActionResult",
      "serializedName": "userActionResult",
      "doc": "User action result.",
      "type": {
-      "$id": "22",
+      "$id": "28",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -215,32 +236,39 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse.userActionResult"
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse.userActionResult",
+     "serializationOptions": {
+      "$id": "29",
+      "json": {
+       "$id": "30",
+       "name": "userActionResult"
+      }
+     }
     }
    ]
   }
  ],
  "Clients": [
   {
-   "$id": "23",
+   "$id": "31",
    "Name": "TraitsClient",
    "ClientNamespace": "_Specs_.Azure.Core.Traits",
    "Doc": "Illustrates Azure Core operation customizations by traits",
    "Operations": [
     {
-     "$id": "24",
+     "$id": "32",
      "Name": "smokeTest",
      "ResourceName": "User",
      "Doc": "Get a resource, sending and receiving headers.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "25",
+       "$id": "33",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Doc": "The API version to use for this operation.",
        "Type": {
-        "$id": "26",
+        "$id": "34",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -254,9 +282,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "27",
+        "$id": "35",
         "Type": {
-         "$id": "28",
+         "$id": "36",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -267,12 +295,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "29",
+       "$id": "37",
        "Name": "id",
        "NameInRequest": "id",
        "Doc": "The user's id.",
        "Type": {
-        "$id": "30",
+        "$id": "38",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -289,12 +317,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "31",
+       "$id": "39",
        "Name": "foo",
        "NameInRequest": "foo",
        "Doc": "header in request",
        "Type": {
-        "$id": "32",
+        "$id": "40",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -311,97 +339,15 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "33",
+       "$id": "41",
        "Name": "ifMatch",
        "NameInRequest": "If-Match",
        "Doc": "The request should only proceed if an entity matches this string.",
        "Type": {
-        "$id": "34",
+        "$id": "42",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
-      },
-      {
-       "$id": "35",
-       "Name": "ifNoneMatch",
-       "NameInRequest": "If-None-Match",
-       "Doc": "The request should only proceed if no entity matches this string.",
-       "Type": {
-        "$id": "36",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
-      },
-      {
-       "$id": "37",
-       "Name": "ifUnmodifiedSince",
-       "NameInRequest": "If-Unmodified-Since",
-       "Doc": "The request should only proceed if the entity was not modified after this time.",
-       "Type": {
-        "$id": "38",
-        "kind": "utcDateTime",
-        "name": "utcDateTime",
-        "encode": "rfc7231",
-        "wireType": {
-         "$id": "39",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
-        "decorators": []
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
-      },
-      {
-       "$id": "40",
-       "Name": "ifModifiedSince",
-       "NameInRequest": "If-Modified-Since",
-       "Doc": "The request should only proceed if the entity was modified after this time.",
-       "Type": {
-        "$id": "41",
-        "kind": "utcDateTime",
-        "name": "utcDateTime",
-        "encode": "rfc7231",
-        "wireType": {
-         "$id": "42",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
         "decorators": []
        },
        "Location": "Header",
@@ -416,16 +362,98 @@
       },
       {
        "$id": "43",
+       "Name": "ifNoneMatch",
+       "NameInRequest": "If-None-Match",
+       "Doc": "The request should only proceed if no entity matches this string.",
+       "Type": {
+        "$id": "44",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": false,
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "45",
+       "Name": "ifUnmodifiedSince",
+       "NameInRequest": "If-Unmodified-Since",
+       "Doc": "The request should only proceed if the entity was not modified after this time.",
+       "Type": {
+        "$id": "46",
+        "kind": "utcDateTime",
+        "name": "utcDateTime",
+        "encode": "rfc7231",
+        "wireType": {
+         "$id": "47",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+        "decorators": []
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": false,
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "48",
+       "Name": "ifModifiedSince",
+       "NameInRequest": "If-Modified-Since",
+       "Doc": "The request should only proceed if the entity was modified after this time.",
+       "Type": {
+        "$id": "49",
+        "kind": "utcDateTime",
+        "name": "utcDateTime",
+        "encode": "rfc7231",
+        "wireType": {
+         "$id": "50",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+        "decorators": []
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": false,
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "51",
        "Name": "clientRequestId",
        "NameInRequest": "x-ms-client-request-id",
        "Doc": "An opaque, globally-unique, client-generated string identifier for the request.",
        "Type": {
-        "$id": "44",
+        "$id": "52",
         "kind": "string",
         "name": "uuid",
         "crossLanguageDefinitionId": "Azure.Core.uuid",
         "baseType": {
-         "$id": "45",
+         "$id": "53",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -444,14 +472,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "46",
+       "$id": "54",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "47",
+        "$id": "55",
         "kind": "constant",
         "valueType": {
-         "$id": "48",
+         "$id": "56",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -473,7 +501,7 @@
      ],
      "Responses": [
       {
-       "$id": "49",
+       "$id": "57",
        "StatusCodes": [
         200
        ],
@@ -483,11 +511,11 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "50",
+         "$id": "58",
          "Name": "bar",
          "NameInResponse": "bar",
          "Type": {
-          "$id": "51",
+          "$id": "59",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -495,12 +523,12 @@
          }
         },
         {
-         "$id": "52",
+         "$id": "60",
          "Name": "etagHeader",
          "NameInResponse": "ETag",
          "Doc": "The entity tag for the response.",
          "Type": {
-          "$id": "53",
+          "$id": "61",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -508,17 +536,17 @@
          }
         },
         {
-         "$id": "54",
+         "$id": "62",
          "Name": "clientRequestId",
          "NameInResponse": "x-ms-client-request-id",
          "Doc": "An opaque, globally-unique, client-generated string identifier for the request.",
          "Type": {
-          "$id": "55",
+          "$id": "63",
           "kind": "string",
           "name": "uuid",
           "crossLanguageDefinitionId": "Azure.Core.uuid",
           "baseType": {
-           "$id": "56",
+           "$id": "64",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -545,19 +573,19 @@
      "Decorators": []
     },
     {
-     "$id": "57",
+     "$id": "65",
      "Name": "repeatableAction",
      "ResourceName": "Traits",
      "Doc": "Test for repeatable requests",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "58",
+       "$id": "66",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Doc": "The API version to use for this operation.",
        "Type": {
-        "$id": "59",
+        "$id": "67",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -571,9 +599,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "60",
+        "$id": "68",
         "Type": {
-         "$id": "61",
+         "$id": "69",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -584,12 +612,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "62",
+       "$id": "70",
        "Name": "id",
        "NameInRequest": "id",
        "Doc": "The user's id.",
        "Type": {
-        "$id": "63",
+        "$id": "71",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -606,12 +634,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "64",
+       "$id": "72",
        "Name": "repeatabilityRequestId",
        "NameInRequest": "Repeatability-Request-ID",
        "Doc": "An opaque, globally-unique, client-generated string identifier for the request.",
        "Type": {
-        "$id": "65",
+        "$id": "73",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -628,17 +656,17 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "66",
+       "$id": "74",
        "Name": "repeatabilityFirstSent",
        "NameInRequest": "Repeatability-First-Sent",
        "Doc": "Specifies the date and time at which the request was first created.",
        "Type": {
-        "$id": "67",
+        "$id": "75",
         "kind": "utcDateTime",
         "name": "utcDateTime",
         "encode": "rfc7231",
         "wireType": {
-         "$id": "68",
+         "$id": "76",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -658,15 +686,15 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "69",
+       "$id": "77",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "70",
+        "$id": "78",
         "kind": "constant",
         "valueType": {
-         "$id": "71",
+         "$id": "79",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -686,14 +714,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "72",
+       "$id": "80",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "73",
+        "$id": "81",
         "kind": "constant",
         "valueType": {
-         "$id": "74",
+         "$id": "82",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -713,12 +741,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "75",
+       "$id": "83",
        "Name": "body",
        "NameInRequest": "body",
        "Doc": "The body parameter.",
        "Type": {
-        "$ref": "17"
+        "$ref": "21"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -733,17 +761,17 @@
      ],
      "Responses": [
       {
-       "$id": "76",
+       "$id": "84",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "20"
+        "$ref": "26"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "77",
+         "$id": "85",
          "Name": "repeatabilityResult",
          "NameInResponse": "Repeatability-Result",
          "Doc": "Indicates whether the repeatable request was accepted or rejected.",
@@ -773,16 +801,16 @@
     }
    ],
    "Protocol": {
-    "$id": "78"
+    "$id": "86"
    },
    "Parameters": [
     {
-     "$id": "79",
+     "$id": "87",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Doc": "Service host",
      "Type": {
-      "$id": "80",
+      "$id": "88",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -797,9 +825,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "81",
+      "$id": "89",
       "Type": {
-       "$id": "82",
+       "$id": "90",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"

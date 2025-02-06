@@ -31,12 +31,19 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.InputModel.name"
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.InputModel.name",
+     "serializationOptions": {
+      "$id": "5",
+      "json": {
+       "$id": "6",
+       "name": "name"
+      }
+     }
     }
    ]
   },
   {
-   "$id": "5",
+   "$id": "7",
    "kind": "model",
    "name": "OutputModel",
    "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
@@ -46,12 +53,12 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "6",
+     "$id": "8",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
      "type": {
-      "$id": "7",
+      "$id": "9",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -62,12 +69,19 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.OutputModel.name"
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.OutputModel.name",
+     "serializationOptions": {
+      "$id": "10",
+      "json": {
+       "$id": "11",
+       "name": "name"
+      }
+     }
     }
    ]
   },
   {
-   "$id": "8",
+   "$id": "12",
    "kind": "model",
    "name": "RoundTripModel",
    "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
@@ -76,12 +90,12 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "9",
+     "$id": "13",
      "kind": "property",
      "name": "result",
      "serializedName": "result",
      "type": {
-      "$id": "10",
+      "$id": "14",
       "kind": "model",
       "name": "ResultModel",
       "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
@@ -90,12 +104,12 @@
       "decorators": [],
       "properties": [
        {
-        "$id": "11",
+        "$id": "15",
         "kind": "property",
         "name": "name",
         "serializedName": "name",
         "type": {
-         "$id": "12",
+         "$id": "16",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -106,7 +120,14 @@
         "discriminator": false,
         "flatten": false,
         "decorators": [],
-        "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.ResultModel.name"
+        "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.ResultModel.name",
+        "serializationOptions": {
+         "$id": "17",
+         "json": {
+          "$id": "18",
+          "name": "name"
+         }
+        }
        }
       ]
      },
@@ -115,15 +136,22 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.RoundTripModel.result"
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.RoundTripModel.result",
+     "serializationOptions": {
+      "$id": "19",
+      "json": {
+       "$id": "20",
+       "name": "result"
+      }
+     }
     }
    ]
   },
   {
-   "$ref": "10"
+   "$ref": "14"
   },
   {
-   "$id": "13",
+   "$id": "21",
    "kind": "model",
    "name": "OrphanModel",
    "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage",
@@ -134,12 +162,12 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "14",
+     "$id": "22",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
      "type": {
-      "$id": "15",
+      "$id": "23",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -150,29 +178,32 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.OrphanModel.name"
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.OrphanModel.name",
+     "serializationOptions": {
+      "$id": "24"
+     }
     }
    ]
   }
  ],
  "Clients": [
   {
-   "$id": "16",
+   "$id": "25",
    "Name": "UsageClient",
    "ClientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage",
    "Doc": "Test for internal decorator.",
    "Operations": [],
    "Protocol": {
-    "$id": "17"
+    "$id": "26"
    },
    "Parameters": [
     {
-     "$id": "18",
+     "$id": "27",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Doc": "Service host",
      "Type": {
-      "$id": "19",
+      "$id": "28",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -187,9 +218,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "20",
+      "$id": "29",
       "Type": {
-       "$id": "21",
+       "$id": "30",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"
@@ -201,27 +232,27 @@
    "Decorators": []
   },
   {
-   "$id": "22",
+   "$id": "31",
    "Name": "ModelInOperation",
    "ClientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
    "Operations": [
     {
-     "$id": "23",
+     "$id": "32",
      "Name": "inputToInputOutput",
      "ResourceName": "ModelInOperation",
      "Doc": "Expected body parameter: \n```json\n{\n  \"name\": \"Madge\"\n}\n```",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "24",
+       "$id": "33",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "25",
+        "$id": "34",
         "kind": "constant",
         "valueType": {
-         "$id": "26",
+         "$id": "35",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -241,7 +272,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "27",
+       "$id": "36",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -260,7 +291,7 @@
      ],
      "Responses": [
       {
-       "$id": "28",
+       "$id": "37",
        "StatusCodes": [
         204
        ],
@@ -283,21 +314,21 @@
      "Decorators": []
     },
     {
-     "$id": "29",
+     "$id": "38",
      "Name": "outputToInputOutput",
      "ResourceName": "ModelInOperation",
      "Doc": "Expected response body: \n```json\n{\n  \"name\": \"Madge\"\n}\n```",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "30",
+       "$id": "39",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "31",
+        "$id": "40",
         "kind": "constant",
         "valueType": {
-         "$id": "32",
+         "$id": "41",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -319,12 +350,12 @@
      ],
      "Responses": [
       {
-       "$id": "33",
+       "$id": "42",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "7"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -345,22 +376,22 @@
      "Decorators": []
     },
     {
-     "$id": "34",
+     "$id": "43",
      "Name": "modelInReadOnlyProperty",
      "ResourceName": "ModelInOperation",
      "Doc": "\"ResultModel\" should be usage=output, as it is read-only and does not exist in request body.\n\nExpected body parameter: \n```json\n{\n}\n```\n\nExpected response body: \n```json\n{\n  \"result\": {\n    \"name\": \"Madge\"\n  }\n}\n```",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "35",
+       "$id": "44",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "36",
+        "$id": "45",
         "kind": "constant",
         "valueType": {
-         "$id": "37",
+         "$id": "46",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -380,14 +411,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "38",
+       "$id": "47",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "39",
+        "$id": "48",
         "kind": "constant",
         "valueType": {
-         "$id": "40",
+         "$id": "49",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -407,11 +438,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "41",
+       "$id": "50",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "8"
+        "$ref": "12"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -426,12 +457,12 @@
      ],
      "Responses": [
       {
-       "$id": "42",
+       "$id": "51",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "8"
+        "$ref": "12"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -456,17 +487,17 @@
     }
    ],
    "Protocol": {
-    "$id": "43"
+    "$id": "52"
    },
    "Parent": "UsageClient",
    "Parameters": [
     {
-     "$id": "44",
+     "$id": "53",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Doc": "Service host",
      "Type": {
-      "$id": "45",
+      "$id": "54",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -481,9 +512,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "46",
+      "$id": "55",
       "Type": {
-       "$id": "47",
+       "$id": "56",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"

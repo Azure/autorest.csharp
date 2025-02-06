@@ -37,7 +37,7 @@ namespace Client.Structure.Service.Multiple.Client
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public ClientBClient(Uri endpoint, ClientType client) : this(endpoint, client, new ClientStructureServiceClientOptions())
+        public ClientBClient(Uri endpoint, ClientType client) : this(endpoint, client, new ClientStructureServiceMultipleClientOptions())
         {
         }
 
@@ -46,10 +46,10 @@ namespace Client.Structure.Service.Multiple.Client
         /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public ClientBClient(Uri endpoint, ClientType client, ClientStructureServiceClientOptions options)
+        public ClientBClient(Uri endpoint, ClientType client, ClientStructureServiceMultipleClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new ClientStructureServiceClientOptions();
+            options ??= new ClientStructureServiceMultipleClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());

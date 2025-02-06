@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Scm.Authentication.Http.Custom",
-  "library-name": "Authentication.Http.Custom",
+  "library-name": "Scm.Authentication.Http.Custom",
   "use-model-reader-writer": true,
   "shared-source-folders": [
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",

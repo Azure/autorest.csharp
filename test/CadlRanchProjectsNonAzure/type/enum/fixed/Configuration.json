@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Scm._Type._Enum.Fixed",
-  "library-name": "Type.Enum.Fixed",
+  "library-name": "Scm._Type._Enum.Fixed",
   "use-model-reader-writer": true,
   "shared-source-folders": [
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",

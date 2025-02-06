@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "_Type.Model.Inheritance.EnumDiscriminator",
-  "library-name": "Type.Model.Inheritance.EnumDiscriminator",
+  "library-name": "_Type.Model.Inheritance.EnumDiscriminator",
   "flavor": "azure",
   "use-model-reader-writer": true,
   "shared-source-folders": [

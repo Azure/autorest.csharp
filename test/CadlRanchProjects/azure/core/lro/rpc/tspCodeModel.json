@@ -185,12 +185,19 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.GenerationOptions.prompt"
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.GenerationOptions.prompt",
+     "serializationOptions": {
+      "$id": "21",
+      "json": {
+       "$id": "22",
+       "name": "prompt"
+      }
+     }
     }
    ]
   },
   {
-   "$id": "21",
+   "$id": "23",
    "kind": "model",
    "name": "GenerationResult",
    "clientNamespace": "_Specs_.Azure.Core.Lro.Rpc",
@@ -200,13 +207,13 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "22",
+     "$id": "24",
      "kind": "property",
      "name": "data",
      "serializedName": "data",
      "doc": "The data.",
      "type": {
-      "$id": "23",
+      "$id": "25",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -217,12 +224,19 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.GenerationResult.data"
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.GenerationResult.data",
+     "serializationOptions": {
+      "$id": "26",
+      "json": {
+       "$id": "27",
+       "name": "data"
+      }
+     }
     }
    ]
   },
   {
-   "$id": "24",
+   "$id": "28",
    "kind": "model",
    "name": "ResourceOperationStatusGenerationResponseGenerationResultError",
    "clientNamespace": "Azure.Core",
@@ -232,13 +246,13 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "25",
+     "$id": "29",
      "kind": "property",
      "name": "id",
      "serializedName": "id",
      "doc": "The unique ID of the operation.",
      "type": {
-      "$id": "26",
+      "$id": "30",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -249,10 +263,17 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.id"
+     "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.id",
+     "serializationOptions": {
+      "$id": "31",
+      "json": {
+       "$id": "32",
+       "name": "id"
+      }
+     }
     },
     {
-     "$id": "27",
+     "$id": "33",
      "kind": "property",
      "name": "status",
      "serializedName": "status",
@@ -265,16 +286,23 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.status"
+     "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.status",
+     "serializationOptions": {
+      "$id": "34",
+      "json": {
+       "$id": "35",
+       "name": "status"
+      }
+     }
     },
     {
-     "$id": "28",
+     "$id": "36",
      "kind": "property",
      "name": "error",
      "serializedName": "error",
      "doc": "Error object that describes the error when status is \"Failed\".",
      "type": {
-      "$id": "29",
+      "$id": "37",
       "kind": "model",
       "name": "Error",
       "clientNamespace": "Azure.Core.Foundations",
@@ -284,13 +312,13 @@
       "decorators": [],
       "properties": [
        {
-        "$id": "30",
+        "$id": "38",
         "kind": "property",
         "name": "code",
         "serializedName": "code",
         "doc": "One of a server-defined set of error codes.",
         "type": {
-         "$id": "31",
+         "$id": "39",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -301,16 +329,23 @@
         "discriminator": false,
         "flatten": false,
         "decorators": [],
-        "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.code"
+        "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.code",
+        "serializationOptions": {
+         "$id": "40",
+         "json": {
+          "$id": "41",
+          "name": "code"
+         }
+        }
        },
        {
-        "$id": "32",
+        "$id": "42",
         "kind": "property",
         "name": "message",
         "serializedName": "message",
         "doc": "A human-readable representation of the error.",
         "type": {
-         "$id": "33",
+         "$id": "43",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -321,16 +356,23 @@
         "discriminator": false,
         "flatten": false,
         "decorators": [],
-        "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.message"
+        "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.message",
+        "serializationOptions": {
+         "$id": "44",
+         "json": {
+          "$id": "45",
+          "name": "message"
+         }
+        }
        },
        {
-        "$id": "34",
+        "$id": "46",
         "kind": "property",
         "name": "target",
         "serializedName": "target",
         "doc": "The target of the error.",
         "type": {
-         "$id": "35",
+         "$id": "47",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -341,20 +383,27 @@
         "discriminator": false,
         "flatten": false,
         "decorators": [],
-        "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.target"
+        "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.target",
+        "serializationOptions": {
+         "$id": "48",
+         "json": {
+          "$id": "49",
+          "name": "target"
+         }
+        }
        },
        {
-        "$id": "36",
+        "$id": "50",
         "kind": "property",
         "name": "details",
         "serializedName": "details",
         "doc": "An array of details about specific errors that led to this reported error.",
         "type": {
-         "$id": "37",
+         "$id": "51",
          "kind": "array",
          "name": "ArrayError",
          "valueType": {
-          "$ref": "29"
+          "$ref": "37"
          },
          "crossLanguageDefinitionId": "TypeSpec.Array",
          "decorators": []
@@ -364,16 +413,23 @@
         "discriminator": false,
         "flatten": false,
         "decorators": [],
-        "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.details"
+        "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.details",
+        "serializationOptions": {
+         "$id": "52",
+         "json": {
+          "$id": "53",
+          "name": "details"
+         }
+        }
        },
        {
-        "$id": "38",
+        "$id": "54",
         "kind": "property",
         "name": "innererror",
         "serializedName": "innererror",
         "doc": "An object containing more specific information than the current object about the error.",
         "type": {
-         "$id": "39",
+         "$id": "55",
          "kind": "model",
          "name": "InnerError",
          "clientNamespace": "Azure.Core.Foundations",
@@ -383,13 +439,13 @@
          "decorators": [],
          "properties": [
           {
-           "$id": "40",
+           "$id": "56",
            "kind": "property",
            "name": "code",
            "serializedName": "code",
            "doc": "One of a server-defined set of error codes.",
            "type": {
-            "$id": "41",
+            "$id": "57",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string",
@@ -400,23 +456,37 @@
            "discriminator": false,
            "flatten": false,
            "decorators": [],
-           "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError.code"
+           "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError.code",
+           "serializationOptions": {
+            "$id": "58",
+            "json": {
+             "$id": "59",
+             "name": "code"
+            }
+           }
           },
           {
-           "$id": "42",
+           "$id": "60",
            "kind": "property",
            "name": "innererror",
            "serializedName": "innererror",
            "doc": "Inner error.",
            "type": {
-            "$ref": "39"
+            "$ref": "55"
            },
            "optional": true,
            "readOnly": false,
            "discriminator": false,
            "flatten": false,
            "decorators": [],
-           "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError.innererror"
+           "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError.innererror",
+           "serializationOptions": {
+            "$id": "61",
+            "json": {
+             "$id": "62",
+             "name": "innererror"
+            }
+           }
           }
          ]
         },
@@ -425,7 +495,14 @@
         "discriminator": false,
         "flatten": false,
         "decorators": [],
-        "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.innererror"
+        "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.innererror",
+        "serializationOptions": {
+         "$id": "63",
+         "json": {
+          "$id": "64",
+          "name": "innererror"
+         }
+        }
        }
       ]
      },
@@ -434,34 +511,48 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.error"
+     "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.error",
+     "serializationOptions": {
+      "$id": "65",
+      "json": {
+       "$id": "66",
+       "name": "error"
+      }
+     }
     },
     {
-     "$id": "43",
+     "$id": "67",
      "kind": "property",
      "name": "result",
      "serializedName": "result",
      "doc": "The result of the operation.",
      "type": {
-      "$ref": "21"
+      "$ref": "23"
      },
      "optional": true,
      "readOnly": false,
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.result"
+     "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.result",
+     "serializationOptions": {
+      "$id": "68",
+      "json": {
+       "$id": "69",
+       "name": "result"
+      }
+     }
     }
    ]
   },
   {
-   "$ref": "29"
+   "$ref": "37"
   },
   {
-   "$ref": "39"
+   "$ref": "55"
   },
   {
-   "$id": "44",
+   "$id": "70",
    "kind": "model",
    "name": "OperationStatusGenerationResultError",
    "clientNamespace": "Azure.Core.Foundations",
@@ -471,13 +562,13 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "45",
+     "$id": "71",
      "kind": "property",
      "name": "id",
      "serializedName": "id",
      "doc": "The unique ID of the operation.",
      "type": {
-      "$id": "46",
+      "$id": "72",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -488,10 +579,17 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus.id"
+     "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus.id",
+     "serializationOptions": {
+      "$id": "73",
+      "json": {
+       "$id": "74",
+       "name": "id"
+      }
+     }
     },
     {
-     "$id": "47",
+     "$id": "75",
      "kind": "property",
      "name": "status",
      "serializedName": "status",
@@ -504,52 +602,73 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus.status"
+     "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus.status",
+     "serializationOptions": {
+      "$id": "76",
+      "json": {
+       "$id": "77",
+       "name": "status"
+      }
+     }
     },
     {
-     "$id": "48",
+     "$id": "78",
      "kind": "property",
      "name": "error",
      "serializedName": "error",
      "doc": "Error object that describes the error when status is \"Failed\".",
      "type": {
-      "$ref": "29"
+      "$ref": "37"
      },
      "optional": true,
      "readOnly": false,
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus.error"
+     "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus.error",
+     "serializationOptions": {
+      "$id": "79",
+      "json": {
+       "$id": "80",
+       "name": "error"
+      }
+     }
     },
     {
-     "$id": "49",
+     "$id": "81",
      "kind": "property",
      "name": "result",
      "serializedName": "result",
      "doc": "The result of the operation.",
      "type": {
-      "$ref": "21"
+      "$ref": "23"
      },
      "optional": true,
      "readOnly": false,
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus.result"
+     "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus.result",
+     "serializationOptions": {
+      "$id": "82",
+      "json": {
+       "$id": "83",
+       "name": "result"
+      }
+     }
     }
    ]
   }
  ],
  "Clients": [
   {
-   "$id": "50",
+   "$id": "84",
    "Name": "RpcClient",
    "ClientNamespace": "_Specs_.Azure.Core.Lro.Rpc",
    "Doc": "Illustrates bodies templated with Azure Core with long-running RPC operation",
    "Operations": [
     {
-     "$id": "51",
+     "$id": "85",
      "Name": "longRunningRpc",
      "ResourceName": "Rpc",
      "Summary": "Generate data.",
@@ -557,12 +676,12 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "52",
+       "$id": "86",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Doc": "The API version to use for this operation.",
        "Type": {
-        "$id": "53",
+        "$id": "87",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -576,9 +695,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "54",
+        "$id": "88",
         "Type": {
-         "$id": "55",
+         "$id": "89",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -589,15 +708,15 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "56",
+       "$id": "90",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "57",
+        "$id": "91",
         "kind": "constant",
         "valueType": {
-         "$id": "58",
+         "$id": "92",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -617,14 +736,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "59",
+       "$id": "93",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "60",
+        "$id": "94",
         "kind": "constant",
         "valueType": {
-         "$id": "61",
+         "$id": "95",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -644,7 +763,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "62",
+       "$id": "96",
        "Name": "body",
        "NameInRequest": "body",
        "Doc": "The body parameter.",
@@ -664,27 +783,27 @@
      ],
      "Responses": [
       {
-       "$id": "63",
+       "$id": "97",
        "StatusCodes": [
         202
        ],
        "BodyType": {
-        "$ref": "24"
+        "$ref": "28"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "64",
+         "$id": "98",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
          "Doc": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "65",
+          "$id": "99",
           "kind": "url",
           "name": "ResourceLocation",
           "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
           "baseType": {
-           "$id": "66",
+           "$id": "100",
            "kind": "url",
            "name": "url",
            "crossLanguageDefinitionId": "TypeSpec.url",
@@ -709,15 +828,15 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "67",
+      "$id": "101",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "68",
+       "$id": "102",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "44"
+        "$ref": "70"
        },
        "BodyMediaType": "Json"
       },
@@ -730,16 +849,16 @@
     }
    ],
    "Protocol": {
-    "$id": "69"
+    "$id": "103"
    },
    "Parameters": [
     {
-     "$id": "70",
+     "$id": "104",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Doc": "Service host",
      "Type": {
-      "$id": "71",
+      "$id": "105",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -754,9 +873,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "72",
+      "$id": "106",
       "Type": {
-       "$id": "73",
+       "$id": "107",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"

@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Scm._Type.Union",
-  "library-name": "Type.Union",
+  "library-name": "Scm._Type.Union",
   "use-model-reader-writer": true,
   "shared-source-folders": [
     "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",

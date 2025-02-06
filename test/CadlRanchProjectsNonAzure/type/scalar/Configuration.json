@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "Scm._Type.Scalar",
-  "library-name": "Type.Scalar",
+  "library-name": "Scm._Type.Scalar",
   "use-model-reader-writer": true,
   "shared-source-folders": [
     "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",

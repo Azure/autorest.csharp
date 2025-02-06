@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "_Azure.ResourceManager.CommonProperties",
-  "library-name": "Azure.ResourceManager.CommonProperties",
+  "library-name": "_Azure.ResourceManager.CommonProperties",
   "flavor": "azure",
   "use-model-reader-writer": true,
   "shared-source-folders": [

@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "_Azure.ResourceManager.Resources",
-  "library-name": "Azure.ResourceManager.Resources",
+  "library-name": "_Azure.ResourceManager.Resources",
   "flavor": "azure",
   "use-model-reader-writer": true,
   "shared-source-folders": [

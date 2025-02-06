@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
   "namespace": "_Type.Model.Visibility",
-  "library-name": "Type.Model.Visibility",
+  "library-name": "_Type.Model.Visibility",
   "flavor": "azure",
   "use-model-reader-writer": true,
   "shared-source-folders": [
