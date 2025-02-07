@@ -30,6 +30,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "UnbrandedTypeSpec",
    "doc": "The Thing_requiredLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -63,6 +64,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "UnbrandedTypeSpec",
    "doc": "The Thing_requiredLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -96,6 +98,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "UnbrandedTypeSpec",
    "doc": "The Thing_requiredLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -129,6 +132,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "UnbrandedTypeSpec",
    "doc": "The Thing_optionalLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -162,6 +166,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "UnbrandedTypeSpec",
    "doc": "The Thing_optionalLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -195,6 +200,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "UnbrandedTypeSpec",
    "doc": "The Thing_optionalLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -266,6 +272,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "UnbrandedTypeSpec",
    "doc": "Simple enum",
    "isFixed": true,
    "isFlags": false,
@@ -337,6 +344,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "UnbrandedTypeSpec",
    "doc": "Extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -408,6 +416,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "UnbrandedTypeSpec",
    "doc": "Int based extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -479,6 +488,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "UnbrandedTypeSpec",
    "doc": "Float based extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -550,6 +560,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "UnbrandedTypeSpec",
    "doc": "float fixed enum",
    "isFixed": true,
    "isFlags": false,
@@ -621,6 +632,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "UnbrandedTypeSpec",
    "doc": "int fixed enum",
    "isFixed": true,
    "isFlags": false,
@@ -760,6 +772,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "UnbrandedTypeSpec",
    "isFixed": false,
    "isFlags": false,
    "usage": "None",
@@ -771,6 +784,7 @@
    "$id": "84",
    "kind": "model",
    "name": "Thing",
+   "clientNamespace": "UnbrandedTypeSpec",
    "crossLanguageDefinitionId": "UnbrandedTypeSpec.Thing",
    "usage": "Input,Output,Spread,Json",
    "doc": "A model with a few properties of literal types",
@@ -843,6 +857,7 @@
         "decorators": []
        }
       ],
+      "clientNamespace": "",
       "decorators": []
      },
      "optional": false,
@@ -1148,7 +1163,8 @@
        },
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
-      }
+      },
+      "clientNamespace": ""
      },
      "optional": true,
      "readOnly": false,
@@ -1186,7 +1202,8 @@
        },
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
-      }
+      },
+      "clientNamespace": ""
      },
      "optional": false,
      "readOnly": false,
@@ -1208,6 +1225,7 @@
    "$id": "147",
    "kind": "model",
    "name": "RoundTripModel",
+   "clientNamespace": "UnbrandedTypeSpec",
    "crossLanguageDefinitionId": "UnbrandedTypeSpec.RoundTripModel",
    "usage": "Input,Output,Json",
    "doc": "this is a roundtrip model",
@@ -1810,6 +1828,7 @@
       "$id": "232",
       "kind": "model",
       "name": "ModelWithRequiredNullableProperties",
+      "clientNamespace": "UnbrandedTypeSpec",
       "crossLanguageDefinitionId": "UnbrandedTypeSpec.ModelWithRequiredNullableProperties",
       "usage": "Input,Output,Json",
       "doc": "A model with a few required nullable properties",
@@ -1830,7 +1849,8 @@
           "name": "int32",
           "crossLanguageDefinitionId": "TypeSpec.int32",
           "decorators": []
-         }
+         },
+         "clientNamespace": ""
         },
         "optional": false,
         "readOnly": false,
@@ -1857,7 +1877,8 @@
          "kind": "nullable",
          "type": {
           "$ref": "28"
-         }
+         },
+         "clientNamespace": ""
         },
         "optional": false,
         "readOnly": false,
@@ -1884,7 +1905,8 @@
          "kind": "nullable",
          "type": {
           "$ref": "20"
-         }
+         },
+         "clientNamespace": ""
         },
         "optional": false,
         "readOnly": false,
@@ -1925,6 +1947,7 @@
    "$id": "248",
    "kind": "model",
    "name": "Friend",
+   "clientNamespace": "UnbrandedTypeSpec",
    "crossLanguageDefinitionId": "UnbrandedTypeSpec.NotFriend",
    "usage": "Output,Spread,Json",
    "doc": "this is not a friendly model but with a friendly name",
@@ -1963,6 +1986,7 @@
    "$id": "253",
    "kind": "model",
    "name": "ProjectedModel",
+   "clientNamespace": "UnbrandedTypeSpec",
    "crossLanguageDefinitionId": "UnbrandedTypeSpec.ModelWithProjectedName",
    "usage": "Output,Spread,Json",
    "doc": "this is a model with a projected name",
@@ -2001,6 +2025,7 @@
    "$id": "258",
    "kind": "model",
    "name": "ReturnsAnonymousModelResponse",
+   "clientNamespace": "UnbrandedTypeSpec",
    "crossLanguageDefinitionId": "UnbrandedTypeSpec.returnsAnonymousModel.Response.anonymous",
    "usage": "Output,Json",
    "decorators": [],
@@ -2011,6 +2036,7 @@
   {
    "$id": "259",
    "Name": "UnbrandedTypeSpecClient",
+   "ClientNamespace": "UnbrandedTypeSpec",
    "Doc": "This is a sample typespec project.",
    "Operations": [
     {

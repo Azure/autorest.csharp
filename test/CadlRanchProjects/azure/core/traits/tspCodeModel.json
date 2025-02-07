@@ -37,6 +37,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "_Specs_.Azure.Core.Traits",
    "doc": "Service versions",
    "isFixed": true,
    "isFlags": false,
@@ -93,6 +94,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "Azure.Core",
    "doc": "Repeatability Result header options",
    "isFixed": true,
    "isFlags": false,
@@ -105,6 +107,7 @@
    "$id": "12",
    "kind": "model",
    "name": "User",
+   "clientNamespace": "_Specs_.Azure.Core.Traits",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User",
    "usage": "Output,Json",
    "doc": "Sample Model",
@@ -170,6 +173,7 @@
    "$id": "21",
    "kind": "model",
    "name": "UserActionParam",
+   "clientNamespace": "_Specs_.Azure.Core.Traits",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam",
    "usage": "Input,Json",
    "doc": "User action param",
@@ -208,6 +212,7 @@
    "$id": "26",
    "kind": "model",
    "name": "UserActionResponse",
+   "clientNamespace": "_Specs_.Azure.Core.Traits",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse",
    "usage": "Output,Json",
    "doc": "User action response",
@@ -247,6 +252,7 @@
   {
    "$id": "31",
    "Name": "TraitsClient",
+   "ClientNamespace": "_Specs_.Azure.Core.Traits",
    "Doc": "Illustrates Azure Core operation customizations by traits",
    "Operations": [
     {

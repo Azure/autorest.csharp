@@ -32,6 +32,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "CustomizedTypeSpec",
    "doc": "The Thing_requiredLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -65,6 +66,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "CustomizedTypeSpec",
    "doc": "The Thing_requiredLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -98,6 +100,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "CustomizedTypeSpec",
    "doc": "The Thing_requiredLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -131,6 +134,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "CustomizedTypeSpec",
    "doc": "The Thing_optionalLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -164,6 +168,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "CustomizedTypeSpec",
    "doc": "The Thing_optionalLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -197,6 +202,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "CustomizedTypeSpec",
    "doc": "The Thing_optionalLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -234,6 +240,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "CustomizedTypeSpec",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -245,6 +252,7 @@
    "$id": "24",
    "kind": "model",
    "name": "Thing",
+   "clientNamespace": "CustomizedTypeSpec",
    "crossLanguageDefinitionId": "CustomizedTypeSpec.Thing",
    "usage": "Input,Output,Spread,Json",
    "doc": "A model with a few properties of literal types",
@@ -317,6 +325,7 @@
         "decorators": []
        }
       ],
+      "clientNamespace": "",
       "decorators": []
      },
      "optional": false,
@@ -622,7 +631,8 @@
        },
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
-      }
+      },
+      "clientNamespace": ""
      },
      "optional": true,
      "readOnly": false,
@@ -660,7 +670,8 @@
        },
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
-      }
+      },
+      "clientNamespace": ""
      },
      "optional": false,
      "readOnly": false,
@@ -682,6 +693,7 @@
    "$id": "87",
    "kind": "model",
    "name": "RoundTripModel",
+   "clientNamespace": "CustomizedTypeSpec",
    "crossLanguageDefinitionId": "CustomizedTypeSpec.RoundTripModel",
    "usage": "Input,Output,Json",
    "doc": "this is a roundtrip model",
@@ -774,6 +786,7 @@
    "$id": "100",
    "kind": "model",
    "name": "ModelWithFormat",
+   "clientNamespace": "CustomizedTypeSpec",
    "crossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithFormat",
    "usage": "Input,Output,Json",
    "decorators": [],
@@ -845,6 +858,7 @@
    "$id": "110",
    "kind": "model",
    "name": "Friend",
+   "clientNamespace": "CustomizedTypeSpec",
    "crossLanguageDefinitionId": "CustomizedTypeSpec.NotFriend",
    "usage": "Output,Spread,Json",
    "doc": "this is not a friendly model but with a friendly name",
@@ -905,6 +919,7 @@
    "$id": "118",
    "kind": "model",
    "name": "ProjectedModel",
+   "clientNamespace": "CustomizedTypeSpec",
    "crossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithProjectedName",
    "usage": "Output,Spread,Json",
    "doc": "this is a model with a projected name",
@@ -943,6 +958,7 @@
    "$id": "123",
    "kind": "model",
    "name": "ReturnsAnonymousModelResponse",
+   "clientNamespace": "CustomizedTypeSpec",
    "crossLanguageDefinitionId": "CustomizedTypeSpec.returnsAnonymousModel.Response.anonymous",
    "usage": "Output,Json",
    "decorators": [],
@@ -953,6 +969,7 @@
   {
    "$id": "124",
    "Name": "CustomizedTypeSpecClient",
+   "ClientNamespace": "CustomizedTypeSpec",
    "Doc": "This is a sample typespec project.",
    "Operations": [
     {

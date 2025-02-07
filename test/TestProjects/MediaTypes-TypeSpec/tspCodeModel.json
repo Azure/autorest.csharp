@@ -51,6 +51,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input",
@@ -121,6 +122,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input",
@@ -132,6 +134,7 @@
    "$id": "16",
    "kind": "model",
    "name": "Body",
+   "clientNamespace": "MultipleMediaTypes",
    "crossLanguageDefinitionId": "MultipleMediaTypes.Body",
    "usage": "Input,Json",
    "decorators": [],
@@ -169,6 +172,7 @@
   {
    "$id": "21",
    "Name": "MultipleMediaTypesClient",
+   "ClientNamespace": "MultipleMediaTypes",
    "Doc": "Play with produces/consumes and media-types in general.",
    "Operations": [
     {

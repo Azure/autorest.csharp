@@ -30,6 +30,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "NoTestTypeSpec",
    "doc": "The Thing_requiredLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -63,6 +64,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "NoTestTypeSpec",
    "doc": "The Thing_requiredLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -96,6 +98,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "NoTestTypeSpec",
    "doc": "The Thing_requiredLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -129,6 +132,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "NoTestTypeSpec",
    "doc": "The Thing_optionalLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -162,6 +166,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "NoTestTypeSpec",
    "doc": "The Thing_optionalLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -195,6 +200,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "NoTestTypeSpec",
    "doc": "The Thing_optionalLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -207,6 +213,7 @@
    "$id": "20",
    "kind": "model",
    "name": "Thing",
+   "clientNamespace": "NoTestTypeSpec",
    "crossLanguageDefinitionId": "NoTestTypeSpec.Thing",
    "usage": "Input,Output,Json",
    "doc": "A model with a few properties of literal types",
@@ -279,6 +286,7 @@
         "decorators": []
        }
       ],
+      "clientNamespace": "",
       "decorators": []
      },
      "optional": false,
@@ -584,7 +592,8 @@
        },
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
-      }
+      },
+      "clientNamespace": ""
      },
      "optional": true,
      "readOnly": false,
@@ -622,7 +631,8 @@
        },
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
-      }
+      },
+      "clientNamespace": ""
      },
      "optional": false,
      "readOnly": false,
@@ -644,6 +654,7 @@
    "$id": "83",
    "kind": "model",
    "name": "DerivedThing",
+   "clientNamespace": "NoTestTypeSpec",
    "crossLanguageDefinitionId": "NoTestTypeSpec.DerivedThing",
    "usage": "Input,Output,Json",
    "decorators": [],
@@ -684,6 +695,7 @@
   {
    "$id": "88",
    "Name": "NoTestTypeSpecClient",
+   "ClientNamespace": "NoTestTypeSpec",
    "Doc": "This is a sample typespec project.",
    "Operations": [
     {

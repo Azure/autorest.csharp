@@ -55,6 +55,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "_Specs_.Azure.Core.Page",
    "doc": "An extensible enum input parameter.",
    "isFixed": true,
    "isFlags": false,
@@ -93,6 +94,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "_Specs_.Azure.Core.Page",
    "doc": "The version of the API.",
    "isFixed": true,
    "isFlags": false,
@@ -105,6 +107,7 @@
    "$id": "12",
    "kind": "model",
    "name": "User",
+   "clientNamespace": "_Specs_.Azure.Core.Page",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.User",
    "usage": "Output,Json",
    "doc": "Details about a user.",
@@ -178,6 +181,7 @@
        "$id": "23",
        "kind": "model",
        "name": "UserOrder",
+       "clientNamespace": "_Specs_.Azure.Core.Page",
        "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.UserOrder",
        "usage": "Output,Json",
        "doc": "UserOrder for testing list with expand.",
@@ -326,6 +330,7 @@
    "$id": "43",
    "kind": "model",
    "name": "ListItemInputBody",
+   "clientNamespace": "_Specs_.Azure.Core.Page",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.ListItemInputBody",
    "usage": "Input,Json",
    "doc": "The body of the input.",
@@ -364,6 +369,7 @@
    "$id": "48",
    "kind": "model",
    "name": "UserListResults",
+   "clientNamespace": "_Specs_.Azure.Core.Page",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.CustomPageModel",
    "usage": "Output,Json",
    "decorators": [],
@@ -431,6 +437,7 @@
    "$id": "57",
    "kind": "model",
    "name": "FirstItem",
+   "clientNamespace": "_Specs_.Azure.Core.Page",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.FirstItem",
    "usage": "Output,Json",
    "doc": "First item.",
@@ -469,6 +476,7 @@
    "$id": "62",
    "kind": "model",
    "name": "SecondItem",
+   "clientNamespace": "_Specs_.Azure.Core.Page",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.SecondItem",
    "usage": "Output,Json",
    "doc": "Second item.",
@@ -507,6 +515,7 @@
    "$id": "67",
    "kind": "model",
    "name": "PagedUser",
+   "clientNamespace": "Azure.Core",
    "crossLanguageDefinitionId": "Azure.Core.Page",
    "usage": "Output,Json",
    "doc": "Paged collection of User items",
@@ -582,6 +591,7 @@
    "$id": "77",
    "kind": "model",
    "name": "PagedFirstItem",
+   "clientNamespace": "Azure.Core",
    "crossLanguageDefinitionId": "Azure.Core.Page",
    "usage": "Output,Json",
    "doc": "Paged collection of FirstItem items",
@@ -657,6 +667,7 @@
    "$id": "87",
    "kind": "model",
    "name": "PagedSecondItem",
+   "clientNamespace": "Azure.Core",
    "crossLanguageDefinitionId": "Azure.Core.Page",
    "usage": "Output,Json",
    "doc": "Paged collection of SecondItem items",
@@ -733,6 +744,7 @@
   {
    "$id": "97",
    "Name": "PageClient",
+   "ClientNamespace": "_Specs_.Azure.Core.Page",
    "Doc": "Illustrates bodies templated with Azure Core with paging support",
    "Operations": [
     {
@@ -1141,6 +1153,7 @@
   {
    "$id": "138",
    "Name": "TwoModelsAsPageItem",
+   "ClientNamespace": "_Specs_.Azure.Core.Page",
    "Operations": [
     {
      "$id": "139",

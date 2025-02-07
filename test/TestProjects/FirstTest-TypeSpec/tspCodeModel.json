@@ -32,6 +32,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "FirstTestTypeSpec",
    "doc": "The Thing_requiredLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -65,6 +66,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "FirstTestTypeSpec",
    "doc": "The Thing_requiredLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -98,6 +100,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "FirstTestTypeSpec",
    "doc": "The Thing_requiredLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -131,6 +134,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "FirstTestTypeSpec",
    "doc": "The Thing_optionalLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -164,6 +168,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "FirstTestTypeSpec",
    "doc": "The Thing_optionalLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -197,6 +202,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
+   "clientNamespace": "FirstTestTypeSpec",
    "doc": "The Thing_optionalLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -268,6 +274,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "FirstTestTypeSpec",
    "doc": "enum with projected name",
    "isFixed": true,
    "isFlags": false,
@@ -339,6 +346,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "FirstTestTypeSpec",
    "doc": "enum with projected name used in a model",
    "isFixed": true,
    "isFlags": false,
@@ -410,6 +418,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "FirstTestTypeSpec",
    "doc": "Simple enum",
    "isFixed": true,
    "isFlags": false,
@@ -481,6 +490,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "FirstTestTypeSpec",
    "doc": "Extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -552,6 +562,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "FirstTestTypeSpec",
    "doc": "Int based extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -623,6 +634,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "FirstTestTypeSpec",
    "doc": "Float based extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -694,6 +706,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "FirstTestTypeSpec",
    "doc": "float fixed enum",
    "isFixed": true,
    "isFlags": false,
@@ -765,6 +778,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "FirstTestTypeSpec",
    "doc": "int fixed enum",
    "isFixed": true,
    "isFlags": false,
@@ -802,6 +816,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "FirstTestTypeSpec",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -940,6 +955,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "FirstTestTypeSpec",
    "isFixed": false,
    "isFlags": false,
    "usage": "None",
@@ -1049,6 +1065,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "Azure.Core.Foundations",
    "doc": "Enum describing allowed operation states.",
    "isFixed": false,
    "isFlags": false,
@@ -1061,6 +1078,7 @@
    "$id": "116",
    "kind": "model",
    "name": "Thing",
+   "clientNamespace": "FirstTestTypeSpec",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing",
    "usage": "Input,Output,Spread,Json",
    "doc": "A model with a few properties of literal types",
@@ -1133,6 +1151,7 @@
         "decorators": []
        }
       ],
+      "clientNamespace": "",
       "decorators": []
      },
      "optional": false,
@@ -1438,7 +1457,8 @@
        },
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
-      }
+      },
+      "clientNamespace": ""
      },
      "optional": true,
      "readOnly": false,
@@ -1476,7 +1496,8 @@
        },
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
-      }
+      },
+      "clientNamespace": ""
      },
      "optional": false,
      "readOnly": false,
@@ -1586,6 +1607,7 @@
    "$id": "192",
    "kind": "model",
    "name": "Friend",
+   "clientNamespace": "FirstTestTypeSpec",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.NotFriend",
    "usage": "Output,Spread,Json",
    "doc": "this is not a friendly model but with a friendly name",
@@ -1624,6 +1646,7 @@
    "$id": "197",
    "kind": "model",
    "name": "ModelWithFormat",
+   "clientNamespace": "FirstTestTypeSpec",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithFormat",
    "usage": "Input,Json",
    "decorators": [],
@@ -1695,6 +1718,7 @@
    "$id": "207",
    "kind": "model",
    "name": "ProjectedModel",
+   "clientNamespace": "FirstTestTypeSpec",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithProjectedName",
    "usage": "Output,Spread,Json",
    "doc": "this is a model with a projected name",
@@ -1733,6 +1757,7 @@
    "$id": "212",
    "kind": "model",
    "name": "ReturnsAnonymousModelResponse",
+   "clientNamespace": "FirstTestTypeSpec",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.returnsAnonymousModel.Response.anonymous",
    "usage": "Output,Json",
    "decorators": [],
@@ -1742,6 +1767,7 @@
    "$id": "213",
    "kind": "model",
    "name": "Extension",
+   "clientNamespace": "FirstTestTypeSpec",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.Extension",
    "usage": "Input,Json",
    "doc": "extension",
@@ -1750,6 +1776,7 @@
     "$id": "214",
     "kind": "model",
     "name": "Element",
+    "clientNamespace": "FirstTestTypeSpec",
     "crossLanguageDefinitionId": "FirstTestTypeSpec.Element",
     "usage": "Input,Json",
     "doc": "element",
@@ -1822,6 +1849,7 @@
    "$id": "223",
    "kind": "model",
    "name": "Extendible",
+   "clientNamespace": "FirstTestTypeSpec",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.Extendible",
    "usage": "Input,Json",
    "doc": "FHIR extendible element",
@@ -1841,6 +1869,7 @@
        "$id": "226",
        "kind": "model",
        "name": "ThereLevelExtension",
+       "clientNamespace": "FirstTestTypeSpec",
        "crossLanguageDefinitionId": "FirstTestTypeSpec.ThereLevelExtension",
        "usage": "Input,Json",
        "doc": "extension",
@@ -1849,6 +1878,7 @@
         "$id": "227",
         "kind": "model",
         "name": "ThereLevelElement",
+        "clientNamespace": "FirstTestTypeSpec",
         "crossLanguageDefinitionId": "FirstTestTypeSpec.ThereLevelElement",
         "usage": "Input,Json",
         "doc": "element",
@@ -1943,6 +1973,7 @@
    "$id": "238",
    "kind": "model",
    "name": "ChildModel",
+   "clientNamespace": "FirstTestTypeSpec",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.ChildModel",
    "usage": "Input,Json",
    "doc": "ChildModel",
@@ -1951,6 +1982,7 @@
     "$id": "239",
     "kind": "model",
     "name": "BaseModel",
+    "clientNamespace": "FirstTestTypeSpec",
     "crossLanguageDefinitionId": "FirstTestTypeSpec.BaseModel",
     "usage": "Input,Json",
     "doc": "parenetModel",
@@ -2023,6 +2055,7 @@
    "$id": "248",
    "kind": "model",
    "name": "ContainSelf",
+   "clientNamespace": "FirstTestTypeSpec",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.ContainSelf",
    "usage": "Input,Json",
    "doc": "containself",
@@ -2056,6 +2089,7 @@
    "$id": "252",
    "kind": "model",
    "name": "ModelWithProjectedEnum",
+   "clientNamespace": "FirstTestTypeSpec",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithProjectedEnum",
    "usage": "Input,Json",
    "decorators": [],
@@ -2089,6 +2123,7 @@
    "$id": "256",
    "kind": "model",
    "name": "AzureLocationModel",
+   "clientNamespace": "FirstTestTypeSpec",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.AzureLocationModel",
    "usage": "Input,Json",
    "decorators": [],
@@ -2132,6 +2167,7 @@
    "$id": "262",
    "kind": "model",
    "name": "RoundTripModel",
+   "clientNamespace": "FirstTestTypeSpec",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel",
    "usage": "Input,Output,Json",
    "doc": "this is a roundtrip model",
@@ -2734,6 +2770,7 @@
       "$id": "347",
       "kind": "model",
       "name": "ModelWithRequiredNullableProperties",
+      "clientNamespace": "FirstTestTypeSpec",
       "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties",
       "usage": "Input,Output,Json",
       "doc": "A model with a few required nullable properties",
@@ -2754,7 +2791,8 @@
           "name": "int32",
           "crossLanguageDefinitionId": "TypeSpec.int32",
           "decorators": []
-         }
+         },
+         "clientNamespace": ""
         },
         "optional": false,
         "readOnly": false,
@@ -2781,7 +2819,8 @@
          "kind": "nullable",
          "type": {
           "$ref": "44"
-         }
+         },
+         "clientNamespace": ""
         },
         "optional": false,
         "readOnly": false,
@@ -2808,7 +2847,8 @@
          "kind": "nullable",
          "type": {
           "$ref": "36"
-         }
+         },
+         "clientNamespace": ""
         },
         "optional": false,
         "readOnly": false,
@@ -2873,6 +2913,7 @@
          "$id": "368",
          "kind": "model",
          "name": "ModelForUnion",
+         "clientNamespace": "FirstTestTypeSpec",
          "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelForUnion",
          "usage": "Input,Output,Json",
          "doc": "This is a model only used in union types, please do not use it anywhere else.",
@@ -2945,6 +2986,7 @@
          "decorators": []
         }
        ],
+       "clientNamespace": "",
        "decorators": []
       },
       "crossLanguageDefinitionId": "TypeSpec.Array",
@@ -3015,6 +3057,7 @@
    "$id": "386",
    "kind": "model",
    "name": "ResourceOperationStatusResourceExportedResourceError",
+   "clientNamespace": "Azure.Core",
    "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
    "usage": "None",
    "doc": "Provides status details for long running operations.",
@@ -3072,6 +3115,7 @@
       "$id": "393",
       "kind": "model",
       "name": "Error",
+      "clientNamespace": "Azure.Core.Foundations",
       "crossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "usage": "None",
       "doc": "The error object.",
@@ -3182,6 +3226,7 @@
          "$id": "407",
          "kind": "model",
          "name": "InnerError",
+         "clientNamespace": "Azure.Core.Foundations",
          "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "usage": "None",
          "doc": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
@@ -3263,6 +3308,7 @@
       "$id": "416",
       "kind": "model",
       "name": "ExportedResource",
+      "clientNamespace": "FirstTestTypeSpec",
       "crossLanguageDefinitionId": "FirstTestTypeSpec.ExportedResource",
       "usage": "None",
       "decorators": [],
@@ -3339,6 +3385,7 @@
   {
    "$id": "424",
    "Name": "FirstTestTypeSpecClient",
+   "ClientNamespace": "FirstTestTypeSpec",
    "Doc": "This is a sample typespec project.",
    "Operations": [
     {
@@ -5278,6 +5325,7 @@
   {
    "$id": "588",
    "Name": "Hello",
+   "ClientNamespace": "FirstTestTypeSpec.Hello",
    "Operations": [],
    "Protocol": {
     "$id": "589"
@@ -5310,6 +5358,7 @@
   {
    "$id": "592",
    "Name": "HelloDemo",
+   "ClientNamespace": "FirstTestTypeSpec.Hello.Demo",
    "Doc": "Hello world service",
    "Operations": [
     {
@@ -5469,6 +5518,7 @@
   {
    "$id": "607",
    "Name": "HelloDemo2",
+   "ClientNamespace": "FirstTestTypeSpec.Hello.Demo2",
    "Operations": [
     {
      "$id": "608",
@@ -6120,6 +6170,7 @@
   {
    "$id": "665",
    "Name": "EnumTest",
+   "ClientNamespace": "FirstTestTypeSpec.EnumTest",
    "Operations": [
     {
      "$id": "666",
@@ -6230,6 +6281,7 @@
   {
    "$id": "675",
    "Name": "ProtocolAndConvenient",
+   "ClientNamespace": "FirstTestTypeSpec.ProtocolAndConvenient",
    "Operations": [
     {
      "$id": "676",
@@ -6401,6 +6453,7 @@
   {
    "$id": "690",
    "Name": "Entity",
+   "ClientNamespace": "FirstTestTypeSpec",
    "Operations": [
     {
      "$id": "691",
@@ -6517,6 +6570,7 @@
   {
    "$id": "701",
    "Name": "Glossary",
+   "ClientNamespace": "FirstTestTypeSpec",
    "Operations": [
     {
      "$id": "702",
@@ -6654,6 +6708,7 @@
   {
    "$id": "714",
    "Name": "ResourceOperations",
+   "ClientNamespace": "FirstTestTypeSpec",
    "Operations": [],
    "Protocol": {
     "$id": "715"
@@ -6686,6 +6741,7 @@
   {
    "$id": "718",
    "Name": "VersioningOp",
+   "ClientNamespace": "FirstTestTypeSpec",
    "Operations": [
     {
      "$id": "719",

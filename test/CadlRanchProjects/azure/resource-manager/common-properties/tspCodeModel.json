@@ -91,6 +91,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "Azure.ResourceManager.CommonTypes",
    "doc": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
    "isFixed": false,
    "isFlags": false,
@@ -183,6 +184,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "Azure.ResourceManager.CommonTypes",
    "doc": "The kind of entity that created the resource.",
    "isFixed": false,
    "isFlags": false,
@@ -221,6 +223,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "Azure.ResourceManager.CommonProperties",
    "doc": "Azure API versions.",
    "isFixed": true,
    "isFlags": false,
@@ -233,6 +236,7 @@
    "$id": "26",
    "kind": "model",
    "name": "ManagedIdentityTrackedResource",
+   "clientNamespace": "Azure.ResourceManager.CommonProperties",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonProperties.ManagedIdentityTrackedResource",
    "usage": "Input,Output,Json",
    "doc": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
@@ -241,6 +245,7 @@
     "$id": "27",
     "kind": "model",
     "name": "TrackedResource",
+    "clientNamespace": "Azure.ResourceManager.CommonTypes",
     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
     "usage": "Input,Output,Json",
     "doc": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
@@ -249,6 +254,7 @@
      "$id": "28",
      "kind": "model",
      "name": "Resource",
+     "clientNamespace": "Azure.ResourceManager.CommonTypes",
      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
      "usage": "Input,Output,Json",
      "doc": "Common fields that are returned in the response for all Azure Resource Manager resources",
@@ -352,6 +358,7 @@
         "$id": "43",
         "kind": "model",
         "name": "SystemData",
+        "clientNamespace": "Azure.ResourceManager.CommonTypes",
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData",
         "usage": "Output,Json",
         "doc": "Metadata pertaining to creation and last modification of the resource.",
@@ -625,6 +632,7 @@
       "$id": "81",
       "kind": "model",
       "name": "ManagedIdentityTrackedResourceProperties",
+      "clientNamespace": "Azure.ResourceManager.CommonProperties",
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonProperties.ManagedIdentityTrackedResourceProperties",
       "usage": "Input,Output,Json",
       "doc": "Managed Identity Arm Resource Properties.",
@@ -683,6 +691,7 @@
       "$id": "89",
       "kind": "model",
       "name": "ManagedServiceIdentity",
+      "clientNamespace": "Azure.ResourceManager.CommonTypes",
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity",
       "usage": "Input,Output,Json",
       "doc": "Managed service identity (system assigned and/or user assigned identities)",
@@ -799,6 +808,7 @@
           "$id": "106",
           "kind": "model",
           "name": "UserAssignedIdentity",
+          "clientNamespace": "Azure.ResourceManager.CommonTypes",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity",
           "usage": "Input,Output,Json",
           "doc": "User assigned identity properties",
@@ -930,6 +940,7 @@
    "$id": "121",
    "kind": "model",
    "name": "ErrorResponse",
+   "clientNamespace": "Azure.ResourceManager.CommonTypes",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
    "usage": "Error,Json,Exception",
    "doc": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
@@ -945,6 +956,7 @@
       "$id": "123",
       "kind": "model",
       "name": "ErrorDetail",
+      "clientNamespace": "Azure.ResourceManager.CommonTypes",
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
       "usage": "Json,Exception",
       "doc": "The error detail.",
@@ -1075,6 +1087,7 @@
           "$id": "142",
           "kind": "model",
           "name": "ErrorAdditionalInfo",
+          "clientNamespace": "Azure.ResourceManager.CommonTypes",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
           "usage": "Json,Exception",
           "doc": "The resource management error additional info.",
@@ -1117,6 +1130,7 @@
              "$id": "148",
              "kind": "model",
              "name": "ErrorAdditionalInfoInfo",
+             "clientNamespace": "Azure.ResourceManager.CommonTypes",
              "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
              "usage": "Json,Exception",
              "decorators": [],
@@ -1187,6 +1201,7 @@
   {
    "$id": "155",
    "Name": "CommonPropertiesClient",
+   "ClientNamespace": "Azure.ResourceManager.CommonProperties",
    "Doc": "Arm Managed Identity Provider management API.",
    "Operations": [],
    "Protocol": {
@@ -1230,6 +1245,7 @@
   {
    "$id": "161",
    "Name": "ManagedIdentity",
+   "ClientNamespace": "Azure.ResourceManager.CommonProperties",
    "Operations": [
     {
      "$id": "162",

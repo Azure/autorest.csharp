@@ -141,6 +141,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "Azure.ResourceManager.Resources",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json,LroInitial,LroFinalEnvelope",
@@ -232,6 +233,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "Azure.ResourceManager.CommonTypes",
    "doc": "The kind of entity that created the resource.",
    "isFixed": false,
    "isFlags": false,
@@ -306,6 +308,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "Azure.ResourceManager",
    "doc": "The provisioning state of a resource type.",
    "isFixed": false,
    "isFlags": false,
@@ -344,6 +347,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "Azure.ResourceManager.Resources",
    "doc": "Azure API versions.",
    "isFixed": true,
    "isFlags": false,
@@ -356,6 +360,7 @@
    "$id": "40",
    "kind": "model",
    "name": "LocationResource",
+   "clientNamespace": "Azure.ResourceManager.Resources",
    "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResource",
    "usage": "Input,Output,Json",
    "doc": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
@@ -364,6 +369,7 @@
     "$id": "41",
     "kind": "model",
     "name": "ProxyResource",
+    "clientNamespace": "Azure.ResourceManager.CommonTypes",
     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ProxyResource",
     "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
     "doc": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
@@ -372,6 +378,7 @@
      "$id": "42",
      "kind": "model",
      "name": "Resource",
+     "clientNamespace": "Azure.ResourceManager.CommonTypes",
      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
      "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
      "doc": "Common fields that are returned in the response for all Azure Resource Manager resources",
@@ -482,6 +489,7 @@
         "$id": "58",
         "kind": "model",
         "name": "SystemData",
+        "clientNamespace": "Azure.ResourceManager.CommonTypes",
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData",
         "usage": "Output,Json,LroInitial,LroFinalEnvelope",
         "doc": "Metadata pertaining to creation and last modification of the resource.",
@@ -688,6 +696,7 @@
       "$id": "86",
       "kind": "model",
       "name": "LocationResourceProperties",
+      "clientNamespace": "Azure.ResourceManager.Resources",
       "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResourceProperties",
       "usage": "Input,Output,Json",
       "doc": "Location resource properties",
@@ -777,6 +786,7 @@
    "$id": "96",
    "kind": "model",
    "name": "ErrorResponse",
+   "clientNamespace": "Azure.ResourceManager.CommonTypes",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
    "usage": "Error,Json,Exception",
    "doc": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
@@ -792,6 +802,7 @@
       "$id": "98",
       "kind": "model",
       "name": "ErrorDetail",
+      "clientNamespace": "Azure.ResourceManager.CommonTypes",
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
       "usage": "Json,Exception,LroPolling",
       "doc": "The error detail.",
@@ -922,6 +933,7 @@
           "$id": "117",
           "kind": "model",
           "name": "ErrorAdditionalInfo",
+          "clientNamespace": "Azure.ResourceManager.CommonTypes",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
           "usage": "Json,Exception,LroPolling",
           "doc": "The resource management error additional info.",
@@ -964,6 +976,7 @@
              "$id": "123",
              "kind": "model",
              "name": "ErrorAdditionalInfoInfo",
+             "clientNamespace": "Azure.ResourceManager.CommonTypes",
              "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
              "usage": "Json,Exception,LroPolling",
              "decorators": [],
@@ -1033,6 +1046,7 @@
    "$id": "130",
    "kind": "model",
    "name": "LocationResourceListResult",
+   "clientNamespace": "Azure.ResourceManager",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "usage": "Output,Json",
    "doc": "The response of a LocationResource list operation.",
@@ -1108,6 +1122,7 @@
    "$id": "140",
    "kind": "model",
    "name": "ExtensionsResource",
+   "clientNamespace": "Azure.ResourceManager.Resources",
    "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResource",
    "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
    "doc": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
@@ -1116,6 +1131,7 @@
     "$id": "141",
     "kind": "model",
     "name": "ExtensionResource",
+    "clientNamespace": "Azure.ResourceManager.CommonTypes",
     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ExtensionResource",
     "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
     "doc": "The base extension resource.",
@@ -1136,6 +1152,7 @@
       "$id": "143",
       "kind": "model",
       "name": "ExtensionsResourceProperties",
+      "clientNamespace": "Azure.ResourceManager.Resources",
       "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResourceProperties",
       "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
       "doc": "ExtensionsResource properties",
@@ -1219,6 +1236,7 @@
    "$id": "153",
    "kind": "model",
    "name": "ArmOperationStatusResourceProvisioningState",
+   "clientNamespace": "Azure.ResourceManager",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ArmOperationStatus",
    "usage": "LroPolling",
    "doc": "Standard Azure Resource Manager operation status response",
@@ -1400,6 +1418,7 @@
    "$id": "178",
    "kind": "model",
    "name": "ExtensionsResourceListResult",
+   "clientNamespace": "Azure.ResourceManager",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "usage": "Output,Json",
    "doc": "The response of a ExtensionsResource list operation.",
@@ -1475,6 +1494,7 @@
    "$id": "188",
    "kind": "model",
    "name": "SingletonTrackedResource",
+   "clientNamespace": "Azure.ResourceManager.Resources",
    "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResource",
    "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
    "doc": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
@@ -1483,6 +1503,7 @@
     "$id": "189",
     "kind": "model",
     "name": "TrackedResource",
+    "clientNamespace": "Azure.ResourceManager.CommonTypes",
     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
     "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
     "doc": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
@@ -1570,6 +1591,7 @@
       "$id": "201",
       "kind": "model",
       "name": "SingletonTrackedResourceProperties",
+      "clientNamespace": "Azure.ResourceManager.Resources",
       "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResourceProperties",
       "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
       "doc": "Singleton Arm Resource Properties.",
@@ -1653,6 +1675,7 @@
    "$id": "211",
    "kind": "model",
    "name": "SingletonTrackedResourceListResult",
+   "clientNamespace": "Azure.ResourceManager",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "usage": "Output,Json",
    "doc": "The response of a SingletonTrackedResource list operation.",
@@ -1728,6 +1751,7 @@
    "$id": "221",
    "kind": "model",
    "name": "NestedProxyResource",
+   "clientNamespace": "Azure.ResourceManager.Resources",
    "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NestedProxyResource",
    "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
    "doc": "Nested child of Top Level Tracked Resource.",
@@ -1746,6 +1770,7 @@
       "$id": "223",
       "kind": "model",
       "name": "NestedProxyResourceProperties",
+      "clientNamespace": "Azure.ResourceManager.Resources",
       "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NestedProxyResourceProperties",
       "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
       "doc": "Nested Proxy Resource Properties.",
@@ -1826,6 +1851,7 @@
    "$id": "233",
    "kind": "model",
    "name": "NestedProxyResourceListResult",
+   "clientNamespace": "Azure.ResourceManager",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "usage": "Output,Json",
    "doc": "The response of a NestedProxyResource list operation.",
@@ -1901,6 +1927,7 @@
    "$id": "243",
    "kind": "model",
    "name": "TopLevelTrackedResource",
+   "clientNamespace": "Azure.ResourceManager.Resources",
    "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResource",
    "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
    "doc": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
@@ -1919,6 +1946,7 @@
       "$id": "245",
       "kind": "model",
       "name": "TopLevelTrackedResourceProperties",
+      "clientNamespace": "Azure.ResourceManager.Resources",
       "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResourceProperties",
       "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
       "doc": "Top Level Arm Resource Properties.",
@@ -1999,6 +2027,7 @@
    "$id": "255",
    "kind": "model",
    "name": "TopLevelTrackedResourceListResult",
+   "clientNamespace": "Azure.ResourceManager",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "usage": "Output,Json",
    "doc": "The response of a TopLevelTrackedResource list operation.",
@@ -2074,6 +2103,7 @@
    "$id": "265",
    "kind": "model",
    "name": "NotificationDetails",
+   "clientNamespace": "Azure.ResourceManager.Resources",
    "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NotificationDetails",
    "usage": "Input,Json",
    "doc": "The details of a user notification.",
@@ -2140,6 +2170,7 @@
   {
    "$id": "274",
    "Name": "ResourcesClient",
+   "ClientNamespace": "Azure.ResourceManager.Resources",
    "Doc": "Arm Resource Provider management API.",
    "Operations": [],
    "Protocol": {
@@ -2183,6 +2214,7 @@
   {
    "$id": "280",
    "Name": "TopLevel",
+   "ClientNamespace": "Azure.ResourceManager.Resources",
    "Operations": [
     {
      "$id": "281",
@@ -3628,6 +3660,7 @@
   {
    "$id": "427",
    "Name": "Nested",
+   "ClientNamespace": "Azure.ResourceManager.Resources",
    "Operations": [
     {
      "$id": "428",
@@ -4845,6 +4878,7 @@
   {
    "$id": "551",
    "Name": "Singleton",
+   "ClientNamespace": "Azure.ResourceManager.Resources",
    "Operations": [
     {
      "$id": "552",
@@ -5628,6 +5662,7 @@
   {
    "$id": "629",
    "Name": "ExtensionsResources",
+   "ClientNamespace": "Azure.ResourceManager.Resources",
    "Doc": "The interface of extensions resources,\nit contains 4 kinds of scopes (resource, resource group, subscription and tenant)",
    "Operations": [
     {
@@ -6503,6 +6538,7 @@
   {
    "$id": "715",
    "Name": "LocationResources",
+   "ClientNamespace": "Azure.ResourceManager.Resources",
    "Operations": [
     {
      "$id": "716",
