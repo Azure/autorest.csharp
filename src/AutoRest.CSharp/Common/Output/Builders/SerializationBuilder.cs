@@ -158,8 +158,8 @@ namespace AutoRest.CSharp.Output.Builders
 
             return inputType switch
             {
-                InputListType listType => new JsonArraySerialization(valueType, BuildJsonSerialization(listType.ValueType, valueType.ElementType, true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
-                InputDictionaryType dictionaryType => new JsonDictionarySerialization(valueType, BuildJsonSerialization(dictionaryType.ValueType, valueType.ElementType, true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                InputListType listType when valueType.IsList => new JsonArraySerialization(valueType, BuildJsonSerialization(listType.ValueType, valueType.ElementType, true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                InputDictionaryType dictionaryType when valueType.IsDictionary => new JsonDictionarySerialization(valueType, BuildJsonSerialization(dictionaryType.ValueType, valueType.ElementType, true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 InputNullableType nullableType => BuildJsonSerialization(nullableType.Type, valueType, isCollectionElement, serializationFormat),
                 _ =>
                 Configuration.AzureArm

@@ -35,6 +35,102 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
+        /// Gets a collection of ExtensionsResources in the ArmClient.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="Mockable_AzureResourceManagerResourcesArmClient.GetExtensionsResources(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> An object representing collection of ExtensionsResources and their operations over a ExtensionsResource. </returns>
+        public static ExtensionsResourceCollection GetExtensionsResources(this ArmClient client, ResourceIdentifier scope)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockable_AzureResourceManagerResourcesArmClient(client).GetExtensionsResources(scope);
+        }
+
+        /// <summary>
+        /// Get a ExtensionsResource
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{resourceUri}/providers/Azure.ResourceManager.Resources/extensionsResources/{extensionsResourceName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ExtensionsResource_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2023-12-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExtensionsResource"/></description>
+        /// </item>
+        /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="Mockable_AzureResourceManagerResourcesArmClient.GetExtensionsResourceAsync(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <param name="extensionsResourceName"> The name of the ExtensionsResource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> or <paramref name="extensionsResourceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="extensionsResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public static async Task<Response<ExtensionsResource>> GetExtensionsResourceAsync(this ArmClient client, ResourceIdentifier scope, string extensionsResourceName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return await GetMockable_AzureResourceManagerResourcesArmClient(client).GetExtensionsResourceAsync(scope, extensionsResourceName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get a ExtensionsResource
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{resourceUri}/providers/Azure.ResourceManager.Resources/extensionsResources/{extensionsResourceName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ExtensionsResource_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2023-12-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExtensionsResource"/></description>
+        /// </item>
+        /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="Mockable_AzureResourceManagerResourcesArmClient.GetExtensionsResource(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <param name="extensionsResourceName"> The name of the ExtensionsResource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> or <paramref name="extensionsResourceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="extensionsResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public static Response<ExtensionsResource> GetExtensionsResource(this ArmClient client, ResourceIdentifier scope, string extensionsResourceName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockable_AzureResourceManagerResourcesArmClient(client).GetExtensionsResource(scope, extensionsResourceName, cancellationToken);
+        }
+
+        /// <summary>
         /// Gets an object representing a <see cref="TopLevelTrackedResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="TopLevelTrackedResource.CreateResourceIdentifier" /> to create a <see cref="TopLevelTrackedResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
@@ -89,6 +185,44 @@ namespace _Azure.ResourceManager.Resources
             Argument.AssertNotNull(client, nameof(client));
 
             return GetMockable_AzureResourceManagerResourcesArmClient(client).GetSingletonTrackedResource(id);
+        }
+
+        /// <summary>
+        /// Gets an object representing an <see cref="ExtensionsResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ExtensionsResource.CreateResourceIdentifier" /> to create an <see cref="ExtensionsResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="Mockable_AzureResourceManagerResourcesArmClient.GetExtensionsResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="ExtensionsResource"/> object. </returns>
+        public static ExtensionsResource GetExtensionsResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockable_AzureResourceManagerResourcesArmClient(client).GetExtensionsResource(id);
+        }
+
+        /// <summary>
+        /// Gets an object representing a <see cref="LocationResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="LocationResource.CreateResourceIdentifier" /> to create a <see cref="LocationResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="Mockable_AzureResourceManagerResourcesArmClient.GetLocationResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="LocationResource"/> object. </returns>
+        public static LocationResource GetLocationResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockable_AzureResourceManagerResourcesArmClient(client).GetLocationResource(id);
         }
 
         /// <summary>
@@ -199,6 +333,102 @@ namespace _Azure.ResourceManager.Resources
             Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
             return GetMockable_AzureResourceManagerResourcesResourceGroupResource(resourceGroupResource).GetSingletonTrackedResource();
+        }
+
+        /// <summary>
+        /// Gets a collection of LocationResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="Mockable_AzureResourceManagerResourcesSubscriptionResource.GetLocationResources(AzureLocation)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of the Azure region. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> An object representing collection of LocationResources and their operations over a LocationResource. </returns>
+        public static LocationResourceCollection GetLocationResources(this SubscriptionResource subscriptionResource, AzureLocation location)
+        {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockable_AzureResourceManagerResourcesSubscriptionResource(subscriptionResource).GetLocationResources(location);
+        }
+
+        /// <summary>
+        /// Get a LocationResource
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.Resources/locations/{location}/locationResources/{locationResourceName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>LocationResource_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2023-12-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="LocationResource"/></description>
+        /// </item>
+        /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="Mockable_AzureResourceManagerResourcesSubscriptionResource.GetLocationResourceAsync(AzureLocation,string,CancellationToken)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of the Azure region. </param>
+        /// <param name="locationResourceName"> The name of the LocationResource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="locationResourceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="locationResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public static async Task<Response<LocationResource>> GetLocationResourceAsync(this SubscriptionResource subscriptionResource, AzureLocation location, string locationResourceName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return await GetMockable_AzureResourceManagerResourcesSubscriptionResource(subscriptionResource).GetLocationResourceAsync(location, locationResourceName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get a LocationResource
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.Resources/locations/{location}/locationResources/{locationResourceName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>LocationResource_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2023-12-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="LocationResource"/></description>
+        /// </item>
+        /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="Mockable_AzureResourceManagerResourcesSubscriptionResource.GetLocationResource(AzureLocation,string,CancellationToken)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of the Azure region. </param>
+        /// <param name="locationResourceName"> The name of the LocationResource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="locationResourceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="locationResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public static Response<LocationResource> GetLocationResource(this SubscriptionResource subscriptionResource, AzureLocation location, string locationResourceName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockable_AzureResourceManagerResourcesSubscriptionResource(subscriptionResource).GetLocationResource(location, locationResourceName, cancellationToken);
         }
 
         /// <summary>

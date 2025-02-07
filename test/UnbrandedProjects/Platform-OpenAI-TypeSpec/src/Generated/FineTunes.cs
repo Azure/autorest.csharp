@@ -146,7 +146,7 @@ namespace OpenAI
         }
 
         /// <summary> List your organization's fine-tuning jobs. </summary>
-        /// <remarks> List. </remarks>
+        /// <remarks> Get fine tunes. </remarks>
         [Obsolete("deprecated")]
         public virtual async Task<ClientResult<ListFineTunesResponse>> GetFineTunesAsync()
         {
@@ -155,7 +155,7 @@ namespace OpenAI
         }
 
         /// <summary> List your organization's fine-tuning jobs. </summary>
-        /// <remarks> List. </remarks>
+        /// <remarks> Get fine tunes. </remarks>
         [Obsolete("deprecated")]
         public virtual ClientResult<ListFineTunesResponse> GetFineTunes()
         {
@@ -326,7 +326,7 @@ namespace OpenAI
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> List events. </remarks>
+        /// <remarks> Get events. </remarks>
         [Obsolete("deprecated")]
         public virtual async Task<ClientResult<ListFineTuneEventsResponse>> GetEventsAsync(string fineTuneId, bool? stream = null)
         {
@@ -349,7 +349,7 @@ namespace OpenAI
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> List events. </remarks>
+        /// <remarks> Get events. </remarks>
         [Obsolete("deprecated")]
         public virtual ClientResult<ListFineTuneEventsResponse> GetEvents(string fineTuneId, bool? stream = null)
         {

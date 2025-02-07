@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
 using Autorest.CSharp.Core;
@@ -152,7 +153,10 @@ namespace AutoRest.CSharp.Generation.Writers
             createPageableParameters.Add($"{scopeName:L}");
             createPageableParameters.Add($"{itemPropertyName:L}");
             createPageableParameters.Add($"{nextLinkPropertyName:L}");
-
+            if (ContainsMaxPageSize(methodParameters))
+            {
+                createPageableParameters.Add($"{KnownParameters.MaxPageSize.Name}");
+            }
             if (ContainsRequestContext(methodParameters))
             {
                 createPageableParameters.Add($"{KnownParameters.RequestContext.Name:I}");
@@ -192,6 +196,8 @@ namespace AutoRest.CSharp.Generation.Writers
         private static bool ContainsRequestContext(IReadOnlyCollection<Parameter>? parameters) =>
             parameters != null && (parameters.Contains(KnownParameters.RequestContext) || parameters.Contains(KnownParameters.RequestContextRequired));
 
+        private static bool ContainsMaxPageSize(IReadOnlyCollection<Parameter>? parameters) => parameters != null && (parameters.Contains(KnownParameters.MaxPageSize, Parameter.TypeAndNameEqualityComparer));
+
         private static FormattableString? GetCreateRequestCall(Reference? restClientReference, RestClientMethod? createRequestMethod, IReadOnlyList<ProtocolToConvenienceParameterConverter>? ProtocolToConvenienceParameterConverters = null)
         {
             if (createRequestMethod == null)
@@ -207,7 +213,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (ProtocolToConvenienceParameterConverters == null)
             {
-                return $"{methodName}({createRequestMethod.Parameters.GetIdentifiersFormattable()})";
+                FormattableString argumentsFormattableString = createRequestMethod.Parameters.GetIdentifiersFormattable();
+                if (ContainsMaxPageSize(createRequestMethod.Parameters))
+                {
+                    argumentsFormattableString = ReplaceArgumentValue(argumentsFormattableString, KnownParameters.MaxPageSize.Name, KnownParameters.PageSizeHint.Name);
+                }
+                return $"{methodName}({argumentsFormattableString})";
             }
 
             var parameters = new List<FormattableString>();
@@ -224,10 +235,26 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     throw new InvalidOperationException($"Cannot find corresponding convenience parameter for create request method parameter {parameter.Name}.");
                 }
-
-                parameters.Add(convenienceParameter.GetConversionFormattable(parameter.Type, null));
+                FormattableString? parameterName = convenienceParameter.GetConversionFormattable(parameter.Type, null);
+                if (Parameter.TypeAndNameEqualityComparer.Equals(parameter, KnownParameters.MaxPageSize))
+                {
+                    parameterName = $"{KnownParameters.PageSizeHint.Name}";
+                }
+                parameters.Add(parameterName);
             }
             return $"{methodName}({parameters.Join(" ,")})";
+        }
+
+        private static FormattableString ReplaceArgumentValue(FormattableString original, object oldValue, object newValue)
+        {
+            object?[] updatedArgs = original.GetArguments().ToArray();
+            int indexToReplace = Array.IndexOf(updatedArgs, oldValue);
+            if (indexToReplace == -1)
+            {
+                return original;
+            }
+            updatedArgs[indexToReplace] = newValue;
+            return FormattableStringFactory.Create(original.Format, updatedArgs);
         }
 
         private static FormattableString GetValueFactory(CSharpType? pageItemType)

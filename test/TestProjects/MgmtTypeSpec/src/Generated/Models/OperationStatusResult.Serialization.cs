@@ -77,6 +77,11 @@ namespace MgmtTypeSpec.Models
                 writer.WritePropertyName("error"u8);
                 JsonSerializer.Serialize(writer, Error);
             }
+            if (options.Format != "W" && Optional.IsDefined(ResourceId))
+            {
+                writer.WritePropertyName("resourceId"u8);
+                writer.WriteStringValue(ResourceId);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -114,7 +119,7 @@ namespace MgmtTypeSpec.Models
             {
                 return null;
             }
-            string id = default;
+            ResourceIdentifier id = default;
             string name = default;
             string status = default;
             double? percentComplete = default;
@@ -122,13 +127,18 @@ namespace MgmtTypeSpec.Models
             DateTimeOffset? endTime = default;
             IReadOnlyList<OperationStatusResult> operations = default;
             ResponseError error = default;
+            string resourceId = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
                 {
-                    id = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("name"u8))
@@ -191,6 +201,11 @@ namespace MgmtTypeSpec.Models
                     error = JsonSerializer.Deserialize<ResponseError>(property.Value.GetRawText());
                     continue;
                 }
+                if (property.NameEquals("resourceId"u8))
+                {
+                    resourceId = property.Value.GetString();
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
@@ -206,6 +221,7 @@ namespace MgmtTypeSpec.Models
                 endTime,
                 operations ?? new ChangeTrackingList<OperationStatusResult>(),
                 error,
+                resourceId,
                 serializedAdditionalRawData);
         }
 

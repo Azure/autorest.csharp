@@ -7,7 +7,7 @@
    "$id": "2",
    "kind": "enum",
    "name": "OneBinaryBodyTwoContentTypesRequestContentType",
-   "crossLanguageDefinitionId": "oneBinaryBodyTwoContentTypes.RequestContentType.anonymous",
+   "crossLanguageDefinitionId": "MultipleMediaTypes.oneBinaryBodyTwoContentTypes.RequestContentType.anonymous",
    "valueType": {
     "$id": "3",
     "kind": "string",
@@ -51,6 +51,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input",
@@ -60,7 +61,7 @@
    "$id": "8",
    "kind": "enum",
    "name": "OneStringBodyThreeContentTypesRequestContentType",
-   "crossLanguageDefinitionId": "oneStringBodyThreeContentTypes.RequestContentType.anonymous",
+   "crossLanguageDefinitionId": "MultipleMediaTypes.oneStringBodyThreeContentTypes.RequestContentType.anonymous",
    "valueType": {
     "$id": "9",
     "kind": "string",
@@ -121,6 +122,7 @@
      "decorators": []
     }
    ],
+   "clientNamespace": "",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input",
@@ -132,6 +134,7 @@
    "$id": "16",
    "kind": "model",
    "name": "Body",
+   "clientNamespace": "MultipleMediaTypes",
    "crossLanguageDefinitionId": "MultipleMediaTypes.Body",
    "usage": "Input,Json",
    "decorators": [],
@@ -153,25 +156,33 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "MultipleMediaTypes.Body.id"
+     "crossLanguageDefinitionId": "MultipleMediaTypes.Body.id",
+     "serializationOptions": {
+      "$id": "19",
+      "json": {
+       "$id": "20",
+       "name": "id"
+      }
+     }
     }
    ]
   }
  ],
  "Clients": [
   {
-   "$id": "19",
+   "$id": "21",
    "Name": "MultipleMediaTypesClient",
-   "Description": "Play with produces/consumes and media-types in general.",
+   "ClientNamespace": "MultipleMediaTypes",
+   "Doc": "Play with produces/consumes and media-types in general.",
    "Operations": [
     {
-     "$id": "20",
+     "$id": "22",
      "Name": "oneBinaryBodyTwoContentTypes",
      "ResourceName": "MultipleMediaTypes",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "21",
+       "$id": "23",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
@@ -188,11 +199,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "22",
+       "$id": "24",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "23",
+        "$id": "25",
         "kind": "bytes",
         "name": "bytes",
         "crossLanguageDefinitionId": "TypeSpec.bytes",
@@ -211,7 +222,7 @@
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "26",
        "StatusCodes": [
         204
        ],
@@ -235,13 +246,13 @@
      "Decorators": []
     },
     {
-     "$id": "25",
+     "$id": "27",
      "Name": "oneStringBodyThreeContentTypes",
      "ResourceName": "MultipleMediaTypes",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "26",
+       "$id": "28",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
@@ -258,11 +269,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "27",
+       "$id": "29",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "28",
+        "$id": "30",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -281,7 +292,7 @@
      ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "31",
        "StatusCodes": [
         204
        ],
@@ -306,20 +317,20 @@
      "Decorators": []
     },
     {
-     "$id": "30",
+     "$id": "32",
      "Name": "oneModelBodyOneContentType",
      "ResourceName": "MultipleMediaTypes",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "31",
+       "$id": "33",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "32",
+        "$id": "34",
         "kind": "constant",
         "valueType": {
-         "$id": "33",
+         "$id": "35",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -339,7 +350,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "34",
+       "$id": "36",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -358,7 +369,7 @@
      ],
      "Responses": [
       {
-       "$id": "35",
+       "$id": "37",
        "StatusCodes": [
         204
        ],
@@ -382,15 +393,15 @@
     }
    ],
    "Protocol": {
-    "$id": "36"
+    "$id": "38"
    },
    "Parameters": [
     {
-     "$id": "37",
+     "$id": "39",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Type": {
-      "$id": "38",
+      "$id": "40",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"

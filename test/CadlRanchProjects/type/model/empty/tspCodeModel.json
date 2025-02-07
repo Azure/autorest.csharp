@@ -8,9 +8,10 @@
    "$id": "2",
    "kind": "model",
    "name": "EmptyInput",
+   "clientNamespace": "Type.Model.Empty",
    "crossLanguageDefinitionId": "Type.Model.Empty.EmptyInput",
    "usage": "Input,Json",
-   "description": "Empty model used in operation parameters",
+   "doc": "Empty model used in operation parameters",
    "decorators": [],
    "properties": []
   },
@@ -18,9 +19,10 @@
    "$id": "3",
    "kind": "model",
    "name": "EmptyOutput",
+   "clientNamespace": "Type.Model.Empty",
    "crossLanguageDefinitionId": "Type.Model.Empty.EmptyOutput",
    "usage": "Output,Json",
-   "description": "Empty model used in operation return type",
+   "doc": "Empty model used in operation return type",
    "decorators": [],
    "properties": []
   },
@@ -28,9 +30,10 @@
    "$id": "4",
    "kind": "model",
    "name": "EmptyInputOutput",
+   "clientNamespace": "Type.Model.Empty",
    "crossLanguageDefinitionId": "Type.Model.Empty.EmptyInputOutput",
    "usage": "Input,Output,Json",
-   "description": "Empty model used in both parameter and return type",
+   "doc": "Empty model used in both parameter and return type",
    "decorators": [],
    "properties": []
   }
@@ -39,7 +42,8 @@
   {
    "$id": "5",
    "Name": "EmptyClient",
-   "Description": "Illustrates usage of empty model used in operation's parameters and responses.",
+   "ClientNamespace": "Type.Model.Empty",
+   "Doc": "Illustrates usage of empty model used in operation's parameters and responses.",
    "Operations": [
     {
      "$id": "6",
@@ -51,7 +55,7 @@
        "$id": "7",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "8",
         "kind": "constant",
@@ -188,7 +192,7 @@
        "$id": "18",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "19",
         "kind": "constant",
@@ -296,7 +300,7 @@
      "$id": "27",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "28",
       "kind": "url",

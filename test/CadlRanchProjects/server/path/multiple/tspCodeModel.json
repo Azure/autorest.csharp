@@ -33,11 +33,12 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "Version 1.0",
+     "doc": "Version 1.0",
      "decorators": []
     }
    ],
-   "description": "Service versions",
+   "clientNamespace": "Server.Path.Multiple",
+   "doc": "Service versions",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,ApiVersionEnum",
@@ -49,6 +50,7 @@
   {
    "$id": "6",
    "Name": "MultipleClient",
+   "ClientNamespace": "Server.Path.Multiple",
    "Operations": [
     {
      "$id": "7",
@@ -135,7 +137,7 @@
      "$id": "14",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Pass in http://localhost:3000 for endpoint.",
+     "Doc": "Pass in http://localhost:3000 for endpoint.",
      "Type": {
       "$id": "15",
       "kind": "url",
@@ -156,7 +158,7 @@
      "$id": "16",
      "Name": "apiVersion",
      "NameInRequest": "apiVersion",
-     "Description": "Pass in v1.0 for API version.",
+     "Doc": "Pass in v1.0 for API version.",
      "Type": {
       "$ref": "2"
      },

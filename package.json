@@ -12,9 +12,10 @@
         "url": "https://github.com/Azure/autorest.csharp/issues"
     },
   "devDependencies": {
-    "@azure-tools/cadl-ranch-specs": "0.39.2",
-    "@azure-tools/typespec-client-generator-core": "0.48.1",
-    "@azure-tools/typespec-azure-resource-manager": "0.48.0",
+    "@typespec/http-specs": "0.1.0-alpha.7",
+    "@azure-tools/azure-http-specs": "0.1.0-alpha.5",
+    "@azure-tools/typespec-client-generator-core": "0.50.2",
+    "@azure-tools/typespec-azure-resource-manager": "0.50.0",
     "@azure-tools/typespec-csharp": "file:src/TypeSpec.Extension/Emitter.Csharp",
     "@azure-tools/unbranded-tests": "file:test/UnbrandedProjects",
     "@microsoft.azure/autorest.testserver": "3.3.50",

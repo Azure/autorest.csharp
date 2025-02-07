@@ -8,13 +8,14 @@
   {
    "$id": "2",
    "Name": "XmsClientRequestIdClient",
-   "Description": "Azure client request id header configurations.",
+   "ClientNamespace": "Azure.SpecialHeaders.XmsClientRequestId",
+   "Doc": "Azure client request id header configurations.",
    "Operations": [
     {
      "$id": "3",
      "Name": "get",
      "ResourceName": "XmsClientRequestId",
-     "Description": "Get operation with azure `x-ms-client-request-id` header.",
+     "Doc": "Get operation with azure `x-ms-client-request-id` header.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -69,7 +70,7 @@
      "$id": "8",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "9",
       "kind": "url",

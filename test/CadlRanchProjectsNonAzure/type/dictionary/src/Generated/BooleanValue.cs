@@ -35,7 +35,7 @@ namespace Scm._Type._Dictionary
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get boolean value. </summary>
         public virtual async Task<ClientResult<IReadOnlyDictionary<string, bool>>> GetBooleanValueAsync()
         {
             ClientResult result = await GetBooleanValueAsync(null).ConfigureAwait(false);
@@ -50,7 +50,7 @@ namespace Scm._Type._Dictionary
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get boolean value. </summary>
         public virtual ClientResult<IReadOnlyDictionary<string, bool>> GetBooleanValue()
         {
             ClientResult result = GetBooleanValue(null);
@@ -66,7 +66,7 @@ namespace Scm._Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get boolean value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -90,7 +90,7 @@ namespace Scm._Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get boolean value.
         /// <list type="bullet">
         /// <item>
         /// <description>

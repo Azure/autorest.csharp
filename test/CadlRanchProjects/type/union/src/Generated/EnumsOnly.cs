@@ -45,7 +45,7 @@ namespace _Type.Union
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get enums only. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='GetEnumsOnlyAsync(CancellationToken)']/*" />
         public virtual async Task<Response<GetResponse3>> GetEnumsOnlyAsync(CancellationToken cancellationToken = default)
@@ -55,7 +55,7 @@ namespace _Type.Union
             return Response.FromValue(GetResponse3.FromResponse(response), response);
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get enums only. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='GetEnumsOnly(CancellationToken)']/*" />
         public virtual Response<GetResponse3> GetEnumsOnly(CancellationToken cancellationToken = default)
@@ -66,7 +66,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get enums only.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -101,7 +101,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get enums only.
         /// <list type="bullet">
         /// <item>
         /// <description>

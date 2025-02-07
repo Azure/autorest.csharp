@@ -31,7 +31,7 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "NotSpecified is not allowed.",
+     "doc": "NotSpecified is not allowed.",
      "decorators": []
     },
     {
@@ -49,11 +49,12 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "Extract is the only allowed value.",
+     "doc": "Extract is the only allowed value.",
      "decorators": []
     }
    ],
-   "description": "The type of alias pattern.",
+   "clientNamespace": "ModelReaderWriterValidationTypeSpec",
+   "doc": "The type of alias pattern.",
    "isFixed": true,
    "isFlags": false,
    "usage": "Output,Json",
@@ -87,7 +88,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type is not specified.",
+     "doc": "The token type is not specified.",
      "decorators": []
     },
     {
@@ -105,7 +106,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type can be anything.",
+     "doc": "The token type can be anything.",
      "decorators": []
     },
     {
@@ -123,7 +124,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type is string.",
+     "doc": "The token type is string.",
      "decorators": []
     },
     {
@@ -141,7 +142,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type is object.",
+     "doc": "The token type is object.",
      "decorators": []
     },
     {
@@ -159,7 +160,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type is array.",
+     "doc": "The token type is array.",
      "decorators": []
     },
     {
@@ -177,7 +178,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type is integer.",
+     "doc": "The token type is integer.",
      "decorators": []
     },
     {
@@ -195,7 +196,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type is number.",
+     "doc": "The token type is number.",
      "decorators": []
     },
     {
@@ -213,11 +214,12 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type is boolean.",
+     "doc": "The token type is boolean.",
      "decorators": []
     }
    ],
-   "description": "The type of the token that the alias path is referring to.",
+   "clientNamespace": "ModelReaderWriterValidationTypeSpec",
+   "doc": "The type of the token that the alias path is referring to.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -251,7 +253,7 @@
      "enumType": {
       "$ref": "26"
      },
-     "description": "The token that the alias path is referring to has no attributes.",
+     "doc": "The token that the alias path is referring to has no attributes.",
      "decorators": []
     },
     {
@@ -269,11 +271,12 @@
      "enumType": {
       "$ref": "26"
      },
-     "description": "The token that the alias path is referring to is modifiable by policies with 'modify' effect.",
+     "doc": "The token that the alias path is referring to is modifiable by policies with 'modify' effect.",
      "decorators": []
     }
    ],
-   "description": "The attributes of the token that the alias path is referring to.",
+   "clientNamespace": "ModelReaderWriterValidationTypeSpec",
+   "doc": "The attributes of the token that the alias path is referring to.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -307,7 +310,7 @@
      "enumType": {
       "$ref": "32"
      },
-     "description": "Alias type is unknown (same as not providing alias type).",
+     "doc": "Alias type is unknown (same as not providing alias type).",
      "decorators": []
     },
     {
@@ -325,7 +328,7 @@
      "enumType": {
       "$ref": "32"
      },
-     "description": "Alias value is not secret.",
+     "doc": "Alias value is not secret.",
      "decorators": []
     },
     {
@@ -343,11 +346,12 @@
      "enumType": {
       "$ref": "32"
      },
-     "description": "Alias value is secret.",
+     "doc": "Alias value is secret.",
      "decorators": []
     }
    ],
-   "description": "The type of the alias.",
+   "clientNamespace": "ModelReaderWriterValidationTypeSpec",
+   "doc": "The type of the alias.",
    "isFixed": true,
    "isFlags": false,
    "usage": "Output,Json",
@@ -381,7 +385,7 @@
      "enumType": {
       "$ref": "40"
      },
-     "description": "The provider authorization consent state is not specified.",
+     "doc": "The provider authorization consent state is not specified.",
      "decorators": []
     },
     {
@@ -399,7 +403,7 @@
      "enumType": {
       "$ref": "40"
      },
-     "description": "The provider authorization consent state is required.",
+     "doc": "The provider authorization consent state is required.",
      "decorators": []
     },
     {
@@ -417,7 +421,7 @@
      "enumType": {
       "$ref": "40"
      },
-     "description": "The provider authorization consent state is not required.",
+     "doc": "The provider authorization consent state is not required.",
      "decorators": []
     },
     {
@@ -435,11 +439,12 @@
      "enumType": {
       "$ref": "40"
      },
-     "description": "The provider authorization consent state is consented.",
+     "doc": "The provider authorization consent state is consented.",
      "decorators": []
     }
    ],
-   "description": "The provider authorization consent state.",
+   "clientNamespace": "ModelReaderWriterValidationTypeSpec",
+   "doc": "The provider authorization consent state.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -451,9 +456,10 @@
    "$id": "50",
    "kind": "model",
    "name": "ModelAsStruct",
+   "clientNamespace": "ModelReaderWriterValidationTypeSpec",
    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelAsStruct",
    "usage": "Input,Output,Json",
-   "description": "The model to change to struct.",
+   "doc": "The model to change to struct.",
    "decorators": [],
    "properties": [
     {
@@ -461,7 +467,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The id property.",
+     "doc": "The id property.",
      "type": {
       "$id": "52",
       "kind": "int32",
@@ -474,26 +480,34 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelAsStruct.id"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelAsStruct.id",
+     "serializationOptions": {
+      "$id": "53",
+      "json": {
+       "$id": "54",
+       "name": "id"
+      }
+     }
     }
    ]
   },
   {
-   "$id": "53",
+   "$id": "55",
    "kind": "model",
    "name": "ModelWithPersistableOnly",
+   "clientNamespace": "ModelReaderWriterValidationTypeSpec",
    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly",
    "usage": "Input,Output,Json",
    "decorators": [],
    "properties": [
     {
-     "$id": "54",
+     "$id": "56",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The name.",
+     "doc": "The name.",
      "type": {
-      "$id": "55",
+      "$id": "57",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -504,20 +518,27 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly.name"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly.name",
+     "serializationOptions": {
+      "$id": "58",
+      "json": {
+       "$id": "59",
+       "name": "name"
+      }
+     }
     },
     {
-     "$id": "56",
+     "$id": "60",
      "kind": "property",
      "name": "fields",
      "serializedName": "fields",
-     "description": "The fields property.",
+     "doc": "The fields property.",
      "type": {
-      "$id": "57",
+      "$id": "61",
       "kind": "array",
       "name": "Array",
       "valueType": {
-       "$id": "58",
+       "$id": "62",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
@@ -531,16 +552,23 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly.fields"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly.fields",
+     "serializationOptions": {
+      "$id": "63",
+      "json": {
+       "$id": "64",
+       "name": "fields"
+      }
+     }
     },
     {
-     "$id": "59",
+     "$id": "65",
      "kind": "property",
      "name": "nullProperty",
      "serializedName": "nullProperty",
-     "description": "The nullable property.",
+     "doc": "The nullable property.",
      "type": {
-      "$id": "60",
+      "$id": "66",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -551,26 +579,33 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly.nullProperty"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly.nullProperty",
+     "serializationOptions": {
+      "$id": "67",
+      "json": {
+       "$id": "68",
+       "name": "nullProperty"
+      }
+     }
     },
     {
-     "$id": "61",
+     "$id": "69",
      "kind": "property",
      "name": "keyValuePairs",
      "serializedName": "keyValuePairs",
-     "description": "The key value pairs property.",
+     "doc": "The key value pairs property.",
      "type": {
-      "$id": "62",
+      "$id": "70",
       "kind": "dict",
       "keyType": {
-       "$id": "63",
+       "$id": "71",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
        "decorators": []
       },
       "valueType": {
-       "$id": "64",
+       "$id": "72",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
@@ -583,16 +618,23 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly.keyValuePairs"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly.keyValuePairs",
+     "serializationOptions": {
+      "$id": "73",
+      "json": {
+       "$id": "74",
+       "name": "keyValuePairs"
+      }
+     }
     },
     {
-     "$id": "65",
+     "$id": "75",
      "kind": "property",
      "name": "xProperty",
      "serializedName": "xProperty",
-     "description": "The x property.",
+     "doc": "The x property.",
      "type": {
-      "$id": "66",
+      "$id": "76",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -603,26 +645,34 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly.xProperty"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly.xProperty",
+     "serializationOptions": {
+      "$id": "77",
+      "json": {
+       "$id": "78",
+       "name": "xProperty"
+      }
+     }
     }
    ]
   },
   {
-   "$id": "67",
+   "$id": "79",
    "kind": "model",
    "name": "BaseModel",
+   "clientNamespace": "ModelReaderWriterValidationTypeSpec",
    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.BaseModel",
    "usage": "Input,Output,Json",
-   "description": "The BaseModel in the discriminated set",
+   "doc": "The BaseModel in the discriminated set",
    "decorators": [],
    "discriminatorProperty": {
-    "$id": "68",
+    "$id": "80",
     "kind": "property",
     "name": "kind",
     "serializedName": "kind",
-    "description": "The kind",
+    "doc": "The kind",
     "type": {
-     "$id": "69",
+     "$id": "81",
      "kind": "string",
      "name": "string",
      "crossLanguageDefinitionId": "TypeSpec.string",
@@ -633,20 +683,27 @@
     "discriminator": true,
     "flatten": false,
     "decorators": [],
-    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.BaseModel.kind"
+    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.BaseModel.kind",
+    "serializationOptions": {
+     "$id": "82",
+     "json": {
+      "$id": "83",
+      "name": "kind"
+     }
+    }
    },
    "properties": [
     {
-     "$ref": "68"
+     "$ref": "80"
     },
     {
-     "$id": "70",
+     "$id": "84",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The name property.",
+     "doc": "The name property.",
      "type": {
-      "$id": "71",
+      "$id": "85",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -657,34 +714,42 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.BaseModel.name"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.BaseModel.name",
+     "serializationOptions": {
+      "$id": "86",
+      "json": {
+       "$id": "87",
+       "name": "name"
+      }
+     }
     }
    ],
    "discriminatedSubtypes": {
-    "$id": "72",
+    "$id": "88",
     "X": {
-     "$id": "73",
+     "$id": "89",
      "kind": "model",
      "name": "ModelX",
+     "clientNamespace": "ModelReaderWriterValidationTypeSpec",
      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX",
      "usage": "Input,Output,Json",
-     "description": "The ModelX in the discriminated set",
+     "doc": "The ModelX in the discriminated set",
      "discriminatorValue": "X",
      "decorators": [],
      "baseModel": {
-      "$ref": "67"
+      "$ref": "79"
      },
      "properties": [
       {
-       "$id": "74",
+       "$id": "90",
        "kind": "property",
        "name": "kind",
        "serializedName": "kind",
        "type": {
-        "$id": "75",
+        "$id": "91",
         "kind": "constant",
         "valueType": {
-         "$id": "76",
+         "$id": "92",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -698,20 +763,27 @@
        "discriminator": true,
        "flatten": false,
        "decorators": [],
-       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX.kind"
+       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX.kind",
+       "serializationOptions": {
+        "$id": "93",
+        "json": {
+         "$id": "94",
+         "name": "kind"
+        }
+       }
       },
       {
-       "$id": "77",
+       "$id": "95",
        "kind": "property",
        "name": "fields",
        "serializedName": "fields",
-       "description": "Optional list.",
+       "doc": "Optional list.",
        "type": {
-        "$id": "78",
+        "$id": "96",
         "kind": "array",
         "name": "Array",
         "valueType": {
-         "$id": "79",
+         "$id": "97",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -725,16 +797,23 @@
        "discriminator": false,
        "flatten": false,
        "decorators": [],
-       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX.fields"
+       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX.fields",
+       "serializationOptions": {
+        "$id": "98",
+        "json": {
+         "$id": "99",
+         "name": "fields"
+        }
+       }
       },
       {
-       "$id": "80",
+       "$id": "100",
        "kind": "property",
        "name": "nullProperty",
        "serializedName": "nullProperty",
-       "description": "Nullable integer.",
+       "doc": "Nullable integer.",
        "type": {
-        "$id": "81",
+        "$id": "101",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -745,26 +824,33 @@
        "discriminator": false,
        "flatten": false,
        "decorators": [],
-       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX.nullProperty"
+       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX.nullProperty",
+       "serializationOptions": {
+        "$id": "102",
+        "json": {
+         "$id": "103",
+         "name": "nullProperty"
+        }
+       }
       },
       {
-       "$id": "82",
+       "$id": "104",
        "kind": "property",
        "name": "keyValuePairs",
        "serializedName": "keyValuePairs",
-       "description": "Optional dictionary.",
+       "doc": "Optional dictionary.",
        "type": {
-        "$id": "83",
+        "$id": "105",
         "kind": "dict",
         "keyType": {
-         "$id": "84",
+         "$id": "106",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
         "valueType": {
-         "$id": "85",
+         "$id": "107",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -777,16 +863,23 @@
        "discriminator": false,
        "flatten": false,
        "decorators": [],
-       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX.keyValuePairs"
+       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX.keyValuePairs",
+       "serializationOptions": {
+        "$id": "108",
+        "json": {
+         "$id": "109",
+         "name": "keyValuePairs"
+        }
+       }
       },
       {
-       "$id": "86",
+       "$id": "110",
        "kind": "property",
        "name": "xProperty",
        "serializedName": "xProperty",
-       "description": "The XProperty property.",
+       "doc": "The XProperty property.",
        "type": {
-        "$id": "87",
+        "$id": "111",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -797,33 +890,41 @@
        "discriminator": false,
        "flatten": false,
        "decorators": [],
-       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX.xProperty"
+       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX.xProperty",
+       "serializationOptions": {
+        "$id": "112",
+        "json": {
+         "$id": "113",
+         "name": "xProperty"
+        }
+       }
       }
      ]
     },
     "Y": {
-     "$id": "88",
+     "$id": "114",
      "kind": "model",
      "name": "ModelY",
+     "clientNamespace": "ModelReaderWriterValidationTypeSpec",
      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelY",
      "usage": "Input,Output,Json",
-     "description": "The ModelY in the discriminated set",
+     "doc": "The ModelY in the discriminated set",
      "discriminatorValue": "Y",
      "decorators": [],
      "baseModel": {
-      "$ref": "67"
+      "$ref": "79"
      },
      "properties": [
       {
-       "$id": "89",
+       "$id": "115",
        "kind": "property",
        "name": "kind",
        "serializedName": "kind",
        "type": {
-        "$id": "90",
+        "$id": "116",
         "kind": "constant",
         "valueType": {
-         "$id": "91",
+         "$id": "117",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -837,16 +938,23 @@
        "discriminator": true,
        "flatten": false,
        "decorators": [],
-       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelY.kind"
+       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelY.kind",
+       "serializationOptions": {
+        "$id": "118",
+        "json": {
+         "$id": "119",
+         "name": "kind"
+        }
+       }
       },
       {
-       "$id": "92",
+       "$id": "120",
        "kind": "property",
        "name": "yProperty",
        "serializedName": "yProperty",
-       "description": "The YProperty property.",
+       "doc": "The YProperty property.",
        "type": {
-        "$id": "93",
+        "$id": "121",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -857,43 +965,52 @@
        "discriminator": false,
        "flatten": false,
        "decorators": [],
-       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelY.yProperty"
+       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelY.yProperty",
+       "serializationOptions": {
+        "$id": "122",
+        "json": {
+         "$id": "123",
+         "name": "yProperty"
+        }
+       }
       }
      ]
     }
    }
   },
   {
-   "$ref": "73"
+   "$ref": "89"
   },
   {
-   "$ref": "88"
+   "$ref": "114"
   },
   {
-   "$id": "94",
+   "$id": "124",
    "kind": "model",
    "name": "AvailabilitySetData",
+   "clientNamespace": "ModelReaderWriterValidationTypeSpec",
    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetData",
    "usage": "Input,Output,Json",
-   "description": "The availability set data",
+   "doc": "The availability set data",
    "decorators": [],
    "baseModel": {
-    "$id": "95",
+    "$id": "125",
     "kind": "model",
     "name": "TrackedResourceData",
+    "clientNamespace": "ModelReaderWriterValidationTypeSpec",
     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData",
     "usage": "Input,Output,Json",
-    "description": "The tracked resource data",
+    "doc": "The tracked resource data",
     "decorators": [],
     "properties": [
      {
-      "$id": "96",
+      "$id": "126",
       "kind": "property",
       "name": "id",
       "serializedName": "id",
-      "description": "The id property.",
+      "doc": "The id property.",
       "type": {
-       "$id": "97",
+       "$id": "127",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
@@ -904,16 +1021,23 @@
       "discriminator": false,
       "flatten": false,
       "decorators": [],
-      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData.id"
+      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData.id",
+      "serializationOptions": {
+       "$id": "128",
+       "json": {
+        "$id": "129",
+        "name": "id"
+       }
+      }
      },
      {
-      "$id": "98",
+      "$id": "130",
       "kind": "property",
       "name": "name",
       "serializedName": "name",
-      "description": "The name property.",
+      "doc": "The name property.",
       "type": {
-       "$id": "99",
+       "$id": "131",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
@@ -924,16 +1048,23 @@
       "discriminator": false,
       "flatten": false,
       "decorators": [],
-      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData.name"
+      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData.name",
+      "serializationOptions": {
+       "$id": "132",
+       "json": {
+        "$id": "133",
+        "name": "name"
+       }
+      }
      },
      {
-      "$id": "100",
+      "$id": "134",
       "kind": "property",
       "name": "resourceType",
       "serializedName": "type",
-      "description": "The resource type.",
+      "doc": "The resource type.",
       "type": {
-       "$id": "101",
+       "$id": "135",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
@@ -944,16 +1075,23 @@
       "discriminator": false,
       "flatten": false,
       "decorators": [],
-      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData.type"
+      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData.type",
+      "serializationOptions": {
+       "$id": "136",
+       "json": {
+        "$id": "137",
+        "name": "type"
+       }
+      }
      },
      {
-      "$id": "102",
+      "$id": "138",
       "kind": "property",
       "name": "location",
       "serializedName": "location",
-      "description": "The location property.",
+      "doc": "The location property.",
       "type": {
-       "$id": "103",
+       "$id": "139",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
@@ -964,26 +1102,33 @@
       "discriminator": false,
       "flatten": false,
       "decorators": [],
-      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData.location"
+      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData.location",
+      "serializationOptions": {
+       "$id": "140",
+       "json": {
+        "$id": "141",
+        "name": "location"
+       }
+      }
      },
      {
-      "$id": "104",
+      "$id": "142",
       "kind": "property",
       "name": "tags",
       "serializedName": "tags",
-      "description": "The tags property.",
+      "doc": "The tags property.",
       "type": {
-       "$id": "105",
+       "$id": "143",
        "kind": "dict",
        "keyType": {
-        "$id": "106",
+        "$id": "144",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
        "valueType": {
-        "$id": "107",
+        "$id": "145",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -996,33 +1141,41 @@
       "discriminator": false,
       "flatten": false,
       "decorators": [],
-      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData.tags"
+      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData.tags",
+      "serializationOptions": {
+       "$id": "146",
+       "json": {
+        "$id": "147",
+        "name": "tags"
+       }
+      }
      }
     ]
    },
    "properties": [
     {
-     "$id": "108",
+     "$id": "148",
      "kind": "property",
      "name": "sku",
      "serializedName": "sku",
-     "description": "The sku.",
+     "doc": "The sku.",
      "type": {
-      "$id": "109",
+      "$id": "149",
       "kind": "model",
       "name": "ComputeSku",
+      "clientNamespace": "ModelReaderWriterValidationTypeSpec",
       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ComputeSku",
       "usage": "Input,Output,Json",
       "decorators": [],
       "properties": [
        {
-        "$id": "110",
+        "$id": "150",
         "kind": "property",
         "name": "name",
         "serializedName": "name",
-        "description": "The sku name.",
+        "doc": "The sku name.",
         "type": {
-         "$id": "111",
+         "$id": "151",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1033,16 +1186,23 @@
         "discriminator": false,
         "flatten": false,
         "decorators": [],
-        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ComputeSku.name"
+        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ComputeSku.name",
+        "serializationOptions": {
+         "$id": "152",
+         "json": {
+          "$id": "153",
+          "name": "name"
+         }
+        }
        },
        {
-        "$id": "112",
+        "$id": "154",
         "kind": "property",
         "name": "tier",
         "serializedName": "tier",
-        "description": "Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**.",
+        "doc": "Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**.",
         "type": {
-         "$id": "113",
+         "$id": "155",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1053,16 +1213,23 @@
         "discriminator": false,
         "flatten": false,
         "decorators": [],
-        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ComputeSku.tier"
+        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ComputeSku.tier",
+        "serializationOptions": {
+         "$id": "156",
+         "json": {
+          "$id": "157",
+          "name": "tier"
+         }
+        }
        },
        {
-        "$id": "114",
+        "$id": "158",
         "kind": "property",
         "name": "capacity",
         "serializedName": "capacity",
-        "description": "Specifies the number of virtual machines in the scale set.",
+        "doc": "Specifies the number of virtual machines in the scale set.",
         "type": {
-         "$id": "115",
+         "$id": "159",
          "kind": "int64",
          "name": "int64",
          "crossLanguageDefinitionId": "TypeSpec.int64",
@@ -1073,7 +1240,14 @@
         "discriminator": false,
         "flatten": false,
         "decorators": [],
-        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ComputeSku.capacity"
+        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ComputeSku.capacity",
+        "serializationOptions": {
+         "$id": "160",
+         "json": {
+          "$id": "161",
+          "name": "capacity"
+         }
+        }
        }
       ]
      },
@@ -1082,50 +1256,59 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetData.sku"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetData.sku",
+     "serializationOptions": {
+      "$id": "162",
+      "json": {
+       "$id": "163",
+       "name": "sku"
+      }
+     }
     },
     {
-     "$id": "116",
+     "$id": "164",
      "kind": "property",
      "name": "properties",
      "serializedName": "properties",
-     "description": "The properties property.",
+     "doc": "The properties property.",
      "type": {
-      "$id": "117",
+      "$id": "165",
       "kind": "model",
       "name": "AvailabilitySetProperties",
+      "clientNamespace": "ModelReaderWriterValidationTypeSpec",
       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetProperties",
       "usage": "Input,Output,Json",
-      "description": "The availability set properties",
+      "doc": "The availability set properties",
       "decorators": [],
       "properties": [
        {
-        "$id": "118",
+        "$id": "166",
         "kind": "property",
         "name": "virtualMachines",
         "serializedName": "virtualMachines",
-        "description": "The virtual machines.",
+        "doc": "The virtual machines.",
         "type": {
-         "$id": "119",
+         "$id": "167",
          "kind": "array",
          "name": "ArrayWritableSubResource",
          "valueType": {
-          "$id": "120",
+          "$id": "168",
           "kind": "model",
           "name": "WritableSubResource",
+          "clientNamespace": "ModelReaderWriterValidationTypeSpec",
           "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.WritableSubResource",
           "usage": "Input,Output,Json",
-          "description": "The writable sub resource",
+          "doc": "The writable sub resource",
           "decorators": [],
           "properties": [
            {
-            "$id": "121",
+            "$id": "169",
             "kind": "property",
             "name": "id",
             "serializedName": "id",
-            "description": "The resource id",
+            "doc": "The resource id",
             "type": {
-             "$id": "122",
+             "$id": "170",
              "kind": "string",
              "name": "string",
              "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1136,7 +1319,14 @@
             "discriminator": false,
             "flatten": false,
             "decorators": [],
-            "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.WritableSubResource.id"
+            "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.WritableSubResource.id",
+            "serializationOptions": {
+             "$id": "171",
+             "json": {
+              "$id": "172",
+              "name": "id"
+             }
+            }
            }
           ]
          },
@@ -1148,16 +1338,23 @@
         "discriminator": false,
         "flatten": false,
         "decorators": [],
-        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetProperties.virtualMachines"
+        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetProperties.virtualMachines",
+        "serializationOptions": {
+         "$id": "173",
+         "json": {
+          "$id": "174",
+          "name": "virtualMachines"
+         }
+        }
        },
        {
-        "$id": "123",
+        "$id": "175",
         "kind": "property",
         "name": "platformFaultDomainCount",
         "serializedName": "platformFaultDomainCount",
-        "description": "The platform fault domain count property.",
+        "doc": "The platform fault domain count property.",
         "type": {
-         "$id": "124",
+         "$id": "176",
          "kind": "int32",
          "name": "int32",
          "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -1168,16 +1365,23 @@
         "discriminator": false,
         "flatten": false,
         "decorators": [],
-        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetProperties.platformFaultDomainCount"
+        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetProperties.platformFaultDomainCount",
+        "serializationOptions": {
+         "$id": "177",
+         "json": {
+          "$id": "178",
+          "name": "platformFaultDomainCount"
+         }
+        }
        },
        {
-        "$id": "125",
+        "$id": "179",
         "kind": "property",
         "name": "platformUpdateDomainCount",
         "serializedName": "platformUpdateDomainCount",
-        "description": "The platform update domain count property.",
+        "doc": "The platform update domain count property.",
         "type": {
-         "$id": "126",
+         "$id": "180",
          "kind": "int32",
          "name": "int32",
          "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -1188,7 +1392,14 @@
         "discriminator": false,
         "flatten": false,
         "decorators": [],
-        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetProperties.platformUpdateDomainCount"
+        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetProperties.platformUpdateDomainCount",
+        "serializationOptions": {
+         "$id": "181",
+         "json": {
+          "$id": "182",
+          "name": "platformUpdateDomainCount"
+         }
+        }
        }
       ]
      },
@@ -1197,39 +1408,47 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetData.properties"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetData.properties",
+     "serializationOptions": {
+      "$id": "183",
+      "json": {
+       "$id": "184",
+       "name": "properties"
+      }
+     }
     }
    ]
   },
   {
-   "$ref": "109"
+   "$ref": "149"
   },
   {
-   "$ref": "117"
+   "$ref": "165"
   },
   {
-   "$ref": "120"
+   "$ref": "168"
   },
   {
-   "$ref": "95"
+   "$ref": "125"
   },
   {
-   "$id": "127",
+   "$id": "185",
    "kind": "model",
    "name": "ResourceProviderData",
+   "clientNamespace": "ModelReaderWriterValidationTypeSpec",
    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData",
    "usage": "Output,Json",
-   "description": "A class representing the ResourceProvider data model.\nResource provider information.",
+   "doc": "A class representing the ResourceProvider data model.\nResource provider information.",
    "decorators": [],
    "properties": [
     {
-     "$id": "128",
+     "$id": "186",
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The provider ID.",
+     "doc": "The provider ID.",
      "type": {
-      "$id": "129",
+      "$id": "187",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1240,16 +1459,23 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.id"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.id",
+     "serializationOptions": {
+      "$id": "188",
+      "json": {
+       "$id": "189",
+       "name": "id"
+      }
+     }
     },
     {
-     "$id": "130",
+     "$id": "190",
      "kind": "property",
      "name": "namespace",
      "serializedName": "namespace",
-     "description": "The namespace of the resource provider.",
+     "doc": "The namespace of the resource provider.",
      "type": {
-      "$id": "131",
+      "$id": "191",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1260,16 +1486,23 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.namespace"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.namespace",
+     "serializationOptions": {
+      "$id": "192",
+      "json": {
+       "$id": "193",
+       "name": "namespace"
+      }
+     }
     },
     {
-     "$id": "132",
+     "$id": "194",
      "kind": "property",
      "name": "registrationState",
      "serializedName": "registrationState",
-     "description": "The registration state of the resource provider.",
+     "doc": "The registration state of the resource provider.",
      "type": {
-      "$id": "133",
+      "$id": "195",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1280,16 +1513,23 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.registrationState"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.registrationState",
+     "serializationOptions": {
+      "$id": "196",
+      "json": {
+       "$id": "197",
+       "name": "registrationState"
+      }
+     }
     },
     {
-     "$id": "134",
+     "$id": "198",
      "kind": "property",
      "name": "registrationPolicy",
      "serializedName": "registrationPolicy",
-     "description": "The registration policy of the resource provider.",
+     "doc": "The registration policy of the resource provider.",
      "type": {
-      "$id": "135",
+      "$id": "199",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1300,34 +1540,42 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.registrationPolicy"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.registrationPolicy",
+     "serializationOptions": {
+      "$id": "200",
+      "json": {
+       "$id": "201",
+       "name": "registrationPolicy"
+      }
+     }
     },
     {
-     "$id": "136",
+     "$id": "202",
      "kind": "property",
      "name": "resourceTypes",
      "serializedName": "resourceTypes",
-     "description": "The collection of provider resource types.",
+     "doc": "The collection of provider resource types.",
      "type": {
-      "$id": "137",
+      "$id": "203",
       "kind": "array",
       "name": "ArrayProviderResourceType",
       "valueType": {
-       "$id": "138",
+       "$id": "204",
        "kind": "model",
        "name": "ProviderResourceType",
+       "clientNamespace": "ModelReaderWriterValidationTypeSpec",
        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType",
        "usage": "Output,Json",
        "decorators": [],
        "properties": [
         {
-         "$id": "139",
+         "$id": "205",
          "kind": "property",
          "name": "resourceType",
          "serializedName": "resourceType",
-         "description": "The resource type.",
+         "doc": "The resource type.",
          "type": {
-          "$id": "140",
+          "$id": "206",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1338,20 +1586,27 @@
          "discriminator": false,
          "flatten": false,
          "decorators": [],
-         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.resourceType"
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.resourceType",
+         "serializationOptions": {
+          "$id": "207",
+          "json": {
+           "$id": "208",
+           "name": "resourceType"
+          }
+         }
         },
         {
-         "$id": "141",
+         "$id": "209",
          "kind": "property",
          "name": "locations",
          "serializedName": "locations",
-         "description": "The collection of locations where this resource type can be created.",
+         "doc": "The collection of locations where this resource type can be created.",
          "type": {
-          "$id": "142",
+          "$id": "210",
           "kind": "array",
           "name": "Array",
           "valueType": {
-           "$id": "143",
+           "$id": "211",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1365,35 +1620,43 @@
          "discriminator": false,
          "flatten": false,
          "decorators": [],
-         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.locations"
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.locations",
+         "serializationOptions": {
+          "$id": "212",
+          "json": {
+           "$id": "213",
+           "name": "locations"
+          }
+         }
         },
         {
-         "$id": "144",
+         "$id": "214",
          "kind": "property",
          "name": "locationMappings",
          "serializedName": "locationMappings",
-         "description": "The location mappings that are supported by this resource type.",
+         "doc": "The location mappings that are supported by this resource type.",
          "type": {
-          "$id": "145",
+          "$id": "215",
           "kind": "array",
           "name": "ArrayProviderExtendedLocation",
           "valueType": {
-           "$id": "146",
+           "$id": "216",
            "kind": "model",
            "name": "ProviderExtendedLocation",
+           "clientNamespace": "ModelReaderWriterValidationTypeSpec",
            "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderExtendedLocation",
            "usage": "Output,Json",
-           "description": "The provider extended location.",
+           "doc": "The provider extended location.",
            "decorators": [],
            "properties": [
             {
-             "$id": "147",
+             "$id": "217",
              "kind": "property",
              "name": "location",
              "serializedName": "location",
-             "description": "The azure location.",
+             "doc": "The azure location.",
              "type": {
-              "$id": "148",
+              "$id": "218",
               "kind": "string",
               "name": "string",
               "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1404,16 +1667,23 @@
              "discriminator": false,
              "flatten": false,
              "decorators": [],
-             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderExtendedLocation.location"
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderExtendedLocation.location",
+             "serializationOptions": {
+              "$id": "219",
+              "json": {
+               "$id": "220",
+               "name": "location"
+              }
+             }
             },
             {
-             "$id": "149",
+             "$id": "221",
              "kind": "property",
              "name": "providerExtendedLocationType",
              "serializedName": "type",
-             "description": "The extended location type.",
+             "doc": "The extended location type.",
              "type": {
-              "$id": "150",
+              "$id": "222",
               "kind": "string",
               "name": "string",
               "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1424,20 +1694,27 @@
              "discriminator": false,
              "flatten": false,
              "decorators": [],
-             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderExtendedLocation.type"
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderExtendedLocation.type",
+             "serializationOptions": {
+              "$id": "223",
+              "json": {
+               "$id": "224",
+               "name": "type"
+              }
+             }
             },
             {
-             "$id": "151",
+             "$id": "225",
              "kind": "property",
              "name": "extendedLocations",
              "serializedName": "extendedLocations",
-             "description": "The extended locations for the azure location.",
+             "doc": "The extended locations for the azure location.",
              "type": {
-              "$id": "152",
+              "$id": "226",
               "kind": "array",
               "name": "Array",
               "valueType": {
-               "$id": "153",
+               "$id": "227",
                "kind": "string",
                "name": "string",
                "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1451,7 +1728,14 @@
              "discriminator": false,
              "flatten": false,
              "decorators": [],
-             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderExtendedLocation.extendedLocations"
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderExtendedLocation.extendedLocations",
+             "serializationOptions": {
+              "$id": "228",
+              "json": {
+               "$id": "229",
+               "name": "extendedLocations"
+              }
+             }
             }
            ]
           },
@@ -1463,35 +1747,43 @@
          "discriminator": false,
          "flatten": false,
          "decorators": [],
-         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.locationMappings"
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.locationMappings",
+         "serializationOptions": {
+          "$id": "230",
+          "json": {
+           "$id": "231",
+           "name": "locationMappings"
+          }
+         }
         },
         {
-         "$id": "154",
+         "$id": "232",
          "kind": "property",
          "name": "aliases",
          "serializedName": "aliases",
-         "description": "The aliases that are supported by this resource type.",
+         "doc": "The aliases that are supported by this resource type.",
          "type": {
-          "$id": "155",
+          "$id": "233",
           "kind": "array",
           "name": "ArrayResourceTypeAlias",
           "valueType": {
-           "$id": "156",
+           "$id": "234",
            "kind": "model",
            "name": "ResourceTypeAlias",
+           "clientNamespace": "ModelReaderWriterValidationTypeSpec",
            "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias",
            "usage": "Output,Json",
-           "description": "The alias type.",
+           "doc": "The alias type.",
            "decorators": [],
            "properties": [
             {
-             "$id": "157",
+             "$id": "235",
              "kind": "property",
              "name": "name",
              "serializedName": "name",
-             "description": "The alias name.",
+             "doc": "The alias name.",
              "type": {
-              "$id": "158",
+              "$id": "236",
               "kind": "string",
               "name": "string",
               "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1502,35 +1794,43 @@
              "discriminator": false,
              "flatten": false,
              "decorators": [],
-             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.name"
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.name",
+             "serializationOptions": {
+              "$id": "237",
+              "json": {
+               "$id": "238",
+               "name": "name"
+              }
+             }
             },
             {
-             "$id": "159",
+             "$id": "239",
              "kind": "property",
              "name": "paths",
              "serializedName": "paths",
-             "description": "The paths for an alias.",
+             "doc": "The paths for an alias.",
              "type": {
-              "$id": "160",
+              "$id": "240",
               "kind": "array",
               "name": "ArrayResourceTypeAliasPath",
               "valueType": {
-               "$id": "161",
+               "$id": "241",
                "kind": "model",
                "name": "ResourceTypeAliasPath",
+               "clientNamespace": "ModelReaderWriterValidationTypeSpec",
                "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath",
                "usage": "Output,Json",
-               "description": "The type of the paths for alias.",
+               "doc": "The type of the paths for alias.",
                "decorators": [],
                "properties": [
                 {
-                 "$id": "162",
+                 "$id": "242",
                  "kind": "property",
                  "name": "path",
                  "serializedName": "path",
-                 "description": "The path of an alias.",
+                 "doc": "The path of an alias.",
                  "type": {
-                  "$id": "163",
+                  "$id": "243",
                   "kind": "string",
                   "name": "string",
                   "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1541,20 +1841,27 @@
                  "discriminator": false,
                  "flatten": false,
                  "decorators": [],
-                 "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath.path"
+                 "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath.path",
+                 "serializationOptions": {
+                  "$id": "244",
+                  "json": {
+                   "$id": "245",
+                   "name": "path"
+                  }
+                 }
                 },
                 {
-                 "$id": "164",
+                 "$id": "246",
                  "kind": "property",
                  "name": "apiVersions",
                  "serializedName": "apiVersions",
-                 "description": "The API versions.",
+                 "doc": "The API versions.",
                  "type": {
-                  "$id": "165",
+                  "$id": "247",
                   "kind": "array",
                   "name": "Array",
                   "valueType": {
-                   "$id": "166",
+                   "$id": "248",
                    "kind": "string",
                    "name": "string",
                    "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1568,31 +1875,39 @@
                  "discriminator": false,
                  "flatten": false,
                  "decorators": [],
-                 "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath.apiVersions"
+                 "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath.apiVersions",
+                 "serializationOptions": {
+                  "$id": "249",
+                  "json": {
+                   "$id": "250",
+                   "name": "apiVersions"
+                  }
+                 }
                 },
                 {
-                 "$id": "167",
+                 "$id": "251",
                  "kind": "property",
                  "name": "pattern",
                  "serializedName": "pattern",
-                 "description": "The pattern for an alias path.",
+                 "doc": "The pattern for an alias path.",
                  "type": {
-                  "$id": "168",
+                  "$id": "252",
                   "kind": "model",
                   "name": "ResourceTypeAliasPattern",
+                  "clientNamespace": "ModelReaderWriterValidationTypeSpec",
                   "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPattern",
                   "usage": "Output,Json",
-                  "description": "The type of the pattern for an alias path.",
+                  "doc": "The type of the pattern for an alias path.",
                   "decorators": [],
                   "properties": [
                    {
-                    "$id": "169",
+                    "$id": "253",
                     "kind": "property",
                     "name": "phrase",
                     "serializedName": "phrase",
-                    "description": "The alias pattern phrase.",
+                    "doc": "The alias pattern phrase.",
                     "type": {
-                     "$id": "170",
+                     "$id": "254",
                      "kind": "string",
                      "name": "string",
                      "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1603,16 +1918,23 @@
                     "discriminator": false,
                     "flatten": false,
                     "decorators": [],
-                    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPattern.phrase"
+                    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPattern.phrase",
+                    "serializationOptions": {
+                     "$id": "255",
+                     "json": {
+                      "$id": "256",
+                      "name": "phrase"
+                     }
+                    }
                    },
                    {
-                    "$id": "171",
+                    "$id": "257",
                     "kind": "property",
                     "name": "variable",
                     "serializedName": "variable",
-                    "description": "The alias pattern variable.",
+                    "doc": "The alias pattern variable.",
                     "type": {
-                     "$id": "172",
+                     "$id": "258",
                      "kind": "string",
                      "name": "string",
                      "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1623,14 +1945,21 @@
                     "discriminator": false,
                     "flatten": false,
                     "decorators": [],
-                    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPattern.variable"
+                    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPattern.variable",
+                    "serializationOptions": {
+                     "$id": "259",
+                     "json": {
+                      "$id": "260",
+                      "name": "variable"
+                     }
+                    }
                    },
                    {
-                    "$id": "173",
+                    "$id": "261",
                     "kind": "property",
                     "name": "patternType",
                     "serializedName": "patternType",
-                    "description": "The type of alias pattern.",
+                    "doc": "The type of alias pattern.",
                     "type": {
                      "$ref": "2"
                     },
@@ -1639,7 +1968,14 @@
                     "discriminator": false,
                     "flatten": false,
                     "decorators": [],
-                    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPattern.patternType"
+                    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPattern.patternType",
+                    "serializationOptions": {
+                     "$id": "262",
+                     "json": {
+                      "$id": "263",
+                      "name": "patternType"
+                     }
+                    }
                    }
                   ]
                  },
@@ -1648,29 +1984,37 @@
                  "discriminator": false,
                  "flatten": false,
                  "decorators": [],
-                 "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath.pattern"
+                 "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath.pattern",
+                 "serializationOptions": {
+                  "$id": "264",
+                  "json": {
+                   "$id": "265",
+                   "name": "pattern"
+                  }
+                 }
                 },
                 {
-                 "$id": "174",
+                 "$id": "266",
                  "kind": "property",
                  "name": "metadata",
                  "serializedName": "metadata",
-                 "description": "The metadata of the alias path. If missing, fall back to the default metadata of the alias.",
+                 "doc": "The metadata of the alias path. If missing, fall back to the default metadata of the alias.",
                  "type": {
-                  "$id": "175",
+                  "$id": "267",
                   "kind": "model",
                   "name": "ResourceTypeAliasPathMetadata",
+                  "clientNamespace": "ModelReaderWriterValidationTypeSpec",
                   "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathMetadata",
                   "usage": "Input,Output,Json",
-                  "description": "The ResourceTypeAliasPathMetadata.",
+                  "doc": "The ResourceTypeAliasPathMetadata.",
                   "decorators": [],
                   "properties": [
                    {
-                    "$id": "176",
+                    "$id": "268",
                     "kind": "property",
                     "name": "tokenType",
                     "serializedName": "tokenType",
-                    "description": "The type of the token that the alias path is referring to.",
+                    "doc": "The type of the token that the alias path is referring to.",
                     "type": {
                      "$ref": "8"
                     },
@@ -1679,14 +2023,21 @@
                     "discriminator": false,
                     "flatten": false,
                     "decorators": [],
-                    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathMetadata.tokenType"
+                    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathMetadata.tokenType",
+                    "serializationOptions": {
+                     "$id": "269",
+                     "json": {
+                      "$id": "270",
+                      "name": "tokenType"
+                     }
+                    }
                    },
                    {
-                    "$id": "177",
+                    "$id": "271",
                     "kind": "property",
                     "name": "attributes",
                     "serializedName": "attributes",
-                    "description": "The attributes of the token that the alias path is referring to.",
+                    "doc": "The attributes of the token that the alias path is referring to.",
                     "type": {
                      "$ref": "26"
                     },
@@ -1695,7 +2046,14 @@
                     "discriminator": false,
                     "flatten": false,
                     "decorators": [],
-                    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathMetadata.attributes"
+                    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathMetadata.attributes",
+                    "serializationOptions": {
+                     "$id": "272",
+                     "json": {
+                      "$id": "273",
+                      "name": "attributes"
+                     }
+                    }
                    }
                   ]
                  },
@@ -1704,7 +2062,14 @@
                  "discriminator": false,
                  "flatten": false,
                  "decorators": [],
-                 "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath.metadata"
+                 "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath.metadata",
+                 "serializationOptions": {
+                  "$id": "274",
+                  "json": {
+                   "$id": "275",
+                   "name": "metadata"
+                  }
+                 }
                 }
                ]
               },
@@ -1716,14 +2081,21 @@
              "discriminator": false,
              "flatten": false,
              "decorators": [],
-             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.paths"
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.paths",
+             "serializationOptions": {
+              "$id": "276",
+              "json": {
+               "$id": "277",
+               "name": "paths"
+              }
+             }
             },
             {
-             "$id": "178",
+             "$id": "278",
              "kind": "property",
              "name": "aliasType",
              "serializedName": "aliasType",
-             "description": "The type of the alias.",
+             "doc": "The type of the alias.",
              "type": {
               "$ref": "32"
              },
@@ -1732,16 +2104,23 @@
              "discriminator": false,
              "flatten": false,
              "decorators": [],
-             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.aliasType"
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.aliasType",
+             "serializationOptions": {
+              "$id": "279",
+              "json": {
+               "$id": "280",
+               "name": "aliasType"
+              }
+             }
             },
             {
-             "$id": "179",
+             "$id": "281",
              "kind": "property",
              "name": "defaultPath",
              "serializedName": "defaultPath",
-             "description": "The default path for an alias.",
+             "doc": "The default path for an alias.",
              "type": {
-              "$id": "180",
+              "$id": "282",
               "kind": "string",
               "name": "string",
               "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1752,39 +2131,60 @@
              "discriminator": false,
              "flatten": false,
              "decorators": [],
-             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.defaultPath"
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.defaultPath",
+             "serializationOptions": {
+              "$id": "283",
+              "json": {
+               "$id": "284",
+               "name": "defaultPath"
+              }
+             }
             },
             {
-             "$id": "181",
+             "$id": "285",
              "kind": "property",
              "name": "defaultPattern",
              "serializedName": "defaultPattern",
-             "description": "The default pattern for an alias.",
+             "doc": "The default pattern for an alias.",
              "type": {
-              "$ref": "168"
+              "$ref": "252"
              },
              "optional": true,
              "readOnly": false,
              "discriminator": false,
              "flatten": false,
              "decorators": [],
-             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.defaultPattern"
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.defaultPattern",
+             "serializationOptions": {
+              "$id": "286",
+              "json": {
+               "$id": "287",
+               "name": "defaultPattern"
+              }
+             }
             },
             {
-             "$id": "182",
+             "$id": "288",
              "kind": "property",
              "name": "defaultMetadata",
              "serializedName": "defaultMetadata",
-             "description": "The default alias path metadata. Applies to the default path and to any alias path that doesn't have metadata.",
+             "doc": "The default alias path metadata. Applies to the default path and to any alias path that doesn't have metadata.",
              "type": {
-              "$ref": "175"
+              "$ref": "267"
              },
              "optional": true,
              "readOnly": false,
              "discriminator": false,
              "flatten": false,
              "decorators": [],
-             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.defaultMetadata"
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.defaultMetadata",
+             "serializationOptions": {
+              "$id": "289",
+              "json": {
+               "$id": "290",
+               "name": "defaultMetadata"
+              }
+             }
             }
            ]
           },
@@ -1796,20 +2196,27 @@
          "discriminator": false,
          "flatten": false,
          "decorators": [],
-         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.aliases"
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.aliases",
+         "serializationOptions": {
+          "$id": "291",
+          "json": {
+           "$id": "292",
+           "name": "aliases"
+          }
+         }
         },
         {
-         "$id": "183",
+         "$id": "293",
          "kind": "property",
          "name": "apiVersions",
          "serializedName": "apiVersions",
-         "description": "The API version.",
+         "doc": "The API version.",
          "type": {
-          "$id": "184",
+          "$id": "294",
           "kind": "array",
           "name": "Array",
           "valueType": {
-           "$id": "185",
+           "$id": "295",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1823,16 +2230,23 @@
          "discriminator": false,
          "flatten": false,
          "decorators": [],
-         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.apiVersions"
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.apiVersions",
+         "serializationOptions": {
+          "$id": "296",
+          "json": {
+           "$id": "297",
+           "name": "apiVersions"
+          }
+         }
         },
         {
-         "$id": "186",
+         "$id": "298",
          "kind": "property",
          "name": "defaultApiVersion",
          "serializedName": "defaultApiVersion",
-         "description": "The default API version.",
+         "doc": "The default API version.",
          "type": {
-          "$id": "187",
+          "$id": "299",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1843,35 +2257,43 @@
          "discriminator": false,
          "flatten": false,
          "decorators": [],
-         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.defaultApiVersion"
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.defaultApiVersion",
+         "serializationOptions": {
+          "$id": "300",
+          "json": {
+           "$id": "301",
+           "name": "defaultApiVersion"
+          }
+         }
         },
         {
-         "$id": "188",
+         "$id": "302",
          "kind": "property",
          "name": "zoneMappings",
          "serializedName": "zoneMappings",
-         "description": "Gets the zone mappings.",
+         "doc": "Gets the zone mappings.",
          "type": {
-          "$id": "189",
+          "$id": "303",
           "kind": "array",
           "name": "ArrayZoneMapping",
           "valueType": {
-           "$id": "190",
+           "$id": "304",
            "kind": "model",
            "name": "ZoneMapping",
+           "clientNamespace": "ModelReaderWriterValidationTypeSpec",
            "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ZoneMapping",
            "usage": "Output,Json",
-           "description": "The ZoneMapping.",
+           "doc": "The ZoneMapping.",
            "decorators": [],
            "properties": [
             {
-             "$id": "191",
+             "$id": "305",
              "kind": "property",
              "name": "location",
              "serializedName": "location",
-             "description": "The location of the zone mapping.",
+             "doc": "The location of the zone mapping.",
              "type": {
-              "$id": "192",
+              "$id": "306",
               "kind": "string",
               "name": "string",
               "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1882,20 +2304,27 @@
              "discriminator": false,
              "flatten": false,
              "decorators": [],
-             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ZoneMapping.location"
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ZoneMapping.location",
+             "serializationOptions": {
+              "$id": "307",
+              "json": {
+               "$id": "308",
+               "name": "location"
+              }
+             }
             },
             {
-             "$id": "193",
+             "$id": "309",
              "kind": "property",
              "name": "zones",
              "serializedName": "zones",
-             "description": "The zones.",
+             "doc": "The zones.",
              "type": {
-              "$id": "194",
+              "$id": "310",
               "kind": "array",
               "name": "Array",
               "valueType": {
-               "$id": "195",
+               "$id": "311",
                "kind": "string",
                "name": "string",
                "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1909,7 +2338,14 @@
              "discriminator": false,
              "flatten": false,
              "decorators": [],
-             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ZoneMapping.zones"
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ZoneMapping.zones",
+             "serializationOptions": {
+              "$id": "312",
+              "json": {
+               "$id": "313",
+               "name": "zones"
+              }
+             }
             }
            ]
           },
@@ -1921,34 +2357,42 @@
          "discriminator": false,
          "flatten": false,
          "decorators": [],
-         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.zoneMappings"
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.zoneMappings",
+         "serializationOptions": {
+          "$id": "314",
+          "json": {
+           "$id": "315",
+           "name": "zoneMappings"
+          }
+         }
         },
         {
-         "$id": "196",
+         "$id": "316",
          "kind": "property",
          "name": "apiProfiles",
          "serializedName": "apiProfiles",
-         "description": "The API profiles for the resource provider.",
+         "doc": "The API profiles for the resource provider.",
          "type": {
-          "$id": "197",
+          "$id": "317",
           "kind": "array",
           "name": "ArrayApiProfile",
           "valueType": {
-           "$id": "198",
+           "$id": "318",
            "kind": "model",
            "name": "ApiProfile",
+           "clientNamespace": "ModelReaderWriterValidationTypeSpec",
            "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ApiProfile",
            "usage": "Output,Json",
            "decorators": [],
            "properties": [
             {
-             "$id": "199",
+             "$id": "319",
              "kind": "property",
              "name": "profileVersion",
              "serializedName": "profileVersion",
-             "description": "The profile version.",
+             "doc": "The profile version.",
              "type": {
-              "$id": "200",
+              "$id": "320",
               "kind": "string",
               "name": "string",
               "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1959,16 +2403,23 @@
              "discriminator": false,
              "flatten": false,
              "decorators": [],
-             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ApiProfile.profileVersion"
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ApiProfile.profileVersion",
+             "serializationOptions": {
+              "$id": "321",
+              "json": {
+               "$id": "322",
+               "name": "profileVersion"
+              }
+             }
             },
             {
-             "$id": "201",
+             "$id": "323",
              "kind": "property",
              "name": "apiVersion",
              "serializedName": "apiVersion",
-             "description": "The API version.",
+             "doc": "The API version.",
              "type": {
-              "$id": "202",
+              "$id": "324",
               "kind": "string",
               "name": "string",
               "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1979,7 +2430,14 @@
              "discriminator": false,
              "flatten": false,
              "decorators": [],
-             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ApiProfile.apiVersion"
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ApiProfile.apiVersion",
+             "serializationOptions": {
+              "$id": "325",
+              "json": {
+               "$id": "326",
+               "name": "apiVersion"
+              }
+             }
             }
            ]
           },
@@ -1991,16 +2449,23 @@
          "discriminator": false,
          "flatten": false,
          "decorators": [],
-         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.apiProfiles"
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.apiProfiles",
+         "serializationOptions": {
+          "$id": "327",
+          "json": {
+           "$id": "328",
+           "name": "apiProfiles"
+          }
+         }
         },
         {
-         "$id": "203",
+         "$id": "329",
          "kind": "property",
          "name": "capabilities",
          "serializedName": "capabilities",
-         "description": "The additional capabilities offered by this resource type.",
+         "doc": "The additional capabilities offered by this resource type.",
          "type": {
-          "$id": "204",
+          "$id": "330",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2011,26 +2476,33 @@
          "discriminator": false,
          "flatten": false,
          "decorators": [],
-         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.capabilities"
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.capabilities",
+         "serializationOptions": {
+          "$id": "331",
+          "json": {
+           "$id": "332",
+           "name": "capabilities"
+          }
+         }
         },
         {
-         "$id": "205",
+         "$id": "333",
          "kind": "property",
          "name": "properties",
          "serializedName": "properties",
-         "description": "The properties.",
+         "doc": "The properties.",
          "type": {
-          "$id": "206",
+          "$id": "334",
           "kind": "dict",
           "keyType": {
-           "$id": "207",
+           "$id": "335",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
            "decorators": []
           },
           "valueType": {
-           "$id": "208",
+           "$id": "336",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2043,7 +2515,14 @@
          "discriminator": false,
          "flatten": false,
          "decorators": [],
-         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.properties"
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.properties",
+         "serializationOptions": {
+          "$id": "337",
+          "json": {
+           "$id": "338",
+           "name": "properties"
+          }
+         }
         }
        ]
       },
@@ -2055,14 +2534,21 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.resourceTypes"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.resourceTypes",
+     "serializationOptions": {
+      "$id": "339",
+      "json": {
+       "$id": "340",
+       "name": "resourceTypes"
+      }
+     }
     },
     {
-     "$id": "209",
+     "$id": "341",
      "kind": "property",
      "name": "providerAuthorizationConsentState",
      "serializedName": "providerAuthorizationConsentState",
-     "description": "The provider authorization consent state.",
+     "doc": "The provider authorization consent state.",
      "type": {
       "$ref": "40"
      },
@@ -2071,43 +2557,51 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.providerAuthorizationConsentState"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.providerAuthorizationConsentState",
+     "serializationOptions": {
+      "$id": "342",
+      "json": {
+       "$id": "343",
+       "name": "providerAuthorizationConsentState"
+      }
+     }
     }
    ]
   },
   {
-   "$ref": "138"
+   "$ref": "204"
   },
   {
-   "$ref": "146"
+   "$ref": "216"
   },
   {
-   "$ref": "156"
+   "$ref": "234"
   },
   {
-   "$ref": "161"
+   "$ref": "241"
   },
   {
-   "$ref": "168"
+   "$ref": "252"
   },
   {
-   "$ref": "175"
+   "$ref": "267"
   },
   {
-   "$ref": "190"
+   "$ref": "304"
   },
   {
-   "$ref": "198"
+   "$ref": "318"
   },
   {
-   "$id": "210",
+   "$id": "344",
    "kind": "model",
    "name": "ModelWithStringAdditionalProperties",
+   "clientNamespace": "ModelReaderWriterValidationTypeSpec",
    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithStringAdditionalProperties",
    "usage": "Input,Output,Json",
    "decorators": [],
    "additionalProperties": {
-    "$id": "211",
+    "$id": "345",
     "kind": "string",
     "name": "string",
     "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2115,13 +2609,13 @@
    },
    "properties": [
     {
-     "$id": "212",
+     "$id": "346",
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The id property.",
+     "doc": "The id property.",
      "type": {
-      "$id": "213",
+      "$id": "347",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2132,16 +2626,23 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithStringAdditionalProperties.id"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithStringAdditionalProperties.id",
+     "serializationOptions": {
+      "$id": "348",
+      "json": {
+       "$id": "349",
+       "name": "id"
+      }
+     }
     },
     {
-     "$id": "214",
+     "$id": "350",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The name property.",
+     "doc": "The name property.",
      "type": {
-      "$id": "215",
+      "$id": "351",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2152,16 +2653,23 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithStringAdditionalProperties.name"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithStringAdditionalProperties.name",
+     "serializationOptions": {
+      "$id": "352",
+      "json": {
+       "$id": "353",
+       "name": "name"
+      }
+     }
     },
     {
-     "$id": "216",
+     "$id": "354",
      "kind": "property",
      "name": "age",
      "serializedName": "age",
-     "description": "The age property.",
+     "doc": "The age property.",
      "type": {
-      "$id": "217",
+      "$id": "355",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -2172,36 +2680,44 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithStringAdditionalProperties.age"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithStringAdditionalProperties.age",
+     "serializationOptions": {
+      "$id": "356",
+      "json": {
+       "$id": "357",
+       "name": "age"
+      }
+     }
     }
    ]
   },
   {
-   "$id": "218",
+   "$id": "358",
    "kind": "model",
    "name": "ModelWithArrayAdditionalProperties",
+   "clientNamespace": "ModelReaderWriterValidationTypeSpec",
    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithArrayAdditionalProperties",
    "usage": "Input,Output,Json",
    "decorators": [],
    "additionalProperties": {
-    "$id": "219",
+    "$id": "359",
     "kind": "array",
     "name": "ArrayResourceTypeAliasPathMetadata",
     "valueType": {
-     "$ref": "175"
+     "$ref": "267"
     },
     "crossLanguageDefinitionId": "TypeSpec.Array",
     "decorators": []
    },
    "properties": [
     {
-     "$id": "220",
+     "$id": "360",
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The id property.",
+     "doc": "The id property.",
      "type": {
-      "$id": "221",
+      "$id": "361",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2212,16 +2728,23 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithArrayAdditionalProperties.id"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithArrayAdditionalProperties.id",
+     "serializationOptions": {
+      "$id": "362",
+      "json": {
+       "$id": "363",
+       "name": "id"
+      }
+     }
     },
     {
-     "$id": "222",
+     "$id": "364",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The name property.",
+     "doc": "The name property.",
      "type": {
-      "$id": "223",
+      "$id": "365",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2232,16 +2755,23 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithArrayAdditionalProperties.name"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithArrayAdditionalProperties.name",
+     "serializationOptions": {
+      "$id": "366",
+      "json": {
+       "$id": "367",
+       "name": "name"
+      }
+     }
     },
     {
-     "$id": "224",
+     "$id": "368",
      "kind": "property",
      "name": "age",
      "serializedName": "age",
-     "description": "The age property.",
+     "doc": "The age property.",
      "type": {
-      "$id": "225",
+      "$id": "369",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -2252,19 +2782,27 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithArrayAdditionalProperties.age"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithArrayAdditionalProperties.age",
+     "serializationOptions": {
+      "$id": "370",
+      "json": {
+       "$id": "371",
+       "name": "age"
+      }
+     }
     }
    ]
   },
   {
-   "$id": "226",
+   "$id": "372",
    "kind": "model",
    "name": "ModelWithUnknownAdditionalProperties",
+   "clientNamespace": "ModelReaderWriterValidationTypeSpec",
    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithUnknownAdditionalProperties",
    "usage": "Input,Output,Json",
    "decorators": [],
    "additionalProperties": {
-    "$id": "227",
+    "$id": "373",
     "kind": "unknown",
     "name": "unknown",
     "crossLanguageDefinitionId": "",
@@ -2272,13 +2810,13 @@
    },
    "properties": [
     {
-     "$id": "228",
+     "$id": "374",
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The id property.",
+     "doc": "The id property.",
      "type": {
-      "$id": "229",
+      "$id": "375",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2289,16 +2827,23 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithUnknownAdditionalProperties.id"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithUnknownAdditionalProperties.id",
+     "serializationOptions": {
+      "$id": "376",
+      "json": {
+       "$id": "377",
+       "name": "id"
+      }
+     }
     },
     {
-     "$id": "230",
+     "$id": "378",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The name property.",
+     "doc": "The name property.",
      "type": {
-      "$id": "231",
+      "$id": "379",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2309,16 +2854,23 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithUnknownAdditionalProperties.name"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithUnknownAdditionalProperties.name",
+     "serializationOptions": {
+      "$id": "380",
+      "json": {
+       "$id": "381",
+       "name": "name"
+      }
+     }
     },
     {
-     "$id": "232",
+     "$id": "382",
      "kind": "property",
      "name": "age",
      "serializedName": "age",
-     "description": "The age property.",
+     "doc": "The age property.",
      "type": {
-      "$id": "233",
+      "$id": "383",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -2329,33 +2881,41 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithUnknownAdditionalProperties.age"
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithUnknownAdditionalProperties.age",
+     "serializationOptions": {
+      "$id": "384",
+      "json": {
+       "$id": "385",
+       "name": "age"
+      }
+     }
     }
    ]
   }
  ],
  "Clients": [
   {
-   "$id": "234",
+   "$id": "386",
    "Name": "ModelReaderWriterValidationTypeSpecClient",
-   "Description": "This is a typespec project to validation the model reader writer functionalities.",
+   "ClientNamespace": "ModelReaderWriterValidationTypeSpec",
+   "Doc": "This is a typespec project to validation the model reader writer functionalities.",
    "Operations": [
     {
-     "$id": "235",
+     "$id": "387",
      "Name": "op1",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "236",
+       "$id": "388",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "237",
+        "$id": "389",
         "kind": "constant",
         "valueType": {
-         "$id": "238",
+         "$id": "390",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2375,14 +2935,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "239",
+       "$id": "391",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "240",
+        "$id": "392",
         "kind": "constant",
         "valueType": {
-         "$id": "241",
+         "$id": "393",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2402,7 +2962,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "242",
+       "$id": "394",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -2421,7 +2981,7 @@
      ],
      "Responses": [
       {
-       "$id": "243",
+       "$id": "395",
        "StatusCodes": [
         200
        ],
@@ -2450,21 +3010,21 @@
      "Decorators": []
     },
     {
-     "$id": "244",
+     "$id": "396",
      "Name": "op2",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "245",
+       "$id": "397",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "246",
+        "$id": "398",
         "kind": "constant",
         "valueType": {
-         "$id": "247",
+         "$id": "399",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2484,14 +3044,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "248",
+       "$id": "400",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "249",
+        "$id": "401",
         "kind": "constant",
         "valueType": {
-         "$id": "250",
+         "$id": "402",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2511,11 +3071,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "251",
+       "$id": "403",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "53"
+        "$ref": "55"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2530,12 +3090,12 @@
      ],
      "Responses": [
       {
-       "$id": "252",
+       "$id": "404",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "53"
+        "$ref": "55"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2559,21 +3119,21 @@
      "Decorators": []
     },
     {
-     "$id": "253",
+     "$id": "405",
      "Name": "op3",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "254",
+       "$id": "406",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "255",
+        "$id": "407",
         "kind": "constant",
         "valueType": {
-         "$id": "256",
+         "$id": "408",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2593,14 +3153,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "257",
+       "$id": "409",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "258",
+        "$id": "410",
         "kind": "constant",
         "valueType": {
-         "$id": "259",
+         "$id": "411",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2620,11 +3180,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "260",
+       "$id": "412",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "67"
+        "$ref": "79"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2639,12 +3199,12 @@
      ],
      "Responses": [
       {
-       "$id": "261",
+       "$id": "413",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "67"
+        "$ref": "79"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2668,21 +3228,21 @@
      "Decorators": []
     },
     {
-     "$id": "262",
+     "$id": "414",
      "Name": "op4",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "263",
+       "$id": "415",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "264",
+        "$id": "416",
         "kind": "constant",
         "valueType": {
-         "$id": "265",
+         "$id": "417",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2702,14 +3262,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "266",
+       "$id": "418",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "267",
+        "$id": "419",
         "kind": "constant",
         "valueType": {
-         "$id": "268",
+         "$id": "420",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2729,11 +3289,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "269",
+       "$id": "421",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "94"
+        "$ref": "124"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2748,12 +3308,12 @@
      ],
      "Responses": [
       {
-       "$id": "270",
+       "$id": "422",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "94"
+        "$ref": "124"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2777,20 +3337,20 @@
      "Decorators": []
     },
     {
-     "$id": "271",
+     "$id": "423",
      "Name": "op5",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "272",
+       "$id": "424",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "273",
+        "$id": "425",
         "kind": "constant",
         "valueType": {
-         "$id": "274",
+         "$id": "426",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2812,12 +3372,12 @@
      ],
      "Responses": [
       {
-       "$id": "275",
+       "$id": "427",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "127"
+        "$ref": "185"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2838,21 +3398,21 @@
      "Decorators": []
     },
     {
-     "$id": "276",
+     "$id": "428",
      "Name": "op6",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "277",
+       "$id": "429",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "278",
+        "$id": "430",
         "kind": "constant",
         "valueType": {
-         "$id": "279",
+         "$id": "431",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2872,14 +3432,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "280",
+       "$id": "432",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "281",
+        "$id": "433",
         "kind": "constant",
         "valueType": {
-         "$id": "282",
+         "$id": "434",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2899,11 +3459,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "283",
+       "$id": "435",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "210"
+        "$ref": "344"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2918,12 +3478,12 @@
      ],
      "Responses": [
       {
-       "$id": "284",
+       "$id": "436",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "210"
+        "$ref": "344"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2947,21 +3507,21 @@
      "Decorators": []
     },
     {
-     "$id": "285",
+     "$id": "437",
      "Name": "op7",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "286",
+       "$id": "438",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "287",
+        "$id": "439",
         "kind": "constant",
         "valueType": {
-         "$id": "288",
+         "$id": "440",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2981,14 +3541,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "289",
+       "$id": "441",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "290",
+        "$id": "442",
         "kind": "constant",
         "valueType": {
-         "$id": "291",
+         "$id": "443",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3008,11 +3568,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "292",
+       "$id": "444",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "218"
+        "$ref": "358"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -3027,12 +3587,12 @@
      ],
      "Responses": [
       {
-       "$id": "293",
+       "$id": "445",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "218"
+        "$ref": "358"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3056,21 +3616,21 @@
      "Decorators": []
     },
     {
-     "$id": "294",
+     "$id": "446",
      "Name": "op8",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "295",
+       "$id": "447",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "296",
+        "$id": "448",
         "kind": "constant",
         "valueType": {
-         "$id": "297",
+         "$id": "449",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3090,14 +3650,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "298",
+       "$id": "450",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "299",
+        "$id": "451",
         "kind": "constant",
         "valueType": {
-         "$id": "300",
+         "$id": "452",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3117,11 +3677,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "301",
+       "$id": "453",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "226"
+        "$ref": "372"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -3136,12 +3696,12 @@
      ],
      "Responses": [
       {
-       "$id": "302",
+       "$id": "454",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "226"
+        "$ref": "372"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3166,15 +3726,15 @@
     }
    ],
    "Protocol": {
-    "$id": "303"
+    "$id": "455"
    },
    "Parameters": [
     {
-     "$id": "304",
+     "$id": "456",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Type": {
-      "$id": "305",
+      "$id": "457",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
