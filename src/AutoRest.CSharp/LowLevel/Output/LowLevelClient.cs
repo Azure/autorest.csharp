@@ -82,6 +82,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             if (Configuration.ModelNamespace && name == "Models")
             {
+                // TODO -- we should report a warning diagnostic here indicating that we are changing something in the input.
                 return "ModelsOps"; // Avoid conflict with the Models namespace
             }
             return name;
