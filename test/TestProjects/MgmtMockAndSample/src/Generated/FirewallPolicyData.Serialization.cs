@@ -95,6 +95,27 @@ namespace MgmtMockAndSample
                 writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
             }
+            if (Optional.IsCollectionDefined(NetworkConfigurations))
+            {
+                writer.WritePropertyName("networkConfigurations"u8);
+                writer.WriteStartArray();
+                foreach (var item in NetworkConfigurations)
+                {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteStartObject();
+                    foreach (var item0 in item)
+                    {
+                        writer.WritePropertyName(item0.Key);
+                        writer.WriteStringValue(item0.Value);
+                    }
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
@@ -128,6 +149,7 @@ namespace MgmtMockAndSample
             FirewallPolicyIntrusionDetection intrusionDetection = default;
             FirewallPolicyTransportSecurity transportSecurity = default;
             FirewallPolicySku sku = default;
+            IList<IDictionary<string, string>> networkConfigurations = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -347,6 +369,32 @@ namespace MgmtMockAndSample
                             sku = FirewallPolicySku.DeserializeFirewallPolicySku(property0.Value);
                             continue;
                         }
+                        if (property0.NameEquals("networkConfigurations"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                            foreach (var item in property0.Value.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                    foreach (var property1 in item.EnumerateObject())
+                                    {
+                                        dictionary.Add(property1.Name, property1.Value.GetString());
+                                    }
+                                    array.Add(dictionary);
+                                }
+                            }
+                            networkConfigurations = array;
+                            continue;
+                        }
                     }
                     continue;
                 }
@@ -374,7 +422,8 @@ namespace MgmtMockAndSample
                 dnsSettings,
                 intrusionDetection,
                 transportSecurity,
-                sku);
+                sku,
+                networkConfigurations ?? new ChangeTrackingList<IDictionary<string, string>>());
         }
     }
 }
