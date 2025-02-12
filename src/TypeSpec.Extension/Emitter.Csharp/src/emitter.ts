@@ -179,7 +179,10 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         if (!options["save-inputs"]) {
             // delete
             deleteFile(logger, resolvePath(outputFolder, tspOutputFileName));
-            deleteFile(logger, resolvePath(outputFolder, configurationFileName));
+            deleteFile(
+                logger,
+                resolvePath(outputFolder, configurationFileName)
+            );
         }
     }
 }
