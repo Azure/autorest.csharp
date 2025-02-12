@@ -36,9 +36,9 @@ extends:
                   useGlobalJson: true
                   performMultiLevelLookup: true
               - task: NodeTool@0
-                displayName: "Install Node 18.x"
+                displayName: "Install Node 20.x"
                 inputs:
-                  versionSpec: '18.x'
+                  versionSpec: '20.x'
               - ${{ if eq(parameters.UseTypeSpecNext, 'true') }}:
                 - pwsh: ./eng/UseTypeSpecNextVersions.ps1
                   displayName: "Use 'next' TypeSpec dependencies"
