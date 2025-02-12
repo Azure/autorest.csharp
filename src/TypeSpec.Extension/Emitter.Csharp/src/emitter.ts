@@ -8,8 +8,6 @@ import fs, { existsSync } from "fs";
 import path from "node:path";
 import {
     $onEmit as $OnMGCEmit,
-    Logger,
-    LoggerLevel,
     configurationFileName,
     tspOutputFileName,
     setSDKContextOptions
@@ -28,7 +26,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
 
     const options = resolveAzureEmitterOptions(context);
     /* set the loglevel. */
-   // Logger(program, options.logLevel ?? LoggerLevel.INFO);
+    // Logger(program, options.logLevel ?? LoggerLevel.INFO);
 
     context.options.skipSDKGeneration = true;
     if (
@@ -37,7 +35,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
     ) {
         context.emitterOutputDir = path.dirname(context.emitterOutputDir);
     }
-   // Logger.getInstance().info("Starting Microsoft Generator Csharp emitter.");
+    // Logger.getInstance().info("Starting Microsoft Generator Csharp emitter.");
     setSDKContextOptions(azureSDKContextOptions);
     await $OnMGCEmit(context);
     const outputFolder = resolvePath(
@@ -152,7 +150,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
             isSrcFolder ? outputFolder : resolvePath(outputFolder, "src"),
             `${configurations["library-name"]}.csproj`
         );
-       // Logger.getInstance().info(`Checking if ${csProjFile} exists`);
+        // Logger.getInstance().info(`Checking if ${csProjFile} exists`);
         const newProjectOption =
             options["new-project"] || !existsSync(csProjFile)
                 ? "--new-project"
@@ -167,16 +165,9 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         )} --project-path ${outputFolder} ${newProjectOption} ${existingProjectOption} --clear-output-folder ${
             options["clear-output-folder"]
         }${debugFlag}`;
-       // Logger.getInstance().info(command);
+        // Logger.getInstance().info(command);
 
-        try {
-            execSync(command, { stdio: "inherit" });
-        } catch (error: any) {
-            // if (error.message) Logger.getInstance().info(error.message);
-            // if (error.stderr) Logger.getInstance().error(error.stderr);
-            // if (error.stdout) Logger.getInstance().verbose(error.stdout);
-            throw error;
-        }
+        execSync(command, { stdio: "inherit" });
         if (!options["save-inputs"]) {
             // delete
             deleteFile(resolvePath(outputFolder, tspOutputFileName));
@@ -190,7 +181,7 @@ function deleteFile(filePath: string) {
         if (err) {
             //logger.error(`stderr: ${err}`);
         } else {
-           // Logger.getInstance().info(`File ${filePath} is deleted.`);
+            // Logger.getInstance().info(`File ${filePath} is deleted.`);
         }
     });
 }
