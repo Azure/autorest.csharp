@@ -3,9 +3,7 @@
     "private": true,
     "description": "Preserve the dependencies for unbranded tests.",
     "devDependencies": {
-        "@typespec/openapi": "0.64.0"
-    },
-    "dependencies": {
-        "@azure-tools/unbranded-tests": "file:"
+      "@typespec/openapi": "0.64.0"
     }
-}
+  }
+  
