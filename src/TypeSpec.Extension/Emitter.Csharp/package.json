@@ -35,15 +35,14 @@
     ],
     "dependencies": {
         "@autorest/csharp": "3.0.0-beta.20240625.4",
-        "@azure-tools/typespec-csharp": "file:",
         "@typespec/http-client-csharp": "0.1.9-alpha.20250206.2"
     },
     "peerDependencies": {
-        "@azure-tools/typespec-autorest": ">=0.50.0 <1.0.0",
         "@azure-tools/typespec-azure-core": ">=0.50.0 <1.0.0",
+        "@azure-tools/typespec-client-generator-core": ">=0.50.0 <1.0.0",
         "@azure-tools/typespec-azure-resource-manager": ">=0.50.0 <1.0.0",
         "@azure-tools/typespec-azure-rulesets": ">=0.50.0 <1.0.0",
-        "@azure-tools/typespec-client-generator-core": ">=0.50.0 <1.0.0",
+        "@azure-tools/typespec-autorest": ">=0.50.0 <1.0.0",
         "@azure-tools/typespec-liftr-base": ">=0.6.0 <1.0.0",
         "@typespec/compiler": ">=0.64.0 <1.0.0",
         "@typespec/http": ">=0.64.0 <1.0.0",
@@ -53,11 +52,11 @@
         "@typespec/xml": ">=0.64.0 <1.0.0"
     },
     "devDependencies": {
-        "@azure-tools/typespec-autorest": "0.50.0",
         "@azure-tools/typespec-azure-core": "0.50.0",
+        "@azure-tools/typespec-client-generator-core": "0.50.2",
         "@azure-tools/typespec-azure-resource-manager": "0.50.0",
         "@azure-tools/typespec-azure-rulesets": "0.50.0",
-        "@azure-tools/typespec-client-generator-core": "0.50.2",
+        "@azure-tools/typespec-autorest": "0.50.0",
         "@azure-tools/typespec-liftr-base": "0.6.0",
         "@eslint/js": "^9.15.0",
         "@types/mocha": "~10.0.9",
@@ -75,7 +74,7 @@
         "prettier": "^3.3.3",
         "rimraf": "~6.0.1",
         "typescript": "~5.6.3",
-        "typescript-eslint": "^8.15.0",
-        "vitest": "^2.1.5"
+        "vitest": "^2.1.5",
+        "typescript-eslint": "^8.15.0"
     }
 }
