@@ -5,20 +5,23 @@
   "description": "package.json intended for in-repo use only, package.json used for publishing is located in src/AutoRest.CSharp/package.json",
   "homepage": "https://github.com/Azure/autorest.csharp#readme",
   "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Azure/autorest.csharp.git"
-    },
-    "bugs": {
-        "url": "https://github.com/Azure/autorest.csharp/issues"
-    },
+    "type": "git",
+    "url": "git+https://github.com/Azure/autorest.csharp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Azure/autorest.csharp/issues"
+  },
   "devDependencies": {
-    "@typespec/http-specs": "0.1.0-alpha.7",
     "@azure-tools/azure-http-specs": "0.1.0-alpha.5",
-    "@azure-tools/typespec-client-generator-core": "0.50.2",
     "@azure-tools/typespec-azure-resource-manager": "0.50.0",
+    "@azure-tools/typespec-client-generator-core": "0.50.2",
     "@azure-tools/typespec-csharp": "file:src/TypeSpec.Extension/Emitter.Csharp",
     "@azure-tools/unbranded-tests": "file:test/UnbrandedProjects",
     "@microsoft.azure/autorest.testserver": "3.3.50",
+    "@typespec/http-specs": "0.1.0-alpha.7",
     "autorest": "3.7.1"
+  },
+  "dependencies": {
+    "@autorest/csharp": "file:"
   }
 }
