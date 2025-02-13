@@ -6,11 +6,11 @@
   "scripts": {
     "start": "dotnet --roll-forward Major ./AutoRest.CSharp.dll --server"
   },
-  "dependencies": {
-    "@autorest/csharp": "file:"
+  "devDependencies": {
   },
+  "dependencies": {},
   "files": [
     "*",
     "!publish"
-  ]
+   ]
 }
