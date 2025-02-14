@@ -59,17 +59,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         }
 
         // write the tspCodeModel.json file
-        await program.host.writeFile(
-            resolvePath(outputFolder, tspOutputFileName),
-            prettierOutput(
-                stringifyRefs(
-                    root,
-                    transformJSONProperties,
-                    1,
-                    PreserveType.Objects
-                )
-            )
-        );
+        await writeCodeModel(program, root, outputFolder, tspOutputFileName);
 
         //resolve shared folders based on generator path override
         const resolvedSharedFolders: string[] = [];
