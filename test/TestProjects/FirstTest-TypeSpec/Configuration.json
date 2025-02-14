@@ -1,7 +1,6 @@
 {
   "output-folder": ".",
-  "namespace": "FirstTestTypeSpec",
-  "library-name": "FirstTestTypeSpec",
+  "package-name": "FirstTestTypeSpec",
   "head-as-boolean": true,
   "deserialize-null-collection-as-null-value": true,
   "flavor": "azure",
@@ -10,5 +9,7 @@
   "shared-source-folders": [
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Azure.Core.Shared"
-  ]
+  ],
+  "namespace": "FirstTestTypeSpec",
+  "library-name": "FirstTestTypeSpec"
 }
