@@ -10,7 +10,6 @@ import path from "node:path";
 import {
     $onEmit as $OnMGCEmit,
     Logger,
-    LoggerLevel,
     configurationFileName,
     tspOutputFileName,
     setSDKContextOptions,
@@ -31,7 +30,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
 
     const options = resolveAzureEmitterOptions(context);
     /* set the loglevel. */
-    const logger = new Logger(program, options.logLevel ?? LoggerLevel.INFO);
+    const logger = new Logger(program, options.logLevel);
 
     if (
         context.emitterOutputDir &&
