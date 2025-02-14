@@ -43,9 +43,9 @@ extends:
                   useGlobalJson: true
                   performMultiLevelLookup: true
               - task: NodeTool@0
-                displayName: "Install Node 18.x"
+                displayName: "Install Node 20.x"
                 inputs:
-                  versionSpec: '18.x'
+                  versionSpec: '20.x'
               - script: |
                   npm ci
                 displayName: "Install packages"

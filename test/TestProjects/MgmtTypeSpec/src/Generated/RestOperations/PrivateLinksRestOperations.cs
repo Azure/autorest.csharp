@@ -123,7 +123,7 @@ namespace MgmtTypeSpec
             }
         }
 
-        internal RequestUriBuilder CreateStartRequestUri(string subscriptionId, string resourceGroupName, string privateLinkResourcenName, StartContent content)
+        internal RequestUriBuilder CreateStartRequestUri(string subscriptionId, string resourceGroupName, string privateLinkResourceName, StartContent content)
         {
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -132,13 +132,13 @@ namespace MgmtTypeSpec
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/MgmtTypeSpec/privateLinkResources/", false);
-            uri.AppendPath(privateLinkResourcenName, true);
+            uri.AppendPath(privateLinkResourceName, true);
             uri.AppendPath("/start", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             return uri;
         }
 
-        internal HttpMessage CreateStartRequest(string subscriptionId, string resourceGroupName, string privateLinkResourcenName, StartContent content)
+        internal HttpMessage CreateStartRequest(string subscriptionId, string resourceGroupName, string privateLinkResourceName, StartContent content)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -150,7 +150,7 @@ namespace MgmtTypeSpec
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/MgmtTypeSpec/privateLinkResources/", false);
-            uri.AppendPath(privateLinkResourcenName, true);
+            uri.AppendPath(privateLinkResourceName, true);
             uri.AppendPath("/start", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -169,18 +169,18 @@ namespace MgmtTypeSpec
         /// <summary> Starts the SAP Application Server Instance. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
-        /// <param name="privateLinkResourcenName"> The name of the private link associated with the Azure resource. </param>
+        /// <param name="privateLinkResourceName"> The name of the private link associated with the Azure resource. </param>
         /// <param name="content"> SAP Application server instance start request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="privateLinkResourcenName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="privateLinkResourcenName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> StartAsync(string subscriptionId, string resourceGroupName, string privateLinkResourcenName, StartContent content = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="privateLinkResourceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="privateLinkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        public async Task<Response> StartAsync(string subscriptionId, string resourceGroupName, string privateLinkResourceName, StartContent content = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(privateLinkResourcenName, nameof(privateLinkResourcenName));
+            Argument.AssertNotNullOrEmpty(privateLinkResourceName, nameof(privateLinkResourceName));
 
-            using var message = CreateStartRequest(subscriptionId, resourceGroupName, privateLinkResourcenName, content);
+            using var message = CreateStartRequest(subscriptionId, resourceGroupName, privateLinkResourceName, content);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -195,18 +195,18 @@ namespace MgmtTypeSpec
         /// <summary> Starts the SAP Application Server Instance. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
-        /// <param name="privateLinkResourcenName"> The name of the private link associated with the Azure resource. </param>
+        /// <param name="privateLinkResourceName"> The name of the private link associated with the Azure resource. </param>
         /// <param name="content"> SAP Application server instance start request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="privateLinkResourcenName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="privateLinkResourcenName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response Start(string subscriptionId, string resourceGroupName, string privateLinkResourcenName, StartContent content = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="privateLinkResourceName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="privateLinkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        public Response Start(string subscriptionId, string resourceGroupName, string privateLinkResourceName, StartContent content = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(privateLinkResourcenName, nameof(privateLinkResourcenName));
+            Argument.AssertNotNullOrEmpty(privateLinkResourceName, nameof(privateLinkResourceName));
 
-            using var message = CreateStartRequest(subscriptionId, resourceGroupName, privateLinkResourcenName, content);
+            using var message = CreateStartRequest(subscriptionId, resourceGroupName, privateLinkResourceName, content);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
