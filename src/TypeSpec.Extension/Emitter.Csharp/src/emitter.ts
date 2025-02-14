@@ -71,11 +71,6 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
             )
         );
 
-        const configurationFilePath = resolvePath(
-            outputFolder,
-            configurationFileName
-        );
-
         //resolve shared folders based on generator path override
         const resolvedSharedFolders: string[] = [];
         const sharedFolders = [
@@ -216,7 +211,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
     }
 }
 
-function deleteFile(filePath: string) {
+function deleteFile(filePath: string, logger: Logger) {
     fs.unlink(filePath, (err) => {
         if (err) {
             //logger.error(`stderr: ${err}`);
