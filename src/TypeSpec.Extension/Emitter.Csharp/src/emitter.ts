@@ -8,7 +8,6 @@ import { PreserveType, stringifyRefs } from "json-serialize-refs";
 import fs, { existsSync } from "fs";
 import path from "node:path";
 import {
-    $onEmit as $OnMGCEmit,
     Logger,
     configurationFileName,
     tspOutputFileName,
