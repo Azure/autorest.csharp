@@ -70,9 +70,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
             outputFolder,
             configurationFileName
         );
-        const configurations = JSON.parse(
-            fs.readFileSync(configurationFilePath, "utf-8")
-        );
+
         //resolve shared folders based on generator path override
         const resolvedSharedFolders: string[] = [];
         const sharedFolders = [
@@ -86,6 +84,14 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
                     .replaceAll("\\", "/")
             );
         }
+
+        const configurations: any = {};
+
+        configurations["output-folder"] = ".";
+        
+        const namespace = options["namespace"] ?? root.Name;
+        configurations["namespace"] = namespace;
+        configurations["library-name"] = options["library-name"] ?? namespace;
 
         configurations["head-as-boolean"] = options["head-as-boolean"];
         configurations["deserialize-null-collection-as-null-value"] =
@@ -145,9 +151,6 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         configurations["enable-internal-raw-data"] =
             options["enable-internal-raw-data"];
         configurations["model-namespace"] = options["model-namespace"];
-        const namespace = options["namespace"] ?? root.Name;
-        configurations["namespace"] = namespace;
-        configurations["library-name"] = options["library-name"] ?? namespace;
         const examplesDir =
             options["examples-dir"] ?? options["examples-directory"];
         if (examplesDir) {
