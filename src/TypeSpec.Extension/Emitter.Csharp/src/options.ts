@@ -1,13 +1,13 @@
 import { EmitContext, JSONSchemaType } from "@typespec/compiler";
 import {
-    NetEmitterOptions,
-    NetEmitterOptionsSchema,
+    CSharpEmitterOptions,
+    CSharpEmitterOptionsSchema,
     defaultOptions,
     resolveOptions
 } from "@typespec/http-client-csharp";
 import { dllFilePath } from "@autorest/csharp";
 
-export interface AzureNetEmitterOptions extends NetEmitterOptions {
+export interface AzureCSharpEmitterOptions extends CSharpEmitterOptions {
     csharpGeneratorPath?: string;
     "model-namespace"?: boolean;
     "enable-internal-raw-data"?: boolean;
@@ -26,12 +26,12 @@ export interface AzureNetEmitterOptions extends NetEmitterOptions {
     "use-model-reader-writer"?: boolean;
 }
 
-export const AzureNetEmitterOptionsSchema: JSONSchemaType<AzureNetEmitterOptions> =
+export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterOptions> =
     {
         type: "object",
         additionalProperties: false,
         properties: {
-            ...NetEmitterOptionsSchema.properties,
+            ...CSharpEmitterOptionsSchema.properties,
             csharpGeneratorPath: {
                 type: "string",
                 default: dllFilePath,
@@ -107,7 +107,7 @@ const defaultAzureEmitterOptions = {
 };
 
 export function resolveAzureEmitterOptions(
-    context: EmitContext<AzureNetEmitterOptions>
+    context: EmitContext<AzureCSharpEmitterOptions>
 ) {
     return {
         ...resolveOptions(context),
