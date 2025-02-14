@@ -44,13 +44,14 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         "@azure-tools/typespec-csharp"
     );
     const csharpEmitterContext: CSharpEmitterContext = {
-        logger: logger, 
+        logger: logger,
         __typeCache: {
-          types: new Map(),
-          models: new Map(),
-          enums: new Map(),
+            types: new Map(),
+            models: new Map(),
+            enums: new Map()
         },
-        ...sdkContext};
+        ...sdkContext
+    };
     const root = createModel(csharpEmitterContext);
 
     const outputFolder = resolvePath(
