@@ -45,7 +45,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
     );
     const csharpEmitterContext = { ...sdkContext, logger: logger };
     const root = createModel(csharpEmitterContext);
-    
+
     const outputFolder = resolvePath(
         context.emitterOutputDir ?? "./tsp-output"
     );
@@ -56,13 +56,20 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
     if (root) {
         if (!fs.existsSync(generatedFolder)) {
             fs.mkdirSync(generatedFolder, { recursive: true });
-          }
-      
-            // write the tspCodeModel.json file
-            await program.host.writeFile(
+        }
+
+        // write the tspCodeModel.json file
+        await program.host.writeFile(
             resolvePath(outputFolder, tspOutputFileName),
-            prettierOutput(stringifyRefs(root, transformJSONProperties, 1, PreserveType.Objects)),
-          );
+            prettierOutput(
+                stringifyRefs(
+                    root,
+                    transformJSONProperties,
+                    1,
+                    PreserveType.Objects
+                )
+            )
+        );
 
         const configurationFilePath = resolvePath(
             outputFolder,
@@ -86,7 +93,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         const configurations: any = {};
 
         configurations["output-folder"] = ".";
-        
+
         const namespace = options["namespace"] ?? root.Name;
         configurations["namespace"] = namespace;
         configurations["library-name"] = options["library-name"] ?? namespace;
@@ -163,7 +170,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         configurations["azure-arm"] =
             sdkContext.arm === false ? undefined : sdkContext.arm;
 
-        // Write the config file    
+        // Write the config file
         await program.host.writeFile(
             resolvePath(outputFolder, configurationFileName),
             prettierOutput(JSON.stringify(configurations, null, 2))
@@ -201,12 +208,15 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         if (!options["save-inputs"]) {
             // delete
             deleteFile(resolvePath(outputFolder, tspOutputFileName), logger);
-            deleteFile(resolvePath(outputFolder, configurationFileName), logger);
+            deleteFile(
+                resolvePath(outputFolder, configurationFileName),
+                logger
+            );
         }
     }
 }
 
-function deleteFile(filePath: string, logger: Logger) {
+function deleteFile(filePath: string) {
     fs.unlink(filePath, (err) => {
         if (err) {
             //logger.error(`stderr: ${err}`);
