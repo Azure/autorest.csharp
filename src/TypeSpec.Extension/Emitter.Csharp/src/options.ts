@@ -1,16 +1,16 @@
 import { EmitContext, JSONSchemaType } from "@typespec/compiler";
 import {
-    NetEmitterOptions,
-    NetEmitterOptionsSchema,
+    CSharpEmitterOptions,
+    CSharpEmitterOptionsSchema,
     defaultOptions,
     resolveOptions
 } from "@typespec/http-client-csharp";
 import { dllFilePath } from "@autorest/csharp";
 
-export interface AzureNetEmitterOptions extends NetEmitterOptions {
+export interface AzureNetEmitterOptions extends CSharpEmitterOptions {
     csharpGeneratorPath?: string;
     "model-namespace"?: boolean;
-    namespace?: string;
+    "namespace"?: string;
     "enable-internal-raw-data"?: boolean;
     "single-top-level-client"?: boolean;
     "existing-project-folder"?: string;
@@ -33,7 +33,7 @@ export const AzureNetEmitterOptionsSchema: JSONSchemaType<AzureNetEmitterOptions
         type: "object",
         additionalProperties: false,
         properties: {
-            ...NetEmitterOptionsSchema.properties,
+            ...CSharpEmitterOptionsSchema.properties,
             csharpGeneratorPath: {
                 type: "string",
                 default: dllFilePath,
@@ -86,7 +86,7 @@ export const AzureNetEmitterOptionsSchema: JSONSchemaType<AzureNetEmitterOptions
                 default: false
             },
             "use-model-reader-writer": { type: "boolean", nullable: true },
-            namespace: { type: "string", nullable: true },
+            "namespace": { type: "string", nullable: true },
             "library-name": { type: "string", nullable: true }
         },
         required: []
@@ -165,7 +165,7 @@ export function resolveAzureEmitterOptions(
             defaultAzureEmitterOptions[
                 "keep-non-overloadable-protocol-signature"
             ],
-        namespace: context.options.namespace,
-        "library-name": context.options["package-name"]
+        "namespace": context.options.namespace,
+        "library-name": context.options["package-name"],
     };
 }

@@ -13,7 +13,8 @@ import {
     tspOutputFileName,
     setSDKContextOptions,
     createModel,
-    transformJSONProperties
+    writeCodeModel,
+    CSharpEmitterContext
 } from "@typespec/http-client-csharp";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
@@ -43,7 +44,14 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         context,
         "@azure-tools/typespec-csharp"
     );
-    const csharpEmitterContext = { ...sdkContext, logger: logger };
+    const csharpEmitterContext: CSharpEmitterContext = {
+        logger: logger, 
+        __typeCache: {
+          types: new Map(),
+          models: new Map(),
+          enums: new Map(),
+        },
+        ...sdkContext};
     const root = createModel(csharpEmitterContext);
 
     const outputFolder = resolvePath(
@@ -59,7 +67,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         }
 
         // write the tspCodeModel.json file
-        await writeCodeModel(program, root, outputFolder, tspOutputFileName);
+        await writeCodeModel(csharpEmitterContext, root, outputFolder);
 
         //resolve shared folders based on generator path override
         const resolvedSharedFolders: string[] = [];
