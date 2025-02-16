@@ -17,12 +17,12 @@ import {
 } from "@typespec/http-client-csharp";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
-    AzureNetEmitterOptions,
+    AzureCSharpEmitterOptions,
     resolveAzureEmitterOptions
 } from "./options.js";
 import { azureSDKContextOptions } from "./sdk-context-options.js";
 
-export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
+export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
     const program: Program = context.program;
 
     if (program.compilerOptions.noEmit || program.hasError()) return;

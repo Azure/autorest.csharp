@@ -7,7 +7,7 @@ import {
 } from "@typespec/http-client-csharp";
 import { dllFilePath } from "@autorest/csharp";
 
-export interface AzureNetEmitterOptions extends CSharpEmitterOptions {
+export interface AzureCSharpEmitterOptions extends CSharpEmitterOptions {
     csharpGeneratorPath?: string;
     "model-namespace"?: boolean;
     namespace?: string;
@@ -28,7 +28,7 @@ export interface AzureNetEmitterOptions extends CSharpEmitterOptions {
     "library-name"?: string;
 }
 
-export const AzureNetEmitterOptionsSchema: JSONSchemaType<AzureNetEmitterOptions> =
+export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterOptions> =
     {
         type: "object",
         additionalProperties: false,
@@ -112,7 +112,7 @@ const defaultAzureEmitterOptions = {
 };
 
 export function resolveAzureEmitterOptions(
-    context: EmitContext<AzureNetEmitterOptions>
+    context: EmitContext<AzureCSharpEmitterOptions>
 ) {
     return {
         ...resolveOptions(context),
