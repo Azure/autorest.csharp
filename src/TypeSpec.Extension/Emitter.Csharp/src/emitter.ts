@@ -10,7 +10,6 @@ import {
     Logger,
     configurationFileName,
     tspOutputFileName,
-    setSDKContextOptions,
     createModel,
     writeCodeModel,
     CSharpEmitterContext
@@ -38,10 +37,10 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
         context.emitterOutputDir = path.dirname(context.emitterOutputDir);
     }
     logger.info("Starting Microsoft Generator Csharp emitter.");
-    setSDKContextOptions(azureSDKContextOptions);
     const sdkContext = await createSdkContext(
         context,
-        "@azure-tools/typespec-csharp"
+        "@azure-tools/typespec-csharp",
+        azureSDKContextOptions
     );
     const csharpEmitterContext: CSharpEmitterContext = {
         logger: logger,
