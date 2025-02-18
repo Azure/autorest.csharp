@@ -89,6 +89,7 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
         const namespace = options["namespace"] ?? root.Name;
         configurations["namespace"] = namespace;
         configurations["library-name"] = options["library-name"] ?? namespace;
+        configurations["unreferenced-types-handling"] = options["unreferenced-types-handling"];
         configurations["disable-xml-docs"] =
             options["disable-xml-docs"] === false
                 ? undefined
