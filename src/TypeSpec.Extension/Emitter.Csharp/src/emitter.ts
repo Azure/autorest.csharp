@@ -89,7 +89,10 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
         const namespace = options["namespace"] ?? root.Name;
         configurations["namespace"] = namespace;
         configurations["library-name"] = options["library-name"] ?? namespace;
-        configurations["disable-xml-docs"] = options["disable-xml-docs"] === false ? undefined : options["disable-xml-docs"]
+        configurations["disable-xml-docs"] =
+            options["disable-xml-docs"] === false
+                ? undefined
+                : options["disable-xml-docs"];
 
         configurations["head-as-boolean"] = options["head-as-boolean"];
         configurations["deserialize-null-collection-as-null-value"] =
