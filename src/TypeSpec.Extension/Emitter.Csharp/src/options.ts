@@ -10,6 +10,7 @@ import { dllFilePath } from "@autorest/csharp";
 export interface AzureCSharpEmitterOptions extends CSharpEmitterOptions {
     csharpGeneratorPath?: string;
     "model-namespace"?: boolean;
+    namespace?: string;
     "enable-internal-raw-data"?: boolean;
     "single-top-level-client"?: boolean;
     "existing-project-folder"?: string;
@@ -24,6 +25,7 @@ export interface AzureCSharpEmitterOptions extends CSharpEmitterOptions {
     "generate-sample-project"?: boolean;
     "generate-test-project"?: boolean;
     "use-model-reader-writer"?: boolean;
+    "library-name"?: string;
 }
 
 export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterOptions> =
@@ -83,7 +85,9 @@ export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterO
                 nullable: true,
                 default: false
             },
-            "use-model-reader-writer": { type: "boolean", nullable: true }
+            "use-model-reader-writer": { type: "boolean", nullable: true },
+            namespace: { type: "string", nullable: true },
+            "library-name": { type: "string", nullable: true }
         },
         required: []
     };
@@ -103,7 +107,8 @@ const defaultAzureEmitterOptions = {
     "generate-sample-project": true,
     "use-model-reader-writer": true,
     "single-top-level-client": undefined,
-    "keep-non-overloadable-protocol-signature": undefined
+    "keep-non-overloadable-protocol-signature": undefined,
+    "library-name": undefined
 };
 
 export function resolveAzureEmitterOptions(
@@ -159,6 +164,8 @@ export function resolveAzureEmitterOptions(
             context.options["keep-non-overloadable-protocol-signature"] ??
             defaultAzureEmitterOptions[
                 "keep-non-overloadable-protocol-signature"
-            ]
+            ],
+        namespace: context.options.namespace,
+        "library-name": context.options["package-name"]
     };
 }

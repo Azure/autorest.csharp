@@ -7,11 +7,12 @@ import { execSync } from "child_process";
 import fs, { existsSync } from "fs";
 import path from "node:path";
 import {
-    $onEmit as $OnMGCEmit,
     Logger,
     configurationFileName,
     tspOutputFileName,
-    setSDKContextOptions
+    createModel,
+    writeCodeModel,
+    CSharpEmitterContext
 } from "@typespec/http-client-csharp";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
@@ -29,7 +30,6 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
     /* set the loglevel. */
     const logger = new Logger(program, options.logLevel);
 
-    context.options.skipSDKGeneration = true;
     if (
         context.emitterOutputDir &&
         path.basename(context.emitterOutputDir) === "src"
@@ -37,8 +37,22 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
         context.emitterOutputDir = path.dirname(context.emitterOutputDir);
     }
     logger.info("Starting Microsoft Generator Csharp emitter.");
-    setSDKContextOptions(azureSDKContextOptions);
-    await $OnMGCEmit(context);
+    const sdkContext = await createSdkContext(
+        context,
+        "@azure-tools/typespec-csharp",
+        azureSDKContextOptions
+    );
+    const csharpEmitterContext: CSharpEmitterContext = {
+        logger: logger,
+        __typeCache: {
+            types: new Map(),
+            models: new Map(),
+            enums: new Map()
+        },
+        ...sdkContext
+    };
+    const root = createModel(csharpEmitterContext);
+
     const outputFolder = resolvePath(
         context.emitterOutputDir ?? "./tsp-output"
     );
@@ -46,14 +60,14 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
     const generatedFolder = isSrcFolder
         ? resolvePath(outputFolder, "Generated")
         : resolvePath(outputFolder, "src", "Generated");
-    if (options.skipSDKGeneration !== true) {
-        const configurationFilePath = resolvePath(
-            outputFolder,
-            configurationFileName
-        );
-        const configurations = JSON.parse(
-            fs.readFileSync(configurationFilePath, "utf-8")
-        );
+    if (root) {
+        if (!fs.existsSync(generatedFolder)) {
+            fs.mkdirSync(generatedFolder, { recursive: true });
+        }
+
+        // write the tspCodeModel.json file
+        await writeCodeModel(csharpEmitterContext, root, outputFolder);
+
         //resolve shared folders based on generator path override
         const resolvedSharedFolders: string[] = [];
         const sharedFolders = [
@@ -67,6 +81,20 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
                     .replaceAll("\\", "/")
             );
         }
+
+        const configurations: any = {};
+
+        configurations["output-folder"] = ".";
+
+        const namespace = options["namespace"] ?? root.Name;
+        configurations["namespace"] = namespace;
+        configurations["library-name"] = options["library-name"] ?? namespace;
+        configurations["unreferenced-types-handling"] =
+            options["unreferenced-types-handling"];
+        configurations["disable-xml-docs"] =
+            options["disable-xml-docs"] === false
+                ? undefined
+                : options["disable-xml-docs"];
 
         configurations["head-as-boolean"] = options["head-as-boolean"];
         configurations["deserialize-null-collection-as-null-value"] =
@@ -136,12 +164,11 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
         }
         /* TODO: when we support to emit decorator list https://github.com/Azure/autorest.csharp/issues/4887, we will update to use emitted decorator to identify if it is azure-arm */
         /* set azure-arm */
-        const sdkContext = await createSdkContext(
-            context,
-            "@azure-tools/typespec-csharp"
-        );
+
         configurations["azure-arm"] =
             sdkContext.arm === false ? undefined : sdkContext.arm;
+
+        // Write the config file
         await program.host.writeFile(
             resolvePath(outputFolder, configurationFileName),
             prettierOutput(JSON.stringify(configurations, null, 2))
@@ -178,16 +205,16 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
         }
         if (!options["save-inputs"]) {
             // delete
-            deleteFile(logger, resolvePath(outputFolder, tspOutputFileName));
+            deleteFile(resolvePath(outputFolder, tspOutputFileName), logger);
             deleteFile(
-                logger,
-                resolvePath(outputFolder, configurationFileName)
+                resolvePath(outputFolder, configurationFileName),
+                logger
             );
         }
     }
 }
 
-function deleteFile(logger: Logger, filePath: string) {
+function deleteFile(filePath: string, logger: Logger) {
     fs.unlink(filePath, (err) => {
         if (err) {
             //logger.error(`stderr: ${err}`);
