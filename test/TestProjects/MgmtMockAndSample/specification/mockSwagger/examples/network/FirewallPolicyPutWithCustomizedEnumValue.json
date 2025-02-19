@@ -97,7 +97,13 @@
             "name": "clientcert",
             "keyVaultSecretId": "https://kv/secret"
           }
-        }
+        },
+        "networkConfigurations": [
+          {
+            "config1": "value1",
+            "config2": "value2"
+          }
+        ]
       }
     }
   },

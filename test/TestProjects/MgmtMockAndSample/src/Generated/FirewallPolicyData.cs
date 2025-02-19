@@ -26,6 +26,7 @@ namespace MgmtMockAndSample
             RuleCollectionGroups = new ChangeTrackingList<WritableSubResource>();
             Firewalls = new ChangeTrackingList<WritableSubResource>();
             ChildPolicies = new ChangeTrackingList<WritableSubResource>();
+            NetworkConfigurations = new ChangeTrackingList<IDictionary<string, string>>();
         }
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyData"/>. </summary>
@@ -52,7 +53,8 @@ namespace MgmtMockAndSample
         /// <param name="intrusionDetection"> The configuration for Intrusion detection. </param>
         /// <param name="transportSecurity"> TLS Configuration definition. </param>
         /// <param name="sku"> The Firewall Policy SKU. </param>
-        internal FirewallPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string etag, ManagedServiceIdentity identity, Probe startupProbe, Probe readinessProbe, DesiredStatusCode? desiredStatusCode, IReadOnlyList<WritableSubResource> ruleCollectionGroups, ProvisioningState? provisioningState, WritableSubResource basePolicy, IReadOnlyList<WritableSubResource> firewalls, IReadOnlyList<WritableSubResource> childPolicies, FirewallPolicyThreatIntelWhitelist threatIntelWhitelist, FirewallPolicyInsights insights, FirewallPolicySnat snat, DnsSettings dnsSettings, FirewallPolicyIntrusionDetection intrusionDetection, FirewallPolicyTransportSecurity transportSecurity, FirewallPolicySku sku) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="networkConfigurations"> List of references to Network Configuration resources. </param>
+        internal FirewallPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string etag, ManagedServiceIdentity identity, Probe startupProbe, Probe readinessProbe, DesiredStatusCode? desiredStatusCode, IReadOnlyList<WritableSubResource> ruleCollectionGroups, ProvisioningState? provisioningState, WritableSubResource basePolicy, IReadOnlyList<WritableSubResource> firewalls, IReadOnlyList<WritableSubResource> childPolicies, FirewallPolicyThreatIntelWhitelist threatIntelWhitelist, FirewallPolicyInsights insights, FirewallPolicySnat snat, DnsSettings dnsSettings, FirewallPolicyIntrusionDetection intrusionDetection, FirewallPolicyTransportSecurity transportSecurity, FirewallPolicySku sku, IList<IDictionary<string, string>> networkConfigurations) : base(id, name, resourceType, systemData, tags, location)
         {
             Etag = etag;
             Identity = identity;
@@ -71,6 +73,7 @@ namespace MgmtMockAndSample
             IntrusionDetection = intrusionDetection;
             TransportSecurity = transportSecurity;
             Sku = sku;
+            NetworkConfigurations = networkConfigurations;
         }
 
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
@@ -153,5 +156,8 @@ namespace MgmtMockAndSample
                 Sku.Tier = value;
             }
         }
+
+        /// <summary> List of references to Network Configuration resources. </summary>
+        public IList<IDictionary<string, string>> NetworkConfigurations { get; }
     }
 }
