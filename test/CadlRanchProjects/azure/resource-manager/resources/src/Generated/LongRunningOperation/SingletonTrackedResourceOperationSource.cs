@@ -25,14 +25,14 @@ namespace _Azure.ResourceManager.Resources
 
         SingletonTrackedResource IOperationSource<SingletonTrackedResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
+            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
             var data = SingletonTrackedResourceData.DeserializeSingletonTrackedResourceData(document.RootElement);
             return new SingletonTrackedResource(_client, data);
         }
 
         async ValueTask<SingletonTrackedResource> IOperationSource<SingletonTrackedResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
             var data = SingletonTrackedResourceData.DeserializeSingletonTrackedResourceData(document.RootElement);
             return new SingletonTrackedResource(_client, data);
         }

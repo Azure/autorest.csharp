@@ -44,7 +44,7 @@ Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
 
 Response response = await client.DoSomethingAsync("<id>", "<h1>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -62,7 +62,7 @@ Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
 
 Response response = await client.DoSomethingAsync("<id>", "<h1>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -90,7 +90,7 @@ Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
 
 Response response = client.DoSomething("<id>", "<h1>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -108,7 +108,7 @@ Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
 
 Response response = client.DoSomething("<id>", "<h1>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());

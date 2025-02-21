@@ -10,7 +10,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters and parse the result.
@@ -20,7 +20,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -33,7 +33,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetNull with all parameters and parse the result.
@@ -43,7 +43,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -56,7 +56,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetInvalidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetInvalidAsync with all parameters and parse the result.
@@ -66,7 +66,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetInvalidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -79,7 +79,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetInvalid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetInvalid with all parameters and parse the result.
@@ -89,7 +89,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetInvalid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -102,7 +102,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetEmptyAsync with all parameters and parse the result.
@@ -112,7 +112,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -125,7 +125,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetEmpty with all parameters and parse the result.
@@ -135,7 +135,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -206,7 +206,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetBooleanTfftAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetBooleanTfftAsync with all parameters and parse the result.
@@ -216,7 +216,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetBooleanTfftAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -229,7 +229,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetBooleanTfft(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetBooleanTfft with all parameters and parse the result.
@@ -239,7 +239,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetBooleanTfft(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -310,7 +310,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetBooleanInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetBooleanInvalidNullAsync with all parameters and parse the result.
@@ -320,7 +320,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetBooleanInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -333,7 +333,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetBooleanInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetBooleanInvalidNull with all parameters and parse the result.
@@ -343,7 +343,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetBooleanInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -356,7 +356,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetBooleanInvalidStringAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetBooleanInvalidStringAsync with all parameters and parse the result.
@@ -366,7 +366,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetBooleanInvalidStringAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -379,7 +379,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetBooleanInvalidString(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetBooleanInvalidString with all parameters and parse the result.
@@ -389,7 +389,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetBooleanInvalidString(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -402,7 +402,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetIntegerValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetIntegerValidAsync with all parameters and parse the result.
@@ -412,7 +412,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetIntegerValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -425,7 +425,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetIntegerValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetIntegerValid with all parameters and parse the result.
@@ -435,7 +435,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetIntegerValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -506,7 +506,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetIntInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetIntInvalidNullAsync with all parameters and parse the result.
@@ -516,7 +516,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetIntInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -529,7 +529,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetIntInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetIntInvalidNull with all parameters and parse the result.
@@ -539,7 +539,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetIntInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -552,7 +552,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetIntInvalidStringAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetIntInvalidStringAsync with all parameters and parse the result.
@@ -562,7 +562,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetIntInvalidStringAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -575,7 +575,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetIntInvalidString(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetIntInvalidString with all parameters and parse the result.
@@ -585,7 +585,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetIntInvalidString(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -598,7 +598,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetLongValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetLongValidAsync with all parameters and parse the result.
@@ -608,7 +608,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetLongValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -621,7 +621,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetLongValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetLongValid with all parameters and parse the result.
@@ -631,7 +631,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetLongValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -702,7 +702,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetLongInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetLongInvalidNullAsync with all parameters and parse the result.
@@ -712,7 +712,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetLongInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -725,7 +725,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetLongInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetLongInvalidNull with all parameters and parse the result.
@@ -735,7 +735,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetLongInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -748,7 +748,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetLongInvalidStringAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetLongInvalidStringAsync with all parameters and parse the result.
@@ -758,7 +758,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetLongInvalidStringAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -771,7 +771,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetLongInvalidString(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetLongInvalidString with all parameters and parse the result.
@@ -781,7 +781,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetLongInvalidString(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -794,7 +794,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetFloatValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetFloatValidAsync with all parameters and parse the result.
@@ -804,7 +804,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetFloatValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -817,7 +817,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetFloatValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetFloatValid with all parameters and parse the result.
@@ -827,7 +827,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetFloatValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -898,7 +898,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetFloatInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetFloatInvalidNullAsync with all parameters and parse the result.
@@ -908,7 +908,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetFloatInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -921,7 +921,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetFloatInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetFloatInvalidNull with all parameters and parse the result.
@@ -931,7 +931,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetFloatInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -944,7 +944,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetFloatInvalidStringAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetFloatInvalidStringAsync with all parameters and parse the result.
@@ -954,7 +954,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetFloatInvalidStringAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -967,7 +967,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetFloatInvalidString(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetFloatInvalidString with all parameters and parse the result.
@@ -977,7 +977,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetFloatInvalidString(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -990,7 +990,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDoubleValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDoubleValidAsync with all parameters and parse the result.
@@ -1000,7 +1000,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDoubleValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1013,7 +1013,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDoubleValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDoubleValid with all parameters and parse the result.
@@ -1023,7 +1023,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDoubleValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1094,7 +1094,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDoubleInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDoubleInvalidNullAsync with all parameters and parse the result.
@@ -1104,7 +1104,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDoubleInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1117,7 +1117,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDoubleInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDoubleInvalidNull with all parameters and parse the result.
@@ -1127,7 +1127,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDoubleInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1140,7 +1140,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDoubleInvalidStringAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDoubleInvalidStringAsync with all parameters and parse the result.
@@ -1150,7 +1150,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDoubleInvalidStringAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1163,7 +1163,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDoubleInvalidString(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDoubleInvalidString with all parameters and parse the result.
@@ -1173,7 +1173,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDoubleInvalidString(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1186,7 +1186,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetStringValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetStringValidAsync with all parameters and parse the result.
@@ -1196,7 +1196,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetStringValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1209,7 +1209,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetStringValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetStringValid with all parameters and parse the result.
@@ -1219,7 +1219,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetStringValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1290,7 +1290,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetEnumValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetEnumValidAsync with all parameters and parse the result.
@@ -1300,7 +1300,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetEnumValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1313,7 +1313,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetEnumValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetEnumValid with all parameters and parse the result.
@@ -1323,7 +1323,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetEnumValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1394,7 +1394,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetStringEnumValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetStringEnumValidAsync with all parameters and parse the result.
@@ -1404,7 +1404,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetStringEnumValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1417,7 +1417,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetStringEnumValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetStringEnumValid with all parameters and parse the result.
@@ -1427,7 +1427,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetStringEnumValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1498,7 +1498,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetStringWithNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetStringWithNullAsync with all parameters and parse the result.
@@ -1508,7 +1508,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetStringWithNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1521,7 +1521,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetStringWithNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetStringWithNull with all parameters and parse the result.
@@ -1531,7 +1531,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetStringWithNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1544,7 +1544,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetStringWithInvalidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetStringWithInvalidAsync with all parameters and parse the result.
@@ -1554,7 +1554,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetStringWithInvalidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1567,7 +1567,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetStringWithInvalid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetStringWithInvalid with all parameters and parse the result.
@@ -1577,7 +1577,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetStringWithInvalid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1590,7 +1590,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetUuidValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetUuidValidAsync with all parameters and parse the result.
@@ -1600,7 +1600,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetUuidValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1613,7 +1613,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetUuidValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetUuidValid with all parameters and parse the result.
@@ -1623,7 +1623,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetUuidValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1694,7 +1694,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetUuidInvalidCharsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetUuidInvalidCharsAsync with all parameters and parse the result.
@@ -1704,7 +1704,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetUuidInvalidCharsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1717,7 +1717,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetUuidInvalidChars(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetUuidInvalidChars with all parameters and parse the result.
@@ -1727,7 +1727,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetUuidInvalidChars(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1740,7 +1740,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDateValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDateValidAsync with all parameters and parse the result.
@@ -1750,7 +1750,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDateValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1763,7 +1763,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDateValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDateValid with all parameters and parse the result.
@@ -1773,7 +1773,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDateValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1844,7 +1844,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDateInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDateInvalidNullAsync with all parameters and parse the result.
@@ -1854,7 +1854,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDateInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1867,7 +1867,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDateInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDateInvalidNull with all parameters and parse the result.
@@ -1877,7 +1877,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDateInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1890,7 +1890,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDateInvalidCharsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDateInvalidCharsAsync with all parameters and parse the result.
@@ -1900,7 +1900,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDateInvalidCharsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1913,7 +1913,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDateInvalidChars(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDateInvalidChars with all parameters and parse the result.
@@ -1923,7 +1923,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDateInvalidChars(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1936,7 +1936,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDateTimeValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDateTimeValidAsync with all parameters and parse the result.
@@ -1946,7 +1946,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDateTimeValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -1959,7 +1959,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDateTimeValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDateTimeValid with all parameters and parse the result.
@@ -1969,7 +1969,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDateTimeValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -2040,7 +2040,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDateTimeInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDateTimeInvalidNullAsync with all parameters and parse the result.
@@ -2050,7 +2050,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDateTimeInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -2063,7 +2063,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDateTimeInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDateTimeInvalidNull with all parameters and parse the result.
@@ -2073,7 +2073,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDateTimeInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -2086,7 +2086,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDateTimeInvalidCharsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDateTimeInvalidCharsAsync with all parameters and parse the result.
@@ -2096,7 +2096,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDateTimeInvalidCharsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -2109,7 +2109,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDateTimeInvalidChars(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDateTimeInvalidChars with all parameters and parse the result.
@@ -2119,7 +2119,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDateTimeInvalidChars(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -2132,7 +2132,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDateTimeRfc1123ValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDateTimeRfc1123ValidAsync with all parameters and parse the result.
@@ -2142,7 +2142,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDateTimeRfc1123ValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -2155,7 +2155,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDateTimeRfc1123Valid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDateTimeRfc1123Valid with all parameters and parse the result.
@@ -2165,7 +2165,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDateTimeRfc1123Valid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -2236,7 +2236,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDurationValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDurationValidAsync with all parameters and parse the result.
@@ -2246,7 +2246,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDurationValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -2259,7 +2259,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDurationValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetDurationValid with all parameters and parse the result.
@@ -2269,7 +2269,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDurationValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -2340,7 +2340,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetByteValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetByteValidAsync with all parameters and parse the result.
@@ -2350,7 +2350,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetByteValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -2363,7 +2363,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetByteValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetByteValid with all parameters and parse the result.
@@ -2373,7 +2373,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetByteValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -2444,7 +2444,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetByteInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetByteInvalidNullAsync with all parameters and parse the result.
@@ -2454,7 +2454,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetByteInvalidNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -2467,7 +2467,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetByteInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetByteInvalidNull with all parameters and parse the result.
@@ -2477,7 +2477,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetByteInvalidNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -2490,7 +2490,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetBase64UrlAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetBase64UrlAsync with all parameters and parse the result.
@@ -2500,7 +2500,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetBase64UrlAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -2513,7 +2513,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetBase64Url(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetBase64Url with all parameters and parse the result.
@@ -2523,7 +2523,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetBase64Url(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -2536,7 +2536,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetComplexNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetComplexNullAsync with all parameters and parse the result.
@@ -2546,7 +2546,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetComplexNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code></example>
@@ -2560,7 +2560,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetComplexNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetComplexNull with all parameters and parse the result.
@@ -2570,7 +2570,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetComplexNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code></example>
@@ -2584,7 +2584,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetComplexEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetComplexEmptyAsync with all parameters and parse the result.
@@ -2594,7 +2594,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetComplexEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code></example>
@@ -2608,7 +2608,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetComplexEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetComplexEmpty with all parameters and parse the result.
@@ -2618,7 +2618,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetComplexEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code></example>
@@ -2632,7 +2632,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetComplexItemNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetComplexItemNullAsync with all parameters and parse the result.
@@ -2642,7 +2642,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetComplexItemNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code></example>
@@ -2656,7 +2656,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetComplexItemNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetComplexItemNull with all parameters and parse the result.
@@ -2666,7 +2666,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetComplexItemNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code></example>
@@ -2680,7 +2680,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetComplexItemEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetComplexItemEmptyAsync with all parameters and parse the result.
@@ -2690,7 +2690,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetComplexItemEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code></example>
@@ -2704,7 +2704,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetComplexItemEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetComplexItemEmpty with all parameters and parse the result.
@@ -2714,7 +2714,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetComplexItemEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code></example>
@@ -2728,7 +2728,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetComplexValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetComplexValidAsync with all parameters and parse the result.
@@ -2738,7 +2738,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetComplexValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code></example>
@@ -2752,7 +2752,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetComplexValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetComplexValid with all parameters and parse the result.
@@ -2762,7 +2762,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetComplexValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("integer").ToString());
 Console.WriteLine(result[0].GetProperty("string").ToString());
 ]]></code></example>
@@ -2842,7 +2842,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetArrayNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code>
 This sample shows how to call GetArrayNullAsync with all parameters and parse the result.
@@ -2852,7 +2852,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetArrayNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code></example>
     </member>
@@ -2865,7 +2865,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetArrayNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code>
 This sample shows how to call GetArrayNull with all parameters and parse the result.
@@ -2875,7 +2875,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetArrayNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code></example>
     </member>
@@ -2888,7 +2888,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetArrayEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code>
 This sample shows how to call GetArrayEmptyAsync with all parameters and parse the result.
@@ -2898,7 +2898,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetArrayEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code></example>
     </member>
@@ -2911,7 +2911,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetArrayEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code>
 This sample shows how to call GetArrayEmpty with all parameters and parse the result.
@@ -2921,7 +2921,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetArrayEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code></example>
     </member>
@@ -2934,7 +2934,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetArrayItemNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code>
 This sample shows how to call GetArrayItemNullAsync with all parameters and parse the result.
@@ -2944,7 +2944,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetArrayItemNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code></example>
     </member>
@@ -2957,7 +2957,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetArrayItemNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code>
 This sample shows how to call GetArrayItemNull with all parameters and parse the result.
@@ -2967,7 +2967,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetArrayItemNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code></example>
     </member>
@@ -2980,7 +2980,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetArrayItemEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code>
 This sample shows how to call GetArrayItemEmptyAsync with all parameters and parse the result.
@@ -2990,7 +2990,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetArrayItemEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code></example>
     </member>
@@ -3003,7 +3003,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetArrayItemEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code>
 This sample shows how to call GetArrayItemEmpty with all parameters and parse the result.
@@ -3013,7 +3013,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetArrayItemEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code></example>
     </member>
@@ -3026,7 +3026,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetArrayValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code>
 This sample shows how to call GetArrayValidAsync with all parameters and parse the result.
@@ -3036,7 +3036,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetArrayValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code></example>
     </member>
@@ -3049,7 +3049,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetArrayValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code>
 This sample shows how to call GetArrayValid with all parameters and parse the result.
@@ -3059,7 +3059,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetArrayValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0][0].ToString());
 ]]></code></example>
     </member>
@@ -3142,7 +3142,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDictionaryNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDictionaryNullAsync with all parameters and parse the result.
@@ -3152,7 +3152,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDictionaryNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
@@ -3165,7 +3165,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDictionaryNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDictionaryNull with all parameters and parse the result.
@@ -3175,7 +3175,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDictionaryNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
@@ -3188,7 +3188,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDictionaryEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDictionaryEmptyAsync with all parameters and parse the result.
@@ -3198,7 +3198,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDictionaryEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
@@ -3211,7 +3211,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDictionaryEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDictionaryEmpty with all parameters and parse the result.
@@ -3221,7 +3221,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDictionaryEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
@@ -3234,7 +3234,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDictionaryItemNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDictionaryItemNullAsync with all parameters and parse the result.
@@ -3244,7 +3244,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDictionaryItemNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
@@ -3257,7 +3257,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDictionaryItemNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDictionaryItemNull with all parameters and parse the result.
@@ -3267,7 +3267,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDictionaryItemNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
@@ -3280,7 +3280,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDictionaryItemEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDictionaryItemEmptyAsync with all parameters and parse the result.
@@ -3290,7 +3290,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDictionaryItemEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
@@ -3303,7 +3303,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDictionaryItemEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDictionaryItemEmpty with all parameters and parse the result.
@@ -3313,7 +3313,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDictionaryItemEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
@@ -3326,7 +3326,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDictionaryValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDictionaryValidAsync with all parameters and parse the result.
@@ -3336,7 +3336,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = await client.GetDictionaryValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
@@ -3349,7 +3349,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDictionaryValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDictionaryValid with all parameters and parse the result.
@@ -3359,7 +3359,7 @@ ArrayClient client = new ArrayClient(credential);
 
 Response response = client.GetDictionaryValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("<key>").ToString());
 ]]></code></example>
     </member>

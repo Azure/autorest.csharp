@@ -32,7 +32,7 @@ namespace Versioning.TypeChangedFrom.Samples
             });
             Response response = client.Test("<param>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
             Console.WriteLine(result.GetProperty("changedProp").ToString());
         }
@@ -51,7 +51,7 @@ namespace Versioning.TypeChangedFrom.Samples
             });
             Response response = await client.TestAsync("<param>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
             Console.WriteLine(result.GetProperty("changedProp").ToString());
         }
@@ -92,7 +92,7 @@ namespace Versioning.TypeChangedFrom.Samples
             });
             Response response = client.Test("<param>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
             Console.WriteLine(result.GetProperty("changedProp").ToString());
         }
@@ -111,7 +111,7 @@ namespace Versioning.TypeChangedFrom.Samples
             });
             Response response = await client.TestAsync("<param>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
             Console.WriteLine(result.GetProperty("changedProp").ToString());
         }

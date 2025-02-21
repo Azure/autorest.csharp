@@ -28,7 +28,7 @@ namespace lro_LowLevel.Samples
             Operation<BinaryData> operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -43,7 +43,7 @@ namespace lro_LowLevel.Samples
             Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -69,7 +69,7 @@ namespace lro_LowLevel.Samples
             Operation<BinaryData> operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -101,7 +101,7 @@ namespace lro_LowLevel.Samples
             Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -122,7 +122,7 @@ namespace lro_LowLevel.Samples
             Operation<BinaryData> operation = client.PutAsyncRelativeRetrySucceeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -137,7 +137,7 @@ namespace lro_LowLevel.Samples
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -163,7 +163,7 @@ namespace lro_LowLevel.Samples
             Operation<BinaryData> operation = client.PutAsyncRelativeRetrySucceeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -195,7 +195,7 @@ namespace lro_LowLevel.Samples
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -215,7 +215,7 @@ namespace lro_LowLevel.Samples
             Operation<BinaryData> operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed, null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -229,7 +229,7 @@ namespace lro_LowLevel.Samples
             Operation<BinaryData> operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -243,7 +243,7 @@ namespace lro_LowLevel.Samples
             Operation<BinaryData> operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed, null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -263,7 +263,7 @@ namespace lro_LowLevel.Samples
             Operation<BinaryData> operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
             Console.WriteLine(result.GetProperty("id").ToString());

@@ -26,7 +26,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             Response response = client.GetSpreadRecordUnion(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("flag").ToString());
         }
 
@@ -38,7 +38,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             Response response = await client.GetSpreadRecordUnionAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("flag").ToString());
         }
 
@@ -68,7 +68,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             Response response = client.GetSpreadRecordUnion(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("flag").ToString());
         }
 
@@ -80,7 +80,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             Response response = await client.GetSpreadRecordUnionAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("flag").ToString());
         }
 

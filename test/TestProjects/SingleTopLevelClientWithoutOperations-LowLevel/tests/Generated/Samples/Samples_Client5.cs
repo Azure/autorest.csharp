@@ -25,7 +25,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
 
             Response response = client.Operation(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -38,7 +38,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
 
             Response response = await client.OperationAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -51,7 +51,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
 
             Response response = client.Operation(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -64,7 +64,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
 
             Response response = await client.OperationAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
     }

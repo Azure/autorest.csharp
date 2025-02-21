@@ -11,7 +11,7 @@ PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, cred
 
 Response response = await client.GetResourceSetRuleAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetResourceSetRuleAsync with all parameters and parse the result.
@@ -22,7 +22,7 @@ PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, cred
 
 Response response = await client.GetResourceSetRuleAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
 Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("resourceSetProcessing").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -120,7 +120,7 @@ PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, cred
 
 Response response = client.GetResourceSetRule(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetResourceSetRule with all parameters and parse the result.
@@ -131,7 +131,7 @@ PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, cred
 
 Response response = client.GetResourceSetRule(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
 Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("resourceSetProcessing").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -230,7 +230,7 @@ PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, cred
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.CreateOrUpdateResourceSetRuleAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdateResourceSetRuleAsync with all request content and parse the result.
@@ -352,7 +352,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.CreateOrUpdateResourceSetRuleAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
 Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("resourceSetProcessing").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -451,7 +451,7 @@ PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, cred
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.CreateOrUpdateResourceSetRule(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdateResourceSetRule with all request content and parse the result.
@@ -573,7 +573,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.CreateOrUpdateResourceSetRule(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
 Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("resourceSetProcessing").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());

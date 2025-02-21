@@ -36,7 +36,7 @@ namespace MgmtExtensionResource.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item))
+                    using (JsonDocument document = JsonDocument.Parse(item, new JsonDocumentOptions { MaxDepth = 256 }))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
@@ -50,7 +50,7 @@ namespace MgmtExtensionResource.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(DefaultValue);
 #else
-                using (JsonDocument document = JsonDocument.Parse(DefaultValue))
+                using (JsonDocument document = JsonDocument.Parse(DefaultValue, new JsonDocumentOptions { MaxDepth = 256 }))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }

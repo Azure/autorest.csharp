@@ -145,7 +145,7 @@ CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.RoundTripAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call RoundTripAsync with all request content and parse the result.
@@ -237,7 +237,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.RoundTripAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("propertyExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredIntOnBase").ToString());
@@ -285,7 +285,7 @@ CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.RoundTrip(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call RoundTrip with all request content and parse the result.
@@ -377,7 +377,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.RoundTrip(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("propertyExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredIntOnBase").ToString());
@@ -472,7 +472,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.FooAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 ]]></code>
 This sample shows how to call FooAsync with all request content and parse the result.
@@ -487,7 +487,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.FooAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalInt").ToString());
 ]]></code></example>
@@ -505,7 +505,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Foo(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 ]]></code>
 This sample shows how to call Foo with all request content and parse the result.
@@ -520,7 +520,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Foo(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalInt").ToString());
 ]]></code></example>
@@ -572,7 +572,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.BarAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 ]]></code>
 This sample shows how to call BarAsync with all request content and parse the result.
@@ -587,7 +587,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.BarAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalInt").ToString());
 ]]></code></example>
@@ -605,7 +605,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Bar(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 ]]></code>
 This sample shows how to call Bar with all request content and parse the result.
@@ -620,7 +620,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Bar(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalInt").ToString());
 ]]></code></example>

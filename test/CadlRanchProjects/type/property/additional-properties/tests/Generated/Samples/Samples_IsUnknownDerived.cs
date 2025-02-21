@@ -26,7 +26,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             Response response = client.GetIsUnknownDerived(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("index").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -39,7 +39,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             Response response = await client.GetIsUnknownDerivedAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("index").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -70,7 +70,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             Response response = client.GetIsUnknownDerived(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("index").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -84,7 +84,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             Response response = await client.GetIsUnknownDerivedAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("index").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());

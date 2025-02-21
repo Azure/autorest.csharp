@@ -28,7 +28,7 @@ namespace AnomalyDetector.Samples
 
             Response response = client.GetMultivariateBatchDetectionResult(Guid.Parse("663884e6-b117-11ea-b3de-0242ac130004"), null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("status").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("dataSource").ToString());
@@ -48,7 +48,7 @@ namespace AnomalyDetector.Samples
 
             Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("663884e6-b117-11ea-b3de-0242ac130004"), null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("status").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("dataSource").ToString());
@@ -105,7 +105,7 @@ namespace AnomalyDetector.Samples
             });
             Response response = client.TrainMultivariateModel(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
             Console.WriteLine(result.GetProperty("createdTime").ToString());
             Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
@@ -136,7 +136,7 @@ namespace AnomalyDetector.Samples
             });
             Response response = await client.TrainMultivariateModelAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
             Console.WriteLine(result.GetProperty("createdTime").ToString());
             Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
@@ -224,7 +224,7 @@ namespace AnomalyDetector.Samples
 
             Response response = client.GetMultivariateModel("45aad126-aafd-11ea-b8fb-d89ef3400c5f", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
             Console.WriteLine(result.GetProperty("createdTime").ToString());
             Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
@@ -240,7 +240,7 @@ namespace AnomalyDetector.Samples
 
             Response response = await client.GetMultivariateModelAsync("45aad126-aafd-11ea-b8fb-d89ef3400c5f", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
             Console.WriteLine(result.GetProperty("createdTime").ToString());
             Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
@@ -285,7 +285,7 @@ namespace AnomalyDetector.Samples
             });
             Response response = client.DetectMultivariateBatchAnomaly("45aad126-aafd-11ea-b8fb-d89ef3400c5f", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("status").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("dataSource").ToString());
@@ -312,7 +312,7 @@ namespace AnomalyDetector.Samples
             });
             Response response = await client.DetectMultivariateBatchAnomalyAsync("45aad126-aafd-11ea-b8fb-d89ef3400c5f", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("status").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("setupInfo").GetProperty("dataSource").ToString());
@@ -573,7 +573,7 @@ values = new object[]
             });
             Response response = client.DetectMultivariateLastAnomaly("45aad126-aafd-11ea-b8fb-d89ef3400c5f", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -804,7 +804,7 @@ values = new object[]
             });
             Response response = await client.DetectMultivariateLastAnomalyAsync("45aad126-aafd-11ea-b8fb-d89ef3400c5f", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -852,7 +852,7 @@ new VariableValues("Variable_3", new string[]{"2021-01-01T00:00:00Z", "2021-01-0
 
             foreach (BinaryData item in client.GetMultivariateModels(0, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("modelId").ToString());
                 Console.WriteLine(result.GetProperty("createdTime").ToString());
                 Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());
@@ -869,7 +869,7 @@ new VariableValues("Variable_3", new string[]{"2021-01-01T00:00:00Z", "2021-01-0
 
             await foreach (BinaryData item in client.GetMultivariateModelsAsync(0, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("modelId").ToString());
                 Console.WriteLine(result.GetProperty("createdTime").ToString());
                 Console.WriteLine(result.GetProperty("lastUpdatedTime").ToString());

@@ -39,7 +39,7 @@ DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
 Response response = await client.GetAvatarAsPngAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetAvatarAsPngAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
 Response response = await client.GetAvatarAsPngAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -60,7 +60,7 @@ DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
 Response response = client.GetAvatarAsPng(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetAvatarAsPng with all parameters and parse the result.
@@ -69,7 +69,7 @@ DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
 Response response = client.GetAvatarAsPng(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -111,7 +111,7 @@ DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
 Response response = await client.GetAvatarAsJsonAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("content").ToString());
 ]]></code>
 This sample shows how to call GetAvatarAsJsonAsync with all parameters and parse the result.
@@ -120,7 +120,7 @@ DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
 Response response = await client.GetAvatarAsJsonAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("content").ToString());
 ]]></code></example>
     </member>
@@ -132,7 +132,7 @@ DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
 Response response = client.GetAvatarAsJson(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("content").ToString());
 ]]></code>
 This sample shows how to call GetAvatarAsJson with all parameters and parse the result.
@@ -141,7 +141,7 @@ DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
 Response response = client.GetAvatarAsJson(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("content").ToString());
 ]]></code></example>
     </member>

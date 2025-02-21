@@ -10,7 +10,7 @@ Parameter client = new RootClient(null, credential).GetParameterClient();
 
 Response response = await client.GetSubParameterAsync("<subParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetSubParameterAsync with all parameters and parse the result.
@@ -20,7 +20,7 @@ Parameter client = new RootClient(null, credential).GetParameterClient();
 
 Response response = await client.GetSubParameterAsync("<subParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -33,7 +33,7 @@ Parameter client = new RootClient(null, credential).GetParameterClient();
 
 Response response = client.GetSubParameter("<subParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetSubParameter with all parameters and parse the result.
@@ -43,7 +43,7 @@ Parameter client = new RootClient(null, credential).GetParameterClient();
 
 Response response = client.GetSubParameter("<subParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

@@ -128,7 +128,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static DataTableCell FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
             return DeserializeDataTableCell(document.RootElement);
         }
     }

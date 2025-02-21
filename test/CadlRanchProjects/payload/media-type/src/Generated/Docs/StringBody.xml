@@ -111,7 +111,7 @@ StringBody client = new MediaTypeClient().GetStringBodyClient();
 
 Response response = await client.GetAsTextAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetAsTextAsync with all parameters and parse the result.
@@ -120,7 +120,7 @@ StringBody client = new MediaTypeClient().GetStringBodyClient();
 
 Response response = await client.GetAsTextAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -132,7 +132,7 @@ StringBody client = new MediaTypeClient().GetStringBodyClient();
 
 Response response = client.GetAsText(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetAsText with all parameters and parse the result.
@@ -141,7 +141,7 @@ StringBody client = new MediaTypeClient().GetStringBodyClient();
 
 Response response = client.GetAsText(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -255,7 +255,7 @@ StringBody client = new MediaTypeClient().GetStringBodyClient();
 
 Response response = await client.GetAsJsonAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetAsJsonAsync with all parameters and parse the result.
@@ -264,7 +264,7 @@ StringBody client = new MediaTypeClient().GetStringBodyClient();
 
 Response response = await client.GetAsJsonAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -276,7 +276,7 @@ StringBody client = new MediaTypeClient().GetStringBodyClient();
 
 Response response = client.GetAsJson(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetAsJson with all parameters and parse the result.
@@ -285,7 +285,7 @@ StringBody client = new MediaTypeClient().GetStringBodyClient();
 
 Response response = client.GetAsJson(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

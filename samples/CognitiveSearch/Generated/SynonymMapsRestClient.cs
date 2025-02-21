@@ -95,7 +95,7 @@ namespace CognitiveSearch
                 case 201:
                     {
                         SynonymMap value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SynonymMap.DeserializeSynonymMap(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -131,7 +131,7 @@ namespace CognitiveSearch
                 case 201:
                     {
                         SynonymMap value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SynonymMap.DeserializeSynonymMap(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -249,7 +249,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         SynonymMap value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SynonymMap.DeserializeSynonymMap(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -277,7 +277,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         SynonymMap value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SynonymMap.DeserializeSynonymMap(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -317,7 +317,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         ListSynonymMapsResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = ListSynonymMapsResult.DeserializeListSynonymMapsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -339,7 +339,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         ListSynonymMapsResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = ListSynonymMapsResult.DeserializeListSynonymMapsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -385,7 +385,7 @@ namespace CognitiveSearch
                 case 201:
                     {
                         SynonymMap value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SynonymMap.DeserializeSynonymMap(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -413,7 +413,7 @@ namespace CognitiveSearch
                 case 201:
                     {
                         SynonymMap value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SynonymMap.DeserializeSynonymMap(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

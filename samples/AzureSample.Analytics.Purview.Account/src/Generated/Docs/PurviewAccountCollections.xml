@@ -11,7 +11,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = await client.GetCollectionAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetCollectionAsync with all parameters and parse the result.
@@ -22,7 +22,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = await client.GetCollectionAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -47,7 +47,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = client.GetCollection(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetCollection with all parameters and parse the result.
@@ -58,7 +58,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = client.GetCollection(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -84,7 +84,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.CreateOrUpdateCollectionAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdateCollectionAsync with all request content and parse the result.
@@ -104,7 +104,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.CreateOrUpdateCollectionAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -130,7 +130,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.CreateOrUpdateCollection(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdateCollection with all request content and parse the result.
@@ -150,7 +150,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.CreateOrUpdateCollection(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -221,7 +221,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = await client.GetCollectionPathAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetCollectionPathAsync with all parameters and parse the result.
@@ -232,7 +232,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = await client.GetCollectionPathAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("parentFriendlyNameChain")[0].ToString());
 Console.WriteLine(result.GetProperty("parentNameChain")[0].ToString());
 ]]></code></example>
@@ -247,7 +247,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = client.GetCollectionPath(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetCollectionPath with all parameters and parse the result.
@@ -258,7 +258,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = client.GetCollectionPath(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("parentFriendlyNameChain")[0].ToString());
 Console.WriteLine(result.GetProperty("parentNameChain")[0].ToString());
 ]]></code></example>
@@ -273,7 +273,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 await foreach (BinaryData item in client.GetCollectionsAsync(null, null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -285,7 +285,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 await foreach (BinaryData item in client.GetCollectionsAsync("<skipToken>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
     Console.WriteLine(result.GetProperty("description").ToString());
     Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -311,7 +311,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 foreach (BinaryData item in client.GetCollections(null, null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -323,7 +323,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 foreach (BinaryData item in client.GetCollections("<skipToken>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
     Console.WriteLine(result.GetProperty("description").ToString());
     Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -349,7 +349,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 await foreach (BinaryData item in client.GetChildCollectionNamesAsync(null, null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -361,7 +361,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 await foreach (BinaryData item in client.GetChildCollectionNamesAsync("<skipToken>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.GetProperty("friendlyName").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
 }
@@ -377,7 +377,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 foreach (BinaryData item in client.GetChildCollectionNames(null, null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -389,7 +389,7 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 foreach (BinaryData item in client.GetChildCollectionNames("<skipToken>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.GetProperty("friendlyName").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
 }

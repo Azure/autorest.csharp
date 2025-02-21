@@ -118,7 +118,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         RenamedModelStruct value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = RenamedModelStruct.DeserializeRenamedModelStruct(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -138,7 +138,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         RenamedModelStruct value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = RenamedModelStruct.DeserializeRenamedModelStruct(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -178,7 +178,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         SecondModel value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SecondModel.DeserializeSecondModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -198,7 +198,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         SecondModel value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SecondModel.DeserializeSecondModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -238,7 +238,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         RenamedThirdModel value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = RenamedThirdModel.DeserializeRenamedThirdModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -258,7 +258,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         RenamedThirdModel value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = RenamedThirdModel.DeserializeRenamedThirdModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -298,7 +298,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         ModelWithArrayOfEnum value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = ModelWithArrayOfEnum.DeserializeModelWithArrayOfEnum(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -318,7 +318,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         ModelWithArrayOfEnum value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = ModelWithArrayOfEnum.DeserializeModelWithArrayOfEnum(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -350,7 +350,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         ModelWithInternalModel value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = ModelWithInternalModel.DeserializeModelWithInternalModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -369,7 +369,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         ModelWithInternalModel value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = ModelWithInternalModel.DeserializeModelWithInternalModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -401,7 +401,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         ModelWithAbstractModel value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = ModelWithAbstractModel.DeserializeModelWithAbstractModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -420,7 +420,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         ModelWithAbstractModel value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = ModelWithAbstractModel.DeserializeModelWithAbstractModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -452,7 +452,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         ModelWithListOfInternalModel value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = ModelWithListOfInternalModel.DeserializeModelWithListOfInternalModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -471,7 +471,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         ModelWithListOfInternalModel value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = ModelWithListOfInternalModel.DeserializeModelWithListOfInternalModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -503,7 +503,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         PublicModelWithInternalProperty value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PublicModelWithInternalProperty.DeserializePublicModelWithInternalProperty(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -522,7 +522,7 @@ namespace TypeSchemaMapping
                 case 200:
                     {
                         PublicModelWithInternalProperty value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PublicModelWithInternalProperty.DeserializePublicModelWithInternalProperty(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

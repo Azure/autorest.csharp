@@ -26,7 +26,7 @@ namespace _Specs_.Azure.Core.Page.Samples
 
             foreach (BinaryData item in client.GetWithPage(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("etag").ToString());
@@ -41,7 +41,7 @@ namespace _Specs_.Azure.Core.Page.Samples
 
             await foreach (BinaryData item in client.GetWithPageAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("etag").ToString());
@@ -78,7 +78,7 @@ namespace _Specs_.Azure.Core.Page.Samples
 
             foreach (BinaryData item in client.GetWithPage(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
@@ -96,7 +96,7 @@ namespace _Specs_.Azure.Core.Page.Samples
 
             await foreach (BinaryData item in client.GetWithPageAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
@@ -140,7 +140,7 @@ namespace _Specs_.Azure.Core.Page.Samples
             });
             foreach (BinaryData item in client.GetWithParameters(content))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("etag").ToString());
@@ -159,7 +159,7 @@ namespace _Specs_.Azure.Core.Page.Samples
             });
             await foreach (BinaryData item in client.GetWithParametersAsync(content))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("etag").ToString());
@@ -202,7 +202,7 @@ namespace _Specs_.Azure.Core.Page.Samples
             });
             foreach (BinaryData item in client.GetWithParameters(content, another: "First"))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
@@ -224,7 +224,7 @@ namespace _Specs_.Azure.Core.Page.Samples
             });
             await foreach (BinaryData item in client.GetWithParametersAsync(content, another: "First"))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
@@ -266,7 +266,7 @@ namespace _Specs_.Azure.Core.Page.Samples
 
             foreach (BinaryData item in client.GetWithCustomPageModel(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("etag").ToString());
@@ -281,7 +281,7 @@ namespace _Specs_.Azure.Core.Page.Samples
 
             await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("etag").ToString());
@@ -318,7 +318,7 @@ namespace _Specs_.Azure.Core.Page.Samples
 
             foreach (BinaryData item in client.GetWithCustomPageModel(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
@@ -336,7 +336,7 @@ namespace _Specs_.Azure.Core.Page.Samples
 
             await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());

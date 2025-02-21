@@ -26,7 +26,7 @@ namespace FirstTestTypeSpec.Samples
             Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", null, null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -41,7 +41,7 @@ namespace FirstTestTypeSpec.Samples
             Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", null, null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -56,7 +56,7 @@ namespace FirstTestTypeSpec.Samples
             Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -71,7 +71,7 @@ namespace FirstTestTypeSpec.Samples
             Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -86,7 +86,7 @@ namespace FirstTestTypeSpec.Samples
             Operation<BinaryData> operation = client.ExportW(WaitUntil.Completed, "<name>", null, null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -101,7 +101,7 @@ namespace FirstTestTypeSpec.Samples
             Operation<BinaryData> operation = await client.ExportWAsync(WaitUntil.Completed, "<name>", null, null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -116,7 +116,7 @@ namespace FirstTestTypeSpec.Samples
             Operation<BinaryData> operation = client.ExportW(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -131,7 +131,7 @@ namespace FirstTestTypeSpec.Samples
             Operation<BinaryData> operation = await client.ExportWAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }

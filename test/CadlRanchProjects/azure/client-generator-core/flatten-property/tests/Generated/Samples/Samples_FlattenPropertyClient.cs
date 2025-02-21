@@ -32,7 +32,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.FlattenProperty.Samples
             });
             Response response = client.PutFlattenModel(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
@@ -52,7 +52,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.FlattenProperty.Samples
             });
             Response response = await client.PutFlattenModelAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
@@ -92,7 +92,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.FlattenProperty.Samples
             });
             Response response = client.PutFlattenModel(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
@@ -112,7 +112,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.FlattenProperty.Samples
             });
             Response response = await client.PutFlattenModelAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
@@ -153,7 +153,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.FlattenProperty.Samples
             });
             Response response = client.PutNestedFlattenModel(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("summary").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
@@ -175,7 +175,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.FlattenProperty.Samples
             });
             Response response = await client.PutNestedFlattenModelAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("summary").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
@@ -217,7 +217,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.FlattenProperty.Samples
             });
             Response response = client.PutNestedFlattenModel(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("summary").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
@@ -239,7 +239,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.FlattenProperty.Samples
             });
             Response response = await client.PutNestedFlattenModelAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("summary").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());

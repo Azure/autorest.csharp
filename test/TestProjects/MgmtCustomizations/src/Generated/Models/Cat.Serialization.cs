@@ -195,7 +195,7 @@ namespace MgmtCustomizations.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
                         return DeserializeCat(document.RootElement, options);
                     }
                 default:

@@ -88,7 +88,7 @@ namespace MgmtResourceName
                 case 200:
                     {
                         ProviderOperationData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = ProviderOperationData.DeserializeProviderOperationData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -116,7 +116,7 @@ namespace MgmtResourceName
                 case 200:
                     {
                         ProviderOperationData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = ProviderOperationData.DeserializeProviderOperationData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -171,7 +171,7 @@ namespace MgmtResourceName
                 case 200:
                     {
                         ProviderOperationsMetadataListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = ProviderOperationsMetadataListResult.DeserializeProviderOperationsMetadataListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -192,7 +192,7 @@ namespace MgmtResourceName
                 case 200:
                     {
                         ProviderOperationsMetadataListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = ProviderOperationsMetadataListResult.DeserializeProviderOperationsMetadataListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -239,7 +239,7 @@ namespace MgmtResourceName
                 case 200:
                     {
                         ProviderOperationsMetadataListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = ProviderOperationsMetadataListResult.DeserializeProviderOperationsMetadataListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -264,7 +264,7 @@ namespace MgmtResourceName
                 case 200:
                     {
                         ProviderOperationsMetadataListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = ProviderOperationsMetadataListResult.DeserializeProviderOperationsMetadataListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

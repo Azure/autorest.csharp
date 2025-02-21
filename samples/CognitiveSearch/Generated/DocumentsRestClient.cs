@@ -73,7 +73,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         long value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = document.RootElement.GetInt64();
                         return Response.FromValue(value, message.Response);
                     }
@@ -94,7 +94,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         long value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = document.RootElement.GetInt64();
                         return Response.FromValue(value, message.Response);
                     }
@@ -208,7 +208,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         SearchDocumentsResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -231,7 +231,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         SearchDocumentsResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -280,7 +280,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         SearchDocumentsResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -308,7 +308,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         SearchDocumentsResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SearchDocumentsResult.DeserializeSearchDocumentsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -360,7 +360,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         object value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = document.RootElement.GetObject();
                         return Response.FromValue(value, message.Response);
                     }
@@ -389,7 +389,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         object value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = document.RootElement.GetObject();
                         return Response.FromValue(value, message.Response);
                     }
@@ -478,7 +478,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         SuggestDocumentsResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -512,7 +512,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         SuggestDocumentsResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -561,7 +561,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         SuggestDocumentsResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -589,7 +589,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         SuggestDocumentsResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SuggestDocumentsResult.DeserializeSuggestDocumentsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -639,7 +639,7 @@ namespace CognitiveSearch
                 case 207:
                     {
                         IndexDocumentsResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = IndexDocumentsResult.DeserializeIndexDocumentsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -668,7 +668,7 @@ namespace CognitiveSearch
                 case 207:
                     {
                         IndexDocumentsResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = IndexDocumentsResult.DeserializeIndexDocumentsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -753,7 +753,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         AutocompleteResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -787,7 +787,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         AutocompleteResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -836,7 +836,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         AutocompleteResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -864,7 +864,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         AutocompleteResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = AutocompleteResult.DeserializeAutocompleteResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

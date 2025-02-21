@@ -26,7 +26,7 @@ namespace _Type.Union.Samples
 
             Response response = client.GetEnumsOnly(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("prop").GetProperty("lr").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("ud").ToString());
         }
@@ -39,7 +39,7 @@ namespace _Type.Union.Samples
 
             Response response = await client.GetEnumsOnlyAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("prop").GetProperty("lr").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("ud").ToString());
         }
@@ -70,7 +70,7 @@ namespace _Type.Union.Samples
 
             Response response = client.GetEnumsOnly(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("prop").GetProperty("lr").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("ud").ToString());
         }
@@ -83,7 +83,7 @@ namespace _Type.Union.Samples
 
             Response response = await client.GetEnumsOnlyAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("prop").GetProperty("lr").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("ud").ToString());
         }

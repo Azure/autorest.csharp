@@ -30,7 +30,7 @@ namespace CustomizationsInTsp.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.RoundTrip(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -44,7 +44,7 @@ namespace CustomizationsInTsp.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.RoundTripAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -161,7 +161,7 @@ key = "<badListOfDictionaryName>",
             });
             Response response = client.RoundTrip(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("propertyExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredIntOnBase").ToString());
@@ -290,7 +290,7 @@ key = "<badListOfDictionaryName>",
             });
             Response response = await client.RoundTripAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("propertyExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredIntOnBase").ToString());
@@ -459,7 +459,7 @@ new Dictionary<string, string>
             });
             Response response = client.Foo(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
         }
 
@@ -476,7 +476,7 @@ new Dictionary<string, string>
             });
             Response response = await client.FooAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
         }
 
@@ -516,7 +516,7 @@ new Dictionary<string, string>
             });
             Response response = client.Foo(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
             Console.WriteLine(result.GetProperty("optionalInt").ToString());
         }
@@ -535,7 +535,7 @@ new Dictionary<string, string>
             });
             Response response = await client.FooAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
             Console.WriteLine(result.GetProperty("optionalInt").ToString());
         }
@@ -581,7 +581,7 @@ new Dictionary<string, string>
             });
             Response response = client.Bar(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
         }
 
@@ -598,7 +598,7 @@ new Dictionary<string, string>
             });
             Response response = await client.BarAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
         }
 
@@ -636,7 +636,7 @@ new Dictionary<string, string>
             });
             Response response = client.Bar(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
             Console.WriteLine(result.GetProperty("optionalInt").ToString());
         }
@@ -655,7 +655,7 @@ new Dictionary<string, string>
             });
             Response response = await client.BarAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
             Console.WriteLine(result.GetProperty("optionalInt").ToString());
         }

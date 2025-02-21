@@ -140,7 +140,7 @@ null
 
             Response response = client.GetRecursive(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("level").ToString());
         }
 
@@ -152,7 +152,7 @@ null
 
             Response response = await client.GetRecursiveAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("level").ToString());
         }
 
@@ -182,7 +182,7 @@ null
 
             Response response = client.GetRecursive(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("level").ToString());
             Console.WriteLine(result.GetProperty("extension")[0].GetProperty("level").ToString());
         }
@@ -195,7 +195,7 @@ null
 
             Response response = await client.GetRecursiveAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("level").ToString());
             Console.WriteLine(result.GetProperty("extension")[0].GetProperty("level").ToString());
         }

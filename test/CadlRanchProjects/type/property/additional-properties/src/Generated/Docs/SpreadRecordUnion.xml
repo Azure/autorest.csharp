@@ -39,7 +39,7 @@ SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnion
 
 Response response = await client.GetSpreadRecordUnionAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("flag").ToString());
 ]]></code>
 This sample shows how to call GetSpreadRecordUnionAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnion
 
 Response response = await client.GetSpreadRecordUnionAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("flag").ToString());
 ]]></code></example>
     </member>
@@ -60,7 +60,7 @@ SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnion
 
 Response response = client.GetSpreadRecordUnion(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("flag").ToString());
 ]]></code>
 This sample shows how to call GetSpreadRecordUnion with all parameters and parse the result.
@@ -69,7 +69,7 @@ SpreadRecordUnion client = new AdditionalPropertiesClient().GetSpreadRecordUnion
 
 Response response = client.GetSpreadRecordUnion(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("flag").ToString());
 ]]></code></example>
     </member>

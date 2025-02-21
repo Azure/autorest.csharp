@@ -108,7 +108,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryImageVersionList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SharedGalleryImageVersionList.DeserializeSharedGalleryImageVersionList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -140,7 +140,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryImageVersionList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SharedGalleryImageVersionList.DeserializeSharedGalleryImageVersionList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -215,7 +215,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryImageVersion value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SharedGalleryImageVersion.DeserializeSharedGalleryImageVersion(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -248,7 +248,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryImageVersion value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SharedGalleryImageVersion.DeserializeSharedGalleryImageVersion(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -304,7 +304,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryImageVersionList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SharedGalleryImageVersionList.DeserializeSharedGalleryImageVersionList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -338,7 +338,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryImageVersionList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SharedGalleryImageVersionList.DeserializeSharedGalleryImageVersionList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

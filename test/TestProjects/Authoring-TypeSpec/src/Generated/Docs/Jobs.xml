@@ -44,7 +44,7 @@ Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2
 
 Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("jobId").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());
@@ -63,7 +63,7 @@ Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2
 
 Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("jobId").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());
@@ -87,7 +87,7 @@ Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2
 
 Response response = client.GetDeploymentStatus("<projectName>", "<deploymentName>", "<jobId>");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("jobId").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());
@@ -106,7 +106,7 @@ Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2
 
 Response response = client.GetDeploymentStatus("<projectName>", "<deploymentName>", "<jobId>");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("jobId").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());
@@ -164,7 +164,7 @@ Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2
 
 Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("jobId").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());
@@ -183,7 +183,7 @@ Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2
 
 Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("jobId").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());
@@ -207,7 +207,7 @@ Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2
 
 Response response = client.GetSwapDeploymentsStatus("<projectName>", "<deploymentName>", "<jobId>");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("jobId").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());
@@ -226,7 +226,7 @@ Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2
 
 Response response = client.GetSwapDeploymentsStatus("<projectName>", "<deploymentName>", "<jobId>");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("jobId").ToString());
 Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());

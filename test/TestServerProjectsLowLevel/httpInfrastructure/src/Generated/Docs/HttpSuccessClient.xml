@@ -52,7 +52,7 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = await client.Get200Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200Async with all parameters and parse the result.
@@ -62,7 +62,7 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = await client.Get200Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -75,7 +75,7 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = client.Get200(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Get200 with all parameters and parse the result.
@@ -85,7 +85,7 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = client.Get200(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -98,7 +98,7 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = await client.Options200Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Options200Async with all parameters and parse the result.
@@ -108,7 +108,7 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = await client.Options200Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -121,7 +121,7 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = client.Options200(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Options200 with all parameters and parse the result.
@@ -131,7 +131,7 @@ HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = client.Options200(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

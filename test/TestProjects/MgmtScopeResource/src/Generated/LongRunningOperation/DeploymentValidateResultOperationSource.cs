@@ -18,13 +18,13 @@ namespace MgmtScopeResource
     {
         DeploymentValidateResult IOperationSource<DeploymentValidateResult>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
+            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
             return DeploymentValidateResult.DeserializeDeploymentValidateResult(document.RootElement);
         }
 
         async ValueTask<DeploymentValidateResult> IOperationSource<DeploymentValidateResult>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
             return DeploymentValidateResult.DeserializeDeploymentValidateResult(document.RootElement);
         }
     }

@@ -93,7 +93,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         BlobServiceItems value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = BlobServiceItems.DeserializeBlobServiceItems(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -122,7 +122,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         BlobServiceItems value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = BlobServiceItems.DeserializeBlobServiceItems(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -195,7 +195,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         BlobServiceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = BlobServiceData.DeserializeBlobServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -226,7 +226,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         BlobServiceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = BlobServiceData.DeserializeBlobServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -293,7 +293,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         BlobServiceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = BlobServiceData.DeserializeBlobServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -324,7 +324,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         BlobServiceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = BlobServiceData.DeserializeBlobServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

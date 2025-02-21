@@ -118,7 +118,7 @@ namespace model_flattening
                 case 200:
                     {
                         IReadOnlyList<FlattenedProduct> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         List<FlattenedProduct> array = new List<FlattenedProduct>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -143,7 +143,7 @@ namespace model_flattening
                 case 200:
                     {
                         IReadOnlyList<FlattenedProduct> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         List<FlattenedProduct> array = new List<FlattenedProduct>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -238,7 +238,7 @@ namespace model_flattening
                 case 200:
                     {
                         IReadOnlyList<ProductWrapper> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         List<ProductWrapper> array = new List<ProductWrapper>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -263,7 +263,7 @@ namespace model_flattening
                 case 200:
                     {
                         IReadOnlyList<ProductWrapper> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         List<ProductWrapper> array = new List<ProductWrapper>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -359,7 +359,7 @@ namespace model_flattening
                 case 200:
                     {
                         IReadOnlyDictionary<string, FlattenedProduct> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -384,7 +384,7 @@ namespace model_flattening
                 case 200:
                     {
                         IReadOnlyDictionary<string, FlattenedProduct> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -474,7 +474,7 @@ namespace model_flattening
                 case 200:
                     {
                         ResourceCollection value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = ResourceCollection.DeserializeResourceCollection(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -494,7 +494,7 @@ namespace model_flattening
                 case 200:
                     {
                         ResourceCollection value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = ResourceCollection.DeserializeResourceCollection(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -535,7 +535,7 @@ namespace model_flattening
                 case 200:
                     {
                         SimpleProduct value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -556,7 +556,7 @@ namespace model_flattening
                 case 200:
                     {
                         SimpleProduct value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -613,7 +613,7 @@ namespace model_flattening
                 case 200:
                     {
                         SimpleProduct value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -645,7 +645,7 @@ namespace model_flattening
                 case 200:
                     {
                         SimpleProduct value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -699,7 +699,7 @@ namespace model_flattening
                 case 200:
                     {
                         SimpleProduct value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -726,7 +726,7 @@ namespace model_flattening
                 case 200:
                     {
                         SimpleProduct value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SimpleProduct.DeserializeSimpleProduct(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

@@ -86,7 +86,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -112,7 +112,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -557,7 +557,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineData.DeserializeVirtualMachineData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -589,7 +589,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineData.DeserializeVirtualMachineData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -656,7 +656,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineInstanceView value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineInstanceView.DeserializeVirtualMachineInstanceView(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -685,7 +685,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineInstanceView value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineInstanceView.DeserializeVirtualMachineInstanceView(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -744,7 +744,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -771,7 +771,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -833,7 +833,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -859,7 +859,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -924,7 +924,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineSizeListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineSizeListResult.DeserializeVirtualMachineSizeListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -953,7 +953,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineSizeListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineSizeListResult.DeserializeVirtualMachineSizeListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1557,7 +1557,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         RetrieveBootDiagnosticsDataResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = RetrieveBootDiagnosticsDataResult.DeserializeRetrieveBootDiagnosticsDataResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1587,7 +1587,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         RetrieveBootDiagnosticsDataResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = RetrieveBootDiagnosticsDataResult.DeserializeRetrieveBootDiagnosticsDataResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1891,7 +1891,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1919,7 +1919,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1970,7 +1970,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1999,7 +1999,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2049,7 +2049,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2077,7 +2077,7 @@ namespace MgmtAcronymMapping
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

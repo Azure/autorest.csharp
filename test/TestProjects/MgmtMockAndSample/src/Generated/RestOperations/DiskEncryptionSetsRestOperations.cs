@@ -275,7 +275,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DiskEncryptionSetData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = DiskEncryptionSetData.DeserializeDiskEncryptionSetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -306,7 +306,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DiskEncryptionSetData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = DiskEncryptionSetData.DeserializeDiskEncryptionSetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -452,7 +452,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DiskEncryptionSetList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = DiskEncryptionSetList.DeserializeDiskEncryptionSetList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -479,7 +479,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DiskEncryptionSetList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = DiskEncryptionSetList.DeserializeDiskEncryptionSetList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -532,7 +532,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DiskEncryptionSetList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = DiskEncryptionSetList.DeserializeDiskEncryptionSetList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -557,7 +557,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DiskEncryptionSetList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = DiskEncryptionSetList.DeserializeDiskEncryptionSetList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -608,7 +608,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DiskEncryptionSetList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = DiskEncryptionSetList.DeserializeDiskEncryptionSetList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -637,7 +637,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DiskEncryptionSetList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = DiskEncryptionSetList.DeserializeDiskEncryptionSetList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -686,7 +686,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DiskEncryptionSetList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = DiskEncryptionSetList.DeserializeDiskEncryptionSetList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -713,7 +713,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DiskEncryptionSetList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = DiskEncryptionSetList.DeserializeDiskEncryptionSetList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

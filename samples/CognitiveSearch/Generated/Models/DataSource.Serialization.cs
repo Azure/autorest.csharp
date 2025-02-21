@@ -127,7 +127,7 @@ namespace CognitiveSearch.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static DataSource FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
             return DeserializeDataSource(document.RootElement);
         }
 

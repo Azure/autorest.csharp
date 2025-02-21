@@ -186,7 +186,7 @@ HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = await client.Options502Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Options502Async with all parameters and parse the result.
@@ -196,7 +196,7 @@ HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = await client.Options502Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -209,7 +209,7 @@ HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = client.Options502(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Options502 with all parameters and parse the result.
@@ -219,7 +219,7 @@ HttpRetryClient client = new HttpRetryClient(credential);
 
 Response response = client.Options502(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

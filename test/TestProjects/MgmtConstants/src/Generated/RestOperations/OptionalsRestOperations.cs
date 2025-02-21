@@ -427,7 +427,7 @@ namespace MgmtConstants
                 case 200:
                     {
                         OptionalMachineData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = OptionalMachineData.DeserializeOptionalMachineData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -459,7 +459,7 @@ namespace MgmtConstants
                 case 200:
                     {
                         OptionalMachineData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = OptionalMachineData.DeserializeOptionalMachineData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -520,7 +520,7 @@ namespace MgmtConstants
                 case 200:
                     {
                         OptionalMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = OptionalMachineListResult.DeserializeOptionalMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -547,7 +547,7 @@ namespace MgmtConstants
                 case 200:
                     {
                         OptionalMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = OptionalMachineListResult.DeserializeOptionalMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -609,7 +609,7 @@ namespace MgmtConstants
                 case 200:
                     {
                         OptionalMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = OptionalMachineListResult.DeserializeOptionalMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -635,7 +635,7 @@ namespace MgmtConstants
                 case 200:
                     {
                         OptionalMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = OptionalMachineListResult.DeserializeOptionalMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -686,7 +686,7 @@ namespace MgmtConstants
                 case 200:
                     {
                         OptionalMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = OptionalMachineListResult.DeserializeOptionalMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -715,7 +715,7 @@ namespace MgmtConstants
                 case 200:
                     {
                         OptionalMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = OptionalMachineListResult.DeserializeOptionalMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -765,7 +765,7 @@ namespace MgmtConstants
                 case 200:
                     {
                         OptionalMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = OptionalMachineListResult.DeserializeOptionalMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -793,7 +793,7 @@ namespace MgmtConstants
                 case 200:
                     {
                         OptionalMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = OptionalMachineListResult.DeserializeOptionalMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

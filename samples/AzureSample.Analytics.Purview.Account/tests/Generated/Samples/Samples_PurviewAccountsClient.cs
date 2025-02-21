@@ -28,7 +28,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = client.GetAccountProperties(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -42,7 +42,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = await client.GetAccountPropertiesAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -56,7 +56,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = client.GetAccountProperties(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("identity").GetProperty("principalId").ToString());
             Console.WriteLine(result.GetProperty("identity").GetProperty("tenantId").ToString());
@@ -107,7 +107,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = await client.GetAccountPropertiesAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("identity").GetProperty("principalId").ToString());
             Console.WriteLine(result.GetProperty("identity").GetProperty("tenantId").ToString());
@@ -159,7 +159,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.UpdateAccountProperties(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -174,7 +174,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.UpdateAccountPropertiesAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -192,7 +192,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
             });
             Response response = client.UpdateAccountProperties(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("identity").GetProperty("principalId").ToString());
             Console.WriteLine(result.GetProperty("identity").GetProperty("tenantId").ToString());
@@ -247,7 +247,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
             });
             Response response = await client.UpdateAccountPropertiesAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("identity").GetProperty("principalId").ToString());
             Console.WriteLine(result.GetProperty("identity").GetProperty("tenantId").ToString());
@@ -298,7 +298,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = client.GetAccessKeys(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -312,7 +312,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = await client.GetAccessKeysAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -326,7 +326,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = client.GetAccessKeys(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("atlasKafkaPrimaryEndpoint").ToString());
             Console.WriteLine(result.GetProperty("atlasKafkaSecondaryEndpoint").ToString());
         }
@@ -341,7 +341,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = await client.GetAccessKeysAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("atlasKafkaPrimaryEndpoint").ToString());
             Console.WriteLine(result.GetProperty("atlasKafkaSecondaryEndpoint").ToString());
         }
@@ -357,7 +357,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.RegenerateAccessKey(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -372,7 +372,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.RegenerateAccessKeyAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -390,7 +390,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
             });
             Response response = client.RegenerateAccessKey(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("atlasKafkaPrimaryEndpoint").ToString());
             Console.WriteLine(result.GetProperty("atlasKafkaSecondaryEndpoint").ToString());
         }
@@ -409,7 +409,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
             });
             Response response = await client.RegenerateAccessKeyAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("atlasKafkaPrimaryEndpoint").ToString());
             Console.WriteLine(result.GetProperty("atlasKafkaSecondaryEndpoint").ToString());
         }
@@ -424,7 +424,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             foreach (BinaryData item in client.GetResourceSetRules(null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -439,7 +439,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             await foreach (BinaryData item in client.GetResourceSetRulesAsync(null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -454,7 +454,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             foreach (BinaryData item in client.GetResourceSetRules("<skipToken>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
                 Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("resourceSetProcessing").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
@@ -553,7 +553,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             await foreach (BinaryData item in client.GetResourceSetRulesAsync("<skipToken>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
                 Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("resourceSetProcessing").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());

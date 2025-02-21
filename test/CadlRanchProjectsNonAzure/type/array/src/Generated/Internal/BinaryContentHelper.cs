@@ -40,7 +40,7 @@ namespace Scm._Type._Array
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(item);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item))
+                    using (JsonDocument document = JsonDocument.Parse(item, new JsonDocumentOptions { MaxDepth = 256 }))
                     {
                         JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
                     }
@@ -97,7 +97,7 @@ namespace Scm._Type._Array
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, new JsonDocumentOptions { MaxDepth = 256 }))
                     {
                         JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
                     }
@@ -122,7 +122,7 @@ namespace Scm._Type._Array
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(value);
 #else
-            using (JsonDocument document = JsonDocument.Parse(value))
+            using (JsonDocument document = JsonDocument.Parse(value, new JsonDocumentOptions { MaxDepth = 256 }))
             {
                 JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
             }

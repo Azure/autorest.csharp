@@ -106,7 +106,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
                         return DeserializeOuterModel(document.RootElement, options);
                     }
                 default:
@@ -120,7 +120,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new OuterModel FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
             return DeserializeOuterModel(document.RootElement);
         }
 

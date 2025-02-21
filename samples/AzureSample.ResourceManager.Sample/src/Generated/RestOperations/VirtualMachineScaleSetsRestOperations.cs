@@ -358,7 +358,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineScaleSetData.DeserializeVirtualMachineScaleSetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -389,7 +389,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineScaleSetData.DeserializeVirtualMachineScaleSetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -643,7 +643,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetInstanceView value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineScaleSetInstanceView.DeserializeVirtualMachineScaleSetInstanceView(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -672,7 +672,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetInstanceView value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineScaleSetInstanceView.DeserializeVirtualMachineScaleSetInstanceView(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -731,7 +731,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineScaleSetListResult.DeserializeVirtualMachineScaleSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -758,7 +758,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineScaleSetListResult.DeserializeVirtualMachineScaleSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -811,7 +811,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListWithLinkResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineScaleSetListWithLinkResult.DeserializeVirtualMachineScaleSetListWithLinkResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -836,7 +836,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListWithLinkResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineScaleSetListWithLinkResult.DeserializeVirtualMachineScaleSetListWithLinkResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -901,7 +901,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListSkusResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineScaleSetListSkusResult.DeserializeVirtualMachineScaleSetListSkusResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -930,7 +930,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListSkusResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineScaleSetListSkusResult.DeserializeVirtualMachineScaleSetListSkusResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -995,7 +995,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListOSUpgradeHistory value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineScaleSetListOSUpgradeHistory.DeserializeVirtualMachineScaleSetListOSUpgradeHistory(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1024,7 +1024,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListOSUpgradeHistory value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineScaleSetListOSUpgradeHistory.DeserializeVirtualMachineScaleSetListOSUpgradeHistory(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1853,7 +1853,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         RecoveryWalkResponse value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = RecoveryWalkResponse.DeserializeRecoveryWalkResponse(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1883,7 +1883,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         RecoveryWalkResponse value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = RecoveryWalkResponse.DeserializeRecoveryWalkResponse(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2118,7 +2118,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineScaleSetListResult.DeserializeVirtualMachineScaleSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2147,7 +2147,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineScaleSetListResult.DeserializeVirtualMachineScaleSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2196,7 +2196,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListWithLinkResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineScaleSetListWithLinkResult.DeserializeVirtualMachineScaleSetListWithLinkResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2223,7 +2223,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListWithLinkResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineScaleSetListWithLinkResult.DeserializeVirtualMachineScaleSetListWithLinkResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2276,7 +2276,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListSkusResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineScaleSetListSkusResult.DeserializeVirtualMachineScaleSetListSkusResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2307,7 +2307,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListSkusResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineScaleSetListSkusResult.DeserializeVirtualMachineScaleSetListSkusResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2360,7 +2360,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListOSUpgradeHistory value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineScaleSetListOSUpgradeHistory.DeserializeVirtualMachineScaleSetListOSUpgradeHistory(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2391,7 +2391,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineScaleSetListOSUpgradeHistory value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineScaleSetListOSUpgradeHistory.DeserializeVirtualMachineScaleSetListOSUpgradeHistory(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

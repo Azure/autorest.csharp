@@ -183,7 +183,7 @@ namespace _Azure.ResourceManager.CommonProperties
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
                         return DeserializeManagedIdentityTrackedResourceData(document.RootElement, options);
                     }
                 default:

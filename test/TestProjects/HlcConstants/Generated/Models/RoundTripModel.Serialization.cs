@@ -65,7 +65,7 @@ namespace HlcConstants.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static RoundTripModel FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
             return DeserializeRoundTripModel(document.RootElement);
         }
 

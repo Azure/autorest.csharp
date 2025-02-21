@@ -26,7 +26,7 @@ namespace _Specs_.Azure.Core.Model.Samples
 
             Response response = client.GetAzureCoreEmbeddingVector(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -38,7 +38,7 @@ namespace _Specs_.Azure.Core.Model.Samples
 
             Response response = await client.GetAzureCoreEmbeddingVectorAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -68,7 +68,7 @@ namespace _Specs_.Azure.Core.Model.Samples
 
             Response response = client.GetAzureCoreEmbeddingVector(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -80,7 +80,7 @@ namespace _Specs_.Azure.Core.Model.Samples
 
             Response response = await client.GetAzureCoreEmbeddingVectorAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -213,7 +213,7 @@ namespace _Specs_.Azure.Core.Model.Samples
             });
             Response response = client.Post(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("embedding")[0].ToString());
         }
 
@@ -232,7 +232,7 @@ namespace _Specs_.Azure.Core.Model.Samples
             });
             Response response = await client.PostAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("embedding")[0].ToString());
         }
 
@@ -271,7 +271,7 @@ namespace _Specs_.Azure.Core.Model.Samples
             });
             Response response = client.Post(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("embedding")[0].ToString());
         }
 
@@ -290,7 +290,7 @@ namespace _Specs_.Azure.Core.Model.Samples
             });
             Response response = await client.PostAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("embedding")[0].ToString());
         }
 

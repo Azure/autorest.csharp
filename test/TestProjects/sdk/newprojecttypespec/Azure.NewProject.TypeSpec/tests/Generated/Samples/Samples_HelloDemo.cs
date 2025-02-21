@@ -25,7 +25,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -45,7 +45,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -65,7 +65,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -89,7 +89,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());

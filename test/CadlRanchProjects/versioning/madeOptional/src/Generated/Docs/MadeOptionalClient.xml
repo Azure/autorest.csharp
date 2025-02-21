@@ -58,7 +58,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.TestAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code>
 This sample shows how to call TestAsync with all parameters and request content and parse the result.
@@ -73,7 +73,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.TestAsync(content, param: "<param>");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("prop").ToString());
 Console.WriteLine(result.GetProperty("changedProp").ToString());
 ]]></code></example>
@@ -91,7 +91,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Test(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code>
 This sample shows how to call Test with all parameters and request content and parse the result.
@@ -106,7 +106,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Test(content, param: "<param>");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("prop").ToString());
 Console.WriteLine(result.GetProperty("changedProp").ToString());
 ]]></code></example>

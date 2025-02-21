@@ -10,7 +10,7 @@ Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Cli
 
 Response response = await client.OperationAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call OperationAsync with all parameters and parse the result.
@@ -20,7 +20,7 @@ Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Cli
 
 Response response = await client.OperationAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -33,7 +33,7 @@ Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Cli
 
 Response response = client.Operation(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Operation with all parameters and parse the result.
@@ -43,7 +43,7 @@ Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Cli
 
 Response response = client.Operation(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

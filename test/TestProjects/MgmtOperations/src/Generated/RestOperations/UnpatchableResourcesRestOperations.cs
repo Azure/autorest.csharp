@@ -97,7 +97,7 @@ namespace MgmtOperations
                 case 200:
                     {
                         UnpatchableResourceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = UnpatchableResourceData.DeserializeUnpatchableResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -128,7 +128,7 @@ namespace MgmtOperations
                 case 200:
                     {
                         UnpatchableResourceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = UnpatchableResourceData.DeserializeUnpatchableResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -197,7 +197,7 @@ namespace MgmtOperations
                 case 200:
                     {
                         UnpatchableResourceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = UnpatchableResourceData.DeserializeUnpatchableResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -228,7 +228,7 @@ namespace MgmtOperations
                 case 200:
                     {
                         UnpatchableResourceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = UnpatchableResourceData.DeserializeUnpatchableResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -383,7 +383,7 @@ namespace MgmtOperations
                 case 200:
                     {
                         UnpatchableResourceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = UnpatchableResourceData.DeserializeUnpatchableResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -415,7 +415,7 @@ namespace MgmtOperations
                 case 200:
                     {
                         UnpatchableResourceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = UnpatchableResourceData.DeserializeUnpatchableResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -485,7 +485,7 @@ namespace MgmtOperations
                 case 200:
                     {
                         UnpatchableResourceListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = UnpatchableResourceListResult.DeserializeUnpatchableResourceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -513,7 +513,7 @@ namespace MgmtOperations
                 case 200:
                     {
                         UnpatchableResourceListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = UnpatchableResourceListResult.DeserializeUnpatchableResourceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

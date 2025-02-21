@@ -96,7 +96,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ManagementPolicyData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = ManagementPolicyData.DeserializeManagementPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -128,7 +128,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ManagementPolicyData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = ManagementPolicyData.DeserializeManagementPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -204,7 +204,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ManagementPolicyData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = ManagementPolicyData.DeserializeManagementPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -236,7 +236,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ManagementPolicyData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = ManagementPolicyData.DeserializeManagementPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

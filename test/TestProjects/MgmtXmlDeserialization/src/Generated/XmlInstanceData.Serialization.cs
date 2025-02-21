@@ -190,7 +190,7 @@ namespace MgmtXmlDeserialization
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
                         return DeserializeXmlInstanceData(document.RootElement, options);
                     }
                 case "X":

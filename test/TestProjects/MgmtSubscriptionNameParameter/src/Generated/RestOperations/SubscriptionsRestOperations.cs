@@ -105,7 +105,7 @@ namespace MgmtSubscriptionNameParameter
                 case 200:
                     {
                         SBSubscriptionListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SBSubscriptionListResult.DeserializeSBSubscriptionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -134,7 +134,7 @@ namespace MgmtSubscriptionNameParameter
                 case 200:
                     {
                         SBSubscriptionListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SBSubscriptionListResult.DeserializeSBSubscriptionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -203,7 +203,7 @@ namespace MgmtSubscriptionNameParameter
                 case 200:
                     {
                         SBSubscriptionData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SBSubscriptionData.DeserializeSBSubscriptionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -234,7 +234,7 @@ namespace MgmtSubscriptionNameParameter
                 case 200:
                     {
                         SBSubscriptionData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SBSubscriptionData.DeserializeSBSubscriptionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -381,7 +381,7 @@ namespace MgmtSubscriptionNameParameter
                 case 200:
                     {
                         SBSubscriptionData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SBSubscriptionData.DeserializeSBSubscriptionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -412,7 +412,7 @@ namespace MgmtSubscriptionNameParameter
                 case 200:
                     {
                         SBSubscriptionData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SBSubscriptionData.DeserializeSBSubscriptionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -467,7 +467,7 @@ namespace MgmtSubscriptionNameParameter
                 case 200:
                     {
                         SBSubscriptionListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SBSubscriptionListResult.DeserializeSBSubscriptionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -498,7 +498,7 @@ namespace MgmtSubscriptionNameParameter
                 case 200:
                     {
                         SBSubscriptionListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SBSubscriptionListResult.DeserializeSBSubscriptionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

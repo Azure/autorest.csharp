@@ -25,14 +25,14 @@ namespace MgmtMockAndSample
 
         FirewallPolicyResource IOperationSource<FirewallPolicyResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
+            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
             var data = FirewallPolicyData.DeserializeFirewallPolicyData(document.RootElement);
             return new FirewallPolicyResource(_client, data);
         }
 
         async ValueTask<FirewallPolicyResource> IOperationSource<FirewallPolicyResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
             var data = FirewallPolicyData.DeserializeFirewallPolicyData(document.RootElement);
             return new FirewallPolicyResource(_client, data);
         }

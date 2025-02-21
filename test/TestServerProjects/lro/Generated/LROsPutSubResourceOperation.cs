@@ -69,13 +69,13 @@ namespace lro
 
         SubProduct IOperationSource<SubProduct>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
+            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
             return SubProduct.DeserializeSubProduct(document.RootElement);
         }
 
         async ValueTask<SubProduct> IOperationSource<SubProduct>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
             return SubProduct.DeserializeSubProduct(document.RootElement);
         }
     }

@@ -60,7 +60,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -82,7 +82,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -117,7 +117,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -139,7 +139,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -174,7 +174,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -196,7 +196,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -231,7 +231,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -253,7 +253,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -288,7 +288,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -310,7 +310,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -345,14 +345,14 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 201:
                     {
                         B value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = B.DeserializeB(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
@@ -372,14 +372,14 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 201:
                     {
                         B value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = B.DeserializeB(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
@@ -412,14 +412,14 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 201:
                     {
                         B value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = B.DeserializeB(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
@@ -439,14 +439,14 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 201:
                     {
                         B value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = B.DeserializeB(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
@@ -479,14 +479,14 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 201:
                     {
                         B value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = B.DeserializeB(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
@@ -506,14 +506,14 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 201:
                     {
                         B value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = B.DeserializeB(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
@@ -546,21 +546,21 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 201:
                     {
                         C value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = C.DeserializeC(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 404:
                     {
                         D value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = D.DeserializeD(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
@@ -580,21 +580,21 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 201:
                     {
                         C value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = C.DeserializeC(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 404:
                     {
                         D value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = D.DeserializeD(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
@@ -627,21 +627,21 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 201:
                     {
                         C value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = C.DeserializeC(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 404:
                     {
                         D value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = D.DeserializeD(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
@@ -661,21 +661,21 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 201:
                     {
                         C value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = C.DeserializeC(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 404:
                     {
                         D value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = D.DeserializeD(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
@@ -708,21 +708,21 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 201:
                     {
                         C value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = C.DeserializeC(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 404:
                     {
                         D value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = D.DeserializeD(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
@@ -742,21 +742,21 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 201:
                     {
                         C value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = C.DeserializeC(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 404:
                     {
                         D value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = D.DeserializeD(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
@@ -789,21 +789,21 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 201:
                     {
                         C value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = C.DeserializeC(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 404:
                     {
                         D value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = D.DeserializeD(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
@@ -823,21 +823,21 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 201:
                     {
                         C value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = C.DeserializeC(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
                 case 404:
                     {
                         D value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = D.DeserializeD(document.RootElement);
                         return Response.FromValue<object>(value, message.Response);
                     }
@@ -1181,7 +1181,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1201,7 +1201,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1234,7 +1234,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1254,7 +1254,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1541,7 +1541,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1561,7 +1561,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1594,7 +1594,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1614,7 +1614,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1647,7 +1647,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1667,7 +1667,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1700,7 +1700,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1720,7 +1720,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1753,7 +1753,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1773,7 +1773,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1806,7 +1806,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1826,7 +1826,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1859,7 +1859,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1879,7 +1879,7 @@ namespace httpInfrastructure
                 case 200:
                     {
                         MyException value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyException.DeserializeMyException(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

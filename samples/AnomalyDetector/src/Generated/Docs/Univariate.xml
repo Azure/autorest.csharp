@@ -685,7 +685,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.DetectUnivariateEntireSeriesAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("period").ToString());
 Console.WriteLine(result.GetProperty("expectedValues")[0].ToString());
 Console.WriteLine(result.GetProperty("upperMargins")[0].ToString());
@@ -955,7 +955,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.DetectUnivariateEntireSeries(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("period").ToString());
 Console.WriteLine(result.GetProperty("expectedValues")[0].ToString());
 Console.WriteLine(result.GetProperty("upperMargins")[0].ToString());
@@ -1652,7 +1652,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.DetectUnivariateLastPointAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("period").ToString());
 Console.WriteLine(result.GetProperty("suggestedWindow").ToString());
 Console.WriteLine(result.GetProperty("expectedValue").ToString());
@@ -1924,7 +1924,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.DetectUnivariateLastPoint(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("period").ToString());
 Console.WriteLine(result.GetProperty("suggestedWindow").ToString());
 Console.WriteLine(result.GetProperty("expectedValue").ToString());
@@ -5337,7 +5337,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.DetectUnivariateChangePointAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -6647,7 +6647,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.DetectUnivariateChangePoint(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

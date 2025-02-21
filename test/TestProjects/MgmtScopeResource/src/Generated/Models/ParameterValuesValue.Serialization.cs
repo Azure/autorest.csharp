@@ -22,7 +22,7 @@ namespace MgmtScopeResource.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Value);
 #else
-                using (JsonDocument document = JsonDocument.Parse(Value))
+                using (JsonDocument document = JsonDocument.Parse(Value, new JsonDocumentOptions { MaxDepth = 256 }))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }

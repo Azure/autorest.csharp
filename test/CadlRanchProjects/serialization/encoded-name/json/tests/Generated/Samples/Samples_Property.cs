@@ -126,7 +126,7 @@ namespace Serialization.EncodedName.Json.Samples
 
             Response response = client.GetProperty(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("wireName").ToString());
         }
 
@@ -138,7 +138,7 @@ namespace Serialization.EncodedName.Json.Samples
 
             Response response = await client.GetPropertyAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("wireName").ToString());
         }
 
@@ -168,7 +168,7 @@ namespace Serialization.EncodedName.Json.Samples
 
             Response response = client.GetProperty(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("wireName").ToString());
         }
 
@@ -180,7 +180,7 @@ namespace Serialization.EncodedName.Json.Samples
 
             Response response = await client.GetPropertyAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("wireName").ToString());
         }
 

@@ -141,7 +141,7 @@ RecursiveClient client = new RecursiveClient();
 
 Response response = await client.GetRecursiveAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("level").ToString());
 ]]></code>
 This sample shows how to call GetRecursiveAsync with all parameters and parse the result.
@@ -150,7 +150,7 @@ RecursiveClient client = new RecursiveClient();
 
 Response response = await client.GetRecursiveAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("level").ToString());
 Console.WriteLine(result.GetProperty("extension")[0].GetProperty("level").ToString());
 ]]></code></example>
@@ -163,7 +163,7 @@ RecursiveClient client = new RecursiveClient();
 
 Response response = client.GetRecursive(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("level").ToString());
 ]]></code>
 This sample shows how to call GetRecursive with all parameters and parse the result.
@@ -172,7 +172,7 @@ RecursiveClient client = new RecursiveClient();
 
 Response response = client.GetRecursive(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("level").ToString());
 Console.WriteLine(result.GetProperty("extension")[0].GetProperty("level").ToString());
 ]]></code></example>

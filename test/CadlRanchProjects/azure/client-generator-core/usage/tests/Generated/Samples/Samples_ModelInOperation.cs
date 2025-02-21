@@ -126,7 +126,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
             Response response = client.OutputToInputOutput(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -138,7 +138,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
             Response response = await client.OutputToInputOutputAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -168,7 +168,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
             Response response = client.OutputToInputOutput(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -180,7 +180,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
             Response response = await client.OutputToInputOutputAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -211,7 +211,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.ModelInReadOnlyProperty(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("result").GetProperty("name").ToString());
         }
 
@@ -224,7 +224,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.ModelInReadOnlyPropertyAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("result").GetProperty("name").ToString());
         }
 
@@ -257,7 +257,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.ModelInReadOnlyProperty(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("result").GetProperty("name").ToString());
         }
 
@@ -270,7 +270,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.ModelInReadOnlyPropertyAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("result").GetProperty("name").ToString());
         }
 

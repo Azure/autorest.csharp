@@ -166,7 +166,7 @@ namespace Azure.Network.Management.Interface
                 case 200:
                     {
                         NetworkInterface value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -199,7 +199,7 @@ namespace Azure.Network.Management.Interface
                 case 200:
                     {
                         NetworkInterface value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -348,7 +348,7 @@ namespace Azure.Network.Management.Interface
                 case 200:
                     {
                         NetworkInterface value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -385,7 +385,7 @@ namespace Azure.Network.Management.Interface
                 case 200:
                     {
                         NetworkInterface value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = NetworkInterface.DeserializeNetworkInterface(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -421,7 +421,7 @@ namespace Azure.Network.Management.Interface
                 case 200:
                     {
                         NetworkInterfaceListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -441,7 +441,7 @@ namespace Azure.Network.Management.Interface
                 case 200:
                     {
                         NetworkInterfaceListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -486,7 +486,7 @@ namespace Azure.Network.Management.Interface
                 case 200:
                     {
                         NetworkInterfaceListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -513,7 +513,7 @@ namespace Azure.Network.Management.Interface
                 case 200:
                     {
                         NetworkInterfaceListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -705,7 +705,7 @@ namespace Azure.Network.Management.Interface
                 case 200:
                     {
                         NetworkInterfaceListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -732,7 +732,7 @@ namespace Azure.Network.Management.Interface
                 case 200:
                     {
                         NetworkInterfaceListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -777,7 +777,7 @@ namespace Azure.Network.Management.Interface
                 case 200:
                     {
                         NetworkInterfaceListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -809,7 +809,7 @@ namespace Azure.Network.Management.Interface
                 case 200:
                     {
                         NetworkInterfaceListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = NetworkInterfaceListResult.DeserializeNetworkInterfaceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

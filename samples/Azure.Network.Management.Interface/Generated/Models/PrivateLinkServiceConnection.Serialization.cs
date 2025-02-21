@@ -165,7 +165,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new PrivateLinkServiceConnection FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
             return DeserializePrivateLinkServiceConnection(document.RootElement);
         }
 

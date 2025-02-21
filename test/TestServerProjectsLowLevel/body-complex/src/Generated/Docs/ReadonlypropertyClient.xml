@@ -10,7 +10,7 @@ ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = await client.GetValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
@@ -20,7 +20,7 @@ ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = await client.GetValidAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code></example>
@@ -34,7 +34,7 @@ ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = client.GetValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
@@ -44,7 +44,7 @@ ReadonlypropertyClient client = new ReadonlypropertyClient(credential);
 
 Response response = client.GetValid(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code></example>

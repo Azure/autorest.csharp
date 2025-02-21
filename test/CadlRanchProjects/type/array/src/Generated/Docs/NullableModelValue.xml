@@ -39,7 +39,7 @@ NullableModelValue client = new ArrayClient().GetNullableModelValueClient();
 
 Response response = await client.GetNullableModelValueAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetNullableModelValueAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ NullableModelValue client = new ArrayClient().GetNullableModelValueClient();
 
 Response response = await client.GetNullableModelValueAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("property").ToString());
 Console.WriteLine(result[0].GetProperty("children")[0].GetProperty("property").ToString());
 ]]></code></example>
@@ -61,7 +61,7 @@ NullableModelValue client = new ArrayClient().GetNullableModelValueClient();
 
 Response response = client.GetNullableModelValue(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetNullableModelValue with all parameters and parse the result.
@@ -70,7 +70,7 @@ NullableModelValue client = new ArrayClient().GetNullableModelValueClient();
 
 Response response = client.GetNullableModelValue(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result[0].GetProperty("property").ToString());
 Console.WriteLine(result[0].GetProperty("children")[0].GetProperty("property").ToString());
 ]]></code></example>

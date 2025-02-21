@@ -47,7 +47,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, new JsonDocumentOptions { MaxDepth = 256 }))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
@@ -107,7 +107,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
                         return DeserializeDog(document.RootElement, options);
                     }
                 default:
@@ -121,7 +121,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static Dog FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
             return DeserializeDog(document.RootElement);
         }
 

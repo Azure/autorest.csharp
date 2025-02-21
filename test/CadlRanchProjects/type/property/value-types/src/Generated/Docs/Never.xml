@@ -39,7 +39,7 @@ Never client = new ValueTypesClient().GetNeverClient();
 
 Response response = await client.GetNeverAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNeverAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ Never client = new ValueTypesClient().GetNeverClient();
 
 Response response = await client.GetNeverAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -60,7 +60,7 @@ Never client = new ValueTypesClient().GetNeverClient();
 
 Response response = client.GetNever(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNever with all parameters and parse the result.
@@ -69,7 +69,7 @@ Never client = new ValueTypesClient().GetNeverClient();
 
 Response response = client.GetNever(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

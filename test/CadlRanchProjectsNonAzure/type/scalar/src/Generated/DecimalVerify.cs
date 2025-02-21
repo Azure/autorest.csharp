@@ -40,7 +40,7 @@ namespace Scm._Type.Scalar
         {
             ClientResult result = await PrepareVerifyAsync(null).ConfigureAwait(false);
             IReadOnlyList<decimal> value = default;
-            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, default).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, default).ConfigureAwait(false);
             List<decimal> array = new List<decimal>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -55,7 +55,7 @@ namespace Scm._Type.Scalar
         {
             ClientResult result = PrepareVerify(null);
             IReadOnlyList<decimal> value = default;
-            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream);
+            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
             List<decimal> array = new List<decimal>();
             foreach (var item in document.RootElement.EnumerateArray())
             {

@@ -127,7 +127,7 @@ UsageClient client = new UsageClient();
 
 Response response = await client.OutputAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 This sample shows how to call OutputAsync with all parameters and parse the result.
@@ -136,7 +136,7 @@ UsageClient client = new UsageClient();
 
 Response response = await client.OutputAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code></example>
     </member>
@@ -148,7 +148,7 @@ UsageClient client = new UsageClient();
 
 Response response = client.Output(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 This sample shows how to call Output with all parameters and parse the result.
@@ -157,7 +157,7 @@ UsageClient client = new UsageClient();
 
 Response response = client.Output(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code></example>
     </member>
@@ -207,7 +207,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.InputAndOutputAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 This sample shows how to call InputAndOutputAsync with all request content and parse the result.
@@ -220,7 +220,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.InputAndOutputAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code></example>
     </member>
@@ -236,7 +236,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.InputAndOutput(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code>
 This sample shows how to call InputAndOutput with all request content and parse the result.
@@ -249,7 +249,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.InputAndOutput(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
 ]]></code></example>
     </member>

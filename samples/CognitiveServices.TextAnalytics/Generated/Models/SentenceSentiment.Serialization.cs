@@ -58,7 +58,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static SentenceSentiment FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
             return DeserializeSentenceSentiment(document.RootElement);
         }
     }

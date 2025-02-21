@@ -26,7 +26,7 @@ namespace PaginationParams_LowLevel.Samples
 
             foreach (BinaryData item in client.GetPaginationParams(null, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -40,7 +40,7 @@ namespace PaginationParams_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetPaginationParamsAsync(null, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -54,7 +54,7 @@ namespace PaginationParams_LowLevel.Samples
 
             foreach (BinaryData item in client.GetPaginationParams(1234, 1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("type").ToString());
@@ -70,7 +70,7 @@ namespace PaginationParams_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetPaginationParamsAsync(1234, 1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("type").ToString());
@@ -86,7 +86,7 @@ namespace PaginationParams_LowLevel.Samples
 
             foreach (BinaryData item in client.Get2s(null, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -100,7 +100,7 @@ namespace PaginationParams_LowLevel.Samples
 
             await foreach (BinaryData item in client.Get2sAsync(null, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -114,7 +114,7 @@ namespace PaginationParams_LowLevel.Samples
 
             foreach (BinaryData item in client.Get2s(1234, 1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("type").ToString());
@@ -130,7 +130,7 @@ namespace PaginationParams_LowLevel.Samples
 
             await foreach (BinaryData item in client.Get2sAsync(1234, 1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("type").ToString());
@@ -146,7 +146,7 @@ namespace PaginationParams_LowLevel.Samples
 
             foreach (BinaryData item in client.Get3s(null, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -160,7 +160,7 @@ namespace PaginationParams_LowLevel.Samples
 
             await foreach (BinaryData item in client.Get3sAsync(null, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -174,7 +174,7 @@ namespace PaginationParams_LowLevel.Samples
 
             foreach (BinaryData item in client.Get3s(1234, 1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("type").ToString());
@@ -190,7 +190,7 @@ namespace PaginationParams_LowLevel.Samples
 
             await foreach (BinaryData item in client.Get3sAsync(1234, 1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("type").ToString());
@@ -206,7 +206,7 @@ namespace PaginationParams_LowLevel.Samples
 
             foreach (BinaryData item in client.Get4s(null, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -220,7 +220,7 @@ namespace PaginationParams_LowLevel.Samples
 
             await foreach (BinaryData item in client.Get4sAsync(null, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -234,7 +234,7 @@ namespace PaginationParams_LowLevel.Samples
 
             foreach (BinaryData item in client.Get4s(1234, 1234, 123.45F, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("type").ToString());
@@ -250,7 +250,7 @@ namespace PaginationParams_LowLevel.Samples
 
             await foreach (BinaryData item in client.Get4sAsync(1234, 1234, 123.45F, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
                 Console.WriteLine(result.GetProperty("type").ToString());

@@ -53,7 +53,7 @@ namespace _Type._Dictionary
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetNullableFloatValueAsync(context).ConfigureAwait(false);
             IReadOnlyDictionary<string, float?> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
             Dictionary<string, float?> dictionary = new Dictionary<string, float?>();
             foreach (var property in document.RootElement.EnumerateObject())
             {
@@ -78,7 +78,7 @@ namespace _Type._Dictionary
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetNullableFloatValue(context);
             IReadOnlyDictionary<string, float?> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream);
+            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
             Dictionary<string, float?> dictionary = new Dictionary<string, float?>();
             foreach (var property in document.RootElement.EnumerateObject())
             {

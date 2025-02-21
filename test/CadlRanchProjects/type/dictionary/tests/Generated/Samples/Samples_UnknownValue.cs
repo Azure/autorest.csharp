@@ -26,7 +26,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = client.GetUnknownValue(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
@@ -38,7 +38,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = await client.GetUnknownValueAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
@@ -68,7 +68,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = client.GetUnknownValue(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
@@ -80,7 +80,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = await client.GetUnknownValueAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 

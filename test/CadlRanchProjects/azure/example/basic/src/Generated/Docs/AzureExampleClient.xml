@@ -73,7 +73,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.BasicActionAsync("query", "header", content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("stringProperty").ToString());
 ]]></code></example>
     </member>
@@ -103,7 +103,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.BasicAction("query", "header", content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("stringProperty").ToString());
 ]]></code></example>
     </member>

@@ -26,7 +26,7 @@ namespace _Type._Array.Samples
 
             Response response = client.GetNullableInt32Value(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -38,7 +38,7 @@ namespace _Type._Array.Samples
 
             Response response = await client.GetNullableInt32ValueAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -68,7 +68,7 @@ namespace _Type._Array.Samples
 
             Response response = client.GetNullableInt32Value(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -80,7 +80,7 @@ namespace _Type._Array.Samples
 
             Response response = await client.GetNullableInt32ValueAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 

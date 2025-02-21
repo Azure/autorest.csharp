@@ -59,7 +59,7 @@ namespace body_datetime_rfc1123
                 case 200:
                     {
                         DateTimeOffset? value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
                             value = null;
@@ -86,7 +86,7 @@ namespace body_datetime_rfc1123
                 case 200:
                     {
                         DateTimeOffset? value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
                             value = null;
@@ -126,7 +126,7 @@ namespace body_datetime_rfc1123
                 case 200:
                     {
                         DateTimeOffset value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = document.RootElement.GetDateTimeOffset("R");
                         return Response.FromValue(value, message.Response);
                     }
@@ -146,7 +146,7 @@ namespace body_datetime_rfc1123
                 case 200:
                     {
                         DateTimeOffset value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = document.RootElement.GetDateTimeOffset("R");
                         return Response.FromValue(value, message.Response);
                     }
@@ -179,7 +179,7 @@ namespace body_datetime_rfc1123
                 case 200:
                     {
                         DateTimeOffset value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = document.RootElement.GetDateTimeOffset("R");
                         return Response.FromValue(value, message.Response);
                     }
@@ -199,7 +199,7 @@ namespace body_datetime_rfc1123
                 case 200:
                     {
                         DateTimeOffset value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = document.RootElement.GetDateTimeOffset("R");
                         return Response.FromValue(value, message.Response);
                     }
@@ -232,7 +232,7 @@ namespace body_datetime_rfc1123
                 case 200:
                     {
                         DateTimeOffset value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = document.RootElement.GetDateTimeOffset("R");
                         return Response.FromValue(value, message.Response);
                     }
@@ -252,7 +252,7 @@ namespace body_datetime_rfc1123
                 case 200:
                     {
                         DateTimeOffset value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = document.RootElement.GetDateTimeOffset("R");
                         return Response.FromValue(value, message.Response);
                     }
@@ -334,7 +334,7 @@ namespace body_datetime_rfc1123
                 case 200:
                     {
                         DateTimeOffset value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = document.RootElement.GetDateTimeOffset("R");
                         return Response.FromValue(value, message.Response);
                     }
@@ -354,7 +354,7 @@ namespace body_datetime_rfc1123
                 case 200:
                     {
                         DateTimeOffset value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = document.RootElement.GetDateTimeOffset("R");
                         return Response.FromValue(value, message.Response);
                     }
@@ -387,7 +387,7 @@ namespace body_datetime_rfc1123
                 case 200:
                     {
                         DateTimeOffset value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = document.RootElement.GetDateTimeOffset("R");
                         return Response.FromValue(value, message.Response);
                     }
@@ -407,7 +407,7 @@ namespace body_datetime_rfc1123
                 case 200:
                     {
                         DateTimeOffset value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = document.RootElement.GetDateTimeOffset("R");
                         return Response.FromValue(value, message.Response);
                     }
@@ -489,7 +489,7 @@ namespace body_datetime_rfc1123
                 case 200:
                     {
                         DateTimeOffset value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = document.RootElement.GetDateTimeOffset("R");
                         return Response.FromValue(value, message.Response);
                     }
@@ -509,7 +509,7 @@ namespace body_datetime_rfc1123
                 case 200:
                     {
                         DateTimeOffset value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = document.RootElement.GetDateTimeOffset("R");
                         return Response.FromValue(value, message.Response);
                     }

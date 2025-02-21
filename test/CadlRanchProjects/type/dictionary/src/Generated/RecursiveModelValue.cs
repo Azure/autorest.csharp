@@ -54,7 +54,7 @@ namespace _Type._Dictionary
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetRecursiveModelValueAsync(context).ConfigureAwait(false);
             IReadOnlyDictionary<string, InnerModel> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
             Dictionary<string, InnerModel> dictionary = new Dictionary<string, InnerModel>();
             foreach (var property in document.RootElement.EnumerateObject())
             {
@@ -72,7 +72,7 @@ namespace _Type._Dictionary
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetRecursiveModelValue(context);
             IReadOnlyDictionary<string, InnerModel> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream);
+            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
             Dictionary<string, InnerModel> dictionary = new Dictionary<string, InnerModel>();
             foreach (var property in document.RootElement.EnumerateObject())
             {

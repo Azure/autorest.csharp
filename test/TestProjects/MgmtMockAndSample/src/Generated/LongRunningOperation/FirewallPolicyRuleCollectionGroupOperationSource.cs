@@ -25,14 +25,14 @@ namespace MgmtMockAndSample
 
         FirewallPolicyRuleCollectionGroupResource IOperationSource<FirewallPolicyRuleCollectionGroupResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
+            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
             var data = FirewallPolicyRuleCollectionGroupData.DeserializeFirewallPolicyRuleCollectionGroupData(document.RootElement);
             return new FirewallPolicyRuleCollectionGroupResource(_client, data);
         }
 
         async ValueTask<FirewallPolicyRuleCollectionGroupResource> IOperationSource<FirewallPolicyRuleCollectionGroupResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
             var data = FirewallPolicyRuleCollectionGroupData.DeserializeFirewallPolicyRuleCollectionGroupData(document.RootElement);
             return new FirewallPolicyRuleCollectionGroupResource(_client, data);
         }

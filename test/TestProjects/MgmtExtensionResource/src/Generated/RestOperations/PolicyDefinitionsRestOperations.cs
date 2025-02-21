@@ -91,7 +91,7 @@ namespace MgmtExtensionResource
                 case 201:
                     {
                         PolicyDefinitionData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -120,7 +120,7 @@ namespace MgmtExtensionResource
                 case 201:
                     {
                         PolicyDefinitionData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -253,7 +253,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -282,7 +282,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -335,7 +335,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -362,7 +362,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -427,7 +427,7 @@ namespace MgmtExtensionResource
                 case 201:
                     {
                         PolicyDefinitionData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -456,7 +456,7 @@ namespace MgmtExtensionResource
                 case 201:
                     {
                         PolicyDefinitionData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -589,7 +589,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -618,7 +618,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -691,7 +691,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PolicyDefinitionListResult.DeserializePolicyDefinitionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -718,7 +718,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PolicyDefinitionListResult.DeserializePolicyDefinitionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -780,7 +780,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PolicyDefinitionListResult.DeserializePolicyDefinitionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -802,7 +802,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PolicyDefinitionListResult.DeserializePolicyDefinitionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -873,7 +873,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PolicyDefinitionListResult.DeserializePolicyDefinitionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -900,7 +900,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PolicyDefinitionListResult.DeserializePolicyDefinitionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -951,7 +951,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PolicyDefinitionListResult.DeserializePolicyDefinitionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -980,7 +980,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PolicyDefinitionListResult.DeserializePolicyDefinitionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1028,7 +1028,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PolicyDefinitionListResult.DeserializePolicyDefinitionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1054,7 +1054,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PolicyDefinitionListResult.DeserializePolicyDefinitionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1105,7 +1105,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PolicyDefinitionListResult.DeserializePolicyDefinitionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1134,7 +1134,7 @@ namespace MgmtExtensionResource
                 case 200:
                     {
                         PolicyDefinitionListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PolicyDefinitionListResult.DeserializePolicyDefinitionListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

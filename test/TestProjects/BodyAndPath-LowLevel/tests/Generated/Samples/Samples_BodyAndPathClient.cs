@@ -184,7 +184,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = client.GetBodyAndPaths(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -197,7 +197,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = await client.GetBodyAndPathsAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -210,7 +210,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = client.GetBodyAndPaths(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -223,7 +223,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = await client.GetBodyAndPathsAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -236,7 +236,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = client.GetItems(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -249,7 +249,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = await client.GetItemsAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -262,7 +262,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = client.GetItems(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -275,7 +275,7 @@ namespace BodyAndPath_LowLevel.Samples
 
             Response response = await client.GetItemsAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 

@@ -39,7 +39,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = await client.GetModelAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
@@ -49,7 +49,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = await client.GetModelAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code></example>
@@ -62,7 +62,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = client.GetModel(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
@@ -72,7 +72,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = client.GetModel(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code></example>
@@ -207,7 +207,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = await client.GetRecursiveModelAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
@@ -217,7 +217,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = await client.GetRecursiveModelAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code></example>
@@ -230,7 +230,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = client.GetRecursiveModel(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
@@ -240,7 +240,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = client.GetRecursiveModel(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code></example>
@@ -375,7 +375,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = await client.GetMissingDiscriminatorAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
@@ -385,7 +385,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = await client.GetMissingDiscriminatorAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code></example>
@@ -398,7 +398,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = client.GetMissingDiscriminator(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
@@ -408,7 +408,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = client.GetMissingDiscriminator(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code></example>
@@ -451,7 +451,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = await client.GetWrongDiscriminatorAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
@@ -461,7 +461,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = await client.GetWrongDiscriminatorAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code></example>
@@ -474,7 +474,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = client.GetWrongDiscriminator(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code>
@@ -484,7 +484,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = client.GetWrongDiscriminator(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("wingspan").ToString());
 ]]></code></example>
@@ -527,7 +527,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = await client.GetLegacyModelAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code>
@@ -537,7 +537,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = await client.GetLegacyModelAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code></example>
@@ -550,7 +550,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = client.GetLegacyModel(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code>
@@ -560,7 +560,7 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Response response = client.GetLegacyModel(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code></example>

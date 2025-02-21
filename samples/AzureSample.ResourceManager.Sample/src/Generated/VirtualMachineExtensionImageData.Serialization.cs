@@ -457,7 +457,7 @@ namespace AzureSample.ResourceManager.Sample
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
                         return DeserializeVirtualMachineExtensionImageData(document.RootElement, options);
                     }
                 default:

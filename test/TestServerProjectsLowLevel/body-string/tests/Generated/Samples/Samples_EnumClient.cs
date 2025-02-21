@@ -26,7 +26,7 @@ namespace body_string_LowLevel.Samples
 
             Response response = client.GetNotExpandable(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -39,7 +39,7 @@ namespace body_string_LowLevel.Samples
 
             Response response = await client.GetNotExpandableAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -52,7 +52,7 @@ namespace body_string_LowLevel.Samples
 
             Response response = client.GetNotExpandable(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -65,7 +65,7 @@ namespace body_string_LowLevel.Samples
 
             Response response = await client.GetNotExpandableAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -130,7 +130,7 @@ namespace body_string_LowLevel.Samples
 
             Response response = client.GetReferenced(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -143,7 +143,7 @@ namespace body_string_LowLevel.Samples
 
             Response response = await client.GetReferencedAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -156,7 +156,7 @@ namespace body_string_LowLevel.Samples
 
             Response response = client.GetReferenced(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -169,7 +169,7 @@ namespace body_string_LowLevel.Samples
 
             Response response = await client.GetReferencedAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -234,7 +234,7 @@ namespace body_string_LowLevel.Samples
 
             Response response = client.GetReferencedConstant(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("ColorConstant").ToString());
         }
 
@@ -247,7 +247,7 @@ namespace body_string_LowLevel.Samples
 
             Response response = await client.GetReferencedConstantAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("ColorConstant").ToString());
         }
 
@@ -260,7 +260,7 @@ namespace body_string_LowLevel.Samples
 
             Response response = client.GetReferencedConstant(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("ColorConstant").ToString());
             Console.WriteLine(result.GetProperty("field1").ToString());
         }
@@ -274,7 +274,7 @@ namespace body_string_LowLevel.Samples
 
             Response response = await client.GetReferencedConstantAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("ColorConstant").ToString());
             Console.WriteLine(result.GetProperty("field1").ToString());
         }

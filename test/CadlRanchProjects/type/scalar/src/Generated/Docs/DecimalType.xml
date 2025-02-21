@@ -39,7 +39,7 @@ DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
 Response response = await client.ResponseBodyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call ResponseBodyAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
 Response response = await client.ResponseBodyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -60,7 +60,7 @@ DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
 Response response = client.ResponseBody(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call ResponseBody with all parameters and parse the result.
@@ -69,7 +69,7 @@ DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
 Response response = client.ResponseBody(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

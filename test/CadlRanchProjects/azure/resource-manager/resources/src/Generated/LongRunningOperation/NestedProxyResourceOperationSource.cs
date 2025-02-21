@@ -25,14 +25,14 @@ namespace _Azure.ResourceManager.Resources
 
         NestedProxyResource IOperationSource<NestedProxyResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
+            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
             var data = NestedProxyResourceData.DeserializeNestedProxyResourceData(document.RootElement);
             return new NestedProxyResource(_client, data);
         }
 
         async ValueTask<NestedProxyResource> IOperationSource<NestedProxyResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
             var data = NestedProxyResourceData.DeserializeNestedProxyResourceData(document.RootElement);
             return new NestedProxyResource(_client, data);
         }

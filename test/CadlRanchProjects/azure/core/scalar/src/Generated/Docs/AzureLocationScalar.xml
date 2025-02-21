@@ -39,7 +39,7 @@ AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
 Response response = await client.GetAzureLocationScalarAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetAzureLocationScalarAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
 Response response = await client.GetAzureLocationScalarAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -60,7 +60,7 @@ AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
 Response response = client.GetAzureLocationScalar(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetAzureLocationScalar with all parameters and parse the result.
@@ -69,7 +69,7 @@ AzureLocationScalar client = new ScalarClient().GetAzureLocationScalarClient();
 
 Response response = client.GetAzureLocationScalar(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -191,7 +191,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.PostAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("location").ToString());
 ]]></code>
 This sample shows how to call PostAsync with all request content and parse the result.
@@ -204,7 +204,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.PostAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("location").ToString());
 ]]></code></example>
     </member>
@@ -220,7 +220,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Post(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("location").ToString());
 ]]></code>
 This sample shows how to call Post with all request content and parse the result.
@@ -233,7 +233,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Post(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("location").ToString());
 ]]></code></example>
     </member>

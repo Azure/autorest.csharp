@@ -26,7 +26,7 @@ namespace dpg_customization_LowLevel.Samples
 
             Response response = client.GetModel("<mode>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
         }
 
@@ -39,7 +39,7 @@ namespace dpg_customization_LowLevel.Samples
 
             Response response = await client.GetModelAsync("<mode>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
         }
 
@@ -52,7 +52,7 @@ namespace dpg_customization_LowLevel.Samples
 
             Response response = client.GetModel("<mode>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
         }
 
@@ -65,7 +65,7 @@ namespace dpg_customization_LowLevel.Samples
 
             Response response = await client.GetModelAsync("<mode>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
         }
 
@@ -82,7 +82,7 @@ namespace dpg_customization_LowLevel.Samples
             });
             Response response = client.PostModel("<mode>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
         }
 
@@ -99,7 +99,7 @@ namespace dpg_customization_LowLevel.Samples
             });
             Response response = await client.PostModelAsync("<mode>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
         }
 
@@ -116,7 +116,7 @@ namespace dpg_customization_LowLevel.Samples
             });
             Response response = client.PostModel("<mode>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
         }
 
@@ -133,7 +133,7 @@ namespace dpg_customization_LowLevel.Samples
             });
             Response response = await client.PostModelAsync("<mode>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
         }
 
@@ -146,7 +146,7 @@ namespace dpg_customization_LowLevel.Samples
 
             foreach (BinaryData item in client.GetPages("<mode>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("received").ToString());
             }
         }
@@ -160,7 +160,7 @@ namespace dpg_customization_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetPagesAsync("<mode>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("received").ToString());
             }
         }
@@ -174,7 +174,7 @@ namespace dpg_customization_LowLevel.Samples
 
             foreach (BinaryData item in client.GetPages("<mode>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("received").ToString());
             }
         }
@@ -188,7 +188,7 @@ namespace dpg_customization_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetPagesAsync("<mode>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
                 Console.WriteLine(result.GetProperty("received").ToString());
             }
         }
@@ -203,7 +203,7 @@ namespace dpg_customization_LowLevel.Samples
             Operation<BinaryData> operation = client.Lro(WaitUntil.Completed, "<mode>", null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("received").ToString());
         }
@@ -218,7 +218,7 @@ namespace dpg_customization_LowLevel.Samples
             Operation<BinaryData> operation = await client.LroAsync(WaitUntil.Completed, "<mode>", null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("received").ToString());
         }
@@ -233,7 +233,7 @@ namespace dpg_customization_LowLevel.Samples
             Operation<BinaryData> operation = client.Lro(WaitUntil.Completed, "<mode>", null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("received").ToString());
         }
@@ -248,7 +248,7 @@ namespace dpg_customization_LowLevel.Samples
             Operation<BinaryData> operation = await client.LroAsync(WaitUntil.Completed, "<mode>", null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("received").ToString());
         }

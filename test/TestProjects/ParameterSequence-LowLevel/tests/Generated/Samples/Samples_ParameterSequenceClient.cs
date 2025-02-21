@@ -25,7 +25,7 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = client.GetItem("<itemName>", "<origin>", null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -38,7 +38,7 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = await client.GetItemAsync("<itemName>", "<origin>", null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -51,7 +51,7 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = client.GetItem("<itemName>", "<origin>", "<version>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -64,7 +64,7 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = await client.GetItemAsync("<itemName>", "<origin>", "<version>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -77,7 +77,7 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = client.SelectItem("<itemName>", "<origin>", null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -90,7 +90,7 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = await client.SelectItemAsync("<itemName>", "<origin>", null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -103,7 +103,7 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = client.SelectItem("<itemName>", "<origin>", "<version>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -116,7 +116,7 @@ namespace ParameterSequence_LowLevel.Samples
 
             Response response = await client.SelectItemAsync("<itemName>", "<origin>", "<version>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
     }

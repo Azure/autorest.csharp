@@ -114,7 +114,7 @@ namespace NoDocsTypeSpec.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
                         return DeserializeChildModel(document.RootElement, options);
                     }
                 default:
@@ -126,7 +126,7 @@ namespace NoDocsTypeSpec.Models
 
         internal static new ChildModel FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
             return DeserializeChildModel(document.RootElement);
         }
 

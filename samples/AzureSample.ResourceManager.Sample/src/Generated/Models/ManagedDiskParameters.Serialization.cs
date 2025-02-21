@@ -203,7 +203,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
                         return DeserializeManagedDiskParameters(document.RootElement, options);
                     }
                 default:

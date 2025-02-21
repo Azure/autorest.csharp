@@ -97,7 +97,7 @@ namespace xms_error_responses.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
                         return DeserializePetActionError(document.RootElement, options);
                     }
                 default:
@@ -111,7 +111,7 @@ namespace xms_error_responses.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new PetActionError FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
             return DeserializePetActionError(document.RootElement);
         }
 

@@ -39,7 +39,7 @@ MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response response = await client.GetMixedTypeAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
@@ -52,7 +52,7 @@ MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response response = await client.GetMixedTypeAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
@@ -68,7 +68,7 @@ MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response response = client.GetMixedType(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
@@ -81,7 +81,7 @@ MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response response = client.GetMixedType(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());

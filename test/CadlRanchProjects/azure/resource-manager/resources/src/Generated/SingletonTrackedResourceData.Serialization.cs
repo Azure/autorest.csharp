@@ -165,7 +165,7 @@ namespace _Azure.ResourceManager.Resources
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
                         return DeserializeSingletonTrackedResourceData(document.RootElement, options);
                     }
                 default:

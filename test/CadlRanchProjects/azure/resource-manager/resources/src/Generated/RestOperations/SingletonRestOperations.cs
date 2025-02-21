@@ -87,7 +87,7 @@ namespace _Azure.ResourceManager.Resources
                 case 200:
                     {
                         SingletonTrackedResourceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SingletonTrackedResourceData.DeserializeSingletonTrackedResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -116,7 +116,7 @@ namespace _Azure.ResourceManager.Resources
                 case 200:
                     {
                         SingletonTrackedResourceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SingletonTrackedResourceData.DeserializeSingletonTrackedResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -269,7 +269,7 @@ namespace _Azure.ResourceManager.Resources
                 case 200:
                     {
                         SingletonTrackedResourceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SingletonTrackedResourceData.DeserializeSingletonTrackedResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -298,7 +298,7 @@ namespace _Azure.ResourceManager.Resources
                 case 200:
                     {
                         SingletonTrackedResourceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SingletonTrackedResourceData.DeserializeSingletonTrackedResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -357,7 +357,7 @@ namespace _Azure.ResourceManager.Resources
                 case 200:
                     {
                         SingletonTrackedResourceListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SingletonTrackedResourceListResult.DeserializeSingletonTrackedResourceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -384,7 +384,7 @@ namespace _Azure.ResourceManager.Resources
                 case 200:
                     {
                         SingletonTrackedResourceListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SingletonTrackedResourceListResult.DeserializeSingletonTrackedResourceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -435,7 +435,7 @@ namespace _Azure.ResourceManager.Resources
                 case 200:
                     {
                         SingletonTrackedResourceListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = SingletonTrackedResourceListResult.DeserializeSingletonTrackedResourceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -464,7 +464,7 @@ namespace _Azure.ResourceManager.Resources
                 case 200:
                     {
                         SingletonTrackedResourceListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = SingletonTrackedResourceListResult.DeserializeSingletonTrackedResourceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

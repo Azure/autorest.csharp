@@ -114,7 +114,7 @@ namespace _Type.Model.Empty.Samples
 
             Response response = client.GetEmpty(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -126,7 +126,7 @@ namespace _Type.Model.Empty.Samples
 
             Response response = await client.GetEmptyAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -156,7 +156,7 @@ namespace _Type.Model.Empty.Samples
 
             Response response = client.GetEmpty(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -168,7 +168,7 @@ namespace _Type.Model.Empty.Samples
 
             Response response = await client.GetEmptyAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -199,7 +199,7 @@ namespace _Type.Model.Empty.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.PostRoundTripEmpty(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -212,7 +212,7 @@ namespace _Type.Model.Empty.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PostRoundTripEmptyAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -245,7 +245,7 @@ namespace _Type.Model.Empty.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.PostRoundTripEmpty(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -258,7 +258,7 @@ namespace _Type.Model.Empty.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PostRoundTripEmptyAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 

@@ -31,7 +31,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             });
             Response response = client.Op1(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -48,7 +48,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             });
             Response response = await client.Op1Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -87,7 +87,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             });
             Response response = client.Op1(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -104,7 +104,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             });
             Response response = await client.Op1Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -140,7 +140,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.Op2(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("xProperty").ToString());
         }
 
@@ -154,7 +154,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.Op2Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("xProperty").ToString());
         }
 
@@ -202,7 +202,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             });
             Response response = client.Op2(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("fields")[0].ToString());
             Console.WriteLine(result.GetProperty("nullProperty").ToString());
@@ -232,7 +232,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             });
             Response response = await client.Op2Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("fields")[0].ToString());
             Console.WriteLine(result.GetProperty("nullProperty").ToString());
@@ -293,7 +293,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             });
             Response response = client.Op3(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
@@ -310,7 +310,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             });
             Response response = await client.Op3Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
@@ -359,7 +359,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             });
             Response response = client.Op3(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -387,7 +387,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             });
             Response response = await client.Op3Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -445,7 +445,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             });
             Response response = client.Op4(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("type").ToString());
@@ -465,7 +465,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             });
             Response response = await client.Op4Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("type").ToString());
@@ -529,7 +529,7 @@ id = "<id>",
             });
             Response response = client.Op4(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("sku").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("sku").GetProperty("tier").ToString());
             Console.WriteLine(result.GetProperty("sku").GetProperty("capacity").ToString());
@@ -578,7 +578,7 @@ id = "<id>",
             });
             Response response = await client.Op4Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("sku").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("sku").GetProperty("tier").ToString());
             Console.WriteLine(result.GetProperty("sku").GetProperty("capacity").ToString());
@@ -665,7 +665,7 @@ Id = new ResourceIdentifier("<id>"),
 
             Response response = client.Op5(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -678,7 +678,7 @@ Id = new ResourceIdentifier("<id>"),
 
             Response response = await client.Op5Async(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -711,7 +711,7 @@ Id = new ResourceIdentifier("<id>"),
 
             Response response = client.Op5(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("namespace").ToString());
             Console.WriteLine(result.GetProperty("registrationState").ToString());
@@ -756,7 +756,7 @@ Id = new ResourceIdentifier("<id>"),
 
             Response response = await client.Op5Async(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("namespace").ToString());
             Console.WriteLine(result.GetProperty("registrationState").ToString());
@@ -825,7 +825,7 @@ Id = new ResourceIdentifier("<id>"),
             });
             Response response = client.Op6(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -843,7 +843,7 @@ Id = new ResourceIdentifier("<id>"),
             });
             Response response = await client.Op6Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -884,7 +884,7 @@ Id = new ResourceIdentifier("<id>"),
             });
             Response response = client.Op6(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
@@ -904,7 +904,7 @@ Id = new ResourceIdentifier("<id>"),
             });
             Response response = await client.Op6Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
@@ -951,7 +951,7 @@ Id = new ResourceIdentifier("<id>"),
             });
             Response response = client.Op7(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -969,7 +969,7 @@ Id = new ResourceIdentifier("<id>"),
             });
             Response response = await client.Op7Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -1010,7 +1010,7 @@ Id = new ResourceIdentifier("<id>"),
             });
             Response response = client.Op7(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
@@ -1030,7 +1030,7 @@ Id = new ResourceIdentifier("<id>"),
             });
             Response response = await client.Op7Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
@@ -1077,7 +1077,7 @@ Id = new ResourceIdentifier("<id>"),
             });
             Response response = client.Op8(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -1095,7 +1095,7 @@ Id = new ResourceIdentifier("<id>"),
             });
             Response response = await client.Op8Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -1136,7 +1136,7 @@ Id = new ResourceIdentifier("<id>"),
             });
             Response response = client.Op8(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
@@ -1156,7 +1156,7 @@ Id = new ResourceIdentifier("<id>"),
             });
             Response response = await client.Op8Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());

@@ -36,7 +36,7 @@ namespace OpenAI.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(global::System.BinaryData.FromStream(File));
 #else
-                using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(File)))
+                using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(File), new JsonDocumentOptions { MaxDepth = 256 }))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
@@ -79,7 +79,7 @@ namespace OpenAI.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, new JsonDocumentOptions { MaxDepth = 256 }))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
@@ -235,7 +235,7 @@ namespace OpenAI.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
                         return DeserializeCreateTranscriptionRequest(document.RootElement, options);
                     }
                 default:
@@ -249,7 +249,7 @@ namespace OpenAI.Models
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static CreateTranscriptionRequest FromResponse(PipelineResponse response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
             return DeserializeCreateTranscriptionRequest(document.RootElement);
         }
 

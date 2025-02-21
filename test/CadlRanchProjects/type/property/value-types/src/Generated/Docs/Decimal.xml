@@ -39,7 +39,7 @@ Decimal client = new ValueTypesClient().GetDecimalClient();
 
 Response response = await client.GetDecimalAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetDecimalAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ Decimal client = new ValueTypesClient().GetDecimalClient();
 
 Response response = await client.GetDecimalAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
@@ -60,7 +60,7 @@ Decimal client = new ValueTypesClient().GetDecimalClient();
 
 Response response = client.GetDecimal(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetDecimal with all parameters and parse the result.
@@ -69,7 +69,7 @@ Decimal client = new ValueTypesClient().GetDecimalClient();
 
 Response response = client.GetDecimal(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>

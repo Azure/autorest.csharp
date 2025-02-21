@@ -91,7 +91,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGroupParentData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MgmtGroupParentData.DeserializeMgmtGroupParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -120,7 +120,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGroupParentData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MgmtGroupParentData.DeserializeMgmtGroupParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -177,7 +177,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGroupParentData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MgmtGroupParentData.DeserializeMgmtGroupParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -206,7 +206,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGroupParentData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MgmtGroupParentData.DeserializeMgmtGroupParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -261,7 +261,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGroupParentListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MgmtGroupParentListResult.DeserializeMgmtGroupParentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -286,7 +286,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGroupParentListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MgmtGroupParentListResult.DeserializeMgmtGroupParentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -335,7 +335,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGroupParentListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MgmtGroupParentListResult.DeserializeMgmtGroupParentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -362,7 +362,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGroupParentListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MgmtGroupParentListResult.DeserializeMgmtGroupParentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

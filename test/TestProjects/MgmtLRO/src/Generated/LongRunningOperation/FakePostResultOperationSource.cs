@@ -18,13 +18,13 @@ namespace MgmtLRO
     {
         FakePostResult IOperationSource<FakePostResult>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
+            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
             return FakePostResult.DeserializeFakePostResult(document.RootElement);
         }
 
         async ValueTask<FakePostResult> IOperationSource<FakePostResult>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
             return FakePostResult.DeserializeFakePostResult(document.RootElement);
         }
     }

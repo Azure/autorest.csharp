@@ -47,7 +47,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.DefaultAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call DefaultAsync with all request content and parse the result.
@@ -60,7 +60,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.DefaultAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -76,7 +76,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Default(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Default with all request content and parse the result.
@@ -89,7 +89,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Default(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -139,7 +139,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Base64Async(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64Async with all request content and parse the result.
@@ -152,7 +152,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Base64Async(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -168,7 +168,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Base64(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64 with all request content and parse the result.
@@ -181,7 +181,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Base64(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -231,7 +231,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Base64urlAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64urlAsync with all request content and parse the result.
@@ -244,7 +244,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Base64urlAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -260,7 +260,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Base64url(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Base64url with all request content and parse the result.
@@ -273,7 +273,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Base64url(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -338,7 +338,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Base64urlArrayAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call Base64urlArrayAsync with all request content and parse the result.
@@ -354,7 +354,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Base64urlArrayAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code></example>
     </member>
@@ -373,7 +373,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Base64urlArray(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call Base64urlArray with all request content and parse the result.
@@ -389,7 +389,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Base64urlArray(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code></example>
     </member>

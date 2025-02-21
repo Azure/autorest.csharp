@@ -44,7 +44,7 @@ namespace _Specs_.Azure.Example.Basic.Samples
             });
             Response response = client.BasicAction("query", "header", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("stringProperty").ToString());
         }
 
@@ -74,7 +74,7 @@ namespace _Specs_.Azure.Example.Basic.Samples
             });
             Response response = await client.BasicActionAsync("query", "header", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
             Console.WriteLine(result.GetProperty("stringProperty").ToString());
         }
 

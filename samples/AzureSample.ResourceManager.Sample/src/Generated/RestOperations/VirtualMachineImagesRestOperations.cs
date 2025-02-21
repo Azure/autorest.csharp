@@ -109,7 +109,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineImage value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineImage.DeserializeVirtualMachineImage(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -143,7 +143,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineImage value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = VirtualMachineImage.DeserializeVirtualMachineImage(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -246,7 +246,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         IReadOnlyList<VirtualMachineImageResource> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         List<VirtualMachineImageResource> array = new List<VirtualMachineImageResource>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -286,7 +286,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         IReadOnlyList<VirtualMachineImageResource> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         List<VirtualMachineImageResource> array = new List<VirtualMachineImageResource>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -355,7 +355,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         IReadOnlyList<VirtualMachineImageResource> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         List<VirtualMachineImageResource> array = new List<VirtualMachineImageResource>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -388,7 +388,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         IReadOnlyList<VirtualMachineImageResource> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         List<VirtualMachineImageResource> array = new List<VirtualMachineImageResource>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -451,7 +451,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         IReadOnlyList<VirtualMachineImageResource> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         List<VirtualMachineImageResource> array = new List<VirtualMachineImageResource>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -482,7 +482,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         IReadOnlyList<VirtualMachineImageResource> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         List<VirtualMachineImageResource> array = new List<VirtualMachineImageResource>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -557,7 +557,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         IReadOnlyList<VirtualMachineImageResource> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         List<VirtualMachineImageResource> array = new List<VirtualMachineImageResource>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -592,7 +592,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         IReadOnlyList<VirtualMachineImageResource> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         List<VirtualMachineImageResource> array = new List<VirtualMachineImageResource>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {

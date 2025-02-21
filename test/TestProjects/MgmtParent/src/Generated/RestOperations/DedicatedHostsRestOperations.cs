@@ -397,7 +397,7 @@ namespace MgmtParent
                 case 200:
                     {
                         DedicatedHostData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = DedicatedHostData.DeserializeDedicatedHostData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -431,7 +431,7 @@ namespace MgmtParent
                 case 200:
                     {
                         DedicatedHostData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = DedicatedHostData.DeserializeDedicatedHostData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -498,7 +498,7 @@ namespace MgmtParent
                 case 200:
                     {
                         DedicatedHostListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = DedicatedHostListResult.DeserializeDedicatedHostListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -527,7 +527,7 @@ namespace MgmtParent
                 case 200:
                     {
                         DedicatedHostListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = DedicatedHostListResult.DeserializeDedicatedHostListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -580,7 +580,7 @@ namespace MgmtParent
                 case 200:
                     {
                         DedicatedHostListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = DedicatedHostListResult.DeserializeDedicatedHostListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -611,7 +611,7 @@ namespace MgmtParent
                 case 200:
                     {
                         DedicatedHostListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = DedicatedHostListResult.DeserializeDedicatedHostListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

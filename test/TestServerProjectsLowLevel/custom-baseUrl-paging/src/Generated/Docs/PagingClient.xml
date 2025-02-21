@@ -10,7 +10,7 @@ PagingClient client = new PagingClient("host", credential);
 
 await foreach (BinaryData item in client.GetPagesPartialUrlAsync("<accountName>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -21,7 +21,7 @@ PagingClient client = new PagingClient("host", credential);
 
 await foreach (BinaryData item in client.GetPagesPartialUrlAsync("<accountName>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
 }
@@ -36,7 +36,7 @@ PagingClient client = new PagingClient("host", credential);
 
 foreach (BinaryData item in client.GetPagesPartialUrl("<accountName>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -47,7 +47,7 @@ PagingClient client = new PagingClient("host", credential);
 
 foreach (BinaryData item in client.GetPagesPartialUrl("<accountName>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
 }
@@ -62,7 +62,7 @@ PagingClient client = new PagingClient("host", credential);
 
 await foreach (BinaryData item in client.GetPagesPartialUrlOperationAsync("<accountName>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -73,7 +73,7 @@ PagingClient client = new PagingClient("host", credential);
 
 await foreach (BinaryData item in client.GetPagesPartialUrlOperationAsync("<accountName>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
 }
@@ -88,7 +88,7 @@ PagingClient client = new PagingClient("host", credential);
 
 foreach (BinaryData item in client.GetPagesPartialUrlOperation("<accountName>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -99,7 +99,7 @@ PagingClient client = new PagingClient("host", credential);
 
 foreach (BinaryData item in client.GetPagesPartialUrlOperation("<accountName>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
 }
@@ -114,7 +114,7 @@ PagingClient client = new PagingClient("host", credential);
 
 await foreach (BinaryData item in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -125,7 +125,7 @@ PagingClient client = new PagingClient("host", credential);
 
 await foreach (BinaryData item in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
 }
@@ -140,7 +140,7 @@ PagingClient client = new PagingClient("host", credential);
 
 foreach (BinaryData item in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -151,7 +151,7 @@ PagingClient client = new PagingClient("host", credential);
 
 foreach (BinaryData item in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
 }

@@ -59,7 +59,7 @@ namespace body_complex
                 case 200:
                     {
                         MyBaseType value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = MyBaseType.DeserializeMyBaseType(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -78,7 +78,7 @@ namespace body_complex
                 case 200:
                     {
                         MyBaseType value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = MyBaseType.DeserializeMyBaseType(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

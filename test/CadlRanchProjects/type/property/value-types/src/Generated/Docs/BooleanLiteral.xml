@@ -39,7 +39,7 @@ BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
 Response response = await client.GetBooleanLiteralAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetBooleanLiteralAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
 Response response = await client.GetBooleanLiteralAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
@@ -60,7 +60,7 @@ BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
 Response response = client.GetBooleanLiteral(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetBooleanLiteral with all parameters and parse the result.
@@ -69,7 +69,7 @@ BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
 Response response = client.GetBooleanLiteral(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>

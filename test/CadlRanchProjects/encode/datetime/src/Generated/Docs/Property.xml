@@ -47,7 +47,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.DefaultAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call DefaultAsync with all request content and parse the result.
@@ -60,7 +60,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.DefaultAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -76,7 +76,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Default(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Default with all request content and parse the result.
@@ -89,7 +89,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Default(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -139,7 +139,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Rfc3339Async(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Rfc3339Async with all request content and parse the result.
@@ -152,7 +152,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Rfc3339Async(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -168,7 +168,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Rfc3339(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Rfc3339 with all request content and parse the result.
@@ -181,7 +181,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Rfc3339(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -231,7 +231,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Rfc7231Async(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Rfc7231Async with all request content and parse the result.
@@ -244,7 +244,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Rfc7231Async(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -260,7 +260,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Rfc7231(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Rfc7231 with all request content and parse the result.
@@ -273,7 +273,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Rfc7231(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -323,7 +323,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.UnixTimestampAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call UnixTimestampAsync with all request content and parse the result.
@@ -336,7 +336,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.UnixTimestampAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -352,7 +352,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.UnixTimestamp(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call UnixTimestamp with all request content and parse the result.
@@ -365,7 +365,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.UnixTimestamp(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -418,7 +418,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.UnixTimestampArrayAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call UnixTimestampArrayAsync with all request content and parse the result.
@@ -434,7 +434,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.UnixTimestampArrayAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code></example>
     </member>
@@ -453,7 +453,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.UnixTimestampArray(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call UnixTimestampArray with all request content and parse the result.
@@ -469,7 +469,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.UnixTimestampArray(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code></example>
     </member>

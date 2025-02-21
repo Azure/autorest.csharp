@@ -39,7 +39,7 @@ ModelValue client = new DictionaryClient().GetModelValueClient();
 
 Response response = await client.GetModelValueAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetModelValueAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ ModelValue client = new DictionaryClient().GetModelValueClient();
 
 Response response = await client.GetModelValueAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
 Console.WriteLine(result.GetProperty("<key>").GetProperty("children").GetProperty("<key>").GetProperty("property").ToString());
 ]]></code></example>
@@ -61,7 +61,7 @@ ModelValue client = new DictionaryClient().GetModelValueClient();
 
 Response response = client.GetModelValue(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetModelValue with all parameters and parse the result.
@@ -70,7 +70,7 @@ ModelValue client = new DictionaryClient().GetModelValueClient();
 
 Response response = client.GetModelValue(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
 Console.WriteLine(result.GetProperty("<key>").GetProperty("children").GetProperty("<key>").GetProperty("property").ToString());
 ]]></code></example>

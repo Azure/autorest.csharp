@@ -65,7 +65,7 @@ namespace _Specs_.Azure.Core.Page.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, new JsonDocumentOptions { MaxDepth = 256 }))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
@@ -161,7 +161,7 @@ namespace _Specs_.Azure.Core.Page.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
                         return DeserializeUser(document.RootElement, options);
                     }
                 default:
@@ -175,7 +175,7 @@ namespace _Specs_.Azure.Core.Page.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static User FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
             return DeserializeUser(document.RootElement);
         }
 

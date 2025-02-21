@@ -18,13 +18,13 @@ namespace MgmtAcronymMapping
     {
         VirtualMachineCaptureResult IOperationSource<VirtualMachineCaptureResult>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
+            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
             return VirtualMachineCaptureResult.DeserializeVirtualMachineCaptureResult(document.RootElement);
         }
 
         async ValueTask<VirtualMachineCaptureResult> IOperationSource<VirtualMachineCaptureResult>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
             return VirtualMachineCaptureResult.DeserializeVirtualMachineCaptureResult(document.RootElement);
         }
     }

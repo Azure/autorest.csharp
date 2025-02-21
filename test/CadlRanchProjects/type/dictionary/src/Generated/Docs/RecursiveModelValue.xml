@@ -39,7 +39,7 @@ RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient
 
 Response response = await client.GetRecursiveModelValueAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetRecursiveModelValueAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient
 
 Response response = await client.GetRecursiveModelValueAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
 Console.WriteLine(result.GetProperty("<key>").GetProperty("children").GetProperty("<key>").GetProperty("property").ToString());
 ]]></code></example>
@@ -61,7 +61,7 @@ RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient
 
 Response response = client.GetRecursiveModelValue(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetRecursiveModelValue with all parameters and parse the result.
@@ -70,7 +70,7 @@ RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient
 
 Response response = client.GetRecursiveModelValue(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
 Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
 Console.WriteLine(result.GetProperty("<key>").GetProperty("children").GetProperty("<key>").GetProperty("property").ToString());
 ]]></code></example>

@@ -40,7 +40,7 @@ namespace Scm._Type._Array
         {
             ClientResult result = await GetDurationValueAsync(null).ConfigureAwait(false);
             IReadOnlyList<TimeSpan> value = default;
-            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, default).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, default).ConfigureAwait(false);
             List<TimeSpan> array = new List<TimeSpan>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -55,7 +55,7 @@ namespace Scm._Type._Array
         {
             ClientResult result = GetDurationValue(null);
             IReadOnlyList<TimeSpan> value = default;
-            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream);
+            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
             List<TimeSpan> array = new List<TimeSpan>();
             foreach (var item in document.RootElement.EnumerateArray())
             {

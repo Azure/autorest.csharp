@@ -97,7 +97,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithNonResChData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = FakeParentWithNonResChData.DeserializeFakeParentWithNonResChData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -128,7 +128,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithNonResChData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = FakeParentWithNonResChData.DeserializeFakeParentWithNonResChData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -191,7 +191,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithNonResChData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = FakeParentWithNonResChData.DeserializeFakeParentWithNonResChData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -222,7 +222,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithNonResChData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = FakeParentWithNonResChData.DeserializeFakeParentWithNonResChData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -289,7 +289,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         NonResourceChildListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = NonResourceChildListResult.DeserializeNonResourceChildListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -318,7 +318,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         NonResourceChildListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = NonResourceChildListResult.DeserializeNonResourceChildListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -377,7 +377,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithNonResChListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = FakeParentWithNonResChListResult.DeserializeFakeParentWithNonResChListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -404,7 +404,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithNonResChListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = FakeParentWithNonResChListResult.DeserializeFakeParentWithNonResChListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -455,7 +455,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithNonResChListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = FakeParentWithNonResChListResult.DeserializeFakeParentWithNonResChListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -484,7 +484,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithNonResChListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = FakeParentWithNonResChListResult.DeserializeFakeParentWithNonResChListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

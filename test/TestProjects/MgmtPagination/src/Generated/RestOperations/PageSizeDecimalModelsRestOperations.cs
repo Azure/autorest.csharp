@@ -95,7 +95,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeDecimalModelListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PageSizeDecimalModelListResult.DeserializePageSizeDecimalModelListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -122,7 +122,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeDecimalModelListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PageSizeDecimalModelListResult.DeserializePageSizeDecimalModelListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -190,7 +190,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeDecimalModelData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -220,7 +220,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeDecimalModelData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -282,7 +282,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeDecimalModelData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -312,7 +312,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeDecimalModelData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -365,7 +365,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeDecimalModelListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
                         value = PageSizeDecimalModelListResult.DeserializePageSizeDecimalModelListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -394,7 +394,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeDecimalModelListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
                         value = PageSizeDecimalModelListResult.DeserializePageSizeDecimalModelListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
