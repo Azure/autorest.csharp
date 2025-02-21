@@ -246,7 +246,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Samples
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
             foreach (var itemValue in exampleListValue?.Values ?? Enumerable.Empty<InputExampleValue>())
             {
-                var elementExpression = GetExpression(elementType, itemValue, serializationFormat, includeCollectionInitialization);
+                // when we are instantiating the element of an array, the collection initialization should always be included.
+                var elementExpression = GetExpression(elementType, itemValue, serializationFormat, true);
                 elementExpressions.Add(elementExpression);
             }
 
@@ -273,7 +274,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Samples
             foreach (var (key, value) in exampleObjectValue?.Values ?? new Dictionary<string, InputExampleValue>())
             {
                 var keyExpression = GetExpression(keyType, InputExampleValue.Value(InputPrimitiveType.String, key), SerializationFormat.Default);
-                var valueExpression = GetExpression(valueType, value, serializationFormat, includeCollectionInitialization);
+                // when we are instantiating the element of a dictionary, the collection initialization should always be included.
+                var valueExpression = GetExpression(valueType, value, serializationFormat, true);
                 elementExpressions.Add((keyExpression, valueExpression));
             }
 

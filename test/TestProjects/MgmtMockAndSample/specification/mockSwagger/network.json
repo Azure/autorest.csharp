@@ -694,6 +694,16 @@
                 "sku": {
                     "description": "The Firewall Policy SKU.",
                     "$ref": "#/definitions/FirewallPolicySku"
+                },
+                "networkConfigurations": {
+                    "type": "array",
+                    "description": "List of references to Network Configuration resources.",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                    }
                 }
             },
             "description": "Firewall Policy definition."
