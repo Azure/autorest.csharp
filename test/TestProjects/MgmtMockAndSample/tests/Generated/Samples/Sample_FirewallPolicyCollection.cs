@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Azure;
@@ -217,6 +218,11 @@ DestinationPorts = {"*"},
                     Name = "clientcert",
                 },
                 SkuTier = FirewallPolicySkuTier.Premium,
+                NetworkConfigurations = {new Dictionary<string, string>
+{
+["config1"] = "value1",
+["config2"] = "value2"
+}},
                 Tags =
 {
 ["key1"] = "value1"
