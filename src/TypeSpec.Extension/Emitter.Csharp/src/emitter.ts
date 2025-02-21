@@ -7,39 +7,52 @@ import { execSync } from "child_process";
 import fs, { existsSync } from "fs";
 import path from "node:path";
 import {
-    $onEmit as $OnMGCEmit,
     Logger,
-    LoggerLevel,
     configurationFileName,
     tspOutputFileName,
-    setSDKContextOptions
+    createModel,
+    writeCodeModel,
+    CSharpEmitterContext
 } from "@typespec/http-client-csharp";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
-    AzureNetEmitterOptions,
+    AzureCSharpEmitterOptions,
     resolveAzureEmitterOptions
 } from "./options.js";
 import { azureSDKContextOptions } from "./sdk-context-options.js";
 
-export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
+export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
     const program: Program = context.program;
 
     if (program.compilerOptions.noEmit || program.hasError()) return;
 
     const options = resolveAzureEmitterOptions(context);
     /* set the loglevel. */
-    Logger.initialize(program, options.logLevel ?? LoggerLevel.INFO);
+    const logger = new Logger(program, options.logLevel);
 
-    context.options.skipSDKGeneration = true;
     if (
         context.emitterOutputDir &&
         path.basename(context.emitterOutputDir) === "src"
     ) {
         context.emitterOutputDir = path.dirname(context.emitterOutputDir);
     }
-    Logger.getInstance().info("Starting Microsoft Generator Csharp emitter.");
-    setSDKContextOptions(azureSDKContextOptions);
-    await $OnMGCEmit(context);
+    logger.info("Starting Microsoft Generator Csharp emitter.");
+    const sdkContext = await createSdkContext(
+        context,
+        "@azure-tools/typespec-csharp",
+        azureSDKContextOptions
+    );
+    const csharpEmitterContext: CSharpEmitterContext = {
+        logger: logger,
+        __typeCache: {
+            types: new Map(),
+            models: new Map(),
+            enums: new Map()
+        },
+        ...sdkContext
+    };
+    const root = createModel(csharpEmitterContext);
+
     const outputFolder = resolvePath(
         context.emitterOutputDir ?? "./tsp-output"
     );
@@ -47,14 +60,14 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
     const generatedFolder = isSrcFolder
         ? resolvePath(outputFolder, "Generated")
         : resolvePath(outputFolder, "src", "Generated");
-    if (options.skipSDKGeneration !== true) {
-        const configurationFilePath = resolvePath(
-            outputFolder,
-            configurationFileName
-        );
-        const configurations = JSON.parse(
-            fs.readFileSync(configurationFilePath, "utf-8")
-        );
+    if (root) {
+        if (!fs.existsSync(generatedFolder)) {
+            fs.mkdirSync(generatedFolder, { recursive: true });
+        }
+
+        // write the tspCodeModel.json file
+        await writeCodeModel(csharpEmitterContext, root, outputFolder);
+
         //resolve shared folders based on generator path override
         const resolvedSharedFolders: string[] = [];
         const sharedFolders = [
@@ -68,6 +81,20 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
                     .replaceAll("\\", "/")
             );
         }
+
+        const configurations: any = {};
+
+        configurations["output-folder"] = ".";
+
+        const namespace = options["namespace"] ?? root.Name;
+        configurations["namespace"] = namespace;
+        configurations["library-name"] = options["library-name"] ?? namespace;
+        configurations["unreferenced-types-handling"] =
+            options["unreferenced-types-handling"];
+        configurations["disable-xml-docs"] =
+            options["disable-xml-docs"] === false
+                ? undefined
+                : options["disable-xml-docs"];
 
         configurations["head-as-boolean"] = options["head-as-boolean"];
         configurations["deserialize-null-collection-as-null-value"] =
@@ -137,12 +164,11 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         }
         /* TODO: when we support to emit decorator list https://github.com/Azure/autorest.csharp/issues/4887, we will update to use emitted decorator to identify if it is azure-arm */
         /* set azure-arm */
-        const sdkContext = await createSdkContext(
-            context,
-            "@azure-tools/typespec-csharp"
-        );
+
         configurations["azure-arm"] =
             sdkContext.arm === false ? undefined : sdkContext.arm;
+
+        // Write the config file
         await program.host.writeFile(
             resolvePath(outputFolder, configurationFileName),
             prettierOutput(JSON.stringify(configurations, null, 2))
@@ -152,7 +178,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
             isSrcFolder ? outputFolder : resolvePath(outputFolder, "src"),
             `${configurations["library-name"]}.csproj`
         );
-        Logger.getInstance().info(`Checking if ${csProjFile} exists`);
+        logger.info(`Checking if ${csProjFile} exists`);
         const newProjectOption =
             options["new-project"] || !existsSync(csProjFile)
                 ? "--new-project"
@@ -167,30 +193,33 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         )} --project-path ${outputFolder} ${newProjectOption} ${existingProjectOption} --clear-output-folder ${
             options["clear-output-folder"]
         }${debugFlag}`;
-        Logger.getInstance().info(command);
+        logger.info(command);
 
         try {
             execSync(command, { stdio: "inherit" });
         } catch (error: any) {
-            if (error.message) Logger.getInstance().info(error.message);
-            if (error.stderr) Logger.getInstance().error(error.stderr);
-            if (error.stdout) Logger.getInstance().verbose(error.stdout);
+            if (error.message) logger.info(error.message);
+            if (error.stderr) logger.error(error.stderr);
+            if (error.stdout) logger.verbose(error.stdout);
             throw error;
         }
         if (!options["save-inputs"]) {
             // delete
-            deleteFile(resolvePath(outputFolder, tspOutputFileName));
-            deleteFile(resolvePath(outputFolder, configurationFileName));
+            deleteFile(resolvePath(outputFolder, tspOutputFileName), logger);
+            deleteFile(
+                resolvePath(outputFolder, configurationFileName),
+                logger
+            );
         }
     }
 }
 
-function deleteFile(filePath: string) {
+function deleteFile(filePath: string, logger: Logger) {
     fs.unlink(filePath, (err) => {
         if (err) {
             //logger.error(`stderr: ${err}`);
         } else {
-            Logger.getInstance().info(`File ${filePath} is deleted.`);
+            logger.info(`File ${filePath} is deleted.`);
         }
     });
 }

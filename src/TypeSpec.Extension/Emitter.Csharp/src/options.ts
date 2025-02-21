@@ -1,15 +1,16 @@
 import { EmitContext, JSONSchemaType } from "@typespec/compiler";
 import {
-    NetEmitterOptions,
-    NetEmitterOptionsSchema,
+    CSharpEmitterOptions,
+    CSharpEmitterOptionsSchema,
     defaultOptions,
     resolveOptions
 } from "@typespec/http-client-csharp";
 import { dllFilePath } from "@autorest/csharp";
 
-export interface AzureNetEmitterOptions extends NetEmitterOptions {
+export interface AzureCSharpEmitterOptions extends CSharpEmitterOptions {
     csharpGeneratorPath?: string;
     "model-namespace"?: boolean;
+    namespace?: string;
     "enable-internal-raw-data"?: boolean;
     "single-top-level-client"?: boolean;
     "existing-project-folder"?: string;
@@ -24,14 +25,15 @@ export interface AzureNetEmitterOptions extends NetEmitterOptions {
     "generate-sample-project"?: boolean;
     "generate-test-project"?: boolean;
     "use-model-reader-writer"?: boolean;
+    "library-name"?: string;
 }
 
-export const AzureNetEmitterOptionsSchema: JSONSchemaType<AzureNetEmitterOptions> =
+export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterOptions> =
     {
         type: "object",
         additionalProperties: false,
         properties: {
-            ...NetEmitterOptionsSchema.properties,
+            ...CSharpEmitterOptionsSchema.properties,
             csharpGeneratorPath: {
                 type: "string",
                 default: dllFilePath,
@@ -83,7 +85,9 @@ export const AzureNetEmitterOptionsSchema: JSONSchemaType<AzureNetEmitterOptions
                 nullable: true,
                 default: false
             },
-            "use-model-reader-writer": { type: "boolean", nullable: true }
+            "use-model-reader-writer": { type: "boolean", nullable: true },
+            namespace: { type: "string", nullable: true },
+            "library-name": { type: "string", nullable: true }
         },
         required: []
     };
@@ -103,11 +107,12 @@ const defaultAzureEmitterOptions = {
     "generate-sample-project": true,
     "use-model-reader-writer": true,
     "single-top-level-client": undefined,
-    "keep-non-overloadable-protocol-signature": undefined
+    "keep-non-overloadable-protocol-signature": undefined,
+    "library-name": undefined
 };
 
 export function resolveAzureEmitterOptions(
-    context: EmitContext<AzureNetEmitterOptions>
+    context: EmitContext<AzureCSharpEmitterOptions>
 ) {
     return {
         ...resolveOptions(context),
@@ -159,6 +164,8 @@ export function resolveAzureEmitterOptions(
             context.options["keep-non-overloadable-protocol-signature"] ??
             defaultAzureEmitterOptions[
                 "keep-non-overloadable-protocol-signature"
-            ]
+            ],
+        namespace: context.options.namespace,
+        "library-name": context.options["package-name"]
     };
 }
