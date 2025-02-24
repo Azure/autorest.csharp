@@ -219,7 +219,7 @@ namespace CognitiveSearch
                 case 201:
                     {
                         Indexer value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = Indexer.DeserializeIndexer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -255,7 +255,7 @@ namespace CognitiveSearch
                 case 201:
                     {
                         Indexer value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = Indexer.DeserializeIndexer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -373,7 +373,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         Indexer value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = Indexer.DeserializeIndexer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -401,7 +401,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         Indexer value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = Indexer.DeserializeIndexer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -441,7 +441,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         ListIndexersResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ListIndexersResult.DeserializeListIndexersResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -463,7 +463,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         ListIndexersResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ListIndexersResult.DeserializeListIndexersResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -509,7 +509,7 @@ namespace CognitiveSearch
                 case 201:
                     {
                         Indexer value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = Indexer.DeserializeIndexer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -537,7 +537,7 @@ namespace CognitiveSearch
                 case 201:
                     {
                         Indexer value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = Indexer.DeserializeIndexer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -581,7 +581,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         IndexerExecutionInfo value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = IndexerExecutionInfo.DeserializeIndexerExecutionInfo(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -609,7 +609,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         IndexerExecutionInfo value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = IndexerExecutionInfo.DeserializeIndexerExecutionInfo(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

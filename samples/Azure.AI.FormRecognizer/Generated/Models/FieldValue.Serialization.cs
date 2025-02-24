@@ -187,7 +187,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static FieldValue FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeFieldValue(document.RootElement);
         }
     }

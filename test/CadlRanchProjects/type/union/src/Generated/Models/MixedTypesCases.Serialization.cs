@@ -39,7 +39,7 @@ namespace _Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Model);
 #else
-            using (JsonDocument document = JsonDocument.Parse(Model, new JsonDocumentOptions { MaxDepth = 256 }))
+            using (JsonDocument document = JsonDocument.Parse(Model, ModelSerializationExtensions.JsonDocumentOptions))
             {
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
@@ -48,7 +48,7 @@ namespace _Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Literal);
 #else
-            using (JsonDocument document = JsonDocument.Parse(Literal, new JsonDocumentOptions { MaxDepth = 256 }))
+            using (JsonDocument document = JsonDocument.Parse(Literal, ModelSerializationExtensions.JsonDocumentOptions))
             {
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
@@ -57,7 +57,7 @@ namespace _Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Int);
 #else
-            using (JsonDocument document = JsonDocument.Parse(Int, new JsonDocumentOptions { MaxDepth = 256 }))
+            using (JsonDocument document = JsonDocument.Parse(Int, ModelSerializationExtensions.JsonDocumentOptions))
             {
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
@@ -66,7 +66,7 @@ namespace _Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Boolean);
 #else
-            using (JsonDocument document = JsonDocument.Parse(Boolean, new JsonDocumentOptions { MaxDepth = 256 }))
+            using (JsonDocument document = JsonDocument.Parse(Boolean, ModelSerializationExtensions.JsonDocumentOptions))
             {
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
@@ -83,7 +83,7 @@ namespace _Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item);
 #else
-                using (JsonDocument document = JsonDocument.Parse(item, new JsonDocumentOptions { MaxDepth = 256 }))
+                using (JsonDocument document = JsonDocument.Parse(item, ModelSerializationExtensions.JsonDocumentOptions))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
@@ -98,7 +98,7 @@ namespace _Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, new JsonDocumentOptions { MaxDepth = 256 }))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
@@ -209,7 +209,7 @@ namespace _Type.Union.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeMixedTypesCases(document.RootElement, options);
                     }
                 default:
@@ -223,7 +223,7 @@ namespace _Type.Union.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static MixedTypesCases FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeMixedTypesCases(document.RootElement);
         }
 

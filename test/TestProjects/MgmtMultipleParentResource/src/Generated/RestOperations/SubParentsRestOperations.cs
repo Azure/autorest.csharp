@@ -398,7 +398,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                     {
                         SubParentData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SubParentData.DeserializeSubParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -432,7 +432,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                     {
                         SubParentData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SubParentData.DeserializeSubParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -508,7 +508,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                     {
                         SubParentsListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SubParentsListResult.DeserializeSubParentsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -538,7 +538,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                     {
                         SubParentsListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SubParentsListResult.DeserializeSubParentsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -592,7 +592,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                     {
                         SubParentsListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SubParentsListResult.DeserializeSubParentsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -624,7 +624,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                     {
                         SubParentsListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SubParentsListResult.DeserializeSubParentsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

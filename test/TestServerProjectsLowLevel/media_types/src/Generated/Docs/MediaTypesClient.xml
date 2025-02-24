@@ -11,7 +11,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = null;
 Response response = await client.AnalyzeBodyAsync(content, new ContentType("application/pdf"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call AnalyzeBodyAsync with all parameters and request content and parse the result.
@@ -22,7 +22,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.AnalyzeBodyAsync(content, new ContentType("application/pdf"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -36,7 +36,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = null;
 Response response = client.AnalyzeBody(content, new ContentType("application/pdf"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call AnalyzeBody with all parameters and request content and parse the result.
@@ -47,7 +47,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.AnalyzeBody(content, new ContentType("application/pdf"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -107,7 +107,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = null;
 Response response = await client.ContentTypeWithEncodingAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call ContentTypeWithEncodingAsync with all request content and parse the result.
@@ -118,7 +118,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create("<input>");
 Response response = await client.ContentTypeWithEncodingAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -132,7 +132,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = null;
 Response response = client.ContentTypeWithEncoding(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call ContentTypeWithEncoding with all request content and parse the result.
@@ -143,7 +143,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create("<input>");
 Response response = client.ContentTypeWithEncoding(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -157,7 +157,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.BinaryBodyWithTwoContentTypesAsync(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call BinaryBodyWithTwoContentTypesAsync with all parameters and request content and parse the result.
@@ -168,7 +168,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.BinaryBodyWithTwoContentTypesAsync(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -182,7 +182,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.BinaryBodyWithTwoContentTypes(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call BinaryBodyWithTwoContentTypes with all parameters and request content and parse the result.
@@ -193,7 +193,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.BinaryBodyWithTwoContentTypes(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -207,7 +207,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.BinaryBodyWithThreeContentTypesAsync(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call BinaryBodyWithThreeContentTypesAsync with all parameters and request content and parse the result.
@@ -218,7 +218,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.BinaryBodyWithThreeContentTypesAsync(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -232,7 +232,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.BinaryBodyWithThreeContentTypes(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call BinaryBodyWithThreeContentTypes with all parameters and request content and parse the result.
@@ -243,7 +243,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.BinaryBodyWithThreeContentTypes(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -257,7 +257,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.BodyThreeTypesAsync(content, new ContentType("application/octet-stream"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call BodyThreeTypesAsync with all parameters and request content and parse the result.
@@ -268,7 +268,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.BodyThreeTypesAsync(content, new ContentType("application/octet-stream"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -282,7 +282,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.BodyThreeTypes(content, new ContentType("application/octet-stream"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call BodyThreeTypes with all parameters and request content and parse the result.
@@ -293,7 +293,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.BodyThreeTypes(content, new ContentType("application/octet-stream"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -307,7 +307,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create("<message>");
 Response response = await client.PutTextAndJsonBodyAsync(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutTextAndJsonBodyAsync with all parameters and request content and parse the result.
@@ -318,7 +318,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create("<message>");
 Response response = await client.PutTextAndJsonBodyAsync(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -332,7 +332,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create("<message>");
 Response response = client.PutTextAndJsonBody(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutTextAndJsonBody with all parameters and request content and parse the result.
@@ -343,7 +343,7 @@ MediaTypesClient client = new MediaTypesClient(credential);
 using RequestContent content = RequestContent.Create("<message>");
 Response response = client.PutTextAndJsonBody(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

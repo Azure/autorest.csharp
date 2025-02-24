@@ -95,7 +95,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeFloatModelListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = PageSizeFloatModelListResult.DeserializePageSizeFloatModelListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -122,7 +122,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeFloatModelListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = PageSizeFloatModelListResult.DeserializePageSizeFloatModelListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -190,7 +190,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeFloatModelData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = PageSizeFloatModelData.DeserializePageSizeFloatModelData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -220,7 +220,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeFloatModelData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = PageSizeFloatModelData.DeserializePageSizeFloatModelData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -282,7 +282,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeFloatModelData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = PageSizeFloatModelData.DeserializePageSizeFloatModelData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -312,7 +312,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeFloatModelData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = PageSizeFloatModelData.DeserializePageSizeFloatModelData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -365,7 +365,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeFloatModelListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = PageSizeFloatModelListResult.DeserializePageSizeFloatModelListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -394,7 +394,7 @@ namespace MgmtPagination
                 case 200:
                     {
                         PageSizeFloatModelListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = PageSizeFloatModelListResult.DeserializePageSizeFloatModelListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

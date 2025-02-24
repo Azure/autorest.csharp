@@ -109,7 +109,7 @@ namespace Payload.MediaType.Samples
 
             Response response = client.GetAsText(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -121,7 +121,7 @@ namespace Payload.MediaType.Samples
 
             Response response = await client.GetAsTextAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -151,7 +151,7 @@ namespace Payload.MediaType.Samples
 
             Response response = client.GetAsText(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -163,7 +163,7 @@ namespace Payload.MediaType.Samples
 
             Response response = await client.GetAsTextAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -277,7 +277,7 @@ namespace Payload.MediaType.Samples
 
             Response response = client.GetAsJson(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -289,7 +289,7 @@ namespace Payload.MediaType.Samples
 
             Response response = await client.GetAsJsonAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -319,7 +319,7 @@ namespace Payload.MediaType.Samples
 
             Response response = client.GetAsJson(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -331,7 +331,7 @@ namespace Payload.MediaType.Samples
 
             Response response = await client.GetAsJsonAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 

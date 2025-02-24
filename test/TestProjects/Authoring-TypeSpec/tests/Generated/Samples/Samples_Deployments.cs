@@ -26,7 +26,7 @@ namespace AuthoringTypeSpec.Samples
 
             Response response = client.GetDeployment("<projectName>", "<deploymentName>");
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -39,7 +39,7 @@ namespace AuthoringTypeSpec.Samples
 
             Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -52,7 +52,7 @@ namespace AuthoringTypeSpec.Samples
 
             Response response = client.GetDeployment("<projectName>", "<deploymentName>");
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -65,7 +65,7 @@ namespace AuthoringTypeSpec.Samples
 
             Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -78,7 +78,7 @@ namespace AuthoringTypeSpec.Samples
 
             foreach (BinaryData item in client.GetDeployments("<projectName>"))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
@@ -92,7 +92,7 @@ namespace AuthoringTypeSpec.Samples
 
             await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
@@ -106,7 +106,7 @@ namespace AuthoringTypeSpec.Samples
 
             foreach (BinaryData item in client.GetDeployments("<projectName>"))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
@@ -120,7 +120,7 @@ namespace AuthoringTypeSpec.Samples
 
             await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
@@ -136,7 +136,7 @@ namespace AuthoringTypeSpec.Samples
             Operation<BinaryData> operation = client.DeployProject(WaitUntil.Completed, "<projectName>", "<deploymentName>", content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -151,7 +151,7 @@ namespace AuthoringTypeSpec.Samples
             Operation<BinaryData> operation = await client.DeployProjectAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>", content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -166,7 +166,7 @@ namespace AuthoringTypeSpec.Samples
             Operation<BinaryData> operation = client.DeployProject(WaitUntil.Completed, "<projectName>", "<deploymentName>", content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -181,7 +181,7 @@ namespace AuthoringTypeSpec.Samples
             Operation<BinaryData> operation = await client.DeployProjectAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>", content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 

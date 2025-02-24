@@ -47,7 +47,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.SafeintAsStringAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call SafeintAsStringAsync with all request content and parse the result.
@@ -60,7 +60,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.SafeintAsStringAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -76,7 +76,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.SafeintAsString(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call SafeintAsString with all request content and parse the result.
@@ -89,7 +89,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.SafeintAsString(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -142,7 +142,7 @@ Property client = new NumericClient().GetPropertyClient();
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.Uint32AsStringOptionalAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Uint32AsStringOptionalAsync with all request content and parse the result.
@@ -155,7 +155,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Uint32AsStringOptionalAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -168,7 +168,7 @@ Property client = new NumericClient().GetPropertyClient();
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.Uint32AsStringOptional(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Uint32AsStringOptional with all request content and parse the result.
@@ -181,7 +181,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Uint32AsStringOptional(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -231,7 +231,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Uint8AsStringAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Uint8AsStringAsync with all request content and parse the result.
@@ -244,7 +244,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Uint8AsStringAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -260,7 +260,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Uint8AsString(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Uint8AsString with all request content and parse the result.
@@ -273,7 +273,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Uint8AsString(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>

@@ -26,7 +26,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetNoItemNamePages(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -40,7 +40,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetNoItemNamePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -54,7 +54,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetNoItemNamePages(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -69,7 +69,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetNoItemNamePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -84,7 +84,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetEmptyNextLinkNamePages(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -98,7 +98,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetEmptyNextLinkNamePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -112,7 +112,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetEmptyNextLinkNamePages(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -127,7 +127,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetEmptyNextLinkNamePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -142,7 +142,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetNullNextLinkNamePages(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -156,7 +156,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetNullNextLinkNamePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -170,7 +170,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetNullNextLinkNamePages(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -185,7 +185,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetNullNextLinkNamePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -200,7 +200,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetSinglePages(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -214,7 +214,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetSinglePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -228,7 +228,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetSinglePages(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -243,7 +243,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetSinglePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -259,7 +259,7 @@ namespace paging_LowLevel.Samples
             using RequestContent content = RequestContent.Create(new object());
             foreach (BinaryData item in client.GetSinglePagesWithBodyParams(content))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -274,7 +274,7 @@ namespace paging_LowLevel.Samples
             using RequestContent content = RequestContent.Create(new object());
             await foreach (BinaryData item in client.GetSinglePagesWithBodyParamsAsync(content))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -292,7 +292,7 @@ namespace paging_LowLevel.Samples
             });
             foreach (BinaryData item in client.GetSinglePagesWithBodyParams(content))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -311,7 +311,7 @@ namespace paging_LowLevel.Samples
             });
             await foreach (BinaryData item in client.GetSinglePagesWithBodyParamsAsync(content))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -326,7 +326,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.FirstResponseEmpty(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -340,7 +340,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.FirstResponseEmptyAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -354,7 +354,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.FirstResponseEmpty(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -369,7 +369,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.FirstResponseEmptyAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -384,7 +384,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePages(null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -398,7 +398,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesAsync(null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -412,7 +412,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePages(1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -427,7 +427,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesAsync(1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -442,7 +442,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetWithQueryParams(1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -456,7 +456,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetWithQueryParamsAsync(1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -470,7 +470,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetWithQueryParams(1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -485,7 +485,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetWithQueryParamsAsync(1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -500,7 +500,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.DuplicateParams(null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -514,7 +514,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.DuplicateParamsAsync(null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -528,7 +528,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.DuplicateParams("<filter>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -543,7 +543,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.DuplicateParamsAsync("<filter>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -558,7 +558,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.PageWithMaxPageSize(null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -572,7 +572,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.PageWithMaxPageSizeAsync(null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -586,7 +586,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.PageWithMaxPageSize("5", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -601,7 +601,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.PageWithMaxPageSizeAsync("5", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -616,7 +616,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.NextOperationWithQueryParams(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -630,7 +630,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.NextOperationWithQueryParamsAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -644,7 +644,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.NextOperationWithQueryParams(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -659,7 +659,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.NextOperationWithQueryParamsAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -674,7 +674,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetOdataMultiplePages(null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -688,7 +688,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetOdataMultiplePagesAsync(null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -702,7 +702,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetOdataMultiplePages(1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -717,7 +717,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetOdataMultiplePagesAsync(1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -732,7 +732,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePagesWithOffset(1234, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -746,7 +746,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesWithOffsetAsync(1234, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -760,7 +760,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePagesWithOffset(1234, 1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -775,7 +775,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesWithOffsetAsync(1234, 1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -790,7 +790,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePagesRetryFirst(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -804,7 +804,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesRetryFirstAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -818,7 +818,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePagesRetryFirst(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -833,7 +833,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesRetryFirstAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -848,7 +848,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePagesRetrySecond(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -862,7 +862,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesRetrySecondAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -876,7 +876,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePagesRetrySecond(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -891,7 +891,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesRetrySecondAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -906,7 +906,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetSinglePagesFailure(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -920,7 +920,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetSinglePagesFailureAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -934,7 +934,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetSinglePagesFailure(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -949,7 +949,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetSinglePagesFailureAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -964,7 +964,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePagesFailure(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -978,7 +978,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesFailureAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -992,7 +992,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePagesFailure(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1007,7 +1007,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesFailureAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1022,7 +1022,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePagesFailureUri(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1036,7 +1036,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesFailureUriAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1050,7 +1050,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePagesFailureUri(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1065,7 +1065,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesFailureUriAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1080,7 +1080,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePagesFragmentNextLink("<tenant>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1094,7 +1094,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesFragmentNextLinkAsync("<tenant>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1108,7 +1108,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePagesFragmentNextLink("<tenant>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1123,7 +1123,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesFragmentNextLinkAsync("<tenant>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1138,7 +1138,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePagesFragmentWithGroupingNextLink("<tenant>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1152,7 +1152,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesFragmentWithGroupingNextLinkAsync("<tenant>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1166,7 +1166,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetMultiplePagesFragmentWithGroupingNextLink("<tenant>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1181,7 +1181,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetMultiplePagesFragmentWithGroupingNextLinkAsync("<tenant>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1196,7 +1196,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.AppendApiVersion(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1210,7 +1210,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.AppendApiVersionAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1224,7 +1224,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.AppendApiVersion(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1239,7 +1239,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.AppendApiVersionAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1254,7 +1254,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.ReplaceApiVersion(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1268,7 +1268,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.ReplaceApiVersionAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1282,7 +1282,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.ReplaceApiVersion(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1297,7 +1297,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.ReplaceApiVersionAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1312,7 +1312,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.NextFragment("<tenant>", "<nextLink>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1326,7 +1326,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.NextFragmentAsync("<tenant>", "<nextLink>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1340,7 +1340,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.NextFragment("<tenant>", "<nextLink>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1355,7 +1355,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.NextFragmentAsync("<tenant>", "<nextLink>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1370,7 +1370,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.NextFragmentWithGrouping("<tenant>", "<nextLink>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1384,7 +1384,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.NextFragmentWithGroupingAsync("<tenant>", "<nextLink>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1398,7 +1398,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.NextFragmentWithGrouping("<tenant>", "<nextLink>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1413,7 +1413,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.NextFragmentWithGroupingAsync("<tenant>", "<nextLink>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1428,7 +1428,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetPagingModelWithItemNameWithXMSClientName(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1442,7 +1442,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetPagingModelWithItemNameWithXMSClientNameAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1456,7 +1456,7 @@ namespace paging_LowLevel.Samples
 
             foreach (BinaryData item in client.GetPagingModelWithItemNameWithXMSClientName(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1471,7 +1471,7 @@ namespace paging_LowLevel.Samples
 
             await foreach (BinaryData item in client.GetPagingModelWithItemNameWithXMSClientNameAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1488,7 +1488,7 @@ namespace paging_LowLevel.Samples
             Pageable<BinaryData> responseData = operation.Value;
             foreach (BinaryData item in operation.Value)
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1504,7 +1504,7 @@ namespace paging_LowLevel.Samples
             AsyncPageable<BinaryData> responseData = operation.Value;
             await foreach (BinaryData item in operation.Value)
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -1520,7 +1520,7 @@ namespace paging_LowLevel.Samples
             Pageable<BinaryData> responseData = operation.Value;
             foreach (BinaryData item in operation.Value)
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }
@@ -1537,7 +1537,7 @@ namespace paging_LowLevel.Samples
             AsyncPageable<BinaryData> responseData = operation.Value;
             await foreach (BinaryData item in operation.Value)
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
             }

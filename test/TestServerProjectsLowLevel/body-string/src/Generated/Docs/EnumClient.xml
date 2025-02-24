@@ -10,7 +10,7 @@ EnumClient client = new EnumClient(credential);
 
 Response response = await client.GetNotExpandableAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNotExpandableAsync with all parameters and parse the result.
@@ -20,7 +20,7 @@ EnumClient client = new EnumClient(credential);
 
 Response response = await client.GetNotExpandableAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -33,7 +33,7 @@ EnumClient client = new EnumClient(credential);
 
 Response response = client.GetNotExpandable(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNotExpandable with all parameters and parse the result.
@@ -43,7 +43,7 @@ EnumClient client = new EnumClient(credential);
 
 Response response = client.GetNotExpandable(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -102,7 +102,7 @@ EnumClient client = new EnumClient(credential);
 
 Response response = await client.GetReferencedAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetReferencedAsync with all parameters and parse the result.
@@ -112,7 +112,7 @@ EnumClient client = new EnumClient(credential);
 
 Response response = await client.GetReferencedAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -125,7 +125,7 @@ EnumClient client = new EnumClient(credential);
 
 Response response = client.GetReferenced(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetReferenced with all parameters and parse the result.
@@ -135,7 +135,7 @@ EnumClient client = new EnumClient(credential);
 
 Response response = client.GetReferenced(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -194,7 +194,7 @@ EnumClient client = new EnumClient(credential);
 
 Response response = await client.GetReferencedConstantAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("ColorConstant").ToString());
 ]]></code>
 This sample shows how to call GetReferencedConstantAsync with all parameters and parse the result.
@@ -204,7 +204,7 @@ EnumClient client = new EnumClient(credential);
 
 Response response = await client.GetReferencedConstantAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("ColorConstant").ToString());
 Console.WriteLine(result.GetProperty("field1").ToString());
 ]]></code></example>
@@ -218,7 +218,7 @@ EnumClient client = new EnumClient(credential);
 
 Response response = client.GetReferencedConstant(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("ColorConstant").ToString());
 ]]></code>
 This sample shows how to call GetReferencedConstant with all parameters and parse the result.
@@ -228,7 +228,7 @@ EnumClient client = new EnumClient(credential);
 
 Response response = client.GetReferencedConstant(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("ColorConstant").ToString());
 Console.WriteLine(result.GetProperty("field1").ToString());
 ]]></code></example>

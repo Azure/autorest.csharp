@@ -254,7 +254,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeVirtualMachineImageResource(document.RootElement, options);
                     }
                 default:

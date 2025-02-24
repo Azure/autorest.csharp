@@ -53,7 +53,7 @@ namespace _Specs_.Azure.Core.Model
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetAzureCoreEmbeddingVectorAsync(context).ConfigureAwait(false);
             ReadOnlyMemory<int> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             int index = 0;
             int[] array = new int[document.RootElement.GetArrayLength()];
             foreach (var item in document.RootElement.EnumerateArray())
@@ -73,7 +73,7 @@ namespace _Specs_.Azure.Core.Model
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetAzureCoreEmbeddingVector(context);
             ReadOnlyMemory<int> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             int index = 0;
             int[] array = new int[document.RootElement.GetArrayLength()];
             foreach (var item in document.RootElement.EnumerateArray())

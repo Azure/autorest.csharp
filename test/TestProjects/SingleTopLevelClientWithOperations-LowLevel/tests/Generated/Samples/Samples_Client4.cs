@@ -25,7 +25,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
             Response response = client.Patch("<filter>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -38,7 +38,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
             Response response = await client.PatchAsync("<filter>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -51,7 +51,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
             Response response = client.Patch("<filter>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -64,7 +64,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
             Response response = await client.PatchAsync("<filter>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
     }

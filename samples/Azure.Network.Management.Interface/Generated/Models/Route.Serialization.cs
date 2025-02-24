@@ -131,7 +131,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Route FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeRoute(document.RootElement);
         }
 

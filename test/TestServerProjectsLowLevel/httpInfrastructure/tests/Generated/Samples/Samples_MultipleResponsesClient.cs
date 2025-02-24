@@ -25,7 +25,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model204NoModelDefaultError200Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -38,7 +38,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model204NoModelDefaultError200ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -51,7 +51,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model204NoModelDefaultError200Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -64,7 +64,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model204NoModelDefaultError200ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -77,7 +77,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model204NoModelDefaultError204Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -90,7 +90,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model204NoModelDefaultError204ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -103,7 +103,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model204NoModelDefaultError204Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -116,7 +116,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model204NoModelDefaultError204ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -129,7 +129,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model204NoModelDefaultError201Invalid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -142,7 +142,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model204NoModelDefaultError201InvalidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -155,7 +155,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model204NoModelDefaultError201Invalid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -168,7 +168,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model204NoModelDefaultError201InvalidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -181,7 +181,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model204NoModelDefaultError202None(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -194,7 +194,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model204NoModelDefaultError202NoneAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -207,7 +207,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model204NoModelDefaultError202None(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -220,7 +220,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model204NoModelDefaultError202NoneAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -233,7 +233,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model204NoModelDefaultError400Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -246,7 +246,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model204NoModelDefaultError400ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -259,7 +259,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model204NoModelDefaultError400Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -272,7 +272,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model204NoModelDefaultError400ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -285,7 +285,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model201ModelDefaultError200Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -298,7 +298,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model201ModelDefaultError200ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -311,7 +311,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model201ModelDefaultError200Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -324,7 +324,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model201ModelDefaultError200ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -337,7 +337,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model201ModelDefaultError201Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -350,7 +350,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model201ModelDefaultError201ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -363,7 +363,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model201ModelDefaultError201Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -376,7 +376,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model201ModelDefaultError201ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -389,7 +389,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model201ModelDefaultError400Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -402,7 +402,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model201ModelDefaultError400ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -415,7 +415,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200Model201ModelDefaultError400Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -428,7 +428,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200Model201ModelDefaultError400ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -441,7 +441,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError200Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -454,7 +454,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -467,7 +467,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError200Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -480,7 +480,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -493,7 +493,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError201Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -506,7 +506,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -519,7 +519,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError201Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -532,7 +532,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -545,7 +545,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError404Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -558,7 +558,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -571,7 +571,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError404Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -584,7 +584,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -597,7 +597,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError400Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -610,7 +610,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -623,7 +623,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError400Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -636,7 +636,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -985,7 +985,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.GetDefaultModelA200Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -998,7 +998,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.GetDefaultModelA200ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1011,7 +1011,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.GetDefaultModelA200Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1024,7 +1024,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.GetDefaultModelA200ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1037,7 +1037,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.GetDefaultModelA200None(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1050,7 +1050,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.GetDefaultModelA200NoneAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1063,7 +1063,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.GetDefaultModelA200None(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1076,7 +1076,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.GetDefaultModelA200NoneAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1377,7 +1377,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA200None(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1390,7 +1390,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA200NoneAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1403,7 +1403,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA200None(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1416,7 +1416,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA200NoneAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1429,7 +1429,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA200Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1442,7 +1442,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA200ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1455,7 +1455,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA200Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1468,7 +1468,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA200ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1481,7 +1481,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA200Invalid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1494,7 +1494,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA200InvalidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1507,7 +1507,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA200Invalid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1520,7 +1520,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA200InvalidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1533,7 +1533,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA400None(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1546,7 +1546,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA400NoneAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1559,7 +1559,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA400None(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1572,7 +1572,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA400NoneAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1585,7 +1585,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA400Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1598,7 +1598,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA400ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1611,7 +1611,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA400Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1624,7 +1624,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA400ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1637,7 +1637,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA400Invalid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1650,7 +1650,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA400InvalidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1663,7 +1663,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA400Invalid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1676,7 +1676,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA400InvalidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1689,7 +1689,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA202Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1702,7 +1702,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA202ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1715,7 +1715,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = client.Get200ModelA202Valid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
@@ -1728,7 +1728,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             Response response = await client.Get200ModelA202ValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
     }

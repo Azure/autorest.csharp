@@ -68,7 +68,7 @@ namespace non_string_enum
                 case 200:
                     {
                         string value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = document.RootElement.GetString();
                         return Response.FromValue(value, message.Response);
                     }
@@ -89,7 +89,7 @@ namespace non_string_enum
                 case 200:
                     {
                         string value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = document.RootElement.GetString();
                         return Response.FromValue(value, message.Response);
                     }
@@ -122,7 +122,7 @@ namespace non_string_enum
                 case 200:
                     {
                         IntEnum value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = new IntEnum(document.RootElement.GetInt32());
                         return Response.FromValue(value, message.Response);
                     }
@@ -142,7 +142,7 @@ namespace non_string_enum
                 case 200:
                     {
                         IntEnum value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = new IntEnum(document.RootElement.GetInt32());
                         return Response.FromValue(value, message.Response);
                     }

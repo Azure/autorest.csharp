@@ -115,7 +115,7 @@ EmptyClient client = new EmptyClient();
 
 Response response = await client.GetEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmptyAsync with all parameters and parse the result.
@@ -124,7 +124,7 @@ EmptyClient client = new EmptyClient();
 
 Response response = await client.GetEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -136,7 +136,7 @@ EmptyClient client = new EmptyClient();
 
 Response response = client.GetEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmpty with all parameters and parse the result.
@@ -145,7 +145,7 @@ EmptyClient client = new EmptyClient();
 
 Response response = client.GetEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -192,7 +192,7 @@ EmptyClient client = new EmptyClient();
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PostRoundTripEmptyAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PostRoundTripEmptyAsync with all request content and parse the result.
@@ -202,7 +202,7 @@ EmptyClient client = new EmptyClient();
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PostRoundTripEmptyAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -215,7 +215,7 @@ EmptyClient client = new EmptyClient();
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.PostRoundTripEmpty(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PostRoundTripEmpty with all request content and parse the result.
@@ -225,7 +225,7 @@ EmptyClient client = new EmptyClient();
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.PostRoundTripEmpty(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

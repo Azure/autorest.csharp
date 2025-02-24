@@ -96,7 +96,7 @@ namespace MgmtPropertyChooser
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -124,7 +124,7 @@ namespace MgmtPropertyChooser
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -475,7 +475,7 @@ namespace MgmtPropertyChooser
                 case 200:
                     {
                         VirtualMachineData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineData.DeserializeVirtualMachineData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -507,7 +507,7 @@ namespace MgmtPropertyChooser
                 case 200:
                     {
                         VirtualMachineData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineData.DeserializeVirtualMachineData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

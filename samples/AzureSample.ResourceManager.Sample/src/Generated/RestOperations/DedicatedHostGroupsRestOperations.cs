@@ -98,7 +98,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 201:
                     {
                         DedicatedHostGroupData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -130,7 +130,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 201:
                     {
                         DedicatedHostGroupData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -199,7 +199,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         DedicatedHostGroupData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -230,7 +230,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         DedicatedHostGroupData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -385,7 +385,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         DedicatedHostGroupData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -417,7 +417,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         DedicatedHostGroupData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -478,7 +478,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         DedicatedHostGroupListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DedicatedHostGroupListResult.DeserializeDedicatedHostGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -505,7 +505,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         DedicatedHostGroupListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DedicatedHostGroupListResult.DeserializeDedicatedHostGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -558,7 +558,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         DedicatedHostGroupListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DedicatedHostGroupListResult.DeserializeDedicatedHostGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -583,7 +583,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         DedicatedHostGroupListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DedicatedHostGroupListResult.DeserializeDedicatedHostGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -634,7 +634,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         DedicatedHostGroupListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DedicatedHostGroupListResult.DeserializeDedicatedHostGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -663,7 +663,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         DedicatedHostGroupListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DedicatedHostGroupListResult.DeserializeDedicatedHostGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -712,7 +712,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         DedicatedHostGroupListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DedicatedHostGroupListResult.DeserializeDedicatedHostGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -739,7 +739,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         DedicatedHostGroupListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DedicatedHostGroupListResult.DeserializeDedicatedHostGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

@@ -97,7 +97,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithAncestorWithNonResChWithLocData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakeParentWithAncestorWithNonResChWithLocData.DeserializeFakeParentWithAncestorWithNonResChWithLocData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -128,7 +128,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithAncestorWithNonResChWithLocData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakeParentWithAncestorWithNonResChWithLocData.DeserializeFakeParentWithAncestorWithNonResChWithLocData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -191,7 +191,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithAncestorWithNonResChWithLocData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakeParentWithAncestorWithNonResChWithLocData.DeserializeFakeParentWithAncestorWithNonResChWithLocData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -222,7 +222,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithAncestorWithNonResChWithLocData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakeParentWithAncestorWithNonResChWithLocData.DeserializeFakeParentWithAncestorWithNonResChWithLocData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -283,7 +283,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithAncestorWithNonResChWithLocListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakeParentWithAncestorWithNonResChWithLocListResult.DeserializeFakeParentWithAncestorWithNonResChWithLocListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -310,7 +310,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithAncestorWithNonResChWithLocListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakeParentWithAncestorWithNonResChWithLocListResult.DeserializeFakeParentWithAncestorWithNonResChWithLocListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -375,7 +375,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         NonResourceChildListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = NonResourceChildListResult.DeserializeNonResourceChildListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -404,7 +404,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         NonResourceChildListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = NonResourceChildListResult.DeserializeNonResourceChildListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -457,7 +457,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithAncestorWithNonResChWithLocListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakeParentWithAncestorWithNonResChWithLocListResult.DeserializeFakeParentWithAncestorWithNonResChWithLocListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -482,7 +482,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithAncestorWithNonResChWithLocListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakeParentWithAncestorWithNonResChWithLocListResult.DeserializeFakeParentWithAncestorWithNonResChWithLocListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -541,7 +541,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         NonResourceChildListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = NonResourceChildListResult.DeserializeNonResourceChildListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -568,7 +568,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         NonResourceChildListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = NonResourceChildListResult.DeserializeNonResourceChildListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -619,7 +619,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithAncestorWithNonResChWithLocListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakeParentWithAncestorWithNonResChWithLocListResult.DeserializeFakeParentWithAncestorWithNonResChWithLocListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -648,7 +648,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithAncestorWithNonResChWithLocListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakeParentWithAncestorWithNonResChWithLocListResult.DeserializeFakeParentWithAncestorWithNonResChWithLocListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -697,7 +697,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithAncestorWithNonResChWithLocListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakeParentWithAncestorWithNonResChWithLocListResult.DeserializeFakeParentWithAncestorWithNonResChWithLocListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -724,7 +724,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         FakeParentWithAncestorWithNonResChWithLocListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakeParentWithAncestorWithNonResChWithLocListResult.DeserializeFakeParentWithAncestorWithNonResChWithLocListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

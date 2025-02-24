@@ -39,7 +39,7 @@ ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArray
 
 Response response = await client.GetExtendsModelArrayAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
 ]]></code>
 This sample shows how to call GetExtendsModelArrayAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArray
 
 Response response = await client.GetExtendsModelArrayAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
 ]]></code></example>
     </member>
@@ -60,7 +60,7 @@ ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArray
 
 Response response = client.GetExtendsModelArray(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
 ]]></code>
 This sample shows how to call GetExtendsModelArray with all parameters and parse the result.
@@ -69,7 +69,7 @@ ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArray
 
 Response response = client.GetExtendsModelArray(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
 ]]></code></example>
     </member>

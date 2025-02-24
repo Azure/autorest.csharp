@@ -43,7 +43,7 @@ namespace CognitiveSearch.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new SqlIntegratedChangeTrackingPolicy FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeSqlIntegratedChangeTrackingPolicy(document.RootElement);
         }
 

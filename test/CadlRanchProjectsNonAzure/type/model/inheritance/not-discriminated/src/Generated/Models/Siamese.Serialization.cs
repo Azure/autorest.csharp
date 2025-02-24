@@ -106,7 +106,7 @@ namespace Scm._Type.Model.Inheritance.NotDiscriminated.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeSiamese(document.RootElement, options);
                     }
                 default:
@@ -120,7 +120,7 @@ namespace Scm._Type.Model.Inheritance.NotDiscriminated.Models
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static new Siamese FromResponse(PipelineResponse response)
         {
-            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeSiamese(document.RootElement);
         }
 

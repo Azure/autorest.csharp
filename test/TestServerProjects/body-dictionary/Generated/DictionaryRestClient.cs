@@ -61,7 +61,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, int> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, int> dictionary = new Dictionary<string, int>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -86,7 +86,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, int> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, int> dictionary = new Dictionary<string, int>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -124,7 +124,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, int> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, int> dictionary = new Dictionary<string, int>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -149,7 +149,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, int> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, int> dictionary = new Dictionary<string, int>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -254,7 +254,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, string> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -279,7 +279,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, string> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -317,7 +317,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, string> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -342,7 +342,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, string> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -380,7 +380,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, string> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -405,7 +405,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, string> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -443,7 +443,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, string> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -468,7 +468,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, string> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -506,7 +506,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, bool> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -531,7 +531,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, bool> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -636,7 +636,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, bool> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -661,7 +661,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, bool> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -699,7 +699,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, bool> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -724,7 +724,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, bool> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -762,7 +762,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, int> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, int> dictionary = new Dictionary<string, int>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -787,7 +787,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, int> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, int> dictionary = new Dictionary<string, int>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -892,7 +892,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, int> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, int> dictionary = new Dictionary<string, int>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -917,7 +917,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, int> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, int> dictionary = new Dictionary<string, int>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -955,7 +955,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, int> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, int> dictionary = new Dictionary<string, int>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -980,7 +980,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, int> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, int> dictionary = new Dictionary<string, int>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1018,7 +1018,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, long> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, long> dictionary = new Dictionary<string, long>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1043,7 +1043,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, long> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, long> dictionary = new Dictionary<string, long>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1148,7 +1148,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, long> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, long> dictionary = new Dictionary<string, long>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1173,7 +1173,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, long> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, long> dictionary = new Dictionary<string, long>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1211,7 +1211,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, long> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, long> dictionary = new Dictionary<string, long>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1236,7 +1236,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, long> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, long> dictionary = new Dictionary<string, long>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1274,7 +1274,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, float> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, float> dictionary = new Dictionary<string, float>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1299,7 +1299,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, float> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, float> dictionary = new Dictionary<string, float>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1404,7 +1404,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, float> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, float> dictionary = new Dictionary<string, float>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1429,7 +1429,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, float> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, float> dictionary = new Dictionary<string, float>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1467,7 +1467,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, float> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, float> dictionary = new Dictionary<string, float>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1492,7 +1492,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, float> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, float> dictionary = new Dictionary<string, float>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1530,7 +1530,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, double> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, double> dictionary = new Dictionary<string, double>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1555,7 +1555,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, double> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, double> dictionary = new Dictionary<string, double>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1660,7 +1660,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, double> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, double> dictionary = new Dictionary<string, double>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1685,7 +1685,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, double> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, double> dictionary = new Dictionary<string, double>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1723,7 +1723,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, double> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, double> dictionary = new Dictionary<string, double>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1748,7 +1748,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, double> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, double> dictionary = new Dictionary<string, double>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1786,7 +1786,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, string> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1811,7 +1811,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, string> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1916,7 +1916,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, string> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1941,7 +1941,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, string> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -1979,7 +1979,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, string> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2004,7 +2004,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, string> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, string> dictionary = new Dictionary<string, string>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2042,7 +2042,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2067,7 +2067,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2172,7 +2172,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2197,7 +2197,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2235,7 +2235,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2260,7 +2260,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2298,7 +2298,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2323,7 +2323,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2428,7 +2428,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2453,7 +2453,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2491,7 +2491,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2516,7 +2516,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2554,7 +2554,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2579,7 +2579,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2684,7 +2684,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, TimeSpan> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, TimeSpan> dictionary = new Dictionary<string, TimeSpan>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2709,7 +2709,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, TimeSpan> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, TimeSpan> dictionary = new Dictionary<string, TimeSpan>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2814,7 +2814,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, byte[]> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2839,7 +2839,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, byte[]> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2944,7 +2944,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, byte[]> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -2969,7 +2969,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, byte[]> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3007,7 +3007,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, byte[]> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3032,7 +3032,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, byte[]> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3070,7 +3070,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, Widget> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
                             value = null;
@@ -3102,7 +3102,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, Widget> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
                             value = null;
@@ -3147,7 +3147,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, Widget> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3172,7 +3172,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, Widget> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3210,7 +3210,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, Widget> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3235,7 +3235,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, Widget> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3273,7 +3273,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, Widget> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3298,7 +3298,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, Widget> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3336,7 +3336,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, Widget> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3361,7 +3361,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, Widget> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3466,7 +3466,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IList<string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
                             value = null;
@@ -3510,7 +3510,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IList<string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
                             value = null;
@@ -3567,7 +3567,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IList<string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3604,7 +3604,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IList<string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3654,7 +3654,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IList<string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3691,7 +3691,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IList<string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3741,7 +3741,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IList<string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3778,7 +3778,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IList<string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3828,7 +3828,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IList<string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3865,7 +3865,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IList<string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -3992,7 +3992,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -4029,7 +4029,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -4079,7 +4079,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -4116,7 +4116,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -4166,7 +4166,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -4203,7 +4203,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -4253,7 +4253,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -4290,7 +4290,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -4340,7 +4340,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
@@ -4377,7 +4377,7 @@ namespace body_dictionary
                 case 200:
                     {
                         IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {

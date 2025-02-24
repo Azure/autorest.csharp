@@ -10,7 +10,7 @@ ResourceServiceClient client = new ResourceServiceClient(credential);
 
 Response response = await client.GetParametersAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetParametersAsync with all parameters and parse the result.
@@ -20,7 +20,7 @@ ResourceServiceClient client = new ResourceServiceClient(credential);
 
 Response response = await client.GetParametersAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -33,7 +33,7 @@ ResourceServiceClient client = new ResourceServiceClient(credential);
 
 Response response = client.GetParameters(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetParameters with all parameters and parse the result.
@@ -43,7 +43,7 @@ ResourceServiceClient client = new ResourceServiceClient(credential);
 
 Response response = client.GetParameters(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -56,7 +56,7 @@ ResourceServiceClient client = new ResourceServiceClient(credential);
 
 await foreach (BinaryData item in client.GetGroupsAsync(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -67,7 +67,7 @@ ResourceServiceClient client = new ResourceServiceClient(credential);
 
 await foreach (BinaryData item in client.GetGroupsAsync(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code></example>
@@ -81,7 +81,7 @@ ResourceServiceClient client = new ResourceServiceClient(credential);
 
 foreach (BinaryData item in client.GetGroups(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -92,7 +92,7 @@ ResourceServiceClient client = new ResourceServiceClient(credential);
 
 foreach (BinaryData item in client.GetGroups(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code></example>
@@ -106,7 +106,7 @@ ResourceServiceClient client = new ResourceServiceClient(credential);
 
 await foreach (BinaryData item in client.GetAllItemsAsync(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -117,7 +117,7 @@ ResourceServiceClient client = new ResourceServiceClient(credential);
 
 await foreach (BinaryData item in client.GetAllItemsAsync(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code></example>
@@ -131,7 +131,7 @@ ResourceServiceClient client = new ResourceServiceClient(credential);
 
 foreach (BinaryData item in client.GetAllItems(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -142,7 +142,7 @@ ResourceServiceClient client = new ResourceServiceClient(credential);
 
 foreach (BinaryData item in client.GetAllItems(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code></example>

@@ -204,7 +204,7 @@ namespace model_flattening.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeFlattenedProduct(document.RootElement, options);
                     }
                 default:
@@ -218,7 +218,7 @@ namespace model_flattening.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new FlattenedProduct FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeFlattenedProduct(document.RootElement);
         }
 

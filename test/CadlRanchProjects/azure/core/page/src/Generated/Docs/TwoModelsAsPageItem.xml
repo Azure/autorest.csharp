@@ -47,7 +47,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 await foreach (BinaryData item in client.GetFirstItemsAsync(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
 }
 ]]></code>
@@ -57,7 +57,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 await foreach (BinaryData item in client.GetFirstItemsAsync(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
 }
 ]]></code></example>
@@ -70,7 +70,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 foreach (BinaryData item in client.GetFirstItems(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
 }
 ]]></code>
@@ -80,7 +80,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 foreach (BinaryData item in client.GetFirstItems(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
 }
 ]]></code></example>
@@ -131,7 +131,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 await foreach (BinaryData item in client.GetSecondItemsAsync(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code>
@@ -141,7 +141,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 await foreach (BinaryData item in client.GetSecondItemsAsync(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code></example>
@@ -154,7 +154,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 foreach (BinaryData item in client.GetSecondItems(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code>
@@ -164,7 +164,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 foreach (BinaryData item in client.GetSecondItems(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code></example>

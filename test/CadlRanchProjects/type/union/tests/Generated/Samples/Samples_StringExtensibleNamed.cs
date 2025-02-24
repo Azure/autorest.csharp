@@ -26,7 +26,7 @@ namespace _Type.Union.Samples
 
             Response response = client.GetStringExtensibleNamed(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
         }
 
@@ -38,7 +38,7 @@ namespace _Type.Union.Samples
 
             Response response = await client.GetStringExtensibleNamedAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
         }
 
@@ -68,7 +68,7 @@ namespace _Type.Union.Samples
 
             Response response = client.GetStringExtensibleNamed(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
         }
 
@@ -80,7 +80,7 @@ namespace _Type.Union.Samples
 
             Response response = await client.GetStringExtensibleNamedAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
         }
 

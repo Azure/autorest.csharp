@@ -71,7 +71,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = client.HelloAgain("<p2>", "<p1>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
@@ -146,7 +146,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
@@ -319,7 +319,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             });
             Response response = client.HelloAgain("<p2>", "<p1>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
@@ -454,7 +454,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
@@ -665,7 +665,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             });
             Response response = client.NoContentType("<p2>", "<p1>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
@@ -740,7 +740,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
@@ -855,7 +855,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             });
             Response response = client.NoContentType("<p2>", "<p1>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
@@ -990,7 +990,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
@@ -1042,7 +1042,7 @@ BinaryData.FromObjectAsJson("<unionList>")
 
             Response response = client.HelloDemoAgain(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -1063,7 +1063,7 @@ BinaryData.FromObjectAsJson("<unionList>")
 
             Response response = await client.HelloDemoAgainAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -1104,7 +1104,7 @@ BinaryData.FromObjectAsJson("<unionList>")
 
             Response response = client.HelloDemoAgain(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -1132,7 +1132,7 @@ BinaryData.FromObjectAsJson("<unionList>")
 
             Response response = await client.HelloDemoAgainAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -1195,7 +1195,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             });
             Response response = client.CreateLiteral(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -1231,7 +1231,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             });
             Response response = await client.CreateLiteralAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -1299,7 +1299,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             });
             Response response = client.CreateLiteral(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -1352,7 +1352,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             });
             Response response = await client.CreateLiteralAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -1420,7 +1420,7 @@ BinaryData.FromObjectAsJson("<unionList>")
 
             Response response = client.HelloLiteral(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -1441,7 +1441,7 @@ BinaryData.FromObjectAsJson("<unionList>")
 
             Response response = await client.HelloLiteralAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -1482,7 +1482,7 @@ BinaryData.FromObjectAsJson("<unionList>")
 
             Response response = client.HelloLiteral(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -1510,7 +1510,7 @@ BinaryData.FromObjectAsJson("<unionList>")
 
             Response response = await client.HelloLiteralAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());

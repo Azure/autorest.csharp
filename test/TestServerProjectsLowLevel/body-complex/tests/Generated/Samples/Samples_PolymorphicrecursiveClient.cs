@@ -26,7 +26,7 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetValid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());
         }
@@ -40,7 +40,7 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());
         }
@@ -54,7 +54,7 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetValid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("species").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());
@@ -72,7 +72,7 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("species").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());

@@ -61,7 +61,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<int> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<int> array = new List<int>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -86,7 +86,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<int> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<int> array = new List<int>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -124,7 +124,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<int> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<int> array = new List<int>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -149,7 +149,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<int> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<int> array = new List<int>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -187,7 +187,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<int> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<int> array = new List<int>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -212,7 +212,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<int> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<int> array = new List<int>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -316,7 +316,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<bool> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<bool> array = new List<bool>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -341,7 +341,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<bool> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<bool> array = new List<bool>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -445,7 +445,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<bool> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<bool> array = new List<bool>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -470,7 +470,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<bool> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<bool> array = new List<bool>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -508,7 +508,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<bool> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<bool> array = new List<bool>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -533,7 +533,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<bool> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<bool> array = new List<bool>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -571,7 +571,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<int> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<int> array = new List<int>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -596,7 +596,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<int> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<int> array = new List<int>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -700,7 +700,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<int> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<int> array = new List<int>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -725,7 +725,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<int> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<int> array = new List<int>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -763,7 +763,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<int> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<int> array = new List<int>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -788,7 +788,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<int> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<int> array = new List<int>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -826,7 +826,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<long> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<long> array = new List<long>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -851,7 +851,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<long> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<long> array = new List<long>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -955,7 +955,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<long> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<long> array = new List<long>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -980,7 +980,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<long> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<long> array = new List<long>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1018,7 +1018,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<long> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<long> array = new List<long>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1043,7 +1043,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<long> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<long> array = new List<long>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1081,7 +1081,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<float> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<float> array = new List<float>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1106,7 +1106,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<float> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<float> array = new List<float>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1210,7 +1210,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<float> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<float> array = new List<float>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1235,7 +1235,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<float> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<float> array = new List<float>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1273,7 +1273,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<float> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<float> array = new List<float>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1298,7 +1298,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<float> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<float> array = new List<float>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1336,7 +1336,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<double> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<double> array = new List<double>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1361,7 +1361,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<double> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<double> array = new List<double>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1465,7 +1465,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<double> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<double> array = new List<double>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1490,7 +1490,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<double> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<double> array = new List<double>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1528,7 +1528,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<double> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<double> array = new List<double>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1553,7 +1553,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<double> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<double> array = new List<double>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1591,7 +1591,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<string> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<string> array = new List<string>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1616,7 +1616,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<string> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<string> array = new List<string>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1720,7 +1720,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<FooEnum> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<FooEnum> array = new List<FooEnum>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1745,7 +1745,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<FooEnum> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<FooEnum> array = new List<FooEnum>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1849,7 +1849,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Enum0> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<Enum0> array = new List<Enum0>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1874,7 +1874,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Enum0> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<Enum0> array = new List<Enum0>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -1978,7 +1978,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<string> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<string> array = new List<string>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2003,7 +2003,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<string> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<string> array = new List<string>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2041,7 +2041,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<string> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<string> array = new List<string>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2066,7 +2066,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<string> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<string> array = new List<string>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2104,7 +2104,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Guid> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<Guid> array = new List<Guid>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2129,7 +2129,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Guid> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<Guid> array = new List<Guid>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2233,7 +2233,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Guid> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<Guid> array = new List<Guid>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2258,7 +2258,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Guid> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<Guid> array = new List<Guid>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2296,7 +2296,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<DateTimeOffset> array = new List<DateTimeOffset>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2321,7 +2321,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<DateTimeOffset> array = new List<DateTimeOffset>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2425,7 +2425,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<DateTimeOffset> array = new List<DateTimeOffset>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2450,7 +2450,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<DateTimeOffset> array = new List<DateTimeOffset>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2488,7 +2488,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<DateTimeOffset> array = new List<DateTimeOffset>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2513,7 +2513,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<DateTimeOffset> array = new List<DateTimeOffset>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2551,7 +2551,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<DateTimeOffset> array = new List<DateTimeOffset>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2576,7 +2576,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<DateTimeOffset> array = new List<DateTimeOffset>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2680,7 +2680,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<DateTimeOffset> array = new List<DateTimeOffset>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2705,7 +2705,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<DateTimeOffset> array = new List<DateTimeOffset>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2743,7 +2743,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<DateTimeOffset> array = new List<DateTimeOffset>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2768,7 +2768,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<DateTimeOffset> array = new List<DateTimeOffset>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2806,7 +2806,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<DateTimeOffset> array = new List<DateTimeOffset>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2831,7 +2831,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<DateTimeOffset> array = new List<DateTimeOffset>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2935,7 +2935,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<TimeSpan> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<TimeSpan> array = new List<TimeSpan>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -2960,7 +2960,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<TimeSpan> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<TimeSpan> array = new List<TimeSpan>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3064,7 +3064,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<byte[]> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<byte[]> array = new List<byte[]>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3089,7 +3089,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<byte[]> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<byte[]> array = new List<byte[]>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3193,7 +3193,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<byte[]> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<byte[]> array = new List<byte[]>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3218,7 +3218,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<byte[]> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<byte[]> array = new List<byte[]>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3256,7 +3256,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<byte[]> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<byte[]> array = new List<byte[]>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3281,7 +3281,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<byte[]> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<byte[]> array = new List<byte[]>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3319,7 +3319,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Product> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3344,7 +3344,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Product> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3382,7 +3382,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Product> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3407,7 +3407,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Product> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3445,7 +3445,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Product> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3470,7 +3470,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Product> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3508,7 +3508,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Product> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3533,7 +3533,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Product> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3571,7 +3571,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Product> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3596,7 +3596,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<Product> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3700,7 +3700,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IList<string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3737,7 +3737,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IList<string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3787,7 +3787,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IList<string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3824,7 +3824,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IList<string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3874,7 +3874,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IList<string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3911,7 +3911,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IList<string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3961,7 +3961,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IList<string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -3998,7 +3998,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IList<string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -4048,7 +4048,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IList<string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -4085,7 +4085,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IList<string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<IList<string>> array = new List<IList<string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -4211,7 +4211,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -4248,7 +4248,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -4298,7 +4298,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -4335,7 +4335,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -4385,7 +4385,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -4422,7 +4422,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -4472,7 +4472,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -4509,7 +4509,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -4559,7 +4559,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -4596,7 +4596,7 @@ namespace body_array
                 case 200:
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {

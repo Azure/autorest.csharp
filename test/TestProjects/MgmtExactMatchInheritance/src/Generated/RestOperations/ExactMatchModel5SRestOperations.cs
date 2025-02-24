@@ -86,7 +86,7 @@ namespace MgmtExactMatchInheritance
                 case 200:
                     {
                         ExactMatchModel5ListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ExactMatchModel5ListResult.DeserializeExactMatchModel5ListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -112,7 +112,7 @@ namespace MgmtExactMatchInheritance
                 case 200:
                     {
                         ExactMatchModel5ListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ExactMatchModel5ListResult.DeserializeExactMatchModel5ListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -180,7 +180,7 @@ namespace MgmtExactMatchInheritance
                 case 200:
                     {
                         ExactMatchModel5Data value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ExactMatchModel5Data.DeserializeExactMatchModel5Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -210,7 +210,7 @@ namespace MgmtExactMatchInheritance
                 case 200:
                     {
                         ExactMatchModel5Data value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ExactMatchModel5Data.DeserializeExactMatchModel5Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -272,7 +272,7 @@ namespace MgmtExactMatchInheritance
                 case 200:
                     {
                         ExactMatchModel5Data value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ExactMatchModel5Data.DeserializeExactMatchModel5Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -302,7 +302,7 @@ namespace MgmtExactMatchInheritance
                 case 200:
                     {
                         ExactMatchModel5Data value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ExactMatchModel5Data.DeserializeExactMatchModel5Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

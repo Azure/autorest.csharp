@@ -87,7 +87,7 @@ namespace MgmtDiscriminator
                 case 200:
                     {
                         DeliveryRuleListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DeliveryRuleListResult.DeserializeDeliveryRuleListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -114,7 +114,7 @@ namespace MgmtDiscriminator
                 case 200:
                     {
                         DeliveryRuleListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DeliveryRuleListResult.DeserializeDeliveryRuleListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -177,7 +177,7 @@ namespace MgmtDiscriminator
                 case 200:
                     {
                         DeliveryRuleData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DeliveryRuleData.DeserializeDeliveryRuleData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -208,7 +208,7 @@ namespace MgmtDiscriminator
                 case 200:
                     {
                         DeliveryRuleData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DeliveryRuleData.DeserializeDeliveryRuleData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -463,7 +463,7 @@ namespace MgmtDiscriminator
                 case 200:
                     {
                         DerivedModel value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DerivedModel.DeserializeDerivedModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -493,7 +493,7 @@ namespace MgmtDiscriminator
                 case 200:
                     {
                         DerivedModel value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DerivedModel.DeserializeDerivedModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

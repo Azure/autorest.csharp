@@ -87,7 +87,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         WorkspaceListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = WorkspaceListResult.DeserializeWorkspaceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -114,7 +114,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         WorkspaceListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = WorkspaceListResult.DeserializeWorkspaceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -177,7 +177,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         WorkspaceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = WorkspaceData.DeserializeWorkspaceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -208,7 +208,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         WorkspaceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = WorkspaceData.DeserializeWorkspaceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -459,7 +459,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         WorkspaceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = WorkspaceData.DeserializeWorkspaceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -490,7 +490,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         WorkspaceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = WorkspaceData.DeserializeWorkspaceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

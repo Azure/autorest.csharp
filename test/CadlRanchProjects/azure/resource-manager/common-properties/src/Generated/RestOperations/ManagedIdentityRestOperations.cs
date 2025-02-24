@@ -90,7 +90,7 @@ namespace _Azure.ResourceManager.CommonProperties
                 case 200:
                     {
                         ManagedIdentityTrackedResourceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ManagedIdentityTrackedResourceData.DeserializeManagedIdentityTrackedResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -121,7 +121,7 @@ namespace _Azure.ResourceManager.CommonProperties
                 case 200:
                     {
                         ManagedIdentityTrackedResourceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ManagedIdentityTrackedResourceData.DeserializeManagedIdentityTrackedResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -193,7 +193,7 @@ namespace _Azure.ResourceManager.CommonProperties
                 case 201:
                     {
                         ManagedIdentityTrackedResourceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ManagedIdentityTrackedResourceData.DeserializeManagedIdentityTrackedResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -225,7 +225,7 @@ namespace _Azure.ResourceManager.CommonProperties
                 case 201:
                     {
                         ManagedIdentityTrackedResourceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ManagedIdentityTrackedResourceData.DeserializeManagedIdentityTrackedResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -294,7 +294,7 @@ namespace _Azure.ResourceManager.CommonProperties
                 case 200:
                     {
                         ManagedIdentityTrackedResourceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ManagedIdentityTrackedResourceData.DeserializeManagedIdentityTrackedResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -325,7 +325,7 @@ namespace _Azure.ResourceManager.CommonProperties
                 case 200:
                     {
                         ManagedIdentityTrackedResourceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ManagedIdentityTrackedResourceData.DeserializeManagedIdentityTrackedResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

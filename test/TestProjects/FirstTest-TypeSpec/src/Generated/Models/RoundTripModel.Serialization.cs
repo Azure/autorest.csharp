@@ -125,7 +125,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnknown);
 #else
-            using (JsonDocument document = JsonDocument.Parse(RequiredUnknown, new JsonDocumentOptions { MaxDepth = 256 }))
+            using (JsonDocument document = JsonDocument.Parse(RequiredUnknown, ModelSerializationExtensions.JsonDocumentOptions))
             {
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
@@ -136,7 +136,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(OptionalUnknown);
 #else
-                using (JsonDocument document = JsonDocument.Parse(OptionalUnknown, new JsonDocumentOptions { MaxDepth = 256 }))
+                using (JsonDocument document = JsonDocument.Parse(OptionalUnknown, ModelSerializationExtensions.JsonDocumentOptions))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
@@ -155,7 +155,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                using (JsonDocument document = JsonDocument.Parse(item.Value, new JsonDocumentOptions { MaxDepth = 256 }))
+                using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
@@ -177,7 +177,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, new JsonDocumentOptions { MaxDepth = 256 }))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
@@ -200,7 +200,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, new JsonDocumentOptions { MaxDepth = 256 }))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
@@ -223,7 +223,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, new JsonDocumentOptions { MaxDepth = 256 }))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
@@ -245,7 +245,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item);
 #else
-                using (JsonDocument document = JsonDocument.Parse(item, new JsonDocumentOptions { MaxDepth = 256 }))
+                using (JsonDocument document = JsonDocument.Parse(item, ModelSerializationExtensions.JsonDocumentOptions))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
@@ -258,7 +258,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(BinaryDataRecord);
 #else
-                using (JsonDocument document = JsonDocument.Parse(BinaryDataRecord, new JsonDocumentOptions { MaxDepth = 256 }))
+                using (JsonDocument document = JsonDocument.Parse(BinaryDataRecord, ModelSerializationExtensions.JsonDocumentOptions))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
@@ -272,7 +272,7 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, new JsonDocumentOptions { MaxDepth = 256 }))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
@@ -639,7 +639,7 @@ namespace FirstTestTypeSpec.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeRoundTripModel(document.RootElement, options);
                     }
                 default:
@@ -653,7 +653,7 @@ namespace FirstTestTypeSpec.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static RoundTripModel FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeRoundTripModel(document.RootElement);
         }
 

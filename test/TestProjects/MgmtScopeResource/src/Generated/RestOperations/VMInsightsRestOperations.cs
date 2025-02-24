@@ -79,7 +79,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         VMInsightsOnboardingStatusData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VMInsightsOnboardingStatusData.DeserializeVMInsightsOnboardingStatusData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -105,7 +105,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         VMInsightsOnboardingStatusData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VMInsightsOnboardingStatusData.DeserializeVMInsightsOnboardingStatusData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

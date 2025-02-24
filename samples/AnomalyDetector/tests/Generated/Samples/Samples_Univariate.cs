@@ -278,7 +278,7 @@ value = 843F,
             });
             Response response = client.DetectUnivariateEntireSeries(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
             Console.WriteLine(result.GetProperty("expectedValues")[0].ToString());
             Console.WriteLine(result.GetProperty("upperMargins")[0].ToString());
@@ -548,7 +548,7 @@ value = 843F,
             });
             Response response = await client.DetectUnivariateEntireSeriesAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
             Console.WriteLine(result.GetProperty("expectedValues")[0].ToString());
             Console.WriteLine(result.GetProperty("upperMargins")[0].ToString());
@@ -1243,7 +1243,7 @@ value = 843F,
             });
             Response response = client.DetectUnivariateLastPoint(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
             Console.WriteLine(result.GetProperty("suggestedWindow").ToString());
             Console.WriteLine(result.GetProperty("expectedValue").ToString());
@@ -1515,7 +1515,7 @@ value = 843F,
             });
             Response response = await client.DetectUnivariateLastPointAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
             Console.WriteLine(result.GetProperty("suggestedWindow").ToString());
             Console.WriteLine(result.GetProperty("expectedValue").ToString());
@@ -3258,7 +3258,7 @@ value = 3233500F,
             });
             Response response = client.DetectUnivariateChangePoint(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -4568,7 +4568,7 @@ value = 3233500F,
             });
             Response response = await client.DetectUnivariateChangePointAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 

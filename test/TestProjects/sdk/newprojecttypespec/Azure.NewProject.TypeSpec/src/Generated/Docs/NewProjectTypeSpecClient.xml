@@ -49,7 +49,7 @@ NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credent
 
 Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -66,7 +66,7 @@ NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credent
 
 Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -90,7 +90,7 @@ NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credent
 
 Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -107,7 +107,7 @@ NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credent
 
 Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -131,7 +131,7 @@ NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credent
 
 Response response = await client.TopAction2Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -148,7 +148,7 @@ NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credent
 
 Response response = await client.TopAction2Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -172,7 +172,7 @@ NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credent
 
 Response response = client.TopAction2(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -189,7 +189,7 @@ NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credent
 
 Response response = client.TopAction2(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -223,7 +223,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.PatchActionAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -254,7 +254,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.PatchActionAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -288,7 +288,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.PatchAction(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -319,7 +319,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.PatchAction(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -391,7 +391,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.AnonymousBodyAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -422,7 +422,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.AnonymousBodyAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -456,7 +456,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.AnonymousBody(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -487,7 +487,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.AnonymousBody(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -553,7 +553,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.FriendlyModelAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call FriendlyModelAsync with all request content and parse the result.
@@ -568,7 +568,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.FriendlyModelAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
@@ -586,7 +586,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.FriendlyModel(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call FriendlyModel with all request content and parse the result.
@@ -601,7 +601,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.FriendlyModel(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>

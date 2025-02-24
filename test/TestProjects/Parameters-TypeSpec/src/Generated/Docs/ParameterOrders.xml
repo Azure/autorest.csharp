@@ -44,7 +44,7 @@ ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersCl
 
 Response response = await client.OperationAsync(1234, null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call OperationAsync with all parameters and parse the result.
@@ -54,7 +54,7 @@ ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersCl
 
 Response response = await client.OperationAsync(1234, 1234, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -67,7 +67,7 @@ ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersCl
 
 Response response = client.Operation(1234, null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call Operation with all parameters and parse the result.
@@ -77,7 +77,7 @@ ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersCl
 
 Response response = client.Operation(1234, 1234, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -124,7 +124,7 @@ ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersCl
 
 Response response = await client.Operation2Async(1234, null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call Operation2Async with all parameters and parse the result.
@@ -134,7 +134,7 @@ ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersCl
 
 Response response = await client.Operation2Async(1234, 1234, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -147,7 +147,7 @@ ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersCl
 
 Response response = client.Operation2(1234, null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call Operation2 with all parameters and parse the result.
@@ -157,7 +157,7 @@ ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersCl
 
 Response response = client.Operation2(1234, 1234, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>

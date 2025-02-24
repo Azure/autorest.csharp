@@ -26,7 +26,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = client.GetModel(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -39,7 +39,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = await client.GetModelAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -70,7 +70,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = client.GetModel(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -83,7 +83,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = await client.GetModelAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -218,7 +218,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = client.GetRecursiveModel(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -231,7 +231,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = await client.GetRecursiveModelAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -262,7 +262,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = client.GetRecursiveModel(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -275,7 +275,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = await client.GetRecursiveModelAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -410,7 +410,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = client.GetMissingDiscriminator(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -423,7 +423,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = await client.GetMissingDiscriminatorAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -454,7 +454,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = client.GetMissingDiscriminator(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -467,7 +467,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = await client.GetMissingDiscriminatorAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -498,7 +498,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = client.GetWrongDiscriminator(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -511,7 +511,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = await client.GetWrongDiscriminatorAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -542,7 +542,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = client.GetWrongDiscriminator(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -555,7 +555,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = await client.GetWrongDiscriminatorAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
@@ -586,7 +586,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = client.GetLegacyModel(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
         }
@@ -599,7 +599,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = await client.GetLegacyModelAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
         }
@@ -630,7 +630,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = client.GetLegacyModel(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
         }
@@ -643,7 +643,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             Response response = await client.GetLegacyModelAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("size").ToString());
         }

@@ -377,7 +377,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         VirtualMachineScaleSetData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineScaleSetData.DeserializeVirtualMachineScaleSetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -409,7 +409,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         VirtualMachineScaleSetData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineScaleSetData.DeserializeVirtualMachineScaleSetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -696,7 +696,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         VirtualMachineScaleSetInstanceView value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineScaleSetInstanceView.DeserializeVirtualMachineScaleSetInstanceView(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -728,7 +728,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         VirtualMachineScaleSetInstanceView value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineScaleSetInstanceView.DeserializeVirtualMachineScaleSetInstanceView(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -787,7 +787,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         VirtualMachineScaleSetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineScaleSetListResult.DeserializeVirtualMachineScaleSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -814,7 +814,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         VirtualMachineScaleSetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineScaleSetListResult.DeserializeVirtualMachineScaleSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -865,7 +865,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         VirtualMachineScaleSetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineScaleSetListResult.DeserializeVirtualMachineScaleSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -894,7 +894,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         VirtualMachineScaleSetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineScaleSetListResult.DeserializeVirtualMachineScaleSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

@@ -129,7 +129,7 @@ namespace ModelShapes
                 case 200:
                     {
                         MixedModel value0 = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value0 = MixedModel.DeserializeMixedModel(document.RootElement);
                         return Response.FromValue(value0, message.Response);
                     }
@@ -155,7 +155,7 @@ namespace ModelShapes
                 case 200:
                     {
                         MixedModel value0 = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value0 = MixedModel.DeserializeMixedModel(document.RootElement);
                         return Response.FromValue(value0, message.Response);
                     }
@@ -187,7 +187,7 @@ namespace ModelShapes
                 case 200:
                     {
                         OutputModel value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = OutputModel.DeserializeOutputModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -206,7 +206,7 @@ namespace ModelShapes
                 case 200:
                     {
                         OutputModel value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = OutputModel.DeserializeOutputModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -249,7 +249,7 @@ namespace ModelShapes
                 case 200:
                     {
                         MixedModelWithReadonlyProperty value0 = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value0 = MixedModelWithReadonlyProperty.DeserializeMixedModelWithReadonlyProperty(document.RootElement);
                         return Response.FromValue(value0, message.Response);
                     }
@@ -275,7 +275,7 @@ namespace ModelShapes
                 case 200:
                     {
                         MixedModelWithReadonlyProperty value0 = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value0 = MixedModelWithReadonlyProperty.DeserializeMixedModelWithReadonlyProperty(document.RootElement);
                         return Response.FromValue(value0, message.Response);
                     }

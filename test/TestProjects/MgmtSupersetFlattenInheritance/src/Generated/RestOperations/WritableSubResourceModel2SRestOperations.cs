@@ -86,7 +86,7 @@ namespace MgmtSupersetFlattenInheritance
                 case 200:
                     {
                         WritableSubResourceModel2ListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = WritableSubResourceModel2ListResult.DeserializeWritableSubResourceModel2ListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -112,7 +112,7 @@ namespace MgmtSupersetFlattenInheritance
                 case 200:
                     {
                         WritableSubResourceModel2ListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = WritableSubResourceModel2ListResult.DeserializeWritableSubResourceModel2ListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -180,7 +180,7 @@ namespace MgmtSupersetFlattenInheritance
                 case 200:
                     {
                         WritableSubResourceModel2 value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = WritableSubResourceModel2.DeserializeWritableSubResourceModel2(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -210,7 +210,7 @@ namespace MgmtSupersetFlattenInheritance
                 case 200:
                     {
                         WritableSubResourceModel2 value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = WritableSubResourceModel2.DeserializeWritableSubResourceModel2(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -272,7 +272,7 @@ namespace MgmtSupersetFlattenInheritance
                 case 200:
                     {
                         WritableSubResourceModel2 value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = WritableSubResourceModel2.DeserializeWritableSubResourceModel2(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -300,7 +300,7 @@ namespace MgmtSupersetFlattenInheritance
                 case 200:
                     {
                         WritableSubResourceModel2 value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = WritableSubResourceModel2.DeserializeWritableSubResourceModel2(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

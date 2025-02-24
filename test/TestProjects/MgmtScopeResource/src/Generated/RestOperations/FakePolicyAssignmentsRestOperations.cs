@@ -85,7 +85,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -114,7 +114,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -179,7 +179,7 @@ namespace MgmtScopeResource
                 case 201:
                     {
                         FakePolicyAssignmentData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -208,7 +208,7 @@ namespace MgmtScopeResource
                 case 201:
                     {
                         FakePolicyAssignmentData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -265,7 +265,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -294,7 +294,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -373,7 +373,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -402,7 +402,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -503,7 +503,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -540,7 +540,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -611,7 +611,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -638,7 +638,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -709,7 +709,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -736,7 +736,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -789,7 +789,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -820,7 +820,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -881,7 +881,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -920,7 +920,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -971,7 +971,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1000,7 +1000,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1051,7 +1051,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1080,7 +1080,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         FakePolicyAssignmentListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

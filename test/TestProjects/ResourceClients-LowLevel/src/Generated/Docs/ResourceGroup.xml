@@ -10,7 +10,7 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 Response response = await client.GetGroupAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetGroupAsync with all parameters and parse the result.
@@ -20,7 +20,7 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 Response response = await client.GetGroupAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -33,7 +33,7 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 Response response = client.GetGroup(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetGroup with all parameters and parse the result.
@@ -43,7 +43,7 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 Response response = client.GetGroup(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -56,7 +56,7 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 await foreach (BinaryData item in client.GetItemsAsync(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -67,7 +67,7 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 await foreach (BinaryData item in client.GetItemsAsync(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code></example>
@@ -81,7 +81,7 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 foreach (BinaryData item in client.GetItems(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -92,7 +92,7 @@ ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<
 
 foreach (BinaryData item in client.GetItems(null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code></example>

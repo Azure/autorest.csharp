@@ -148,7 +148,7 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = await client.GetBodyAndPathsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetBodyAndPathsAsync with all parameters and parse the result.
@@ -158,7 +158,7 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = await client.GetBodyAndPathsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -171,7 +171,7 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = client.GetBodyAndPaths(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetBodyAndPaths with all parameters and parse the result.
@@ -181,7 +181,7 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = client.GetBodyAndPaths(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -194,7 +194,7 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = await client.GetItemsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetItemsAsync with all parameters and parse the result.
@@ -204,7 +204,7 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = await client.GetItemsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -217,7 +217,7 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = client.GetItems(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetItems with all parameters and parse the result.
@@ -227,7 +227,7 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 
 Response response = client.GetItems(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>

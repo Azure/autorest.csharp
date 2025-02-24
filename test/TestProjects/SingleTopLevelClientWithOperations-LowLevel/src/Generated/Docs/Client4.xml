@@ -10,7 +10,7 @@ Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<
 
 Response response = await client.PatchAsync("<filter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PatchAsync with all parameters and parse the result.
@@ -20,7 +20,7 @@ Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<
 
 Response response = await client.PatchAsync("<filter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -33,7 +33,7 @@ Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<
 
 Response response = client.Patch("<filter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Patch with all parameters and parse the result.
@@ -43,7 +43,7 @@ Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<
 
 Response response = client.Patch("<filter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

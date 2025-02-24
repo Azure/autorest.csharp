@@ -26,7 +26,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
             Response response = client.SmokeTest(1234, "<foo>", null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -38,7 +38,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
             Response response = await client.SmokeTestAsync(1234, "<foo>", null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -68,7 +68,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
             Response response = client.SmokeTest(1234, "<foo>", null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -81,7 +81,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
             Response response = await client.SmokeTestAsync(1234, "<foo>", null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -116,7 +116,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
             });
             Response response = client.RepeatableAction(1234, content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("userActionResult").ToString());
         }
 
@@ -132,7 +132,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
             });
             Response response = await client.RepeatableActionAsync(1234, content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("userActionResult").ToString());
         }
 
@@ -168,7 +168,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
             });
             Response response = client.RepeatableAction(1234, content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("userActionResult").ToString());
         }
 
@@ -184,7 +184,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
             });
             Response response = await client.RepeatableActionAsync(1234, content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("userActionResult").ToString());
         }
 

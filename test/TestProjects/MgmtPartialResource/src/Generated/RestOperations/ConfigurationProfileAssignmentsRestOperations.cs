@@ -104,7 +104,7 @@ namespace MgmtPartialResource
                 case 201:
                     {
                         ConfigurationProfileAssignmentData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ConfigurationProfileAssignmentData.DeserializeConfigurationProfileAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -138,7 +138,7 @@ namespace MgmtPartialResource
                 case 201:
                     {
                         ConfigurationProfileAssignmentData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ConfigurationProfileAssignmentData.DeserializeConfigurationProfileAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -207,7 +207,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         ConfigurationProfileAssignmentData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ConfigurationProfileAssignmentData.DeserializeConfigurationProfileAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -240,7 +240,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         ConfigurationProfileAssignmentData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ConfigurationProfileAssignmentData.DeserializeConfigurationProfileAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -398,7 +398,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         ConfigurationProfileAssignmentList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ConfigurationProfileAssignmentList.DeserializeConfigurationProfileAssignmentList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -427,7 +427,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         ConfigurationProfileAssignmentList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ConfigurationProfileAssignmentList.DeserializeConfigurationProfileAssignmentList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

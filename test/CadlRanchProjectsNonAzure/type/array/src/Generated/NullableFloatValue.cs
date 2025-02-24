@@ -40,7 +40,7 @@ namespace Scm._Type._Array
         {
             ClientResult result = await GetNullableFloatValueAsync(null).ConfigureAwait(false);
             IReadOnlyList<float?> value = default;
-            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, default).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, ModelSerializationExtensions.JsonDocumentOptions, default).ConfigureAwait(false);
             List<float?> array = new List<float?>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -62,7 +62,7 @@ namespace Scm._Type._Array
         {
             ClientResult result = GetNullableFloatValue(null);
             IReadOnlyList<float?> value = default;
-            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             List<float?> array = new List<float?>();
             foreach (var item in document.RootElement.EnumerateArray())
             {

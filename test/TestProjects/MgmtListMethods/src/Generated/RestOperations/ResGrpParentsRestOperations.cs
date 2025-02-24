@@ -97,7 +97,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         ResGrpParentData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ResGrpParentData.DeserializeResGrpParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -128,7 +128,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         ResGrpParentData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ResGrpParentData.DeserializeResGrpParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -191,7 +191,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         ResGrpParentData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ResGrpParentData.DeserializeResGrpParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -222,7 +222,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         ResGrpParentData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ResGrpParentData.DeserializeResGrpParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -283,7 +283,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         ResGrpParentListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ResGrpParentListResult.DeserializeResGrpParentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -310,7 +310,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         ResGrpParentListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ResGrpParentListResult.DeserializeResGrpParentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

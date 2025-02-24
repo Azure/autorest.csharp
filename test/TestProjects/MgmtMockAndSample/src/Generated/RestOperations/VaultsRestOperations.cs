@@ -190,7 +190,7 @@ namespace MgmtMockAndSample
                 case 201:
                     {
                         VaultData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VaultData.DeserializeVaultData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -222,7 +222,7 @@ namespace MgmtMockAndSample
                 case 201:
                     {
                         VaultData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VaultData.DeserializeVaultData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -369,7 +369,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         VaultData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VaultData.DeserializeVaultData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -400,7 +400,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         VaultData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VaultData.DeserializeVaultData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -467,7 +467,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         VaultListKeysResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VaultListKeysResult.DeserializeVaultListKeysResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -496,7 +496,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         VaultListKeysResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VaultListKeysResult.DeserializeVaultListKeysResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -561,7 +561,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         VaultValidationResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VaultValidationResult.DeserializeVaultValidationResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -590,7 +590,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         VaultValidationResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VaultValidationResult.DeserializeVaultValidationResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -749,7 +749,7 @@ namespace MgmtMockAndSample
                 case 201:
                     {
                         VaultAccessPolicyParameters value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VaultAccessPolicyParameters.DeserializeVaultAccessPolicyParameters(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -782,7 +782,7 @@ namespace MgmtMockAndSample
                 case 201:
                     {
                         VaultAccessPolicyParameters value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VaultAccessPolicyParameters.DeserializeVaultAccessPolicyParameters(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -850,7 +850,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         VaultListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VaultListResult.DeserializeVaultListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -878,7 +878,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         VaultListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VaultListResult.DeserializeVaultListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -940,7 +940,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         VaultListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VaultListResult.DeserializeVaultListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -966,7 +966,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         VaultListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VaultListResult.DeserializeVaultListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1019,7 +1019,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DeletedVaultListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DeletedVaultListResult.DeserializeDeletedVaultListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1044,7 +1044,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DeletedVaultListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DeletedVaultListResult.DeserializeDeletedVaultListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1106,7 +1106,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DeletedVaultData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DeletedVaultData.DeserializeDeletedVaultData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1136,7 +1136,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DeletedVaultData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DeletedVaultData.DeserializeDeletedVaultData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1281,7 +1281,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         CheckNameAvailabilityResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = CheckNameAvailabilityResult.DeserializeCheckNameAvailabilityResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1308,7 +1308,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         CheckNameAvailabilityResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = CheckNameAvailabilityResult.DeserializeCheckNameAvailabilityResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1360,7 +1360,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         VaultListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VaultListResult.DeserializeVaultListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1390,7 +1390,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         VaultListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VaultListResult.DeserializeVaultListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1440,7 +1440,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         VaultListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VaultListResult.DeserializeVaultListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1468,7 +1468,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         VaultListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VaultListResult.DeserializeVaultListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1517,7 +1517,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DeletedVaultListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DeletedVaultListResult.DeserializeDeletedVaultListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1544,7 +1544,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DeletedVaultListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DeletedVaultListResult.DeserializeDeletedVaultListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

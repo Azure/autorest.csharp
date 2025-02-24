@@ -25,14 +25,14 @@ namespace MgmtParamOrdering
 
         WorkspaceResource IOperationSource<WorkspaceResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             var data = WorkspaceData.DeserializeWorkspaceData(document.RootElement);
             return new WorkspaceResource(_client, data);
         }
 
         async ValueTask<WorkspaceResource> IOperationSource<WorkspaceResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             var data = WorkspaceData.DeserializeWorkspaceData(document.RootElement);
             return new WorkspaceResource(_client, data);
         }

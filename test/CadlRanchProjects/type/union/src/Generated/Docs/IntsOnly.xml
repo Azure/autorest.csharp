@@ -39,7 +39,7 @@ IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
 Response response = await client.GetIntsOnlyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code>
 This sample shows how to call GetIntsOnlyAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
 Response response = await client.GetIntsOnlyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code></example>
     </member>
@@ -60,7 +60,7 @@ IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
 Response response = client.GetIntsOnly(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code>
 This sample shows how to call GetIntsOnly with all parameters and parse the result.
@@ -69,7 +69,7 @@ IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
 Response response = client.GetIntsOnly(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code></example>
     </member>

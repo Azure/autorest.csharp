@@ -86,7 +86,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         ListUsagesResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ListUsagesResult.DeserializeListUsagesResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -112,7 +112,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         ListUsagesResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ListUsagesResult.DeserializeListUsagesResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -162,7 +162,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         ListUsagesResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ListUsagesResult.DeserializeListUsagesResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -190,7 +190,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         ListUsagesResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ListUsagesResult.DeserializeListUsagesResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

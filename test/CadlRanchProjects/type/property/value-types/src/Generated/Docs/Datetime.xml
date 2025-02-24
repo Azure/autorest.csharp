@@ -39,7 +39,7 @@ Datetime client = new ValueTypesClient().GetDatetimeClient();
 
 Response response = await client.GetDatetimeAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetDatetimeAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ Datetime client = new ValueTypesClient().GetDatetimeClient();
 
 Response response = await client.GetDatetimeAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
@@ -60,7 +60,7 @@ Datetime client = new ValueTypesClient().GetDatetimeClient();
 
 Response response = client.GetDatetime(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetDatetime with all parameters and parse the result.
@@ -69,7 +69,7 @@ Datetime client = new ValueTypesClient().GetDatetimeClient();
 
 Response response = client.GetDatetime(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>

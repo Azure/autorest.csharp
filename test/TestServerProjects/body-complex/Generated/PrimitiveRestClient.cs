@@ -60,7 +60,7 @@ namespace body_complex
                 case 200:
                     {
                         IntWrapper value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = IntWrapper.DeserializeIntWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -80,7 +80,7 @@ namespace body_complex
                 case 200:
                     {
                         IntWrapper value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = IntWrapper.DeserializeIntWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -174,7 +174,7 @@ namespace body_complex
                 case 200:
                     {
                         LongWrapper value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = LongWrapper.DeserializeLongWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -194,7 +194,7 @@ namespace body_complex
                 case 200:
                     {
                         LongWrapper value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = LongWrapper.DeserializeLongWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -288,7 +288,7 @@ namespace body_complex
                 case 200:
                     {
                         FloatWrapper value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FloatWrapper.DeserializeFloatWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -308,7 +308,7 @@ namespace body_complex
                 case 200:
                     {
                         FloatWrapper value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FloatWrapper.DeserializeFloatWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -402,7 +402,7 @@ namespace body_complex
                 case 200:
                     {
                         DoubleWrapper value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DoubleWrapper.DeserializeDoubleWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -422,7 +422,7 @@ namespace body_complex
                 case 200:
                     {
                         DoubleWrapper value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DoubleWrapper.DeserializeDoubleWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -516,7 +516,7 @@ namespace body_complex
                 case 200:
                     {
                         BooleanWrapper value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = BooleanWrapper.DeserializeBooleanWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -536,7 +536,7 @@ namespace body_complex
                 case 200:
                     {
                         BooleanWrapper value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = BooleanWrapper.DeserializeBooleanWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -630,7 +630,7 @@ namespace body_complex
                 case 200:
                     {
                         StringWrapper value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = StringWrapper.DeserializeStringWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -650,7 +650,7 @@ namespace body_complex
                 case 200:
                     {
                         StringWrapper value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = StringWrapper.DeserializeStringWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -744,7 +744,7 @@ namespace body_complex
                 case 200:
                     {
                         DateWrapper value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DateWrapper.DeserializeDateWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -764,7 +764,7 @@ namespace body_complex
                 case 200:
                     {
                         DateWrapper value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DateWrapper.DeserializeDateWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -858,7 +858,7 @@ namespace body_complex
                 case 200:
                     {
                         DatetimeWrapper value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DatetimeWrapper.DeserializeDatetimeWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -878,7 +878,7 @@ namespace body_complex
                 case 200:
                     {
                         DatetimeWrapper value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DatetimeWrapper.DeserializeDatetimeWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -972,7 +972,7 @@ namespace body_complex
                 case 200:
                     {
                         Datetimerfc1123Wrapper value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = Datetimerfc1123Wrapper.DeserializeDatetimerfc1123Wrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -992,7 +992,7 @@ namespace body_complex
                 case 200:
                     {
                         Datetimerfc1123Wrapper value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = Datetimerfc1123Wrapper.DeserializeDatetimerfc1123Wrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1086,7 +1086,7 @@ namespace body_complex
                 case 200:
                     {
                         DurationWrapper value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DurationWrapper.DeserializeDurationWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1106,7 +1106,7 @@ namespace body_complex
                 case 200:
                     {
                         DurationWrapper value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DurationWrapper.DeserializeDurationWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1200,7 +1200,7 @@ namespace body_complex
                 case 200:
                     {
                         ByteWrapper value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ByteWrapper.DeserializeByteWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1220,7 +1220,7 @@ namespace body_complex
                 case 200:
                     {
                         ByteWrapper value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ByteWrapper.DeserializeByteWrapper(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

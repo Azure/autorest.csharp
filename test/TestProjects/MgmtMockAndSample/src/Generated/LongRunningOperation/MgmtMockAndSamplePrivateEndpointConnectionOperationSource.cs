@@ -25,14 +25,14 @@ namespace MgmtMockAndSample
 
         MgmtMockAndSamplePrivateEndpointConnectionResource IOperationSource<MgmtMockAndSamplePrivateEndpointConnectionResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             var data = MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(document.RootElement);
             return new MgmtMockAndSamplePrivateEndpointConnectionResource(_client, data);
         }
 
         async ValueTask<MgmtMockAndSamplePrivateEndpointConnectionResource> IOperationSource<MgmtMockAndSamplePrivateEndpointConnectionResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             var data = MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(document.RootElement);
             return new MgmtMockAndSamplePrivateEndpointConnectionResource(_client, data);
         }

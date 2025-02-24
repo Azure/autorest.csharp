@@ -104,7 +104,7 @@ namespace MgmtMockAndSample
                 case 201:
                     {
                         GuestConfigurationAssignmentData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = GuestConfigurationAssignmentData.DeserializeGuestConfigurationAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -138,7 +138,7 @@ namespace MgmtMockAndSample
                 case 201:
                     {
                         GuestConfigurationAssignmentData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = GuestConfigurationAssignmentData.DeserializeGuestConfigurationAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -207,7 +207,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         GuestConfigurationAssignmentData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = GuestConfigurationAssignmentData.DeserializeGuestConfigurationAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -240,7 +240,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         GuestConfigurationAssignmentData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = GuestConfigurationAssignmentData.DeserializeGuestConfigurationAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -396,7 +396,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         GuestConfigurationAssignmentList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = GuestConfigurationAssignmentList.DeserializeGuestConfigurationAssignmentList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -425,7 +425,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         GuestConfigurationAssignmentList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = GuestConfigurationAssignmentList.DeserializeGuestConfigurationAssignmentList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

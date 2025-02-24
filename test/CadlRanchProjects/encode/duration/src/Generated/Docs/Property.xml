@@ -47,7 +47,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.DefaultAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call DefaultAsync with all request content and parse the result.
@@ -60,7 +60,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.DefaultAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -76,7 +76,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Default(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Default with all request content and parse the result.
@@ -89,7 +89,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Default(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -139,7 +139,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Iso8601Async(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Iso8601Async with all request content and parse the result.
@@ -152,7 +152,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Iso8601Async(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -168,7 +168,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Iso8601(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Iso8601 with all request content and parse the result.
@@ -181,7 +181,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Iso8601(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -231,7 +231,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Int32SecondsAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Int32SecondsAsync with all request content and parse the result.
@@ -244,7 +244,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Int32SecondsAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -260,7 +260,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Int32Seconds(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Int32Seconds with all request content and parse the result.
@@ -273,7 +273,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Int32Seconds(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -323,7 +323,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.FloatSecondsAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call FloatSecondsAsync with all request content and parse the result.
@@ -336,7 +336,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.FloatSecondsAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -352,7 +352,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.FloatSeconds(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call FloatSeconds with all request content and parse the result.
@@ -365,7 +365,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.FloatSeconds(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -415,7 +415,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Float64SecondsAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Float64SecondsAsync with all request content and parse the result.
@@ -428,7 +428,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.Float64SecondsAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -444,7 +444,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Float64Seconds(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
 This sample shows how to call Float64Seconds with all request content and parse the result.
@@ -457,7 +457,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.Float64Seconds(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
@@ -510,7 +510,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.FloatSecondsArrayAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call FloatSecondsArrayAsync with all request content and parse the result.
@@ -526,7 +526,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.FloatSecondsArrayAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code></example>
     </member>
@@ -545,7 +545,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.FloatSecondsArray(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
 This sample shows how to call FloatSecondsArray with all request content and parse the result.
@@ -561,7 +561,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.FloatSecondsArray(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code></example>
     </member>

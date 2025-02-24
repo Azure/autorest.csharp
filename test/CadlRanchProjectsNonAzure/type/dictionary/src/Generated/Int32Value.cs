@@ -40,7 +40,7 @@ namespace Scm._Type._Dictionary
         {
             ClientResult result = await GetInt32ValueAsync(null).ConfigureAwait(false);
             IReadOnlyDictionary<string, int> value = default;
-            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, default).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, ModelSerializationExtensions.JsonDocumentOptions, default).ConfigureAwait(false);
             Dictionary<string, int> dictionary = new Dictionary<string, int>();
             foreach (var property in document.RootElement.EnumerateObject())
             {
@@ -55,7 +55,7 @@ namespace Scm._Type._Dictionary
         {
             ClientResult result = GetInt32Value(null);
             IReadOnlyDictionary<string, int> value = default;
-            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             Dictionary<string, int> dictionary = new Dictionary<string, int>();
             foreach (var property in document.RootElement.EnumerateObject())
             {

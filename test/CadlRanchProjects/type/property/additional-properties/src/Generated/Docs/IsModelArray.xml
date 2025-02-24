@@ -39,7 +39,7 @@ IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 Response response = await client.GetIsModelArrayAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
 ]]></code>
 This sample shows how to call GetIsModelArrayAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 Response response = await client.GetIsModelArrayAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
 ]]></code></example>
     </member>
@@ -60,7 +60,7 @@ IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 Response response = client.GetIsModelArray(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
 ]]></code>
 This sample shows how to call GetIsModelArray with all parameters and parse the result.
@@ -69,7 +69,7 @@ IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 Response response = client.GetIsModelArray(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("knownProp")[0].GetProperty("state").ToString());
 ]]></code></example>
     </member>

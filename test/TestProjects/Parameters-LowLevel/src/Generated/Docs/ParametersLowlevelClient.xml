@@ -10,7 +10,7 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, null, null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call NoRequestBodyResponseBodyAsync with all parameters and parse the result.
@@ -20,7 +20,7 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, 1234, "start", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -33,7 +33,7 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.NoRequestBodyResponseBody(1234, default, null, null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call NoRequestBodyResponseBody with all parameters and parse the result.
@@ -43,7 +43,7 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.NoRequestBodyResponseBody(1234, default, 1234, "start", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -57,7 +57,7 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 using RequestContent content = null;
 Response response = await client.RequestBodyResponseBodyAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call RequestBodyResponseBodyAsync with all request content and parse the result.
@@ -72,7 +72,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.RequestBodyResponseBodyAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("Code").ToString());
 Console.WriteLine(result.GetProperty("Status").ToString());
 ]]></code></example>
@@ -87,7 +87,7 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 using RequestContent content = null;
 Response response = client.RequestBodyResponseBody(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call RequestBodyResponseBody with all request content and parse the result.
@@ -102,7 +102,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.RequestBodyResponseBody(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("Code").ToString());
 Console.WriteLine(result.GetProperty("Status").ToString());
 ]]></code></example>
@@ -116,7 +116,7 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call DeleteNoRequestBodyResponseBodyAsync with all parameters and parse the result.
@@ -126,7 +126,7 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -139,7 +139,7 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call DeleteNoRequestBodyResponseBody with all parameters and parse the result.
@@ -149,7 +149,7 @@ ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
 Response response = client.DeleteNoRequestBodyResponseBody("<resourceName>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

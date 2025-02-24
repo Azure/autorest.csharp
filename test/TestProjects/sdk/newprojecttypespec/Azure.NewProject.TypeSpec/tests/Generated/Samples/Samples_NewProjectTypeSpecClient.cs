@@ -27,7 +27,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -47,7 +47,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -89,7 +89,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -113,7 +113,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -159,7 +159,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             Response response = client.TopAction2(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -179,7 +179,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             Response response = await client.TopAction2Async(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -199,7 +199,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             Response response = client.TopAction2(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -223,7 +223,7 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             Response response = await client.TopAction2Async(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -257,7 +257,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             });
             Response response = client.PatchAction(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -287,7 +287,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             });
             Response response = await client.PatchActionAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -321,7 +321,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             });
             Response response = client.PatchAction(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -359,7 +359,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             });
             Response response = await client.PatchActionAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -393,7 +393,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             });
             Response response = client.AnonymousBody(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -423,7 +423,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             });
             Response response = await client.AnonymousBodyAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -479,7 +479,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             });
             Response response = client.AnonymousBody(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -517,7 +517,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             });
             Response response = await client.AnonymousBodyAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -567,7 +567,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             });
             Response response = client.FriendlyModel(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -585,7 +585,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             });
             Response response = await client.FriendlyModelAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -625,7 +625,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             });
             Response response = client.FriendlyModel(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -643,7 +643,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             });
             Response response = await client.FriendlyModelAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 

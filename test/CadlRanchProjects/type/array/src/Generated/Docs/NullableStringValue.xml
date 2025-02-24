@@ -39,7 +39,7 @@ NullableStringValue client = new ArrayClient().GetNullableStringValueClient();
 
 Response response = await client.GetNullableStringValueAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetNullableStringValueAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ NullableStringValue client = new ArrayClient().GetNullableStringValueClient();
 
 Response response = await client.GetNullableStringValueAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>
@@ -60,7 +60,7 @@ NullableStringValue client = new ArrayClient().GetNullableStringValueClient();
 
 Response response = client.GetNullableStringValue(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code>
 This sample shows how to call GetNullableStringValue with all parameters and parse the result.
@@ -69,7 +69,7 @@ NullableStringValue client = new ArrayClient().GetNullableStringValueClient();
 
 Response response = client.GetNullableStringValue(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
 ]]></code></example>
     </member>

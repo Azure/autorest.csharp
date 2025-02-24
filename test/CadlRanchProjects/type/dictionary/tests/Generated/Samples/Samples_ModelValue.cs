@@ -27,7 +27,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = client.GetModelValue(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
         }
 
@@ -39,7 +39,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = await client.GetModelValueAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
         }
 
@@ -69,7 +69,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = client.GetModelValue(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
             Console.WriteLine(result.GetProperty("<key>").GetProperty("children").GetProperty("<key>").GetProperty("property").ToString());
         }
@@ -82,7 +82,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = await client.GetModelValueAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
             Console.WriteLine(result.GetProperty("<key>").GetProperty("children").GetProperty("<key>").GetProperty("property").ToString());
         }

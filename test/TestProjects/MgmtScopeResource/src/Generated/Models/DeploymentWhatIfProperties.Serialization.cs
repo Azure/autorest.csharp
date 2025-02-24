@@ -26,7 +26,7 @@ namespace MgmtScopeResource.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Template);
 #else
-                using (JsonDocument document = JsonDocument.Parse(Template, new JsonDocumentOptions { MaxDepth = 256 }))
+                using (JsonDocument document = JsonDocument.Parse(Template, ModelSerializationExtensions.JsonDocumentOptions))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
@@ -38,7 +38,7 @@ namespace MgmtScopeResource.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Parameters);
 #else
-                using (JsonDocument document = JsonDocument.Parse(Parameters, new JsonDocumentOptions { MaxDepth = 256 }))
+                using (JsonDocument document = JsonDocument.Parse(Parameters, ModelSerializationExtensions.JsonDocumentOptions))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }

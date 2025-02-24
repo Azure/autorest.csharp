@@ -46,7 +46,7 @@ namespace NameConflicts.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static Request FromResponse(Azure.Response response)
         {
-            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeRequest(document.RootElement);
         }
 

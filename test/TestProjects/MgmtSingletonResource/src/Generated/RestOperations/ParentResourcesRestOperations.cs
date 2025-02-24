@@ -87,7 +87,7 @@ namespace MgmtSingletonResource
                 case 200:
                     {
                         ParentResourceListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ParentResourceListResult.DeserializeParentResourceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -114,7 +114,7 @@ namespace MgmtSingletonResource
                 case 200:
                     {
                         ParentResourceListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ParentResourceListResult.DeserializeParentResourceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -177,7 +177,7 @@ namespace MgmtSingletonResource
                 case 200:
                     {
                         ParentResourceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ParentResourceData.DeserializeParentResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -208,7 +208,7 @@ namespace MgmtSingletonResource
                 case 200:
                     {
                         ParentResourceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ParentResourceData.DeserializeParentResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -278,7 +278,7 @@ namespace MgmtSingletonResource
                 case 200:
                     {
                         ParentResourceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ParentResourceData.DeserializeParentResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -308,7 +308,7 @@ namespace MgmtSingletonResource
                 case 200:
                     {
                         ParentResourceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ParentResourceData.DeserializeParentResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

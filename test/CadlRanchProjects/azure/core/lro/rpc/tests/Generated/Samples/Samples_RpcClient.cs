@@ -31,7 +31,7 @@ namespace _Azure.Lro.Rpc.Samples
             Operation<BinaryData> operation = client.LongRunningRpc(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("data").ToString());
         }
 
@@ -48,7 +48,7 @@ namespace _Azure.Lro.Rpc.Samples
             Operation<BinaryData> operation = await client.LongRunningRpcAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("data").ToString());
         }
 
@@ -87,7 +87,7 @@ namespace _Azure.Lro.Rpc.Samples
             Operation<BinaryData> operation = client.LongRunningRpc(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("data").ToString());
         }
 
@@ -104,7 +104,7 @@ namespace _Azure.Lro.Rpc.Samples
             Operation<BinaryData> operation = await client.LongRunningRpcAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("data").ToString());
         }
 

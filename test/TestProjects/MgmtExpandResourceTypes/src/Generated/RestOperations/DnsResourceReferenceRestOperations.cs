@@ -87,7 +87,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         DnsResourceReferenceResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DnsResourceReferenceResult.DeserializeDnsResourceReferenceResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -114,7 +114,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         DnsResourceReferenceResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DnsResourceReferenceResult.DeserializeDnsResourceReferenceResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

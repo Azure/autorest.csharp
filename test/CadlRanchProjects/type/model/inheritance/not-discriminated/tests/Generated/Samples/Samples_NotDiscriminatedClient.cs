@@ -134,7 +134,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
             Response response = client.GetValid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -148,7 +148,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
             Response response = await client.GetValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -180,7 +180,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
             Response response = client.GetValid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -194,7 +194,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
 
             Response response = await client.GetValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -232,7 +232,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
             });
             Response response = client.PutValid(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -252,7 +252,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
             });
             Response response = await client.PutValidAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -292,7 +292,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
             });
             Response response = client.PutValid(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -312,7 +312,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
             });
             Response response = await client.PutValidAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());

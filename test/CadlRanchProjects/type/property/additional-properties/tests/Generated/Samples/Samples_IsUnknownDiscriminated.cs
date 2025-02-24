@@ -26,7 +26,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             Response response = client.GetIsUnknownDiscriminated(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("kind").ToString());
         }
@@ -39,7 +39,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             Response response = await client.GetIsUnknownDiscriminatedAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("kind").ToString());
         }
@@ -70,7 +70,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             Response response = client.GetIsUnknownDiscriminated(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("kind").ToString());
         }
@@ -83,7 +83,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             Response response = await client.GetIsUnknownDiscriminatedAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("kind").ToString());
         }

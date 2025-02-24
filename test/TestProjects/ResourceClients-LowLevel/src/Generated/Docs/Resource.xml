@@ -10,7 +10,7 @@ Resource client = new ResourceServiceClient(credential).GetResourceGroup("<Group
 
 Response response = await client.GetItemAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetItemAsync with all parameters and parse the result.
@@ -20,7 +20,7 @@ Resource client = new ResourceServiceClient(credential).GetResourceGroup("<Group
 
 Response response = await client.GetItemAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -33,7 +33,7 @@ Resource client = new ResourceServiceClient(credential).GetResourceGroup("<Group
 
 Response response = client.GetItem(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetItem with all parameters and parse the result.
@@ -43,7 +43,7 @@ Resource client = new ResourceServiceClient(credential).GetResourceGroup("<Group
 
 Response response = client.GetItem(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

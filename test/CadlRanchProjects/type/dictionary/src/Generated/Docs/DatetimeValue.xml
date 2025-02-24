@@ -39,7 +39,7 @@ DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
 Response response = await client.GetDatetimeValueAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValueAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
 Response response = await client.GetDatetimeValueAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
@@ -60,7 +60,7 @@ DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
 Response response = client.GetDatetimeValue(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValue with all parameters and parse the result.
@@ -69,7 +69,7 @@ DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
 Response response = client.GetDatetimeValue(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code></example>
     </member>

@@ -28,7 +28,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -49,7 +49,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -90,7 +90,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -118,7 +118,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -166,7 +166,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.TopAction2(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -187,7 +187,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = await client.TopAction2Async(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -208,7 +208,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.TopAction2(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -236,7 +236,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = await client.TopAction2Async(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -279,7 +279,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = client.PatchAction(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -315,7 +315,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = await client.PatchActionAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -361,7 +361,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = client.PatchAction(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -414,7 +414,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = await client.PatchActionAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -457,7 +457,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = client.AnonymousBody(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -493,7 +493,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = await client.AnonymousBodyAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -559,7 +559,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = client.AnonymousBody(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -612,7 +612,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = await client.AnonymousBodyAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
@@ -664,7 +664,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = client.FriendlyModel(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -681,7 +681,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = await client.FriendlyModelAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -718,7 +718,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = client.FriendlyModel(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -735,7 +735,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = await client.FriendlyModelAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -932,7 +932,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = client.ProjectedNameModel(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -949,7 +949,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = await client.ProjectedNameModelAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -986,7 +986,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = client.ProjectedNameModel(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -1003,7 +1003,7 @@ namespace FirstTestTypeSpec.Samples
             });
             Response response = await client.ProjectedNameModelAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -1036,7 +1036,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.ReturnsAnonymousModel(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1049,7 +1049,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = await client.ReturnsAnonymousModelAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1082,7 +1082,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.ReturnsAnonymousModel(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1095,7 +1095,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = await client.ReturnsAnonymousModelAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1452,7 +1452,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.ReturnString(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1465,7 +1465,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = await client.ReturnStringAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1498,7 +1498,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.ReturnString(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1511,7 +1511,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = await client.ReturnStringAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1544,7 +1544,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.ReturnUnknown(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1557,7 +1557,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = await client.ReturnUnknownAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1590,7 +1590,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.ReturnUnknown(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -1603,7 +1603,7 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = await client.ReturnUnknownAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 

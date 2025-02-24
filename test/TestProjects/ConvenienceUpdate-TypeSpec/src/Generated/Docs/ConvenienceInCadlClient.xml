@@ -44,7 +44,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.UpdateConvenienceAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call UpdateConvenienceAsync with all parameters and parse the result.
@@ -54,7 +54,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.UpdateConvenienceAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -67,7 +67,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.UpdateConvenience(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call UpdateConvenience with all parameters and parse the result.
@@ -77,7 +77,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.UpdateConvenience(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -186,7 +186,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.NoConvenienceAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call NoConvenienceAsync with all parameters and parse the result.
@@ -196,7 +196,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.NoConvenienceAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -209,7 +209,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.NoConvenience(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call NoConvenience with all parameters and parse the result.
@@ -219,7 +219,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.NoConvenience(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -376,7 +376,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ProtocolAsync();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ProtocolAsync with all request content and parse the result.
@@ -386,7 +386,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ProtocolAsync();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -399,7 +399,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.Protocol();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call Protocol with all request content and parse the result.
@@ -409,7 +409,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.Protocol();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -456,7 +456,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceWithOptionalAsync();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceWithOptionalAsync with all request content and parse the result.
@@ -466,7 +466,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceWithOptionalAsync();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -479,7 +479,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceWithOptional();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceWithOptional with all request content and parse the result.
@@ -489,7 +489,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceWithOptional();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -536,7 +536,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceWithRequiredAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceWithRequiredAsync with all parameters and parse the result.
@@ -546,7 +546,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceWithRequiredAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -559,7 +559,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceWithRequired(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceWithRequired with all parameters and parse the result.
@@ -569,7 +569,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceWithRequired(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -700,7 +700,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ProtocolOptionalQueryAsync();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ProtocolOptionalQueryAsync with all parameters and parse the result.
@@ -710,7 +710,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ProtocolOptionalQueryAsync(optional: 1234);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -723,7 +723,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ProtocolOptionalQuery();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ProtocolOptionalQuery with all parameters and parse the result.
@@ -733,7 +733,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ProtocolOptionalQuery(optional: 1234);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -780,7 +780,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ProtocolRequiredQueryAsync(1234);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ProtocolRequiredQueryAsync with all parameters and parse the result.
@@ -790,7 +790,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ProtocolRequiredQueryAsync(1234);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -803,7 +803,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ProtocolRequiredQuery(1234);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ProtocolRequiredQuery with all parameters and parse the result.
@@ -813,7 +813,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ProtocolRequiredQuery(1234);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -1044,7 +1044,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceOptionalQueryWithOptionalAsync();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceOptionalQueryWithOptionalAsync with all parameters and parse the result.
@@ -1054,7 +1054,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceOptionalQueryWithOptionalAsync(optional: 1234);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -1067,7 +1067,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceOptionalQueryWithOptional();
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceOptionalQueryWithOptional with all parameters and parse the result.
@@ -1077,7 +1077,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceOptionalQueryWithOptional(optional: 1234);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -1124,7 +1124,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceRequiredQueryWithOptionalAsync(1234);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceRequiredQueryWithOptionalAsync with all parameters and parse the result.
@@ -1134,7 +1134,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceRequiredQueryWithOptionalAsync(1234);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -1147,7 +1147,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceRequiredQueryWithOptional(1234);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceRequiredQueryWithOptional with all parameters and parse the result.
@@ -1157,7 +1157,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceRequiredQueryWithOptional(1234);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -1204,7 +1204,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceOptionalQueryWithRequiredAsync with all parameters and parse the result.
@@ -1214,7 +1214,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(1234, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -1227,7 +1227,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceOptionalQueryWithRequired(null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceOptionalQueryWithRequired with all parameters and parse the result.
@@ -1237,7 +1237,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceOptionalQueryWithRequired(1234, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -1284,7 +1284,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceRequiredQueryWithRequiredAsync with all parameters and parse the result.
@@ -1294,7 +1294,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>
@@ -1307,7 +1307,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceRequiredQueryWithRequired(1234, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceRequiredQueryWithRequired with all parameters and parse the result.
@@ -1317,7 +1317,7 @@ ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceRequiredQueryWithRequired(1234, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code></example>
     </member>

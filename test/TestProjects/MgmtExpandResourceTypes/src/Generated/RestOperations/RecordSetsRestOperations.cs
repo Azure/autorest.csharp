@@ -113,7 +113,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = RecordSetData.DeserializeRecordSetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -148,7 +148,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = RecordSetData.DeserializeRecordSetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -239,7 +239,7 @@ namespace MgmtExpandResourceTypes
                 case 201:
                     {
                         RecordSetData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = RecordSetData.DeserializeRecordSetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -276,7 +276,7 @@ namespace MgmtExpandResourceTypes
                 case 201:
                     {
                         RecordSetData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = RecordSetData.DeserializeRecordSetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -454,7 +454,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = RecordSetData.DeserializeRecordSetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -488,7 +488,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = RecordSetData.DeserializeRecordSetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -576,7 +576,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = RecordSetListResult.DeserializeRecordSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -608,7 +608,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = RecordSetListResult.DeserializeRecordSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -691,7 +691,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = RecordSetListResult.DeserializeRecordSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -722,7 +722,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = RecordSetListResult.DeserializeRecordSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -805,7 +805,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = RecordSetListResult.DeserializeRecordSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -836,7 +836,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = RecordSetListResult.DeserializeRecordSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -892,7 +892,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = RecordSetListResult.DeserializeRecordSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -926,7 +926,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = RecordSetListResult.DeserializeRecordSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -981,7 +981,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = RecordSetListResult.DeserializeRecordSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1014,7 +1014,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = RecordSetListResult.DeserializeRecordSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1069,7 +1069,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = RecordSetListResult.DeserializeRecordSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1102,7 +1102,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         RecordSetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = RecordSetListResult.DeserializeRecordSetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

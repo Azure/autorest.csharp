@@ -23,7 +23,7 @@ namespace MgmtMockAndSample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Settings);
 #else
-                using (JsonDocument document = JsonDocument.Parse(Settings, new JsonDocumentOptions { MaxDepth = 256 }))
+                using (JsonDocument document = JsonDocument.Parse(Settings, ModelSerializationExtensions.JsonDocumentOptions))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
@@ -35,7 +35,7 @@ namespace MgmtMockAndSample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(ProtectedSettings);
 #else
-                using (JsonDocument document = JsonDocument.Parse(ProtectedSettings, new JsonDocumentOptions { MaxDepth = 256 }))
+                using (JsonDocument document = JsonDocument.Parse(ProtectedSettings, ModelSerializationExtensions.JsonDocumentOptions))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }

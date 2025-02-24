@@ -361,7 +361,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         ManagedHsmData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ManagedHsmData.DeserializeManagedHsmData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -394,7 +394,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         ManagedHsmData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ManagedHsmData.DeserializeManagedHsmData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -466,7 +466,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         ManagedHsmListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ManagedHsmListResult.DeserializeManagedHsmListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -494,7 +494,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         ManagedHsmListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ManagedHsmListResult.DeserializeManagedHsmListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -556,7 +556,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         ManagedHsmListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ManagedHsmListResult.DeserializeManagedHsmListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -582,7 +582,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         ManagedHsmListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ManagedHsmListResult.DeserializeManagedHsmListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -635,7 +635,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DeletedManagedHsmListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DeletedManagedHsmListResult.DeserializeDeletedManagedHsmListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -660,7 +660,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DeletedManagedHsmListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DeletedManagedHsmListResult.DeserializeDeletedManagedHsmListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -722,7 +722,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DeletedManagedHsmData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DeletedManagedHsmData.DeserializeDeletedManagedHsmData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -752,7 +752,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DeletedManagedHsmData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DeletedManagedHsmData.DeserializeDeletedManagedHsmData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -888,7 +888,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         ManagedHsmListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ManagedHsmListResult.DeserializeManagedHsmListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -918,7 +918,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         ManagedHsmListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ManagedHsmListResult.DeserializeManagedHsmListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -968,7 +968,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         ManagedHsmListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ManagedHsmListResult.DeserializeManagedHsmListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -996,7 +996,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         ManagedHsmListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ManagedHsmListResult.DeserializeManagedHsmListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1045,7 +1045,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DeletedManagedHsmListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DeletedManagedHsmListResult.DeserializeDeletedManagedHsmListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1072,7 +1072,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         DeletedManagedHsmListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DeletedManagedHsmListResult.DeserializeDeletedManagedHsmListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

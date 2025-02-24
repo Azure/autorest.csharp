@@ -53,7 +53,7 @@ namespace _Type._Dictionary
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetDurationValueAsync(context).ConfigureAwait(false);
             IReadOnlyDictionary<string, TimeSpan> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             Dictionary<string, TimeSpan> dictionary = new Dictionary<string, TimeSpan>();
             foreach (var property in document.RootElement.EnumerateObject())
             {
@@ -71,7 +71,7 @@ namespace _Type._Dictionary
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetDurationValue(context);
             IReadOnlyDictionary<string, TimeSpan> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             Dictionary<string, TimeSpan> dictionary = new Dictionary<string, TimeSpan>();
             foreach (var property in document.RootElement.EnumerateObject())
             {

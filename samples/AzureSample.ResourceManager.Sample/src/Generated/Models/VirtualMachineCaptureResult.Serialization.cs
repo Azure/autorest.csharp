@@ -54,7 +54,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Parameters);
 #else
-                using (JsonDocument document = JsonDocument.Parse(Parameters, new JsonDocumentOptions { MaxDepth = 256 }))
+                using (JsonDocument document = JsonDocument.Parse(Parameters, ModelSerializationExtensions.JsonDocumentOptions))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
@@ -74,7 +74,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item, new JsonDocumentOptions { MaxDepth = 256 }))
+                    using (JsonDocument document = JsonDocument.Parse(item, ModelSerializationExtensions.JsonDocumentOptions))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
@@ -323,7 +323,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeVirtualMachineCaptureResult(document.RootElement, options);
                     }
                 default:

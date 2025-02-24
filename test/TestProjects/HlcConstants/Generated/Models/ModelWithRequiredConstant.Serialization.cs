@@ -67,7 +67,7 @@ namespace HlcConstants.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static ModelWithRequiredConstant FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeModelWithRequiredConstant(document.RootElement);
         }
 

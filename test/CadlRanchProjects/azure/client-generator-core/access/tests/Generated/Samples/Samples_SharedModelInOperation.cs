@@ -25,7 +25,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
             Response response = client.Public("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -37,7 +37,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
             Response response = await client.PublicAsync("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -67,7 +67,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
             Response response = client.Public("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -79,7 +79,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
             Response response = await client.PublicAsync("<name>", null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 

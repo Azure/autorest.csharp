@@ -26,7 +26,7 @@ namespace ParametersCadl.Samples
 
             Response response = client.Operation(1234, null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -39,7 +39,7 @@ namespace ParametersCadl.Samples
 
             Response response = await client.OperationAsync(1234, null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -72,7 +72,7 @@ namespace ParametersCadl.Samples
 
             Response response = client.Operation(1234, 1234, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -85,7 +85,7 @@ namespace ParametersCadl.Samples
 
             Response response = await client.OperationAsync(1234, 1234, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -118,7 +118,7 @@ namespace ParametersCadl.Samples
 
             Response response = client.Operation2(1234, null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -131,7 +131,7 @@ namespace ParametersCadl.Samples
 
             Response response = await client.Operation2Async(1234, null, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -164,7 +164,7 @@ namespace ParametersCadl.Samples
 
             Response response = client.Operation2(1234, 1234, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 
@@ -177,7 +177,7 @@ namespace ParametersCadl.Samples
 
             Response response = await client.Operation2Async(1234, 1234, null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
 

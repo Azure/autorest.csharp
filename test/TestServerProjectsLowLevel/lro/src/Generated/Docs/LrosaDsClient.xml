@@ -12,7 +12,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutNonRetry400Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry400Async with all parameters and request content and parse the result.
@@ -35,7 +35,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.PutNonRetry400Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -56,7 +56,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = client.PutNonRetry400(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry400 with all parameters and request content and parse the result.
@@ -79,7 +79,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.PutNonRetry400(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -100,7 +100,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutNonRetry201Creating400Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry201Creating400Async with all parameters and request content and parse the result.
@@ -123,7 +123,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.PutNonRetry201Creating400Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -144,7 +144,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = client.PutNonRetry201Creating400(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry201Creating400 with all parameters and request content and parse the result.
@@ -167,7 +167,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.PutNonRetry201Creating400(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -188,7 +188,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutNonRetry201Creating400InvalidJsonAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry201Creating400InvalidJsonAsync with all parameters and request content and parse the result.
@@ -211,7 +211,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.PutNonRetry201Creating400InvalidJsonAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -232,7 +232,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = client.PutNonRetry201Creating400InvalidJson(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutNonRetry201Creating400InvalidJson with all parameters and request content and parse the result.
@@ -255,7 +255,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.PutNonRetry201Creating400InvalidJson(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -276,7 +276,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetry400Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetry400Async with all parameters and request content and parse the result.
@@ -299,7 +299,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetry400Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -320,7 +320,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncRelativeRetry400(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetry400 with all parameters and request content and parse the result.
@@ -343,7 +343,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.PutAsyncRelativeRetry400(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -646,7 +646,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutError201NoProvisioningStatePayloadAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutError201NoProvisioningStatePayloadAsync with all parameters and request content and parse the result.
@@ -669,7 +669,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.PutError201NoProvisioningStatePayloadAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -690,7 +690,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = client.PutError201NoProvisioningStatePayload(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutError201NoProvisioningStatePayload with all parameters and request content and parse the result.
@@ -713,7 +713,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.PutError201NoProvisioningStatePayload(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -734,7 +734,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryNoStatusAsync with all parameters and request content and parse the result.
@@ -757,7 +757,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -778,7 +778,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatus(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryNoStatus with all parameters and request content and parse the result.
@@ -801,7 +801,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatus(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -822,7 +822,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryNoStatusPayloadAsync with all parameters and request content and parse the result.
@@ -845,7 +845,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -866,7 +866,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatusPayload(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryNoStatusPayload with all parameters and request content and parse the result.
@@ -889,7 +889,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatusPayload(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -1098,7 +1098,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = await client.Put200InvalidJsonAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Put200InvalidJsonAsync with all parameters and request content and parse the result.
@@ -1121,7 +1121,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.Put200InvalidJsonAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -1142,7 +1142,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = client.Put200InvalidJson(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Put200InvalidJson with all parameters and request content and parse the result.
@@ -1165,7 +1165,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.Put200InvalidJson(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -1186,7 +1186,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryInvalidHeaderAsync with all parameters and request content and parse the result.
@@ -1209,7 +1209,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -1230,7 +1230,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryInvalidHeader with all parameters and request content and parse the result.
@@ -1253,7 +1253,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -1274,7 +1274,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryInvalidJsonPollingAsync with all parameters and request content and parse the result.
@@ -1297,7 +1297,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -1318,7 +1318,7 @@ using RequestContent content = null;
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutAsyncRelativeRetryInvalidJsonPolling with all parameters and request content and parse the result.
@@ -1341,7 +1341,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
 Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());

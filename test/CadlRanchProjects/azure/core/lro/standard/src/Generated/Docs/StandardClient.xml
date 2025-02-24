@@ -52,7 +52,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.CreateOrReplaceAsync(WaitUntil.Completed, "<name>", content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("role").ToString());
 ]]></code>
@@ -67,7 +67,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.CreateOrReplaceAsync(WaitUntil.Completed, "<name>", content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("role").ToString());
 ]]></code></example>
@@ -85,7 +85,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.CreateOrReplace(WaitUntil.Completed, "<name>", content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("role").ToString());
 ]]></code>
@@ -100,7 +100,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.CreateOrReplace(WaitUntil.Completed, "<name>", content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("role").ToString());
 ]]></code></example>
@@ -178,7 +178,7 @@ StandardClient client = new StandardClient();
 Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<format>", null);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("resourceUri").ToString());
 ]]></code>
@@ -189,7 +189,7 @@ StandardClient client = new StandardClient();
 Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<format>", null);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("resourceUri").ToString());
 ]]></code></example>
@@ -203,7 +203,7 @@ StandardClient client = new StandardClient();
 Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", "<format>", null);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("resourceUri").ToString());
 ]]></code>
@@ -214,7 +214,7 @@ StandardClient client = new StandardClient();
 Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", "<format>", null);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("resourceUri").ToString());
 ]]></code></example>

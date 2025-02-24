@@ -91,7 +91,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithNonResChData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = MgmtGrpParentWithNonResChData.DeserializeMgmtGrpParentWithNonResChData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -120,7 +120,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithNonResChData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = MgmtGrpParentWithNonResChData.DeserializeMgmtGrpParentWithNonResChData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -177,7 +177,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithNonResChData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = MgmtGrpParentWithNonResChData.DeserializeMgmtGrpParentWithNonResChData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -206,7 +206,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithNonResChData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = MgmtGrpParentWithNonResChData.DeserializeMgmtGrpParentWithNonResChData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -261,7 +261,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithNonResChListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = MgmtGrpParentWithNonResChListResult.DeserializeMgmtGrpParentWithNonResChListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -286,7 +286,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithNonResChListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = MgmtGrpParentWithNonResChListResult.DeserializeMgmtGrpParentWithNonResChListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -345,7 +345,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         NonResourceChildListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = NonResourceChildListResult.DeserializeNonResourceChildListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -372,7 +372,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         NonResourceChildListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = NonResourceChildListResult.DeserializeNonResourceChildListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -421,7 +421,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithNonResChListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = MgmtGrpParentWithNonResChListResult.DeserializeMgmtGrpParentWithNonResChListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -448,7 +448,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithNonResChListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = MgmtGrpParentWithNonResChListResult.DeserializeMgmtGrpParentWithNonResChListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

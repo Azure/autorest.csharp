@@ -52,7 +52,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.LongRunningRpcAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("data").ToString());
 ]]></code>
 This sample shows how to call LongRunningRpcAsync with all parameters and request content and parse the result.
@@ -66,7 +66,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.LongRunningRpcAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("data").ToString());
 ]]></code></example>
     </member>
@@ -83,7 +83,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.LongRunningRpc(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("data").ToString());
 ]]></code>
 This sample shows how to call LongRunningRpc with all parameters and request content and parse the result.
@@ -97,7 +97,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.LongRunningRpc(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("data").ToString());
 ]]></code></example>
     </member>

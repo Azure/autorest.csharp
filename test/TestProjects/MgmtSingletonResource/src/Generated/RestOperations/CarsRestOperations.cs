@@ -86,7 +86,7 @@ namespace MgmtSingletonResource
                 case 200:
                     {
                         CarListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = CarListResult.DeserializeCarListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -112,7 +112,7 @@ namespace MgmtSingletonResource
                 case 200:
                     {
                         CarListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = CarListResult.DeserializeCarListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -180,7 +180,7 @@ namespace MgmtSingletonResource
                 case 200:
                     {
                         CarData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = CarData.DeserializeCarData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -210,7 +210,7 @@ namespace MgmtSingletonResource
                 case 200:
                     {
                         CarData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = CarData.DeserializeCarData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -272,7 +272,7 @@ namespace MgmtSingletonResource
                 case 200:
                     {
                         CarData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = CarData.DeserializeCarData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -302,7 +302,7 @@ namespace MgmtSingletonResource
                 case 200:
                     {
                         CarData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = CarData.DeserializeCarData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

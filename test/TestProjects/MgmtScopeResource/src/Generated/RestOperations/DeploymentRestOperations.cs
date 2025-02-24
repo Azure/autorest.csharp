@@ -91,7 +91,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         DeploymentOperation value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DeploymentOperation.DeserializeDeploymentOperation(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -120,7 +120,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         DeploymentOperation value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DeploymentOperation.DeserializeDeploymentOperation(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -188,7 +188,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         DeploymentOperationsListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DeploymentOperationsListResult.DeserializeDeploymentOperationsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -216,7 +216,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         DeploymentOperationsListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DeploymentOperationsListResult.DeserializeDeploymentOperationsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -268,7 +268,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         DeploymentOperationsListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DeploymentOperationsListResult.DeserializeDeploymentOperationsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -298,7 +298,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         DeploymentOperationsListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DeploymentOperationsListResult.DeserializeDeploymentOperationsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

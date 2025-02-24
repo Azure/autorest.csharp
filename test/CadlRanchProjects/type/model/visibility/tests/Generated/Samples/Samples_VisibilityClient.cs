@@ -39,7 +39,7 @@ namespace _Type.Model.Visibility.Samples
             });
             Response response = client.GetModel(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("readProp").ToString());
             Console.WriteLine(result.GetProperty("queryProp").ToString());
             Console.WriteLine(result.GetProperty("createProp")[0].ToString());
@@ -68,7 +68,7 @@ namespace _Type.Model.Visibility.Samples
             });
             Response response = await client.GetModelAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("readProp").ToString());
             Console.WriteLine(result.GetProperty("queryProp").ToString());
             Console.WriteLine(result.GetProperty("createProp")[0].ToString());
@@ -117,7 +117,7 @@ namespace _Type.Model.Visibility.Samples
             });
             Response response = client.GetModel(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("readProp").ToString());
             Console.WriteLine(result.GetProperty("queryProp").ToString());
             Console.WriteLine(result.GetProperty("createProp")[0].ToString());
@@ -146,7 +146,7 @@ namespace _Type.Model.Visibility.Samples
             });
             Response response = await client.GetModelAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("readProp").ToString());
             Console.WriteLine(result.GetProperty("queryProp").ToString());
             Console.WriteLine(result.GetProperty("createProp")[0].ToString());
@@ -823,7 +823,7 @@ namespace _Type.Model.Visibility.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutReadOnlyModel(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -836,7 +836,7 @@ namespace _Type.Model.Visibility.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutReadOnlyModelAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -869,7 +869,7 @@ namespace _Type.Model.Visibility.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutReadOnlyModel(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("optionalNullableIntList")[0].ToString());
             Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
         }
@@ -883,7 +883,7 @@ namespace _Type.Model.Visibility.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutReadOnlyModelAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("optionalNullableIntList")[0].ToString());
             Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
         }

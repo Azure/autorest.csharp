@@ -28,7 +28,7 @@ namespace Versioning.ReturnTypeChangedFrom.Samples
             using RequestContent content = RequestContent.Create("<body>");
             Response response = client.Test(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -42,7 +42,7 @@ namespace Versioning.ReturnTypeChangedFrom.Samples
             using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.TestAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -76,7 +76,7 @@ namespace Versioning.ReturnTypeChangedFrom.Samples
             using RequestContent content = RequestContent.Create("<body>");
             Response response = client.Test(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -90,7 +90,7 @@ namespace Versioning.ReturnTypeChangedFrom.Samples
             using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.TestAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 

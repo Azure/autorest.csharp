@@ -59,7 +59,7 @@ namespace body_byte
                 case 200:
                     {
                         byte[] value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = document.RootElement.GetBytesFromBase64("D");
                         return Response.FromValue(value, message.Response);
                     }
@@ -79,7 +79,7 @@ namespace body_byte
                 case 200:
                     {
                         byte[] value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = document.RootElement.GetBytesFromBase64("D");
                         return Response.FromValue(value, message.Response);
                     }
@@ -112,7 +112,7 @@ namespace body_byte
                 case 200:
                     {
                         byte[] value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = document.RootElement.GetBytesFromBase64("D");
                         return Response.FromValue(value, message.Response);
                     }
@@ -132,7 +132,7 @@ namespace body_byte
                 case 200:
                     {
                         byte[] value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = document.RootElement.GetBytesFromBase64("D");
                         return Response.FromValue(value, message.Response);
                     }
@@ -165,7 +165,7 @@ namespace body_byte
                 case 200:
                     {
                         byte[] value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = document.RootElement.GetBytesFromBase64("D");
                         return Response.FromValue(value, message.Response);
                     }
@@ -185,7 +185,7 @@ namespace body_byte
                 case 200:
                     {
                         byte[] value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = document.RootElement.GetBytesFromBase64("D");
                         return Response.FromValue(value, message.Response);
                     }
@@ -279,7 +279,7 @@ namespace body_byte
                 case 200:
                     {
                         byte[] value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = document.RootElement.GetBytesFromBase64("D");
                         return Response.FromValue(value, message.Response);
                     }
@@ -299,7 +299,7 @@ namespace body_byte
                 case 200:
                     {
                         byte[] value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = document.RootElement.GetBytesFromBase64("D");
                         return Response.FromValue(value, message.Response);
                     }

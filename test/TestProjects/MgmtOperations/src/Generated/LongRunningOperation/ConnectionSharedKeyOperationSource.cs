@@ -18,13 +18,13 @@ namespace MgmtOperations
     {
         ConnectionSharedKey IOperationSource<ConnectionSharedKey>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             return ConnectionSharedKey.DeserializeConnectionSharedKey(document.RootElement);
         }
 
         async ValueTask<ConnectionSharedKey> IOperationSource<ConnectionSharedKey>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             return ConnectionSharedKey.DeserializeConnectionSharedKey(document.RootElement);
         }
     }

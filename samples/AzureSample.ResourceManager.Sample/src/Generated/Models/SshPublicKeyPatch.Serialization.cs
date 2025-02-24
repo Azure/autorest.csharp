@@ -132,7 +132,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeSshPublicKeyPatch(document.RootElement, options);
                     }
                 default:

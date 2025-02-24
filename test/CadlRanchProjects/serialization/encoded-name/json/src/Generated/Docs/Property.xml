@@ -127,7 +127,7 @@ Property client = new JsonClient().GetPropertyClient();
 
 Response response = await client.GetPropertyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("wireName").ToString());
 ]]></code>
 This sample shows how to call GetPropertyAsync with all parameters and parse the result.
@@ -136,7 +136,7 @@ Property client = new JsonClient().GetPropertyClient();
 
 Response response = await client.GetPropertyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("wireName").ToString());
 ]]></code></example>
     </member>
@@ -148,7 +148,7 @@ Property client = new JsonClient().GetPropertyClient();
 
 Response response = client.GetProperty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("wireName").ToString());
 ]]></code>
 This sample shows how to call GetProperty with all parameters and parse the result.
@@ -157,7 +157,7 @@ Property client = new JsonClient().GetPropertyClient();
 
 Response response = client.GetProperty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("wireName").ToString());
 ]]></code></example>
     </member>

@@ -10,7 +10,7 @@ Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVer
 
 Response response = await client.GetProjectAsync("<projectName>");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -27,7 +27,7 @@ Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVer
 
 Response response = await client.GetProjectAsync("<projectName>");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -50,7 +50,7 @@ Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVer
 
 Response response = client.GetProject("<projectName>");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -67,7 +67,7 @@ Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVer
 
 Response response = client.GetProject("<projectName>");
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -90,7 +90,7 @@ Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVer
 
 await foreach (BinaryData item in client.GetProjectsAsync())
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -108,7 +108,7 @@ Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVer
 
 await foreach (BinaryData item in client.GetProjectsAsync())
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -132,7 +132,7 @@ Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVer
 
 foreach (BinaryData item in client.GetProjects())
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -150,7 +150,7 @@ Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVer
 
 foreach (BinaryData item in client.GetProjects())
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -181,7 +181,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.CreateOrUpdateAsync(WaitUntil.Completed, "<projectName>", content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -208,7 +208,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = await client.CreateOrUpdateAsync(WaitUntil.Completed, "<projectName>", content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -238,7 +238,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.CreateOrUpdate(WaitUntil.Completed, "<projectName>", content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
@@ -265,7 +265,7 @@ using RequestContent content = RequestContent.Create(new
 Operation<BinaryData> operation = client.CreateOrUpdate(WaitUntil.Completed, "<projectName>", content);
 BinaryData responseData = operation.Value;
 
-JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());

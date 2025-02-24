@@ -26,7 +26,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
 
             Response response = client.GetAzureLocationScalar(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -38,7 +38,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
 
             Response response = await client.GetAzureLocationScalarAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -68,7 +68,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
 
             Response response = client.GetAzureLocationScalar(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -80,7 +80,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
 
             Response response = await client.GetAzureLocationScalarAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -198,7 +198,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
             });
             Response response = client.Post(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("location").ToString());
         }
 
@@ -214,7 +214,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
             });
             Response response = await client.PostAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("location").ToString());
         }
 
@@ -250,7 +250,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
             });
             Response response = client.Post(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("location").ToString());
         }
 
@@ -266,7 +266,7 @@ namespace _Specs_.Azure.Core.Scalar.Samples
             });
             Response response = await client.PostAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("location").ToString());
         }
 

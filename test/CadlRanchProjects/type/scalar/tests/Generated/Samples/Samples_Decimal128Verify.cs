@@ -26,7 +26,7 @@ namespace _Type.Scalar.Samples
 
             Response response = client.PrepareVerify(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -38,7 +38,7 @@ namespace _Type.Scalar.Samples
 
             Response response = await client.PrepareVerifyAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -68,7 +68,7 @@ namespace _Type.Scalar.Samples
 
             Response response = client.PrepareVerify(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 
@@ -80,7 +80,7 @@ namespace _Type.Scalar.Samples
 
             Response response = await client.PrepareVerifyAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
         }
 

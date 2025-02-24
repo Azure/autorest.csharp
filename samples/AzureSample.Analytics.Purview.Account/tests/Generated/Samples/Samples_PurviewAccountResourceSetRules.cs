@@ -28,7 +28,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = client.GetResourceSetRule(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -42,7 +42,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = await client.GetResourceSetRuleAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -56,7 +56,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = client.GetResourceSetRule(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("resourceSetProcessing").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -154,7 +154,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = await client.GetResourceSetRuleAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("resourceSetProcessing").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -253,7 +253,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.CreateOrUpdateResourceSetRule(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -268,7 +268,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateOrUpdateResourceSetRuleAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -393,7 +393,7 @@ storeType = "<storeType>",
             });
             Response response = client.CreateOrUpdateResourceSetRule(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("resourceSetProcessing").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -602,7 +602,7 @@ storeType = "<storeType>",
             });
             Response response = await client.CreateOrUpdateResourceSetRuleAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("resourceSetProcessing").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());

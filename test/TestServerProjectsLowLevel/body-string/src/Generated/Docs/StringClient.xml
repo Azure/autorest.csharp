@@ -10,7 +10,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters and parse the result.
@@ -20,7 +20,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -33,7 +33,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNull with all parameters and parse the result.
@@ -43,7 +43,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetNull(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -102,7 +102,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmptyAsync with all parameters and parse the result.
@@ -112,7 +112,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -125,7 +125,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmpty with all parameters and parse the result.
@@ -135,7 +135,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -194,7 +194,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetMbcsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetMbcsAsync with all parameters and parse the result.
@@ -204,7 +204,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetMbcsAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -217,7 +217,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetMbcs(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetMbcs with all parameters and parse the result.
@@ -227,7 +227,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetMbcs(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -286,7 +286,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetWhitespaceAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetWhitespaceAsync with all parameters and parse the result.
@@ -296,7 +296,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetWhitespaceAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -309,7 +309,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetWhitespace(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetWhitespace with all parameters and parse the result.
@@ -319,7 +319,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetWhitespace(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -378,7 +378,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNotProvidedAsync with all parameters and parse the result.
@@ -388,7 +388,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetNotProvidedAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -401,7 +401,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetNotProvided(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNotProvided with all parameters and parse the result.
@@ -411,7 +411,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetNotProvided(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -424,7 +424,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64EncodedAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBase64EncodedAsync with all parameters and parse the result.
@@ -434,7 +434,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64EncodedAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -447,7 +447,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64Encoded(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBase64Encoded with all parameters and parse the result.
@@ -457,7 +457,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64Encoded(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -470,7 +470,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64UrlEncodedAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBase64UrlEncodedAsync with all parameters and parse the result.
@@ -480,7 +480,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetBase64UrlEncodedAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -493,7 +493,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64UrlEncoded(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBase64UrlEncoded with all parameters and parse the result.
@@ -503,7 +503,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetBase64UrlEncoded(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -562,7 +562,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullBase64UrlEncodedAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNullBase64UrlEncodedAsync with all parameters and parse the result.
@@ -572,7 +572,7 @@ StringClient client = new StringClient(credential);
 
 Response response = await client.GetNullBase64UrlEncodedAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -585,7 +585,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetNullBase64UrlEncoded(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNullBase64UrlEncoded with all parameters and parse the result.
@@ -595,7 +595,7 @@ StringClient client = new StringClient(credential);
 
 Response response = client.GetNullBase64UrlEncoded(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

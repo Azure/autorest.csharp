@@ -26,7 +26,7 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetValid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());
         }
@@ -40,7 +40,7 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());
         }
@@ -54,7 +54,7 @@ namespace body_complex_LowLevel.Samples
 
             Response response = client.GetValid(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("species").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());
@@ -72,7 +72,7 @@ namespace body_complex_LowLevel.Samples
 
             Response response = await client.GetValidAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("species").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());
@@ -172,7 +172,7 @@ null
 
             Response response = client.GetDotSyntax(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fish.type").ToString());
         }
 
@@ -185,7 +185,7 @@ null
 
             Response response = await client.GetDotSyntaxAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fish.type").ToString());
         }
 
@@ -198,7 +198,7 @@ null
 
             Response response = client.GetDotSyntax(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fish.type").ToString());
             Console.WriteLine(result.GetProperty("species").ToString());
         }
@@ -212,7 +212,7 @@ null
 
             Response response = await client.GetDotSyntaxAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fish.type").ToString());
             Console.WriteLine(result.GetProperty("species").ToString());
         }
@@ -226,7 +226,7 @@ null
 
             Response response = client.GetComposedWithDiscriminator(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -239,7 +239,7 @@ null
 
             Response response = await client.GetComposedWithDiscriminatorAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -252,7 +252,7 @@ null
 
             Response response = client.GetComposedWithDiscriminator(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
@@ -276,7 +276,7 @@ null
 
             Response response = await client.GetComposedWithDiscriminatorAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
@@ -300,7 +300,7 @@ null
 
             Response response = client.GetComposedWithoutDiscriminator(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -313,7 +313,7 @@ null
 
             Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -326,7 +326,7 @@ null
 
             Response response = client.GetComposedWithoutDiscriminator(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
@@ -350,7 +350,7 @@ null
 
             Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
@@ -374,7 +374,7 @@ null
 
             Response response = client.GetComplicated(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());
         }
@@ -388,7 +388,7 @@ null
 
             Response response = await client.GetComplicatedAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());
         }
@@ -402,7 +402,7 @@ null
 
             Response response = client.GetComplicated(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("iswild").ToString());
             Console.WriteLine(result.GetProperty("fishtype").ToString());
@@ -422,7 +422,7 @@ null
 
             Response response = await client.GetComplicatedAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("iswild").ToString());
             Console.WriteLine(result.GetProperty("fishtype").ToString());
@@ -553,7 +553,7 @@ null
             });
             Response response = client.PutMissingDiscriminator(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());
         }
@@ -572,7 +572,7 @@ null
             });
             Response response = await client.PutMissingDiscriminatorAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());
         }
@@ -610,7 +610,7 @@ null
             });
             Response response = client.PutMissingDiscriminator(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("iswild").ToString());
             Console.WriteLine(result.GetProperty("fishtype").ToString());
@@ -654,7 +654,7 @@ null
             });
             Response response = await client.PutMissingDiscriminatorAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("iswild").ToString());
             Console.WriteLine(result.GetProperty("fishtype").ToString());

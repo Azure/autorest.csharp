@@ -41,7 +41,7 @@ namespace Scm._Type._Array
         {
             ClientResult result = await GetNullableModelValueAsync(null).ConfigureAwait(false);
             IReadOnlyList<InnerModel> value = default;
-            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, default).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, ModelSerializationExtensions.JsonDocumentOptions, default).ConfigureAwait(false);
             List<InnerModel> array = new List<InnerModel>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -56,7 +56,7 @@ namespace Scm._Type._Array
         {
             ClientResult result = GetNullableModelValue(null);
             IReadOnlyList<InnerModel> value = default;
-            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             List<InnerModel> array = new List<InnerModel>();
             foreach (var item in document.RootElement.EnumerateArray())
             {

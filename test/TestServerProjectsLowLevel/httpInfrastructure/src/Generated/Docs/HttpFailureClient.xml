@@ -10,7 +10,7 @@ HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = await client.GetEmptyErrorAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmptyErrorAsync with all parameters and parse the result.
@@ -20,7 +20,7 @@ HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = await client.GetEmptyErrorAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -33,7 +33,7 @@ HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = client.GetEmptyError(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmptyError with all parameters and parse the result.
@@ -43,7 +43,7 @@ HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = client.GetEmptyError(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -56,7 +56,7 @@ HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = await client.GetNoModelErrorAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNoModelErrorAsync with all parameters and parse the result.
@@ -66,7 +66,7 @@ HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = await client.GetNoModelErrorAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -79,7 +79,7 @@ HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = client.GetNoModelError(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNoModelError with all parameters and parse the result.
@@ -89,7 +89,7 @@ HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = client.GetNoModelError(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -102,7 +102,7 @@ HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = await client.GetNoModelEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNoModelEmptyAsync with all parameters and parse the result.
@@ -112,7 +112,7 @@ HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = await client.GetNoModelEmptyAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -125,7 +125,7 @@ HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = client.GetNoModelEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNoModelEmpty with all parameters and parse the result.
@@ -135,7 +135,7 @@ HttpFailureClient client = new HttpFailureClient(credential);
 
 Response response = client.GetNoModelEmpty(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

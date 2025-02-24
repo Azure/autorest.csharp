@@ -53,7 +53,7 @@ namespace _Type._Array
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetNullableInt32ValueAsync(context).ConfigureAwait(false);
             IReadOnlyList<int?> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             List<int?> array = new List<int?>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -78,7 +78,7 @@ namespace _Type._Array
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetNullableInt32Value(context);
             IReadOnlyList<int?> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             List<int?> array = new List<int?>();
             foreach (var item in document.RootElement.EnumerateArray())
             {

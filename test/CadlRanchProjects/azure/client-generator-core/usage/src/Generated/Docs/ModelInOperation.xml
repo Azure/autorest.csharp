@@ -127,7 +127,7 @@ ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
 Response response = await client.OutputToInputOutputAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call OutputToInputOutputAsync with all parameters and parse the result.
@@ -136,7 +136,7 @@ ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
 Response response = await client.OutputToInputOutputAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
@@ -148,7 +148,7 @@ ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
 Response response = client.OutputToInputOutput(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call OutputToInputOutput with all parameters and parse the result.
@@ -157,7 +157,7 @@ ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
 Response response = client.OutputToInputOutput(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
@@ -204,7 +204,7 @@ ModelInOperation client = new UsageClient().GetModelInOperationClient();
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.ModelInReadOnlyPropertyAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("result").GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call ModelInReadOnlyPropertyAsync with all request content and parse the result.
@@ -214,7 +214,7 @@ ModelInOperation client = new UsageClient().GetModelInOperationClient();
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.ModelInReadOnlyPropertyAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("result").GetProperty("name").ToString());
 ]]></code></example>
     </member>
@@ -227,7 +227,7 @@ ModelInOperation client = new UsageClient().GetModelInOperationClient();
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.ModelInReadOnlyProperty(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("result").GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call ModelInReadOnlyProperty with all request content and parse the result.
@@ -237,7 +237,7 @@ ModelInOperation client = new UsageClient().GetModelInOperationClient();
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.ModelInReadOnlyProperty(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("result").GetProperty("name").ToString());
 ]]></code></example>
     </member>

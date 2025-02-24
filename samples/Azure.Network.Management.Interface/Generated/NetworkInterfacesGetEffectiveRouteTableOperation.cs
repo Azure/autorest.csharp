@@ -68,13 +68,13 @@ namespace Azure.Network.Management.Interface
 
         EffectiveRouteListResult IOperationSource<EffectiveRouteListResult>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             return EffectiveRouteListResult.DeserializeEffectiveRouteListResult(document.RootElement);
         }
 
         async ValueTask<EffectiveRouteListResult> IOperationSource<EffectiveRouteListResult>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             return EffectiveRouteListResult.DeserializeEffectiveRouteListResult(document.RootElement);
         }
     }

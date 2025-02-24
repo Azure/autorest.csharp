@@ -10,7 +10,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.HeadNoParamsAsync(null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call HeadNoParamsAsync with all parameters and parse the result.
@@ -20,7 +20,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.HeadNoParamsAsync("<newParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -33,7 +33,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = client.HeadNoParams(null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call HeadNoParams with all parameters and parse the result.
@@ -43,7 +43,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = client.HeadNoParams("<newParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -56,7 +56,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.GetRequiredAsync("<parameter>", null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetRequiredAsync with all parameters and parse the result.
@@ -66,7 +66,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.GetRequiredAsync("<parameter>", "<newParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -79,7 +79,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = client.GetRequired("<parameter>", null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetRequired with all parameters and parse the result.
@@ -89,7 +89,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = client.GetRequired("<parameter>", "<newParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -102,7 +102,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.PutRequiredOptionalAsync("<requiredParam>", null, null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutRequiredOptionalAsync with all parameters and parse the result.
@@ -112,7 +112,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.PutRequiredOptionalAsync("<requiredParam>", "<optionalParam>", "<newParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -125,7 +125,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = client.PutRequiredOptional("<requiredParam>", null, null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutRequiredOptional with all parameters and parse the result.
@@ -135,7 +135,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = client.PutRequiredOptional("<requiredParam>", "<optionalParam>", "<newParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -152,7 +152,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.PostParametersAsync(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PostParametersAsync with all parameters and request content and parse the result.
@@ -166,7 +166,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.PostParametersAsync(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -183,7 +183,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.PostParameters(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PostParameters with all parameters and request content and parse the result.
@@ -197,7 +197,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.PostParameters(content, new ContentType("application/json"));
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -252,7 +252,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.GetOptionalAsync(null, null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetOptionalAsync with all parameters and parse the result.
@@ -262,7 +262,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.GetOptionalAsync("<optionalParam>", "<newParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -275,7 +275,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = client.GetOptional(null, null, null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetOptional with all parameters and parse the result.
@@ -285,7 +285,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = client.GetOptional("<optionalParam>", "<newParameter>", null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -298,7 +298,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.GetNewOperationAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNewOperationAsync with all parameters and parse the result.
@@ -308,7 +308,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = await client.GetNewOperationAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -321,7 +321,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = client.GetNewOperation(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetNewOperation with all parameters and parse the result.
@@ -331,7 +331,7 @@ ParamsClient client = new ParamsClient(credential);
 
 Response response = client.GetNewOperation(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

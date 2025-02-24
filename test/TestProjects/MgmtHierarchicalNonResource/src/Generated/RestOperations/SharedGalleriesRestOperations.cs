@@ -96,7 +96,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SharedGalleryList.DeserializeSharedGalleryList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -124,7 +124,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SharedGalleryList.DeserializeSharedGalleryList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -187,7 +187,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SharedGalleryData.DeserializeSharedGalleryData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -218,7 +218,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SharedGalleryData.DeserializeSharedGalleryData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -272,7 +272,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SharedGalleryList.DeserializeSharedGalleryList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -302,7 +302,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SharedGalleryList.DeserializeSharedGalleryList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

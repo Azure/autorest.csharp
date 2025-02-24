@@ -33,7 +33,7 @@ namespace Versioning.Removed.OldVersion.Samples
             });
             Response response = client.V1(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
             Console.WriteLine(result.GetProperty("enumProp").ToString());
             Console.WriteLine(result.GetProperty("unionProp").ToString());
@@ -54,7 +54,7 @@ namespace Versioning.Removed.OldVersion.Samples
             });
             Response response = await client.V1Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
             Console.WriteLine(result.GetProperty("enumProp").ToString());
             Console.WriteLine(result.GetProperty("unionProp").ToString());
@@ -97,7 +97,7 @@ namespace Versioning.Removed.OldVersion.Samples
             });
             Response response = client.V1(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
             Console.WriteLine(result.GetProperty("enumProp").ToString());
             Console.WriteLine(result.GetProperty("unionProp").ToString());
@@ -118,7 +118,7 @@ namespace Versioning.Removed.OldVersion.Samples
             });
             Response response = await client.V1Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
             Console.WriteLine(result.GetProperty("enumProp").ToString());
             Console.WriteLine(result.GetProperty("unionProp").ToString());
@@ -162,7 +162,7 @@ namespace Versioning.Removed.OldVersion.Samples
             });
             Response response = client.V2("<param>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
             Console.WriteLine(result.GetProperty("removedProp").ToString());
             Console.WriteLine(result.GetProperty("enumProp").ToString());
@@ -185,7 +185,7 @@ namespace Versioning.Removed.OldVersion.Samples
             });
             Response response = await client.V2Async("<param>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
             Console.WriteLine(result.GetProperty("removedProp").ToString());
             Console.WriteLine(result.GetProperty("enumProp").ToString());
@@ -230,7 +230,7 @@ namespace Versioning.Removed.OldVersion.Samples
             });
             Response response = client.V2("<param>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
             Console.WriteLine(result.GetProperty("removedProp").ToString());
             Console.WriteLine(result.GetProperty("enumProp").ToString());
@@ -253,7 +253,7 @@ namespace Versioning.Removed.OldVersion.Samples
             });
             Response response = await client.V2Async("<param>", content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").ToString());
             Console.WriteLine(result.GetProperty("removedProp").ToString());
             Console.WriteLine(result.GetProperty("enumProp").ToString());
@@ -296,7 +296,7 @@ namespace Versioning.Removed.OldVersion.Samples
             });
             Response response = client.ModelV3(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("enumProp").ToString());
         }
@@ -315,7 +315,7 @@ namespace Versioning.Removed.OldVersion.Samples
             });
             Response response = await client.ModelV3Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("enumProp").ToString());
         }
@@ -356,7 +356,7 @@ namespace Versioning.Removed.OldVersion.Samples
             });
             Response response = client.ModelV3(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("enumProp").ToString());
         }
@@ -375,7 +375,7 @@ namespace Versioning.Removed.OldVersion.Samples
             });
             Response response = await client.ModelV3Async(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("enumProp").ToString());
         }

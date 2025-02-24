@@ -76,7 +76,7 @@ namespace CognitiveSearch
                 case 201:
                     {
                         Models.Index value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = Models.Index.DeserializeIndex(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -104,7 +104,7 @@ namespace CognitiveSearch
                 case 201:
                     {
                         Models.Index value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = Models.Index.DeserializeIndex(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -144,7 +144,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         ListIndexesResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ListIndexesResult.DeserializeListIndexesResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -166,7 +166,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         ListIndexesResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ListIndexesResult.DeserializeListIndexesResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -236,7 +236,7 @@ namespace CognitiveSearch
                 case 201:
                     {
                         Models.Index value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = Models.Index.DeserializeIndex(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -273,7 +273,7 @@ namespace CognitiveSearch
                 case 201:
                     {
                         Models.Index value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = Models.Index.DeserializeIndex(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -391,7 +391,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         Models.Index value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = Models.Index.DeserializeIndex(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -419,7 +419,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         Models.Index value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = Models.Index.DeserializeIndex(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -463,7 +463,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         GetIndexStatisticsResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = GetIndexStatisticsResult.DeserializeGetIndexStatisticsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -491,7 +491,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         GetIndexStatisticsResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = GetIndexStatisticsResult.DeserializeGetIndexStatisticsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -544,7 +544,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         AnalyzeResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AnalyzeResult.DeserializeAnalyzeResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -577,7 +577,7 @@ namespace CognitiveSearch
                 case 200:
                     {
                         AnalyzeResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AnalyzeResult.DeserializeAnalyzeResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

@@ -25,14 +25,14 @@ namespace MgmtMultipleParentResource
 
         TheParentResource IOperationSource<TheParentResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             var data = TheParentData.DeserializeTheParentData(document.RootElement);
             return new TheParentResource(_client, data);
         }
 
         async ValueTask<TheParentResource> IOperationSource<TheParentResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             var data = TheParentData.DeserializeTheParentData(document.RootElement);
             return new TheParentResource(_client, data);
         }

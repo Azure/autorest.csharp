@@ -39,7 +39,7 @@ SpreadDifferentModelArray client = new AdditionalPropertiesClient().GetSpreadDif
 
 Response response = await client.GetSpreadDifferentModelArrayAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("knownProp").ToString());
 ]]></code>
 This sample shows how to call GetSpreadDifferentModelArrayAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ SpreadDifferentModelArray client = new AdditionalPropertiesClient().GetSpreadDif
 
 Response response = await client.GetSpreadDifferentModelArrayAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("knownProp").ToString());
 ]]></code></example>
     </member>
@@ -60,7 +60,7 @@ SpreadDifferentModelArray client = new AdditionalPropertiesClient().GetSpreadDif
 
 Response response = client.GetSpreadDifferentModelArray(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("knownProp").ToString());
 ]]></code>
 This sample shows how to call GetSpreadDifferentModelArray with all parameters and parse the result.
@@ -69,7 +69,7 @@ SpreadDifferentModelArray client = new AdditionalPropertiesClient().GetSpreadDif
 
 Response response = client.GetSpreadDifferentModelArray(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("knownProp").ToString());
 ]]></code></example>
     </member>

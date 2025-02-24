@@ -39,7 +39,7 @@ namespace NoDocsTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnion);
 #else
-            using (JsonDocument document = JsonDocument.Parse(RequiredUnion, new JsonDocumentOptions { MaxDepth = 256 }))
+            using (JsonDocument document = JsonDocument.Parse(RequiredUnion, ModelSerializationExtensions.JsonDocumentOptions))
             {
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
@@ -113,7 +113,7 @@ namespace NoDocsTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, new JsonDocumentOptions { MaxDepth = 256 }))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
@@ -304,7 +304,7 @@ namespace NoDocsTypeSpec.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeThing(document.RootElement, options);
                     }
                 default:
@@ -316,7 +316,7 @@ namespace NoDocsTypeSpec.Models
 
         internal static Thing FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeThing(document.RootElement);
         }
 

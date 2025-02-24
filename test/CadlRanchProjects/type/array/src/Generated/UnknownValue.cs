@@ -53,7 +53,7 @@ namespace _Type._Array
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetUnknownValueAsync(context).ConfigureAwait(false);
             IReadOnlyList<BinaryData> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             List<BinaryData> array = new List<BinaryData>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -78,7 +78,7 @@ namespace _Type._Array
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetUnknownValue(context);
             IReadOnlyList<BinaryData> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             List<BinaryData> array = new List<BinaryData>();
             foreach (var item in document.RootElement.EnumerateArray())
             {

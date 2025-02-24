@@ -91,7 +91,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithLocData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = MgmtGrpParentWithLocData.DeserializeMgmtGrpParentWithLocData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -120,7 +120,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithLocData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = MgmtGrpParentWithLocData.DeserializeMgmtGrpParentWithLocData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -177,7 +177,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithLocData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = MgmtGrpParentWithLocData.DeserializeMgmtGrpParentWithLocData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -206,7 +206,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithLocData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = MgmtGrpParentWithLocData.DeserializeMgmtGrpParentWithLocData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -261,7 +261,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithLocListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = MgmtGrpParentWithLocListResult.DeserializeMgmtGrpParentWithLocListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -286,7 +286,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithLocListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = MgmtGrpParentWithLocListResult.DeserializeMgmtGrpParentWithLocListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -335,7 +335,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithLocListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = MgmtGrpParentWithLocListResult.DeserializeMgmtGrpParentWithLocListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -362,7 +362,7 @@ namespace MgmtListMethods
                 case 200:
                     {
                         MgmtGrpParentWithLocListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = MgmtGrpParentWithLocListResult.DeserializeMgmtGrpParentWithLocListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

@@ -10,7 +10,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetIntAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetIntAsync with all parameters and parse the result.
@@ -20,7 +20,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetIntAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field2").ToString());
 ]]></code></example>
@@ -34,7 +34,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetInt(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetInt with all parameters and parse the result.
@@ -44,7 +44,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetInt(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field2").ToString());
 ]]></code></example>
@@ -112,7 +112,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetLongAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetLongAsync with all parameters and parse the result.
@@ -122,7 +122,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetLongAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field2").ToString());
 ]]></code></example>
@@ -136,7 +136,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetLong(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetLong with all parameters and parse the result.
@@ -146,7 +146,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetLong(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field2").ToString());
 ]]></code></example>
@@ -214,7 +214,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetFloatAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetFloatAsync with all parameters and parse the result.
@@ -224,7 +224,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetFloatAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field2").ToString());
 ]]></code></example>
@@ -238,7 +238,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetFloat(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetFloat with all parameters and parse the result.
@@ -248,7 +248,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetFloat(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field2").ToString());
 ]]></code></example>
@@ -316,7 +316,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDoubleAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDoubleAsync with all parameters and parse the result.
@@ -326,7 +326,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDoubleAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose").ToString());
 ]]></code></example>
@@ -340,7 +340,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDouble(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDouble with all parameters and parse the result.
@@ -350,7 +350,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDouble(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
 Console.WriteLine(result.GetProperty("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose").ToString());
 ]]></code></example>
@@ -418,7 +418,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetBoolAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBoolAsync with all parameters and parse the result.
@@ -428,7 +428,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetBoolAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field_true").ToString());
 Console.WriteLine(result.GetProperty("field_false").ToString());
 ]]></code></example>
@@ -442,7 +442,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetBool(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetBool with all parameters and parse the result.
@@ -452,7 +452,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetBool(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field_true").ToString());
 Console.WriteLine(result.GetProperty("field_false").ToString());
 ]]></code></example>
@@ -520,7 +520,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetStringAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetStringAsync with all parameters and parse the result.
@@ -530,7 +530,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetStringAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 Console.WriteLine(result.GetProperty("empty").ToString());
 Console.WriteLine(result.GetProperty("null").ToString());
@@ -545,7 +545,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetString(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetString with all parameters and parse the result.
@@ -555,7 +555,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetString(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 Console.WriteLine(result.GetProperty("empty").ToString());
 Console.WriteLine(result.GetProperty("null").ToString());
@@ -626,7 +626,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDateAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDateAsync with all parameters and parse the result.
@@ -636,7 +636,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDateAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 Console.WriteLine(result.GetProperty("leap").ToString());
 ]]></code></example>
@@ -650,7 +650,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDate(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDate with all parameters and parse the result.
@@ -660,7 +660,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDate(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 Console.WriteLine(result.GetProperty("leap").ToString());
 ]]></code></example>
@@ -728,7 +728,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDateTimeAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDateTimeAsync with all parameters and parse the result.
@@ -738,7 +738,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDateTimeAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 Console.WriteLine(result.GetProperty("now").ToString());
 ]]></code></example>
@@ -752,7 +752,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDateTime(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDateTime with all parameters and parse the result.
@@ -762,7 +762,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDateTime(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 Console.WriteLine(result.GetProperty("now").ToString());
 ]]></code></example>
@@ -830,7 +830,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDateTimeRfc1123Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDateTimeRfc1123Async with all parameters and parse the result.
@@ -840,7 +840,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDateTimeRfc1123Async(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 Console.WriteLine(result.GetProperty("now").ToString());
 ]]></code></example>
@@ -854,7 +854,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDateTimeRfc1123(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDateTimeRfc1123 with all parameters and parse the result.
@@ -864,7 +864,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDateTimeRfc1123(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 Console.WriteLine(result.GetProperty("now").ToString());
 ]]></code></example>
@@ -932,7 +932,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDurationAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDurationAsync with all parameters and parse the result.
@@ -942,7 +942,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetDurationAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 ]]></code></example>
     </member>
@@ -955,7 +955,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDuration(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDuration with all parameters and parse the result.
@@ -965,7 +965,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetDuration(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 ]]></code></example>
     </member>
@@ -1030,7 +1030,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetByteAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetByteAsync with all parameters and parse the result.
@@ -1040,7 +1040,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = await client.GetByteAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 ]]></code></example>
     </member>
@@ -1053,7 +1053,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetByte(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetByte with all parameters and parse the result.
@@ -1063,7 +1063,7 @@ PrimitiveClient client = new PrimitiveClient(credential);
 
 Response response = client.GetByte(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
 ]]></code></example>
     </member>

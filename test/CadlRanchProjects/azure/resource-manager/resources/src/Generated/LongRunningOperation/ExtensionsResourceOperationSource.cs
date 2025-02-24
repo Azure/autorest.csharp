@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,14 +27,13 @@ namespace _Azure.ResourceManager.Resources
 
         ExtensionsResource IOperationSource<ExtensionsResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
-            var data = ExtensionsResourceData.DeserializeExtensionsResourceData(document.RootElement);
+            var data = ModelReaderWriter.Read<ExtensionsResourceData>(new BinaryData(response.ContentStream));
             return new ExtensionsResource(_client, data);
         }
 
         async ValueTask<ExtensionsResource> IOperationSource<ExtensionsResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             var data = ExtensionsResourceData.DeserializeExtensionsResourceData(document.RootElement);
             return new ExtensionsResource(_client, data);
         }

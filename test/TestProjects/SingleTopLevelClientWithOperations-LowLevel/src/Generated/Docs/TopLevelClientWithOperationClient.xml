@@ -10,7 +10,7 @@ TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient
 
 Response response = await client.OperationAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call OperationAsync with all parameters and parse the result.
@@ -20,7 +20,7 @@ TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient
 
 Response response = await client.OperationAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -33,7 +33,7 @@ TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient
 
 Response response = client.Operation(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Operation with all parameters and parse the result.
@@ -43,7 +43,7 @@ TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient
 
 Response response = client.Operation(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -56,7 +56,7 @@ TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient
 
 await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -67,7 +67,7 @@ TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient
 
 await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code></example>
@@ -81,7 +81,7 @@ TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient
 
 foreach (BinaryData item in client.GetAll("<filter>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code>
@@ -92,7 +92,7 @@ TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient
 
 foreach (BinaryData item in client.GetAll("<filter>", null))
 {
-    JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
 }
 ]]></code></example>

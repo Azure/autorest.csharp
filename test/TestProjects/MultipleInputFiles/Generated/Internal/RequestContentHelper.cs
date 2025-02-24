@@ -43,7 +43,7 @@ namespace MultipleInputFiles
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(item);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item, new JsonDocumentOptions { MaxDepth = 256 }))
+                    using (JsonDocument document = JsonDocument.Parse(item, ModelSerializationExtensions.JsonDocumentOptions))
                     {
                         JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
                     }
@@ -100,7 +100,7 @@ namespace MultipleInputFiles
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, new JsonDocumentOptions { MaxDepth = 256 }))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
                     {
                         JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
                     }
@@ -125,7 +125,7 @@ namespace MultipleInputFiles
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(value);
 #else
-            using (JsonDocument document = JsonDocument.Parse(value, new JsonDocumentOptions { MaxDepth = 256 }))
+            using (JsonDocument document = JsonDocument.Parse(value, ModelSerializationExtensions.JsonDocumentOptions))
             {
                 JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
             }

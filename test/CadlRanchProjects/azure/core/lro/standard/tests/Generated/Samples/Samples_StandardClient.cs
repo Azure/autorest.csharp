@@ -31,7 +31,7 @@ namespace _Azure.Lro.Standard.Samples
             Operation<BinaryData> operation = client.CreateOrReplace(WaitUntil.Completed, "<name>", content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("role").ToString());
         }
@@ -49,7 +49,7 @@ namespace _Azure.Lro.Standard.Samples
             Operation<BinaryData> operation = await client.CreateOrReplaceAsync(WaitUntil.Completed, "<name>", content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("role").ToString());
         }
@@ -89,7 +89,7 @@ namespace _Azure.Lro.Standard.Samples
             Operation<BinaryData> operation = client.CreateOrReplace(WaitUntil.Completed, "<name>", content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("role").ToString());
         }
@@ -107,7 +107,7 @@ namespace _Azure.Lro.Standard.Samples
             Operation<BinaryData> operation = await client.CreateOrReplaceAsync(WaitUntil.Completed, "<name>", content);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("role").ToString());
         }
@@ -179,7 +179,7 @@ namespace _Azure.Lro.Standard.Samples
             Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", "<format>", null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("resourceUri").ToString());
         }
@@ -193,7 +193,7 @@ namespace _Azure.Lro.Standard.Samples
             Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<format>", null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("resourceUri").ToString());
         }
@@ -227,7 +227,7 @@ namespace _Azure.Lro.Standard.Samples
             Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", "<format>", null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("resourceUri").ToString());
         }
@@ -241,7 +241,7 @@ namespace _Azure.Lro.Standard.Samples
             Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<format>", null);
             BinaryData responseData = operation.Value;
 
-            JsonElement result = JsonDocument.Parse(responseData.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("resourceUri").ToString());
         }

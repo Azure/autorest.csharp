@@ -104,7 +104,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data, new JsonDocumentOptions { MaxDepth = 256 });
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeCobra(document.RootElement, options);
                     }
                 default:
@@ -118,7 +118,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Cobra FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeCobra(document.RootElement);
         }
 

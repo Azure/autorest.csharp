@@ -107,7 +107,7 @@ namespace NameConflicts
                 case 200:
                     {
                         Struct value = default;
-                        using var document = await JsonDocument.ParseAsync(message0.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message0.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = Struct.DeserializeStruct(document.RootElement);
                         return Azure.Response.FromValue(value, message0.Response);
                     }
@@ -163,7 +163,7 @@ namespace NameConflicts
                 case 200:
                     {
                         Struct value = default;
-                        using var document = JsonDocument.Parse(message0.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message0.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = Struct.DeserializeStruct(document.RootElement);
                         return Azure.Response.FromValue(value, message0.Response);
                     }
@@ -303,7 +303,7 @@ namespace NameConflicts
                 case 200:
                     {
                         Models.HttpMessage value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = Models.HttpMessage.DeserializeHttpMessage(document.RootElement);
                         return Azure.Response.FromValue(value, message.Response);
                     }
@@ -323,7 +323,7 @@ namespace NameConflicts
                 case 200:
                     {
                         Models.HttpMessage value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = Models.HttpMessage.DeserializeHttpMessage(document.RootElement);
                         return Azure.Response.FromValue(value, message.Response);
                     }
@@ -363,7 +363,7 @@ namespace NameConflicts
                 case 200:
                     {
                         Models.Request value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = Models.Request.DeserializeRequest(document.RootElement);
                         return Azure.Response.FromValue(value, message.Response);
                     }
@@ -383,7 +383,7 @@ namespace NameConflicts
                 case 200:
                     {
                         Models.Request value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = Models.Request.DeserializeRequest(document.RootElement);
                         return Azure.Response.FromValue(value, message.Response);
                     }
@@ -423,7 +423,7 @@ namespace NameConflicts
                 case 200:
                     {
                         Models.Response value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = Models.Response.DeserializeResponse(document.RootElement);
                         return Azure.Response.FromValue(value, message.Response);
                     }
@@ -443,7 +443,7 @@ namespace NameConflicts
                 case 200:
                     {
                         Models.Response value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = Models.Response.DeserializeResponse(document.RootElement);
                         return Azure.Response.FromValue(value, message.Response);
                     }

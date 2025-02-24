@@ -104,7 +104,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 201:
                     {
                         EncryptionScopeData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = EncryptionScopeData.DeserializeEncryptionScopeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -138,7 +138,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 201:
                     {
                         EncryptionScopeData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = EncryptionScopeData.DeserializeEncryptionScopeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -213,7 +213,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         EncryptionScopeData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = EncryptionScopeData.DeserializeEncryptionScopeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -246,7 +246,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         EncryptionScopeData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = EncryptionScopeData.DeserializeEncryptionScopeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -315,7 +315,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         EncryptionScopeData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = EncryptionScopeData.DeserializeEncryptionScopeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -348,7 +348,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         EncryptionScopeData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = EncryptionScopeData.DeserializeEncryptionScopeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -415,7 +415,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         EncryptionScopeListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -444,7 +444,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         EncryptionScopeListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -497,7 +497,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         EncryptionScopeListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -528,7 +528,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         EncryptionScopeListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = EncryptionScopeListResult.DeserializeEncryptionScopeListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

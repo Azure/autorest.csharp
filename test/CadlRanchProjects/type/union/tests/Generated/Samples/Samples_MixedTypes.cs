@@ -27,7 +27,7 @@ namespace _Type.Union.Samples
 
             Response response = client.GetMixedType(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
@@ -43,7 +43,7 @@ namespace _Type.Union.Samples
 
             Response response = await client.GetMixedTypeAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
@@ -77,7 +77,7 @@ namespace _Type.Union.Samples
 
             Response response = client.GetMixedType(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
@@ -93,7 +93,7 @@ namespace _Type.Union.Samples
 
             Response response = await client.GetMixedTypeAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());

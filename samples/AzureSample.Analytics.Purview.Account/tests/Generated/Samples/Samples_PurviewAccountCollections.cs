@@ -28,7 +28,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = client.GetCollection(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -42,7 +42,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = await client.GetCollectionAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -56,7 +56,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = client.GetCollection(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
             Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -81,7 +81,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = await client.GetCollectionAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
             Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -107,7 +107,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.CreateOrUpdateCollection(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -122,7 +122,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateOrUpdateCollectionAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -145,7 +145,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
             });
             Response response = client.CreateOrUpdateCollection(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
             Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -179,7 +179,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
             });
             Response response = await client.CreateOrUpdateCollectionAsync(content);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
             Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -256,7 +256,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = client.GetCollectionPath(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -270,7 +270,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = await client.GetCollectionPathAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -284,7 +284,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = client.GetCollectionPath(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("parentFriendlyNameChain")[0].ToString());
             Console.WriteLine(result.GetProperty("parentNameChain")[0].ToString());
         }
@@ -299,7 +299,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             Response response = await client.GetCollectionPathAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("parentFriendlyNameChain")[0].ToString());
             Console.WriteLine(result.GetProperty("parentNameChain")[0].ToString());
         }
@@ -314,7 +314,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             foreach (BinaryData item in client.GetCollections(null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -329,7 +329,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             await foreach (BinaryData item in client.GetCollectionsAsync(null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -344,7 +344,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             foreach (BinaryData item in client.GetCollections("<skipToken>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
                 Console.WriteLine(result.GetProperty("description").ToString());
                 Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -370,7 +370,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             await foreach (BinaryData item in client.GetCollectionsAsync("<skipToken>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
                 Console.WriteLine(result.GetProperty("description").ToString());
                 Console.WriteLine(result.GetProperty("friendlyName").ToString());
@@ -396,7 +396,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             foreach (BinaryData item in client.GetChildCollectionNames(null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -411,7 +411,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             await foreach (BinaryData item in client.GetChildCollectionNamesAsync(null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
             }
         }
@@ -426,7 +426,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             foreach (BinaryData item in client.GetChildCollectionNames("<skipToken>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("friendlyName").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
             }
@@ -442,7 +442,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
 
             await foreach (BinaryData item in client.GetChildCollectionNamesAsync("<skipToken>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream(), new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("friendlyName").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
             }

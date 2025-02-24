@@ -97,7 +97,7 @@ namespace MgmtParent
                 case 200:
                     {
                         AvailabilitySetData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -128,7 +128,7 @@ namespace MgmtParent
                 case 200:
                     {
                         AvailabilitySetData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -197,7 +197,7 @@ namespace MgmtParent
                 case 200:
                     {
                         AvailabilitySetData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -228,7 +228,7 @@ namespace MgmtParent
                 case 200:
                     {
                         AvailabilitySetData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -374,7 +374,7 @@ namespace MgmtParent
                 case 200:
                     {
                         AvailabilitySetData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -405,7 +405,7 @@ namespace MgmtParent
                 case 200:
                     {
                         AvailabilitySetData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -469,7 +469,7 @@ namespace MgmtParent
                 case 200:
                     {
                         AvailabilitySetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AvailabilitySetListResult.DeserializeAvailabilitySetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -495,7 +495,7 @@ namespace MgmtParent
                 case 200:
                     {
                         AvailabilitySetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AvailabilitySetListResult.DeserializeAvailabilitySetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -554,7 +554,7 @@ namespace MgmtParent
                 case 200:
                     {
                         AvailabilitySetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AvailabilitySetListResult.DeserializeAvailabilitySetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -581,7 +581,7 @@ namespace MgmtParent
                 case 200:
                     {
                         AvailabilitySetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AvailabilitySetListResult.DeserializeAvailabilitySetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -631,7 +631,7 @@ namespace MgmtParent
                 case 200:
                     {
                         AvailabilitySetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AvailabilitySetListResult.DeserializeAvailabilitySetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -659,7 +659,7 @@ namespace MgmtParent
                 case 200:
                     {
                         AvailabilitySetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AvailabilitySetListResult.DeserializeAvailabilitySetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -710,7 +710,7 @@ namespace MgmtParent
                 case 200:
                     {
                         AvailabilitySetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AvailabilitySetListResult.DeserializeAvailabilitySetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -739,7 +739,7 @@ namespace MgmtParent
                 case 200:
                     {
                         AvailabilitySetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AvailabilitySetListResult.DeserializeAvailabilitySetListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

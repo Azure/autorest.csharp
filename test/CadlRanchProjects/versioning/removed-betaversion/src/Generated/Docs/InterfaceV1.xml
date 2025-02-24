@@ -54,7 +54,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.V1InInterfaceAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("prop").ToString());
 Console.WriteLine(result.GetProperty("enumProp").ToString());
 Console.WriteLine(result.GetProperty("unionProp").ToString());
@@ -72,7 +72,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = await client.V1InInterfaceAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("prop").ToString());
 Console.WriteLine(result.GetProperty("enumProp").ToString());
 Console.WriteLine(result.GetProperty("unionProp").ToString());
@@ -93,7 +93,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.V1InInterface(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("prop").ToString());
 Console.WriteLine(result.GetProperty("enumProp").ToString());
 Console.WriteLine(result.GetProperty("unionProp").ToString());
@@ -111,7 +111,7 @@ using RequestContent content = RequestContent.Create(new
 });
 Response response = client.V1InInterface(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("prop").ToString());
 Console.WriteLine(result.GetProperty("enumProp").ToString());
 Console.WriteLine(result.GetProperty("unionProp").ToString());

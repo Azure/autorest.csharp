@@ -45,7 +45,7 @@ ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, d
 using RequestContent content = RequestContent.Create("<body>");
 Response response = await client.TestAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call TestAsync with all request content and parse the result.
@@ -56,7 +56,7 @@ ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, d
 using RequestContent content = RequestContent.Create("<body>");
 Response response = await client.TestAsync(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
@@ -70,7 +70,7 @@ ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, d
 using RequestContent content = RequestContent.Create("<body>");
 Response response = client.Test(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Test with all request content and parse the result.
@@ -81,7 +81,7 @@ ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, d
 using RequestContent content = RequestContent.Create("<body>");
 Response response = client.Test(content);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>

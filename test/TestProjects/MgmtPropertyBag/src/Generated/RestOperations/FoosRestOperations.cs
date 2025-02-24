@@ -100,7 +100,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         IReadOnlyList<FooData> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<FooData> array = new List<FooData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -132,7 +132,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         IReadOnlyList<FooData> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<FooData> array = new List<FooData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -246,7 +246,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         IReadOnlyList<FooData> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<FooData> array = new List<FooData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -284,7 +284,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         IReadOnlyList<FooData> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<FooData> array = new List<FooData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -393,7 +393,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         FooData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FooData.DeserializeFooData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -429,7 +429,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         FooData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FooData.DeserializeFooData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -527,7 +527,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         FooData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FooData.DeserializeFooData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -561,7 +561,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         FooData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FooData.DeserializeFooData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -630,7 +630,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         FooData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FooData.DeserializeFooData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -661,7 +661,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         FooData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FooData.DeserializeFooData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -781,7 +781,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         FooData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FooData.DeserializeFooData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -816,7 +816,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         FooData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FooData.DeserializeFooData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

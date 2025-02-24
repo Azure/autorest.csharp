@@ -26,7 +26,7 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = client.GetAll(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -38,7 +38,7 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = await client.GetAllAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -68,7 +68,7 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = client.GetAll(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
         }
 
@@ -80,7 +80,7 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = await client.GetAllAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
         }
 
@@ -110,7 +110,7 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = client.GetDefault(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -122,7 +122,7 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = await client.GetDefaultAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
         }
 
@@ -152,7 +152,7 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = client.GetDefault(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
         }
 
@@ -164,7 +164,7 @@ namespace _Type.Property.Optionality.Samples
 
             Response response = await client.GetDefaultAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
         }
 

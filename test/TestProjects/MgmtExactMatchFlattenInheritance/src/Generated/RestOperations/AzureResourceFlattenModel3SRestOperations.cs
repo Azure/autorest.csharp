@@ -87,7 +87,7 @@ namespace MgmtExactMatchFlattenInheritance
                 case 200:
                     {
                         AzureResourceFlattenModel3ListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AzureResourceFlattenModel3ListResult.DeserializeAzureResourceFlattenModel3ListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -114,7 +114,7 @@ namespace MgmtExactMatchFlattenInheritance
                 case 200:
                     {
                         AzureResourceFlattenModel3ListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AzureResourceFlattenModel3ListResult.DeserializeAzureResourceFlattenModel3ListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -183,7 +183,7 @@ namespace MgmtExactMatchFlattenInheritance
                 case 200:
                     {
                         AzureResourceFlattenModel3 value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AzureResourceFlattenModel3.DeserializeAzureResourceFlattenModel3(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -214,7 +214,7 @@ namespace MgmtExactMatchFlattenInheritance
                 case 200:
                     {
                         AzureResourceFlattenModel3 value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AzureResourceFlattenModel3.DeserializeAzureResourceFlattenModel3(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -277,7 +277,7 @@ namespace MgmtExactMatchFlattenInheritance
                 case 200:
                     {
                         AzureResourceFlattenModel3 value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AzureResourceFlattenModel3.DeserializeAzureResourceFlattenModel3(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -306,7 +306,7 @@ namespace MgmtExactMatchFlattenInheritance
                 case 200:
                     {
                         AzureResourceFlattenModel3 value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AzureResourceFlattenModel3.DeserializeAzureResourceFlattenModel3(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

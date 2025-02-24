@@ -54,7 +54,7 @@ namespace _Type._Array
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetNullableModelValueAsync(context).ConfigureAwait(false);
             IReadOnlyList<InnerModel> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             List<InnerModel> array = new List<InnerModel>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -72,7 +72,7 @@ namespace _Type._Array
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetNullableModelValue(context);
             IReadOnlyList<InnerModel> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             List<InnerModel> array = new List<InnerModel>();
             foreach (var item in document.RootElement.EnumerateArray())
             {

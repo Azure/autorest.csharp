@@ -27,7 +27,7 @@ namespace _Type.Union.Samples
 
             Response response = client.GetStringAndArray(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").GetProperty("string").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("array").ToString());
         }
@@ -40,7 +40,7 @@ namespace _Type.Union.Samples
 
             Response response = await client.GetStringAndArrayAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").GetProperty("string").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("array").ToString());
         }
@@ -71,7 +71,7 @@ namespace _Type.Union.Samples
 
             Response response = client.GetStringAndArray(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").GetProperty("string").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("array").ToString());
         }
@@ -84,7 +84,7 @@ namespace _Type.Union.Samples
 
             Response response = await client.GetStringAndArrayAsync(null);
 
-            JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("prop").GetProperty("string").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("array").ToString());
         }

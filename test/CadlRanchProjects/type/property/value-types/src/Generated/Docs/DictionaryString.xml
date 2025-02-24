@@ -39,7 +39,7 @@ DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 Response response = await client.GetDictionaryStringAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDictionaryStringAsync with all parameters and parse the result.
@@ -48,7 +48,7 @@ DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 Response response = await client.GetDictionaryStringAsync(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
@@ -60,7 +60,7 @@ DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 Response response = client.GetDictionaryString(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
 ]]></code>
 This sample shows how to call GetDictionaryString with all parameters and parse the result.
@@ -69,7 +69,7 @@ DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 Response response = client.GetDictionaryString(null);
 
-JsonElement result = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }).RootElement;
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
 ]]></code></example>
     </member>

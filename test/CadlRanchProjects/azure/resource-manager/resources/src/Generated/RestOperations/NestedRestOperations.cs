@@ -97,7 +97,7 @@ namespace _Azure.ResourceManager.Resources
                 case 200:
                     {
                         NestedProxyResourceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = NestedProxyResourceData.DeserializeNestedProxyResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -130,7 +130,7 @@ namespace _Azure.ResourceManager.Resources
                 case 200:
                     {
                         NestedProxyResourceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = NestedProxyResourceData.DeserializeNestedProxyResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -489,7 +489,7 @@ namespace _Azure.ResourceManager.Resources
                 case 200:
                     {
                         NestedProxyResourceListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = NestedProxyResourceListResult.DeserializeNestedProxyResourceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -518,7 +518,7 @@ namespace _Azure.ResourceManager.Resources
                 case 200:
                     {
                         NestedProxyResourceListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = NestedProxyResourceListResult.DeserializeNestedProxyResourceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -571,7 +571,7 @@ namespace _Azure.ResourceManager.Resources
                 case 200:
                     {
                         NestedProxyResourceListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = NestedProxyResourceListResult.DeserializeNestedProxyResourceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -602,7 +602,7 @@ namespace _Azure.ResourceManager.Resources
                 case 200:
                     {
                         NestedProxyResourceListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = NestedProxyResourceListResult.DeserializeNestedProxyResourceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
