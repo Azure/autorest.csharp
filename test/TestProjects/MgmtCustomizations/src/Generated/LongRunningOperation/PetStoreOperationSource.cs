@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,14 +27,13 @@ namespace MgmtCustomizations
 
         PetStoreResource IOperationSource<PetStoreResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
-            var data = PetStoreData.DeserializePetStoreData(document.RootElement);
+            var data = ModelReaderWriter.Read<PetStoreData>(new BinaryData(response.ContentStream));
             return new PetStoreResource(_client, data);
         }
 
         async ValueTask<PetStoreResource> IOperationSource<PetStoreResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             var data = PetStoreData.DeserializePetStoreData(document.RootElement);
             return new PetStoreResource(_client, data);
         }

@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -156,9 +157,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 var resourceData = _opSource.Resource!.ResourceData;
 
-                yield return UsingVar("document", JsonDocumentExpression.Parse(stream, async), out var document);
+                ValueExpression deserializeExpression;
+                if (async)
+                {
+                    yield return UsingVar("document", JsonDocumentExpression.Parse(stream, async), out var document);
 
-                ValueExpression deserializeExpression = SerializableObjectTypeExpression.Deserialize(resourceData, document.RootElement);
+                    deserializeExpression = SerializableObjectTypeExpression.Deserialize(resourceData, document.RootElement);
+                }
+                else
+                {
+                    deserializeExpression = new InvokeStaticMethodExpression(typeof(ModelReaderWriter), "Read", [New.Instance(typeof(BinaryData), stream)], [resourceData.Type]);
+                }
+
                 if (_operationIdMappings is not null)
                 {
                     deserializeExpression = new InvokeInstanceMethodExpression(null, "ScrubId", new[]{deserializeExpression}, null, false);

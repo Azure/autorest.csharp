@@ -87,7 +87,7 @@ namespace MgmtCustomizations
                 case 200:
                     {
                         PetStoreListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = PetStoreListResult.DeserializePetStoreListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -114,7 +114,7 @@ namespace MgmtCustomizations
                 case 200:
                     {
                         PetStoreListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = PetStoreListResult.DeserializePetStoreListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -177,7 +177,7 @@ namespace MgmtCustomizations
                 case 200:
                     {
                         PetStoreData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 }, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = PetStoreData.DeserializePetStoreData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -208,7 +208,7 @@ namespace MgmtCustomizations
                 case 200:
                     {
                         PetStoreData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream, new JsonDocumentOptions { MaxDepth = 256 });
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = PetStoreData.DeserializePetStoreData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
