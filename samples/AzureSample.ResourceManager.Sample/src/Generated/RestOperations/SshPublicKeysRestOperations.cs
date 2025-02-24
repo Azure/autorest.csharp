@@ -81,7 +81,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         SshPublicKeysGroupListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SshPublicKeysGroupListResult.DeserializeSshPublicKeysGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -106,7 +106,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         SshPublicKeysGroupListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SshPublicKeysGroupListResult.DeserializeSshPublicKeysGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -165,7 +165,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         SshPublicKeysGroupListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SshPublicKeysGroupListResult.DeserializeSshPublicKeysGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -192,7 +192,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         SshPublicKeysGroupListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SshPublicKeysGroupListResult.DeserializeSshPublicKeysGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -262,7 +262,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 201:
                     {
                         SshPublicKeyData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SshPublicKeyData.DeserializeSshPublicKeyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -294,7 +294,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 201:
                     {
                         SshPublicKeyData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SshPublicKeyData.DeserializeSshPublicKeyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -363,7 +363,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         SshPublicKeyData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SshPublicKeyData.DeserializeSshPublicKeyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -394,7 +394,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         SshPublicKeyData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SshPublicKeyData.DeserializeSshPublicKeyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -540,7 +540,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         SshPublicKeyData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SshPublicKeyData.DeserializeSshPublicKeyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -571,7 +571,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         SshPublicKeyData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SshPublicKeyData.DeserializeSshPublicKeyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -638,7 +638,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         SshPublicKeyGenerateKeyPairResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SshPublicKeyGenerateKeyPairResult.DeserializeSshPublicKeyGenerateKeyPairResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -667,7 +667,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         SshPublicKeyGenerateKeyPairResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SshPublicKeyGenerateKeyPairResult.DeserializeSshPublicKeyGenerateKeyPairResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -716,7 +716,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         SshPublicKeysGroupListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SshPublicKeysGroupListResult.DeserializeSshPublicKeysGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -743,7 +743,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         SshPublicKeysGroupListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SshPublicKeysGroupListResult.DeserializeSshPublicKeysGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -794,7 +794,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         SshPublicKeysGroupListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SshPublicKeysGroupListResult.DeserializeSshPublicKeysGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -823,7 +823,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         SshPublicKeysGroupListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SshPublicKeysGroupListResult.DeserializeSshPublicKeysGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

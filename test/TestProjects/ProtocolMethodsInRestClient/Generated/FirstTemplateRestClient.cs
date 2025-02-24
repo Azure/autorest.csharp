@@ -68,7 +68,7 @@ namespace ProtocolMethodsInRestClient
                 case 200:
                     {
                         Resource value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = Resource.DeserializeResource(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -89,7 +89,7 @@ namespace ProtocolMethodsInRestClient
                 case 200:
                     {
                         Resource value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = Resource.DeserializeResource(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -262,7 +262,7 @@ namespace ProtocolMethodsInRestClient
                 case 200:
                     {
                         Resource value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = Resource.DeserializeResource(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -289,7 +289,7 @@ namespace ProtocolMethodsInRestClient
                 case 200:
                     {
                         Resource value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = Resource.DeserializeResource(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

@@ -183,7 +183,7 @@ namespace _Azure.ResourceManager.CommonProperties
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeManagedIdentityTrackedResourceData(document.RootElement, options);
                     }
                 default:

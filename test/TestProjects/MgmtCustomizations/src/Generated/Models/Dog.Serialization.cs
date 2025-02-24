@@ -217,7 +217,7 @@ namespace MgmtCustomizations.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeDog(document.RootElement, options);
                     }
                 default:

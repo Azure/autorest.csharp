@@ -53,7 +53,7 @@ namespace _Type._Dictionary
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetInt64ValueAsync(context).ConfigureAwait(false);
             IReadOnlyDictionary<string, long> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             Dictionary<string, long> dictionary = new Dictionary<string, long>();
             foreach (var property in document.RootElement.EnumerateObject())
             {
@@ -71,7 +71,7 @@ namespace _Type._Dictionary
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetInt64Value(context);
             IReadOnlyDictionary<string, long> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream);
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             Dictionary<string, long> dictionary = new Dictionary<string, long>();
             foreach (var property in document.RootElement.EnumerateObject())
             {

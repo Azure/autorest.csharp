@@ -40,7 +40,7 @@ namespace Scm._Type._Array
         {
             ClientResult result = await GetInt64ValueAsync(null).ConfigureAwait(false);
             IReadOnlyList<long> value = default;
-            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, default).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, ModelSerializationExtensions.JsonDocumentOptions, default).ConfigureAwait(false);
             List<long> array = new List<long>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -55,7 +55,7 @@ namespace Scm._Type._Array
         {
             ClientResult result = GetInt64Value(null);
             IReadOnlyList<long> value = default;
-            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream);
+            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             List<long> array = new List<long>();
             foreach (var item in document.RootElement.EnumerateArray())
             {

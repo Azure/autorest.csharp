@@ -40,7 +40,7 @@ namespace Scm._Type._Array
         {
             ClientResult result = await GetDatetimeValueAsync(null).ConfigureAwait(false);
             IReadOnlyList<DateTimeOffset> value = default;
-            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, default).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, ModelSerializationExtensions.JsonDocumentOptions, default).ConfigureAwait(false);
             List<DateTimeOffset> array = new List<DateTimeOffset>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -55,7 +55,7 @@ namespace Scm._Type._Array
         {
             ClientResult result = GetDatetimeValue(null);
             IReadOnlyList<DateTimeOffset> value = default;
-            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream);
+            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             List<DateTimeOffset> array = new List<DateTimeOffset>();
             foreach (var item in document.RootElement.EnumerateArray())
             {

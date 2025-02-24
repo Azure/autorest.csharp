@@ -122,7 +122,7 @@ namespace body_complex.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeMyBaseType(document.RootElement, options);
                     }
                 default:
@@ -136,7 +136,7 @@ namespace body_complex.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new UnknownMyBaseType FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeUnknownMyBaseType(document.RootElement);
         }
 

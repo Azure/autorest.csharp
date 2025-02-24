@@ -45,7 +45,7 @@ namespace CognitiveSearch.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static ResourceCounter FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeResourceCounter(document.RootElement);
         }
     }

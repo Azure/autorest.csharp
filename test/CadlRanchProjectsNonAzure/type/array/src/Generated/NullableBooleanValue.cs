@@ -40,7 +40,7 @@ namespace Scm._Type._Array
         {
             ClientResult result = await GetNullableBooleanValueAsync(null).ConfigureAwait(false);
             IReadOnlyList<bool?> value = default;
-            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, default, default).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(result.GetRawResponse().ContentStream, ModelSerializationExtensions.JsonDocumentOptions, default).ConfigureAwait(false);
             List<bool?> array = new List<bool?>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -62,7 +62,7 @@ namespace Scm._Type._Array
         {
             ClientResult result = GetNullableBooleanValue(null);
             IReadOnlyList<bool?> value = default;
-            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream);
+            using var document = JsonDocument.Parse(result.GetRawResponse().ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             List<bool?> array = new List<bool?>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
