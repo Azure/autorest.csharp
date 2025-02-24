@@ -43,6 +43,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                 InitializationValue = New.Instance(typeof(ModelReaderWriterOptions), Literal("W"))
             };
 
+            _jsonDocumentOptionsField = new FieldDeclaration(
+                modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
+                type: typeof(JsonDocumentOptions),
+                name: _jsonDocumentOptionsName)
+            {
+                InitializationValue = New.Instance(typeof(JsonDocumentOptions), new Dictionary<string, ValueExpression>() { { "MaxDepth", Literal(256) } })
+            };
+
             if (Configuration.EnableInternalRawData)
             {
                 // when we have this configuration, we have a sentinel value for raw data values to let us skip values
@@ -61,17 +69,23 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private const string _wireOptionsName = "WireOptions";
+        private const string _jsonDocumentOptionsName = "JsonDocumentOptions";
         private readonly FieldDeclaration _wireOptionsField;
+        private readonly FieldDeclaration _jsonDocumentOptionsField;
         private const string _sentinelBinaryDataName = "SentinelValue";
         private readonly FieldDeclaration? _sentinelBinaryDataField;
 
         private ModelReaderWriterOptionsExpression? _wireOptions;
         public ModelReaderWriterOptionsExpression WireOptions => _wireOptions ??= new ModelReaderWriterOptionsExpression(new MemberExpression(Type, _wireOptionsName));
 
+        private ValueExpression? _jsonDocumentOptions;
+        public ValueExpression JsonDocumentOptions => _jsonDocumentOptions ??= new MemberExpression(Type, _jsonDocumentOptionsName);
+
         protected override string DefaultName => "ModelSerializationExtensions";
 
         protected override IEnumerable<FieldDeclaration> BuildFields()
         {
+            yield return _jsonDocumentOptionsField;
             yield return _wireOptionsField;
 
             if (_sentinelBinaryDataField != null)
