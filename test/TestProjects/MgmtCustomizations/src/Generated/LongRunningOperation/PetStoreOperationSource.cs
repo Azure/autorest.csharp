@@ -7,7 +7,6 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -33,9 +32,8 @@ namespace MgmtCustomizations
 
         async ValueTask<PetStoreResource> IOperationSource<PetStoreResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
-            var data = PetStoreData.DeserializePetStoreData(document.RootElement);
-            return new PetStoreResource(_client, data);
+            var data = ModelReaderWriter.Read<PetStoreData>(new BinaryData(response.ContentStream));
+            return await Task.FromResult(new PetStoreResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

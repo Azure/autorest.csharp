@@ -4,7 +4,6 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -158,7 +157,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var resourceData = _opSource.Resource!.ResourceData;
 
                 ValueExpression deserializeExpression;
-                if (async || !Configuration.UseModelReaderWriter)
+                if (!Configuration.UseModelReaderWriter)
                 {
                     yield return UsingVar("document", JsonDocumentExpression.Parse(stream, async), out var document);
 
@@ -181,11 +180,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     yield return Assign(new MemberExpression(dataVariable, "Id"), new MemberExpression(_opSource.ArmClientField, "Id"));
                 }
-                yield return Return(New.Instance(_opSource.Resource.Type, (ValueExpression)_opSource.ArmClientField, dataVariable));
+                yield return Return(GetReturnExpression(dataVariable));
             }
             else
             {
                 yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(_opSource.ResponseSerialization, async, null, stream, _opSource.ReturnType.Equals(typeof(BinaryData)), null);
+            }
+
+            ValueExpression GetReturnExpression(VariableReference dataVariable)
+            {
+                var opSourceInstance = New.Instance(_opSource.Resource?.Type!, (ValueExpression)_opSource.ArmClientField, dataVariable);
+                if (Configuration.UseModelReaderWriter && async)
+                {
+                    return new InvokeStaticMethodExpression(typeof(Task), "FromResult", [opSourceInstance], CallAsAsync: true);
+                }
+                return opSourceInstance;
             }
         }
     }
