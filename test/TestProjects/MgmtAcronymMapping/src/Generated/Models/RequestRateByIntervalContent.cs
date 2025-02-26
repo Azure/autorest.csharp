@@ -78,6 +78,6 @@ namespace MgmtAcronymMapping.Models
         /// Interval value in minutes used to create LogAnalytics call rate logs.
         /// Serialized Name: RequestRateByIntervalInput.intervalLength
         /// </summary>
-        public IntervalInMin IntervalLength { get; }
+        public IntervalInMin IntervalLength { get; set; }
     }
 }

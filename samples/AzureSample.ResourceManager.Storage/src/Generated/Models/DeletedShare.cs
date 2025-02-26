@@ -26,8 +26,8 @@ namespace AzureSample.ResourceManager.Storage.Models
         }
 
         /// <summary> Required. Identify the name of the deleted share that will be restored. </summary>
-        public string DeletedShareName { get; }
+        public string DeletedShareName { get; set; }
         /// <summary> Required. Identify the version of the deleted share that will be restored. </summary>
-        public string DeletedShareVersion { get; }
+        public string DeletedShareVersion { get; set; }
     }
 }

@@ -104,18 +104,18 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineCaptureParameters.vhdPrefix
         /// </summary>
         [WirePath("vhdPrefix")]
-        public string VhdPrefix { get; }
+        public string VhdPrefix { get; set; }
         /// <summary>
         /// The destination container name.
         /// Serialized Name: VirtualMachineCaptureParameters.destinationContainerName
         /// </summary>
         [WirePath("destinationContainerName")]
-        public string DestinationContainerName { get; }
+        public string DestinationContainerName { get; set; }
         /// <summary>
         /// Specifies whether to overwrite the destination virtual hard disk, in case of conflict.
         /// Serialized Name: VirtualMachineCaptureParameters.overwriteVhds
         /// </summary>
         [WirePath("overwriteVhds")]
-        public bool OverwriteVhds { get; }
+        public bool OverwriteVhds { get; set; }
     }
 }

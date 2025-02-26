@@ -86,6 +86,6 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// Serialized Name: RequestRateByIntervalInput.intervalLength
         /// </summary>
         [WirePath("intervalLength")]
-        public IntervalInMin IntervalLength { get; }
+        public IntervalInMin IntervalLength { get; set; }
     }
 }

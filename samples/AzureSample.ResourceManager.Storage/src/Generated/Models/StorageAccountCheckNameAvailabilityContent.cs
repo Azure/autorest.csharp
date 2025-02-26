@@ -33,7 +33,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         }
 
         /// <summary> The storage account name. </summary>
-        public string Name { get; }
+        public string Name { get; set; }
         /// <summary> The type of resource, Microsoft.Storage/storageAccounts. </summary>
         public Type ResourceType { get; }
     }

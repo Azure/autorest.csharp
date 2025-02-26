@@ -2544,87 +2544,6 @@ namespace AzureSample.ResourceManager.Sample.Models
                 serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.RequestRateByIntervalContent"/>. </summary>
-        /// <param name="blobContainerSasUri">
-        /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
-        /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
-        /// </param>
-        /// <param name="fromTime">
-        /// From time of the query
-        /// Serialized Name: LogAnalyticsInputBase.fromTime
-        /// </param>
-        /// <param name="toTime">
-        /// To time of the query
-        /// Serialized Name: LogAnalyticsInputBase.toTime
-        /// </param>
-        /// <param name="groupByThrottlePolicy">
-        /// Group query result by Throttle Policy applied.
-        /// Serialized Name: LogAnalyticsInputBase.groupByThrottlePolicy
-        /// </param>
-        /// <param name="groupByOperationName">
-        /// Group query result by Operation Name.
-        /// Serialized Name: LogAnalyticsInputBase.groupByOperationName
-        /// </param>
-        /// <param name="groupByResourceName">
-        /// Group query result by Resource Name.
-        /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
-        /// </param>
-        /// <param name="intervalLength">
-        /// Interval value in minutes used to create LogAnalytics call rate logs.
-        /// Serialized Name: RequestRateByIntervalInput.intervalLength
-        /// </param>
-        /// <returns> A new <see cref="Models.RequestRateByIntervalContent"/> instance for mocking. </returns>
-        public static RequestRateByIntervalContent RequestRateByIntervalContent(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null, IntervalInMin intervalLength = default)
-        {
-            return new RequestRateByIntervalContent(
-                blobContainerSasUri,
-                fromTime,
-                toTime,
-                groupByThrottlePolicy,
-                groupByOperationName,
-                groupByResourceName,
-                serializedAdditionalRawData: null,
-                intervalLength);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.LogAnalyticsInputBase"/>. </summary>
-        /// <param name="blobContainerSasUri">
-        /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
-        /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
-        /// </param>
-        /// <param name="fromTime">
-        /// From time of the query
-        /// Serialized Name: LogAnalyticsInputBase.fromTime
-        /// </param>
-        /// <param name="toTime">
-        /// To time of the query
-        /// Serialized Name: LogAnalyticsInputBase.toTime
-        /// </param>
-        /// <param name="groupByThrottlePolicy">
-        /// Group query result by Throttle Policy applied.
-        /// Serialized Name: LogAnalyticsInputBase.groupByThrottlePolicy
-        /// </param>
-        /// <param name="groupByOperationName">
-        /// Group query result by Operation Name.
-        /// Serialized Name: LogAnalyticsInputBase.groupByOperationName
-        /// </param>
-        /// <param name="groupByResourceName">
-        /// Group query result by Resource Name.
-        /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
-        /// </param>
-        /// <returns> A new <see cref="Models.LogAnalyticsInputBase"/> instance for mocking. </returns>
-        public static LogAnalyticsInputBase LogAnalyticsInputBase(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null)
-        {
-            return new LogAnalyticsInputBase(
-                blobContainerSasUri,
-                fromTime,
-                toTime,
-                groupByThrottlePolicy,
-                groupByOperationName,
-                groupByResourceName,
-                serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.LogAnalytics"/>. </summary>
         /// <param name="logAnalyticsOutput">
         /// LogAnalyticsOutput
@@ -2634,44 +2553,6 @@ namespace AzureSample.ResourceManager.Sample.Models
         public static LogAnalytics LogAnalytics(string logAnalyticsOutput = null)
         {
             return new LogAnalytics(logAnalyticsOutput != null ? new LogAnalyticsOutput(logAnalyticsOutput, serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ThrottledRequestsContent"/>. </summary>
-        /// <param name="blobContainerSasUri">
-        /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
-        /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
-        /// </param>
-        /// <param name="fromTime">
-        /// From time of the query
-        /// Serialized Name: LogAnalyticsInputBase.fromTime
-        /// </param>
-        /// <param name="toTime">
-        /// To time of the query
-        /// Serialized Name: LogAnalyticsInputBase.toTime
-        /// </param>
-        /// <param name="groupByThrottlePolicy">
-        /// Group query result by Throttle Policy applied.
-        /// Serialized Name: LogAnalyticsInputBase.groupByThrottlePolicy
-        /// </param>
-        /// <param name="groupByOperationName">
-        /// Group query result by Operation Name.
-        /// Serialized Name: LogAnalyticsInputBase.groupByOperationName
-        /// </param>
-        /// <param name="groupByResourceName">
-        /// Group query result by Resource Name.
-        /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
-        /// </param>
-        /// <returns> A new <see cref="Models.ThrottledRequestsContent"/> instance for mocking. </returns>
-        public static ThrottledRequestsContent ThrottledRequestsContent(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null)
-        {
-            return new ThrottledRequestsContent(
-                blobContainerSasUri,
-                fromTime,
-                toTime,
-                groupByThrottlePolicy,
-                groupByOperationName,
-                groupByResourceName,
-                serializedAdditionalRawData: null);
         }
     }
 }

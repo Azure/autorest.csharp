@@ -32,11 +32,11 @@ namespace MgmtAcronymMapping.Models
         /// The name of the service.
         /// Serialized Name: OrchestrationServiceStateInput.serviceName
         /// </summary>
-        public OrchestrationServiceName ServiceName { get; }
+        public OrchestrationServiceName ServiceName { get; set; }
         /// <summary>
         /// The action to be performed.
         /// Serialized Name: OrchestrationServiceStateInput.action
         /// </summary>
-        public OrchestrationServiceStateAction Action { get; }
+        public OrchestrationServiceStateAction Action { get; set; }
     }
 }

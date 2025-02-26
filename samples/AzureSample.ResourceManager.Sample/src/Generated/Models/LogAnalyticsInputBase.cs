@@ -118,19 +118,19 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
         /// </summary>
         [WirePath("blobContainerSasUri")]
-        public Uri BlobContainerSasUri { get; }
+        public Uri BlobContainerSasUri { get; set; }
         /// <summary>
         /// From time of the query
         /// Serialized Name: LogAnalyticsInputBase.fromTime
         /// </summary>
         [WirePath("fromTime")]
-        public DateTimeOffset FromTime { get; }
+        public DateTimeOffset FromTime { get; set; }
         /// <summary>
         /// To time of the query
         /// Serialized Name: LogAnalyticsInputBase.toTime
         /// </summary>
         [WirePath("toTime")]
-        public DateTimeOffset ToTime { get; }
+        public DateTimeOffset ToTime { get; set; }
         /// <summary>
         /// Group query result by Throttle Policy applied.
         /// Serialized Name: LogAnalyticsInputBase.groupByThrottlePolicy

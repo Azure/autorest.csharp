@@ -87,11 +87,11 @@ namespace AzureSample.ResourceManager.Storage.Models
         }
 
         /// <summary> Required. Gets or sets the SKU name. </summary>
-        public AzureSampleResourceManagerStorageSku Sku { get; }
+        public AzureSampleResourceManagerStorageSku Sku { get; set; }
         /// <summary> Required. Indicates the type of storage account. </summary>
-        public AzureSampleResourceManagerStorageKind Kind { get; }
+        public AzureSampleResourceManagerStorageKind Kind { get; set; }
         /// <summary> Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed. </summary>
-        public AzureLocation Location { get; }
+        public AzureLocation Location { get; set; }
         /// <summary> Optional. Set the extended location of the resource. If not set, the storage account will be created in Azure main region. Otherwise it will be created in the specified extended location. </summary>
         public ExtendedLocation ExtendedLocation { get; set; }
         /// <summary> Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters. </summary>

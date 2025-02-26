@@ -38,7 +38,7 @@ namespace MgmtScopeResource.Models
         /// <summary> The location to store the deployment data. </summary>
         public string Location { get; set; }
         /// <summary> The deployment properties. </summary>
-        public DeploymentProperties Properties { get; }
+        public DeploymentProperties Properties { get; set; }
         /// <summary> Deployment tags. </summary>
         public IDictionary<string, string> Tags { get; }
     }

@@ -77,17 +77,17 @@ namespace MgmtAcronymMapping.Models
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
         /// </summary>
-        public Uri BlobContainerSasUri { get; }
+        public Uri BlobContainerSasUri { get; set; }
         /// <summary>
         /// From time of the query
         /// Serialized Name: LogAnalyticsInputBase.fromTime
         /// </summary>
-        public DateTimeOffset FromTime { get; }
+        public DateTimeOffset FromTime { get; set; }
         /// <summary>
         /// To time of the query
         /// Serialized Name: LogAnalyticsInputBase.toTime
         /// </summary>
-        public DateTimeOffset ToTime { get; }
+        public DateTimeOffset ToTime { get; set; }
         /// <summary>
         /// Group query result by Throttle Policy applied.
         /// Serialized Name: LogAnalyticsInputBase.groupByThrottlePolicy

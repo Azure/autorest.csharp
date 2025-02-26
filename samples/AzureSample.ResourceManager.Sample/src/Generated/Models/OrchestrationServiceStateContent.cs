@@ -90,12 +90,12 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// Serialized Name: OrchestrationServiceStateInput.serviceName
         /// </summary>
         [WirePath("serviceName")]
-        public OrchestrationServiceName ServiceName { get; }
+        public OrchestrationServiceName ServiceName { get; set; }
         /// <summary>
         /// The action to be performed.
         /// Serialized Name: OrchestrationServiceStateInput.action
         /// </summary>
         [WirePath("action")]
-        public OrchestrationServiceStateAction Action { get; }
+        public OrchestrationServiceStateAction Action { get; set; }
     }
 }

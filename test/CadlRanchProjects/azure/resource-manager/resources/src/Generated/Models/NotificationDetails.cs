@@ -74,8 +74,8 @@ namespace _Azure.ResourceManager.Resources.Models
         }
 
         /// <summary> The notification message. </summary>
-        public string Message { get; }
+        public string Message { get; set; }
         /// <summary> If true, the notification is urgent. </summary>
-        public bool Urgent { get; }
+        public bool Urgent { get; set; }
     }
 }

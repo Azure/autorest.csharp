@@ -64,7 +64,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         }
 
         /// <summary> The canonical path to the signed resource. </summary>
-        public string CanonicalizedResource { get; }
+        public string CanonicalizedResource { get; set; }
         /// <summary> The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s). </summary>
         public SignedResource? Resource { get; set; }
         /// <summary> The signed permissions for the service SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p). </summary>

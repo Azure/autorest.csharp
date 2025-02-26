@@ -43,16 +43,16 @@ namespace MgmtAcronymMapping.Models
         /// The captured virtual hard disk's name prefix.
         /// Serialized Name: VirtualMachineCaptureParameters.vhdPrefix
         /// </summary>
-        public string VhdPrefix { get; }
+        public string VhdPrefix { get; set; }
         /// <summary>
         /// The destination container name.
         /// Serialized Name: VirtualMachineCaptureParameters.destinationContainerName
         /// </summary>
-        public string DestinationContainerName { get; }
+        public string DestinationContainerName { get; set; }
         /// <summary>
         /// Specifies whether to overwrite the destination virtual hard disk, in case of conflict.
         /// Serialized Name: VirtualMachineCaptureParameters.overwriteVhds
         /// </summary>
-        public bool OverwriteVhds { get; }
+        public bool OverwriteVhds { get; set; }
     }
 }

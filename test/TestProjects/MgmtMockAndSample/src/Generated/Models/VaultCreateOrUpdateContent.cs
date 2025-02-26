@@ -42,11 +42,11 @@ namespace MgmtMockAndSample.Models
         }
 
         /// <summary> The supported Azure location where the key vault should be created. </summary>
-        public AzureLocation Location { get; }
+        public AzureLocation Location { get; set; }
         /// <summary> The tags that will be assigned to the key vault. </summary>
         public IDictionary<string, string> Tags { get; }
         /// <summary> Properties of the vault. </summary>
-        public VaultProperties Properties { get; }
+        public VaultProperties Properties { get; set; }
         /// <summary> Identity for the virtual machine. </summary>
         public ManagedServiceIdentity Identity { get; set; }
     }

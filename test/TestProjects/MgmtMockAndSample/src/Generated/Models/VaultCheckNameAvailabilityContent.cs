@@ -33,7 +33,7 @@ namespace MgmtMockAndSample.Models
         }
 
         /// <summary> The vault name. </summary>
-        public string Name { get; }
+        public string Name { get; set; }
         /// <summary> The type of resource, Microsoft.KeyVault/vaults. </summary>
         public EncryptionType ResourceType { get; }
     }
