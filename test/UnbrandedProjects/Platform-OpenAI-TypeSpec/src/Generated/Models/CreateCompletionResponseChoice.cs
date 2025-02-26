@@ -53,7 +53,7 @@ namespace OpenAI.Models
         /// content filters.
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
-        internal CreateCompletionResponseChoice(long index, string text, CreateCompletionResponseChoiceLogprobs logprobs, CreateCompletionResponseChoiceFinishReason finishReason)
+        internal CreateCompletionResponseChoice(long index, string text, CreateCompletionResponseChoiceLogprobs1 logprobs, CreateCompletionResponseChoiceFinishReason finishReason)
         {
             Argument.AssertNotNull(text, nameof(text));
 
@@ -75,7 +75,7 @@ namespace OpenAI.Models
         /// content filters.
         /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CreateCompletionResponseChoice(long index, string text, CreateCompletionResponseChoiceLogprobs logprobs, CreateCompletionResponseChoiceFinishReason finishReason, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CreateCompletionResponseChoice(long index, string text, CreateCompletionResponseChoiceLogprobs1 logprobs, CreateCompletionResponseChoiceFinishReason finishReason, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Index = index;
             Text = text;
@@ -94,7 +94,7 @@ namespace OpenAI.Models
         /// <summary> Gets the text. </summary>
         public string Text { get; }
         /// <summary> Gets the logprobs. </summary>
-        public CreateCompletionResponseChoiceLogprobs Logprobs { get; }
+        public CreateCompletionResponseChoiceLogprobs1 Logprobs { get; }
         /// <summary>
         /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
         /// natural stop point or a provided stop sequence, or `content_filter` if content was omitted
