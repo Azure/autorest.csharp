@@ -36,7 +36,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "_Specs_.Azure.Example.Basic",
+   "namespace": "_Specs_.Azure.Example.Basic",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -73,7 +73,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "_Specs_.Azure.Example.Basic",
+   "namespace": "_Specs_.Azure.Example.Basic",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -85,7 +85,7 @@
    "$id": "10",
    "kind": "model",
    "name": "ActionRequest",
-   "clientNamespace": "_Specs_.Azure.Example.Basic",
+   "namespace": "_Specs_.Azure.Example.Basic",
    "crossLanguageDefinitionId": "_Specs_.Azure.Example.Basic.ActionRequest",
    "usage": "Input,Json",
    "decorators": [],
@@ -125,7 +125,7 @@
       "$id": "16",
       "kind": "model",
       "name": "Model",
-      "clientNamespace": "_Specs_.Azure.Example.Basic",
+      "namespace": "_Specs_.Azure.Example.Basic",
       "crossLanguageDefinitionId": "_Specs_.Azure.Example.Basic.Model",
       "usage": "Input,Output,Json",
       "decorators": [],
@@ -300,7 +300,7 @@
    "$id": "41",
    "kind": "model",
    "name": "ActionResponse",
-   "clientNamespace": "_Specs_.Azure.Example.Basic",
+   "namespace": "_Specs_.Azure.Example.Basic",
    "crossLanguageDefinitionId": "_Specs_.Azure.Example.Basic.ActionResponse",
    "usage": "Output,Json",
    "decorators": [],
@@ -431,7 +431,7 @@
   {
    "$id": "60",
    "Name": "AzureExampleClient",
-   "ClientNamespace": "AzureExampleBasicClient",
+   "Namespace": "AzureExampleBasicClient",
    "Operations": [
     {
      "$id": "61",
