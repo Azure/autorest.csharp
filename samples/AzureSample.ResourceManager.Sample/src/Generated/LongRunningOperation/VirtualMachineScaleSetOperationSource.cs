@@ -7,7 +7,6 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -33,9 +32,8 @@ namespace AzureSample.ResourceManager.Sample
 
         async ValueTask<VirtualMachineScaleSetResource> IOperationSource<VirtualMachineScaleSetResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
-            var data = VirtualMachineScaleSetData.DeserializeVirtualMachineScaleSetData(document.RootElement);
-            return new VirtualMachineScaleSetResource(_client, data);
+            var data = ModelReaderWriter.Read<VirtualMachineScaleSetData>(new BinaryData(response.ContentStream));
+            return await Task.FromResult(new VirtualMachineScaleSetResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

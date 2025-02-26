@@ -7,7 +7,6 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -33,9 +32,8 @@ namespace MgmtTypeSpec
 
         async ValueTask<FooResource> IOperationSource<FooResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
-            var data = FooData.DeserializeFooData(document.RootElement);
-            return new FooResource(_client, data);
+            var data = ModelReaderWriter.Read<FooData>(new BinaryData(response.ContentStream));
+            return await Task.FromResult(new FooResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

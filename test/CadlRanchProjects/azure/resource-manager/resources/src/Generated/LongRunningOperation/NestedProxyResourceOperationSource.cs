@@ -7,7 +7,6 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -33,9 +32,8 @@ namespace _Azure.ResourceManager.Resources
 
         async ValueTask<NestedProxyResource> IOperationSource<NestedProxyResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
-            var data = NestedProxyResourceData.DeserializeNestedProxyResourceData(document.RootElement);
-            return new NestedProxyResource(_client, data);
+            var data = ModelReaderWriter.Read<NestedProxyResourceData>(new BinaryData(response.ContentStream));
+            return await Task.FromResult(new NestedProxyResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

@@ -7,7 +7,6 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -33,9 +32,8 @@ namespace MgmtDiscriminator
 
         async ValueTask<DeliveryRuleResource> IOperationSource<DeliveryRuleResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
-            var data = DeliveryRuleData.DeserializeDeliveryRuleData(document.RootElement);
-            return new DeliveryRuleResource(_client, data);
+            var data = ModelReaderWriter.Read<DeliveryRuleData>(new BinaryData(response.ContentStream));
+            return await Task.FromResult(new DeliveryRuleResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

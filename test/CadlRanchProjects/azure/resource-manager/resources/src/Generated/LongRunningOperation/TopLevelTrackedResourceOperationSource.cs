@@ -7,7 +7,6 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -33,9 +32,8 @@ namespace _Azure.ResourceManager.Resources
 
         async ValueTask<TopLevelTrackedResource> IOperationSource<TopLevelTrackedResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
-            var data = TopLevelTrackedResourceData.DeserializeTopLevelTrackedResourceData(document.RootElement);
-            return new TopLevelTrackedResource(_client, data);
+            var data = ModelReaderWriter.Read<TopLevelTrackedResourceData>(new BinaryData(response.ContentStream));
+            return await Task.FromResult(new TopLevelTrackedResource(_client, data)).ConfigureAwait(false);
         }
     }
 }
