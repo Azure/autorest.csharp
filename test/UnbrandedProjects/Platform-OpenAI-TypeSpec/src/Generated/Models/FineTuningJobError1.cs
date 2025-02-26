@@ -7,8 +7,8 @@ using System.Collections.Generic;
 
 namespace OpenAI.Models
 {
-    /// <summary> The FineTuningJobError. </summary>
-    public partial class FineTuningJobError
+    /// <summary> The FineTuningJobError1. </summary>
+    public partial class FineTuningJobError1
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -41,12 +41,12 @@ namespace OpenAI.Models
         /// </para>
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
-        /// <summary> Initializes a new instance of <see cref="FineTuningJobError"/>. </summary>
-        internal FineTuningJobError()
+        /// <summary> Initializes a new instance of <see cref="FineTuningJobError1"/>. </summary>
+        internal FineTuningJobError1()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="FineTuningJobError"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuningJobError1"/>. </summary>
         /// <param name="message"> A human-readable error message. </param>
         /// <param name="code"> A machine-readable error code. </param>
         /// <param name="param">
@@ -54,7 +54,7 @@ namespace OpenAI.Models
         /// will be null if the failure was not parameter-specific.
         /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal FineTuningJobError(string message, string code, string param, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal FineTuningJobError1(string message, string code, string param, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Message = message;
             Code = code;

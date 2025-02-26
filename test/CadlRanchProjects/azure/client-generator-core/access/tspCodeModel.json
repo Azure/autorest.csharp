@@ -8,7 +8,7 @@
    "$id": "2",
    "kind": "model",
    "name": "OuterModel",
-   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
+   "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.OuterModel",
    "usage": "Output,Json",
    "doc": "Used in internal operations, should be generated but not exported.",
@@ -17,7 +17,7 @@
     "$id": "3",
     "kind": "model",
     "name": "BaseModel",
-    "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
+    "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.BaseModel",
     "usage": "Output,Json",
     "doc": "Used in internal operations, should be generated but not exported.",
@@ -61,7 +61,7 @@
       "$id": "9",
       "kind": "model",
       "name": "InnerModel",
-      "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
+      "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
       "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.InnerModel",
       "usage": "Output,Json",
       "doc": "Used in internal operations, should be generated but not exported.",
@@ -121,7 +121,7 @@
    "$id": "16",
    "kind": "model",
    "name": "AbstractModel",
-   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
+   "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.AbstractModel",
    "usage": "Output,Json",
    "doc": "Used in internal operations, should be generated but not exported.",
@@ -190,7 +190,7 @@
      "$id": "26",
      "kind": "model",
      "name": "RealModel",
-     "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
+     "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.RealModel",
      "usage": "Output,Json",
      "doc": "Used in internal operations, should be generated but not exported.",
@@ -243,7 +243,7 @@
    "$id": "32",
    "kind": "model",
    "name": "SharedModel",
-   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation",
+   "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation.SharedModel",
    "usage": "Output,Json",
    "doc": "Used by both public and internal operation. It should be generated and exported.",
@@ -281,7 +281,7 @@
    "$id": "37",
    "kind": "model",
    "name": "NoDecoratorModelInInternal",
-   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
+   "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.NoDecoratorModelInInternal",
    "usage": "Output,Json",
    "doc": "Used in an internal operation, should be generated but not exported.",
@@ -319,7 +319,7 @@
    "$id": "42",
    "kind": "model",
    "name": "InternalDecoratorModelInInternal",
-   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
+   "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.InternalDecoratorModelInInternal",
    "access": "internal",
    "usage": "Output,Json",
@@ -358,7 +358,7 @@
    "$id": "47",
    "kind": "model",
    "name": "PublicDecoratorModelInInternal",
-   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
+   "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.PublicDecoratorModelInInternal",
    "access": "public",
    "usage": "Output,Json",
@@ -397,7 +397,7 @@
    "$id": "52",
    "kind": "model",
    "name": "NoDecoratorModelInPublic",
-   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
+   "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation.NoDecoratorModelInPublic",
    "usage": "Output,Json",
    "doc": "Used in a public operation, should be generated and exported.",
@@ -435,7 +435,7 @@
    "$id": "57",
    "kind": "model",
    "name": "PublicDecoratorModelInPublic",
-   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
+   "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation.PublicDecoratorModelInPublic",
    "access": "public",
    "usage": "Output,Json",
@@ -475,7 +475,7 @@
   {
    "$id": "62",
    "Name": "AccessClient",
-   "ClientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access",
    "Doc": "Test for internal decorator.",
    "Operations": [],
    "Protocol": {
@@ -519,7 +519,7 @@
   {
    "$id": "68",
    "Name": "PublicOperation",
-   "ClientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
    "Operations": [
     {
      "$id": "69",
@@ -728,7 +728,7 @@
   {
    "$id": "88",
    "Name": "InternalOperation",
-   "ClientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
    "Operations": [
     {
      "$id": "89",
@@ -1019,7 +1019,7 @@
   {
    "$id": "115",
    "Name": "SharedModelInOperation",
-   "ClientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation",
    "Operations": [
     {
      "$id": "116",
@@ -1228,7 +1228,7 @@
   {
    "$id": "135",
    "Name": "RelativeModelInOperation",
-   "ClientNamespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
+   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
    "Operations": [
     {
      "$id": "136",
