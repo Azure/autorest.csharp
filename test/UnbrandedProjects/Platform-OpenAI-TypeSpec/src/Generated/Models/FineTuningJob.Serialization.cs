@@ -193,7 +193,7 @@ namespace OpenAI.Models
             string validationFile = default;
             IReadOnlyList<string> resultFiles = default;
             long? trainedTokens = default;
-            FineTuningJobError error = default;
+            FineTuningJobError1 error = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -295,7 +295,7 @@ namespace OpenAI.Models
                         error = null;
                         continue;
                     }
-                    error = FineTuningJobError.DeserializeFineTuningJobError(property.Value, options);
+                    error = FineTuningJobError1.DeserializeFineTuningJobError1(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
