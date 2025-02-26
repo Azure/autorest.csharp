@@ -8,7 +8,7 @@
    "$id": "2",
    "kind": "model",
    "name": "InnerModel",
-   "namespace": "Type.Dictionary",
+   "clientNamespace": "Type.Dictionary",
    "crossLanguageDefinitionId": "Type.Dictionary.InnerModel",
    "usage": "Input,Output,Json",
    "doc": "Dictionary inner model",
@@ -82,7 +82,7 @@
   {
    "$id": "12",
    "Name": "DictionaryClient",
-   "Namespace": "Type.Dictionary",
+   "ClientNamespace": "Type.Dictionary",
    "Doc": "Illustrates various of dictionaries.",
    "Operations": [],
    "Protocol": {
@@ -126,7 +126,7 @@
   {
    "$id": "18",
    "Name": "Int32Value",
-   "Namespace": "Type.Dictionary",
+   "ClientNamespace": "Type.Dictionary",
    "Doc": "Dictionary of int32 values",
    "Operations": [
     {
@@ -341,7 +341,7 @@
   {
    "$id": "41",
    "Name": "Int64Value",
-   "Namespace": "Type.Dictionary",
+   "ClientNamespace": "Type.Dictionary",
    "Doc": "Dictionary of int64 values",
    "Operations": [
     {
@@ -556,7 +556,7 @@
   {
    "$id": "64",
    "Name": "BooleanValue",
-   "Namespace": "Type.Dictionary",
+   "ClientNamespace": "Type.Dictionary",
    "Doc": "Dictionary of boolean values",
    "Operations": [
     {
@@ -771,7 +771,7 @@
   {
    "$id": "87",
    "Name": "StringValue",
-   "Namespace": "Type.Dictionary",
+   "ClientNamespace": "Type.Dictionary",
    "Doc": "Dictionary of string values",
    "Operations": [
     {
@@ -986,7 +986,7 @@
   {
    "$id": "110",
    "Name": "Float32Value",
-   "Namespace": "Type.Dictionary",
+   "ClientNamespace": "Type.Dictionary",
    "Doc": "Dictionary of float values",
    "Operations": [
     {
@@ -1201,7 +1201,7 @@
   {
    "$id": "133",
    "Name": "DatetimeValue",
-   "Namespace": "Type.Dictionary",
+   "ClientNamespace": "Type.Dictionary",
    "Doc": "Dictionary of datetime values",
    "Operations": [
     {
@@ -1432,7 +1432,7 @@
   {
    "$id": "158",
    "Name": "DurationValue",
-   "Namespace": "Type.Dictionary",
+   "ClientNamespace": "Type.Dictionary",
    "Doc": "Dictionary of duration values",
    "Operations": [
     {
@@ -1663,7 +1663,7 @@
   {
    "$id": "183",
    "Name": "UnknownValue",
-   "Namespace": "Type.Dictionary",
+   "ClientNamespace": "Type.Dictionary",
    "Doc": "Dictionary of unknown values",
    "Operations": [
     {
@@ -1878,7 +1878,7 @@
   {
    "$id": "206",
    "Name": "ModelValue",
-   "Namespace": "Type.Dictionary",
+   "ClientNamespace": "Type.Dictionary",
    "Doc": "Dictionary of model values",
    "Operations": [
     {
@@ -2085,7 +2085,7 @@
   {
    "$id": "227",
    "Name": "RecursiveModelValue",
-   "Namespace": "Type.Dictionary",
+   "ClientNamespace": "Type.Dictionary",
    "Doc": "Dictionary of model values",
    "Operations": [
     {
@@ -2292,7 +2292,7 @@
   {
    "$id": "248",
    "Name": "NullableFloatValue",
-   "Namespace": "Type.Dictionary",
+   "ClientNamespace": "Type.Dictionary",
    "Doc": "Dictionary of nullable float values",
    "Operations": [
     {
@@ -2355,7 +2355,7 @@
           "crossLanguageDefinitionId": "TypeSpec.float32",
           "decorators": []
          },
-         "namespace": ""
+         "clientNamespace": ""
         },
         "decorators": []
        },

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,13 +25,13 @@ namespace _Azure.ResourceManager.Resources
 
         ExtensionsResource IOperationSource<ExtensionsResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<ExtensionsResourceData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<ExtensionsResourceData>(response.Content);
             return new ExtensionsResource(_client, data);
         }
 
         async ValueTask<ExtensionsResource> IOperationSource<ExtensionsResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<ExtensionsResourceData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<ExtensionsResourceData>(response.Content);
             return await Task.FromResult(new ExtensionsResource(_client, data)).ConfigureAwait(false);
         }
     }

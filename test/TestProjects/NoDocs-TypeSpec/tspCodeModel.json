@@ -32,7 +32,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "doc": "The Thing_requiredLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -66,7 +66,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "doc": "The Thing_requiredLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -100,7 +100,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "doc": "The Thing_requiredLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -134,7 +134,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "doc": "The Thing_optionalLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -168,7 +168,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "doc": "The Thing_optionalLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -202,7 +202,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "doc": "The Thing_optionalLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -274,7 +274,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "doc": "enum with projected name",
    "isFixed": true,
    "isFlags": false,
@@ -346,7 +346,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "doc": "enum with projected name used in a model",
    "isFixed": true,
    "isFlags": false,
@@ -418,7 +418,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "doc": "Simple enum",
    "isFixed": true,
    "isFlags": false,
@@ -490,7 +490,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "doc": "Extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -562,7 +562,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "doc": "Int based extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -634,7 +634,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "doc": "Float based extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -706,7 +706,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "doc": "float fixed enum",
    "isFixed": true,
    "isFlags": false,
@@ -778,7 +778,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "doc": "int fixed enum",
    "isFixed": true,
    "isFlags": false,
@@ -816,7 +816,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -955,7 +955,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "isFixed": false,
    "isFlags": false,
    "usage": "None",
@@ -967,7 +967,7 @@
    "$id": "104",
    "kind": "model",
    "name": "Thing",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.Thing",
    "usage": "Input,Output,Spread,Json",
    "doc": "A model with a few properties of literal types",
@@ -1040,7 +1040,7 @@
         "decorators": []
        }
       ],
-      "namespace": "",
+      "clientNamespace": "",
       "decorators": []
      },
      "optional": false,
@@ -1347,7 +1347,7 @@
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
       },
-      "namespace": ""
+      "clientNamespace": ""
      },
      "optional": true,
      "readOnly": false,
@@ -1386,7 +1386,7 @@
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
       },
-      "namespace": ""
+      "clientNamespace": ""
      },
      "optional": false,
      "readOnly": false,
@@ -1408,7 +1408,7 @@
    "$id": "167",
    "kind": "model",
    "name": "Friend",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.NotFriend",
    "usage": "Output,Spread,Json",
    "doc": "this is not a friendly model but with a friendly name",
@@ -1447,7 +1447,7 @@
    "$id": "172",
    "kind": "model",
    "name": "ProjectedModel",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithProjectedName",
    "usage": "Output,Spread,Json",
    "doc": "this is a model with a projected name",
@@ -1486,7 +1486,7 @@
    "$id": "177",
    "kind": "model",
    "name": "ReturnsAnonymousModelResponse",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.returnsAnonymousModel.Response.anonymous",
    "usage": "Output,Json",
    "decorators": [],
@@ -1496,7 +1496,7 @@
    "$id": "178",
    "kind": "model",
    "name": "Extension",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.Extension",
    "usage": "Input,Json",
    "doc": "extension",
@@ -1505,7 +1505,7 @@
     "$id": "179",
     "kind": "model",
     "name": "Element",
-    "namespace": "NoDocsTypeSpec",
+    "clientNamespace": "NoDocsTypeSpec",
     "crossLanguageDefinitionId": "NoDocsTypeSpec.Element",
     "usage": "Input,Json",
     "doc": "element",
@@ -1578,7 +1578,7 @@
    "$id": "188",
    "kind": "model",
    "name": "Extendible",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.Extendible",
    "usage": "Input,Json",
    "doc": "FHIR extendible element",
@@ -1598,7 +1598,7 @@
        "$id": "191",
        "kind": "model",
        "name": "ThereLevelExtension",
-       "namespace": "NoDocsTypeSpec",
+       "clientNamespace": "NoDocsTypeSpec",
        "crossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelExtension",
        "usage": "Input,Json",
        "doc": "extension",
@@ -1607,7 +1607,7 @@
         "$id": "192",
         "kind": "model",
         "name": "ThereLevelElement",
-        "namespace": "NoDocsTypeSpec",
+        "clientNamespace": "NoDocsTypeSpec",
         "crossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelElement",
         "usage": "Input,Json",
         "doc": "element",
@@ -1702,7 +1702,7 @@
    "$id": "203",
    "kind": "model",
    "name": "ChildModel",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.ChildModel",
    "usage": "Input,Json",
    "doc": "ChildModel",
@@ -1711,7 +1711,7 @@
     "$id": "204",
     "kind": "model",
     "name": "BaseModel",
-    "namespace": "NoDocsTypeSpec",
+    "clientNamespace": "NoDocsTypeSpec",
     "crossLanguageDefinitionId": "NoDocsTypeSpec.BaseModel",
     "usage": "Input,Json",
     "doc": "parenetModel",
@@ -1784,7 +1784,7 @@
    "$id": "213",
    "kind": "model",
    "name": "ContainSelf",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.ContainSelf",
    "usage": "Input,Json",
    "doc": "containself",
@@ -1818,7 +1818,7 @@
    "$id": "217",
    "kind": "model",
    "name": "ModelWithProjectedEnum",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithProjectedEnum",
    "usage": "Input,Json",
    "decorators": [],
@@ -1852,7 +1852,7 @@
    "$id": "221",
    "kind": "model",
    "name": "AzureLocationModel",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.AzureLocationModel",
    "usage": "Input,Json",
    "decorators": [],
@@ -1896,7 +1896,7 @@
    "$id": "227",
    "kind": "model",
    "name": "RoundTripModel",
-   "namespace": "NoDocsTypeSpec",
+   "clientNamespace": "NoDocsTypeSpec",
    "crossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel",
    "usage": "Input,Output,Json",
    "doc": "this is a roundtrip model",
@@ -2499,7 +2499,7 @@
       "$id": "312",
       "kind": "model",
       "name": "ModelWithRequiredNullableProperties",
-      "namespace": "NoDocsTypeSpec",
+      "clientNamespace": "NoDocsTypeSpec",
       "crossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithRequiredNullableProperties",
       "usage": "Input,Output,Json",
       "doc": "A model with a few required nullable properties",
@@ -2521,7 +2521,7 @@
           "crossLanguageDefinitionId": "TypeSpec.int32",
           "decorators": []
          },
-         "namespace": ""
+         "clientNamespace": ""
         },
         "optional": false,
         "readOnly": false,
@@ -2549,7 +2549,7 @@
          "type": {
           "$ref": "44"
          },
-         "namespace": ""
+         "clientNamespace": ""
         },
         "optional": false,
         "readOnly": false,
@@ -2577,7 +2577,7 @@
          "type": {
           "$ref": "36"
          },
-         "namespace": ""
+         "clientNamespace": ""
         },
         "optional": false,
         "readOnly": false,
@@ -2642,7 +2642,7 @@
          "$id": "333",
          "kind": "model",
          "name": "ModelForUnion",
-         "namespace": "NoDocsTypeSpec",
+         "clientNamespace": "NoDocsTypeSpec",
          "crossLanguageDefinitionId": "NoDocsTypeSpec.ModelForUnion",
          "usage": "Input,Output,Json",
          "doc": "This is a model only used in union types, please do not use it anywhere else.",
@@ -2715,7 +2715,7 @@
          "decorators": []
         }
        ],
-       "namespace": "",
+       "clientNamespace": "",
        "decorators": []
       },
       "crossLanguageDefinitionId": "TypeSpec.Array",
@@ -2748,7 +2748,7 @@
   {
    "$id": "345",
    "Name": "NoDocsTypeSpecClient",
-   "Namespace": "NoDocsTypeSpec",
+   "ClientNamespace": "NoDocsTypeSpec",
    "Doc": "This is a sample typespec project.",
    "Operations": [
     {
@@ -4492,7 +4492,7 @@
   {
    "$id": "492",
    "Name": "Hello",
-   "Namespace": "NoDocsTypeSpec.Hello",
+   "ClientNamespace": "NoDocsTypeSpec.Hello",
    "Operations": [],
    "Protocol": {
     "$id": "493"
@@ -4525,7 +4525,7 @@
   {
    "$id": "496",
    "Name": "HelloDemo",
-   "Namespace": "NoDocsTypeSpec.Hello.Demo",
+   "ClientNamespace": "NoDocsTypeSpec.Hello.Demo",
    "Doc": "Hello world service",
    "Operations": [
     {
@@ -4685,7 +4685,7 @@
   {
    "$id": "511",
    "Name": "HelloDemo2",
-   "Namespace": "NoDocsTypeSpec.Hello.Demo2",
+   "ClientNamespace": "NoDocsTypeSpec.Hello.Demo2",
    "Operations": [
     {
      "$id": "512",
@@ -5337,7 +5337,7 @@
   {
    "$id": "569",
    "Name": "EnumTest",
-   "Namespace": "NoDocsTypeSpec.EnumTest",
+   "ClientNamespace": "NoDocsTypeSpec.EnumTest",
    "Operations": [
     {
      "$id": "570",
@@ -5448,7 +5448,7 @@
   {
    "$id": "579",
    "Name": "ProtocolAndConvenient",
-   "Namespace": "NoDocsTypeSpec.ProtocolAndConvenient",
+   "ClientNamespace": "NoDocsTypeSpec.ProtocolAndConvenient",
    "Operations": [
     {
      "$id": "580",
@@ -5620,7 +5620,7 @@
   {
    "$id": "594",
    "Name": "Entity",
-   "Namespace": "NoDocsTypeSpec",
+   "ClientNamespace": "NoDocsTypeSpec",
    "Operations": [
     {
      "$id": "595",
@@ -5737,7 +5737,7 @@
   {
    "$id": "605",
    "Name": "Glossary",
-   "Namespace": "NoDocsTypeSpec",
+   "ClientNamespace": "NoDocsTypeSpec",
    "Operations": [
     {
      "$id": "606",

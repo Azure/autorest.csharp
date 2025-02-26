@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,13 +25,13 @@ namespace AzureSample.ResourceManager.Sample
 
         VirtualMachineScaleSetVmResource IOperationSource<VirtualMachineScaleSetVmResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<VirtualMachineScaleSetVmData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<VirtualMachineScaleSetVmData>(response.Content);
             return new VirtualMachineScaleSetVmResource(_client, data);
         }
 
         async ValueTask<VirtualMachineScaleSetVmResource> IOperationSource<VirtualMachineScaleSetVmResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<VirtualMachineScaleSetVmData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<VirtualMachineScaleSetVmData>(response.Content);
             return await Task.FromResult(new VirtualMachineScaleSetVmResource(_client, data)).ConfigureAwait(false);
         }
     }

@@ -55,7 +55,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Azure.ResourceManager.CommonTypes",
+   "clientNamespace": "Azure.ResourceManager.CommonTypes",
    "doc": "The supported ExtendedLocation types.",
    "isFixed": false,
    "isFlags": false,
@@ -148,7 +148,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Azure.ResourceManager.CommonTypes",
+   "clientNamespace": "Azure.ResourceManager.CommonTypes",
    "doc": "The kind of entity that created the resource.",
    "isFixed": false,
    "isFlags": false,
@@ -223,7 +223,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Azure.ResourceManager",
+   "clientNamespace": "Azure.ResourceManager",
    "doc": "The provisioning state of a resource type.",
    "isFixed": false,
    "isFlags": false,
@@ -316,7 +316,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Azure.ResourceManager.CommonTypes",
+   "clientNamespace": "Azure.ResourceManager.CommonTypes",
    "doc": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
    "isFixed": false,
    "isFlags": false,
@@ -391,7 +391,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Azure.ResourceManager.CommonTypes",
+   "clientNamespace": "Azure.ResourceManager.CommonTypes",
    "doc": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
    "isFixed": false,
    "isFlags": false,
@@ -430,7 +430,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Azure.ResourceManager.CommonTypes",
+   "clientNamespace": "Azure.ResourceManager.CommonTypes",
    "doc": "Extensible enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
    "isFixed": false,
    "isFlags": false,
@@ -469,7 +469,7 @@
      "decorators": []
     }
    ],
-   "namespace": "MgmtTypeSpec",
+   "clientNamespace": "MgmtTypeSpec",
    "doc": "The available API versions.",
    "isFixed": true,
    "isFlags": false,
@@ -482,7 +482,7 @@
    "$id": "52",
    "kind": "model",
    "name": "Foo",
-   "namespace": "MgmtTypeSpec",
+   "clientNamespace": "MgmtTypeSpec",
    "crossLanguageDefinitionId": "MgmtTypeSpec.Foo",
    "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
    "doc": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
@@ -491,7 +491,7 @@
     "$id": "53",
     "kind": "model",
     "name": "TrackedResource",
-    "namespace": "Azure.ResourceManager.CommonTypes",
+    "clientNamespace": "Azure.ResourceManager.CommonTypes",
     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
     "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
     "doc": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
@@ -500,7 +500,7 @@
      "$id": "54",
      "kind": "model",
      "name": "Resource",
-     "namespace": "Azure.ResourceManager.CommonTypes",
+     "clientNamespace": "Azure.ResourceManager.CommonTypes",
      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
      "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
      "doc": "Common fields that are returned in the response for all Azure Resource Manager resources",
@@ -611,7 +611,7 @@
         "$id": "70",
         "kind": "model",
         "name": "SystemData",
-        "namespace": "Azure.ResourceManager.CommonTypes",
+        "clientNamespace": "Azure.ResourceManager.CommonTypes",
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData",
         "usage": "Output,Json,LroInitial,LroFinalEnvelope",
         "doc": "Metadata pertaining to creation and last modification of the resource.",
@@ -885,7 +885,7 @@
       "$id": "108",
       "kind": "model",
       "name": "FooProperties",
-      "namespace": "MgmtTypeSpec",
+      "clientNamespace": "MgmtTypeSpec",
       "crossLanguageDefinitionId": "MgmtTypeSpec.FooProperties",
       "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
       "decorators": [
@@ -1059,7 +1059,7 @@
       "$id": "134",
       "kind": "model",
       "name": "ExtendedLocation",
-      "namespace": "Azure.ResourceManager.CommonTypes",
+      "clientNamespace": "Azure.ResourceManager.CommonTypes",
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ExtendedLocation",
       "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
       "doc": "The complex type of the extended location.",
@@ -1152,7 +1152,7 @@
    "$id": "144",
    "kind": "model",
    "name": "ErrorResponse",
-   "namespace": "Azure.ResourceManager.CommonTypes",
+   "clientNamespace": "Azure.ResourceManager.CommonTypes",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
    "usage": "Error,Json,Exception",
    "doc": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
@@ -1168,7 +1168,7 @@
       "$id": "146",
       "kind": "model",
       "name": "ErrorDetail",
-      "namespace": "Azure.ResourceManager.CommonTypes",
+      "clientNamespace": "Azure.ResourceManager.CommonTypes",
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
       "usage": "Output,Json,Exception,LroInitial,LroPolling,LroFinalEnvelope",
       "doc": "The error detail.",
@@ -1299,7 +1299,7 @@
           "$id": "165",
           "kind": "model",
           "name": "ErrorAdditionalInfo",
-          "namespace": "Azure.ResourceManager.CommonTypes",
+          "clientNamespace": "Azure.ResourceManager.CommonTypes",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
           "usage": "Output,Json,Exception,LroInitial,LroPolling,LroFinalEnvelope",
           "doc": "The resource management error additional info.",
@@ -1342,7 +1342,7 @@
              "$id": "171",
              "kind": "model",
              "name": "ErrorAdditionalInfoInfo",
-             "namespace": "Azure.ResourceManager.CommonTypes",
+             "clientNamespace": "Azure.ResourceManager.CommonTypes",
              "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
              "usage": "Output,Json,Exception,LroInitial,LroPolling,LroFinalEnvelope",
              "decorators": [],
@@ -1412,7 +1412,7 @@
    "$id": "178",
    "kind": "model",
    "name": "ArmOperationStatusResourceProvisioningState",
-   "namespace": "Azure.ResourceManager",
+   "clientNamespace": "Azure.ResourceManager",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ArmOperationStatus",
    "usage": "LroPolling",
    "doc": "Standard Azure Resource Manager operation status response",
@@ -1594,7 +1594,7 @@
    "$id": "203",
    "kind": "model",
    "name": "FooListResult",
-   "namespace": "Azure.ResourceManager",
+   "clientNamespace": "Azure.ResourceManager",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "usage": "Output,Json",
    "doc": "The response of a Foo list operation.",
@@ -1670,7 +1670,7 @@
    "$id": "213",
    "kind": "model",
    "name": "PrivateLinkResourceListResult",
-   "namespace": "Azure.ResourceManager",
+   "clientNamespace": "Azure.ResourceManager",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "usage": "Output,Json",
    "doc": "The response of a PrivateLinkResource list operation.",
@@ -1690,7 +1690,7 @@
        "$id": "216",
        "kind": "model",
        "name": "PrivateLinkResource",
-       "namespace": "MgmtTypeSpec",
+       "clientNamespace": "MgmtTypeSpec",
        "crossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinkResource",
        "usage": "Output,Json",
        "doc": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
@@ -1699,7 +1699,7 @@
         "$id": "217",
         "kind": "model",
         "name": "ProxyResource",
-        "namespace": "Azure.ResourceManager.CommonTypes",
+        "clientNamespace": "Azure.ResourceManager.CommonTypes",
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ProxyResource",
         "usage": "Output,Json",
         "doc": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
@@ -1720,7 +1720,7 @@
           "$id": "219",
           "kind": "model",
           "name": "PrivateLinkResourceProperties",
-          "namespace": "Azure.ResourceManager.CommonTypes",
+          "clientNamespace": "Azure.ResourceManager.CommonTypes",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties",
           "usage": "Output,Json",
           "doc": "Properties of a private link resource.",
@@ -1847,7 +1847,7 @@
           "$id": "237",
           "kind": "model",
           "name": "ManagedServiceIdentity",
-          "namespace": "Azure.ResourceManager.CommonTypes",
+          "clientNamespace": "Azure.ResourceManager.CommonTypes",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity",
           "usage": "Output,Json",
           "doc": "Managed service identity (system assigned and/or user assigned identities)",
@@ -1967,7 +1967,7 @@
                "$id": "255",
                "kind": "model",
                "name": "UserAssignedIdentity",
-               "namespace": "Azure.ResourceManager.CommonTypes",
+               "clientNamespace": "Azure.ResourceManager.CommonTypes",
                "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity",
                "usage": "Output,Json",
                "doc": "User assigned identity properties",
@@ -2043,7 +2043,7 @@
                 }
                ]
               },
-              "namespace": ""
+              "clientNamespace": ""
              },
              "decorators": []
             },
@@ -2151,7 +2151,7 @@
    "$id": "277",
    "kind": "model",
    "name": "StartRequest",
-   "namespace": "MgmtTypeSpec",
+   "clientNamespace": "MgmtTypeSpec",
    "crossLanguageDefinitionId": "MgmtTypeSpec.StartRequest",
    "usage": "Input,Json",
    "doc": "Start SAP instance(s) request body.",
@@ -2190,7 +2190,7 @@
    "$id": "282",
    "kind": "model",
    "name": "OperationStatusResult",
-   "namespace": "Azure.ResourceManager.CommonTypes",
+   "clientNamespace": "Azure.ResourceManager.CommonTypes",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.OperationStatusResult",
    "usage": "Output,Json,LroInitial,LroFinalEnvelope",
    "doc": "The current status of an async operation.",
@@ -2467,7 +2467,7 @@
    "$id": "321",
    "kind": "model",
    "name": "OperationListResult",
-   "namespace": "Azure.ResourceManager.CommonTypes",
+   "clientNamespace": "Azure.ResourceManager.CommonTypes",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.OperationListResult",
    "usage": "Output,Json",
    "doc": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
@@ -2487,7 +2487,7 @@
        "$id": "324",
        "kind": "model",
        "name": "Operation",
-       "namespace": "Azure.ResourceManager.CommonTypes",
+       "clientNamespace": "Azure.ResourceManager.CommonTypes",
        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Operation",
        "usage": "Output,Json",
        "doc": "Details of a REST API operation, returned from the Resource Provider Operations API",
@@ -2557,7 +2557,7 @@
           "$id": "334",
           "kind": "model",
           "name": "OperationDisplay",
-          "namespace": "Azure.ResourceManager.CommonTypes",
+          "clientNamespace": "Azure.ResourceManager.CommonTypes",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.OperationDisplay",
           "usage": "Output,Json",
           "doc": "Localized display information for and operation.",
@@ -2799,7 +2799,7 @@
   {
    "$id": "366",
    "Name": "MgmtTypeSpecClient",
-   "Namespace": "MgmtTypeSpec",
+   "ClientNamespace": "MgmtTypeSpec",
    "Operations": [],
    "Protocol": {
     "$id": "367"
@@ -2842,7 +2842,7 @@
   {
    "$id": "372",
    "Name": "Operations",
-   "Namespace": "MgmtTypeSpec",
+   "ClientNamespace": "MgmtTypeSpec",
    "Operations": [
     {
      "$id": "373",
@@ -2986,7 +2986,7 @@
   {
    "$id": "388",
    "Name": "PrivateLinks",
-   "Namespace": "MgmtTypeSpec",
+   "ClientNamespace": "MgmtTypeSpec",
    "Operations": [
     {
      "$id": "389",
@@ -3447,7 +3447,7 @@
   {
    "$id": "436",
    "Name": "Foos",
-   "Namespace": "MgmtTypeSpec",
+   "ClientNamespace": "MgmtTypeSpec",
    "Operations": [
     {
      "$id": "437",

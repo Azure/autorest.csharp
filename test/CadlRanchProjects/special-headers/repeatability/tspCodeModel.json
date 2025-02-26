@@ -51,7 +51,7 @@
      "decorators": []
     }
    ],
-   "namespace": "",
+   "clientNamespace": "",
    "isFixed": true,
    "isFlags": false,
    "usage": "Output",
@@ -63,7 +63,7 @@
   {
    "$id": "8",
    "Name": "RepeatabilityClient",
-   "Namespace": "SpecialHeaders.Repeatability",
+   "ClientNamespace": "SpecialHeaders.Repeatability",
    "Doc": "Illustrates OASIS repeatability headers",
    "Operations": [
     {

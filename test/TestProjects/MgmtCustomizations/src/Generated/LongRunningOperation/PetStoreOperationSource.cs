@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,13 +25,13 @@ namespace MgmtCustomizations
 
         PetStoreResource IOperationSource<PetStoreResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<PetStoreData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<PetStoreData>(response.Content);
             return new PetStoreResource(_client, data);
         }
 
         async ValueTask<PetStoreResource> IOperationSource<PetStoreResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<PetStoreData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<PetStoreData>(response.Content);
             return await Task.FromResult(new PetStoreResource(_client, data)).ConfigureAwait(false);
         }
     }

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,13 +25,13 @@ namespace MgmtDiscriminator
 
         DeliveryRuleResource IOperationSource<DeliveryRuleResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<DeliveryRuleData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<DeliveryRuleData>(response.Content);
             return new DeliveryRuleResource(_client, data);
         }
 
         async ValueTask<DeliveryRuleResource> IOperationSource<DeliveryRuleResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<DeliveryRuleData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<DeliveryRuleData>(response.Content);
             return await Task.FromResult(new DeliveryRuleResource(_client, data)).ConfigureAwait(false);
         }
     }

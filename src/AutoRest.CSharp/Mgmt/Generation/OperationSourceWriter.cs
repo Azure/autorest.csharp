@@ -137,7 +137,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var responseVariable = new VariableReference(Configuration.ApiTypes.ResponseType, $"{Configuration.ApiTypes.ResponseParameterName}");
             using (_writer.Scope($"{_opSource.ReturnType} {_opSource.Interface}.CreateResult({Configuration.ApiTypes.ResponseType} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                BuildCreateResultBody(new ResponseExpression(responseVariable).ContentStream, false).AsStatement().Write(_writer);
+                BuildCreateResultBody(responseVariable, new ResponseExpression(responseVariable).ContentStream, false).AsStatement().Write(_writer);
             }
         }
 
@@ -146,11 +146,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var responseVariable = new VariableReference(Configuration.ApiTypes.ResponseType, $"{Configuration.ApiTypes.ResponseParameterName}");
             using (_writer.Scope($"async {new CSharpType(typeof(ValueTask<>), _opSource.ReturnType)} {_opSource.Interface}.CreateResultAsync({Configuration.ApiTypes.ResponseType} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                BuildCreateResultBody(new ResponseExpression(responseVariable).ContentStream, true).AsStatement().Write(_writer);
+                BuildCreateResultBody(responseVariable, new ResponseExpression(responseVariable).ContentStream, true).AsStatement().Write(_writer);
             }
         }
 
-        private IEnumerable<MethodBodyStatement> BuildCreateResultBody(StreamExpression stream, bool async)
+        private IEnumerable<MethodBodyStatement> BuildCreateResultBody(VariableReference responseVariable, StreamExpression stream, bool async)
         {
             if (_opSource.IsReturningResource)
             {
@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 else
                 {
-                    deserializeExpression = new InvokeStaticMethodExpression(typeof(ModelReaderWriter), "Read", [New.Instance(typeof(BinaryData), stream)], [resourceData.Type]);
+                    deserializeExpression = new InvokeStaticMethodExpression(typeof(ModelReaderWriter), "Read", [responseVariable.Property("Content")], [resourceData.Type]);
                 }
 
                 if (_operationIdMappings is not null)

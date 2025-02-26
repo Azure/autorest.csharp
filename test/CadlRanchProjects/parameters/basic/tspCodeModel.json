@@ -8,7 +8,7 @@
    "$id": "2",
    "kind": "model",
    "name": "SimpleRequest",
-   "namespace": "Parameters.Basic.ImplicitBody",
+   "clientNamespace": "Parameters.Basic.ImplicitBody",
    "crossLanguageDefinitionId": "Parameters.Basic.ImplicitBody.simple.Request.anonymous",
    "usage": "Spread,Json",
    "decorators": [],
@@ -45,7 +45,7 @@
    "$id": "7",
    "kind": "model",
    "name": "User",
-   "namespace": "Parameters.Basic.ExplicitBody",
+   "clientNamespace": "Parameters.Basic.ExplicitBody",
    "crossLanguageDefinitionId": "Parameters.Basic.ExplicitBody.User",
    "usage": "Input,Json",
    "doc": "This is a simple model.",
@@ -84,7 +84,7 @@
   {
    "$id": "12",
    "Name": "BasicClient",
-   "Namespace": "Parameters.Basic",
+   "ClientNamespace": "Parameters.Basic",
    "Doc": "Test for basic parameters cases.",
    "Operations": [],
    "Protocol": {
@@ -128,7 +128,7 @@
   {
    "$id": "18",
    "Name": "ExplicitBody",
-   "Namespace": "Parameters.Basic.ExplicitBody",
+   "ClientNamespace": "Parameters.Basic.ExplicitBody",
    "Operations": [
     {
      "$id": "19",
@@ -249,7 +249,7 @@
   {
    "$id": "30",
    "Name": "ImplicitBody",
-   "Namespace": "Parameters.Basic.ImplicitBody",
+   "ClientNamespace": "Parameters.Basic.ImplicitBody",
    "Operations": [
     {
      "$id": "31",

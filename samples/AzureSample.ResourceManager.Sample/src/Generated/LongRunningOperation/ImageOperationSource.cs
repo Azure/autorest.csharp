@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,13 +25,13 @@ namespace AzureSample.ResourceManager.Sample
 
         ImageResource IOperationSource<ImageResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<ImageData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<ImageData>(response.Content);
             return new ImageResource(_client, data);
         }
 
         async ValueTask<ImageResource> IOperationSource<ImageResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<ImageData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<ImageData>(response.Content);
             return await Task.FromResult(new ImageResource(_client, data)).ConfigureAwait(false);
         }
     }

@@ -8,7 +8,7 @@
    "$id": "2",
    "kind": "model",
    "name": "Siamese",
-   "namespace": "Type.Model.Inheritance.NotDiscriminated",
+   "clientNamespace": "Type.Model.Inheritance.NotDiscriminated",
    "crossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Siamese",
    "usage": "Input,Output,Json",
    "doc": "The third level model in the normal multiple levels inheritance.",
@@ -17,7 +17,7 @@
     "$id": "3",
     "kind": "model",
     "name": "Cat",
-    "namespace": "Type.Model.Inheritance.NotDiscriminated",
+    "clientNamespace": "Type.Model.Inheritance.NotDiscriminated",
     "crossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Cat",
     "usage": "Input,Output,Json",
     "doc": "The second level model in the normal multiple levels inheritance.",
@@ -26,7 +26,7 @@
      "$id": "4",
      "kind": "model",
      "name": "Pet",
-     "namespace": "Type.Model.Inheritance.NotDiscriminated",
+     "clientNamespace": "Type.Model.Inheritance.NotDiscriminated",
      "crossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Pet",
      "usage": "Input,Output,Json",
      "doc": "This is base model for not-discriminated normal multiple levels inheritance.",
@@ -129,7 +129,7 @@
   {
    "$id": "17",
    "Name": "NotDiscriminatedClient",
-   "Namespace": "Type.Model.Inheritance.NotDiscriminated",
+   "ClientNamespace": "Type.Model.Inheritance.NotDiscriminated",
    "Doc": "Illustrates not-discriminated inheritance model.",
    "Operations": [
     {

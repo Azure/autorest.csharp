@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,13 +25,13 @@ namespace MgmtTypeSpec
 
         FooResource IOperationSource<FooResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<FooData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<FooData>(response.Content);
             return new FooResource(_client, data);
         }
 
         async ValueTask<FooResource> IOperationSource<FooResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<FooData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<FooData>(response.Content);
             return await Task.FromResult(new FooResource(_client, data)).ConfigureAwait(false);
         }
     }

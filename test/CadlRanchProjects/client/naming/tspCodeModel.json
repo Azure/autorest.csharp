@@ -34,7 +34,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Client.Naming.UnionEnum",
+   "clientNamespace": "Client.Naming.UnionEnum",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Json",
@@ -88,7 +88,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Client.Naming.UnionEnum",
+   "clientNamespace": "Client.Naming.UnionEnum",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Json",
@@ -100,7 +100,7 @@
    "$id": "12",
    "kind": "model",
    "name": "ClientNameModel",
-   "namespace": "Client.Naming.Property",
+   "clientNamespace": "Client.Naming.Property",
    "crossLanguageDefinitionId": "Client.Naming.Property.ClientNameModel",
    "usage": "Input,Json",
    "decorators": [],
@@ -138,7 +138,7 @@
    "$id": "17",
    "kind": "model",
    "name": "LanguageClientNameModel",
-   "namespace": "Client.Naming.Property",
+   "clientNamespace": "Client.Naming.Property",
    "crossLanguageDefinitionId": "Client.Naming.Property.LanguageClientNameModel",
    "usage": "Input,Json",
    "decorators": [],
@@ -176,7 +176,7 @@
    "$id": "22",
    "kind": "model",
    "name": "ClientNameAndJsonEncodedNameModel",
-   "namespace": "Client.Naming.Property",
+   "clientNamespace": "Client.Naming.Property",
    "crossLanguageDefinitionId": "Client.Naming.Property.ClientNameAndJsonEncodedNameModel",
    "usage": "Input,Json",
    "decorators": [],
@@ -214,7 +214,7 @@
    "$id": "27",
    "kind": "model",
    "name": "ClientModel",
-   "namespace": "Client.Naming.Model",
+   "clientNamespace": "Client.Naming.Model",
    "crossLanguageDefinitionId": "Client.Naming.Model.ModelWithClientClientName",
    "usage": "Input,Json",
    "decorators": [],
@@ -252,7 +252,7 @@
    "$id": "32",
    "kind": "model",
    "name": "CSModel",
-   "namespace": "Client.Naming.Model",
+   "clientNamespace": "Client.Naming.Model",
    "crossLanguageDefinitionId": "Client.Naming.Model.ModelWithLanguageClientName",
    "usage": "Input,Json",
    "decorators": [],
@@ -291,7 +291,7 @@
   {
    "$id": "37",
    "Name": "NamingClient",
-   "Namespace": "Client.Naming",
+   "ClientNamespace": "Client.Naming",
    "Doc": "Describe changing names of types in a client with `@clientName`",
    "Operations": [
     {
@@ -729,7 +729,7 @@
   {
    "$id": "75",
    "Name": "ClientModel",
-   "Namespace": "Client.Naming.Model",
+   "ClientNamespace": "Client.Naming.Model",
    "Operations": [
     {
      "$id": "76",
@@ -926,7 +926,7 @@
   {
    "$id": "93",
    "Name": "UnionEnum",
-   "Namespace": "Client.Naming.UnionEnum",
+   "ClientNamespace": "Client.Naming.UnionEnum",
    "Operations": [
     {
      "$id": "94",

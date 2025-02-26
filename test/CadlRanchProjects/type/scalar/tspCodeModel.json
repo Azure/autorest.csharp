@@ -8,7 +8,7 @@
   {
    "$id": "2",
    "Name": "ScalarClient",
-   "Namespace": "Type.Scalar",
+   "ClientNamespace": "Type.Scalar",
    "Operations": [],
    "Protocol": {
     "$id": "3"
@@ -51,7 +51,7 @@
   {
    "$id": "8",
    "Name": "String",
-   "Namespace": "Type.Scalar",
+   "ClientNamespace": "Type.Scalar",
    "Operations": [
     {
      "$id": "9",
@@ -244,7 +244,7 @@
   {
    "$id": "27",
    "Name": "Boolean",
-   "Namespace": "Type.Scalar",
+   "ClientNamespace": "Type.Scalar",
    "Operations": [
     {
      "$id": "28",
@@ -437,7 +437,7 @@
   {
    "$id": "46",
    "Name": "Unknown",
-   "Namespace": "Type.Scalar",
+   "ClientNamespace": "Type.Scalar",
    "Operations": [
     {
      "$id": "47",
@@ -630,7 +630,7 @@
   {
    "$id": "65",
    "Name": "DecimalType",
-   "Namespace": "Type.Scalar",
+   "ClientNamespace": "Type.Scalar",
    "Doc": "Decimal type",
    "Operations": [
     {
@@ -870,7 +870,7 @@
   {
    "$id": "88",
    "Name": "Decimal128Type",
-   "Namespace": "Type.Scalar",
+   "ClientNamespace": "Type.Scalar",
    "Doc": "Decimal128 type",
    "Operations": [
     {
@@ -1110,7 +1110,7 @@
   {
    "$id": "111",
    "Name": "DecimalVerify",
-   "Namespace": "Type.Scalar",
+   "ClientNamespace": "Type.Scalar",
    "Doc": "Decimal type verification",
    "Operations": [
     {
@@ -1308,7 +1308,7 @@
   {
    "$id": "131",
    "Name": "Decimal128Verify",
-   "Namespace": "Type.Scalar",
+   "ClientNamespace": "Type.Scalar",
    "Doc": "Decimal128 type verification",
    "Operations": [
     {

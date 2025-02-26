@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,13 +25,13 @@ namespace _Azure.ResourceManager.Resources
 
         SingletonTrackedResource IOperationSource<SingletonTrackedResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<SingletonTrackedResourceData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<SingletonTrackedResourceData>(response.Content);
             return new SingletonTrackedResource(_client, data);
         }
 
         async ValueTask<SingletonTrackedResource> IOperationSource<SingletonTrackedResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<SingletonTrackedResourceData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<SingletonTrackedResourceData>(response.Content);
             return await Task.FromResult(new SingletonTrackedResource(_client, data)).ConfigureAwait(false);
         }
     }

@@ -8,7 +8,7 @@
    "$id": "2",
    "kind": "model",
    "name": "InputModel",
-   "namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
+   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.InputModel",
    "usage": "Input,Output,Json",
    "doc": "Usage override to roundtrip.",
@@ -46,7 +46,7 @@
    "$id": "7",
    "kind": "model",
    "name": "OutputModel",
-   "namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
+   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.OutputModel",
    "usage": "Input,Output,Json",
    "doc": "Usage override to roundtrip.",
@@ -84,7 +84,7 @@
    "$id": "12",
    "kind": "model",
    "name": "RoundTripModel",
-   "namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
+   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.RoundTripModel",
    "usage": "Input,Output,Json",
    "decorators": [],
@@ -98,7 +98,7 @@
       "$id": "14",
       "kind": "model",
       "name": "ResultModel",
-      "namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
+      "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
       "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.ResultModel",
       "usage": "Output,Json",
       "decorators": [],
@@ -154,7 +154,7 @@
    "$id": "21",
    "kind": "model",
    "name": "OrphanModel",
-   "namespace": "_Specs_.Azure.ClientGenerator.Core.Usage",
+   "clientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.OrphanModel",
    "access": "public",
    "usage": "Input",
@@ -190,7 +190,7 @@
   {
    "$id": "25",
    "Name": "UsageClient",
-   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage",
+   "ClientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage",
    "Doc": "Test for internal decorator.",
    "Operations": [],
    "Protocol": {
@@ -234,7 +234,7 @@
   {
    "$id": "31",
    "Name": "ModelInOperation",
-   "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
+   "ClientNamespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
    "Operations": [
     {
      "$id": "32",

@@ -138,7 +138,7 @@
      "decorators": []
     }
    ],
-   "namespace": "AuthoringTypeSpec",
+   "clientNamespace": "AuthoringTypeSpec",
    "doc": "Represents the job status values.",
    "isFixed": false,
    "isFlags": false,
@@ -176,7 +176,7 @@
      "decorators": []
     }
    ],
-   "namespace": "AuthoringTypeSpec",
+   "clientNamespace": "AuthoringTypeSpec",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -250,7 +250,7 @@
      "decorators": []
     }
    ],
-   "namespace": "AuthoringTypeSpec",
+   "clientNamespace": "AuthoringTypeSpec",
    "doc": "Represents the project kind.",
    "isFixed": false,
    "isFlags": false,
@@ -361,7 +361,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Azure.Core.Foundations",
+   "clientNamespace": "Azure.Core.Foundations",
    "doc": "Enum describing allowed operation states.",
    "isFixed": false,
    "isFlags": false,
@@ -374,7 +374,7 @@
    "$id": "42",
    "kind": "model",
    "name": "DeploymentJob",
-   "namespace": "AuthoringTypeSpec",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.DeploymentJob",
    "usage": "Output,Json",
    "decorators": [],
@@ -548,7 +548,7 @@
        "$id": "67",
        "kind": "model",
        "name": "JobWarning",
-       "namespace": "AuthoringTypeSpec",
+       "clientNamespace": "AuthoringTypeSpec",
        "crossLanguageDefinitionId": "AuthoringTypeSpec.JobWarning",
        "usage": "Output,Json",
        "doc": "Represents a warning that was encountered while executing the request.",
@@ -637,7 +637,7 @@
       "$id": "79",
       "kind": "model",
       "name": "Error",
-      "namespace": "Azure.Core.Foundations",
+      "clientNamespace": "Azure.Core.Foundations",
       "crossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "usage": "Output,Json,Exception",
       "doc": "The error object.",
@@ -764,7 +764,7 @@
          "$id": "97",
          "kind": "model",
          "name": "InnerError",
-         "namespace": "Azure.Core.Foundations",
+         "clientNamespace": "Azure.Core.Foundations",
          "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "usage": "Output,Json,Exception",
          "doc": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
@@ -893,7 +893,7 @@
    "$id": "113",
    "kind": "model",
    "name": "SwapDeploymentsJob",
-   "namespace": "AuthoringTypeSpec",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.SwapDeploymentsJob",
    "usage": "Output,Json",
    "decorators": [],
@@ -1138,7 +1138,7 @@
    "$id": "147",
    "kind": "model",
    "name": "Project",
-   "namespace": "AuthoringTypeSpec",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.Project",
    "usage": "None",
    "decorators": [],
@@ -1217,7 +1217,7 @@
       "$id": "157",
       "kind": "model",
       "name": "ProjectSettings",
-      "namespace": "AuthoringTypeSpec",
+      "clientNamespace": "AuthoringTypeSpec",
       "crossLanguageDefinitionId": "AuthoringTypeSpec.ProjectSettings",
       "usage": "None",
       "doc": "Represents the settings used to define the project behavior.",
@@ -1443,7 +1443,7 @@
    "$id": "185",
    "kind": "model",
    "name": "OperationStatusError",
-   "namespace": "Azure.Core.Foundations",
+   "clientNamespace": "Azure.Core.Foundations",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "usage": "None",
    "doc": "Provides status details for long running operations.",
@@ -1516,7 +1516,7 @@
    "$id": "193",
    "kind": "model",
    "name": "PagedProject",
-   "namespace": "Azure.Core.Foundations",
+   "clientNamespace": "Azure.Core.Foundations",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "usage": "None",
    "doc": "Paged collection of Project items",
@@ -1584,7 +1584,7 @@
    "$id": "201",
    "kind": "model",
    "name": "TrainingJobOptions",
-   "namespace": "AuthoringTypeSpec",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.TrainingJobOptions",
    "usage": "None",
    "doc": "Training job parameters.",
@@ -1618,7 +1618,7 @@
    "$id": "205",
    "kind": "model",
    "name": "Deployment",
-   "namespace": "AuthoringTypeSpec",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.Deployment",
    "usage": "None",
    "decorators": [],
@@ -1651,7 +1651,7 @@
    "$id": "209",
    "kind": "model",
    "name": "PagedDeployment",
-   "namespace": "Azure.Core.Foundations",
+   "clientNamespace": "Azure.Core.Foundations",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "usage": "None",
    "doc": "Paged collection of Deployment items",
@@ -1719,7 +1719,7 @@
    "$id": "217",
    "kind": "model",
    "name": "SwapDeploymentsOptions",
-   "namespace": "AuthoringTypeSpec",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.SwapDeploymentsOptions",
    "usage": "None",
    "decorators": [],
@@ -1776,7 +1776,7 @@
    "$id": "224",
    "kind": "model",
    "name": "SupportedLanguages",
-   "namespace": "AuthoringTypeSpec",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.SupportedLanguages",
    "usage": "None",
    "doc": "Paged collection of SupportedLanguage items",
@@ -1796,7 +1796,7 @@
        "$id": "227",
        "kind": "model",
        "name": "SupportedLanguage",
-       "namespace": "AuthoringTypeSpec",
+       "clientNamespace": "AuthoringTypeSpec",
        "crossLanguageDefinitionId": "AuthoringTypeSpec.SupportedLanguage",
        "usage": "None",
        "doc": "Represents a supported language.",
@@ -1902,7 +1902,7 @@
    "$id": "239",
    "kind": "model",
    "name": "TrainingConfigVersions",
-   "namespace": "AuthoringTypeSpec",
+   "clientNamespace": "AuthoringTypeSpec",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.TrainingConfigVersions",
    "usage": "None",
    "doc": "Paged collection of TrainingConfigVersion items",
@@ -1922,7 +1922,7 @@
        "$id": "242",
        "kind": "model",
        "name": "TrainingConfigVersion",
-       "namespace": "AuthoringTypeSpec",
+       "clientNamespace": "AuthoringTypeSpec",
        "crossLanguageDefinitionId": "AuthoringTypeSpec.TrainingConfigVersion",
        "usage": "None",
        "doc": "Represents a training config version.",
@@ -2029,7 +2029,7 @@
   {
    "$id": "254",
    "Name": "AuthoringTypeSpecClient",
-   "Namespace": "AuthoringTypeSpec",
+   "ClientNamespace": "AuthoringTypeSpec",
    "Operations": [],
    "Protocol": {
     "$id": "255"
@@ -2061,7 +2061,7 @@
   {
    "$id": "258",
    "Name": "Projects",
-   "Namespace": "AuthoringTypeSpec",
+   "ClientNamespace": "AuthoringTypeSpec",
    "Operations": [
     {
      "$id": "259",
@@ -3183,7 +3183,7 @@
   {
    "$id": "377",
    "Name": "Deployments",
-   "Namespace": "AuthoringTypeSpec",
+   "ClientNamespace": "AuthoringTypeSpec",
    "Operations": [
     {
      "$id": "378",
@@ -4087,7 +4087,7 @@
   {
    "$id": "470",
    "Name": "Jobs",
-   "Namespace": "AuthoringTypeSpec",
+   "ClientNamespace": "AuthoringTypeSpec",
    "Operations": [
     {
      "$id": "471",
@@ -4435,7 +4435,7 @@
   {
    "$id": "504",
    "Name": "Global",
-   "Namespace": "AuthoringTypeSpec",
+   "ClientNamespace": "AuthoringTypeSpec",
    "Operations": [
     {
      "$id": "505",

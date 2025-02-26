@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,13 +25,13 @@ namespace _Azure.ResourceManager.Resources
 
         NestedProxyResource IOperationSource<NestedProxyResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<NestedProxyResourceData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<NestedProxyResourceData>(response.Content);
             return new NestedProxyResource(_client, data);
         }
 
         async ValueTask<NestedProxyResource> IOperationSource<NestedProxyResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<NestedProxyResourceData>(new BinaryData(response.ContentStream));
+            var data = ModelReaderWriter.Read<NestedProxyResourceData>(response.Content);
             return await Task.FromResult(new NestedProxyResource(_client, data)).ConfigureAwait(false);
         }
     }

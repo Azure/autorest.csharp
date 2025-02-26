@@ -8,7 +8,7 @@
    "$id": "2",
    "kind": "model",
    "name": "CollectionsStringProperty",
-   "namespace": "Type.Property.Nullable",
+   "clientNamespace": "Type.Property.Nullable",
    "crossLanguageDefinitionId": "Type.Property.Nullable.CollectionsStringProperty",
    "usage": "Input,Output,JsonMergePatch,Json",
    "doc": "Model with collection string properties",
@@ -64,7 +64,7 @@
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
       },
-      "namespace": ""
+      "clientNamespace": ""
      },
      "optional": false,
      "readOnly": false,
@@ -86,7 +86,7 @@
    "$id": "13",
    "kind": "model",
    "name": "CollectionsModelProperty",
-   "namespace": "Type.Property.Nullable",
+   "clientNamespace": "Type.Property.Nullable",
    "crossLanguageDefinitionId": "Type.Property.Nullable.CollectionsModelProperty",
    "usage": "Input,Output,JsonMergePatch,Json",
    "doc": "Model with collection models properties",
@@ -136,7 +136,7 @@
         "$id": "21",
         "kind": "model",
         "name": "InnerModel",
-        "namespace": "Type.Property.Nullable",
+        "clientNamespace": "Type.Property.Nullable",
         "crossLanguageDefinitionId": "Type.Property.Nullable.InnerModel",
         "usage": "Input,Output,JsonMergePatch,Json",
         "doc": "Inner model used in collections model property",
@@ -174,7 +174,7 @@
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
       },
-      "namespace": ""
+      "clientNamespace": ""
      },
      "optional": false,
      "readOnly": false,
@@ -199,7 +199,7 @@
    "$id": "28",
    "kind": "model",
    "name": "CollectionsByteProperty",
-   "namespace": "Type.Property.Nullable",
+   "clientNamespace": "Type.Property.Nullable",
    "crossLanguageDefinitionId": "Type.Property.Nullable.CollectionsByteProperty",
    "usage": "Input,Output,JsonMergePatch,Json",
    "doc": "Model with collection bytes properties",
@@ -256,7 +256,7 @@
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
       },
-      "namespace": ""
+      "clientNamespace": ""
      },
      "optional": false,
      "readOnly": false,
@@ -278,7 +278,7 @@
    "$id": "39",
    "kind": "model",
    "name": "DurationProperty",
-   "namespace": "Type.Property.Nullable",
+   "clientNamespace": "Type.Property.Nullable",
    "crossLanguageDefinitionId": "Type.Property.Nullable.DurationProperty",
    "usage": "Input,Output,JsonMergePatch,Json",
    "doc": "Model with a duration property",
@@ -335,7 +335,7 @@
        "crossLanguageDefinitionId": "TypeSpec.duration",
        "decorators": []
       },
-      "namespace": ""
+      "clientNamespace": ""
      },
      "optional": false,
      "readOnly": false,
@@ -357,7 +357,7 @@
    "$id": "50",
    "kind": "model",
    "name": "DatetimeProperty",
-   "namespace": "Type.Property.Nullable",
+   "clientNamespace": "Type.Property.Nullable",
    "crossLanguageDefinitionId": "Type.Property.Nullable.DatetimeProperty",
    "usage": "Input,Output,JsonMergePatch,Json",
    "doc": "Model with a datetime property",
@@ -414,7 +414,7 @@
        "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
        "decorators": []
       },
-      "namespace": ""
+      "clientNamespace": ""
      },
      "optional": false,
      "readOnly": false,
@@ -436,7 +436,7 @@
    "$id": "61",
    "kind": "model",
    "name": "BytesProperty",
-   "namespace": "Type.Property.Nullable",
+   "clientNamespace": "Type.Property.Nullable",
    "crossLanguageDefinitionId": "Type.Property.Nullable.BytesProperty",
    "usage": "Input,Output,JsonMergePatch,Json",
    "doc": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
@@ -486,7 +486,7 @@
        "crossLanguageDefinitionId": "TypeSpec.bytes",
        "decorators": []
       },
-      "namespace": ""
+      "clientNamespace": ""
      },
      "optional": false,
      "readOnly": false,
@@ -508,7 +508,7 @@
    "$id": "71",
    "kind": "model",
    "name": "StringProperty",
-   "namespace": "Type.Property.Nullable",
+   "clientNamespace": "Type.Property.Nullable",
    "crossLanguageDefinitionId": "Type.Property.Nullable.StringProperty",
    "usage": "Input,Output,JsonMergePatch,Json",
    "doc": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
@@ -557,7 +557,7 @@
        "crossLanguageDefinitionId": "TypeSpec.string",
        "decorators": []
       },
-      "namespace": ""
+      "clientNamespace": ""
      },
      "optional": false,
      "readOnly": false,
@@ -580,7 +580,7 @@
   {
    "$id": "81",
    "Name": "NullableClient",
-   "Namespace": "Type.Property.Nullable",
+   "ClientNamespace": "Type.Property.Nullable",
    "Doc": "Illustrates models with nullable properties.",
    "Operations": [],
    "Protocol": {
@@ -624,7 +624,7 @@
   {
    "$id": "87",
    "Name": "String",
-   "Namespace": "Type.Property.Nullable",
+   "ClientNamespace": "Type.Property.Nullable",
    "Operations": [
     {
      "$id": "88",
@@ -947,7 +947,7 @@
   {
    "$id": "115",
    "Name": "Bytes",
-   "Namespace": "Type.Property.Nullable",
+   "ClientNamespace": "Type.Property.Nullable",
    "Operations": [
     {
      "$id": "116",
@@ -1270,7 +1270,7 @@
   {
    "$id": "143",
    "Name": "Datetime",
-   "Namespace": "Type.Property.Nullable",
+   "ClientNamespace": "Type.Property.Nullable",
    "Operations": [
     {
      "$id": "144",
@@ -1593,7 +1593,7 @@
   {
    "$id": "171",
    "Name": "Duration",
-   "Namespace": "Type.Property.Nullable",
+   "ClientNamespace": "Type.Property.Nullable",
    "Operations": [
     {
      "$id": "172",
@@ -1916,7 +1916,7 @@
   {
    "$id": "199",
    "Name": "CollectionsByte",
-   "Namespace": "Type.Property.Nullable",
+   "ClientNamespace": "Type.Property.Nullable",
    "Operations": [
     {
      "$id": "200",
@@ -2239,7 +2239,7 @@
   {
    "$id": "227",
    "Name": "CollectionsModel",
-   "Namespace": "Type.Property.Nullable",
+   "ClientNamespace": "Type.Property.Nullable",
    "Operations": [
     {
      "$id": "228",
@@ -2562,7 +2562,7 @@
   {
    "$id": "255",
    "Name": "CollectionsString",
-   "Namespace": "Type.Property.Nullable",
+   "ClientNamespace": "Type.Property.Nullable",
    "Operations": [
     {
      "$id": "256",
