@@ -565,8 +565,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 // In mixed models required properties are not readonly
                 propertyShouldOmitSetter |= property.IsRequired &&
-                              _usage.HasFlag(InputModelTypeUsage.Input) &&
-                              !_usage.HasFlag(InputModelTypeUsage.Output);
+                              !_usage.HasFlag(InputModelTypeUsage.Input) &&
+                              _usage.HasFlag(InputModelTypeUsage.Output);
             }
 
             // we should remove the setter of required constant
