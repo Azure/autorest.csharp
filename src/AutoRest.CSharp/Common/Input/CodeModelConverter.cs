@@ -145,6 +145,7 @@ namespace AutoRest.CSharp.Common.Input
                 parameters: parameters,
                 responses: operation.Responses.Select<ServiceResponse, OperationResponse>(CreateOperationResponse).ToList(),
                 httpMethod: httpRequest.Method.ToCoreRequestMethod(),
+                requestBodyMediaType: GetBodyFormat((httpRequest as HttpWithBodyRequest)?.KnownMediaType),
                 uri: httpRequest.Uri,
                 path: httpRequest.Path,
                 externalDocsUrl: operation.ExternalDocs?.Url,

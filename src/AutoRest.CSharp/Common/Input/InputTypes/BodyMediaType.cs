@@ -59,7 +59,13 @@ public static class BodyMediaTypeHelper
             throw new NotSupportedException($"Content type {contentType} is not supported.");
         }
 
-        if ((subType == "json" || suffix == "json") && (type == "application" || type == "text") && suffix == "" && parameter == "")
+        if (subType == "json" && (type == "application" || type == "text") && suffix == "" && parameter == "")
+        {
+            return BodyMediaType.Json;
+        }
+
+        // application/vnd.microsoft.appconfig.kv+json, where type is "application", subType is "vnd.microsoft.appconfig.kv", suffix is "json", and parameter is ""
+        if (suffix == "json" && (type == "application" || type == "text") && parameter == "")
         {
             return BodyMediaType.Json;
         }

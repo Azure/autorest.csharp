@@ -112,7 +112,9 @@ namespace media_types
             if (input != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                request.Content = RequestContent.Create(input);
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(input, ModelSerializationExtensions.WireOptions);
+                request.Content = content;
             }
             return message;
         }
@@ -222,7 +224,9 @@ namespace media_types
             if (input != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                request.Content = RequestContent.Create(input);
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(input, ModelSerializationExtensions.WireOptions);
+                request.Content = content;
             }
             return message;
         }
@@ -535,7 +539,7 @@ namespace media_types
             request.Uri = uri;
             request.Headers.Add("Accept", "text/plain");
             request.Headers.Add("Content-Type", "text/plain");
-            request.Content = RequestContent.Create(message);
+            request.Content = new StringRequestContent(message);
             return message0;
         }
 
@@ -602,7 +606,9 @@ namespace media_types
             request.Uri = uri;
             request.Headers.Add("Accept", "text/plain");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = RequestContent.Create(message);
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue<object>(message, ModelSerializationExtensions.WireOptions);
+            request.Content = content;
             return message0;
         }
 
@@ -669,7 +675,7 @@ namespace media_types
             request.Uri = uri;
             request.Headers.Add("Accept", "text/plain");
             request.Headers.Add("Content-Type", contentType.ToSerialString());
-            request.Content = RequestContent.Create(message);
+            request.Content = new StringRequestContent(message);
             return message0;
         }
 

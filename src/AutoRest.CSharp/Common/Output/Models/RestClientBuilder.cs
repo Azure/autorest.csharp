@@ -209,9 +209,11 @@ namespace AutoRest.CSharp.Output.Models
 
             var body = bodyParameter != null
                 ? new RequestContentRequestBody(bodyParameter)
-                : operation.RequestMediaTypes != null && operation.RequestMediaTypes.Count > 0
-                    ? BuildRequestBody(requestParts, BodyMediaTypeHelper.DetermineBodyMediaType(operation.RequestMediaTypes), library, typeFactory)
-                    : null;
+                : operation.RequestMediaTypes != null
+                    ? (operation.RequestBodyMediaType != BodyMediaType.None ? BuildRequestBody(requestParts, operation.RequestBodyMediaType!.Value, library, typeFactory) : null)
+                    : (operation.RequestMediaTypes != null && operation.RequestMediaTypes.Count > 0
+                        ? BuildRequestBody(requestParts, BodyMediaTypeHelper.DetermineBodyMediaType(operation.RequestMediaTypes), library, typeFactory)
+                        : null);
 
             return new Request(
                 operation.HttpMethod,

@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Common.Input
             parameters = parameters ?? throw new JsonException("InputOperation must have parameters");
             responses = responses ?? throw new JsonException("InputOperation must have responses");
 
-            var inputOperation = new InputOperation(name, resourceName, summary, deprecated, doc, accessibility, parameters, responses, httpMethod, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, crossLanguageDefinitionId, keepClientDefaultValue, examples)
+            var inputOperation = new InputOperation(name, resourceName, summary, deprecated, doc, accessibility, parameters, responses, httpMethod, null, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, crossLanguageDefinitionId, keepClientDefaultValue, examples)
             {
                 IsNameChanged = IsNameChanged(crossLanguageDefinitionId, name)
             };

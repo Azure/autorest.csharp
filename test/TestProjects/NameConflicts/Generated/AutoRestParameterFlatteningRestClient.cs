@@ -233,7 +233,9 @@ namespace NameConflicts
             if (stringBody != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                request.Content = RequestContent.Create(stringBody);
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStringValue(stringBody);
+                request.Content = content;
             }
             return message;
         }

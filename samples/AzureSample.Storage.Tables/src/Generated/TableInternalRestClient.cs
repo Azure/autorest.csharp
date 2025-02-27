@@ -135,7 +135,9 @@ namespace AzureSample.Storage.Tables
             request.Headers.Add("DataServiceVersion", dataServiceVersion.ToString());
             request.Headers.Add("Accept", "application/json;odata=nometadata");
             request.Headers.Add("Content-Type", "application/json;odata=nometadata");
-            request.Content = RequestContent.Create(tableProperties);
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(tableProperties);
+            request.Content = content;
             return message;
         }
 
@@ -512,7 +514,20 @@ namespace AzureSample.Storage.Tables
             if (tableEntityProperties != null)
             {
                 request.Headers.Add("Content-Type", "application/json;odata=nometadata");
-                request.Content = RequestContent.Create(tableEntityProperties);
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartObject();
+                foreach (var item in tableEntityProperties)
+                {
+                    content.JsonWriter.WritePropertyName(item.Key);
+                    if (item.Value == null)
+                    {
+                        content.JsonWriter.WriteNullValue();
+                        continue;
+                    }
+                    content.JsonWriter.WriteObjectValue<object>(item.Value);
+                }
+                content.JsonWriter.WriteEndObject();
+                request.Content = content;
             }
             return message;
         }
@@ -716,7 +731,20 @@ namespace AzureSample.Storage.Tables
             if (tableEntityProperties != null)
             {
                 request.Headers.Add("Content-Type", "application/json;odata=nometadata");
-                request.Content = RequestContent.Create(tableEntityProperties);
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartObject();
+                foreach (var item in tableEntityProperties)
+                {
+                    content.JsonWriter.WritePropertyName(item.Key);
+                    if (item.Value == null)
+                    {
+                        content.JsonWriter.WriteNullValue();
+                        continue;
+                    }
+                    content.JsonWriter.WriteObjectValue<object>(item.Value);
+                }
+                content.JsonWriter.WriteEndObject();
+                request.Content = content;
             }
             return message;
         }
