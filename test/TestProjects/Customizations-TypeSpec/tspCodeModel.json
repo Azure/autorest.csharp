@@ -1662,7 +1662,6 @@
        "BodyType": {
         "$ref": "38"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1671,7 +1670,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/inputToRoundTrip",
      "RequestMediaTypes": [
@@ -1772,7 +1770,6 @@
        "BodyType": {
         "$ref": "51"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1781,7 +1778,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/foo",
      "RequestMediaTypes": [
@@ -1882,7 +1878,6 @@
        "BodyType": {
         "$ref": "51"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1891,7 +1886,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/bar",
      "RequestMediaTypes": [

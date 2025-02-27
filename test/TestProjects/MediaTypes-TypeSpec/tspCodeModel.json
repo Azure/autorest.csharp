@@ -227,13 +227,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Binary",
      "Uri": "{endpoint}",
      "Path": "/oneBinaryBodyTwoContentTypes",
      "RequestMediaTypes": [
@@ -297,13 +295,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Text",
      "Uri": "{endpoint}",
      "Path": "/oneStringBodyThreeContentTypes",
      "RequestMediaTypes": [
@@ -374,13 +370,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/oneModelBodyOneContentType",
      "RequestMediaTypes": [

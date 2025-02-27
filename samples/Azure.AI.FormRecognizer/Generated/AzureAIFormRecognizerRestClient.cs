@@ -303,9 +303,7 @@ namespace Azure.AI.FormRecognizer
             if (fileStream != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(fileStream);
-                request.Content = content;
+                request.Content = RequestContent.Create(fileStream);
             }
             return message;
         }
@@ -685,9 +683,7 @@ namespace Azure.AI.FormRecognizer
             if (fileStream != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(fileStream);
-                request.Content = content;
+                request.Content = RequestContent.Create(fileStream);
             }
             return message;
         }
@@ -860,9 +856,7 @@ namespace Azure.AI.FormRecognizer
             if (fileStream != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(fileStream);
-                request.Content = content;
+                request.Content = RequestContent.Create(fileStream);
             }
             return message;
         }

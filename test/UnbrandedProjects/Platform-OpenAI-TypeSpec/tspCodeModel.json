@@ -10761,7 +10761,6 @@
        "BodyType": {
         "$ref": "1415"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -10770,7 +10769,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/audio/transcriptions",
      "RequestMediaTypes": [
@@ -10915,7 +10913,6 @@
        "BodyType": {
         "$ref": "1387"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -10924,7 +10921,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/audio/translations",
      "RequestMediaTypes": [
@@ -11113,7 +11109,6 @@
        "BodyType": {
         "$ref": "1311"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -11122,7 +11117,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/chat/completions",
      "RequestMediaTypes": [
@@ -11312,7 +11306,6 @@
        "BodyType": {
         "$ref": "1087"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -11321,7 +11314,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/fine_tuning/jobs",
      "RequestMediaTypes": [
@@ -11420,7 +11412,6 @@
        "BodyType": {
         "$ref": "1172"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -11429,7 +11420,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/fine_tuning/jobs",
      "BufferResponse": true,
@@ -11503,7 +11493,6 @@
        "BodyType": {
         "$ref": "1087"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -11512,7 +11501,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/fine_tuning/jobs/{fine_tuning_job_id}",
      "BufferResponse": true,
@@ -11631,7 +11619,6 @@
        "BodyType": {
         "$ref": "1185"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -11640,7 +11627,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/fine_tuning/jobs/{fine_tuning_job_id}/events",
      "BufferResponse": true,
@@ -11715,7 +11701,6 @@
        "BodyType": {
         "$ref": "1087"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -11724,7 +11709,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/fine_tuning/jobs/{fine_tuning_job_id}/cancel",
      "BufferResponse": true,
@@ -11866,7 +11850,6 @@
        "BodyType": {
         "$ref": "992"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -11875,7 +11858,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/completions",
      "RequestMediaTypes": [
@@ -12021,7 +12003,6 @@
        "BodyType": {
         "$ref": "852"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -12030,7 +12011,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/edits",
      "RequestMediaTypes": [
@@ -12176,7 +12156,6 @@
        "BodyType": {
         "$ref": "782"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -12185,7 +12164,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/embeddings",
      "RequestMediaTypes": [
@@ -12286,7 +12264,6 @@
        "BodyType": {
         "$ref": "730"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -12295,7 +12272,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/files",
      "BufferResponse": true,
@@ -12392,7 +12368,6 @@
        "BodyType": {
         "$ref": "646"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -12401,7 +12376,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/files",
      "RequestMediaTypes": [
@@ -12479,7 +12453,6 @@
        "BodyType": {
         "$ref": "646"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -12488,7 +12461,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/files/files/{file_id}",
      "BufferResponse": true,
@@ -12563,7 +12535,6 @@
        "BodyType": {
         "$ref": "748"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -12572,7 +12543,6 @@
       }
      ],
      "HttpMethod": "DELETE",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/files/files/{file_id}",
      "BufferResponse": true,
@@ -12651,7 +12621,6 @@
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -12660,7 +12629,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/files/files/{file_id}/content",
      "BufferResponse": true,
@@ -12804,7 +12772,6 @@
        "BodyType": {
         "$ref": "577"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -12813,7 +12780,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/fine-tunes",
      "RequestMediaTypes": [
@@ -12870,7 +12836,6 @@
        "BodyType": {
         "$ref": "712"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -12879,7 +12844,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/fine-tunes",
      "BufferResponse": true,
@@ -12955,7 +12919,6 @@
        "BodyType": {
         "$ref": "577"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -12964,7 +12927,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/fine-tunes/{fine_tune_id}",
      "BufferResponse": true,
@@ -13062,7 +13024,6 @@
        "BodyType": {
         "$ref": "721"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -13071,7 +13032,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/fine-tunes/{fine_tune_id}/events",
      "BufferResponse": true,
@@ -13147,7 +13107,6 @@
        "BodyType": {
         "$ref": "577"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -13156,7 +13115,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/fine-tunes/{fine_tune_id}/cancel",
      "BufferResponse": true,
@@ -13254,7 +13212,6 @@
        "BodyType": {
         "$ref": "476"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -13263,7 +13220,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/models",
      "BufferResponse": true,
@@ -13338,7 +13294,6 @@
        "BodyType": {
         "$ref": "483"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -13347,7 +13302,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/models/{model}",
      "BufferResponse": true,
@@ -13422,7 +13376,6 @@
        "BodyType": {
         "$ref": "503"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -13431,7 +13384,6 @@
       }
      ],
      "HttpMethod": "DELETE",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/models/{model}",
      "BufferResponse": true,
@@ -13574,7 +13526,6 @@
        "BodyType": {
         "$ref": "411"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -13583,7 +13534,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/images/generations",
      "RequestMediaTypes": [
@@ -13683,7 +13633,6 @@
        "BodyType": {
         "$ref": "411"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -13692,7 +13641,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/images/edits",
      "RequestMediaTypes": [
@@ -13792,7 +13740,6 @@
        "BodyType": {
         "$ref": "411"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -13801,7 +13748,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/images/variations",
      "RequestMediaTypes": [
@@ -13947,7 +13893,6 @@
        "BodyType": {
         "$ref": "250"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -13956,7 +13901,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/moderations",
      "RequestMediaTypes": [

@@ -7,19 +7,15 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
-using static System.Net.Mime.MediaTypeNames;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -118,7 +114,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     case { IsFrameworkType: false, Implementation: ModelTypeProvider }:
                         {
-                            BodyMediaType? mediaType = contentType == null ? null : ToMediaType(contentType);
+                            BodyMediaType? mediaType = contentType == null ? null : BodyMediaTypeHelper.FromString(contentType);
                             if (mediaType == BodyMediaType.Multipart)
                             {
                                 return $"{parameter.Name:I}.{Configuration.ApiTypes.ToMultipartRequestContentName}()";
@@ -171,7 +167,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{RequestContentHelperProvider.Instance.FromObject(((ValueExpression)parameter).InvokeToString())}";
             }
 
-            BodyMediaType? mediaType = contentType == null ? null : ToMediaType(contentType);
+            BodyMediaType? mediaType = contentType == null ? null : BodyMediaTypeHelper.FromString(contentType);
             if (parameter.RequestLocation == RequestLocation.Body && mediaType == BodyMediaType.Binary)
             {
                 return $"{parameter.Name:I}";
@@ -183,67 +179,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return $"{RequestContentHelperProvider.Instance.FromObject(parameter)}";
-        }
-
-        // TODO: This is a temporary solution. We will move this part to some common place.
-        // This logic is a twist from https://github.com/Azure/autorest/blob/faf5c1168232ba8a1e8fe02fbc28667c00db8c96/packages/libs/codegen/src/media-types.ts#L53
-        public static BodyMediaType ToMediaType(string contentType)
-        {
-            const string pattern = @"(application|audio|font|example|image|message|model|multipart|text|video|x-(?:[0-9A-Za-z!#$%&'*+.^_`|~-]+))\/([0-9A-Za-z!#$%&'*.^_`|~-]+)\s*(?:\+([0-9A-Za-z!#$%&'*.^_`|~-]+))?\s*(?:;.\s*(\S*))?";
-
-            var matches = Regex.Matches(contentType, pattern);
-            if (matches.Count == 0)
-            {
-                throw new NotSupportedException($"Content type {contentType} is not supported.");
-            }
-
-            var type = matches[0].Groups[1].Value;
-            var subType = matches[0].Groups[2].Value;
-            var suffix = matches[0].Groups[3].Value;
-            var parameter = matches[0].Groups[4].Value;
-
-            var typeSubs = contentType.Split('/');
-            if (typeSubs.Length != 2)
-            {
-                throw new NotSupportedException($"Content type {contentType} is not supported.");
-            }
-
-            if ((subType == "json" || suffix == "json") && (type == "application" || type == "text") && suffix == "" && parameter == "")
-            {
-                return BodyMediaType.Json;
-            }
-
-            if ((subType == "xml" || suffix == "xml") && (type == "application" || type == "text"))
-            {
-                return BodyMediaType.Xml;
-            }
-
-            if (type == "audio" || type == "image" || type == "video" || subType == "octet-stream" || parameter == "serialization=Avro")
-            {
-                return BodyMediaType.Binary;
-            }
-
-            if (type == "application" && subType == "formEncoded")
-            {
-                return BodyMediaType.Form;
-            }
-
-            if (type == "multipart" && subType == "form-data")
-            {
-                return BodyMediaType.Multipart;
-            }
-
-            if (type == "application")
-            {
-                return BodyMediaType.Binary;
-            }
-
-            if (type == "text")
-            {
-                return BodyMediaType.Text;
-            }
-
-            throw new NotSupportedException($"Content type {contentType} is not supported.");
         }
 
         public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)

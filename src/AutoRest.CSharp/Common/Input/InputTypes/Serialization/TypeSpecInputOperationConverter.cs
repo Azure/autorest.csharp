@@ -37,7 +37,6 @@ namespace AutoRest.CSharp.Common.Input
             IReadOnlyList<InputParameter>? parameters = null;
             IReadOnlyList<OperationResponse>? responses = null;
             RequestMethod httpMethod = default;
-            BodyMediaType requestBodyMediaType = default;
             string? uri = null;
             string? path = null;
             string? externalDocsUri = null;
@@ -63,7 +62,6 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadWithConverter(nameof(InputOperation.Parameters), options, ref parameters)
                     || reader.TryReadWithConverter(nameof(InputOperation.Responses), options, ref responses)
                     || reader.TryReadWithConverter(nameof(InputOperation.HttpMethod), options, ref httpMethod)
-                    || reader.TryReadWithConverter(nameof(InputOperation.RequestBodyMediaType), options, ref requestBodyMediaType)
                     || reader.TryReadString(nameof(InputOperation.Uri), ref uri)
                     || reader.TryReadString(nameof(InputOperation.Path), ref path)
                     || reader.TryReadString(nameof(InputOperation.ExternalDocsUrl), ref externalDocsUri)
@@ -94,7 +92,7 @@ namespace AutoRest.CSharp.Common.Input
             parameters = parameters ?? throw new JsonException("InputOperation must have parameters");
             responses = responses ?? throw new JsonException("InputOperation must have responses");
 
-            var inputOperation = new InputOperation(name, resourceName, summary, deprecated, doc, accessibility, parameters, responses, httpMethod, requestBodyMediaType, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, crossLanguageDefinitionId, keepClientDefaultValue, examples)
+            var inputOperation = new InputOperation(name, resourceName, summary, deprecated, doc, accessibility, parameters, responses, httpMethod, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, crossLanguageDefinitionId, keepClientDefaultValue, examples)
             {
                 IsNameChanged = IsNameChanged(crossLanguageDefinitionId, name)
             };

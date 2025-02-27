@@ -823,7 +823,6 @@
        "BodyType": {
         "$ref": "67"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -832,7 +831,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/core/page/page",
      "BufferResponse": true,
@@ -986,7 +984,6 @@
        "BodyType": {
         "$ref": "67"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -995,7 +992,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/azure/core/page/parameters",
      "RequestMediaTypes": [
@@ -1088,7 +1084,6 @@
        "BodyType": {
         "$ref": "48"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1097,7 +1092,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/core/page/custom-page",
      "BufferResponse": true,
@@ -1231,7 +1225,6 @@
        "BodyType": {
         "$ref": "77"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1240,7 +1233,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/core/page/first-item",
      "BufferResponse": true,
@@ -1330,7 +1322,6 @@
        "BodyType": {
         "$ref": "87"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1339,7 +1330,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/core/page/second-item",
      "BufferResponse": true,

@@ -7,6 +7,7 @@
 
 using System;
 using System.IO;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -48,7 +49,16 @@ namespace JsonAsBinary
             if (body != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                request.Content = RequestContent.Create(body);
+                var content = new Utf8JsonRequestContent();
+#if NET6_0_OR_GREATER
+				content.JsonWriter.WriteRawValue(global::System.BinaryData.FromStream(body));
+#else
+                using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(body)))
+                {
+                    JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
+                }
+#endif
+                request.Content = content;
             }
             return message;
         }

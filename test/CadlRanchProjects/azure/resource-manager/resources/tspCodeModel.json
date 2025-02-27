@@ -2365,7 +2365,6 @@
        "BodyType": {
         "$ref": "243"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -2374,7 +2373,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}",
      "BufferResponse": true,
@@ -2578,7 +2576,6 @@
        "BodyType": {
         "$ref": "243"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -2593,7 +2590,6 @@
        "BodyType": {
         "$ref": "243"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "318",
@@ -2629,7 +2625,6 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}",
      "RequestMediaTypes": [
@@ -2646,8 +2641,7 @@
        ],
        "BodyType": {
         "$ref": "243"
-       },
-       "BodyMediaType": "Json"
+       }
       }
      },
      "GenerateProtocolMethod": true,
@@ -2850,7 +2844,6 @@
        "BodyType": {
         "$ref": "243"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -2862,7 +2855,6 @@
        "StatusCodes": [
         202
        ],
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "345",
@@ -2895,7 +2887,6 @@
       }
      ],
      "HttpMethod": "PATCH",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}",
      "RequestMediaTypes": [
@@ -2912,8 +2903,7 @@
        ],
        "BodyType": {
         "$ref": "243"
-       },
-       "BodyMediaType": "Json"
+       }
       }
      },
      "GenerateProtocolMethod": true,
@@ -3067,7 +3057,6 @@
        "StatusCodes": [
         202
        ],
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "367",
@@ -3103,13 +3092,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "DELETE",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}",
      "BufferResponse": true,
@@ -3120,8 +3107,7 @@
        "$id": "373",
        "StatusCodes": [
         204
-       ],
-       "BodyMediaType": "Json"
+       ]
       }
      },
      "GenerateProtocolMethod": true,
@@ -3256,7 +3242,6 @@
        "BodyType": {
         "$ref": "255"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -3265,7 +3250,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Resources/topLevelTrackedResources",
      "BufferResponse": true,
@@ -3384,7 +3368,6 @@
        "BodyType": {
         "$ref": "255"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -3393,7 +3376,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.Resources/topLevelTrackedResources",
      "BufferResponse": true,
@@ -3599,13 +3581,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}/actionSync",
      "RequestMediaTypes": [
@@ -3833,7 +3813,6 @@
        "BodyType": {
         "$ref": "221"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -3842,7 +3821,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}/nestedProxyResources/{nextedProxyResourceName}",
      "BufferResponse": true,
@@ -4068,7 +4046,6 @@
        "BodyType": {
         "$ref": "221"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -4083,7 +4060,6 @@
        "BodyType": {
         "$ref": "221"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "469",
@@ -4119,7 +4095,6 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}/nestedProxyResources/{nextedProxyResourceName}",
      "RequestMediaTypes": [
@@ -4136,8 +4111,7 @@
        ],
        "BodyType": {
         "$ref": "221"
-       },
-       "BodyMediaType": "Json"
+       }
       }
      },
      "GenerateProtocolMethod": true,
@@ -4362,7 +4336,6 @@
        "BodyType": {
         "$ref": "221"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -4374,7 +4347,6 @@
        "StatusCodes": [
         202
        ],
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "498",
@@ -4407,7 +4379,6 @@
       }
      ],
      "HttpMethod": "PATCH",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}/nestedProxyResources/{nextedProxyResourceName}",
      "RequestMediaTypes": [
@@ -4424,8 +4395,7 @@
        ],
        "BodyType": {
         "$ref": "221"
-       },
-       "BodyMediaType": "Json"
+       }
       }
      },
      "GenerateProtocolMethod": true,
@@ -4601,7 +4571,6 @@
        "StatusCodes": [
         202
        ],
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "522",
@@ -4637,13 +4606,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "DELETE",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}/nestedProxyResources/{nextedProxyResourceName}",
      "BufferResponse": true,
@@ -4654,8 +4621,7 @@
        "$id": "528",
        "StatusCodes": [
         204
-       ],
-       "BodyMediaType": "Json"
+       ]
       }
      },
      "GenerateProtocolMethod": true,
@@ -4812,7 +4778,6 @@
        "BodyType": {
         "$ref": "233"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -4821,7 +4786,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}/nestedProxyResources",
      "BufferResponse": true,
@@ -5007,7 +4971,6 @@
        "BodyType": {
         "$ref": "188"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -5016,7 +4979,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Resources/singletonTrackedResources/default",
      "BufferResponse": true,
@@ -5198,7 +5160,6 @@
        "BodyType": {
         "$ref": "188"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -5213,7 +5174,6 @@
        "BodyType": {
         "$ref": "188"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "585",
@@ -5249,7 +5209,6 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Resources/singletonTrackedResources/default",
      "RequestMediaTypes": [
@@ -5266,8 +5225,7 @@
        ],
        "BodyType": {
         "$ref": "188"
-       },
-       "BodyMediaType": "Json"
+       }
       }
      },
      "GenerateProtocolMethod": true,
@@ -5448,7 +5406,6 @@
        "BodyType": {
         "$ref": "188"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -5457,7 +5414,6 @@
       }
      ],
      "HttpMethod": "PATCH",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Resources/singletonTrackedResources/default",
      "RequestMediaTypes": [
@@ -5596,7 +5552,6 @@
        "BodyType": {
         "$ref": "211"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -5605,7 +5560,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Resources/singletonTrackedResources",
      "BufferResponse": true,
@@ -5785,7 +5739,6 @@
        "BodyType": {
         "$ref": "140"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -5794,7 +5747,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/{resourceUri}/providers/Azure.ResourceManager.Resources/extensionsResources/{extensionsResourceName}",
      "BufferResponse": true,
@@ -5969,7 +5921,6 @@
        "BodyType": {
         "$ref": "140"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -5984,7 +5935,6 @@
        "BodyType": {
         "$ref": "140"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "661",
@@ -6020,7 +5970,6 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/{resourceUri}/providers/Azure.ResourceManager.Resources/extensionsResources/{extensionsResourceName}",
      "RequestMediaTypes": [
@@ -6037,8 +5986,7 @@
        ],
        "BodyType": {
         "$ref": "140"
-       },
-       "BodyMediaType": "Json"
+       }
       }
      },
      "GenerateProtocolMethod": true,
@@ -6212,7 +6160,6 @@
        "BodyType": {
         "$ref": "140"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -6221,7 +6168,6 @@
       }
      ],
      "HttpMethod": "PATCH",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/{resourceUri}/providers/Azure.ResourceManager.Resources/extensionsResources/{extensionsResourceName}",
      "RequestMediaTypes": [
@@ -6350,7 +6296,6 @@
        "StatusCodes": [
         200
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       },
@@ -6359,13 +6304,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "DELETE",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/{resourceUri}/providers/Azure.ResourceManager.Resources/extensionsResources/{extensionsResourceName}",
      "BufferResponse": true,
@@ -6472,7 +6415,6 @@
        "BodyType": {
         "$ref": "178"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -6481,7 +6423,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/{resourceUri}/providers/Azure.ResourceManager.Resources/extensionsResources",
      "BufferResponse": true,
@@ -6696,7 +6637,6 @@
        "BodyType": {
         "$ref": "40"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -6705,7 +6645,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.Resources/locations/{location}/locationResources/{locationResourceName}",
      "BufferResponse": true,
@@ -6916,7 +6855,6 @@
        "BodyType": {
         "$ref": "40"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -6931,7 +6869,6 @@
        "BodyType": {
         "$ref": "40"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -6940,7 +6877,6 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.Resources/locations/{location}/locationResources/{locationResourceName}",
      "RequestMediaTypes": [
@@ -7154,7 +7090,6 @@
        "BodyType": {
         "$ref": "40"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -7163,7 +7098,6 @@
       }
      ],
      "HttpMethod": "PATCH",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.Resources/locations/{location}/locationResources/{locationResourceName}",
      "RequestMediaTypes": [
@@ -7328,7 +7262,6 @@
        "StatusCodes": [
         200
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       },
@@ -7337,13 +7270,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "DELETE",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.Resources/locations/{location}/locationResources/{locationResourceName}",
      "BufferResponse": true,
@@ -7486,7 +7417,6 @@
        "BodyType": {
         "$ref": "130"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -7495,7 +7425,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.Resources/locations/{location}/locationResources",
      "BufferResponse": true,

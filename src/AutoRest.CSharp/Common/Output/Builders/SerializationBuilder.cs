@@ -104,6 +104,7 @@ namespace AutoRest.CSharp.Output.Builders
         {
             BodyMediaType.Xml => BuildXmlElementSerialization(inputType, type, null, true),
             BodyMediaType.Json => BuildJsonSerialization(inputType, type, false, serializationFormat ?? GetSerializationFormat(inputType, type)),
+            BodyMediaType.Binary => new JsonValueSerialization(type, serializationFormat ?? GetSerializationFormat(inputType, type), type.IsNullable),
             _ => throw new NotImplementedException(bodyMediaType.ToString())
         };
 

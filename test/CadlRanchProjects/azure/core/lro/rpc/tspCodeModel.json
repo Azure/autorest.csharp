@@ -790,7 +790,6 @@
        "BodyType": {
         "$ref": "28"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "98",
@@ -820,7 +819,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/azure/core/lro/rpc/generations:submit",
      "RequestMediaTypes": [
@@ -837,8 +835,7 @@
        ],
        "BodyType": {
         "$ref": "70"
-       },
-       "BodyMediaType": "Json"
+       }
       },
       "ResultPath": "result"
      },

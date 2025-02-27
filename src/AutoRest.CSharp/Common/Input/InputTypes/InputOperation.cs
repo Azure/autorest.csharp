@@ -23,7 +23,6 @@ internal record InputOperation
     IReadOnlyList<InputParameter> parameters,
     IReadOnlyList<OperationResponse> responses,
     RequestMethod httpMethod,
-    BodyMediaType requestBodyMediaType,
     string uri,
     string path,
     string? externalDocsUrl,
@@ -47,7 +46,6 @@ internal record InputOperation
         Parameters = parameters;
         Responses = responses;
         HttpMethod = httpMethod;
-        RequestBodyMediaType = requestBodyMediaType;
         Uri = uri;
         Path = path;
         ExternalDocsUrl = externalDocsUrl;
@@ -72,7 +70,6 @@ internal record InputOperation
         parameters: Array.Empty<InputParameter>(),
         responses: Array.Empty<OperationResponse>(),
         httpMethod: RequestMethod.Get,
-        requestBodyMediaType: BodyMediaType.None,
         uri: string.Empty,
         path: string.Empty,
         externalDocsUrl: null,
@@ -100,7 +97,6 @@ internal record InputOperation
             operation.Parameters.Where(p => !p.IsApiVersion).ToList(),
             operation.Responses,
             operation.HttpMethod,
-            operation.RequestBodyMediaType,
             operation.Uri,
             operation.Path,
             operation.ExternalDocsUrl,
@@ -144,7 +140,6 @@ internal record InputOperation
     public IReadOnlyList<InputParameter> Parameters { get; init; }
     public IReadOnlyList<OperationResponse> Responses { get; }
     public RequestMethod HttpMethod { get; }
-    public BodyMediaType RequestBodyMediaType { get; }
     public string Uri { get; init; }
     public string Path { get; }
     public string? ExternalDocsUrl { get; }

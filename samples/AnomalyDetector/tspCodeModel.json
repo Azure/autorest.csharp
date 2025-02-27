@@ -4366,7 +4366,6 @@
        "BodyType": {
         "$ref": "424"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -4375,7 +4374,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/timeseries/entire/detect",
      "RequestMediaTypes": [
@@ -8586,7 +8584,6 @@
        "BodyType": {
         "$ref": "472"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -8595,7 +8592,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/timeseries/last/detect",
      "RequestMediaTypes": [
@@ -10127,7 +10123,6 @@
        "BodyType": {
         "$ref": "533"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -10136,7 +10131,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/timeseries/changepoint/detect",
      "RequestMediaTypes": [
@@ -21214,7 +21208,6 @@
        "BodyType": {
         "$ref": "108"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -21223,7 +21216,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/detect-batch/{resultId}",
      "BufferResponse": true,
@@ -21890,7 +21882,6 @@
        "BodyType": {
         "$ref": "314"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "3022",
@@ -21913,7 +21904,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/models",
      "RequestMediaTypes": [
@@ -22288,7 +22278,6 @@
        "BodyType": {
         "$ref": "333"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -22297,7 +22286,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/models",
      "BufferResponse": true,
@@ -23443,13 +23431,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "DELETE",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/models/{modelId}",
      "BufferResponse": true,
@@ -23559,7 +23545,6 @@
        "BodyType": {
         "$ref": "314"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -23568,7 +23553,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/models/{modelId}",
      "BufferResponse": true,
@@ -24701,7 +24685,6 @@
        "BodyType": {
         "$ref": "108"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "3381",
@@ -24737,7 +24720,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/models/{modelId}:detect-batch",
      "RequestMediaTypes": [
@@ -25052,7 +25034,6 @@
        "BodyType": {
         "$ref": "374"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -25061,7 +25042,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/models/{modelId}:detect-last",
      "RequestMediaTypes": [

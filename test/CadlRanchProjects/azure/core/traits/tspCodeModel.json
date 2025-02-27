@@ -508,7 +508,6 @@
        "BodyType": {
         "$ref": "12"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "58",
@@ -563,7 +562,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/core/traits/user/{id}",
      "BufferResponse": true,
@@ -768,7 +766,6 @@
        "BodyType": {
         "$ref": "26"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "85",
@@ -787,7 +784,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/azure/core/traits/user/{id}:repeatableAction",
      "RequestMediaTypes": [

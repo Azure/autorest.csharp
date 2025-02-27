@@ -209,8 +209,8 @@ namespace AutoRest.CSharp.Output.Models
 
             var body = bodyParameter != null
                 ? new RequestContentRequestBody(bodyParameter)
-                : operation.RequestBodyMediaType != BodyMediaType.None
-                    ? BuildRequestBody(requestParts, operation.RequestBodyMediaType, library, typeFactory)
+                : operation.RequestMediaTypes != null && operation.RequestMediaTypes.Count > 0
+                    ? BuildRequestBody(requestParts, BodyMediaTypeHelper.DetermineBodyMediaType(operation.RequestMediaTypes), library, typeFactory)
                     : null;
 
             return new Request(
@@ -587,4 +587,5 @@ namespace AutoRest.CSharp.Output.Models
     }
 
     internal record RequestPartSource(string NameInRequest, InputParameter? InputParameter, ReferenceOrConstant Reference, SerializationFormat SerializationFormat);
+
 }

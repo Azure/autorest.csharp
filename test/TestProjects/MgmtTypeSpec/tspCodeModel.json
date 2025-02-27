@@ -2920,7 +2920,6 @@
        "BodyType": {
         "$ref": "321"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -2929,7 +2928,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/providers/MgmtTypeSpec/operations",
      "BufferResponse": true,
@@ -3115,7 +3113,6 @@
        "BodyType": {
         "$ref": "213"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -3124,7 +3121,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/privateLinkResources",
      "BufferResponse": true,
@@ -3330,7 +3326,6 @@
        "StatusCodes": [
         202
        ],
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "424",
@@ -3369,7 +3364,6 @@
        "BodyType": {
         "$ref": "282"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -3378,7 +3372,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/privateLinkResources/{privateLinkResourceName}/start",
      "RequestMediaTypes": [
@@ -3395,8 +3388,7 @@
        ],
        "BodyType": {
         "$ref": "282"
-       },
-       "BodyMediaType": "Json"
+       }
       }
      },
      "GenerateProtocolMethod": true,
@@ -3644,7 +3636,6 @@
        "BodyType": {
         "$ref": "52"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -3659,7 +3650,6 @@
        "BodyType": {
         "$ref": "52"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "458",
@@ -3695,7 +3685,6 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/foos/{fooName}",
      "RequestMediaTypes": [
@@ -3712,8 +3701,7 @@
        ],
        "BodyType": {
         "$ref": "52"
-       },
-       "BodyMediaType": "Json"
+       }
       }
      },
      "GenerateProtocolMethod": true,
@@ -4082,7 +4070,6 @@
        "BodyType": {
         "$ref": "52"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -4091,7 +4078,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/foos/{fooName}",
      "BufferResponse": true,
@@ -4368,7 +4354,6 @@
        "StatusCodes": [
         202
        ],
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "543",
@@ -4404,13 +4389,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "DELETE",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/foos/{fooName}",
      "BufferResponse": true,
@@ -4421,8 +4404,7 @@
        "$id": "549",
        "StatusCodes": [
         204
-       ],
-       "BodyMediaType": "Json"
+       ]
       }
      },
      "GenerateProtocolMethod": true,
@@ -4557,7 +4539,6 @@
        "BodyType": {
         "$ref": "203"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -4566,7 +4547,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/foos",
      "BufferResponse": true,
