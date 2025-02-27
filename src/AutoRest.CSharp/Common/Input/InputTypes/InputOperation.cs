@@ -23,6 +23,7 @@ internal record InputOperation
     IReadOnlyList<InputParameter> parameters,
     IReadOnlyList<OperationResponse> responses,
     RequestMethod httpMethod,
+    // Obsolete, for swagger input only
     BodyMediaType? requestBodyMediaType,
     string uri,
     string path,
@@ -47,7 +48,7 @@ internal record InputOperation
         Parameters = parameters;
         Responses = responses;
         HttpMethod = httpMethod;
-        RequestBodyMediaType = requestBodyMediaType;
+        _requestBodyMediaType = requestBodyMediaType;
         Uri = uri;
         Path = path;
         ExternalDocsUrl = externalDocsUrl;
@@ -119,6 +120,8 @@ internal record InputOperation
 
     public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
 
+    private BodyMediaType? _requestBodyMediaType;
+
     private IReadOnlyList<InputOperationExample>? _examples;
     public IReadOnlyList<InputOperationExample> Examples => _examples ??= EnsureExamples();
 
@@ -144,7 +147,7 @@ internal record InputOperation
     public IReadOnlyList<InputParameter> Parameters { get; init; }
     public IReadOnlyList<OperationResponse> Responses { get; }
     public RequestMethod HttpMethod { get; }
-    public BodyMediaType? RequestBodyMediaType { get; }
+    public BodyMediaType RequestBodyMediaType => _requestBodyMediaType ??= (RequestMediaTypes != null && RequestMediaTypes.Count > 0 ? BodyMediaTypeHelper.DetermineBodyMediaType(RequestMediaTypes) : BodyMediaType.None);
     public string Uri { get; init; }
     public string Path { get; }
     public string? ExternalDocsUrl { get; }

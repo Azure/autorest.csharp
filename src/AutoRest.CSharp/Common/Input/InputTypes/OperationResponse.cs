@@ -10,6 +10,7 @@ internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? Bod
 {
     public OperationResponse() : this(StatusCodes: Array.Empty<int>(), BodyType: null, Headers: Array.Empty<OperationResponseHeader>(), IsErrorResponse: false, ContentTypes: Array.Empty<string>()) { }
 
+    [Obsolete("For swagger input only")]
     public OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType, IReadOnlyList<OperationResponseHeader> Headers, bool IsErrorResponse, IReadOnlyList<string> ContentTypes) : this(StatusCodes, BodyType, Headers, IsErrorResponse, ContentTypes)
     {
         _bodyMediaType = BodyMediaType;
