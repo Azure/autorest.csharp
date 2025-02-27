@@ -36,7 +36,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "ParametersCadl",
+   "namespace": "ParametersCadl",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -48,7 +48,7 @@
    "$id": "6",
    "kind": "model",
    "name": "Result",
-   "clientNamespace": "ParametersCadl.ParameterOrders",
+   "namespace": "ParametersCadl.ParameterOrders",
    "crossLanguageDefinitionId": "ParametersCadl.ParameterOrders.Result",
    "usage": "Output,Json",
    "decorators": [],
@@ -86,7 +86,7 @@
   {
    "$id": "11",
    "Name": "ParametersCadlClient",
-   "ClientNamespace": "ParametersCadl",
+   "Namespace": "ParametersCadl",
    "Operations": [],
    "Protocol": {
     "$id": "12"
@@ -119,7 +119,7 @@
   {
    "$id": "15",
    "Name": "ParameterOrders",
-   "ClientNamespace": "ParametersCadl.ParameterOrders",
+   "Namespace": "ParametersCadl.ParameterOrders",
    "Operations": [
     {
      "$id": "16",

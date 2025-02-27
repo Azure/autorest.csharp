@@ -37,7 +37,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "_Specs_.Azure.Core.Lro.Rpc",
+   "namespace": "_Specs_.Azure.Core.Lro.Rpc",
    "doc": "The API version.",
    "isFixed": true,
    "isFlags": false,
@@ -148,7 +148,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "Azure.Core.Foundations",
+   "namespace": "Azure.Core.Foundations",
    "doc": "Enum describing allowed operation states.",
    "isFixed": false,
    "isFlags": false,
@@ -161,7 +161,7 @@
    "$id": "18",
    "kind": "model",
    "name": "GenerationOptions",
-   "clientNamespace": "_Specs_.Azure.Core.Lro.Rpc",
+   "namespace": "_Specs_.Azure.Core.Lro.Rpc",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.GenerationOptions",
    "usage": "Input,Json",
    "doc": "Options for the generation.",
@@ -200,7 +200,7 @@
    "$id": "23",
    "kind": "model",
    "name": "GenerationResult",
-   "clientNamespace": "_Specs_.Azure.Core.Lro.Rpc",
+   "namespace": "_Specs_.Azure.Core.Lro.Rpc",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.GenerationResult",
    "usage": "Output,Json,LroInitial,LroPolling,LroFinalEnvelope",
    "doc": "Result of the generation.",
@@ -239,7 +239,7 @@
    "$id": "28",
    "kind": "model",
    "name": "ResourceOperationStatusGenerationResponseGenerationResultError",
-   "clientNamespace": "Azure.Core",
+   "namespace": "Azure.Core",
    "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
    "usage": "Json,LroInitial",
    "doc": "Provides status details for long running operations.",
@@ -305,7 +305,7 @@
       "$id": "37",
       "kind": "model",
       "name": "Error",
-      "clientNamespace": "Azure.Core.Foundations",
+      "namespace": "Azure.Core.Foundations",
       "crossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "usage": "Json,Exception,LroInitial,LroPolling,LroFinalEnvelope",
       "doc": "The error object.",
@@ -432,7 +432,7 @@
          "$id": "55",
          "kind": "model",
          "name": "InnerError",
-         "clientNamespace": "Azure.Core.Foundations",
+         "namespace": "Azure.Core.Foundations",
          "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "usage": "Json,Exception,LroInitial,LroPolling,LroFinalEnvelope",
          "doc": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
@@ -555,7 +555,7 @@
    "$id": "70",
    "kind": "model",
    "name": "OperationStatusGenerationResultError",
-   "clientNamespace": "Azure.Core.Foundations",
+   "namespace": "Azure.Core.Foundations",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "usage": "LroPolling,LroFinalEnvelope",
    "doc": "Provides status details for long running operations.",
@@ -664,7 +664,7 @@
   {
    "$id": "84",
    "Name": "RpcClient",
-   "ClientNamespace": "_Specs_.Azure.Core.Lro.Rpc",
+   "Namespace": "_Specs_.Azure.Core.Lro.Rpc",
    "Doc": "Illustrates bodies templated with Azure Core with long-running RPC operation",
    "Operations": [
     {

@@ -53,7 +53,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "CustomizationsInTsp",
+   "namespace": "CustomizationsInTsp",
    "doc": "Extensible enum to customize operator",
    "isFixed": false,
    "isFlags": false,
@@ -125,7 +125,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "CustomizationsInTsp",
+   "namespace": "CustomizationsInTsp",
    "doc": "Renamed enum (original name: EnumToRename)",
    "isFixed": true,
    "isFlags": false,
@@ -197,7 +197,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "CustomizationsInTsp",
+   "namespace": "CustomizationsInTsp",
    "doc": "Enum with renamed value (original name: ValueToRename)",
    "isFixed": true,
    "isFlags": false,
@@ -269,7 +269,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "CustomizationsInTsp",
+   "namespace": "CustomizationsInTsp",
    "doc": "Extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -324,7 +324,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "CustomizationsInTsp",
+   "namespace": "CustomizationsInTsp",
    "doc": "A normal enum",
    "isFixed": false,
    "isFlags": false,
@@ -337,7 +337,7 @@
    "$id": "38",
    "kind": "model",
    "name": "RootModel",
-   "clientNamespace": "CustomizationsInTsp",
+   "namespace": "CustomizationsInTsp",
    "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel",
    "usage": "Input,Output,Json",
    "doc": "Root RoundTrip model to reference all other types to ensure generation",
@@ -376,7 +376,7 @@
       "$id": "43",
       "kind": "model",
       "name": "ModelToMakeInternal",
-      "clientNamespace": "CustomizationsInTsp",
+      "namespace": "CustomizationsInTsp",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToMakeInternal",
       "usage": "Input,Output,Json",
       "doc": "Public model made internal",
@@ -435,7 +435,7 @@
       "$id": "51",
       "kind": "model",
       "name": "ModelToRename",
-      "clientNamespace": "CustomizationsInTsp",
+      "namespace": "CustomizationsInTsp",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToRename",
       "usage": "Input,Output,Spread,Json",
       "doc": "Renamed model (original name: ModelToRename)",
@@ -521,7 +521,7 @@
       "$id": "63",
       "kind": "model",
       "name": "ModelToChangeNamespace",
-      "clientNamespace": "CustomizationsInTsp",
+      "namespace": "CustomizationsInTsp",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToChangeNamespace",
       "usage": "Input,Output,Json",
       "doc": "Model moved into custom namespace",
@@ -580,7 +580,7 @@
       "$id": "71",
       "kind": "model",
       "name": "ModelWithCustomizedProperties",
-      "clientNamespace": "CustomizationsInTsp",
+      "namespace": "CustomizationsInTsp",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties",
       "usage": "Input,Output,Json",
       "doc": "Model with customized properties",
@@ -1061,7 +1061,7 @@
           "crossLanguageDefinitionId": "TypeSpec.Array",
           "decorators": []
          },
-         "clientNamespace": ""
+         "namespace": ""
         },
         "optional": false,
         "readOnly": false,
@@ -1100,7 +1100,7 @@
           "crossLanguageDefinitionId": "TypeSpec.Array",
           "decorators": []
          },
-         "clientNamespace": ""
+         "namespace": ""
         },
         "optional": true,
         "readOnly": false,
@@ -1207,7 +1207,7 @@
           "crossLanguageDefinitionId": "TypeSpec.Array",
           "decorators": []
          },
-         "clientNamespace": ""
+         "namespace": ""
         },
         "optional": false,
         "readOnly": true,
@@ -1246,7 +1246,7 @@
           "crossLanguageDefinitionId": "TypeSpec.Array",
           "decorators": []
          },
-         "clientNamespace": ""
+         "namespace": ""
         },
         "optional": true,
         "readOnly": true,
@@ -1357,7 +1357,7 @@
       "$id": "185",
       "kind": "model",
       "name": "ModelToAddAdditionalSerializableProperty",
-      "clientNamespace": "CustomizationsInTsp",
+      "namespace": "CustomizationsInTsp",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToAddAdditionalSerializableProperty",
       "usage": "Input,Output,Json",
       "doc": "Model to add additional serializable property",
@@ -1442,7 +1442,7 @@
       "$id": "196",
       "kind": "model",
       "name": "ModelStruct",
-      "clientNamespace": "CustomizationsInTsp",
+      "namespace": "CustomizationsInTsp",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct",
       "usage": "Input,Output,Json",
       "doc": "Model to make to a struct",
@@ -1570,7 +1570,7 @@
   {
    "$id": "211",
    "Name": "CustomizationsInTspClient",
-   "ClientNamespace": "CustomizationsInTsp",
+   "Namespace": "CustomizationsInTsp",
    "Doc": "CADL project to test various types of models.",
    "Operations": [
     {
