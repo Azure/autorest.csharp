@@ -30,7 +30,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "doc": "The Thing_requiredLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -64,7 +64,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "doc": "The Thing_requiredLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -98,7 +98,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "doc": "The Thing_requiredLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -132,7 +132,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "doc": "The Thing_optionalLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -166,7 +166,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "doc": "The Thing_optionalLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -200,7 +200,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "doc": "The Thing_optionalLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -272,7 +272,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "doc": "Simple enum",
    "isFixed": true,
    "isFlags": false,
@@ -344,7 +344,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "doc": "Extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -416,7 +416,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "doc": "Int based extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -488,7 +488,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "doc": "Float based extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -560,7 +560,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "doc": "float fixed enum",
    "isFixed": true,
    "isFlags": false,
@@ -632,7 +632,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "doc": "int fixed enum",
    "isFixed": true,
    "isFlags": false,
@@ -772,7 +772,7 @@
      "decorators": []
     }
    ],
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "isFixed": false,
    "isFlags": false,
    "usage": "None",
@@ -784,7 +784,7 @@
    "$id": "84",
    "kind": "model",
    "name": "Thing",
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "crossLanguageDefinitionId": "NewProjectTypeSpec.Thing",
    "usage": "Input,Output,Spread,Json",
    "doc": "A model with a few properties of literal types",
@@ -857,7 +857,7 @@
         "decorators": []
        }
       ],
-      "clientNamespace": "",
+      "namespace": "",
       "decorators": []
      },
      "optional": false,
@@ -1147,7 +1147,7 @@
    "$id": "135",
    "kind": "model",
    "name": "Friend",
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "crossLanguageDefinitionId": "NewProjectTypeSpec.NotFriend",
    "usage": "Output,Spread,Json",
    "doc": "this is not a friendly model but with a friendly name",
@@ -1186,7 +1186,7 @@
    "$id": "140",
    "kind": "model",
    "name": "RoundTripModel",
-   "clientNamespace": "NewProjectTypeSpec",
+   "namespace": "NewProjectTypeSpec",
    "crossLanguageDefinitionId": "NewProjectTypeSpec.RoundTripModel",
    "usage": "Input,Output,Json",
    "doc": "this is a roundtrip model",
@@ -1786,7 +1786,7 @@
   {
    "$id": "224",
    "Name": "NewProjectTypeSpecClient",
-   "ClientNamespace": "NewProjectTypeSpec",
+   "Namespace": "NewProjectTypeSpec",
    "Doc": "This is a sample typespec project.",
    "Operations": [
     {
@@ -2360,7 +2360,7 @@
   {
    "$id": "273",
    "Name": "Hello",
-   "ClientNamespace": "NewProjectTypeSpec.Hello",
+   "Namespace": "NewProjectTypeSpec.Hello",
    "Operations": [],
    "Protocol": {
     "$id": "274"
@@ -2393,7 +2393,7 @@
   {
    "$id": "277",
    "Name": "HelloDemo",
-   "ClientNamespace": "NewProjectTypeSpec.Hello.Demo",
+   "Namespace": "NewProjectTypeSpec.Hello.Demo",
    "Doc": "Hello world service",
    "Operations": [
     {
@@ -2553,7 +2553,7 @@
   {
    "$id": "292",
    "Name": "HelloDemo2",
-   "ClientNamespace": "NewProjectTypeSpec.Hello.Demo2",
+   "Namespace": "NewProjectTypeSpec.Hello.Demo2",
    "Operations": [
     {
      "$id": "293",
@@ -3143,7 +3143,7 @@
   {
    "$id": "345",
    "Name": "EnumTest",
-   "ClientNamespace": "NewProjectTypeSpec.EnumTest",
+   "Namespace": "NewProjectTypeSpec.EnumTest",
    "Operations": [
     {
      "$id": "346",
@@ -3254,7 +3254,7 @@
   {
    "$id": "355",
    "Name": "ProtocolAndConvenient",
-   "ClientNamespace": "NewProjectTypeSpec.ProtocolAndConvenient",
+   "Namespace": "NewProjectTypeSpec.ProtocolAndConvenient",
    "Operations": [
     {
      "$id": "356",

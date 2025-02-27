@@ -681,25 +681,25 @@ namespace OpenAI.Models
         /// content filters.
         /// </param>
         /// <returns> A new <see cref="Models.CreateCompletionResponseChoice"/> instance for mocking. </returns>
-        public static CreateCompletionResponseChoice CreateCompletionResponseChoice(long index = default, string text = null, CreateCompletionResponseChoiceLogprobs logprobs = null, CreateCompletionResponseChoiceFinishReason finishReason = default)
+        public static CreateCompletionResponseChoice CreateCompletionResponseChoice(long index = default, string text = null, CreateCompletionResponseChoiceLogprobs1 logprobs = null, CreateCompletionResponseChoiceFinishReason finishReason = default)
         {
             return new CreateCompletionResponseChoice(index, text, logprobs, finishReason, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.CreateCompletionResponseChoiceLogprobs"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.CreateCompletionResponseChoiceLogprobs1"/>. </summary>
         /// <param name="tokens"></param>
         /// <param name="tokenLogprobs"></param>
         /// <param name="topLogprobs"></param>
         /// <param name="textOffset"></param>
-        /// <returns> A new <see cref="Models.CreateCompletionResponseChoiceLogprobs"/> instance for mocking. </returns>
-        public static CreateCompletionResponseChoiceLogprobs CreateCompletionResponseChoiceLogprobs(IEnumerable<string> tokens = null, IEnumerable<double> tokenLogprobs = null, IEnumerable<IDictionary<string, long>> topLogprobs = null, IEnumerable<long> textOffset = null)
+        /// <returns> A new <see cref="Models.CreateCompletionResponseChoiceLogprobs1"/> instance for mocking. </returns>
+        public static CreateCompletionResponseChoiceLogprobs1 CreateCompletionResponseChoiceLogprobs1(IEnumerable<string> tokens = null, IEnumerable<double> tokenLogprobs = null, IEnumerable<IDictionary<string, long>> topLogprobs = null, IEnumerable<long> textOffset = null)
         {
             tokens ??= new List<string>();
             tokenLogprobs ??= new List<double>();
             topLogprobs ??= new List<IDictionary<string, long>>();
             textOffset ??= new List<long>();
 
-            return new CreateCompletionResponseChoiceLogprobs(tokens?.ToList(), tokenLogprobs?.ToList(), topLogprobs?.ToList(), textOffset?.ToList(), serializedAdditionalRawData: null);
+            return new CreateCompletionResponseChoiceLogprobs1(tokens?.ToList(), tokenLogprobs?.ToList(), topLogprobs?.ToList(), textOffset?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateFineTuningJobRequest"/>. </summary>
@@ -791,7 +791,7 @@ namespace OpenAI.Models
         /// failure.
         /// </param>
         /// <returns> A new <see cref="Models.FineTuningJob"/> instance for mocking. </returns>
-        public static FineTuningJob FineTuningJob(string id = null, FineTuningJobObject @object = default, DateTimeOffset createdAt = default, DateTimeOffset? finishedAt = null, string model = null, string fineTunedModel = null, string organizationId = null, FineTuningJobStatus status = default, FineTuningJobHyperparameters hyperparameters = null, string trainingFile = null, string validationFile = null, IEnumerable<string> resultFiles = null, long? trainedTokens = null, FineTuningJobError error = null)
+        public static FineTuningJob FineTuningJob(string id = null, FineTuningJobObject @object = default, DateTimeOffset createdAt = default, DateTimeOffset? finishedAt = null, string model = null, string fineTunedModel = null, string organizationId = null, FineTuningJobStatus status = default, FineTuningJobHyperparameters hyperparameters = null, string trainingFile = null, string validationFile = null, IEnumerable<string> resultFiles = null, long? trainedTokens = null, FineTuningJobError1 error = null)
         {
             resultFiles ??= new List<string>();
 
@@ -827,17 +827,17 @@ namespace OpenAI.Models
             return new FineTuningJobHyperparameters(nEpochs, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.FineTuningJobError"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.FineTuningJobError1"/>. </summary>
         /// <param name="message"> A human-readable error message. </param>
         /// <param name="code"> A machine-readable error code. </param>
         /// <param name="param">
         /// The parameter that was invalid, usually `training_file` or `validation_file`. This field
         /// will be null if the failure was not parameter-specific.
         /// </param>
-        /// <returns> A new <see cref="Models.FineTuningJobError"/> instance for mocking. </returns>
-        public static FineTuningJobError FineTuningJobError(string message = null, string code = null, string param = null)
+        /// <returns> A new <see cref="Models.FineTuningJobError1"/> instance for mocking. </returns>
+        public static FineTuningJobError1 FineTuningJobError1(string message = null, string code = null, string param = null)
         {
-            return new FineTuningJobError(message, code, param, serializedAdditionalRawData: null);
+            return new FineTuningJobError1(message, code, param, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListPaginatedFineTuningJobsResponse"/>. </summary>

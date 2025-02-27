@@ -8,8 +8,8 @@ using System.Linq;
 
 namespace OpenAI.Models
 {
-    /// <summary> The CreateCompletionResponseChoiceLogprobs. </summary>
-    public partial class CreateCompletionResponseChoiceLogprobs
+    /// <summary> The CreateCompletionResponseChoiceLogprobs1. </summary>
+    public partial class CreateCompletionResponseChoiceLogprobs1
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -42,13 +42,13 @@ namespace OpenAI.Models
         /// </para>
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
-        /// <summary> Initializes a new instance of <see cref="CreateCompletionResponseChoiceLogprobs"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateCompletionResponseChoiceLogprobs1"/>. </summary>
         /// <param name="tokens"></param>
         /// <param name="tokenLogprobs"></param>
         /// <param name="topLogprobs"></param>
         /// <param name="textOffset"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="tokens"/>, <paramref name="tokenLogprobs"/>, <paramref name="topLogprobs"/> or <paramref name="textOffset"/> is null. </exception>
-        internal CreateCompletionResponseChoiceLogprobs(IEnumerable<string> tokens, IEnumerable<double> tokenLogprobs, IEnumerable<IDictionary<string, long>> topLogprobs, IEnumerable<long> textOffset)
+        internal CreateCompletionResponseChoiceLogprobs1(IEnumerable<string> tokens, IEnumerable<double> tokenLogprobs, IEnumerable<IDictionary<string, long>> topLogprobs, IEnumerable<long> textOffset)
         {
             Argument.AssertNotNull(tokens, nameof(tokens));
             Argument.AssertNotNull(tokenLogprobs, nameof(tokenLogprobs));
@@ -61,13 +61,13 @@ namespace OpenAI.Models
             TextOffset = textOffset.ToList();
         }
 
-        /// <summary> Initializes a new instance of <see cref="CreateCompletionResponseChoiceLogprobs"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateCompletionResponseChoiceLogprobs1"/>. </summary>
         /// <param name="tokens"></param>
         /// <param name="tokenLogprobs"></param>
         /// <param name="topLogprobs"></param>
         /// <param name="textOffset"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CreateCompletionResponseChoiceLogprobs(IReadOnlyList<string> tokens, IReadOnlyList<double> tokenLogprobs, IReadOnlyList<IDictionary<string, long>> topLogprobs, IReadOnlyList<long> textOffset, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CreateCompletionResponseChoiceLogprobs1(IReadOnlyList<string> tokens, IReadOnlyList<double> tokenLogprobs, IReadOnlyList<IDictionary<string, long>> topLogprobs, IReadOnlyList<long> textOffset, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Tokens = tokens;
             TokenLogprobs = tokenLogprobs;
@@ -76,8 +76,8 @@ namespace OpenAI.Models
             SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="CreateCompletionResponseChoiceLogprobs"/> for deserialization. </summary>
-        internal CreateCompletionResponseChoiceLogprobs()
+        /// <summary> Initializes a new instance of <see cref="CreateCompletionResponseChoiceLogprobs1"/> for deserialization. </summary>
+        internal CreateCompletionResponseChoiceLogprobs1()
         {
         }
 

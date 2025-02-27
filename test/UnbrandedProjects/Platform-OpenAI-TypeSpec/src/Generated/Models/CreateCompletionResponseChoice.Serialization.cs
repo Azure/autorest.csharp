@@ -99,7 +99,7 @@ namespace OpenAI.Models
             }
             long index = default;
             string text = default;
-            CreateCompletionResponseChoiceLogprobs logprobs = default;
+            CreateCompletionResponseChoiceLogprobs1 logprobs = default;
             CreateCompletionResponseChoiceFinishReason finishReason = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
@@ -122,7 +122,7 @@ namespace OpenAI.Models
                         logprobs = null;
                         continue;
                     }
-                    logprobs = CreateCompletionResponseChoiceLogprobs.DeserializeCreateCompletionResponseChoiceLogprobs(property.Value, options);
+                    logprobs = CreateCompletionResponseChoiceLogprobs1.DeserializeCreateCompletionResponseChoiceLogprobs1(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("finish_reason"u8))
