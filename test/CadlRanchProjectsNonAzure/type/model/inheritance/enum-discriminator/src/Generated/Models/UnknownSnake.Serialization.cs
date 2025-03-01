@@ -98,7 +98,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeSnake(document.RootElement, options);
                     }
                 default:
@@ -112,7 +112,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator.Models
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static new UnknownSnake FromResponse(PipelineResponse response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeUnknownSnake(document.RootElement);
         }
 

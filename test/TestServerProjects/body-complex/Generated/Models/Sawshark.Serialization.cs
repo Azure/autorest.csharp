@@ -164,7 +164,7 @@ namespace body_complex.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeSawshark(document.RootElement, options);
                     }
                 default:
@@ -178,7 +178,7 @@ namespace body_complex.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Sawshark FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeSawshark(document.RootElement);
         }
 

@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.Text.Json;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,16 +25,14 @@ namespace AzureSample.ResourceManager.Sample
 
         VirtualMachineScaleSetVirtualMachineExtensionResource IOperationSource<VirtualMachineScaleSetVirtualMachineExtensionResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
-            var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
+            var data = ModelReaderWriter.Read<VirtualMachineExtensionData>(response.Content);
             return new VirtualMachineScaleSetVirtualMachineExtensionResource(_client, data);
         }
 
         async ValueTask<VirtualMachineScaleSetVirtualMachineExtensionResource> IOperationSource<VirtualMachineScaleSetVirtualMachineExtensionResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
-            return new VirtualMachineScaleSetVirtualMachineExtensionResource(_client, data);
+            var data = ModelReaderWriter.Read<VirtualMachineExtensionData>(response.Content);
+            return await Task.FromResult(new VirtualMachineScaleSetVirtualMachineExtensionResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

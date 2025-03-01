@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -137,7 +137,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var responseVariable = new VariableReference(Configuration.ApiTypes.ResponseType, $"{Configuration.ApiTypes.ResponseParameterName}");
             using (_writer.Scope($"{_opSource.ReturnType} {_opSource.Interface}.CreateResult({Configuration.ApiTypes.ResponseType} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                BuildCreateResultBody(new ResponseExpression(responseVariable).ContentStream, false).AsStatement().Write(_writer);
+                BuildCreateResultBody(responseVariable, new ResponseExpression(responseVariable).ContentStream, false).AsStatement().Write(_writer);
             }
         }
 
@@ -146,19 +146,28 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var responseVariable = new VariableReference(Configuration.ApiTypes.ResponseType, $"{Configuration.ApiTypes.ResponseParameterName}");
             using (_writer.Scope($"async {new CSharpType(typeof(ValueTask<>), _opSource.ReturnType)} {_opSource.Interface}.CreateResultAsync({Configuration.ApiTypes.ResponseType} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                BuildCreateResultBody(new ResponseExpression(responseVariable).ContentStream, true).AsStatement().Write(_writer);
+                BuildCreateResultBody(responseVariable, new ResponseExpression(responseVariable).ContentStream, true).AsStatement().Write(_writer);
             }
         }
 
-        private IEnumerable<MethodBodyStatement> BuildCreateResultBody(StreamExpression stream, bool async)
+        private IEnumerable<MethodBodyStatement> BuildCreateResultBody(VariableReference responseVariable, StreamExpression stream, bool async)
         {
             if (_opSource.IsReturningResource)
             {
                 var resourceData = _opSource.Resource!.ResourceData;
 
-                yield return UsingVar("document", JsonDocumentExpression.Parse(stream, async), out var document);
+                ValueExpression deserializeExpression;
+                if (!Configuration.UseModelReaderWriter)
+                {
+                    yield return UsingVar("document", JsonDocumentExpression.Parse(stream, async), out var document);
 
-                ValueExpression deserializeExpression = SerializableObjectTypeExpression.Deserialize(resourceData, document.RootElement);
+                    deserializeExpression = SerializableObjectTypeExpression.Deserialize(resourceData, document.RootElement);
+                }
+                else
+                {
+                    deserializeExpression = new InvokeStaticMethodExpression(typeof(ModelReaderWriter), "Read", [responseVariable.Property("Content")], [resourceData.Type]);
+                }
+
                 if (_operationIdMappings is not null)
                 {
                     deserializeExpression = new InvokeInstanceMethodExpression(null, "ScrubId", new[]{deserializeExpression}, null, false);
@@ -171,11 +180,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     yield return Assign(new MemberExpression(dataVariable, "Id"), new MemberExpression(_opSource.ArmClientField, "Id"));
                 }
-                yield return Return(New.Instance(_opSource.Resource.Type, (ValueExpression)_opSource.ArmClientField, dataVariable));
+                yield return Return(GetReturnExpression(dataVariable));
             }
             else
             {
                 yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(_opSource.ResponseSerialization, async, null, stream, _opSource.ReturnType.Equals(typeof(BinaryData)), null);
+            }
+
+            ValueExpression GetReturnExpression(VariableReference dataVariable)
+            {
+                var opSourceInstance = New.Instance(_opSource.Resource?.Type!, (ValueExpression)_opSource.ArmClientField, dataVariable);
+                if (Configuration.UseModelReaderWriter && async)
+                {
+                    return new InvokeStaticMethodExpression(typeof(Task), "FromResult", [opSourceInstance], CallAsAsync: true);
+                }
+                return opSourceInstance;
             }
         }
     }

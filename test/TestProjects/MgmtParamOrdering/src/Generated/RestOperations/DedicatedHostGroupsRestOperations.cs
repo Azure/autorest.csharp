@@ -96,7 +96,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         DedicatedHostGroupListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DedicatedHostGroupListResult.DeserializeDedicatedHostGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -124,7 +124,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         DedicatedHostGroupListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DedicatedHostGroupListResult.DeserializeDedicatedHostGroupListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -194,7 +194,7 @@ namespace MgmtParamOrdering
                 case 201:
                     {
                         DedicatedHostGroupData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -226,7 +226,7 @@ namespace MgmtParamOrdering
                 case 201:
                     {
                         DedicatedHostGroupData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -295,7 +295,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         DedicatedHostGroupData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -326,7 +326,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         DedicatedHostGroupData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -481,7 +481,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         DedicatedHostGroupData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -513,7 +513,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         DedicatedHostGroupData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

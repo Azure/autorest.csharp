@@ -25,14 +25,14 @@ namespace MgmtMultipleParentResource
 
         AnotherParentChildResource IOperationSource<AnotherParentChildResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
             return new AnotherParentChildResource(_client, data);
         }
 
         async ValueTask<AnotherParentChildResource> IOperationSource<AnotherParentChildResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
             return new AnotherParentChildResource(_client, data);
         }

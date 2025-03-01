@@ -93,7 +93,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         PublicIPAddressListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = PublicIPAddressListResult.DeserializePublicIPAddressListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -122,7 +122,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         PublicIPAddressListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = PublicIPAddressListResult.DeserializePublicIPAddressListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -279,7 +279,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         PublicIPAddressData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = PublicIPAddressData.DeserializePublicIPAddressData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -311,7 +311,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         PublicIPAddressData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = PublicIPAddressData.DeserializePublicIPAddressData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -458,7 +458,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         PublicIPAddressListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = PublicIPAddressListResult.DeserializePublicIPAddressListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -483,7 +483,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         PublicIPAddressListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = PublicIPAddressListResult.DeserializePublicIPAddressListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -542,7 +542,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         PublicIPAddressListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = PublicIPAddressListResult.DeserializePublicIPAddressListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -569,7 +569,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         PublicIPAddressListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = PublicIPAddressListResult.DeserializePublicIPAddressListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -622,7 +622,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         PublicIPAddressListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = PublicIPAddressListResult.DeserializePublicIPAddressListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -653,7 +653,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         PublicIPAddressListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = PublicIPAddressListResult.DeserializePublicIPAddressListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -702,7 +702,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         PublicIPAddressListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = PublicIPAddressListResult.DeserializePublicIPAddressListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -729,7 +729,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         PublicIPAddressListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = PublicIPAddressListResult.DeserializePublicIPAddressListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -780,7 +780,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         PublicIPAddressListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = PublicIPAddressListResult.DeserializePublicIPAddressListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -809,7 +809,7 @@ namespace MgmtPartialResource
                 case 200:
                     {
                         PublicIPAddressListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = PublicIPAddressListResult.DeserializePublicIPAddressListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

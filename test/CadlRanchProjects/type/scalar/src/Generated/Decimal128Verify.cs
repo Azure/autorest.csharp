@@ -53,7 +53,7 @@ namespace _Type.Scalar
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PrepareVerifyAsync(context).ConfigureAwait(false);
             IReadOnlyList<decimal> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             List<decimal> array = new List<decimal>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -71,7 +71,7 @@ namespace _Type.Scalar
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = PrepareVerify(context);
             IReadOnlyList<decimal> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream);
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             List<decimal> array = new List<decimal>();
             foreach (var item in document.RootElement.EnumerateArray())
             {

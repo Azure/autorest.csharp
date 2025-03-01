@@ -113,7 +113,7 @@ namespace NoDocsTypeSpec.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeExtension(document.RootElement, options);
                     }
                 default:
@@ -125,7 +125,7 @@ namespace NoDocsTypeSpec.Models
 
         internal static new Extension FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeExtension(document.RootElement);
         }
 

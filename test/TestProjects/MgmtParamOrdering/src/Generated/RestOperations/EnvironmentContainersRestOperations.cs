@@ -93,7 +93,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         EnvironmentContainerResourceListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = EnvironmentContainerResourceListResult.DeserializeEnvironmentContainerResourceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -122,7 +122,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         EnvironmentContainerResourceListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = EnvironmentContainerResourceListResult.DeserializeEnvironmentContainerResourceListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -283,7 +283,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         EnvironmentContainerResourceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = EnvironmentContainerResourceData.DeserializeEnvironmentContainerResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -316,7 +316,7 @@ namespace MgmtParamOrdering
                 case 200:
                     {
                         EnvironmentContainerResourceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = EnvironmentContainerResourceData.DeserializeEnvironmentContainerResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -394,7 +394,7 @@ namespace MgmtParamOrdering
                 case 201:
                     {
                         EnvironmentContainerResourceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = EnvironmentContainerResourceData.DeserializeEnvironmentContainerResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -428,7 +428,7 @@ namespace MgmtParamOrdering
                 case 201:
                     {
                         EnvironmentContainerResourceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = EnvironmentContainerResourceData.DeserializeEnvironmentContainerResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

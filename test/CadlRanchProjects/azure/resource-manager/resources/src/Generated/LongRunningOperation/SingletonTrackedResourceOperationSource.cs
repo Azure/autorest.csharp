@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.Text.Json;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,16 +25,14 @@ namespace _Azure.ResourceManager.Resources
 
         SingletonTrackedResource IOperationSource<SingletonTrackedResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
-            var data = SingletonTrackedResourceData.DeserializeSingletonTrackedResourceData(document.RootElement);
+            var data = ModelReaderWriter.Read<SingletonTrackedResourceData>(response.Content);
             return new SingletonTrackedResource(_client, data);
         }
 
         async ValueTask<SingletonTrackedResource> IOperationSource<SingletonTrackedResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = SingletonTrackedResourceData.DeserializeSingletonTrackedResourceData(document.RootElement);
-            return new SingletonTrackedResource(_client, data);
+            var data = ModelReaderWriter.Read<SingletonTrackedResourceData>(response.Content);
+            return await Task.FromResult(new SingletonTrackedResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace OpenAI.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(NEpochs);
 #else
-                using (JsonDocument document = JsonDocument.Parse(NEpochs))
+                using (JsonDocument document = JsonDocument.Parse(NEpochs, ModelSerializationExtensions.JsonDocumentOptions))
                 {
                     JsonSerializer.Serialize(writer, document.RootElement);
                 }
@@ -53,7 +53,7 @@ namespace OpenAI.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
@@ -127,7 +127,7 @@ namespace OpenAI.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeCreateFineTuningJobRequestHyperparameters(document.RootElement, options);
                     }
                 default:
@@ -141,7 +141,7 @@ namespace OpenAI.Models
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static CreateFineTuningJobRequestHyperparameters FromResponse(PipelineResponse response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeCreateFineTuningJobRequestHyperparameters(document.RootElement);
         }
 

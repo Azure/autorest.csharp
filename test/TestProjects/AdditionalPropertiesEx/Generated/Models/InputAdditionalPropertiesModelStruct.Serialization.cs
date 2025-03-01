@@ -101,7 +101,7 @@ namespace AdditionalPropertiesEx.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeInputAdditionalPropertiesModelStruct(document.RootElement, options);
                     }
                 default:
@@ -121,7 +121,7 @@ namespace AdditionalPropertiesEx.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static InputAdditionalPropertiesModelStruct FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeInputAdditionalPropertiesModelStruct(document.RootElement);
         }
 

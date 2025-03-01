@@ -87,7 +87,7 @@ namespace MgmtExactMatchFlattenInheritance
                 case 200:
                     {
                         AzureResourceFlattenModel4ListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AzureResourceFlattenModel4ListResult.DeserializeAzureResourceFlattenModel4ListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -114,7 +114,7 @@ namespace MgmtExactMatchFlattenInheritance
                 case 200:
                     {
                         AzureResourceFlattenModel4ListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AzureResourceFlattenModel4ListResult.DeserializeAzureResourceFlattenModel4ListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -183,7 +183,7 @@ namespace MgmtExactMatchFlattenInheritance
                 case 200:
                     {
                         AzureResourceFlattenModel4 value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AzureResourceFlattenModel4.DeserializeAzureResourceFlattenModel4(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -214,7 +214,7 @@ namespace MgmtExactMatchFlattenInheritance
                 case 200:
                     {
                         AzureResourceFlattenModel4 value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AzureResourceFlattenModel4.DeserializeAzureResourceFlattenModel4(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -277,7 +277,7 @@ namespace MgmtExactMatchFlattenInheritance
                 case 200:
                     {
                         AzureResourceFlattenModel4 value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AzureResourceFlattenModel4.DeserializeAzureResourceFlattenModel4(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -306,7 +306,7 @@ namespace MgmtExactMatchFlattenInheritance
                 case 200:
                     {
                         AzureResourceFlattenModel4 value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AzureResourceFlattenModel4.DeserializeAzureResourceFlattenModel4(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

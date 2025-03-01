@@ -109,7 +109,7 @@ namespace xms_error_responses.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializePet(document.RootElement, options);
                     }
                 default:
@@ -123,7 +123,7 @@ namespace xms_error_responses.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Pet FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializePet(document.RootElement);
         }
 

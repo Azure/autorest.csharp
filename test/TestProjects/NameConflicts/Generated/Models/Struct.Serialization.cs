@@ -1347,7 +1347,7 @@ namespace NameConflicts.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Struct FromResponse(Azure.Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeStruct(document.RootElement);
         }
 

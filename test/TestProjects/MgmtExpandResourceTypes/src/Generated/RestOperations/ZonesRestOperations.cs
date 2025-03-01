@@ -108,7 +108,7 @@ namespace MgmtExpandResourceTypes
                 case 201:
                     {
                         ZoneData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ZoneData.DeserializeZoneData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -142,7 +142,7 @@ namespace MgmtExpandResourceTypes
                 case 201:
                     {
                         ZoneData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ZoneData.DeserializeZoneData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -297,7 +297,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         ZoneData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ZoneData.DeserializeZoneData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -328,7 +328,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         ZoneData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ZoneData.DeserializeZoneData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -404,7 +404,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         ZoneData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ZoneData.DeserializeZoneData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -436,7 +436,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         ZoneData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ZoneData.DeserializeZoneData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -504,7 +504,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         ZoneListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ZoneListResult.DeserializeZoneListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -532,7 +532,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         ZoneListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ZoneListResult.DeserializeZoneListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -594,7 +594,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         ZoneListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ZoneListResult.DeserializeZoneListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -620,7 +620,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         ZoneListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ZoneListResult.DeserializeZoneListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -672,7 +672,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         ZoneListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ZoneListResult.DeserializeZoneListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -702,7 +702,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         ZoneListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ZoneListResult.DeserializeZoneListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -752,7 +752,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         ZoneListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ZoneListResult.DeserializeZoneListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -780,7 +780,7 @@ namespace MgmtExpandResourceTypes
                 case 200:
                     {
                         ZoneListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ZoneListResult.DeserializeZoneListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

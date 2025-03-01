@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.Text.Json;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,16 +25,14 @@ namespace _Azure.ResourceManager.Resources
 
         NestedProxyResource IOperationSource<NestedProxyResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
-            var data = NestedProxyResourceData.DeserializeNestedProxyResourceData(document.RootElement);
+            var data = ModelReaderWriter.Read<NestedProxyResourceData>(response.Content);
             return new NestedProxyResource(_client, data);
         }
 
         async ValueTask<NestedProxyResource> IOperationSource<NestedProxyResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = NestedProxyResourceData.DeserializeNestedProxyResourceData(document.RootElement);
-            return new NestedProxyResource(_client, data);
+            var data = ModelReaderWriter.Read<NestedProxyResourceData>(response.Content);
+            return await Task.FromResult(new NestedProxyResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

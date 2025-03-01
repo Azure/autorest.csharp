@@ -25,14 +25,14 @@ namespace MgmtPartialResource
 
         PublicIPAddressResource IOperationSource<PublicIPAddressResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             var data = PublicIPAddressData.DeserializePublicIPAddressData(document.RootElement);
             return new PublicIPAddressResource(_client, data);
         }
 
         async ValueTask<PublicIPAddressResource> IOperationSource<PublicIPAddressResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             var data = PublicIPAddressData.DeserializePublicIPAddressData(document.RootElement);
             return new PublicIPAddressResource(_client, data);
         }

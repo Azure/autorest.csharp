@@ -96,7 +96,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         BarListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = BarListResult.DeserializeBarListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -123,7 +123,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         BarListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = BarListResult.DeserializeBarListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -228,7 +228,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         IReadOnlyList<BarData> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<BarData> array = new List<BarData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -266,7 +266,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         IReadOnlyList<BarData> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<BarData> array = new List<BarData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -375,7 +375,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         BarData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = BarData.DeserializeBarData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -411,7 +411,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         BarData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = BarData.DeserializeBarData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -505,7 +505,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         BarData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = BarData.DeserializeBarData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -539,7 +539,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         BarData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = BarData.DeserializeBarData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -594,7 +594,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         BarListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = BarListResult.DeserializeBarListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -623,7 +623,7 @@ namespace MgmtPropertyBag
                 case 200:
                     {
                         BarListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = BarListResult.DeserializeBarListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
