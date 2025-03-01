@@ -322,6 +322,7 @@ namespace AutoRest.CSharp.Common.Input
                 : null
         );
 
+#pragma warning disable CS0618 // Type or member is obsolete
         private OperationResponse CreateOperationResponse(ServiceResponse response) => new(
             StatusCodes: response.HttpResponse.IntStatusCodes.ToList(),
             BodyType: GetResponseBodyType(response),
@@ -330,6 +331,7 @@ namespace AutoRest.CSharp.Common.Input
             IsErrorResponse: false,
             ContentTypes: Array.Empty<string>()
         );
+#pragma warning restore CS0618 // Type or member is obsolete
 
         private OperationResponseHeader CreateResponseHeader(HttpResponseHeader header) => new(
             Name: header.CSharpName(),

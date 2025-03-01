@@ -237,7 +237,6 @@
        "BodyType": {
         "$ref": "6"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -246,7 +245,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/parameterOrders",
      "BufferResponse": true,
@@ -340,7 +338,6 @@
        "BodyType": {
         "$ref": "6"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -349,7 +346,6 @@
       }
      ],
      "HttpMethod": "HEAD",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/parameterOrders",
      "BufferResponse": true,

@@ -306,13 +306,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/client/naming/operation",
      "BufferResponse": true,
@@ -355,13 +353,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/client/naming/parameter",
      "BufferResponse": true,
@@ -428,13 +424,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/client/naming/property/client",
      "RequestMediaTypes": [
@@ -504,13 +498,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/client/naming/property/language",
      "RequestMediaTypes": [
@@ -580,13 +572,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/client/naming/property/compatible-with-encoded-name",
      "RequestMediaTypes": [
@@ -632,13 +622,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/client/naming/header",
      "BufferResponse": true,
@@ -659,7 +647,6 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "68",
@@ -678,7 +665,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/client/naming/header",
      "BufferResponse": true,
@@ -789,13 +775,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/client/naming/model/client",
      "RequestMediaTypes": [
@@ -865,13 +849,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/client/naming/model/language",
      "RequestMediaTypes": [
@@ -986,13 +968,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/client/naming/union-enum/union-enum-name",
      "RequestMediaTypes": [
@@ -1062,13 +1042,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/client/naming/union-enum/union-enum-member-name",
      "RequestMediaTypes": [
