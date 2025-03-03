@@ -1551,7 +1551,8 @@
      }
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic"
   }
  ]
 }
