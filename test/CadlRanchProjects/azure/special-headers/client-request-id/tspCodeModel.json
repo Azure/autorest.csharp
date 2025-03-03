@@ -98,7 +98,8 @@
      }
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "Azure.SpecialHeaders.XmsClientRequestId"
   }
  ]
 }
