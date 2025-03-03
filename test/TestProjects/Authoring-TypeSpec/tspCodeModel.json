@@ -2206,7 +2206,6 @@
        "BodyType": {
         "$ref": "147"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "274",
@@ -2242,7 +2241,6 @@
        "BodyType": {
         "$ref": "147"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "278",
@@ -2272,7 +2270,6 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects/{projectName}",
      "RequestMediaTypes": [
@@ -2289,8 +2286,7 @@
        ],
        "BodyType": {
         "$ref": "147"
-       },
-       "BodyMediaType": "Json"
+       }
       }
      },
      "GenerateProtocolMethod": true,
@@ -2395,7 +2391,6 @@
        "BodyType": {
         "$ref": "147"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -2404,7 +2399,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects/{projectName}",
      "BufferResponse": true,
@@ -2510,7 +2504,6 @@
        "BodyType": {
         "$ref": "185"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "305",
@@ -2540,7 +2533,6 @@
       }
      ],
      "HttpMethod": "DELETE",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects/{projectName}",
      "BufferResponse": true,
@@ -2551,8 +2543,7 @@
        "$id": "309",
        "StatusCodes": [
         204
-       ],
-       "BodyMediaType": "Json"
+       ]
       }
      },
      "GenerateProtocolMethod": true,
@@ -2636,7 +2627,6 @@
        "BodyType": {
         "$ref": "193"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -2645,7 +2635,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects",
      "BufferResponse": true,
@@ -2774,7 +2763,6 @@
        "StatusCodes": [
         202
        ],
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "333",
@@ -2801,7 +2789,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects/{projectName}:export",
      "BufferResponse": true,
@@ -2812,8 +2799,7 @@
        "$id": "337",
        "StatusCodes": [
         200
-       ],
-       "BodyMediaType": "Json"
+       ]
       }
      },
      "GenerateProtocolMethod": true,
@@ -2915,7 +2901,6 @@
        "StatusCodes": [
         202
        ],
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "349",
@@ -2942,7 +2927,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects/{projectName}:importx",
      "BufferResponse": true,
@@ -2953,8 +2937,7 @@
        "$id": "353",
        "StatusCodes": [
         200
-       ],
-       "BodyMediaType": "Json"
+       ]
       }
      },
      "GenerateProtocolMethod": true,
@@ -3101,7 +3084,6 @@
        "StatusCodes": [
         202
        ],
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "369",
@@ -3128,7 +3110,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects/{projectName}:train",
      "RequestMediaTypes": [
@@ -3142,8 +3123,7 @@
        "$id": "373",
        "StatusCodes": [
         200
-       ],
-       "BodyMediaType": "Json"
+       ]
       }
      },
      "GenerateProtocolMethod": true,
@@ -3303,7 +3283,6 @@
        "BodyType": {
         "$ref": "205"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -3312,7 +3291,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}",
      "BufferResponse": true,
@@ -3485,7 +3463,6 @@
        "BodyType": {
         "$ref": "205"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "408",
@@ -3521,7 +3498,6 @@
        "BodyType": {
         "$ref": "205"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "412",
@@ -3551,7 +3527,6 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}",
      "RequestMediaTypes": [
@@ -3568,8 +3543,7 @@
        ],
        "BodyType": {
         "$ref": "205"
-       },
-       "BodyMediaType": "Json"
+       }
       }
      },
      "GenerateProtocolMethod": true,
@@ -3695,7 +3669,6 @@
        "BodyType": {
         "$ref": "185"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "430",
@@ -3725,7 +3698,6 @@
       }
      ],
      "HttpMethod": "DELETE",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}",
      "BufferResponse": true,
@@ -3736,8 +3708,7 @@
        "$id": "434",
        "StatusCodes": [
         204
-       ],
-       "BodyMediaType": "Json"
+       ]
       }
      },
      "GenerateProtocolMethod": true,
@@ -3842,7 +3813,6 @@
        "BodyType": {
         "$ref": "209"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -3851,7 +3821,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments",
      "BufferResponse": true,
@@ -4005,7 +3974,6 @@
        "StatusCodes": [
         202
        ],
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "462",
@@ -4032,7 +4000,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments:swap",
      "RequestMediaTypes": [
@@ -4046,8 +4013,7 @@
        "$id": "466",
        "StatusCodes": [
         200
-       ],
-       "BodyMediaType": "Json"
+       ]
       }
      },
      "GenerateProtocolMethod": true,
@@ -4228,7 +4194,6 @@
        "BodyType": {
         "$ref": "42"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -4237,7 +4202,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}",
      "BufferResponse": true,
@@ -4385,7 +4349,6 @@
        "BodyType": {
         "$ref": "113"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -4394,7 +4357,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/swap/jobs/{jobId}",
      "BufferResponse": true,
@@ -4575,7 +4537,6 @@
        "BodyType": {
         "$ref": "224"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -4584,7 +4545,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects/global/languages",
      "BufferResponse": true,
@@ -4736,7 +4696,6 @@
        "BodyType": {
         "$ref": "239"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -4745,7 +4704,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/language",
      "Path": "/authoring/analyze-text/projects/global/training-config-versions",
      "BufferResponse": true,

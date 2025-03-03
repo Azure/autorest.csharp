@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
             public override TypedValueExpression GetTypedResponseFromBinaryData(Type responseType, TypedValueExpression result, string? contentType = null)
             {
                 var rawResponse = GetRawResponse(result);
-                if (responseType == typeof(string) && contentType != null && FormattableStringHelpers.ToMediaType(contentType) == BodyMediaType.Text)
+                if (responseType == typeof(string) && contentType != null && BodyMediaTypeHelper.FromString(contentType) == BodyMediaType.Text)
                 {
                     return ClientResultExpression.FromValue(rawResponse.Content.InvokeToString(), rawResponse);
                 }
