@@ -1148,7 +1148,8 @@
      }
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page"
   },
   {
    "$id": "138",
@@ -1391,7 +1392,8 @@
      }
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.TwoModelsAsPageItem"
   }
  ]
 }
