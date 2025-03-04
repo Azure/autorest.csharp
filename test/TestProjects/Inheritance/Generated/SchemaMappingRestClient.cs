@@ -70,7 +70,7 @@ namespace Inheritance
                 case 200:
                     {
                         BaseClass value0 = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value0 = BaseClass.DeserializeBaseClass(document.RootElement);
                         return Response.FromValue(value0, message.Response);
                     }
@@ -96,7 +96,7 @@ namespace Inheritance
                 case 200:
                     {
                         BaseClass value0 = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value0 = BaseClass.DeserializeBaseClass(document.RootElement);
                         return Response.FromValue(value0, message.Response);
                     }

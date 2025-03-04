@@ -53,7 +53,7 @@ namespace _Type._Array
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetDurationValueAsync(context).ConfigureAwait(false);
             IReadOnlyList<TimeSpan> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
             List<TimeSpan> array = new List<TimeSpan>();
             foreach (var item in document.RootElement.EnumerateArray())
             {
@@ -71,7 +71,7 @@ namespace _Type._Array
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetDurationValue(context);
             IReadOnlyList<TimeSpan> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream);
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
             List<TimeSpan> array = new List<TimeSpan>();
             foreach (var item in document.RootElement.EnumerateArray())
             {

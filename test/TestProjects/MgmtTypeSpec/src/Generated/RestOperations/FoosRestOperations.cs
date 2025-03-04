@@ -183,7 +183,7 @@ namespace MgmtTypeSpec
                 case 200:
                     {
                         FooData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FooData.DeserializeFooData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -214,7 +214,7 @@ namespace MgmtTypeSpec
                 case 200:
                     {
                         FooData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FooData.DeserializeFooData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -359,7 +359,7 @@ namespace MgmtTypeSpec
                 case 200:
                     {
                         FooListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FooListResult.DeserializeFooListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -386,7 +386,7 @@ namespace MgmtTypeSpec
                 case 200:
                     {
                         FooListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FooListResult.DeserializeFooListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -437,7 +437,7 @@ namespace MgmtTypeSpec
                 case 200:
                     {
                         FooListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FooListResult.DeserializeFooListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -466,7 +466,7 @@ namespace MgmtTypeSpec
                 case 200:
                     {
                         FooListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FooListResult.DeserializeFooListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

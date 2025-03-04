@@ -86,7 +86,7 @@ namespace MgmtSupersetFlattenInheritance
                 case 200:
                     {
                         TrackedResourceModel1ListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = TrackedResourceModel1ListResult.DeserializeTrackedResourceModel1ListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -112,7 +112,7 @@ namespace MgmtSupersetFlattenInheritance
                 case 200:
                     {
                         TrackedResourceModel1ListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = TrackedResourceModel1ListResult.DeserializeTrackedResourceModel1ListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -180,7 +180,7 @@ namespace MgmtSupersetFlattenInheritance
                 case 200:
                     {
                         TrackedResourceModel1Data value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -210,7 +210,7 @@ namespace MgmtSupersetFlattenInheritance
                 case 200:
                     {
                         TrackedResourceModel1Data value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -272,7 +272,7 @@ namespace MgmtSupersetFlattenInheritance
                 case 200:
                     {
                         TrackedResourceModel1Data value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -302,7 +302,7 @@ namespace MgmtSupersetFlattenInheritance
                 case 200:
                     {
                         TrackedResourceModel1Data value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

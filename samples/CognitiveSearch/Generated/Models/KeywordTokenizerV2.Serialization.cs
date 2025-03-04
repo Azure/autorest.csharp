@@ -66,7 +66,7 @@ namespace CognitiveSearch.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new KeywordTokenizerV2 FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeKeywordTokenizerV2(document.RootElement);
         }
 

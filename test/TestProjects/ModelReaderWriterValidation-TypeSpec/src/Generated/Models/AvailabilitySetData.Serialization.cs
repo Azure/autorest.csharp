@@ -169,7 +169,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeAvailabilitySetData(document.RootElement, options);
                     }
                 default:
@@ -183,7 +183,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new AvailabilitySetData FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeAvailabilitySetData(document.RootElement);
         }
 

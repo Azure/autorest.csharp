@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.Text.Json;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,16 +25,14 @@ namespace MgmtDiscriminator
 
         DeliveryRuleResource IOperationSource<DeliveryRuleResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
-            var data = DeliveryRuleData.DeserializeDeliveryRuleData(document.RootElement);
+            var data = ModelReaderWriter.Read<DeliveryRuleData>(response.Content);
             return new DeliveryRuleResource(_client, data);
         }
 
         async ValueTask<DeliveryRuleResource> IOperationSource<DeliveryRuleResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = DeliveryRuleData.DeserializeDeliveryRuleData(document.RootElement);
-            return new DeliveryRuleResource(_client, data);
+            var data = ModelReaderWriter.Read<DeliveryRuleData>(response.Content);
+            return await Task.FromResult(new DeliveryRuleResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

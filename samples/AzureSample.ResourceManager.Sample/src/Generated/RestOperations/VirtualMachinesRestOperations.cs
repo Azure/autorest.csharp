@@ -86,7 +86,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -112,7 +112,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -557,7 +557,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineData.DeserializeVirtualMachineData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -589,7 +589,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineData.DeserializeVirtualMachineData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -656,7 +656,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineInstanceView value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineInstanceView.DeserializeVirtualMachineInstanceView(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -685,7 +685,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineInstanceView value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineInstanceView.DeserializeVirtualMachineInstanceView(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -997,7 +997,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1024,7 +1024,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1086,7 +1086,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1112,7 +1112,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1177,7 +1177,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineSizeListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineSizeListResult.DeserializeVirtualMachineSizeListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1206,7 +1206,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineSizeListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineSizeListResult.DeserializeVirtualMachineSizeListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1810,7 +1810,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         RetrieveBootDiagnosticsDataResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = RetrieveBootDiagnosticsDataResult.DeserializeRetrieveBootDiagnosticsDataResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1840,7 +1840,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         RetrieveBootDiagnosticsDataResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = RetrieveBootDiagnosticsDataResult.DeserializeRetrieveBootDiagnosticsDataResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2144,7 +2144,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2172,7 +2172,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2223,7 +2223,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2252,7 +2252,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2302,7 +2302,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2330,7 +2330,7 @@ namespace AzureSample.ResourceManager.Sample
                 case 200:
                     {
                         VirtualMachineListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineListResult.DeserializeVirtualMachineListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

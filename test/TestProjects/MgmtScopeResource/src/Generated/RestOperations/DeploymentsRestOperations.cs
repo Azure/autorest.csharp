@@ -335,7 +335,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         DeploymentExtendedData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DeploymentExtendedData.DeserializeDeploymentExtendedData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -364,7 +364,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         DeploymentExtendedData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DeploymentExtendedData.DeserializeDeploymentExtendedData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -589,7 +589,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         DeploymentExportResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DeploymentExportResult.DeserializeDeploymentExportResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -616,7 +616,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         DeploymentExportResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DeploymentExportResult.DeserializeDeploymentExportResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -686,7 +686,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         DeploymentListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DeploymentListResult.DeserializeDeploymentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -712,7 +712,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         DeploymentListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DeploymentListResult.DeserializeDeploymentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1090,7 +1090,7 @@ namespace MgmtScopeResource
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(template);
 #else
-            using (JsonDocument document = JsonDocument.Parse(template))
+            using (JsonDocument document = JsonDocument.Parse(template, ModelSerializationExtensions.JsonDocumentOptions))
             {
                 JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
             }
@@ -1115,7 +1115,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         TemplateHashResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = TemplateHashResult.DeserializeTemplateHashResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1139,7 +1139,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         TemplateHashResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = TemplateHashResult.DeserializeTemplateHashResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1189,7 +1189,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         DeploymentListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = DeploymentListResult.DeserializeDeploymentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1217,7 +1217,7 @@ namespace MgmtScopeResource
                 case 200:
                     {
                         DeploymentListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = DeploymentListResult.DeserializeDeploymentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

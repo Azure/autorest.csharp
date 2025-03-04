@@ -96,7 +96,7 @@ namespace MgmtExactMatchInheritance
                 case 200:
                     {
                         ExactMatchModel2 value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ExactMatchModel2.DeserializeExactMatchModel2(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -126,7 +126,7 @@ namespace MgmtExactMatchInheritance
                 case 200:
                     {
                         ExactMatchModel2 value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ExactMatchModel2.DeserializeExactMatchModel2(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

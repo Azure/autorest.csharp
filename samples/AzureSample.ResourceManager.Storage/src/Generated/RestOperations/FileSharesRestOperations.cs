@@ -120,7 +120,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         FileShareItems value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FileShareItems.DeserializeFileShareItems(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -152,7 +152,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         FileShareItems value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FileShareItems.DeserializeFileShareItems(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -237,7 +237,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 201:
                     {
                         FileShareData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FileShareData.DeserializeFileShareData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -272,7 +272,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 201:
                     {
                         FileShareData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FileShareData.DeserializeFileShareData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -347,7 +347,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         FileShareData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FileShareData.DeserializeFileShareData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -380,7 +380,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         FileShareData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FileShareData.DeserializeFileShareData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -463,7 +463,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         FileShareData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FileShareData.DeserializeFileShareData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -498,7 +498,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         FileShareData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FileShareData.DeserializeFileShareData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -792,7 +792,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         LeaseShareResponse value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = LeaseShareResponse.DeserializeLeaseShareResponse(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -825,7 +825,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         LeaseShareResponse value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = LeaseShareResponse.DeserializeLeaseShareResponse(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -881,7 +881,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         FileShareItems value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = FileShareItems.DeserializeFileShareItems(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -915,7 +915,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         FileShareItems value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = FileShareItems.DeserializeFileShareItems(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

@@ -103,7 +103,7 @@ namespace MgmtParent
                 case 200:
                     {
                         VirtualMachineExtensionImageData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -138,7 +138,7 @@ namespace MgmtParent
                 case 200:
                     {
                         VirtualMachineExtensionImageData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -205,7 +205,7 @@ namespace MgmtParent
                 case 200:
                     {
                         IReadOnlyList<VirtualMachineExtensionImageData> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -239,7 +239,7 @@ namespace MgmtParent
                 case 200:
                     {
                         IReadOnlyList<VirtualMachineExtensionImageData> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -342,7 +342,7 @@ namespace MgmtParent
                 case 200:
                     {
                         IReadOnlyList<VirtualMachineExtensionImageData> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -381,7 +381,7 @@ namespace MgmtParent
                 case 200:
                     {
                         IReadOnlyList<VirtualMachineExtensionImageData> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {

@@ -115,7 +115,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeExtension(document.RootElement, options);
                     }
                 default:
@@ -129,7 +129,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Extension FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeExtension(document.RootElement);
         }
 

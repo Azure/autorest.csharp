@@ -398,7 +398,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                     {
                         ChildBodyData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ChildBodyData.DeserializeChildBodyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -432,7 +432,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                     {
                         ChildBodyData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ChildBodyData.DeserializeChildBodyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -508,7 +508,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                     {
                         ChildBodiesListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ChildBodiesListResult.DeserializeChildBodiesListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -538,7 +538,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                     {
                         ChildBodiesListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ChildBodiesListResult.DeserializeChildBodiesListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -592,7 +592,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                     {
                         ChildBodiesListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ChildBodiesListResult.DeserializeChildBodiesListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -624,7 +624,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                     {
                         ChildBodiesListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ChildBodiesListResult.DeserializeChildBodiesListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

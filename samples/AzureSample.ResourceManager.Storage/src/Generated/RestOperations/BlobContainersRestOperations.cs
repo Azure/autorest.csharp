@@ -120,7 +120,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ListContainerItems value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -152,7 +152,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ListContainerItems value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -228,7 +228,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 201:
                     {
                         BlobContainerData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -262,7 +262,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 201:
                     {
                         BlobContainerData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -337,7 +337,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         BlobContainerData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -370,7 +370,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         BlobContainerData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -439,7 +439,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         BlobContainerData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -472,7 +472,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         BlobContainerData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -642,7 +642,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         LegalHold value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = LegalHold.DeserializeLegalHold(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -675,7 +675,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         LegalHold value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = LegalHold.DeserializeLegalHold(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -752,7 +752,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         LegalHold value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = LegalHold.DeserializeLegalHold(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -785,7 +785,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         LegalHold value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = LegalHold.DeserializeLegalHold(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -869,7 +869,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ImmutabilityPolicyData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -903,7 +903,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ImmutabilityPolicyData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -981,7 +981,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ImmutabilityPolicyData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1015,7 +1015,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ImmutabilityPolicyData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1093,7 +1093,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ImmutabilityPolicyData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1126,7 +1126,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ImmutabilityPolicyData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1200,7 +1200,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ImmutabilityPolicyData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1233,7 +1233,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ImmutabilityPolicyData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1315,7 +1315,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ImmutabilityPolicyData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1349,7 +1349,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ImmutabilityPolicyData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1428,7 +1428,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         LeaseContainerResponse value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = LeaseContainerResponse.DeserializeLeaseContainerResponse(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1460,7 +1460,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         LeaseContainerResponse value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = LeaseContainerResponse.DeserializeLeaseContainerResponse(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1610,7 +1610,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ListContainerItems value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1644,7 +1644,7 @@ namespace AzureSample.ResourceManager.Storage
                 case 200:
                     {
                         ListContainerItems value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

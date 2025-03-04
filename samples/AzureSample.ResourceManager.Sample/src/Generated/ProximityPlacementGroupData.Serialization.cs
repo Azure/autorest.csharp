@@ -530,7 +530,7 @@ namespace AzureSample.ResourceManager.Sample
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeProximityPlacementGroupData(document.RootElement, options);
                     }
                 default:

@@ -99,7 +99,7 @@ namespace MgmtOperations
                 case 200:
                     {
                         AvailabilitySetGrandChildListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AvailabilitySetGrandChildListResult.DeserializeAvailabilitySetGrandChildListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -130,7 +130,7 @@ namespace MgmtOperations
                 case 200:
                     {
                         AvailabilitySetGrandChildListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AvailabilitySetGrandChildListResult.DeserializeAvailabilitySetGrandChildListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -205,7 +205,7 @@ namespace MgmtOperations
                 case 200:
                     {
                         AvailabilitySetGrandChildData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -240,7 +240,7 @@ namespace MgmtOperations
                 case 200:
                     {
                         AvailabilitySetGrandChildData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -323,7 +323,7 @@ namespace MgmtOperations
                 case 200:
                     {
                         AvailabilitySetGrandChildData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -358,7 +358,7 @@ namespace MgmtOperations
                 case 200:
                     {
                         AvailabilitySetGrandChildData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

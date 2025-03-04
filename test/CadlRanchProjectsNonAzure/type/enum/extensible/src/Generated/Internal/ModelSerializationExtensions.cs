@@ -14,6 +14,7 @@ namespace Scm._Type._Enum.Extensible
 {
     internal static class ModelSerializationExtensions
     {
+        internal static readonly JsonDocumentOptions JsonDocumentOptions = new JsonDocumentOptions { MaxDepth = 256 };
         internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
 
         public static object GetObject(this JsonElement element)
