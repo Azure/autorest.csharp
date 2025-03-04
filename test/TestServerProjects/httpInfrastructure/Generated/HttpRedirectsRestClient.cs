@@ -113,7 +113,7 @@ namespace httpInfrastructure
                 case 300:
                     {
                         IReadOnlyList<string> value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         List<string> array = new List<string>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
@@ -142,7 +142,7 @@ namespace httpInfrastructure
                 case 300:
                     {
                         IReadOnlyList<string> value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         List<string> array = new List<string>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {

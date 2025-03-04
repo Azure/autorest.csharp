@@ -1924,7 +1924,8 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "CustomizationsInTsp"
   }
  ]
 }

@@ -507,7 +507,8 @@
      }
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty"
   }
  ]
 }

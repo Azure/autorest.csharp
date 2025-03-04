@@ -2343,7 +2343,8 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "NewProjectTypeSpec"
   },
   {
    "$id": "273",
@@ -2376,7 +2377,8 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "NewProjectTypeSpec.Hello"
   },
   {
    "$id": "277",
@@ -2534,7 +2536,8 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "NewProjectTypeSpec.Hello.Demo"
   },
   {
    "$id": "292",
@@ -3116,7 +3119,8 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "NewProjectTypeSpec.Hello.Demo2"
   },
   {
    "$id": "345",
@@ -3225,7 +3229,8 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "NewProjectTypeSpec.EnumTest"
   },
   {
    "$id": "355",
@@ -3393,7 +3398,8 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "NewProjectTypeSpec.ProtocolAndConvenient"
   }
  ],
  "Auth": {

@@ -63,7 +63,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValue value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -83,7 +83,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValue value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -116,7 +116,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValue value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -136,7 +136,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValue value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -169,7 +169,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -189,7 +189,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -222,7 +222,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -242,7 +242,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -286,7 +286,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -313,7 +313,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -346,7 +346,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValue value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -366,7 +366,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValue value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -409,7 +409,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -430,7 +430,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -466,7 +466,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -487,7 +487,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -525,7 +525,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -546,7 +546,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -584,7 +584,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -605,7 +605,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -639,7 +639,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -659,7 +659,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -702,7 +702,7 @@ namespace paging
                 case 200:
                     {
                         OdataProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -723,7 +723,7 @@ namespace paging
                 case 200:
                     {
                         OdataProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -773,7 +773,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -800,7 +800,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -833,7 +833,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -853,7 +853,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -886,7 +886,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -906,7 +906,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -939,7 +939,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -959,7 +959,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -992,7 +992,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1012,7 +1012,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1045,7 +1045,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1065,7 +1065,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1112,7 +1112,7 @@ namespace paging
                 case 200:
                     {
                         OdataProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1144,7 +1144,7 @@ namespace paging
                 case 200:
                     {
                         OdataProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1186,7 +1186,7 @@ namespace paging
                 case 200:
                     {
                         OdataProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1213,7 +1213,7 @@ namespace paging
                 case 200:
                     {
                         OdataProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1301,7 +1301,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1321,7 +1321,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1355,7 +1355,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1375,7 +1375,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1429,7 +1429,7 @@ namespace paging
                 case 200:
                     {
                         OdataProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1466,7 +1466,7 @@ namespace paging
                 case 200:
                     {
                         OdataProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1515,7 +1515,7 @@ namespace paging
                 case 200:
                     {
                         OdataProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1547,7 +1547,7 @@ namespace paging
                 case 200:
                     {
                         OdataProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1580,7 +1580,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValueWithXMSClientName value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResultValueWithXMSClientName.DeserializeProductResultValueWithXMSClientName(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1600,7 +1600,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValueWithXMSClientName value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResultValueWithXMSClientName.DeserializeProductResultValueWithXMSClientName(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1640,7 +1640,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValue value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1667,7 +1667,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValue value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1707,7 +1707,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValue value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1734,7 +1734,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValue value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1774,7 +1774,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1801,7 +1801,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1846,7 +1846,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1878,7 +1878,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1918,7 +1918,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValue value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1945,7 +1945,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValue value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -1995,7 +1995,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2023,7 +2023,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2064,7 +2064,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2092,7 +2092,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2133,7 +2133,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2161,7 +2161,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2211,7 +2211,7 @@ namespace paging
                 case 200:
                     {
                         OdataProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2239,7 +2239,7 @@ namespace paging
                 case 200:
                     {
                         OdataProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2293,7 +2293,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2325,7 +2325,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2365,7 +2365,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2392,7 +2392,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2432,7 +2432,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2459,7 +2459,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2499,7 +2499,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2526,7 +2526,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2566,7 +2566,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2593,7 +2593,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2633,7 +2633,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2660,7 +2660,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2768,7 +2768,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2795,7 +2795,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2835,7 +2835,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2862,7 +2862,7 @@ namespace paging
                 case 200:
                     {
                         ProductResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2902,7 +2902,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValueWithXMSClientName value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = ProductResultValueWithXMSClientName.DeserializeProductResultValueWithXMSClientName(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -2929,7 +2929,7 @@ namespace paging
                 case 200:
                     {
                         ProductResultValueWithXMSClientName value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = ProductResultValueWithXMSClientName.DeserializeProductResultValueWithXMSClientName(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

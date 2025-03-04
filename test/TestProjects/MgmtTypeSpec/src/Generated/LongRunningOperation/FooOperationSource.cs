@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.Text.Json;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,16 +25,14 @@ namespace MgmtTypeSpec
 
         FooResource IOperationSource<FooResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
-            var data = FooData.DeserializeFooData(document.RootElement);
+            var data = ModelReaderWriter.Read<FooData>(response.Content);
             return new FooResource(_client, data);
         }
 
         async ValueTask<FooResource> IOperationSource<FooResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = FooData.DeserializeFooData(document.RootElement);
-            return new FooResource(_client, data);
+            var data = ModelReaderWriter.Read<FooData>(response.Content);
+            return await Task.FromResult(new FooResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

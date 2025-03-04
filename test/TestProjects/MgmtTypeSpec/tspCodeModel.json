@@ -2837,7 +2837,8 @@
      }
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "MgmtTypeSpec"
   },
   {
    "$id": "372",
@@ -2979,7 +2980,8 @@
      }
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "MgmtTypeSpec.Operations"
   },
   {
    "$id": "388",
@@ -3434,7 +3436,8 @@
      }
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinks"
   },
   {
    "$id": "436",
@@ -4598,7 +4601,8 @@
      }
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "MgmtTypeSpec.Foos"
   }
  ],
  "Auth": {

@@ -102,7 +102,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryImageList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SharedGalleryImageList.DeserializeSharedGalleryImageList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -132,7 +132,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryImageList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SharedGalleryImageList.DeserializeSharedGalleryImageList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -201,7 +201,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryImage value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SharedGalleryImage.DeserializeSharedGalleryImage(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -232,7 +232,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryImage value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SharedGalleryImage.DeserializeSharedGalleryImage(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -286,7 +286,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryImageList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = SharedGalleryImageList.DeserializeSharedGalleryImageList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -318,7 +318,7 @@ namespace MgmtHierarchicalNonResource
                 case 200:
                     {
                         SharedGalleryImageList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = SharedGalleryImageList.DeserializeSharedGalleryImageList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

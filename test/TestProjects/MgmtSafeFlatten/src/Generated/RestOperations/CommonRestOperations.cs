@@ -81,7 +81,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeOneListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = TypeOneListResult.DeserializeTypeOneListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -106,7 +106,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeOneListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = TypeOneListResult.DeserializeTypeOneListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -159,7 +159,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeTwoListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = TypeTwoListResult.DeserializeTypeTwoListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -184,7 +184,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeTwoListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = TypeTwoListResult.DeserializeTypeTwoListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -243,7 +243,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeOneListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = TypeOneListResult.DeserializeTypeOneListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -270,7 +270,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeOneListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = TypeOneListResult.DeserializeTypeOneListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -329,7 +329,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeTwoListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = TypeTwoListResult.DeserializeTypeTwoListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -356,7 +356,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeTwoListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = TypeTwoListResult.DeserializeTypeTwoListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -419,7 +419,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeOneData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = TypeOneData.DeserializeTypeOneData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -450,7 +450,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeOneData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = TypeOneData.DeserializeTypeOneData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -521,7 +521,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeOneData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = TypeOneData.DeserializeTypeOneData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -552,7 +552,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeOneData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = TypeOneData.DeserializeTypeOneData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -615,7 +615,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeTwoData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = TypeTwoData.DeserializeTypeTwoData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -646,7 +646,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeTwoData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = TypeTwoData.DeserializeTypeTwoData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -717,7 +717,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeTwoData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = TypeTwoData.DeserializeTypeTwoData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -748,7 +748,7 @@ namespace MgmtSafeFlatten
                 case 200:
                     {
                         TypeTwoData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = TypeTwoData.DeserializeTypeTwoData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

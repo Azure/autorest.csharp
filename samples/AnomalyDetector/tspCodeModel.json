@@ -4268,7 +4268,8 @@
      }
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "AnomalyDetector"
   },
   {
    "$id": "562",
@@ -21127,7 +21128,8 @@
      }
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "AnomalyDetector.Univariate"
   },
   {
    "$id": "2922",
@@ -27203,7 +27205,8 @@
      }
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate"
   }
  ],
  "Auth": {

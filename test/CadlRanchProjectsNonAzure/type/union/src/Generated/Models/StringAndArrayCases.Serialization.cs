@@ -33,7 +33,7 @@ namespace Scm._Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(String);
 #else
-            using (JsonDocument document = JsonDocument.Parse(String))
+            using (JsonDocument document = JsonDocument.Parse(String, ModelSerializationExtensions.JsonDocumentOptions))
             {
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
@@ -42,7 +42,7 @@ namespace Scm._Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Array);
 #else
-            using (JsonDocument document = JsonDocument.Parse(Array))
+            using (JsonDocument document = JsonDocument.Parse(Array, ModelSerializationExtensions.JsonDocumentOptions))
             {
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
@@ -55,7 +55,7 @@ namespace Scm._Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
@@ -130,7 +130,7 @@ namespace Scm._Type.Union.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeStringAndArrayCases(document.RootElement, options);
                     }
                 default:
@@ -144,7 +144,7 @@ namespace Scm._Type.Union.Models
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static StringAndArrayCases FromResponse(PipelineResponse response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeStringAndArrayCases(document.RootElement);
         }
 

@@ -45,7 +45,7 @@ namespace _Type.Model.Usage.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
@@ -114,7 +114,7 @@ namespace _Type.Model.Usage.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeInputOutputRecord(document.RootElement, options);
                     }
                 default:
@@ -128,7 +128,7 @@ namespace _Type.Model.Usage.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static InputOutputRecord FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeInputOutputRecord(document.RootElement);
         }
 

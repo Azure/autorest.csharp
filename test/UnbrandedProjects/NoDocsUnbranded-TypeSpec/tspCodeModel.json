@@ -807,7 +807,8 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec"
   }
  ],
  "Auth": {

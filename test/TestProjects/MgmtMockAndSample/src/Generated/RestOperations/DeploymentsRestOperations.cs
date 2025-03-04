@@ -110,7 +110,7 @@ namespace MgmtMockAndSample
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(template);
 #else
-            using (JsonDocument document = JsonDocument.Parse(template))
+            using (JsonDocument document = JsonDocument.Parse(template, ModelSerializationExtensions.JsonDocumentOptions))
             {
                 JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
             }
@@ -141,7 +141,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         TemplateHashResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = TemplateHashResult.DeserializeTemplateHashResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -171,7 +171,7 @@ namespace MgmtMockAndSample
                 case 200:
                     {
                         TemplateHashResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = TemplateHashResult.DeserializeTemplateHashResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

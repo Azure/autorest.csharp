@@ -112,7 +112,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializeSiamese(document.RootElement, options);
                     }
                 default:
@@ -126,7 +126,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Siamese FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeSiamese(document.RootElement);
         }
 

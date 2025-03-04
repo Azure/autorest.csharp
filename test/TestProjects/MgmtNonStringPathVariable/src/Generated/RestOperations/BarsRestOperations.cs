@@ -270,7 +270,7 @@ namespace MgmtNonStringPathVariable
                 case 200:
                     {
                         BarData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = BarData.DeserializeBarData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -300,7 +300,7 @@ namespace MgmtNonStringPathVariable
                 case 200:
                     {
                         BarData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = BarData.DeserializeBarData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

@@ -142,7 +142,7 @@ namespace MgmtCustomizations
             {
                 case "J":
                     {
-                        using JsonDocument document = JsonDocument.Parse(data);
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
                         return DeserializePetStoreData(document.RootElement, options);
                     }
                 default:

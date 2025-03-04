@@ -90,7 +90,7 @@ namespace MgmtCollectionParent
                 case 200:
                     {
                         OrderResourceList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = OrderResourceList.DeserializeOrderResourceList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -116,7 +116,7 @@ namespace MgmtCollectionParent
                 case 200:
                     {
                         OrderResourceList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = OrderResourceList.DeserializeOrderResourceList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -184,7 +184,7 @@ namespace MgmtCollectionParent
                 case 200:
                     {
                         OrderResourceList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = OrderResourceList.DeserializeOrderResourceList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -212,7 +212,7 @@ namespace MgmtCollectionParent
                 case 200:
                     {
                         OrderResourceList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = OrderResourceList.DeserializeOrderResourceList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -281,7 +281,7 @@ namespace MgmtCollectionParent
                 case 200:
                     {
                         OrderResourceData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = OrderResourceData.DeserializeOrderResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -314,7 +314,7 @@ namespace MgmtCollectionParent
                 case 200:
                     {
                         OrderResourceData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = OrderResourceData.DeserializeOrderResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -366,7 +366,7 @@ namespace MgmtCollectionParent
                 case 200:
                     {
                         OrderResourceList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = OrderResourceList.DeserializeOrderResourceList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -394,7 +394,7 @@ namespace MgmtCollectionParent
                 case 200:
                     {
                         OrderResourceList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = OrderResourceList.DeserializeOrderResourceList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -446,7 +446,7 @@ namespace MgmtCollectionParent
                 case 200:
                     {
                         OrderResourceList value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
                         value = OrderResourceList.DeserializeOrderResourceList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
@@ -476,7 +476,7 @@ namespace MgmtCollectionParent
                 case 200:
                     {
                         OrderResourceList value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        using var document = JsonDocument.Parse(message.Response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
                         value = OrderResourceList.DeserializeOrderResourceList(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }

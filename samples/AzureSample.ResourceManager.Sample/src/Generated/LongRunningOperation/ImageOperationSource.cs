@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.Text.Json;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,16 +25,14 @@ namespace AzureSample.ResourceManager.Sample
 
         ImageResource IOperationSource<ImageResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
-            var data = ImageData.DeserializeImageData(document.RootElement);
+            var data = ModelReaderWriter.Read<ImageData>(response.Content);
             return new ImageResource(_client, data);
         }
 
         async ValueTask<ImageResource> IOperationSource<ImageResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = ImageData.DeserializeImageData(document.RootElement);
-            return new ImageResource(_client, data);
+            var data = ModelReaderWriter.Read<ImageData>(response.Content);
+            return await Task.FromResult(new ImageResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

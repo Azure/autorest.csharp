@@ -412,7 +412,8 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "MultipleMediaTypes"
   }
  ]
 }

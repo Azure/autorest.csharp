@@ -95,7 +95,7 @@ namespace HlcConstants.Models
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static ModelWithOptionalConstant FromResponse(Response response)
         {
-            using var document = JsonDocument.Parse(response.Content);
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeModelWithOptionalConstant(document.RootElement);
         }
 
