@@ -257,8 +257,7 @@ namespace _Azure.ResourceManager.Resources
         public virtual AsyncPageable<ExtensionsResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _extensionsResourceRestClient.CreateListByScopeRequest(Id);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _extensionsResourceRestClient.CreateListByScopeNextPageRequest(nextLink, Id);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ExtensionsResource(Client, ExtensionsResourceData.DeserializeExtensionsResourceData(e)), _extensionsResourceClientDiagnostics, Pipeline, "ExtensionsResourceCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ExtensionsResource(Client, ExtensionsResourceData.DeserializeExtensionsResourceData(e)), _extensionsResourceClientDiagnostics, Pipeline, "ExtensionsResourceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -287,8 +286,7 @@ namespace _Azure.ResourceManager.Resources
         public virtual Pageable<ExtensionsResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _extensionsResourceRestClient.CreateListByScopeRequest(Id);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _extensionsResourceRestClient.CreateListByScopeNextPageRequest(nextLink, Id);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ExtensionsResource(Client, ExtensionsResourceData.DeserializeExtensionsResourceData(e)), _extensionsResourceClientDiagnostics, Pipeline, "ExtensionsResourceCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new ExtensionsResource(Client, ExtensionsResourceData.DeserializeExtensionsResourceData(e)), _extensionsResourceClientDiagnostics, Pipeline, "ExtensionsResourceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

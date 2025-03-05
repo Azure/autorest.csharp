@@ -135,8 +135,7 @@ namespace MgmtTypeSpec.Mocking
         public virtual AsyncPageable<MgmtTypeSpecPrivateLinkResourceData> GetAllPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => PrivateLinksRestClient.CreateGetAllPrivateLinkResourcesRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PrivateLinksRestClient.CreateGetAllPrivateLinkResourcesNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => MgmtTypeSpecPrivateLinkResourceData.DeserializeMgmtTypeSpecPrivateLinkResourceData(e), PrivateLinksClientDiagnostics, Pipeline, "MockableMgmtTypeSpecResourceGroupResource.GetAllPrivateLinkResources", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => MgmtTypeSpecPrivateLinkResourceData.DeserializeMgmtTypeSpecPrivateLinkResourceData(e), PrivateLinksClientDiagnostics, Pipeline, "MockableMgmtTypeSpecResourceGroupResource.GetAllPrivateLinkResources", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -161,8 +160,7 @@ namespace MgmtTypeSpec.Mocking
         public virtual Pageable<MgmtTypeSpecPrivateLinkResourceData> GetAllPrivateLinkResources(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => PrivateLinksRestClient.CreateGetAllPrivateLinkResourcesRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PrivateLinksRestClient.CreateGetAllPrivateLinkResourcesNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => MgmtTypeSpecPrivateLinkResourceData.DeserializeMgmtTypeSpecPrivateLinkResourceData(e), PrivateLinksClientDiagnostics, Pipeline, "MockableMgmtTypeSpecResourceGroupResource.GetAllPrivateLinkResources", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => MgmtTypeSpecPrivateLinkResourceData.DeserializeMgmtTypeSpecPrivateLinkResourceData(e), PrivateLinksClientDiagnostics, Pipeline, "MockableMgmtTypeSpecResourceGroupResource.GetAllPrivateLinkResources", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

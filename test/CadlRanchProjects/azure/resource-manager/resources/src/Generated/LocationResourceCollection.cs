@@ -275,8 +275,7 @@ namespace _Azure.ResourceManager.Resources
         public virtual AsyncPageable<LocationResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _locationResourceRestClient.CreateListByLocationRequest(Id.SubscriptionId, new AzureLocation(_location));
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _locationResourceRestClient.CreateListByLocationNextPageRequest(nextLink, Id.SubscriptionId, new AzureLocation(_location));
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new LocationResource(Client, LocationResourceData.DeserializeLocationResourceData(e)), _locationResourceClientDiagnostics, Pipeline, "LocationResourceCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new LocationResource(Client, LocationResourceData.DeserializeLocationResourceData(e)), _locationResourceClientDiagnostics, Pipeline, "LocationResourceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -305,8 +304,7 @@ namespace _Azure.ResourceManager.Resources
         public virtual Pageable<LocationResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _locationResourceRestClient.CreateListByLocationRequest(Id.SubscriptionId, new AzureLocation(_location));
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _locationResourceRestClient.CreateListByLocationNextPageRequest(nextLink, Id.SubscriptionId, new AzureLocation(_location));
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new LocationResource(Client, LocationResourceData.DeserializeLocationResourceData(e)), _locationResourceClientDiagnostics, Pipeline, "LocationResourceCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new LocationResource(Client, LocationResourceData.DeserializeLocationResourceData(e)), _locationResourceClientDiagnostics, Pipeline, "LocationResourceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

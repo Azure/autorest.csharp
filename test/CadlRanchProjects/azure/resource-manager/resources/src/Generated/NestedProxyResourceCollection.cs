@@ -267,8 +267,7 @@ namespace _Azure.ResourceManager.Resources
         public virtual AsyncPageable<NestedProxyResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _nestedProxyResourceNestedRestClient.CreateListByTopLevelTrackedResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _nestedProxyResourceNestedRestClient.CreateListByTopLevelTrackedResourceNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new NestedProxyResource(Client, NestedProxyResourceData.DeserializeNestedProxyResourceData(e)), _nestedProxyResourceNestedClientDiagnostics, Pipeline, "NestedProxyResourceCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new NestedProxyResource(Client, NestedProxyResourceData.DeserializeNestedProxyResourceData(e)), _nestedProxyResourceNestedClientDiagnostics, Pipeline, "NestedProxyResourceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -297,8 +296,7 @@ namespace _Azure.ResourceManager.Resources
         public virtual Pageable<NestedProxyResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _nestedProxyResourceNestedRestClient.CreateListByTopLevelTrackedResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _nestedProxyResourceNestedRestClient.CreateListByTopLevelTrackedResourceNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new NestedProxyResource(Client, NestedProxyResourceData.DeserializeNestedProxyResourceData(e)), _nestedProxyResourceNestedClientDiagnostics, Pipeline, "NestedProxyResourceCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new NestedProxyResource(Client, NestedProxyResourceData.DeserializeNestedProxyResourceData(e)), _nestedProxyResourceNestedClientDiagnostics, Pipeline, "NestedProxyResourceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

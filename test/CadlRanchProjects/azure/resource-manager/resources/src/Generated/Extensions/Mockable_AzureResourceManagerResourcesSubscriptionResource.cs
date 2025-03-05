@@ -141,8 +141,7 @@ namespace _Azure.ResourceManager.Resources.Mocking
         public virtual AsyncPageable<TopLevelTrackedResource> GetTopLevelTrackedResourcesAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => TopLevelTrackedResourceTopLevelRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => TopLevelTrackedResourceTopLevelRestClient.CreateListBySubscriptionNextPageRequest(nextLink, Id.SubscriptionId);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new TopLevelTrackedResource(Client, TopLevelTrackedResourceData.DeserializeTopLevelTrackedResourceData(e)), TopLevelTrackedResourceTopLevelClientDiagnostics, Pipeline, "Mockable_AzureResourceManagerResourcesSubscriptionResource.GetTopLevelTrackedResources", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TopLevelTrackedResource(Client, TopLevelTrackedResourceData.DeserializeTopLevelTrackedResourceData(e)), TopLevelTrackedResourceTopLevelClientDiagnostics, Pipeline, "Mockable_AzureResourceManagerResourcesSubscriptionResource.GetTopLevelTrackedResources", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -171,8 +170,7 @@ namespace _Azure.ResourceManager.Resources.Mocking
         public virtual Pageable<TopLevelTrackedResource> GetTopLevelTrackedResources(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => TopLevelTrackedResourceTopLevelRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => TopLevelTrackedResourceTopLevelRestClient.CreateListBySubscriptionNextPageRequest(nextLink, Id.SubscriptionId);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new TopLevelTrackedResource(Client, TopLevelTrackedResourceData.DeserializeTopLevelTrackedResourceData(e)), TopLevelTrackedResourceTopLevelClientDiagnostics, Pipeline, "Mockable_AzureResourceManagerResourcesSubscriptionResource.GetTopLevelTrackedResources", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new TopLevelTrackedResource(Client, TopLevelTrackedResourceData.DeserializeTopLevelTrackedResourceData(e)), TopLevelTrackedResourceTopLevelClientDiagnostics, Pipeline, "Mockable_AzureResourceManagerResourcesSubscriptionResource.GetTopLevelTrackedResources", "value", "nextLink", cancellationToken);
         }
     }
 }

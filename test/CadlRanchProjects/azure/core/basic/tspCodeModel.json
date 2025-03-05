@@ -1129,8 +1129,16 @@
      "BufferResponse": true,
      "Paging": {
       "$id": "122",
-      "ItemName": "value",
-      "NextLinkName": "nextLink"
+      "ItemPropertySegments": [
+       "value"
+      ],
+      "NextLink": {
+       "$id": "123",
+       "ResponseSegments": [
+        "nextLink"
+       ],
+       "ResponseLocation": "Body"
+      }
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
@@ -1138,7 +1146,7 @@
      "Decorators": []
     },
     {
-     "$id": "123",
+     "$id": "124",
      "Name": "delete",
      "ResourceName": "User",
      "Summary": "Deletes a user.",
@@ -1146,12 +1154,12 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "124",
+       "$id": "125",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Doc": "The API version to use for this operation.",
        "Type": {
-        "$id": "125",
+        "$id": "126",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1165,9 +1173,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "126",
+        "$id": "127",
         "Type": {
-         "$id": "127",
+         "$id": "128",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1178,12 +1186,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "128",
+       "$id": "129",
        "Name": "id",
        "NameInRequest": "id",
        "Doc": "The user's id.",
        "Type": {
-        "$id": "129",
+        "$id": "130",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -1200,14 +1208,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "130",
+       "$id": "131",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "131",
+        "$id": "132",
         "kind": "constant",
         "valueType": {
-         "$id": "132",
+         "$id": "133",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1229,7 +1237,7 @@
      ],
      "Responses": [
       {
-       "$id": "133",
+       "$id": "134",
        "StatusCodes": [
         204
        ],
@@ -1247,7 +1255,7 @@
      "Decorators": []
     },
     {
-     "$id": "134",
+     "$id": "135",
      "Name": "export",
      "ResourceName": "Basic",
      "Summary": "Exports a user.",
@@ -1255,12 +1263,12 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "135",
+       "$id": "136",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Doc": "The API version to use for this operation.",
        "Type": {
-        "$id": "136",
+        "$id": "137",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1274,9 +1282,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "137",
+        "$id": "138",
         "Type": {
-         "$id": "138",
+         "$id": "139",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1287,12 +1295,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "139",
+       "$id": "140",
        "Name": "id",
        "NameInRequest": "id",
        "Doc": "The user's id.",
        "Type": {
-        "$id": "140",
+        "$id": "141",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -1309,12 +1317,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "141",
+       "$id": "142",
        "Name": "format",
        "NameInRequest": "format",
        "Doc": "The format of the data.",
        "Type": {
-        "$id": "142",
+        "$id": "143",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1331,14 +1339,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "143",
+       "$id": "144",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "144",
+        "$id": "145",
         "kind": "constant",
         "valueType": {
-         "$id": "145",
+         "$id": "146",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1360,7 +1368,7 @@
      ],
      "Responses": [
       {
-       "$id": "146",
+       "$id": "147",
        "StatusCodes": [
         200
        ],
@@ -1384,7 +1392,7 @@
      "Decorators": []
     },
     {
-     "$id": "147",
+     "$id": "148",
      "Name": "exportAllUsers",
      "ResourceName": "Basic",
      "Summary": "Exports all users.",
@@ -1392,12 +1400,12 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "148",
+       "$id": "149",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Doc": "The API version to use for this operation.",
        "Type": {
-        "$id": "149",
+        "$id": "150",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1411,9 +1419,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "150",
+        "$id": "151",
         "Type": {
-         "$id": "151",
+         "$id": "152",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1424,12 +1432,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "152",
+       "$id": "153",
        "Name": "format",
        "NameInRequest": "format",
        "Doc": "The format of the data.",
        "Type": {
-        "$id": "153",
+        "$id": "154",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1446,14 +1454,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "154",
+       "$id": "155",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "155",
+        "$id": "156",
         "kind": "constant",
         "valueType": {
-         "$id": "156",
+         "$id": "157",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1475,7 +1483,7 @@
      ],
      "Responses": [
       {
-       "$id": "157",
+       "$id": "158",
        "StatusCodes": [
         200
        ],
@@ -1500,16 +1508,16 @@
     }
    ],
    "Protocol": {
-    "$id": "158"
+    "$id": "159"
    },
    "Parameters": [
     {
-     "$id": "159",
+     "$id": "160",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Doc": "Service host",
      "Type": {
-      "$id": "160",
+      "$id": "161",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -1524,9 +1532,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "161",
+      "$id": "162",
       "Type": {
-       "$id": "162",
+       "$id": "163",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"
