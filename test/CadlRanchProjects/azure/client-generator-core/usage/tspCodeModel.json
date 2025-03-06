@@ -229,7 +229,8 @@
      }
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage"
   },
   {
    "$id": "31",
@@ -523,7 +524,8 @@
      }
     }
    ],
-   "Decorators": []
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation"
   }
  ]
 }
