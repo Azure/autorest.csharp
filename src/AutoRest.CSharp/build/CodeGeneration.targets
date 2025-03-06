@@ -1,6 +1,7 @@
 <Project>
 
   <PropertyGroup>
+    <CurrentDotnetFramework>net9.0</CurrentDotnetFramework>
     <PowerShellExe Condition="'$(PowerShellExe)' == ''">pwsh</PowerShellExe>
     <_TypeSpecProjectSyncAndGenerateCommand>npx --no-install --package=@azure-tools/typespec-client-generator-cli --yes tsp-client update --no-prompt --output-dir $(MSBuildProjectDirectory)/../</_TypeSpecProjectSyncAndGenerateCommand>
     <_TypeSpecProjectGenerateCommand>npx --no-install --package=@azure-tools/typespec-client-generator-cli --yes tsp-client generate --no-prompt --output-dir $(MSBuildProjectDirectory)/../</_TypeSpecProjectGenerateCommand>
