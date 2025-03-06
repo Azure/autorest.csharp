@@ -1,0 +1,1 @@
+New-Variable -Name "CurrentDotnetFramework" -Value "net9.0" -Option Constant

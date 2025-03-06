@@ -1,3 +1,5 @@
+Import-Module "$PSScriptRoot\Constants.ps1" -DisableNameChecking -Force;
+
 function Find-Mapping([string]$path) {
     $fileContent = Get-Content $path
     $outputFolder = ''
@@ -211,7 +213,7 @@ function  MockTestInit {
             Write-Host "Autorest build fail."
             exit
         }
-        $autorestVersion = Join-Path $projRoot "\artifacts\bin\AutoRest.CSharp\Debug\net9.0"
+        $autorestVersion = Join-Path $projRoot "\artifacts\bin\AutoRest.CSharp\Debug\$CurrentDotnetFramework"
 
         # Clone Azure/azure-rest-api-specs and get latest commitId
         & git clone https://github.com/Azure/azure-rest-api-specs.git $projRoot\azure-rest-api-specs
