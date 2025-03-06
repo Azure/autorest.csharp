@@ -6,47 +6,65 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record OperationPaging(NextLink? NextLink, ContinuationToken? ContinuationToken, IReadOnlyList<string> ItemPropertySegments)
+internal record OperationPaging
 {
-    private string? nextLinkName;
-    private string? itemName;
-    private InputOperation? nextLinkOperation;
-    private bool selfNextLink;
+    public OperationPaging(NextLink? nextLink, ContinuationToken? continuationToken, IReadOnlyList<string> itemPropertySegments)
+    {
+        NextLink = nextLink ?? new();
+        ContinuationToken = continuationToken;
+        ItemPropertySegments = itemPropertySegments;
+    }
+
+    public NextLink NextLink { get; init; }
+    public ContinuationToken? ContinuationToken { get; init; }
+    public IReadOnlyList<string> ItemPropertySegments { get; init; }
 
     public OperationPaging() : this(null, null, Array.Empty<string>()) { }
 
     // obsolete, for swagger input only
-    public OperationPaging(string? NextLinkName, string? ItemName, InputOperation? NextLinkOperation, bool SelfNextLink)
+    public OperationPaging(string? nextLinkName, string? itemName, InputOperation? nextLinkOperation, bool selfNextLink)
         : this(null, null, Array.Empty<string>())
     {
-        nextLinkName = NextLinkName;
-        itemName = ItemName;
-        nextLinkOperation = NextLinkOperation;
-        selfNextLink = SelfNextLink;
+        NextLink = BuildNextLink(nextLinkName, nextLinkOperation);
+        ItemPropertySegments = itemName != null ? [itemName] : [];
+        SelfNextLink = selfNextLink;
     }
 
-    public string? NextLinkName => nextLinkName ??= (NextLink?.ResponseSegments.Count > 0 ? NextLink.ResponseSegments[0] : null);
+    private static NextLink BuildNextLink(string? nextLinkName, InputOperation? nextLinkOperation)
+    {
+        string[]? nextLinkSegments = nextLinkName != null ? [nextLinkName] : null;
+        return new NextLink(nextLinkOperation, nextLinkSegments ?? [], ResponseLocation.Body);
+    }
 
-    public string? ItemName => itemName ??= (ItemPropertySegments.Count > 0 ? ItemPropertySegments[0] : null);
+    public string? NextLinkName => NextLink?.ResponseSegments.Count > 0 ? NextLink.ResponseSegments[0] : null;
+
+    public string? ItemName => ItemPropertySegments.Count > 0 ? ItemPropertySegments[0] : null;
 
     public InputOperation? NextLinkOperation
     {
         get
         {
-            return nextLinkOperation ??= NextLink?.Operation;
+            return NextLink?.Operation;
         }
         set
         {
-            nextLinkOperation = value;
+            NextLink.Operation = value;
         }
     }
 
-    public bool SelfNextLink => selfNextLink;
+    public bool SelfNextLink { get; }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
 }
 
 internal record NextLink(InputOperation? Operation, IReadOnlyList<string> ResponseSegments, ResponseLocation ResponseLocation)
 {
     public NextLink() : this(null, Array.Empty<string>(), ResponseLocation.None) { }
+
+    public InputOperation? Operation { get; internal set; } = Operation;
 }
 
 internal record ContinuationToken(InputParameter Parameter, IReadOnlyList<string> ResponseSegments, ResponseLocation ResponseLocation)

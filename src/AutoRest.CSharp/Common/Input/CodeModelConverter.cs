@@ -145,7 +145,6 @@ namespace AutoRest.CSharp.Common.Input
                 parameters: parameters,
                 responses: operation.Responses.Select<ServiceResponse, OperationResponse>(CreateOperationResponse).ToList(),
                 httpMethod: httpRequest.Method.ToCoreRequestMethod(),
-                requestBodyMediaType: GetBodyFormat((httpRequest as HttpWithBodyRequest)?.KnownMediaType),
                 uri: httpRequest.Uri,
                 path: httpRequest.Path,
                 externalDocsUrl: operation.ExternalDocs?.Url,
@@ -155,9 +154,10 @@ namespace AutoRest.CSharp.Common.Input
                 paging: CreateOperationPaging(serviceRequest, operation),
                 generateProtocolMethod: true,
                 generateConvenienceMethod: false,
-                crossLanguageDefinitionId: string.Empty, // in typespec input, this is to determine whether an operation has been renamed. We have separated configuration for that in swagger input, therefore we leave it empty here
-                keepClientDefaultValue: operationId is null ? false : Configuration.MethodsToKeepClientDefaultValue.Contains(operationId),
-                examples: CreateOperationExamplesFromTestModeler(operation))
+                crossLanguageDefinitionId: string.Empty,
+                keepClientDefaultValue: operationId is null ? false : Configuration.MethodsToKeepClientDefaultValue.Contains(operationId), // in typespec input, this is to determine whether an operation has been renamed. We have separated configuration for that in swagger input, therefore we leave it empty here
+                examples: CreateOperationExamplesFromTestModeler(operation),
+                requestBodyMediaType: GetBodyFormat((httpRequest as HttpWithBodyRequest)?.KnownMediaType))
             {
                 SpecName = operation.Language.Default.SerializedName ?? operation.Language.Default.Name
             };
@@ -366,10 +366,10 @@ namespace AutoRest.CSharp.Common.Input
             var nextLinkServiceRequest = paging.NextLinkOperation?.Requests.Single();
             if (nextLinkServiceRequest != null && nextLinkServiceRequest != serviceRequest && _operationsCache.TryGetValue(nextLinkServiceRequest, out var nextLinkOperationRef))
             {
-                return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName, nextLinkOperationRef(), false);
+                return new OperationPaging(nextLinkName: paging.NextLinkName, itemName: paging.ItemName, nextLinkOperationRef(), false);
             }
 
-            return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName, null, nextLinkServiceRequest == serviceRequest);
+            return new OperationPaging(nextLinkName: paging.NextLinkName, itemName: paging.ItemName, null, nextLinkServiceRequest == serviceRequest);
         }
 
         private void CreateEnums()

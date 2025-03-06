@@ -268,7 +268,8 @@ namespace _Azure.ResourceManager.Resources
         public virtual AsyncPageable<TopLevelTrackedResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _topLevelTrackedResourceTopLevelRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TopLevelTrackedResource(Client, TopLevelTrackedResourceData.DeserializeTopLevelTrackedResourceData(e)), _topLevelTrackedResourceTopLevelClientDiagnostics, Pipeline, "TopLevelTrackedResourceCollection.GetAll", "value", "nextLink", cancellationToken);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _topLevelTrackedResourceTopLevelRestClient.CreateListByResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new TopLevelTrackedResource(Client, TopLevelTrackedResourceData.DeserializeTopLevelTrackedResourceData(e)), _topLevelTrackedResourceTopLevelClientDiagnostics, Pipeline, "TopLevelTrackedResourceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -297,7 +298,8 @@ namespace _Azure.ResourceManager.Resources
         public virtual Pageable<TopLevelTrackedResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _topLevelTrackedResourceTopLevelRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new TopLevelTrackedResource(Client, TopLevelTrackedResourceData.DeserializeTopLevelTrackedResourceData(e)), _topLevelTrackedResourceTopLevelClientDiagnostics, Pipeline, "TopLevelTrackedResourceCollection.GetAll", "value", "nextLink", cancellationToken);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _topLevelTrackedResourceTopLevelRestClient.CreateListByResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new TopLevelTrackedResource(Client, TopLevelTrackedResourceData.DeserializeTopLevelTrackedResourceData(e)), _topLevelTrackedResourceTopLevelClientDiagnostics, Pipeline, "TopLevelTrackedResourceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

@@ -268,7 +268,8 @@ namespace MgmtTypeSpec
         public virtual AsyncPageable<FooResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fooRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "value", "nextLink", cancellationToken);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fooRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FooResource(Client, FooData.DeserializeFooData(e)), _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -297,7 +298,8 @@ namespace MgmtTypeSpec
         public virtual Pageable<FooResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fooRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "value", "nextLink", cancellationToken);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fooRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FooResource(Client, FooData.DeserializeFooData(e)), _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
