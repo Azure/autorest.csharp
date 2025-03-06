@@ -121,8 +121,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Dictionary"
+   "Decorators": []
   },
   {
    "$id": "18",
@@ -337,8 +336,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Dictionary.Int32Value"
+   "Decorators": []
   },
   {
    "$id": "41",
@@ -553,8 +551,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Dictionary.Int64Value"
+   "Decorators": []
   },
   {
    "$id": "64",
@@ -769,8 +766,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Dictionary.BooleanValue"
+   "Decorators": []
   },
   {
    "$id": "87",
@@ -985,8 +981,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Dictionary.StringValue"
+   "Decorators": []
   },
   {
    "$id": "110",
@@ -1201,8 +1196,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Dictionary.Float32Value"
+   "Decorators": []
   },
   {
    "$id": "133",
@@ -1433,8 +1427,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Dictionary.DatetimeValue"
+   "Decorators": []
   },
   {
    "$id": "158",
@@ -1665,8 +1658,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Dictionary.DurationValue"
+   "Decorators": []
   },
   {
    "$id": "183",
@@ -1881,8 +1873,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Dictionary.UnknownValue"
+   "Decorators": []
   },
   {
    "$id": "206",
@@ -2089,8 +2080,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Dictionary.ModelValue"
+   "Decorators": []
   },
   {
    "$id": "227",
@@ -2297,8 +2287,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Dictionary.RecursiveModelValue"
+   "Decorators": []
   },
   {
    "$id": "248",
@@ -2514,8 +2503,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Dictionary.NullableFloatValue"
+   "Decorators": []
   }
  ]
 }

@@ -295,8 +295,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Encode.Datetime"
+   "Decorators": []
   },
   {
    "$id": "41",
@@ -649,8 +648,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Encode.Datetime.Query"
+   "Decorators": []
   },
   {
    "$id": "75",
@@ -1240,8 +1238,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Encode.Datetime.Property"
+   "Decorators": []
   },
   {
    "$id": "126",
@@ -1594,8 +1591,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Encode.Datetime.Header"
+   "Decorators": []
   },
   {
    "$id": "160",
@@ -1832,8 +1828,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Encode.Datetime.ResponseHeader"
+   "Decorators": []
   }
  ]
 }

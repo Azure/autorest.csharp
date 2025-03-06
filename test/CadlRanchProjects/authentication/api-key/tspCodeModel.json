@@ -170,8 +170,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Authentication.ApiKey"
+   "Decorators": []
   }
  ],
  "Auth": {

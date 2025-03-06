@@ -657,8 +657,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Versioning.Added"
+   "Decorators": []
   },
   {
    "$id": "72",
@@ -820,8 +819,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Versioning.Added.InterfaceV2"
+   "Decorators": []
   }
  ]
 }

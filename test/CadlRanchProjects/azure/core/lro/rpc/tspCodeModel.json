@@ -884,8 +884,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc"
+   "Decorators": []
   }
  ]
 }

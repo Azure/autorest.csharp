@@ -188,8 +188,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Structure.ClientOperationGroup"
+   "Decorators": []
   },
   {
    "$id": "21",
@@ -296,8 +295,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Structure.ClientOperationGroup.Group3"
+   "Decorators": []
   },
   {
    "$id": "30",
@@ -377,8 +375,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Structure.ClientOperationGroup.Group4"
+   "Decorators": []
   },
   {
    "$id": "37",
@@ -457,8 +454,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Structure.AnotherClientOperationGroup"
+   "Decorators": []
   },
   {
    "$id": "44",
@@ -538,8 +534,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Structure.AnotherClientOperationGroup.Group5"
+   "Decorators": []
   }
  ]
 }

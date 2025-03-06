@@ -2714,8 +2714,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "CustomizedTypeSpec"
+   "Decorators": []
   }
  ],
  "Auth": {

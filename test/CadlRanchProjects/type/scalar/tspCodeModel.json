@@ -46,8 +46,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Scalar"
+   "Decorators": []
   },
   {
    "$id": "8",
@@ -240,8 +239,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Scalar.String"
+   "Decorators": []
   },
   {
    "$id": "27",
@@ -434,8 +432,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Scalar.Boolean"
+   "Decorators": []
   },
   {
    "$id": "46",
@@ -628,8 +625,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Scalar.Unknown"
+   "Decorators": []
   },
   {
    "$id": "65",
@@ -869,8 +865,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Scalar.DecimalType"
+   "Decorators": []
   },
   {
    "$id": "88",
@@ -1110,8 +1105,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Scalar.Decimal128Type"
+   "Decorators": []
   },
   {
    "$id": "111",
@@ -1309,8 +1303,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Scalar.DecimalVerify"
+   "Decorators": []
   },
   {
    "$id": "131",
@@ -1508,8 +1501,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Scalar.Decimal128Verify"
+   "Decorators": []
   }
  ]
 }

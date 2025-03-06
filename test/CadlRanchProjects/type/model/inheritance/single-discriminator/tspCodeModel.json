@@ -987,8 +987,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator"
+   "Decorators": []
   }
  ]
 }

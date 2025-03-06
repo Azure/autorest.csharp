@@ -2209,8 +2209,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Azure.ResourceManager.Resources"
+   "Decorators": []
   },
   {
    "$id": "280",
@@ -3656,8 +3655,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevel"
+   "Decorators": []
   },
   {
    "$id": "427",
@@ -4875,8 +4873,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Azure.ResourceManager.Resources.Nested"
+   "Decorators": []
   },
   {
    "$id": "551",
@@ -5660,8 +5657,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Azure.ResourceManager.Resources.Singleton"
+   "Decorators": []
   },
   {
    "$id": "629",
@@ -6537,8 +6533,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResources"
+   "Decorators": []
   },
   {
    "$id": "715",
@@ -7552,8 +7547,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResources"
+   "Decorators": []
   }
  ],
  "Auth": {

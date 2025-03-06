@@ -514,8 +514,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access"
+   "Decorators": []
   },
   {
    "$id": "68",
@@ -724,8 +723,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation"
+   "Decorators": []
   },
   {
    "$id": "88",
@@ -1016,8 +1014,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation"
+   "Decorators": []
   },
   {
    "$id": "115",
@@ -1226,8 +1223,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation"
+   "Decorators": []
   },
   {
    "$id": "135",
@@ -1438,8 +1434,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation"
+   "Decorators": []
   }
  ]
 }

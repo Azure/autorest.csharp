@@ -607,8 +607,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Versioning.Removed"
+   "Decorators": []
   }
  ]
 }

@@ -133,8 +133,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar"
+   "Decorators": []
   },
   {
    "$id": "18",
@@ -568,8 +567,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationScalar"
+   "Decorators": []
   }
  ]
 }

@@ -234,8 +234,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Versioning.ReturnTypeChangedFrom"
+   "Decorators": []
   }
  ]
 }

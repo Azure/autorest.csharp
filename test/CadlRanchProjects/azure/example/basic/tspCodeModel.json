@@ -808,8 +808,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "AzureExampleBasicClient.AzureExampleClient"
+   "Decorators": []
   }
  ]
 }

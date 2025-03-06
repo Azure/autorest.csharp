@@ -1676,8 +1676,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "ConvenienceInCadl"
+   "Decorators": []
   }
  ]
 }

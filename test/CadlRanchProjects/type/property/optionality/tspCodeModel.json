@@ -992,8 +992,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional"
+   "Decorators": []
   },
   {
    "$id": "120",
@@ -1316,8 +1315,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.String"
+   "Decorators": []
   },
   {
    "$id": "148",
@@ -1640,8 +1638,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.Bytes"
+   "Decorators": []
   },
   {
    "$id": "176",
@@ -1964,8 +1961,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.Datetime"
+   "Decorators": []
   },
   {
    "$id": "204",
@@ -2288,8 +2284,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.Duration"
+   "Decorators": []
   },
   {
    "$id": "232",
@@ -2612,8 +2607,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.PlainDate"
+   "Decorators": []
   },
   {
    "$id": "260",
@@ -2936,8 +2930,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.PlainTime"
+   "Decorators": []
   },
   {
    "$id": "288",
@@ -3260,8 +3253,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsByte"
+   "Decorators": []
   },
   {
    "$id": "316",
@@ -3584,8 +3576,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsModel"
+   "Decorators": []
   },
   {
    "$id": "344",
@@ -3908,8 +3899,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.StringLiteral"
+   "Decorators": []
   },
   {
    "$id": "372",
@@ -4232,8 +4222,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.IntLiteral"
+   "Decorators": []
   },
   {
    "$id": "400",
@@ -4556,8 +4545,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.FloatLiteral"
+   "Decorators": []
   },
   {
    "$id": "428",
@@ -4880,8 +4868,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.BooleanLiteral"
+   "Decorators": []
   },
   {
    "$id": "456",
@@ -5204,8 +5191,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.UnionStringLiteral"
+   "Decorators": []
   },
   {
    "$id": "484",
@@ -5528,8 +5514,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.UnionIntLiteral"
+   "Decorators": []
   },
   {
    "$id": "512",
@@ -5852,8 +5837,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.UnionFloatLiteral"
+   "Decorators": []
   },
   {
    "$id": "540",
@@ -6177,8 +6161,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Property.Optional.RequiredAndOptional"
+   "Decorators": []
   }
  ]
 }

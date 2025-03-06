@@ -271,7 +271,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         {
             var writer = new CSProjWriter()
             {
-                TargetFramework = "net8.0",
+                TargetFramework = Configuration.CurrentDotnetVersion,
                 NoWarn = new("$(NoWarn);CS1591", "Ignore XML doc comments on test types and members")
             };
 

@@ -1240,8 +1240,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonProperties"
+   "Decorators": []
   },
   {
    "$id": "161",
@@ -1879,8 +1878,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonProperties.ManagedIdentity"
+   "Decorators": []
   }
  ],
  "Auth": {

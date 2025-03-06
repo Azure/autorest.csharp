@@ -242,8 +242,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation"
+   "Decorators": []
   },
   {
    "$id": "25",
@@ -377,8 +376,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.Group"
+   "Decorators": []
   }
  ]
 }

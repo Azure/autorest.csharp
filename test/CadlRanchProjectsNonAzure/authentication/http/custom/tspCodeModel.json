@@ -170,8 +170,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Authentication.Http.Custom"
+   "Decorators": []
   }
  ],
  "Auth": {

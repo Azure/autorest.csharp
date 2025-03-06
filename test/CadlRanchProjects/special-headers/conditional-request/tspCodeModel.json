@@ -268,8 +268,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "SpecialHeaders.ConditionalRequest"
+   "Decorators": []
   }
  ]
 }

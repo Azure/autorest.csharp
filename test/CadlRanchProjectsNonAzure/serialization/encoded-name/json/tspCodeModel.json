@@ -86,8 +86,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Serialization.EncodedName.Json"
+   "Decorators": []
   },
   {
    "$id": "13",
@@ -269,8 +268,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Serialization.EncodedName.Json.Property"
+   "Decorators": []
   }
  ]
 }

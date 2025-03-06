@@ -959,8 +959,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "NoTestTypeSpec"
+   "Decorators": []
   }
  ],
  "Auth": {

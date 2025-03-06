@@ -104,8 +104,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Authentication.Union"
+   "Decorators": []
   }
  ],
  "Auth": {

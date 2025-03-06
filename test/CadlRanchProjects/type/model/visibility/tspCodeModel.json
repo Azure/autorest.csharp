@@ -898,8 +898,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Model.Visibility"
+   "Decorators": []
   }
  ]
 }

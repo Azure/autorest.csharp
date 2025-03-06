@@ -86,8 +86,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Payload.ContentNegotiation"
+   "Decorators": []
   },
   {
    "$id": "13",
@@ -300,8 +299,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Payload.ContentNegotiation.SameBody"
+   "Decorators": []
   },
   {
    "$id": "37",
@@ -510,8 +508,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody"
+   "Decorators": []
   }
  ]
 }

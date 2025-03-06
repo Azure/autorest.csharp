@@ -3750,8 +3750,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec"
+   "Decorators": []
   }
  ]
 }

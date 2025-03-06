@@ -2056,8 +2056,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "AuthoringTypeSpec"
+   "Decorators": []
   },
   {
    "$id": "258",
@@ -3179,8 +3178,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "AuthoringTypeSpec.Projects"
+   "Decorators": []
   },
   {
    "$id": "377",
@@ -4084,8 +4082,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "AuthoringTypeSpec.Deployments"
+   "Decorators": []
   },
   {
    "$id": "470",
@@ -4433,8 +4430,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "AuthoringTypeSpec.Jobs"
+   "Decorators": []
   },
   {
    "$id": "504",
@@ -4790,8 +4786,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "AuthoringTypeSpec.Global"
+   "Decorators": []
   }
  ]
 }

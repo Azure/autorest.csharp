@@ -116,8 +116,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Array"
+   "Decorators": []
   },
   {
    "$id": "17",
@@ -322,8 +321,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Array.Int32Value"
+   "Decorators": []
   },
   {
    "$id": "38",
@@ -528,8 +526,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Array.Int64Value"
+   "Decorators": []
   },
   {
    "$id": "59",
@@ -734,8 +731,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Array.BooleanValue"
+   "Decorators": []
   },
   {
    "$id": "80",
@@ -940,8 +936,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Array.StringValue"
+   "Decorators": []
   },
   {
    "$id": "101",
@@ -1146,8 +1141,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Array.Float32Value"
+   "Decorators": []
   },
   {
    "$id": "122",
@@ -1368,8 +1362,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Array.DatetimeValue"
+   "Decorators": []
   },
   {
    "$id": "145",
@@ -1590,8 +1583,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Array.DurationValue"
+   "Decorators": []
   },
   {
    "$id": "168",
@@ -1796,8 +1788,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Array.UnknownValue"
+   "Decorators": []
   },
   {
    "$id": "189",
@@ -1994,8 +1985,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Array.ModelValue"
+   "Decorators": []
   },
   {
    "$id": "208",
@@ -2201,8 +2191,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Array.NullableFloatValue"
+   "Decorators": []
   },
   {
    "$id": "229",
@@ -2408,8 +2397,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Array.NullableInt32Value"
+   "Decorators": []
   },
   {
    "$id": "250",
@@ -2615,8 +2603,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Array.NullableBooleanValue"
+   "Decorators": []
   },
   {
    "$id": "271",
@@ -2822,8 +2809,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Array.NullableStringValue"
+   "Decorators": []
   },
   {
    "$id": "292",
@@ -3025,8 +3011,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Array.NullableModelValue"
+   "Decorators": []
   }
  ]
 }

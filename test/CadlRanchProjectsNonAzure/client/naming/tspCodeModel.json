@@ -724,8 +724,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Naming"
+   "Decorators": []
   },
   {
    "$id": "75",
@@ -922,8 +921,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Naming.Model"
+   "Decorators": []
   },
   {
    "$id": "93",
@@ -1120,8 +1118,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Naming.UnionEnum"
+   "Decorators": []
   }
  ]
 }

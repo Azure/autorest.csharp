@@ -415,8 +415,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated"
+   "Decorators": []
   }
  ]
 }

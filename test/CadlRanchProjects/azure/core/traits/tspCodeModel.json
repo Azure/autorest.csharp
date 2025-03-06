@@ -836,8 +836,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits"
+   "Decorators": []
   }
  ]
 }

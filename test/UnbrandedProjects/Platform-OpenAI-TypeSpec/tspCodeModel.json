@@ -10622,8 +10622,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI"
+   "Decorators": []
   },
   {
    "$id": "1426",
@@ -10667,8 +10666,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI.Audio"
+   "Decorators": []
   },
   {
    "$id": "1432",
@@ -10822,8 +10820,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI.Audio.Transcriptions"
+   "Decorators": []
   },
   {
    "$id": "1447",
@@ -10977,8 +10974,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI.Audio.Translations"
+   "Decorators": []
   },
   {
    "$id": "1462",
@@ -11022,8 +11018,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI.Chat"
+   "Decorators": []
   },
   {
    "$id": "1468",
@@ -11177,8 +11172,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI.Chat.Completions"
+   "Decorators": []
   },
   {
    "$id": "1483",
@@ -11222,8 +11216,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI.FineTuning"
+   "Decorators": []
   },
   {
    "$id": "1489",
@@ -11778,8 +11771,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI.FineTuning.Jobs"
+   "Decorators": []
   },
   {
    "$id": "1538",
@@ -11933,8 +11925,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI.Completions"
+   "Decorators": []
   },
   {
    "$id": "1553",
@@ -12089,8 +12080,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI.Edits"
+   "Decorators": []
   },
   {
    "$id": "1568",
@@ -12245,8 +12235,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI.Embeddings"
+   "Decorators": []
   },
   {
    "$id": "1583",
@@ -12718,8 +12707,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI.Files"
+   "Decorators": []
   },
   {
    "$id": "1625",
@@ -13215,8 +13203,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI.FineTunes"
+   "Decorators": []
   },
   {
    "$id": "1668",
@@ -13491,8 +13478,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI.Models"
+   "Decorators": []
   },
   {
    "$id": "1693",
@@ -13865,8 +13851,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI.Images"
+   "Decorators": []
   },
   {
    "$id": "1726",
@@ -14021,8 +14006,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "OpenAI.Moderations"
+   "Decorators": []
   }
  ],
  "Auth": {

@@ -5320,8 +5320,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec"
+   "Decorators": []
   },
   {
    "$id": "588",
@@ -5354,8 +5353,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.Hello"
+   "Decorators": []
   },
   {
    "$id": "592",
@@ -5515,8 +5513,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.Hello.Demo"
+   "Decorators": []
   },
   {
    "$id": "607",
@@ -6168,8 +6165,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.Hello.Demo2"
+   "Decorators": []
   },
   {
    "$id": "665",
@@ -6280,8 +6276,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.EnumTest"
+   "Decorators": []
   },
   {
    "$id": "675",
@@ -6453,8 +6448,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ProtocolAndConvenient"
+   "Decorators": []
   },
   {
    "$id": "690",
@@ -6571,8 +6565,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.Entity"
+   "Decorators": []
   },
   {
    "$id": "701",
@@ -6710,8 +6703,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.Glossary"
+   "Decorators": []
   },
   {
    "$id": "714",
@@ -6744,8 +6736,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.ResourceOperations"
+   "Decorators": []
   },
   {
    "$id": "718",
@@ -7123,8 +7114,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "FirstTestTypeSpec.VersioningOp"
+   "Decorators": []
   }
  ],
  "Auth": {

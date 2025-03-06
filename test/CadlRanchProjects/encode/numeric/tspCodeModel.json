@@ -162,8 +162,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Encode.Numeric"
+   "Decorators": []
   },
   {
    "$id": "23",
@@ -535,8 +534,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Encode.Numeric.Property"
+   "Decorators": []
   }
  ]
 }

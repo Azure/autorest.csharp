@@ -268,8 +268,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive"
+   "Decorators": []
   }
  ]
 }

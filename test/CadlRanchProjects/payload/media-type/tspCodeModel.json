@@ -47,8 +47,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Payload.MediaType"
+   "Decorators": []
   },
   {
    "$id": "8",
@@ -419,8 +418,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Payload.MediaType.StringBody"
+   "Decorators": []
   }
  ]
 }

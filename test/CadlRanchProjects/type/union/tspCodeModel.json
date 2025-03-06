@@ -1756,8 +1756,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Union"
+   "Decorators": []
   },
   {
    "$id": "217",
@@ -1940,8 +1939,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Union.StringsOnly"
+   "Decorators": []
   },
   {
    "$id": "234",
@@ -2124,8 +2122,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Union.StringExtensible"
+   "Decorators": []
   },
   {
    "$id": "251",
@@ -2308,8 +2305,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Union.StringExtensibleNamed"
+   "Decorators": []
   },
   {
    "$id": "268",
@@ -2492,8 +2488,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Union.IntsOnly"
+   "Decorators": []
   },
   {
    "$id": "285",
@@ -2676,8 +2671,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Union.FloatsOnly"
+   "Decorators": []
   },
   {
    "$id": "302",
@@ -2860,8 +2854,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Union.ModelsOnly"
+   "Decorators": []
   },
   {
    "$id": "319",
@@ -3044,8 +3037,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Union.EnumsOnly"
+   "Decorators": []
   },
   {
    "$id": "336",
@@ -3228,8 +3220,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Union.StringAndArray"
+   "Decorators": []
   },
   {
    "$id": "353",
@@ -3412,8 +3403,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Union.MixedLiterals"
+   "Decorators": []
   },
   {
    "$id": "370",
@@ -3596,8 +3586,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Type.Union.MixedTypes"
+   "Decorators": []
   }
  ]
 }

@@ -1400,8 +1400,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Payload.MultiPart"
+   "Decorators": []
   },
   {
    "$id": "5657",
@@ -1978,8 +1977,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Payload.MultiPart.FormData"
+   "Decorators": []
   },
   {
    "$id": "5705",
@@ -2100,8 +2098,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.HttpParts"
+   "Decorators": []
   },
   {
    "$id": "5717",
@@ -2374,8 +2371,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.HttpParts.ContentType"
+   "Decorators": []
   },
   {
    "$id": "5741",
@@ -2496,8 +2492,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.HttpParts.NonString"
+   "Decorators": []
   }
  ]
 }

@@ -1930,8 +1930,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "CustomizationsInTsp"
+   "Decorators": []
   }
  ]
 }

@@ -216,8 +216,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Structure.Service"
+   "Decorators": []
   },
   {
    "$id": "23",
@@ -269,8 +268,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Structure.Service.Baz"
+   "Decorators": []
   },
   {
    "$id": "28",
@@ -350,8 +348,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Structure.Service.Baz.Foo"
+   "Decorators": []
   },
   {
    "$id": "35",
@@ -431,8 +428,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Structure.Service.Qux"
+   "Decorators": []
   },
   {
    "$id": "42",
@@ -512,8 +508,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Structure.Service.Qux.Bar"
+   "Decorators": []
   },
   {
    "$id": "49",
@@ -620,8 +615,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Structure.Service.Foo"
+   "Decorators": []
   },
   {
    "$id": "58",
@@ -728,8 +722,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Client.Structure.Service.Bar"
+   "Decorators": []
   }
  ]
 }

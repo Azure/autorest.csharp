@@ -163,8 +163,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Server.Versions.NotVersioned"
+   "Decorators": []
   }
  ]
 }

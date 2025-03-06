@@ -303,8 +303,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Server.Versions.Versioned"
+   "Decorators": []
   }
  ]
 }

@@ -65,8 +65,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Server.Path.Single"
+   "Decorators": []
   }
  ]
 }

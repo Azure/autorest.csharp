@@ -114,8 +114,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "ParametersCadl"
+   "Decorators": []
   },
   {
    "$id": "15",
@@ -387,8 +386,7 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "ParametersCadl.ParameterOrders"
+   "Decorators": []
   }
  ]
 }

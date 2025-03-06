@@ -123,8 +123,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Parameters.Basic"
+   "Decorators": []
   },
   {
    "$id": "18",
@@ -245,8 +244,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Parameters.Basic.ExplicitBody"
+   "Decorators": []
   },
   {
    "$id": "30",
@@ -367,8 +365,7 @@
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "Parameters.Basic.ImplicitBody"
+   "Decorators": []
   }
  ]
 }
