@@ -60,7 +60,7 @@ internal record InputOperation
         CrossLanguageDefinitionId = crossLanguageDefinitionId;
         KeepClientDefaultValue = keepClientDefaultValue;
         _examples = examples;
-        RequestBodyMediaType = requestBodyMediaType ??= (RequestMediaTypes != null && RequestMediaTypes.Count > 0 ? BodyMediaTypeHelper.DetermineBodyMediaType(RequestMediaTypes) : BodyMediaType.None);
+        RequestBodyMediaType = requestBodyMediaType ?? (RequestMediaTypes != null && RequestMediaTypes.Count > 0 ? BodyMediaTypeHelper.DetermineBodyMediaType(RequestMediaTypes) : BodyMediaType.None);
     }
 
     public InputOperation() : this(
@@ -166,9 +166,4 @@ internal record InputOperation
 
     internal bool IsNameChanged { get; init; }
     public string DocDescription => Doc ?? $"{Name.Humanize()}.";
-
-    //public override int GetHashCode()
-    //{
-    //    return HashCode.Combine(Name, HttpMethod, Parameters);
-    //}
 };

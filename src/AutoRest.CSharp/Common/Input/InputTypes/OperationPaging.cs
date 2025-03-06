@@ -53,11 +53,6 @@ internal record OperationPaging
     }
 
     public bool SelfNextLink { get; }
-
-    public override int GetHashCode()
-    {
-        return 0;
-    }
 }
 
 internal record NextLink(InputOperation? Operation, IReadOnlyList<string> ResponseSegments, ResponseLocation ResponseLocation)
