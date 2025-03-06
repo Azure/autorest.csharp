@@ -1,5 +1,7 @@
 #Requires -Version 7.0
 
+Import-Module "$PSScriptRoot\Constants.ps1" -DisableNameChecking -Force;
+
 param(
     [string] $BuildNumber,
     [string] $Output,
@@ -57,7 +59,7 @@ finally
 }
 
 # pack the c# npm package
-Push-Location "$artifactsPath/bin/AutoRest.CSharp/Release/net8.0/"
+Push-Location "$artifactsPath/bin/AutoRest.CSharp/Release/$CurrentDotnetFramework/"
 try {
     Write-Host "Working in $PWD"
     if ($BuildNumber) {

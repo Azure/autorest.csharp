@@ -6,7 +6,7 @@ This is the repository for the [autorest](https://github.com/Azure/autorest) plu
 
 The following software is required to build and test this repository:
 
-- [.NET 8.0.7 SDK](https://dotnet.microsoft.com/download/dotnet-core/8.0)
+- [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet-core/9.0)
 - [Node.js 20](https://nodejs.org/download/release/latest-v20.x/) ([installation instructions](https://nodejs.org/en/download/))
 - NPM 10.x: `npm install -g npm@10.x` (may need to run under `sudo` on linux)
   > ⚠️ **Warning:** using NPM 9 may prevent proper source generation, preventing a PR from building cleanly.

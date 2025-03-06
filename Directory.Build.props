@@ -3,6 +3,7 @@
     <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
     <RepoEngPath>$(MSBuildThisFileDirectory)eng</RepoEngPath>
     <RepoSrcPath>$(RepoRoot)src</RepoSrcPath>
+    <CurrentDotnetFramework>net9.0</CurrentDotnetFramework>
     <IsTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestProject>
     <IsNoDocProject Condition="$(MSBuildProjectName.StartsWith('NoDocs'))">true</IsNoDocProject>
     <CentralPackagesFile>$(MSBuildThisFileDirectory)Packages.Data.props</CentralPackagesFile>
