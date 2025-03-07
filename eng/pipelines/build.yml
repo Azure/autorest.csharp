@@ -98,7 +98,7 @@ extends:
               - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
                 - pwsh: >
                     ./eng/PublishRelease.ps1
-                    -AutorestArtifactDirectory ./artifacts/bin/AutoRest.CSharp/Release/net8.0/
+                    -AutorestArtifactDirectory ./artifacts/bin/AutoRest.CSharp/Release/net9.0/
                     -TypeSpecEmitterDirectory ./src/TypeSpec.Extension/Emitter.Csharp
                     -GitHubToken $(azuresdk-github-pat)
                     -NpmToken $(azure-sdk-npm-token)

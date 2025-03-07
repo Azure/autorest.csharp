@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>$(CurrentDotnetFramework)</TargetFramework>
     <IsPackable>false</IsPackable>
     <Nullable>annotations</Nullable>
     <NoWarn>$(NoWarn);SA1649;SA1633;CS0618</NoWarn>
