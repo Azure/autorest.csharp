@@ -17,6 +17,7 @@ namespace AutoRest.CSharp.Common.Input
     internal static class Configuration
     {
         internal static readonly string ProjectFolderDefault = "../";
+        internal const string CurrentDotnetVersion = "net9.0";
 
         public static class Options
         {
@@ -158,7 +159,7 @@ namespace AutoRest.CSharp.Common.Input
             if (publicClients && generation1ConvenienceClient && isAzureProject)
             {
                 var binaryLocation = typeof(Configuration).Assembly.Location;
-                if (!binaryLocation.EndsWith(Path.Combine("artifacts", "bin", "AutoRest.CSharp", "Debug", "net8.0", "AutoRest.CSharp.dll")))
+                if (!binaryLocation.EndsWith(Path.Combine("artifacts", "bin", "AutoRest.CSharp", "Debug", CurrentDotnetVersion, "AutoRest.CSharp.dll")))
                 {
                     if (_absoluteProjectFolder is not null)
                     {

@@ -1811,7 +1811,7 @@ to change the file license headers in all generated files.
 # autorest-core version
 version: 3.9.7
 save-inputs: true
-use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/net8.0/
+use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/net9.0/
 clear-output-folder: true
 public-clients: true
 skip-csproj-packagereference: true

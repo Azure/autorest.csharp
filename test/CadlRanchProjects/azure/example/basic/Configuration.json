@@ -5,8 +5,8 @@
   "flavor": "azure",
   "use-model-reader-writer": true,
   "shared-source-folders": [
-    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",
-    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Azure.Core.Shared"
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net9.0/Generator.Shared",
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net9.0/Azure.Core.Shared"
   ],
   "examples-dir": "..\\..\\..\\..\\..\\node_modules\\@azure-tools\\azure-http-specs\\specs\\azure\\example\\basic\\examples"
 }
