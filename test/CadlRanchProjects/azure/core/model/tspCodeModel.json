@@ -196,7 +196,6 @@
         "crossLanguageDefinitionId": "Azure.Core.EmbeddingVector",
         "decorators": []
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -205,7 +204,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/core/model/embeddingVector",
      "BufferResponse": true,
@@ -285,13 +283,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/core/model/embeddingVector",
      "RequestMediaTypes": [
@@ -393,7 +389,6 @@
        "BodyType": {
         "$ref": "6"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -402,7 +397,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/azure/core/model/embeddingVector",
      "RequestMediaTypes": [

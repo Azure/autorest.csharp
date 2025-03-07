@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Common.Output.Models
                             modelExpression = modelExpression.NullConditional();
                         }
                         var serializableObjectExpression = new SerializableObjectTypeExpression(model, modelExpression);
-                        if (contentType != null && FormattableStringHelpers.ToMediaType(contentType) == BodyMediaType.Multipart)
+                        if (contentType != null && BodyMediaTypeHelper.FromString(contentType) == BodyMediaType.Multipart)
                         {
                             return serializableObjectExpression.ToMultipartRequestContent();
                         }
@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Common.Output.Models
                     return RequestContentHelperProvider.Instance.FromObject(((ValueExpression)parameter).InvokeToString());
                 }
 
-                BodyMediaType? mediaType = contentType == null ? null : FormattableStringHelpers.ToMediaType(contentType);
+                BodyMediaType? mediaType = contentType == null ? null : BodyMediaTypeHelper.FromString(contentType);
                 if (parameter.RequestLocation == RequestLocation.Body && mediaType == BodyMediaType.Binary)
                 {
                     return parameter;

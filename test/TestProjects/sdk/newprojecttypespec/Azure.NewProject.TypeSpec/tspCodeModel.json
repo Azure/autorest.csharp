@@ -1862,7 +1862,6 @@
        "BodyType": {
         "$ref": "84"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1871,7 +1870,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{firstTestTypeSpecUrl}",
      "Path": "/top/{action}",
      "BufferResponse": true,
@@ -1924,7 +1922,6 @@
        "BodyType": {
         "$ref": "84"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1933,7 +1930,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{firstTestTypeSpecUrl}",
      "Path": "/top2",
      "BufferResponse": true,
@@ -2031,7 +2027,6 @@
        "BodyType": {
         "$ref": "84"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -2040,7 +2035,6 @@
       }
      ],
      "HttpMethod": "PATCH",
-     "RequestBodyMediaType": "Json",
      "Uri": "{firstTestTypeSpecUrl}",
      "Path": "/patch",
      "RequestMediaTypes": [
@@ -2141,7 +2135,6 @@
        "BodyType": {
         "$ref": "84"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -2150,7 +2143,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{firstTestTypeSpecUrl}",
      "Path": "/anonymousBody",
      "RequestMediaTypes": [
@@ -2251,7 +2243,6 @@
        "BodyType": {
         "$ref": "135"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -2260,7 +2251,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{firstTestTypeSpecUrl}",
      "Path": "/friendlyName",
      "RequestMediaTypes": [
@@ -2314,13 +2304,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{firstTestTypeSpecUrl}",
      "Path": "/",
      "BufferResponse": true,
@@ -2505,7 +2493,6 @@
        "BodyType": {
         "$ref": "84"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -2514,7 +2501,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{firstTestTypeSpecUrl}",
      "Path": "/hello",
      "BufferResponse": true,
@@ -2688,7 +2674,6 @@
        "BodyType": {
         "$ref": "140"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -2697,7 +2682,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
      "Uri": "{firstTestTypeSpecUrl}",
      "Path": "/againHi/{p2}",
      "RequestMediaTypes": [
@@ -2840,7 +2824,6 @@
        "BodyType": {
         "$ref": "140"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -2849,7 +2832,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
      "Uri": "{firstTestTypeSpecUrl}",
      "Path": "/noContentType/{p2}",
      "RequestMediaTypes": [
@@ -2950,7 +2932,6 @@
        "BodyType": {
         "$ref": "84"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -2959,7 +2940,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{firstTestTypeSpecUrl}",
      "Path": "/literal",
      "RequestMediaTypes": [
@@ -3096,7 +3076,6 @@
        "BodyType": {
         "$ref": "84"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -3105,7 +3084,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{firstTestTypeSpecUrl}",
      "Path": "/helloLiteral/{p2}",
      "BufferResponse": true,
@@ -3208,13 +3186,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "None",
      "Uri": "{firstTestTypeSpecUrl}",
      "Path": "/unknown-value",
      "RequestMediaTypes": [
@@ -3350,7 +3326,6 @@
        "BodyType": {
         "$ref": "84"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -3359,7 +3334,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{firstTestTypeSpecUrl}",
      "Path": "/internalProtocol",
      "RequestMediaTypes": [
@@ -3384,13 +3358,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{firstTestTypeSpecUrl}",
      "Path": "/stillConvenient",
      "BufferResponse": true,

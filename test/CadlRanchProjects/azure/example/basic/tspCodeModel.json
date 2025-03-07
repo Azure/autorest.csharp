@@ -595,7 +595,6 @@
        "BodyType": {
         "$ref": "41"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -604,7 +603,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/azure/example/basic/basic",
      "RequestMediaTypes": [

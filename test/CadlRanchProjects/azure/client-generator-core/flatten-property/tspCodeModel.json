@@ -344,7 +344,6 @@
        "BodyType": {
         "$ref": "2"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -353,7 +352,6 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/azure/client-generator-core/flatten-property/flattenModel",
      "RequestMediaTypes": [
@@ -453,7 +451,6 @@
        "BodyType": {
         "$ref": "19"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -462,7 +459,6 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/azure/client-generator-core/flatten-property/nestedFlattenModel",
      "RequestMediaTypes": [

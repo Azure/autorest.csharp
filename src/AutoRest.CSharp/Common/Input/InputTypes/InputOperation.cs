@@ -23,7 +23,6 @@ internal record InputOperation
     IReadOnlyList<InputParameter> parameters,
     IReadOnlyList<OperationResponse> responses,
     RequestMethod httpMethod,
-    BodyMediaType requestBodyMediaType,
     string uri,
     string path,
     string? externalDocsUrl,
@@ -35,7 +34,9 @@ internal record InputOperation
     bool generateConvenienceMethod,
     string crossLanguageDefinitionId,
     bool keepClientDefaultValue,
-    IReadOnlyList<InputOperationExample>? examples = null)
+    IReadOnlyList<InputOperationExample>? examples = null,
+    // Obsolete, for swagger input only
+    BodyMediaType? requestBodyMediaType = null)
     {
         Name = name;
         SpecName = name;
@@ -47,7 +48,6 @@ internal record InputOperation
         Parameters = parameters;
         Responses = responses;
         HttpMethod = httpMethod;
-        RequestBodyMediaType = requestBodyMediaType;
         Uri = uri;
         Path = path;
         ExternalDocsUrl = externalDocsUrl;
@@ -60,6 +60,7 @@ internal record InputOperation
         CrossLanguageDefinitionId = crossLanguageDefinitionId;
         KeepClientDefaultValue = keepClientDefaultValue;
         _examples = examples;
+        RequestBodyMediaType = requestBodyMediaType ?? (RequestMediaTypes != null && RequestMediaTypes.Count > 0 ? BodyMediaTypeHelper.DetermineBodyMediaType(RequestMediaTypes) : BodyMediaType.None);
     }
 
     public InputOperation() : this(
@@ -72,7 +73,6 @@ internal record InputOperation
         parameters: Array.Empty<InputParameter>(),
         responses: Array.Empty<OperationResponse>(),
         httpMethod: RequestMethod.Get,
-        requestBodyMediaType: BodyMediaType.None,
         uri: string.Empty,
         path: string.Empty,
         externalDocsUrl: null,
@@ -100,7 +100,6 @@ internal record InputOperation
             operation.Parameters.Where(p => !p.IsApiVersion).ToList(),
             operation.Responses,
             operation.HttpMethod,
-            operation.RequestBodyMediaType,
             operation.Uri,
             operation.Path,
             operation.ExternalDocsUrl,
@@ -111,7 +110,8 @@ internal record InputOperation
             operation.GenerateProtocolMethod,
             operation.GenerateConvenienceMethod,
             operation.CrossLanguageDefinitionId,
-            operation.KeepClientDefaultValue)
+            operation.KeepClientDefaultValue,
+            requestBodyMediaType: operation.RequestBodyMediaType)
         {
             SpecName = operation.SpecName
         };
