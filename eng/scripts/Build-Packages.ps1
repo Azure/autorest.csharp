@@ -1,7 +1,5 @@
 #Requires -Version 7.0
 
-Import-Module "$PSScriptRoot\Constants.ps1" -DisableNameChecking -Force;
-
 param(
     [string] $BuildNumber,
     [string] $Output,
@@ -9,6 +7,7 @@ param(
     [switch] $PublishInternal
 )
 
+$CurrentDotnetFramework = "net9.0";
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 3.0
 $root = (Resolve-Path "$PSScriptRoot/../..").Path.Replace('\', '/')
