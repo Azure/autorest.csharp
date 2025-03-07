@@ -1390,7 +1390,6 @@
        "BodyType": {
         "$ref": "26"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1399,7 +1398,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CommonProperties/managedIdentityTrackedResources/{managedIdentityTrackedResourceName}",
      "BufferResponse": true,
@@ -1596,7 +1594,6 @@
        "BodyType": {
         "$ref": "26"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1611,7 +1608,6 @@
        "BodyType": {
         "$ref": "26"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1620,7 +1616,6 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CommonProperties/managedIdentityTrackedResources/{managedIdentityTrackedResourceName}",
      "RequestMediaTypes": [
@@ -1820,7 +1815,6 @@
        "BodyType": {
         "$ref": "26"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1829,7 +1823,6 @@
       }
      ],
      "HttpMethod": "PATCH",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.CommonProperties/managedIdentityTrackedResources/{managedIdentityTrackedResourceName}",
      "RequestMediaTypes": [

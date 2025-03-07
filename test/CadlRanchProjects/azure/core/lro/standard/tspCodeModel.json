@@ -951,7 +951,6 @@
        "BodyType": {
         "$ref": "18"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "119",
@@ -987,7 +986,6 @@
        "BodyType": {
         "$ref": "18"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "123",
@@ -1017,7 +1015,6 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/azure/core/lro/standard/users/{name}",
      "RequestMediaTypes": [
@@ -1034,8 +1031,7 @@
        ],
        "BodyType": {
         "$ref": "18"
-       },
-       "BodyMediaType": "Json"
+       }
       }
      },
      "GenerateProtocolMethod": true,
@@ -1142,7 +1138,6 @@
        "BodyType": {
         "$ref": "36"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "139",
@@ -1172,7 +1167,6 @@
       }
      ],
      "HttpMethod": "DELETE",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/core/lro/standard/users/{name}",
      "BufferResponse": true,
@@ -1183,8 +1177,7 @@
        "$id": "143",
        "StatusCodes": [
         204
-       ],
-       "BodyMediaType": "Json"
+       ]
       }
      },
      "GenerateProtocolMethod": true,
@@ -1313,7 +1306,6 @@
        "BodyType": {
         "$ref": "75"
        },
-       "BodyMediaType": "Json",
        "Headers": [
         {
          "$id": "157",
@@ -1343,7 +1335,6 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/core/lro/standard/users/{name}:export",
      "BufferResponse": true,
@@ -1357,8 +1348,7 @@
        ],
        "BodyType": {
         "$ref": "89"
-       },
-       "BodyMediaType": "Json"
+       }
       },
       "ResultPath": "result"
      },

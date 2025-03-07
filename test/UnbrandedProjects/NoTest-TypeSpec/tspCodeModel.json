@@ -805,7 +805,6 @@
        "BodyType": {
         "$ref": "20"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -814,7 +813,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{noTestTypeSpecUrl}",
      "Path": "/hello",
      "BufferResponse": true,
@@ -912,7 +910,6 @@
        "BodyType": {
         "$ref": "83"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -921,7 +918,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
      "Uri": "{noTestTypeSpecUrl}",
      "Path": "/helloAgain",
      "RequestMediaTypes": [

@@ -586,7 +586,6 @@
        "BodyType": {
         "$ref": "52"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -595,7 +594,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/client-generator-core/access/publicOperation/noDecoratorInPublic",
      "BufferResponse": true,
@@ -668,7 +666,6 @@
        "BodyType": {
         "$ref": "57"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -677,7 +674,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/client-generator-core/access/publicOperation/publicDecoratorInPublic",
      "BufferResponse": true,
@@ -796,7 +792,6 @@
        "BodyType": {
         "$ref": "37"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -805,7 +800,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/client-generator-core/access/internalOperation/noDecoratorInInternal",
      "BufferResponse": true,
@@ -878,7 +872,6 @@
        "BodyType": {
         "$ref": "42"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -887,7 +880,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/client-generator-core/access/internalOperation/internalDecoratorInInternal",
      "BufferResponse": true,
@@ -960,7 +952,6 @@
        "BodyType": {
         "$ref": "47"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -969,7 +960,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/client-generator-core/access/internalOperation/publicDecoratorInInternal",
      "BufferResponse": true,
@@ -1088,7 +1078,6 @@
        "BodyType": {
         "$ref": "32"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1097,7 +1086,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/client-generator-core/access/sharedModelInOperation/public",
      "BufferResponse": true,
@@ -1170,7 +1158,6 @@
        "BodyType": {
         "$ref": "32"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1179,7 +1166,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/client-generator-core/access/sharedModelInOperation/internal",
      "BufferResponse": true,
@@ -1299,7 +1285,6 @@
        "BodyType": {
         "$ref": "2"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1308,7 +1293,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/client-generator-core/access/relativeModelInOperation/operation",
      "BufferResponse": true,
@@ -1382,7 +1366,6 @@
        "BodyType": {
         "$ref": "16"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -1391,7 +1374,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/client-generator-core/access/relativeModelInOperation/discriminator",
      "BufferResponse": true,

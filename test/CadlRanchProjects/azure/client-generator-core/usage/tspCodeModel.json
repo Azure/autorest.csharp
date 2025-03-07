@@ -296,13 +296,11 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/azure/client-generator-core/usage/inputToInputOutput",
      "RequestMediaTypes": [
@@ -358,7 +356,6 @@
        "BodyType": {
         "$ref": "7"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -367,7 +364,6 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/azure/client-generator-core/usage/outputToInputOutput",
      "BufferResponse": true,
@@ -465,7 +461,6 @@
        "BodyType": {
         "$ref": "12"
        },
-       "BodyMediaType": "Json",
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
@@ -474,7 +469,6 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
      "Uri": "{endpoint}",
      "Path": "/azure/client-generator-core/usage/modelInReadOnlyProperty",
      "RequestMediaTypes": [
