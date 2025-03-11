@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public DpgOutputLibrary Build(bool isTspInput)
         {
-            var inputClients = UpdateOperations().ToList();
+            var inputClients = UpdateOperations(_rootNamespace.Clients).ToList();
 
             var clientInfosByName = inputClients
                 .Select(og => CreateClientInfo(og, _sourceInputModel, _rootNamespace.Name))
@@ -151,12 +151,24 @@ namespace AutoRest.CSharp.Output.Models
             return defaultDerivedType;
         }
 
-        private IEnumerable<InputClient> UpdateOperations()
+        private IEnumerable<InputClient> EnumerateClients()
+        {
+            var clients = _rootNamespace.Clients;
+            while (clients.Count > 0)
+            {
+                foreach (var client in clients)
+                {
+                    yield return client;
+                }
+            }
+        }
+
+        private IEnumerable<InputClient> UpdateOperations(IEnumerable<InputClient> clients)
         {
             var defaultName = _rootNamespace.Name.ReplaceLast("Client", "");
             // this map of old/new InputOperation is to update the lazy initialization of `Paging.NextLinkOperation`
             var operationsMap = new Dictionary<InputOperation, Func<InputOperation>>();
-            foreach (var client in _rootNamespace.Clients)
+            foreach (var client in clients)
             {
                 var clientName = client.Name.IsNullOrEmpty() ? defaultName : client.Name;
                 foreach (var operation in client.Operations)
@@ -248,7 +260,7 @@ namespace AutoRest.CSharp.Output.Models
             var operations = ns.Operations;
             var clientParameters = RestClientBuilder.GetParametersFromClient(ns).ToList();
             var resourceParameters = clientParameters.Where(cp => cp.IsResourceParameter).ToHashSet();
-            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any() || !string.IsNullOrEmpty(ns.Parent);
+            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any() || ns.Parent != null;
             var clientName = isSubClient ? clientNamePrefix : clientNamePrefix + ClientBuilder.GetClientSuffix();
 
             INamedTypeSymbol? existingType;
@@ -308,7 +320,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             foreach (var client in clients)
             {
-                if (!String.IsNullOrEmpty(client.Parent))
+                if (client.Parent != null)
                 {
                     ClientInfo? targetClient = null;
                     ClientInfo? targetParent = null;
@@ -316,7 +328,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         if (info.OperationGroupKey == client.Name)
                             targetClient = info;
-                        if (info.OperationGroupKey == client.Parent)
+                        if (info.OperationGroupKey == client.Parent.Name)
                             targetParent = info;
                     }
                     if (targetClient != null && targetParent != null)

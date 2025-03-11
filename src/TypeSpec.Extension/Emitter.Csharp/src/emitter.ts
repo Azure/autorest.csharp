@@ -46,6 +46,7 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
         logger: logger,
         __typeCache: {
             crossLanguageDefinitionIds: new Map(),
+            clients: new Map(),
             types: new Map(),
             models: new Map(),
             enums: new Map()

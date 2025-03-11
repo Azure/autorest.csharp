@@ -75,7 +75,8 @@ namespace AutoRest.CSharp.Common.Input
                 Doc: operationGroup.Language.Default.Description,
                 Operations: CreateOperations(operationGroup.Operations, serviceRequestToInputOperation, inputOperationToOperation),
                 Parameters: Array.Empty<InputParameter>(),
-                Parent: null)
+                Parent: null,
+                Children: [])
             {
                 Key = operationGroup.Key,
             };
