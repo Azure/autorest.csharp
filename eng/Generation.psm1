@@ -88,10 +88,11 @@ function Invoke-TypeSpec($baseOutput, $projectName, $mainFile, $arguments="", $s
         $repoRootPath = Resolve-Path -Path $repoRootPath
         Push-Location $repoRootPath
         $autorestCsharpBinPath = Join-Path $repoRootPath "artifacts/bin/AutoRest.CSharp/Debug/$CurrentDotnetFramework/AutoRest.CSharp.dll"
+        $emitterDir = Join-Path $repoRootPath "src" "TypeSpec.Extension" "Emitter.Csharp"
         Try
         {
             $typespecFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.tsp"
-            $emitCommand = "npx tsp compile $typespecFileName --trace @azure-tools/typespec-csharp --emit @azure-tools/typespec-csharp --option @azure-tools/typespec-csharp.emitter-output-dir=$outputPath --option @azure-tools/typespec-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
+            $emitCommand = "npx tsp compile $typespecFileName --trace @azure-tools/typespec-csharp --emit $emitterDir --option @azure-tools/typespec-csharp.emitter-output-dir=$outputPath --option @azure-tools/typespec-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
             Invoke $emitCommand $outputPath
         }
         Finally 
