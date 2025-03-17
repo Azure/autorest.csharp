@@ -32,34 +32,74 @@ namespace AutoRest.CSharp.Common.Input
             string? doc = null;
             IReadOnlyList<InputOperation>? operations = null;
             IReadOnlyList<InputParameter>? parameters = null;
-            string? parent = null;
+            InputClient? parent = null;
+
+            InputClient? inputClient = null;
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputClient.Name), ref name)
-                    || reader.TryReadString("Summary", ref summary)
-                    || reader.TryReadString("Doc", ref doc)
-                    || reader.TryReadWithConverter(nameof(InputClient.Operations), options, ref operations)
-                    || reader.TryReadWithConverter(nameof(InputClient.Parameters), options, ref parameters)
-                    || reader.TryReadString(nameof(InputClient.Parent), ref parent);
+                    || reader.TryReadString("name", ref name)
+                    || reader.TryReadString("summary", ref summary)
+                    || reader.TryReadString("doc", ref doc)
+                    || reader.TryReadWithConverter("operations", options, ref operations)
+                    || reader.TryReadWithConverter("parameters", options, ref parameters)
+                    || reader.TryReadWithConverter("parent", options, ref parent);
 
-                if (!isKnownProperty)
+                if (isKnownProperty)
                 {
-                    reader.SkipProperty();
+                    continue;
                 }
+
+                if (reader.GetString() == "children")
+                {
+                    var children = new List<InputClient>();
+                    inputClient ??= CreateClientInstance(id, name, summary, doc, operations, parameters, parent, children, resolver);
+                    reader.Read();
+                    CreateChildren(ref reader, children, options, inputClient.Name);
+                    continue;
+                }
+
+                reader.SkipProperty();
             }
 
-            name= name ?? throw new JsonException("InputClient must have name");
+            return inputClient ??= CreateClientInstance(id, name, summary, doc, operations, parameters, parent, [], resolver);
+        }
+
+        private static InputClient CreateClientInstance(string? id, string? name, string? summary, string? doc, IReadOnlyList<InputOperation>? operations, IReadOnlyList<InputParameter>? parameters, InputClient? parent, IReadOnlyList<InputClient> children, ReferenceResolver resolver)
+        {
+            name = name ?? throw new JsonException("InputClient must have name");
             operations = operations ?? Array.Empty<InputOperation>();
             parameters = parameters ?? Array.Empty<InputParameter>();
-            var inputClient = new InputClient(name, summary, doc, operations, parameters, parent);
+            var inputClient = new InputClient(name, summary, doc, operations, parameters, parent, children);
+
             if (id != null)
             {
                 resolver.AddReference(id, inputClient);
             }
 
             return inputClient;
+        }
+
+        private static void CreateChildren(ref Utf8JsonReader reader, IList<InputClient> children, JsonSerializerOptions options, string clientName)
+        {
+            if (reader.TokenType != JsonTokenType.StartArray)
+            {
+                throw new JsonException($"Invalid JSON format. 'children' property of '{clientName}' should be an array.");
+            }
+            reader.Read();
+
+            while (reader.TokenType != JsonTokenType.EndArray)
+            {
+                var child = reader.ReadWithConverter<InputClient>(options);
+                if (child == null)
+                {
+                    throw new JsonException($"child of InputClient '{clientName}' cannot be null.");
+                }
+
+                children.Add(child);
+            }
+            reader.Read();
         }
     }
 }
