@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="DurationConstantAsync(DurationModel,CancellationToken)">
+      <example>
+This sample shows how to call DurationConstantAsync.
+<code><![CDATA[
+EncodingClient client = new EncodingClient();
+
+DurationModel body = new DurationModel(default);
+Response response = await client.DurationConstantAsync(body);
+]]></code>
+This sample shows how to call DurationConstantAsync with all parameters.
+<code><![CDATA[
+EncodingClient client = new EncodingClient();
+
+DurationModel body = new DurationModel(default);
+Response response = await client.DurationConstantAsync(body);
+]]></code></example>
+    </member>
+    <member name="DurationConstant(DurationModel,CancellationToken)">
+      <example>
+This sample shows how to call DurationConstant.
+<code><![CDATA[
+EncodingClient client = new EncodingClient();
+
+DurationModel body = new DurationModel(default);
+Response response = client.DurationConstant(body);
+]]></code>
+This sample shows how to call DurationConstant with all parameters.
+<code><![CDATA[
+EncodingClient client = new EncodingClient();
+
+DurationModel body = new DurationModel(default);
+Response response = client.DurationConstant(body);
+]]></code></example>
+    </member>
+    <member name="DurationConstantAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call DurationConstantAsync.
+<code><![CDATA[
+EncodingClient client = new EncodingClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = await client.DurationConstantAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call DurationConstantAsync with all request content.
+<code><![CDATA[
+EncodingClient client = new EncodingClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = await client.DurationConstantAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="DurationConstant(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call DurationConstant.
+<code><![CDATA[
+EncodingClient client = new EncodingClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = client.DurationConstant(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call DurationConstant with all request content.
+<code><![CDATA[
+EncodingClient client = new EncodingClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = client.DurationConstant(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>
