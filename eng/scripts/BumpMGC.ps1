@@ -44,7 +44,7 @@ function Get-Node-Package-DownloadUrl([string] $ArtifactDownloadUrl) {
     Write-Verbose "BaseUrl: $baseUrl"
     $query = [System.Web.HttpUtility]::ParseQueryString($url.Query)
     $query.Set("format", "file") 
-    $query.Set("subPath", "/packages/typespec-http-client-csharp-0.1.9-alpha.$($BuildJson.buildNumber).tgz")
+    $query.Set("subPath", "/packages/typespec-http-client-csharp-1.0.0-alpha.$($BuildJson.buildNumber).tgz")
 
     $newUrl = $baseUrl + "?" + $query.ToString()
     Write-Verbose "Node Package Download URL: $newUrl"
