@@ -33,6 +33,7 @@ namespace AutoRest.CSharp.Common.Input
             IReadOnlyList<InputOperation>? operations = null;
             IReadOnlyList<InputParameter>? parameters = null;
             string? parent = null;
+            IReadOnlyList<InputDecoratorInfo>? decorators = null;
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
@@ -42,7 +43,8 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString("Doc", ref doc)
                     || reader.TryReadWithConverter(nameof(InputClient.Operations), options, ref operations)
                     || reader.TryReadWithConverter(nameof(InputClient.Parameters), options, ref parameters)
-                    || reader.TryReadString(nameof(InputClient.Parent), ref parent);
+                    || reader.TryReadString(nameof(InputClient.Parent), ref parent)
+                    || reader.TryReadWithConverter("decorators", options, ref decorators);
 
                 if (!isKnownProperty)
                 {
@@ -58,7 +60,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 resolver.AddReference(id, inputClient);
             }
-
+            inputClient.Decorators = decorators ?? Array.Empty<InputDecoratorInfo>();
             return inputClient;
         }
     }

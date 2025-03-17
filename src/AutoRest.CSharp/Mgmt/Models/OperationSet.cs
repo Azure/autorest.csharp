@@ -40,6 +40,11 @@ namespace AutoRest.CSharp.Mgmt.Models
             Operations = new HashSet<InputOperation>();
         }
 
+        public bool IsResourceOperations()
+        {
+            return _inputClient == null || _inputClient?.Decorators?.FirstOrDefault(d => d.Name == "armResourceOperations") != null;
+        }
+
         /// <summary>
         /// Add a new operation to this <see cref="OperationSet"/>
         /// </summary>
