@@ -30,6 +30,8 @@ model FooProperties {
 
     /** double value */
     doubleValue?: float64;
+
+    testResource? : Azure.Core.armResourceType;
 }
 
 @armResourceOperations
