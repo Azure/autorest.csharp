@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.Common.Input
                 AllowTrailingCommas = true,
                 Converters =
                 {
+                    new TypeSpecInputNamespaceConverter(referenceHandler),
                     new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
                     new RequestMethodConverter(),
                     new TypeSpecInputTypeConverter(referenceHandler),
