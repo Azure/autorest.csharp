@@ -391,7 +391,7 @@ namespace AutoRest.CSharp.Output.Models
             return new Reference($"{groupedByParameterName.ToVariableName()}.{propertyName}", propertyType);
         }
 
-        private static ResponseBody? BuildResponseBody(OperationResponse response, TypeFactory typeFactory)
+        private static ResponseBody? BuildResponseBody(InputOperationResponse response, TypeFactory typeFactory)
         {
             var bodyType = response.BodyType;
             if (bodyType == null)

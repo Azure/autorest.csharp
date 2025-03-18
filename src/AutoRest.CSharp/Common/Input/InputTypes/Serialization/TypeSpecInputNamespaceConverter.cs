@@ -40,11 +40,11 @@ namespace AutoRest.CSharp.Common.Input
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadString("name", ref name)
-                    || reader.TryReadWithConverter("apiVersions", options, ref apiVersions)
-                    || reader.TryReadWithConverter("enums", options, ref enums)
-                    || reader.TryReadWithConverter("models", options, ref models)
-                    || reader.TryReadWithConverter("clients", options, ref clients)
-                    || reader.TryReadWithConverter("auth", options, ref auth);
+                    || reader.TryReadComplexType("apiVersions", options, ref apiVersions)
+                    || reader.TryReadComplexType("enums", options, ref enums)
+                    || reader.TryReadComplexType("models", options, ref models)
+                    || reader.TryReadComplexType("clients", options, ref clients)
+                    || reader.TryReadComplexType("auth", options, ref auth);
 
                 if (!isKnownProperty)
                 {

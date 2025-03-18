@@ -39,8 +39,8 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString("name", ref name)
                     || reader.TryReadString("summary", ref summary)
                     || reader.TryReadString("doc", ref doc)
-                    || reader.TryReadWithConverter("operations", options, ref operations)
-                    || reader.TryReadWithConverter("parameters", options, ref parameters)
+                    || reader.TryReadComplexType("operations", options, ref operations)
+                    || reader.TryReadComplexType("parameters", options, ref parameters)
                     || reader.TryReadString("parent", ref parent);
 
                 if (!isKnownProperty)
