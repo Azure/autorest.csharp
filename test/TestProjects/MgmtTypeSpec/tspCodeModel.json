@@ -4650,7 +4650,7 @@
   "$id": "574",
   "oAuth2": {
    "$id": "575",
-   "Scopes": [
+   "scopes": [
     "user_impersonation"
    ]
   }

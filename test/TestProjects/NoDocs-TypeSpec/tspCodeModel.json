@@ -5789,7 +5789,7 @@
   "$id": "610",
   "oAuth2": {
    "$id": "611",
-   "Scopes": [
+   "scopes": [
     "https://api.example.com/.default"
    ]
   },
