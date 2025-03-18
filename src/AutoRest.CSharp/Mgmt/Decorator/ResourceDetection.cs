@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             // try to get another configuration to see if this is marked as not a resource
-            if (Configuration.MgmtConfiguration.RequestPathIsNonResource.Contains(set.RequestPath))
+            if (Configuration.MgmtConfiguration.RequestPathIsNonResource.Contains(set.RequestPath) || !set.IsResourceOperations())
             {
                 MgmtReport.Instance.TransformSection.AddTransformLog(
                     new TransformItem(TransformTypeName.RequestPathIsNonResource, set.RequestPath), set.RequestPath, "Path marked as non-resource: " + set.RequestPath);
