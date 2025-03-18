@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Common.Input
             IReadOnlyList<string>? requestMediaTypes = null;
             bool bufferResponse = false;
             InputOperationLongRunning? longRunning= null;
-            OperationPaging? paging = null;
+            InputOperationPaging? paging = null;
             bool generateProtocolMethod = false;
             bool generateConvenienceMethod = false;
             string? crossLanguageDefinitionId = null;

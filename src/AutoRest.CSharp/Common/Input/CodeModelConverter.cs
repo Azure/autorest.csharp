@@ -355,7 +355,7 @@ namespace AutoRest.CSharp.Common.Input
             );
         }
 
-        private OperationPaging? CreateOperationPaging(ServiceRequest serviceRequest, Operation operation)
+        private InputOperationPaging? CreateOperationPaging(ServiceRequest serviceRequest, Operation operation)
         {
             var paging = operation.Language.Default.Paging;
             if (paging == null)
@@ -366,10 +366,10 @@ namespace AutoRest.CSharp.Common.Input
             var nextLinkServiceRequest = paging.NextLinkOperation?.Requests.Single();
             if (nextLinkServiceRequest != null && nextLinkServiceRequest != serviceRequest && _operationsCache.TryGetValue(nextLinkServiceRequest, out var nextLinkOperationRef))
             {
-                return new OperationPaging(nextLinkName: paging.NextLinkName, itemName: paging.ItemName, nextLinkOperationRef(), false);
+                return new InputOperationPaging(nextLinkName: paging.NextLinkName, itemName: paging.ItemName, nextLinkOperationRef(), false);
             }
 
-            return new OperationPaging(nextLinkName: paging.NextLinkName, itemName: paging.ItemName, null, nextLinkServiceRequest == serviceRequest);
+            return new InputOperationPaging(nextLinkName: paging.NextLinkName, itemName: paging.ItemName, null, nextLinkServiceRequest == serviceRequest);
         }
 
         private void CreateEnums()

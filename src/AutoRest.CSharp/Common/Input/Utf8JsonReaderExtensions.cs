@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -11,6 +10,24 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal static class Utf8JsonReaderExtensions
     {
+        public static bool TryReadReferenceId(this ref Utf8JsonReader reader, ref string? id)
+        {
+            if (reader.TokenType != JsonTokenType.PropertyName)
+            {
+                throw new JsonException();
+            }
+
+            if (reader.GetString() != "$id")
+            {
+                return false;
+            }
+
+            reader.Read();
+            id = reader.GetString() ?? throw new JsonException();
+            reader.Read();
+            return true;
+        }
+
         public static bool TryReadReferenceId(this ref Utf8JsonReader reader, ref bool isFirstProperty, ref string? value)
         {
             if (reader.TokenType != JsonTokenType.PropertyName)

@@ -48,7 +48,10 @@ namespace AutoRest.CSharp.Common.Input
                     new TypeSpecInputOAuth2AuthConverter(referenceHandler),
                     new TypeSpecInputOperationResponseConverter(referenceHandler),
                     new TypeSpecInputOperationResponseHeaderConverter(referenceHandler),
-                    new TypeSpecOperationLongRunningConverter(referenceHandler),
+                    new TypeSpecInputOperationLongRunningConverter(referenceHandler),
+                    new TypeSpecInputOperationPagingConverter(referenceHandler),
+                    new TypeSpecInputNextLinkConverter(referenceHandler),
+                    new TypeSpecInputContinuationTokenConverter(referenceHandler),
                 }
             };
 

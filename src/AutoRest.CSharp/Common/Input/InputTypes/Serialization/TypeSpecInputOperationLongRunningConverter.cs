@@ -8,11 +8,11 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal sealed class TypeSpecOperationLongRunningConverter : JsonConverter<InputOperationLongRunning>
+    internal sealed class TypeSpecInputOperationLongRunningConverter : JsonConverter<InputOperationLongRunning>
     {
         private readonly TypeSpecReferenceHandler _referenceHandler;
 
-        public TypeSpecOperationLongRunningConverter(TypeSpecReferenceHandler referenceHandler)
+        public TypeSpecInputOperationLongRunningConverter(TypeSpecReferenceHandler referenceHandler)
         {
             _referenceHandler = referenceHandler;
         }

@@ -29,7 +29,7 @@ internal record InputOperation
     IReadOnlyList<string>? requestMediaTypes,
     bool bufferResponse,
     InputOperationLongRunning? longRunning,
-    OperationPaging? paging,
+    InputOperationPaging? paging,
     bool generateProtocolMethod,
     bool generateConvenienceMethod,
     string crossLanguageDefinitionId,
@@ -151,7 +151,7 @@ internal record InputOperation
     public IReadOnlyList<string>? RequestMediaTypes { get; }
     public bool BufferResponse { get; }
     public InputOperationLongRunning? LongRunning { get; }
-    public OperationPaging? Paging { get; init; }
+    public InputOperationPaging? Paging { get; init; }
     public bool GenerateProtocolMethod { get; }
     public bool GenerateConvenienceMethod { get; }
     public string CrossLanguageDefinitionId { get; }
