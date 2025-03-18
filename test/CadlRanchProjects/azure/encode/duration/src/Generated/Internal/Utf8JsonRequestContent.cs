@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core;
 
-namespace _Specs_.Azure.Payload.Encoding
+namespace _Specs_.Azure.Encode.Duration
 {
     internal class Utf8JsonRequestContent : RequestContent
     {

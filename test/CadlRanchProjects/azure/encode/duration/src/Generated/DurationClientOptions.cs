@@ -7,10 +7,10 @@
 
 using Azure.Core;
 
-namespace _Specs_.Azure.Payload.Encoding
+namespace _Specs_.Azure.Encode.Duration
 {
-    /// <summary> Client options for EncodingClient. </summary>
-    public partial class EncodingClientOptions : ClientOptions
+    /// <summary> Client options for DurationClient. </summary>
+    public partial class DurationClientOptions : ClientOptions
     {
     }
 }

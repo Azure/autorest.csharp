@@ -12,7 +12,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace _Specs_.Azure.Payload.Encoding.Models
+namespace _Specs_.Azure.Encode.Duration.Models
 {
     public partial class DurationModel : IUtf8JsonSerializable, IJsonModel<DurationModel>
     {

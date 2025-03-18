@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using _Specs_.Azure.Payload.Encoding.Models;
+using _Specs_.Azure.Encode.Duration.Models;
 
-namespace _Specs_.Azure.Payload.Encoding
+namespace _Specs_.Azure.Encode.Duration
 {
     // Data plane generated client.
     /// <summary> Test for azure related encode decorator. </summary>
-    public partial class EncodingClient
+    public partial class DurationClient
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -28,19 +28,19 @@ namespace _Specs_.Azure.Payload.Encoding
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of EncodingClient. </summary>
-        public EncodingClient() : this(new Uri("http://localhost:3000"), new EncodingClientOptions())
+        /// <summary> Initializes a new instance of DurationClient. </summary>
+        public DurationClient() : this(new Uri("http://localhost:3000"), new DurationClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of EncodingClient. </summary>
+        /// <summary> Initializes a new instance of DurationClient. </summary>
         /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public EncodingClient(Uri endpoint, EncodingClientOptions options)
+        public DurationClient(Uri endpoint, DurationClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new EncodingClientOptions();
+            options ??= new DurationClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
@@ -52,14 +52,14 @@ namespace _Specs_.Azure.Payload.Encoding
         /// Expected request body:
         /// ```json
         /// {
-        ///   "input": "1.2:59:59.5000000"
+        ///   "input": "1.02:59:59.5000000"
         /// }
         /// ```
         /// </summary>
         /// <param name="body"> The <see cref="DurationModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/EncodingClient.xml" path="doc/members/member[@name='DurationConstantAsync(DurationModel,CancellationToken)']/*" />
+        /// <include file="Docs/DurationClient.xml" path="doc/members/member[@name='DurationConstantAsync(DurationModel,CancellationToken)']/*" />
         public virtual async Task<Response> DurationConstantAsync(DurationModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -75,14 +75,14 @@ namespace _Specs_.Azure.Payload.Encoding
         /// Expected request body:
         /// ```json
         /// {
-        ///   "input": "1.2:59:59.5000000"
+        ///   "input": "1.02:59:59.5000000"
         /// }
         /// ```
         /// </summary>
         /// <param name="body"> The <see cref="DurationModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/EncodingClient.xml" path="doc/members/member[@name='DurationConstant(DurationModel,CancellationToken)']/*" />
+        /// <include file="Docs/DurationClient.xml" path="doc/members/member[@name='DurationConstant(DurationModel,CancellationToken)']/*" />
         public virtual Response DurationConstant(DurationModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -98,7 +98,7 @@ namespace _Specs_.Azure.Payload.Encoding
         /// Expected request body:
         /// ```json
         /// {
-        ///   "input": "1.2:59:59.5000000"
+        ///   "input": "1.02:59:59.5000000"
         /// }
         /// ```
         /// <list type="bullet">
@@ -119,12 +119,12 @@ namespace _Specs_.Azure.Payload.Encoding
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/EncodingClient.xml" path="doc/members/member[@name='DurationConstantAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/DurationClient.xml" path="doc/members/member[@name='DurationConstantAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> DurationConstantAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("EncodingClient.DurationConstant");
+            using var scope = ClientDiagnostics.CreateScope("DurationClient.DurationConstant");
             scope.Start();
             try
             {
@@ -143,7 +143,7 @@ namespace _Specs_.Azure.Payload.Encoding
         /// Expected request body:
         /// ```json
         /// {
-        ///   "input": "1.2:59:59.5000000"
+        ///   "input": "1.02:59:59.5000000"
         /// }
         /// ```
         /// <list type="bullet">
@@ -164,12 +164,12 @@ namespace _Specs_.Azure.Payload.Encoding
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/EncodingClient.xml" path="doc/members/member[@name='DurationConstant(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/DurationClient.xml" path="doc/members/member[@name='DurationConstant(RequestContent,RequestContext)']/*" />
         public virtual Response DurationConstant(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("EncodingClient.DurationConstant");
+            using var scope = ClientDiagnostics.CreateScope("DurationClient.DurationConstant");
             scope.Start();
             try
             {
@@ -190,7 +190,7 @@ namespace _Specs_.Azure.Payload.Encoding
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/azure/payload/encoding/duration-constant", false);
+            uri.AppendPath("/azure/encode/duration/duration-constant", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;

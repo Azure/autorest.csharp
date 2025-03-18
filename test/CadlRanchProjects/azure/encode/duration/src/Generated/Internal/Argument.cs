@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace _Specs_.Azure.Payload.Encoding
+namespace _Specs_.Azure.Encode.Duration
 {
     internal static class Argument
     {

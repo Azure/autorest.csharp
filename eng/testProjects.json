@@ -35,7 +35,7 @@
         "azure/example/basic",
         "azure/resource-manager/common-properties",
         "azure/special-headers/client-request-id",
-        "azure/payload/encoding",
+        "azure/encode/duration",
         "encode/bytes",
         "encode/datetime",
         "encode/duration",

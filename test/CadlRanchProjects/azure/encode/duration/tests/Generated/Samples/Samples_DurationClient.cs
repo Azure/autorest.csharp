@@ -11,17 +11,17 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Specs_.Azure.Payload.Encoding.Models;
+using _Specs_.Azure.Encode.Duration.Models;
 
-namespace _Specs_.Azure.Payload.Encoding.Samples
+namespace _Specs_.Azure.Encode.Duration.Samples
 {
-    public partial class Samples_EncodingClient
+    public partial class Samples_DurationClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Encoding_DurationConstant_ShortVersion()
+        public void Example_Duration_DurationConstant_ShortVersion()
         {
-            EncodingClient client = new EncodingClient();
+            DurationClient client = new DurationClient();
 
             using RequestContent content = RequestContent.Create(new { });
             Response response = client.DurationConstant(content);
@@ -31,9 +31,9 @@ namespace _Specs_.Azure.Payload.Encoding.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Encoding_DurationConstant_ShortVersion_Async()
+        public async Task Example_Duration_DurationConstant_ShortVersion_Async()
         {
-            EncodingClient client = new EncodingClient();
+            DurationClient client = new DurationClient();
 
             using RequestContent content = RequestContent.Create(new { });
             Response response = await client.DurationConstantAsync(content);
@@ -43,9 +43,9 @@ namespace _Specs_.Azure.Payload.Encoding.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Encoding_DurationConstant_ShortVersion_Convenience()
+        public void Example_Duration_DurationConstant_ShortVersion_Convenience()
         {
-            EncodingClient client = new EncodingClient();
+            DurationClient client = new DurationClient();
 
             DurationModel body = new DurationModel(default);
             Response response = client.DurationConstant(body);
@@ -53,9 +53,9 @@ namespace _Specs_.Azure.Payload.Encoding.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Encoding_DurationConstant_ShortVersion_Convenience_Async()
+        public async Task Example_Duration_DurationConstant_ShortVersion_Convenience_Async()
         {
-            EncodingClient client = new EncodingClient();
+            DurationClient client = new DurationClient();
 
             DurationModel body = new DurationModel(default);
             Response response = await client.DurationConstantAsync(body);
@@ -63,9 +63,9 @@ namespace _Specs_.Azure.Payload.Encoding.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Encoding_DurationConstant_AllParameters()
+        public void Example_Duration_DurationConstant_AllParameters()
         {
-            EncodingClient client = new EncodingClient();
+            DurationClient client = new DurationClient();
 
             using RequestContent content = RequestContent.Create(new { });
             Response response = client.DurationConstant(content);
@@ -75,9 +75,9 @@ namespace _Specs_.Azure.Payload.Encoding.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Encoding_DurationConstant_AllParameters_Async()
+        public async Task Example_Duration_DurationConstant_AllParameters_Async()
         {
-            EncodingClient client = new EncodingClient();
+            DurationClient client = new DurationClient();
 
             using RequestContent content = RequestContent.Create(new { });
             Response response = await client.DurationConstantAsync(content);
@@ -87,9 +87,9 @@ namespace _Specs_.Azure.Payload.Encoding.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Encoding_DurationConstant_AllParameters_Convenience()
+        public void Example_Duration_DurationConstant_AllParameters_Convenience()
         {
-            EncodingClient client = new EncodingClient();
+            DurationClient client = new DurationClient();
 
             DurationModel body = new DurationModel(default);
             Response response = client.DurationConstant(body);
@@ -97,9 +97,9 @@ namespace _Specs_.Azure.Payload.Encoding.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Encoding_DurationConstant_AllParameters_Convenience_Async()
+        public async Task Example_Duration_DurationConstant_AllParameters_Convenience_Async()
         {
-            EncodingClient client = new EncodingClient();
+            DurationClient client = new DurationClient();
 
             DurationModel body = new DurationModel(default);
             Response response = await client.DurationConstantAsync(body);

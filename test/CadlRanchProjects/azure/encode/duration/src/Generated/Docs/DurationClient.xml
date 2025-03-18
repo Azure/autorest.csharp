@@ -5,14 +5,14 @@
       <example>
 This sample shows how to call DurationConstantAsync.
 <code><![CDATA[
-EncodingClient client = new EncodingClient();
+DurationClient client = new DurationClient();
 
 DurationModel body = new DurationModel(default);
 Response response = await client.DurationConstantAsync(body);
 ]]></code>
 This sample shows how to call DurationConstantAsync with all parameters.
 <code><![CDATA[
-EncodingClient client = new EncodingClient();
+DurationClient client = new DurationClient();
 
 DurationModel body = new DurationModel(default);
 Response response = await client.DurationConstantAsync(body);
@@ -22,14 +22,14 @@ Response response = await client.DurationConstantAsync(body);
       <example>
 This sample shows how to call DurationConstant.
 <code><![CDATA[
-EncodingClient client = new EncodingClient();
+DurationClient client = new DurationClient();
 
 DurationModel body = new DurationModel(default);
 Response response = client.DurationConstant(body);
 ]]></code>
 This sample shows how to call DurationConstant with all parameters.
 <code><![CDATA[
-EncodingClient client = new EncodingClient();
+DurationClient client = new DurationClient();
 
 DurationModel body = new DurationModel(default);
 Response response = client.DurationConstant(body);
@@ -39,7 +39,7 @@ Response response = client.DurationConstant(body);
       <example>
 This sample shows how to call DurationConstantAsync.
 <code><![CDATA[
-EncodingClient client = new EncodingClient();
+DurationClient client = new DurationClient();
 
 using RequestContent content = RequestContent.Create(new { });
 Response response = await client.DurationConstantAsync(content);
@@ -48,7 +48,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DurationConstantAsync with all request content.
 <code><![CDATA[
-EncodingClient client = new EncodingClient();
+DurationClient client = new DurationClient();
 
 using RequestContent content = RequestContent.Create(new { });
 Response response = await client.DurationConstantAsync(content);
@@ -60,7 +60,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call DurationConstant.
 <code><![CDATA[
-EncodingClient client = new EncodingClient();
+DurationClient client = new DurationClient();
 
 using RequestContent content = RequestContent.Create(new { });
 Response response = client.DurationConstant(content);
@@ -69,7 +69,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DurationConstant with all request content.
 <code><![CDATA[
-EncodingClient client = new EncodingClient();
+DurationClient client = new DurationClient();
 
 using RequestContent content = RequestContent.Create(new { });
 Response response = client.DurationConstant(content);

@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "_Specs_.Azure.Payload.Encoding",
+ "Name": "_Specs_.Azure.Encode.Duration",
  "ApiVersions": [],
  "Enums": [],
  "Models": [
@@ -8,8 +8,8 @@
    "$id": "2",
    "kind": "model",
    "name": "DurationModel",
-   "namespace": "_Specs_.Azure.Payload.Encoding",
-   "crossLanguageDefinitionId": "_Specs_.Azure.Payload.Encoding.DurationModel",
+   "namespace": "_Specs_.Azure.Encode.Duration",
+   "crossLanguageDefinitionId": "_Specs_.Azure.Encode.Duration.DurationModel",
    "usage": "Input,Json",
    "decorators": [],
    "properties": [
@@ -38,7 +38,7 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.Payload.Encoding.DurationModel.input",
+     "crossLanguageDefinitionId": "_Specs_.Azure.Encode.Duration.DurationModel.input",
      "serializationOptions": {
       "$id": "6",
       "json": {
@@ -53,15 +53,15 @@
  "Clients": [
   {
    "$id": "8",
-   "Name": "EncodingClient",
-   "Namespace": "_Specs_.Azure.Payload.Encoding",
+   "Name": "DurationClient",
+   "Namespace": "_Specs_.Azure.Encode.Duration",
    "Doc": "Test for azure related encode decorator.",
    "Operations": [
     {
      "$id": "9",
      "Name": "durationConstant",
-     "ResourceName": "Encoding",
-     "Doc": "Test duration with azure specific encoding.\nExpected request body:\n```json\n{\n  \"input\": \"1.2:59:59.5000000\"\n}\n```",
+     "ResourceName": "Duration",
+     "Doc": "Test duration with azure specific encoding.\nExpected request body:\n```json\n{\n  \"input\": \"1.02:59:59.5000000\"\n}\n```",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -122,14 +122,14 @@
      ],
      "HttpMethod": "PUT",
      "Uri": "{endpoint}",
-     "Path": "/azure/payload/encoding/duration-constant",
+     "Path": "/azure/encode/duration/duration-constant",
      "RequestMediaTypes": [
       "application/json"
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Payload.Encoding.durationConstant",
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Encode.Duration.durationConstant",
      "Decorators": []
     }
    ],
@@ -170,7 +170,7 @@
     }
    ],
    "Decorators": [],
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Payload.Encoding"
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Encode.Duration"
   }
  ]
 }

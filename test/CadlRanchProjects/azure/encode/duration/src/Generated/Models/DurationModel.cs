@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace _Specs_.Azure.Payload.Encoding.Models
+namespace _Specs_.Azure.Encode.Duration.Models
 {
     /// <summary> The DurationModel. </summary>
     public partial class DurationModel
