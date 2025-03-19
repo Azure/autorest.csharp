@@ -51,16 +51,27 @@ namespace AutoRest.CSharp.Common.Input
             crossLanguageDefinitionId = crossLanguageDefinitionId ?? throw new JsonException("Duration type must have crossLanguageDefinitionId");
             encode = encode ?? throw new JsonException("Duration type must have encode");
             wireType = wireType ?? throw new JsonException("Duration type must have wireType");
-            encode = encode == "duration-constant" ? "constant" : encode;
-            var dateTimeType = Enum.TryParse<DurationKnownEncoding>(encode, ignoreCase: true, out var encodeKind)
-                ? new InputDurationType(encodeKind, name, crossLanguageDefinitionId, wireType, baseType) { Decorators = decorators ?? [] }
-                : throw new JsonException($"Encoding of Duration type {encode} is unknown.");
+
+            var dateTimeType = new InputDurationType(CreateDurationKnownEncoding(encode), name, crossLanguageDefinitionId, wireType, baseType) { Decorators = decorators ?? [] };
 
             if (id != null)
             {
                 resolver.AddReference(id, dateTimeType);
             }
             return dateTimeType;
+        }
+
+        private static DurationKnownEncoding CreateDurationKnownEncoding(string encode)
+        {
+            if (encode == "duration-constant")
+            {
+                return DurationKnownEncoding.DurationConstant;
+            }
+            if (Enum.TryParse<DurationKnownEncoding>(encode, ignoreCase: true, out var encodeKind))
+            {
+                return encodeKind;
+            }
+            throw new JsonException($"Encoding of Duration type {encode} is unknown.");
         }
     }
 }
