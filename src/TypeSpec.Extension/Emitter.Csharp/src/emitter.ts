@@ -66,16 +66,6 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
             fs.mkdirSync(generatedFolder, { recursive: true });
         }
 
-        // clean up those models with empty name
-        // TODO -- we could remove this part until TCGC fixes it: https://github.com/Azure/typespec-azure/issues/2417
-        const models = [];
-        for (const model of root.models) {
-            if (model.name !== "") {
-                models.push(model);
-            }
-        }
-        root.models = models;
-
         // write the tspCodeModel.json file
         await writeCodeModel(csharpEmitterContext, root, outputFolder);
 
