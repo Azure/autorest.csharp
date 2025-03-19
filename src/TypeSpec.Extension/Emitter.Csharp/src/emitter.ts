@@ -66,6 +66,15 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
             fs.mkdirSync(generatedFolder, { recursive: true });
         }
 
+        // clean up those models with empty name
+        const models = [];
+        for (const model of root.models) {
+            if (model.name !== "") {
+                models.push(model);
+            }
+        }
+        root.models = models;
+
         // write the tspCodeModel.json file
         await writeCodeModel(csharpEmitterContext, root, outputFolder);
 
