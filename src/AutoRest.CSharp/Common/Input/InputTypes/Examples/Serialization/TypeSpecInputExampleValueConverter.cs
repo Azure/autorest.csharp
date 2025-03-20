@@ -72,8 +72,8 @@ namespace AutoRest.CSharp.Common.Input.Examples
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadWithConverter(TypePropertyName, options, ref type)
-                    || reader.TryReadWithConverter(ValuePropertyName, options, ref value);
+                    || reader.TryReadComplexType(TypePropertyName, options, ref type)
+                    || reader.TryReadComplexType(ValuePropertyName, options, ref value);
 
                 if (!isKnownProperty)
                 {
@@ -99,8 +99,8 @@ namespace AutoRest.CSharp.Common.Input.Examples
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadWithConverter(TypePropertyName, options, ref type)
-                    || reader.TryReadWithConverter(ValuePropertyName, options, ref value);
+                    || reader.TryReadComplexType(TypePropertyName, options, ref type)
+                    || reader.TryReadComplexType(ValuePropertyName, options, ref value);
 
                 if (!isKnownProperty)
                 {
@@ -126,8 +126,8 @@ namespace AutoRest.CSharp.Common.Input.Examples
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadWithConverter(TypePropertyName, options, ref type)
-                    || reader.TryReadWithConverter(ValuePropertyName, options, ref rawValue);
+                    || reader.TryReadComplexType(TypePropertyName, options, ref type)
+                    || reader.TryReadComplexType(ValuePropertyName, options, ref rawValue);
 
                 if (!isKnownProperty)
                 {
@@ -197,8 +197,8 @@ namespace AutoRest.CSharp.Common.Input.Examples
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadWithConverter(TypePropertyName, options, ref type)
-                    || reader.TryReadWithConverter(ValuePropertyName, options, ref rawValue);
+                    || reader.TryReadComplexType(TypePropertyName, options, ref type)
+                    || reader.TryReadComplexType(ValuePropertyName, options, ref rawValue);
 
                 if (!isKnownProperty)
                 {

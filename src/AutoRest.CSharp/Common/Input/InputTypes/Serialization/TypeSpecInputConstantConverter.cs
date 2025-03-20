@@ -28,11 +28,11 @@ namespace AutoRest.CSharp.Common.Input
             InputType? type = null;
 
             reader.TryReadReferenceId(ref isFirstProperty, ref id);
-            if (!reader.TryReadWithConverter(nameof(InputConstant.Type), options, ref type))
+            if (!reader.TryReadComplexType("type", options, ref type))
             {
                 throw new JsonException("Must provide type ahead of value.");
             }
-            var value = ReadConstantValue(ref reader, nameof(InputConstant.Value), options, type);
+            var value = ReadConstantValue(ref reader, "value", options, type);
 
             type = type ?? throw new JsonException("InputConstant must have type");
 

@@ -87,7 +87,7 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
 
         configurations["output-folder"] = ".";
 
-        const namespace = options["namespace"] ?? root.Name;
+        const namespace = options["namespace"] ?? root.name;
         configurations["namespace"] = namespace;
         configurations["library-name"] = options["library-name"] ?? namespace;
         configurations["unreferenced-types-handling"] =

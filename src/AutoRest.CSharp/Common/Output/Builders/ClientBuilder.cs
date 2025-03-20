@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             foreach (var operation in inputClient.Operations)
             {
-                OperationPaging? paging = operation.Paging;
+                InputOperationPaging? paging = operation.Paging;
                 if (paging == null || operation.IsLongRunning)
                 {
                     continue;

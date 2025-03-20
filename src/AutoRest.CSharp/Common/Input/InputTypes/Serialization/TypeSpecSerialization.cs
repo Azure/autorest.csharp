@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.Common.Input
                 AllowTrailingCommas = true,
                 Converters =
                 {
+                    new TypeSpecInputNamespaceConverter(referenceHandler),
                     new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
                     new RequestMethodConverter(),
                     new TypeSpecInputTypeConverter(referenceHandler),
@@ -42,6 +43,15 @@ namespace AutoRest.CSharp.Common.Input
                     new TypeSpecInputExampleValueConverter(referenceHandler),
                     new TypeSpecInputOperationExampleConverter(referenceHandler),
                     new TypeSpecInputParameterExampleConverter(referenceHandler),
+                    new TypeSpecInputAuthConverter(referenceHandler),
+                    new TypeSpecInputApiKeyAuthConverter(referenceHandler),
+                    new TypeSpecInputOAuth2AuthConverter(referenceHandler),
+                    new TypeSpecInputOperationResponseConverter(referenceHandler),
+                    new TypeSpecInputOperationResponseHeaderConverter(referenceHandler),
+                    new TypeSpecInputOperationLongRunningConverter(referenceHandler),
+                    new TypeSpecInputOperationPagingConverter(referenceHandler),
+                    new TypeSpecInputNextLinkConverter(referenceHandler),
+                    new TypeSpecInputContinuationTokenConverter(referenceHandler),
                 }
             };
 

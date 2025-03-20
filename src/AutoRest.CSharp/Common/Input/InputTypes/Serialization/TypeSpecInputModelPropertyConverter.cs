@@ -45,11 +45,11 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString("serializedName", ref serializedName)
                     || reader.TryReadString("summary", ref summary)
                     || reader.TryReadString("doc", ref doc)
-                    || reader.TryReadWithConverter("type", options, ref propertyType)
+                    || reader.TryReadComplexType("type", options, ref propertyType)
                     || reader.TryReadBoolean("readOnly", ref isReadOnly)
                     || reader.TryReadBoolean("optional", ref isOptional)
                     || reader.TryReadBoolean("discriminator", ref isDiscriminator)
-                    || reader.TryReadWithConverter("decorators", options, ref decorators)
+                    || reader.TryReadComplexType("decorators", options, ref decorators)
                     || reader.TryReadBoolean("flatten", ref isFlattened);
 
                 if (!isKnownProperty)
