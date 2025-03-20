@@ -26,6 +26,10 @@ export interface AzureCSharpEmitterOptions extends CSharpEmitterOptions {
     "generate-test-project"?: boolean;
     "use-model-reader-writer"?: boolean;
     "library-name"?: string;
+    "examples-directory"?: string;
+    "examples-dir"?: string;
+    "generate-protocol-methods"?: boolean;
+    "generate-convenience-methods"?: boolean;
 }
 
 export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterOptions> =
@@ -34,6 +38,8 @@ export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterO
         additionalProperties: false,
         properties: {
             ...CSharpEmitterOptionsSchema.properties,
+            "examples-directory": { type: "string", nullable: true },
+            "examples-dir": { type: "string", nullable: true },
             csharpGeneratorPath: {
                 type: "string",
                 default: dllFilePath,
@@ -74,6 +80,8 @@ export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterO
             },
             "package-dir": { type: "string", nullable: true },
             "head-as-boolean": { type: "boolean", nullable: true },
+            "generate-protocol-methods": { type: "boolean", nullable: true },
+            "generate-convenience-methods": { type: "boolean", nullable: true },
             flavor: { type: "string", nullable: true },
             "generate-sample-project": {
                 type: "boolean",
@@ -108,7 +116,11 @@ const defaultAzureEmitterOptions = {
     "use-model-reader-writer": true,
     "single-top-level-client": undefined,
     "keep-non-overloadable-protocol-signature": undefined,
-    "library-name": undefined
+    "library-name": undefined,
+    "examples-directory": undefined,
+    "examples-dir": undefined,
+    "generate-protocol-methods": true,
+    "generate-convenience-methods": true
 };
 
 export function resolveAzureEmitterOptions(
@@ -166,6 +178,12 @@ export function resolveAzureEmitterOptions(
                 "keep-non-overloadable-protocol-signature"
             ],
         namespace: context.options.namespace,
-        "library-name": context.options["package-name"]
+        "library-name": context.options["package-name"],
+        "examples-directory": context.options["examples-directory"],
+        "examples-dir": context.options["examples-dir"],
+        "generate-protocol-methods":
+            context.options["generate-protocol-methods"],
+        "generate-convenience-methods":
+            context.options["generate-convenience-methods"]
     };
 }
