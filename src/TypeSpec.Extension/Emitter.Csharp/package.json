@@ -18,6 +18,9 @@
     ],
     "type": "module",
     "main": "dist/src/index.js",
+    "engines": {
+        "node": ">=20.0.0"
+    },
     "scripts": {
         "clean": "rimraf ./dist ./temp",
         "build": "tsc -p .",
