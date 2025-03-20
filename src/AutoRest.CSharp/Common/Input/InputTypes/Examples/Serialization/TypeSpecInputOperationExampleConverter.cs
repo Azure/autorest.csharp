@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
                     || reader.TryReadString("name", ref name)
                     || reader.TryReadString("description", ref description)
                     || reader.TryReadString("filePath", ref filePath)
-                    || reader.TryReadWithConverter("parameters", options, ref parameters);
+                    || reader.TryReadComplexType("parameters", options, ref parameters);
 
                 if (!isKnownProperty)
                 {

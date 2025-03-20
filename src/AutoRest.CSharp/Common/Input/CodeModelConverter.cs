@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.Common.Input
                 doc: operation.Language.Default.Description,
                 accessibility: operation.Accessibility,
                 parameters: parameters,
-                responses: operation.Responses.Select<ServiceResponse, OperationResponse>(CreateOperationResponse).ToList(),
+                responses: operation.Responses.Select<ServiceResponse, InputOperationResponse>(CreateOperationResponse).ToList(),
                 httpMethod: httpRequest.Method.ToCoreRequestMethod(),
                 uri: httpRequest.Uri,
                 path: httpRequest.Path,
@@ -323,7 +323,7 @@ namespace AutoRest.CSharp.Common.Input
         );
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        private OperationResponse CreateOperationResponse(ServiceResponse response) => new(
+        private InputOperationResponse CreateOperationResponse(ServiceResponse response) => new(
             StatusCodes: response.HttpResponse.IntStatusCodes.ToList(),
             BodyType: GetResponseBodyType(response),
             BodyMediaType: GetBodyFormat(response.HttpResponse.KnownMediaType),
@@ -333,7 +333,7 @@ namespace AutoRest.CSharp.Common.Input
         );
 #pragma warning restore CS0618 // Type or member is obsolete
 
-        private OperationResponseHeader CreateResponseHeader(HttpResponseHeader header) => new(
+        private InputOperationResponseHeader CreateResponseHeader(HttpResponseHeader header) => new(
             Name: header.CSharpName(),
             NameInResponse: header.Extensions?.HeaderCollectionPrefix ?? header.Header,
             Summary: string.Empty,
@@ -341,21 +341,21 @@ namespace AutoRest.CSharp.Common.Input
             Type: GetOrCreateType(header.Schema, header.Extensions?.Format, true)
         );
 
-        private OperationLongRunning? CreateLongRunning(Operation operation)
+        private InputOperationLongRunning? CreateLongRunning(Operation operation)
         {
             if (!operation.IsLongRunning)
             {
                 return null;
             }
 
-            return new OperationLongRunning(
+            return new InputOperationLongRunning(
                 FinalStateVia: operation.LongRunningFinalStateVia,
                 FinalResponse: CreateOperationResponse(operation.LongRunningFinalResponse),
                 ResultPath: null
             );
         }
 
-        private OperationPaging? CreateOperationPaging(ServiceRequest serviceRequest, Operation operation)
+        private InputOperationPaging? CreateOperationPaging(ServiceRequest serviceRequest, Operation operation)
         {
             var paging = operation.Language.Default.Paging;
             if (paging == null)
@@ -366,10 +366,10 @@ namespace AutoRest.CSharp.Common.Input
             var nextLinkServiceRequest = paging.NextLinkOperation?.Requests.Single();
             if (nextLinkServiceRequest != null && nextLinkServiceRequest != serviceRequest && _operationsCache.TryGetValue(nextLinkServiceRequest, out var nextLinkOperationRef))
             {
-                return new OperationPaging(nextLinkName: paging.NextLinkName, itemName: paging.ItemName, nextLinkOperationRef(), false);
+                return new InputOperationPaging(nextLinkName: paging.NextLinkName, itemName: paging.ItemName, nextLinkOperationRef(), false);
             }
 
-            return new OperationPaging(nextLinkName: paging.NextLinkName, itemName: paging.ItemName, null, nextLinkServiceRequest == serviceRequest);
+            return new InputOperationPaging(nextLinkName: paging.NextLinkName, itemName: paging.ItemName, null, nextLinkServiceRequest == serviceRequest);
         }
 
         private void CreateEnums()
@@ -599,11 +599,11 @@ namespace AutoRest.CSharp.Common.Input
             _ => null
         };
 
-        private IReadOnlyList<OperationResponseHeader> GetResponseHeaders(ICollection<HttpResponseHeader>? headers)
+        private IReadOnlyList<InputOperationResponseHeader> GetResponseHeaders(ICollection<HttpResponseHeader>? headers)
         {
             if (headers == null)
             {
-                return Array.Empty<OperationResponseHeader>();
+                return Array.Empty<InputOperationResponseHeader>();
             }
             return headers.Select(CreateResponseHeader).ToList();
         }

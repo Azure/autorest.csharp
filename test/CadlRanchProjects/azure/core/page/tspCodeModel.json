@@ -1,10 +1,10 @@
 {
  "$id": "1",
- "Name": "_Specs_.Azure.Core.Page",
- "ApiVersions": [
+ "name": "_Specs_.Azure.Core.Page",
+ "apiVersions": [
   "2022-12-01-preview"
  ],
- "Enums": [
+ "enums": [
   {
    "$id": "2",
    "kind": "enum",
@@ -102,7 +102,7 @@
    "decorators": []
   }
  ],
- "Models": [
+ "models": [
   {
    "$id": "12",
    "kind": "model",
@@ -740,57 +740,57 @@
    ]
   }
  ],
- "Clients": [
+ "clients": [
   {
    "$id": "97",
-   "Name": "PageClient",
-   "Namespace": "_Specs_.Azure.Core.Page",
-   "Doc": "Illustrates bodies templated with Azure Core with paging support",
-   "Operations": [
+   "name": "PageClient",
+   "namespace": "_Specs_.Azure.Core.Page",
+   "doc": "Illustrates bodies templated with Azure Core with paging support",
+   "operations": [
     {
      "$id": "98",
-     "Name": "listWithPage",
-     "ResourceName": "Page",
-     "Doc": "List with Azure.Core.Page<>.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "listWithPage",
+     "resourceName": "Page",
+     "doc": "List with Azure.Core.Page<>.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "99",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
-       "Type": {
+       "name": "apiVersion",
+       "nameInRequest": "api-version",
+       "doc": "The API version to use for this operation.",
+       "type": {
         "$id": "100",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Client",
-       "DefaultValue": {
+       "location": "Query",
+       "isApiVersion": true,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Client",
+       "defaultValue": {
         "$id": "101",
-        "Type": {
+        "type": {
          "$id": "102",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
-        "Value": "2022-12-01-preview"
+        "value": "2022-12-01-preview"
        },
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "103",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "104",
         "kind": "constant",
         "valueType": {
@@ -803,118 +803,118 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "106",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "67"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/azure/core/page/page",
-     "BufferResponse": true,
-     "Paging": {
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/azure/core/page/page",
+     "bufferResponse": true,
+     "paging": {
       "$id": "107",
-      "ItemPropertySegments": [
+      "itemPropertySegments": [
        "value"
       ],
-      "NextLink": {
+      "nextLink": {
        "$id": "108",
-       "ResponseSegments": [
+       "responseSegments": [
         "nextLink"
        ],
-       "ResponseLocation": "Body"
+       "responseLocation": "Body"
       }
      },
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.listWithPage",
-     "Decorators": []
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.listWithPage",
+     "decorators": []
     },
     {
      "$id": "109",
-     "Name": "listWithParameters",
-     "ResourceName": "Page",
-     "Doc": "List with extensible enum parameter Azure.Core.Page<>.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "listWithParameters",
+     "resourceName": "Page",
+     "doc": "List with extensible enum parameter Azure.Core.Page<>.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "110",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
-       "Type": {
+       "name": "apiVersion",
+       "nameInRequest": "api-version",
+       "doc": "The API version to use for this operation.",
+       "type": {
         "$id": "111",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Client",
-       "DefaultValue": {
+       "location": "Query",
+       "isApiVersion": true,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Client",
+       "defaultValue": {
         "$id": "112",
-        "Type": {
+        "type": {
          "$id": "113",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
-        "Value": "2022-12-01-preview"
+        "value": "2022-12-01-preview"
        },
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "114",
-       "Name": "another",
-       "NameInRequest": "another",
-       "Doc": "Another query parameter.",
-       "Type": {
+       "name": "another",
+       "nameInRequest": "another",
+       "doc": "Another query parameter.",
+       "type": {
         "$ref": "2"
        },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "115",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
-       "Type": {
+       "name": "contentType",
+       "nameInRequest": "Content-Type",
+       "doc": "Body parameter's content type. Known values are application/json",
+       "type": {
         "$id": "116",
         "kind": "constant",
         "valueType": {
@@ -927,21 +927,21 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": true,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "118",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "119",
         "kind": "constant",
         "valueType": {
@@ -954,120 +954,120 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "121",
-       "Name": "bodyInput",
-       "NameInRequest": "bodyInput",
-       "Doc": "The body of the input.",
-       "Type": {
+       "name": "bodyInput",
+       "nameInRequest": "bodyInput",
+       "doc": "The body of the input.",
+       "type": {
         "$ref": "43"
        },
-       "Location": "Body",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Body",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "122",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "67"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/azure/core/page/parameters",
-     "RequestMediaTypes": [
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/azure/core/page/parameters",
+     "requestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": true,
-     "Paging": {
+     "bufferResponse": true,
+     "paging": {
       "$id": "123",
-      "ItemPropertySegments": [
+      "itemPropertySegments": [
        "value"
       ],
-      "NextLink": {
+      "nextLink": {
        "$id": "124",
-       "ResponseSegments": [
+       "responseSegments": [
         "nextLink"
        ],
-       "ResponseLocation": "Body"
+       "responseLocation": "Body"
       }
      },
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.listWithParameters",
-     "Decorators": []
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.listWithParameters",
+     "decorators": []
     },
     {
      "$id": "125",
-     "Name": "listWithCustomPageModel",
-     "ResourceName": "Page",
-     "Doc": "List with custom page model.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "listWithCustomPageModel",
+     "resourceName": "Page",
+     "doc": "List with custom page model.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "126",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
-       "Type": {
+       "name": "apiVersion",
+       "nameInRequest": "api-version",
+       "doc": "The API version to use for this operation.",
+       "type": {
         "$id": "127",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Client",
-       "DefaultValue": {
+       "location": "Query",
+       "isApiVersion": true,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Client",
+       "defaultValue": {
         "$id": "128",
-        "Type": {
+        "type": {
          "$id": "129",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
-        "Value": "2022-12-01-preview"
+        "value": "2022-12-01-preview"
        },
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "130",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "131",
         "kind": "constant",
         "valueType": {
@@ -1080,148 +1080,144 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "133",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "48"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/azure/core/page/custom-page",
-     "BufferResponse": true,
-     "Paging": {
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/azure/core/page/custom-page",
+     "bufferResponse": true,
+     "paging": {
       "$id": "134",
-      "ItemPropertySegments": [
+      "itemPropertySegments": [
        "items"
       ],
-      "NextLink": {
+      "nextLink": {
        "$id": "135",
-       "ResponseSegments": [
+       "responseSegments": [
         "nextLink"
        ],
-       "ResponseLocation": "Body"
+       "responseLocation": "Body"
       }
      },
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.listWithCustomPageModel",
-     "Decorators": []
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.listWithCustomPageModel",
+     "decorators": []
     }
    ],
-   "Protocol": {
-    "$id": "136"
-   },
-   "Parameters": [
+   "parameters": [
     {
-     "$id": "137",
-     "Name": "endpoint",
-     "NameInRequest": "endpoint",
-     "Doc": "Service host",
-     "Type": {
-      "$id": "138",
+     "$id": "136",
+     "name": "endpoint",
+     "nameInRequest": "endpoint",
+     "doc": "Service host",
+     "type": {
+      "$id": "137",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
      },
-     "Location": "Uri",
-     "IsApiVersion": false,
-     "IsResourceParameter": false,
-     "IsContentType": false,
-     "IsRequired": true,
-     "IsEndpoint": true,
-     "SkipUrlEncoding": false,
-     "Explode": false,
-     "Kind": "Client",
-     "DefaultValue": {
-      "$id": "139",
-      "Type": {
-       "$id": "140",
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client",
+     "defaultValue": {
+      "$id": "138",
+      "type": {
+       "$id": "139",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"
       },
-      "Value": "http://localhost:3000"
+      "value": "http://localhost:3000"
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page"
+   "decorators": [],
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page"
   },
   {
-   "$id": "141",
-   "Name": "TwoModelsAsPageItem",
-   "Namespace": "_Specs_.Azure.Core.Page",
-   "Operations": [
+   "$id": "140",
+   "name": "TwoModelsAsPageItem",
+   "namespace": "_Specs_.Azure.Core.Page",
+   "operations": [
     {
-     "$id": "142",
-     "Name": "listFirstItem",
-     "ResourceName": "TwoModelsAsPageItem",
-     "Doc": "Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.",
-     "Accessibility": "public",
-     "Parameters": [
+     "$id": "141",
+     "name": "listFirstItem",
+     "resourceName": "TwoModelsAsPageItem",
+     "doc": "Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.",
+     "accessibility": "public",
+     "parameters": [
       {
-       "$id": "143",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
-       "Type": {
-        "$id": "144",
+       "$id": "142",
+       "name": "apiVersion",
+       "nameInRequest": "api-version",
+       "doc": "The API version to use for this operation.",
+       "type": {
+        "$id": "143",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "145",
-        "Type": {
-         "$id": "146",
+       "location": "Query",
+       "isApiVersion": true,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "144",
+        "type": {
+         "$id": "145",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
-        "Value": "2022-12-01-preview"
+        "value": "2022-12-01-preview"
        },
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
-       "$id": "147",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "148",
+       "$id": "146",
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
+        "$id": "147",
         "kind": "constant",
         "valueType": {
-         "$id": "149",
+         "$id": "148",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1230,103 +1226,103 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
-       "$id": "150",
-       "StatusCodes": [
+       "$id": "149",
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "77"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/azure/core/page/first-item",
-     "BufferResponse": true,
-     "Paging": {
-      "$id": "151",
-      "ItemPropertySegments": [
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/azure/core/page/first-item",
+     "bufferResponse": true,
+     "paging": {
+      "$id": "150",
+      "itemPropertySegments": [
        "value"
       ],
-      "NextLink": {
-       "$id": "152",
-       "ResponseSegments": [
+      "nextLink": {
+       "$id": "151",
+       "responseSegments": [
         "nextLink"
        ],
-       "ResponseLocation": "Body"
+       "responseLocation": "Body"
       }
      },
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.TwoModelsAsPageItem.listFirstItem",
-     "Decorators": []
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.TwoModelsAsPageItem.listFirstItem",
+     "decorators": []
     },
     {
-     "$id": "153",
-     "Name": "listSecondItem",
-     "ResourceName": "TwoModelsAsPageItem",
-     "Doc": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
-     "Accessibility": "public",
-     "Parameters": [
+     "$id": "152",
+     "name": "listSecondItem",
+     "resourceName": "TwoModelsAsPageItem",
+     "doc": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
+     "accessibility": "public",
+     "parameters": [
       {
-       "$id": "154",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
-       "Type": {
-        "$id": "155",
+       "$id": "153",
+       "name": "apiVersion",
+       "nameInRequest": "api-version",
+       "doc": "The API version to use for this operation.",
+       "type": {
+        "$id": "154",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "156",
-        "Type": {
-         "$id": "157",
+       "location": "Query",
+       "isApiVersion": true,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "155",
+        "type": {
+         "$id": "156",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
-        "Value": "2022-12-01-preview"
+        "value": "2022-12-01-preview"
        },
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
-       "$id": "158",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "159",
+       "$id": "157",
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
+        "$id": "158",
         "kind": "constant",
         "valueType": {
-         "$id": "160",
+         "$id": "159",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1335,95 +1331,91 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
-       "$id": "161",
-       "StatusCodes": [
+       "$id": "160",
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "87"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/azure/core/page/second-item",
-     "BufferResponse": true,
-     "Paging": {
-      "$id": "162",
-      "ItemPropertySegments": [
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/azure/core/page/second-item",
+     "bufferResponse": true,
+     "paging": {
+      "$id": "161",
+      "itemPropertySegments": [
        "value"
       ],
-      "NextLink": {
-       "$id": "163",
-       "ResponseSegments": [
+      "nextLink": {
+       "$id": "162",
+       "responseSegments": [
         "nextLink"
        ],
-       "ResponseLocation": "Body"
+       "responseLocation": "Body"
       }
      },
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.TwoModelsAsPageItem.listSecondItem",
-     "Decorators": []
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.TwoModelsAsPageItem.listSecondItem",
+     "decorators": []
     }
    ],
-   "Protocol": {
-    "$id": "164"
-   },
-   "Parent": "PageClient",
-   "Parameters": [
+   "parent": "PageClient",
+   "parameters": [
     {
-     "$id": "165",
-     "Name": "endpoint",
-     "NameInRequest": "endpoint",
-     "Doc": "Service host",
-     "Type": {
-      "$id": "166",
+     "$id": "163",
+     "name": "endpoint",
+     "nameInRequest": "endpoint",
+     "doc": "Service host",
+     "type": {
+      "$id": "164",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
      },
-     "Location": "Uri",
-     "IsApiVersion": false,
-     "IsResourceParameter": false,
-     "IsContentType": false,
-     "IsRequired": true,
-     "IsEndpoint": true,
-     "SkipUrlEncoding": false,
-     "Explode": false,
-     "Kind": "Client",
-     "DefaultValue": {
-      "$id": "167",
-      "Type": {
-       "$id": "168",
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client",
+     "defaultValue": {
+      "$id": "165",
+      "type": {
+       "$id": "166",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"
       },
-      "Value": "http://localhost:3000"
+      "value": "http://localhost:3000"
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.TwoModelsAsPageItem"
+   "decorators": [],
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.TwoModelsAsPageItem"
   }
  ]
 }

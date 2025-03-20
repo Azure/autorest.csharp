@@ -166,7 +166,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private LongRunningResultRetrievalMethod? GetLongRunningResultRetrievalMethod(OperationLongRunning? longRunning)
+        private LongRunningResultRetrievalMethod? GetLongRunningResultRetrievalMethod(InputOperationLongRunning? longRunning)
         {
             if (longRunning is { ResultPath: not null })
                 return new(_typeFactory.CreateType(longRunning.ReturnType!), longRunning.FinalResponse.BodyType!.Name, longRunning.ResultPath);
