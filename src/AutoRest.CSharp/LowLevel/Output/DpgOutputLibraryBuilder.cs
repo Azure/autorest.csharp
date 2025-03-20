@@ -207,7 +207,7 @@ namespace AutoRest.CSharp.Output.Models
             return parameters;
         }
 
-        private static OperationPaging? UpdateOperationPaging(OperationPaging? sourcePaging, IReadOnlyDictionary<InputOperation, Func<InputOperation>> operationsMap)
+        private static InputOperationPaging? UpdateOperationPaging(InputOperationPaging? sourcePaging, IReadOnlyDictionary<InputOperation, Func<InputOperation>> operationsMap)
         {
             if (sourcePaging == null)
             {

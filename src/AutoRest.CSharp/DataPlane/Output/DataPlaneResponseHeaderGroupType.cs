@@ -24,10 +24,10 @@ namespace AutoRest.CSharp.Output.Models.Responses
             "x-ms-request-id"
         };
 
-        public DataPlaneResponseHeaderGroupType(InputOperation operation, OperationResponseHeader[] httpResponseHeaders, TypeFactory typeFactory, string clientPrefix, SourceInputModel? sourceInputModel)
+        public DataPlaneResponseHeaderGroupType(InputOperation operation, InputOperationResponseHeader[] httpResponseHeaders, TypeFactory typeFactory, string clientPrefix, SourceInputModel? sourceInputModel)
             : base(Configuration.Namespace, sourceInputModel)
         {
-            ResponseHeader CreateResponseHeader(OperationResponseHeader header)
+            ResponseHeader CreateResponseHeader(InputOperationResponseHeader header)
             {
                 CSharpType type = typeFactory.CreateType(header.Type);
 

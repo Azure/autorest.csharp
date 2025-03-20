@@ -55,10 +55,10 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString("summary", ref summary)
                     || reader.TryReadString("doc", ref doc)
                     || reader.TryReadString("usage", ref usageString)
-                    || reader.TryReadWithConverter("discriminatorProperty", options, ref discriminatorProperty)
+                    || reader.TryReadComplexType("discriminatorProperty", options, ref discriminatorProperty)
                     || reader.TryReadString("discriminatorValue", ref discriminatorValue)
-                    || reader.TryReadWithConverter("additionalProperties", options, ref additionalProperties)
-                    || reader.TryReadWithConverter("decorators", options, ref decorators);
+                    || reader.TryReadComplexType("additionalProperties", options, ref additionalProperties)
+                    || reader.TryReadComplexType("decorators", options, ref decorators);
 
                 if (isKnownProperty)
                 {
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Common.Input
                 if (reader.GetString() == "baseModel")
                 {
                     model = CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, access, deprecation, summary, doc, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, decorators, resolver);
-                    reader.TryReadWithConverter("baseModel", options, ref baseModel);
+                    reader.TryReadComplexType("baseModel", options, ref baseModel);
                     if (baseModel != null)
                     {
                         model.SetBaseModel(baseModel);

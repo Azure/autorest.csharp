@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -11,6 +10,24 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal static class Utf8JsonReaderExtensions
     {
+        public static bool TryReadReferenceId(this ref Utf8JsonReader reader, ref string? id)
+        {
+            if (reader.TokenType != JsonTokenType.PropertyName)
+            {
+                throw new JsonException();
+            }
+
+            if (reader.GetString() != "$id")
+            {
+                return false;
+            }
+
+            reader.Read();
+            id = reader.GetString() ?? throw new JsonException();
+            reader.Read();
+            return true;
+        }
+
         public static bool TryReadReferenceId(this ref Utf8JsonReader reader, ref bool isFirstProperty, ref string? value)
         {
             if (reader.TokenType != JsonTokenType.PropertyName)
@@ -50,6 +67,24 @@ namespace AutoRest.CSharp.Common.Input
 
             reader.Read();
             value = reader.GetBoolean();
+            reader.Read();
+            return true;
+        }
+
+        public static bool TryReadInt32(this ref Utf8JsonReader reader, string propertyName, ref int value)
+        {
+            if (reader.TokenType != JsonTokenType.PropertyName)
+            {
+                throw new JsonException();
+            }
+
+            if (reader.GetString() != propertyName)
+            {
+                return false;
+            }
+
+            reader.Read();
+            value = reader.GetInt32();
             reader.Read();
             return true;
         }
@@ -112,7 +147,7 @@ namespace AutoRest.CSharp.Common.Input
             return true;
         }
 
-        public static bool TryReadWithConverter<T>(this ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, ref T? value)
+        public static bool TryReadComplexType<T>(this ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, ref T? value)
         {
             if (reader.TokenType != JsonTokenType.PropertyName)
             {
@@ -129,7 +164,7 @@ namespace AutoRest.CSharp.Common.Input
             return true;
         }
 
-        public static bool TryReadWithConverter<T>(this ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, ref IReadOnlyList<T>? value)
+        public static bool TryReadComplexType<T>(this ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, ref IReadOnlyList<T>? value)
         {
             if (reader.TokenType != JsonTokenType.PropertyName)
             {

@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, OperationResponse FinalResponse, string? ResultPath)
+internal record InputOperationLongRunning(OperationFinalStateVia FinalStateVia, InputOperationResponse FinalResponse, string? ResultPath)
 {
-    public OperationLongRunning() : this(FinalStateVia: OperationFinalStateVia.Location, FinalResponse: new OperationResponse(), null) { }
+    public InputOperationLongRunning() : this(FinalStateVia: OperationFinalStateVia.Location, FinalResponse: new InputOperationResponse(), null) { }
 
     /// <summary>
     /// Meaningful return type of the long running operation.

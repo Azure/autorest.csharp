@@ -1,10 +1,10 @@
 {
  "$id": "1",
- "Name": "ParametersCadl",
- "ApiVersions": [
+ "name": "ParametersCadl",
+ "apiVersions": [
   "2022-05-15-preview"
  ],
- "Enums": [
+ "enums": [
   {
    "$id": "2",
    "kind": "enum",
@@ -43,7 +43,7 @@
    "decorators": []
   }
  ],
- "Models": [
+ "models": [
   {
    "$id": "6",
    "kind": "model",
@@ -82,134 +82,130 @@
    ]
   }
  ],
- "Clients": [
+ "clients": [
   {
    "$id": "11",
-   "Name": "ParametersCadlClient",
-   "Namespace": "ParametersCadl",
-   "Operations": [],
-   "Protocol": {
-    "$id": "12"
-   },
-   "Parameters": [
+   "name": "ParametersCadlClient",
+   "namespace": "ParametersCadl",
+   "operations": [],
+   "parameters": [
     {
-     "$id": "13",
-     "Name": "endpoint",
-     "NameInRequest": "endpoint",
-     "Doc": "Service host",
-     "Type": {
-      "$id": "14",
+     "$id": "12",
+     "name": "endpoint",
+     "nameInRequest": "endpoint",
+     "doc": "Service host",
+     "type": {
+      "$id": "13",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
      },
-     "Location": "Uri",
-     "IsApiVersion": false,
-     "IsResourceParameter": false,
-     "IsContentType": false,
-     "IsRequired": true,
-     "IsEndpoint": true,
-     "SkipUrlEncoding": false,
-     "Explode": false,
-     "Kind": "Client"
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "ParametersCadl"
+   "decorators": [],
+   "crossLanguageDefinitionId": "ParametersCadl"
   },
   {
-   "$id": "15",
-   "Name": "ParameterOrders",
-   "Namespace": "ParametersCadl.ParameterOrders",
-   "Operations": [
+   "$id": "14",
+   "name": "ParameterOrders",
+   "namespace": "ParametersCadl.ParameterOrders",
+   "operations": [
     {
-     "$id": "16",
-     "Name": "Operation",
-     "ResourceName": "ParameterOrders",
-     "Accessibility": "public",
-     "Parameters": [
+     "$id": "15",
+     "name": "Operation",
+     "resourceName": "ParameterOrders",
+     "accessibility": "public",
+     "parameters": [
       {
-       "$id": "17",
-       "Name": "start",
-       "NameInRequest": "start",
-       "Type": {
-        "$id": "18",
+       "$id": "16",
+       "name": "start",
+       "nameInRequest": "start",
+       "type": {
+        "$id": "17",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
-       "$id": "19",
-       "Name": "end",
-       "NameInRequest": "end",
-       "Type": {
-        "$id": "20",
+       "$id": "18",
+       "name": "end",
+       "nameInRequest": "end",
+       "type": {
+        "$id": "19",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
-       "$id": "21",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Type": {
-        "$id": "22",
+       "$id": "20",
+       "name": "apiVersion",
+       "nameInRequest": "api-version",
+       "type": {
+        "$id": "21",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "23",
-        "Type": {
-         "$id": "24",
+       "location": "Query",
+       "isApiVersion": true,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "22",
+        "type": {
+         "$id": "23",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
-        "Value": "2022-05-15-preview"
+        "value": "2022-05-15-preview"
        },
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
-       "$id": "25",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "26",
+       "$id": "24",
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
+        "$id": "25",
         "kind": "constant",
         "valueType": {
-         "$id": "27",
+         "$id": "26",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -218,99 +214,99 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
-       "$id": "28",
-       "StatusCodes": [
+       "$id": "27",
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "6"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/parameterOrders",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ParametersCadl.ParameterOrders.Operation",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/parameterOrders",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ParametersCadl.ParameterOrders.Operation",
+     "decorators": []
     },
     {
-     "$id": "29",
-     "Name": "Operation2",
-     "ResourceName": "ParameterOrders",
-     "Accessibility": "public",
-     "Parameters": [
+     "$id": "28",
+     "name": "Operation2",
+     "resourceName": "ParameterOrders",
+     "accessibility": "public",
+     "parameters": [
       {
-       "$id": "30",
-       "Name": "start",
-       "NameInRequest": "start",
-       "Type": {
-        "$id": "31",
+       "$id": "29",
+       "name": "start",
+       "nameInRequest": "start",
+       "type": {
+        "$id": "30",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
-       "$id": "32",
-       "Name": "end",
-       "NameInRequest": "end",
-       "Type": {
-        "$id": "33",
+       "$id": "31",
+       "name": "end",
+       "nameInRequest": "end",
+       "type": {
+        "$id": "32",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
-       "$id": "34",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "35",
+       "$id": "33",
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
+        "$id": "34",
         "kind": "constant",
         "valueType": {
-         "$id": "36",
+         "$id": "35",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -319,72 +315,68 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
-       "$id": "37",
-       "StatusCodes": [
+       "$id": "36",
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "6"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "HEAD",
-     "Uri": "{endpoint}",
-     "Path": "/parameterOrders",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ParametersCadl.ParameterOrders.Operation2",
-     "Decorators": []
+     "httpMethod": "HEAD",
+     "uri": "{endpoint}",
+     "path": "/parameterOrders",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ParametersCadl.ParameterOrders.Operation2",
+     "decorators": []
     }
    ],
-   "Protocol": {
-    "$id": "38"
-   },
-   "Parent": "ParametersCadlClient",
-   "Parameters": [
+   "parent": "ParametersCadlClient",
+   "parameters": [
     {
-     "$id": "39",
-     "Name": "endpoint",
-     "NameInRequest": "endpoint",
-     "Doc": "Service host",
-     "Type": {
-      "$id": "40",
+     "$id": "37",
+     "name": "endpoint",
+     "nameInRequest": "endpoint",
+     "doc": "Service host",
+     "type": {
+      "$id": "38",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
      },
-     "Location": "Uri",
-     "IsApiVersion": false,
-     "IsResourceParameter": false,
-     "IsContentType": false,
-     "IsRequired": true,
-     "IsEndpoint": true,
-     "SkipUrlEncoding": false,
-     "Explode": false,
-     "Kind": "Client"
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "ParametersCadl.ParameterOrders"
+   "decorators": [],
+   "crossLanguageDefinitionId": "ParametersCadl.ParameterOrders"
   }
  ]
 }
