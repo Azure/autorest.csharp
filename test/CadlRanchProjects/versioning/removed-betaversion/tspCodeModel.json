@@ -37,7 +37,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Versioning.Removed",
+   "namespace": "Versioning.Removed.BetaVersion",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -91,7 +91,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Versioning.Removed",
+   "namespace": "Versioning.Removed.BetaVersion",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -147,7 +147,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Versioning.Removed",
+   "namespace": "Versioning.Removed.BetaVersion",
    "doc": "The version of the API.",
    "isFixed": true,
    "isFlags": false,
@@ -160,7 +160,7 @@
    "$id": "18",
    "kind": "model",
    "name": "ModelV1",
-   "namespace": "Versioning.Removed",
+   "namespace": "Versioning.Removed.BetaVersion",
    "crossLanguageDefinitionId": "Versioning.Removed.ModelV1",
    "usage": "Input,Output,Json",
    "decorators": [],
@@ -238,7 +238,7 @@
         "decorators": []
        }
       ],
-      "namespace": "Versioning.Removed",
+      "namespace": "Versioning.Removed.BetaVersion",
       "decorators": []
      },
      "optional": false,
@@ -261,7 +261,7 @@
    "$id": "32",
    "kind": "model",
    "name": "ModelV2",
-   "namespace": "Versioning.Removed",
+   "namespace": "Versioning.Removed.BetaVersion",
    "crossLanguageDefinitionId": "Versioning.Removed.ModelV2",
    "usage": "Input,Output,Json",
    "decorators": [],
@@ -379,7 +379,7 @@
         "decorators": []
        }
       ],
-      "namespace": "Versioning.Removed",
+      "namespace": "Versioning.Removed.BetaVersion",
       "decorators": []
      },
      "optional": false,
@@ -402,7 +402,7 @@
    "$id": "52",
    "kind": "model",
    "name": "ModelV3",
-   "namespace": "Versioning.Removed",
+   "namespace": "Versioning.Removed.BetaVersion",
    "crossLanguageDefinitionId": "Versioning.Removed.ModelV3",
    "usage": "Input,Output,Json",
    "decorators": [],
@@ -440,7 +440,7 @@
   {
    "$id": "57",
    "name": "RemovedClient",
-   "namespace": "Versioning.Removed",
+   "namespace": "Versioning.Removed.BetaVersion",
    "doc": "Test for the `@removed` decorator.",
    "operations": [
     {
@@ -833,7 +833,7 @@
   {
    "$id": "90",
    "name": "InterfaceV1",
-   "namespace": "Versioning.Removed",
+   "namespace": "Versioning.Removed.BetaVersion",
    "doc": "This operation group should not be generated with latest version.",
    "operations": [
     {

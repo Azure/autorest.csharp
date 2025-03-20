@@ -1985,7 +1985,7 @@
     "namespace": "FirstTestTypeSpec",
     "crossLanguageDefinitionId": "FirstTestTypeSpec.BaseModel",
     "usage": "Input,Json",
-    "doc": "parenetModel",
+    "doc": "parentModel",
     "decorators": [],
     "properties": [
      {
@@ -2058,7 +2058,7 @@
    "namespace": "FirstTestTypeSpec",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.ContainSelf",
    "usage": "Input,Json",
-   "doc": "containself",
+   "doc": "containSelf",
    "decorators": [],
    "properties": [
     {

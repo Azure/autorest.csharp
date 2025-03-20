@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 namespace Serialization.EncodedName.Json
 {
     // Data plane generated client.
-    /// <summary> Projection. </summary>
+    /// <summary> Encoded names. </summary>
     public partial class JsonClient
     {
         private readonly HttpPipeline _pipeline;

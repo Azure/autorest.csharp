@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace FirstTestTypeSpec.Models
+namespace _Azure.ResourceManager.CommonProperties.Models
 {
-    /// <summary> parentModel. </summary>
-    public partial class BaseModel
+    /// <summary> Confidential Resource Properties. </summary>
+    public partial class ConfidentialResourceProperties
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -43,30 +43,39 @@ namespace FirstTestTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
-        /// <param name="level"></param>
-        public BaseModel(sbyte level)
+        /// <summary> Initializes a new instance of <see cref="ConfidentialResourceProperties"/>. </summary>
+        /// <param name="provisioningState"> The status of the last operation. </param>
+        /// <param name="username"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="username"/> is null. </exception>
+        public ConfidentialResourceProperties(string provisioningState, string username)
         {
-            Level = level;
+            Argument.AssertNotNull(username, nameof(username));
+
+            ProvisioningState = provisioningState;
+            Username = username;
         }
 
-        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
-        /// <param name="level"></param>
+        /// <summary> Initializes a new instance of <see cref="ConfidentialResourceProperties"/>. </summary>
+        /// <param name="provisioningState"> The status of the last operation. </param>
+        /// <param name="username"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal BaseModel(sbyte level, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ConfidentialResourceProperties(string provisioningState, string username, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Level = level;
+            ProvisioningState = provisioningState;
+            Username = username;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="BaseModel"/> for deserialization. </summary>
-        internal BaseModel()
+        /// <summary> Initializes a new instance of <see cref="ConfidentialResourceProperties"/> for deserialization. </summary>
+        internal ConfidentialResourceProperties()
         {
         }
 
-        /// <summary> Gets the level. </summary>
-        public sbyte Level { get; }
+        /// <summary> The status of the last operation. </summary>
+        public string ProvisioningState { get; }
+        /// <summary> Gets or sets the username. </summary>
+        public string Username { get; set; }
     }
 }

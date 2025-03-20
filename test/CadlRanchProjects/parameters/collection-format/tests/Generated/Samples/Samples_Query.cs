@@ -105,50 +105,6 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Query_Tsv_ShortVersion()
-        {
-            Query client = new CollectionFormatClient().GetQueryClient();
-
-            Response response = client.Tsv(new string[] { "<colors>" });
-
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Query_Tsv_ShortVersion_Async()
-        {
-            Query client = new CollectionFormatClient().GetQueryClient();
-
-            Response response = await client.TsvAsync(new string[] { "<colors>" });
-
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Query_Tsv_AllParameters()
-        {
-            Query client = new CollectionFormatClient().GetQueryClient();
-
-            Response response = client.Tsv(new string[] { "<colors>" });
-
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Query_Tsv_AllParameters_Async()
-        {
-            Query client = new CollectionFormatClient().GetQueryClient();
-
-            Response response = await client.TsvAsync(new string[] { "<colors>" });
-
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_Query_Pipes_ShortVersion()
         {
             Query client = new CollectionFormatClient().GetQueryClient();

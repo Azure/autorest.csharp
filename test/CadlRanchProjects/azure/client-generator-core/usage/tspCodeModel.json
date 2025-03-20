@@ -164,7 +164,7 @@
     {
      "$id": "22",
      "kind": "property",
-     "name": "name",
+     "name": "modelName",
      "serializedName": "name",
      "type": {
       "$id": "23",
@@ -182,25 +182,51 @@
      "serializationOptions": {
       "$id": "24"
      }
+    },
+    {
+     "$id": "25",
+     "kind": "property",
+     "name": "description",
+     "serializedName": "desc",
+     "type": {
+      "$id": "26",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.OrphanModel.description",
+     "serializationOptions": {
+      "$id": "27",
+      "json": {
+       "$id": "28",
+       "name": "desc"
+      }
+     }
     }
    ]
   }
  ],
  "clients": [
   {
-   "$id": "25",
+   "$id": "29",
    "name": "UsageClient",
    "namespace": "_Specs_.Azure.ClientGenerator.Core.Usage",
    "doc": "Test for internal decorator.",
    "operations": [],
    "parameters": [
     {
-     "$id": "26",
+     "$id": "30",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Service host",
      "type": {
-      "$id": "27",
+      "$id": "31",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -214,9 +240,9 @@
      "explode": false,
      "kind": "Client",
      "defaultValue": {
-      "$id": "28",
+      "$id": "32",
       "type": {
-       "$id": "29",
+       "$id": "33",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"
@@ -229,27 +255,27 @@
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage"
   },
   {
-   "$id": "30",
+   "$id": "34",
    "name": "ModelInOperation",
    "namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
    "operations": [
     {
-     "$id": "31",
+     "$id": "35",
      "name": "inputToInputOutput",
      "resourceName": "ModelInOperation",
      "doc": "Expected body parameter: \n```json\n{\n  \"name\": \"Madge\"\n}\n```",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "32",
+       "$id": "36",
        "name": "contentType",
        "nameInRequest": "Content-Type",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$id": "33",
+        "$id": "37",
         "kind": "constant",
         "valueType": {
-         "$id": "34",
+         "$id": "38",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -269,7 +295,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "35",
+       "$id": "39",
        "name": "body",
        "nameInRequest": "body",
        "type": {
@@ -288,7 +314,7 @@
      ],
      "responses": [
       {
-       "$id": "36",
+       "$id": "40",
        "statusCodes": [
         204
        ],
@@ -309,21 +335,21 @@
      "decorators": []
     },
     {
-     "$id": "37",
+     "$id": "41",
      "name": "outputToInputOutput",
      "resourceName": "ModelInOperation",
      "doc": "Expected response body: \n```json\n{\n  \"name\": \"Madge\"\n}\n```",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "38",
+       "$id": "42",
        "name": "accept",
        "nameInRequest": "Accept",
        "type": {
-        "$id": "39",
+        "$id": "43",
         "kind": "constant",
         "valueType": {
-         "$id": "40",
+         "$id": "44",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -345,7 +371,7 @@
      ],
      "responses": [
       {
-       "$id": "41",
+       "$id": "45",
        "statusCodes": [
         200
        ],
@@ -369,22 +395,22 @@
      "decorators": []
     },
     {
-     "$id": "42",
+     "$id": "46",
      "name": "modelInReadOnlyProperty",
      "resourceName": "ModelInOperation",
      "doc": "\"ResultModel\" should be usage=output, as it is read-only and does not exist in request body.\n\nExpected body parameter: \n```json\n{\n}\n```\n\nExpected response body: \n```json\n{\n  \"result\": {\n    \"name\": \"Madge\"\n  }\n}\n```",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "43",
+       "$id": "47",
        "name": "contentType",
        "nameInRequest": "Content-Type",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$id": "44",
+        "$id": "48",
         "kind": "constant",
         "valueType": {
-         "$id": "45",
+         "$id": "49",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -404,14 +430,14 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "46",
+       "$id": "50",
        "name": "accept",
        "nameInRequest": "Accept",
        "type": {
-        "$id": "47",
+        "$id": "51",
         "kind": "constant",
         "valueType": {
-         "$id": "48",
+         "$id": "52",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -431,7 +457,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "49",
+       "$id": "53",
        "name": "body",
        "nameInRequest": "body",
        "type": {
@@ -450,7 +476,7 @@
      ],
      "responses": [
       {
-       "$id": "50",
+       "$id": "54",
        "statusCodes": [
         200
        ],
@@ -475,17 +501,96 @@
      "generateConvenienceMethod": true,
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.modelInReadOnlyProperty",
      "decorators": []
+    },
+    {
+     "$id": "55",
+     "name": "orphanModelSerializable",
+     "resourceName": "ModelInOperation",
+     "doc": "Serialize the 'OrphanModel' as request body.\n\nExpected body parameter: \n```json\n{\n  \"name\": \"name\",\n  \"desc\": \"desc\"\n}\n```",
+     "accessibility": "public",
+     "parameters": [
+      {
+       "$id": "56",
+       "name": "contentType",
+       "nameInRequest": "Content-Type",
+       "doc": "Body parameter's content type. Known values are application/json",
+       "type": {
+        "$id": "57",
+        "kind": "constant",
+        "valueType": {
+         "$id": "58",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "value": "application/json",
+        "decorators": []
+       },
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": true,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
+      },
+      {
+       "$id": "59",
+       "name": "body",
+       "nameInRequest": "body",
+       "type": {
+        "$id": "60",
+        "kind": "unknown",
+        "name": "unknown",
+        "crossLanguageDefinitionId": "",
+        "decorators": []
+       },
+       "location": "Body",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
+      }
+     ],
+     "responses": [
+      {
+       "$id": "61",
+       "statusCodes": [
+        204
+       ],
+       "headers": [],
+       "isErrorResponse": false
+      }
+     ],
+     "httpMethod": "PUT",
+     "uri": "{endpoint}",
+     "path": "/azure/client-generator-core/usage/orphanModelSerializable",
+     "requestMediaTypes": [
+      "application/json"
+     ],
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": false,
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.orphanModelSerializable",
+     "decorators": []
     }
    ],
    "parent": "UsageClient",
    "parameters": [
     {
-     "$id": "51",
+     "$id": "62",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Service host",
      "type": {
-      "$id": "52",
+      "$id": "63",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -499,9 +604,9 @@
      "explode": false,
      "kind": "Client",
      "defaultValue": {
-      "$id": "53",
+      "$id": "64",
       "type": {
-       "$id": "54",
+       "$id": "65",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"

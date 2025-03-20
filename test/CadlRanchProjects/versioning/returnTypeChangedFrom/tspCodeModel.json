@@ -82,7 +82,7 @@
        "$id": "10",
        "name": "contentType",
        "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
+       "doc": "Body parameter's content type. Known values are text/plain",
        "type": {
         "$id": "11",
         "kind": "constant",
@@ -93,7 +93,7 @@
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
-        "value": "application/json",
+        "value": "text/plain",
         "decorators": []
        },
        "location": "Header",
@@ -168,7 +168,26 @@
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "headers": [],
+       "headers": [
+        {
+         "$id": "20",
+         "name": "contentType",
+         "nameInResponse": "content-type",
+         "type": {
+          "$id": "21",
+          "kind": "constant",
+          "valueType": {
+           "$id": "22",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         }
+        }
+       ],
        "isErrorResponse": false,
        "contentTypes": [
         "application/json"
@@ -179,7 +198,7 @@
      "uri": "{endpoint}/versioning/return-type-changed-from/api-version:{version}",
      "path": "/test",
      "requestMediaTypes": [
-      "application/json"
+      "text/plain"
      ],
      "bufferResponse": true,
      "generateProtocolMethod": true,
@@ -190,12 +209,12 @@
    ],
    "parameters": [
     {
-     "$id": "20",
+     "$id": "23",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Need to be set as 'http://localhost:3000' in client.",
      "type": {
-      "$id": "21",
+      "$id": "24",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -210,7 +229,7 @@
      "kind": "Client"
     },
     {
-     "$id": "22",
+     "$id": "25",
      "name": "version",
      "nameInRequest": "version",
      "doc": "Need to be set as 'v1' or 'v2' in client.",

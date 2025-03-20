@@ -48,7 +48,7 @@
    "$id": "7",
    "name": "ConvenienceInCadlClient",
    "namespace": "ConvenienceInCadl",
-   "doc": "Typespec project to test various types of convenience methods.",
+   "doc": "TypeSpec project to test various types of convenience methods.",
    "operations": [
     {
      "$id": "8",

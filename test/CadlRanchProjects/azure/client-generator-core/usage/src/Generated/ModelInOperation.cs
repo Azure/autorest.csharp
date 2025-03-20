@@ -462,6 +462,90 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] Serialize the 'OrphanModel' as request body.
+        ///
+        /// Expected body parameter:
+        /// ```json
+        /// {
+        ///   "name": "name",
+        ///   "desc": "desc"
+        /// }
+        /// ```
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelInOperation.xml" path="doc/members/member[@name='OrphanModelSerializableAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> OrphanModelSerializableAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelInOperation.OrphanModelSerializable");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOrphanModelSerializableRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Serialize the 'OrphanModel' as request body.
+        ///
+        /// Expected body parameter:
+        /// ```json
+        /// {
+        ///   "name": "name",
+        ///   "desc": "desc"
+        /// }
+        /// ```
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelInOperation.xml" path="doc/members/member[@name='OrphanModelSerializable(RequestContent,RequestContext)']/*" />
+        public virtual Response OrphanModelSerializable(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelInOperation.OrphanModelSerializable");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateOrphanModelSerializableRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateInputToInputOutputRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -499,6 +583,20 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
             uri.AppendPath("/azure/client-generator-core/usage/modelInReadOnlyProperty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateOrphanModelSerializableRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/azure/client-generator-core/usage/orphanModelSerializable", false);
+            request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

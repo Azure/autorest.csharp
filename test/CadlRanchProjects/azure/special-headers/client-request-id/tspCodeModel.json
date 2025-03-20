@@ -8,7 +8,7 @@
   {
    "$id": "2",
    "name": "XmsClientRequestIdClient",
-   "namespace": "Azure.SpecialHeaders.XmsClientRequestId",
+   "namespace": "_Azure.SpecialHeaders.XmsClientRequestId",
    "doc": "Azure client request id header configurations.",
    "operations": [
     {

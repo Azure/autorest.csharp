@@ -77,44 +77,6 @@ Response response = client.Ssv(new string[] { "<colors>" });
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="TsvAsync(IEnumerable{string},RequestContext)">
-      <example>
-This sample shows how to call TsvAsync.
-<code><![CDATA[
-Query client = new CollectionFormatClient().GetQueryClient();
-
-Response response = await client.TsvAsync(new string[] { "<colors>" });
-
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call TsvAsync with all parameters.
-<code><![CDATA[
-Query client = new CollectionFormatClient().GetQueryClient();
-
-Response response = await client.TsvAsync(new string[] { "<colors>" });
-
-Console.WriteLine(response.Status);
-]]></code></example>
-    </member>
-    <member name="Tsv(IEnumerable{string},RequestContext)">
-      <example>
-This sample shows how to call Tsv.
-<code><![CDATA[
-Query client = new CollectionFormatClient().GetQueryClient();
-
-Response response = client.Tsv(new string[] { "<colors>" });
-
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call Tsv with all parameters.
-<code><![CDATA[
-Query client = new CollectionFormatClient().GetQueryClient();
-
-Response response = client.Tsv(new string[] { "<colors>" });
-
-Console.WriteLine(response.Status);
-]]></code></example>
-    </member>
     <member name="PipesAsync(IEnumerable{string},RequestContext)">
       <example>
 This sample shows how to call PipesAsync.

@@ -1571,7 +1571,7 @@
    "$id": "211",
    "name": "CustomizationsInTspClient",
    "namespace": "CustomizationsInTsp",
-   "doc": "CADL project to test various types of models.",
+   "doc": "TypeSpec project to test various types of models.",
    "operations": [
     {
      "$id": "212",
