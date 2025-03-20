@@ -9,7 +9,7 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 
 @versioned(Versions)
-@service({
+@service(#{
     title: "hello world"
 })
 @doc("This is a sample typespec project.")
@@ -157,7 +157,7 @@ model RoundTripModel {
     requiredInt: int32;
 
     @doc("Required readonly int")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     requiredReadonlyInt: int32;
 }
 

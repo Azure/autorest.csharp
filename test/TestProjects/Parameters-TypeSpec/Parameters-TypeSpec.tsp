@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 @service(#{
     title: "This service does not define an endpoint. The generated code will add one."
 })
-namespace ParametersCadl;
+namespace ParametersTypeSpec;
 
 enum Versions {
     @useDependency(Azure.Core.Versions.v1_0_Preview_1)

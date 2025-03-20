@@ -14,7 +14,7 @@ using System.Text.Json;
 using System.Xml;
 using Azure.Core;
 
-namespace ParametersCadl
+namespace ParametersTypeSpec
 {
     internal static class ModelSerializationExtensions
     {

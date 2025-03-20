@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
-  "namespace": "ParametersCadl",
-  "library-name": "ParametersCadl",
+  "namespace": "ParametersTypeSpec",
+  "library-name": "ParametersTypeSpec",
   "flavor": "azure",
   "use-model-reader-writer": true,
   "shared-source-folders": [

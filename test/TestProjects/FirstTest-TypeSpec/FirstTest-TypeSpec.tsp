@@ -494,7 +494,7 @@ model Extendible {
 @convenientAPI(true)
 op threeLevelRecursive(@body input: Extendible): void;
 
-@doc("parenetModel")
+@doc("parentModel")
 model BaseModel {
     level: int8;
 }
@@ -511,7 +511,7 @@ model ChildModel extends BaseModel {
 op recursiveModels(@body input: ChildModel): void;
 
 
-@doc("containself")
+@doc("containSelf")
 model ContainSelf{
   self: ContainSelf;
 }

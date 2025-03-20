@@ -5,10 +5,10 @@
 
 #nullable disable
 
-namespace ParametersCadl.Models
+namespace ParametersTypeSpec.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class ParametersCadlModelFactory
+    public static partial class ParametersTypeSpecModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.Result"/>. </summary>
         /// <param name="id"></param>
