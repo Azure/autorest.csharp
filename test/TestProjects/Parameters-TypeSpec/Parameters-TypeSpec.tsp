@@ -10,11 +10,9 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 @versioned(Versions)
-@service(
-    {
-        title: "This service does not define an endpoint. The generated code will add one."
-    }
-)
+@service(#{
+    title: "This service does not define an endpoint. The generated code will add one."
+})
 namespace ParametersCadl;
 
 enum Versions {
