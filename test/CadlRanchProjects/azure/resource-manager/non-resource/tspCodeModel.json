@@ -1,0 +1,883 @@
+{
+ "$id": "1",
+ "Name": "Azure.ResourceManager.NonResource",
+ "ApiVersions": [
+  "2023-12-01-preview"
+ ],
+ "Enums": [
+  {
+   "$id": "2",
+   "kind": "enum",
+   "name": "Versions",
+   "crossLanguageDefinitionId": "Azure.ResourceManager.NonResource.Versions",
+   "valueType": {
+    "$id": "3",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "4",
+     "kind": "enumvalue",
+     "name": "v2023_12_01_preview",
+     "value": "2023-12-01-preview",
+     "valueType": {
+      "$id": "5",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "doc": "Preview API version 2023-12-01-preview.",
+     "decorators": []
+    }
+   ],
+   "namespace": "Azure.ResourceManager.NonResource",
+   "doc": "Azure API versions.",
+   "isFixed": true,
+   "isFlags": false,
+   "usage": "ApiVersionEnum",
+   "decorators": []
+  }
+ ],
+ "Models": [
+  {
+   "$id": "6",
+   "kind": "model",
+   "name": "NonResource",
+   "namespace": "Azure.ResourceManager.NonResource",
+   "crossLanguageDefinitionId": "Azure.ResourceManager.NonResource.NonResource",
+   "usage": "Input,Output,Json",
+   "doc": "Though this model has `id`, `name`, `type` properties, it is not a resource as it doesn't extends `Resource`.",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "7",
+     "kind": "property",
+     "name": "id",
+     "serializedName": "id",
+     "doc": "The identification of the result",
+     "type": {
+      "$id": "8",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.ResourceManager.NonResource.NonResource.id",
+     "serializationOptions": {
+      "$id": "9",
+      "json": {
+       "$id": "10",
+       "name": "id"
+      }
+     }
+    },
+    {
+     "$id": "11",
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "doc": "The name of the result",
+     "type": {
+      "$id": "12",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.ResourceManager.NonResource.NonResource.name",
+     "serializationOptions": {
+      "$id": "13",
+      "json": {
+       "$id": "14",
+       "name": "name"
+      }
+     }
+    },
+    {
+     "$id": "15",
+     "kind": "property",
+     "name": "type",
+     "serializedName": "type",
+     "doc": "The result resource type",
+     "type": {
+      "$id": "16",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.ResourceManager.NonResource.NonResource.type",
+     "serializationOptions": {
+      "$id": "17",
+      "json": {
+       "$id": "18",
+       "name": "type"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$id": "19",
+   "kind": "model",
+   "name": "ErrorResponse",
+   "namespace": "Azure.ResourceManager.CommonTypes",
+   "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
+   "usage": "Error,Json,Exception",
+   "doc": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "20",
+     "kind": "property",
+     "name": "error",
+     "serializedName": "error",
+     "doc": "The error object.",
+     "type": {
+      "$id": "21",
+      "kind": "model",
+      "name": "ErrorDetail",
+      "namespace": "Azure.ResourceManager.CommonTypes",
+      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
+      "usage": "Json,Exception",
+      "doc": "The error detail.",
+      "decorators": [],
+      "properties": [
+       {
+        "$id": "22",
+        "kind": "property",
+        "name": "code",
+        "serializedName": "code",
+        "doc": "The error code.",
+        "type": {
+         "$id": "23",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "optional": true,
+        "readOnly": true,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.code",
+        "serializationOptions": {
+         "$id": "24",
+         "json": {
+          "$id": "25",
+          "name": "code"
+         }
+        }
+       },
+       {
+        "$id": "26",
+        "kind": "property",
+        "name": "message",
+        "serializedName": "message",
+        "doc": "The error message.",
+        "type": {
+         "$id": "27",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "optional": true,
+        "readOnly": true,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.message",
+        "serializationOptions": {
+         "$id": "28",
+         "json": {
+          "$id": "29",
+          "name": "message"
+         }
+        }
+       },
+       {
+        "$id": "30",
+        "kind": "property",
+        "name": "target",
+        "serializedName": "target",
+        "doc": "The error target.",
+        "type": {
+         "$id": "31",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "optional": true,
+        "readOnly": true,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.target",
+        "serializationOptions": {
+         "$id": "32",
+         "json": {
+          "$id": "33",
+          "name": "target"
+         }
+        }
+       },
+       {
+        "$id": "34",
+        "kind": "property",
+        "name": "details",
+        "serializedName": "details",
+        "doc": "The error details.",
+        "type": {
+         "$id": "35",
+         "kind": "array",
+         "name": "ArrayErrorDetail",
+         "valueType": {
+          "$ref": "21"
+         },
+         "crossLanguageDefinitionId": "TypeSpec.Array",
+         "decorators": []
+        },
+        "optional": true,
+        "readOnly": true,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.details",
+        "serializationOptions": {
+         "$id": "36",
+         "json": {
+          "$id": "37",
+          "name": "details"
+         }
+        }
+       },
+       {
+        "$id": "38",
+        "kind": "property",
+        "name": "additionalInfo",
+        "serializedName": "additionalInfo",
+        "doc": "The error additional info.",
+        "type": {
+         "$id": "39",
+         "kind": "array",
+         "name": "ArrayErrorAdditionalInfo",
+         "valueType": {
+          "$id": "40",
+          "kind": "model",
+          "name": "ErrorAdditionalInfo",
+          "namespace": "Azure.ResourceManager.CommonTypes",
+          "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
+          "usage": "Json,Exception",
+          "doc": "The resource management error additional info.",
+          "decorators": [],
+          "properties": [
+           {
+            "$id": "41",
+            "kind": "property",
+            "name": "type",
+            "serializedName": "type",
+            "doc": "The additional info type.",
+            "type": {
+             "$id": "42",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "optional": true,
+            "readOnly": true,
+            "discriminator": false,
+            "flatten": false,
+            "decorators": [],
+            "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.type",
+            "serializationOptions": {
+             "$id": "43",
+             "json": {
+              "$id": "44",
+              "name": "type"
+             }
+            }
+           },
+           {
+            "$id": "45",
+            "kind": "property",
+            "name": "info",
+            "serializedName": "info",
+            "doc": "The additional info.",
+            "type": {
+             "$id": "46",
+             "kind": "model",
+             "name": "ErrorAdditionalInfoInfo",
+             "namespace": "Azure.ResourceManager.CommonTypes",
+             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
+             "usage": "Json,Exception",
+             "decorators": [],
+             "properties": []
+            },
+            "optional": true,
+            "readOnly": true,
+            "discriminator": false,
+            "flatten": false,
+            "decorators": [],
+            "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info",
+            "serializationOptions": {
+             "$id": "47",
+             "json": {
+              "$id": "48",
+              "name": "info"
+             }
+            }
+           }
+          ]
+         },
+         "crossLanguageDefinitionId": "TypeSpec.Array",
+         "decorators": []
+        },
+        "optional": true,
+        "readOnly": true,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.additionalInfo",
+        "serializationOptions": {
+         "$id": "49",
+         "json": {
+          "$id": "50",
+          "name": "additionalInfo"
+         }
+        }
+       }
+      ]
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse.error",
+     "serializationOptions": {
+      "$id": "51",
+      "json": {
+       "$id": "52",
+       "name": "error"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$ref": "21"
+  },
+  {
+   "$ref": "40"
+  },
+  {
+   "$ref": "46"
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "53",
+   "Name": "NonResourceClient",
+   "Namespace": "Azure.ResourceManager.NonResource",
+   "Doc": "Arm Resource Provider management API.",
+   "Operations": [],
+   "Protocol": {
+    "$id": "54"
+   },
+   "Parameters": [
+    {
+     "$id": "55",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Doc": "Service host",
+     "Type": {
+      "$id": "56",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "57",
+      "Type": {
+       "$id": "58",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "https://management.azure.com"
+     }
+    }
+   ],
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.NonResource"
+  },
+  {
+   "$id": "59",
+   "Name": "NonResourceOperations",
+   "Namespace": "Azure.ResourceManager.NonResource",
+   "Doc": "Operations on non resource model should not be marked as `@armResourceOperations`.",
+   "Operations": [
+    {
+     "$id": "60",
+     "Name": "get",
+     "ResourceName": "NonResourceOperations",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "61",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Doc": "The API version to use for this operation.",
+       "Type": {
+        "$id": "62",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+       },
+       "Location": "Query",
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "63",
+        "Type": {
+         "$id": "64",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "2023-12-01-preview"
+       },
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "65",
+       "Name": "subscriptionId",
+       "NameInRequest": "subscriptionId",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
+       "Type": {
+        "$id": "66",
+        "kind": "string",
+        "name": "uuid",
+        "crossLanguageDefinitionId": "Azure.Core.uuid",
+        "baseType": {
+         "$id": "67",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "decorators": []
+       },
+       "Location": "Path",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Client",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "68",
+       "Name": "location",
+       "NameInRequest": "location",
+       "Doc": "The location parameter.",
+       "Type": {
+        "$id": "69",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+       },
+       "Location": "Path",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "70",
+       "Name": "parameter",
+       "NameInRequest": "parameter",
+       "Doc": "The cluster code version.",
+       "Type": {
+        "$id": "71",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+       },
+       "Location": "Path",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "72",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "73",
+        "kind": "constant",
+        "valueType": {
+         "$id": "74",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "value": "application/json",
+        "decorators": []
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "75",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "6"
+       },
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "Uri": "{endpoint}",
+     "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.NonResource/locations/{location}/otherParameters/{parameter}",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.NonResource.NonResourceOperations.get",
+     "Decorators": []
+    },
+    {
+     "$id": "76",
+     "Name": "create",
+     "ResourceName": "NonResourceOperations",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "77",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Doc": "The API version to use for this operation.",
+       "Type": {
+        "$id": "78",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+       },
+       "Location": "Query",
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "79",
+        "Type": {
+         "$id": "80",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "2023-12-01-preview"
+       },
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "81",
+       "Name": "subscriptionId",
+       "NameInRequest": "subscriptionId",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
+       "Type": {
+        "$id": "82",
+        "kind": "string",
+        "name": "uuid",
+        "crossLanguageDefinitionId": "Azure.Core.uuid",
+        "baseType": {
+         "$id": "83",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "decorators": []
+       },
+       "Location": "Path",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Client",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "84",
+       "Name": "location",
+       "NameInRequest": "location",
+       "Doc": "The location parameter.",
+       "Type": {
+        "$id": "85",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+       },
+       "Location": "Path",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "86",
+       "Name": "parameter",
+       "NameInRequest": "parameter",
+       "Doc": "The cluster code version.",
+       "Type": {
+        "$id": "87",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+       },
+       "Location": "Path",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "88",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Doc": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "89",
+        "kind": "constant",
+        "valueType": {
+         "$id": "90",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "value": "application/json",
+        "decorators": []
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "91",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "92",
+        "kind": "constant",
+        "valueType": {
+         "$id": "93",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "value": "application/json",
+        "decorators": []
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "94",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Doc": "The request body.",
+       "Type": {
+        "$ref": "6"
+       },
+       "Location": "Body",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "95",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "6"
+       },
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "PUT",
+     "Uri": "{endpoint}",
+     "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.NonResource/locations/{location}/otherParameters/{parameter}",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.NonResource.NonResourceOperations.create",
+     "Decorators": []
+    }
+   ],
+   "Protocol": {
+    "$id": "96"
+   },
+   "Parent": "NonResourceClient",
+   "Parameters": [
+    {
+     "$id": "97",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Doc": "Service host",
+     "Type": {
+      "$id": "98",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "99",
+      "Type": {
+       "$id": "100",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "https://management.azure.com"
+     }
+    }
+   ],
+   "Decorators": [],
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.NonResource.NonResourceOperations"
+  }
+ ],
+ "Auth": {
+  "$id": "101",
+  "OAuth2": {
+   "$id": "102",
+   "Scopes": [
+    "user_impersonation"
+   ]
+  }
+ }
+}

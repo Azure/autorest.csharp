@@ -656,6 +656,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\resource-manager\\common-properties\\src\\Generated -n"
     },
+    "typespec-azure/resource-manager/non-resource": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\resource-manager\\non-resource\\src\\Generated -n"
+    },
     "typespec-azure/resource-manager/resources": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\resource-manager\\resources\\src\\Generated -n"
