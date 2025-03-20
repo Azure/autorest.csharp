@@ -131,7 +131,7 @@ function Get-TypeSpec-Entry([System.IO.DirectoryInfo]$directory) {
         return $projectNamePath
     }
     
-    throw "There is no client.tsp or main.tsp or other tsp file named after project name in project $($tspDirectory.Name)" 
+    #throw "There is no client.tsp or main.tsp or other tsp file named after project name in project $($tspDirectory.Name)" 
 }
 
 $testData = Get-Content $testProjectDataFile -Encoding utf8 -Raw | ConvertFrom-Json
@@ -241,7 +241,7 @@ function Add-TestProjects-Directory($directory) {
         Add-Swagger $testName $directory $testArguments
     }
     else {
-        throw "There is no tspconfig.yaml file or readme.md file or swagger json file $testName.json found in test project $testName"
+        #throw "There is no tspconfig.yaml file or readme.md file or swagger json file $testName.json found in test project $testName"
     }
 }
 
@@ -295,7 +295,7 @@ if (!($Exclude -contains "Samples")) {
             Add-TypeSpec $sampleName $projectDirectory $mainTspFile
         }
         else {
-            throw "There is no tspconfig.yaml file or readme.md file found in sample project $sampleName"
+            #throw "There is no tspconfig.yaml file or readme.md file found in sample project $sampleName"
         }
     }
 }

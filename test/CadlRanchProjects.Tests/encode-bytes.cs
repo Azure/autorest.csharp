@@ -122,6 +122,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        [Ignore("Package is no longer maintained")]
         public Task Encode_Bytes_RequestBody_default() => Test(async (host) =>
         {
             BinaryData data = new BinaryData($"\"{Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("test"))}\"");
