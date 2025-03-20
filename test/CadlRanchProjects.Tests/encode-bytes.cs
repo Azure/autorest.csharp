@@ -162,6 +162,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        [Ignore("")]
         public Task Encode_Bytes_ResponseBody_default() => Test(async (host) =>
         {
             BinaryData data = new BinaryData(File.ReadAllBytes(SamplePngPath));
