@@ -46,6 +46,10 @@ jobs:
     inputs:
       artifact: matrix-props
       targetPath: $(Build.SourcesDirectory)/azure-sdk-for-net/artifacts/matrix-props
+  - task: UseNode@1
+    displayName: 'Install Node.js'
+    inputs:
+      version: ${{ parameters.NodeVersion }}
   - task: Powershell@2
     displayName: Update SDK codes
     inputs:
