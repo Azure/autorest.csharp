@@ -102,7 +102,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Client.Structure.Service",
+   "namespace": "Client.Structure.Service.TwoOperationGroup",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input",
@@ -114,7 +114,7 @@
   {
    "$id": "14",
    "name": "TwoOperationGroupClient",
-   "namespace": "Client.Structure.TwoOperationGroup",
+   "namespace": "Client.Structure.Service.TwoOperationGroup",
    "operations": [],
    "parameters": [
     {
@@ -161,7 +161,7 @@
   {
    "$id": "18",
    "name": "Group1",
-   "namespace": "Client.Structure.TwoOperationGroup",
+   "namespace": "Client.Structure.Service.TwoOperationGroup",
    "operations": [
     {
      "$id": "19",
@@ -285,7 +285,7 @@
   {
    "$id": "28",
    "name": "Group2",
-   "namespace": "Client.Structure.TwoOperationGroup",
+   "namespace": "Client.Structure.Service.TwoOperationGroup",
    "operations": [
     {
      "$id": "29",

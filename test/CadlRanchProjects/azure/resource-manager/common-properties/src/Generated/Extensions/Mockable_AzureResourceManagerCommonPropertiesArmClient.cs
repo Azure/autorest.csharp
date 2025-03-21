@@ -46,5 +46,17 @@ namespace _Azure.ResourceManager.CommonProperties.Mocking
             ManagedIdentityTrackedResource.ValidateResourceId(id);
             return new ManagedIdentityTrackedResource(Client, id);
         }
+
+        /// <summary>
+        /// Gets an object representing a <see cref="ConfidentialResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ConfidentialResource.CreateResourceIdentifier" /> to create a <see cref="ConfidentialResource"/> <see cref="ResourceIdentifier"/> from its components.
+        /// </summary>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="ConfidentialResource"/> object. </returns>
+        public virtual ConfidentialResource GetConfidentialResource(ResourceIdentifier id)
+        {
+            ConfidentialResource.ValidateResourceId(id);
+            return new ConfidentialResource(Client, id);
+        }
     }
 }

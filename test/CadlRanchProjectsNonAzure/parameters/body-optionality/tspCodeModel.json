@@ -8,7 +8,7 @@
    "$id": "2",
    "kind": "model",
    "name": "BodyModel",
-   "namespace": "Parameters.BodyOptionality",
+   "namespace": "Scm.Parameters.BodyOptionality",
    "crossLanguageDefinitionId": "Parameters.BodyOptionality.BodyModel",
    "usage": "Input,Spread,Json",
    "decorators": [],
@@ -46,7 +46,7 @@
   {
    "$id": "7",
    "name": "BodyOptionalityClient",
-   "namespace": "Parameters.BodyOptionality",
+   "namespace": "Scm.Parameters.BodyOptionality",
    "doc": "Test describing optionality of the request body.",
    "operations": [
     {
@@ -236,7 +236,7 @@
   {
    "$id": "24",
    "name": "OptionalExplicit",
-   "namespace": "Parameters.BodyOptionality.OptionalExplicit",
+   "namespace": "Scm.Parameters.BodyOptionality",
    "operations": [
     {
      "$id": "25",

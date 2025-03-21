@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace ParametersCadl
+namespace ParametersTypeSpec
 {
-    /// <summary> Client options for ParametersCadlClient. </summary>
-    public partial class ParametersCadlClientOptions : ClientOptions
+    /// <summary> Client options for ParametersTypeSpecClient. </summary>
+    public partial class ParametersTypeSpecClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2022_05_15_Preview;
 
@@ -24,8 +24,8 @@ namespace ParametersCadl
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of ParametersCadlClientOptions. </summary>
-        public ParametersCadlClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of ParametersTypeSpecClientOptions. </summary>
+        public ParametersTypeSpecClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

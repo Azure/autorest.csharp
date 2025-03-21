@@ -72,7 +72,6 @@ namespace _Type.Property.AdditionalProperties
         private ExtendsDifferentSpreadModelArray _cachedExtendsDifferentSpreadModelArray;
         private MultipleSpread _cachedMultipleSpread;
         private SpreadRecordUnion _cachedSpreadRecordUnion;
-        private SpreadRecordDiscriminatedUnion _cachedSpreadRecordDiscriminatedUnion;
         private SpreadRecordNonDiscriminatedUnion _cachedSpreadRecordNonDiscriminatedUnion;
         private SpreadRecordNonDiscriminatedUnion2 _cachedSpreadRecordNonDiscriminatedUnion2;
         private SpreadRecordNonDiscriminatedUnion3 _cachedSpreadRecordNonDiscriminatedUnion3;
@@ -243,12 +242,6 @@ namespace _Type.Property.AdditionalProperties
         public virtual SpreadRecordUnion GetSpreadRecordUnionClient()
         {
             return Volatile.Read(ref _cachedSpreadRecordUnion) ?? Interlocked.CompareExchange(ref _cachedSpreadRecordUnion, new SpreadRecordUnion(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedSpreadRecordUnion;
-        }
-
-        /// <summary> Initializes a new instance of SpreadRecordDiscriminatedUnion. </summary>
-        public virtual SpreadRecordDiscriminatedUnion GetSpreadRecordDiscriminatedUnionClient()
-        {
-            return Volatile.Read(ref _cachedSpreadRecordDiscriminatedUnion) ?? Interlocked.CompareExchange(ref _cachedSpreadRecordDiscriminatedUnion, new SpreadRecordDiscriminatedUnion(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedSpreadRecordDiscriminatedUnion;
         }
 
         /// <summary> Initializes a new instance of SpreadRecordNonDiscriminatedUnion. </summary>

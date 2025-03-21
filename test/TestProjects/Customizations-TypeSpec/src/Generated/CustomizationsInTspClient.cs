@@ -17,7 +17,7 @@ using CustomizationsInTsp.Models;
 namespace CustomizationsInTsp
 {
     // Data plane generated client.
-    /// <summary> CADL project to test various types of models. </summary>
+    /// <summary> TypeSpec project to test various types of models. </summary>
     public partial class CustomizationsInTspClient
     {
         private readonly HttpPipeline _pipeline;

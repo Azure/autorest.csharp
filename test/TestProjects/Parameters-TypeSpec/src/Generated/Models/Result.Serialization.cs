@@ -12,7 +12,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace ParametersCadl.Models
+namespace ParametersTypeSpec.Models
 {
     public partial class Result : IUtf8JsonSerializable, IJsonModel<Result>
     {

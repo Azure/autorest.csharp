@@ -293,5 +293,53 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
             RoundTripModel body = new RoundTripModel();
             Response<RoundTripModel> response = await client.ModelInReadOnlyPropertyAsync(body);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelInOperation_OrphanModelSerializable_ShortVersion()
+        {
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
+
+            using RequestContent content = RequestContent.Create(new object());
+            Response response = client.OrphanModelSerializable(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelInOperation_OrphanModelSerializable_ShortVersion_Async()
+        {
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
+
+            using RequestContent content = RequestContent.Create(new object());
+            Response response = await client.OrphanModelSerializableAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelInOperation_OrphanModelSerializable_AllParameters()
+        {
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
+
+            using RequestContent content = RequestContent.Create(new object());
+            Response response = client.OrphanModelSerializable(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelInOperation_OrphanModelSerializable_AllParameters_Async()
+        {
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
+
+            using RequestContent content = RequestContent.Create(new object());
+            Response response = await client.OrphanModelSerializableAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
     }
 }

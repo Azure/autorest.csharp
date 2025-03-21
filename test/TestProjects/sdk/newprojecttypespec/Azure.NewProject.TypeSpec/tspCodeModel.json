@@ -30,7 +30,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "doc": "The Thing_requiredLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -64,7 +64,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "doc": "The Thing_requiredLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -98,7 +98,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "doc": "The Thing_requiredLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -132,7 +132,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "doc": "The Thing_optionalLiteralString",
    "isFixed": false,
    "isFlags": false,
@@ -166,7 +166,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "doc": "The Thing_optionalLiteralInt",
    "isFixed": false,
    "isFlags": false,
@@ -200,7 +200,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "doc": "The Thing_optionalLiteralFloat",
    "isFixed": false,
    "isFlags": false,
@@ -272,7 +272,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "doc": "Simple enum",
    "isFixed": true,
    "isFlags": false,
@@ -344,7 +344,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "doc": "Extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -416,7 +416,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "doc": "Int based extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -488,7 +488,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "doc": "Float based extensible enum",
    "isFixed": false,
    "isFlags": false,
@@ -560,7 +560,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "doc": "float fixed enum",
    "isFixed": true,
    "isFlags": false,
@@ -632,7 +632,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "doc": "int fixed enum",
    "isFixed": true,
    "isFlags": false,
@@ -772,7 +772,7 @@
      "decorators": []
     }
    ],
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "isFixed": false,
    "isFlags": false,
    "usage": "None",
@@ -784,7 +784,7 @@
    "$id": "84",
    "kind": "model",
    "name": "Thing",
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "crossLanguageDefinitionId": "NewProjectTypeSpec.Thing",
    "usage": "Input,Output,Spread,Json",
    "doc": "A model with a few properties of literal types",
@@ -857,7 +857,7 @@
         "decorators": []
        }
       ],
-      "namespace": "",
+      "namespace": "Azure.NewProject.TypeSpec",
       "decorators": []
      },
      "optional": false,
@@ -1147,7 +1147,7 @@
    "$id": "135",
    "kind": "model",
    "name": "Friend",
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "crossLanguageDefinitionId": "NewProjectTypeSpec.NotFriend",
    "usage": "Output,Spread,Json",
    "doc": "this is not a friendly model but with a friendly name",
@@ -1186,7 +1186,7 @@
    "$id": "140",
    "kind": "model",
    "name": "RoundTripModel",
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "crossLanguageDefinitionId": "NewProjectTypeSpec.RoundTripModel",
    "usage": "Input,Output,Json",
    "doc": "this is a roundtrip model",
@@ -1786,7 +1786,7 @@
   {
    "$id": "224",
    "name": "NewProjectTypeSpecClient",
-   "namespace": "NewProjectTypeSpec",
+   "namespace": "Azure.NewProject.TypeSpec",
    "doc": "This is a sample typespec project.",
    "operations": [
     {
@@ -2345,7 +2345,7 @@
   {
    "$id": "272",
    "name": "Hello",
-   "namespace": "NewProjectTypeSpec.Hello",
+   "namespace": "Azure.NewProject.TypeSpec",
    "operations": [],
    "parent": "NewProjectTypeSpecClient",
    "parameters": [
@@ -2375,7 +2375,7 @@
   {
    "$id": "275",
    "name": "HelloDemo",
-   "namespace": "NewProjectTypeSpec.Hello.Demo",
+   "namespace": "Azure.NewProject.TypeSpec",
    "doc": "Hello world service",
    "operations": [
     {
@@ -2530,7 +2530,7 @@
   {
    "$id": "289",
    "name": "HelloDemo2",
-   "namespace": "NewProjectTypeSpec.Hello.Demo2",
+   "namespace": "Azure.NewProject.TypeSpec",
    "operations": [
     {
      "$id": "290",
@@ -3109,7 +3109,7 @@
   {
    "$id": "341",
    "name": "EnumTest",
-   "namespace": "NewProjectTypeSpec.EnumTest",
+   "namespace": "Azure.NewProject.TypeSpec",
    "operations": [
     {
      "$id": "342",
@@ -3122,7 +3122,7 @@
        "$id": "343",
        "name": "contentType",
        "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
+       "doc": "Body parameter's content type. Known values are text/plain",
        "type": {
         "$id": "344",
         "kind": "constant",
@@ -3133,7 +3133,7 @@
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
-        "value": "application/json",
+        "value": "text/plain",
         "decorators": []
        },
        "location": "Header",
@@ -3178,7 +3178,7 @@
      "uri": "{firstTestTypeSpecUrl}",
      "path": "/unknown-value",
      "requestMediaTypes": [
-      "application/json"
+      "text/plain"
      ],
      "bufferResponse": true,
      "generateProtocolMethod": true,
@@ -3215,7 +3215,7 @@
   {
    "$id": "350",
    "name": "ProtocolAndConvenient",
-   "namespace": "NewProjectTypeSpec.ProtocolAndConvenient",
+   "namespace": "Azure.NewProject.TypeSpec",
    "operations": [
     {
      "$id": "351",

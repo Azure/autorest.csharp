@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ParametersCadl
+namespace ParametersTypeSpec
 {
     internal static class Argument
     {

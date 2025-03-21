@@ -85,7 +85,7 @@ namespace NoDocsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/unknown-value", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Content-Type", "text/plain");
             request.Content = content;
             return message;
         }

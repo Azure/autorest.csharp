@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "name": "ParametersCadl",
+ "name": "ParametersTypeSpec",
  "apiVersions": [
   "2022-05-15-preview"
  ],
@@ -9,7 +9,7 @@
    "$id": "2",
    "kind": "enum",
    "name": "Versions",
-   "crossLanguageDefinitionId": "ParametersCadl.Versions",
+   "crossLanguageDefinitionId": "ParametersTypeSpec.Versions",
    "valueType": {
     "$id": "3",
     "kind": "string",
@@ -36,7 +36,7 @@
      "decorators": []
     }
    ],
-   "namespace": "ParametersCadl",
+   "namespace": "ParametersTypeSpec",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -48,8 +48,8 @@
    "$id": "6",
    "kind": "model",
    "name": "Result",
-   "namespace": "ParametersCadl.ParameterOrders",
-   "crossLanguageDefinitionId": "ParametersCadl.ParameterOrders.Result",
+   "namespace": "ParametersTypeSpec.ParameterOrders",
+   "crossLanguageDefinitionId": "ParametersTypeSpec.ParameterOrders.Result",
    "usage": "Output,Json",
    "decorators": [],
    "properties": [
@@ -70,7 +70,7 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "ParametersCadl.ParameterOrders.Result.id",
+     "crossLanguageDefinitionId": "ParametersTypeSpec.ParameterOrders.Result.id",
      "serializationOptions": {
       "$id": "9",
       "json": {
@@ -85,8 +85,8 @@
  "clients": [
   {
    "$id": "11",
-   "name": "ParametersCadlClient",
-   "namespace": "ParametersCadl",
+   "name": "ParametersTypeSpecClient",
+   "namespace": "ParametersTypeSpec",
    "operations": [],
    "parameters": [
     {
@@ -111,12 +111,12 @@
     }
    ],
    "decorators": [],
-   "crossLanguageDefinitionId": "ParametersCadl"
+   "crossLanguageDefinitionId": "ParametersTypeSpec"
   },
   {
    "$id": "14",
    "name": "ParameterOrders",
-   "namespace": "ParametersCadl.ParameterOrders",
+   "namespace": "ParametersTypeSpec.ParameterOrders",
    "operations": [
     {
      "$id": "15",
@@ -247,7 +247,7 @@
      "bufferResponse": true,
      "generateProtocolMethod": true,
      "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "ParametersCadl.ParameterOrders.Operation",
+     "crossLanguageDefinitionId": "ParametersTypeSpec.ParameterOrders.Operation",
      "decorators": []
     },
     {
@@ -348,11 +348,11 @@
      "bufferResponse": true,
      "generateProtocolMethod": true,
      "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "ParametersCadl.ParameterOrders.Operation2",
+     "crossLanguageDefinitionId": "ParametersTypeSpec.ParameterOrders.Operation2",
      "decorators": []
     }
    ],
-   "parent": "ParametersCadlClient",
+   "parent": "ParametersTypeSpecClient",
    "parameters": [
     {
      "$id": "37",
@@ -376,7 +376,7 @@
     }
    ],
    "decorators": [],
-   "crossLanguageDefinitionId": "ParametersCadl.ParameterOrders"
+   "crossLanguageDefinitionId": "ParametersTypeSpec.ParameterOrders"
   }
  ]
 }

@@ -9,11 +9,11 @@ using System;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace ParametersCadl
+namespace ParametersTypeSpec
 {
     // Data plane generated client.
-    /// <summary> The ParametersCadl service client. </summary>
-    public partial class ParametersCadlClient
+    /// <summary> The ParametersTypeSpec service client. </summary>
+    public partial class ParametersTypeSpecClient
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -24,26 +24,26 @@ namespace ParametersCadl
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of ParametersCadlClient for mocking. </summary>
-        protected ParametersCadlClient()
+        /// <summary> Initializes a new instance of ParametersTypeSpecClient for mocking. </summary>
+        protected ParametersTypeSpecClient()
         {
         }
 
-        /// <summary> Initializes a new instance of ParametersCadlClient. </summary>
+        /// <summary> Initializes a new instance of ParametersTypeSpecClient. </summary>
         /// <param name="endpoint"> Service host. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public ParametersCadlClient(Uri endpoint) : this(endpoint, new ParametersCadlClientOptions())
+        public ParametersTypeSpecClient(Uri endpoint) : this(endpoint, new ParametersTypeSpecClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of ParametersCadlClient. </summary>
+        /// <summary> Initializes a new instance of ParametersTypeSpecClient. </summary>
         /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public ParametersCadlClient(Uri endpoint, ParametersCadlClientOptions options)
+        public ParametersTypeSpecClient(Uri endpoint, ParametersTypeSpecClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new ParametersCadlClientOptions();
+            options ??= new ParametersTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());

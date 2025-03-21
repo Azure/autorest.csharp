@@ -54,7 +54,7 @@ enum ModelStatus {
 model MultivariateDetectionResult {
   @doc("Result identifier, which is used to fetch the results of an inference call.")
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resultId: uuid;
 
   @doc("Multivariate anomaly detection status.")
@@ -249,7 +249,7 @@ detect whether the timestamp is anomaly or not.
   @doc("Model status. One of CREATED, RUNNING, READY, and FAILED.")
   status?: ModelStatus;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Error messages when failed to create a model.")
   errors?: ErrorResponse[];
 
@@ -312,7 +312,7 @@ epoch.
 model AnomalyDetectionModel {
   @doc("Model identifier.")
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modelId: uuid;
 
   @doc("Date and time (UTC) when the model was created.")

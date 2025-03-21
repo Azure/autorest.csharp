@@ -8,7 +8,7 @@
    "$id": "2",
    "kind": "model",
    "name": "InnerModel",
-   "namespace": "Type.Dictionary",
+   "namespace": "_Type._Dictionary",
    "crossLanguageDefinitionId": "Type.Dictionary.InnerModel",
    "usage": "Input,Output,Json",
    "doc": "Dictionary inner model",
@@ -82,7 +82,7 @@
   {
    "$id": "12",
    "name": "DictionaryClient",
-   "namespace": "Type.Dictionary",
+   "namespace": "_Type._Dictionary",
    "doc": "Illustrates various of dictionaries.",
    "operations": [],
    "parameters": [
@@ -123,7 +123,7 @@
   {
    "$id": "17",
    "name": "Int32Value",
-   "namespace": "Type.Dictionary",
+   "namespace": "_Type._Dictionary",
    "doc": "Dictionary of int32 values",
    "operations": [
     {
@@ -331,7 +331,7 @@
   {
    "$id": "39",
    "name": "Int64Value",
-   "namespace": "Type.Dictionary",
+   "namespace": "_Type._Dictionary",
    "doc": "Dictionary of int64 values",
    "operations": [
     {
@@ -539,7 +539,7 @@
   {
    "$id": "61",
    "name": "BooleanValue",
-   "namespace": "Type.Dictionary",
+   "namespace": "_Type._Dictionary",
    "doc": "Dictionary of boolean values",
    "operations": [
     {
@@ -747,7 +747,7 @@
   {
    "$id": "83",
    "name": "StringValue",
-   "namespace": "Type.Dictionary",
+   "namespace": "_Type._Dictionary",
    "doc": "Dictionary of string values",
    "operations": [
     {
@@ -955,7 +955,7 @@
   {
    "$id": "105",
    "name": "Float32Value",
-   "namespace": "Type.Dictionary",
+   "namespace": "_Type._Dictionary",
    "doc": "Dictionary of float values",
    "operations": [
     {
@@ -1163,7 +1163,7 @@
   {
    "$id": "127",
    "name": "DatetimeValue",
-   "namespace": "Type.Dictionary",
+   "namespace": "_Type._Dictionary",
    "doc": "Dictionary of datetime values",
    "operations": [
     {
@@ -1387,7 +1387,7 @@
   {
    "$id": "151",
    "name": "DurationValue",
-   "namespace": "Type.Dictionary",
+   "namespace": "_Type._Dictionary",
    "doc": "Dictionary of duration values",
    "operations": [
     {
@@ -1611,7 +1611,7 @@
   {
    "$id": "175",
    "name": "UnknownValue",
-   "namespace": "Type.Dictionary",
+   "namespace": "_Type._Dictionary",
    "doc": "Dictionary of unknown values",
    "operations": [
     {
@@ -1819,7 +1819,7 @@
   {
    "$id": "197",
    "name": "ModelValue",
-   "namespace": "Type.Dictionary",
+   "namespace": "_Type._Dictionary",
    "doc": "Dictionary of model values",
    "operations": [
     {
@@ -2019,7 +2019,7 @@
   {
    "$id": "217",
    "name": "RecursiveModelValue",
-   "namespace": "Type.Dictionary",
+   "namespace": "_Type._Dictionary",
    "doc": "Dictionary of model values",
    "operations": [
     {
@@ -2219,7 +2219,7 @@
   {
    "$id": "237",
    "name": "NullableFloatValue",
-   "namespace": "Type.Dictionary",
+   "namespace": "_Type._Dictionary",
    "doc": "Dictionary of nullable float values",
    "operations": [
     {
@@ -2282,7 +2282,7 @@
           "crossLanguageDefinitionId": "TypeSpec.float32",
           "decorators": []
          },
-         "namespace": ""
+         "namespace": "_Type._Dictionary"
         },
         "decorators": []
        },

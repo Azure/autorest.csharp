@@ -48,7 +48,7 @@
    "$id": "7",
    "name": "JsonClient",
    "namespace": "Serialization.EncodedName.Json",
-   "doc": "Projection",
+   "doc": "Encoded names",
    "operations": [],
    "parameters": [
     {

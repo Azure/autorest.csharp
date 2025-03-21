@@ -1985,7 +1985,7 @@
     "namespace": "FirstTestTypeSpec",
     "crossLanguageDefinitionId": "FirstTestTypeSpec.BaseModel",
     "usage": "Input,Json",
-    "doc": "parenetModel",
+    "doc": "parentModel",
     "decorators": [],
     "properties": [
      {
@@ -2058,7 +2058,7 @@
    "namespace": "FirstTestTypeSpec",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.ContainSelf",
    "usage": "Input,Json",
-   "doc": "containself",
+   "doc": "containSelf",
    "decorators": [],
    "properties": [
     {
@@ -4246,7 +4246,7 @@
        "$id": "498",
        "name": "contentType",
        "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
+       "doc": "Body parameter's content type. Known values are text/plain",
        "type": {
         "$id": "499",
         "kind": "constant",
@@ -4257,7 +4257,7 @@
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
-        "value": "application/json",
+        "value": "text/plain",
         "decorators": []
        },
        "location": "Header",
@@ -4306,7 +4306,7 @@
      "uri": "{firstTestTypeSpecUrl}",
      "path": "/stringBody",
      "requestMediaTypes": [
-      "application/json"
+      "text/plain"
      ],
      "bufferResponse": true,
      "generateProtocolMethod": true,
@@ -4325,7 +4325,7 @@
        "$id": "505",
        "name": "contentType",
        "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
+       "doc": "Body parameter's content type. Known values are text/plain",
        "type": {
         "$id": "506",
         "kind": "constant",
@@ -4336,7 +4336,7 @@
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
-        "value": "application/json",
+        "value": "text/plain",
         "decorators": []
        },
        "location": "Header",
@@ -4385,7 +4385,7 @@
      "uri": "{firstTestTypeSpecUrl}",
      "path": "/boolBody",
      "requestMediaTypes": [
-      "application/json"
+      "text/plain"
      ],
      "bufferResponse": true,
      "generateProtocolMethod": true,
@@ -4404,7 +4404,7 @@
        "$id": "512",
        "name": "contentType",
        "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
+       "doc": "Body parameter's content type. Known values are text/plain",
        "type": {
         "$id": "513",
         "kind": "constant",
@@ -4415,7 +4415,7 @@
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
-        "value": "application/json",
+        "value": "text/plain",
         "decorators": []
        },
        "location": "Header",
@@ -4472,7 +4472,7 @@
      "uri": "{firstTestTypeSpecUrl}",
      "path": "/dateTimeBody",
      "requestMediaTypes": [
-      "application/json"
+      "text/plain"
      ],
      "bufferResponse": true,
      "generateProtocolMethod": true,
@@ -4501,7 +4501,7 @@
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
-        "value": "application/json",
+        "value": "text/plain",
         "decorators": []
        },
        "location": "Header",
@@ -4531,7 +4531,7 @@
        "headers": [],
        "isErrorResponse": false,
        "contentTypes": [
-        "application/json"
+        "text/plain"
        ]
       }
      ],
@@ -6113,7 +6113,7 @@
        "$id": "663",
        "name": "contentType",
        "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
+       "doc": "Body parameter's content type. Known values are text/plain",
        "type": {
         "$id": "664",
         "kind": "constant",
@@ -6124,7 +6124,7 @@
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
-        "value": "application/json",
+        "value": "text/plain",
         "decorators": []
        },
        "location": "Header",
@@ -6169,7 +6169,7 @@
      "uri": "{firstTestTypeSpecUrl}",
      "path": "/unknown-value",
      "requestMediaTypes": [
-      "application/json"
+      "text/plain"
      ],
      "bufferResponse": true,
      "generateProtocolMethod": true,

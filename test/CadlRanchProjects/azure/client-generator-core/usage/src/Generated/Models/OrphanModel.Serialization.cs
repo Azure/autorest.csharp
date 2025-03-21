@@ -36,7 +36,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
             }
 
             writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
+            writer.WriteStringValue(ModelName);
+            writer.WritePropertyName("desc"u8);
+            writer.WriteStringValue(Description);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -75,6 +77,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
                 return null;
             }
             string name = default;
+            string desc = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -84,13 +87,18 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("desc"u8))
+                {
+                    desc = property.Value.GetString();
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new OrphanModel(name, serializedAdditionalRawData);
+            return new OrphanModel(name, desc, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<OrphanModel>.Write(ModelReaderWriterOptions options)

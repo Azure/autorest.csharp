@@ -8,7 +8,7 @@
    "$id": "2",
    "kind": "model",
    "name": "JsonEncodedNameModel",
-   "namespace": "Serialization.EncodedName.Json.Property",
+   "namespace": "Scm.Serialization.EncodedName.Json",
    "crossLanguageDefinitionId": "Serialization.EncodedName.Json.Property.JsonEncodedNameModel",
    "usage": "Input,Output,Json",
    "decorators": [],
@@ -47,8 +47,8 @@
   {
    "$id": "7",
    "name": "JsonClient",
-   "namespace": "Serialization.EncodedName.Json",
-   "doc": "Projection",
+   "namespace": "Scm.Serialization.EncodedName.Json",
+   "doc": "Encoded names",
    "operations": [],
    "parameters": [
     {
@@ -88,7 +88,7 @@
   {
    "$id": "12",
    "name": "Property",
-   "namespace": "Serialization.EncodedName.Json.Property",
+   "namespace": "Scm.Serialization.EncodedName.Json",
    "operations": [
     {
      "$id": "13",

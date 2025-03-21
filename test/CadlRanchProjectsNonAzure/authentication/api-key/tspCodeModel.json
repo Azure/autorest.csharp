@@ -8,7 +8,7 @@
    "$id": "2",
    "kind": "model",
    "name": "InvalidAuth",
-   "namespace": "Authentication.ApiKey",
+   "namespace": "Scm.Authentication.ApiKey",
    "crossLanguageDefinitionId": "Authentication.ApiKey.InvalidAuth",
    "usage": "Error,Json,Exception",
    "decorators": [],
@@ -46,7 +46,7 @@
   {
    "$id": "7",
    "name": "ApiKeyClient",
-   "namespace": "Authentication.ApiKey",
+   "namespace": "Scm.Authentication.ApiKey",
    "doc": "Illustrates clients generated with ApiKey authentication.",
    "operations": [
     {

@@ -3,9 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 
-@service({
-    title: "Validation for MRW",
-    version: "0.1.0",
+@service(#{
+    title: "Validation for MRW"
 })
 @doc("This is a typespec project to validation the model reader writer functionalities.")
 @server(
@@ -45,7 +44,7 @@ model ModelWithPersistableOnly {
     keyValuePairs?: Record<string>;
 
     @doc("The x property.")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     xProperty: int32;
 }
 
@@ -77,7 +76,7 @@ model ModelX extends BaseModel {
     keyValuePairs?: Record<string>;
 
     @doc("The XProperty property.")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     xProperty: int32;
 }
 
@@ -86,7 +85,7 @@ model ModelY extends BaseModel {
     kind: "Y";
 
     @doc("The YProperty property.")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     yProperty: string;
 }
 
@@ -97,15 +96,15 @@ op op3(@body body: BaseModel): BaseModel;
 @doc("The tracked resource data")
 model TrackedResourceData {
     @doc("The id property.")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     id: string;
 
     @doc("The name property.")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     name: string;
 
     @doc("The resource type.")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     @clientName("resourceType")
     type: string;
 
@@ -374,7 +373,7 @@ op op5(): ResourceProviderData;
 
 model ModelWithStringAdditionalProperties {
     @doc("The id property.")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     id: string;
 
     @doc("The name property.")
@@ -392,7 +391,7 @@ op op6(@body body: ModelWithStringAdditionalProperties): ModelWithStringAddition
 
 model ModelWithArrayAdditionalProperties {
     @doc("The id property.")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     id: string;
 
     @doc("The name property.")
@@ -410,7 +409,7 @@ op op7(@body body: ModelWithArrayAdditionalProperties): ModelWithArrayAdditional
 
 model ModelWithUnknownAdditionalProperties {
     @doc("The id property.")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     id: string;
 
     @doc("The name property.")

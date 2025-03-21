@@ -3417,7 +3417,7 @@
        "$id": "402",
        "name": "contentType",
        "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
+       "doc": "Body parameter's content type. Known values are text/plain",
        "type": {
         "$id": "403",
         "kind": "constant",
@@ -3428,7 +3428,7 @@
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
-        "value": "application/json",
+        "value": "text/plain",
         "decorators": []
        },
        "location": "Header",
@@ -3477,7 +3477,7 @@
      "uri": "{endpoint}",
      "path": "/stringBody",
      "requestMediaTypes": [
-      "application/json"
+      "text/plain"
      ],
      "bufferResponse": true,
      "generateProtocolMethod": true,
@@ -3496,7 +3496,7 @@
        "$id": "409",
        "name": "contentType",
        "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
+       "doc": "Body parameter's content type. Known values are text/plain",
        "type": {
         "$id": "410",
         "kind": "constant",
@@ -3507,7 +3507,7 @@
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
-        "value": "application/json",
+        "value": "text/plain",
         "decorators": []
        },
        "location": "Header",
@@ -3556,7 +3556,7 @@
      "uri": "{endpoint}",
      "path": "/boolBody",
      "requestMediaTypes": [
-      "application/json"
+      "text/plain"
      ],
      "bufferResponse": true,
      "generateProtocolMethod": true,
@@ -3575,7 +3575,7 @@
        "$id": "416",
        "name": "contentType",
        "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
+       "doc": "Body parameter's content type. Known values are text/plain",
        "type": {
         "$id": "417",
         "kind": "constant",
@@ -3586,7 +3586,7 @@
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
-        "value": "application/json",
+        "value": "text/plain",
         "decorators": []
        },
        "location": "Header",
@@ -3643,7 +3643,7 @@
      "uri": "{endpoint}",
      "path": "/dateTimeBody",
      "requestMediaTypes": [
-      "application/json"
+      "text/plain"
      ],
      "bufferResponse": true,
      "generateProtocolMethod": true,
@@ -3672,7 +3672,7 @@
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
-        "value": "application/json",
+        "value": "text/plain",
         "decorators": []
        },
        "location": "Header",
@@ -3702,7 +3702,7 @@
        "headers": [],
        "isErrorResponse": false,
        "contentTypes": [
-        "application/json"
+        "text/plain"
        ]
       }
      ],
@@ -5284,7 +5284,7 @@
        "$id": "567",
        "name": "contentType",
        "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
+       "doc": "Body parameter's content type. Known values are text/plain",
        "type": {
         "$id": "568",
         "kind": "constant",
@@ -5295,7 +5295,7 @@
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
-        "value": "application/json",
+        "value": "text/plain",
         "decorators": []
        },
        "location": "Header",
@@ -5340,7 +5340,7 @@
      "uri": "{endpoint}",
      "path": "/unknown-value",
      "requestMediaTypes": [
-      "application/json"
+      "text/plain"
      ],
      "bufferResponse": true,
      "generateProtocolMethod": true,
