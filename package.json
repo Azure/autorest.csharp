@@ -12,7 +12,7 @@
         "url": "https://github.com/Azure/autorest.csharp/issues"
     },
   "devDependencies": {
-    "@typespec/http-specs": "0.1.0-alpha.15-dev.3",
+    "@typespec/http-specs": "0.1.0-alpha.15",
     "@azure-tools/azure-http-specs": "0.1.0-alpha.10",
     "@azure-tools/typespec-client-generator-core": "0.53.0",
     "@azure-tools/typespec-azure-resource-manager": "0.53.0",

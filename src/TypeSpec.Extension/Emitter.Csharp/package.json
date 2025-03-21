@@ -35,7 +35,7 @@
     ],
     "dependencies": {
         "@autorest/csharp": "3.0.0-beta.20240625.4",
-        "@typespec/http-client-csharp": "https://artprodcus3.artifacts.visualstudio.com/A0fb41ef4-5012-48a9-bf39-4ee3de03ee35/29ec6040-b234-4e31-b139-33dc4287b756/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL2F6dXJlLXNkay9wcm9qZWN0SWQvMjllYzYwNDAtYjIzNC00ZTMxLWIxMzktMzNkYzQyODdiNzU2L2J1aWxkSWQvNDY3MTg1MC9hcnRpZmFjdE5hbWUvYnVpbGRfYXJ0aWZhY3RzX2NzaGFycA2/content?format=file&subPath=%2fpackages%2ftypespec-http-client-csharp-1.0.0-alpha.20250319.113.tgz"
+        "@typespec/http-client-csharp": "https://artprodcus3.artifacts.visualstudio.com/A0fb41ef4-5012-48a9-bf39-4ee3de03ee35/29ec6040-b234-4e31-b139-33dc4287b756/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL2F6dXJlLXNkay9wcm9qZWN0SWQvMjllYzYwNDAtYjIzNC00ZTMxLWIxMzktMzNkYzQyODdiNzU2L2J1aWxkSWQvNDY3MzA1MS9hcnRpZmFjdE5hbWUvYnVpbGRfYXJ0aWZhY3RzX2NzaGFycA2/content?format=file&subPath=%2fpackages%2ftypespec-http-client-csharp-1.0.0-alpha.20250320.9.tgz"
     },
     "peerDependencies": {
         "@azure-tools/typespec-azure-core": ">=0.53.0 <1.0.0",
@@ -64,11 +64,11 @@
         "@types/prettier": "^2.6.3",
         "@typespec/compiler": "0.67.1",
         "@typespec/http": "0.67.1",
-        "@typespec/library-linter": "0.67.0",
-        "@typespec/openapi": "0.67.0",
-        "@typespec/rest": "0.67.0",
-        "@typespec/versioning": "0.67.0",
-        "@typespec/xml": "0.67.0",
+        "@typespec/library-linter": "0.67.1",
+        "@typespec/openapi": "0.67.1",
+        "@typespec/rest": "0.67.1",
+        "@typespec/versioning": "0.67.1",
+        "@typespec/xml": "0.67.1",
         "eslint": "^9.15.0",
         "globals": "^15.2.0",
         "prettier": "^3.3.3",
