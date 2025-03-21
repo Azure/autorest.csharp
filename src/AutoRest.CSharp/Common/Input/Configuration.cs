@@ -146,7 +146,6 @@ namespace AutoRest.CSharp.Common.Input
             ShouldTreatBase64AsBinaryData = !azureArm && !generation1ConvenienceClient ? shouldTreatBase64AsBinaryData : false;
             UseCoreDataFactoryReplacements = useCoreDataFactoryReplacements;
             UseModelReaderWriter = useModelReaderWriter;
-            // TODO: remove use-writ-core after we enable all RPs for DPG
             EnableBicepSerialization = enableBicepSerialization;
             EnableInternalRawData = enableInternalRawData;
             projectFolder ??= ProjectFolderDefault;

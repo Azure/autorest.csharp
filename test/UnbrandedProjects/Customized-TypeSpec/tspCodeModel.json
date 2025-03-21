@@ -2678,14 +2678,26 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
+   "Decorators": [
+    {
+     "$id": "273",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "274",
+      "options": {
+       "$id": "275",
+       "title": "hello world"
+      }
+     }
+    }
+   ],
    "CrossLanguageDefinitionId": "CustomizedTypeSpec"
   }
  ],
  "Auth": {
-  "$id": "273",
+  "$id": "276",
   "ApiKey": {
-   "$id": "274",
+   "$id": "277",
    "Name": "my-api-key",
    "In": "header"
   }

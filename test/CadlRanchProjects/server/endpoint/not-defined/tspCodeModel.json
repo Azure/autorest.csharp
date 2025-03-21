@@ -63,7 +63,19 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
+   "Decorators": [
+    {
+     "$id": "8",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "9",
+      "options": {
+       "$id": "10",
+       "title": "Testserver without any endpoint"
+      }
+     }
+    }
+   ],
    "CrossLanguageDefinitionId": "Server.Endpoint.NotDefined"
   }
  ]

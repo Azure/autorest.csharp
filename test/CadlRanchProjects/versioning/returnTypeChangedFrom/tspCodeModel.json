@@ -232,7 +232,15 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
+   "Decorators": [
+    {
+     "$id": "24",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "25"
+     }
+    }
+   ],
    "CrossLanguageDefinitionId": "Versioning.ReturnTypeChangedFrom"
   }
  ]

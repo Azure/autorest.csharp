@@ -603,7 +603,15 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
+   "Decorators": [
+    {
+     "$id": "65",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "66"
+     }
+    }
+   ],
    "CrossLanguageDefinitionId": "Versioning.Removed"
   }
  ]

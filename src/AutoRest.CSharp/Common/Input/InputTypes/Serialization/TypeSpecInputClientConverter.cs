@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadWithConverter(nameof(InputClient.Operations), options, ref operations)
                     || reader.TryReadWithConverter(nameof(InputClient.Parameters), options, ref parameters)
                     || reader.TryReadString(nameof(InputClient.Parent), ref parent)
-                    || reader.TryReadWithConverter("decorators", options, ref decorators);
+                    || reader.TryReadWithConverter(nameof(InputClient.Decorators), options, ref decorators);
 
                 if (!isKnownProperty)
                 {

@@ -443,28 +443,36 @@
      }
     }
    ],
-   "Decorators": [],
+   "Decorators": [
+    {
+     "$id": "59",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "60"
+     }
+    }
+   ],
    "CrossLanguageDefinitionId": "Azure.ResourceManager.NonResource"
   },
   {
-   "$id": "59",
+   "$id": "61",
    "Name": "NonResourceOperations",
    "Namespace": "Azure.ResourceManager.NonResource",
    "Doc": "Operations on non resource model should not be marked as `@armResourceOperations`.",
    "Operations": [
     {
-     "$id": "60",
+     "$id": "62",
      "Name": "get",
      "ResourceName": "NonResourceOperations",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "61",
+       "$id": "63",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Doc": "The API version to use for this operation.",
        "Type": {
-        "$id": "62",
+        "$id": "64",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -478,9 +486,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "63",
+        "$id": "65",
         "Type": {
-         "$id": "64",
+         "$id": "66",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -491,17 +499,17 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "65",
+       "$id": "67",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
        "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
-        "$id": "66",
+        "$id": "68",
         "kind": "string",
         "name": "uuid",
         "crossLanguageDefinitionId": "Azure.Core.uuid",
         "baseType": {
-         "$id": "67",
+         "$id": "69",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -520,32 +528,10 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "68",
+       "$id": "70",
        "Name": "location",
        "NameInRequest": "location",
        "Doc": "The location parameter.",
-       "Type": {
-        "$id": "69",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "Location": "Path",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
-      },
-      {
-       "$id": "70",
-       "Name": "parameter",
-       "NameInRequest": "parameter",
-       "Doc": "The cluster code version.",
        "Type": {
         "$id": "71",
         "kind": "string",
@@ -565,13 +551,35 @@
       },
       {
        "$id": "72",
+       "Name": "parameter",
+       "NameInRequest": "parameter",
+       "Doc": "The cluster code version.",
+       "Type": {
+        "$id": "73",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+       },
+       "Location": "Path",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "74",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "73",
+        "$id": "75",
         "kind": "constant",
         "valueType": {
-         "$id": "74",
+         "$id": "76",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -593,7 +601,7 @@
      ],
      "Responses": [
       {
-       "$id": "75",
+       "$id": "77",
        "StatusCodes": [
         200
        ],
@@ -617,18 +625,18 @@
      "Decorators": []
     },
     {
-     "$id": "76",
+     "$id": "78",
      "Name": "create",
      "ResourceName": "NonResourceOperations",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "77",
+       "$id": "79",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Doc": "The API version to use for this operation.",
        "Type": {
-        "$id": "78",
+        "$id": "80",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -642,9 +650,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "79",
+        "$id": "81",
         "Type": {
-         "$id": "80",
+         "$id": "82",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -655,17 +663,17 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "81",
+       "$id": "83",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
        "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
-        "$id": "82",
+        "$id": "84",
         "kind": "string",
         "name": "uuid",
         "crossLanguageDefinitionId": "Azure.Core.uuid",
         "baseType": {
-         "$id": "83",
+         "$id": "85",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -684,32 +692,10 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "84",
+       "$id": "86",
        "Name": "location",
        "NameInRequest": "location",
        "Doc": "The location parameter.",
-       "Type": {
-        "$id": "85",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "Location": "Path",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
-      },
-      {
-       "$id": "86",
-       "Name": "parameter",
-       "NameInRequest": "parameter",
-       "Doc": "The cluster code version.",
        "Type": {
         "$id": "87",
         "kind": "string",
@@ -729,14 +715,36 @@
       },
       {
        "$id": "88",
+       "Name": "parameter",
+       "NameInRequest": "parameter",
+       "Doc": "The cluster code version.",
+       "Type": {
+        "$id": "89",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+       },
+       "Location": "Path",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "90",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "89",
+        "$id": "91",
         "kind": "constant",
         "valueType": {
-         "$id": "90",
+         "$id": "92",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -756,14 +764,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "91",
+       "$id": "93",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "92",
+        "$id": "94",
         "kind": "constant",
         "valueType": {
-         "$id": "93",
+         "$id": "95",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -783,7 +791,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "94",
+       "$id": "96",
        "Name": "body",
        "NameInRequest": "body",
        "Doc": "The request body.",
@@ -803,7 +811,7 @@
      ],
      "Responses": [
       {
-       "$id": "95",
+       "$id": "97",
        "StatusCodes": [
         200
        ],
@@ -831,17 +839,17 @@
     }
    ],
    "Protocol": {
-    "$id": "96"
+    "$id": "98"
    },
    "Parent": "NonResourceClient",
    "Parameters": [
     {
-     "$id": "97",
+     "$id": "99",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Doc": "Service host",
      "Type": {
-      "$id": "98",
+      "$id": "100",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -856,9 +864,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "99",
+      "$id": "101",
       "Type": {
-       "$id": "100",
+       "$id": "102",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"
@@ -872,9 +880,9 @@
   }
  ],
  "Auth": {
-  "$id": "101",
+  "$id": "103",
   "OAuth2": {
-   "$id": "102",
+   "$id": "104",
    "Scopes": [
     "user_impersonation"
    ]

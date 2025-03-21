@@ -13,11 +13,7 @@ using Azure.ClientGenerator.Core;
 // NOTE: These features are missing:
 // - Security definition for apiKey
 @versioned(Versions)
-@service(
-    {
-        title: "Microsoft Cognitive Language Service - Analyze Text Authoring"
-    }
-)
+@service
 @server(
   "{Endpoint}/language",
   "Language Service",

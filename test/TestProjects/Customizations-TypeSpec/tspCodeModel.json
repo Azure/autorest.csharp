@@ -1924,7 +1924,20 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
+   "Decorators": [
+    {
+     "$id": "242",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "243",
+      "options": {
+       "$id": "244",
+       "title": "Models in CADL",
+       "version": "0.1.0"
+      }
+     }
+    }
+   ],
    "CrossLanguageDefinitionId": "CustomizationsInTsp"
   }
  ]

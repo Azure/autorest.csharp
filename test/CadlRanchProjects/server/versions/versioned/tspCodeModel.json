@@ -295,7 +295,15 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
+   "Decorators": [
+    {
+     "$id": "32",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "33"
+     }
+    }
+   ],
    "CrossLanguageDefinitionId": "Server.Versions.Versioned"
   }
  ]

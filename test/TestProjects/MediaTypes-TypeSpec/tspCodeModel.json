@@ -412,7 +412,20 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
+   "Decorators": [
+    {
+     "$id": "41",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "42",
+      "options": {
+       "$id": "43",
+       "title": "Media Types Service",
+       "version": "2021-03-25"
+      }
+     }
+    }
+   ],
    "CrossLanguageDefinitionId": "MultipleMediaTypes"
   }
  ]

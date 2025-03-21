@@ -3879,14 +3879,27 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
+   "Decorators": [
+    {
+     "$id": "421",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "422",
+      "options": {
+       "$id": "423",
+       "title": "hello world",
+       "version": "0.1.0"
+      }
+     }
+    }
+   ],
    "CrossLanguageDefinitionId": "UnbrandedTypeSpec"
   }
  ],
  "Auth": {
-  "$id": "421",
+  "$id": "424",
   "ApiKey": {
-   "$id": "422",
+   "$id": "425",
    "Name": "my-api-key",
    "In": "header"
   }

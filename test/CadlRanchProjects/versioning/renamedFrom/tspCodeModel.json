@@ -391,30 +391,38 @@
      "Kind": "Client"
     }
    ],
-   "Decorators": [],
+   "Decorators": [
+    {
+     "$id": "43",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "44"
+     }
+    }
+   ],
    "CrossLanguageDefinitionId": "Versioning.RenamedFrom"
   },
   {
-   "$id": "43",
+   "$id": "45",
    "Name": "NewInterface",
    "Namespace": "Versioning.RenamedFrom",
    "Operations": [
     {
-     "$id": "44",
+     "$id": "46",
      "Name": "newOpInNewInterface",
      "ResourceName": "NewInterface",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "45",
+       "$id": "47",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "46",
+        "$id": "48",
         "kind": "constant",
         "valueType": {
-         "$id": "47",
+         "$id": "49",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -434,14 +442,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "48",
+       "$id": "50",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "49",
+        "$id": "51",
         "kind": "constant",
         "valueType": {
-         "$id": "50",
+         "$id": "52",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -461,7 +469,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "51",
+       "$id": "53",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -480,7 +488,7 @@
      ],
      "Responses": [
       {
-       "$id": "52",
+       "$id": "54",
        "StatusCodes": [
         200
        ],
@@ -508,17 +516,17 @@
     }
    ],
    "Protocol": {
-    "$id": "53"
+    "$id": "55"
    },
    "Parent": "RenamedFromClient",
    "Parameters": [
     {
-     "$id": "54",
+     "$id": "56",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Doc": "Need to be set as 'http://localhost:3000' in client.",
      "Type": {
-      "$id": "55",
+      "$id": "57",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -534,7 +542,7 @@
      "Kind": "Client"
     },
     {
-     "$id": "56",
+     "$id": "58",
      "Name": "version",
      "NameInRequest": "version",
      "Doc": "Need to be set as 'v1' or 'v2' in client.",
