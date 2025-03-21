@@ -23,7 +23,7 @@ resources:
       type: github
       endpoint: Azure
       name: Azure/azure-sdk-tools
-      ref: refs/heads/main
+      ref: refs/pull/10102/head
 
 pool:
   name: azsdk-pool-mms-win-2022-general
@@ -32,6 +32,7 @@ pool:
 extends:
   template: eng/pipelines/templates/stages/archetype-autorest-preview.yml@azure-sdk-tools
   parameters:
+    NodeVersion: 20.x
     RegenerationJobCount: 10
     BuildPrereleaseVersion: true
     ${{ if eq(variables['Build.Reason'], 'Schedule') }}:
