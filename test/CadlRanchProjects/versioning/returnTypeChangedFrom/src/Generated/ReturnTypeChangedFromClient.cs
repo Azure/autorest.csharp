@@ -68,7 +68,7 @@ namespace Versioning.ReturnTypeChangedFrom
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
-            using RequestContent content = body;
+            using RequestContent content = RequestContentHelper.FromObject(body);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await TestAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(response.Content.ToObjectFromJson<string>(), response);
@@ -84,7 +84,7 @@ namespace Versioning.ReturnTypeChangedFrom
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
-            using RequestContent content = body;
+            using RequestContent content = RequestContentHelper.FromObject(body);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Test(content, context);
             return Response.FromValue(response.Content.ToObjectFromJson<string>(), response);
@@ -180,7 +180,7 @@ namespace Versioning.ReturnTypeChangedFrom
             uri.AppendPath("/test", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "text/plain");
+            request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
