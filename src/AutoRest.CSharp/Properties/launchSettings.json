@@ -648,6 +648,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\traits\\src\\Generated -n"
     },
+    "typespec-azure/encode/duration": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\encode\\duration\\src\\Generated -n"
+    },
     "typespec-azure/example/basic": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\example\\basic\\src\\Generated -n"
