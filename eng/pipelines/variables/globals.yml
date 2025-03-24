@@ -22,3 +22,7 @@ variables:
     value: windows
   - name: MACOS
     value: macOS
+  
+  # Indicates the node version to use
+  - name: NodeVersion
+    value: '20.x'

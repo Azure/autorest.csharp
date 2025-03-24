@@ -1,5 +1,0 @@
-variables:
-  # Indicates the node version to use
-  - name: NodeVersion
-    type: string
-    value: '20.x'
