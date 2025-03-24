@@ -3,11 +3,10 @@ import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 
-@service({
-    title: "Models in CADL",
-    version: "0.1.0",
+@service(#{
+    title: "Models in TypeSpec"
 })
-@doc("CADL project to test various types of models.")
+@doc("TypeSpec project to test various types of models.")
 namespace CustomizationsInTsp;
 
 using TypeSpec.Http;
@@ -115,19 +114,19 @@ model ModelWithCustomizedProperties {
     vectorOptionalNullable?: float32[] | null;
 
     @doc("Property type changed to ReadOnlyMemory<float>")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     vectorReadOnly: float32[];
 
     @doc("Property type changed to ReadOnlyMemory<float>?")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     vectorOptionalReadOnly?: float32[];
 
     @doc("Property type changed to ReadOnlyMemory<float>?")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     vectorNullableReadOnly: float32[] | null;
 
     @doc("Property type changed to ReadOnlyMemory<float>?")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     vectorOptionalNullableReadOnly?: float32[] | null;
 }
 

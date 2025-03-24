@@ -1,10 +1,10 @@
 {
  "$id": "1",
- "Name": "_Specs_.Azure.Core.Traits",
- "ApiVersions": [
+ "name": "_Specs_.Azure.Core.Traits",
+ "apiVersions": [
   "2022-12-01-preview"
  ],
- "Enums": [
+ "enums": [
   {
    "$id": "2",
    "kind": "enum",
@@ -102,7 +102,7 @@
    "decorators": []
   }
  ],
- "Models": [
+ "models": [
   {
    "$id": "12",
    "kind": "model",
@@ -248,146 +248,146 @@
    ]
   }
  ],
- "Clients": [
+ "clients": [
   {
    "$id": "31",
-   "Name": "TraitsClient",
-   "Namespace": "_Specs_.Azure.Core.Traits",
-   "Doc": "Illustrates Azure Core operation customizations by traits",
-   "Operations": [
+   "name": "TraitsClient",
+   "namespace": "_Specs_.Azure.Core.Traits",
+   "doc": "Illustrates Azure Core operation customizations by traits",
+   "operations": [
     {
      "$id": "32",
-     "Name": "smokeTest",
-     "ResourceName": "User",
-     "Doc": "Get a resource, sending and receiving headers.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "smokeTest",
+     "resourceName": "User",
+     "doc": "Get a resource, sending and receiving headers.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "33",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
-       "Type": {
+       "name": "apiVersion",
+       "nameInRequest": "api-version",
+       "doc": "The API version to use for this operation.",
+       "type": {
         "$id": "34",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Client",
-       "DefaultValue": {
+       "location": "Query",
+       "isApiVersion": true,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Client",
+       "defaultValue": {
         "$id": "35",
-        "Type": {
+        "type": {
          "$id": "36",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
-        "Value": "2022-12-01-preview"
+        "value": "2022-12-01-preview"
        },
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "37",
-       "Name": "id",
-       "NameInRequest": "id",
-       "Doc": "The user's id.",
-       "Type": {
+       "name": "id",
+       "nameInRequest": "id",
+       "doc": "The user's id.",
+       "type": {
         "$id": "38",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
         "decorators": []
        },
-       "Location": "Path",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Path",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "39",
-       "Name": "foo",
-       "NameInRequest": "foo",
-       "Doc": "header in request",
-       "Type": {
+       "name": "foo",
+       "nameInRequest": "foo",
+       "doc": "header in request",
+       "type": {
         "$id": "40",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "41",
-       "Name": "ifMatch",
-       "NameInRequest": "If-Match",
-       "Doc": "The request should only proceed if an entity matches this string.",
-       "Type": {
+       "name": "ifMatch",
+       "nameInRequest": "If-Match",
+       "doc": "The request should only proceed if an entity matches this string.",
+       "type": {
         "$id": "42",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "43",
-       "Name": "ifNoneMatch",
-       "NameInRequest": "If-None-Match",
-       "Doc": "The request should only proceed if no entity matches this string.",
-       "Type": {
+       "name": "ifNoneMatch",
+       "nameInRequest": "If-None-Match",
+       "doc": "The request should only proceed if no entity matches this string.",
+       "type": {
         "$id": "44",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "45",
-       "Name": "ifUnmodifiedSince",
-       "NameInRequest": "If-Unmodified-Since",
-       "Doc": "The request should only proceed if the entity was not modified after this time.",
-       "Type": {
+       "name": "ifUnmodifiedSince",
+       "nameInRequest": "If-Unmodified-Since",
+       "doc": "The request should only proceed if the entity was not modified after this time.",
+       "type": {
         "$id": "46",
         "kind": "utcDateTime",
         "name": "utcDateTime",
@@ -402,22 +402,22 @@
         "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "48",
-       "Name": "ifModifiedSince",
-       "NameInRequest": "If-Modified-Since",
-       "Doc": "The request should only proceed if the entity was modified after this time.",
-       "Type": {
+       "name": "ifModifiedSince",
+       "nameInRequest": "If-Modified-Since",
+       "doc": "The request should only proceed if the entity was modified after this time.",
+       "type": {
         "$id": "49",
         "kind": "utcDateTime",
         "name": "utcDateTime",
@@ -432,22 +432,22 @@
         "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "51",
-       "Name": "clientRequestId",
-       "NameInRequest": "x-ms-client-request-id",
-       "Doc": "An opaque, globally-unique, client-generated string identifier for the request.",
-       "Type": {
+       "name": "clientRequestId",
+       "nameInRequest": "x-ms-client-request-id",
+       "doc": "An opaque, globally-unique, client-generated string identifier for the request.",
+       "type": {
         "$id": "52",
         "kind": "string",
         "name": "uuid",
@@ -461,21 +461,21 @@
         },
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "54",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "55",
         "kind": "constant",
         "valueType": {
@@ -488,32 +488,32 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "57",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "12"
        },
-       "Headers": [
+       "headers": [
         {
          "$id": "58",
-         "Name": "bar",
-         "NameInResponse": "bar",
-         "Type": {
+         "name": "bar",
+         "nameInResponse": "bar",
+         "type": {
           "$id": "59",
           "kind": "string",
           "name": "string",
@@ -523,10 +523,10 @@
         },
         {
          "$id": "60",
-         "Name": "etagHeader",
-         "NameInResponse": "ETag",
-         "Doc": "The entity tag for the response.",
-         "Type": {
+         "name": "etagHeader",
+         "nameInResponse": "ETag",
+         "doc": "The entity tag for the response.",
+         "type": {
           "$id": "61",
           "kind": "string",
           "name": "string",
@@ -536,10 +536,10 @@
         },
         {
          "$id": "62",
-         "Name": "clientRequestId",
-         "NameInResponse": "x-ms-client-request-id",
-         "Doc": "An opaque, globally-unique, client-generated string identifier for the request.",
-         "Type": {
+         "name": "clientRequestId",
+         "nameInResponse": "x-ms-client-request-id",
+         "doc": "An opaque, globally-unique, client-generated string identifier for the request.",
+         "type": {
           "$id": "63",
           "kind": "string",
           "name": "uuid",
@@ -555,110 +555,110 @@
          }
         }
        ],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/azure/core/traits/user/{id}",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.smokeTest",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/azure/core/traits/user/{id}",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.smokeTest",
+     "decorators": []
     },
     {
      "$id": "65",
-     "Name": "repeatableAction",
-     "ResourceName": "Traits",
-     "Doc": "Test for repeatable requests",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "repeatableAction",
+     "resourceName": "Traits",
+     "doc": "Test for repeatable requests",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "66",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
-       "Type": {
+       "name": "apiVersion",
+       "nameInRequest": "api-version",
+       "doc": "The API version to use for this operation.",
+       "type": {
         "$id": "67",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Client",
-       "DefaultValue": {
+       "location": "Query",
+       "isApiVersion": true,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Client",
+       "defaultValue": {
         "$id": "68",
-        "Type": {
+        "type": {
          "$id": "69",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
-        "Value": "2022-12-01-preview"
+        "value": "2022-12-01-preview"
        },
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "70",
-       "Name": "id",
-       "NameInRequest": "id",
-       "Doc": "The user's id.",
-       "Type": {
+       "name": "id",
+       "nameInRequest": "id",
+       "doc": "The user's id.",
+       "type": {
         "$id": "71",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
         "decorators": []
        },
-       "Location": "Path",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Path",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "72",
-       "Name": "repeatabilityRequestId",
-       "NameInRequest": "Repeatability-Request-ID",
-       "Doc": "An opaque, globally-unique, client-generated string identifier for the request.",
-       "Type": {
+       "name": "repeatabilityRequestId",
+       "nameInRequest": "Repeatability-Request-ID",
+       "doc": "An opaque, globally-unique, client-generated string identifier for the request.",
+       "type": {
         "$id": "73",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "74",
-       "Name": "repeatabilityFirstSent",
-       "NameInRequest": "Repeatability-First-Sent",
-       "Doc": "Specifies the date and time at which the request was first created.",
-       "Type": {
+       "name": "repeatabilityFirstSent",
+       "nameInRequest": "Repeatability-First-Sent",
+       "doc": "Specifies the date and time at which the request was first created.",
+       "type": {
         "$id": "75",
         "kind": "utcDateTime",
         "name": "utcDateTime",
@@ -673,22 +673,22 @@
         "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "77",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
-       "Type": {
+       "name": "contentType",
+       "nameInRequest": "Content-Type",
+       "doc": "Body parameter's content type. Known values are application/json",
+       "type": {
         "$id": "78",
         "kind": "constant",
         "valueType": {
@@ -701,21 +701,21 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": true,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "80",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "81",
         "kind": "constant",
         "valueType": {
@@ -728,112 +728,108 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "83",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Doc": "The body parameter.",
-       "Type": {
+       "name": "body",
+       "nameInRequest": "body",
+       "doc": "The body parameter.",
+       "type": {
         "$ref": "21"
        },
-       "Location": "Body",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Body",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "84",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "26"
        },
-       "Headers": [
+       "headers": [
         {
          "$id": "85",
-         "Name": "repeatabilityResult",
-         "NameInResponse": "Repeatability-Result",
-         "Doc": "Indicates whether the repeatable request was accepted or rejected.",
-         "Type": {
+         "name": "repeatabilityResult",
+         "nameInResponse": "Repeatability-Result",
+         "doc": "Indicates whether the repeatable request was accepted or rejected.",
+         "type": {
           "$ref": "6"
          }
         }
        ],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "POST",
-     "Uri": "{endpoint}",
-     "Path": "/azure/core/traits/user/{id}:repeatableAction",
-     "RequestMediaTypes": [
+     "httpMethod": "POST",
+     "uri": "{endpoint}",
+     "path": "/azure/core/traits/user/{id}:repeatableAction",
+     "requestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.repeatableAction",
-     "Decorators": []
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.repeatableAction",
+     "decorators": []
     }
    ],
-   "Protocol": {
-    "$id": "86"
-   },
-   "Parameters": [
+   "parameters": [
     {
-     "$id": "87",
-     "Name": "endpoint",
-     "NameInRequest": "endpoint",
-     "Doc": "Service host",
-     "Type": {
-      "$id": "88",
+     "$id": "86",
+     "name": "endpoint",
+     "nameInRequest": "endpoint",
+     "doc": "Service host",
+     "type": {
+      "$id": "87",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
      },
-     "Location": "Uri",
-     "IsApiVersion": false,
-     "IsResourceParameter": false,
-     "IsContentType": false,
-     "IsRequired": true,
-     "IsEndpoint": true,
-     "SkipUrlEncoding": false,
-     "Explode": false,
-     "Kind": "Client",
-     "DefaultValue": {
-      "$id": "89",
-      "Type": {
-       "$id": "90",
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client",
+     "defaultValue": {
+      "$id": "88",
+      "type": {
+       "$id": "89",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"
       },
-      "Value": "http://localhost:3000"
+      "value": "http://localhost:3000"
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits"
+   "decorators": [],
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits"
   }
  ]
 }

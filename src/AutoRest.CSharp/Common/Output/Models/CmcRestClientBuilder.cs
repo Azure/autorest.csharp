@@ -368,7 +368,7 @@ namespace AutoRest.CSharp.Output.Models
         private static SerializationFormat GetSerializationFormat(InputParameter requestParameter)
             => SerializationBuilder.GetSerializationFormat(requestParameter.Type);
 
-        private ResponseBody? BuildResponseBody(OperationResponse response)
+        private ResponseBody? BuildResponseBody(InputOperationResponse response)
         {
             if (response.BodyMediaType == BodyMediaType.Text)
             {

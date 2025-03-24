@@ -3,9 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 
-@service({
-    title: "hello world",
-    version: "0.1.0",
+@service(#{
+    title: "hello world"
 })
 @doc("This is a sample typespec project.")
 @server(
@@ -194,11 +193,11 @@ model RoundTripModel {
     optionalRecordUnknown?: Record<unknown>;
 
     @doc("required readonly record of unknown")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     readOnlyRequiredRecordUnknown: Record<unknown>;
 
     @doc("optional readonly record of unknown")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     readOnlyOptionalRecordUnknown?: Record<unknown>;
 
     @doc("this is a model with required nullable properties")

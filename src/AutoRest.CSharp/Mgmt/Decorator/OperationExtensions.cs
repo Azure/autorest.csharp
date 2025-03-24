@@ -201,7 +201,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return operation.Requests.FirstOrDefault();
         }
 
-        public static OperationResponse? GetServiceResponse(this InputOperation operation, int code = 200)
+        public static InputOperationResponse? GetServiceResponse(this InputOperation operation, int code = 200)
         {
             return operation.Responses.FirstOrDefault(r => r.StatusCodes.Contains(code));
         }

@@ -17,7 +17,7 @@ internal record InputPrimitiveType(InputPrimitiveTypeKind Kind, string Name, str
     #region Types we supported but not yet added to typespec-azure-core
     internal const string CharId = "Azure.Core.char";
     internal const string ContentTypeId = "Azure.Core.contentType";
-    internal const string ResourceTypeId = "Azure.Core.resourceType";
+    internal const string ResourceTypeId = "Azure.Core.armResourceType";
     internal const string RequestMethodId = "Azure.Core.requestMethod";
     #endregion
 

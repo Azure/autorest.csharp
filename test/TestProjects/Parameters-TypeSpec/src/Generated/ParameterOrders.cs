@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using ParametersCadl.Models;
+using ParametersTypeSpec.Models;
 
-namespace ParametersCadl
+namespace ParametersTypeSpec
 {
     // Data plane generated sub-client.
     /// <summary> The ParameterOrders sub-client. </summary>

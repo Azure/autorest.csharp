@@ -502,7 +502,7 @@ namespace Encode.Bytes
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/bytes/body/response/default", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Accept", "application/octet-stream");
             return message;
         }
 

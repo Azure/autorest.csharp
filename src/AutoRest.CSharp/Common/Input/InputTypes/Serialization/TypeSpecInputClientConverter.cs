@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using AutoRest.CSharp.Common.Input;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -42,9 +41,9 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString("name", ref name)
                     || reader.TryReadString("summary", ref summary)
                     || reader.TryReadString("doc", ref doc)
-                    || reader.TryReadWithConverter("operations", options, ref operations)
-                    || reader.TryReadWithConverter("parameters", options, ref parameters)
-                    || reader.TryReadWithConverter("parent", options, ref parent);
+                    || reader.TryReadComplexType("operations", options, ref operations)
+                    || reader.TryReadComplexType("parameters", options, ref parameters)
+                    || reader.TryReadComplexType("parent", options, ref parent);
 
                 if (isKnownProperty)
                 {
@@ -63,6 +62,7 @@ namespace AutoRest.CSharp.Common.Input
                 reader.SkipProperty();
             }
 
+<<<<<<< HEAD
             return inputClient ??= CreateClientInstance(id, name, summary, doc, operations, parameters, parent, [], resolver);
         }
 
@@ -73,6 +73,12 @@ namespace AutoRest.CSharp.Common.Input
             parameters = parameters ?? Array.Empty<InputParameter>();
             var inputClient = new InputClient(name, summary, doc, operations, parameters, parent, children);
 
+=======
+            name= name ?? throw new JsonException("InputClient must have name");
+            operations = operations ?? [];
+            parameters = parameters ?? [];
+            var inputClient = new InputClient(name, summary, doc, operations, parameters, parent);
+>>>>>>> origin/main
             if (id != null)
             {
                 resolver.AddReference(id, inputClient);

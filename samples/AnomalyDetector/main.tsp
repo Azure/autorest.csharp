@@ -9,7 +9,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 @versioned(Versions)
-@service({title: "Anomaly Detector"})
+@service(#{title: "Anomaly Detector"})
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @server(
   "{Endpoint}/anomalydetector/{ApiVersion}",

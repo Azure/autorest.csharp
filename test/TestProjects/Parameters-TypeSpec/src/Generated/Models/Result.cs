@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ParametersCadl.Models
+namespace ParametersTypeSpec.Models
 {
     /// <summary> The Result. </summary>
     public partial class Result

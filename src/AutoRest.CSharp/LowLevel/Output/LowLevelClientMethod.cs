@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Output.Models
         InputType? ResponseBodyType,
         Diagnostic ProtocolMethodDiagnostic,
         ProtocolMethodPaging? PagingInfo,
-        OperationLongRunning? LongRunning,
+        InputOperationLongRunning? LongRunning,
         RequestConditionHeaders ConditionHeaderFlag,
         IEnumerable<DpgOperationSample> Samples,
         ConvenienceMethodOmittingMessage? ConvenienceMethodOmittingMessage,

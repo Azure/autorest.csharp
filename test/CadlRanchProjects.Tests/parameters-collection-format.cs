@@ -37,14 +37,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task Parameters_CollectionFormat_Query_tsv() => Test(async (host) =>
-        {
-            List<string> colors = new List<string>() { "blue", "red", "green" };
-            Response response = await new CollectionFormatClient(host, null).GetQueryClient().TsvAsync(colors, new RequestContext());
-            Assert.AreEqual(204, response.Status);
-        });
-
-        [Test]
         public Task Parameters_CollectionFormat_Query_pipes() => Test(async (host) =>
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };

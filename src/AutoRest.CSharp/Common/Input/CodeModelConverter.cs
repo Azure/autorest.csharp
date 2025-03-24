@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Common.Input
                 doc: operation.Language.Default.Description,
                 accessibility: operation.Accessibility,
                 parameters: parameters,
-                responses: operation.Responses.Select<ServiceResponse, OperationResponse>(CreateOperationResponse).ToList(),
+                responses: operation.Responses.Select<ServiceResponse, InputOperationResponse>(CreateOperationResponse).ToList(),
                 httpMethod: httpRequest.Method.ToCoreRequestMethod(),
                 uri: httpRequest.Uri,
                 path: httpRequest.Path,
@@ -324,7 +324,7 @@ namespace AutoRest.CSharp.Common.Input
         );
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        private OperationResponse CreateOperationResponse(ServiceResponse response) => new(
+        private InputOperationResponse CreateOperationResponse(ServiceResponse response) => new(
             StatusCodes: response.HttpResponse.IntStatusCodes.ToList(),
             BodyType: GetResponseBodyType(response),
             BodyMediaType: GetBodyFormat(response.HttpResponse.KnownMediaType),
@@ -334,7 +334,7 @@ namespace AutoRest.CSharp.Common.Input
         );
 #pragma warning restore CS0618 // Type or member is obsolete
 
-        private OperationResponseHeader CreateResponseHeader(HttpResponseHeader header) => new(
+        private InputOperationResponseHeader CreateResponseHeader(HttpResponseHeader header) => new(
             Name: header.CSharpName(),
             NameInResponse: header.Extensions?.HeaderCollectionPrefix ?? header.Header,
             Summary: string.Empty,
@@ -342,21 +342,21 @@ namespace AutoRest.CSharp.Common.Input
             Type: GetOrCreateType(header.Schema, header.Extensions?.Format, true)
         );
 
-        private OperationLongRunning? CreateLongRunning(Operation operation)
+        private InputOperationLongRunning? CreateLongRunning(Operation operation)
         {
             if (!operation.IsLongRunning)
             {
                 return null;
             }
 
-            return new OperationLongRunning(
+            return new InputOperationLongRunning(
                 FinalStateVia: operation.LongRunningFinalStateVia,
                 FinalResponse: CreateOperationResponse(operation.LongRunningFinalResponse),
                 ResultPath: null
             );
         }
 
-        private OperationPaging? CreateOperationPaging(ServiceRequest serviceRequest, Operation operation)
+        private InputOperationPaging? CreateOperationPaging(ServiceRequest serviceRequest, Operation operation)
         {
             var paging = operation.Language.Default.Paging;
             if (paging == null)
@@ -367,10 +367,10 @@ namespace AutoRest.CSharp.Common.Input
             var nextLinkServiceRequest = paging.NextLinkOperation?.Requests.Single();
             if (nextLinkServiceRequest != null && nextLinkServiceRequest != serviceRequest && _operationsCache.TryGetValue(nextLinkServiceRequest, out var nextLinkOperationRef))
             {
-                return new OperationPaging(nextLinkName: paging.NextLinkName, itemName: paging.ItemName, nextLinkOperationRef(), false);
+                return new InputOperationPaging(nextLinkName: paging.NextLinkName, itemName: paging.ItemName, nextLinkOperationRef(), false);
             }
 
-            return new OperationPaging(nextLinkName: paging.NextLinkName, itemName: paging.ItemName, null, nextLinkServiceRequest == serviceRequest);
+            return new InputOperationPaging(nextLinkName: paging.NextLinkName, itemName: paging.ItemName, null, nextLinkServiceRequest == serviceRequest);
         }
 
         private void CreateEnums()
@@ -600,11 +600,11 @@ namespace AutoRest.CSharp.Common.Input
             _ => null
         };
 
-        private IReadOnlyList<OperationResponseHeader> GetResponseHeaders(ICollection<HttpResponseHeader>? headers)
+        private IReadOnlyList<InputOperationResponseHeader> GetResponseHeaders(ICollection<HttpResponseHeader>? headers)
         {
             if (headers == null)
             {
-                return Array.Empty<OperationResponseHeader>();
+                return Array.Empty<InputOperationResponseHeader>();
             }
             return headers.Select(CreateResponseHeader).ToList();
         }
@@ -683,7 +683,7 @@ namespace AutoRest.CSharp.Common.Input
             DateTimeSchema { Type: AllSchemaTypes.DateTime, Format: DateTimeSchemaFormat.DateTime } => new InputDateTimeType(DateTimeKnownEncoding.Rfc3339, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
             DateTimeSchema { Type: AllSchemaTypes.DateTime, Format: DateTimeSchemaFormat.DateTimeRfc1123 } => new InputDateTimeType(DateTimeKnownEncoding.Rfc7231, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
             { Type: AllSchemaTypes.DateTime } => new InputDateTimeType(DateTimeKnownEncoding.Rfc3339, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
-            DurationSchema when format == XMsFormat.DurationConstant => new InputDurationType(DurationKnownEncoding.Constant, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
+            DurationSchema when format == XMsFormat.DurationConstant => new InputDurationType(DurationKnownEncoding.DurationConstant, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
             { Type: AllSchemaTypes.Duration } => new InputDurationType(DurationKnownEncoding.Iso8601, "duration", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
             NumberSchema { Type: AllSchemaTypes.Number, Precision: 32 } => InputPrimitiveType.Float32.WithNullable(isNullable),
             NumberSchema { Type: AllSchemaTypes.Number, Precision: 128 } => InputPrimitiveType.Decimal128.WithNullable(isNullable),
@@ -700,7 +700,7 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.String } when format == XMsFormat.DateTime => new InputDateTimeType(DateTimeKnownEncoding.Rfc3339, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
             { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeRFC1123 => new InputDateTimeType(DateTimeKnownEncoding.Rfc7231, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
             { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeUnix => new InputDateTimeType(DateTimeKnownEncoding.UnixTimestamp, "dateTime", string.Empty, InputPrimitiveType.Int64).WithNullable(isNullable),
-            { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => new InputDurationType(DurationKnownEncoding.Constant, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => new InputDurationType(DurationKnownEncoding.DurationConstant, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
             { Type: AllSchemaTypes.String } when format == XMsFormat.ETag => InputPrimitiveType.ETag.WithNullable(isNullable),
             { Type: AllSchemaTypes.String } when format == XMsFormat.IPAddress => InputPrimitiveType.IPAddress.WithNullable(isNullable),
             { Type: AllSchemaTypes.String } when format == XMsFormat.ResourceType => InputPrimitiveType.ResourceType.WithNullable(isNullable),

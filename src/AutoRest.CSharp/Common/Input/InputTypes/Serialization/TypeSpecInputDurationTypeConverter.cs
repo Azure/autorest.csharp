@@ -37,9 +37,9 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString("name", ref name)
                     || reader.TryReadString("crossLanguageDefinitionId", ref crossLanguageDefinitionId)
                     || reader.TryReadString("encode", ref encode)
-                    || reader.TryReadWithConverter("wireType", options, ref wireType)
-                    || reader.TryReadWithConverter("baseType", options, ref baseType)
-                    || reader.TryReadWithConverter("decorators", options, ref decorators);
+                    || reader.TryReadComplexType("wireType", options, ref wireType)
+                    || reader.TryReadComplexType("baseType", options, ref baseType)
+                    || reader.TryReadComplexType("decorators", options, ref decorators);
 
                 if (!isKnownProperty)
                 {
@@ -52,15 +52,26 @@ namespace AutoRest.CSharp.Common.Input
             encode = encode ?? throw new JsonException("Duration type must have encode");
             wireType = wireType ?? throw new JsonException("Duration type must have wireType");
 
-            var dateTimeType = Enum.TryParse<DurationKnownEncoding>(encode, ignoreCase: true, out var encodeKind)
-                ? new InputDurationType(encodeKind, name, crossLanguageDefinitionId, wireType, baseType) { Decorators = decorators ?? [] }
-                : throw new JsonException($"Encoding of Duration type {encode} is unknown.");
+            var dateTimeType = new InputDurationType(CreateDurationKnownEncoding(encode), name, crossLanguageDefinitionId, wireType, baseType) { Decorators = decorators ?? [] };
 
             if (id != null)
             {
                 resolver.AddReference(id, dateTimeType);
             }
             return dateTimeType;
+        }
+
+        private static DurationKnownEncoding CreateDurationKnownEncoding(string encode)
+        {
+            if (encode == "duration-constant")
+            {
+                return DurationKnownEncoding.DurationConstant;
+            }
+            if (Enum.TryParse<DurationKnownEncoding>(encode, ignoreCase: true, out var encodeKind))
+            {
+                return encodeKind;
+            }
+            throw new JsonException($"Encoding of Duration type {encode} is unknown.");
         }
     }
 }

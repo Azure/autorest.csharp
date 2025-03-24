@@ -185,76 +185,6 @@ namespace Parameters.CollectionFormat
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Tsv.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='TsvAsync(IEnumerable{string},RequestContext)']/*" />
-        public virtual async Task<Response> TsvAsync(IEnumerable<string> colors, RequestContext context = null)
-        {
-            Argument.AssertNotNull(colors, nameof(colors));
-
-            using var scope = ClientDiagnostics.CreateScope("Query.Tsv");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateTsvRequest(colors, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
-        /// <summary>
-        /// [Protocol Method] Tsv.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Query.xml" path="doc/members/member[@name='Tsv(IEnumerable{string},RequestContext)']/*" />
-        public virtual Response Tsv(IEnumerable<string> colors, RequestContext context = null)
-        {
-            Argument.AssertNotNull(colors, nameof(colors));
-
-            using var scope = ClientDiagnostics.CreateScope("Query.Tsv");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateTsvRequest(colors, context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
-        /// <summary>
         /// [Protocol Method] Pipes.
         /// <list type="bullet">
         /// <item>
@@ -423,22 +353,6 @@ namespace Parameters.CollectionFormat
             if (colors != null && !(colors is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
             {
                 uri.AppendQueryDelimited("colors", colors, " ", true);
-            }
-            request.Uri = uri;
-            return message;
-        }
-
-        internal HttpMessage CreateTsvRequest(IEnumerable<string> colors, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/parameters/collection-format/query/tsv", false);
-            if (colors != null && !(colors is ChangeTrackingList<string> changeTrackingList && changeTrackingList.IsUndefined))
-            {
-                uri.AppendQueryDelimited("colors", colors, "\t", true);
             }
             request.Uri = uri;
             return message;

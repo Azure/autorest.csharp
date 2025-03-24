@@ -21,15 +21,15 @@ internal record InputOperation
     string? doc,
     string? accessibility,
     IReadOnlyList<InputParameter> parameters,
-    IReadOnlyList<OperationResponse> responses,
+    IReadOnlyList<InputOperationResponse> responses,
     RequestMethod httpMethod,
     string uri,
     string path,
     string? externalDocsUrl,
     IReadOnlyList<string>? requestMediaTypes,
     bool bufferResponse,
-    OperationLongRunning? longRunning,
-    OperationPaging? paging,
+    InputOperationLongRunning? longRunning,
+    InputOperationPaging? paging,
     bool generateProtocolMethod,
     bool generateConvenienceMethod,
     string crossLanguageDefinitionId,
@@ -71,7 +71,7 @@ internal record InputOperation
         doc: string.Empty,
         accessibility: null,
         parameters: Array.Empty<InputParameter>(),
-        responses: Array.Empty<OperationResponse>(),
+        responses: Array.Empty<InputOperationResponse>(),
         httpMethod: RequestMethod.Get,
         uri: string.Empty,
         path: string.Empty,
@@ -142,7 +142,7 @@ internal record InputOperation
     public string? Doc { get; }
     public string? Accessibility { get; }
     public IReadOnlyList<InputParameter> Parameters { get; init; }
-    public IReadOnlyList<OperationResponse> Responses { get; }
+    public IReadOnlyList<InputOperationResponse> Responses { get; }
     public RequestMethod HttpMethod { get; }
     public BodyMediaType RequestBodyMediaType { get; }
     public string Uri { get; init; }
@@ -150,8 +150,8 @@ internal record InputOperation
     public string? ExternalDocsUrl { get; }
     public IReadOnlyList<string>? RequestMediaTypes { get; }
     public bool BufferResponse { get; }
-    public OperationLongRunning? LongRunning { get; }
-    public OperationPaging? Paging { get; init; }
+    public InputOperationLongRunning? LongRunning { get; }
+    public InputOperationPaging? Paging { get; init; }
     public bool GenerateProtocolMethod { get; }
     public bool GenerateConvenienceMethod { get; }
     public string CrossLanguageDefinitionId { get; }

@@ -1,10 +1,10 @@
 {
  "$id": "1",
- "Name": "_Specs_.Azure.Core.Lro.Rpc",
- "ApiVersions": [
+ "name": "_Specs_.Azure.Core.Lro.Rpc",
+ "apiVersions": [
   "2022-12-01-preview"
  ],
- "Enums": [
+ "enums": [
   {
    "$id": "2",
    "kind": "enum",
@@ -37,7 +37,7 @@
      "decorators": []
     }
    ],
-   "namespace": "_Specs_.Azure.Core.Lro.Rpc",
+   "namespace": "_Azure.Lro.Rpc",
    "doc": "The API version.",
    "isFixed": true,
    "isFlags": false,
@@ -148,7 +148,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Azure.Core.Foundations",
+   "namespace": "_Azure.Lro.Rpc",
    "doc": "Enum describing allowed operation states.",
    "isFixed": false,
    "isFlags": false,
@@ -156,12 +156,12 @@
    "decorators": []
   }
  ],
- "Models": [
+ "models": [
   {
    "$id": "18",
    "kind": "model",
    "name": "GenerationOptions",
-   "namespace": "_Specs_.Azure.Core.Lro.Rpc",
+   "namespace": "_Azure.Lro.Rpc",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.GenerationOptions",
    "usage": "Input,Json",
    "doc": "Options for the generation.",
@@ -200,7 +200,7 @@
    "$id": "23",
    "kind": "model",
    "name": "GenerationResult",
-   "namespace": "_Specs_.Azure.Core.Lro.Rpc",
+   "namespace": "_Azure.Lro.Rpc",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.GenerationResult",
    "usage": "Output,Json,LroInitial,LroPolling,LroFinalEnvelope",
    "doc": "Result of the generation.",
@@ -239,7 +239,7 @@
    "$id": "28",
    "kind": "model",
    "name": "ResourceOperationStatusGenerationResponseGenerationResultError",
-   "namespace": "Azure.Core",
+   "namespace": "_Azure.Lro.Rpc",
    "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
    "usage": "Json,LroInitial",
    "doc": "Provides status details for long running operations.",
@@ -305,7 +305,7 @@
       "$id": "37",
       "kind": "model",
       "name": "Error",
-      "namespace": "Azure.Core.Foundations",
+      "namespace": "_Azure.Lro.Rpc",
       "crossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "usage": "Json,Exception,LroInitial,LroPolling,LroFinalEnvelope",
       "doc": "The error object.",
@@ -432,7 +432,7 @@
          "$id": "55",
          "kind": "model",
          "name": "InnerError",
-         "namespace": "Azure.Core.Foundations",
+         "namespace": "_Azure.Lro.Rpc",
          "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "usage": "Json,Exception,LroInitial,LroPolling,LroFinalEnvelope",
          "doc": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
@@ -555,7 +555,7 @@
    "$id": "70",
    "kind": "model",
    "name": "OperationStatusGenerationResultError",
-   "namespace": "Azure.Core.Foundations",
+   "namespace": "_Azure.Lro.Rpc",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "usage": "LroPolling,LroFinalEnvelope",
    "doc": "Provides status details for long running operations.",
@@ -660,59 +660,59 @@
    ]
   }
  ],
- "Clients": [
+ "clients": [
   {
    "$id": "84",
-   "Name": "RpcClient",
-   "Namespace": "_Specs_.Azure.Core.Lro.Rpc",
-   "Doc": "Illustrates bodies templated with Azure Core with long-running RPC operation",
-   "Operations": [
+   "name": "RpcClient",
+   "namespace": "_Azure.Lro.Rpc",
+   "doc": "Illustrates bodies templated with Azure Core with long-running RPC operation",
+   "operations": [
     {
      "$id": "85",
-     "Name": "longRunningRpc",
-     "ResourceName": "Rpc",
-     "Summary": "Generate data.",
-     "Doc": "Generate data.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "longRunningRpc",
+     "resourceName": "Rpc",
+     "summary": "Generate data.",
+     "doc": "Generate data.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "86",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
-       "Type": {
+       "name": "apiVersion",
+       "nameInRequest": "api-version",
+       "doc": "The API version to use for this operation.",
+       "type": {
         "$id": "87",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Client",
-       "DefaultValue": {
+       "location": "Query",
+       "isApiVersion": true,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Client",
+       "defaultValue": {
         "$id": "88",
-        "Type": {
+        "type": {
          "$id": "89",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
-        "Value": "2022-12-01-preview"
+        "value": "2022-12-01-preview"
        },
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "90",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
-       "Type": {
+       "name": "contentType",
+       "nameInRequest": "Content-Type",
+       "doc": "Body parameter's content type. Known values are application/json",
+       "type": {
         "$id": "91",
         "kind": "constant",
         "valueType": {
@@ -725,21 +725,21 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": true,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "93",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "94",
         "kind": "constant",
         "valueType": {
@@ -752,51 +752,51 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "96",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Doc": "The body parameter.",
-       "Type": {
+       "name": "body",
+       "nameInRequest": "body",
+       "doc": "The body parameter.",
+       "type": {
         "$ref": "18"
        },
-       "Location": "Body",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Body",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "97",
-       "StatusCodes": [
+       "statusCodes": [
         202
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "28"
        },
-       "Headers": [
+       "headers": [
         {
          "$id": "98",
-         "Name": "operationLocation",
-         "NameInResponse": "Operation-Location",
-         "Doc": "The location for monitoring the operation state.",
-         "Type": {
+         "name": "operationLocation",
+         "nameInResponse": "Operation-Location",
+         "doc": "The location for monitoring the operation state.",
+         "type": {
           "$id": "99",
           "kind": "url",
           "name": "ResourceLocation",
@@ -812,77 +812,73 @@
          }
         }
        ],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "POST",
-     "Uri": "{endpoint}",
-     "Path": "/azure/core/lro/rpc/generations:submit",
-     "RequestMediaTypes": [
+     "httpMethod": "POST",
+     "uri": "{endpoint}",
+     "path": "/azure/core/lro/rpc/generations:submit",
+     "requestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": true,
-     "LongRunning": {
+     "bufferResponse": true,
+     "longRunning": {
       "$id": "101",
-      "FinalStateVia": 3,
-      "FinalResponse": {
+      "finalStateVia": 3,
+      "finalResponse": {
        "$id": "102",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "70"
        }
       },
-      "ResultPath": "result"
+      "resultPath": "result"
      },
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.longRunningRpc",
-     "Decorators": []
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.longRunningRpc",
+     "decorators": []
     }
    ],
-   "Protocol": {
-    "$id": "103"
-   },
-   "Parameters": [
+   "parameters": [
     {
-     "$id": "104",
-     "Name": "endpoint",
-     "NameInRequest": "endpoint",
-     "Doc": "Service host",
-     "Type": {
-      "$id": "105",
+     "$id": "103",
+     "name": "endpoint",
+     "nameInRequest": "endpoint",
+     "doc": "Service host",
+     "type": {
+      "$id": "104",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
      },
-     "Location": "Uri",
-     "IsApiVersion": false,
-     "IsResourceParameter": false,
-     "IsContentType": false,
-     "IsRequired": true,
-     "IsEndpoint": true,
-     "SkipUrlEncoding": false,
-     "Explode": false,
-     "Kind": "Client",
-     "DefaultValue": {
-      "$id": "106",
-      "Type": {
-       "$id": "107",
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client",
+     "defaultValue": {
+      "$id": "105",
+      "type": {
+       "$id": "106",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"
       },
-      "Value": "http://localhost:3000"
+      "value": "http://localhost:3000"
      }
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc"
+   "decorators": [],
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc"
   }
  ]
 }

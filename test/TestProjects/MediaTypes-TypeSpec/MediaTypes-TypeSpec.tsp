@@ -4,12 +4,9 @@ import "@azure-tools/typespec-client-generator-core";
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 
-@service(
-    {
-        title: "Media Types Service",
-        version: "2021-03-25"
-    }
-)
+@service(#{
+    title: "Media Types Service"
+})
 @doc("Play with produces/consumes and media-types in general.")
 @server(
     "{endpoint}",

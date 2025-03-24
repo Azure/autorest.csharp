@@ -7,7 +7,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Input.Examples;
 using Azure.Core;
-using Humanizer;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -35,15 +34,15 @@ namespace AutoRest.CSharp.Common.Input
             string? accessibility = null;
             string? doc = null;
             IReadOnlyList<InputParameter>? parameters = null;
-            IReadOnlyList<OperationResponse>? responses = null;
+            IReadOnlyList<InputOperationResponse>? responses = null;
             RequestMethod httpMethod = default;
             string? uri = null;
             string? path = null;
             string? externalDocsUri = null;
             IReadOnlyList<string>? requestMediaTypes = null;
             bool bufferResponse = false;
-            OperationLongRunning? longRunning= null;
-            OperationPaging? paging = null;
+            InputOperationLongRunning? longRunning= null;
+            InputOperationPaging? paging = null;
             bool generateProtocolMethod = false;
             bool generateConvenienceMethod = false;
             string? crossLanguageDefinitionId = null;
@@ -53,27 +52,27 @@ namespace AutoRest.CSharp.Common.Input
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputOperation.Name), ref name)
-                    || reader.TryReadString(nameof(InputOperation.ResourceName), ref resourceName)
-                    || reader.TryReadString(nameof(InputOperation.Summary), ref summary)
-                    || reader.TryReadString(nameof(InputOperation.Deprecated), ref deprecated)
-                    || reader.TryReadString(nameof(InputOperation.Doc), ref doc)
-                    || reader.TryReadString(nameof(InputOperation.Accessibility), ref accessibility)
-                    || reader.TryReadWithConverter(nameof(InputOperation.Parameters), options, ref parameters)
-                    || reader.TryReadWithConverter(nameof(InputOperation.Responses), options, ref responses)
-                    || reader.TryReadWithConverter(nameof(InputOperation.HttpMethod), options, ref httpMethod)
-                    || reader.TryReadString(nameof(InputOperation.Uri), ref uri)
-                    || reader.TryReadString(nameof(InputOperation.Path), ref path)
-                    || reader.TryReadString(nameof(InputOperation.ExternalDocsUrl), ref externalDocsUri)
-                    || reader.TryReadWithConverter(nameof(InputOperation.RequestMediaTypes), options, ref requestMediaTypes)
-                    || reader.TryReadBoolean(nameof(InputOperation.BufferResponse), ref bufferResponse)
-                    || reader.TryReadWithConverter(nameof(InputOperation.LongRunning), options, ref longRunning)
-                    || reader.TryReadWithConverter(nameof(InputOperation.Paging), options, ref paging)
-                    || reader.TryReadBoolean(nameof(InputOperation.GenerateProtocolMethod), ref generateProtocolMethod)
-                    || reader.TryReadBoolean(nameof(InputOperation.GenerateConvenienceMethod), ref generateConvenienceMethod)
-                    || reader.TryReadString(nameof(InputOperation.CrossLanguageDefinitionId), ref crossLanguageDefinitionId)
-                    || reader.TryReadBoolean(nameof(InputOperation.KeepClientDefaultValue), ref keepClientDefaultValue)
-                    || reader.TryReadWithConverter(nameof(InputOperation.Examples), options, ref examples);
+                    || reader.TryReadString("name", ref name)
+                    || reader.TryReadString("resourceName", ref resourceName)
+                    || reader.TryReadString("summary", ref summary)
+                    || reader.TryReadString("deprecated", ref deprecated)
+                    || reader.TryReadString("doc", ref doc)
+                    || reader.TryReadString("accessibility", ref accessibility)
+                    || reader.TryReadComplexType("parameters", options, ref parameters)
+                    || reader.TryReadComplexType("responses", options, ref responses)
+                    || reader.TryReadComplexType("httpMethod", options, ref httpMethod)
+                    || reader.TryReadString("uri", ref uri)
+                    || reader.TryReadString("path", ref path)
+                    || reader.TryReadString("externalDocsUrl", ref externalDocsUri)
+                    || reader.TryReadComplexType("requestMediaTypes", options, ref requestMediaTypes)
+                    || reader.TryReadBoolean("bufferResponse", ref bufferResponse)
+                    || reader.TryReadComplexType("longRunning", options, ref longRunning)
+                    || reader.TryReadComplexType("paging", options, ref paging)
+                    || reader.TryReadBoolean("generateProtocolMethod", ref generateProtocolMethod)
+                    || reader.TryReadBoolean("generateConvenienceMethod", ref generateConvenienceMethod)
+                    || reader.TryReadString("crossLanguageDefinitionId", ref crossLanguageDefinitionId)
+                    || reader.TryReadBoolean("keepClientDefaultValue", ref keepClientDefaultValue)
+                    || reader.TryReadComplexType("examples", options, ref examples);
 
                 if (!isKnownProperty)
                 {

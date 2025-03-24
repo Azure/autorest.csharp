@@ -1,9 +1,9 @@
 {
  "$id": "1",
- "Name": "ConvenienceInCadl",
- "ApiVersions": [],
- "Enums": [],
- "Models": [
+ "name": "ConvenienceInCadl",
+ "apiVersions": [],
+ "enums": [],
+ "models": [
   {
    "$id": "2",
    "kind": "model",
@@ -43,25 +43,25 @@
    ]
   }
  ],
- "Clients": [
+ "clients": [
   {
    "$id": "7",
-   "Name": "ConvenienceInCadlClient",
-   "Namespace": "ConvenienceInCadl",
-   "Doc": "Typespec project to test various types of convenience methods.",
-   "Operations": [
+   "name": "ConvenienceInCadlClient",
+   "namespace": "ConvenienceInCadl",
+   "doc": "TypeSpec project to test various types of convenience methods.",
+   "operations": [
     {
      "$id": "8",
-     "Name": "updateConvenience",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "No initial operation methods. In the updated version, we add the protocol method and convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "updateConvenience",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "No initial operation methods. In the updated version, we add the protocol method and convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "9",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "10",
         "kind": "constant",
         "valueType": {
@@ -74,76 +74,76 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "12",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "2"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/updateConvenience",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.updateConvenience",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/updateConvenience",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.updateConvenience",
+     "decorators": []
     },
     {
      "$id": "13",
-     "Name": "convenienceOptionalBeforeRequired",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "No initial operation methods. In the updated version, we add the protocol method and convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "convenienceOptionalBeforeRequired",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "No initial operation methods. In the updated version, we add the protocol method and convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "14",
-       "Name": "optional",
-       "NameInRequest": "optional",
-       "Type": {
+       "name": "optional",
+       "nameInRequest": "optional",
+       "type": {
         "$id": "15",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "16",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
-       "Type": {
+       "name": "contentType",
+       "nameInRequest": "Content-Type",
+       "doc": "Body parameter's content type. Known values are application/json",
+       "type": {
         "$id": "17",
         "kind": "constant",
         "valueType": {
@@ -156,68 +156,68 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": true,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "19",
-       "Name": "required",
-       "NameInRequest": "required",
-       "Type": {
+       "name": "required",
+       "nameInRequest": "required",
+       "type": {
         "$ref": "2"
        },
-       "Location": "Body",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Body",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "20",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "Headers": [],
-       "IsErrorResponse": false
+       "headers": [],
+       "isErrorResponse": false
       }
      ],
-     "HttpMethod": "POST",
-     "Uri": "{endpoint}",
-     "Path": "/convenienceOptionalBeforeRequired",
-     "RequestMediaTypes": [
+     "httpMethod": "POST",
+     "uri": "{endpoint}",
+     "path": "/convenienceOptionalBeforeRequired",
+     "requestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalBeforeRequired",
-     "Decorators": []
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalBeforeRequired",
+     "decorators": []
     },
     {
      "$id": "21",
-     "Name": "noConvenience",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "noConvenience",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "22",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "23",
         "kind": "constant",
         "valueType": {
@@ -230,55 +230,55 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "25",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "2"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/noConvenience",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.noConvenience",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/noConvenience",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": false,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.noConvenience",
+     "decorators": []
     },
     {
      "$id": "26",
-     "Name": "noConvenienceRequiredBody",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "No convenience method. But if we add the convenientAPI decorator, there will be no ambiguity.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "noConvenienceRequiredBody",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "No convenience method. But if we add the convenientAPI decorator, there will be no ambiguity.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "27",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
-       "Type": {
+       "name": "contentType",
+       "nameInRequest": "Content-Type",
+       "doc": "Body parameter's content type. Known values are application/json",
+       "type": {
         "$id": "28",
         "kind": "constant",
         "valueType": {
@@ -291,69 +291,69 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": true,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "30",
-       "Name": "required",
-       "NameInRequest": "required",
-       "Type": {
+       "name": "required",
+       "nameInRequest": "required",
+       "type": {
         "$ref": "2"
        },
-       "Location": "Body",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Body",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "31",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "Headers": [],
-       "IsErrorResponse": false
+       "headers": [],
+       "isErrorResponse": false
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/noConvenienceRequiredBody",
-     "RequestMediaTypes": [
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/noConvenienceRequiredBody",
+     "requestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.noConvenienceRequiredBody",
-     "Decorators": []
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": false,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.noConvenienceRequiredBody",
+     "decorators": []
     },
     {
      "$id": "32",
-     "Name": "noConvenienceOptionalBody",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "noConvenienceOptionalBody",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "33",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
-       "Type": {
+       "name": "contentType",
+       "nameInRequest": "Content-Type",
+       "doc": "Body parameter's content type. Known values are application/json",
+       "type": {
         "$id": "34",
         "kind": "constant",
         "valueType": {
@@ -366,68 +366,68 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": true,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "36",
-       "Name": "optional",
-       "NameInRequest": "optional",
-       "Type": {
+       "name": "optional",
+       "nameInRequest": "optional",
+       "type": {
         "$ref": "2"
        },
-       "Location": "Body",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Body",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "37",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "Headers": [],
-       "IsErrorResponse": false
+       "headers": [],
+       "isErrorResponse": false
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/noConvenienceOptionalBody",
-     "RequestMediaTypes": [
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/noConvenienceOptionalBody",
+     "requestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.noConvenienceOptionalBody",
-     "Decorators": []
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": false,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.noConvenienceOptionalBody",
+     "decorators": []
     },
     {
      "$id": "38",
-     "Name": "protocol",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Initial operation only has protocol method. In the updated version, we add the convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "protocol",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Initial operation only has protocol method. In the updated version, we add the convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "39",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "40",
         "kind": "constant",
         "valueType": {
@@ -440,54 +440,54 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "42",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "2"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/protocol",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocol",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/protocol",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.protocol",
+     "decorators": []
     },
     {
      "$id": "43",
-     "Name": "convenienceWithOptional",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Operation has protocol method with optional RequestContext and convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "convenienceWithOptional",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Operation has protocol method with optional RequestContext and convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "44",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "45",
         "kind": "constant",
         "valueType": {
@@ -500,54 +500,54 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "47",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "2"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/convenienceWithOptional",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceWithOptional",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/convenienceWithOptional",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.convenienceWithOptional",
+     "decorators": []
     },
     {
      "$id": "48",
-     "Name": "convenienceWithRequired",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Operation has protocol method with required RequestContext and convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "convenienceWithRequired",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Operation has protocol method with required RequestContext and convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "49",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "50",
         "kind": "constant",
         "valueType": {
@@ -560,127 +560,127 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "52",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "2"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/convenienceWithRequired",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceWithRequired",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/convenienceWithRequired",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.convenienceWithRequired",
+     "decorators": []
     },
     {
      "$id": "53",
-     "Name": "convenienceShouldNotGenerate",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Operation has protocol method marked with convenience method, but the convenience method should not be generated.",
-     "Accessibility": "public",
-     "Parameters": [],
-     "Responses": [
+     "name": "convenienceShouldNotGenerate",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Operation has protocol method marked with convenience method, but the convenience method should not be generated.",
+     "accessibility": "public",
+     "parameters": [],
+     "responses": [
       {
        "$id": "54",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "Headers": [],
-       "IsErrorResponse": false
+       "headers": [],
+       "isErrorResponse": false
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/convenienceShouldNotGenerate",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceShouldNotGenerate",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/convenienceShouldNotGenerate",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.convenienceShouldNotGenerate",
+     "decorators": []
     },
     {
      "$id": "55",
-     "Name": "protocolShouldNotGenerateConvenience",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.",
-     "Accessibility": "public",
-     "Parameters": [],
-     "Responses": [
+     "name": "protocolShouldNotGenerateConvenience",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.",
+     "accessibility": "public",
+     "parameters": [],
+     "responses": [
       {
        "$id": "56",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "Headers": [],
-       "IsErrorResponse": false
+       "headers": [],
+       "isErrorResponse": false
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/protocolShouldNotGenerateConvenience",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolShouldNotGenerateConvenience",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/protocolShouldNotGenerateConvenience",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.protocolShouldNotGenerateConvenience",
+     "decorators": []
     },
     {
      "$id": "57",
-     "Name": "protocolOptionalQuery",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "protocolOptionalQuery",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "58",
-       "Name": "optional",
-       "NameInRequest": "optional",
-       "Type": {
+       "name": "optional",
+       "nameInRequest": "optional",
+       "type": {
         "$id": "59",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "60",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "61",
         "kind": "constant",
         "valueType": {
@@ -693,75 +693,75 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "63",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "2"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/protocolOptionalQuery",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolOptionalQuery",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/protocolOptionalQuery",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.protocolOptionalQuery",
+     "decorators": []
     },
     {
      "$id": "64",
-     "Name": "protocolRequiredQuery",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "protocolRequiredQuery",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "65",
-       "Name": "required",
-       "NameInRequest": "required",
-       "Type": {
+       "name": "required",
+       "nameInRequest": "required",
+       "type": {
         "$id": "66",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "67",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "68",
         "kind": "constant",
         "valueType": {
@@ -774,55 +774,55 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "70",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "2"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/protocolRequiredQuery",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolRequiredQuery",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/protocolRequiredQuery",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.protocolRequiredQuery",
+     "decorators": []
     },
     {
      "$id": "71",
-     "Name": "protocolOptionalModel",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "protocolOptionalModel",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "72",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
-       "Type": {
+       "name": "contentType",
+       "nameInRequest": "Content-Type",
+       "doc": "Body parameter's content type. Known values are application/json",
+       "type": {
         "$id": "73",
         "kind": "constant",
         "valueType": {
@@ -835,69 +835,69 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": true,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "75",
-       "Name": "optional",
-       "NameInRequest": "optional",
-       "Type": {
+       "name": "optional",
+       "nameInRequest": "optional",
+       "type": {
         "$ref": "2"
        },
-       "Location": "Body",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Body",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "76",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "Headers": [],
-       "IsErrorResponse": false
+       "headers": [],
+       "isErrorResponse": false
       }
      ],
-     "HttpMethod": "POST",
-     "Uri": "{endpoint}",
-     "Path": "/protocolOptionalModel",
-     "RequestMediaTypes": [
+     "httpMethod": "POST",
+     "uri": "{endpoint}",
+     "path": "/protocolOptionalModel",
+     "requestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolOptionalModel",
-     "Decorators": []
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.protocolOptionalModel",
+     "decorators": []
     },
     {
      "$id": "77",
-     "Name": "protocolRequiredModel",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "protocolRequiredModel",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "78",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
-       "Type": {
+       "name": "contentType",
+       "nameInRequest": "Content-Type",
+       "doc": "Body parameter's content type. Known values are application/json",
+       "type": {
         "$id": "79",
         "kind": "constant",
         "valueType": {
@@ -910,89 +910,89 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": true,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "81",
-       "Name": "required",
-       "NameInRequest": "required",
-       "Type": {
+       "name": "required",
+       "nameInRequest": "required",
+       "type": {
         "$ref": "2"
        },
-       "Location": "Body",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Body",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "82",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "Headers": [],
-       "IsErrorResponse": false
+       "headers": [],
+       "isErrorResponse": false
       }
      ],
-     "HttpMethod": "POST",
-     "Uri": "{endpoint}",
-     "Path": "/protocolRequiredModel",
-     "RequestMediaTypes": [
+     "httpMethod": "POST",
+     "uri": "{endpoint}",
+     "path": "/protocolRequiredModel",
+     "requestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolRequiredModel",
-     "Decorators": []
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.protocolRequiredModel",
+     "decorators": []
     },
     {
      "$id": "83",
-     "Name": "convenienceOptionalQueryWithOptional",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Operation has protocol method with optional query parameter and optional RequestContext and convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "convenienceOptionalQueryWithOptional",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Operation has protocol method with optional query parameter and optional RequestContext and convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "84",
-       "Name": "optional",
-       "NameInRequest": "optional",
-       "Type": {
+       "name": "optional",
+       "nameInRequest": "optional",
+       "type": {
         "$id": "85",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "86",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "87",
         "kind": "constant",
         "valueType": {
@@ -1005,75 +1005,75 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "89",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "2"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/convenienceOptionalQueryWithOptional",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalQueryWithOptional",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/convenienceOptionalQueryWithOptional",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalQueryWithOptional",
+     "decorators": []
     },
     {
      "$id": "90",
-     "Name": "convenienceRequiredQueryWithOptional",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Operation has protocol method with required query parameter and optional RequestContext and convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "convenienceRequiredQueryWithOptional",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Operation has protocol method with required query parameter and optional RequestContext and convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "91",
-       "Name": "required",
-       "NameInRequest": "required",
-       "Type": {
+       "name": "required",
+       "nameInRequest": "required",
+       "type": {
         "$id": "92",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "93",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "94",
         "kind": "constant",
         "valueType": {
@@ -1086,75 +1086,75 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "96",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "2"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/convenienceRequiredQueryWithOptional",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceRequiredQueryWithOptional",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/convenienceRequiredQueryWithOptional",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.convenienceRequiredQueryWithOptional",
+     "decorators": []
     },
     {
      "$id": "97",
-     "Name": "convenienceOptionalQueryWithRequired",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Operation has protocol method with optional query parameter and required RequestContext and convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "convenienceOptionalQueryWithRequired",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Operation has protocol method with optional query parameter and required RequestContext and convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "98",
-       "Name": "optional",
-       "NameInRequest": "optional",
-       "Type": {
+       "name": "optional",
+       "nameInRequest": "optional",
+       "type": {
         "$id": "99",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "100",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "101",
         "kind": "constant",
         "valueType": {
@@ -1167,75 +1167,75 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "103",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "2"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/convenienceOptionalQueryWithRequired",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalQueryWithRequired",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/convenienceOptionalQueryWithRequired",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalQueryWithRequired",
+     "decorators": []
     },
     {
      "$id": "104",
-     "Name": "convenienceRequiredQueryWithRequired",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Operation has protocol method with required query parameter and required RequestContext and convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "convenienceRequiredQueryWithRequired",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Operation has protocol method with required query parameter and required RequestContext and convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "105",
-       "Name": "required",
-       "NameInRequest": "required",
-       "Type": {
+       "name": "required",
+       "nameInRequest": "required",
+       "type": {
         "$id": "106",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "107",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "108",
         "kind": "constant",
         "valueType": {
@@ -1248,55 +1248,55 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "110",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "2"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{endpoint}",
-     "Path": "/convenienceRequiredQueryWithRequired",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceRequiredQueryWithRequired",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{endpoint}",
+     "path": "/convenienceRequiredQueryWithRequired",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.convenienceRequiredQueryWithRequired",
+     "decorators": []
     },
     {
      "$id": "111",
-     "Name": "convenienceOptionalModelWithOptional",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Operation has protocol method with optional body parameter and optional RequestContext and convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "convenienceOptionalModelWithOptional",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Operation has protocol method with optional body parameter and optional RequestContext and convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "112",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
-       "Type": {
+       "name": "contentType",
+       "nameInRequest": "Content-Type",
+       "doc": "Body parameter's content type. Known values are application/json",
+       "type": {
         "$id": "113",
         "kind": "constant",
         "valueType": {
@@ -1309,69 +1309,69 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": true,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "115",
-       "Name": "optional",
-       "NameInRequest": "optional",
-       "Type": {
+       "name": "optional",
+       "nameInRequest": "optional",
+       "type": {
         "$ref": "2"
        },
-       "Location": "Body",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Body",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "116",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "Headers": [],
-       "IsErrorResponse": false
+       "headers": [],
+       "isErrorResponse": false
       }
      ],
-     "HttpMethod": "POST",
-     "Uri": "{endpoint}",
-     "Path": "/convenienceOptionalModelWithOptional",
-     "RequestMediaTypes": [
+     "httpMethod": "POST",
+     "uri": "{endpoint}",
+     "path": "/convenienceOptionalModelWithOptional",
+     "requestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalModelWithOptional",
-     "Decorators": []
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalModelWithOptional",
+     "decorators": []
     },
     {
      "$id": "117",
-     "Name": "convenienceRequiredModelWithOptional",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Operation has protocol method with required body parameter and optional RequestContext and convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "convenienceRequiredModelWithOptional",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Operation has protocol method with required body parameter and optional RequestContext and convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "118",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
-       "Type": {
+       "name": "contentType",
+       "nameInRequest": "Content-Type",
+       "doc": "Body parameter's content type. Known values are application/json",
+       "type": {
         "$id": "119",
         "kind": "constant",
         "valueType": {
@@ -1384,69 +1384,69 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": true,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "121",
-       "Name": "required",
-       "NameInRequest": "required",
-       "Type": {
+       "name": "required",
+       "nameInRequest": "required",
+       "type": {
         "$ref": "2"
        },
-       "Location": "Body",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Body",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "122",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "Headers": [],
-       "IsErrorResponse": false
+       "headers": [],
+       "isErrorResponse": false
       }
      ],
-     "HttpMethod": "POST",
-     "Uri": "{endpoint}",
-     "Path": "/convenienceRequiredModelWithOptional",
-     "RequestMediaTypes": [
+     "httpMethod": "POST",
+     "uri": "{endpoint}",
+     "path": "/convenienceRequiredModelWithOptional",
+     "requestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceRequiredModelWithOptional",
-     "Decorators": []
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.convenienceRequiredModelWithOptional",
+     "decorators": []
     },
     {
      "$id": "123",
-     "Name": "convenienceOptionalModelWithRequired",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Operation has protocol method with optional body parameter and required RequestContext and convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "convenienceOptionalModelWithRequired",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Operation has protocol method with optional body parameter and required RequestContext and convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "124",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
-       "Type": {
+       "name": "contentType",
+       "nameInRequest": "Content-Type",
+       "doc": "Body parameter's content type. Known values are application/json",
+       "type": {
         "$id": "125",
         "kind": "constant",
         "valueType": {
@@ -1459,90 +1459,90 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": true,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "127",
-       "Name": "optional",
-       "NameInRequest": "optional",
-       "Type": {
+       "name": "optional",
+       "nameInRequest": "optional",
+       "type": {
         "$ref": "2"
        },
-       "Location": "Body",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Body",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "128",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "Headers": [],
-       "IsErrorResponse": false
+       "headers": [],
+       "isErrorResponse": false
       }
      ],
-     "HttpMethod": "POST",
-     "Uri": "{endpoint}",
-     "Path": "/convenienceOptionalModelWithRequired",
-     "RequestMediaTypes": [
+     "httpMethod": "POST",
+     "uri": "{endpoint}",
+     "path": "/convenienceOptionalModelWithRequired",
+     "requestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalModelWithRequired",
-     "Decorators": []
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalModelWithRequired",
+     "decorators": []
     },
     {
      "$id": "129",
-     "Name": "protocolOptionalBeforeRequired",
-     "ResourceName": "ConvenienceInCadl",
-     "Doc": "Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "protocolOptionalBeforeRequired",
+     "resourceName": "ConvenienceInCadl",
+     "doc": "Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "130",
-       "Name": "optional",
-       "NameInRequest": "optional",
-       "Type": {
+       "name": "optional",
+       "nameInRequest": "optional",
+       "type": {
         "$id": "131",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "132",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
-       "Type": {
+       "name": "contentType",
+       "nameInRequest": "Content-Type",
+       "doc": "Body parameter's content type. Known values are application/json",
+       "type": {
         "$id": "133",
         "kind": "constant",
         "valueType": {
@@ -1555,85 +1555,81 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": true,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "135",
-       "Name": "required",
-       "NameInRequest": "required",
-       "Type": {
+       "name": "required",
+       "nameInRequest": "required",
+       "type": {
         "$ref": "2"
        },
-       "Location": "Body",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Body",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "136",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "Headers": [],
-       "IsErrorResponse": false
+       "headers": [],
+       "isErrorResponse": false
       }
      ],
-     "HttpMethod": "POST",
-     "Uri": "{endpoint}",
-     "Path": "/protocolOptionalBeforeRequired",
-     "RequestMediaTypes": [
+     "httpMethod": "POST",
+     "uri": "{endpoint}",
+     "path": "/protocolOptionalBeforeRequired",
+     "requestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolOptionalBeforeRequired",
-     "Decorators": []
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "ConvenienceInCadl.protocolOptionalBeforeRequired",
+     "decorators": []
     }
    ],
-   "Protocol": {
-    "$id": "137"
-   },
-   "Parameters": [
+   "parameters": [
     {
-     "$id": "138",
-     "Name": "endpoint",
-     "NameInRequest": "endpoint",
-     "Doc": "Service host",
-     "Type": {
-      "$id": "139",
+     "$id": "137",
+     "name": "endpoint",
+     "nameInRequest": "endpoint",
+     "doc": "Service host",
+     "type": {
+      "$id": "138",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
      },
-     "Location": "Uri",
-     "IsApiVersion": false,
-     "IsResourceParameter": false,
-     "IsContentType": false,
-     "IsRequired": true,
-     "IsEndpoint": true,
-     "SkipUrlEncoding": false,
-     "Explode": false,
-     "Kind": "Client"
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client"
     }
    ],
-   "Decorators": [],
-   "CrossLanguageDefinitionId": "ConvenienceInCadl"
+   "decorators": [],
+   "crossLanguageDefinitionId": "ConvenienceInCadl"
   }
  ]
 }
