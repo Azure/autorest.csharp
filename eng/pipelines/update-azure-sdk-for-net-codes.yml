@@ -1,6 +1,9 @@
 # Generate SDK codes
 
 parameters:
+  - name: NodeVersion
+    type: string
+    default: '20.x'
   - name: Name
     type: string
   - name: AutorestCSharpVersion
