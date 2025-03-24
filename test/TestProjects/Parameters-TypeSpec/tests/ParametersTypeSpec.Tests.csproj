@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\ParametersCadl.csproj" />
+    <ProjectReference Include="..\src\ParametersTypeSpec.csproj" />
   </ItemGroup>
 
   <ItemGroup>

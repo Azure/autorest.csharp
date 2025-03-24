@@ -1,13 +1,10 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-client-generator-core";
 
-@service(
-    {
-        title: "Convenience methods in Typespec",
-        version: "0.1.0"
-    }
-)
-@doc("Typespec project to test various types of convenience methods.")
+@service(#{
+    title: "Convenience methods in TypeSpec"
+})
+@doc("TypeSpec project to test various types of convenience methods.")
 namespace ConvenienceInCadl;
 
 using TypeSpec.Http;

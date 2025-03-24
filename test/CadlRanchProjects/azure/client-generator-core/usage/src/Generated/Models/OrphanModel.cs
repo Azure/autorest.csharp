@@ -46,21 +46,26 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="OrphanModel"/>. </summary>
-        /// <param name="name"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public OrphanModel(string name)
+        /// <param name="modelName"></param>
+        /// <param name="description"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="modelName"/> or <paramref name="description"/> is null. </exception>
+        public OrphanModel(string modelName, string description)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(modelName, nameof(modelName));
+            Argument.AssertNotNull(description, nameof(description));
 
-            Name = name;
+            ModelName = modelName;
+            Description = description;
         }
 
         /// <summary> Initializes a new instance of <see cref="OrphanModel"/>. </summary>
-        /// <param name="name"></param>
+        /// <param name="modelName"></param>
+        /// <param name="description"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal OrphanModel(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal OrphanModel(string modelName, string description, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Name = name;
+            ModelName = modelName;
+            Description = description;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -69,7 +74,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
         {
         }
 
-        /// <summary> Gets the name. </summary>
-        public string Name { get; }
+        /// <summary> Gets the model name. </summary>
+        public string ModelName { get; }
+        /// <summary> Gets the description. </summary>
+        public string Description { get; }
     }
 }

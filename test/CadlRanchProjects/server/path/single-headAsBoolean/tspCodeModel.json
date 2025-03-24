@@ -8,7 +8,7 @@
   {
    "$id": "2",
    "name": "SingleClient",
-   "namespace": "Server.Path.Single",
+   "namespace": "Server.Path.SingleHeadAsBoolean",
    "doc": "Illustrates server with a single path parameter @server",
    "operations": [
     {

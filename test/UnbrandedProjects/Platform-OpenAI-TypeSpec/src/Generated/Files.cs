@@ -365,7 +365,7 @@ namespace OpenAI
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
             ClientResult result = await DownloadAsync(fileId, null).ConfigureAwait(false);
-            return ClientResult.FromValue(result.GetRawResponse().Content.ToObjectFromJson<string>(), result.GetRawResponse());
+            return ClientResult.FromValue(result.GetRawResponse().Content.ToString(), result.GetRawResponse());
         }
 
         /// <summary> Returns the contents of the specified file. </summary>
@@ -378,7 +378,7 @@ namespace OpenAI
             Argument.AssertNotNullOrEmpty(fileId, nameof(fileId));
 
             ClientResult result = Download(fileId, null);
-            return ClientResult.FromValue(result.GetRawResponse().Content.ToObjectFromJson<string>(), result.GetRawResponse());
+            return ClientResult.FromValue(result.GetRawResponse().Content.ToString(), result.GetRawResponse());
         }
 
         /// <summary>
@@ -515,7 +515,7 @@ namespace OpenAI
             uri.AppendPath(fileId, true);
             uri.AppendPath("/content", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Accept", "text/plain");
             message.Apply(options);
             return message;
         }

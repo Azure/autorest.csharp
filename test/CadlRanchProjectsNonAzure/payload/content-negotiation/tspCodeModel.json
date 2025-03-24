@@ -8,7 +8,7 @@
    "$id": "2",
    "kind": "model",
    "name": "PngImageAsJson",
-   "namespace": "Payload.ContentNegotiation.DifferentBody",
+   "namespace": "Scm.Payload.ContentNegotiation",
    "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson",
    "usage": "Output,Json",
    "decorators": [],
@@ -47,7 +47,7 @@
   {
    "$id": "7",
    "name": "ContentNegotiationClient",
-   "namespace": "Payload.ContentNegotiation",
+   "namespace": "Scm.Payload.ContentNegotiation",
    "doc": "Test describing optionality of the request body.",
    "operations": [],
    "parameters": [
@@ -88,7 +88,7 @@
   {
    "$id": "12",
    "name": "SameBody",
-   "namespace": "Payload.ContentNegotiation.SameBody",
+   "namespace": "Scm.Payload.ContentNegotiation",
    "operations": [
     {
      "$id": "13",
@@ -294,7 +294,7 @@
   {
    "$id": "35",
    "name": "DifferentBody",
-   "namespace": "Payload.ContentNegotiation.DifferentBody",
+   "namespace": "Scm.Payload.ContentNegotiation",
    "operations": [
     {
      "$id": "36",

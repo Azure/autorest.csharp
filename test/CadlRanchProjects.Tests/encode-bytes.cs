@@ -124,7 +124,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Encode_Bytes_RequestBody_default() => Test(async (host) =>
         {
-            BinaryData data = new BinaryData($"\"{Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("test"))}\"");
+            BinaryData data = new BinaryData(File.ReadAllBytes(SamplePngPath));
             Response response = await new BytesClient(host, null).GetRequestBodyClient().DefaultAsync(data);
             Assert.AreEqual(204, response.Status);
         });
@@ -164,8 +164,9 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Encode_Bytes_ResponseBody_default() => Test(async (host) =>
         {
+            BinaryData data = new BinaryData(File.ReadAllBytes(SamplePngPath));
             var response = await new BytesClient(host, null).GetResponseBodyClient().DefaultAsync();
-            CollectionAssert.AreEqual(BinaryData.FromObjectAsJson("dGVzdA==").ToArray(), response.Value.ToArray());
+            BinaryDataAssert.AreEqual(data, response);
         });
 
         [Test]

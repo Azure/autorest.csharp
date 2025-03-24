@@ -52,7 +52,7 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            using RequestContent content = RequestContentHelper.FromObject(value);
+            using RequestContent content = value;
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await DefaultAsync(content, context).ConfigureAwait(false);
             return response;
@@ -67,7 +67,7 @@ namespace Encode.Bytes
         {
             Argument.AssertNotNull(value, nameof(value));
 
-            using RequestContent content = RequestContentHelper.FromObject(value);
+            using RequestContent content = value;
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Default(content, context);
             return response;
@@ -592,7 +592,7 @@ namespace Encode.Bytes
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/bytes/body/request/default", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Content-Type", "application/octet-stream");
             request.Content = content;
             return message;
         }

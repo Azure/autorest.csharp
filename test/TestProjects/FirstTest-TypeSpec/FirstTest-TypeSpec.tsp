@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 using Azure.Core.Traits;
 
 @versioned(Versions)
-@service({
+@service(#{
     title: "hello world"
 })
 @doc("This is a sample typespec project.")
@@ -222,11 +222,11 @@ model RoundTripModel {
     optionalRecordUnknown?: Record<unknown>;
 
     @doc("required readonly record of unknown")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     readOnlyRequiredRecordUnknown: Record<unknown>;
 
     @doc("optional readonly record of unknown")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     readOnlyOptionalRecordUnknown?: Record<unknown>;
 
     @doc("this is a model with required nullable properties")
@@ -494,7 +494,7 @@ model Extendible {
 @convenientAPI(true)
 op threeLevelRecursive(@body input: Extendible): void;
 
-@doc("parenetModel")
+@doc("parentModel")
 model BaseModel {
     level: int8;
 }
@@ -511,7 +511,7 @@ model ChildModel extends BaseModel {
 op recursiveModels(@body input: ChildModel): void;
 
 
-@doc("containself")
+@doc("containSelf")
 model ContainSelf{
   self: ContainSelf;
 }
@@ -577,11 +577,11 @@ op azureLocationOp(@query location: azureLocation, @header regenLocation: azureL
 // TODO: remove below after duplicated polling operation case is added into cadl-ranch
 @resource("resources")
 model Resource {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   type: string;

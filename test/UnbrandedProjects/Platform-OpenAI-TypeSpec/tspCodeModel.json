@@ -12561,7 +12561,7 @@
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
-        "value": "application/json",
+        "value": "text/plain",
         "decorators": []
        },
        "location": "Header",
@@ -12591,7 +12591,7 @@
        "headers": [],
        "isErrorResponse": false,
        "contentTypes": [
-        "application/json"
+        "text/plain"
        ]
       }
      ],

@@ -1576,7 +1576,7 @@ namespace UnbrandedTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/unknown-value", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Content-Type", "application/json");
+            request.Headers.Set("Content-Type", "text/plain");
             request.Content = content;
             message.Apply(options);
             return message;

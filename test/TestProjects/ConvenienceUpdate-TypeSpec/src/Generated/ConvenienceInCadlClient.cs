@@ -16,7 +16,7 @@ using ConvenienceInCadl.Models;
 namespace ConvenienceInCadl
 {
     // Data plane generated client.
-    /// <summary> Typespec project to test various types of convenience methods. </summary>
+    /// <summary> TypeSpec project to test various types of convenience methods. </summary>
     public partial class ConvenienceInCadlClient
     {
         private readonly HttpPipeline _pipeline;

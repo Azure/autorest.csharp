@@ -51,7 +51,7 @@
      "decorators": []
     }
    ],
-   "namespace": "",
+   "namespace": "Scm._Type.Property.Optionality",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -105,7 +105,7 @@
      "decorators": []
     }
    ],
-   "namespace": "",
+   "namespace": "Scm._Type.Property.Optionality",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -159,7 +159,7 @@
      "decorators": []
     }
    ],
-   "namespace": "",
+   "namespace": "Scm._Type.Property.Optionality",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -192,7 +192,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "doc": "The FloatLiteralProperty_property",
    "isFixed": false,
    "isFlags": false,
@@ -226,7 +226,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "doc": "The IntLiteralProperty_property",
    "isFixed": false,
    "isFlags": false,
@@ -260,7 +260,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "doc": "The StringLiteralProperty_property",
    "isFixed": false,
    "isFlags": false,
@@ -273,7 +273,7 @@
    "$id": "29",
    "kind": "model",
    "name": "RequiredAndOptionalProperty",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "crossLanguageDefinitionId": "Type.Property.Optional.RequiredAndOptionalProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with required and optional properties",
@@ -339,7 +339,7 @@
    "$id": "38",
    "kind": "model",
    "name": "UnionFloatLiteralProperty",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "crossLanguageDefinitionId": "Type.Property.Optional.UnionFloatLiteralProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with union of float literal property",
@@ -374,7 +374,7 @@
    "$id": "42",
    "kind": "model",
    "name": "UnionIntLiteralProperty",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "crossLanguageDefinitionId": "Type.Property.Optional.UnionIntLiteralProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with union of int literal property",
@@ -409,7 +409,7 @@
    "$id": "46",
    "kind": "model",
    "name": "UnionStringLiteralProperty",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "crossLanguageDefinitionId": "Type.Property.Optional.UnionStringLiteralProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with union of string literal property",
@@ -444,7 +444,7 @@
    "$id": "50",
    "kind": "model",
    "name": "BooleanLiteralProperty",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "crossLanguageDefinitionId": "Type.Property.Optional.BooleanLiteralProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with boolean literal property",
@@ -489,7 +489,7 @@
    "$id": "56",
    "kind": "model",
    "name": "FloatLiteralProperty",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "crossLanguageDefinitionId": "Type.Property.Optional.FloatLiteralProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with float literal property",
@@ -530,7 +530,7 @@
    "$id": "61",
    "kind": "model",
    "name": "IntLiteralProperty",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "crossLanguageDefinitionId": "Type.Property.Optional.IntLiteralProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with int literal property",
@@ -571,7 +571,7 @@
    "$id": "66",
    "kind": "model",
    "name": "StringLiteralProperty",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "crossLanguageDefinitionId": "Type.Property.Optional.StringLiteralProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with string literal property",
@@ -612,7 +612,7 @@
    "$id": "71",
    "kind": "model",
    "name": "CollectionsModelProperty",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "crossLanguageDefinitionId": "Type.Property.Optional.CollectionsModelProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with collection models properties",
@@ -632,7 +632,7 @@
        "$id": "74",
        "kind": "model",
        "name": "StringProperty",
-       "namespace": "Type.Property.Optional",
+       "namespace": "Scm._Type.Property.Optionality",
        "crossLanguageDefinitionId": "Type.Property.Optional.StringProperty",
        "usage": "Input,Output,Json",
        "doc": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
@@ -693,7 +693,7 @@
    "$id": "81",
    "kind": "model",
    "name": "CollectionsByteProperty",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "crossLanguageDefinitionId": "Type.Property.Optional.CollectionsByteProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with collection bytes properties",
@@ -740,7 +740,7 @@
    "$id": "87",
    "kind": "model",
    "name": "PlainTimeProperty",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "crossLanguageDefinitionId": "Type.Property.Optional.PlainTimeProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a plainTime property",
@@ -779,7 +779,7 @@
    "$id": "92",
    "kind": "model",
    "name": "PlainDateProperty",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "crossLanguageDefinitionId": "Type.Property.Optional.PlainDateProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a plainDate property",
@@ -818,7 +818,7 @@
    "$id": "97",
    "kind": "model",
    "name": "DurationProperty",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "crossLanguageDefinitionId": "Type.Property.Optional.DurationProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a duration property",
@@ -865,7 +865,7 @@
    "$id": "103",
    "kind": "model",
    "name": "DatetimeProperty",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "crossLanguageDefinitionId": "Type.Property.Optional.DatetimeProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a datetime property",
@@ -912,7 +912,7 @@
    "$id": "109",
    "kind": "model",
    "name": "BytesProperty",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "crossLanguageDefinitionId": "Type.Property.Optional.BytesProperty",
    "usage": "Input,Output,Json",
    "doc": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
@@ -953,7 +953,7 @@
   {
    "$id": "114",
    "name": "OptionalClient",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "doc": "Illustrates models with optional properties.",
    "operations": [],
    "parameters": [
@@ -994,7 +994,7 @@
   {
    "$id": "119",
    "name": "String",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "operations": [
     {
      "$id": "120",
@@ -1306,7 +1306,7 @@
   {
    "$id": "146",
    "name": "Bytes",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "operations": [
     {
      "$id": "147",
@@ -1618,7 +1618,7 @@
   {
    "$id": "173",
    "name": "Datetime",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "operations": [
     {
      "$id": "174",
@@ -1930,7 +1930,7 @@
   {
    "$id": "200",
    "name": "Duration",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "operations": [
     {
      "$id": "201",
@@ -2242,7 +2242,7 @@
   {
    "$id": "227",
    "name": "PlainDate",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "operations": [
     {
      "$id": "228",
@@ -2554,7 +2554,7 @@
   {
    "$id": "254",
    "name": "PlainTime",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "operations": [
     {
      "$id": "255",
@@ -2866,7 +2866,7 @@
   {
    "$id": "281",
    "name": "CollectionsByte",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "operations": [
     {
      "$id": "282",
@@ -3178,7 +3178,7 @@
   {
    "$id": "308",
    "name": "CollectionsModel",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "operations": [
     {
      "$id": "309",
@@ -3490,7 +3490,7 @@
   {
    "$id": "335",
    "name": "StringLiteral",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "operations": [
     {
      "$id": "336",
@@ -3802,7 +3802,7 @@
   {
    "$id": "362",
    "name": "IntLiteral",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "operations": [
     {
      "$id": "363",
@@ -4114,7 +4114,7 @@
   {
    "$id": "389",
    "name": "FloatLiteral",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "operations": [
     {
      "$id": "390",
@@ -4426,7 +4426,7 @@
   {
    "$id": "416",
    "name": "BooleanLiteral",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "operations": [
     {
      "$id": "417",
@@ -4738,7 +4738,7 @@
   {
    "$id": "443",
    "name": "UnionStringLiteral",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "operations": [
     {
      "$id": "444",
@@ -5050,7 +5050,7 @@
   {
    "$id": "470",
    "name": "UnionIntLiteral",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "operations": [
     {
      "$id": "471",
@@ -5362,7 +5362,7 @@
   {
    "$id": "497",
    "name": "UnionFloatLiteral",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "operations": [
     {
      "$id": "498",
@@ -5674,7 +5674,7 @@
   {
    "$id": "524",
    "name": "RequiredAndOptional",
-   "namespace": "Type.Property.Optional",
+   "namespace": "Scm._Type.Property.Optionality",
    "doc": "Test optional and required properties",
    "operations": [
     {

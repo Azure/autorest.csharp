@@ -34,7 +34,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -88,7 +88,7 @@
      "decorators": []
     }
    ],
-   "namespace": "",
+   "namespace": "_Type.Property.ValueTypes",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -142,7 +142,7 @@
      "decorators": []
     }
    ],
-   "namespace": "",
+   "namespace": "_Type.Property.ValueTypes",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -196,7 +196,7 @@
      "decorators": []
     }
    ],
-   "namespace": "",
+   "namespace": "_Type.Property.ValueTypes",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -229,7 +229,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "doc": "The FloatLiteralProperty_property",
    "isFixed": false,
    "isFlags": false,
@@ -263,7 +263,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "doc": "The IntLiteralProperty_property",
    "isFixed": false,
    "isFlags": false,
@@ -297,7 +297,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "doc": "The StringLiteralProperty_property",
    "isFixed": false,
    "isFlags": false,
@@ -354,7 +354,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "doc": "Enum that will be used as a property for model EnumProperty. Extensible.",
    "isFixed": false,
    "isFlags": false,
@@ -411,7 +411,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "doc": "Enum that will be used as a property for model EnumProperty. Non-extensible.",
    "isFixed": true,
    "isFlags": false,
@@ -424,7 +424,7 @@
    "$id": "45",
    "kind": "model",
    "name": "UnionEnumValueProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.UnionEnumValueProperty",
    "usage": "Input,Output,Json",
    "doc": "Template type for testing models with specific properties. Pass in the type of the property you are looking for",
@@ -465,7 +465,7 @@
    "$id": "50",
    "kind": "model",
    "name": "UnionFloatLiteralProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.UnionFloatLiteralProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a union of float literal as property.",
@@ -500,7 +500,7 @@
    "$id": "54",
    "kind": "model",
    "name": "UnionIntLiteralProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.UnionIntLiteralProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a union of int literal as property.",
@@ -535,7 +535,7 @@
    "$id": "58",
    "kind": "model",
    "name": "UnionStringLiteralProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.UnionStringLiteralProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a union of string literal as property.",
@@ -570,7 +570,7 @@
    "$id": "62",
    "kind": "model",
    "name": "BooleanLiteralProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.BooleanLiteralProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a boolean literal property.",
@@ -615,7 +615,7 @@
    "$id": "68",
    "kind": "model",
    "name": "FloatLiteralProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.FloatLiteralProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a float literal property.",
@@ -656,7 +656,7 @@
    "$id": "73",
    "kind": "model",
    "name": "IntLiteralProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.IntLiteralProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a int literal property.",
@@ -697,7 +697,7 @@
    "$id": "78",
    "kind": "model",
    "name": "StringLiteralProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.StringLiteralProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a string literal property.",
@@ -738,7 +738,7 @@
    "$id": "83",
    "kind": "model",
    "name": "UnknownArrayProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownArrayProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a property unknown, and the data is an array.",
@@ -777,7 +777,7 @@
    "$id": "88",
    "kind": "model",
    "name": "UnknownDictProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownDictProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a property unknown, and the data is a dictionnary.",
@@ -816,7 +816,7 @@
    "$id": "93",
    "kind": "model",
    "name": "UnknownIntProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownIntProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a property unknown, and the data is a int32.",
@@ -855,7 +855,7 @@
    "$id": "98",
    "kind": "model",
    "name": "UnknownStringProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownStringProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a property unknown, and the data is a string.",
@@ -894,7 +894,7 @@
    "$id": "103",
    "kind": "model",
    "name": "NeverProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.NeverProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a property never. (This property should not be included).",
@@ -905,7 +905,7 @@
    "$id": "104",
    "kind": "model",
    "name": "DictionaryStringProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.DictionaryStringProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with dictionary string properties",
@@ -956,7 +956,7 @@
    "$id": "111",
    "kind": "model",
    "name": "CollectionsModelProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.CollectionsModelProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with collection model properties",
@@ -976,7 +976,7 @@
        "$id": "114",
        "kind": "model",
        "name": "InnerModel",
-       "namespace": "Type.Property.ValueTypes",
+       "namespace": "_Type.Property.ValueTypes",
        "crossLanguageDefinitionId": "Type.Property.ValueTypes.InnerModel",
        "usage": "Input,Output,Json",
        "doc": "Inner model. Will be a property type for ModelWithModelProperties",
@@ -1037,7 +1037,7 @@
    "$id": "121",
    "kind": "model",
    "name": "CollectionsIntProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.CollectionsIntProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with collection int properties",
@@ -1083,7 +1083,7 @@
    "$id": "127",
    "kind": "model",
    "name": "CollectionsStringProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.CollectionsStringProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with collection string properties",
@@ -1129,7 +1129,7 @@
    "$id": "133",
    "kind": "model",
    "name": "ModelProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.ModelProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with model properties",
@@ -1164,7 +1164,7 @@
    "$id": "137",
    "kind": "model",
    "name": "ExtensibleEnumProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.ExtensibleEnumProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with extensible enum properties",
@@ -1199,7 +1199,7 @@
    "$id": "141",
    "kind": "model",
    "name": "EnumProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.EnumProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with enum properties",
@@ -1234,7 +1234,7 @@
    "$id": "145",
    "kind": "model",
    "name": "DurationProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.DurationProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a duration property",
@@ -1281,7 +1281,7 @@
    "$id": "151",
    "kind": "model",
    "name": "DatetimeProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.DatetimeProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a datetime property",
@@ -1328,7 +1328,7 @@
    "$id": "157",
    "kind": "model",
    "name": "Decimal128Property",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.Decimal128Property",
    "usage": "Input,Output,Json",
    "doc": "Model with a decimal128 property",
@@ -1367,7 +1367,7 @@
    "$id": "162",
    "kind": "model",
    "name": "DecimalProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.DecimalProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a decimal property",
@@ -1406,7 +1406,7 @@
    "$id": "167",
    "kind": "model",
    "name": "FloatProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.FloatProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a float property",
@@ -1445,7 +1445,7 @@
    "$id": "172",
    "kind": "model",
    "name": "IntProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.IntProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a int property",
@@ -1484,7 +1484,7 @@
    "$id": "177",
    "kind": "model",
    "name": "BytesProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.BytesProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a bytes property",
@@ -1524,7 +1524,7 @@
    "$id": "182",
    "kind": "model",
    "name": "StringProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.StringProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a string property",
@@ -1563,7 +1563,7 @@
    "$id": "187",
    "kind": "model",
    "name": "BooleanProperty",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "crossLanguageDefinitionId": "Type.Property.ValueTypes.BooleanProperty",
    "usage": "Input,Output,Json",
    "doc": "Model with a boolean property",
@@ -1603,7 +1603,7 @@
   {
    "$id": "192",
    "name": "ValueTypesClient",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "doc": "Illustrates various property types for models",
    "operations": [],
    "parameters": [
@@ -1644,7 +1644,7 @@
   {
    "$id": "197",
    "name": "Boolean",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "198",
@@ -1822,7 +1822,7 @@
   {
    "$id": "213",
    "name": "String",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "214",
@@ -2000,7 +2000,7 @@
   {
    "$id": "229",
    "name": "Bytes",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "230",
@@ -2178,7 +2178,7 @@
   {
    "$id": "245",
    "name": "Int",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "246",
@@ -2356,7 +2356,7 @@
   {
    "$id": "261",
    "name": "Float",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "262",
@@ -2534,7 +2534,7 @@
   {
    "$id": "277",
    "name": "Decimal",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "278",
@@ -2712,7 +2712,7 @@
   {
    "$id": "293",
    "name": "Decimal128",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "294",
@@ -2890,7 +2890,7 @@
   {
    "$id": "309",
    "name": "Datetime",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "310",
@@ -3068,7 +3068,7 @@
   {
    "$id": "325",
    "name": "Duration",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "326",
@@ -3246,7 +3246,7 @@
   {
    "$id": "341",
    "name": "Enum",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "342",
@@ -3424,7 +3424,7 @@
   {
    "$id": "357",
    "name": "ExtensibleEnum",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "358",
@@ -3602,7 +3602,7 @@
   {
    "$id": "373",
    "name": "Model",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "374",
@@ -3780,7 +3780,7 @@
   {
    "$id": "389",
    "name": "CollectionsString",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "390",
@@ -3958,7 +3958,7 @@
   {
    "$id": "405",
    "name": "CollectionsInt",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "406",
@@ -4136,7 +4136,7 @@
   {
    "$id": "421",
    "name": "CollectionsModel",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "422",
@@ -4314,7 +4314,7 @@
   {
    "$id": "437",
    "name": "DictionaryString",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "438",
@@ -4492,7 +4492,7 @@
   {
    "$id": "453",
    "name": "Never",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "454",
@@ -4670,7 +4670,7 @@
   {
    "$id": "469",
    "name": "UnknownString",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "470",
@@ -4848,7 +4848,7 @@
   {
    "$id": "485",
    "name": "UnknownInt",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "486",
@@ -5026,7 +5026,7 @@
   {
    "$id": "501",
    "name": "UnknownDict",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "502",
@@ -5204,7 +5204,7 @@
   {
    "$id": "517",
    "name": "UnknownArray",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "518",
@@ -5382,7 +5382,7 @@
   {
    "$id": "533",
    "name": "StringLiteral",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "534",
@@ -5560,7 +5560,7 @@
   {
    "$id": "549",
    "name": "IntLiteral",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "550",
@@ -5738,7 +5738,7 @@
   {
    "$id": "565",
    "name": "FloatLiteral",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "566",
@@ -5916,7 +5916,7 @@
   {
    "$id": "581",
    "name": "BooleanLiteral",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "582",
@@ -6094,7 +6094,7 @@
   {
    "$id": "597",
    "name": "UnionStringLiteral",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "598",
@@ -6272,7 +6272,7 @@
   {
    "$id": "613",
    "name": "UnionIntLiteral",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "614",
@@ -6450,7 +6450,7 @@
   {
    "$id": "629",
    "name": "UnionFloatLiteral",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "630",
@@ -6628,7 +6628,7 @@
   {
    "$id": "645",
    "name": "UnionEnumValue",
-   "namespace": "Type.Property.ValueTypes",
+   "namespace": "_Type.Property.ValueTypes",
    "operations": [
     {
      "$id": "646",

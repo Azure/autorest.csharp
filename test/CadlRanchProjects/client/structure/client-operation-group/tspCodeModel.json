@@ -102,7 +102,7 @@
      "decorators": []
     }
    ],
-   "namespace": "Client.Structure.Service",
+   "namespace": "Client.Structure.Service.ClientOperationGroup",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input",
@@ -114,7 +114,7 @@
   {
    "$id": "14",
    "name": "FirstClient",
-   "namespace": "Client.Structure.ClientOperationGroup",
+   "namespace": "Client.Structure.Service.ClientOperationGroup",
    "operations": [
     {
      "$id": "15",
@@ -187,7 +187,7 @@
   {
    "$id": "20",
    "name": "Group3",
-   "namespace": "Client.Structure.ClientOperationGroup",
+   "namespace": "Client.Structure.Service.ClientOperationGroup",
    "operations": [
     {
      "$id": "21",
@@ -286,7 +286,7 @@
   {
    "$id": "28",
    "name": "Group4",
-   "namespace": "Client.Structure.ClientOperationGroup",
+   "namespace": "Client.Structure.Service.ClientOperationGroup",
    "operations": [
     {
      "$id": "29",
@@ -360,7 +360,7 @@
   {
    "$id": "34",
    "name": "SubNamespace.SecondClient",
-   "namespace": "Client.Structure.AnotherClientOperationGroup",
+   "namespace": "Client.Structure.Service.ClientOperationGroup",
    "operations": [
     {
      "$id": "35",
@@ -433,7 +433,7 @@
   {
    "$id": "40",
    "name": "Group5",
-   "namespace": "Client.Structure.AnotherClientOperationGroup",
+   "namespace": "Client.Structure.Service.ClientOperationGroup",
    "operations": [
     {
      "$id": "41",
