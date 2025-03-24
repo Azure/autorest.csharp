@@ -1569,27 +1569,50 @@
  "clients": [
   {
    "$id": "211",
+   "kind": "client",
    "name": "CustomizationsInTspClient",
    "namespace": "CustomizationsInTsp",
    "doc": "TypeSpec project to test various types of models.",
-   "operations": [
+   "parameters": [
     {
      "$id": "212",
+     "name": "endpoint",
+     "nameInRequest": "endpoint",
+     "doc": "Service host",
+     "type": {
+      "$id": "213",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client"
+    }
+   ],
+   "operations": [
+    {
+     "$id": "214",
      "name": "roundTrip",
      "resourceName": "CustomizationsInTsp",
      "doc": "RoundTrip operation to make RootModel round-trip",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "213",
+       "$id": "215",
        "name": "contentType",
        "nameInRequest": "Content-Type",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$id": "214",
+        "$id": "216",
         "kind": "constant",
         "valueType": {
-         "$id": "215",
+         "$id": "217",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1609,14 +1632,14 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "216",
+       "$id": "218",
        "name": "accept",
        "nameInRequest": "Accept",
        "type": {
-        "$id": "217",
+        "$id": "219",
         "kind": "constant",
         "valueType": {
-         "$id": "218",
+         "$id": "220",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1636,7 +1659,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "219",
+       "$id": "221",
        "name": "input",
        "nameInRequest": "input",
        "type": {
@@ -1655,7 +1678,7 @@
      ],
      "responses": [
       {
-       "$id": "220",
+       "$id": "222",
        "statusCodes": [
         200
        ],
@@ -1682,22 +1705,22 @@
      "decorators": []
     },
     {
-     "$id": "221",
+     "$id": "223",
      "name": "foo",
      "resourceName": "CustomizationsInTsp",
      "doc": "Sample operation with request body of a renamed model",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "222",
+       "$id": "224",
        "name": "contentType",
        "nameInRequest": "Content-Type",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$id": "223",
+        "$id": "225",
         "kind": "constant",
         "valueType": {
-         "$id": "224",
+         "$id": "226",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1717,14 +1740,14 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "225",
+       "$id": "227",
        "name": "accept",
        "nameInRequest": "Accept",
        "type": {
-        "$id": "226",
+        "$id": "228",
         "kind": "constant",
         "valueType": {
-         "$id": "227",
+         "$id": "229",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1744,7 +1767,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "228",
+       "$id": "230",
        "name": "input",
        "nameInRequest": "input",
        "type": {
@@ -1763,7 +1786,7 @@
      ],
      "responses": [
       {
-       "$id": "229",
+       "$id": "231",
        "statusCodes": [
         200
        ],
@@ -1790,22 +1813,22 @@
      "decorators": []
     },
     {
-     "$id": "230",
+     "$id": "232",
      "name": "bar",
      "resourceName": "CustomizationsInTsp",
      "doc": "Sample operation with request body using a model parameter with a spread operator.",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "231",
+       "$id": "233",
        "name": "contentType",
        "nameInRequest": "Content-Type",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$id": "232",
+        "$id": "234",
         "kind": "constant",
         "valueType": {
-         "$id": "233",
+         "$id": "235",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1825,14 +1848,14 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "234",
+       "$id": "236",
        "name": "accept",
        "nameInRequest": "Accept",
        "type": {
-        "$id": "235",
+        "$id": "237",
         "kind": "constant",
         "valueType": {
-         "$id": "236",
+         "$id": "238",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1852,7 +1875,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "237",
+       "$id": "239",
        "name": "modelToRename",
        "nameInRequest": "modelToRename",
        "type": {
@@ -1871,7 +1894,7 @@
      ],
      "responses": [
       {
-       "$id": "238",
+       "$id": "240",
        "statusCodes": [
         200
        ],
@@ -1898,30 +1921,9 @@
      "decorators": []
     }
    ],
-   "parameters": [
-    {
-     "$id": "239",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "240",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client"
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "CustomizationsInTsp"
+   "apiVersions": [],
+   "crossLanguageDefinitionId": "CustomizationsInTsp",
+   "decorators": []
   }
  ]
 }

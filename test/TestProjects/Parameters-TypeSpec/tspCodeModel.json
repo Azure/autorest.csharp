@@ -85,9 +85,9 @@
  "clients": [
   {
    "$id": "11",
+   "kind": "client",
    "name": "ParametersTypeSpecClient",
    "namespace": "ParametersTypeSpec",
-   "operations": [],
    "parameters": [
     {
      "$id": "12",
@@ -110,273 +110,285 @@
      "kind": "Client"
     }
    ],
+   "operations": [],
+   "apiVersions": [
+    "2022-05-15-preview"
+   ],
+   "crossLanguageDefinitionId": "ParametersTypeSpec",
    "decorators": [],
-   "crossLanguageDefinitionId": "ParametersTypeSpec"
-  },
-  {
-   "$id": "14",
-   "name": "ParameterOrders",
-   "namespace": "ParametersTypeSpec.ParameterOrders",
-   "operations": [
+   "children": [
     {
-     "$id": "15",
-     "name": "Operation",
-     "resourceName": "ParameterOrders",
-     "accessibility": "public",
+     "$id": "14",
+     "kind": "client",
+     "name": "ParameterOrders",
+     "namespace": "ParametersTypeSpec.ParameterOrders",
      "parameters": [
       {
-       "$id": "16",
-       "name": "start",
-       "nameInRequest": "start",
+       "$id": "15",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
        "type": {
-        "$id": "17",
-        "kind": "int32",
-        "name": "int32",
-        "crossLanguageDefinitionId": "TypeSpec.int32",
-        "decorators": []
+        "$id": "16",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
-       "location": "Query",
+       "location": "Uri",
        "isApiVersion": false,
        "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
        "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "18",
-       "name": "end",
-       "nameInRequest": "end",
-       "type": {
-        "$id": "19",
-        "kind": "int32",
-        "name": "int32",
-        "crossLanguageDefinitionId": "TypeSpec.int32",
-        "decorators": []
-       },
-       "location": "Query",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
        "explode": false,
-       "isRequired": false,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
+       "kind": "Client"
+      }
+     ],
+     "operations": [
       {
-       "$id": "20",
-       "name": "apiVersion",
-       "nameInRequest": "api-version",
-       "type": {
-        "$id": "21",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Query",
-       "isApiVersion": true,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Client",
-       "defaultValue": {
-        "$id": "22",
-        "type": {
-         "$id": "23",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
+       "$id": "17",
+       "name": "Operation",
+       "resourceName": "ParameterOrders",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "18",
+         "name": "start",
+         "nameInRequest": "start",
+         "type": {
+          "$id": "19",
+          "kind": "int32",
+          "name": "int32",
+          "crossLanguageDefinitionId": "TypeSpec.int32",
+          "decorators": []
+         },
+         "location": "Query",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
         },
-        "value": "2022-05-15-preview"
-       },
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "24",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "25",
-        "kind": "constant",
-        "valueType": {
+        {
+         "$id": "20",
+         "name": "end",
+         "nameInRequest": "end",
+         "type": {
+          "$id": "21",
+          "kind": "int32",
+          "name": "int32",
+          "crossLanguageDefinitionId": "TypeSpec.int32",
+          "decorators": []
+         },
+         "location": "Query",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": false,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "22",
+         "name": "apiVersion",
+         "nameInRequest": "api-version",
+         "type": {
+          "$id": "23",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "location": "Query",
+         "isApiVersion": true,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Client",
+         "defaultValue": {
+          "$id": "24",
+          "type": {
+           "$id": "25",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string"
+          },
+          "value": "2022-05-15-preview"
+         },
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
          "$id": "26",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "27",
-       "statusCodes": [
-        200
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "27",
+          "kind": "constant",
+          "valueType": {
+           "$id": "28",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
        ],
-       "bodyType": {
-        "$ref": "6"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "GET",
-     "uri": "{endpoint}",
-     "path": "/parameterOrders",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "ParametersTypeSpec.ParameterOrders.Operation",
-     "decorators": []
-    },
-    {
-     "$id": "28",
-     "name": "Operation2",
-     "resourceName": "ParameterOrders",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "29",
-       "name": "start",
-       "nameInRequest": "start",
-       "type": {
-        "$id": "30",
-        "kind": "int32",
-        "name": "int32",
-        "crossLanguageDefinitionId": "TypeSpec.int32",
-        "decorators": []
-       },
-       "location": "Query",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": false,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
+       "responses": [
+        {
+         "$id": "29",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "6"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "GET",
+       "uri": "{endpoint}",
+       "path": "/parameterOrders",
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "ParametersTypeSpec.ParameterOrders.Operation",
+       "decorators": []
       },
       {
-       "$id": "31",
-       "name": "end",
-       "nameInRequest": "end",
-       "type": {
-        "$id": "32",
-        "kind": "int32",
-        "name": "int32",
-        "crossLanguageDefinitionId": "TypeSpec.int32",
-        "decorators": []
-       },
-       "location": "Query",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "33",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "34",
-        "kind": "constant",
-        "valueType": {
+       "$id": "30",
+       "name": "Operation2",
+       "resourceName": "ParameterOrders",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "31",
+         "name": "start",
+         "nameInRequest": "start",
+         "type": {
+          "$id": "32",
+          "kind": "int32",
+          "name": "int32",
+          "crossLanguageDefinitionId": "TypeSpec.int32",
+          "decorators": []
+         },
+         "location": "Query",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": false,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "33",
+         "name": "end",
+         "nameInRequest": "end",
+         "type": {
+          "$id": "34",
+          "kind": "int32",
+          "name": "int32",
+          "crossLanguageDefinitionId": "TypeSpec.int32",
+          "decorators": []
+         },
+         "location": "Query",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
          "$id": "35",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "36",
-       "statusCodes": [
-        200
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "36",
+          "kind": "constant",
+          "valueType": {
+           "$id": "37",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
        ],
-       "bodyType": {
-        "$ref": "6"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
+       "responses": [
+        {
+         "$id": "38",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "6"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "HEAD",
+       "uri": "{endpoint}",
+       "path": "/parameterOrders",
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "ParametersTypeSpec.ParameterOrders.Operation2",
+       "decorators": []
       }
      ],
-     "httpMethod": "HEAD",
-     "uri": "{endpoint}",
-     "path": "/parameterOrders",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "ParametersTypeSpec.ParameterOrders.Operation2",
-     "decorators": []
+     "apiVersions": [
+      "2022-05-15-preview"
+     ],
+     "crossLanguageDefinitionId": "ParametersTypeSpec.ParameterOrders",
+     "decorators": [],
+     "parent": {
+      "$ref": "11"
+     }
     }
-   ],
-   "parent": "ParametersTypeSpecClient",
-   "parameters": [
-    {
-     "$id": "37",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "38",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client"
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "ParametersTypeSpec.ParameterOrders"
+   ]
   }
  ]
 }

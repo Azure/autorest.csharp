@@ -252,26 +252,59 @@
  "clients": [
   {
    "$id": "35",
+   "kind": "client",
    "name": "FlattenPropertyClient",
    "namespace": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty",
    "doc": "Illustrates the model flatten cases.",
-   "operations": [
+   "parameters": [
     {
      "$id": "36",
+     "name": "endpoint",
+     "nameInRequest": "endpoint",
+     "doc": "Service host",
+     "type": {
+      "$id": "37",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client",
+     "defaultValue": {
+      "$id": "38",
+      "type": {
+       "$id": "39",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "value": "http://localhost:3000"
+     }
+    }
+   ],
+   "operations": [
+    {
+     "$id": "40",
      "name": "putFlattenModel",
      "resourceName": "FlattenProperty",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "37",
+       "$id": "41",
        "name": "contentType",
        "nameInRequest": "Content-Type",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$id": "38",
+        "$id": "42",
         "kind": "constant",
         "valueType": {
-         "$id": "39",
+         "$id": "43",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -291,14 +324,14 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "40",
+       "$id": "44",
        "name": "accept",
        "nameInRequest": "Accept",
        "type": {
-        "$id": "41",
+        "$id": "45",
         "kind": "constant",
         "valueType": {
-         "$id": "42",
+         "$id": "46",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -318,7 +351,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "43",
+       "$id": "47",
        "name": "input",
        "nameInRequest": "input",
        "type": {
@@ -337,7 +370,7 @@
      ],
      "responses": [
       {
-       "$id": "44",
+       "$id": "48",
        "statusCodes": [
         200
        ],
@@ -364,21 +397,21 @@
      "decorators": []
     },
     {
-     "$id": "45",
+     "$id": "49",
      "name": "putNestedFlattenModel",
      "resourceName": "FlattenProperty",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "46",
+       "$id": "50",
        "name": "contentType",
        "nameInRequest": "Content-Type",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$id": "47",
+        "$id": "51",
         "kind": "constant",
         "valueType": {
-         "$id": "48",
+         "$id": "52",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -398,14 +431,14 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "49",
+       "$id": "53",
        "name": "accept",
        "nameInRequest": "Accept",
        "type": {
-        "$id": "50",
+        "$id": "54",
         "kind": "constant",
         "valueType": {
-         "$id": "51",
+         "$id": "55",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -425,7 +458,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "52",
+       "$id": "56",
        "name": "input",
        "nameInRequest": "input",
        "type": {
@@ -444,7 +477,7 @@
      ],
      "responses": [
       {
-       "$id": "53",
+       "$id": "57",
        "statusCodes": [
         200
        ],
@@ -471,40 +504,9 @@
      "decorators": []
     }
    ],
-   "parameters": [
-    {
-     "$id": "54",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "55",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "56",
-      "type": {
-       "$id": "57",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "http://localhost:3000"
-     }
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty"
+   "apiVersions": [],
+   "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty",
+   "decorators": []
   }
  ]
 }
