@@ -62,7 +62,6 @@ namespace AutoRest.CSharp.Common.Input
                 reader.SkipProperty();
             }
 
-<<<<<<< HEAD
             return inputClient ??= CreateClientInstance(id, name, summary, doc, operations, parameters, parent, [], resolver);
         }
 
@@ -73,12 +72,6 @@ namespace AutoRest.CSharp.Common.Input
             parameters = parameters ?? Array.Empty<InputParameter>();
             var inputClient = new InputClient(name, summary, doc, operations, parameters, parent, children);
 
-=======
-            name= name ?? throw new JsonException("InputClient must have name");
-            operations = operations ?? [];
-            parameters = parameters ?? [];
-            var inputClient = new InputClient(name, summary, doc, operations, parameters, parent);
->>>>>>> origin/main
             if (id != null)
             {
                 resolver.AddReference(id, inputClient);
