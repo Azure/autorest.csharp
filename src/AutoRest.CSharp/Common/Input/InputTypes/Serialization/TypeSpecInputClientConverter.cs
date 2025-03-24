@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadComplexType("operations", options, ref operations)
                     || reader.TryReadComplexType("parameters", options, ref parameters)
                     || reader.TryReadString("parent", ref parent)
-                    || reader.TryReadWithConverter("decorators", options, ref decorators);
+                    || reader.TryReadComplexType("decorators", options, ref decorators);
 
                 if (!isKnownProperty)
                 {
