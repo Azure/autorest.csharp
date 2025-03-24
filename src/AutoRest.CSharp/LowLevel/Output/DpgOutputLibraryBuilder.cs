@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public DpgOutputLibrary Build(bool isTspInput)
         {
-            var inputClients = UpdateOperations(_rootNamespace.Clients).ToList();
+            var inputClients = UpdateOperations(EnumerateClients()).ToList();
 
             var clientInfosByName = inputClients
                 .Select(og => CreateClientInfo(og, _sourceInputModel, _rootNamespace.Name))
@@ -153,14 +153,21 @@ namespace AutoRest.CSharp.Output.Models
 
         private IEnumerable<InputClient> EnumerateClients()
         {
-            var clients = _rootNamespace.Clients;
-            while (clients.Count > 0)
+            var queue = new Queue<InputClient>(_rootNamespace.Clients);
+            var allClients = new List<InputClient>();
+
+            while (queue.Count > 0)
             {
-                foreach (var client in clients)
+                var currentClient = queue.Dequeue();
+                allClients.Add(currentClient);
+
+                foreach (var childClient in currentClient.Children)
                 {
-                    yield return client;
+                    queue.Enqueue(childClient);
                 }
             }
+
+            return allClients;
         }
 
         private IEnumerable<InputClient> UpdateOperations(IEnumerable<InputClient> clients)
