@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Output.Builders
                     InputPrimitiveTypeKind.Float or InputPrimitiveTypeKind.Float32 => SerializationFormat.Duration_Seconds_Float,
                     _ => SerializationFormat.Duration_Seconds_Double
                 },
-                DurationKnownEncoding.Constant => SerializationFormat.Duration_Constant,
+                DurationKnownEncoding.DurationConstant => SerializationFormat.Duration_Constant,
                 _ => throw new IndexOutOfRangeException($"unknown encode {durationType.Encode}")
             },
             InputPrimitiveType primitiveType => primitiveType.Kind switch
