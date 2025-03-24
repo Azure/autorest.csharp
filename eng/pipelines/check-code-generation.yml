@@ -17,10 +17,10 @@ jobs:
 - job: ${{ parameters.name }}
   dependsOn: ${{ parameters.dependsOn }}
   steps:
-    - task: NodeTool@0
-      displayName: "Install Node 20.x"
+    - task: UseNode@1
+      displayName: 'Install Node.js'
       inputs:
-        versionSpec: '20.x'
+        version: $(NodeVersion)
     - task: UseDotNet@2
       displayName: 'Use .NET Core SDK'
       inputs:

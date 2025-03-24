@@ -1,0 +1,5 @@
+variables:
+  # Indicates the node version to use
+  - name: NodeVersion
+    type: string
+    default: '20.x'

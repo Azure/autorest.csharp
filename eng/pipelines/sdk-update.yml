@@ -35,10 +35,10 @@ extends:
                 inputs:
                   useGlobalJson: true
                   performMultiLevelLookup: true
-              - task: NodeTool@0
-                displayName: "Install Node 20.x"
+              - task: UseNode@1
+                displayName: 'Install Node.js'
                 inputs:
-                  versionSpec: '20.x'
+                  version: $(NodeVersion)
               - ${{ if eq(parameters.UseTypeSpecNext, 'true') }}:
                 - pwsh: ./eng/UseTypeSpecNextVersions.ps1
                   displayName: "Use 'next' TypeSpec dependencies"
