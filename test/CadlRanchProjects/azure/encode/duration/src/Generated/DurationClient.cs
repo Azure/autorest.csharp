@@ -47,15 +47,7 @@ namespace _Specs_.Azure.Encode.Duration
             _endpoint = endpoint;
         }
 
-        /// <summary>
-        /// Test duration with azure specific encoding.
-        /// Expected request body:
-        /// ```json
-        /// {
-        ///   "input": "1.02:59:59.5000000"
-        /// }
-        /// ```
-        /// </summary>
+        /// <summary> Test duration with azure specific encoding. </summary>
         /// <param name="body"> The <see cref="DurationModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -70,15 +62,7 @@ namespace _Specs_.Azure.Encode.Duration
             return response;
         }
 
-        /// <summary>
-        /// Test duration with azure specific encoding.
-        /// Expected request body:
-        /// ```json
-        /// {
-        ///   "input": "1.02:59:59.5000000"
-        /// }
-        /// ```
-        /// </summary>
+        /// <summary> Test duration with azure specific encoding. </summary>
         /// <param name="body"> The <see cref="DurationModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -95,12 +79,6 @@ namespace _Specs_.Azure.Encode.Duration
 
         /// <summary>
         /// [Protocol Method] Test duration with azure specific encoding.
-        /// Expected request body:
-        /// ```json
-        /// {
-        ///   "input": "1.02:59:59.5000000"
-        /// }
-        /// ```
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -140,12 +118,6 @@ namespace _Specs_.Azure.Encode.Duration
 
         /// <summary>
         /// [Protocol Method] Test duration with azure specific encoding.
-        /// Expected request body:
-        /// ```json
-        /// {
-        ///   "input": "1.02:59:59.5000000"
-        /// }
-        /// ```
         /// <list type="bullet">
         /// <item>
         /// <description>
