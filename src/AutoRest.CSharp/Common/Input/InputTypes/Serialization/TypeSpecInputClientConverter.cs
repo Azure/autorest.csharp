@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using AutoRest.CSharp.Common.Input;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -38,13 +37,13 @@ namespace AutoRest.CSharp.Common.Input
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputClient.Name), ref name)
-                    || reader.TryReadString("Summary", ref summary)
-                    || reader.TryReadString("Doc", ref doc)
-                    || reader.TryReadWithConverter(nameof(InputClient.Operations), options, ref operations)
-                    || reader.TryReadWithConverter(nameof(InputClient.Parameters), options, ref parameters)
-                    || reader.TryReadString(nameof(InputClient.Parent), ref parent)
-                    || reader.TryReadWithConverter(nameof(InputClient.Decorators), options, ref decorators);
+                    || reader.TryReadString("name", ref name)
+                    || reader.TryReadString("summary", ref summary)
+                    || reader.TryReadString("doc", ref doc)
+                    || reader.TryReadComplexType("operations", options, ref operations)
+                    || reader.TryReadComplexType("parameters", options, ref parameters)
+                    || reader.TryReadString("parent", ref parent)
+                    || reader.TryReadWithConverter("decorators", options, ref decorators);
 
                 if (!isKnownProperty)
                 {
@@ -53,8 +52,8 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             name= name ?? throw new JsonException("InputClient must have name");
-            operations = operations ?? Array.Empty<InputOperation>();
-            parameters = parameters ?? Array.Empty<InputParameter>();
+            operations = operations ?? [];
+            parameters = parameters ?? [];
             var inputClient = new InputClient(name, summary, doc, operations, parameters, parent);
             if (id != null)
             {

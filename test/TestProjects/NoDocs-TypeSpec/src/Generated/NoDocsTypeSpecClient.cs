@@ -455,7 +455,7 @@ namespace NoDocsTypeSpec
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
-            using RequestContent content = RequestContentHelper.FromObject(body);
+            using RequestContent content = body;
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await StringBodyAsync(content, context).ConfigureAwait(false);
             return response;
@@ -465,7 +465,7 @@ namespace NoDocsTypeSpec
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
-            using RequestContent content = RequestContentHelper.FromObject(body);
+            using RequestContent content = body;
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = StringBody(content, context);
             return response;
@@ -615,14 +615,14 @@ namespace NoDocsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ReturnStringAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<string>(), response);
+            return Response.FromValue(response.Content.ToString(), response);
         }
 
         public virtual Response<string> ReturnString(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = ReturnString(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<string>(), response);
+            return Response.FromValue(response.Content.ToString(), response);
         }
 
         public virtual async Task<Response> ReturnStringAsync(RequestContext context)
@@ -1277,7 +1277,7 @@ namespace NoDocsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/stringBody", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Content-Type", "text/plain");
             request.Content = content;
             return message;
         }
@@ -1291,7 +1291,7 @@ namespace NoDocsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/boolBody", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Content-Type", "text/plain");
             request.Content = content;
             return message;
         }
@@ -1305,7 +1305,7 @@ namespace NoDocsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/dateTimeBody", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Content-Type", "text/plain");
             request.Content = content;
             return message;
         }
@@ -1319,7 +1319,7 @@ namespace NoDocsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/returnString", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 

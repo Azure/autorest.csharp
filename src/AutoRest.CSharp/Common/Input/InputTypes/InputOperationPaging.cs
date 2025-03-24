@@ -6,23 +6,23 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record OperationPaging
+internal record InputOperationPaging
 {
-    public OperationPaging(NextLink? nextLink, ContinuationToken? continuationToken, IReadOnlyList<string> itemPropertySegments)
+    public InputOperationPaging(InputNextLink? nextLink, InputContinuationToken? continuationToken, IReadOnlyList<string> itemPropertySegments)
     {
         NextLink = nextLink ?? new();
         ContinuationToken = continuationToken;
         ItemPropertySegments = itemPropertySegments;
     }
 
-    public NextLink NextLink { get; init; }
-    public ContinuationToken? ContinuationToken { get; init; }
+    public InputNextLink NextLink { get; init; }
+    public InputContinuationToken? ContinuationToken { get; init; }
     public IReadOnlyList<string> ItemPropertySegments { get; init; }
 
-    public OperationPaging() : this(null, null, Array.Empty<string>()) { }
+    public InputOperationPaging() : this(null, null, Array.Empty<string>()) { }
 
     // obsolete, for swagger input only
-    public OperationPaging(string? nextLinkName, string? itemName, InputOperation? nextLinkOperation, bool selfNextLink)
+    public InputOperationPaging(string? nextLinkName, string? itemName, InputOperation? nextLinkOperation, bool selfNextLink)
         : this(null, null, Array.Empty<string>())
     {
         NextLink = BuildNextLink(nextLinkName, nextLinkOperation);
@@ -30,10 +30,10 @@ internal record OperationPaging
         SelfNextLink = selfNextLink;
     }
 
-    private static NextLink BuildNextLink(string? nextLinkName, InputOperation? nextLinkOperation)
+    private static InputNextLink BuildNextLink(string? nextLinkName, InputOperation? nextLinkOperation)
     {
         string[]? nextLinkSegments = nextLinkName != null ? [nextLinkName] : null;
-        return new NextLink(nextLinkOperation, nextLinkSegments ?? [], ResponseLocation.Body);
+        return new InputNextLink(nextLinkOperation, nextLinkSegments ?? [], InputResponseLocation.Body);
     }
 
     public string? NextLinkName => NextLink?.ResponseSegments.Count > 0 ? NextLink.ResponseSegments[0] : null;
@@ -55,19 +55,19 @@ internal record OperationPaging
     public bool SelfNextLink { get; }
 }
 
-internal record NextLink(InputOperation? Operation, IReadOnlyList<string> ResponseSegments, ResponseLocation ResponseLocation)
+internal record InputNextLink(InputOperation? Operation, IReadOnlyList<string> ResponseSegments, InputResponseLocation ResponseLocation)
 {
-    public NextLink() : this(null, Array.Empty<string>(), ResponseLocation.None) { }
+    public InputNextLink() : this(null, Array.Empty<string>(), InputResponseLocation.None) { }
 
     public InputOperation? Operation { get; internal set; } = Operation;
 }
 
-internal record ContinuationToken(InputParameter Parameter, IReadOnlyList<string> ResponseSegments, ResponseLocation ResponseLocation)
+internal record InputContinuationToken(InputParameter Parameter, IReadOnlyList<string> ResponseSegments, InputResponseLocation ResponseLocation)
 {
-    public ContinuationToken() : this(new InputParameter(), Array.Empty<string>(), ResponseLocation.None) { }
+    public InputContinuationToken() : this(new InputParameter(), Array.Empty<string>(), InputResponseLocation.None) { }
 }
 
-internal enum ResponseLocation
+internal enum InputResponseLocation
 {
     None,
     Header,

@@ -241,5 +241,47 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("result").GetProperty("name").ToString());
 ]]></code></example>
     </member>
+    <member name="OrphanModelSerializableAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call OrphanModelSerializableAsync.
+<code><![CDATA[
+ModelInOperation client = new UsageClient().GetModelInOperationClient();
+
+using RequestContent content = RequestContent.Create(new object());
+Response response = await client.OrphanModelSerializableAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call OrphanModelSerializableAsync with all request content.
+<code><![CDATA[
+ModelInOperation client = new UsageClient().GetModelInOperationClient();
+
+using RequestContent content = RequestContent.Create(new object());
+Response response = await client.OrphanModelSerializableAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="OrphanModelSerializable(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call OrphanModelSerializable.
+<code><![CDATA[
+ModelInOperation client = new UsageClient().GetModelInOperationClient();
+
+using RequestContent content = RequestContent.Create(new object());
+Response response = client.OrphanModelSerializable(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call OrphanModelSerializable with all request content.
+<code><![CDATA[
+ModelInOperation client = new UsageClient().GetModelInOperationClient();
+
+using RequestContent content = RequestContent.Create(new object());
+Response response = client.OrphanModelSerializable(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
   </members>
 </doc>

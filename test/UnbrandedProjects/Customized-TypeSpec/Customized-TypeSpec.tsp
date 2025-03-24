@@ -9,7 +9,7 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 
 @versioned(Versions)
-@service({
+@service(#{
     title: "hello world"
 })
 @doc("This is a sample typespec project.")
@@ -142,7 +142,7 @@ model NotFriend {
 }
 
 @doc("this is a model with a projected name")
-@projectedName("client", "ProjectedModel")
+@clientName("ProjectedModel")
 model ModelWithProjectedName {
     @doc("name of the ModelWithProjectedName")
     name: string;
@@ -157,7 +157,7 @@ model RoundTripModel {
     requiredInt: int32;
 
     @doc("Required readonly int")
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     requiredReadonlyInt: int32;
 }
 

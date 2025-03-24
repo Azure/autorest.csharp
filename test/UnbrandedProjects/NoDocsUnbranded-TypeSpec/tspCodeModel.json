@@ -1,8 +1,8 @@
 {
  "$id": "1",
- "Name": "NoDocsUnbrandedTypeSpec",
- "ApiVersions": [],
- "Enums": [
+ "name": "NoDocsUnbrandedTypeSpec",
+ "apiVersions": [],
+ "enums": [
   {
    "$id": "2",
    "kind": "enum",
@@ -208,7 +208,7 @@
    "decorators": []
   }
  ],
- "Models": [
+ "models": [
   {
    "$id": "20",
    "kind": "model",
@@ -651,88 +651,88 @@
    ]
   }
  ],
- "Clients": [
+ "clients": [
   {
    "$id": "83",
-   "Name": "NoDocsUnbrandedTypeSpecClient",
-   "Namespace": "NoDocsUnbrandedTypeSpec",
-   "Doc": "This is a sample typespec project.",
-   "Operations": [
+   "name": "NoDocsUnbrandedTypeSpecClient",
+   "namespace": "NoDocsUnbrandedTypeSpec",
+   "doc": "This is a sample typespec project.",
+   "operations": [
     {
      "$id": "84",
-     "Name": "sayHi",
-     "ResourceName": "NoDocsUnbrandedTypeSpec",
-     "Doc": "Return hi",
-     "Accessibility": "public",
-     "Parameters": [
+     "name": "sayHi",
+     "resourceName": "NoDocsUnbrandedTypeSpec",
+     "doc": "Return hi",
+     "accessibility": "public",
+     "parameters": [
       {
        "$id": "85",
-       "Name": "headParameter",
-       "NameInRequest": "head-parameter",
-       "Type": {
+       "name": "headParameter",
+       "nameInRequest": "head-parameter",
+       "type": {
         "$id": "86",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "87",
-       "Name": "queryParameter",
-       "NameInRequest": "queryParameter",
-       "Type": {
+       "name": "queryParameter",
+       "nameInRequest": "queryParameter",
+       "type": {
         "$id": "88",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "89",
-       "Name": "optionalQuery",
-       "NameInRequest": "optionalQuery",
-       "Type": {
+       "name": "optionalQuery",
+       "nameInRequest": "optionalQuery",
+       "type": {
         "$id": "90",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
       },
       {
        "$id": "91",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
+       "name": "accept",
+       "nameInRequest": "Accept",
+       "type": {
         "$id": "92",
         "kind": "constant",
         "valueType": {
@@ -745,91 +745,74 @@
         "value": "application/json",
         "decorators": []
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant",
-       "Decorators": [],
-       "SkipUrlEncoding": false
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
      ],
-     "Responses": [
+     "responses": [
       {
        "$id": "94",
-       "StatusCodes": [
+       "statusCodes": [
         200
        ],
-       "BodyType": {
+       "bodyType": {
         "$ref": "20"
        },
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
+       "headers": [],
+       "isErrorResponse": false,
+       "contentTypes": [
         "application/json"
        ]
       }
      ],
-     "HttpMethod": "GET",
-     "Uri": "{noTestTypeSpecUrl}",
-     "Path": "/hello",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.sayHi",
-     "Decorators": []
+     "httpMethod": "GET",
+     "uri": "{noTestTypeSpecUrl}",
+     "path": "/hello",
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.sayHi",
+     "decorators": []
     }
    ],
-   "Protocol": {
-    "$id": "95"
-   },
-   "Parameters": [
+   "parameters": [
     {
-     "$id": "96",
-     "Name": "noTestTypeSpecUrl",
-     "NameInRequest": "noTestTypeSpecUrl",
-     "Type": {
-      "$id": "97",
+     "$id": "95",
+     "name": "noTestTypeSpecUrl",
+     "nameInRequest": "noTestTypeSpecUrl",
+     "type": {
+      "$id": "96",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
      },
-     "Location": "Uri",
-     "IsApiVersion": false,
-     "IsResourceParameter": false,
-     "IsContentType": false,
-     "IsRequired": true,
-     "IsEndpoint": true,
-     "SkipUrlEncoding": false,
-     "Explode": false,
-     "Kind": "Client"
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client"
     }
    ],
-   "Decorators": [
-    {
-     "$id": "98",
-     "name": "TypeSpec.@service",
-     "arguments": {
-      "$id": "99",
-      "options": {
-       "$id": "100",
-       "title": "hello world",
-       "version": "0.1.0"
-      }
-     }
-    }
-   ],
-   "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec"
+   "decorators": [],
+   "crossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec"
   }
  ],
- "Auth": {
-  "$id": "101",
-  "ApiKey": {
-   "$id": "102",
-   "Name": "my-api-key",
-   "In": "header"
+ "auth": {
+  "$id": "97",
+  "apiKey": {
+   "$id": "98",
+   "name": "my-api-key",
+   "in": "header"
   }
  }
 }

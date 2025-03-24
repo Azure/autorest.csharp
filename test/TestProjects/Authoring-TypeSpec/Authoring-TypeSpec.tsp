@@ -13,7 +13,9 @@ using Azure.ClientGenerator.Core;
 // NOTE: These features are missing:
 // - Security definition for apiKey
 @versioned(Versions)
-@service
+@service(#{
+  title: "Microsoft Cognitive Language Service - Analyze Text Authoring"
+})
 @server(
   "{Endpoint}/language",
   "Language Service",
@@ -38,7 +40,7 @@ scalar Endpoint extends string;
 // Models
 model Project {
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @segment("projects")
   projectName: string;
 
@@ -61,19 +63,19 @@ model Project {
   language: string;
 
   @doc("Represents the project creation datetime.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdDateTime: utcDateTime;
 
   @doc("Represents the project last modification datetime.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedDateTime: utcDateTime;
 
   @doc("Represents the project last training datetime.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastTrainedDateTime: utcDateTime;
 
   @doc("Represents the project last deployment datetime.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastDeployedDateTime: utcDateTime;
 }
 
@@ -96,7 +98,7 @@ model ProjectSettings is Record<string>;
 @parentResource(Project)
 model Deployment {
   @key("deploymentName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @segment("deployments")
   name: string;
 }
@@ -106,15 +108,15 @@ model Job {
   jobId: string;
 
   @doc("The creation date time of the job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdDateTime: utcDateTime;
 
   @doc("The the last date time the job was updated.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastUpdatedDateTime: utcDateTime;
 
   @doc("The expiration date time of the job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expirationDateTime: utcDateTime;
 
   @doc("The job status.")
@@ -154,7 +156,7 @@ model DeploymentJob {
   ...Job;
 
   @key("jobId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @segment("jobs")
   id: string;
 }
@@ -164,7 +166,7 @@ model SwapDeploymentsJob {
   ...Job;
 
   @key("jobId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @segment("swap/jobs")
   id: string;
 }
