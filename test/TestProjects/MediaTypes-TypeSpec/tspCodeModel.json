@@ -175,36 +175,15 @@
    "name": "MultipleMediaTypesClient",
    "namespace": "MultipleMediaTypes",
    "doc": "Play with produces/consumes and media-types in general.",
-   "parameters": [
-    {
-     "$id": "22",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "type": {
-      "$id": "23",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client"
-    }
-   ],
    "operations": [
     {
-     "$id": "24",
+     "$id": "22",
      "name": "oneBinaryBodyTwoContentTypes",
      "resourceName": "MultipleMediaTypes",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "25",
+       "$id": "23",
        "name": "contentType",
        "nameInRequest": "Content-Type",
        "type": {
@@ -221,11 +200,11 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "26",
+       "$id": "24",
        "name": "body",
        "nameInRequest": "body",
        "type": {
-        "$id": "27",
+        "$id": "25",
         "kind": "bytes",
         "name": "bytes",
         "encode": "base64",
@@ -245,7 +224,7 @@
      ],
      "responses": [
       {
-       "$id": "28",
+       "$id": "26",
        "statusCodes": [
         204
        ],
@@ -267,13 +246,13 @@
      "decorators": []
     },
     {
-     "$id": "29",
+     "$id": "27",
      "name": "oneStringBodyThreeContentTypes",
      "resourceName": "MultipleMediaTypes",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "30",
+       "$id": "28",
        "name": "contentType",
        "nameInRequest": "Content-Type",
        "type": {
@@ -290,11 +269,11 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "31",
+       "$id": "29",
        "name": "body",
        "nameInRequest": "body",
        "type": {
-        "$id": "32",
+        "$id": "30",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -313,7 +292,7 @@
      ],
      "responses": [
       {
-       "$id": "33",
+       "$id": "31",
        "statusCodes": [
         204
        ],
@@ -336,20 +315,20 @@
      "decorators": []
     },
     {
-     "$id": "34",
+     "$id": "32",
      "name": "oneModelBodyOneContentType",
      "resourceName": "MultipleMediaTypes",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "35",
+       "$id": "33",
        "name": "contentType",
        "nameInRequest": "Content-Type",
        "type": {
-        "$id": "36",
+        "$id": "34",
         "kind": "constant",
         "valueType": {
-         "$id": "37",
+         "$id": "35",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -369,7 +348,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "38",
+       "$id": "36",
        "name": "body",
        "nameInRequest": "body",
        "type": {
@@ -388,7 +367,7 @@
      ],
      "responses": [
       {
-       "$id": "39",
+       "$id": "37",
        "statusCodes": [
         204
        ],
@@ -409,9 +388,30 @@
      "decorators": []
     }
    ],
-   "apiVersions": [],
+   "parameters": [
+    {
+     "$id": "38",
+     "name": "endpoint",
+     "nameInRequest": "endpoint",
+     "type": {
+      "$id": "39",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client"
+    }
+   ],
+   "decorators": [],
    "crossLanguageDefinitionId": "MultipleMediaTypes",
-   "decorators": []
+   "apiVersions": []
   }
  ]
 }

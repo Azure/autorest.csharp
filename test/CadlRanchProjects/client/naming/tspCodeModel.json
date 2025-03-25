@@ -294,48 +294,16 @@
    "name": "NamingClient",
    "namespace": "Client.Naming",
    "doc": "Describe changing names of types in a client with `@clientName`",
-   "parameters": [
-    {
-     "$id": "38",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "39",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "40",
-      "type": {
-       "$id": "41",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "http://localhost:3000"
-     }
-    }
-   ],
    "operations": [
     {
-     "$id": "42",
+     "$id": "38",
      "name": "clientName",
      "resourceName": "Naming",
      "accessibility": "public",
      "parameters": [],
      "responses": [
       {
-       "$id": "43",
+       "$id": "39",
        "statusCodes": [
         204
        ],
@@ -353,17 +321,17 @@
      "decorators": []
     },
     {
-     "$id": "44",
+     "$id": "40",
      "name": "parameter",
      "resourceName": "Naming",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "45",
+       "$id": "41",
        "name": "clientName",
        "nameInRequest": "defaultName",
        "type": {
-        "$id": "46",
+        "$id": "42",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -382,7 +350,7 @@
      ],
      "responses": [
       {
-       "$id": "47",
+       "$id": "43",
        "statusCodes": [
         204
        ],
@@ -400,21 +368,21 @@
      "decorators": []
     },
     {
-     "$id": "48",
+     "$id": "44",
      "name": "client",
      "resourceName": "Property",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "49",
+       "$id": "45",
        "name": "contentType",
        "nameInRequest": "Content-Type",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$id": "50",
+        "$id": "46",
         "kind": "constant",
         "valueType": {
-         "$id": "51",
+         "$id": "47",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -434,7 +402,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "52",
+       "$id": "48",
        "name": "body",
        "nameInRequest": "body",
        "type": {
@@ -453,7 +421,7 @@
      ],
      "responses": [
       {
-       "$id": "53",
+       "$id": "49",
        "statusCodes": [
         204
        ],
@@ -474,21 +442,21 @@
      "decorators": []
     },
     {
-     "$id": "54",
+     "$id": "50",
      "name": "language",
      "resourceName": "Property",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "55",
+       "$id": "51",
        "name": "contentType",
        "nameInRequest": "Content-Type",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$id": "56",
+        "$id": "52",
         "kind": "constant",
         "valueType": {
-         "$id": "57",
+         "$id": "53",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -508,7 +476,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "58",
+       "$id": "54",
        "name": "body",
        "nameInRequest": "body",
        "type": {
@@ -527,7 +495,7 @@
      ],
      "responses": [
       {
-       "$id": "59",
+       "$id": "55",
        "statusCodes": [
         204
        ],
@@ -548,21 +516,21 @@
      "decorators": []
     },
     {
-     "$id": "60",
+     "$id": "56",
      "name": "compatibleWithEncodedName",
      "resourceName": "Property",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "61",
+       "$id": "57",
        "name": "contentType",
        "nameInRequest": "Content-Type",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$id": "62",
+        "$id": "58",
         "kind": "constant",
         "valueType": {
-         "$id": "63",
+         "$id": "59",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -582,13 +550,63 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "64",
+       "$id": "60",
        "name": "body",
        "nameInRequest": "body",
        "type": {
         "$ref": "22"
        },
        "location": "Body",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
+      }
+     ],
+     "responses": [
+      {
+       "$id": "61",
+       "statusCodes": [
+        204
+       ],
+       "headers": [],
+       "isErrorResponse": false
+      }
+     ],
+     "httpMethod": "POST",
+     "uri": "{endpoint}",
+     "path": "/client/naming/property/compatible-with-encoded-name",
+     "requestMediaTypes": [
+      "application/json"
+     ],
+     "bufferResponse": true,
+     "generateProtocolMethod": true,
+     "generateConvenienceMethod": true,
+     "crossLanguageDefinitionId": "Client.Naming.Property.compatibleWithEncodedName",
+     "decorators": []
+    },
+    {
+     "$id": "62",
+     "name": "request",
+     "resourceName": "Header",
+     "accessibility": "public",
+     "parameters": [
+      {
+       "$id": "63",
+       "name": "clientName",
+       "nameInRequest": "default-name",
+       "type": {
+        "$id": "64",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+       },
+       "location": "Header",
        "isApiVersion": false,
        "isContentType": false,
        "isEndpoint": false,
@@ -611,56 +629,6 @@
      ],
      "httpMethod": "POST",
      "uri": "{endpoint}",
-     "path": "/client/naming/property/compatible-with-encoded-name",
-     "requestMediaTypes": [
-      "application/json"
-     ],
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "Client.Naming.Property.compatibleWithEncodedName",
-     "decorators": []
-    },
-    {
-     "$id": "66",
-     "name": "request",
-     "resourceName": "Header",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "67",
-       "name": "clientName",
-       "nameInRequest": "default-name",
-       "type": {
-        "$id": "68",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "69",
-       "statusCodes": [
-        204
-       ],
-       "headers": [],
-       "isErrorResponse": false
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
      "path": "/client/naming/header",
      "bufferResponse": true,
      "generateProtocolMethod": true,
@@ -669,24 +637,24 @@
      "decorators": []
     },
     {
-     "$id": "70",
+     "$id": "66",
      "name": "response",
      "resourceName": "Header",
      "accessibility": "public",
      "parameters": [],
      "responses": [
       {
-       "$id": "71",
+       "$id": "67",
        "statusCodes": [
         204
        ],
        "headers": [
         {
-         "$id": "72",
+         "$id": "68",
          "name": "default-name",
          "nameInResponse": "default-name",
          "type": {
-          "$id": "73",
+          "$id": "69",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -707,64 +675,64 @@
      "decorators": []
     }
    ],
-   "apiVersions": [],
-   "crossLanguageDefinitionId": "Client.Naming",
+   "parameters": [
+    {
+     "$id": "70",
+     "name": "endpoint",
+     "nameInRequest": "endpoint",
+     "doc": "Service host",
+     "type": {
+      "$id": "71",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client",
+     "defaultValue": {
+      "$id": "72",
+      "type": {
+       "$id": "73",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "value": "http://localhost:3000"
+     }
+    }
+   ],
    "decorators": [],
+   "crossLanguageDefinitionId": "Client.Naming",
+   "apiVersions": [],
    "children": [
     {
      "$id": "74",
      "kind": "client",
      "name": "ClientModel",
      "namespace": "Client.Naming.Model",
-     "parameters": [
-      {
-       "$id": "75",
-       "name": "endpoint",
-       "nameInRequest": "endpoint",
-       "doc": "Service host",
-       "type": {
-        "$id": "76",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "location": "Uri",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isRequired": true,
-       "isEndpoint": true,
-       "skipUrlEncoding": false,
-       "explode": false,
-       "kind": "Client",
-       "defaultValue": {
-        "$id": "77",
-        "type": {
-         "$id": "78",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "value": "http://localhost:3000"
-       }
-      }
-     ],
      "operations": [
       {
-       "$id": "79",
+       "$id": "75",
        "name": "client",
        "resourceName": "Model",
        "accessibility": "public",
        "parameters": [
         {
-         "$id": "80",
+         "$id": "76",
          "name": "contentType",
          "nameInRequest": "Content-Type",
          "doc": "Body parameter's content type. Known values are application/json",
          "type": {
-          "$id": "81",
+          "$id": "77",
           "kind": "constant",
           "valueType": {
-           "$id": "82",
+           "$id": "78",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -784,7 +752,7 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "83",
+         "$id": "79",
          "name": "body",
          "nameInRequest": "body",
          "type": {
@@ -803,7 +771,7 @@
        ],
        "responses": [
         {
-         "$id": "84",
+         "$id": "80",
          "statusCodes": [
           204
          ],
@@ -824,21 +792,21 @@
        "decorators": []
       },
       {
-       "$id": "85",
+       "$id": "81",
        "name": "language",
        "resourceName": "Model",
        "accessibility": "public",
        "parameters": [
         {
-         "$id": "86",
+         "$id": "82",
          "name": "contentType",
          "nameInRequest": "Content-Type",
          "doc": "Body parameter's content type. Known values are application/json",
          "type": {
-          "$id": "87",
+          "$id": "83",
           "kind": "constant",
           "valueType": {
-           "$id": "88",
+           "$id": "84",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -858,7 +826,7 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "89",
+         "$id": "85",
          "name": "body",
          "nameInRequest": "body",
          "type": {
@@ -877,7 +845,7 @@
        ],
        "responses": [
         {
-         "$id": "90",
+         "$id": "86",
          "statusCodes": [
           204
          ],
@@ -898,26 +866,14 @@
        "decorators": []
       }
      ],
-     "apiVersions": [],
-     "crossLanguageDefinitionId": "Client.Naming.Model",
-     "decorators": [],
-     "parent": {
-      "$ref": "37"
-     }
-    },
-    {
-     "$id": "91",
-     "kind": "client",
-     "name": "UnionEnum",
-     "namespace": "Client.Naming.UnionEnum",
      "parameters": [
       {
-       "$id": "92",
+       "$id": "87",
        "name": "endpoint",
        "nameInRequest": "endpoint",
        "doc": "Service host",
        "type": {
-        "$id": "93",
+        "$id": "88",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -931,9 +887,9 @@
        "explode": false,
        "kind": "Client",
        "defaultValue": {
-        "$id": "94",
+        "$id": "89",
         "type": {
-         "$id": "95",
+         "$id": "90",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -942,22 +898,34 @@
        }
       }
      ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "Client.Naming.Model",
+     "apiVersions": [],
+     "parent": {
+      "$ref": "37"
+     }
+    },
+    {
+     "$id": "91",
+     "kind": "client",
+     "name": "UnionEnum",
+     "namespace": "Client.Naming.UnionEnum",
      "operations": [
       {
-       "$id": "96",
+       "$id": "92",
        "name": "unionEnumName",
        "resourceName": "UnionEnum",
        "accessibility": "public",
        "parameters": [
         {
-         "$id": "97",
+         "$id": "93",
          "name": "contentType",
          "nameInRequest": "Content-Type",
          "type": {
-          "$id": "98",
+          "$id": "94",
           "kind": "constant",
           "valueType": {
-           "$id": "99",
+           "$id": "95",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -977,7 +945,7 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "100",
+         "$id": "96",
          "name": "body",
          "nameInRequest": "body",
          "type": {
@@ -996,7 +964,7 @@
        ],
        "responses": [
         {
-         "$id": "101",
+         "$id": "97",
          "statusCodes": [
           204
          ],
@@ -1017,20 +985,20 @@
        "decorators": []
       },
       {
-       "$id": "102",
+       "$id": "98",
        "name": "unionEnumMemberName",
        "resourceName": "UnionEnum",
        "accessibility": "public",
        "parameters": [
         {
-         "$id": "103",
+         "$id": "99",
          "name": "contentType",
          "nameInRequest": "Content-Type",
          "type": {
-          "$id": "104",
+          "$id": "100",
           "kind": "constant",
           "valueType": {
-           "$id": "105",
+           "$id": "101",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1050,7 +1018,7 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "106",
+         "$id": "102",
          "name": "body",
          "nameInRequest": "body",
          "type": {
@@ -1069,7 +1037,7 @@
        ],
        "responses": [
         {
-         "$id": "107",
+         "$id": "103",
          "statusCodes": [
           204
          ],
@@ -1090,9 +1058,41 @@
        "decorators": []
       }
      ],
-     "apiVersions": [],
-     "crossLanguageDefinitionId": "Client.Naming.UnionEnum",
+     "parameters": [
+      {
+       "$id": "104",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "105",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "106",
+        "type": {
+         "$id": "107",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "value": "http://localhost:3000"
+       }
+      }
+     ],
      "decorators": [],
+     "crossLanguageDefinitionId": "Client.Naming.UnionEnum",
+     "apiVersions": [],
      "parent": {
       "$ref": "37"
      }

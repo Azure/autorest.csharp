@@ -658,41 +658,20 @@
    "name": "NoDocsUnbrandedTypeSpecClient",
    "namespace": "NoDocsUnbrandedTypeSpec",
    "doc": "This is a sample typespec project.",
-   "parameters": [
-    {
-     "$id": "84",
-     "name": "noTestTypeSpecUrl",
-     "nameInRequest": "noTestTypeSpecUrl",
-     "type": {
-      "$id": "85",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client"
-    }
-   ],
    "operations": [
     {
-     "$id": "86",
+     "$id": "84",
      "name": "sayHi",
      "resourceName": "NoDocsUnbrandedTypeSpec",
      "doc": "Return hi",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "87",
+       "$id": "85",
        "name": "headParameter",
        "nameInRequest": "head-parameter",
        "type": {
-        "$id": "88",
+        "$id": "86",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -709,11 +688,11 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "89",
+       "$id": "87",
        "name": "queryParameter",
        "nameInRequest": "queryParameter",
        "type": {
-        "$id": "90",
+        "$id": "88",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -730,11 +709,11 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "91",
+       "$id": "89",
        "name": "optionalQuery",
        "nameInRequest": "optionalQuery",
        "type": {
-        "$id": "92",
+        "$id": "90",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -751,14 +730,14 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "93",
+       "$id": "91",
        "name": "accept",
        "nameInRequest": "Accept",
        "type": {
-        "$id": "94",
+        "$id": "92",
         "kind": "constant",
         "valueType": {
-         "$id": "95",
+         "$id": "93",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -780,7 +759,7 @@
      ],
      "responses": [
       {
-       "$id": "96",
+       "$id": "94",
        "statusCodes": [
         200
        ],
@@ -804,9 +783,30 @@
      "decorators": []
     }
    ],
-   "apiVersions": [],
+   "parameters": [
+    {
+     "$id": "95",
+     "name": "noTestTypeSpecUrl",
+     "nameInRequest": "noTestTypeSpecUrl",
+     "type": {
+      "$id": "96",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client"
+    }
+   ],
+   "decorators": [],
    "crossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec",
-   "decorators": []
+   "apiVersions": []
   }
  ],
  "auth": {

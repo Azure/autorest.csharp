@@ -11,52 +11,20 @@
    "name": "XmsClientRequestIdClient",
    "namespace": "_Azure.SpecialHeaders.XmsClientRequestId",
    "doc": "Azure client request id header configurations.",
-   "parameters": [
-    {
-     "$id": "3",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "4",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "5",
-      "type": {
-       "$id": "6",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "http://localhost:3000"
-     }
-    }
-   ],
    "operations": [
     {
-     "$id": "7",
+     "$id": "3",
      "name": "get",
      "resourceName": "XmsClientRequestId",
      "doc": "Get operation with azure `x-ms-client-request-id` header.",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "8",
+       "$id": "4",
        "name": "clientRequestId",
        "nameInRequest": "x-ms-client-request-id",
        "type": {
-        "$id": "9",
+        "$id": "5",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -75,7 +43,7 @@
      ],
      "responses": [
       {
-       "$id": "10",
+       "$id": "6",
        "statusCodes": [
         204
        ],
@@ -93,9 +61,41 @@
      "decorators": []
     }
    ],
-   "apiVersions": [],
+   "parameters": [
+    {
+     "$id": "7",
+     "name": "endpoint",
+     "nameInRequest": "endpoint",
+     "doc": "Service host",
+     "type": {
+      "$id": "8",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client",
+     "defaultValue": {
+      "$id": "9",
+      "type": {
+       "$id": "10",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "value": "http://localhost:3000"
+     }
+    }
+   ],
+   "decorators": [],
    "crossLanguageDefinitionId": "Azure.SpecialHeaders.XmsClientRequestId",
-   "decorators": []
+   "apiVersions": []
   }
  ]
 }

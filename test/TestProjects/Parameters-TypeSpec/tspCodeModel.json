@@ -88,6 +88,7 @@
    "kind": "client",
    "name": "ParametersTypeSpecClient",
    "namespace": "ParametersTypeSpec",
+   "operations": [],
    "parameters": [
     {
      "$id": "12",
@@ -110,53 +111,30 @@
      "kind": "Client"
     }
    ],
-   "operations": [],
+   "decorators": [],
+   "crossLanguageDefinitionId": "ParametersTypeSpec",
    "apiVersions": [
     "2022-05-15-preview"
    ],
-   "crossLanguageDefinitionId": "ParametersTypeSpec",
-   "decorators": [],
    "children": [
     {
      "$id": "14",
      "kind": "client",
      "name": "ParameterOrders",
      "namespace": "ParametersTypeSpec.ParameterOrders",
-     "parameters": [
-      {
-       "$id": "15",
-       "name": "endpoint",
-       "nameInRequest": "endpoint",
-       "doc": "Service host",
-       "type": {
-        "$id": "16",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "location": "Uri",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isRequired": true,
-       "isEndpoint": true,
-       "skipUrlEncoding": false,
-       "explode": false,
-       "kind": "Client"
-      }
-     ],
      "operations": [
       {
-       "$id": "17",
+       "$id": "15",
        "name": "Operation",
        "resourceName": "ParameterOrders",
        "accessibility": "public",
        "parameters": [
         {
-         "$id": "18",
+         "$id": "16",
          "name": "start",
          "nameInRequest": "start",
          "type": {
-          "$id": "19",
+          "$id": "17",
           "kind": "int32",
           "name": "int32",
           "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -173,11 +151,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "20",
+         "$id": "18",
          "name": "end",
          "nameInRequest": "end",
          "type": {
-          "$id": "21",
+          "$id": "19",
           "kind": "int32",
           "name": "int32",
           "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -194,11 +172,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "22",
+         "$id": "20",
          "name": "apiVersion",
          "nameInRequest": "api-version",
          "type": {
-          "$id": "23",
+          "$id": "21",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -212,9 +190,9 @@
          "isRequired": true,
          "kind": "Client",
          "defaultValue": {
-          "$id": "24",
+          "$id": "22",
           "type": {
-           "$id": "25",
+           "$id": "23",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string"
@@ -225,14 +203,14 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "26",
+         "$id": "24",
          "name": "accept",
          "nameInRequest": "Accept",
          "type": {
-          "$id": "27",
+          "$id": "25",
           "kind": "constant",
           "valueType": {
-           "$id": "28",
+           "$id": "26",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -254,7 +232,7 @@
        ],
        "responses": [
         {
-         "$id": "29",
+         "$id": "27",
          "statusCodes": [
           200
          ],
@@ -278,17 +256,17 @@
        "decorators": []
       },
       {
-       "$id": "30",
+       "$id": "28",
        "name": "Operation2",
        "resourceName": "ParameterOrders",
        "accessibility": "public",
        "parameters": [
         {
-         "$id": "31",
+         "$id": "29",
          "name": "start",
          "nameInRequest": "start",
          "type": {
-          "$id": "32",
+          "$id": "30",
           "kind": "int32",
           "name": "int32",
           "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -305,11 +283,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "33",
+         "$id": "31",
          "name": "end",
          "nameInRequest": "end",
          "type": {
-          "$id": "34",
+          "$id": "32",
           "kind": "int32",
           "name": "int32",
           "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -326,14 +304,14 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "35",
+         "$id": "33",
          "name": "accept",
          "nameInRequest": "Accept",
          "type": {
-          "$id": "36",
+          "$id": "34",
           "kind": "constant",
           "valueType": {
-           "$id": "37",
+           "$id": "35",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -355,7 +333,7 @@
        ],
        "responses": [
         {
-         "$id": "38",
+         "$id": "36",
          "statusCodes": [
           200
          ],
@@ -379,11 +357,33 @@
        "decorators": []
       }
      ],
+     "parameters": [
+      {
+       "$id": "37",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "38",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client"
+      }
+     ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "ParametersTypeSpec.ParameterOrders",
      "apiVersions": [
       "2022-05-15-preview"
      ],
-     "crossLanguageDefinitionId": "ParametersTypeSpec.ParameterOrders",
-     "decorators": [],
      "parent": {
       "$ref": "11"
      }

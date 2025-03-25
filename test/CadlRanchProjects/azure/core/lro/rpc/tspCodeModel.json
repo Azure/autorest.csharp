@@ -667,41 +667,9 @@
    "name": "RpcClient",
    "namespace": "_Azure.Lro.Rpc",
    "doc": "Illustrates bodies templated with Azure Core with long-running RPC operation",
-   "parameters": [
-    {
-     "$id": "85",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "86",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "87",
-      "type": {
-       "$id": "88",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "http://localhost:3000"
-     }
-    }
-   ],
    "operations": [
     {
-     "$id": "89",
+     "$id": "85",
      "name": "longRunningRpc",
      "resourceName": "Rpc",
      "summary": "Generate data.",
@@ -709,12 +677,12 @@
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "90",
+       "$id": "86",
        "name": "apiVersion",
        "nameInRequest": "api-version",
        "doc": "The API version to use for this operation.",
        "type": {
-        "$id": "91",
+        "$id": "87",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -728,9 +696,9 @@
        "isRequired": true,
        "kind": "Client",
        "defaultValue": {
-        "$id": "92",
+        "$id": "88",
         "type": {
-         "$id": "93",
+         "$id": "89",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -741,15 +709,15 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "94",
+       "$id": "90",
        "name": "contentType",
        "nameInRequest": "Content-Type",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$id": "95",
+        "$id": "91",
         "kind": "constant",
         "valueType": {
-         "$id": "96",
+         "$id": "92",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -769,14 +737,14 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "97",
+       "$id": "93",
        "name": "accept",
        "nameInRequest": "Accept",
        "type": {
-        "$id": "98",
+        "$id": "94",
         "kind": "constant",
         "valueType": {
-         "$id": "99",
+         "$id": "95",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -796,7 +764,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "100",
+       "$id": "96",
        "name": "body",
        "nameInRequest": "body",
        "doc": "The body parameter.",
@@ -816,7 +784,7 @@
      ],
      "responses": [
       {
-       "$id": "101",
+       "$id": "97",
        "statusCodes": [
         202
        ],
@@ -825,17 +793,17 @@
        },
        "headers": [
         {
-         "$id": "102",
+         "$id": "98",
          "name": "operationLocation",
          "nameInResponse": "Operation-Location",
          "doc": "The location for monitoring the operation state.",
          "type": {
-          "$id": "103",
+          "$id": "99",
           "kind": "url",
           "name": "ResourceLocation",
           "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
           "baseType": {
-           "$id": "104",
+           "$id": "100",
            "kind": "url",
            "name": "url",
            "crossLanguageDefinitionId": "TypeSpec.url",
@@ -859,10 +827,10 @@
      ],
      "bufferResponse": true,
      "longRunning": {
-      "$id": "105",
+      "$id": "101",
       "finalStateVia": 3,
       "finalResponse": {
-       "$id": "106",
+       "$id": "102",
        "statusCodes": [
         200
        ],
@@ -878,11 +846,43 @@
      "decorators": []
     }
    ],
+   "parameters": [
+    {
+     "$id": "103",
+     "name": "endpoint",
+     "nameInRequest": "endpoint",
+     "doc": "Service host",
+     "type": {
+      "$id": "104",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client",
+     "defaultValue": {
+      "$id": "105",
+      "type": {
+       "$id": "106",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "value": "http://localhost:3000"
+     }
+    }
+   ],
+   "decorators": [],
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc",
    "apiVersions": [
     "2022-12-01-preview"
-   ],
-   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc",
-   "decorators": []
+   ]
   }
  ]
 }
