@@ -1,4 +1,4 @@
 variables:
   # Indicates the node version to use
-  - name: NodeVersion
+  - name: NODE_VERSION
     value: '20.x'

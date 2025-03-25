@@ -38,7 +38,7 @@ extends:
               - task: UseNode@1
                 displayName: 'Install Node.js'
                 inputs:
-                  version: $(NodeVersion)
+                  version: $(NODE_VERSION)
               - ${{ if eq(parameters.UseTypeSpecNext, 'true') }}:
                 - pwsh: ./eng/UseTypeSpecNextVersions.ps1
                   displayName: "Use 'next' TypeSpec dependencies"

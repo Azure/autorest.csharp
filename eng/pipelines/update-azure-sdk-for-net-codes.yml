@@ -1,9 +1,6 @@
 # Generate SDK codes
 
 parameters:
-  - name: NodeVersion
-    type: string
-    default: '20.x'
   - name: Name
     type: string
   - name: AutorestCSharpVersion
@@ -52,7 +49,7 @@ jobs:
   - task: UseNode@1
     displayName: 'Install Node.js'
     inputs:
-      version: $(NodeVersion)
+      version: $(NODE_VERSION)
   - task: Powershell@2
     displayName: Update SDK codes
     inputs:
