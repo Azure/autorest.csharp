@@ -36,6 +36,7 @@
         "azure/resource-manager/common-properties",
         "azure/resource-manager/non-resource",
         "azure/special-headers/client-request-id",
+        "azure/encode/duration",
         "encode/bytes",
         "encode/datetime",
         "encode/duration",
