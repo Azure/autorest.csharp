@@ -26,6 +26,7 @@ export interface AzureCSharpEmitterOptions extends CSharpEmitterOptions {
     "generate-test-project"?: boolean;
     "use-model-reader-writer"?: boolean;
     "library-name"?: string;
+    "examples-dir"?: string;
 }
 
 export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterOptions> =
@@ -87,7 +88,8 @@ export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterO
             },
             "use-model-reader-writer": { type: "boolean", nullable: true },
             namespace: { type: "string", nullable: true },
-            "library-name": { type: "string", nullable: true }
+            "library-name": { type: "string", nullable: true },
+            "examples-dir": { type: "string", nullable: true }
         },
         required: []
     };
@@ -108,7 +110,8 @@ const defaultAzureEmitterOptions = {
     "use-model-reader-writer": true,
     "single-top-level-client": undefined,
     "keep-non-overloadable-protocol-signature": undefined,
-    "library-name": undefined
+    "library-name": undefined,
+    "examples-dir": undefined
 };
 
 export function resolveAzureEmitterOptions(
@@ -166,6 +169,9 @@ export function resolveAzureEmitterOptions(
                 "keep-non-overloadable-protocol-signature"
             ],
         namespace: context.options.namespace,
-        "library-name": context.options["package-name"]
+        "library-name": context.options["package-name"],
+        "examples-dir":
+            context.options["examples-dir"] ??
+            defaultAzureEmitterOptions["examples-dir"]
     };
 }
