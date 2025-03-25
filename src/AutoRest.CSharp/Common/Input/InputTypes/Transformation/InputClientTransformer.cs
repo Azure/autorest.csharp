@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Common.Input
     {
         public static void Transform(InputNamespace input)
         {
-            foreach (var client in input.Clients)
+            foreach (var client in input.EnumerateClients())
             {
                 RemoveInternalOperationFromInputClient(client);
                 UpdateSubscriptionId(client);
