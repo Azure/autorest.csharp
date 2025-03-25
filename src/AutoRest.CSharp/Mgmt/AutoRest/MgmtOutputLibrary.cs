@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _input = inputNamespace;
 
             // For TypeSpec input, we need to filter out the client that has no operations
-            _inputClients = _input.Clients.Where(c => c.Operations.Count > 0);
+            _inputClients = _input.EnumerateClients().Where(c => c.Operations.Count > 0);
 
             // these dictionaries are initialized right now and they would not change later
             RawRequestPathToOperationSets = CategorizeOperationGroups();
