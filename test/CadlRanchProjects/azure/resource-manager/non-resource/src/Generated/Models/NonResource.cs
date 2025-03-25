@@ -51,9 +51,9 @@ namespace _Azure.ResourceManager.NonResources.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="NonResource"/>. </summary>
-        /// <param name="id"> The identification of the result. </param>
-        /// <param name="name"> The name of the result. </param>
-        /// <param name="type"> The result resource type. </param>
+        /// <param name="id"> An id. </param>
+        /// <param name="name"> A name. </param>
+        /// <param name="type"> A type. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal NonResource(string id, string name, string type, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -63,11 +63,11 @@ namespace _Azure.ResourceManager.NonResources.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The identification of the result. </summary>
+        /// <summary> An id. </summary>
         public string Id { get; set; }
-        /// <summary> The name of the result. </summary>
+        /// <summary> A name. </summary>
         public string Name { get; set; }
-        /// <summary> The result resource type. </summary>
+        /// <summary> A type. </summary>
         public string Type { get; set; }
     }
 }

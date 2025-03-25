@@ -74,7 +74,7 @@ namespace _Azure.ResourceManager.NonResources
         /// <summary> Get. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="location"> The location parameter. </param>
-        /// <param name="parameter"> The cluster code version. </param>
+        /// <param name="parameter"> Another parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="parameter"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="parameter"/> is an empty string, and was expected to be non-empty. </exception>
@@ -103,7 +103,7 @@ namespace _Azure.ResourceManager.NonResources
         /// <summary> Get. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="location"> The location parameter. </param>
-        /// <param name="parameter"> The cluster code version. </param>
+        /// <param name="parameter"> Another parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="parameter"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="parameter"/> is an empty string, and was expected to be non-empty. </exception>
@@ -170,7 +170,7 @@ namespace _Azure.ResourceManager.NonResources
         /// <summary> Create. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="location"> The location parameter. </param>
-        /// <param name="parameter"> The cluster code version. </param>
+        /// <param name="parameter"> Another parameter. </param>
         /// <param name="body"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="parameter"/> or <paramref name="body"/> is null. </exception>
@@ -201,7 +201,7 @@ namespace _Azure.ResourceManager.NonResources
         /// <summary> Create. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="location"> The location parameter. </param>
-        /// <param name="parameter"> The cluster code version. </param>
+        /// <param name="parameter"> Another parameter. </param>
         /// <param name="body"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="parameter"/> or <paramref name="body"/> is null. </exception>

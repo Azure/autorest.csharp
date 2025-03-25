@@ -61,7 +61,7 @@ namespace _Azure.ResourceManager.NonResources.Mocking
         /// </list>
         /// </summary>
         /// <param name="location"> The location parameter. </param>
-        /// <param name="parameter"> The cluster code version. </param>
+        /// <param name="parameter"> Another parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="parameter"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameter"/> is null. </exception>
@@ -102,7 +102,7 @@ namespace _Azure.ResourceManager.NonResources.Mocking
         /// </list>
         /// </summary>
         /// <param name="location"> The location parameter. </param>
-        /// <param name="parameter"> The cluster code version. </param>
+        /// <param name="parameter"> Another parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="parameter"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameter"/> is null. </exception>
@@ -143,7 +143,7 @@ namespace _Azure.ResourceManager.NonResources.Mocking
         /// </list>
         /// </summary>
         /// <param name="location"> The location parameter. </param>
-        /// <param name="parameter"> The cluster code version. </param>
+        /// <param name="parameter"> Another parameter. </param>
         /// <param name="body"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="parameter"/> is an empty string, and was expected to be non-empty. </exception>
@@ -186,7 +186,7 @@ namespace _Azure.ResourceManager.NonResources.Mocking
         /// </list>
         /// </summary>
         /// <param name="location"> The location parameter. </param>
-        /// <param name="parameter"> The cluster code version. </param>
+        /// <param name="parameter"> Another parameter. </param>
         /// <param name="body"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="parameter"/> is an empty string, and was expected to be non-empty. </exception>
