@@ -430,6 +430,7 @@
  "clients": [
   {
    "$id": "60",
+   "kind": "client",
    "name": "AzureExampleClient",
    "namespace": "AzureExampleBasicClient",
    "operations": [
@@ -803,7 +804,10 @@
     }
    ],
    "decorators": [],
-   "crossLanguageDefinitionId": "AzureExampleBasicClient.AzureExampleClient"
+   "crossLanguageDefinitionId": "AzureExampleBasicClient.AzureExampleClient",
+   "apiVersions": [
+    "2022-12-01-preview"
+   ]
   }
  ]
 }

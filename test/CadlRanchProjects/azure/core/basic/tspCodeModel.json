@@ -389,6 +389,7 @@
  "clients": [
   {
    "$id": "52",
+   "kind": "client",
    "name": "BasicClient",
    "namespace": "_Specs_.Azure.Core.Basic",
    "doc": "Illustrates bodies templated with Azure Core",
@@ -1540,7 +1541,10 @@
     }
    ],
    "decorators": [],
-   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Basic"
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Basic",
+   "apiVersions": [
+    "2022-12-01-preview"
+   ]
   }
  ]
 }

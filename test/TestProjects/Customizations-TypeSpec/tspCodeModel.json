@@ -1569,6 +1569,7 @@
  "clients": [
   {
    "$id": "211",
+   "kind": "client",
    "name": "CustomizationsInTspClient",
    "namespace": "CustomizationsInTsp",
    "doc": "TypeSpec project to test various types of models.",
@@ -1921,7 +1922,8 @@
     }
    ],
    "decorators": [],
-   "crossLanguageDefinitionId": "CustomizationsInTsp"
+   "crossLanguageDefinitionId": "CustomizationsInTsp",
+   "apiVersions": []
   }
  ]
 }

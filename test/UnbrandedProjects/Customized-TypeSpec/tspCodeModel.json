@@ -968,6 +968,7 @@
  "clients": [
   {
    "$id": "124",
+   "kind": "client",
    "name": "CustomizedTypeSpecClient",
    "namespace": "CustomizedTypeSpec",
    "doc": "This is a sample typespec project.",
@@ -2675,7 +2676,10 @@
     }
    ],
    "decorators": [],
-   "crossLanguageDefinitionId": "CustomizedTypeSpec"
+   "crossLanguageDefinitionId": "CustomizedTypeSpec",
+   "apiVersions": [
+    "2022-05-15-preview"
+   ]
   }
  ],
  "auth": {

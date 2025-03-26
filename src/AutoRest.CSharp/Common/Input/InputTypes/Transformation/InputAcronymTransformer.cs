@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Common.Input
             UpdateAcronyms(input.Models);
             UpdateAcronyms(input.Enums);
             // transform all the parameter names
-            UpdateAcronyms(input.Clients);
+            UpdateAcronyms(input.AllClients);
         }
 
 
