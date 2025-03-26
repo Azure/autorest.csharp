@@ -6,13 +6,32 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputNamespace(string Name, IReadOnlyList<string> ApiVersions, IReadOnlyList<InputEnumType> Enums, IReadOnlyList<InputModelType> Models, IReadOnlyList<InputClient> Clients, InputAuth Auth)
+internal record InputNamespace
 {
-    public InputNamespace() : this(Name: string.Empty, ApiVersions: Array.Empty<string>(), Enums: Array.Empty<InputEnumType>(), Models: Array.Empty<InputModelType>(), Clients: Array.Empty<InputClient>(), Auth: new InputAuth()) { }
+    public string Name { get; init; }
+    public IReadOnlyList<string> ApiVersions { get; init; }
+    public IReadOnlyList<InputEnumType> Enums { get; init; }
+    public IReadOnlyList<InputModelType> Models { get; init; }
+    private IReadOnlyList<InputClient> Clients { get; init; } // we should not be using this because this only contains the top level clients
+    public InputAuth Auth { get; init; }
+    public IReadOnlyList<InputClient> AllClients { get; init; }
 
-    public IEnumerable<InputClient> EnumerateClients()
+    public InputNamespace(string name, IReadOnlyList<string> apiVersions, IReadOnlyList<InputEnumType> enums, IReadOnlyList<InputModelType> models, IReadOnlyList<InputClient> clients, InputAuth auth)
     {
-        var queue = new Queue<InputClient>(Clients);
+        Name = name;
+        ApiVersions = apiVersions;
+        Enums = enums;
+        Models = models;
+        Clients = clients;
+        Auth = auth;
+        AllClients = EnumerateClients(clients);
+    }
+
+    public InputNamespace() : this(name: string.Empty, apiVersions: Array.Empty<string>(), enums: Array.Empty<InputEnumType>(), models: Array.Empty<InputModelType>(), clients: Array.Empty<InputClient>(), auth: new InputAuth()) { }
+
+    private static IReadOnlyList<InputClient> EnumerateClients(IEnumerable<InputClient> clients)
+    {
+        var queue = new Queue<InputClient>(clients);
         var allClients = new List<InputClient>();
 
         while (queue.Count > 0)

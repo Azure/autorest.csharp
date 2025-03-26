@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public DpgOutputLibrary Build(bool isTspInput)
         {
-            var inputClients = UpdateOperations(_rootNamespace.EnumerateClients()).ToList();
+            var inputClients = UpdateOperations(_rootNamespace.AllClients).ToList();
 
             var clientInfosByName = inputClients
                 .Select(og => CreateClientInfo(og, _sourceInputModel, _rootNamespace.Name))
