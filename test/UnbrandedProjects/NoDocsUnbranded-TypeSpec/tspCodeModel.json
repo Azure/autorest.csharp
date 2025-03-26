@@ -654,6 +654,7 @@
  "clients": [
   {
    "$id": "83",
+   "kind": "client",
    "name": "NoDocsUnbrandedTypeSpecClient",
    "namespace": "NoDocsUnbrandedTypeSpec",
    "doc": "This is a sample typespec project.",
@@ -816,7 +817,8 @@
      }
     }
    ],
-   "crossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec"
+   "crossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec",
+   "apiVersions": []
   }
  ],
  "auth": {

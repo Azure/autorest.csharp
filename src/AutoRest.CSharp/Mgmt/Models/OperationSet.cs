@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         public bool IsNonResourceOperations(InputNamespace? inputNamespace)
         {
             // We use decorator @service to tell if it is a TypeSpec input
-            bool isTsp = inputNamespace?.Clients.FirstOrDefault(c => c.Decorators.Any(d => d.Name == "TypeSpec.@service")) != null;
+            bool isTsp = inputNamespace?.AllClients.FirstOrDefault(c => c.Decorators.Any(d => d.Name == "TypeSpec.@service")) != null;
             // If swagger input, we don't use this operation to check if it is a non resource operation
             if (!isTsp)
                 return false;

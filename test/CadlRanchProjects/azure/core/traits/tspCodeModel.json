@@ -251,6 +251,7 @@
  "clients": [
   {
    "$id": "31",
+   "kind": "client",
    "name": "TraitsClient",
    "namespace": "_Specs_.Azure.Core.Traits",
    "doc": "Illustrates Azure Core operation customizations by traits",
@@ -829,7 +830,10 @@
     }
    ],
    "decorators": [],
-   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits"
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits",
+   "apiVersions": [
+    "2022-12-01-preview"
+   ]
   }
  ]
 }

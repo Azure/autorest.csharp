@@ -171,6 +171,7 @@
  "clients": [
   {
    "$id": "21",
+   "kind": "client",
    "name": "MultipleMediaTypesClient",
    "namespace": "MultipleMediaTypes",
    "doc": "Play with produces/consumes and media-types in general.",
@@ -421,7 +422,8 @@
      }
     }
    ],
-   "crossLanguageDefinitionId": "MultipleMediaTypes"
+   "crossLanguageDefinitionId": "MultipleMediaTypes",
+   "apiVersions": []
   }
  ]
 }

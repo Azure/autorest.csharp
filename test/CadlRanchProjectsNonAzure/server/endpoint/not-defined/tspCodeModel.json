@@ -7,6 +7,7 @@
  "clients": [
   {
    "$id": "2",
+   "kind": "client",
    "name": "NotDefinedClient",
    "namespace": "Scm.Server.Endpoint.NotDefined",
    "doc": "Illustrates server doesn't define endpoint. Client should automatically add an endpoint to let user pass in.",
@@ -72,7 +73,8 @@
      }
     }
    ],
-   "crossLanguageDefinitionId": "Server.Endpoint.NotDefined"
+   "crossLanguageDefinitionId": "Server.Endpoint.NotDefined",
+   "apiVersions": []
   }
  ]
 }

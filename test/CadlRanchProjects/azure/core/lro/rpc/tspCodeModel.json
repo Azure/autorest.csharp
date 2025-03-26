@@ -663,6 +663,7 @@
  "clients": [
   {
    "$id": "84",
+   "kind": "client",
    "name": "RpcClient",
    "namespace": "_Azure.Lro.Rpc",
    "doc": "Illustrates bodies templated with Azure Core with long-running RPC operation",
@@ -878,7 +879,10 @@
     }
    ],
    "decorators": [],
-   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc"
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc",
+   "apiVersions": [
+    "2022-12-01-preview"
+   ]
   }
  ]
 }

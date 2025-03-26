@@ -743,6 +743,7 @@
  "clients": [
   {
    "$id": "97",
+   "kind": "client",
    "name": "PageClient",
    "namespace": "_Specs_.Azure.Core.Page",
    "doc": "Illustrates bodies templated with Azure Core with paging support",
@@ -1163,259 +1164,270 @@
     }
    ],
    "decorators": [],
-   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page"
-  },
-  {
-   "$id": "140",
-   "name": "TwoModelsAsPageItem",
-   "namespace": "_Specs_.Azure.Core.Page",
-   "operations": [
-    {
-     "$id": "141",
-     "name": "listFirstItem",
-     "resourceName": "TwoModelsAsPageItem",
-     "doc": "Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "142",
-       "name": "apiVersion",
-       "nameInRequest": "api-version",
-       "doc": "The API version to use for this operation.",
-       "type": {
-        "$id": "143",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Query",
-       "isApiVersion": true,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Client",
-       "defaultValue": {
-        "$id": "144",
-        "type": {
-         "$id": "145",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "value": "2022-12-01-preview"
-       },
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "146",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "147",
-        "kind": "constant",
-        "valueType": {
-         "$id": "148",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "149",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "77"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "GET",
-     "uri": "{endpoint}",
-     "path": "/azure/core/page/first-item",
-     "bufferResponse": true,
-     "paging": {
-      "$id": "150",
-      "itemPropertySegments": [
-       "value"
-      ],
-      "nextLink": {
-       "$id": "151",
-       "responseSegments": [
-        "nextLink"
-       ],
-       "responseLocation": "Body"
-      }
-     },
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.TwoModelsAsPageItem.listFirstItem",
-     "decorators": []
-    },
-    {
-     "$id": "152",
-     "name": "listSecondItem",
-     "resourceName": "TwoModelsAsPageItem",
-     "doc": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "153",
-       "name": "apiVersion",
-       "nameInRequest": "api-version",
-       "doc": "The API version to use for this operation.",
-       "type": {
-        "$id": "154",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Query",
-       "isApiVersion": true,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Client",
-       "defaultValue": {
-        "$id": "155",
-        "type": {
-         "$id": "156",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "value": "2022-12-01-preview"
-       },
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "157",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "158",
-        "kind": "constant",
-        "valueType": {
-         "$id": "159",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "160",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "87"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "GET",
-     "uri": "{endpoint}",
-     "path": "/azure/core/page/second-item",
-     "bufferResponse": true,
-     "paging": {
-      "$id": "161",
-      "itemPropertySegments": [
-       "value"
-      ],
-      "nextLink": {
-       "$id": "162",
-       "responseSegments": [
-        "nextLink"
-       ],
-       "responseLocation": "Body"
-      }
-     },
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.TwoModelsAsPageItem.listSecondItem",
-     "decorators": []
-    }
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page",
+   "apiVersions": [
+    "2022-12-01-preview"
    ],
-   "parent": "PageClient",
-   "parameters": [
+   "children": [
     {
-     "$id": "163",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "164",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "165",
-      "type": {
-       "$id": "166",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
+     "$id": "140",
+     "kind": "client",
+     "name": "TwoModelsAsPageItem",
+     "namespace": "_Specs_.Azure.Core.Page",
+     "operations": [
+      {
+       "$id": "141",
+       "name": "listFirstItem",
+       "resourceName": "TwoModelsAsPageItem",
+       "doc": "Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "142",
+         "name": "apiVersion",
+         "nameInRequest": "api-version",
+         "doc": "The API version to use for this operation.",
+         "type": {
+          "$id": "143",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "location": "Query",
+         "isApiVersion": true,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Client",
+         "defaultValue": {
+          "$id": "144",
+          "type": {
+           "$id": "145",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string"
+          },
+          "value": "2022-12-01-preview"
+         },
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "146",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "147",
+          "kind": "constant",
+          "valueType": {
+           "$id": "148",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "149",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "77"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "GET",
+       "uri": "{endpoint}",
+       "path": "/azure/core/page/first-item",
+       "bufferResponse": true,
+       "paging": {
+        "$id": "150",
+        "itemPropertySegments": [
+         "value"
+        ],
+        "nextLink": {
+         "$id": "151",
+         "responseSegments": [
+          "nextLink"
+         ],
+         "responseLocation": "Body"
+        }
+       },
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.TwoModelsAsPageItem.listFirstItem",
+       "decorators": []
       },
-      "value": "http://localhost:3000"
+      {
+       "$id": "152",
+       "name": "listSecondItem",
+       "resourceName": "TwoModelsAsPageItem",
+       "doc": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "153",
+         "name": "apiVersion",
+         "nameInRequest": "api-version",
+         "doc": "The API version to use for this operation.",
+         "type": {
+          "$id": "154",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "location": "Query",
+         "isApiVersion": true,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Client",
+         "defaultValue": {
+          "$id": "155",
+          "type": {
+           "$id": "156",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string"
+          },
+          "value": "2022-12-01-preview"
+         },
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "157",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "158",
+          "kind": "constant",
+          "valueType": {
+           "$id": "159",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "160",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "87"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "GET",
+       "uri": "{endpoint}",
+       "path": "/azure/core/page/second-item",
+       "bufferResponse": true,
+       "paging": {
+        "$id": "161",
+        "itemPropertySegments": [
+         "value"
+        ],
+        "nextLink": {
+         "$id": "162",
+         "responseSegments": [
+          "nextLink"
+         ],
+         "responseLocation": "Body"
+        }
+       },
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.TwoModelsAsPageItem.listSecondItem",
+       "decorators": []
+      }
+     ],
+     "parameters": [
+      {
+       "$id": "163",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "164",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "165",
+        "type": {
+         "$id": "166",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "value": "http://localhost:3000"
+       }
+      }
+     ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.TwoModelsAsPageItem",
+     "apiVersions": [
+      "2022-12-01-preview"
+     ],
+     "parent": {
+      "$ref": "97"
      }
     }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.TwoModelsAsPageItem"
+   ]
   }
  ]
 }

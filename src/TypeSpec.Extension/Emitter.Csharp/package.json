@@ -35,7 +35,7 @@
     ],
     "dependencies": {
         "@autorest/csharp": "3.0.0-beta.20240625.4",
-        "@typespec/http-client-csharp": "1.0.0-alpha.20250324.1"
+        "@typespec/http-client-csharp": "1.0.0-alpha.20250325.1"
     },
     "peerDependencies": {
         "@azure-tools/typespec-azure-core": ">=0.53.0 <1.0.0",
@@ -56,7 +56,7 @@
     },
     "devDependencies": {
         "@azure-tools/typespec-azure-core": "0.53.0",
-        "@azure-tools/typespec-client-generator-core": "0.53.0",
+        "@azure-tools/typespec-client-generator-core": "0.53.1",
         "@azure-tools/typespec-azure-resource-manager": "0.53.0",
         "@azure-tools/typespec-azure-rulesets": "0.53.0",
         "@azure-tools/typespec-autorest": "0.53.0",
@@ -65,7 +65,7 @@
         "@types/mocha": "~10.0.9",
         "@types/node": "~22.7.9",
         "@types/prettier": "^2.6.3",
-        "@typespec/compiler": "0.67.1",
+        "@typespec/compiler": "0.67.2",
         "@typespec/events": "0.67.1",
         "@typespec/http": "0.67.1",
         "@typespec/library-linter": "0.67.1",

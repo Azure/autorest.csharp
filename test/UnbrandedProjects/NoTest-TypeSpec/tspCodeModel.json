@@ -694,6 +694,7 @@
  "clients": [
   {
    "$id": "88",
+   "kind": "client",
    "name": "NoTestTypeSpecClient",
    "namespace": "NoTestTypeSpec",
    "doc": "This is a sample typespec project.",
@@ -964,7 +965,8 @@
      }
     }
    ],
-   "crossLanguageDefinitionId": "NoTestTypeSpec"
+   "crossLanguageDefinitionId": "NoTestTypeSpec",
+   "apiVersions": []
   }
  ],
  "auth": {

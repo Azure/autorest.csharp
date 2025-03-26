@@ -10582,6 +10582,7 @@
  "clients": [
   {
    "$id": "1420",
+   "kind": "client",
    "name": "OpenAIClient",
    "namespace": "OpenAI",
    "doc": "The OpenAI REST API. Please see https://platform.openai.com/docs/api-reference for more details.",
@@ -10631,3290 +10632,3359 @@
      }
     }
    ],
-   "crossLanguageDefinitionId": "OpenAI"
-  },
-  {
-   "$id": "1428",
-   "name": "Audio",
-   "namespace": "OpenAI.Audio",
-   "operations": [],
-   "parent": "OpenAIClient",
-   "parameters": [
+   "crossLanguageDefinitionId": "OpenAI",
+   "apiVersions": [],
+   "children": [
     {
-     "$id": "1429",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "1430",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
+     "$id": "1428",
+     "kind": "client",
+     "name": "Audio",
+     "namespace": "OpenAI.Audio",
+     "operations": [],
+     "parameters": [
+      {
+       "$id": "1429",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "1430",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "1431",
+        "type": {
+         "$id": "1432",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "value": "https://api.openai.com/v1"
+       }
+      }
+     ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "OpenAI.Audio",
+     "apiVersions": [],
+     "parent": {
+      "$ref": "1420"
      },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "1431",
-      "type": {
-       "$id": "1432",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
+     "children": [
+      {
+       "$id": "1433",
+       "kind": "client",
+       "name": "Transcriptions",
+       "namespace": "OpenAI.Audio",
+       "operations": [
+        {
+         "$id": "1434",
+         "name": "create",
+         "resourceName": "Transcriptions",
+         "summary": "Transcribes audio into the input language.",
+         "accessibility": "public",
+         "parameters": [
+          {
+           "$id": "1435",
+           "name": "contentType",
+           "nameInRequest": "Content-Type",
+           "type": {
+            "$id": "1436",
+            "kind": "constant",
+            "valueType": {
+             "$id": "1437",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "multipart/form-data",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": true,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "1438",
+           "name": "accept",
+           "nameInRequest": "Accept",
+           "type": {
+            "$id": "1439",
+            "kind": "constant",
+            "valueType": {
+             "$id": "1440",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "application/json",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "1441",
+           "name": "audio",
+           "nameInRequest": "audio",
+           "type": {
+            "$ref": "1392"
+           },
+           "location": "Body",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Method",
+           "decorators": [],
+           "skipUrlEncoding": false
+          }
+         ],
+         "responses": [
+          {
+           "$id": "1442",
+           "statusCodes": [
+            200
+           ],
+           "bodyType": {
+            "$ref": "1415"
+           },
+           "headers": [],
+           "isErrorResponse": false,
+           "contentTypes": [
+            "application/json"
+           ]
+          }
+         ],
+         "httpMethod": "POST",
+         "uri": "{endpoint}",
+         "path": "/audio/transcriptions",
+         "requestMediaTypes": [
+          "multipart/form-data"
+         ],
+         "bufferResponse": true,
+         "generateProtocolMethod": true,
+         "generateConvenienceMethod": true,
+         "crossLanguageDefinitionId": "OpenAI.Audio.Transcriptions.create",
+         "decorators": []
+        }
+       ],
+       "parameters": [
+        {
+         "$id": "1443",
+         "name": "endpoint",
+         "nameInRequest": "endpoint",
+         "doc": "Service host",
+         "type": {
+          "$id": "1444",
+          "kind": "url",
+          "name": "url",
+          "crossLanguageDefinitionId": "TypeSpec.url"
+         },
+         "location": "Uri",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isRequired": true,
+         "isEndpoint": true,
+         "skipUrlEncoding": false,
+         "explode": false,
+         "kind": "Client",
+         "defaultValue": {
+          "$id": "1445",
+          "type": {
+           "$id": "1446",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string"
+          },
+          "value": "https://api.openai.com/v1"
+         }
+        }
+       ],
+       "decorators": [],
+       "crossLanguageDefinitionId": "OpenAI.Audio.Transcriptions",
+       "apiVersions": [],
+       "parent": {
+        "$ref": "1428"
+       }
       },
-      "value": "https://api.openai.com/v1"
+      {
+       "$id": "1447",
+       "kind": "client",
+       "name": "Translations",
+       "namespace": "OpenAI.Audio",
+       "operations": [
+        {
+         "$id": "1448",
+         "name": "create",
+         "resourceName": "Translations",
+         "summary": "Transcribes audio into the input language.",
+         "accessibility": "public",
+         "parameters": [
+          {
+           "$id": "1449",
+           "name": "contentType",
+           "nameInRequest": "Content-Type",
+           "type": {
+            "$id": "1450",
+            "kind": "constant",
+            "valueType": {
+             "$id": "1451",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "multipart/form-data",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": true,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "1452",
+           "name": "accept",
+           "nameInRequest": "Accept",
+           "type": {
+            "$id": "1453",
+            "kind": "constant",
+            "valueType": {
+             "$id": "1454",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "application/json",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "1455",
+           "name": "audio",
+           "nameInRequest": "audio",
+           "type": {
+            "$ref": "1368"
+           },
+           "location": "Body",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Method",
+           "decorators": [],
+           "skipUrlEncoding": false
+          }
+         ],
+         "responses": [
+          {
+           "$id": "1456",
+           "statusCodes": [
+            200
+           ],
+           "bodyType": {
+            "$ref": "1387"
+           },
+           "headers": [],
+           "isErrorResponse": false,
+           "contentTypes": [
+            "application/json"
+           ]
+          }
+         ],
+         "httpMethod": "POST",
+         "uri": "{endpoint}",
+         "path": "/audio/translations",
+         "requestMediaTypes": [
+          "multipart/form-data"
+         ],
+         "bufferResponse": true,
+         "generateProtocolMethod": true,
+         "generateConvenienceMethod": true,
+         "crossLanguageDefinitionId": "OpenAI.Audio.Translations.create",
+         "decorators": []
+        }
+       ],
+       "parameters": [
+        {
+         "$id": "1457",
+         "name": "endpoint",
+         "nameInRequest": "endpoint",
+         "doc": "Service host",
+         "type": {
+          "$id": "1458",
+          "kind": "url",
+          "name": "url",
+          "crossLanguageDefinitionId": "TypeSpec.url"
+         },
+         "location": "Uri",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isRequired": true,
+         "isEndpoint": true,
+         "skipUrlEncoding": false,
+         "explode": false,
+         "kind": "Client",
+         "defaultValue": {
+          "$id": "1459",
+          "type": {
+           "$id": "1460",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string"
+          },
+          "value": "https://api.openai.com/v1"
+         }
+        }
+       ],
+       "decorators": [],
+       "crossLanguageDefinitionId": "OpenAI.Audio.Translations",
+       "apiVersions": [],
+       "parent": {
+        "$ref": "1428"
+       }
+      }
+     ]
+    },
+    {
+     "$id": "1461",
+     "kind": "client",
+     "name": "Chat",
+     "namespace": "OpenAI.Chat",
+     "operations": [],
+     "parameters": [
+      {
+       "$id": "1462",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "1463",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "1464",
+        "type": {
+         "$id": "1465",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "value": "https://api.openai.com/v1"
+       }
+      }
+     ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "OpenAI.Chat",
+     "apiVersions": [],
+     "parent": {
+      "$ref": "1420"
+     },
+     "children": [
+      {
+       "$id": "1466",
+       "kind": "client",
+       "name": "Completions",
+       "namespace": "OpenAI.Chat",
+       "operations": [
+        {
+         "$id": "1467",
+         "name": "create",
+         "resourceName": "Completions",
+         "accessibility": "public",
+         "parameters": [
+          {
+           "$id": "1468",
+           "name": "contentType",
+           "nameInRequest": "Content-Type",
+           "doc": "Body parameter's content type. Known values are application/json",
+           "type": {
+            "$id": "1469",
+            "kind": "constant",
+            "valueType": {
+             "$id": "1470",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "application/json",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": true,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "1471",
+           "name": "accept",
+           "nameInRequest": "Accept",
+           "type": {
+            "$id": "1472",
+            "kind": "constant",
+            "valueType": {
+             "$id": "1473",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "application/json",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "1474",
+           "name": "createChatCompletionRequest",
+           "nameInRequest": "createChatCompletionRequest",
+           "type": {
+            "$ref": "1259"
+           },
+           "location": "Body",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Spread",
+           "decorators": [],
+           "skipUrlEncoding": false
+          }
+         ],
+         "responses": [
+          {
+           "$id": "1475",
+           "statusCodes": [
+            200
+           ],
+           "bodyType": {
+            "$ref": "1311"
+           },
+           "headers": [],
+           "isErrorResponse": false,
+           "contentTypes": [
+            "application/json"
+           ]
+          }
+         ],
+         "httpMethod": "POST",
+         "uri": "{endpoint}",
+         "path": "/chat/completions",
+         "requestMediaTypes": [
+          "application/json"
+         ],
+         "bufferResponse": true,
+         "generateProtocolMethod": true,
+         "generateConvenienceMethod": true,
+         "crossLanguageDefinitionId": "OpenAI.Chat.Completions.create",
+         "decorators": []
+        }
+       ],
+       "parameters": [
+        {
+         "$id": "1476",
+         "name": "endpoint",
+         "nameInRequest": "endpoint",
+         "doc": "Service host",
+         "type": {
+          "$id": "1477",
+          "kind": "url",
+          "name": "url",
+          "crossLanguageDefinitionId": "TypeSpec.url"
+         },
+         "location": "Uri",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isRequired": true,
+         "isEndpoint": true,
+         "skipUrlEncoding": false,
+         "explode": false,
+         "kind": "Client",
+         "defaultValue": {
+          "$id": "1478",
+          "type": {
+           "$id": "1479",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string"
+          },
+          "value": "https://api.openai.com/v1"
+         }
+        }
+       ],
+       "decorators": [],
+       "crossLanguageDefinitionId": "OpenAI.Chat.Completions",
+       "apiVersions": [],
+       "parent": {
+        "$ref": "1461"
+       }
+      }
+     ]
+    },
+    {
+     "$id": "1480",
+     "kind": "client",
+     "name": "FineTuning",
+     "namespace": "OpenAI.FineTuning",
+     "operations": [],
+     "parameters": [
+      {
+       "$id": "1481",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "1482",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "1483",
+        "type": {
+         "$id": "1484",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "value": "https://api.openai.com/v1"
+       }
+      }
+     ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "OpenAI.FineTuning",
+     "apiVersions": [],
+     "parent": {
+      "$ref": "1420"
+     },
+     "children": [
+      {
+       "$id": "1485",
+       "kind": "client",
+       "name": "Jobs",
+       "namespace": "OpenAI.FineTuning",
+       "operations": [
+        {
+         "$id": "1486",
+         "name": "create",
+         "resourceName": "Jobs",
+         "doc": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the\nfine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
+         "accessibility": "public",
+         "parameters": [
+          {
+           "$id": "1487",
+           "name": "contentType",
+           "nameInRequest": "Content-Type",
+           "doc": "Body parameter's content type. Known values are application/json",
+           "type": {
+            "$id": "1488",
+            "kind": "constant",
+            "valueType": {
+             "$id": "1489",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "application/json",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": true,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "1490",
+           "name": "accept",
+           "nameInRequest": "Accept",
+           "type": {
+            "$id": "1491",
+            "kind": "constant",
+            "valueType": {
+             "$id": "1492",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "application/json",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "1493",
+           "name": "job",
+           "nameInRequest": "job",
+           "type": {
+            "$ref": "1056"
+           },
+           "location": "Body",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Method",
+           "decorators": [],
+           "skipUrlEncoding": false
+          }
+         ],
+         "responses": [
+          {
+           "$id": "1494",
+           "statusCodes": [
+            200
+           ],
+           "bodyType": {
+            "$ref": "1087"
+           },
+           "headers": [],
+           "isErrorResponse": false,
+           "contentTypes": [
+            "application/json"
+           ]
+          }
+         ],
+         "httpMethod": "POST",
+         "uri": "{endpoint}",
+         "path": "/fine_tuning/jobs",
+         "requestMediaTypes": [
+          "application/json"
+         ],
+         "bufferResponse": true,
+         "generateProtocolMethod": true,
+         "generateConvenienceMethod": true,
+         "crossLanguageDefinitionId": "OpenAI.FineTuning.Jobs.create",
+         "decorators": []
+        },
+        {
+         "$id": "1495",
+         "name": "listPaginated",
+         "resourceName": "Jobs",
+         "accessibility": "public",
+         "parameters": [
+          {
+           "$id": "1496",
+           "name": "after",
+           "nameInRequest": "after",
+           "doc": "Identifier for the last job from the previous pagination request.",
+           "type": {
+            "$id": "1497",
+            "kind": "string",
+            "name": "string",
+            "crossLanguageDefinitionId": "TypeSpec.string",
+            "decorators": []
+           },
+           "location": "Query",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": false,
+           "kind": "Method",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "1498",
+           "name": "limit",
+           "nameInRequest": "limit",
+           "doc": "Number of fine-tuning jobs to retrieve.",
+           "type": {
+            "$id": "1499",
+            "kind": "safeint",
+            "name": "safeint",
+            "crossLanguageDefinitionId": "TypeSpec.safeint",
+            "decorators": []
+           },
+           "location": "Query",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": false,
+           "kind": "Method",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "1500",
+           "name": "accept",
+           "nameInRequest": "Accept",
+           "type": {
+            "$id": "1501",
+            "kind": "constant",
+            "valueType": {
+             "$id": "1502",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "application/json",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          }
+         ],
+         "responses": [
+          {
+           "$id": "1503",
+           "statusCodes": [
+            200
+           ],
+           "bodyType": {
+            "$ref": "1172"
+           },
+           "headers": [],
+           "isErrorResponse": false,
+           "contentTypes": [
+            "application/json"
+           ]
+          }
+         ],
+         "httpMethod": "GET",
+         "uri": "{endpoint}",
+         "path": "/fine_tuning/jobs",
+         "bufferResponse": true,
+         "generateProtocolMethod": true,
+         "generateConvenienceMethod": true,
+         "crossLanguageDefinitionId": "OpenAI.FineTuning.Jobs.listPaginated",
+         "decorators": []
+        },
+        {
+         "$id": "1504",
+         "name": "retrieve",
+         "resourceName": "Jobs",
+         "summary": "Get info about a fine-tuning job.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
+         "accessibility": "public",
+         "parameters": [
+          {
+           "$id": "1505",
+           "name": "fine_tuning_job_id",
+           "nameInRequest": "fine_tuning_job_id",
+           "type": {
+            "$id": "1506",
+            "kind": "string",
+            "name": "string",
+            "crossLanguageDefinitionId": "TypeSpec.string",
+            "decorators": []
+           },
+           "location": "Path",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Method",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "1507",
+           "name": "accept",
+           "nameInRequest": "Accept",
+           "type": {
+            "$id": "1508",
+            "kind": "constant",
+            "valueType": {
+             "$id": "1509",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "application/json",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          }
+         ],
+         "responses": [
+          {
+           "$id": "1510",
+           "statusCodes": [
+            200
+           ],
+           "bodyType": {
+            "$ref": "1087"
+           },
+           "headers": [],
+           "isErrorResponse": false,
+           "contentTypes": [
+            "application/json"
+           ]
+          }
+         ],
+         "httpMethod": "GET",
+         "uri": "{endpoint}",
+         "path": "/fine_tuning/jobs/{fine_tuning_job_id}",
+         "bufferResponse": true,
+         "generateProtocolMethod": true,
+         "generateConvenienceMethod": true,
+         "crossLanguageDefinitionId": "OpenAI.FineTuning.Jobs.retrieve",
+         "decorators": []
+        },
+        {
+         "$id": "1511",
+         "name": "listEvents",
+         "resourceName": "Jobs",
+         "summary": "Get status updates for a fine-tuning job.",
+         "accessibility": "public",
+         "parameters": [
+          {
+           "$id": "1512",
+           "name": "fine_tuning_job_id",
+           "nameInRequest": "fine_tuning_job_id",
+           "doc": "The ID of the fine-tuning job to get events for.",
+           "type": {
+            "$id": "1513",
+            "kind": "string",
+            "name": "string",
+            "crossLanguageDefinitionId": "TypeSpec.string",
+            "decorators": []
+           },
+           "location": "Path",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Method",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "1514",
+           "name": "after",
+           "nameInRequest": "after",
+           "doc": "Identifier for the last event from the previous pagination request.",
+           "type": {
+            "$id": "1515",
+            "kind": "string",
+            "name": "string",
+            "crossLanguageDefinitionId": "TypeSpec.string",
+            "decorators": []
+           },
+           "location": "Query",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": false,
+           "kind": "Method",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "1516",
+           "name": "limit",
+           "nameInRequest": "limit",
+           "doc": "Number of events to retrieve.",
+           "type": {
+            "$id": "1517",
+            "kind": "integer",
+            "name": "integer",
+            "crossLanguageDefinitionId": "TypeSpec.integer",
+            "decorators": []
+           },
+           "location": "Query",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": false,
+           "kind": "Method",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "1518",
+           "name": "accept",
+           "nameInRequest": "Accept",
+           "type": {
+            "$id": "1519",
+            "kind": "constant",
+            "valueType": {
+             "$id": "1520",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "application/json",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          }
+         ],
+         "responses": [
+          {
+           "$id": "1521",
+           "statusCodes": [
+            200
+           ],
+           "bodyType": {
+            "$ref": "1185"
+           },
+           "headers": [],
+           "isErrorResponse": false,
+           "contentTypes": [
+            "application/json"
+           ]
+          }
+         ],
+         "httpMethod": "GET",
+         "uri": "{endpoint}",
+         "path": "/fine_tuning/jobs/{fine_tuning_job_id}/events",
+         "bufferResponse": true,
+         "generateProtocolMethod": true,
+         "generateConvenienceMethod": true,
+         "crossLanguageDefinitionId": "OpenAI.FineTuning.Jobs.listEvents",
+         "decorators": []
+        },
+        {
+         "$id": "1522",
+         "name": "cancel",
+         "resourceName": "Jobs",
+         "summary": "Immediately cancel a fine-tune job.",
+         "accessibility": "public",
+         "parameters": [
+          {
+           "$id": "1523",
+           "name": "fine_tuning_job_id",
+           "nameInRequest": "fine_tuning_job_id",
+           "doc": "The ID of the fine-tuning job to cancel.",
+           "type": {
+            "$id": "1524",
+            "kind": "string",
+            "name": "string",
+            "crossLanguageDefinitionId": "TypeSpec.string",
+            "decorators": []
+           },
+           "location": "Path",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Method",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "1525",
+           "name": "accept",
+           "nameInRequest": "Accept",
+           "type": {
+            "$id": "1526",
+            "kind": "constant",
+            "valueType": {
+             "$id": "1527",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "application/json",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          }
+         ],
+         "responses": [
+          {
+           "$id": "1528",
+           "statusCodes": [
+            200
+           ],
+           "bodyType": {
+            "$ref": "1087"
+           },
+           "headers": [],
+           "isErrorResponse": false,
+           "contentTypes": [
+            "application/json"
+           ]
+          }
+         ],
+         "httpMethod": "POST",
+         "uri": "{endpoint}",
+         "path": "/fine_tuning/jobs/{fine_tuning_job_id}/cancel",
+         "bufferResponse": true,
+         "generateProtocolMethod": true,
+         "generateConvenienceMethod": true,
+         "crossLanguageDefinitionId": "OpenAI.FineTuning.Jobs.cancel",
+         "decorators": []
+        }
+       ],
+       "parameters": [
+        {
+         "$id": "1529",
+         "name": "endpoint",
+         "nameInRequest": "endpoint",
+         "doc": "Service host",
+         "type": {
+          "$id": "1530",
+          "kind": "url",
+          "name": "url",
+          "crossLanguageDefinitionId": "TypeSpec.url"
+         },
+         "location": "Uri",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isRequired": true,
+         "isEndpoint": true,
+         "skipUrlEncoding": false,
+         "explode": false,
+         "kind": "Client",
+         "defaultValue": {
+          "$id": "1531",
+          "type": {
+           "$id": "1532",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string"
+          },
+          "value": "https://api.openai.com/v1"
+         }
+        }
+       ],
+       "decorators": [],
+       "crossLanguageDefinitionId": "OpenAI.FineTuning.Jobs",
+       "apiVersions": [],
+       "parent": {
+        "$ref": "1480"
+       }
+      }
+     ]
+    },
+    {
+     "$id": "1533",
+     "kind": "client",
+     "name": "Completions",
+     "namespace": "OpenAI",
+     "operations": [
+      {
+       "$id": "1534",
+       "name": "create",
+       "resourceName": "Completions",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1535",
+         "name": "contentType",
+         "nameInRequest": "Content-Type",
+         "doc": "Body parameter's content type. Known values are application/json",
+         "type": {
+          "$id": "1536",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1537",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": true,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1538",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1539",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1540",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1541",
+         "name": "createCompletionRequest",
+         "nameInRequest": "createCompletionRequest",
+         "type": {
+          "$ref": "894"
+         },
+         "location": "Body",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Spread",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1542",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "992"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "POST",
+       "uri": "{endpoint}",
+       "path": "/completions",
+       "requestMediaTypes": [
+        "application/json"
+       ],
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.Completions.create",
+       "decorators": []
+      }
+     ],
+     "parameters": [
+      {
+       "$id": "1543",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "1544",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "1545",
+        "type": {
+         "$id": "1546",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "value": "https://api.openai.com/v1"
+       }
+      }
+     ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "OpenAI.Completions",
+     "apiVersions": [],
+     "parent": {
+      "$ref": "1420"
+     }
+    },
+    {
+     "$id": "1547",
+     "kind": "client",
+     "name": "Edits",
+     "namespace": "OpenAI",
+     "operations": [
+      {
+       "$id": "1548",
+       "name": "create",
+       "resourceName": "Edits",
+       "deprecated": "deprecated",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1549",
+         "name": "contentType",
+         "nameInRequest": "Content-Type",
+         "doc": "Body parameter's content type. Known values are application/json",
+         "type": {
+          "$id": "1550",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1551",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": true,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1552",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1553",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1554",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1555",
+         "name": "edit",
+         "nameInRequest": "edit",
+         "type": {
+          "$ref": "821"
+         },
+         "location": "Body",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1556",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "852"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "POST",
+       "uri": "{endpoint}",
+       "path": "/edits",
+       "requestMediaTypes": [
+        "application/json"
+       ],
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.Edits.create",
+       "decorators": []
+      }
+     ],
+     "parameters": [
+      {
+       "$id": "1557",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "1558",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "1559",
+        "type": {
+         "$id": "1560",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "value": "https://api.openai.com/v1"
+       }
+      }
+     ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "OpenAI.Edits",
+     "apiVersions": [],
+     "parent": {
+      "$ref": "1420"
+     }
+    },
+    {
+     "$id": "1561",
+     "kind": "client",
+     "name": "Embeddings",
+     "namespace": "OpenAI",
+     "operations": [
+      {
+       "$id": "1562",
+       "name": "create",
+       "resourceName": "Embeddings",
+       "summary": "Creates an embedding vector representing the input text.",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1563",
+         "name": "contentType",
+         "nameInRequest": "Content-Type",
+         "doc": "Body parameter's content type. Known values are application/json",
+         "type": {
+          "$id": "1564",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1565",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": true,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1566",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1567",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1568",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1569",
+         "name": "embedding",
+         "nameInRequest": "embedding",
+         "type": {
+          "$ref": "761"
+         },
+         "location": "Body",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1570",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "782"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "POST",
+       "uri": "{endpoint}",
+       "path": "/embeddings",
+       "requestMediaTypes": [
+        "application/json"
+       ],
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.Embeddings.create",
+       "decorators": []
+      }
+     ],
+     "parameters": [
+      {
+       "$id": "1571",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "1572",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "1573",
+        "type": {
+         "$id": "1574",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "value": "https://api.openai.com/v1"
+       }
+      }
+     ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "OpenAI.Embeddings",
+     "apiVersions": [],
+     "parent": {
+      "$ref": "1420"
+     }
+    },
+    {
+     "$id": "1575",
+     "kind": "client",
+     "name": "Files",
+     "namespace": "OpenAI",
+     "operations": [
+      {
+       "$id": "1576",
+       "name": "list",
+       "resourceName": "Files",
+       "summary": "Returns a list of files that belong to the user's organization.",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1577",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1578",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1579",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1580",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "730"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "GET",
+       "uri": "{endpoint}",
+       "path": "/files",
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.Files.list",
+       "decorators": []
+      },
+      {
+       "$id": "1581",
+       "name": "create",
+       "resourceName": "Files",
+       "summary": "Returns a list of files that belong to the user's organization.",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1582",
+         "name": "contentType",
+         "nameInRequest": "Content-Type",
+         "type": {
+          "$id": "1583",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1584",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "multipart/form-data",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": true,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1585",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1586",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1587",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1588",
+         "name": "file",
+         "nameInRequest": "file",
+         "type": {
+          "$ref": "739"
+         },
+         "location": "Body",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1589",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "646"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "POST",
+       "uri": "{endpoint}",
+       "path": "/files",
+       "requestMediaTypes": [
+        "multipart/form-data"
+       ],
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.Files.create",
+       "decorators": []
+      },
+      {
+       "$id": "1590",
+       "name": "retrieve",
+       "resourceName": "Files",
+       "summary": "Returns information about a specific file.",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1591",
+         "name": "file_id",
+         "nameInRequest": "file_id",
+         "doc": "The ID of the file to use for this request.",
+         "type": {
+          "$id": "1592",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "location": "Path",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1593",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1594",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1595",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1596",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "646"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "POST",
+       "uri": "{endpoint}",
+       "path": "/files/files/{file_id}",
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.Files.retrieve",
+       "decorators": []
+      },
+      {
+       "$id": "1597",
+       "name": "delete",
+       "resourceName": "Files",
+       "summary": "Delete a file",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1598",
+         "name": "file_id",
+         "nameInRequest": "file_id",
+         "doc": "The ID of the file to use for this request.",
+         "type": {
+          "$id": "1599",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "location": "Path",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1600",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1601",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1602",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1603",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "748"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "DELETE",
+       "uri": "{endpoint}",
+       "path": "/files/files/{file_id}",
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.Files.delete",
+       "decorators": []
+      },
+      {
+       "$id": "1604",
+       "name": "download",
+       "resourceName": "Files",
+       "summary": "Returns the contents of the specified file.",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1605",
+         "name": "file_id",
+         "nameInRequest": "file_id",
+         "doc": "The ID of the file to use for this request.",
+         "type": {
+          "$id": "1606",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "location": "Path",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1607",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1608",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1609",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "text/plain",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1610",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$id": "1611",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "text/plain"
+         ]
+        }
+       ],
+       "httpMethod": "GET",
+       "uri": "{endpoint}",
+       "path": "/files/files/{file_id}/content",
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.Files.download",
+       "decorators": []
+      }
+     ],
+     "parameters": [
+      {
+       "$id": "1612",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "1613",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "1614",
+        "type": {
+         "$id": "1615",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "value": "https://api.openai.com/v1"
+       }
+      }
+     ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "OpenAI.Files",
+     "apiVersions": [],
+     "parent": {
+      "$ref": "1420"
+     }
+    },
+    {
+     "$id": "1616",
+     "kind": "client",
+     "name": "FineTunes",
+     "namespace": "OpenAI",
+     "operations": [
+      {
+       "$id": "1617",
+       "name": "create",
+       "resourceName": "FineTunes",
+       "deprecated": "deprecated",
+       "summary": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the fine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1618",
+         "name": "contentType",
+         "nameInRequest": "Content-Type",
+         "doc": "Body parameter's content type. Known values are application/json",
+         "type": {
+          "$id": "1619",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1620",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": true,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1621",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1622",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1623",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1624",
+         "name": "fine_tune",
+         "nameInRequest": "fine_tune",
+         "type": {
+          "$ref": "516"
+         },
+         "location": "Body",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1625",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "577"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "POST",
+       "uri": "{endpoint}",
+       "path": "/fine-tunes",
+       "requestMediaTypes": [
+        "application/json"
+       ],
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.FineTunes.create",
+       "decorators": []
+      },
+      {
+       "$id": "1626",
+       "name": "list",
+       "resourceName": "FineTunes",
+       "deprecated": "deprecated",
+       "summary": "List your organization's fine-tuning jobs",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1627",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1628",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1629",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1630",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "712"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "GET",
+       "uri": "{endpoint}",
+       "path": "/fine-tunes",
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.FineTunes.list",
+       "decorators": []
+      },
+      {
+       "$id": "1631",
+       "name": "retrieve",
+       "resourceName": "FineTunes",
+       "deprecated": "deprecated",
+       "summary": "Gets info about the fine-tune job.\n\n[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1632",
+         "name": "fine_tune_id",
+         "nameInRequest": "fine_tune_id",
+         "doc": "The ID of the fine-tune job",
+         "type": {
+          "$id": "1633",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "location": "Path",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1634",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1635",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1636",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1637",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "577"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "GET",
+       "uri": "{endpoint}",
+       "path": "/fine-tunes/{fine_tune_id}",
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.FineTunes.retrieve",
+       "decorators": []
+      },
+      {
+       "$id": "1638",
+       "name": "listEvents",
+       "resourceName": "FineTunes",
+       "deprecated": "deprecated",
+       "summary": "Get fine-grained status updates for a fine-tune job.",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1639",
+         "name": "fine_tune_id",
+         "nameInRequest": "fine_tune_id",
+         "doc": "The ID of the fine-tune job to get events for.",
+         "type": {
+          "$id": "1640",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "location": "Path",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1641",
+         "name": "stream",
+         "nameInRequest": "stream",
+         "doc": "Whether to stream events for the fine-tune job. If set to true, events will be sent as\ndata-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available. The stream will terminate with a `data: [DONE]` message when the\njob is finished (succeeded, cancelled, or failed).\n\nIf set to false, only events generated so far will be returned.",
+         "type": {
+          "$id": "1642",
+          "kind": "boolean",
+          "name": "boolean",
+          "crossLanguageDefinitionId": "TypeSpec.boolean",
+          "decorators": []
+         },
+         "location": "Query",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": false,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1643",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1644",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1645",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1646",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "721"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "GET",
+       "uri": "{endpoint}",
+       "path": "/fine-tunes/{fine_tune_id}/events",
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.FineTunes.listEvents",
+       "decorators": []
+      },
+      {
+       "$id": "1647",
+       "name": "cancel",
+       "resourceName": "FineTunes",
+       "deprecated": "deprecated",
+       "summary": "Immediately cancel a fine-tune job.",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1648",
+         "name": "fine_tune_id",
+         "nameInRequest": "fine_tune_id",
+         "doc": "The ID of the fine-tune job to cancel",
+         "type": {
+          "$id": "1649",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "location": "Path",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1650",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1651",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1652",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1653",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "577"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "POST",
+       "uri": "{endpoint}",
+       "path": "/fine-tunes/{fine_tune_id}/cancel",
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.FineTunes.cancel",
+       "decorators": []
+      }
+     ],
+     "parameters": [
+      {
+       "$id": "1654",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "1655",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "1656",
+        "type": {
+         "$id": "1657",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "value": "https://api.openai.com/v1"
+       }
+      }
+     ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "OpenAI.FineTunes",
+     "apiVersions": [],
+     "parent": {
+      "$ref": "1420"
+     }
+    },
+    {
+     "$id": "1658",
+     "kind": "client",
+     "name": "Models",
+     "namespace": "OpenAI",
+     "operations": [
+      {
+       "$id": "1659",
+       "name": "list",
+       "resourceName": "Models",
+       "summary": "Lists the currently available models, and provides basic information about each one such as the\nowner and availability.",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1660",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1661",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1662",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1663",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "476"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "GET",
+       "uri": "{endpoint}",
+       "path": "/models",
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.Models.list",
+       "decorators": []
+      },
+      {
+       "$id": "1664",
+       "name": "retrieve",
+       "resourceName": "Models",
+       "summary": "Retrieves a model instance, providing basic information about the model such as the owner and\npermissioning.",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1665",
+         "name": "model",
+         "nameInRequest": "model",
+         "doc": "The ID of the model to use for this request.",
+         "type": {
+          "$id": "1666",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "location": "Path",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1667",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1668",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1669",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1670",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "483"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "GET",
+       "uri": "{endpoint}",
+       "path": "/models/{model}",
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.Models.retrieve",
+       "decorators": []
+      },
+      {
+       "$id": "1671",
+       "name": "delete",
+       "resourceName": "Models",
+       "summary": "Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1672",
+         "name": "model",
+         "nameInRequest": "model",
+         "doc": "The model to delete",
+         "type": {
+          "$id": "1673",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "location": "Path",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1674",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1675",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1676",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1677",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "503"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "DELETE",
+       "uri": "{endpoint}",
+       "path": "/models/{model}",
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.Models.delete",
+       "decorators": []
+      }
+     ],
+     "parameters": [
+      {
+       "$id": "1678",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "1679",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "1680",
+        "type": {
+         "$id": "1681",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "value": "https://api.openai.com/v1"
+       }
+      }
+     ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "OpenAI.Models",
+     "apiVersions": [],
+     "parent": {
+      "$ref": "1420"
+     }
+    },
+    {
+     "$id": "1682",
+     "kind": "client",
+     "name": "Images",
+     "namespace": "OpenAI",
+     "operations": [
+      {
+       "$id": "1683",
+       "name": "create",
+       "resourceName": "Images",
+       "summary": "Creates an image given a prompt",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1684",
+         "name": "contentType",
+         "nameInRequest": "Content-Type",
+         "doc": "Body parameter's content type. Known values are application/json",
+         "type": {
+          "$id": "1685",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1686",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": true,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1687",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1688",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1689",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1690",
+         "name": "image",
+         "nameInRequest": "image",
+         "type": {
+          "$ref": "387"
+         },
+         "location": "Body",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1691",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "411"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "POST",
+       "uri": "{endpoint}",
+       "path": "/images/generations",
+       "requestMediaTypes": [
+        "application/json"
+       ],
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.Images.create",
+       "decorators": []
+      },
+      {
+       "$id": "1692",
+       "name": "createEdit",
+       "resourceName": "Images",
+       "summary": "Creates an edited or extended image given an original image and a prompt.",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1693",
+         "name": "contentType",
+         "nameInRequest": "Content-Type",
+         "type": {
+          "$id": "1694",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1695",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "multipart/form-data",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": true,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1696",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1697",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1698",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1699",
+         "name": "image",
+         "nameInRequest": "image",
+         "type": {
+          "$ref": "430"
+         },
+         "location": "Body",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1700",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "411"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "POST",
+       "uri": "{endpoint}",
+       "path": "/images/edits",
+       "requestMediaTypes": [
+        "multipart/form-data"
+       ],
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.Images.createEdit",
+       "decorators": []
+      },
+      {
+       "$id": "1701",
+       "name": "createVariation",
+       "resourceName": "Images",
+       "summary": "Creates an edited or extended image given an original image and a prompt.",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1702",
+         "name": "contentType",
+         "nameInRequest": "Content-Type",
+         "type": {
+          "$id": "1703",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1704",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "multipart/form-data",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": true,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1705",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1706",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1707",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1708",
+         "name": "image",
+         "nameInRequest": "image",
+         "type": {
+          "$ref": "457"
+         },
+         "location": "Body",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1709",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "411"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "POST",
+       "uri": "{endpoint}",
+       "path": "/images/variations",
+       "requestMediaTypes": [
+        "multipart/form-data"
+       ],
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.Images.createVariation",
+       "decorators": []
+      }
+     ],
+     "parameters": [
+      {
+       "$id": "1710",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "1711",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "1712",
+        "type": {
+         "$id": "1713",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "value": "https://api.openai.com/v1"
+       }
+      }
+     ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "OpenAI.Images",
+     "apiVersions": [],
+     "parent": {
+      "$ref": "1420"
+     }
+    },
+    {
+     "$id": "1714",
+     "kind": "client",
+     "name": "Moderations",
+     "namespace": "OpenAI",
+     "operations": [
+      {
+       "$id": "1715",
+       "name": "create",
+       "resourceName": "Moderations",
+       "summary": "Classifies if text violates OpenAI's Content Policy",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "1716",
+         "name": "contentType",
+         "nameInRequest": "Content-Type",
+         "doc": "Body parameter's content type. Known values are application/json",
+         "type": {
+          "$id": "1717",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1718",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": true,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1719",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "1720",
+          "kind": "constant",
+          "valueType": {
+           "$id": "1721",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "1722",
+         "name": "content",
+         "nameInRequest": "content",
+         "type": {
+          "$ref": "239"
+         },
+         "location": "Body",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "1723",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "250"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "POST",
+       "uri": "{endpoint}",
+       "path": "/moderations",
+       "requestMediaTypes": [
+        "application/json"
+       ],
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "OpenAI.Moderations.create",
+       "decorators": []
+      }
+     ],
+     "parameters": [
+      {
+       "$id": "1724",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "1725",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client",
+       "defaultValue": {
+        "$id": "1726",
+        "type": {
+         "$id": "1727",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "value": "https://api.openai.com/v1"
+       }
+      }
+     ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "OpenAI.Moderations",
+     "apiVersions": [],
+     "parent": {
+      "$ref": "1420"
      }
     }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "OpenAI.Audio"
-  },
-  {
-   "$id": "1433",
-   "name": "AudioTranscriptions",
-   "namespace": "OpenAI.Audio",
-   "operations": [
-    {
-     "$id": "1434",
-     "name": "create",
-     "resourceName": "Transcriptions",
-     "summary": "Transcribes audio into the input language.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1435",
-       "name": "contentType",
-       "nameInRequest": "Content-Type",
-       "type": {
-        "$id": "1436",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1437",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "multipart/form-data",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": true,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1438",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1439",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1440",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1441",
-       "name": "audio",
-       "nameInRequest": "audio",
-       "type": {
-        "$ref": "1392"
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1442",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "1415"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/audio/transcriptions",
-     "requestMediaTypes": [
-      "multipart/form-data"
-     ],
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Audio.Transcriptions.create",
-     "decorators": []
-    }
-   ],
-   "parent": "Audio",
-   "parameters": [
-    {
-     "$id": "1443",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "1444",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "1445",
-      "type": {
-       "$id": "1446",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "https://api.openai.com/v1"
-     }
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "OpenAI.Audio.Transcriptions"
-  },
-  {
-   "$id": "1447",
-   "name": "AudioTranslations",
-   "namespace": "OpenAI.Audio",
-   "operations": [
-    {
-     "$id": "1448",
-     "name": "create",
-     "resourceName": "Translations",
-     "summary": "Transcribes audio into the input language.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1449",
-       "name": "contentType",
-       "nameInRequest": "Content-Type",
-       "type": {
-        "$id": "1450",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1451",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "multipart/form-data",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": true,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1452",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1453",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1454",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1455",
-       "name": "audio",
-       "nameInRequest": "audio",
-       "type": {
-        "$ref": "1368"
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1456",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "1387"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/audio/translations",
-     "requestMediaTypes": [
-      "multipart/form-data"
-     ],
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Audio.Translations.create",
-     "decorators": []
-    }
-   ],
-   "parent": "Audio",
-   "parameters": [
-    {
-     "$id": "1457",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "1458",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "1459",
-      "type": {
-       "$id": "1460",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "https://api.openai.com/v1"
-     }
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "OpenAI.Audio.Translations"
-  },
-  {
-   "$id": "1461",
-   "name": "Chat",
-   "namespace": "OpenAI.Chat",
-   "operations": [],
-   "parent": "OpenAIClient",
-   "parameters": [
-    {
-     "$id": "1462",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "1463",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "1464",
-      "type": {
-       "$id": "1465",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "https://api.openai.com/v1"
-     }
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "OpenAI.Chat"
-  },
-  {
-   "$id": "1466",
-   "name": "ChatCompletions",
-   "namespace": "OpenAI.Chat",
-   "operations": [
-    {
-     "$id": "1467",
-     "name": "create",
-     "resourceName": "Completions",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1468",
-       "name": "contentType",
-       "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
-       "type": {
-        "$id": "1469",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1470",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": true,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1471",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1472",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1473",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1474",
-       "name": "createChatCompletionRequest",
-       "nameInRequest": "createChatCompletionRequest",
-       "type": {
-        "$ref": "1259"
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Spread",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1475",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "1311"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/chat/completions",
-     "requestMediaTypes": [
-      "application/json"
-     ],
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Chat.Completions.create",
-     "decorators": []
-    }
-   ],
-   "parent": "Chat",
-   "parameters": [
-    {
-     "$id": "1476",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "1477",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "1478",
-      "type": {
-       "$id": "1479",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "https://api.openai.com/v1"
-     }
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "OpenAI.Chat.Completions"
-  },
-  {
-   "$id": "1480",
-   "name": "FineTuning",
-   "namespace": "OpenAI.FineTuning",
-   "operations": [],
-   "parent": "OpenAIClient",
-   "parameters": [
-    {
-     "$id": "1481",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "1482",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "1483",
-      "type": {
-       "$id": "1484",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "https://api.openai.com/v1"
-     }
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "OpenAI.FineTuning"
-  },
-  {
-   "$id": "1485",
-   "name": "FineTuningJobs",
-   "namespace": "OpenAI.FineTuning",
-   "operations": [
-    {
-     "$id": "1486",
-     "name": "create",
-     "resourceName": "Jobs",
-     "doc": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the\nfine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1487",
-       "name": "contentType",
-       "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
-       "type": {
-        "$id": "1488",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1489",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": true,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1490",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1491",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1492",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1493",
-       "name": "job",
-       "nameInRequest": "job",
-       "type": {
-        "$ref": "1056"
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1494",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "1087"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/fine_tuning/jobs",
-     "requestMediaTypes": [
-      "application/json"
-     ],
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.FineTuning.Jobs.create",
-     "decorators": []
-    },
-    {
-     "$id": "1495",
-     "name": "listPaginated",
-     "resourceName": "Jobs",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1496",
-       "name": "after",
-       "nameInRequest": "after",
-       "doc": "Identifier for the last job from the previous pagination request.",
-       "type": {
-        "$id": "1497",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Query",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": false,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1498",
-       "name": "limit",
-       "nameInRequest": "limit",
-       "doc": "Number of fine-tuning jobs to retrieve.",
-       "type": {
-        "$id": "1499",
-        "kind": "safeint",
-        "name": "safeint",
-        "crossLanguageDefinitionId": "TypeSpec.safeint",
-        "decorators": []
-       },
-       "location": "Query",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": false,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1500",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1501",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1502",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1503",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "1172"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "GET",
-     "uri": "{endpoint}",
-     "path": "/fine_tuning/jobs",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.FineTuning.Jobs.listPaginated",
-     "decorators": []
-    },
-    {
-     "$id": "1504",
-     "name": "retrieve",
-     "resourceName": "Jobs",
-     "summary": "Get info about a fine-tuning job.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1505",
-       "name": "fine_tuning_job_id",
-       "nameInRequest": "fine_tuning_job_id",
-       "type": {
-        "$id": "1506",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Path",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1507",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1508",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1509",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1510",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "1087"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "GET",
-     "uri": "{endpoint}",
-     "path": "/fine_tuning/jobs/{fine_tuning_job_id}",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.FineTuning.Jobs.retrieve",
-     "decorators": []
-    },
-    {
-     "$id": "1511",
-     "name": "listEvents",
-     "resourceName": "Jobs",
-     "summary": "Get status updates for a fine-tuning job.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1512",
-       "name": "fine_tuning_job_id",
-       "nameInRequest": "fine_tuning_job_id",
-       "doc": "The ID of the fine-tuning job to get events for.",
-       "type": {
-        "$id": "1513",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Path",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1514",
-       "name": "after",
-       "nameInRequest": "after",
-       "doc": "Identifier for the last event from the previous pagination request.",
-       "type": {
-        "$id": "1515",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Query",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": false,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1516",
-       "name": "limit",
-       "nameInRequest": "limit",
-       "doc": "Number of events to retrieve.",
-       "type": {
-        "$id": "1517",
-        "kind": "integer",
-        "name": "integer",
-        "crossLanguageDefinitionId": "TypeSpec.integer",
-        "decorators": []
-       },
-       "location": "Query",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": false,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1518",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1519",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1520",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1521",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "1185"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "GET",
-     "uri": "{endpoint}",
-     "path": "/fine_tuning/jobs/{fine_tuning_job_id}/events",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.FineTuning.Jobs.listEvents",
-     "decorators": []
-    },
-    {
-     "$id": "1522",
-     "name": "cancel",
-     "resourceName": "Jobs",
-     "summary": "Immediately cancel a fine-tune job.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1523",
-       "name": "fine_tuning_job_id",
-       "nameInRequest": "fine_tuning_job_id",
-       "doc": "The ID of the fine-tuning job to cancel.",
-       "type": {
-        "$id": "1524",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Path",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1525",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1526",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1527",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1528",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "1087"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/fine_tuning/jobs/{fine_tuning_job_id}/cancel",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.FineTuning.Jobs.cancel",
-     "decorators": []
-    }
-   ],
-   "parent": "FineTuning",
-   "parameters": [
-    {
-     "$id": "1529",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "1530",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "1531",
-      "type": {
-       "$id": "1532",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "https://api.openai.com/v1"
-     }
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "OpenAI.FineTuning.Jobs"
-  },
-  {
-   "$id": "1533",
-   "name": "Completions",
-   "namespace": "OpenAI",
-   "operations": [
-    {
-     "$id": "1534",
-     "name": "create",
-     "resourceName": "Completions",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1535",
-       "name": "contentType",
-       "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
-       "type": {
-        "$id": "1536",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1537",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": true,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1538",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1539",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1540",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1541",
-       "name": "createCompletionRequest",
-       "nameInRequest": "createCompletionRequest",
-       "type": {
-        "$ref": "894"
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Spread",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1542",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "992"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/completions",
-     "requestMediaTypes": [
-      "application/json"
-     ],
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Completions.create",
-     "decorators": []
-    }
-   ],
-   "parent": "OpenAIClient",
-   "parameters": [
-    {
-     "$id": "1543",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "1544",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "1545",
-      "type": {
-       "$id": "1546",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "https://api.openai.com/v1"
-     }
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "OpenAI.Completions"
-  },
-  {
-   "$id": "1547",
-   "name": "Edits",
-   "namespace": "OpenAI",
-   "operations": [
-    {
-     "$id": "1548",
-     "name": "create",
-     "resourceName": "Edits",
-     "deprecated": "deprecated",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1549",
-       "name": "contentType",
-       "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
-       "type": {
-        "$id": "1550",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1551",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": true,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1552",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1553",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1554",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1555",
-       "name": "edit",
-       "nameInRequest": "edit",
-       "type": {
-        "$ref": "821"
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1556",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "852"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/edits",
-     "requestMediaTypes": [
-      "application/json"
-     ],
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Edits.create",
-     "decorators": []
-    }
-   ],
-   "parent": "OpenAIClient",
-   "parameters": [
-    {
-     "$id": "1557",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "1558",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "1559",
-      "type": {
-       "$id": "1560",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "https://api.openai.com/v1"
-     }
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "OpenAI.Edits"
-  },
-  {
-   "$id": "1561",
-   "name": "Embeddings",
-   "namespace": "OpenAI",
-   "operations": [
-    {
-     "$id": "1562",
-     "name": "create",
-     "resourceName": "Embeddings",
-     "summary": "Creates an embedding vector representing the input text.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1563",
-       "name": "contentType",
-       "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
-       "type": {
-        "$id": "1564",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1565",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": true,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1566",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1567",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1568",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1569",
-       "name": "embedding",
-       "nameInRequest": "embedding",
-       "type": {
-        "$ref": "761"
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1570",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "782"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/embeddings",
-     "requestMediaTypes": [
-      "application/json"
-     ],
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Embeddings.create",
-     "decorators": []
-    }
-   ],
-   "parent": "OpenAIClient",
-   "parameters": [
-    {
-     "$id": "1571",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "1572",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "1573",
-      "type": {
-       "$id": "1574",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "https://api.openai.com/v1"
-     }
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "OpenAI.Embeddings"
-  },
-  {
-   "$id": "1575",
-   "name": "Files",
-   "namespace": "OpenAI",
-   "operations": [
-    {
-     "$id": "1576",
-     "name": "list",
-     "resourceName": "Files",
-     "summary": "Returns a list of files that belong to the user's organization.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1577",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1578",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1579",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1580",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "730"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "GET",
-     "uri": "{endpoint}",
-     "path": "/files",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Files.list",
-     "decorators": []
-    },
-    {
-     "$id": "1581",
-     "name": "create",
-     "resourceName": "Files",
-     "summary": "Returns a list of files that belong to the user's organization.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1582",
-       "name": "contentType",
-       "nameInRequest": "Content-Type",
-       "type": {
-        "$id": "1583",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1584",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "multipart/form-data",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": true,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1585",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1586",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1587",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1588",
-       "name": "file",
-       "nameInRequest": "file",
-       "type": {
-        "$ref": "739"
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1589",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "646"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/files",
-     "requestMediaTypes": [
-      "multipart/form-data"
-     ],
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Files.create",
-     "decorators": []
-    },
-    {
-     "$id": "1590",
-     "name": "retrieve",
-     "resourceName": "Files",
-     "summary": "Returns information about a specific file.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1591",
-       "name": "file_id",
-       "nameInRequest": "file_id",
-       "doc": "The ID of the file to use for this request.",
-       "type": {
-        "$id": "1592",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Path",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1593",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1594",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1595",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1596",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "646"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/files/files/{file_id}",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Files.retrieve",
-     "decorators": []
-    },
-    {
-     "$id": "1597",
-     "name": "delete",
-     "resourceName": "Files",
-     "summary": "Delete a file",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1598",
-       "name": "file_id",
-       "nameInRequest": "file_id",
-       "doc": "The ID of the file to use for this request.",
-       "type": {
-        "$id": "1599",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Path",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1600",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1601",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1602",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1603",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "748"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "DELETE",
-     "uri": "{endpoint}",
-     "path": "/files/files/{file_id}",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Files.delete",
-     "decorators": []
-    },
-    {
-     "$id": "1604",
-     "name": "download",
-     "resourceName": "Files",
-     "summary": "Returns the contents of the specified file.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1605",
-       "name": "file_id",
-       "nameInRequest": "file_id",
-       "doc": "The ID of the file to use for this request.",
-       "type": {
-        "$id": "1606",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Path",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1607",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1608",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1609",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "text/plain",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1610",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$id": "1611",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "text/plain"
-       ]
-      }
-     ],
-     "httpMethod": "GET",
-     "uri": "{endpoint}",
-     "path": "/files/files/{file_id}/content",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Files.download",
-     "decorators": []
-    }
-   ],
-   "parent": "OpenAIClient",
-   "parameters": [
-    {
-     "$id": "1612",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "1613",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "1614",
-      "type": {
-       "$id": "1615",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "https://api.openai.com/v1"
-     }
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "OpenAI.Files"
-  },
-  {
-   "$id": "1616",
-   "name": "FineTunes",
-   "namespace": "OpenAI",
-   "operations": [
-    {
-     "$id": "1617",
-     "name": "create",
-     "resourceName": "FineTunes",
-     "deprecated": "deprecated",
-     "summary": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the fine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1618",
-       "name": "contentType",
-       "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
-       "type": {
-        "$id": "1619",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1620",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": true,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1621",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1622",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1623",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1624",
-       "name": "fine_tune",
-       "nameInRequest": "fine_tune",
-       "type": {
-        "$ref": "516"
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1625",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "577"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/fine-tunes",
-     "requestMediaTypes": [
-      "application/json"
-     ],
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.FineTunes.create",
-     "decorators": []
-    },
-    {
-     "$id": "1626",
-     "name": "list",
-     "resourceName": "FineTunes",
-     "deprecated": "deprecated",
-     "summary": "List your organization's fine-tuning jobs",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1627",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1628",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1629",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1630",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "712"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "GET",
-     "uri": "{endpoint}",
-     "path": "/fine-tunes",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.FineTunes.list",
-     "decorators": []
-    },
-    {
-     "$id": "1631",
-     "name": "retrieve",
-     "resourceName": "FineTunes",
-     "deprecated": "deprecated",
-     "summary": "Gets info about the fine-tune job.\n\n[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1632",
-       "name": "fine_tune_id",
-       "nameInRequest": "fine_tune_id",
-       "doc": "The ID of the fine-tune job",
-       "type": {
-        "$id": "1633",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Path",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1634",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1635",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1636",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1637",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "577"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "GET",
-     "uri": "{endpoint}",
-     "path": "/fine-tunes/{fine_tune_id}",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.FineTunes.retrieve",
-     "decorators": []
-    },
-    {
-     "$id": "1638",
-     "name": "listEvents",
-     "resourceName": "FineTunes",
-     "deprecated": "deprecated",
-     "summary": "Get fine-grained status updates for a fine-tune job.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1639",
-       "name": "fine_tune_id",
-       "nameInRequest": "fine_tune_id",
-       "doc": "The ID of the fine-tune job to get events for.",
-       "type": {
-        "$id": "1640",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Path",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1641",
-       "name": "stream",
-       "nameInRequest": "stream",
-       "doc": "Whether to stream events for the fine-tune job. If set to true, events will be sent as\ndata-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available. The stream will terminate with a `data: [DONE]` message when the\njob is finished (succeeded, cancelled, or failed).\n\nIf set to false, only events generated so far will be returned.",
-       "type": {
-        "$id": "1642",
-        "kind": "boolean",
-        "name": "boolean",
-        "crossLanguageDefinitionId": "TypeSpec.boolean",
-        "decorators": []
-       },
-       "location": "Query",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": false,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1643",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1644",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1645",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1646",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "721"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "GET",
-     "uri": "{endpoint}",
-     "path": "/fine-tunes/{fine_tune_id}/events",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.FineTunes.listEvents",
-     "decorators": []
-    },
-    {
-     "$id": "1647",
-     "name": "cancel",
-     "resourceName": "FineTunes",
-     "deprecated": "deprecated",
-     "summary": "Immediately cancel a fine-tune job.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1648",
-       "name": "fine_tune_id",
-       "nameInRequest": "fine_tune_id",
-       "doc": "The ID of the fine-tune job to cancel",
-       "type": {
-        "$id": "1649",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Path",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1650",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1651",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1652",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1653",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "577"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/fine-tunes/{fine_tune_id}/cancel",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.FineTunes.cancel",
-     "decorators": []
-    }
-   ],
-   "parent": "OpenAIClient",
-   "parameters": [
-    {
-     "$id": "1654",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "1655",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "1656",
-      "type": {
-       "$id": "1657",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "https://api.openai.com/v1"
-     }
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "OpenAI.FineTunes"
-  },
-  {
-   "$id": "1658",
-   "name": "Models",
-   "namespace": "OpenAI",
-   "operations": [
-    {
-     "$id": "1659",
-     "name": "list",
-     "resourceName": "Models",
-     "summary": "Lists the currently available models, and provides basic information about each one such as the\nowner and availability.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1660",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1661",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1662",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1663",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "476"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "GET",
-     "uri": "{endpoint}",
-     "path": "/models",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Models.list",
-     "decorators": []
-    },
-    {
-     "$id": "1664",
-     "name": "retrieve",
-     "resourceName": "Models",
-     "summary": "Retrieves a model instance, providing basic information about the model such as the owner and\npermissioning.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1665",
-       "name": "model",
-       "nameInRequest": "model",
-       "doc": "The ID of the model to use for this request.",
-       "type": {
-        "$id": "1666",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Path",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1667",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1668",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1669",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1670",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "483"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "GET",
-     "uri": "{endpoint}",
-     "path": "/models/{model}",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Models.retrieve",
-     "decorators": []
-    },
-    {
-     "$id": "1671",
-     "name": "delete",
-     "resourceName": "Models",
-     "summary": "Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1672",
-       "name": "model",
-       "nameInRequest": "model",
-       "doc": "The model to delete",
-       "type": {
-        "$id": "1673",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Path",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1674",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1675",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1676",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1677",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "503"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "DELETE",
-     "uri": "{endpoint}",
-     "path": "/models/{model}",
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Models.delete",
-     "decorators": []
-    }
-   ],
-   "parent": "OpenAIClient",
-   "parameters": [
-    {
-     "$id": "1678",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "1679",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "1680",
-      "type": {
-       "$id": "1681",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "https://api.openai.com/v1"
-     }
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "OpenAI.Models"
-  },
-  {
-   "$id": "1682",
-   "name": "Images",
-   "namespace": "OpenAI",
-   "operations": [
-    {
-     "$id": "1683",
-     "name": "create",
-     "resourceName": "Images",
-     "summary": "Creates an image given a prompt",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1684",
-       "name": "contentType",
-       "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
-       "type": {
-        "$id": "1685",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1686",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": true,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1687",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1688",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1689",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1690",
-       "name": "image",
-       "nameInRequest": "image",
-       "type": {
-        "$ref": "387"
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1691",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "411"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/images/generations",
-     "requestMediaTypes": [
-      "application/json"
-     ],
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Images.create",
-     "decorators": []
-    },
-    {
-     "$id": "1692",
-     "name": "createEdit",
-     "resourceName": "Images",
-     "summary": "Creates an edited or extended image given an original image and a prompt.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1693",
-       "name": "contentType",
-       "nameInRequest": "Content-Type",
-       "type": {
-        "$id": "1694",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1695",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "multipart/form-data",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": true,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1696",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1697",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1698",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1699",
-       "name": "image",
-       "nameInRequest": "image",
-       "type": {
-        "$ref": "430"
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1700",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "411"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/images/edits",
-     "requestMediaTypes": [
-      "multipart/form-data"
-     ],
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Images.createEdit",
-     "decorators": []
-    },
-    {
-     "$id": "1701",
-     "name": "createVariation",
-     "resourceName": "Images",
-     "summary": "Creates an edited or extended image given an original image and a prompt.",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1702",
-       "name": "contentType",
-       "nameInRequest": "Content-Type",
-       "type": {
-        "$id": "1703",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1704",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "multipart/form-data",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": true,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1705",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1706",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1707",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1708",
-       "name": "image",
-       "nameInRequest": "image",
-       "type": {
-        "$ref": "457"
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1709",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "411"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/images/variations",
-     "requestMediaTypes": [
-      "multipart/form-data"
-     ],
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Images.createVariation",
-     "decorators": []
-    }
-   ],
-   "parent": "OpenAIClient",
-   "parameters": [
-    {
-     "$id": "1710",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "1711",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "1712",
-      "type": {
-       "$id": "1713",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "https://api.openai.com/v1"
-     }
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "OpenAI.Images"
-  },
-  {
-   "$id": "1714",
-   "name": "Moderations",
-   "namespace": "OpenAI",
-   "operations": [
-    {
-     "$id": "1715",
-     "name": "create",
-     "resourceName": "Moderations",
-     "summary": "Classifies if text violates OpenAI's Content Policy",
-     "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "1716",
-       "name": "contentType",
-       "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
-       "type": {
-        "$id": "1717",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1718",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": true,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1719",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "1720",
-        "kind": "constant",
-        "valueType": {
-         "$id": "1721",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "1722",
-       "name": "content",
-       "nameInRequest": "content",
-       "type": {
-        "$ref": "239"
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
-      {
-       "$id": "1723",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "250"
-       },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/moderations",
-     "requestMediaTypes": [
-      "application/json"
-     ],
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "OpenAI.Moderations.create",
-     "decorators": []
-    }
-   ],
-   "parent": "OpenAIClient",
-   "parameters": [
-    {
-     "$id": "1724",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "1725",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "1726",
-      "type": {
-       "$id": "1727",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "https://api.openai.com/v1"
-     }
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "OpenAI.Moderations"
+   ]
   }
  ],
  "auth": {

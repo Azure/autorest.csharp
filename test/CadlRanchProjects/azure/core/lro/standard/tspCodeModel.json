@@ -802,6 +802,7 @@
  "clients": [
   {
    "$id": "103",
+   "kind": "client",
    "name": "StandardClient",
    "namespace": "_Azure.Lro.Standard",
    "doc": "Illustrates bodies templated with Azure Core with long-running operation",
@@ -1391,7 +1392,10 @@
     }
    ],
    "decorators": [],
-   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard"
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard",
+   "apiVersions": [
+    "2022-12-01-preview"
+   ]
   }
  ]
 }

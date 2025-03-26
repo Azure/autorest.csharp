@@ -57,12 +57,12 @@ namespace AutoRest.CSharp.Common.Input
             var models = CreateModels();
             var clients = CreateClients(_codeModel.OperationGroups, serviceRequestToInputOperation, inputOperationToOperation);
 
-            return new(Name: _codeModel.Language.Default.Name,
-                Clients: clients,
-                Models: models,
-                Enums: _enumsCache.Values.ToArray(),
-                ApiVersions: GetApiVersions(),
-                Auth: GetAuth(_codeModel.Security.Schemes.OfType<SecurityScheme>()));
+            return new(name: _codeModel.Language.Default.Name,
+                clients: clients,
+                models: models,
+                enums: _enumsCache.Values.ToArray(),
+                apiVersions: GetApiVersions(),
+                auth: GetAuth(_codeModel.Security.Schemes.OfType<SecurityScheme>()));
         }
 
         private IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups, Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
@@ -75,7 +75,8 @@ namespace AutoRest.CSharp.Common.Input
                 Doc: operationGroup.Language.Default.Description,
                 Operations: CreateOperations(operationGroup.Operations, serviceRequestToInputOperation, inputOperationToOperation),
                 Parameters: Array.Empty<InputParameter>(),
-                Parent: null)
+                Parent: null,
+                Children: [])
             {
                 Key = operationGroup.Key,
             };
