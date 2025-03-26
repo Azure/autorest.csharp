@@ -37,7 +37,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("AvailabilitySets", "Delete", new[] { "subscriptionId", "resourceGroupName", "availabilitySetName" })]
         public void ValidateOperationParameterList(string operationGroupName, string methodName, string[] parameterList)
         {
-            var method = MgmtContext.InputNamespace.Clients.Single(p => p.Key.Equals(operationGroupName))
+            var method = MgmtContext.InputNamespace.AllClients.Single(p => p.Key.Equals(operationGroupName))
                 .Operations.Single(o => o.CSharpName().Equals(methodName));
 
             Assert.IsTrue(parameterList.SequenceEqual(method.Parameters.Where(p => p.Location == CSharp.Common.Input.RequestLocation.Path).Select(p => p.CSharpName())));

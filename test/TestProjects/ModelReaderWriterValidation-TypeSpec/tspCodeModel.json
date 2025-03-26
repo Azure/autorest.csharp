@@ -2896,6 +2896,7 @@
  "clients": [
   {
    "$id": "386",
+   "kind": "client",
    "name": "ModelReaderWriterValidationTypeSpecClient",
    "namespace": "ModelReaderWriterValidationTypeSpec",
    "doc": "This is a typespec project to validation the model reader writer functionalities.",
@@ -3731,7 +3732,8 @@
     }
    ],
    "decorators": [],
-   "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec"
+   "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec",
+   "apiVersions": []
   }
  ]
 }

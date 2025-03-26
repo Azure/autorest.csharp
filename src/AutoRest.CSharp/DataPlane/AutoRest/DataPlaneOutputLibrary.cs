@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ClientOptionsTypeProvider? CreateClientOptions()
         {
-            if (!Configuration.PublicClients || !_input.Clients.Any())
+            if (!Configuration.PublicClients || !_input.AllClients.Any())
             {
                 return null;
             }
@@ -139,7 +139,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var headerModels = new Dictionary<InputOperation, DataPlaneResponseHeaderGroupType>();
             if (Configuration.GenerateResponseHeaderModels)
             {
-                foreach (var inputClient in _input.Clients)
+                foreach (var inputClient in _input.AllClients)
                 {
                     var clientPrefix = ClientBuilder.GetClientPrefix(GetClientDeclarationName(inputClient), _input.Name);
                     foreach (var operation in inputClient.Operations)
@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (Configuration.PublicClients && Configuration.GenerateLongRunningOperationTypes)
             {
-                foreach (var client in _input.Clients)
+                foreach (var client in _input.AllClients)
                 {
                     var clientName = _clients.Value[client].Declaration.Name;
                     var clientPrefix = ClientBuilder.GetClientPrefix(clientName, _input.Name);
@@ -193,7 +193,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (Configuration.PublicClients)
             {
-                foreach (var inputClient in _input.Clients)
+                foreach (var inputClient in _input.AllClients)
                 {
                     clients.Add(inputClient, new DataPlaneClient(inputClient, _restClients.Value[inputClient], GetClientDefaultName(inputClient), this, _sourceInputModel));
                 }
@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<InputClient, DataPlaneRestClient> EnsureRestClients()
         {
             var restClients = new Dictionary<InputClient, DataPlaneRestClient>();
-            foreach (var client in _input.Clients)
+            foreach (var client in _input.AllClients)
             {
                 var restClientBuilder = new RestClientBuilder(client.Parameters, client.Operations, _typeFactory, this);
                 restClients.Add(client, new DataPlaneRestClient(client, restClientBuilder, GetRestClientDefaultName(client), this, _typeFactory, _sourceInputModel));

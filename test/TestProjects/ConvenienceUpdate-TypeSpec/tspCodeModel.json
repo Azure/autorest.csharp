@@ -46,6 +46,7 @@
  "clients": [
   {
    "$id": "7",
+   "kind": "client",
    "name": "ConvenienceInCadlClient",
    "namespace": "ConvenienceInCadl",
    "doc": "TypeSpec project to test various types of convenience methods.",
@@ -1629,7 +1630,8 @@
     }
    ],
    "decorators": [],
-   "crossLanguageDefinitionId": "ConvenienceInCadl"
+   "crossLanguageDefinitionId": "ConvenienceInCadl",
+   "apiVersions": []
   }
  ]
 }

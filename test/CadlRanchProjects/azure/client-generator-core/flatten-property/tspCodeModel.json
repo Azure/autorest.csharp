@@ -252,6 +252,7 @@
  "clients": [
   {
    "$id": "35",
+   "kind": "client",
    "name": "FlattenPropertyClient",
    "namespace": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty",
    "doc": "Illustrates the model flatten cases.",
@@ -504,7 +505,8 @@
     }
    ],
    "decorators": [],
-   "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty"
+   "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty",
+   "apiVersions": []
   }
  ]
 }
