@@ -11,7 +11,7 @@ using System.Text.Json;
 
 namespace Payload.MultiPart.Models
 {
-    internal partial class AnonymousModelRequest : IJsonModel<AnonymousModelRequest>
+    public partial class AnonymousModelRequest : IJsonModel<AnonymousModelRequest>
     {
         void IJsonModel<AnonymousModelRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {

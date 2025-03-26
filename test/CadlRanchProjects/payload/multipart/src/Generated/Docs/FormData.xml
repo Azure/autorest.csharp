@@ -613,34 +613,38 @@ Response response = client.CheckFileNameAndContentType(content, "multipart/form-
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="AnonymousModelAsync(Stream,CancellationToken)">
+    <member name="AnonymousModelAsync(AnonymousModelRequest,CancellationToken)">
       <example>
 This sample shows how to call AnonymousModelAsync.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-Response response = await client.AnonymousModelAsync(null);
+AnonymousModelRequest body = new AnonymousModelRequest(null);
+Response response = await client.AnonymousModelAsync(body);
 ]]></code>
 This sample shows how to call AnonymousModelAsync with all parameters.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-Response response = await client.AnonymousModelAsync(null);
+AnonymousModelRequest body = new AnonymousModelRequest(null);
+Response response = await client.AnonymousModelAsync(body);
 ]]></code></example>
     </member>
-    <member name="AnonymousModel(Stream,CancellationToken)">
+    <member name="AnonymousModel(AnonymousModelRequest,CancellationToken)">
       <example>
 This sample shows how to call AnonymousModel.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-Response response = client.AnonymousModel(null);
+AnonymousModelRequest body = new AnonymousModelRequest(null);
+Response response = client.AnonymousModel(body);
 ]]></code>
 This sample shows how to call AnonymousModel with all parameters.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-Response response = client.AnonymousModel(null);
+AnonymousModelRequest body = new AnonymousModelRequest(null);
+Response response = client.AnonymousModel(body);
 ]]></code></example>
     </member>
     <member name="AnonymousModelAsync(RequestContent,string,RequestContext)">

@@ -40,8 +40,6 @@ namespace _Type.Model.Visibility.Models
                 writer.WritePropertyName("readProp"u8);
                 writer.WriteStringValue(ReadProp);
             }
-            writer.WritePropertyName("queryProp"u8);
-            writer.WriteNumberValue(QueryProp);
             writer.WritePropertyName("createProp"u8);
             writer.WriteStartArray();
             foreach (var item in CreateProp)
@@ -96,7 +94,6 @@ namespace _Type.Model.Visibility.Models
                 return null;
             }
             string readProp = default;
-            int queryProp = default;
             IList<string> createProp = default;
             IList<int> updateProp = default;
             bool deleteProp = default;
@@ -107,11 +104,6 @@ namespace _Type.Model.Visibility.Models
                 if (property.NameEquals("readProp"u8))
                 {
                     readProp = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("queryProp"u8))
-                {
-                    queryProp = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("createProp"u8))
@@ -145,13 +137,7 @@ namespace _Type.Model.Visibility.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new VisibilityModel(
-                readProp,
-                queryProp,
-                createProp,
-                updateProp,
-                deleteProp,
-                serializedAdditionalRawData);
+            return new VisibilityModel(readProp, createProp, updateProp, deleteProp, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<VisibilityModel>.Write(ModelReaderWriterOptions options)
