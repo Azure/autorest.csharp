@@ -110,26 +110,38 @@
      "kind": "Client"
     }
    ],
-   "decorators": [],
+   "decorators": [
+    {
+     "$id": "14",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "15",
+      "options": {
+       "$id": "16",
+       "title": "This service does not define an endpoint. The generated code will add one."
+      }
+     }
+    }
+   ],
    "crossLanguageDefinitionId": "ParametersTypeSpec"
   },
   {
-   "$id": "14",
+   "$id": "17",
    "name": "ParameterOrders",
    "namespace": "ParametersTypeSpec.ParameterOrders",
    "operations": [
     {
-     "$id": "15",
+     "$id": "18",
      "name": "Operation",
      "resourceName": "ParameterOrders",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "16",
+       "$id": "19",
        "name": "start",
        "nameInRequest": "start",
        "type": {
-        "$id": "17",
+        "$id": "20",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -146,11 +158,11 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "18",
+       "$id": "21",
        "name": "end",
        "nameInRequest": "end",
        "type": {
-        "$id": "19",
+        "$id": "22",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -167,11 +179,11 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "20",
+       "$id": "23",
        "name": "apiVersion",
        "nameInRequest": "api-version",
        "type": {
-        "$id": "21",
+        "$id": "24",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -185,9 +197,9 @@
        "isRequired": true,
        "kind": "Client",
        "defaultValue": {
-        "$id": "22",
+        "$id": "25",
         "type": {
-         "$id": "23",
+         "$id": "26",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -198,14 +210,14 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "24",
+       "$id": "27",
        "name": "accept",
        "nameInRequest": "Accept",
        "type": {
-        "$id": "25",
+        "$id": "28",
         "kind": "constant",
         "valueType": {
-         "$id": "26",
+         "$id": "29",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -227,7 +239,7 @@
      ],
      "responses": [
       {
-       "$id": "27",
+       "$id": "30",
        "statusCodes": [
         200
        ],
@@ -251,17 +263,17 @@
      "decorators": []
     },
     {
-     "$id": "28",
+     "$id": "31",
      "name": "Operation2",
      "resourceName": "ParameterOrders",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "29",
+       "$id": "32",
        "name": "start",
        "nameInRequest": "start",
        "type": {
-        "$id": "30",
+        "$id": "33",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -278,11 +290,11 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "31",
+       "$id": "34",
        "name": "end",
        "nameInRequest": "end",
        "type": {
-        "$id": "32",
+        "$id": "35",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -299,14 +311,14 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "33",
+       "$id": "36",
        "name": "accept",
        "nameInRequest": "Accept",
        "type": {
-        "$id": "34",
+        "$id": "37",
         "kind": "constant",
         "valueType": {
-         "$id": "35",
+         "$id": "38",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -328,7 +340,7 @@
      ],
      "responses": [
       {
-       "$id": "36",
+       "$id": "39",
        "statusCodes": [
         200
        ],
@@ -355,12 +367,12 @@
    "parent": "ParametersTypeSpecClient",
    "parameters": [
     {
-     "$id": "37",
+     "$id": "40",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Service host",
      "type": {
-      "$id": "38",
+      "$id": "41",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"

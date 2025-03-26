@@ -174,7 +174,19 @@
      }
     }
    ],
-   "decorators": [],
+   "decorators": [
+    {
+     "$id": "18",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "19",
+      "options": {
+       "$id": "20",
+       "title": "ServerPathMultiple"
+      }
+     }
+    }
+   ],
    "crossLanguageDefinitionId": "Server.Path.Multiple"
   }
  ]

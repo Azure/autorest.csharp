@@ -648,30 +648,38 @@
      "kind": "Client"
     }
    ],
-   "decorators": [],
+   "decorators": [
+    {
+     "$id": "71",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "72"
+     }
+    }
+   ],
    "crossLanguageDefinitionId": "Versioning.Added"
   },
   {
-   "$id": "71",
+   "$id": "73",
    "name": "InterfaceV2",
    "namespace": "Versioning.Added",
    "operations": [
     {
-     "$id": "72",
+     "$id": "74",
      "name": "v2InInterface",
      "resourceName": "InterfaceV2",
      "accessibility": "public",
      "parameters": [
       {
-       "$id": "73",
+       "$id": "75",
        "name": "contentType",
        "nameInRequest": "Content-Type",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$id": "74",
+        "$id": "76",
         "kind": "constant",
         "valueType": {
-         "$id": "75",
+         "$id": "77",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -691,14 +699,14 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "76",
+       "$id": "78",
        "name": "accept",
        "nameInRequest": "Accept",
        "type": {
-        "$id": "77",
+        "$id": "79",
         "kind": "constant",
         "valueType": {
-         "$id": "78",
+         "$id": "80",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -718,7 +726,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "79",
+       "$id": "81",
        "name": "body",
        "nameInRequest": "body",
        "type": {
@@ -737,7 +745,7 @@
      ],
      "responses": [
       {
-       "$id": "80",
+       "$id": "82",
        "statusCodes": [
         200
        ],
@@ -767,12 +775,12 @@
    "parent": "AddedClient",
    "parameters": [
     {
-     "$id": "81",
+     "$id": "83",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Need to be set as 'http://localhost:3000' in client.",
      "type": {
-      "$id": "82",
+      "$id": "84",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -787,7 +795,7 @@
      "kind": "Client"
     },
     {
-     "$id": "83",
+     "$id": "85",
      "name": "version",
      "nameInRequest": "version",
      "doc": "Need to be set as 'v1' or 'v2' in client.",

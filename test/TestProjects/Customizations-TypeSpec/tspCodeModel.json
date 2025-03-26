@@ -1920,7 +1920,19 @@
      "kind": "Client"
     }
    ],
-   "decorators": [],
+   "decorators": [
+    {
+     "$id": "241",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "242",
+      "options": {
+       "$id": "243",
+       "title": "Models in TypeSpec"
+      }
+     }
+    }
+   ],
    "crossLanguageDefinitionId": "CustomizationsInTsp"
   }
  ]

@@ -3730,7 +3730,19 @@
      "kind": "Client"
     }
    ],
-   "decorators": [],
+   "decorators": [
+    {
+     "$id": "457",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "458",
+      "options": {
+       "$id": "459",
+       "title": "Validation for MRW"
+      }
+     }
+    }
+   ],
    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec"
   }
  ]

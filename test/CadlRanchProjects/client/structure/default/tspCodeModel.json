@@ -207,23 +207,35 @@
      "kind": "Client"
     }
    ],
-   "decorators": [],
+   "decorators": [
+    {
+     "$id": "22",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "23",
+      "options": {
+       "$id": "24",
+       "title": "MultiClient"
+      }
+     }
+    }
+   ],
    "crossLanguageDefinitionId": "Client.Structure.Service"
   },
   {
-   "$id": "22",
+   "$id": "25",
    "name": "Baz",
    "namespace": "Client.Structure.Service.Baz",
    "operations": [],
    "parent": "ServiceClient",
    "parameters": [
     {
-     "$id": "23",
+     "$id": "26",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Need to be set as 'http://localhost:3000' in client.",
      "type": {
-      "$id": "24",
+      "$id": "27",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -238,7 +250,7 @@
      "kind": "Client"
     },
     {
-     "$id": "25",
+     "$id": "28",
      "name": "client",
      "nameInRequest": "client",
      "doc": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -259,19 +271,19 @@
    "crossLanguageDefinitionId": "Client.Structure.Service.Baz"
   },
   {
-   "$id": "26",
+   "$id": "29",
    "name": "BazFoo",
    "namespace": "Client.Structure.Service.Baz",
    "operations": [
     {
-     "$id": "27",
+     "$id": "30",
      "name": "seven",
      "resourceName": "Foo",
      "accessibility": "public",
      "parameters": [],
      "responses": [
       {
-       "$id": "28",
+       "$id": "31",
        "statusCodes": [
         204
        ],
@@ -292,12 +304,12 @@
    "parent": "Baz",
    "parameters": [
     {
-     "$id": "29",
+     "$id": "32",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Need to be set as 'http://localhost:3000' in client.",
      "type": {
-      "$id": "30",
+      "$id": "33",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -312,7 +324,7 @@
      "kind": "Client"
     },
     {
-     "$id": "31",
+     "$id": "34",
      "name": "client",
      "nameInRequest": "client",
      "doc": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -333,19 +345,19 @@
    "crossLanguageDefinitionId": "Client.Structure.Service.Baz.Foo"
   },
   {
-   "$id": "32",
+   "$id": "35",
    "name": "Qux",
    "namespace": "Client.Structure.Service.Qux",
    "operations": [
     {
-     "$id": "33",
+     "$id": "36",
      "name": "eight",
      "resourceName": "Qux",
      "accessibility": "public",
      "parameters": [],
      "responses": [
       {
-       "$id": "34",
+       "$id": "37",
        "statusCodes": [
         204
        ],
@@ -366,12 +378,12 @@
    "parent": "ServiceClient",
    "parameters": [
     {
-     "$id": "35",
+     "$id": "38",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Need to be set as 'http://localhost:3000' in client.",
      "type": {
-      "$id": "36",
+      "$id": "39",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -386,7 +398,7 @@
      "kind": "Client"
     },
     {
-     "$id": "37",
+     "$id": "40",
      "name": "client",
      "nameInRequest": "client",
      "doc": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -407,19 +419,19 @@
    "crossLanguageDefinitionId": "Client.Structure.Service.Qux"
   },
   {
-   "$id": "38",
+   "$id": "41",
    "name": "QuxBar",
    "namespace": "Client.Structure.Service.Qux",
    "operations": [
     {
-     "$id": "39",
+     "$id": "42",
      "name": "nine",
      "resourceName": "Bar",
      "accessibility": "public",
      "parameters": [],
      "responses": [
       {
-       "$id": "40",
+       "$id": "43",
        "statusCodes": [
         204
        ],
@@ -440,12 +452,12 @@
    "parent": "Qux",
    "parameters": [
     {
-     "$id": "41",
+     "$id": "44",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Need to be set as 'http://localhost:3000' in client.",
      "type": {
-      "$id": "42",
+      "$id": "45",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -460,7 +472,7 @@
      "kind": "Client"
     },
     {
-     "$id": "43",
+     "$id": "46",
      "name": "client",
      "nameInRequest": "client",
      "doc": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -481,19 +493,19 @@
    "crossLanguageDefinitionId": "Client.Structure.Service.Qux.Bar"
   },
   {
-   "$id": "44",
+   "$id": "47",
    "name": "Foo",
    "namespace": "Client.Structure.Service",
    "operations": [
     {
-     "$id": "45",
+     "$id": "48",
      "name": "three",
      "resourceName": "Foo",
      "accessibility": "public",
      "parameters": [],
      "responses": [
       {
-       "$id": "46",
+       "$id": "49",
        "statusCodes": [
         204
        ],
@@ -511,14 +523,14 @@
      "decorators": []
     },
     {
-     "$id": "47",
+     "$id": "50",
      "name": "four",
      "resourceName": "Foo",
      "accessibility": "public",
      "parameters": [],
      "responses": [
       {
-       "$id": "48",
+       "$id": "51",
        "statusCodes": [
         204
        ],
@@ -539,12 +551,12 @@
    "parent": "ServiceClient",
    "parameters": [
     {
-     "$id": "49",
+     "$id": "52",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Need to be set as 'http://localhost:3000' in client.",
      "type": {
-      "$id": "50",
+      "$id": "53",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -559,7 +571,7 @@
      "kind": "Client"
     },
     {
-     "$id": "51",
+     "$id": "54",
      "name": "client",
      "nameInRequest": "client",
      "doc": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -580,19 +592,19 @@
    "crossLanguageDefinitionId": "Client.Structure.Service.Foo"
   },
   {
-   "$id": "52",
+   "$id": "55",
    "name": "Bar",
    "namespace": "Client.Structure.Service",
    "operations": [
     {
-     "$id": "53",
+     "$id": "56",
      "name": "five",
      "resourceName": "Bar",
      "accessibility": "public",
      "parameters": [],
      "responses": [
       {
-       "$id": "54",
+       "$id": "57",
        "statusCodes": [
         204
        ],
@@ -610,14 +622,14 @@
      "decorators": []
     },
     {
-     "$id": "55",
+     "$id": "58",
      "name": "six",
      "resourceName": "Bar",
      "accessibility": "public",
      "parameters": [],
      "responses": [
       {
-       "$id": "56",
+       "$id": "59",
        "statusCodes": [
         204
        ],
@@ -638,12 +650,12 @@
    "parent": "ServiceClient",
    "parameters": [
     {
-     "$id": "57",
+     "$id": "60",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Need to be set as 'http://localhost:3000' in client.",
      "type": {
-      "$id": "58",
+      "$id": "61",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -658,7 +670,7 @@
      "kind": "Client"
     },
     {
-     "$id": "59",
+     "$id": "62",
      "name": "client",
      "nameInRequest": "client",
      "doc": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",

@@ -1628,7 +1628,19 @@
      "kind": "Client"
     }
    ],
-   "decorators": [],
+   "decorators": [
+    {
+     "$id": "139",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "140",
+      "options": {
+       "$id": "141",
+       "title": "Convenience methods in TypeSpec"
+      }
+     }
+    }
+   ],
    "crossLanguageDefinitionId": "ConvenienceInCadl"
   }
  ]

@@ -59,7 +59,15 @@
      "kind": "Client"
     }
    ],
-   "decorators": [],
+   "decorators": [
+    {
+     "$id": "7",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "8"
+     }
+    }
+   ],
    "crossLanguageDefinitionId": "Server.Path.Single"
   }
  ]

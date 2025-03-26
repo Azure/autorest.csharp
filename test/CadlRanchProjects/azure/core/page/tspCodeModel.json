@@ -999,7 +999,7 @@
        ]
       }
      ],
-     "httpMethod": "GET",
+     "httpMethod": "POST",
      "uri": "{endpoint}",
      "path": "/azure/core/page/parameters",
      "requestMediaTypes": [

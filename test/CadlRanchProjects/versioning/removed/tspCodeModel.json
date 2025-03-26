@@ -598,7 +598,15 @@
      "kind": "Client"
     }
    ],
-   "decorators": [],
+   "decorators": [
+    {
+     "$id": "64",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "65"
+     }
+    }
+   ],
    "crossLanguageDefinitionId": "Versioning.Removed"
   }
  ]

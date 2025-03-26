@@ -153,7 +153,15 @@
      "kind": "Client"
     }
    ],
-   "decorators": [],
+   "decorators": [
+    {
+     "$id": "15",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "16"
+     }
+    }
+   ],
    "crossLanguageDefinitionId": "Server.Versions.NotVersioned"
   }
  ]
