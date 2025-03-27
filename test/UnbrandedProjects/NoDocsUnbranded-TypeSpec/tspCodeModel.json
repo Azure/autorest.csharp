@@ -804,15 +804,27 @@
      "kind": "Client"
     }
    ],
-   "decorators": [],
+   "decorators": [
+    {
+     "$id": "97",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "98",
+      "options": {
+       "$id": "99",
+       "title": "hello world"
+      }
+     }
+    }
+   ],
    "crossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec",
    "apiVersions": []
   }
  ],
  "auth": {
-  "$id": "97",
+  "$id": "100",
   "apiKey": {
-   "$id": "98",
+   "$id": "101",
    "name": "my-api-key",
    "in": "header"
   }

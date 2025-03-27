@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace Payload.MultiPart.Models
 {
-    internal partial class AnonymousModelRequest : IUtf8JsonSerializable, IJsonModel<AnonymousModelRequest>
+    public partial class AnonymousModelRequest : IUtf8JsonSerializable, IJsonModel<AnonymousModelRequest>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AnonymousModelRequest>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 

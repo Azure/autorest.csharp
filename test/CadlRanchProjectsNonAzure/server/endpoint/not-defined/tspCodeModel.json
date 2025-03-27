@@ -60,7 +60,19 @@
      "kind": "Client"
     }
    ],
-   "decorators": [],
+   "decorators": [
+    {
+     "$id": "7",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "8",
+      "options": {
+       "$id": "9",
+       "title": "Testserver without any endpoint"
+      }
+     }
+    }
+   ],
    "crossLanguageDefinitionId": "Server.Endpoint.NotDefined",
    "apiVersions": []
   }

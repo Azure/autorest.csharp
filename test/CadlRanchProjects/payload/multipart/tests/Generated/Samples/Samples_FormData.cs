@@ -738,7 +738,8 @@ System.IO.File.OpenRead("<filePath>")
         {
             FormData client = new MultiPartClient().GetFormDataClient();
 
-            Response response = client.AnonymousModel(null);
+            AnonymousModelRequest body = new AnonymousModelRequest(null);
+            Response response = client.AnonymousModel(body);
         }
 
         [Test]
@@ -747,7 +748,8 @@ System.IO.File.OpenRead("<filePath>")
         {
             FormData client = new MultiPartClient().GetFormDataClient();
 
-            Response response = await client.AnonymousModelAsync(null);
+            AnonymousModelRequest body = new AnonymousModelRequest(null);
+            Response response = await client.AnonymousModelAsync(body);
         }
 
         [Test]
@@ -786,7 +788,8 @@ System.IO.File.OpenRead("<filePath>")
         {
             FormData client = new MultiPartClient().GetFormDataClient();
 
-            Response response = client.AnonymousModel(null);
+            AnonymousModelRequest body = new AnonymousModelRequest(null);
+            Response response = client.AnonymousModel(body);
         }
 
         [Test]
@@ -795,7 +798,8 @@ System.IO.File.OpenRead("<filePath>")
         {
             FormData client = new MultiPartClient().GetFormDataClient();
 
-            Response response = await client.AnonymousModelAsync(null);
+            AnonymousModelRequest body = new AnonymousModelRequest(null);
+            Response response = await client.AnonymousModelAsync(body);
         }
     }
 }

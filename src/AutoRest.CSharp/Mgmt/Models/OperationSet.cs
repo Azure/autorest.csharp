@@ -40,6 +40,18 @@ namespace AutoRest.CSharp.Mgmt.Models
             Operations = new HashSet<InputOperation>();
         }
 
+        public bool IsNonResourceOperations(InputNamespace? inputNamespace)
+        {
+            // We use decorator @service to tell if it is a TypeSpec input
+            bool isTsp = inputNamespace?.AllClients.FirstOrDefault(c => c.Decorators.Any(d => d.Name == "TypeSpec.@service")) != null;
+            // If swagger input, we don't use this operation to check if it is a non resource operation
+            if (!isTsp)
+                return false;
+
+            // If TypeSpec input, and there is no @armResourceOperations, we think it is a non-resource client
+            return _inputClient != null && _inputClient.Decorators?.FirstOrDefault(d => d.Name == "Azure.ResourceManager.@armResourceOperations") == null;
+        }
+
         /// <summary>
         /// Add a new operation to this <see cref="OperationSet"/>
         /// </summary>

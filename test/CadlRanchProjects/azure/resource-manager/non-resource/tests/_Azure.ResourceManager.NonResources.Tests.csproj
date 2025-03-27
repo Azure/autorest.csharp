@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup />
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\_Azure.ResourceManager.NonResources.csproj" />
+  </ItemGroup>
+</Project>

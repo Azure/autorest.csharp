@@ -65,7 +65,7 @@
         "@types/mocha": "~10.0.9",
         "@types/node": "~22.7.9",
         "@types/prettier": "^2.6.3",
-        "@typespec/compiler": "0.67.1",
+        "@typespec/compiler": "0.67.2",
         "@typespec/events": "0.67.1",
         "@typespec/http": "0.67.1",
         "@typespec/library-linter": "0.67.1",
