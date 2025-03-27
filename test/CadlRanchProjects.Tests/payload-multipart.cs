@@ -72,7 +72,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Payload_Multipart_FormData_Anonymous_Model() => Test(async (host) =>
         {
-            var response = await new MultiPartClient(host, null).GetFormDataClient().AnonymousModelAsync(System.IO.File.OpenRead(SampleJpgPath));
+            var response = await new MultiPartClient(host, null).GetFormDataClient().AnonymousModelAsync(new AnonymousModelRequest(System.IO.File.OpenRead(SampleJpgPath)));
             Assert.AreEqual(204, response.Status);
         });
 
