@@ -5,8 +5,6 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
-using System.Collections.Generic;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Payload.MultiPart.Models;
@@ -530,27 +528,25 @@ namespace Payload.MultiPart
         }
 
         /// <summary> Test content-type: multipart/form-data. </summary>
-        /// <param name="profileImage"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
-        public virtual async Task<ClientResult> AnonymousModelAsync(Stream profileImage)
+        /// <param name="body"> The <see cref="AnonymousModelRequest"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult> AnonymousModelAsync(AnonymousModelRequest body)
         {
-            Argument.AssertNotNull(profileImage, nameof(profileImage));
+            Argument.AssertNotNull(body, nameof(body));
 
-            AnonymousModelRequest anonymousModelRequest = new AnonymousModelRequest(profileImage, null);
-            using MultipartFormDataBinaryContent content = anonymousModelRequest.ToMultipartBinaryBody();
+            using MultipartFormDataBinaryContent content = body.ToMultipartBinaryBody();
             ClientResult result = await AnonymousModelAsync(content, content.ContentType, null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Test content-type: multipart/form-data. </summary>
-        /// <param name="profileImage"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
-        public virtual ClientResult AnonymousModel(Stream profileImage)
+        /// <param name="body"> The <see cref="AnonymousModelRequest"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult AnonymousModel(AnonymousModelRequest body)
         {
-            Argument.AssertNotNull(profileImage, nameof(profileImage));
+            Argument.AssertNotNull(body, nameof(body));
 
-            AnonymousModelRequest anonymousModelRequest = new AnonymousModelRequest(profileImage, null);
-            using MultipartFormDataBinaryContent content = anonymousModelRequest.ToMultipartBinaryBody();
+            using MultipartFormDataBinaryContent content = body.ToMultipartBinaryBody();
             ClientResult result = AnonymousModel(content, content.ContentType, null);
             return result;
         }
@@ -565,7 +561,7 @@ namespace Payload.MultiPart
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousModelAsync(Stream)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousModelAsync(AnonymousModelRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -594,7 +590,7 @@ namespace Payload.MultiPart
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousModel(Stream)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousModel(AnonymousModelRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

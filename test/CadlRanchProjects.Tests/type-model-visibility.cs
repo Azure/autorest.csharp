@@ -47,13 +47,6 @@ namespace CadlRanchProjects.Tests
         }
 
         [Test]
-        public void RequiredPropertiesAreSettable()
-        {
-            var requiredInt = TypeAsserts.HasProperty(typeof(VisibilityModel), nameof(VisibilityModel.QueryProp), BindingFlags.Public | BindingFlags.Instance);
-            Assert.NotNull(requiredInt.SetMethod);
-        }
-
-        [Test]
         public void RequiredListsAreNotSettable()
         {
             var requiredStringList = TypeAsserts.HasProperty(typeof(VisibilityModel), nameof(VisibilityModel.ReadProp), BindingFlags.Public | BindingFlags.Instance);

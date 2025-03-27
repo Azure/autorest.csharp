@@ -305,7 +305,15 @@
      "kind": "Client"
     }
    ],
-   "decorators": [],
+   "decorators": [
+    {
+     "$id": "32",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "33"
+     }
+    }
+   ],
    "crossLanguageDefinitionId": "Versioning.TypeChangedFrom",
    "apiVersions": [
     "v1",

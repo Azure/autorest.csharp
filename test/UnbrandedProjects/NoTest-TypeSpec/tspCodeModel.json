@@ -952,15 +952,27 @@
      "kind": "Client"
     }
    ],
-   "decorators": [],
+   "decorators": [
+    {
+     "$id": "111",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "112",
+      "options": {
+       "$id": "113",
+       "title": "hello world"
+      }
+     }
+    }
+   ],
    "crossLanguageDefinitionId": "NoTestTypeSpec",
    "apiVersions": []
   }
  ],
  "auth": {
-  "$id": "111",
+  "$id": "114",
   "apiKey": {
-   "$id": "112",
+   "$id": "115",
    "name": "my-api-key",
    "in": "header"
   }

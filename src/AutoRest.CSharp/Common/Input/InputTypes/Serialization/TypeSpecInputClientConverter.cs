@@ -33,6 +33,7 @@ namespace AutoRest.CSharp.Common.Input
             IReadOnlyList<InputOperation>? operations = null;
             IReadOnlyList<InputParameter>? parameters = null;
             InputClient? parent = null;
+            IReadOnlyList<InputDecoratorInfo>? decorators = null;
 
             InputClient? inputClient = null;
 
@@ -44,7 +45,8 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString("doc", ref doc)
                     || reader.TryReadComplexType("operations", options, ref operations)
                     || reader.TryReadComplexType("parameters", options, ref parameters)
-                    || reader.TryReadComplexType("parent", options, ref parent);
+                    || reader.TryReadComplexType("parent", options, ref parent)
+                    || reader.TryReadComplexType("decorators", options, ref decorators);
 
                 if (isKnownProperty)
                 {
@@ -54,7 +56,7 @@ namespace AutoRest.CSharp.Common.Input
                 if (reader.GetString() == "children")
                 {
                     var children = new List<InputClient>();
-                    inputClient ??= CreateClientInstance(id, name, summary, doc, operations, parameters, parent, children, resolver);
+                    inputClient ??= CreateClientInstance(id, name, summary, doc, operations, parameters, parent, decorators, children, resolver);
                     reader.Read();
                     CreateChildren(ref reader, children, options, inputClient.Name);
                     continue;
@@ -63,10 +65,10 @@ namespace AutoRest.CSharp.Common.Input
                 reader.SkipProperty();
             }
 
-            return inputClient ??= CreateClientInstance(id, name, summary, doc, operations, parameters, parent, [], resolver);
+            return inputClient ??= CreateClientInstance(id, name, summary, doc, operations, parameters, parent, decorators, [], resolver);
         }
 
-        private static InputClient CreateClientInstance(string? id, string? name, string? summary, string? doc, IReadOnlyList<InputOperation>? operations, IReadOnlyList<InputParameter>? parameters, InputClient? parent, IReadOnlyList<InputClient> children, ReferenceResolver resolver)
+        private static InputClient CreateClientInstance(string? id, string? name, string? summary, string? doc, IReadOnlyList<InputOperation>? operations, IReadOnlyList<InputParameter>? parameters, InputClient? parent, IReadOnlyList<InputDecoratorInfo>? decorators,  IReadOnlyList<InputClient> children, ReferenceResolver resolver)
         {
             name = name ?? throw new JsonException("InputClient must have name");
 
@@ -83,7 +85,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 resolver.AddReference(id, inputClient);
             }
-
+            inputClient.Decorators = decorators ?? Array.Empty<InputDecoratorInfo>();
             return inputClient;
 
             static string BuildClientName(string name, InputClient? parent)

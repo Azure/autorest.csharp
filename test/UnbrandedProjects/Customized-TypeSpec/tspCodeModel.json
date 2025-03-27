@@ -2675,7 +2675,19 @@
      "kind": "Client"
     }
    ],
-   "decorators": [],
+   "decorators": [
+    {
+     "$id": "272",
+     "name": "TypeSpec.@service",
+     "arguments": {
+      "$id": "273",
+      "options": {
+       "$id": "274",
+       "title": "hello world"
+      }
+     }
+    }
+   ],
    "crossLanguageDefinitionId": "CustomizedTypeSpec",
    "apiVersions": [
     "2022-05-15-preview"
@@ -2683,9 +2695,9 @@
   }
  ],
  "auth": {
-  "$id": "272",
+  "$id": "275",
   "apiKey": {
-   "$id": "273",
+   "$id": "276",
    "name": "my-api-key",
    "in": "header"
   }

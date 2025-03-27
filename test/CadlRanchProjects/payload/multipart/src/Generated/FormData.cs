@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -707,32 +705,30 @@ namespace Payload.MultiPart
         }
 
         /// <summary> Test content-type: multipart/form-data. </summary>
-        /// <param name="profileImage"></param>
+        /// <param name="body"> The <see cref="AnonymousModelRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
-        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='AnonymousModelAsync(Stream,CancellationToken)']/*" />
-        public virtual async Task<Response> AnonymousModelAsync(Stream profileImage, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='AnonymousModelAsync(AnonymousModelRequest,CancellationToken)']/*" />
+        public virtual async Task<Response> AnonymousModelAsync(AnonymousModelRequest body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(profileImage, nameof(profileImage));
+            Argument.AssertNotNull(body, nameof(body));
 
-            AnonymousModelRequest anonymousModelRequest = new AnonymousModelRequest(profileImage, null);
-            using MultipartFormDataRequestContent content = anonymousModelRequest.ToMultipartRequestContent();
+            using MultipartFormDataRequestContent content = body.ToMultipartRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await AnonymousModelAsync(content, content.ContentType, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Test content-type: multipart/form-data. </summary>
-        /// <param name="profileImage"></param>
+        /// <param name="body"> The <see cref="AnonymousModelRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
-        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='AnonymousModel(Stream,CancellationToken)']/*" />
-        public virtual Response AnonymousModel(Stream profileImage, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='AnonymousModel(AnonymousModelRequest,CancellationToken)']/*" />
+        public virtual Response AnonymousModel(AnonymousModelRequest body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(profileImage, nameof(profileImage));
+            Argument.AssertNotNull(body, nameof(body));
 
-            AnonymousModelRequest anonymousModelRequest = new AnonymousModelRequest(profileImage, null);
-            using MultipartFormDataRequestContent content = anonymousModelRequest.ToMultipartRequestContent();
+            using MultipartFormDataRequestContent content = body.ToMultipartRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = AnonymousModel(content, content.ContentType, context);
             return response;
@@ -748,7 +744,7 @@ namespace Payload.MultiPart
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousModelAsync(Stream,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousModelAsync(AnonymousModelRequest,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -788,7 +784,7 @@ namespace Payload.MultiPart
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousModel(Stream,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousModel(AnonymousModelRequest,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
