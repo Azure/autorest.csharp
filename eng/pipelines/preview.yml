@@ -32,7 +32,7 @@ pool:
 extends:
   template: eng/pipelines/templates/stages/archetype-autorest-preview.yml@azure-sdk-tools
   parameters:
-    NodeVersion: 20.x
+    NodeVersion: $(NODE_VERSION)
     RegenerationJobCount: 10
     BuildPrereleaseVersion: true
     ${{ if eq(variables['Build.Reason'], 'Schedule') }}:
