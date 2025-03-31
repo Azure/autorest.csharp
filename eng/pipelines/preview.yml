@@ -29,10 +29,11 @@ pool:
   name: azsdk-pool-mms-win-2022-general
   vmImage: windows-2022
 
+variables:
+- template: /eng/pipelines/variables/globals.yml@self
+
 extends:
   template: eng/pipelines/templates/stages/archetype-autorest-preview.yml@azure-sdk-tools
-  variables:
-  - template: /eng/pipelines/variables/globals.yml@self
   parameters:
     NodeVersion: $(NODE_VERSION)
     RegenerationJobCount: 10
