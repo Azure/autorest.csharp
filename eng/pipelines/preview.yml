@@ -31,6 +31,8 @@ pool:
 
 extends:
   template: eng/pipelines/templates/stages/archetype-autorest-preview.yml@azure-sdk-tools
+  variables:
+  - template: /eng/pipelines/variables/globals.yml@self
   parameters:
     NodeVersion: $(NODE_VERSION)
     RegenerationJobCount: 10
