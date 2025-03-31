@@ -12,7 +12,8 @@ import {
     tspOutputFileName,
     createModel,
     writeCodeModel,
-    CSharpEmitterContext
+    CSharpEmitterContext,
+    createCSharpEmitterContext
 } from "@typespec/http-client-csharp";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
@@ -42,17 +43,7 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
         "@azure-tools/typespec-csharp",
         azureSDKContextOptions
     );
-    const csharpEmitterContext: CSharpEmitterContext = {
-        logger: logger,
-        __typeCache: {
-            crossLanguageDefinitionIds: new Map(),
-            clients: new Map(),
-            types: new Map(),
-            models: new Map(),
-            enums: new Map()
-        },
-        ...sdkContext
-    };
+    const csharpEmitterContext = createCSharpEmitterContext(sdkContext, logger);
     const root = createModel(csharpEmitterContext);
 
     const outputFolder = resolvePath(
