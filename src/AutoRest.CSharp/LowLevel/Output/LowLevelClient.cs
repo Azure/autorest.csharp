@@ -341,6 +341,9 @@ namespace AutoRest.CSharp.Output.Models
                 // add custom ctors into the candidates
                 foreach (var existingCtor in ExistingType.Constructors)
                 {
+                    // skip any ctor if any of its parameters have a type of non-INamedTypeSymbol, such as an array or anonymous type (like tuple)
+                    if (existingCtor.Parameters.Any(p => p.Type is not INamedTypeSymbol))
+                        continue;
                     var parameters = existingCtor.Parameters;
                     var modifiers = GetModifiers(existingCtor);
                     bool isPublic = modifiers.HasFlag(Public);
