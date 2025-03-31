@@ -29,5 +29,14 @@ namespace FirstTestTypeSpec
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { }, new ResponseClassifier());
             _endpoint = endpoint;
         }
+
+        /// <summary>
+        /// Constructor for testing purpose. See if we could include a constructor that takes an array as parameter
+        /// </summary>
+        /// <param name="endpoint"></param>
+        /// <param name="credential"></param>
+        /// <param name="authorizationScopes"></param>
+        public FirstTestTypeSpecClient(Uri endpoint, TokenCredential credential, string[] authorizationScopes)
+        {}
     }
 }
