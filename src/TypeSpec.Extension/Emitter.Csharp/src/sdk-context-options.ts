@@ -7,7 +7,8 @@ export const azureSDKContextOptions: CreateSdkContextOptions = {
     versioning: {},
     additionalDecorators: [
         "Azure\\.ClientGenerator\\.Core\\.@useSystemTextJsonConverter",
+        "Azure\\.ClientGenerator\\.Core\\.@deserializeEmptyStringAsNull",
         "Azure\\.ResourceManager\\.@armResourceOperations",
-        "TypeSpec\\.@service"
+        "TypeSpec\\.@service",
     ]
 };
