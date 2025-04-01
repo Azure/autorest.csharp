@@ -9,6 +9,6 @@ export const azureSDKContextOptions: CreateSdkContextOptions = {
         "Azure\\.ClientGenerator\\.Core\\.@useSystemTextJsonConverter",
         "Azure\\.ClientGenerator\\.Core\\.@deserializeEmptyStringAsNull",
         "Azure\\.ResourceManager\\.@armResourceOperations",
-        "TypeSpec\\.@service",
+        "TypeSpec\\.@service"
     ]
 };
