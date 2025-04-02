@@ -14,173 +14,6 @@ namespace AnomalyDetector.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AnomalyDetectorModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Models.MultivariateDetectionResult"/>. </summary>
-        /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
-        /// <param name="summary"> Multivariate anomaly detection status. </param>
-        /// <param name="results"> Detection result for each timestamp. </param>
-        /// <returns> A new <see cref="Models.MultivariateDetectionResult"/> instance for mocking. </returns>
-        public static MultivariateDetectionResult MultivariateDetectionResult(Guid resultId = default, MultivariateBatchDetectionResultSummary summary = null, IEnumerable<AnomalyState> results = null)
-        {
-            results ??= new List<AnomalyState>();
-
-            return new MultivariateDetectionResult(resultId, summary, results?.ToList(), serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.MultivariateBatchDetectionResultSummary"/>. </summary>
-        /// <param name="status"> Status of detection results. One of CREATED, RUNNING, READY, and FAILED. </param>
-        /// <param name="errors"> Error message when detection is failed. </param>
-        /// <param name="variableStates"> Variable Status. </param>
-        /// <param name="setupInfo">
-        /// Detection request for batch inference. This is an asynchronous inference which
-        /// will need another API to get detection results.
-        /// </param>
-        /// <returns> A new <see cref="Models.MultivariateBatchDetectionResultSummary"/> instance for mocking. </returns>
-        public static MultivariateBatchDetectionResultSummary MultivariateBatchDetectionResultSummary(MultivariateBatchDetectionStatus status = default, IEnumerable<ErrorResponse> errors = null, IEnumerable<VariableState> variableStates = null, MultivariateBatchDetectionOptions setupInfo = null)
-        {
-            errors ??= new List<ErrorResponse>();
-            variableStates ??= new List<VariableState>();
-
-            return new MultivariateBatchDetectionResultSummary(status, errors?.ToList(), variableStates?.ToList(), setupInfo, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ErrorResponse"/>. </summary>
-        /// <param name="code"> The error code. </param>
-        /// <param name="message"> The message explaining the error reported by the service. </param>
-        /// <returns> A new <see cref="Models.ErrorResponse"/> instance for mocking. </returns>
-        public static ErrorResponse ErrorResponse(string code = null, string message = null)
-        {
-            return new ErrorResponse(code, message, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.AnomalyState"/>. </summary>
-        /// <param name="timestamp"> The timestamp for this anomaly. </param>
-        /// <param name="value"> The detailed value of this anomalous timestamp. </param>
-        /// <param name="errors"> Error message for the current timestamp. </param>
-        /// <returns> A new <see cref="Models.AnomalyState"/> instance for mocking. </returns>
-        public static AnomalyState AnomalyState(DateTimeOffset timestamp = default, AnomalyValue value = null, IEnumerable<ErrorResponse> errors = null)
-        {
-            errors ??= new List<ErrorResponse>();
-
-            return new AnomalyState(timestamp, value, errors?.ToList(), serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.AnomalyValue"/>. </summary>
-        /// <param name="isAnomaly"> True if an anomaly is detected at the current timestamp. </param>
-        /// <param name="severity">
-        /// Indicates the significance of the anomaly. The higher the severity, the more
-        /// significant the anomaly is.
-        /// </param>
-        /// <param name="score">
-        /// Raw anomaly score of severity, will help indicate the degree of abnormality as
-        /// well.
-        /// </param>
-        /// <param name="interpretation"> Interpretation of this anomalous timestamp. </param>
-        /// <returns> A new <see cref="Models.AnomalyValue"/> instance for mocking. </returns>
-        public static AnomalyValue AnomalyValue(bool isAnomaly = default, float severity = default, float score = default, IEnumerable<AnomalyInterpretation> interpretation = null)
-        {
-            interpretation ??= new List<AnomalyInterpretation>();
-
-            return new AnomalyValue(isAnomaly, severity, score, interpretation?.ToList(), serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.AnomalyInterpretation"/>. </summary>
-        /// <param name="variable"> Variable. </param>
-        /// <param name="contributionScore">
-        /// This score shows the percentage contributing to the anomalous timestamp. A
-        /// number between 0 and 1.
-        /// </param>
-        /// <param name="correlationChanges"> Correlation changes among the anomalous variables. </param>
-        /// <returns> A new <see cref="Models.AnomalyInterpretation"/> instance for mocking. </returns>
-        public static AnomalyInterpretation AnomalyInterpretation(string variable = null, float? contributionScore = null, CorrelationChanges correlationChanges = null)
-        {
-            return new AnomalyInterpretation(variable, contributionScore, correlationChanges, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.CorrelationChanges"/>. </summary>
-        /// <param name="changedVariables"> The correlated variables that have correlation changes under an anomaly. </param>
-        /// <returns> A new <see cref="Models.CorrelationChanges"/> instance for mocking. </returns>
-        public static CorrelationChanges CorrelationChanges(IEnumerable<string> changedVariables = null)
-        {
-            changedVariables ??= new List<string>();
-
-            return new CorrelationChanges(changedVariables?.ToList(), serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ModelInfo"/>. </summary>
-        /// <param name="dataSource">
-        /// Source link to the input data to indicate an accessible Azure storage Uri,
-        /// either pointed to an Azure blob storage folder, or pointed to a CSV file in
-        /// Azure blob storage based on you data schema selection.
-        /// </param>
-        /// <param name="dataSchema">
-        /// Data schema of input data source: OneTable or MultiTable. The default
-        /// DataSchema is OneTable.
-        /// </param>
-        /// <param name="startTime">
-        /// A required field, indicating the start time of training data, which should be
-        /// date-time of ISO 8601 format.
-        /// </param>
-        /// <param name="endTime">
-        /// A required field, indicating the end time of training data, which should be
-        /// date-time of ISO 8601 format.
-        /// </param>
-        /// <param name="displayName">
-        /// An optional field. The display name of the model whose maximum length is 24
-        /// characters.
-        /// </param>
-        /// <param name="slidingWindow">
-        /// An optional field, indicating how many previous timestamps will be used to
-        /// detect whether the timestamp is anomaly or not.
-        /// </param>
-        /// <param name="alignPolicy"> An optional field, indicating the manner to align multiple variables. </param>
-        /// <param name="status"> Model status. One of CREATED, RUNNING, READY, and FAILED. </param>
-        /// <param name="errors"> Error messages when failed to create a model. </param>
-        /// <param name="diagnosticsInfo"> Diagnostics information to help inspect the states of model or variable. </param>
-        /// <returns> A new <see cref="Models.ModelInfo"/> instance for mocking. </returns>
-        public static ModelInfo ModelInfo(string dataSource = null, DataSchema? dataSchema = null, DateTimeOffset startTime = default, DateTimeOffset endTime = default, string displayName = null, int? slidingWindow = null, AlignPolicy alignPolicy = null, ModelStatus? status = null, IEnumerable<ErrorResponse> errors = null, DiagnosticsInfo diagnosticsInfo = null)
-        {
-            errors ??= new List<ErrorResponse>();
-
-            return new ModelInfo(
-                dataSource,
-                dataSchema,
-                startTime,
-                endTime,
-                displayName,
-                slidingWindow,
-                alignPolicy,
-                status,
-                errors?.ToList(),
-                diagnosticsInfo,
-                serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.AnomalyDetectionModel"/>. </summary>
-        /// <param name="modelId"> Model identifier. </param>
-        /// <param name="createdTime"> Date and time (UTC) when the model was created. </param>
-        /// <param name="lastUpdatedTime"> Date and time (UTC) when the model was last updated. </param>
-        /// <param name="modelInfo">
-        /// Training result of a model including its status, errors and diagnostics
-        /// information.
-        /// </param>
-        /// <returns> A new <see cref="Models.AnomalyDetectionModel"/> instance for mocking. </returns>
-        public static AnomalyDetectionModel AnomalyDetectionModel(Guid modelId = default, DateTimeOffset createdTime = default, DateTimeOffset lastUpdatedTime = default, ModelInfo modelInfo = null)
-        {
-            return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.MultivariateLastDetectionResult"/>. </summary>
-        /// <param name="variableStates"> Variable Status. </param>
-        /// <param name="results"> Anomaly status and information. </param>
-        /// <returns> A new <see cref="Models.MultivariateLastDetectionResult"/> instance for mocking. </returns>
-        public static MultivariateLastDetectionResult MultivariateLastDetectionResult(IEnumerable<VariableState> variableStates = null, IEnumerable<AnomalyState> results = null)
-        {
-            variableStates ??= new List<VariableState>();
-            results ??= new List<AnomalyState>();
-
-            return new MultivariateLastDetectionResult(variableStates?.ToList(), results?.ToList(), serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.TimeSeriesPoint"/>. </summary>
         /// <param name="timestamp"> Optional argument, timestamp of a data point (ISO8601 format). </param>
         /// <param name="value"> The measurement of that point, should be float. </param>
@@ -369,6 +202,173 @@ namespace AnomalyDetector.Models
             confidenceScores ??= new List<float>();
 
             return new UnivariateChangePointDetectionResult(period, isChangePoint?.ToList(), confidenceScores?.ToList(), serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.MultivariateDetectionResult"/>. </summary>
+        /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
+        /// <param name="summary"> Multivariate anomaly detection status. </param>
+        /// <param name="results"> Detection result for each timestamp. </param>
+        /// <returns> A new <see cref="Models.MultivariateDetectionResult"/> instance for mocking. </returns>
+        public static MultivariateDetectionResult MultivariateDetectionResult(Guid resultId = default, MultivariateBatchDetectionResultSummary summary = null, IEnumerable<AnomalyState> results = null)
+        {
+            results ??= new List<AnomalyState>();
+
+            return new MultivariateDetectionResult(resultId, summary, results?.ToList(), serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.MultivariateBatchDetectionResultSummary"/>. </summary>
+        /// <param name="status"> Status of detection results. One of CREATED, RUNNING, READY, and FAILED. </param>
+        /// <param name="errors"> Error message when detection is failed. </param>
+        /// <param name="variableStates"> Variable Status. </param>
+        /// <param name="setupInfo">
+        /// Detection request for batch inference. This is an asynchronous inference which
+        /// will need another API to get detection results.
+        /// </param>
+        /// <returns> A new <see cref="Models.MultivariateBatchDetectionResultSummary"/> instance for mocking. </returns>
+        public static MultivariateBatchDetectionResultSummary MultivariateBatchDetectionResultSummary(MultivariateBatchDetectionStatus status = default, IEnumerable<ErrorResponse> errors = null, IEnumerable<VariableState> variableStates = null, MultivariateBatchDetectionOptions setupInfo = null)
+        {
+            errors ??= new List<ErrorResponse>();
+            variableStates ??= new List<VariableState>();
+
+            return new MultivariateBatchDetectionResultSummary(status, errors?.ToList(), variableStates?.ToList(), setupInfo, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ErrorResponse"/>. </summary>
+        /// <param name="code"> The error code. </param>
+        /// <param name="message"> The message explaining the error reported by the service. </param>
+        /// <returns> A new <see cref="Models.ErrorResponse"/> instance for mocking. </returns>
+        public static ErrorResponse ErrorResponse(string code = null, string message = null)
+        {
+            return new ErrorResponse(code, message, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.AnomalyState"/>. </summary>
+        /// <param name="timestamp"> The timestamp for this anomaly. </param>
+        /// <param name="value"> The detailed value of this anomalous timestamp. </param>
+        /// <param name="errors"> Error message for the current timestamp. </param>
+        /// <returns> A new <see cref="Models.AnomalyState"/> instance for mocking. </returns>
+        public static AnomalyState AnomalyState(DateTimeOffset timestamp = default, AnomalyValue value = null, IEnumerable<ErrorResponse> errors = null)
+        {
+            errors ??= new List<ErrorResponse>();
+
+            return new AnomalyState(timestamp, value, errors?.ToList(), serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.AnomalyValue"/>. </summary>
+        /// <param name="isAnomaly"> True if an anomaly is detected at the current timestamp. </param>
+        /// <param name="severity">
+        /// Indicates the significance of the anomaly. The higher the severity, the more
+        /// significant the anomaly is.
+        /// </param>
+        /// <param name="score">
+        /// Raw anomaly score of severity, will help indicate the degree of abnormality as
+        /// well.
+        /// </param>
+        /// <param name="interpretation"> Interpretation of this anomalous timestamp. </param>
+        /// <returns> A new <see cref="Models.AnomalyValue"/> instance for mocking. </returns>
+        public static AnomalyValue AnomalyValue(bool isAnomaly = default, float severity = default, float score = default, IEnumerable<AnomalyInterpretation> interpretation = null)
+        {
+            interpretation ??= new List<AnomalyInterpretation>();
+
+            return new AnomalyValue(isAnomaly, severity, score, interpretation?.ToList(), serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.AnomalyInterpretation"/>. </summary>
+        /// <param name="variable"> Variable. </param>
+        /// <param name="contributionScore">
+        /// This score shows the percentage contributing to the anomalous timestamp. A
+        /// number between 0 and 1.
+        /// </param>
+        /// <param name="correlationChanges"> Correlation changes among the anomalous variables. </param>
+        /// <returns> A new <see cref="Models.AnomalyInterpretation"/> instance for mocking. </returns>
+        public static AnomalyInterpretation AnomalyInterpretation(string variable = null, float? contributionScore = null, CorrelationChanges correlationChanges = null)
+        {
+            return new AnomalyInterpretation(variable, contributionScore, correlationChanges, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.CorrelationChanges"/>. </summary>
+        /// <param name="changedVariables"> The correlated variables that have correlation changes under an anomaly. </param>
+        /// <returns> A new <see cref="Models.CorrelationChanges"/> instance for mocking. </returns>
+        public static CorrelationChanges CorrelationChanges(IEnumerable<string> changedVariables = null)
+        {
+            changedVariables ??= new List<string>();
+
+            return new CorrelationChanges(changedVariables?.ToList(), serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ModelInfo"/>. </summary>
+        /// <param name="dataSource">
+        /// Source link to the input data to indicate an accessible Azure storage Uri,
+        /// either pointed to an Azure blob storage folder, or pointed to a CSV file in
+        /// Azure blob storage based on you data schema selection.
+        /// </param>
+        /// <param name="dataSchema">
+        /// Data schema of input data source: OneTable or MultiTable. The default
+        /// DataSchema is OneTable.
+        /// </param>
+        /// <param name="startTime">
+        /// A required field, indicating the start time of training data, which should be
+        /// date-time of ISO 8601 format.
+        /// </param>
+        /// <param name="endTime">
+        /// A required field, indicating the end time of training data, which should be
+        /// date-time of ISO 8601 format.
+        /// </param>
+        /// <param name="displayName">
+        /// An optional field. The display name of the model whose maximum length is 24
+        /// characters.
+        /// </param>
+        /// <param name="slidingWindow">
+        /// An optional field, indicating how many previous timestamps will be used to
+        /// detect whether the timestamp is anomaly or not.
+        /// </param>
+        /// <param name="alignPolicy"> An optional field, indicating the manner to align multiple variables. </param>
+        /// <param name="status"> Model status. One of CREATED, RUNNING, READY, and FAILED. </param>
+        /// <param name="errors"> Error messages when failed to create a model. </param>
+        /// <param name="diagnosticsInfo"> Diagnostics information to help inspect the states of model or variable. </param>
+        /// <returns> A new <see cref="Models.ModelInfo"/> instance for mocking. </returns>
+        public static ModelInfo ModelInfo(string dataSource = null, DataSchema? dataSchema = null, DateTimeOffset startTime = default, DateTimeOffset endTime = default, string displayName = null, int? slidingWindow = null, AlignPolicy alignPolicy = null, ModelStatus? status = null, IEnumerable<ErrorResponse> errors = null, DiagnosticsInfo diagnosticsInfo = null)
+        {
+            errors ??= new List<ErrorResponse>();
+
+            return new ModelInfo(
+                dataSource,
+                dataSchema,
+                startTime,
+                endTime,
+                displayName,
+                slidingWindow,
+                alignPolicy,
+                status,
+                errors?.ToList(),
+                diagnosticsInfo,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.AnomalyDetectionModel"/>. </summary>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="createdTime"> Date and time (UTC) when the model was created. </param>
+        /// <param name="lastUpdatedTime"> Date and time (UTC) when the model was last updated. </param>
+        /// <param name="modelInfo">
+        /// Training result of a model including its status, errors and diagnostics
+        /// information.
+        /// </param>
+        /// <returns> A new <see cref="Models.AnomalyDetectionModel"/> instance for mocking. </returns>
+        public static AnomalyDetectionModel AnomalyDetectionModel(Guid modelId = default, DateTimeOffset createdTime = default, DateTimeOffset lastUpdatedTime = default, ModelInfo modelInfo = null)
+        {
+            return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.MultivariateLastDetectionResult"/>. </summary>
+        /// <param name="variableStates"> Variable Status. </param>
+        /// <param name="results"> Anomaly status and information. </param>
+        /// <returns> A new <see cref="Models.MultivariateLastDetectionResult"/> instance for mocking. </returns>
+        public static MultivariateLastDetectionResult MultivariateLastDetectionResult(IEnumerable<VariableState> variableStates = null, IEnumerable<AnomalyState> results = null)
+        {
+            variableStates ??= new List<VariableState>();
+            results ??= new List<AnomalyState>();
+
+            return new MultivariateLastDetectionResult(variableStates?.ToList(), results?.ToList(), serializedAdditionalRawData: null);
         }
     }
 }
