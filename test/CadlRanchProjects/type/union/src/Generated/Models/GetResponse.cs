@@ -47,18 +47,15 @@ namespace _Type.Union.Models
 
         /// <summary> Initializes a new instance of <see cref="GetResponse"/>. </summary>
         /// <param name="prop"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
-        internal GetResponse(MixedTypesCases prop)
+        internal GetResponse(GetResponseProp prop)
         {
-            Argument.AssertNotNull(prop, nameof(prop));
-
             Prop = prop;
         }
 
         /// <summary> Initializes a new instance of <see cref="GetResponse"/>. </summary>
         /// <param name="prop"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal GetResponse(MixedTypesCases prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal GetResponse(GetResponseProp prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Prop = prop;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -70,6 +67,6 @@ namespace _Type.Union.Models
         }
 
         /// <summary> Gets the prop. </summary>
-        public MixedTypesCases Prop { get; }
+        public GetResponseProp Prop { get; }
     }
 }

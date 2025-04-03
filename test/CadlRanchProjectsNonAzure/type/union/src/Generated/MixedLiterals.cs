@@ -36,17 +36,17 @@ namespace Scm._Type.Union
         }
 
         /// <summary> Get mixed literal. </summary>
-        public virtual async Task<ClientResult<GetResponse1>> GetMixedLiteralAsync()
+        public virtual async Task<ClientResult<GetResponse8>> GetMixedLiteralAsync()
         {
             ClientResult result = await GetMixedLiteralAsync(null).ConfigureAwait(false);
-            return ClientResult.FromValue(GetResponse1.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse8.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Get mixed literal. </summary>
-        public virtual ClientResult<GetResponse1> GetMixedLiteral()
+        public virtual ClientResult<GetResponse8> GetMixedLiteral()
         {
             ClientResult result = GetMixedLiteral(null);
-            return ClientResult.FromValue(GetResponse1.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse8.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -104,8 +104,8 @@ namespace Scm._Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest1 sendRequest1 = new SendRequest1(prop, null);
-            ClientResult result = await SendAsync(sendRequest1.ToBinaryContent(), null).ConfigureAwait(false);
+            SendRequest8 sendRequest8 = new SendRequest8(prop, null);
+            ClientResult result = await SendAsync(sendRequest8.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
@@ -116,8 +116,8 @@ namespace Scm._Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest1 sendRequest1 = new SendRequest1(prop, null);
-            ClientResult result = Send(sendRequest1.ToBinaryContent(), null);
+            SendRequest8 sendRequest8 = new SendRequest8(prop, null);
+            ClientResult result = Send(sendRequest8.ToBinaryContent(), null);
             return result;
         }
 
