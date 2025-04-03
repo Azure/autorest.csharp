@@ -47,18 +47,15 @@ namespace _Type.Union.Models
 
         /// <summary> Initializes a new instance of <see cref="GetResponse4"/>. </summary>
         /// <param name="prop"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
-        internal GetResponse4(BinaryData prop)
+        internal GetResponse4(GetResponseProp3 prop)
         {
-            Argument.AssertNotNull(prop, nameof(prop));
-
             Prop = prop;
         }
 
         /// <summary> Initializes a new instance of <see cref="GetResponse4"/>. </summary>
         /// <param name="prop"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal GetResponse4(BinaryData prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal GetResponse4(GetResponseProp3 prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Prop = prop;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -69,47 +66,7 @@ namespace _Type.Union.Models
         {
         }
 
-        /// <summary>
-        /// Gets the prop
-        /// <para>
-        /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// <remarks>
-        /// Supported types:
-        /// <list type="bullet">
-        /// <item>
-        /// <description><see cref="Cat"/></description>
-        /// </item>
-        /// <item>
-        /// <description><see cref="Dog"/></description>
-        /// </item>
-        /// </list>
-        /// </remarks>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        public BinaryData Prop { get; }
+        /// <summary> Gets the prop. </summary>
+        public GetResponseProp3 Prop { get; }
     }
 }

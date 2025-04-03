@@ -9,13 +9,13 @@ namespace Scm._Type.Property.AdditionalProperties.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ScmTypePropertyAdditionalPropertiesModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Models.WidgetData2"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.WidgetData0"/>. </summary>
         /// <param name="kind"></param>
-        /// <param name="start"></param>
-        /// <returns> A new <see cref="Models.WidgetData2"/> instance for mocking. </returns>
-        public static WidgetData2 WidgetData2(WidgetData2Kind kind = default, string start = null)
+        /// <param name="fooProp"></param>
+        /// <returns> A new <see cref="Models.WidgetData0"/> instance for mocking. </returns>
+        public static WidgetData0 WidgetData0(WidgetData0Kind kind = default, string fooProp = null)
         {
-            return new WidgetData2(kind, start, serializedAdditionalRawData: null);
+            return new WidgetData0(kind, fooProp, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.WidgetData1"/>. </summary>
@@ -28,13 +28,13 @@ namespace Scm._Type.Property.AdditionalProperties.Models
             return new WidgetData1(kind, start, end, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.WidgetData0"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.WidgetData2"/>. </summary>
         /// <param name="kind"></param>
-        /// <param name="fooProp"></param>
-        /// <returns> A new <see cref="Models.WidgetData0"/> instance for mocking. </returns>
-        public static WidgetData0 WidgetData0(WidgetData0Kind kind = default, string fooProp = null)
+        /// <param name="start"></param>
+        /// <returns> A new <see cref="Models.WidgetData2"/> instance for mocking. </returns>
+        public static WidgetData2 WidgetData2(WidgetData2Kind kind = default, string start = null)
         {
-            return new WidgetData0(kind, fooProp, serializedAdditionalRawData: null);
+            return new WidgetData2(kind, start, serializedAdditionalRawData: null);
         }
     }
 }

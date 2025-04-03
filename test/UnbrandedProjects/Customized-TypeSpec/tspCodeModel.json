@@ -621,7 +621,7 @@
       "type": {
        "$id": "77",
        "kind": "array",
-       "name": "Array",
+       "name": "Array1",
        "valueType": {
         "$id": "78",
         "kind": "int32",
@@ -660,7 +660,7 @@
       "type": {
        "$id": "83",
        "kind": "array",
-       "name": "Array",
+       "name": "Array1",
        "valueType": {
         "$id": "84",
         "kind": "int32",

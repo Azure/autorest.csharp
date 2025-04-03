@@ -36,17 +36,17 @@ namespace Scm._Type.Union
         }
 
         /// <summary> Get models only. </summary>
-        public virtual async Task<ClientResult<GetResponse4>> GetModelsOnlyAsync()
+        public virtual async Task<ClientResult<GetResponse5>> GetModelsOnlyAsync()
         {
             ClientResult result = await GetModelsOnlyAsync(null).ConfigureAwait(false);
-            return ClientResult.FromValue(GetResponse4.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse5.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Get models only. </summary>
-        public virtual ClientResult<GetResponse4> GetModelsOnly()
+        public virtual ClientResult<GetResponse5> GetModelsOnly()
         {
             ClientResult result = GetModelsOnly(null);
-            return ClientResult.FromValue(GetResponse4.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse5.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -104,8 +104,8 @@ namespace Scm._Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest4 sendRequest4 = new SendRequest4(prop, null);
-            ClientResult result = await SendAsync(sendRequest4.ToBinaryContent(), null).ConfigureAwait(false);
+            SendRequest5 sendRequest5 = new SendRequest5(prop, null);
+            ClientResult result = await SendAsync(sendRequest5.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
@@ -116,8 +116,8 @@ namespace Scm._Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest4 sendRequest4 = new SendRequest4(prop, null);
-            ClientResult result = Send(sendRequest4.ToBinaryContent(), null);
+            SendRequest5 sendRequest5 = new SendRequest5(prop, null);
+            ClientResult result = Send(sendRequest5.ToBinaryContent(), null);
             return result;
         }
 

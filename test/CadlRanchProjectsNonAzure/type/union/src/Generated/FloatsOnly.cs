@@ -36,17 +36,17 @@ namespace Scm._Type.Union
         }
 
         /// <summary> Get floats only. </summary>
-        public virtual async Task<ClientResult<GetResponse5>> GetFloatsOnlyAsync()
+        public virtual async Task<ClientResult<GetResponse4>> GetFloatsOnlyAsync()
         {
             ClientResult result = await GetFloatsOnlyAsync(null).ConfigureAwait(false);
-            return ClientResult.FromValue(GetResponse5.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse4.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Get floats only. </summary>
-        public virtual ClientResult<GetResponse5> GetFloatsOnly()
+        public virtual ClientResult<GetResponse4> GetFloatsOnly()
         {
             ClientResult result = GetFloatsOnly(null);
-            return ClientResult.FromValue(GetResponse5.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse4.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -99,19 +99,19 @@ namespace Scm._Type.Union
 
         /// <summary> Send. </summary>
         /// <param name="prop"></param>
-        public virtual async Task<ClientResult> SendAsync(GetResponseProp1 prop)
+        public virtual async Task<ClientResult> SendAsync(GetResponseProp3 prop)
         {
-            SendRequest5 sendRequest5 = new SendRequest5(prop, null);
-            ClientResult result = await SendAsync(sendRequest5.ToBinaryContent(), null).ConfigureAwait(false);
+            SendRequest4 sendRequest4 = new SendRequest4(prop, null);
+            ClientResult result = await SendAsync(sendRequest4.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Send. </summary>
         /// <param name="prop"></param>
-        public virtual ClientResult Send(GetResponseProp1 prop)
+        public virtual ClientResult Send(GetResponseProp3 prop)
         {
-            SendRequest5 sendRequest5 = new SendRequest5(prop, null);
-            ClientResult result = Send(sendRequest5.ToBinaryContent(), null);
+            SendRequest4 sendRequest4 = new SendRequest4(prop, null);
+            ClientResult result = Send(sendRequest4.ToBinaryContent(), null);
             return result;
         }
 
@@ -125,7 +125,7 @@ namespace Scm._Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SendAsync(GetResponseProp1)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SendAsync(GetResponseProp3)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -153,7 +153,7 @@ namespace Scm._Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Send(GetResponseProp1)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Send(GetResponseProp3)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

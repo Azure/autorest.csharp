@@ -47,15 +47,18 @@ namespace _Type.Union.Models
 
         /// <summary> Initializes a new instance of <see cref="GetResponse7"/>. </summary>
         /// <param name="prop"></param>
-        internal GetResponse7(StringExtensibleNamedUnion prop)
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        internal GetResponse7(StringAndArrayCases prop)
         {
+            Argument.AssertNotNull(prop, nameof(prop));
+
             Prop = prop;
         }
 
         /// <summary> Initializes a new instance of <see cref="GetResponse7"/>. </summary>
         /// <param name="prop"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal GetResponse7(StringExtensibleNamedUnion prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal GetResponse7(StringAndArrayCases prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Prop = prop;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -67,6 +70,6 @@ namespace _Type.Union.Models
         }
 
         /// <summary> Gets the prop. </summary>
-        public StringExtensibleNamedUnion Prop { get; }
+        public StringAndArrayCases Prop { get; }
     }
 }

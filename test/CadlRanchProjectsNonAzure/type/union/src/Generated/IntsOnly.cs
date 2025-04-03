@@ -36,17 +36,17 @@ namespace Scm._Type.Union
         }
 
         /// <summary> Get ints only. </summary>
-        public virtual async Task<ClientResult<GetResponse6>> GetIntsOnlyAsync()
+        public virtual async Task<ClientResult<GetResponse3>> GetIntsOnlyAsync()
         {
             ClientResult result = await GetIntsOnlyAsync(null).ConfigureAwait(false);
-            return ClientResult.FromValue(GetResponse6.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse3.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Get ints only. </summary>
-        public virtual ClientResult<GetResponse6> GetIntsOnly()
+        public virtual ClientResult<GetResponse3> GetIntsOnly()
         {
             ClientResult result = GetIntsOnly(null);
-            return ClientResult.FromValue(GetResponse6.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse3.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -101,8 +101,8 @@ namespace Scm._Type.Union
         /// <param name="prop"></param>
         public virtual async Task<ClientResult> SendAsync(GetResponseProp2 prop)
         {
-            SendRequest6 sendRequest6 = new SendRequest6(prop, null);
-            ClientResult result = await SendAsync(sendRequest6.ToBinaryContent(), null).ConfigureAwait(false);
+            SendRequest3 sendRequest3 = new SendRequest3(prop, null);
+            ClientResult result = await SendAsync(sendRequest3.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
@@ -110,8 +110,8 @@ namespace Scm._Type.Union
         /// <param name="prop"></param>
         public virtual ClientResult Send(GetResponseProp2 prop)
         {
-            SendRequest6 sendRequest6 = new SendRequest6(prop, null);
-            ClientResult result = Send(sendRequest6.ToBinaryContent(), null);
+            SendRequest3 sendRequest3 = new SendRequest3(prop, null);
+            ClientResult result = Send(sendRequest3.ToBinaryContent(), null);
             return result;
         }
 

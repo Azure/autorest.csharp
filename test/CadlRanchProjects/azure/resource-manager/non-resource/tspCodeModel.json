@@ -145,7 +145,7 @@
    "name": "ErrorResponse",
    "namespace": "_Azure.ResourceManager.NonResources",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
-   "usage": "Error,Json,Exception",
+   "usage": "Json,Exception",
    "doc": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
    "decorators": [],
    "properties": [

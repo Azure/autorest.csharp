@@ -1447,7 +1447,7 @@
       "type": {
        "$id": "169",
        "kind": "array",
-       "name": "Array",
+       "name": "Array1",
        "valueType": {
         "$id": "170",
         "kind": "int32",
@@ -1486,7 +1486,7 @@
       "type": {
        "$id": "175",
        "kind": "array",
-       "name": "Array",
+       "name": "Array1",
        "valueType": {
         "$id": "176",
         "kind": "int32",
@@ -2889,7 +2889,7 @@
      "type": {
       "$id": "364",
       "kind": "array",
-      "name": "Array",
+      "name": "Array2",
       "valueType": {
        "$id": "365",
        "kind": "union",

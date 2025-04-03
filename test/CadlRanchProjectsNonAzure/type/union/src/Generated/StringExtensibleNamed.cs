@@ -36,17 +36,17 @@ namespace Scm._Type.Union
         }
 
         /// <summary> Get string extensible named. </summary>
-        public virtual async Task<ClientResult<GetResponse7>> GetStringExtensibleNamedAsync()
+        public virtual async Task<ClientResult<GetResponse2>> GetStringExtensibleNamedAsync()
         {
             ClientResult result = await GetStringExtensibleNamedAsync(null).ConfigureAwait(false);
-            return ClientResult.FromValue(GetResponse7.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse2.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Get string extensible named. </summary>
-        public virtual ClientResult<GetResponse7> GetStringExtensibleNamed()
+        public virtual ClientResult<GetResponse2> GetStringExtensibleNamed()
         {
             ClientResult result = GetStringExtensibleNamed(null);
-            return ClientResult.FromValue(GetResponse7.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse2.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -101,8 +101,8 @@ namespace Scm._Type.Union
         /// <param name="prop"></param>
         public virtual async Task<ClientResult> SendAsync(StringExtensibleNamedUnion prop)
         {
-            SendRequest7 sendRequest7 = new SendRequest7(prop, null);
-            ClientResult result = await SendAsync(sendRequest7.ToBinaryContent(), null).ConfigureAwait(false);
+            SendRequest2 sendRequest2 = new SendRequest2(prop, null);
+            ClientResult result = await SendAsync(sendRequest2.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
@@ -110,8 +110,8 @@ namespace Scm._Type.Union
         /// <param name="prop"></param>
         public virtual ClientResult Send(StringExtensibleNamedUnion prop)
         {
-            SendRequest7 sendRequest7 = new SendRequest7(prop, null);
-            ClientResult result = Send(sendRequest7.ToBinaryContent(), null);
+            SendRequest2 sendRequest2 = new SendRequest2(prop, null);
+            ClientResult result = Send(sendRequest2.ToBinaryContent(), null);
             return result;
         }
 

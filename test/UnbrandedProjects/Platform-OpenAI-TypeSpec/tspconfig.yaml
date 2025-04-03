@@ -1,4 +1,0 @@
-options:
-  "@azure-tools/typespec-csharp":
-    generate-test-project: true
-    enable-internal-raw-data: true
