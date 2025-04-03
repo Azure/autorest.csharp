@@ -885,7 +885,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static BoolExpression GetCheckEmptyPropertyValueExpression(JsonPropertyExpression jsonProperty, JsonPropertySerialization jsonPropertySerialization, bool shouldTreatEmptyStringAsNull)
         {
             var jsonElement = jsonProperty.Value;
-            if (!shouldTreatEmptyStringAsNull)
+            if (!shouldTreatEmptyStringAsNull && !jsonPropertySerialization.DeserializeEmptyStringAsNull)
             {
                 return jsonElement.ValueKindEqualsNull();
             }
