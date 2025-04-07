@@ -9,10 +9,10 @@ import path from "node:path";
 import {
     Logger,
     configurationFileName,
-    tspOutputFileName,
+    createCSharpEmitterContext,
     createModel,
+    tspOutputFileName,
     writeCodeModel,
-    createCSharpEmitterContext
 } from "@typespec/http-client-csharp";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
