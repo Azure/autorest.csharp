@@ -359,20 +359,20 @@
   {
    "$id": "40",
    "kind": "model",
-   "name": "LocationResource",
+   "name": "TopLevelTrackedResource",
    "namespace": "_Azure.ResourceManager.Resources",
-   "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResource",
-   "usage": "Input,Output,Json",
-   "doc": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+   "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResource",
+   "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
+   "doc": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
    "decorators": [],
    "baseModel": {
     "$id": "41",
     "kind": "model",
-    "name": "ProxyResource",
+    "name": "TrackedResource",
     "namespace": "_Azure.ResourceManager.Resources",
-    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ProxyResource",
+    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
     "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-    "doc": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+    "doc": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
     "decorators": [],
     "baseModel": {
      "$id": "42",
@@ -683,54 +683,94 @@
       }
      ]
     },
-    "properties": []
+    "properties": [
+     {
+      "$id": "85",
+      "kind": "property",
+      "name": "tags",
+      "serializedName": "tags",
+      "doc": "Resource tags.",
+      "type": {
+       "$id": "86",
+       "kind": "dict",
+       "keyType": {
+        "$id": "87",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+       },
+       "valueType": {
+        "$id": "88",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+       },
+       "decorators": []
+      },
+      "optional": true,
+      "readOnly": false,
+      "discriminator": false,
+      "flatten": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource.tags",
+      "serializationOptions": {
+       "$id": "89",
+       "json": {
+        "$id": "90",
+        "name": "tags"
+       }
+      }
+     },
+     {
+      "$id": "91",
+      "kind": "property",
+      "name": "location",
+      "serializedName": "location",
+      "doc": "The geo-location where the resource lives",
+      "type": {
+       "$id": "92",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
+      },
+      "optional": false,
+      "readOnly": false,
+      "discriminator": false,
+      "flatten": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource.location",
+      "serializationOptions": {
+       "$id": "93",
+       "json": {
+        "$id": "94",
+        "name": "location"
+       }
+      }
+     }
+    ]
    },
    "properties": [
     {
-     "$id": "85",
+     "$id": "95",
      "kind": "property",
      "name": "properties",
      "serializedName": "properties",
      "doc": "The resource-specific properties for this resource.",
      "type": {
-      "$id": "86",
+      "$id": "96",
       "kind": "model",
-      "name": "LocationResourceProperties",
+      "name": "TopLevelTrackedResourceProperties",
       "namespace": "_Azure.ResourceManager.Resources",
-      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResourceProperties",
-      "usage": "Input,Output,Json",
-      "doc": "Location resource properties",
+      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResourceProperties",
+      "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
+      "doc": "Top Level Arm Resource Properties.",
       "decorators": [],
       "properties": [
        {
-        "$id": "87",
-        "kind": "property",
-        "name": "description",
-        "serializedName": "description",
-        "doc": "The description of the resource.",
-        "type": {
-         "$id": "88",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "optional": true,
-        "readOnly": false,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResourceProperties.description",
-        "serializationOptions": {
-         "$id": "89",
-         "json": {
-          "$id": "90",
-          "name": "description"
-         }
-        }
-       },
-       {
-        "$id": "91",
+        "$id": "97",
         "kind": "property",
         "name": "provisioningState",
         "serializedName": "provisioningState",
@@ -743,12 +783,39 @@
         "discriminator": false,
         "flatten": false,
         "decorators": [],
-        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResourceProperties.provisioningState",
+        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResourceProperties.provisioningState",
         "serializationOptions": {
-         "$id": "92",
+         "$id": "98",
          "json": {
-          "$id": "93",
+          "$id": "99",
           "name": "provisioningState"
+         }
+        }
+       },
+       {
+        "$id": "100",
+        "kind": "property",
+        "name": "description",
+        "serializedName": "description",
+        "doc": "The description of the resource.",
+        "type": {
+         "$id": "101",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "optional": true,
+        "readOnly": false,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResourceProperties.description",
+        "serializationOptions": {
+         "$id": "102",
+         "json": {
+          "$id": "103",
+          "name": "description"
          }
         }
        }
@@ -759,11 +826,11 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResource.properties",
+     "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResource.properties",
      "serializationOptions": {
-      "$id": "94",
+      "$id": "104",
       "json": {
-       "$id": "95",
+       "$id": "105",
        "name": "properties"
       }
      }
@@ -771,7 +838,7 @@
    ]
   },
   {
-   "$ref": "86"
+   "$ref": "96"
   },
   {
    "$ref": "41"
@@ -783,23 +850,23 @@
    "$ref": "58"
   },
   {
-   "$id": "96",
+   "$id": "106",
    "kind": "model",
    "name": "ErrorResponse",
    "namespace": "_Azure.ResourceManager.Resources",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
-   "usage": "Error,Json,Exception",
+   "usage": "Json,Exception",
    "doc": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
    "decorators": [],
    "properties": [
     {
-     "$id": "97",
+     "$id": "107",
      "kind": "property",
      "name": "error",
      "serializedName": "error",
      "doc": "The error object.",
      "type": {
-      "$id": "98",
+      "$id": "108",
       "kind": "model",
       "name": "ErrorDetail",
       "namespace": "_Azure.ResourceManager.Resources",
@@ -809,13 +876,13 @@
       "decorators": [],
       "properties": [
        {
-        "$id": "99",
+        "$id": "109",
         "kind": "property",
         "name": "code",
         "serializedName": "code",
         "doc": "The error code.",
         "type": {
-         "$id": "100",
+         "$id": "110",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -828,21 +895,21 @@
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.code",
         "serializationOptions": {
-         "$id": "101",
+         "$id": "111",
          "json": {
-          "$id": "102",
+          "$id": "112",
           "name": "code"
          }
         }
        },
        {
-        "$id": "103",
+        "$id": "113",
         "kind": "property",
         "name": "message",
         "serializedName": "message",
         "doc": "The error message.",
         "type": {
-         "$id": "104",
+         "$id": "114",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -855,21 +922,21 @@
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.message",
         "serializationOptions": {
-         "$id": "105",
+         "$id": "115",
          "json": {
-          "$id": "106",
+          "$id": "116",
           "name": "message"
          }
         }
        },
        {
-        "$id": "107",
+        "$id": "117",
         "kind": "property",
         "name": "target",
         "serializedName": "target",
         "doc": "The error target.",
         "type": {
-         "$id": "108",
+         "$id": "118",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -882,25 +949,25 @@
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.target",
         "serializationOptions": {
-         "$id": "109",
+         "$id": "119",
          "json": {
-          "$id": "110",
+          "$id": "120",
           "name": "target"
          }
         }
        },
        {
-        "$id": "111",
+        "$id": "121",
         "kind": "property",
         "name": "details",
         "serializedName": "details",
         "doc": "The error details.",
         "type": {
-         "$id": "112",
+         "$id": "122",
          "kind": "array",
          "name": "ArrayErrorDetail",
          "valueType": {
-          "$ref": "98"
+          "$ref": "108"
          },
          "crossLanguageDefinitionId": "TypeSpec.Array",
          "decorators": []
@@ -912,25 +979,25 @@
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.details",
         "serializationOptions": {
-         "$id": "113",
+         "$id": "123",
          "json": {
-          "$id": "114",
+          "$id": "124",
           "name": "details"
          }
         }
        },
        {
-        "$id": "115",
+        "$id": "125",
         "kind": "property",
         "name": "additionalInfo",
         "serializedName": "additionalInfo",
         "doc": "The error additional info.",
         "type": {
-         "$id": "116",
+         "$id": "126",
          "kind": "array",
          "name": "ArrayErrorAdditionalInfo",
          "valueType": {
-          "$id": "117",
+          "$id": "127",
           "kind": "model",
           "name": "ErrorAdditionalInfo",
           "namespace": "_Azure.ResourceManager.Resources",
@@ -940,13 +1007,13 @@
           "decorators": [],
           "properties": [
            {
-            "$id": "118",
+            "$id": "128",
             "kind": "property",
             "name": "type",
             "serializedName": "type",
             "doc": "The additional info type.",
             "type": {
-             "$id": "119",
+             "$id": "129",
              "kind": "string",
              "name": "string",
              "crossLanguageDefinitionId": "TypeSpec.string",
@@ -959,21 +1026,21 @@
             "decorators": [],
             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.type",
             "serializationOptions": {
-             "$id": "120",
+             "$id": "130",
              "json": {
-              "$id": "121",
+              "$id": "131",
               "name": "type"
              }
             }
            },
            {
-            "$id": "122",
+            "$id": "132",
             "kind": "property",
             "name": "info",
             "serializedName": "info",
             "doc": "The additional info.",
             "type": {
-             "$id": "123",
+             "$id": "133",
              "kind": "model",
              "name": "ErrorAdditionalInfoInfo",
              "namespace": "_Azure.ResourceManager.Resources",
@@ -989,9 +1056,9 @@
             "decorators": [],
             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info",
             "serializationOptions": {
-             "$id": "124",
+             "$id": "134",
              "json": {
-              "$id": "125",
+              "$id": "135",
               "name": "info"
              }
             }
@@ -1008,9 +1075,9 @@
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.additionalInfo",
         "serializationOptions": {
-         "$id": "126",
+         "$id": "136",
          "json": {
-          "$id": "127",
+          "$id": "137",
           "name": "additionalInfo"
          }
         }
@@ -1024,9 +1091,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse.error",
      "serializationOptions": {
-      "$id": "128",
+      "$id": "138",
       "json": {
-       "$id": "129",
+       "$id": "139",
        "name": "error"
       }
      }
@@ -1034,206 +1101,16 @@
    ]
   },
   {
-   "$ref": "98"
+   "$ref": "108"
   },
   {
-   "$ref": "117"
+   "$ref": "127"
   },
   {
-   "$ref": "123"
-  },
-  {
-   "$id": "130",
-   "kind": "model",
-   "name": "LocationResourceListResult",
-   "namespace": "_Azure.ResourceManager.Resources",
-   "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
-   "usage": "Output,Json",
-   "doc": "The response of a LocationResource list operation.",
-   "decorators": [],
-   "properties": [
-    {
-     "$id": "131",
-     "kind": "property",
-     "name": "value",
-     "serializedName": "value",
-     "doc": "The LocationResource items on this page",
-     "type": {
-      "$id": "132",
-      "kind": "array",
-      "name": "ArrayLocationResource",
-      "valueType": {
-       "$ref": "40"
-      },
-      "crossLanguageDefinitionId": "TypeSpec.Array",
-      "decorators": []
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value",
-     "serializationOptions": {
-      "$id": "133",
-      "json": {
-       "$id": "134",
-       "name": "value"
-      }
-     }
-    },
-    {
-     "$id": "135",
-     "kind": "property",
-     "name": "nextLink",
-     "serializedName": "nextLink",
-     "doc": "The link to the next page of items",
-     "type": {
-      "$id": "136",
-      "kind": "url",
-      "name": "ResourceLocation",
-      "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
-      "baseType": {
-       "$id": "137",
-       "kind": "url",
-       "name": "url",
-       "crossLanguageDefinitionId": "TypeSpec.url",
-       "decorators": []
-      },
-      "decorators": []
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink",
-     "serializationOptions": {
-      "$id": "138",
-      "json": {
-       "$id": "139",
-       "name": "nextLink"
-      }
-     }
-    }
-   ]
+   "$ref": "133"
   },
   {
    "$id": "140",
-   "kind": "model",
-   "name": "ExtensionsResource",
-   "namespace": "_Azure.ResourceManager.Resources",
-   "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResource",
-   "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-   "doc": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
-   "decorators": [],
-   "baseModel": {
-    "$id": "141",
-    "kind": "model",
-    "name": "ExtensionResource",
-    "namespace": "_Azure.ResourceManager.Resources",
-    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ExtensionResource",
-    "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-    "doc": "The base extension resource.",
-    "decorators": [],
-    "baseModel": {
-     "$ref": "42"
-    },
-    "properties": []
-   },
-   "properties": [
-    {
-     "$id": "142",
-     "kind": "property",
-     "name": "properties",
-     "serializedName": "properties",
-     "doc": "The resource-specific properties for this resource.",
-     "type": {
-      "$id": "143",
-      "kind": "model",
-      "name": "ExtensionsResourceProperties",
-      "namespace": "_Azure.ResourceManager.Resources",
-      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResourceProperties",
-      "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-      "doc": "ExtensionsResource properties",
-      "decorators": [],
-      "properties": [
-       {
-        "$id": "144",
-        "kind": "property",
-        "name": "description",
-        "serializedName": "description",
-        "doc": "The description of the resource.",
-        "type": {
-         "$id": "145",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "optional": true,
-        "readOnly": false,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResourceProperties.description",
-        "serializationOptions": {
-         "$id": "146",
-         "json": {
-          "$id": "147",
-          "name": "description"
-         }
-        }
-       },
-       {
-        "$id": "148",
-        "kind": "property",
-        "name": "provisioningState",
-        "serializedName": "provisioningState",
-        "doc": "The status of the last operation.",
-        "type": {
-         "$ref": "2"
-        },
-        "optional": true,
-        "readOnly": true,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResourceProperties.provisioningState",
-        "serializationOptions": {
-         "$id": "149",
-         "json": {
-          "$id": "150",
-          "name": "provisioningState"
-         }
-        }
-       }
-      ]
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResource.properties",
-     "serializationOptions": {
-      "$id": "151",
-      "json": {
-       "$id": "152",
-       "name": "properties"
-      }
-     }
-    }
-   ]
-  },
-  {
-   "$ref": "143"
-  },
-  {
-   "$ref": "141"
-  },
-  {
-   "$id": "153",
    "kind": "model",
    "name": "ArmOperationStatusResourceProvisioningState",
    "namespace": "_Azure.ResourceManager.Resources",
@@ -1243,7 +1120,7 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "154",
+     "$id": "141",
      "kind": "property",
      "name": "status",
      "serializedName": "status",
@@ -1258,21 +1135,21 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ArmOperationStatus.status",
      "serializationOptions": {
-      "$id": "155",
+      "$id": "142",
       "json": {
-       "$id": "156",
+       "$id": "143",
        "name": "status"
       }
      }
     },
     {
-     "$id": "157",
+     "$id": "144",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
      "doc": "The name of the  operationStatus resource",
      "type": {
-      "$id": "158",
+      "$id": "145",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1285,26 +1162,26 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ArmOperationStatus.name",
      "serializationOptions": {
-      "$id": "159",
+      "$id": "146",
       "json": {
-       "$id": "160",
+       "$id": "147",
        "name": "name"
       }
      }
     },
     {
-     "$id": "161",
+     "$id": "148",
      "kind": "property",
      "name": "startTime",
      "serializedName": "startTime",
      "doc": "Operation start time",
      "type": {
-      "$id": "162",
+      "$id": "149",
       "kind": "utcDateTime",
       "name": "utcDateTime",
       "encode": "rfc3339",
       "wireType": {
-       "$id": "163",
+       "$id": "150",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1320,26 +1197,26 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ArmOperationStatus.startTime",
      "serializationOptions": {
-      "$id": "164",
+      "$id": "151",
       "json": {
-       "$id": "165",
+       "$id": "152",
        "name": "startTime"
       }
      }
     },
     {
-     "$id": "166",
+     "$id": "153",
      "kind": "property",
      "name": "endTime",
      "serializedName": "endTime",
      "doc": "Operation complete time",
      "type": {
-      "$id": "167",
+      "$id": "154",
       "kind": "utcDateTime",
       "name": "utcDateTime",
       "encode": "rfc3339",
       "wireType": {
-       "$id": "168",
+       "$id": "155",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1355,21 +1232,21 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ArmOperationStatus.endTime",
      "serializationOptions": {
-      "$id": "169",
+      "$id": "156",
       "json": {
-       "$id": "170",
+       "$id": "157",
        "name": "endTime"
       }
      }
     },
     {
-     "$id": "171",
+     "$id": "158",
      "kind": "property",
      "name": "percentComplete",
      "serializedName": "percentComplete",
      "doc": "The progress made toward completing the operation",
      "type": {
-      "$id": "172",
+      "$id": "159",
       "kind": "float64",
       "name": "float64",
       "crossLanguageDefinitionId": "TypeSpec.float64",
@@ -1382,21 +1259,21 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ArmOperationStatus.percentComplete",
      "serializationOptions": {
-      "$id": "173",
+      "$id": "160",
       "json": {
-       "$id": "174",
+       "$id": "161",
        "name": "percentComplete"
       }
      }
     },
     {
-     "$id": "175",
+     "$id": "162",
      "kind": "property",
      "name": "error",
      "serializedName": "error",
      "doc": "Errors that occurred if the operation ended with Canceled or Failed status",
      "type": {
-      "$ref": "98"
+      "$ref": "108"
      },
      "optional": true,
      "readOnly": true,
@@ -1405,9 +1282,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ArmOperationStatus.error",
      "serializationOptions": {
-      "$id": "176",
+      "$id": "163",
       "json": {
-       "$id": "177",
+       "$id": "164",
        "name": "error"
       }
      }
@@ -1415,27 +1292,27 @@
    ]
   },
   {
-   "$id": "178",
+   "$id": "165",
    "kind": "model",
-   "name": "ExtensionsResourceListResult",
+   "name": "TopLevelTrackedResourceListResult",
    "namespace": "_Azure.ResourceManager.Resources",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "usage": "Output,Json",
-   "doc": "The response of a ExtensionsResource list operation.",
+   "doc": "The response of a TopLevelTrackedResource list operation.",
    "decorators": [],
    "properties": [
     {
-     "$id": "179",
+     "$id": "166",
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "doc": "The ExtensionsResource items on this page",
+     "doc": "The TopLevelTrackedResource items on this page",
      "type": {
-      "$id": "180",
+      "$id": "167",
       "kind": "array",
-      "name": "ArrayExtensionsResource",
+      "name": "ArrayTopLevelTrackedResource",
       "valueType": {
-       "$ref": "140"
+       "$ref": "40"
       },
       "crossLanguageDefinitionId": "TypeSpec.Array",
       "decorators": []
@@ -1447,254 +1324,97 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value",
      "serializationOptions": {
+      "$id": "168",
+      "json": {
+       "$id": "169",
+       "name": "value"
+      }
+     }
+    },
+    {
+     "$id": "170",
+     "kind": "property",
+     "name": "nextLink",
+     "serializedName": "nextLink",
+     "doc": "The link to the next page of items",
+     "type": {
+      "$id": "171",
+      "kind": "url",
+      "name": "ResourceLocation",
+      "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+      "baseType": {
+       "$id": "172",
+       "kind": "url",
+       "name": "url",
+       "crossLanguageDefinitionId": "TypeSpec.url",
+       "decorators": []
+      },
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink",
+     "serializationOptions": {
+      "$id": "173",
+      "json": {
+       "$id": "174",
+       "name": "nextLink"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$id": "175",
+   "kind": "model",
+   "name": "NotificationDetails",
+   "namespace": "_Azure.ResourceManager.Resources",
+   "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NotificationDetails",
+   "usage": "Input,Json",
+   "doc": "The details of a user notification.",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "176",
+     "kind": "property",
+     "name": "message",
+     "serializedName": "message",
+     "doc": "The notification message.",
+     "type": {
+      "$id": "177",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NotificationDetails.message",
+     "serializationOptions": {
+      "$id": "178",
+      "json": {
+       "$id": "179",
+       "name": "message"
+      }
+     }
+    },
+    {
+     "$id": "180",
+     "kind": "property",
+     "name": "urgent",
+     "serializedName": "urgent",
+     "doc": "If true, the notification is urgent.",
+     "type": {
       "$id": "181",
-      "json": {
-       "$id": "182",
-       "name": "value"
-      }
-     }
-    },
-    {
-     "$id": "183",
-     "kind": "property",
-     "name": "nextLink",
-     "serializedName": "nextLink",
-     "doc": "The link to the next page of items",
-     "type": {
-      "$id": "184",
-      "kind": "url",
-      "name": "ResourceLocation",
-      "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
-      "baseType": {
-       "$id": "185",
-       "kind": "url",
-       "name": "url",
-       "crossLanguageDefinitionId": "TypeSpec.url",
-       "decorators": []
-      },
-      "decorators": []
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink",
-     "serializationOptions": {
-      "$id": "186",
-      "json": {
-       "$id": "187",
-       "name": "nextLink"
-      }
-     }
-    }
-   ]
-  },
-  {
-   "$id": "188",
-   "kind": "model",
-   "name": "SingletonTrackedResource",
-   "namespace": "_Azure.ResourceManager.Resources",
-   "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResource",
-   "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-   "doc": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
-   "decorators": [],
-   "baseModel": {
-    "$id": "189",
-    "kind": "model",
-    "name": "TrackedResource",
-    "namespace": "_Azure.ResourceManager.Resources",
-    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
-    "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-    "doc": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-    "decorators": [],
-    "baseModel": {
-     "$ref": "42"
-    },
-    "properties": [
-     {
-      "$id": "190",
-      "kind": "property",
-      "name": "tags",
-      "serializedName": "tags",
-      "doc": "Resource tags.",
-      "type": {
-       "$id": "191",
-       "kind": "dict",
-       "keyType": {
-        "$id": "192",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "valueType": {
-        "$id": "193",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "decorators": []
-      },
-      "optional": true,
-      "readOnly": false,
-      "discriminator": false,
-      "flatten": false,
-      "decorators": [],
-      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource.tags",
-      "serializationOptions": {
-       "$id": "194",
-       "json": {
-        "$id": "195",
-        "name": "tags"
-       }
-      }
-     },
-     {
-      "$id": "196",
-      "kind": "property",
-      "name": "location",
-      "serializedName": "location",
-      "doc": "The geo-location where the resource lives",
-      "type": {
-       "$id": "197",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string",
-       "decorators": []
-      },
-      "optional": false,
-      "readOnly": false,
-      "discriminator": false,
-      "flatten": false,
-      "decorators": [],
-      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource.location",
-      "serializationOptions": {
-       "$id": "198",
-       "json": {
-        "$id": "199",
-        "name": "location"
-       }
-      }
-     }
-    ]
-   },
-   "properties": [
-    {
-     "$id": "200",
-     "kind": "property",
-     "name": "properties",
-     "serializedName": "properties",
-     "doc": "The resource-specific properties for this resource.",
-     "type": {
-      "$id": "201",
-      "kind": "model",
-      "name": "SingletonTrackedResourceProperties",
-      "namespace": "_Azure.ResourceManager.Resources",
-      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResourceProperties",
-      "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-      "doc": "Singleton Arm Resource Properties.",
-      "decorators": [],
-      "properties": [
-       {
-        "$id": "202",
-        "kind": "property",
-        "name": "provisioningState",
-        "serializedName": "provisioningState",
-        "doc": "The status of the last operation.",
-        "type": {
-         "$ref": "2"
-        },
-        "optional": true,
-        "readOnly": true,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResourceProperties.provisioningState",
-        "serializationOptions": {
-         "$id": "203",
-         "json": {
-          "$id": "204",
-          "name": "provisioningState"
-         }
-        }
-       },
-       {
-        "$id": "205",
-        "kind": "property",
-        "name": "description",
-        "serializedName": "description",
-        "doc": "The description of the resource.",
-        "type": {
-         "$id": "206",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "optional": true,
-        "readOnly": false,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResourceProperties.description",
-        "serializationOptions": {
-         "$id": "207",
-         "json": {
-          "$id": "208",
-          "name": "description"
-         }
-        }
-       }
-      ]
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResource.properties",
-     "serializationOptions": {
-      "$id": "209",
-      "json": {
-       "$id": "210",
-       "name": "properties"
-      }
-     }
-    }
-   ]
-  },
-  {
-   "$ref": "201"
-  },
-  {
-   "$ref": "189"
-  },
-  {
-   "$id": "211",
-   "kind": "model",
-   "name": "SingletonTrackedResourceListResult",
-   "namespace": "_Azure.ResourceManager.Resources",
-   "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
-   "usage": "Output,Json",
-   "doc": "The response of a SingletonTrackedResource list operation.",
-   "decorators": [],
-   "properties": [
-    {
-     "$id": "212",
-     "kind": "property",
-     "name": "value",
-     "serializedName": "value",
-     "doc": "The SingletonTrackedResource items on this page",
-     "type": {
-      "$id": "213",
-      "kind": "array",
-      "name": "ArraySingletonTrackedResource",
-      "valueType": {
-       "$ref": "188"
-      },
-      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "kind": "boolean",
+      "name": "boolean",
+      "crossLanguageDefinitionId": "TypeSpec.boolean",
       "decorators": []
      },
      "optional": false,
@@ -1702,53 +1422,19 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value",
+     "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NotificationDetails.urgent",
      "serializationOptions": {
-      "$id": "214",
+      "$id": "182",
       "json": {
-       "$id": "215",
-       "name": "value"
-      }
-     }
-    },
-    {
-     "$id": "216",
-     "kind": "property",
-     "name": "nextLink",
-     "serializedName": "nextLink",
-     "doc": "The link to the next page of items",
-     "type": {
-      "$id": "217",
-      "kind": "url",
-      "name": "ResourceLocation",
-      "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
-      "baseType": {
-       "$id": "218",
-       "kind": "url",
-       "name": "url",
-       "crossLanguageDefinitionId": "TypeSpec.url",
-       "decorators": []
-      },
-      "decorators": []
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink",
-     "serializationOptions": {
-      "$id": "219",
-      "json": {
-       "$id": "220",
-       "name": "nextLink"
+       "$id": "183",
+       "name": "urgent"
       }
      }
     }
    ]
   },
   {
-   "$id": "221",
+   "$id": "184",
    "kind": "model",
    "name": "NestedProxyResource",
    "namespace": "_Azure.ResourceManager.Resources",
@@ -1757,17 +1443,28 @@
    "doc": "Nested child of Top Level Tracked Resource.",
    "decorators": [],
    "baseModel": {
-    "$ref": "41"
+    "$id": "185",
+    "kind": "model",
+    "name": "ProxyResource",
+    "namespace": "_Azure.ResourceManager.Resources",
+    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ProxyResource",
+    "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
+    "doc": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+    "decorators": [],
+    "baseModel": {
+     "$ref": "42"
+    },
+    "properties": []
    },
    "properties": [
     {
-     "$id": "222",
+     "$id": "186",
      "kind": "property",
      "name": "properties",
      "serializedName": "properties",
      "doc": "The resource-specific properties for this resource.",
      "type": {
-      "$id": "223",
+      "$id": "187",
       "kind": "model",
       "name": "NestedProxyResourceProperties",
       "namespace": "_Azure.ResourceManager.Resources",
@@ -1777,7 +1474,7 @@
       "decorators": [],
       "properties": [
        {
-        "$id": "224",
+        "$id": "188",
         "kind": "property",
         "name": "provisioningState",
         "serializedName": "provisioningState",
@@ -1792,21 +1489,21 @@
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NestedProxyResourceProperties.provisioningState",
         "serializationOptions": {
-         "$id": "225",
+         "$id": "189",
          "json": {
-          "$id": "226",
+          "$id": "190",
           "name": "provisioningState"
          }
         }
        },
        {
-        "$id": "227",
+        "$id": "191",
         "kind": "property",
         "name": "description",
         "serializedName": "description",
         "doc": "Nested resource description.",
         "type": {
-         "$id": "228",
+         "$id": "192",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1819,9 +1516,9 @@
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NestedProxyResourceProperties.description",
         "serializationOptions": {
-         "$id": "229",
+         "$id": "193",
          "json": {
-          "$id": "230",
+          "$id": "194",
           "name": "description"
          }
         }
@@ -1835,9 +1532,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NestedProxyResource.properties",
      "serializationOptions": {
-      "$id": "231",
+      "$id": "195",
       "json": {
-       "$id": "232",
+       "$id": "196",
        "name": "properties"
       }
      }
@@ -1845,10 +1542,13 @@
    ]
   },
   {
-   "$ref": "223"
+   "$ref": "187"
   },
   {
-   "$id": "233",
+   "$ref": "185"
+  },
+  {
+   "$id": "197",
    "kind": "model",
    "name": "NestedProxyResourceListResult",
    "namespace": "_Azure.ResourceManager.Resources",
@@ -1858,17 +1558,17 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "234",
+     "$id": "198",
      "kind": "property",
      "name": "value",
      "serializedName": "value",
      "doc": "The NestedProxyResource items on this page",
      "type": {
-      "$id": "235",
+      "$id": "199",
       "kind": "array",
       "name": "ArrayNestedProxyResource",
       "valueType": {
-       "$ref": "221"
+       "$ref": "184"
       },
       "crossLanguageDefinitionId": "TypeSpec.Array",
       "decorators": []
@@ -1880,26 +1580,26 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value",
      "serializationOptions": {
-      "$id": "236",
+      "$id": "200",
       "json": {
-       "$id": "237",
+       "$id": "201",
        "name": "value"
       }
      }
     },
     {
-     "$id": "238",
+     "$id": "202",
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
      "doc": "The link to the next page of items",
      "type": {
-      "$id": "239",
+      "$id": "203",
       "kind": "url",
       "name": "ResourceLocation",
       "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
       "baseType": {
-       "$id": "240",
+       "$id": "204",
        "kind": "url",
        "name": "url",
        "crossLanguageDefinitionId": "TypeSpec.url",
@@ -1914,9 +1614,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink",
      "serializationOptions": {
-      "$id": "241",
+      "$id": "205",
       "json": {
-       "$id": "242",
+       "$id": "206",
        "name": "nextLink"
       }
      }
@@ -1924,36 +1624,36 @@
    ]
   },
   {
-   "$id": "243",
+   "$id": "207",
    "kind": "model",
-   "name": "TopLevelTrackedResource",
+   "name": "SingletonTrackedResource",
    "namespace": "_Azure.ResourceManager.Resources",
-   "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResource",
+   "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResource",
    "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
    "doc": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
    "decorators": [],
    "baseModel": {
-    "$ref": "189"
+    "$ref": "41"
    },
    "properties": [
     {
-     "$id": "244",
+     "$id": "208",
      "kind": "property",
      "name": "properties",
      "serializedName": "properties",
      "doc": "The resource-specific properties for this resource.",
      "type": {
-      "$id": "245",
+      "$id": "209",
       "kind": "model",
-      "name": "TopLevelTrackedResourceProperties",
+      "name": "SingletonTrackedResourceProperties",
       "namespace": "_Azure.ResourceManager.Resources",
-      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResourceProperties",
+      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResourceProperties",
       "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-      "doc": "Top Level Arm Resource Properties.",
+      "doc": "Singleton Arm Resource Properties.",
       "decorators": [],
       "properties": [
        {
-        "$id": "246",
+        "$id": "210",
         "kind": "property",
         "name": "provisioningState",
         "serializedName": "provisioningState",
@@ -1966,23 +1666,23 @@
         "discriminator": false,
         "flatten": false,
         "decorators": [],
-        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResourceProperties.provisioningState",
+        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResourceProperties.provisioningState",
         "serializationOptions": {
-         "$id": "247",
+         "$id": "211",
          "json": {
-          "$id": "248",
+          "$id": "212",
           "name": "provisioningState"
          }
         }
        },
        {
-        "$id": "249",
+        "$id": "213",
         "kind": "property",
         "name": "description",
         "serializedName": "description",
         "doc": "The description of the resource.",
         "type": {
-         "$id": "250",
+         "$id": "214",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1993,11 +1693,11 @@
         "discriminator": false,
         "flatten": false,
         "decorators": [],
-        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResourceProperties.description",
+        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResourceProperties.description",
         "serializationOptions": {
-         "$id": "251",
+         "$id": "215",
          "json": {
-          "$id": "252",
+          "$id": "216",
           "name": "description"
          }
         }
@@ -2009,11 +1709,11 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResource.properties",
+     "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResource.properties",
      "serializationOptions": {
-      "$id": "253",
+      "$id": "217",
       "json": {
-       "$id": "254",
+       "$id": "218",
        "name": "properties"
       }
      }
@@ -2021,30 +1721,30 @@
    ]
   },
   {
-   "$ref": "245"
+   "$ref": "209"
   },
   {
-   "$id": "255",
+   "$id": "219",
    "kind": "model",
-   "name": "TopLevelTrackedResourceListResult",
+   "name": "SingletonTrackedResourceListResult",
    "namespace": "_Azure.ResourceManager.Resources",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "usage": "Output,Json",
-   "doc": "The response of a TopLevelTrackedResource list operation.",
+   "doc": "The response of a SingletonTrackedResource list operation.",
    "decorators": [],
    "properties": [
     {
-     "$id": "256",
+     "$id": "220",
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "doc": "The TopLevelTrackedResource items on this page",
+     "doc": "The SingletonTrackedResource items on this page",
      "type": {
-      "$id": "257",
+      "$id": "221",
       "kind": "array",
-      "name": "ArrayTopLevelTrackedResource",
+      "name": "ArraySingletonTrackedResource",
       "valueType": {
-       "$ref": "243"
+       "$ref": "207"
       },
       "crossLanguageDefinitionId": "TypeSpec.Array",
       "decorators": []
@@ -2056,26 +1756,26 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value",
      "serializationOptions": {
-      "$id": "258",
+      "$id": "222",
       "json": {
-       "$id": "259",
+       "$id": "223",
        "name": "value"
       }
      }
     },
     {
-     "$id": "260",
+     "$id": "224",
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
      "doc": "The link to the next page of items",
      "type": {
-      "$id": "261",
+      "$id": "225",
       "kind": "url",
       "name": "ResourceLocation",
       "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
       "baseType": {
-       "$id": "262",
+       "$id": "226",
        "kind": "url",
        "name": "url",
        "crossLanguageDefinitionId": "TypeSpec.url",
@@ -2090,9 +1790,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink",
      "serializationOptions": {
-      "$id": "263",
+      "$id": "227",
       "json": {
-       "$id": "264",
+       "$id": "228",
        "name": "nextLink"
       }
      }
@@ -2100,26 +1800,143 @@
    ]
   },
   {
-   "$id": "265",
+   "$id": "229",
    "kind": "model",
-   "name": "NotificationDetails",
+   "name": "ExtensionsResource",
    "namespace": "_Azure.ResourceManager.Resources",
-   "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NotificationDetails",
-   "usage": "Input,Json",
-   "doc": "The details of a user notification.",
+   "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResource",
+   "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
+   "doc": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
+   "decorators": [],
+   "baseModel": {
+    "$id": "230",
+    "kind": "model",
+    "name": "ExtensionResource",
+    "namespace": "_Azure.ResourceManager.Resources",
+    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ExtensionResource",
+    "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
+    "doc": "The base extension resource.",
+    "decorators": [],
+    "baseModel": {
+     "$ref": "42"
+    },
+    "properties": []
+   },
+   "properties": [
+    {
+     "$id": "231",
+     "kind": "property",
+     "name": "properties",
+     "serializedName": "properties",
+     "doc": "The resource-specific properties for this resource.",
+     "type": {
+      "$id": "232",
+      "kind": "model",
+      "name": "ExtensionsResourceProperties",
+      "namespace": "_Azure.ResourceManager.Resources",
+      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResourceProperties",
+      "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
+      "doc": "ExtensionsResource properties",
+      "decorators": [],
+      "properties": [
+       {
+        "$id": "233",
+        "kind": "property",
+        "name": "description",
+        "serializedName": "description",
+        "doc": "The description of the resource.",
+        "type": {
+         "$id": "234",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "optional": true,
+        "readOnly": false,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResourceProperties.description",
+        "serializationOptions": {
+         "$id": "235",
+         "json": {
+          "$id": "236",
+          "name": "description"
+         }
+        }
+       },
+       {
+        "$id": "237",
+        "kind": "property",
+        "name": "provisioningState",
+        "serializedName": "provisioningState",
+        "doc": "The status of the last operation.",
+        "type": {
+         "$ref": "2"
+        },
+        "optional": true,
+        "readOnly": true,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResourceProperties.provisioningState",
+        "serializationOptions": {
+         "$id": "238",
+         "json": {
+          "$id": "239",
+          "name": "provisioningState"
+         }
+        }
+       }
+      ]
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResource.properties",
+     "serializationOptions": {
+      "$id": "240",
+      "json": {
+       "$id": "241",
+       "name": "properties"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$ref": "232"
+  },
+  {
+   "$ref": "230"
+  },
+  {
+   "$id": "242",
+   "kind": "model",
+   "name": "ExtensionsResourceListResult",
+   "namespace": "_Azure.ResourceManager.Resources",
+   "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
+   "usage": "Output,Json",
+   "doc": "The response of a ExtensionsResource list operation.",
    "decorators": [],
    "properties": [
     {
-     "$id": "266",
+     "$id": "243",
      "kind": "property",
-     "name": "message",
-     "serializedName": "message",
-     "doc": "The notification message.",
+     "name": "value",
+     "serializedName": "value",
+     "doc": "The ExtensionsResource items on this page",
      "type": {
-      "$id": "267",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
+      "$id": "244",
+      "kind": "array",
+      "name": "ArrayExtensionsResource",
+      "valueType": {
+       "$ref": "229"
+      },
+      "crossLanguageDefinitionId": "TypeSpec.Array",
       "decorators": []
      },
      "optional": false,
@@ -2127,26 +1944,175 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NotificationDetails.message",
+     "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value",
      "serializationOptions": {
-      "$id": "268",
+      "$id": "245",
       "json": {
-       "$id": "269",
-       "name": "message"
+       "$id": "246",
+       "name": "value"
       }
      }
     },
     {
-     "$id": "270",
+     "$id": "247",
      "kind": "property",
-     "name": "urgent",
-     "serializedName": "urgent",
-     "doc": "If true, the notification is urgent.",
+     "name": "nextLink",
+     "serializedName": "nextLink",
+     "doc": "The link to the next page of items",
      "type": {
-      "$id": "271",
-      "kind": "boolean",
-      "name": "boolean",
-      "crossLanguageDefinitionId": "TypeSpec.boolean",
+      "$id": "248",
+      "kind": "url",
+      "name": "ResourceLocation",
+      "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+      "baseType": {
+       "$id": "249",
+       "kind": "url",
+       "name": "url",
+       "crossLanguageDefinitionId": "TypeSpec.url",
+       "decorators": []
+      },
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink",
+     "serializationOptions": {
+      "$id": "250",
+      "json": {
+       "$id": "251",
+       "name": "nextLink"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$id": "252",
+   "kind": "model",
+   "name": "LocationResource",
+   "namespace": "_Azure.ResourceManager.Resources",
+   "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResource",
+   "usage": "Input,Output,Json",
+   "doc": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+   "decorators": [],
+   "baseModel": {
+    "$ref": "185"
+   },
+   "properties": [
+    {
+     "$id": "253",
+     "kind": "property",
+     "name": "properties",
+     "serializedName": "properties",
+     "doc": "The resource-specific properties for this resource.",
+     "type": {
+      "$id": "254",
+      "kind": "model",
+      "name": "LocationResourceProperties",
+      "namespace": "_Azure.ResourceManager.Resources",
+      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResourceProperties",
+      "usage": "Input,Output,Json",
+      "doc": "Location resource properties",
+      "decorators": [],
+      "properties": [
+       {
+        "$id": "255",
+        "kind": "property",
+        "name": "description",
+        "serializedName": "description",
+        "doc": "The description of the resource.",
+        "type": {
+         "$id": "256",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "optional": true,
+        "readOnly": false,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResourceProperties.description",
+        "serializationOptions": {
+         "$id": "257",
+         "json": {
+          "$id": "258",
+          "name": "description"
+         }
+        }
+       },
+       {
+        "$id": "259",
+        "kind": "property",
+        "name": "provisioningState",
+        "serializedName": "provisioningState",
+        "doc": "The status of the last operation.",
+        "type": {
+         "$ref": "2"
+        },
+        "optional": true,
+        "readOnly": true,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResourceProperties.provisioningState",
+        "serializationOptions": {
+         "$id": "260",
+         "json": {
+          "$id": "261",
+          "name": "provisioningState"
+         }
+        }
+       }
+      ]
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResource.properties",
+     "serializationOptions": {
+      "$id": "262",
+      "json": {
+       "$id": "263",
+       "name": "properties"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$ref": "254"
+  },
+  {
+   "$id": "264",
+   "kind": "model",
+   "name": "LocationResourceListResult",
+   "namespace": "_Azure.ResourceManager.Resources",
+   "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
+   "usage": "Output,Json",
+   "doc": "The response of a LocationResource list operation.",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "265",
+     "kind": "property",
+     "name": "value",
+     "serializedName": "value",
+     "doc": "The LocationResource items on this page",
+     "type": {
+      "$id": "266",
+      "kind": "array",
+      "name": "ArrayLocationResource",
+      "valueType": {
+       "$ref": "252"
+      },
+      "crossLanguageDefinitionId": "TypeSpec.Array",
       "decorators": []
      },
      "optional": false,
@@ -2154,12 +2120,46 @@
      "discriminator": false,
      "flatten": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NotificationDetails.urgent",
+     "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value",
+     "serializationOptions": {
+      "$id": "267",
+      "json": {
+       "$id": "268",
+       "name": "value"
+      }
+     }
+    },
+    {
+     "$id": "269",
+     "kind": "property",
+     "name": "nextLink",
+     "serializedName": "nextLink",
+     "doc": "The link to the next page of items",
+     "type": {
+      "$id": "270",
+      "kind": "url",
+      "name": "ResourceLocation",
+      "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+      "baseType": {
+       "$id": "271",
+       "kind": "url",
+       "name": "url",
+       "crossLanguageDefinitionId": "TypeSpec.url",
+       "decorators": []
+      },
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink",
      "serializationOptions": {
       "$id": "272",
       "json": {
        "$id": "273",
-       "name": "urgent"
+       "name": "nextLink"
       }
      }
     }
@@ -2373,7 +2373,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "243"
+          "$ref": "40"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -2564,7 +2564,7 @@
          "nameInRequest": "resource",
          "doc": "Resource create parameters.",
          "type": {
-          "$ref": "243"
+          "$ref": "40"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -2584,7 +2584,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "243"
+          "$ref": "40"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -2598,7 +2598,7 @@
           201
          ],
          "bodyType": {
-          "$ref": "243"
+          "$ref": "40"
          },
          "headers": [
           {
@@ -2650,7 +2650,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "243"
+          "$ref": "40"
          }
         }
        },
@@ -2832,7 +2832,7 @@
          "nameInRequest": "properties",
          "doc": "The resource properties to be updated.",
          "type": {
-          "$ref": "243"
+          "$ref": "40"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -2852,7 +2852,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "243"
+          "$ref": "40"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -2912,7 +2912,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "243"
+          "$ref": "40"
          }
         }
        },
@@ -3250,7 +3250,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "255"
+          "$ref": "165"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -3384,7 +3384,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "255"
+          "$ref": "165"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -3588,7 +3588,7 @@
          "nameInRequest": "body",
          "doc": "The content of the action request",
          "type": {
-          "$ref": "265"
+          "$ref": "175"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -3848,7 +3848,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "221"
+          "$ref": "184"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -4061,7 +4061,7 @@
          "nameInRequest": "resource",
          "doc": "Resource create parameters.",
          "type": {
-          "$ref": "221"
+          "$ref": "184"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -4081,7 +4081,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "221"
+          "$ref": "184"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -4095,7 +4095,7 @@
           201
          ],
          "bodyType": {
-          "$ref": "221"
+          "$ref": "184"
          },
          "headers": [
           {
@@ -4147,7 +4147,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "221"
+          "$ref": "184"
          }
         }
        },
@@ -4351,7 +4351,7 @@
          "nameInRequest": "properties",
          "doc": "The resource properties to be updated.",
          "type": {
-          "$ref": "221"
+          "$ref": "184"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -4371,7 +4371,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "221"
+          "$ref": "184"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -4431,7 +4431,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "221"
+          "$ref": "184"
          }
         }
        },
@@ -4813,7 +4813,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "233"
+          "$ref": "197"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -5025,7 +5025,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "188"
+          "$ref": "207"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -5194,7 +5194,7 @@
          "nameInRequest": "resource",
          "doc": "Resource create parameters.",
          "type": {
-          "$ref": "188"
+          "$ref": "207"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -5214,7 +5214,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "188"
+          "$ref": "207"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -5228,7 +5228,7 @@
           201
          ],
          "bodyType": {
-          "$ref": "188"
+          "$ref": "207"
          },
          "headers": [
           {
@@ -5280,7 +5280,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "188"
+          "$ref": "207"
          }
         }
        },
@@ -5440,7 +5440,7 @@
          "nameInRequest": "properties",
          "doc": "The resource properties to be updated.",
          "type": {
-          "$ref": "188"
+          "$ref": "207"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -5460,7 +5460,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "188"
+          "$ref": "207"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -5606,7 +5606,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "211"
+          "$ref": "219"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -5812,7 +5812,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "140"
+          "$ref": "229"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -5974,7 +5974,7 @@
          "nameInRequest": "resource",
          "doc": "Resource create parameters.",
          "type": {
-          "$ref": "140"
+          "$ref": "229"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -5994,7 +5994,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "140"
+          "$ref": "229"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -6008,7 +6008,7 @@
           201
          ],
          "bodyType": {
-          "$ref": "140"
+          "$ref": "229"
          },
          "headers": [
           {
@@ -6060,7 +6060,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "140"
+          "$ref": "229"
          }
         }
        },
@@ -6213,7 +6213,7 @@
          "nameInRequest": "properties",
          "doc": "The resource properties to be updated.",
          "type": {
-          "$ref": "140"
+          "$ref": "229"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -6233,7 +6233,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "140"
+          "$ref": "229"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -6488,7 +6488,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "178"
+          "$ref": "242"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -6729,7 +6729,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "40"
+          "$ref": "252"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -6927,7 +6927,7 @@
          "nameInRequest": "resource",
          "doc": "Resource create parameters.",
          "type": {
-          "$ref": "40"
+          "$ref": "252"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -6947,7 +6947,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "40"
+          "$ref": "252"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -6961,7 +6961,7 @@
           201
          ],
          "bodyType": {
-          "$ref": "40"
+          "$ref": "252"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -7162,7 +7162,7 @@
          "nameInRequest": "properties",
          "doc": "The resource properties to be updated.",
          "type": {
-          "$ref": "40"
+          "$ref": "252"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -7182,7 +7182,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "40"
+          "$ref": "252"
          },
          "headers": [],
          "isErrorResponse": false,
@@ -7509,7 +7509,7 @@
           200
          ],
          "bodyType": {
-          "$ref": "130"
+          "$ref": "264"
          },
          "headers": [],
          "isErrorResponse": false,

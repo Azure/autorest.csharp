@@ -36,17 +36,17 @@ namespace Scm._Type.Union
         }
 
         /// <summary> Get string extensible. </summary>
-        public virtual async Task<ClientResult<GetResponse8>> GetStringExtensibleAsync()
+        public virtual async Task<ClientResult<GetResponse1>> GetStringExtensibleAsync()
         {
             ClientResult result = await GetStringExtensibleAsync(null).ConfigureAwait(false);
-            return ClientResult.FromValue(GetResponse8.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse1.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Get string extensible. </summary>
-        public virtual ClientResult<GetResponse8> GetStringExtensible()
+        public virtual ClientResult<GetResponse1> GetStringExtensible()
         {
             ClientResult result = GetStringExtensible(null);
-            return ClientResult.FromValue(GetResponse8.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse1.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -99,19 +99,19 @@ namespace Scm._Type.Union
 
         /// <summary> Send. </summary>
         /// <param name="prop"></param>
-        public virtual async Task<ClientResult> SendAsync(GetResponseProp3 prop)
+        public virtual async Task<ClientResult> SendAsync(GetResponseProp1 prop)
         {
-            SendRequest8 sendRequest8 = new SendRequest8(prop, null);
-            ClientResult result = await SendAsync(sendRequest8.ToBinaryContent(), null).ConfigureAwait(false);
+            SendRequest1 sendRequest1 = new SendRequest1(prop, null);
+            ClientResult result = await SendAsync(sendRequest1.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Send. </summary>
         /// <param name="prop"></param>
-        public virtual ClientResult Send(GetResponseProp3 prop)
+        public virtual ClientResult Send(GetResponseProp1 prop)
         {
-            SendRequest8 sendRequest8 = new SendRequest8(prop, null);
-            ClientResult result = Send(sendRequest8.ToBinaryContent(), null);
+            SendRequest1 sendRequest1 = new SendRequest1(prop, null);
+            ClientResult result = Send(sendRequest1.ToBinaryContent(), null);
             return result;
         }
 
@@ -125,7 +125,7 @@ namespace Scm._Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SendAsync(GetResponseProp3)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SendAsync(GetResponseProp1)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -153,7 +153,7 @@ namespace Scm._Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Send(GetResponseProp3)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Send(GetResponseProp1)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

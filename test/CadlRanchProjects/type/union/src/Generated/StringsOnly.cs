@@ -48,21 +48,21 @@ namespace _Type.Union
         /// <summary> Get strings only. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='GetStringsOnlyAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<GetResponse9>> GetStringsOnlyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetResponse>> GetStringsOnlyAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetStringsOnlyAsync(context).ConfigureAwait(false);
-            return Response.FromValue(GetResponse9.FromResponse(response), response);
+            return Response.FromValue(GetResponse.FromResponse(response), response);
         }
 
         /// <summary> Get strings only. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='GetStringsOnly(CancellationToken)']/*" />
-        public virtual Response<GetResponse9> GetStringsOnly(CancellationToken cancellationToken = default)
+        public virtual Response<GetResponse> GetStringsOnly(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetStringsOnly(context);
-            return Response.FromValue(GetResponse9.FromResponse(response), response);
+            return Response.FromValue(GetResponse.FromResponse(response), response);
         }
 
         /// <summary>
@@ -138,24 +138,24 @@ namespace _Type.Union
         /// <summary> Send. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='SendAsync(GetResponseProp4,CancellationToken)']/*" />
-        public virtual async Task<Response> SendAsync(GetResponseProp4 prop, CancellationToken cancellationToken = default)
+        /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='SendAsync(GetResponseProp,CancellationToken)']/*" />
+        public virtual async Task<Response> SendAsync(GetResponseProp prop, CancellationToken cancellationToken = default)
         {
-            SendRequest9 sendRequest9 = new SendRequest9(prop, null);
+            SendRequest sendRequest = new SendRequest(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SendAsync(sendRequest9.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SendAsync(sendRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Send. </summary>
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='Send(GetResponseProp4,CancellationToken)']/*" />
-        public virtual Response Send(GetResponseProp4 prop, CancellationToken cancellationToken = default)
+        /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='Send(GetResponseProp,CancellationToken)']/*" />
+        public virtual Response Send(GetResponseProp prop, CancellationToken cancellationToken = default)
         {
-            SendRequest9 sendRequest9 = new SendRequest9(prop, null);
+            SendRequest sendRequest = new SendRequest(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Send(sendRequest9.ToRequestContent(), context);
+            Response response = Send(sendRequest.ToRequestContent(), context);
             return response;
         }
 
@@ -169,7 +169,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SendAsync(GetResponseProp4,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SendAsync(GetResponseProp,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -208,7 +208,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Send(GetResponseProp4,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Send(GetResponseProp,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

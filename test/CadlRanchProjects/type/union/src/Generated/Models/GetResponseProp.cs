@@ -7,8 +7,8 @@
 
 namespace _Type.Union.Models
 {
-    /// <summary> The GetResponseProp4. </summary>
-    public enum GetResponseProp4
+    /// <summary> The GetResponseProp. </summary>
+    public enum GetResponseProp
     {
         /// <summary> a. </summary>
         A,
