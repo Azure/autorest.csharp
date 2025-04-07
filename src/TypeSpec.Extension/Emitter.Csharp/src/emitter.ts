@@ -12,7 +12,7 @@ import {
     createCSharpEmitterContext,
     createModel,
     tspOutputFileName,
-    writeCodeModel,
+    writeCodeModel
 } from "@typespec/http-client-csharp";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
