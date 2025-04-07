@@ -68,8 +68,10 @@ namespace MgmtTypeSpec.Models
         }
 
         /// <summary> The resource-specific properties for this resource. </summary>
+        [WirePath("properties")]
         public MgmtTypeSpecPrivateLinkResourceProperties Properties { get; }
         /// <summary> The managed service identities assigned to this resource. </summary>
+        [WirePath("identity")]
         public ManagedServiceIdentity Identity { get; }
     }
 }
