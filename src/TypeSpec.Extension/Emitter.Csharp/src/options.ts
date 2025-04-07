@@ -27,7 +27,7 @@ export interface AzureCSharpEmitterOptions extends CSharpEmitterOptions {
     "use-model-reader-writer"?: boolean;
     "library-name"?: string;
     "examples-dir"?: string;
-    "enable-bicep-serialization": boolean;
+    "enable-bicep-serialization"?: boolean;
 }
 
 export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterOptions> =
