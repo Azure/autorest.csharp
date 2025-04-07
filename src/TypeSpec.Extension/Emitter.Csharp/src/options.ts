@@ -93,8 +93,7 @@ export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterO
             "examples-dir": { type: "string", nullable: true },
             "enable-bicep-serialization": {
                 type: "boolean",
-                nullable: false,
-                default: false
+                nullable: false
             }
         },
         required: []
