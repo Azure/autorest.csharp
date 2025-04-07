@@ -17,30 +17,6 @@ namespace _Azure.ResourceManager.CommonProperties.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmAzureResourceManagerCommonPropertiesModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="CommonProperties.ConfidentialResourceData"/>. </summary>
-        /// <param name="id"> The id. </param>
-        /// <param name="name"> The name. </param>
-        /// <param name="resourceType"> The resourceType. </param>
-        /// <param name="systemData"> The systemData. </param>
-        /// <param name="tags"> The tags. </param>
-        /// <param name="location"> The location. </param>
-        /// <param name="properties"> The resource-specific properties for this resource. </param>
-        /// <returns> A new <see cref="CommonProperties.ConfidentialResourceData"/> instance for mocking. </returns>
-        public static ConfidentialResourceData ConfidentialResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, ConfidentialResourceProperties properties = null)
-        {
-            tags ??= new Dictionary<string, string>();
-
-            return new ConfidentialResourceData(
-                id,
-                name,
-                resourceType,
-                systemData,
-                tags,
-                location,
-                properties,
-                serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="CommonProperties.ManagedIdentityTrackedResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
@@ -64,6 +40,30 @@ namespace _Azure.ResourceManager.CommonProperties.Models
                 location,
                 managedIdentityTrackedResourceProvisioningState != null ? new ManagedIdentityTrackedResourceProperties(managedIdentityTrackedResourceProvisioningState, serializedAdditionalRawData: null) : null,
                 identity,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CommonProperties.ConfidentialResourceData"/>. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="properties"> The resource-specific properties for this resource. </param>
+        /// <returns> A new <see cref="CommonProperties.ConfidentialResourceData"/> instance for mocking. </returns>
+        public static ConfidentialResourceData ConfidentialResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, ConfidentialResourceProperties properties = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new ConfidentialResourceData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                properties,
                 serializedAdditionalRawData: null);
         }
     }

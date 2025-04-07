@@ -20,9 +20,33 @@ namespace Payload.MultiPart.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FileRequiredMetaData"/>. </summary>
-        /// <param name="contentType"></param>
-        /// <param name="filename"></param>
-        /// <param name="contents"></param>
+        /// <param name="contentType">
+        /// The allowed media (MIME) types of the file contents.
+        ///
+        /// In file bodies, this value comes from the `Content-Type` header of the request or response. In JSON bodies,
+        /// this value is serialized as a field in the response.
+        ///
+        /// NOTE: this is not _necessarily_ the same as the `Content-Type` header of the request or response, but
+        /// it will be for file bodies. It may be different if the file is serialized as a JSON object. It always refers to the
+        /// _contents_ of the file, and not necessarily the way the file itself is transmitted or serialized.
+        /// </param>
+        /// <param name="filename">
+        /// The name of the file, if any.
+        ///
+        /// In file bodies, this value comes from the `filename` parameter of the `Content-Disposition` header of the response
+        /// or multipart payload. In JSON bodies, this value is serialized as a field in the response.
+        ///
+        /// NOTE: By default, `filename` cannot be sent in request payloads and can only be sent in responses and multipart
+        /// payloads, as the `Content-Disposition` header is not valid in requests. If you want to send the `filename` in a request,
+        /// you must extend the `File` model and override the `filename` property with a different location defined by HTTP metadata
+        /// decorators.
+        /// </param>
+        /// <param name="contents">
+        /// The contents of the file.
+        ///
+        /// In file bodies, this value comes from the body of the request, response, or multipart payload. In JSON bodies,
+        /// this value is serialized as a field in the response.
+        /// </param>
         /// <returns> A new <see cref="Models.FileRequiredMetaData"/> instance for mocking. </returns>
         public static FileRequiredMetaData FileRequiredMetaData(string contentType = null, string filename = null, BinaryData contents = null)
         {
@@ -30,9 +54,33 @@ namespace Payload.MultiPart.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.File"/>. </summary>
-        /// <param name="contentType"></param>
-        /// <param name="filename"></param>
-        /// <param name="contents"></param>
+        /// <param name="contentType">
+        /// The allowed media (MIME) types of the file contents.
+        ///
+        /// In file bodies, this value comes from the `Content-Type` header of the request or response. In JSON bodies,
+        /// this value is serialized as a field in the response.
+        ///
+        /// NOTE: this is not _necessarily_ the same as the `Content-Type` header of the request or response, but
+        /// it will be for file bodies. It may be different if the file is serialized as a JSON object. It always refers to the
+        /// _contents_ of the file, and not necessarily the way the file itself is transmitted or serialized.
+        /// </param>
+        /// <param name="filename">
+        /// The name of the file, if any.
+        ///
+        /// In file bodies, this value comes from the `filename` parameter of the `Content-Disposition` header of the response
+        /// or multipart payload. In JSON bodies, this value is serialized as a field in the response.
+        ///
+        /// NOTE: By default, `filename` cannot be sent in request payloads and can only be sent in responses and multipart
+        /// payloads, as the `Content-Disposition` header is not valid in requests. If you want to send the `filename` in a request,
+        /// you must extend the `File` model and override the `filename` property with a different location defined by HTTP metadata
+        /// decorators.
+        /// </param>
+        /// <param name="contents">
+        /// The contents of the file.
+        ///
+        /// In file bodies, this value comes from the body of the request, response, or multipart payload. In JSON bodies,
+        /// this value is serialized as a field in the response.
+        /// </param>
         /// <returns> A new <see cref="Models.File"/> instance for mocking. </returns>
         public static File File(string contentType = null, string filename = null, BinaryData contents = null)
         {
@@ -40,9 +88,33 @@ namespace Payload.MultiPart.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FileSpecificContentType"/>. </summary>
-        /// <param name="contentType"></param>
-        /// <param name="filename"></param>
-        /// <param name="contents"></param>
+        /// <param name="contentType">
+        /// The allowed media (MIME) types of the file contents.
+        ///
+        /// In file bodies, this value comes from the `Content-Type` header of the request or response. In JSON bodies,
+        /// this value is serialized as a field in the response.
+        ///
+        /// NOTE: this is not _necessarily_ the same as the `Content-Type` header of the request or response, but
+        /// it will be for file bodies. It may be different if the file is serialized as a JSON object. It always refers to the
+        /// _contents_ of the file, and not necessarily the way the file itself is transmitted or serialized.
+        /// </param>
+        /// <param name="filename">
+        /// The name of the file, if any.
+        ///
+        /// In file bodies, this value comes from the `filename` parameter of the `Content-Disposition` header of the response
+        /// or multipart payload. In JSON bodies, this value is serialized as a field in the response.
+        ///
+        /// NOTE: By default, `filename` cannot be sent in request payloads and can only be sent in responses and multipart
+        /// payloads, as the `Content-Disposition` header is not valid in requests. If you want to send the `filename` in a request,
+        /// you must extend the `File` model and override the `filename` property with a different location defined by HTTP metadata
+        /// decorators.
+        /// </param>
+        /// <param name="contents">
+        /// The contents of the file.
+        ///
+        /// In file bodies, this value comes from the body of the request, response, or multipart payload. In JSON bodies,
+        /// this value is serialized as a field in the response.
+        /// </param>
         /// <returns> A new <see cref="Models.FileSpecificContentType"/> instance for mocking. </returns>
         public static FileSpecificContentType FileSpecificContentType(string contentType = null, string filename = null, BinaryData contents = null)
         {
@@ -50,9 +122,33 @@ namespace Payload.MultiPart.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FileOptionalContentType"/>. </summary>
-        /// <param name="contentType"></param>
-        /// <param name="filename"></param>
-        /// <param name="contents"></param>
+        /// <param name="contentType">
+        /// The allowed media (MIME) types of the file contents.
+        ///
+        /// In file bodies, this value comes from the `Content-Type` header of the request or response. In JSON bodies,
+        /// this value is serialized as a field in the response.
+        ///
+        /// NOTE: this is not _necessarily_ the same as the `Content-Type` header of the request or response, but
+        /// it will be for file bodies. It may be different if the file is serialized as a JSON object. It always refers to the
+        /// _contents_ of the file, and not necessarily the way the file itself is transmitted or serialized.
+        /// </param>
+        /// <param name="filename">
+        /// The name of the file, if any.
+        ///
+        /// In file bodies, this value comes from the `filename` parameter of the `Content-Disposition` header of the response
+        /// or multipart payload. In JSON bodies, this value is serialized as a field in the response.
+        ///
+        /// NOTE: By default, `filename` cannot be sent in request payloads and can only be sent in responses and multipart
+        /// payloads, as the `Content-Disposition` header is not valid in requests. If you want to send the `filename` in a request,
+        /// you must extend the `File` model and override the `filename` property with a different location defined by HTTP metadata
+        /// decorators.
+        /// </param>
+        /// <param name="contents">
+        /// The contents of the file.
+        ///
+        /// In file bodies, this value comes from the body of the request, response, or multipart payload. In JSON bodies,
+        /// this value is serialized as a field in the response.
+        /// </param>
         /// <returns> A new <see cref="Models.FileOptionalContentType"/> instance for mocking. </returns>
         public static FileOptionalContentType FileOptionalContentType(string contentType = null, string filename = null, BinaryData contents = null)
         {

@@ -36,17 +36,17 @@ namespace Scm._Type.Union
         }
 
         /// <summary> Get enums only. </summary>
-        public virtual async Task<ClientResult<GetResponse3>> GetEnumsOnlyAsync()
+        public virtual async Task<ClientResult<GetResponse6>> GetEnumsOnlyAsync()
         {
             ClientResult result = await GetEnumsOnlyAsync(null).ConfigureAwait(false);
-            return ClientResult.FromValue(GetResponse3.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse6.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Get enums only. </summary>
-        public virtual ClientResult<GetResponse3> GetEnumsOnly()
+        public virtual ClientResult<GetResponse6> GetEnumsOnly()
         {
             ClientResult result = GetEnumsOnly(null);
-            return ClientResult.FromValue(GetResponse3.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse6.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -104,8 +104,8 @@ namespace Scm._Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest3 sendRequest3 = new SendRequest3(prop, null);
-            ClientResult result = await SendAsync(sendRequest3.ToBinaryContent(), null).ConfigureAwait(false);
+            SendRequest6 sendRequest6 = new SendRequest6(prop, null);
+            ClientResult result = await SendAsync(sendRequest6.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
@@ -116,8 +116,8 @@ namespace Scm._Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest3 sendRequest3 = new SendRequest3(prop, null);
-            ClientResult result = Send(sendRequest3.ToBinaryContent(), null);
+            SendRequest6 sendRequest6 = new SendRequest6(prop, null);
+            ClientResult result = Send(sendRequest6.ToBinaryContent(), null);
             return result;
         }
 

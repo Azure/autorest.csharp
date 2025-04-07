@@ -48,21 +48,21 @@ namespace _Type.Union
         /// <summary> Get ints only. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/IntsOnly.xml" path="doc/members/member[@name='GetIntsOnlyAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<GetResponse6>> GetIntsOnlyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetResponse3>> GetIntsOnlyAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetIntsOnlyAsync(context).ConfigureAwait(false);
-            return Response.FromValue(GetResponse6.FromResponse(response), response);
+            return Response.FromValue(GetResponse3.FromResponse(response), response);
         }
 
         /// <summary> Get ints only. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/IntsOnly.xml" path="doc/members/member[@name='GetIntsOnly(CancellationToken)']/*" />
-        public virtual Response<GetResponse6> GetIntsOnly(CancellationToken cancellationToken = default)
+        public virtual Response<GetResponse3> GetIntsOnly(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetIntsOnly(context);
-            return Response.FromValue(GetResponse6.FromResponse(response), response);
+            return Response.FromValue(GetResponse3.FromResponse(response), response);
         }
 
         /// <summary>
@@ -141,9 +141,9 @@ namespace _Type.Union
         /// <include file="Docs/IntsOnly.xml" path="doc/members/member[@name='SendAsync(GetResponseProp2,CancellationToken)']/*" />
         public virtual async Task<Response> SendAsync(GetResponseProp2 prop, CancellationToken cancellationToken = default)
         {
-            SendRequest6 sendRequest6 = new SendRequest6(prop, null);
+            SendRequest3 sendRequest3 = new SendRequest3(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SendAsync(sendRequest6.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SendAsync(sendRequest3.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -153,9 +153,9 @@ namespace _Type.Union
         /// <include file="Docs/IntsOnly.xml" path="doc/members/member[@name='Send(GetResponseProp2,CancellationToken)']/*" />
         public virtual Response Send(GetResponseProp2 prop, CancellationToken cancellationToken = default)
         {
-            SendRequest6 sendRequest6 = new SendRequest6(prop, null);
+            SendRequest3 sendRequest3 = new SendRequest3(prop, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Send(sendRequest6.ToRequestContent(), context);
+            Response response = Send(sendRequest3.ToRequestContent(), context);
             return response;
         }
 

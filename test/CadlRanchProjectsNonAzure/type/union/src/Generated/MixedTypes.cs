@@ -36,17 +36,17 @@ namespace Scm._Type.Union
         }
 
         /// <summary> Get mixed type. </summary>
-        public virtual async Task<ClientResult<GetResponse>> GetMixedTypeAsync()
+        public virtual async Task<ClientResult<GetResponse9>> GetMixedTypeAsync()
         {
             ClientResult result = await GetMixedTypeAsync(null).ConfigureAwait(false);
-            return ClientResult.FromValue(GetResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse9.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> Get mixed type. </summary>
-        public virtual ClientResult<GetResponse> GetMixedType()
+        public virtual ClientResult<GetResponse9> GetMixedType()
         {
             ClientResult result = GetMixedType(null);
-            return ClientResult.FromValue(GetResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
+            return ClientResult.FromValue(GetResponse9.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
@@ -104,8 +104,8 @@ namespace Scm._Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest sendRequest = new SendRequest(prop, null);
-            ClientResult result = await SendAsync(sendRequest.ToBinaryContent(), null).ConfigureAwait(false);
+            SendRequest9 sendRequest9 = new SendRequest9(prop, null);
+            ClientResult result = await SendAsync(sendRequest9.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
@@ -116,8 +116,8 @@ namespace Scm._Type.Union
         {
             Argument.AssertNotNull(prop, nameof(prop));
 
-            SendRequest sendRequest = new SendRequest(prop, null);
-            ClientResult result = Send(sendRequest.ToBinaryContent(), null);
+            SendRequest9 sendRequest9 = new SendRequest9(prop, null);
+            ClientResult result = Send(sendRequest9.ToBinaryContent(), null);
             return result;
         }
 

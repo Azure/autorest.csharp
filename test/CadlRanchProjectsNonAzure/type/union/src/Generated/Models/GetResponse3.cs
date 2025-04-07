@@ -44,18 +44,15 @@ namespace Scm._Type.Union.Models
 
         /// <summary> Initializes a new instance of <see cref="GetResponse3"/>. </summary>
         /// <param name="prop"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
-        internal GetResponse3(EnumsOnlyCases prop)
+        internal GetResponse3(GetResponseProp2 prop)
         {
-            Argument.AssertNotNull(prop, nameof(prop));
-
             Prop = prop;
         }
 
         /// <summary> Initializes a new instance of <see cref="GetResponse3"/>. </summary>
         /// <param name="prop"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal GetResponse3(EnumsOnlyCases prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal GetResponse3(GetResponseProp2 prop, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Prop = prop;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -67,6 +64,6 @@ namespace Scm._Type.Union.Models
         }
 
         /// <summary> Gets the prop. </summary>
-        public EnumsOnlyCases Prop { get; }
+        public GetResponseProp2 Prop { get; }
     }
 }
