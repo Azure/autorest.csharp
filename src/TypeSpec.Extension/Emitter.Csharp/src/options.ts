@@ -118,7 +118,7 @@ const defaultAzureEmitterOptions = {
     "keep-non-overloadable-protocol-signature": undefined,
     "library-name": undefined,
     "examples-dir": undefined,
-    "enable-bicep-serialization": false
+    "enable-bicep-serialization": undefined
 };
 
 export function resolveAzureEmitterOptions(
