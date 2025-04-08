@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using AutoRest.CSharp.Output.Builders;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -28,6 +27,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             var isFirstProperty = true;
             string? serializedName = null;
+            string? kind = null;
             string? summary = null;
             string? doc = null;
             InputType? propertyType = null;
@@ -42,6 +42,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString("name", ref name)
+                    || reader.TryReadString("kind", ref kind)
                     || reader.TryReadString("serializedName", ref serializedName)
                     || reader.TryReadString("summary", ref summary)
                     || reader.TryReadString("doc", ref doc)
@@ -59,6 +60,11 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             name = name ?? throw new JsonException($"{nameof(InputModelProperty)} must have a name.");
+            if (kind == null)
+            {
+                throw new JsonException("Property must have kind");
+            }
+            Enum.TryParse(kind, ignoreCase: true, out InputModelPropertyKind propertyKind);
             propertyType = propertyType ?? throw new JsonException($"{nameof(InputModelProperty)} must have a property type.");
 
             if (propertyType is InputLiteralType lt)
@@ -67,7 +73,7 @@ namespace AutoRest.CSharp.Common.Input
                 propertyType = lt.ValueType;
             }
 
-            var property = new InputModelProperty(name, serializedName ?? name, summary, doc, propertyType, defaultValue, !isOptional, isReadOnly, isDiscriminator)
+            var property = new InputModelProperty(name, serializedName ?? name, summary, doc, propertyType, defaultValue, !isOptional, isReadOnly, isDiscriminator, propertyKind)
             {
                 Decorators = decorators ?? [],
                 IsFlattened = isFlattened

@@ -15,16 +15,23 @@ namespace _Type.Model.Visibility.Models
     {
         /// <summary> Initializes a new instance of <see cref="Models.VisibilityModel"/>. </summary>
         /// <param name="readProp"> Required string, illustrating a readonly property. </param>
+        /// <param name="queryProp"> Required int32, illustrating a query property. </param>
         /// <param name="createProp"> Required string[], illustrating a create property. </param>
         /// <param name="updateProp"> Required int32[], illustrating a update property. </param>
         /// <param name="deleteProp"> Required bool, illustrating a delete property. </param>
         /// <returns> A new <see cref="Models.VisibilityModel"/> instance for mocking. </returns>
-        public static VisibilityModel VisibilityModel(string readProp = null, IEnumerable<string> createProp = null, IEnumerable<int> updateProp = null, bool deleteProp = default)
+        public static VisibilityModel VisibilityModel(string readProp = null, int queryProp = default, IEnumerable<string> createProp = null, IEnumerable<int> updateProp = null, bool deleteProp = default)
         {
             createProp ??= new List<string>();
             updateProp ??= new List<int>();
 
-            return new VisibilityModel(readProp, createProp?.ToList(), updateProp?.ToList(), deleteProp, serializedAdditionalRawData: null);
+            return new VisibilityModel(
+                readProp,
+                queryProp,
+                createProp?.ToList(),
+                updateProp?.ToList(),
+                deleteProp,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ReadOnlyModel"/>. </summary>

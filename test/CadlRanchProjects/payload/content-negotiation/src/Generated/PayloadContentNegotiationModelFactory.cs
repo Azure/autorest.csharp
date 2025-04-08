@@ -13,11 +13,12 @@ namespace Payload.ContentNegotiation.Models
     public static partial class PayloadContentNegotiationModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.PngImageAsJson"/>. </summary>
+        /// <param name="contentType"></param>
         /// <param name="content"></param>
         /// <returns> A new <see cref="Models.PngImageAsJson"/> instance for mocking. </returns>
-        public static PngImageAsJson PngImageAsJson(BinaryData content = null)
+        public static PngImageAsJson PngImageAsJson(PngImageAsJsonContentType contentType = default, BinaryData content = null)
         {
-            return new PngImageAsJson(content, serializedAdditionalRawData: null);
+            return new PngImageAsJson(contentType, content, serializedAdditionalRawData: null);
         }
     }
 }

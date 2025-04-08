@@ -72,6 +72,7 @@ namespace AutoRest.CSharp.Common.Input
             => new(
                 Name: operationGroup.Language.Default.Name,
                 Summary: string.Empty,
+                Methods: null,
                 Doc: operationGroup.Language.Default.Description,
                 Operations: CreateOperations(operationGroup.Operations, serviceRequestToInputOperation, inputOperationToOperation),
                 Parameters: Array.Empty<InputParameter>(),

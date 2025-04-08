@@ -112,6 +112,7 @@ DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 Response response = await client.GetAvatarAsJsonAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("content-type").ToString());
 Console.WriteLine(result.GetProperty("content").ToString());
 ]]></code>
 This sample shows how to call GetAvatarAsJsonAsync with all parameters and parse the result.
@@ -121,6 +122,7 @@ DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 Response response = await client.GetAvatarAsJsonAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("content-type").ToString());
 Console.WriteLine(result.GetProperty("content").ToString());
 ]]></code></example>
     </member>
@@ -133,6 +135,7 @@ DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 Response response = client.GetAvatarAsJson(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("content-type").ToString());
 Console.WriteLine(result.GetProperty("content").ToString());
 ]]></code>
 This sample shows how to call GetAvatarAsJson with all parameters and parse the result.
@@ -142,6 +145,7 @@ DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 Response response = client.GetAvatarAsJson(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("content-type").ToString());
 Console.WriteLine(result.GetProperty("content").ToString());
 ]]></code></example>
     </member>

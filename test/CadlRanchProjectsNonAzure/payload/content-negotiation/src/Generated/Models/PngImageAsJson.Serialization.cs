@@ -29,6 +29,8 @@ namespace Scm.Payload.ContentNegotiation.Models
                 throw new FormatException($"The model {nameof(PngImageAsJson)} does not support writing '{format}' format.");
             }
 
+            writer.WritePropertyName("content-type"u8);
+            writer.WriteStringValue(ContentType.ToString());
             writer.WritePropertyName("content"u8);
             writer.WriteBase64StringValue(Content.ToArray(), "D");
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -68,11 +70,17 @@ namespace Scm.Payload.ContentNegotiation.Models
             {
                 return null;
             }
+            PngImageAsJsonContentType contentType = default;
             BinaryData content = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("content-type"u8))
+                {
+                    contentType = new PngImageAsJsonContentType(property.Value.GetString());
+                    continue;
+                }
                 if (property.NameEquals("content"u8))
                 {
                     content = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
@@ -84,7 +92,7 @@ namespace Scm.Payload.ContentNegotiation.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new PngImageAsJson(content, serializedAdditionalRawData);
+            return new PngImageAsJson(contentType, content, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<PngImageAsJson>.Write(ModelReaderWriterOptions options)
