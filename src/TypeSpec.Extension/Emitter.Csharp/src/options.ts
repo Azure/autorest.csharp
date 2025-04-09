@@ -110,7 +110,7 @@ const defaultAzureEmitterOptions = {
     "head-as-boolean": undefined,
     "generate-sample-project": true,
     "use-model-reader-writer": true,
-    "use-azure-plugin": false,
+    "use-azure-plugin": undefined,
     "single-top-level-client": undefined,
     "keep-non-overloadable-protocol-signature": undefined,
     "library-name": undefined,
