@@ -44,3 +44,5 @@ interface Foos {
 
     list is ArmResourceListByParent<Foo>;
 }
+
+@@deserializeEmptyStringAsNull(FooProperties.serviceUrl);
