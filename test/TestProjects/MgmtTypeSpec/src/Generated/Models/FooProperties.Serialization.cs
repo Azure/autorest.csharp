@@ -8,9 +8,11 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace MgmtTypeSpec.Models
 {
@@ -179,6 +181,120 @@ namespace MgmtTypeSpec.Models
                 serializedAdditionalRawData);
         }
 
+        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+        {
+            StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.PropertyOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
+            builder.AppendLine("{");
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ServiceUri), out propertyOverride);
+            if (hasPropertyOverride)
+            {
+                builder.Append("  serviceUrl: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(ServiceUri))
+                {
+                    builder.Append("  serviceUrl: ");
+                    builder.AppendLine($"'{ServiceUri.AbsoluteUri}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Something), out propertyOverride);
+            if (hasPropertyOverride)
+            {
+                builder.Append("  something: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(Something))
+                {
+                    builder.Append("  something: ");
+                    if (Something.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine("'''");
+                        builder.AppendLine($"{Something}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"'{Something}'");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(BoolValue), out propertyOverride);
+            if (hasPropertyOverride)
+            {
+                builder.Append("  boolValue: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(BoolValue))
+                {
+                    builder.Append("  boolValue: ");
+                    var boolValue = BoolValue.Value == true ? "true" : "false";
+                    builder.AppendLine($"{boolValue}");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(FloatValue), out propertyOverride);
+            if (hasPropertyOverride)
+            {
+                builder.Append("  floatValue: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(FloatValue))
+                {
+                    builder.Append("  floatValue: ");
+                    builder.AppendLine($"'{FloatValue.Value.ToString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DoubleValue), out propertyOverride);
+            if (hasPropertyOverride)
+            {
+                builder.Append("  doubleValue: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(DoubleValue))
+                {
+                    builder.Append("  doubleValue: ");
+                    builder.AppendLine($"'{DoubleValue.Value.ToString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TestResource), out propertyOverride);
+            if (hasPropertyOverride)
+            {
+                builder.Append("  testResource: ");
+                builder.AppendLine(propertyOverride);
+            }
+            else
+            {
+                if (Optional.IsDefined(TestResource))
+                {
+                    builder.Append("  testResource: ");
+                    builder.AppendLine($"'{TestResource.Value.ToString()}'");
+                }
+            }
+
+            builder.AppendLine("}");
+            return BinaryData.FromString(builder.ToString());
+        }
+
         BinaryData IPersistableModel<FooProperties>.Write(ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<FooProperties>)this).GetFormatFromOptions(options) : options.Format;
@@ -187,6 +303,8 @@ namespace MgmtTypeSpec.Models
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
+                case "bicep":
+                    return SerializeBicep(options);
                 default:
                     throw new FormatException($"The model {nameof(FooProperties)} does not support writing '{options.Format}' format.");
             }

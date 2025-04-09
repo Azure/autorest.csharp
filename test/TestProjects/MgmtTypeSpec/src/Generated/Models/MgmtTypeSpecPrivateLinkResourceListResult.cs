@@ -73,8 +73,10 @@ namespace MgmtTypeSpec.Models
         }
 
         /// <summary> The PrivateLinkResource items on this page. </summary>
+        [WirePath("value")]
         public IReadOnlyList<MgmtTypeSpecPrivateLinkResourceData> Value { get; }
         /// <summary> The link to the next page of items. </summary>
+        [WirePath("nextLink")]
         public Uri NextLink { get; }
     }
 }

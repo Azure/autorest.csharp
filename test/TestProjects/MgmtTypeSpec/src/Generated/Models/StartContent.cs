@@ -60,6 +60,7 @@ namespace MgmtTypeSpec.Models
         }
 
         /// <summary> The boolean value indicates whether to start the virtual machines before starting the SAP instances. </summary>
+        [WirePath("startVm")]
         public bool? StartVm { get; set; }
     }
 }
