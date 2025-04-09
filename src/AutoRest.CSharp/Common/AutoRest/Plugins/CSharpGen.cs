@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.AzurePlugin;
 using AutoRest.CSharp.Common.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
@@ -50,6 +51,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 CodeModelTransformer.TransformForMgmt(codeModel);
                 var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
+                await AzurePluginTarget.ExecuteAsync(project, inputNamespace);
             }
             else
             {
