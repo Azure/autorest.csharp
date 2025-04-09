@@ -46,6 +46,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 await MgmtTarget.ExecuteAsync(project);
                 GenerateMgmtReport(project);
             }
+            else if (Configuration.UseAzurePlugin)
+            {
+                CodeModelTransformer.TransformForMgmt(codeModel);
+                var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
+            }
             else
             {
                 var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();

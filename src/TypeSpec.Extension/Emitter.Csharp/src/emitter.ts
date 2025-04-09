@@ -120,6 +120,9 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
 
         configurations["use-model-reader-writer"] =
             options["use-model-reader-writer"];
+            
+        configurations["use-azure-plugin"] =
+            options["use-azure-plugin"];
 
         configurations["single-top-level-client"] =
             options["single-top-level-client"];
