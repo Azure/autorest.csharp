@@ -52,6 +52,8 @@ namespace AutoRest.CSharp.Common.Input
                     new TypeSpecInputOperationPagingConverter(referenceHandler),
                     new TypeSpecInputNextLinkConverter(referenceHandler),
                     new TypeSpecInputContinuationTokenConverter(referenceHandler),
+                    new TypeSpecInputServiceMethodConverter(referenceHandler),
+                    new TypeSpecInputServiceMethodResponseConverter(referenceHandler),
                 }
             };
 

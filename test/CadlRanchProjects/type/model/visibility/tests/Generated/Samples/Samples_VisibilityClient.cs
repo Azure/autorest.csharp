@@ -26,6 +26,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -40,6 +41,7 @@ namespace _Type.Model.Visibility.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("readProp").ToString());
+            Console.WriteLine(result.GetProperty("queryProp").ToString());
             Console.WriteLine(result.GetProperty("createProp")[0].ToString());
             Console.WriteLine(result.GetProperty("updateProp")[0].ToString());
             Console.WriteLine(result.GetProperty("deleteProp").ToString());
@@ -53,6 +55,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -67,6 +70,7 @@ namespace _Type.Model.Visibility.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("readProp").ToString());
+            Console.WriteLine(result.GetProperty("queryProp").ToString());
             Console.WriteLine(result.GetProperty("createProp")[0].ToString());
             Console.WriteLine(result.GetProperty("updateProp")[0].ToString());
             Console.WriteLine(result.GetProperty("deleteProp").ToString());
@@ -78,7 +82,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response<VisibilityModel> response = client.GetModel(1234, input);
         }
 
@@ -88,7 +92,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response<VisibilityModel> response = await client.GetModelAsync(1234, input);
         }
 
@@ -100,6 +104,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -114,6 +119,7 @@ namespace _Type.Model.Visibility.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("readProp").ToString());
+            Console.WriteLine(result.GetProperty("queryProp").ToString());
             Console.WriteLine(result.GetProperty("createProp")[0].ToString());
             Console.WriteLine(result.GetProperty("updateProp")[0].ToString());
             Console.WriteLine(result.GetProperty("deleteProp").ToString());
@@ -127,6 +133,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -141,6 +148,7 @@ namespace _Type.Model.Visibility.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("readProp").ToString());
+            Console.WriteLine(result.GetProperty("queryProp").ToString());
             Console.WriteLine(result.GetProperty("createProp")[0].ToString());
             Console.WriteLine(result.GetProperty("updateProp")[0].ToString());
             Console.WriteLine(result.GetProperty("deleteProp").ToString());
@@ -152,7 +160,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response<VisibilityModel> response = client.GetModel(1234, input);
         }
 
@@ -162,7 +170,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response<VisibilityModel> response = await client.GetModelAsync(1234, input);
         }
 
@@ -174,6 +182,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -197,6 +206,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -218,7 +228,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = client.HeadModel(1234, input);
         }
 
@@ -228,7 +238,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = await client.HeadModelAsync(1234, input);
         }
 
@@ -240,6 +250,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -263,6 +274,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -284,7 +296,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = client.HeadModel(1234, input);
         }
 
@@ -294,7 +306,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = await client.HeadModelAsync(1234, input);
         }
 
@@ -306,6 +318,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -329,6 +342,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -350,7 +364,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = client.PutModel(input);
         }
 
@@ -360,7 +374,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = await client.PutModelAsync(input);
         }
 
@@ -372,6 +386,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -395,6 +410,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -416,7 +432,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = client.PutModel(input);
         }
 
@@ -426,7 +442,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = await client.PutModelAsync(input);
         }
 
@@ -438,6 +454,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -461,6 +478,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -484,6 +502,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -507,6 +526,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -530,6 +550,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -553,6 +574,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -574,7 +596,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = client.PostModel(input);
         }
 
@@ -584,7 +606,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = await client.PostModelAsync(input);
         }
 
@@ -596,6 +618,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -619,6 +642,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -640,7 +664,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = client.PostModel(input);
         }
 
@@ -650,7 +674,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = await client.PostModelAsync(input);
         }
 
@@ -662,6 +686,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -685,6 +710,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -706,7 +732,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = client.DeleteModel(input);
         }
 
@@ -716,7 +742,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = await client.DeleteModelAsync(input);
         }
 
@@ -728,6 +754,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -751,6 +778,7 @@ namespace _Type.Model.Visibility.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                queryProp = 1234,
                 createProp = new object[]
             {
 "<createProp>"
@@ -772,7 +800,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = client.DeleteModel(input);
         }
 
@@ -782,7 +810,7 @@ namespace _Type.Model.Visibility.Samples
         {
             VisibilityClient client = new VisibilityClient();
 
-            VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
             Response response = await client.DeleteModelAsync(input);
         }
 
