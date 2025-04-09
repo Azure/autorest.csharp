@@ -1,11 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
 using System.Threading.Tasks;
 
-namespace AutoRest.CSharp.AzurePlugin
+namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class AzurePluginTarget
     {
