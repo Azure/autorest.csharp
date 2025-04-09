@@ -28,6 +28,7 @@ export interface AzureCSharpEmitterOptions extends CSharpEmitterOptions {
     "use-azure-plugin"?: boolean;
     "library-name"?: string;
     "examples-dir"?: string;
+    "enable-bicep-serialization"?: boolean;
 }
 
 export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterOptions> =
@@ -91,7 +92,11 @@ export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterO
             "use-azure-plugin": { type: "boolean", nullable: true },
             namespace: { type: "string", nullable: true },
             "library-name": { type: "string", nullable: true },
-            "examples-dir": { type: "string", nullable: true }
+            "examples-dir": { type: "string", nullable: true },
+            "enable-bicep-serialization": {
+                type: "boolean",
+                nullable: false
+            }
         },
         required: []
     };
@@ -114,7 +119,8 @@ const defaultAzureEmitterOptions = {
     "single-top-level-client": undefined,
     "keep-non-overloadable-protocol-signature": undefined,
     "library-name": undefined,
-    "examples-dir": undefined
+    "examples-dir": undefined,
+    "enable-bicep-serialization": undefined
 };
 
 export function resolveAzureEmitterOptions(
@@ -178,6 +184,9 @@ export function resolveAzureEmitterOptions(
         "library-name": context.options["package-name"],
         "examples-dir":
             context.options["examples-dir"] ??
-            defaultAzureEmitterOptions["examples-dir"]
+            defaultAzureEmitterOptions["examples-dir"],
+        "enable-bicep-serialization":
+            context.options["enable-bicep-serialization"] ??
+            defaultAzureEmitterOptions["enable-bicep-serialization"]
     };
 }

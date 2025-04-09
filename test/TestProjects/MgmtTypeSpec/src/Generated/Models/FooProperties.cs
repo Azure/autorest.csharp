@@ -71,16 +71,22 @@ namespace MgmtTypeSpec.Models
         }
 
         /// <summary> the service url. </summary>
+        [WirePath("serviceUrl")]
         public Uri ServiceUri { get; set; }
         /// <summary> something. </summary>
+        [WirePath("something")]
         public string Something { get; set; }
         /// <summary> boolean value. </summary>
+        [WirePath("boolValue")]
         public bool? BoolValue { get; set; }
         /// <summary> float value. </summary>
+        [WirePath("floatValue")]
         public float? FloatValue { get; set; }
         /// <summary> double value. </summary>
+        [WirePath("doubleValue")]
         public double? DoubleValue { get; set; }
         /// <summary> Gets or sets the test resource. </summary>
+        [WirePath("testResource")]
         public ResourceType? TestResource { get; set; }
     }
 }
