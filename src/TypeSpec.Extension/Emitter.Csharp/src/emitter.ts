@@ -9,10 +9,10 @@ import path from "node:path";
 import {
     Logger,
     configurationFileName,
-    tspOutputFileName,
+    createCSharpEmitterContext,
     createModel,
-    writeCodeModel,
-    CSharpEmitterContext
+    tspOutputFileName,
+    writeCodeModel
 } from "@typespec/http-client-csharp";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
@@ -42,17 +42,7 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
         "@azure-tools/typespec-csharp",
         azureSDKContextOptions
     );
-    const csharpEmitterContext: CSharpEmitterContext = {
-        logger: logger,
-        __typeCache: {
-            crossLanguageDefinitionIds: new Map(),
-            clients: new Map(),
-            types: new Map(),
-            models: new Map(),
-            enums: new Map()
-        },
-        ...sdkContext
-    };
+    const csharpEmitterContext = createCSharpEmitterContext(sdkContext, logger);
     const root = createModel(csharpEmitterContext);
 
     const outputFolder = resolvePath(
@@ -121,6 +111,8 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
         configurations["use-model-reader-writer"] =
             options["use-model-reader-writer"];
 
+        configurations["use-azure-plugin"] = options["use-azure-plugin"];
+
         configurations["single-top-level-client"] =
             options["single-top-level-client"];
 
@@ -162,6 +154,8 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
                 outputFolder,
                 examplesDir
             );
+            configurations["enable-bicep-serialization"] =
+                options["enable-bicep-serialization"];
         }
         /* TODO: when we support to emit decorator list https://github.com/Azure/autorest.csharp/issues/4887, we will update to use emitted decorator to identify if it is azure-arm */
         /* set azure-arm */

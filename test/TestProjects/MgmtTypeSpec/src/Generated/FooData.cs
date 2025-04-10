@@ -81,8 +81,10 @@ namespace MgmtTypeSpec
         }
 
         /// <summary> The resource-specific properties for this resource. </summary>
+        [WirePath("properties")]
         public FooProperties Properties { get; set; }
         /// <summary> Gets or sets the extended location. </summary>
+        [WirePath("extendedLocation")]
         public ExtendedLocation ExtendedLocation { get; set; }
     }
 }

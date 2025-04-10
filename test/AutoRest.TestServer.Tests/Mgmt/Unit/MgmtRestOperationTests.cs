@@ -75,6 +75,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 keepNonOverloadableProtocolSignature: false,
                 useCoreDataFactoryReplacements: true,
                 useModelReaderWriter: true,
+                useAzurePlugin: false,
                 enableBicepSerialization: true,
                 enableInternalRawData: false,
                 projectFolder: "/..",

@@ -95,6 +95,7 @@ namespace NamedTypeSymbolExtensionsTests
                 deserializeNullCollectionAsNullValue: false,
                 useCoreDataFactoryReplacements: true,
                 useModelReaderWriter: true,
+                useAzurePlugin: false,
                 enableBicepSerialization: true,
                 enableInternalRawData: false,
                 modelFactoryForHlc: Array.Empty<string>(),
