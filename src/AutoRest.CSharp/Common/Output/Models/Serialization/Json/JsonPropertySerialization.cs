@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
@@ -41,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
             ValueSerialization = valueSerialization;
             CustomSerializationMethodName = serializationHooks?.JsonSerializationMethodName;
             CustomDeserializationMethodName = serializationHooks?.JsonDeserializationMethodName;
-            DeserializeEmptyStringAsNull = property.InputModelProperty?.Decorators.Any(d => d.Name == "Azure.ClientGenerator.Core.@deserializeEmptyStringAsNull") ?? false;
+            DeserializeEmptyStringAsNull = property.InputModelProperty?.ShouldDeserializeEmptyStringAsNull() ?? false;
         }
 
         public JsonPropertySerialization(string serializedName, JsonPropertySerialization[] propertySerializations)
