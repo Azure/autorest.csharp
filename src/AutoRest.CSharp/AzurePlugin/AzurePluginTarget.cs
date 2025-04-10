@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public static async Task ExecuteAsync(GeneratedCodeWorkspace project, InputNamespace inputNamespace)
         {
-            // TODO: serialize configuration.json and serialize inputNamespace to tspCodeModel.json
+            // TODO: serialize inputNamespace to tspCodeModel.json
             // TODO: spawn a child process to invoke MTG or Azure plugin
             await Task.CompletedTask;
         }
