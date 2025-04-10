@@ -885,10 +885,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static BoolExpression GetCheckEmptyPropertyValueExpression(JsonPropertyExpression jsonProperty, JsonPropertySerialization jsonPropertySerialization, bool shouldTreatEmptyStringAsNull)
         {
             var jsonElement = jsonProperty.Value;
+            var emptyStringAsNullExpression = Or(jsonElement.ValueKindEqualsNull(), And(jsonElement.ValueKindEqualsString(), Equal(jsonElement.GetString().Length, Int(0))));
 
             if (jsonPropertySerialization.DeserializeEmptyStringAsNull)
             {
-                return Or(jsonElement.ValueKindEqualsNull(), And(jsonElement.ValueKindEqualsString(), Equal(jsonElement.GetString().Length, Int(0))));
+                return emptyStringAsNullExpression;
             }
 
             if (!shouldTreatEmptyStringAsNull)
@@ -906,7 +907,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return jsonElement.ValueKindEqualsNull();
             }
 
-            return Or(jsonElement.ValueKindEqualsNull(), And(jsonElement.ValueKindEqualsString(), Equal(jsonElement.GetString().Length, Int(0))));
+            return emptyStringAsNullExpression;
 
         }
 
