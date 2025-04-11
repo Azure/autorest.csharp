@@ -16,13 +16,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var outputFolder = NormalizeOutputFolder(Configuration.OutputFolder);
             // write the configuration.json
             var configurationFilepath = Path.Combine(outputFolder, "Configuration.json");
-            Console.Error.WriteLine(configurationFilepath);
             await File.WriteAllTextAsync(configurationFilepath, Configuration.SaveConfiguration());
             // serialize inputNamespace to tspCodeModel.json
             var tspCodeModel = TypeSpecSerialization.Serialize(inputNamespace);
             var codeModelFilepath = Path.Combine(outputFolder, "tspCodeModel.json");
-            Console.Error.WriteLine(codeModelFilepath);
-            Console.Error.WriteLine(tspCodeModel);
             await File.WriteAllTextAsync(codeModelFilepath, tspCodeModel);
             // TODO: spawn a child process to invoke MTG or Azure plugin
         }
