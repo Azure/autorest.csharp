@@ -142,7 +142,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
 
                 // generate csproj if necessary
-                if (!Configuration.SkipCSProj)
+                // when we generate via azure plugin, the csproj should be handled by the azure plugin, therefore here we skip it
+                if (!Configuration.SkipCSProj && !Configuration.UseAzurePlugin)
                 {
                     bool needAzureKeyAuth = codeModel.Security.Schemes.Any(scheme => scheme is KeySecurityScheme);
                     bool includeDfe = codeModelYaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal);

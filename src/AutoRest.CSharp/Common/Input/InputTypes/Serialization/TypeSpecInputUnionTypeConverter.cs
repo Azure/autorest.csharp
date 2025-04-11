@@ -10,6 +10,8 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class TypeSpecInputUnionTypeConverter : JsonConverter<InputUnionType>
     {
+        internal const string UnionKind = "union";
+
         private readonly TypeSpecReferenceHandler _referenceHandler;
         public TypeSpecInputUnionTypeConverter(TypeSpecReferenceHandler referenceHandler)
         {

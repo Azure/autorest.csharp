@@ -21,7 +21,17 @@ namespace AutoRest.CSharp.Common.Input
             => ReadInputNamespace(ref reader, options, _referenceHandler.CurrentResolver);
 
         public override void Write(Utf8JsonWriter writer, InputNamespace value, JsonSerializerOptions options)
-            => throw new NotSupportedException("Writing not supported");
+        {
+            writer.WriteStartObject();
+
+            writer.WriteString("name", value.Name);
+            writer.WriteArray("apiVersions", value.ApiVersions, options);
+            writer.WriteArray("enums", value.Enums, options);
+            writer.WriteArray("models", value.Models, options);
+            // TODO -- write other values
+
+            writer.WriteEndObject();
+        }
 
         private static InputNamespace? ReadInputNamespace(ref Utf8JsonReader reader, JsonSerializerOptions options, ReferenceResolver resolver)
         {

@@ -10,6 +10,8 @@ namespace AutoRest.CSharp.Common.Input.InputTypes.Serialization
 {
     internal class TypeSpecInputNullableTypeConverter : JsonConverter<InputNullableType>
     {
+        internal const string NullableKind = "nullable";
+
         private readonly TypeSpecReferenceHandler _referenceHandler;
         public TypeSpecInputNullableTypeConverter(TypeSpecReferenceHandler referenceHandler)
         {

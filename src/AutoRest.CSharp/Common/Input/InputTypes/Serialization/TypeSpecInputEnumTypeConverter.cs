@@ -11,6 +11,8 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal sealed class TypeSpecInputEnumTypeConverter : JsonConverter<InputEnumType>
     {
+        internal const string EnumKind = "enum";
+
         private readonly TypeSpecReferenceHandler _referenceHandler;
 
         public TypeSpecInputEnumTypeConverter(TypeSpecReferenceHandler referenceHandler)
@@ -20,9 +22,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public override InputEnumType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => reader.ReadReferenceAndResolve<InputEnumType>(_referenceHandler.CurrentResolver) ?? CreateEnumType(ref reader, null, null, options, _referenceHandler.CurrentResolver);
-
-        public override void Write(Utf8JsonWriter writer, InputEnumType value, JsonSerializerOptions options)
-            => throw new NotSupportedException("Writing not supported");
 
         public static InputEnumType CreateEnumType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
@@ -93,6 +92,50 @@ namespace AutoRest.CSharp.Common.Input
                 resolver.AddReference(id, enumType);
             }
             return enumType;
+        }
+
+        public override void Write(Utf8JsonWriter writer, InputEnumType value, JsonSerializerOptions options)
+        {
+            var id = _referenceHandler.CurrentResolver.GetReference(value, out var alreadyExists);
+            if (alreadyExists)
+            {
+                writer.WriteObjectReference(id);
+                return;
+            }
+
+            // if not exist
+            writer.WriteStartObject();
+
+            // the first property should always be the id
+            writer.WriteReferenceId(id);
+            // then we write the kind
+            writer.WriteString("kind", EnumKind);
+            // name
+            writer.WriteString("name", value.Name);
+            // crossLanguageDefinitionId
+            writer.WriteString("crossLanguageDefinitionId", value.CrossLanguageDefinitionId);
+            // valueType
+            writer.WriteObject("valueType", value.ValueType, options);
+            // values
+            writer.WriteArray("values", value.Values, options);
+            // access
+            writer.WriteStringIfPresent("access", value.Accessibility);
+            // namespace
+            writer.WriteString("namespace", string.Empty); // here the writing is a shimming layer from swagger to typespec. Swagger does not have the concept of namespace
+            // deprecation
+            writer.WriteStringIfPresent("deprecation", value.Deprecated);
+            // summary
+            writer.WriteStringIfPresent("summary", value.Summary);
+            // doc
+            writer.WriteStringIfPresent("doc", value.Doc);
+            // isFixed
+            writer.WriteBoolean("isFixed", !value.IsExtensible);
+            // usage
+            writer.WriteString("usage", value.Usage.ToString());
+            // decorators
+            writer.WriteArray("decorators", value.Decorators, options);
+
+            writer.WriteEndObject();
         }
     }
 }
