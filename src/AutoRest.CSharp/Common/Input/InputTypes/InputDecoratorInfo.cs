@@ -8,12 +8,12 @@ namespace AutoRest.CSharp.Common.Input
 {
     public class InputDecoratorInfo
     {
-        public InputDecoratorInfo(string name, IReadOnlyDictionary<string, BinaryData>? arguments)
+        public InputDecoratorInfo(string name, IReadOnlyDictionary<string, BinaryData> arguments)
         {
             Name = name;
             Arguments = arguments;
         }
         public string Name { get; }
-        public IReadOnlyDictionary<string, BinaryData>? Arguments { get; }
+        public IReadOnlyDictionary<string, BinaryData> Arguments { get; }
     }
 }

@@ -91,7 +91,32 @@ namespace AutoRest.CSharp.Common.Input
 
             // the first property should always be the id
             writer.WriteReferenceId(id);
-            // TODO
+            // kind
+            writer.WriteString("kind", "property");
+            // name
+            writer.WriteString("name", value.Name);
+            // serializedName
+            writer.WriteString("serializedName", value.SerializedName);
+            // summary
+            writer.WriteString("summary", value.Summary);
+            // doc
+            writer.WriteString("doc", value.Doc);
+            // type
+            writer.WriteObject("type", value.Type, options);
+            // optional
+            writer.WriteBoolean("optional", !value.IsRequired);
+            // isReadOnly
+            writer.WriteBoolean("isReadOnly", value.IsReadOnly);
+            // discriminator
+            writer.WriteBoolean("discriminator", value.IsDiscriminator);
+            // flatten
+            writer.WriteBoolean("flatten", value.IsFlattened); // need to figure out how flatten works here.
+            // decorators
+            writer.WriteArray("decorators", value.Decorators, options);
+            // crossLanguageDefinitionId
+            writer.WriteString("crossLanguageDefinitionId", string.Empty);
+            // serializationOptions
+            //writer.WriteObject("serializationOptions", value.SerializationOptions); // we did not adopt this yet
 
             writer.WriteEndObject();
         }

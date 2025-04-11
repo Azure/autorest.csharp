@@ -23,7 +23,10 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public override void Write(Utf8JsonWriter writer, InputType value, JsonSerializerOptions options)
-            => throw new NotSupportedException("Writing not supported");
+        {
+            // InputType is an abstract class, therefore here we just defer to the concrete type
+            JsonSerializer.Serialize(writer, value, value.GetType(), options);
+        }
 
         private InputType CreateInputType(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using static AutoRest.CSharp.Common.Input.Configuration;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -48,6 +49,25 @@ namespace AutoRest.CSharp.Common.Input
             foreach (var (key, value) in dict)
             {
                 writer.WriteObject(key, value, options);
+            }
+
+            writer.WriteEndObject();
+        }
+
+        public static void WriteDictionary(this Utf8JsonWriter writer, ReadOnlySpan<char> propertyName, IEnumerable<KeyValuePair<string, BinaryData>> dict)
+        {
+            writer.WritePropertyName(propertyName);
+            writer.WriteDictionaryValue(dict);
+        }
+
+        public static void WriteDictionaryValue(this Utf8JsonWriter writer, IEnumerable<KeyValuePair<string, BinaryData>> dict)
+        {
+            writer.WriteStartObject();
+
+            foreach (var (key, value) in dict)
+            {
+                writer.WritePropertyName(key);
+                writer.WriteRawValue(value);
             }
 
             writer.WriteEndObject();
