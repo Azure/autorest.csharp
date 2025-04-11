@@ -23,9 +23,6 @@ namespace AutoRest.CSharp.Common.Input
         public override InputModelType? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => ReadModelType(ref reader, options, _referenceHandler.CurrentResolver);
 
-        public override void Write(Utf8JsonWriter writer, InputModelType value, JsonSerializerOptions options)
-            => throw new NotSupportedException("Writing not supported");
-
         private static InputModelType? ReadModelType(ref Utf8JsonReader reader, JsonSerializerOptions options, ReferenceResolver resolver)
             => reader.ReadReferenceAndResolve<InputModelType>(resolver) ?? CreateModelType(ref reader, null, null, options, resolver);
 
@@ -267,6 +264,59 @@ namespace AutoRest.CSharp.Common.Input
                 },
                 _ => propertyType
             };
+        }
+
+        public override void Write(Utf8JsonWriter writer, InputModelType value, JsonSerializerOptions options)
+        {
+            var id = _referenceHandler.CurrentResolver.GetReference(value, out var alreadyExists);
+            if (alreadyExists)
+            {
+                writer.WriteObjectReference(id);
+                return;
+            }
+
+            // if not exist
+            writer.WriteStartObject();
+
+            // the first property should always be the id
+            writer.WriteReferenceId(id);
+            // then we write the kind
+            writer.WriteString("kind", ModelKind);
+            // name
+            writer.WriteString("name", value.Name);
+            // namespace - swagger does not have a concept of namespace, just write empty
+            writer.WriteString("namespace", string.Empty);
+            // crossLanguageDefinitionId
+            writer.WriteString("crossLanguageDefinitionId", value.CrossLanguageDefinitionId);
+            // access
+            writer.WriteStringIfPresent("access", value.Access);
+            // usage
+            writer.WriteString("usage", value.Usage.ToString());
+            // deprecation
+            writer.WriteStringIfPresent("deprecation", value.Deprecation);
+            // summary
+            writer.WriteStringIfPresent("summary", value.Summary);
+            // doc
+            writer.WriteStringIfPresent("doc", value.Doc);
+            // discriminatorValue
+            writer.WriteStringIfPresent("discriminatorValue", value.DiscriminatorValue);
+            // decorators
+            writer.WriteArray("decorators", value.Decorators, options);
+            // additionalProperties
+            writer.WriteObjectIfPresent("additionalProperties", value.AdditionalProperties, options);
+            // discriminatorProperty
+            writer.WriteObjectIfPresent("discriminatorProperty", value.DiscriminatorProperty, options);
+            // baseModel
+            writer.WriteObjectIfPresent("baseModel", value.BaseModel, options);
+            // properties
+            writer.WriteArray("properties", value.Properties, options);
+            // discriminatedSubtypes
+            if (value.DiscriminatedSubtypes.Count > 0)
+            {
+                writer.WriteDictionary("discriminatedSubtypes", value.DiscriminatedSubtypes, options);
+            }
+
+            writer.WriteEndObject();
         }
     }
 }

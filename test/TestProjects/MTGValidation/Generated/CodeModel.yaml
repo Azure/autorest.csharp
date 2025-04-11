@@ -11,8 +11,98 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
+    - !StringSchema &ref_1
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: OperationResultValue
+          description: The value of the operation.
+      protocol: !Protocols {}
+    - !StringSchema &ref_3
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: ApiErrorBaseCode
+          description: The error code.
+      protocol: !Protocols {}
+    - !StringSchema &ref_4
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: ApiErrorBaseTarget
+          description: The target of the particular error.
+      protocol: !Protocols {}
+    - !StringSchema &ref_5
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: ApiErrorBaseMessage
+          description: The error message.
+      protocol: !Protocols {}
+    - !StringSchema &ref_6
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: InnerErrorExceptiontype
+          description: The exception type.
+      protocol: !Protocols {}
+    - !StringSchema &ref_7
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: InnerErrorErrordetail
+          description: The internal error message or exception dump.
+      protocol: !Protocols {}
+    - !StringSchema &ref_8
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: ApiErrorCode
+          description: The error code.
+      protocol: !Protocols {}
+    - !StringSchema &ref_9
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: ApiErrorTarget
+          description: The target of the particular error.
+      protocol: !Protocols {}
+    - !StringSchema &ref_10
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: ApiErrorMessage
+          description: The error message.
+      protocol: !Protocols {}
   choices:
-    - !ChoiceSchema &ref_5
+    - !ChoiceSchema &ref_20
       choices:
         - !ChoiceValue 
           value: '2.0'
@@ -28,7 +118,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_1
+    - !ConstantSchema &ref_16
       type: constant
       value: !ConstantValue 
         value: 1.0.0
@@ -38,7 +128,7 @@ schemas: !Schemas
           name: ApiVersion10
           description: Api Version (1.0.0)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_4
+    - !ConstantSchema &ref_19
       type: constant
       value: !ConstantValue 
         value: '2.0'
@@ -48,8 +138,242 @@ schemas: !Schemas
           name: ApiVersionConstant
           description: ''
       protocol: !Protocols {}
+    - !ConstantSchema &ref_21
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !Protocols {}
+  objects:
+    - !ObjectSchema &ref_23
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_14
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: 1.0.0
+            elementType: !ObjectSchema &ref_2
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: 1.0.0
+              properties:
+                - !Property 
+                  schema: *ref_1
+                  serializedName: value
+                  language: !Languages 
+                    default:
+                      name: value
+                      description: The value of the operation.
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - output
+              language: !Languages 
+                default:
+                  name: OperationResult
+                  description: The result of the operation.
+                  namespace: ''
+              protocol: !Protocols {}
+            language: !Languages 
+              default:
+                name: OperationResultListValue
+                description: The value of the operation.
+            protocol: !Protocols {}
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: The value of the operation.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: OperationResultList
+          description: The result of the operation list.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_2
+    - !ObjectSchema &ref_24
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      properties:
+        - !Property 
+          schema: !ObjectSchema &ref_11
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: 1.0.0
+            properties:
+              - !Property 
+                schema: !ArraySchema &ref_15
+                  type: array
+                  apiVersions:
+                    - !ApiVersion 
+                      version: 1.0.0
+                  elementType: !ObjectSchema &ref_12
+                    type: object
+                    apiVersions:
+                      - !ApiVersion 
+                        version: 1.0.0
+                    properties:
+                      - !Property 
+                        schema: *ref_3
+                        serializedName: code
+                        language: !Languages 
+                          default:
+                            name: code
+                            description: The error code.
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_4
+                        serializedName: target
+                        language: !Languages 
+                          default:
+                            name: target
+                            description: The target of the particular error.
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_5
+                        serializedName: message
+                        language: !Languages 
+                          default:
+                            name: message
+                            description: The error message.
+                        protocol: !Protocols {}
+                    serializationFormats:
+                      - json
+                    usage:
+                      - exception
+                    language: !Languages 
+                      default:
+                        name: ApiErrorBase
+                        description: Api error base.
+                        namespace: ''
+                    protocol: !Protocols {}
+                  language: !Languages 
+                    default:
+                      name: ApiErrorDetails
+                      description: The Api error details
+                  protocol: !Protocols {}
+                serializedName: details
+                language: !Languages 
+                  default:
+                    name: details
+                    description: The Api error details
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ObjectSchema &ref_13
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: 1.0.0
+                  properties:
+                    - !Property 
+                      schema: *ref_6
+                      serializedName: exceptiontype
+                      language: !Languages 
+                        default:
+                          name: exceptiontype
+                          description: The exception type.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_7
+                      serializedName: errordetail
+                      language: !Languages 
+                        default:
+                          name: errordetail
+                          description: The internal error message or exception dump.
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - exception
+                  language: !Languages 
+                    default:
+                      name: InnerError
+                      description: Inner error details.
+                      namespace: ''
+                  protocol: !Protocols {}
+                serializedName: innererror
+                language: !Languages 
+                  default:
+                    name: innererror
+                    description: The Api inner error
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_8
+                serializedName: code
+                language: !Languages 
+                  default:
+                    name: code
+                    description: The error code.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_9
+                serializedName: target
+                language: !Languages 
+                  default:
+                    name: target
+                    description: The target of the particular error.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_10
+                serializedName: message
+                language: !Languages 
+                  default:
+                    name: message
+                    description: The error message.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - exception
+            language: !Languages 
+              default:
+                name: ApiError
+                description: Api error.
+                namespace: ''
+            protocol: !Protocols {}
+          serializedName: error
+          language: !Languages 
+            default:
+              name: error
+              description: Api error.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - exception
+      language: !Languages 
+        default:
+          name: CloudError
+          description: An error response from the Compute service.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_11
+    - *ref_12
+    - *ref_13
+  arrays:
+    - *ref_14
+    - *ref_15
 globalParameters:
-  - !Parameter &ref_2
+  - !Parameter &ref_17
     schema: *ref_0
     clientDefaultValue: ''
     implementation: Client
@@ -65,8 +389,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_3
-    schema: *ref_1
+  - !Parameter &ref_18
+    schema: *ref_16
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -88,10 +412,10 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_2
-          - *ref_3
+          - *ref_17
+          - *ref_18
           - !Parameter 
-            schema: *ref_4
+            schema: *ref_19
             implementation: Method
             required: true
             language: !Languages 
@@ -102,8 +426,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_6
-            schema: *ref_5
+          - !Parameter &ref_22
+            schema: *ref_20
             implementation: Method
             required: true
             language: !Languages 
@@ -116,6 +440,21 @@ operationGroups:
                 in: query
         requests:
           - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_21
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
             language: !Languages 
               default:
                 name: ''
@@ -126,17 +465,35 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_6
+          - *ref_22
         responses:
-          - !Response 
+          - !SchemaResponse 
+            schema: *ref_23
             language: !Languages 
               default:
                 name: ''
-                description: OK
+                description: Succeeded
             protocol: !Protocols 
               http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
                 statusCodes:
                   - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_24
+            language: !Languages 
+              default:
+                name: ''
+                description: Error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
         language: !Languages 
           default:
             name: Operation

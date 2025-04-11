@@ -38,5 +38,130 @@
       "usage": "Input",
       "decorators": []
     }
+  ],
+  "models": [
+    {
+      "$id": "3",
+      "kind": "model",
+      "name": "OperationResultList",
+      "namespace": "",
+      "crossLanguageDefinitionId": "OperationResultList",
+      "access": "public",
+      "usage": "Output",
+      "summary": "",
+      "doc": "The result of the operation list.",
+      "decorators": [],
+      "properties": [
+        {
+          "$id": "4"
+        }
+      ]
+    },
+    {
+      "$id": "5",
+      "kind": "model",
+      "name": "OperationResult",
+      "namespace": "",
+      "crossLanguageDefinitionId": "OperationResult",
+      "access": "public",
+      "usage": "Output",
+      "summary": "",
+      "doc": "The result of the operation.",
+      "decorators": [],
+      "properties": [
+        {
+          "$id": "6"
+        }
+      ]
+    },
+    {
+      "$id": "7",
+      "kind": "model",
+      "name": "CloudError",
+      "namespace": "",
+      "crossLanguageDefinitionId": "CloudError",
+      "access": "internal",
+      "usage": "Output",
+      "summary": "",
+      "doc": "An error response from the Compute service.",
+      "decorators": [],
+      "properties": [
+        {
+          "$id": "8"
+        }
+      ]
+    },
+    {
+      "$id": "9",
+      "kind": "model",
+      "name": "ApiError",
+      "namespace": "",
+      "crossLanguageDefinitionId": "ApiError",
+      "access": "internal",
+      "usage": "Output",
+      "summary": "",
+      "doc": "Api error.",
+      "decorators": [],
+      "properties": [
+        {
+          "$id": "10"
+        },
+        {
+          "$id": "11"
+        },
+        {
+          "$id": "12"
+        },
+        {
+          "$id": "13"
+        },
+        {
+          "$id": "14"
+        }
+      ]
+    },
+    {
+      "$id": "15",
+      "kind": "model",
+      "name": "ApiErrorBase",
+      "namespace": "",
+      "crossLanguageDefinitionId": "ApiErrorBase",
+      "access": "internal",
+      "usage": "Output",
+      "summary": "",
+      "doc": "Api error base.",
+      "decorators": [],
+      "properties": [
+        {
+          "$id": "16"
+        },
+        {
+          "$id": "17"
+        },
+        {
+          "$id": "18"
+        }
+      ]
+    },
+    {
+      "$id": "19",
+      "kind": "model",
+      "name": "InnerError",
+      "namespace": "",
+      "crossLanguageDefinitionId": "InnerError",
+      "access": "internal",
+      "usage": "Output",
+      "summary": "",
+      "doc": "Inner error details.",
+      "decorators": [],
+      "properties": [
+        {
+          "$id": "20"
+        },
+        {
+          "$id": "21"
+        }
+      ]
+    }
   ]
 }

@@ -21,9 +21,6 @@ namespace AutoRest.CSharp.Common.Input
         public override InputModelProperty Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => reader.ReadReferenceAndResolve<InputModelProperty>(_referenceHandler.CurrentResolver) ?? ReadInputModelProperty(ref reader, null, null, options, _referenceHandler.CurrentResolver);
 
-        public override void Write(Utf8JsonWriter writer, InputModelProperty value, JsonSerializerOptions options)
-            => throw new NotSupportedException("Writing not supported");
-
         private static InputModelProperty ReadInputModelProperty(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = true;
@@ -78,6 +75,25 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             return property;
+        }
+
+        public override void Write(Utf8JsonWriter writer, InputModelProperty value, JsonSerializerOptions options)
+        {
+            var id = _referenceHandler.CurrentResolver.GetReference(value, out var alreadyExists);
+            if (alreadyExists)
+            {
+                writer.WriteObjectReference(id);
+                return;
+            }
+
+            // if not exist
+            writer.WriteStartObject();
+
+            // the first property should always be the id
+            writer.WriteReferenceId(id);
+            // TODO
+
+            writer.WriteEndObject();
         }
     }
 }

@@ -35,6 +35,24 @@ namespace AutoRest.CSharp.Common.Input
             writer.WriteEndArray();
         }
 
+        public static void WriteDictionary<T>(this Utf8JsonWriter writer, ReadOnlySpan<char> propertyName, IEnumerable<KeyValuePair<string, T>> dict, JsonSerializerOptions options) where T : notnull
+        {
+            writer.WritePropertyName(propertyName);
+            writer.WriteDictionaryValue(dict, options);
+        }
+
+        public static void WriteDictionaryValue<T>(this Utf8JsonWriter writer, IEnumerable<KeyValuePair<string, T>> dict, JsonSerializerOptions options) where T : notnull
+        {
+            writer.WriteStartObject();
+
+            foreach (var (key, value) in dict)
+            {
+                writer.WriteObject(key, value, options);
+            }
+
+            writer.WriteEndObject();
+        }
+
         public static void WriteObjectIfPresent<T>(this Utf8JsonWriter writer, ReadOnlySpan<char> propertyName, T? value, JsonSerializerOptions options)
         {
             if (value == null)
