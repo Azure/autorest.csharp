@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using AutoRest.CSharp.Common.Input;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -11,15 +12,34 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public static async Task ExecuteAsync(GeneratedCodeWorkspace project, InputNamespace inputNamespace)
         {
+            // normalize the output folder
+            var outputFolder = NormalizeOutputFolder(Configuration.OutputFolder);
             // write the configuration.json
-            var configurationFilepath = Path.Combine(Configuration.OutputFolder, "Configuration.json");
+            var configurationFilepath = Path.Combine(outputFolder, "Configuration.json");
+            Console.Error.WriteLine(configurationFilepath);
             await File.WriteAllTextAsync(configurationFilepath, Configuration.SaveConfiguration());
             // serialize inputNamespace to tspCodeModel.json
             var tspCodeModel = TypeSpecSerialization.Serialize(inputNamespace);
-            var codeModelFilepath = Path.Combine(Configuration.OutputFolder, "tspCodeModel.json");
+            var codeModelFilepath = Path.Combine(outputFolder, "tspCodeModel.json");
+            Console.Error.WriteLine(codeModelFilepath);
+            Console.Error.WriteLine(tspCodeModel);
             await File.WriteAllTextAsync(codeModelFilepath, tspCodeModel);
             // TODO: spawn a child process to invoke MTG or Azure plugin
-            await Task.CompletedTask;
+        }
+
+        private static string NormalizeOutputFolder(string outputFolder)
+        {
+            var fullpath = Path.GetFullPath(outputFolder);
+            var index = fullpath.LastIndexOf(Path.DirectorySeparatorChar);
+            if (index < 0)
+            {
+                return outputFolder;
+            }
+            if (fullpath[(index + 1)..] == "Generated")
+            {
+                return fullpath[..index];
+            }
+            return outputFolder;
         }
     }
 }

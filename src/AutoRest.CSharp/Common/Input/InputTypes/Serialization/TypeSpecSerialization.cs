@@ -14,6 +14,7 @@ namespace AutoRest.CSharp.Common.Input
         public static string Serialize(InputNamespace inputNamespace)
         {
             var options = CreateOptions();
+            options.WriteIndented = true;
             return JsonSerializer.Serialize(inputNamespace, options);
         }
 
