@@ -26,8 +26,8 @@ namespace AutoRest.CSharp.Common.Input
 
             writer.WriteString("name", value.Name);
             writer.WriteArray("apiVersions", value.ApiVersions, options);
+            writer.WriteArray("enums", value.Enums, options);
             // TODO -- write other values
-            //writer.WriteArray("enums", value.Enums, options);
 
             writer.WriteEndObject();
         }

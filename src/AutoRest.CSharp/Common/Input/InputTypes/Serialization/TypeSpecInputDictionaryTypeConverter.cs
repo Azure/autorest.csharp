@@ -10,6 +10,8 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal sealed class TypeSpecInputDictionaryTypeConverter : JsonConverter<InputDictionaryType>
     {
+        internal const string DictionaryKind = "dict";
+
         private readonly TypeSpecReferenceHandler _referenceHandler;
 
         public TypeSpecInputDictionaryTypeConverter(TypeSpecReferenceHandler referenceHandler)

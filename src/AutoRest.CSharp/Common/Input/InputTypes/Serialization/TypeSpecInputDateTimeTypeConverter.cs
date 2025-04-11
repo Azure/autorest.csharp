@@ -10,6 +10,9 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class TypeSpecInputDateTimeTypeConverter : JsonConverter<InputDateTimeType>
     {
+        internal const string UtcDateTimeKind = "utcDateTime";
+        internal const string OffsetDateTimeKind = "offsetDateTime";
+
         private readonly TypeSpecReferenceHandler _referenceHandler;
         public TypeSpecInputDateTimeTypeConverter(TypeSpecReferenceHandler referenceHandler)
         {

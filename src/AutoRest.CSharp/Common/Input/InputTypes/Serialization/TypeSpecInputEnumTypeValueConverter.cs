@@ -20,9 +20,6 @@ namespace AutoRest.CSharp.Common.Input
         public override InputEnumTypeValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => reader.ReadReferenceAndResolve<InputEnumTypeValue>(_referenceHandler.CurrentResolver) ?? CreateEnumTypeValue(ref reader, null, null, options, _referenceHandler.CurrentResolver);
 
-        public override void Write(Utf8JsonWriter writer, InputEnumTypeValue value, JsonSerializerOptions options)
-            => throw new NotSupportedException("Writing not supported");
-
         private static InputEnumTypeValue CreateEnumTypeValue(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
@@ -68,6 +65,60 @@ namespace AutoRest.CSharp.Common.Input
                 resolver.AddReference(id, enumValue);
             }
             return enumValue;
+        }
+
+        public override void Write(Utf8JsonWriter writer, InputEnumTypeValue enumValue, JsonSerializerOptions options)
+        {
+            var id = _referenceHandler.CurrentResolver.GetReference(enumValue, out var alreadyExists);
+            if (alreadyExists)
+            {
+                writer.WriteObjectReference(id);
+                return;
+            }
+
+            // if not exist
+            writer.WriteStartObject();
+
+            // the first property should always be the id
+            writer.WriteReferenceId(id);
+            // then we write the kind
+            writer.WriteString("kind", "enumvalue");
+            // name
+            writer.WriteString("name", enumValue.Name);
+            // value and valueType
+            switch (enumValue)
+            {
+                case InputEnumTypeStringValue strValue:
+                    // value
+                    writer.WriteString("value", strValue.StringValue);
+                    // valueType
+                    writer.WriteObject("valueType", InputPrimitiveType.String, options);
+                    break;
+                case InputEnumTypeIntegerValue intValue:
+                    // value
+                    writer.WriteNumber("value", intValue.IntegerValue);
+                    // valueType
+                    writer.WriteObject("valueType", InputPrimitiveType.Int32, options);
+                    break;
+                case InputEnumTypeFloatValue floatValue:
+                    // value
+                    writer.WriteNumber("value", floatValue.FloatValue);
+                    // valueType
+                    writer.WriteObject("valueType", InputPrimitiveType.Float32, options);
+                    break;
+                default:
+                    throw new InvalidOperationException("this should never happen");
+            }
+            // enumType - the schema has this property but this has cyclic reference and we never used it
+            // therefore omit this property.
+            // summary
+            writer.WriteStringIfPresent("summary", enumValue.Summary);
+            // doc
+            writer.WriteStringIfPresent("doc", enumValue.Doc);
+            // decorators
+            writer.WriteArray("decorators", enumValue.Decorators, options);
+
+            writer.WriteEndObject();
         }
     }
 }

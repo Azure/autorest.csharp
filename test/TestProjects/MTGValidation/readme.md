@@ -9,6 +9,4 @@ input-file: $(this-folder)/MTGValidation.json
 namespace: Azure.MTG
 save-inputs: true
 azure-plugin: true
-csharpgen:
-  attach: true
 ```

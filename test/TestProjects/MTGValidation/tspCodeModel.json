@@ -2,5 +2,41 @@
   "name": "MTGValidation",
   "apiVersions": [
     "1.0.0"
+  ],
+  "enums": [
+    {
+      "$id": "0",
+      "kind": "enum",
+      "name": "ApiVersion",
+      "crossLanguageDefinitionId": "ApiVersion",
+      "valueType": {
+        "$id": "1",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "values": [
+        {
+          "$id": "2",
+          "kind": "enumvalue",
+          "name": "Two0",
+          "value": "2.0",
+          "valueType": {
+            "$ref": "1"
+          },
+          "summary": "",
+          "doc": "",
+          "decorators": []
+        }
+      ],
+      "access": "public",
+      "namespace": "",
+      "summary": "",
+      "doc": "",
+      "isFixed": false,
+      "usage": "Input",
+      "decorators": []
+    }
   ]
 }

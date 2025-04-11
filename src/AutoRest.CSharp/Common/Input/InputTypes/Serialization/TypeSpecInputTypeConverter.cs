@@ -49,29 +49,18 @@ namespace AutoRest.CSharp.Common.Input
             return result ?? CreateDerivedType(ref reader, id, kind, name, options);
         }
 
-        private const string LiteralKind = "constant";
-        private const string UnionKind = "union";
-        private const string ModelKind = "model";
-        private const string EnumKind = "enum";
-        private const string ArrayKind = "array";
-        private const string DictionaryKind = "dict";
-        private const string NullableKind = "nullable";
-        private const string UtcDateTimeKind = "utcDateTime";
-        private const string OffsetDateTimeKind = "offsetDateTime";
-        private const string DurationKind = "duration";
-
         private InputType CreateDerivedType(ref Utf8JsonReader reader, string? id, string? kind, string? name, JsonSerializerOptions options) => kind switch
         {
             null => throw new JsonException($"InputType (id: '{id}', name: '{name}') must have a 'Kind' property"),
-            LiteralKind => TypeSpecInputLiteralTypeConverter.CreateInputLiteralType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            UnionKind => TypeSpecInputUnionTypeConverter.CreateInputUnionType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            ModelKind => TypeSpecInputModelTypeConverter.CreateModelType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            EnumKind => TypeSpecInputEnumTypeConverter.CreateEnumType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            ArrayKind => TypeSpecInputListTypeConverter.CreateListType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            DictionaryKind => TypeSpecInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, options, _referenceHandler.CurrentResolver),
-            NullableKind => TypeSpecInputNullableTypeConverter.CreateNullableType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            UtcDateTimeKind or OffsetDateTimeKind => TypeSpecInputDateTimeTypeConverter.CreateDateTimeType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            DurationKind => TypeSpecInputDurationTypeConverter.CreateDurationType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            TypeSpecInputLiteralTypeConverter.LiteralKind => TypeSpecInputLiteralTypeConverter.CreateInputLiteralType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            TypeSpecInputUnionTypeConverter.UnionKind => TypeSpecInputUnionTypeConverter.CreateInputUnionType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            TypeSpecInputModelTypeConverter.ModelKind => TypeSpecInputModelTypeConverter.CreateModelType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            TypeSpecInputEnumTypeConverter.EnumKind => TypeSpecInputEnumTypeConverter.CreateEnumType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            TypeSpecInputListTypeConverter.ArrayKind => TypeSpecInputListTypeConverter.CreateListType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            TypeSpecInputDictionaryTypeConverter.DictionaryKind => TypeSpecInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, options, _referenceHandler.CurrentResolver),
+            TypeSpecInputNullableTypeConverter.NullableKind => TypeSpecInputNullableTypeConverter.CreateNullableType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            TypeSpecInputDateTimeTypeConverter.UtcDateTimeKind or TypeSpecInputDateTimeTypeConverter.OffsetDateTimeKind => TypeSpecInputDateTimeTypeConverter.CreateDateTimeType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            TypeSpecInputDurationTypeConverter.DurationKind => TypeSpecInputDurationTypeConverter.CreateDurationType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             _ => TypeSpecInputPrimitiveTypeConverter.CreatePrimitiveType(ref reader, id, kind, name, options, _referenceHandler.CurrentResolver),
         };
     }

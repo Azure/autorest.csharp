@@ -10,6 +10,8 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal sealed class TypeSpecInputListTypeConverter : JsonConverter<InputListType>
     {
+        internal const string ArrayKind = "array";
+
         private readonly TypeSpecReferenceHandler _referenceHandler;
 
         public TypeSpecInputListTypeConverter(TypeSpecReferenceHandler referenceHandler)

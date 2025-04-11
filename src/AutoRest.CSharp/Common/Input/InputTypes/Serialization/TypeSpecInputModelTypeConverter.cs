@@ -11,6 +11,8 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal sealed class TypeSpecInputModelTypeConverter : JsonConverter<InputModelType>
     {
+        internal const string ModelKind = "model";
+
         private readonly TypeSpecReferenceHandler _referenceHandler;
 
         public TypeSpecInputModelTypeConverter(TypeSpecReferenceHandler referenceHandler)

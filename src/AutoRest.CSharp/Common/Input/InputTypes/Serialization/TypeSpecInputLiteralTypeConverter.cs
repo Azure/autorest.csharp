@@ -10,6 +10,8 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class TypeSpecInputLiteralTypeConverter : JsonConverter<InputLiteralType>
     {
+        internal const string LiteralKind = "constant";
+
         private readonly TypeSpecReferenceHandler _referenceHandler;
         public TypeSpecInputLiteralTypeConverter(TypeSpecReferenceHandler referenceHandler)
         {

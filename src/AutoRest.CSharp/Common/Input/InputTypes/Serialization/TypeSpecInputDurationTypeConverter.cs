@@ -10,6 +10,8 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class TypeSpecInputDurationTypeConverter : JsonConverter<InputDurationType>
     {
+        internal const string DurationKind = "duration";
+
         private readonly TypeSpecReferenceHandler _referenceHandler;
         public TypeSpecInputDurationTypeConverter(TypeSpecReferenceHandler referenceHandler)
         {

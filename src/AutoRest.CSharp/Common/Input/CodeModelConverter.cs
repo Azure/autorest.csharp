@@ -843,11 +843,20 @@ namespace AutoRest.CSharp.Common.Input
         {
             // in code model, the value of choices are defined to be strings. We need to convert them back to their real values
             var value = ConvertRawValue(valueType, choiceValue.Value);
-            return new(
-                Name: choiceValue.Language.Default.Name,
-                Summary: string.Empty,
-                Doc: choiceValue.Language.Default.Description,
-                Value: value!);
+            var name = choiceValue.Language.Default.Name;
+            var doc = choiceValue.Language.Default.Description;
+            switch (valueType.Kind)
+            {
+                case InputPrimitiveTypeKind.String:
+                    return new InputEnumTypeStringValue(name, (string)value!, string.Empty, doc);
+                case InputPrimitiveTypeKind.Int32:
+                    return new InputEnumTypeIntegerValue(name, (int)value!, string.Empty, doc);
+                case InputPrimitiveTypeKind.Float32:
+                case InputPrimitiveTypeKind.Float:
+                    return new InputEnumTypeFloatValue(name, (float)value!, string.Empty, doc);
+                default:
+                    return new InputEnumTypeStringValue(name, value!.ToString()!, string.Empty, doc);
+            }
         }
 
         private static RequestLocation GetRequestLocation(RequestParameter requestParameter) => requestParameter.In switch
