@@ -20,19 +20,6 @@ namespace AutoRest.CSharp.Common.Input
         public override InputNamespace? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => ReadInputNamespace(ref reader, options, _referenceHandler.CurrentResolver);
 
-        public override void Write(Utf8JsonWriter writer, InputNamespace value, JsonSerializerOptions options)
-        {
-            writer.WriteStartObject();
-
-            writer.WriteString("name", value.Name);
-            writer.WriteArray("apiVersions", value.ApiVersions, options);
-            writer.WriteArray("enums", value.Enums, options);
-            writer.WriteArray("models", value.Models, options);
-            // TODO -- write other values
-
-            writer.WriteEndObject();
-        }
-
         private static InputNamespace? ReadInputNamespace(ref Utf8JsonReader reader, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             if (reader.TokenType == JsonTokenType.StartObject)
@@ -75,6 +62,19 @@ namespace AutoRest.CSharp.Common.Input
                 models,
                 clients,
                 auth);
+        }
+
+        public override void Write(Utf8JsonWriter writer, InputNamespace value, JsonSerializerOptions options)
+        {
+            writer.WriteStartObject();
+
+            writer.WriteString("name", value.Name);
+            writer.WriteArray("apiVersions", value.ApiVersions, options);
+            writer.WriteArray("enums", value.Enums, options);
+            writer.WriteArray("models", value.Models, options);
+            // TODO -- write other values
+
+            writer.WriteEndObject();
         }
     }
 }

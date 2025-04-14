@@ -21,9 +21,6 @@ namespace AutoRest.CSharp.Common.Input
         public override InputDurationType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
            => reader.ReadReferenceAndResolve<InputDurationType>(_referenceHandler.CurrentResolver) ?? CreateDurationType(ref reader, null, null, options, _referenceHandler.CurrentResolver);
 
-        public override void Write(Utf8JsonWriter writer, InputDurationType value, JsonSerializerOptions options)
-            => throw new NotSupportedException("Writing not supported");
-
         public static InputDurationType CreateDurationType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
@@ -63,9 +60,11 @@ namespace AutoRest.CSharp.Common.Input
             return dateTimeType;
         }
 
+        private const string DurationConstantEncode = "duration-constant";
+
         private static DurationKnownEncoding CreateDurationKnownEncoding(string encode)
         {
-            if (encode == "duration-constant")
+            if (encode == DurationConstantEncode)
             {
                 return DurationKnownEncoding.DurationConstant;
             }
@@ -74,6 +73,31 @@ namespace AutoRest.CSharp.Common.Input
                 return encodeKind;
             }
             throw new JsonException($"Encoding of Duration type {encode} is unknown.");
+        }
+
+        public override void Write(Utf8JsonWriter writer, InputDurationType value, JsonSerializerOptions options)
+            => writer.WriteObjectOrReference(value, options, _referenceHandler.CurrentResolver, WriteInputDurationTypeProperties);
+
+        private static void WriteInputDurationTypeProperties(Utf8JsonWriter writer, InputDurationType value, JsonSerializerOptions options)
+        {
+            // kind
+            writer.WriteString("kind", DurationKind);
+            // name
+            writer.WriteString("name", value.Name);
+            // encode
+            writer.WriteString("encode", value.Encode switch
+            {
+                DurationKnownEncoding.DurationConstant => DurationConstantEncode,
+                _ => value.Encode.ToString().ToLowerInvariant(),
+            });
+            // wireType
+            writer.WriteObject("wireType", value.WireType, options);
+            // crossLanguageDefinitionId
+            writer.WriteString("crossLanguageDefinitionId", value.CrossLanguageDefinitionId);
+            // baseType
+            writer.WriteObjectIfPresent("baseType", value.BaseType, options);
+            // decorators
+            writer.WriteArray("decorators", value.Decorators, options);
         }
     }
 }

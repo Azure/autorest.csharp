@@ -22,9 +22,6 @@ namespace AutoRest.CSharp.Common.Input
         public override InputDictionaryType? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => reader.ReadReferenceAndResolve<InputDictionaryType>(_referenceHandler.CurrentResolver) ?? CreateDictionaryType(ref reader, null, options, _referenceHandler.CurrentResolver);
 
-        public override void Write(Utf8JsonWriter writer, InputDictionaryType value, JsonSerializerOptions options)
-            => throw new NotSupportedException("Writing not supported");
-
         public static InputDictionaryType CreateDictionaryType(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
@@ -57,6 +54,21 @@ namespace AutoRest.CSharp.Common.Input
                 resolver.AddReference(id, dictType);
             }
             return dictType;
+        }
+
+        public override void Write(Utf8JsonWriter writer, InputDictionaryType value, JsonSerializerOptions options)
+            => writer.WriteObjectOrReference(value, options, _referenceHandler.CurrentResolver, WriteInputDictionaryTypeProperties);
+
+        private static void WriteInputDictionaryTypeProperties(Utf8JsonWriter writer, InputDictionaryType value, JsonSerializerOptions options)
+        {
+            // kind
+            writer.WriteString("kind", DictionaryKind);
+            // keyType
+            writer.WriteObject("keyType", value.KeyType, options);
+            // valueType
+            writer.WriteObject("valueType", value.ValueType, options);
+            // decorators
+            writer.WriteArray("decorators", value.Decorators, options);
         }
     }
 }

@@ -21,9 +21,6 @@ namespace AutoRest.CSharp.Common.Input.InputTypes.Serialization
         public override InputNullableType? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => reader.ReadReferenceAndResolve<InputNullableType>(_referenceHandler.CurrentResolver) ?? CreateNullableType(ref reader, null, null, options, _referenceHandler.CurrentResolver);
 
-        public override void Write(Utf8JsonWriter writer, InputNullableType value, JsonSerializerOptions options)
-            => throw new NotSupportedException("Writing not supported");
-
         public static InputNullableType CreateNullableType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null && name == null;
@@ -54,6 +51,19 @@ namespace AutoRest.CSharp.Common.Input.InputTypes.Serialization
                 resolver.AddReference(id, nullableType);
             }
             return nullableType;
+        }
+
+        public override void Write(Utf8JsonWriter writer, InputNullableType value, JsonSerializerOptions options)
+            => writer.WriteObjectOrReference(value, options, _referenceHandler.CurrentResolver, WriteInputNullableTypeProperties);
+
+        private static void WriteInputNullableTypeProperties(Utf8JsonWriter writer, InputNullableType value, JsonSerializerOptions options)
+        {
+            // kind
+            writer.WriteString("kind", NullableKind);
+            // type
+            writer.WriteObject("type", value.Type, options);
+            // namespace
+            writer.WriteString("namespace", string.Empty); // swagger never supports namespace
         }
     }
 }

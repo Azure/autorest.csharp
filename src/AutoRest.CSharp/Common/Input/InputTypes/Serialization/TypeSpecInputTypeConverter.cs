@@ -22,12 +22,6 @@ namespace AutoRest.CSharp.Common.Input
             return reader.ReadReferenceAndResolve<InputType>(_referenceHandler.CurrentResolver) ?? CreateInputType(ref reader, options);
         }
 
-        public override void Write(Utf8JsonWriter writer, InputType value, JsonSerializerOptions options)
-        {
-            // InputType is an abstract class, therefore here we just defer to the concrete type
-            JsonSerializer.Serialize(writer, value, value.GetType(), options);
-        }
-
         private InputType CreateInputType(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
             string? id = null;
@@ -66,5 +60,11 @@ namespace AutoRest.CSharp.Common.Input
             TypeSpecInputDurationTypeConverter.DurationKind => TypeSpecInputDurationTypeConverter.CreateDurationType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             _ => TypeSpecInputPrimitiveTypeConverter.CreatePrimitiveType(ref reader, id, kind, name, options, _referenceHandler.CurrentResolver),
         };
+
+        public override void Write(Utf8JsonWriter writer, InputType value, JsonSerializerOptions options)
+        {
+            // InputType is an abstract class, therefore here we just defer to the concrete type
+            JsonSerializer.Serialize(writer, value, value.GetType(), options);
+        }
     }
 }
