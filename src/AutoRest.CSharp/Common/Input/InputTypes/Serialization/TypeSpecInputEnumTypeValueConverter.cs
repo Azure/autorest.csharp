@@ -67,26 +67,17 @@ namespace AutoRest.CSharp.Common.Input
             return enumValue;
         }
 
-        public override void Write(Utf8JsonWriter writer, InputEnumTypeValue enumValue, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, InputEnumTypeValue value, JsonSerializerOptions options)
+            => writer.WriteObjectOrReference(value, options, _referenceHandler.CurrentResolver, WriteInputEnumTypeValueProperties);
+
+        private static void WriteInputEnumTypeValueProperties(Utf8JsonWriter writer, InputEnumTypeValue value, JsonSerializerOptions options)
         {
-            var id = _referenceHandler.CurrentResolver.GetReference(enumValue, out var alreadyExists);
-            if (alreadyExists)
-            {
-                writer.WriteObjectReference(id);
-                return;
-            }
-
-            // if not exist
-            writer.WriteStartObject();
-
-            // the first property should always be the id
-            writer.WriteReferenceId(id);
-            // then we write the kind
+            // kind
             writer.WriteString("kind", "enumvalue");
             // name
-            writer.WriteString("name", enumValue.Name);
+            writer.WriteString("name", value.Name);
             // value and valueType
-            switch (enumValue)
+            switch (value)
             {
                 case InputEnumTypeStringValue strValue:
                     // value
@@ -112,13 +103,11 @@ namespace AutoRest.CSharp.Common.Input
             // enumType - the schema has this property but this has cyclic reference and we never used it
             // therefore omit this property.
             // summary
-            writer.WriteStringIfPresent("summary", enumValue.Summary);
+            writer.WriteStringIfPresent("summary", value.Summary);
             // doc
-            writer.WriteStringIfPresent("doc", enumValue.Doc);
+            writer.WriteStringIfPresent("doc", value.Doc);
             // decorators
-            writer.WriteArray("decorators", enumValue.Decorators, options);
-
-            writer.WriteEndObject();
+            writer.WriteArray("decorators", value.Decorators, options);
         }
     }
 }

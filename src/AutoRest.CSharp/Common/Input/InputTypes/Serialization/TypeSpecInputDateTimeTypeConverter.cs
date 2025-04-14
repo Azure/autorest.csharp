@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -21,9 +22,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public override InputDateTimeType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
            => reader.ReadReferenceAndResolve<InputDateTimeType>(_referenceHandler.CurrentResolver) ?? CreateDateTimeType(ref reader, null, null, options, _referenceHandler.CurrentResolver);
-
-        public override void Write(Utf8JsonWriter writer, InputDateTimeType value, JsonSerializerOptions options)
-            => throw new NotSupportedException("Writing not supported");
 
         public static InputDateTimeType CreateDateTimeType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
@@ -67,6 +65,31 @@ namespace AutoRest.CSharp.Common.Input
                 resolver.AddReference(id, dateTimeType);
             }
             return dateTimeType;
+        }
+
+        public override void Write(Utf8JsonWriter writer, InputDateTimeType value, JsonSerializerOptions options)
+            => writer.WriteObjectOrReference<InputDateTimeType>(value, options, _referenceHandler.CurrentResolver, WriteInputDateTimeType);
+
+        private static void WriteInputDateTimeType(Utf8JsonWriter writer, InputDateTimeType value, JsonSerializerOptions options)
+        {
+            writer.WriteStartObject();
+
+            // kind
+            writer.WriteString("kind", UtcDateTimeKind); // TODO -- currently the two different kinds have exactly the same properties, therefore here we no longer have the ability to distinguish
+            // name
+            writer.WriteString("name", value.Name);
+            // encode
+            writer.WriteString("encode", value.Encode.ToString().FirstCharToLowerCase());
+            // wireType
+            writer.WriteObject("wireType", value.WireType, options);
+            // crossLanguageDefinitionId
+            writer.WriteString("crossLanguageDefinitionId", value.CrossLanguageDefinitionId);
+            // baseType
+            writer.WriteObjectIfPresent("baseType", value.BaseType, options);
+            // decorators
+            writer.WriteArray("decorators", value.Decorators, options);
+
+            writer.WriteEndObject();
         }
     }
 }

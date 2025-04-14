@@ -54,20 +54,11 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public override void Write(Utf8JsonWriter writer, InputListType value, JsonSerializerOptions options)
+            => writer.WriteObjectOrReference(value, options, _referenceHandler.CurrentResolver, WriteInputListTypeProperties);
+
+        private static void WriteInputListTypeProperties(Utf8JsonWriter writer, InputListType value, JsonSerializerOptions options)
         {
-            var id = _referenceHandler.CurrentResolver.GetReference(value, out var alreadyExists);
-            if (alreadyExists)
-            {
-                writer.WriteObjectReference(id);
-                return;
-            }
-
-            // if not exist
-            writer.WriteStartObject();
-
-            // the first property should always be the id
-            writer.WriteReferenceId(id);
-            // then we write the kind
+            // kind
             writer.WriteString("kind", ArrayKind);
             // name
             writer.WriteString("name", value.Name);
@@ -77,8 +68,6 @@ namespace AutoRest.CSharp.Common.Input
             writer.WriteString("crossLanguageDefinitionId", value.CrossLanguageDefinitionId);
             // decorators
             writer.WriteArray("decorators", value.Decorators, options);
-
-            writer.WriteEndObject();
         }
     }
 }

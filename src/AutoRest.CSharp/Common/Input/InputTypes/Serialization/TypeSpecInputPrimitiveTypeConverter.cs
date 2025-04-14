@@ -59,20 +59,11 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public override void Write(Utf8JsonWriter writer, InputPrimitiveType value, JsonSerializerOptions options)
+            => writer.WriteObjectOrReference(value, options, _referenceHandler.CurrentResolver, WriteInputPrimitiveTypeProperties);
+
+        private static void WriteInputPrimitiveTypeProperties(Utf8JsonWriter writer, InputPrimitiveType value, JsonSerializerOptions options)
         {
-            var id = _referenceHandler.CurrentResolver.GetReference(value, out var alreadyExists);
-            if (alreadyExists)
-            {
-                writer.WriteObjectReference(id);
-                return;
-            }
-
-            // if not exist
-            writer.WriteStartObject();
-
-            // the first property should always be the id
-            writer.WriteReferenceId(id);
-            // then we write the kind
+            // kind
             writer.WriteString("kind", value.Kind.ToString().FirstCharToLowerCase());
             // name
             writer.WriteString("name", value.Name);
@@ -84,8 +75,6 @@ namespace AutoRest.CSharp.Common.Input
             writer.WriteObjectIfPresent("baseType", value.BaseType, options);
             // decorators
             writer.WriteArray("decorators", value.Decorators, options);
-
-            writer.WriteEndObject();
         }
     }
 }

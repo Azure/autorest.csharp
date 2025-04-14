@@ -267,20 +267,11 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public override void Write(Utf8JsonWriter writer, InputModelType value, JsonSerializerOptions options)
+            => writer.WriteObjectOrReference(value, options, _referenceHandler.CurrentResolver, WriteInputModelTypeProperties);
+
+        private static void WriteInputModelTypeProperties(Utf8JsonWriter writer, InputModelType value, JsonSerializerOptions options)
         {
-            var id = _referenceHandler.CurrentResolver.GetReference(value, out var alreadyExists);
-            if (alreadyExists)
-            {
-                writer.WriteObjectReference(id);
-                return;
-            }
-
-            // if not exist
-            writer.WriteStartObject();
-
-            // the first property should always be the id
-            writer.WriteReferenceId(id);
-            // then we write the kind
+            // kind
             writer.WriteString("kind", ModelKind);
             // name
             writer.WriteString("name", value.Name);
@@ -315,8 +306,6 @@ namespace AutoRest.CSharp.Common.Input
             {
                 writer.WriteDictionary("discriminatedSubtypes", value.DiscriminatedSubtypes, options);
             }
-
-            writer.WriteEndObject();
         }
     }
 }

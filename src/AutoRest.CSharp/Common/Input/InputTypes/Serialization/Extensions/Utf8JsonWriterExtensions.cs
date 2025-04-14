@@ -101,13 +101,21 @@ namespace AutoRest.CSharp.Common.Input
             converter.Write(writer, value, options);
         }
 
-        public static void WriteReferenceId(this Utf8JsonWriter writer, string id)
-            => writer.WriteString("$id", id);
-
-        public static void WriteObjectReference(this Utf8JsonWriter writer, string id)
+        public static void WriteObjectOrReference<T>(this Utf8JsonWriter writer, T value, JsonSerializerOptions options, ReferenceResolver referenceResolver, Action<Utf8JsonWriter, T, JsonSerializerOptions> writeProperties) where T : class
         {
+            var id = referenceResolver.GetReference(value, out var alreadyExists);
             writer.WriteStartObject();
-            writer.WriteString("$ref", id);
+            if (alreadyExists)
+            {
+                writer.WriteString("$ref", id);
+            }
+            else
+            {
+                // write id
+                writer.WriteString("$id", id);
+                // write its own properties
+                writeProperties(writer, value, options);
+            }
             writer.WriteEndObject();
         }
     }
