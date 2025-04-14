@@ -102,7 +102,7 @@ export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterO
                 type: "boolean",
                 nullable: true,
                 default: false
-            },
+            }
         },
         required: []
     };
@@ -127,7 +127,7 @@ const defaultAzureEmitterOptions = {
     "library-name": undefined,
     "examples-dir": undefined,
     "enable-bicep-serialization": undefined,
-    "clear-output-folder": false,
+    "clear-output-folder": false
 };
 
 export function resolveAzureEmitterOptions(
@@ -197,6 +197,6 @@ export function resolveAzureEmitterOptions(
             defaultAzureEmitterOptions["enable-bicep-serialization"],
         "clear-output-folder":
             context.options["clear-output-folder"] ??
-            defaultAzureEmitterOptions["clear-output-folder"],
+            defaultAzureEmitterOptions["clear-output-folder"]
     };
 }
