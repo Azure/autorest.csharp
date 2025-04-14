@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
@@ -40,6 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
             ValueSerialization = valueSerialization;
             CustomSerializationMethodName = serializationHooks?.JsonSerializationMethodName;
             CustomDeserializationMethodName = serializationHooks?.JsonDeserializationMethodName;
+            DeserializeEmptyStringAsNull = property.InputModelProperty?.ShouldDeserializeEmptyStringAsNull() ?? false;
         }
 
         public JsonPropertySerialization(string serializedName, JsonPropertySerialization[] propertySerializations)
@@ -57,5 +59,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
         public string? CustomSerializationMethodName { get; }
 
         public string? CustomDeserializationMethodName { get; }
+
+        public bool DeserializeEmptyStringAsNull { get; }
     }
 }

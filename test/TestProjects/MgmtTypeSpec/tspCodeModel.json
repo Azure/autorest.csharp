@@ -2542,7 +2542,15 @@
         "readOnly": false,
         "discriminator": false,
         "flatten": false,
-        "decorators": [],
+        "decorators": [
+         {
+          "$id": "326",
+          "name": "Azure.ClientGenerator.Core.@deserializeEmptyStringAsNull",
+          "arguments": {
+           "$id": "327"
+          }
+         }
+        ],
         "crossLanguageDefinitionId": "MgmtTypeSpec.FooProperties.serviceUrl",
         "serializationOptions": {
          "$id": "330",
@@ -3730,10 +3738,10 @@
          "nameInRequest": "contentType",
          "doc": "Body parameter's content type. Known values are application/json",
          "type": {
-          "$id": "463",
+          "$id": "465",
           "kind": "constant",
           "valueType": {
-           "$id": "464",
+           "$id": "466",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",

@@ -25,6 +25,7 @@ export interface AzureCSharpEmitterOptions extends CSharpEmitterOptions {
     "generate-sample-project"?: boolean;
     "generate-test-project"?: boolean;
     "use-model-reader-writer"?: boolean;
+    "use-azure-plugin"?: boolean;
     "library-name"?: string;
     "examples-dir"?: string;
     "enable-bicep-serialization"?: boolean;
@@ -89,6 +90,7 @@ export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterO
                 default: false
             },
             "use-model-reader-writer": { type: "boolean", nullable: true },
+            "use-azure-plugin": { type: "boolean", nullable: true },
             namespace: { type: "string", nullable: true },
             "library-name": { type: "string", nullable: true },
             "examples-dir": { type: "string", nullable: true },
@@ -119,6 +121,7 @@ const defaultAzureEmitterOptions = {
     "head-as-boolean": undefined,
     "generate-sample-project": true,
     "use-model-reader-writer": true,
+    "use-azure-plugin": undefined,
     "single-top-level-client": undefined,
     "keep-non-overloadable-protocol-signature": undefined,
     "library-name": undefined,
@@ -173,6 +176,9 @@ export function resolveAzureEmitterOptions(
         "use-model-reader-writer":
             context.options["use-model-reader-writer"] ??
             defaultAzureEmitterOptions["use-model-reader-writer"],
+        "use-azure-plugin":
+            context.options["use-azure-plugin"] ??
+            defaultAzureEmitterOptions["use-azure-plugin"],
         "single-top-level-client":
             context.options["single-top-level-client"] ??
             defaultAzureEmitterOptions["single-top-level-client"],

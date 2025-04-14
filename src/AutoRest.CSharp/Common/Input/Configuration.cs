@@ -67,6 +67,7 @@ namespace AutoRest.CSharp.Common.Input
             public const string HelperNamespace = "helper-namespace";
             public const string DisableXmlDocs = "disable-xml-docs";
             public const string CustomHeader = "custom-header";
+            public const string UseAzurePlugin = "azure-plugin";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -97,6 +98,7 @@ namespace AutoRest.CSharp.Common.Input
             bool deserializeNullCollectionAsNullValue,
             bool useCoreDataFactoryReplacements,
             bool useModelReaderWriter,
+            bool useAzurePlugin,
             bool enableBicepSerialization,
             bool enableInternalRawData,
             IReadOnlyList<string> modelFactoryForHlc,
@@ -146,6 +148,7 @@ namespace AutoRest.CSharp.Common.Input
             ShouldTreatBase64AsBinaryData = !azureArm && !generation1ConvenienceClient ? shouldTreatBase64AsBinaryData : false;
             UseCoreDataFactoryReplacements = useCoreDataFactoryReplacements;
             UseModelReaderWriter = useModelReaderWriter;
+            UseAzurePlugin = useAzurePlugin;
             EnableBicepSerialization = enableBicepSerialization;
             EnableInternalRawData = enableInternalRawData;
             projectFolder ??= ProjectFolderDefault;
@@ -271,6 +274,8 @@ namespace AutoRest.CSharp.Common.Input
 
         public static bool UseModelReaderWriter { get; private set; }
 
+        public static bool UseAzurePlugin { get; private set; }
+
         public static bool EnableBicepSerialization { get; private set; }
 
         public static bool EnableInternalRawData { get; private set; }
@@ -379,6 +384,7 @@ namespace AutoRest.CSharp.Common.Input
                 keepNonOverloadableProtocolSignature: GetOptionBoolValue(autoRest, Options.KeepNonOverloadableProtocolSignature),
                 useCoreDataFactoryReplacements: GetOptionBoolValue(autoRest, Options.UseCoreDataFactoryReplacements),
                 useModelReaderWriter: GetOptionBoolValue(autoRest, Options.UseModelReaderWriter),
+                useAzurePlugin: GetOptionBoolValue(autoRest, Options.UseAzurePlugin),
                 enableBicepSerialization: GetOptionBoolValue(autoRest, Options.EnableBicepSerialization),
                 enableInternalRawData: GetOptionBoolValue(autoRest, Options.EnableInternalRawData),
                 projectFolder: GetProjectFolderOption(autoRest),
@@ -472,6 +478,8 @@ namespace AutoRest.CSharp.Common.Input
                     return false;
                 case Options.UseModelReaderWriter:
                     return false;
+                case Options.UseAzurePlugin:
+                    return false;
                 case Options.EnableBicepSerialization:
                     return false;
                 case Options.DisableXmlDocs:
@@ -551,6 +559,7 @@ namespace AutoRest.CSharp.Common.Input
                 deserializeNullCollectionAsNullValue: ReadOption(root, Options.DeserializeNullCollectionAsNullValue),
                 useCoreDataFactoryReplacements: ReadOption(root, Options.UseCoreDataFactoryReplacements),
                 useModelReaderWriter: ReadOption(root, Options.UseModelReaderWriter),
+                useAzurePlugin: ReadOption(root, Options.UseAzurePlugin),
                 enableBicepSerialization: ReadOption(root, Options.EnableBicepSerialization),
                 enableInternalRawData: ReadOption(root, Options.EnableInternalRawData),
                 modelFactoryForHlc: oldModelFactoryEntries,
