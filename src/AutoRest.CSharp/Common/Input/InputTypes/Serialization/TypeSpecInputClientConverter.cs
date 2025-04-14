@@ -77,8 +77,10 @@ namespace AutoRest.CSharp.Common.Input
             // we should not be doing it here, but doing it correctly requires so much changes in our generator.
             name = BuildClientName(name, parent);
 
+            methods = methods ?? Array.Empty<InputServiceMethod>();
             parameters = parameters ?? Array.Empty<InputParameter>();
-            var inputClient = new InputClient(name, summary, doc, methods, Array.Empty<InputOperation>(), parameters, parent, children);
+            var operations = AggregateOperationsFromMethods(methods);
+            var inputClient = new InputClient(name, summary, doc, operations, parameters, parent, children);
 
             if (id != null)
             {
@@ -121,6 +123,16 @@ namespace AutoRest.CSharp.Common.Input
                 children.Add(child);
             }
             reader.Read();
+        }
+
+        private static List<InputOperation> AggregateOperationsFromMethods(IReadOnlyList<InputServiceMethod> methods)
+        {
+            var operations = new List<InputOperation>();
+            foreach (var method in methods)
+            {
+                operations.Add(method.Operation);
+            }
+            return operations;
         }
     }
 }

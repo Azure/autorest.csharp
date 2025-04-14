@@ -56,12 +56,10 @@ namespace Payload.ContentNegotiation.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="PngImageAsJson"/>. </summary>
-        /// <param name="contentType"></param>
         /// <param name="content"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal PngImageAsJson(PngImageAsJsonContentType contentType, BinaryData content, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal PngImageAsJson(BinaryData content, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            ContentType = contentType;
             Content = content;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
@@ -70,9 +68,6 @@ namespace Payload.ContentNegotiation.Models
         internal PngImageAsJson()
         {
         }
-
-        /// <summary> Gets the content type. </summary>
-        public PngImageAsJsonContentType ContentType { get; } = PngImageAsJsonContentType.ApplicationJson;
 
         /// <summary>
         /// Gets the content
