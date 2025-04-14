@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Common.Input
             string? name = null;
             string? summary = null;
             string? doc = null;
-            IReadOnlyList<InputOperation>? operations = null;
+            IReadOnlyList<InputServiceMethod>? methods = null;
             IReadOnlyList<InputParameter>? parameters = null;
             InputClient? parent = null;
             IReadOnlyList<InputDecoratorInfo>? decorators = null;
@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString("name", ref name)
                     || reader.TryReadString("summary", ref summary)
                     || reader.TryReadString("doc", ref doc)
-                    || reader.TryReadComplexType("operations", options, ref operations)
+                    || reader.TryReadComplexType("methods", options, ref methods)
                     || reader.TryReadComplexType("parameters", options, ref parameters)
                     || reader.TryReadComplexType("parent", options, ref parent)
                     || reader.TryReadComplexType("decorators", options, ref decorators);
@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Common.Input
                 if (reader.GetString() == "children")
                 {
                     var children = new List<InputClient>();
-                    inputClient ??= CreateClientInstance(id, name, summary, doc, operations, parameters, parent, decorators, children, resolver);
+                    inputClient ??= CreateClientInstance(id, name, summary, doc, methods, parameters, parent, decorators, children, resolver);
                     reader.Read();
                     CreateChildren(ref reader, children, options, inputClient.Name);
                     continue;
@@ -65,10 +65,10 @@ namespace AutoRest.CSharp.Common.Input
                 reader.SkipProperty();
             }
 
-            return inputClient ??= CreateClientInstance(id, name, summary, doc, operations, parameters, parent, decorators, [], resolver);
+            return inputClient ??= CreateClientInstance(id, name, summary, doc, methods, parameters, parent, decorators, [], resolver);
         }
 
-        private static InputClient CreateClientInstance(string? id, string? name, string? summary, string? doc, IReadOnlyList<InputOperation>? operations, IReadOnlyList<InputParameter>? parameters, InputClient? parent, IReadOnlyList<InputDecoratorInfo>? decorators,  IReadOnlyList<InputClient> children, ReferenceResolver resolver)
+        private static InputClient CreateClientInstance(string? id, string? name, string? summary, string? doc, IReadOnlyList<InputServiceMethod>? methods, IReadOnlyList<InputParameter>? parameters, InputClient? parent, IReadOnlyList<InputDecoratorInfo>? decorators,  IReadOnlyList<InputClient> children, ReferenceResolver resolver)
         {
             name = name ?? throw new JsonException("InputClient must have name");
 
@@ -77,8 +77,9 @@ namespace AutoRest.CSharp.Common.Input
             // we should not be doing it here, but doing it correctly requires so much changes in our generator.
             name = BuildClientName(name, parent);
 
-            operations = operations ?? Array.Empty<InputOperation>();
+            methods = methods ?? Array.Empty<InputServiceMethod>();
             parameters = parameters ?? Array.Empty<InputParameter>();
+            var operations = AggregateOperationsFromMethods(methods);
             var inputClient = new InputClient(name, summary, doc, operations, parameters, parent, children);
 
             if (id != null)
@@ -122,6 +123,16 @@ namespace AutoRest.CSharp.Common.Input
                 children.Add(child);
             }
             reader.Read();
+        }
+
+        private static List<InputOperation> AggregateOperationsFromMethods(IReadOnlyList<InputServiceMethod> methods)
+        {
+            var operations = new List<InputOperation>();
+            foreach (var method in methods)
+            {
+                operations.Add(method.Operation);
+            }
+            return operations;
         }
     }
 }
