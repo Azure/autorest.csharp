@@ -72,8 +72,6 @@ namespace AutoRest.CSharp.Common.Input
 
         private static void WriteInputDateTimeType(Utf8JsonWriter writer, InputDateTimeType value, JsonSerializerOptions options)
         {
-            writer.WriteStartObject();
-
             // kind
             writer.WriteString("kind", UtcDateTimeKind); // TODO -- currently the two different kinds have exactly the same properties, therefore here we no longer have the ability to distinguish
             // name
@@ -88,8 +86,6 @@ namespace AutoRest.CSharp.Common.Input
             writer.WriteObjectIfPresent("baseType", value.BaseType, options);
             // decorators
             writer.WriteArray("decorators", value.Decorators, options);
-
-            writer.WriteEndObject();
         }
     }
 }
