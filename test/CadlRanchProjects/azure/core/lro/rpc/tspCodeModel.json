@@ -836,20 +836,6 @@
        "application/json"
       ],
       "bufferResponse": true,
-      "longRunning": {
-       "$id": "102",
-       "finalStateVia": 3,
-       "finalResponse": {
-        "$id": "103",
-        "statusCodes": [
-         200
-        ],
-        "bodyType": {
-         "$ref": "70"
-        }
-       },
-       "resultPath": "result"
-      },
       "generateProtocolMethod": true,
       "generateConvenienceMethod": true,
       "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.longRunningRpc",
@@ -857,7 +843,7 @@
      },
      "parameters": [
       {
-       "$id": "104",
+       "$id": "102",
        "name": "body",
        "nameInRequest": "body",
        "doc": "The body parameter.",
@@ -875,15 +861,15 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "105",
+       "$id": "103",
        "name": "contentType",
        "nameInRequest": "contentType",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$id": "106",
+        "$id": "104",
         "kind": "constant",
         "valueType": {
-         "$id": "107",
+         "$id": "105",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -903,14 +889,14 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "108",
+       "$id": "106",
        "name": "accept",
        "nameInRequest": "accept",
        "type": {
-        "$id": "109",
+        "$id": "107",
         "kind": "constant",
         "valueType": {
-         "$id": "110",
+         "$id": "108",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -931,7 +917,7 @@
       }
      ],
      "response": {
-      "$id": "111",
+      "$id": "109",
       "type": {
        "$ref": "23"
       },
@@ -942,7 +928,21 @@
      "isOverride": false,
      "generateConvenient": true,
      "generateProtocol": true,
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.longRunningRpc"
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.longRunningRpc",
+     "lroMetadata": {
+      "$id": "110",
+      "finalStateVia": 3,
+      "finalResponse": {
+       "$id": "111",
+       "statusCodes": [
+        200
+       ],
+       "bodyType": {
+        "$ref": "70"
+       }
+      },
+      "resultPath": "result"
+     }
     }
    ],
    "parameters": [

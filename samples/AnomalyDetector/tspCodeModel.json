@@ -22649,38 +22649,25 @@
         "uri": "{Endpoint}/anomalydetector/{ApiVersion}",
         "path": "/multivariate/models",
         "bufferResponse": true,
-        "paging": {
-         "$id": "3094",
-         "itemPropertySegments": [
-          "models"
-         ],
-         "nextLink": {
-          "$id": "3095",
-          "responseSegments": [
-           "nextLink"
-          ],
-          "responseLocation": "Body"
-         }
-        },
         "generateProtocolMethod": true,
         "generateConvenienceMethod": true,
         "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ListMultivariateModels",
         "decorators": [],
         "examples": [
          {
-          "$id": "3096",
+          "$id": "3094",
           "kind": "http",
           "name": "List multivariate models",
           "description": "List multivariate models",
           "filePath": "v1.1/ListModel.json",
           "parameters": [
            {
-            "$id": "3097",
+            "$id": "3095",
             "parameter": {
              "$ref": "3086"
             },
             "value": {
-             "$id": "3098",
+             "$id": "3096",
              "kind": "number",
              "type": {
               "$ref": "3087"
@@ -22689,12 +22676,12 @@
             }
            },
            {
-            "$id": "3099",
+            "$id": "3097",
             "parameter": {
              "$ref": "3088"
             },
             "value": {
-             "$id": "3100",
+             "$id": "3098",
              "kind": "number",
              "type": {
               "$ref": "3089"
@@ -22705,36 +22692,36 @@
           ],
           "responses": [
            {
-            "$id": "3101",
+            "$id": "3099",
             "response": {
              "$ref": "3093"
             },
             "statusCode": 200,
             "bodyValue": {
-             "$id": "3102",
+             "$id": "3100",
              "kind": "model",
              "type": {
               "$ref": "500"
              },
              "value": {
-              "$id": "3103",
+              "$id": "3101",
               "models": {
-               "$id": "3104",
+               "$id": "3102",
                "kind": "array",
                "type": {
                 "$ref": "502"
                },
                "value": [
                 {
-                 "$id": "3105",
+                 "$id": "3103",
                  "kind": "model",
                  "type": {
                   "$ref": "481"
                  },
                  "value": {
-                  "$id": "3106",
+                  "$id": "3104",
                   "modelId": {
-                   "$id": "3107",
+                   "$id": "3105",
                    "kind": "string",
                    "type": {
                     "$ref": "483"
@@ -22742,7 +22729,7 @@
                    "value": "45aad126-aafd-11ea-b8fb-d89ef3400c5f"
                   },
                   "createdTime": {
-                   "$id": "3108",
+                   "$id": "3106",
                    "kind": "string",
                    "type": {
                     "$ref": "488"
@@ -22750,7 +22737,7 @@
                    "value": "2020-06-30T00:00:00Z"
                   },
                   "lastUpdatedTime": {
-                   "$id": "3109",
+                   "$id": "3107",
                    "kind": "string",
                    "type": {
                     "$ref": "493"
@@ -22758,15 +22745,15 @@
                    "value": "2020-06-30T00:00:00Z"
                   },
                   "modelInfo": {
-                   "$id": "3110",
+                   "$id": "3108",
                    "kind": "model",
                    "type": {
                     "$ref": "402"
                    },
                    "value": {
-                    "$id": "3111",
+                    "$id": "3109",
                     "slidingWindow": {
-                     "$id": "3112",
+                     "$id": "3110",
                      "kind": "number",
                      "type": {
                       "$ref": "425"
@@ -22774,15 +22761,15 @@
                      "value": 20
                     },
                     "alignPolicy": {
-                     "$id": "3113",
+                     "$id": "3111",
                      "kind": "model",
                      "type": {
                       "$ref": "429"
                      },
                      "value": {
-                      "$id": "3114",
+                      "$id": "3112",
                       "alignMode": {
-                       "$id": "3115",
+                       "$id": "3113",
                        "kind": "string",
                        "type": {
                         "$ref": "76"
@@ -22790,7 +22777,7 @@
                        "value": "Outer"
                       },
                       "fillNAMethod": {
-                       "$id": "3116",
+                       "$id": "3114",
                        "kind": "string",
                        "type": {
                         "$ref": "82"
@@ -22798,7 +22785,7 @@
                        "value": "Linear"
                       },
                       "paddingValue": {
-                       "$id": "3117",
+                       "$id": "3115",
                        "kind": "number",
                        "type": {
                         "$ref": "437"
@@ -22808,7 +22795,7 @@
                      }
                     },
                     "dataSource": {
-                     "$id": "3118",
+                     "$id": "3116",
                      "kind": "string",
                      "type": {
                       "$ref": "404"
@@ -22816,7 +22803,7 @@
                      "value": "https://multiadsample.blob.core.windows.net/data/sample_data_2_1000.csv"
                     },
                     "dataSchema": {
-                     "$id": "3119",
+                     "$id": "3117",
                      "kind": "string",
                      "type": {
                       "$ref": "70"
@@ -22824,7 +22811,7 @@
                      "value": "OneTable"
                     },
                     "startTime": {
-                     "$id": "3120",
+                     "$id": "3118",
                      "kind": "string",
                      "type": {
                       "$ref": "411"
@@ -22832,7 +22819,7 @@
                      "value": "2019-04-01T00:00:00Z"
                     },
                     "endTime": {
-                     "$id": "3121",
+                     "$id": "3119",
                      "kind": "string",
                      "type": {
                       "$ref": "416"
@@ -22840,7 +22827,7 @@
                      "value": "2019-04-02T00:00:00Z"
                     },
                     "displayName": {
-                     "$id": "3122",
+                     "$id": "3120",
                      "kind": "string",
                      "type": {
                       "$ref": "421"
@@ -22848,7 +22835,7 @@
                      "value": "Devops-MultiAD"
                     },
                     "status": {
-                     "$id": "3123",
+                     "$id": "3121",
                      "kind": "string",
                      "type": {
                       "$ref": "94"
@@ -22856,7 +22843,7 @@
                      "value": "READY"
                     },
                     "errors": {
-                     "$id": "3124",
+                     "$id": "3122",
                      "kind": "array",
                      "type": {
                       "$ref": "446"
@@ -22864,30 +22851,30 @@
                      "value": []
                     },
                     "diagnosticsInfo": {
-                     "$id": "3125",
+                     "$id": "3123",
                      "kind": "model",
                      "type": {
                       "$ref": "450"
                      },
                      "value": {
-                      "$id": "3126",
+                      "$id": "3124",
                       "modelState": {
-                       "$id": "3127",
+                       "$id": "3125",
                        "kind": "model",
                        "type": {
                         "$ref": "452"
                        },
                        "value": {
-                        "$id": "3128",
+                        "$id": "3126",
                         "epochIds": {
-                         "$id": "3129",
+                         "$id": "3127",
                          "kind": "array",
                          "type": {
                           "$ref": "454"
                          },
                          "value": [
                           {
-                           "$id": "3130",
+                           "$id": "3128",
                            "kind": "number",
                            "type": {
                             "$ref": "455"
@@ -22895,7 +22882,7 @@
                            "value": 10
                           },
                           {
-                           "$id": "3131",
+                           "$id": "3129",
                            "kind": "number",
                            "type": {
                             "$ref": "455"
@@ -22903,7 +22890,7 @@
                            "value": 20
                           },
                           {
-                           "$id": "3132",
+                           "$id": "3130",
                            "kind": "number",
                            "type": {
                             "$ref": "455"
@@ -22911,7 +22898,7 @@
                            "value": 30
                           },
                           {
-                           "$id": "3133",
+                           "$id": "3131",
                            "kind": "number",
                            "type": {
                             "$ref": "455"
@@ -22919,7 +22906,7 @@
                            "value": 40
                           },
                           {
-                           "$id": "3134",
+                           "$id": "3132",
                            "kind": "number",
                            "type": {
                             "$ref": "455"
@@ -22927,7 +22914,7 @@
                            "value": 50
                           },
                           {
-                           "$id": "3135",
+                           "$id": "3133",
                            "kind": "number",
                            "type": {
                             "$ref": "455"
@@ -22935,7 +22922,7 @@
                            "value": 60
                           },
                           {
-                           "$id": "3136",
+                           "$id": "3134",
                            "kind": "number",
                            "type": {
                             "$ref": "455"
@@ -22943,7 +22930,7 @@
                            "value": 70
                           },
                           {
-                           "$id": "3137",
+                           "$id": "3135",
                            "kind": "number",
                            "type": {
                             "$ref": "455"
@@ -22951,7 +22938,7 @@
                            "value": 80
                           },
                           {
-                           "$id": "3138",
+                           "$id": "3136",
                            "kind": "number",
                            "type": {
                             "$ref": "455"
@@ -22959,7 +22946,7 @@
                            "value": 90
                           },
                           {
-                           "$id": "3139",
+                           "$id": "3137",
                            "kind": "number",
                            "type": {
                             "$ref": "455"
@@ -22969,14 +22956,14 @@
                          ]
                         },
                         "trainLosses": {
-                         "$id": "3140",
+                         "$id": "3138",
                          "kind": "array",
                          "type": {
                           "$ref": "459"
                          },
                          "value": [
                           {
-                           "$id": "3141",
+                           "$id": "3139",
                            "kind": "number",
                            "type": {
                             "$ref": "460"
@@ -22984,7 +22971,7 @@
                            "value": 0.6291328072547913
                           },
                           {
-                           "$id": "3142",
+                           "$id": "3140",
                            "kind": "number",
                            "type": {
                             "$ref": "460"
@@ -22992,7 +22979,7 @@
                            "value": 0.1671326905488968
                           },
                           {
-                           "$id": "3143",
+                           "$id": "3141",
                            "kind": "number",
                            "type": {
                             "$ref": "460"
@@ -23000,7 +22987,7 @@
                            "value": 0.12354248017072678
                           },
                           {
-                           "$id": "3144",
+                           "$id": "3142",
                            "kind": "number",
                            "type": {
                             "$ref": "460"
@@ -23008,7 +22995,7 @@
                            "value": 0.10259664058685303
                           },
                           {
-                           "$id": "3145",
+                           "$id": "3143",
                            "kind": "number",
                            "type": {
                             "$ref": "460"
@@ -23016,7 +23003,7 @@
                            "value": 0.09584927558898926
                           },
                           {
-                           "$id": "3146",
+                           "$id": "3144",
                            "kind": "number",
                            "type": {
                             "$ref": "460"
@@ -23024,7 +23011,7 @@
                            "value": 0.09069952368736267
                           },
                           {
-                           "$id": "3147",
+                           "$id": "3145",
                            "kind": "number",
                            "type": {
                             "$ref": "460"
@@ -23032,7 +23019,7 @@
                            "value": 0.08686016499996185
                           },
                           {
-                           "$id": "3148",
+                           "$id": "3146",
                            "kind": "number",
                            "type": {
                             "$ref": "460"
@@ -23040,7 +23027,7 @@
                            "value": 0.08603022992610931
                           },
                           {
-                           "$id": "3149",
+                           "$id": "3147",
                            "kind": "number",
                            "type": {
                             "$ref": "460"
@@ -23048,7 +23035,7 @@
                            "value": 0.08287354558706284
                           },
                           {
-                           "$id": "3150",
+                           "$id": "3148",
                            "kind": "number",
                            "type": {
                             "$ref": "460"
@@ -23058,14 +23045,14 @@
                          ]
                         },
                         "validationLosses": {
-                         "$id": "3151",
+                         "$id": "3149",
                          "kind": "array",
                          "type": {
                           "$ref": "464"
                          },
                          "value": [
                           {
-                           "$id": "3152",
+                           "$id": "3150",
                            "kind": "number",
                            "type": {
                             "$ref": "465"
@@ -23073,7 +23060,7 @@
                            "value": 1.9232804775238037
                           },
                           {
-                           "$id": "3153",
+                           "$id": "3151",
                            "kind": "number",
                            "type": {
                             "$ref": "465"
@@ -23081,7 +23068,7 @@
                            "value": 1.0645641088485718
                           },
                           {
-                           "$id": "3154",
+                           "$id": "3152",
                            "kind": "number",
                            "type": {
                             "$ref": "465"
@@ -23089,7 +23076,7 @@
                            "value": 0.6031560301780701
                           },
                           {
-                           "$id": "3155",
+                           "$id": "3153",
                            "kind": "number",
                            "type": {
                             "$ref": "465"
@@ -23097,7 +23084,7 @@
                            "value": 0.5302737951278687
                           },
                           {
-                           "$id": "3156",
+                           "$id": "3154",
                            "kind": "number",
                            "type": {
                             "$ref": "465"
@@ -23105,7 +23092,7 @@
                            "value": 0.46980252861976624
                           },
                           {
-                           "$id": "3157",
+                           "$id": "3155",
                            "kind": "number",
                            "type": {
                             "$ref": "465"
@@ -23113,7 +23100,7 @@
                            "value": 0.4395163357257843
                           },
                           {
-                           "$id": "3158",
+                           "$id": "3156",
                            "kind": "number",
                            "type": {
                             "$ref": "465"
@@ -23121,7 +23108,7 @@
                            "value": 0.41829314827919006
                           },
                           {
-                           "$id": "3159",
+                           "$id": "3157",
                            "kind": "number",
                            "type": {
                             "$ref": "465"
@@ -23129,7 +23116,7 @@
                            "value": 0.40579143166542053
                           },
                           {
-                           "$id": "3160",
+                           "$id": "3158",
                            "kind": "number",
                            "type": {
                             "$ref": "465"
@@ -23137,7 +23124,7 @@
                            "value": 0.405649870634079
                           },
                           {
-                           "$id": "3161",
+                           "$id": "3159",
                            "kind": "number",
                            "type": {
                             "$ref": "465"
@@ -23147,14 +23134,14 @@
                          ]
                         },
                         "latenciesInSeconds": {
-                         "$id": "3162",
+                         "$id": "3160",
                          "kind": "array",
                          "type": {
                           "$ref": "469"
                          },
                          "value": [
                           {
-                           "$id": "3163",
+                           "$id": "3161",
                            "kind": "number",
                            "type": {
                             "$ref": "470"
@@ -23162,7 +23149,7 @@
                            "value": 0.3398594856262207
                           },
                           {
-                           "$id": "3164",
+                           "$id": "3162",
                            "kind": "number",
                            "type": {
                             "$ref": "470"
@@ -23170,7 +23157,7 @@
                            "value": 0.3659665584564209
                           },
                           {
-                           "$id": "3165",
+                           "$id": "3163",
                            "kind": "number",
                            "type": {
                             "$ref": "470"
@@ -23178,7 +23165,7 @@
                            "value": 0.37360644340515137
                           },
                           {
-                           "$id": "3166",
+                           "$id": "3164",
                            "kind": "number",
                            "type": {
                             "$ref": "470"
@@ -23186,7 +23173,7 @@
                            "value": 0.35134077072143555
                           },
                           {
-                           "$id": "3167",
+                           "$id": "3165",
                            "kind": "number",
                            "type": {
                             "$ref": "470"
@@ -23194,7 +23181,7 @@
                            "value": 0.33703041076660156
                           },
                           {
-                           "$id": "3168",
+                           "$id": "3166",
                            "kind": "number",
                            "type": {
                             "$ref": "470"
@@ -23202,7 +23189,7 @@
                            "value": 0.31876277923583984
                           },
                           {
-                           "$id": "3169",
+                           "$id": "3167",
                            "kind": "number",
                            "type": {
                             "$ref": "470"
@@ -23210,7 +23197,7 @@
                            "value": 0.32833099365234375
                           },
                           {
-                           "$id": "3170",
+                           "$id": "3168",
                            "kind": "number",
                            "type": {
                             "$ref": "470"
@@ -23218,7 +23205,7 @@
                            "value": 0.3503587245941162
                           },
                           {
-                           "$id": "3171",
+                           "$id": "3169",
                            "kind": "number",
                            "type": {
                             "$ref": "470"
@@ -23226,7 +23213,7 @@
                            "value": 0.3080024719238281
                           },
                           {
-                           "$id": "3172",
+                           "$id": "3170",
                            "kind": "number",
                            "type": {
                             "$ref": "470"
@@ -23238,22 +23225,22 @@
                        }
                       },
                       "variableStates": {
-                       "$id": "3173",
+                       "$id": "3171",
                        "kind": "array",
                        "type": {
                         "$ref": "476"
                        },
                        "value": [
                         {
-                         "$id": "3174",
+                         "$id": "3172",
                          "kind": "model",
                          "type": {
                           "$ref": "301"
                          },
                          "value": {
-                          "$id": "3175",
+                          "$id": "3173",
                           "variable": {
-                           "$id": "3176",
+                           "$id": "3174",
                            "kind": "string",
                            "type": {
                             "$ref": "303"
@@ -23261,7 +23248,7 @@
                            "value": "ad_input"
                           },
                           "filledNARatio": {
-                           "$id": "3177",
+                           "$id": "3175",
                            "kind": "number",
                            "type": {
                             "$ref": "307"
@@ -23269,7 +23256,7 @@
                            "value": 0
                           },
                           "effectiveCount": {
-                           "$id": "3178",
+                           "$id": "3176",
                            "kind": "number",
                            "type": {
                             "$ref": "311"
@@ -23277,7 +23264,7 @@
                            "value": 1441
                           },
                           "firstTimestamp": {
-                           "$id": "3179",
+                           "$id": "3177",
                            "kind": "string",
                            "type": {
                             "$ref": "315"
@@ -23285,7 +23272,7 @@
                            "value": "2019-04-01T00:00:00Z"
                           },
                           "lastTimestamp": {
-                           "$id": "3180",
+                           "$id": "3178",
                            "kind": "string",
                            "type": {
                             "$ref": "320"
@@ -23295,15 +23282,15 @@
                          }
                         },
                         {
-                         "$id": "3181",
+                         "$id": "3179",
                          "kind": "model",
                          "type": {
                           "$ref": "301"
                          },
                          "value": {
-                          "$id": "3182",
+                          "$id": "3180",
                           "variable": {
-                           "$id": "3183",
+                           "$id": "3181",
                            "kind": "string",
                            "type": {
                             "$ref": "303"
@@ -23311,7 +23298,7 @@
                            "value": "ad_ontimer_output"
                           },
                           "filledNARatio": {
-                           "$id": "3184",
+                           "$id": "3182",
                            "kind": "number",
                            "type": {
                             "$ref": "307"
@@ -23319,7 +23306,7 @@
                            "value": 0
                           },
                           "effectiveCount": {
-                           "$id": "3185",
+                           "$id": "3183",
                            "kind": "number",
                            "type": {
                             "$ref": "311"
@@ -23327,7 +23314,7 @@
                            "value": 1441
                           },
                           "firstTimestamp": {
-                           "$id": "3186",
+                           "$id": "3184",
                            "kind": "string",
                            "type": {
                             "$ref": "315"
@@ -23335,7 +23322,7 @@
                            "value": "2019-04-01T00:00:00Z"
                           },
                           "lastTimestamp": {
-                           "$id": "3187",
+                           "$id": "3185",
                            "kind": "string",
                            "type": {
                             "$ref": "320"
@@ -23345,15 +23332,15 @@
                          }
                         },
                         {
-                         "$id": "3188",
+                         "$id": "3186",
                          "kind": "model",
                          "type": {
                           "$ref": "301"
                          },
                          "value": {
-                          "$id": "3189",
+                          "$id": "3187",
                           "variable": {
-                           "$id": "3190",
+                           "$id": "3188",
                            "kind": "string",
                            "type": {
                             "$ref": "303"
@@ -23361,7 +23348,7 @@
                            "value": "ingestion"
                           },
                           "filledNARatio": {
-                           "$id": "3191",
+                           "$id": "3189",
                            "kind": "number",
                            "type": {
                             "$ref": "307"
@@ -23369,7 +23356,7 @@
                            "value": 0
                           },
                           "effectiveCount": {
-                           "$id": "3192",
+                           "$id": "3190",
                            "kind": "number",
                            "type": {
                             "$ref": "311"
@@ -23377,7 +23364,7 @@
                            "value": 1441
                           },
                           "firstTimestamp": {
-                           "$id": "3193",
+                           "$id": "3191",
                            "kind": "string",
                            "type": {
                             "$ref": "315"
@@ -23385,7 +23372,7 @@
                            "value": "2019-04-01T00:00:00Z"
                           },
                           "lastTimestamp": {
-                           "$id": "3194",
+                           "$id": "3192",
                            "kind": "string",
                            "type": {
                             "$ref": "320"
@@ -23395,15 +23382,15 @@
                          }
                         },
                         {
-                         "$id": "3195",
+                         "$id": "3193",
                          "kind": "model",
                          "type": {
                           "$ref": "301"
                          },
                          "value": {
-                          "$id": "3196",
+                          "$id": "3194",
                           "variable": {
-                           "$id": "3197",
+                           "$id": "3195",
                            "kind": "string",
                            "type": {
                             "$ref": "303"
@@ -23411,7 +23398,7 @@
                            "value": "data_in_speed"
                           },
                           "filledNARatio": {
-                           "$id": "3198",
+                           "$id": "3196",
                            "kind": "number",
                            "type": {
                             "$ref": "307"
@@ -23419,7 +23406,7 @@
                            "value": 0
                           },
                           "effectiveCount": {
-                           "$id": "3199",
+                           "$id": "3197",
                            "kind": "number",
                            "type": {
                             "$ref": "311"
@@ -23427,7 +23414,7 @@
                            "value": 1441
                           },
                           "firstTimestamp": {
-                           "$id": "3200",
+                           "$id": "3198",
                            "kind": "string",
                            "type": {
                             "$ref": "315"
@@ -23435,7 +23422,7 @@
                            "value": "2019-04-01T00:00:00Z"
                           },
                           "lastTimestamp": {
-                           "$id": "3201",
+                           "$id": "3199",
                            "kind": "string",
                            "type": {
                             "$ref": "320"
@@ -23445,15 +23432,15 @@
                          }
                         },
                         {
-                         "$id": "3202",
+                         "$id": "3200",
                          "kind": "model",
                          "type": {
                           "$ref": "301"
                          },
                          "value": {
-                          "$id": "3203",
+                          "$id": "3201",
                           "variable": {
-                           "$id": "3204",
+                           "$id": "3202",
                            "kind": "string",
                            "type": {
                             "$ref": "303"
@@ -23461,7 +23448,7 @@
                            "value": "cpu"
                           },
                           "filledNARatio": {
-                           "$id": "3205",
+                           "$id": "3203",
                            "kind": "number",
                            "type": {
                             "$ref": "307"
@@ -23469,7 +23456,7 @@
                            "value": 0
                           },
                           "effectiveCount": {
-                           "$id": "3206",
+                           "$id": "3204",
                            "kind": "number",
                            "type": {
                             "$ref": "311"
@@ -23477,7 +23464,7 @@
                            "value": 1441
                           },
                           "firstTimestamp": {
-                           "$id": "3207",
+                           "$id": "3205",
                            "kind": "string",
                            "type": {
                             "$ref": "315"
@@ -23485,7 +23472,7 @@
                            "value": "2019-04-01T00:00:00Z"
                           },
                           "lastTimestamp": {
-                           "$id": "3208",
+                           "$id": "3206",
                            "kind": "string",
                            "type": {
                             "$ref": "320"
@@ -23495,15 +23482,15 @@
                          }
                         },
                         {
-                         "$id": "3209",
+                         "$id": "3207",
                          "kind": "model",
                          "type": {
                           "$ref": "301"
                          },
                          "value": {
-                          "$id": "3210",
+                          "$id": "3208",
                           "variable": {
-                           "$id": "3211",
+                           "$id": "3209",
                            "kind": "string",
                            "type": {
                             "$ref": "303"
@@ -23511,7 +23498,7 @@
                            "value": "ad_series_init"
                           },
                           "filledNARatio": {
-                           "$id": "3212",
+                           "$id": "3210",
                            "kind": "number",
                            "type": {
                             "$ref": "307"
@@ -23519,7 +23506,7 @@
                            "value": 0
                           },
                           "effectiveCount": {
-                           "$id": "3213",
+                           "$id": "3211",
                            "kind": "number",
                            "type": {
                             "$ref": "311"
@@ -23527,7 +23514,7 @@
                            "value": 1441
                           },
                           "firstTimestamp": {
-                           "$id": "3214",
+                           "$id": "3212",
                            "kind": "string",
                            "type": {
                             "$ref": "315"
@@ -23535,7 +23522,7 @@
                            "value": "2019-04-01T00:00:00Z"
                           },
                           "lastTimestamp": {
-                           "$id": "3215",
+                           "$id": "3213",
                            "kind": "string",
                            "type": {
                             "$ref": "320"
@@ -23545,15 +23532,15 @@
                          }
                         },
                         {
-                         "$id": "3216",
+                         "$id": "3214",
                          "kind": "model",
                          "type": {
                           "$ref": "301"
                          },
                          "value": {
-                          "$id": "3217",
+                          "$id": "3215",
                           "variable": {
-                           "$id": "3218",
+                           "$id": "3216",
                            "kind": "string",
                            "type": {
                             "$ref": "303"
@@ -23561,7 +23548,7 @@
                            "value": "flink_last_ckpt_duration"
                           },
                           "filledNARatio": {
-                           "$id": "3219",
+                           "$id": "3217",
                            "kind": "number",
                            "type": {
                             "$ref": "307"
@@ -23569,7 +23556,7 @@
                            "value": 0
                           },
                           "effectiveCount": {
-                           "$id": "3220",
+                           "$id": "3218",
                            "kind": "number",
                            "type": {
                             "$ref": "311"
@@ -23577,7 +23564,7 @@
                            "value": 1441
                           },
                           "firstTimestamp": {
-                           "$id": "3221",
+                           "$id": "3219",
                            "kind": "string",
                            "type": {
                             "$ref": "315"
@@ -23585,7 +23572,7 @@
                            "value": "2019-04-01T00:00:00Z"
                           },
                           "lastTimestamp": {
-                           "$id": "3222",
+                           "$id": "3220",
                            "kind": "string",
                            "type": {
                             "$ref": "320"
@@ -23595,15 +23582,15 @@
                          }
                         },
                         {
-                         "$id": "3223",
+                         "$id": "3221",
                          "kind": "model",
                          "type": {
                           "$ref": "301"
                          },
                          "value": {
-                          "$id": "3224",
+                          "$id": "3222",
                           "variable": {
-                           "$id": "3225",
+                           "$id": "3223",
                            "kind": "string",
                            "type": {
                             "$ref": "303"
@@ -23611,7 +23598,7 @@
                            "value": "data_out_speed"
                           },
                           "filledNARatio": {
-                           "$id": "3226",
+                           "$id": "3224",
                            "kind": "number",
                            "type": {
                             "$ref": "307"
@@ -23619,7 +23606,7 @@
                            "value": 0
                           },
                           "effectiveCount": {
-                           "$id": "3227",
+                           "$id": "3225",
                            "kind": "number",
                            "type": {
                             "$ref": "311"
@@ -23627,7 +23614,7 @@
                            "value": 1441
                           },
                           "firstTimestamp": {
-                           "$id": "3228",
+                           "$id": "3226",
                            "kind": "string",
                            "type": {
                             "$ref": "315"
@@ -23635,7 +23622,7 @@
                            "value": "2019-04-01T00:00:00Z"
                           },
                           "lastTimestamp": {
-                           "$id": "3229",
+                           "$id": "3227",
                            "kind": "string",
                            "type": {
                             "$ref": "320"
@@ -23645,15 +23632,15 @@
                          }
                         },
                         {
-                         "$id": "3230",
+                         "$id": "3228",
                          "kind": "model",
                          "type": {
                           "$ref": "301"
                          },
                          "value": {
-                          "$id": "3231",
+                          "$id": "3229",
                           "variable": {
-                           "$id": "3232",
+                           "$id": "3230",
                            "kind": "string",
                            "type": {
                             "$ref": "303"
@@ -23661,7 +23648,7 @@
                            "value": "ad_output"
                           },
                           "filledNARatio": {
-                           "$id": "3233",
+                           "$id": "3231",
                            "kind": "number",
                            "type": {
                             "$ref": "307"
@@ -23669,7 +23656,7 @@
                            "value": 0
                           },
                           "effectiveCount": {
-                           "$id": "3234",
+                           "$id": "3232",
                            "kind": "number",
                            "type": {
                             "$ref": "311"
@@ -23677,7 +23664,7 @@
                            "value": 1441
                           },
                           "firstTimestamp": {
-                           "$id": "3235",
+                           "$id": "3233",
                            "kind": "string",
                            "type": {
                             "$ref": "315"
@@ -23685,7 +23672,7 @@
                            "value": "2019-04-01T00:00:00Z"
                           },
                           "lastTimestamp": {
-                           "$id": "3236",
+                           "$id": "3234",
                            "kind": "string",
                            "type": {
                             "$ref": "320"
@@ -23705,7 +23692,7 @@
                ]
               },
               "currentCount": {
-               "$id": "3237",
+               "$id": "3235",
                "kind": "number",
                "type": {
                 "$ref": "506"
@@ -23713,7 +23700,7 @@
                "value": 1
               },
               "maxCount": {
-               "$id": "3238",
+               "$id": "3236",
                "kind": "number",
                "type": {
                 "$ref": "510"
@@ -23721,7 +23708,7 @@
                "value": 20
               },
               "nextLink": {
-               "$id": "3239",
+               "$id": "3237",
                "kind": "string",
                "type": {
                 "$ref": "514"
@@ -23737,10 +23724,32 @@
        },
        "parameters": [
         {
-         "$id": "3240",
+         "$id": "3238",
          "name": "skip",
          "nameInRequest": "skip",
          "doc": "Skip indicates how many models will be skipped.",
+         "type": {
+          "$id": "3239",
+          "kind": "int32",
+          "name": "int32",
+          "crossLanguageDefinitionId": "TypeSpec.int32",
+          "decorators": []
+         },
+         "location": "Query",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": false,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "3240",
+         "name": "top",
+         "nameInRequest": "top",
+         "doc": "Top indicates how many models will be fetched.",
          "type": {
           "$id": "3241",
           "kind": "int32",
@@ -23760,28 +23769,6 @@
         },
         {
          "$id": "3242",
-         "name": "top",
-         "nameInRequest": "top",
-         "doc": "Top indicates how many models will be fetched.",
-         "type": {
-          "$id": "3243",
-          "kind": "int32",
-          "name": "int32",
-          "crossLanguageDefinitionId": "TypeSpec.int32",
-          "decorators": []
-         },
-         "location": "Query",
-         "isApiVersion": false,
-         "isContentType": false,
-         "isEndpoint": false,
-         "explode": false,
-         "isRequired": false,
-         "kind": "Method",
-         "decorators": [],
-         "skipUrlEncoding": false
-        },
-        {
-         "$id": "3244",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
@@ -23799,9 +23786,9 @@
         }
        ],
        "response": {
-        "$id": "3245",
+        "$id": "3243",
         "type": {
-         "$id": "3246",
+         "$id": "3244",
          "kind": "array",
          "name": "ArrayAnomalyDetectionModel",
          "valueType": {
@@ -23817,7 +23804,20 @@
        "isOverride": false,
        "generateConvenient": true,
        "generateProtocol": true,
-       "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ListMultivariateModels"
+       "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ListMultivariateModels",
+       "pagingMetadata": {
+        "$id": "3245",
+        "itemPropertySegments": [
+         "models"
+        ],
+        "nextLink": {
+         "$id": "3246",
+         "responseSegments": [
+          "nextLink"
+         ],
+         "responseLocation": "Body"
+        }
+       }
       },
       {
        "$id": "3247",

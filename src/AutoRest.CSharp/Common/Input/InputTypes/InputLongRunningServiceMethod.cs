@@ -8,33 +8,36 @@ namespace AutoRest.CSharp.Common.Input;
 internal record InputLongRunningServiceMethod : InputServiceMethod
 {
     public InputLongRunningServiceMethod(
-        string name,
-        string? accessibility,
-        string[] apiVersions,
-        string? documentation,
-        string? summary,
-        InputOperation operation,
-        IReadOnlyList<InputParameter> parameters,
-        InputServiceMethodResponse response,
-        InputServiceMethodResponse? exception,
-        bool isOverride,
-        bool generateConvenient,
-        bool generateProtocol,
-        string crossLanguageDefinitionId) : base(
-            name,
-            accessibility,
-            apiVersions,
-            documentation,
-            summary,
-            operation,
-            parameters,
-            response,
-            exception,
-            isOverride,
-            generateConvenient,
-            generateProtocol,
-            crossLanguageDefinitionId)
-    { }
+            string name,
+            string? accessibility,
+            string[] apiVersions,
+            string? documentation,
+            string? summary,
+            InputOperation operation,
+            IReadOnlyList<InputParameter> parameters,
+            InputServiceMethodResponse response,
+            InputServiceMethodResponse? exception,
+            bool isOverride,
+            bool generateConvenient,
+            bool generateProtocol,
+            string crossLanguageDefinitionId,
+            InputLongRunningServiceMetadata longRunningServiceMetadata) : base(
+                name,
+                accessibility,
+                apiVersions,
+                documentation,
+                summary,
+                operation,
+                parameters,
+                response,
+                exception,
+                isOverride,
+                generateConvenient,
+                generateProtocol,
+                crossLanguageDefinitionId)
+    {
+        LongRunningServiceMetadata = longRunningServiceMetadata;
+    }
 
     internal InputLongRunningServiceMethod() : this(
        string.Empty,
@@ -49,6 +52,9 @@ internal record InputLongRunningServiceMethod : InputServiceMethod
        false,
        false,
        false,
-       string.Empty)
+       string.Empty,
+       new InputLongRunningServiceMetadata())
     { }
+
+    public InputLongRunningServiceMetadata LongRunningServiceMetadata { get; internal set; }
 }

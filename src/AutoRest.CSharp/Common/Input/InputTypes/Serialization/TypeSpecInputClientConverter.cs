@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -130,9 +131,49 @@ namespace AutoRest.CSharp.Common.Input
             var operations = new List<InputOperation>();
             foreach (var method in methods)
             {
+                // propogate paging metadata to the operation
+                PopulateOperationMetadata(method);
                 operations.Add(method.Operation);
             }
             return operations;
+        }
+
+        private static void PopulateOperationMetadata(InputServiceMethod method)
+        {
+            switch (method)
+            {
+                case InputLongRunningPagingServiceMethod lroPagingMethod:
+                    var pagingMetadata = lroPagingMethod.PagingMetadata;
+                    method.Operation.Paging = new InputOperationPaging(
+                        pagingMetadata.NextLink,
+                        pagingMetadata.ContinuationToken,
+                        pagingMetadata.ItemPropertySegments);
+
+                    var lroMetadata = lroPagingMethod.LongRunningServiceMetadata;
+                    method.Operation.LongRunning = new InputOperationLongRunning(
+                        (OperationFinalStateVia)lroMetadata.FinalStateVia,
+                        lroMetadata.FinalResponse,
+                        lroMetadata.ResultPath);
+                    break;
+
+                case InputPagingServiceMethod pagingMethod:
+                    var singlePagingMetadata = pagingMethod.PagingMetadata;
+                    method.Operation.Paging = new InputOperationPaging(
+                        singlePagingMetadata.NextLink,
+                        singlePagingMetadata.ContinuationToken,
+                        singlePagingMetadata.ItemPropertySegments);
+                    break;
+
+                case InputLongRunningServiceMethod lroMethod:
+                    var singleLroMetadata = lroMethod.LongRunningServiceMetadata;
+                    method.Operation.LongRunning = new InputOperationLongRunning(
+                        (OperationFinalStateVia)singleLroMetadata.FinalStateVia,
+                        singleLroMetadata.FinalResponse,
+                        singleLroMetadata.ResultPath);
+                    break;
+            }
+
+            return;
         }
     }
 }
