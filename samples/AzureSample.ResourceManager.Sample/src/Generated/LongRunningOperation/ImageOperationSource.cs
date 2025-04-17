@@ -25,13 +25,13 @@ namespace AzureSample.ResourceManager.Sample
 
         ImageResource IOperationSource<ImageResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<ImageData>(response.Content);
+            var data = ModelReaderWriter.Read<ImageData>(response.Content, ModelReaderWriterOptions.Json, AzureSampleResourceManagerSampleContext.Default);
             return new ImageResource(_client, data);
         }
 
         async ValueTask<ImageResource> IOperationSource<ImageResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<ImageData>(response.Content);
+            var data = ModelReaderWriter.Read<ImageData>(response.Content, ModelReaderWriterOptions.Json, AzureSampleResourceManagerSampleContext.Default);
             return await Task.FromResult(new ImageResource(_client, data)).ConfigureAwait(false);
         }
     }

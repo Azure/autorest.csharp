@@ -108,7 +108,7 @@ namespace validation.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, validationContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(ConstantProduct)} does not support writing '{options.Format}' format.");
             }

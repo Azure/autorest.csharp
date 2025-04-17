@@ -166,7 +166,7 @@ namespace _Specs_.Azure.Example.Basic.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _Specs_AzureExampleBasicContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(ActionResponse)} does not support writing '{options.Format}' format.");
             }

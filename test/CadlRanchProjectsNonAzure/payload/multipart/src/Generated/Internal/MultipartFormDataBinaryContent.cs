@@ -11,7 +11,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Payload.MultiPart
+namespace Scm.Payload.Multipart
 {
     internal class MultipartFormDataBinaryContent : BinaryContent
     {

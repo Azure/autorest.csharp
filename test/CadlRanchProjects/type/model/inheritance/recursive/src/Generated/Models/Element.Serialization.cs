@@ -117,7 +117,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _TypeModelInheritanceRecursiveContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Element)} does not support writing '{options.Format}' format.");
             }

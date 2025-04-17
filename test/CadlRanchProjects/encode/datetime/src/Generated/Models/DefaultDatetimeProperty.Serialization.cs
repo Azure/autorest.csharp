@@ -100,7 +100,7 @@ namespace Encode.Datetime.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, EncodeDatetimeContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(DefaultDatetimeProperty)} does not support writing '{options.Format}' format.");
             }

@@ -173,7 +173,7 @@ namespace Payload.MultiPart.Models
         {
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
             content.Add(Id, "id");
-            content.Add(ModelReaderWriter.Write(Address, ModelSerializationExtensions.WireOptions), "address");
+            content.Add(ModelReaderWriter.Write<Address>(Address, ModelSerializationExtensions.WireOptions, PayloadMultiPartContext.Default), "address");
             content.Add(ProfileImage, "profileImage", "profileImage", "application/octet-stream");
             foreach (Stream item in Pictures)
             {
@@ -189,7 +189,7 @@ namespace Payload.MultiPart.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, PayloadMultiPartContext.Default);
                 case "MFD":
                     return SerializeMultipart(options);
                 default:

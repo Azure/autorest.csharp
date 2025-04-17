@@ -86,7 +86,7 @@ namespace CustomNamespace
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, TypeSchemaMappingContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(CustomizedModel)} does not support writing '{options.Format}' format.");
             }

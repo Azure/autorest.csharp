@@ -150,7 +150,7 @@ namespace NoDocsTypeSpec.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, NoDocsTypeSpecContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support writing '{options.Format}' format.");
             }

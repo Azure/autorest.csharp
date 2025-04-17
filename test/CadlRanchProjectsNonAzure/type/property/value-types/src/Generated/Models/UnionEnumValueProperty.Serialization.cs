@@ -94,7 +94,7 @@ namespace Scm._Type.Property.ValueTypes.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, Scm_TypePropertyValueTypesContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(UnionEnumValueProperty)} does not support writing '{options.Format}' format.");
             }

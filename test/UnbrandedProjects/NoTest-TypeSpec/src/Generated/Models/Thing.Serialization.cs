@@ -315,7 +315,7 @@ namespace NoTestTypeSpec.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, NoTestTypeSpecContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Thing)} does not support writing '{options.Format}' format.");
             }

@@ -25,13 +25,13 @@ namespace _Azure.ResourceManager.Resources
 
         ExtensionsResource IOperationSource<ExtensionsResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<ExtensionsResourceData>(response.Content);
+            var data = ModelReaderWriter.Read<ExtensionsResourceData>(response.Content, ModelReaderWriterOptions.Json, _AzureResourceManagerResourcesContext.Default);
             return new ExtensionsResource(_client, data);
         }
 
         async ValueTask<ExtensionsResource> IOperationSource<ExtensionsResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<ExtensionsResourceData>(response.Content);
+            var data = ModelReaderWriter.Read<ExtensionsResourceData>(response.Content, ModelReaderWriterOptions.Json, _AzureResourceManagerResourcesContext.Default);
             return await Task.FromResult(new ExtensionsResource(_client, data)).ConfigureAwait(false);
         }
     }

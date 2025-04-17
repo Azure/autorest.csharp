@@ -17,9 +17,9 @@ namespace _Azure.ResourceManager.Resources
 
         NestedProxyResourceData IJsonModel<NestedProxyResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<NestedProxyResourceData>)Data).Create(ref reader, options);
 
-        BinaryData IPersistableModel<NestedProxyResourceData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write(Data, options);
+        BinaryData IPersistableModel<NestedProxyResourceData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<NestedProxyResourceData>(Data, options, _AzureResourceManagerResourcesContext.Default);
 
-        NestedProxyResourceData IPersistableModel<NestedProxyResourceData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<NestedProxyResourceData>(data, options);
+        NestedProxyResourceData IPersistableModel<NestedProxyResourceData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<NestedProxyResourceData>(data, options, _AzureResourceManagerResourcesContext.Default);
 
         string IPersistableModel<NestedProxyResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<NestedProxyResourceData>)Data).GetFormatFromOptions(options);
     }

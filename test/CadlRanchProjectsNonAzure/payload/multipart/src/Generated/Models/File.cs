@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Payload.MultiPart.Models
+namespace Scm.Payload.Multipart.Models
 {
     /// <summary>
     /// A file in an HTTP request, response, or multipart payload.

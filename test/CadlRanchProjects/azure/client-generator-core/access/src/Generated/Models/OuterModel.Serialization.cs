@@ -92,7 +92,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _Specs_AzureClientGeneratorCoreAccessContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(OuterModel)} does not support writing '{options.Format}' format.");
             }

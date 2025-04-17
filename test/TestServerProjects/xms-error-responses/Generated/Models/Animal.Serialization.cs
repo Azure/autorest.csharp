@@ -103,7 +103,7 @@ namespace xms_error_responses.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, xms_error_responsesContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Animal)} does not support writing '{options.Format}' format.");
             }

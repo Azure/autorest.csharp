@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Payload.MultiPart
+namespace Scm.Payload.Multipart
 {
     internal class ClientUriBuilder
     {

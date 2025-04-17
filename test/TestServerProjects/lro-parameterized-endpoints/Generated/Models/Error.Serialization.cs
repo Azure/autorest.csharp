@@ -118,7 +118,7 @@ namespace lro_parameterized_endpoints.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, lro_parameterized_endpointsContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Error)} does not support writing '{options.Format}' format.");
             }

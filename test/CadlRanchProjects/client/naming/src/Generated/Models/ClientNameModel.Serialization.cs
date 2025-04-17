@@ -100,7 +100,7 @@ namespace Client.Naming.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ClientNamingContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(ClientNameModel)} does not support writing '{options.Format}' format.");
             }

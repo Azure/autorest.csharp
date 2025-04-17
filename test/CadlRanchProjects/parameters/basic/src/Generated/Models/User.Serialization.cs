@@ -100,7 +100,7 @@ namespace Parameters.Basic.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ParametersBasicContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(User)} does not support writing '{options.Format}' format.");
             }

@@ -118,7 +118,7 @@ namespace body_datetime.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, body_datetimeContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Error)} does not support writing '{options.Format}' format.");
             }
