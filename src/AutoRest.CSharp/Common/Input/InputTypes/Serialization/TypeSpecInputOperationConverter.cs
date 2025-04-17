@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Common.Input
             string? externalDocsUri = null;
             IReadOnlyList<string>? requestMediaTypes = null;
             bool bufferResponse = false;
-            InputOperationLongRunning? longRunning= null;
+            InputOperationLongRunning? longRunning = null;
             InputOperationPaging? paging = null;
             bool generateProtocolMethod = false;
             bool generateConvenienceMethod = false;
@@ -66,8 +66,6 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString("externalDocsUrl", ref externalDocsUri)
                     || reader.TryReadComplexType("requestMediaTypes", options, ref requestMediaTypes)
                     || reader.TryReadBoolean("bufferResponse", ref bufferResponse)
-                    || reader.TryReadComplexType("longRunning", options, ref longRunning)
-                    || reader.TryReadComplexType("paging", options, ref paging)
                     || reader.TryReadBoolean("generateProtocolMethod", ref generateProtocolMethod)
                     || reader.TryReadBoolean("generateConvenienceMethod", ref generateConvenienceMethod)
                     || reader.TryReadString("crossLanguageDefinitionId", ref crossLanguageDefinitionId)

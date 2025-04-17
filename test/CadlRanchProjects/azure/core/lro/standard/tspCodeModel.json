@@ -1032,19 +1032,6 @@
        "application/json"
       ],
       "bufferResponse": true,
-      "longRunning": {
-       "$id": "127",
-       "finalStateVia": 2,
-       "finalResponse": {
-        "$id": "128",
-        "statusCodes": [
-         200
-        ],
-        "bodyType": {
-         "$ref": "18"
-        }
-       }
-      },
       "generateProtocolMethod": true,
       "generateConvenienceMethod": true,
       "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.createOrReplace",
@@ -1052,12 +1039,12 @@
      },
      "parameters": [
       {
-       "$id": "129",
+       "$id": "127",
        "name": "name",
        "nameInRequest": "name",
        "doc": "The name of user.",
        "type": {
-        "$id": "130",
+        "$id": "128",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1074,7 +1061,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "131",
+       "$id": "129",
        "name": "resource",
        "nameInRequest": "resource",
        "doc": "The resource instance.",
@@ -1092,15 +1079,15 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "132",
+       "$id": "130",
        "name": "contentType",
        "nameInRequest": "contentType",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$id": "133",
+        "$id": "131",
         "kind": "constant",
         "valueType": {
-         "$id": "134",
+         "$id": "132",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1120,14 +1107,14 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "135",
+       "$id": "133",
        "name": "accept",
        "nameInRequest": "accept",
        "type": {
-        "$id": "136",
+        "$id": "134",
         "kind": "constant",
         "valueType": {
-         "$id": "137",
+         "$id": "135",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1148,7 +1135,7 @@
       }
      ],
      "response": {
-      "$id": "138",
+      "$id": "136",
       "type": {
        "$ref": "18"
       }
@@ -1156,7 +1143,20 @@
      "isOverride": false,
      "generateConvenient": true,
      "generateProtocol": true,
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.createOrReplace"
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.createOrReplace",
+     "lroMetadata": {
+      "$id": "137",
+      "finalStateVia": 2,
+      "finalResponse": {
+       "$id": "138",
+       "statusCodes": [
+        200
+       ],
+       "bodyType": {
+        "$ref": "18"
+       }
+      }
+     }
     },
     {
      "$id": "139",
@@ -1299,16 +1299,6 @@
       "uri": "{endpoint}",
       "path": "/azure/core/lro/standard/users/{name}",
       "bufferResponse": true,
-      "longRunning": {
-       "$id": "154",
-       "finalStateVia": 3,
-       "finalResponse": {
-        "$id": "155",
-        "statusCodes": [
-         204
-        ]
-       }
-      },
       "generateProtocolMethod": true,
       "generateConvenienceMethod": true,
       "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.delete",
@@ -1316,12 +1306,12 @@
      },
      "parameters": [
       {
-       "$id": "156",
+       "$id": "154",
        "name": "name",
        "nameInRequest": "name",
        "doc": "The name of user.",
        "type": {
-        "$id": "157",
+        "$id": "155",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1338,14 +1328,14 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "158",
+       "$id": "156",
        "name": "accept",
        "nameInRequest": "accept",
        "type": {
-        "$id": "159",
+        "$id": "157",
         "kind": "constant",
         "valueType": {
-         "$id": "160",
+         "$id": "158",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1366,12 +1356,22 @@
       }
      ],
      "response": {
-      "$id": "161"
+      "$id": "159"
      },
      "isOverride": false,
      "generateConvenient": true,
      "generateProtocol": true,
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.delete"
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.delete",
+     "lroMetadata": {
+      "$id": "160",
+      "finalStateVia": 3,
+      "finalResponse": {
+       "$id": "161",
+       "statusCodes": [
+        204
+       ]
+      }
+     }
     },
     {
      "$id": "162",
@@ -1536,20 +1536,6 @@
       "uri": "{endpoint}",
       "path": "/azure/core/lro/standard/users/{name}:export",
       "bufferResponse": true,
-      "longRunning": {
-       "$id": "179",
-       "finalStateVia": 3,
-       "finalResponse": {
-        "$id": "180",
-        "statusCodes": [
-         200
-        ],
-        "bodyType": {
-         "$ref": "89"
-        }
-       },
-       "resultPath": "result"
-      },
       "generateProtocolMethod": true,
       "generateConvenienceMethod": true,
       "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.export",
@@ -1557,12 +1543,12 @@
      },
      "parameters": [
       {
-       "$id": "181",
+       "$id": "179",
        "name": "name",
        "nameInRequest": "name",
        "doc": "The name of user.",
        "type": {
-        "$id": "182",
+        "$id": "180",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1579,12 +1565,12 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "183",
+       "$id": "181",
        "name": "format",
        "nameInRequest": "format",
        "doc": "The format of the data.",
        "type": {
-        "$id": "184",
+        "$id": "182",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1601,14 +1587,14 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "185",
+       "$id": "183",
        "name": "accept",
        "nameInRequest": "accept",
        "type": {
-        "$id": "186",
+        "$id": "184",
         "kind": "constant",
         "valueType": {
-         "$id": "187",
+         "$id": "185",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1629,7 +1615,7 @@
       }
      ],
      "response": {
-      "$id": "188",
+      "$id": "186",
       "type": {
        "$ref": "27"
       },
@@ -1640,7 +1626,21 @@
      "isOverride": false,
      "generateConvenient": true,
      "generateProtocol": true,
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.export"
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.export",
+     "lroMetadata": {
+      "$id": "187",
+      "finalStateVia": 3,
+      "finalResponse": {
+       "$id": "188",
+       "statusCodes": [
+        200
+       ],
+       "bodyType": {
+        "$ref": "89"
+       }
+      },
+      "resultPath": "result"
+     }
     }
    ],
    "parameters": [

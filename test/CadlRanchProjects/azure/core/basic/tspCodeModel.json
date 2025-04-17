@@ -1406,19 +1406,6 @@
       "uri": "{endpoint}",
       "path": "/azure/core/basic/users",
       "bufferResponse": true,
-      "paging": {
-       "$id": "144",
-       "itemPropertySegments": [
-        "value"
-       ],
-       "nextLink": {
-        "$id": "145",
-        "responseSegments": [
-         "nextLink"
-        ],
-        "responseLocation": "Body"
-       }
-      },
       "generateProtocolMethod": true,
       "generateConvenienceMethod": true,
       "crossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.list",
@@ -1426,10 +1413,32 @@
      },
      "parameters": [
       {
-       "$id": "146",
+       "$id": "144",
        "name": "top",
        "nameInRequest": "top",
        "doc": "The number of result items to return.",
+       "type": {
+        "$id": "145",
+        "kind": "int32",
+        "name": "int32",
+        "crossLanguageDefinitionId": "TypeSpec.int32",
+        "decorators": []
+       },
+       "location": "Query",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": false,
+       "kind": "Method",
+       "decorators": [],
+       "skipUrlEncoding": false
+      },
+      {
+       "$id": "146",
+       "name": "skip",
+       "nameInRequest": "skip",
+       "doc": "The number of result items to skip.",
        "type": {
         "$id": "147",
         "kind": "int32",
@@ -1449,9 +1458,9 @@
       },
       {
        "$id": "148",
-       "name": "skip",
-       "nameInRequest": "skip",
-       "doc": "The number of result items to skip.",
+       "name": "maxpagesize",
+       "nameInRequest": "maxpagesize",
+       "doc": "The maximum number of result items per page.",
        "type": {
         "$id": "149",
         "kind": "int32",
@@ -1471,37 +1480,15 @@
       },
       {
        "$id": "150",
-       "name": "maxpagesize",
-       "nameInRequest": "maxpagesize",
-       "doc": "The maximum number of result items per page.",
-       "type": {
-        "$id": "151",
-        "kind": "int32",
-        "name": "int32",
-        "crossLanguageDefinitionId": "TypeSpec.int32",
-        "decorators": []
-       },
-       "location": "Query",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": false,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "152",
        "name": "orderby",
        "nameInRequest": "orderby",
        "doc": "Expressions that specify the order of returned results.",
        "type": {
-        "$id": "153",
+        "$id": "151",
         "kind": "array",
         "name": "Array",
         "valueType": {
-         "$id": "154",
+         "$id": "152",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1521,12 +1508,12 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "155",
+       "$id": "153",
        "name": "filter",
        "nameInRequest": "filter",
        "doc": "Filter the result list using the given expression.",
        "type": {
-        "$id": "156",
+        "$id": "154",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1543,16 +1530,16 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "157",
+       "$id": "155",
        "name": "select",
        "nameInRequest": "select",
        "doc": "Select the specified fields to be included in the response.",
        "type": {
-        "$id": "158",
+        "$id": "156",
         "kind": "array",
         "name": "Array",
         "valueType": {
-         "$id": "159",
+         "$id": "157",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1572,16 +1559,16 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "160",
+       "$id": "158",
        "name": "expand",
        "nameInRequest": "expand",
        "doc": "Expand the indicated resources into the response.",
        "type": {
-        "$id": "161",
+        "$id": "159",
         "kind": "array",
         "name": "Array",
         "valueType": {
-         "$id": "162",
+         "$id": "160",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1601,7 +1588,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "163",
+       "$id": "161",
        "name": "accept",
        "nameInRequest": "accept",
        "type": {
@@ -1619,9 +1606,9 @@
       }
      ],
      "response": {
-      "$id": "164",
+      "$id": "162",
       "type": {
-       "$id": "165",
+       "$id": "163",
        "kind": "array",
        "name": "ArrayUser",
        "valueType": {
@@ -1637,7 +1624,20 @@
      "isOverride": false,
      "generateConvenient": true,
      "generateProtocol": true,
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.list"
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.list",
+     "pagingMetadata": {
+      "$id": "164",
+      "itemPropertySegments": [
+       "value"
+      ],
+      "nextLink": {
+       "$id": "165",
+       "responseSegments": [
+        "nextLink"
+       ],
+       "responseLocation": "Body"
+      }
+     }
     },
     {
      "$id": "166",

@@ -54,6 +54,12 @@ namespace AutoRest.CSharp.Common.Input
                     new TypeSpecInputContinuationTokenConverter(referenceHandler),
                     new TypeSpecInputServiceMethodConverter(referenceHandler),
                     new TypeSpecInputServiceMethodResponseConverter(referenceHandler),
+                    new TypeSpecInputBasicServiceMethodConverter(referenceHandler),
+                    new TypeSpecInputPagingServiceMethodConverter(referenceHandler),
+                    new TypeSpecInputPagingServiceMetadataConverter(referenceHandler),
+                    new TypeSpecInputLongRunningServiceMethodConverter(referenceHandler),
+                    new TypeSpecInputLongRunningServiceMetadataConverter(referenceHandler),
+                    new TypeSpecInputLongRunningPagingServiceMethodConverter(referenceHandler),
                 }
             };
 

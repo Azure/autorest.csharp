@@ -20,7 +20,8 @@ internal record InputPagingServiceMethod : InputServiceMethod
         bool isOverride,
         bool generateConvenient,
         bool generateProtocol,
-        string crossLanguageDefinitionId) : base(
+        string crossLanguageDefinitionId,
+        InputPagingServiceMetadata paging) : base(
             name,
             accessibility,
             apiVersions,
@@ -34,7 +35,9 @@ internal record InputPagingServiceMethod : InputServiceMethod
             generateConvenient,
             generateProtocol,
             crossLanguageDefinitionId)
-    { }
+    {
+        PagingMetadata = paging;
+    }
 
     internal InputPagingServiceMethod() : this(
        string.Empty,
@@ -49,6 +52,9 @@ internal record InputPagingServiceMethod : InputServiceMethod
        false,
        false,
        false,
-       string.Empty)
+       string.Empty,
+       new InputPagingServiceMetadata())
     { }
+
+    public InputPagingServiceMetadata PagingMetadata { get; internal set; }
 }

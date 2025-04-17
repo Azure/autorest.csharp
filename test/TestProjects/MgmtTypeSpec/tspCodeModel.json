@@ -3065,19 +3065,6 @@
         "uri": "{endpoint}",
         "path": "/providers/MgmtTypeSpec/operations",
         "bufferResponse": true,
-        "paging": {
-         "$id": "399",
-         "itemPropertySegments": [
-          "value"
-         ],
-         "nextLink": {
-          "$id": "400",
-          "responseSegments": [
-           "nextLink"
-          ],
-          "responseLocation": "Body"
-         }
-        },
         "generateProtocolMethod": true,
         "generateConvenienceMethod": true,
         "crossLanguageDefinitionId": "Azure.ResourceManager.Operations.list",
@@ -3085,7 +3072,7 @@
        },
        "parameters": [
         {
-         "$id": "401",
+         "$id": "399",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
@@ -3103,9 +3090,9 @@
         }
        ],
        "response": {
-        "$id": "402",
+        "$id": "400",
         "type": {
-         "$id": "403",
+         "$id": "401",
          "kind": "array",
          "name": "ArrayOperation",
          "valueType": {
@@ -3121,7 +3108,20 @@
        "isOverride": false,
        "generateConvenient": true,
        "generateProtocol": true,
-       "crossLanguageDefinitionId": "Azure.ResourceManager.Operations.list"
+       "crossLanguageDefinitionId": "Azure.ResourceManager.Operations.list",
+       "pagingMetadata": {
+        "$id": "402",
+        "itemPropertySegments": [
+         "value"
+        ],
+        "nextLink": {
+         "$id": "403",
+         "responseSegments": [
+          "nextLink"
+         ],
+         "responseLocation": "Body"
+        }
+       }
       }
      ],
      "parameters": [
@@ -3318,19 +3318,6 @@
         "uri": "{endpoint}",
         "path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/privateLinkResources",
         "bufferResponse": true,
-        "paging": {
-         "$id": "424",
-         "itemPropertySegments": [
-          "value"
-         ],
-         "nextLink": {
-          "$id": "425",
-          "responseSegments": [
-           "nextLink"
-          ],
-          "responseLocation": "Body"
-         }
-        },
         "generateProtocolMethod": true,
         "generateConvenienceMethod": true,
         "crossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinks.listByMongoCluster",
@@ -3338,12 +3325,12 @@
        },
        "parameters": [
         {
-         "$id": "426",
+         "$id": "424",
          "name": "resourceGroupName",
          "nameInRequest": "resourceGroupName",
          "doc": "The name of the resource group. The name is case insensitive.",
          "type": {
-          "$id": "427",
+          "$id": "425",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3360,7 +3347,7 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "428",
+         "$id": "426",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
@@ -3378,9 +3365,9 @@
         }
        ],
        "response": {
-        "$id": "429",
+        "$id": "427",
         "type": {
-         "$id": "430",
+         "$id": "428",
          "kind": "array",
          "name": "ArrayPrivateLinkResource",
          "valueType": {
@@ -3396,7 +3383,20 @@
        "isOverride": false,
        "generateConvenient": true,
        "generateProtocol": true,
-       "crossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinks.listByMongoCluster"
+       "crossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinks.listByMongoCluster",
+       "pagingMetadata": {
+        "$id": "429",
+        "itemPropertySegments": [
+         "value"
+        ],
+        "nextLink": {
+         "$id": "430",
+         "responseSegments": [
+          "nextLink"
+         ],
+         "responseLocation": "Body"
+        }
+       }
       },
       {
        "$id": "431",
@@ -3651,19 +3651,6 @@
          "application/json"
         ],
         "bufferResponse": true,
-        "longRunning": {
-         "$id": "457",
-         "finalStateVia": 1,
-         "finalResponse": {
-          "$id": "458",
-          "statusCodes": [
-           200
-          ],
-          "bodyType": {
-           "$ref": "246"
-          }
-         }
-        },
         "generateProtocolMethod": true,
         "generateConvenienceMethod": true,
         "crossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinks.start",
@@ -3671,10 +3658,32 @@
        },
        "parameters": [
         {
-         "$id": "459",
+         "$id": "457",
          "name": "resourceGroupName",
          "nameInRequest": "resourceGroupName",
          "doc": "The name of the resource group. The name is case insensitive.",
+         "type": {
+          "$id": "458",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "location": "Path",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "459",
+         "name": "privateLinkResourceName",
+         "nameInRequest": "privateLinkResourceName",
+         "doc": "The name of the private link associated with the Azure resource.",
          "type": {
           "$id": "460",
           "kind": "string",
@@ -3694,28 +3703,6 @@
         },
         {
          "$id": "461",
-         "name": "privateLinkResourceName",
-         "nameInRequest": "privateLinkResourceName",
-         "doc": "The name of the private link associated with the Azure resource.",
-         "type": {
-          "$id": "462",
-          "kind": "string",
-          "name": "string",
-          "crossLanguageDefinitionId": "TypeSpec.string",
-          "decorators": []
-         },
-         "location": "Path",
-         "isApiVersion": false,
-         "isContentType": false,
-         "isEndpoint": false,
-         "explode": false,
-         "isRequired": true,
-         "kind": "Method",
-         "decorators": [],
-         "skipUrlEncoding": false
-        },
-        {
-         "$id": "463",
          "name": "body",
          "nameInRequest": "body",
          "doc": "The content of the action request",
@@ -3733,15 +3720,15 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "464",
+         "$id": "462",
          "name": "contentType",
          "nameInRequest": "contentType",
          "doc": "Body parameter's content type. Known values are application/json",
          "type": {
-          "$id": "465",
+          "$id": "463",
           "kind": "constant",
           "valueType": {
-           "$id": "466",
+           "$id": "464",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3761,14 +3748,14 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "467",
+         "$id": "465",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$id": "468",
+          "$id": "466",
           "kind": "constant",
           "valueType": {
-           "$id": "469",
+           "$id": "467",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3789,7 +3776,7 @@
         }
        ],
        "response": {
-        "$id": "470",
+        "$id": "468",
         "type": {
          "$ref": "246"
         }
@@ -3797,7 +3784,20 @@
        "isOverride": false,
        "generateConvenient": true,
        "generateProtocol": true,
-       "crossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinks.start"
+       "crossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinks.start",
+       "lroMetadata": {
+        "$id": "469",
+        "finalStateVia": 1,
+        "finalResponse": {
+         "$id": "470",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "246"
+         }
+        }
+       }
       }
      ],
      "parameters": [
@@ -4114,38 +4114,25 @@
          "application/json"
         ],
         "bufferResponse": true,
-        "longRunning": {
-         "$id": "504",
-         "finalStateVia": 0,
-         "finalResponse": {
-          "$id": "505",
-          "statusCodes": [
-           200
-          ],
-          "bodyType": {
-           "$ref": "312"
-          }
-         }
-        },
         "generateProtocolMethod": true,
         "generateConvenienceMethod": true,
         "crossLanguageDefinitionId": "MgmtTypeSpec.Foos.createOrUpdate",
         "decorators": [],
         "examples": [
          {
-          "$id": "506",
+          "$id": "504",
           "kind": "http",
           "name": "Create a foo",
           "description": "Create a foo",
           "filePath": "2024-05-01/Foos_CreateOrUpdate.json",
           "parameters": [
            {
-            "$id": "507",
+            "$id": "505",
             "parameter": {
              "$ref": "484"
             },
             "value": {
-             "$id": "508",
+             "$id": "506",
              "kind": "string",
              "type": {
               "$ref": "485"
@@ -4154,12 +4141,12 @@
             }
            },
            {
-            "$id": "509",
+            "$id": "507",
             "parameter": {
              "$ref": "487"
             },
             "value": {
-             "$id": "510",
+             "$id": "508",
              "kind": "string",
              "type": {
               "$ref": "488"
@@ -4168,12 +4155,12 @@
             }
            },
            {
-            "$id": "511",
+            "$id": "509",
             "parameter": {
              "$ref": "489"
             },
             "value": {
-             "$id": "512",
+             "$id": "510",
              "kind": "string",
              "type": {
               "$ref": "490"
@@ -4182,28 +4169,28 @@
             }
            },
            {
-            "$id": "513",
+            "$id": "511",
             "parameter": {
              "$ref": "497"
             },
             "value": {
-             "$id": "514",
+             "$id": "512",
              "kind": "model",
              "type": {
               "$ref": "312"
              },
              "value": {
-              "$id": "515",
+              "$id": "513",
               "properties": {
-               "$id": "516",
+               "$id": "514",
                "kind": "model",
                "type": {
                 "$ref": "325"
                },
                "value": {
-                "$id": "517",
+                "$id": "515",
                 "serviceUrl": {
-                 "$id": "518",
+                 "$id": "516",
                  "kind": "string",
                  "type": {
                   "$ref": "329"
@@ -4211,7 +4198,7 @@
                  "value": "https://myService.com"
                 },
                 "something": {
-                 "$id": "519",
+                 "$id": "517",
                  "kind": "string",
                  "type": {
                   "$ref": "335"
@@ -4219,7 +4206,7 @@
                  "value": "for test only"
                 },
                 "boolValue": {
-                 "$id": "520",
+                 "$id": "518",
                  "kind": "boolean",
                  "type": {
                   "$ref": "339"
@@ -4227,7 +4214,7 @@
                  "value": true
                 },
                 "floatValue": {
-                 "$id": "521",
+                 "$id": "519",
                  "kind": "number",
                  "type": {
                   "$ref": "343"
@@ -4235,7 +4222,7 @@
                  "value": 1.2
                 },
                 "doubleValue": {
-                 "$id": "522",
+                 "$id": "520",
                  "kind": "number",
                  "type": {
                   "$ref": "347"
@@ -4250,21 +4237,21 @@
           ],
           "responses": [
            {
-            "$id": "523",
+            "$id": "521",
             "response": {
              "$ref": "498"
             },
             "statusCode": 200,
             "bodyValue": {
-             "$id": "524",
+             "$id": "522",
              "kind": "model",
              "type": {
               "$ref": "312"
              },
              "value": {
-              "$id": "525",
+              "$id": "523",
               "id": {
-               "$id": "526",
+               "$id": "524",
                "kind": "string",
                "type": {
                 "$ref": "138"
@@ -4272,7 +4259,7 @@
                "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/MgmtTypeSpec/foos/myFoo"
               },
               "name": {
-               "$id": "527",
+               "$id": "525",
                "kind": "string",
                "type": {
                 "$ref": "143"
@@ -4280,7 +4267,7 @@
                "value": "myFoo"
               },
               "type": {
-               "$id": "528",
+               "$id": "526",
                "kind": "string",
                "type": {
                 "$ref": "147"
@@ -4288,15 +4275,15 @@
                "value": "MgmtTypeSpec/foos"
               },
               "properties": {
-               "$id": "529",
+               "$id": "527",
                "kind": "model",
                "type": {
                 "$ref": "325"
                },
                "value": {
-                "$id": "530",
+                "$id": "528",
                 "serviceUrl": {
-                 "$id": "531",
+                 "$id": "529",
                  "kind": "string",
                  "type": {
                   "$ref": "329"
@@ -4304,7 +4291,7 @@
                  "value": "https://myService.com"
                 },
                 "something": {
-                 "$id": "532",
+                 "$id": "530",
                  "kind": "string",
                  "type": {
                   "$ref": "335"
@@ -4312,7 +4299,7 @@
                  "value": "for test only"
                 },
                 "boolValue": {
-                 "$id": "533",
+                 "$id": "531",
                  "kind": "boolean",
                  "type": {
                   "$ref": "339"
@@ -4320,7 +4307,7 @@
                  "value": true
                 },
                 "floatValue": {
-                 "$id": "534",
+                 "$id": "532",
                  "kind": "number",
                  "type": {
                   "$ref": "343"
@@ -4328,7 +4315,7 @@
                  "value": 1.2
                 },
                 "doubleValue": {
-                 "$id": "535",
+                 "$id": "533",
                  "kind": "number",
                  "type": {
                   "$ref": "347"
@@ -4346,10 +4333,32 @@
        },
        "parameters": [
         {
-         "$id": "536",
+         "$id": "534",
          "name": "resourceGroupName",
          "nameInRequest": "resourceGroupName",
          "doc": "The name of the resource group. The name is case insensitive.",
+         "type": {
+          "$id": "535",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "location": "Path",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "536",
+         "name": "fooName",
+         "nameInRequest": "fooName",
+         "doc": "The name of the Foo",
          "type": {
           "$id": "537",
           "kind": "string",
@@ -4369,28 +4378,6 @@
         },
         {
          "$id": "538",
-         "name": "fooName",
-         "nameInRequest": "fooName",
-         "doc": "The name of the Foo",
-         "type": {
-          "$id": "539",
-          "kind": "string",
-          "name": "string",
-          "crossLanguageDefinitionId": "TypeSpec.string",
-          "decorators": []
-         },
-         "location": "Path",
-         "isApiVersion": false,
-         "isContentType": false,
-         "isEndpoint": false,
-         "explode": false,
-         "isRequired": true,
-         "kind": "Method",
-         "decorators": [],
-         "skipUrlEncoding": false
-        },
-        {
-         "$id": "540",
          "name": "resource",
          "nameInRequest": "resource",
          "doc": "Resource create parameters.",
@@ -4408,15 +4395,15 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "541",
+         "$id": "539",
          "name": "contentType",
          "nameInRequest": "contentType",
          "doc": "Body parameter's content type. Known values are application/json",
          "type": {
-          "$id": "542",
+          "$id": "540",
           "kind": "constant",
           "valueType": {
-           "$id": "543",
+           "$id": "541",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4436,14 +4423,14 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "544",
+         "$id": "542",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$id": "545",
+          "$id": "543",
           "kind": "constant",
           "valueType": {
-           "$id": "546",
+           "$id": "544",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4464,7 +4451,7 @@
         }
        ],
        "response": {
-        "$id": "547",
+        "$id": "545",
         "type": {
          "$ref": "312"
         }
@@ -4472,7 +4459,20 @@
        "isOverride": false,
        "generateConvenient": true,
        "generateProtocol": true,
-       "crossLanguageDefinitionId": "MgmtTypeSpec.Foos.createOrUpdate"
+       "crossLanguageDefinitionId": "MgmtTypeSpec.Foos.createOrUpdate",
+       "lroMetadata": {
+        "$id": "546",
+        "finalStateVia": 0,
+        "finalResponse": {
+         "$id": "547",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "312"
+         }
+        }
+       }
       },
       {
        "$id": "548",
@@ -5042,16 +5042,6 @@
         "uri": "{endpoint}",
         "path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/foos/{fooName}",
         "bufferResponse": true,
-        "longRunning": {
-         "$id": "610",
-         "finalStateVia": 1,
-         "finalResponse": {
-          "$id": "611",
-          "statusCodes": [
-           204
-          ]
-         }
-        },
         "generateProtocolMethod": true,
         "generateConvenienceMethod": true,
         "crossLanguageDefinitionId": "MgmtTypeSpec.Foos.delete",
@@ -5059,10 +5049,32 @@
        },
        "parameters": [
         {
-         "$id": "612",
+         "$id": "610",
          "name": "resourceGroupName",
          "nameInRequest": "resourceGroupName",
          "doc": "The name of the resource group. The name is case insensitive.",
+         "type": {
+          "$id": "611",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "location": "Path",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "612",
+         "name": "fooName",
+         "nameInRequest": "fooName",
+         "doc": "The name of the Foo",
          "type": {
           "$id": "613",
           "kind": "string",
@@ -5082,35 +5094,13 @@
         },
         {
          "$id": "614",
-         "name": "fooName",
-         "nameInRequest": "fooName",
-         "doc": "The name of the Foo",
-         "type": {
-          "$id": "615",
-          "kind": "string",
-          "name": "string",
-          "crossLanguageDefinitionId": "TypeSpec.string",
-          "decorators": []
-         },
-         "location": "Path",
-         "isApiVersion": false,
-         "isContentType": false,
-         "isEndpoint": false,
-         "explode": false,
-         "isRequired": true,
-         "kind": "Method",
-         "decorators": [],
-         "skipUrlEncoding": false
-        },
-        {
-         "$id": "616",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$id": "617",
+          "$id": "615",
           "kind": "constant",
           "valueType": {
-           "$id": "618",
+           "$id": "616",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5131,12 +5121,22 @@
         }
        ],
        "response": {
-        "$id": "619"
+        "$id": "617"
        },
        "isOverride": false,
        "generateConvenient": true,
        "generateProtocol": true,
-       "crossLanguageDefinitionId": "MgmtTypeSpec.Foos.delete"
+       "crossLanguageDefinitionId": "MgmtTypeSpec.Foos.delete",
+       "lroMetadata": {
+        "$id": "618",
+        "finalStateVia": 1,
+        "finalResponse": {
+         "$id": "619",
+         "statusCodes": [
+          204
+         ]
+        }
+       }
       },
       {
        "$id": "620",
@@ -5285,19 +5285,6 @@
         "uri": "{endpoint}",
         "path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/foos",
         "bufferResponse": true,
-        "paging": {
-         "$id": "635",
-         "itemPropertySegments": [
-          "value"
-         ],
-         "nextLink": {
-          "$id": "636",
-          "responseSegments": [
-           "nextLink"
-          ],
-          "responseLocation": "Body"
-         }
-        },
         "generateProtocolMethod": true,
         "generateConvenienceMethod": true,
         "crossLanguageDefinitionId": "MgmtTypeSpec.Foos.list",
@@ -5305,12 +5292,12 @@
        },
        "parameters": [
         {
-         "$id": "637",
+         "$id": "635",
          "name": "resourceGroupName",
          "nameInRequest": "resourceGroupName",
          "doc": "The name of the resource group. The name is case insensitive.",
          "type": {
-          "$id": "638",
+          "$id": "636",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5327,7 +5314,7 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "639",
+         "$id": "637",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
@@ -5345,9 +5332,9 @@
         }
        ],
        "response": {
-        "$id": "640",
+        "$id": "638",
         "type": {
-         "$id": "641",
+         "$id": "639",
          "kind": "array",
          "name": "ArrayFoo",
          "valueType": {
@@ -5363,7 +5350,20 @@
        "isOverride": false,
        "generateConvenient": true,
        "generateProtocol": true,
-       "crossLanguageDefinitionId": "MgmtTypeSpec.Foos.list"
+       "crossLanguageDefinitionId": "MgmtTypeSpec.Foos.list",
+       "pagingMetadata": {
+        "$id": "640",
+        "itemPropertySegments": [
+         "value"
+        ],
+        "nextLink": {
+         "$id": "641",
+         "responseSegments": [
+          "nextLink"
+         ],
+         "responseLocation": "Body"
+        }
+       }
       }
      ],
      "parameters": [

@@ -5356,19 +5356,6 @@
        "application/json"
       ],
       "bufferResponse": true,
-      "paging": {
-       "$id": "596",
-       "itemPropertySegments": [
-        "value"
-       ],
-       "nextLink": {
-        "$id": "597",
-        "responseSegments": [
-         "nextLink"
-        ],
-        "responseLocation": "Body"
-       }
-      },
       "generateProtocolMethod": true,
       "generateConvenienceMethod": true,
       "crossLanguageDefinitionId": "FirstTestTypeSpec.listWithOptionalBody",
@@ -5376,7 +5363,7 @@
      },
      "parameters": [
       {
-       "$id": "598",
+       "$id": "596",
        "name": "body",
        "nameInRequest": "body",
        "doc": "Metric dimension filter ",
@@ -5394,7 +5381,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "599",
+       "$id": "597",
        "name": "contentType",
        "nameInRequest": "contentType",
        "doc": "Body parameter's content type. Known values are application/json",
@@ -5412,7 +5399,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "600",
+       "$id": "598",
        "name": "accept",
        "nameInRequest": "accept",
        "type": {
@@ -5430,9 +5417,9 @@
       }
      ],
      "response": {
-      "$id": "601",
+      "$id": "599",
       "type": {
-       "$id": "602",
+       "$id": "600",
        "kind": "array",
        "name": "ArrayThing",
        "valueType": {
@@ -5448,7 +5435,20 @@
      "isOverride": false,
      "generateConvenient": true,
      "generateProtocol": true,
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.listWithOptionalBody"
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.listWithOptionalBody",
+     "pagingMetadata": {
+      "$id": "601",
+      "itemPropertySegments": [
+       "value"
+      ],
+      "nextLink": {
+       "$id": "602",
+       "responseSegments": [
+        "nextLink"
+       ],
+       "responseLocation": "Body"
+      }
+     }
     },
     {
      "$id": "603",
@@ -9784,20 +9784,6 @@
         "uri": "{firstTestTypeSpecUrl}",
         "path": "/lro/resources/{name}:export",
         "bufferResponse": true,
-        "longRunning": {
-         "$id": "978",
-         "finalStateVia": 3,
-         "finalResponse": {
-          "$id": "979",
-          "statusCodes": [
-           200
-          ],
-          "bodyType": {
-           "$ref": "401"
-          }
-         },
-         "resultPath": "result"
-        },
         "generateProtocolMethod": true,
         "generateConvenienceMethod": false,
         "crossLanguageDefinitionId": "FirstTestTypeSpec.VersioningOp.export",
@@ -9805,11 +9791,11 @@
        },
        "parameters": [
         {
-         "$id": "980",
+         "$id": "978",
          "name": "name",
          "nameInRequest": "name",
          "type": {
-          "$id": "981",
+          "$id": "979",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9826,11 +9812,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "982",
+         "$id": "980",
          "name": "projectFileVersion",
          "nameInRequest": "projectFileVersion",
          "type": {
-          "$id": "983",
+          "$id": "981",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9847,14 +9833,14 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "984",
+         "$id": "982",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$id": "985",
+          "$id": "983",
           "kind": "constant",
           "valueType": {
-           "$id": "986",
+           "$id": "984",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9875,7 +9861,7 @@
         }
        ],
        "response": {
-        "$id": "987",
+        "$id": "985",
         "type": {
          "$ref": "438"
         },
@@ -9886,7 +9872,21 @@
        "isOverride": false,
        "generateConvenient": false,
        "generateProtocol": true,
-       "crossLanguageDefinitionId": "FirstTestTypeSpec.VersioningOp.export"
+       "crossLanguageDefinitionId": "FirstTestTypeSpec.VersioningOp.export",
+       "lroMetadata": {
+        "$id": "986",
+        "finalStateVia": 3,
+        "finalResponse": {
+         "$id": "987",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "401"
+         }
+        },
+        "resultPath": "result"
+       }
       },
       {
        "$id": "988",
@@ -10047,20 +10047,6 @@
         "uri": "{firstTestTypeSpecUrl}",
         "path": "/lro/resources/{name}:exportW",
         "bufferResponse": true,
-        "longRunning": {
-         "$id": "1005",
-         "finalStateVia": 3,
-         "finalResponse": {
-          "$id": "1006",
-          "statusCodes": [
-           200
-          ],
-          "bodyType": {
-           "$ref": "401"
-          }
-         },
-         "resultPath": "result"
-        },
         "generateProtocolMethod": true,
         "generateConvenienceMethod": false,
         "crossLanguageDefinitionId": "FirstTestTypeSpec.VersioningOp.exportW",
@@ -10068,11 +10054,11 @@
        },
        "parameters": [
         {
-         "$id": "1007",
+         "$id": "1005",
          "name": "name",
          "nameInRequest": "name",
          "type": {
-          "$id": "1008",
+          "$id": "1006",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10089,11 +10075,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "1009",
+         "$id": "1007",
          "name": "projectFileVersion",
          "nameInRequest": "projectFileVersion",
          "type": {
-          "$id": "1010",
+          "$id": "1008",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10110,14 +10096,14 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "1011",
+         "$id": "1009",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$id": "1012",
+          "$id": "1010",
           "kind": "constant",
           "valueType": {
-           "$id": "1013",
+           "$id": "1011",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10138,7 +10124,7 @@
         }
        ],
        "response": {
-        "$id": "1014",
+        "$id": "1012",
         "type": {
          "$ref": "438"
         },
@@ -10149,7 +10135,21 @@
        "isOverride": false,
        "generateConvenient": false,
        "generateProtocol": true,
-       "crossLanguageDefinitionId": "FirstTestTypeSpec.VersioningOp.exportW"
+       "crossLanguageDefinitionId": "FirstTestTypeSpec.VersioningOp.exportW",
+       "lroMetadata": {
+        "$id": "1013",
+        "finalStateVia": 3,
+        "finalResponse": {
+         "$id": "1014",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "401"
+         }
+        },
+        "resultPath": "result"
+       }
       }
      ],
      "parameters": [
