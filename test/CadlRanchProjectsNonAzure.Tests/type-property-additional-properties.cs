@@ -2,6 +2,7 @@
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
@@ -297,7 +298,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var response = await new AdditionalPropertiesClient(host, null).GetExtendsUnknownDiscriminatedClient().GetExtendsUnknownDiscriminatedAsync();
             var value = response.Value;
             Assert.AreEqual("Derived", value.Name);
-            Assert.AreEqual("derived", value.Kind);
+            Assert.AreEqual("derived", TestServerTestBase.GetProperty(value, "Kind"));
             var derived = value as ExtendsUnknownAdditionalPropertiesDiscriminatedDerived;
             Assert.IsNotNull(derived);
             Assert.AreEqual(314, derived.Index);
@@ -396,7 +397,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var response = await new AdditionalPropertiesClient(host, null).GetIsUnknownDiscriminatedClient().GetIsUnknownDiscriminatedAsync();
             var value = response.Value;
             Assert.AreEqual("Derived", value.Name);
-            Assert.AreEqual("derived", value.Kind);
+            Assert.AreEqual("derived", TestServerTestBase.GetProperty(value, "Kind"));
             var derived = value as IsUnknownAdditionalPropertiesDiscriminatedDerived;
             Assert.IsNotNull(derived);
             Assert.AreEqual(314, derived.Index);

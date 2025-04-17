@@ -201,13 +201,13 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
             new("Azure.Core"),
-            new("System.Text.Json")
+            new("System.Text.Json"),
         };
 
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
-            new("System.ClientModel", "1.1.0-beta.3"),
-            new("System.Text.Json", "4.7.2")
+            new("System.ClientModel", "1.4.0-beta.3"),
+            new("System.Text.Json", "6.0.11")
         };
 
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedTestDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]

@@ -20,7 +20,11 @@ namespace AutoRest.TestServer.Tests
             var expected = GetVersionsOverride();
             var actual = Enum.GetValues(typeof(ServiceVersion))
                 .Cast<ServiceVersion>()
-                .Select(i => new ServiceVersionOverrideClientOptions(i).Version)
+                .Select(i =>
+                {
+                    var options = new ServiceVersionOverrideClientOptions(i);
+                    return options.GetType().GetProperty("Version", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(options);
+                })
                 .ToList();
 
             CollectionAssert.AreEqual(expected, actual);
@@ -30,7 +34,8 @@ namespace AutoRest.TestServer.Tests
         public void OverrideServiceVersions_LastVersionIsTheLatest()
         {
             var expected = GetVersionsOverride().Last();
-            var actual = new ServiceVersionOverrideClientOptions().Version;
+            var options = new ServiceVersionOverrideClientOptions();
+            var actual = options.GetType().GetProperty("Version", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(options);
 
             Assert.AreEqual(expected, actual);
         }
@@ -42,7 +47,7 @@ namespace AutoRest.TestServer.Tests
 
         private static IEnumerable<CustomAttributeTypedArgument> GetOverrideServiceVersionsConstructorArgument()
             => (IEnumerable<CustomAttributeTypedArgument>)typeof(ServiceVersionOverrideClientOptions).Assembly.CustomAttributes
-                .Single(cad => cad.AttributeType == typeof(CodeGenOverrideServiceVersionsAttribute))
+                .Single(cad => cad.AttributeType.Name == nameof(CodeGenOverrideServiceVersionsAttribute))
                 .ConstructorArguments[0].Value!;
     }
 }

@@ -21,7 +21,7 @@ namespace AutoRest.TestServer.Tests
                 await content.Response.Body.WriteAsync(Encoding.UTF8.GetBytes("[3, 2, 1]"));
             });
 
-            var responseModel = await new JsonAsBinaryClient(ClientDiagnostics, HttpPipeline, testServer.Address).OperationAsync(new MemoryStream(Encoding.UTF8.GetBytes("[1, 2, 3]")));
+            var responseModel = await GetClient<JsonAsBinaryClient>(HttpPipeline, testServer.Address).OperationAsync(new MemoryStream(Encoding.UTF8.GetBytes("[1, 2, 3]")));
 
             var responseMemoryStream = new MemoryStream();
             await responseModel.Value.CopyToAsync(responseMemoryStream);

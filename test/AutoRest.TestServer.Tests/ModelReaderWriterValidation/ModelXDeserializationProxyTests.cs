@@ -6,6 +6,7 @@ using System.ClientModel.Primitives;
 using System.Text;
 using ModelReaderWriterValidationTypeSpec.Models;
 using NUnit.Framework;
+using static AutoRest.TestServer.Tests.Infrastructure.TestServerTestBase;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -20,7 +21,7 @@ namespace AutoRest.TestServer.Tests
             object? modelX = ModelReaderWriter.Read(data, typeof(ModelXDeserializationProxy), options);
             Assert.IsNotNull(modelX);
             Assert.IsInstanceOf<ModelX>(modelX);
-            Assert.AreEqual("X", ((ModelX)modelX!).Kind);
+            Assert.AreEqual("X", GetProperty(modelX, "Kind"));
             Assert.AreEqual("xmodel", ((ModelX)modelX).Name);
             Assert.AreEqual(100, ((ModelX)modelX).XProperty);
             if (format == "J")

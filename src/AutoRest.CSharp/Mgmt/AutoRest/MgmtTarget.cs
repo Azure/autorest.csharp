@@ -7,6 +7,7 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Writers;
@@ -235,7 +236,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             //if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
             //    throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
-            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
+            var contextWriter = new CodeWriter();
+            var contextWriterInstance = new ModelReaderWriterContextWriter();
+            contextWriterInstance.Write(contextWriter);
+            project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
+
+            List<string> modelsToKeepList = [.. Configuration.MgmtConfiguration.KeepOrphanedModels, ModelReaderWriterContextWriter.Name];
+            var modelsToKeep = modelsToKeepList.ToImmutableHashSet();
             await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
 
             // write samples if enabled

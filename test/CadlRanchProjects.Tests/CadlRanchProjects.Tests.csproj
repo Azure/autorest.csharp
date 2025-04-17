@@ -1,10 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>$(CurrentDotnetFramework)</TargetFramework>
     <IsPackable>false</IsPackable>
     <Nullable>annotations</Nullable>
-    <NoWarn>SA1649;SA1633;CS0618</NoWarn>
+    <NoWarn>$(NoWarn);SA1649;SA1633;CS0618;SCM0005;SCM0001</NoWarn>
+    <IncludeAzureCadlRanchProjects>true</IncludeAzureCadlRanchProjects>
+    <!--<IncludeAzureTestProjectsTypeSpec>true</IncludeAzureTestProjectsTypeSpec>-->
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,13 +35,12 @@
 
   <ItemGroup>
     <Compile Include="$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs" LinkBase="Shared/Core" />
-    <Compile Include="../../src/assets/Management.Shared/SharedExtensions.cs"/>
-    <Compile Include="../../src/assets/Management.Shared/ManagedServiceIdentityTypeV3Converter.cs"/>
-    <Compile Include="../CadlRanchProjects/**/*.cs" LinkBase="CadlRanchProjects" />
-    <Compile Include="../TestProjects/*-TypeSpec/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-TypeSpec/**/*.cs" LinkBase="TestProjects" />
-    <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" />
-    <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" />
-    <Compile Include="../../src/assets/Azure.Core.Shared/AzureResourceProviderNamespaceAttribute.cs"/>
+    <Compile Include="../../src/assets/Management.Shared/SharedExtensions.cs" LinkBase="Shared/Mgmt"/>
+    <Compile Include="../../src/assets/Management.Shared/ManagedServiceIdentityTypeV3Converter.cs" LinkBase="Shared/Mgmt"/>
+    <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" LinkBase="Shared/Infrastructure" />
+    <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" LinkBase="Shared/Infrastructure" />
+    <Compile Include="../../src/assets/Azure.Core.Shared/AzureResourceProviderNamespaceAttribute.cs" LinkBase="Shared/Core" />
+    <Compile Include="..\CadlRanchProjects\authentication\api-key\src\Generated\Internal\*.cs" LinkBase="Shared/Internal" />
   </ItemGroup>
 
 </Project>

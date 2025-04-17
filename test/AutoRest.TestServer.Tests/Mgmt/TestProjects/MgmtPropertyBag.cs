@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -19,6 +20,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     public class MgmtPropertyBagTests : TestProjectTests
     {
         public MgmtPropertyBagTests() : base("MgmtPropertyBag") { }
+
+        private protected override Assembly GetAssembly() => typeof(MgmtPropertyBagExtensions).Assembly;
 
         [TestCase("MgmtPropertyBagExtensions", "GetFoos", true, typeof(SubscriptionResource), typeof(string), typeof(int?))]
         [TestCase("MgmtPropertyBagExtensions", "GetBars", true, typeof(SubscriptionResource), typeof(ETag?), typeof(int?))]
@@ -50,9 +53,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Transport = new FailureInjectingTransport(new HttpClientTransport(new MockHandler()))
             });
 
-            var restOperation = new BarsRestOperations(pipeline, null);
+            var restOperation = GetModel(GetType("BarsRestOperations"), pipeline, null);
 
-            var rawMessage = restOperation.CreateGetRequest(barId.SubscriptionId, barId.ResourceGroupName, barName, ifMatch, filter, top, skip, items);
+            var rawMessage = InvokeInternalMethod(restOperation, "CreateGetRequest", barId.SubscriptionId, barId.ResourceGroupName, barName, ifMatch, filter, top, skip, items);
 
             var options = new BarCollectionGetOptions(barId.Name)
             {
@@ -67,9 +70,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 foreach (var item in items)
                     options.Items.Add(item);
             }
-            var messageWithOptions = restOperation.CreateGetRequest(barId.SubscriptionId, barId.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, options.Skip, options.Items);
+            var messageWithOptions = InvokeInternalMethod(restOperation, "CreateGetRequest", barId.SubscriptionId, barId.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, options.Skip, options.Items);
 
-            Assert.AreEqual(rawMessage.Request.Uri.PathAndQuery, messageWithOptions.Request.Uri.PathAndQuery);
+            Assert.AreEqual(
+                GetProperty(GetProperty(GetProperty(rawMessage, "Request"), "Uri"), "PathAndQuery"),
+                GetProperty(GetProperty(GetProperty(messageWithOptions, "Request"), "Uri"), "PathAndQuery")
+            );
         }
 
         private static readonly object[] PropertyBagTestData =

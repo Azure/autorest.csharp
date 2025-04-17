@@ -16,7 +16,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetModelFlattenArray() => Test(async (host, pipeline) =>
         {
-            var result = await new AutoRestResourceFlatteningTestServiceClient(ClientDiagnostics, pipeline, host).GetArrayAsync();
+            var result = await GetClient<AutoRestResourceFlatteningTestServiceClient>(pipeline, host).GetArrayAsync();
             var product1 = result.Value.ElementAt(0);
             Assert.AreEqual("1", product1.Id);
             Assert.AreEqual("Building 44", product1.Location);
@@ -40,7 +40,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetModelFlattenDictionary() => Test(async (host, pipeline) =>
         {
-            var result = await new AutoRestResourceFlatteningTestServiceClient(ClientDiagnostics, pipeline, host).GetDictionaryAsync();
+            var result = await GetClient<AutoRestResourceFlatteningTestServiceClient>(pipeline, host).GetDictionaryAsync();
             var product1 = result.Value["Product1"];
             Assert.AreEqual("1", product1.Id);
             Assert.AreEqual("Building 44", product1.Location);
@@ -64,7 +64,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetModelFlattenResourceCollection() => Test(async (host, pipeline) =>
         {
-            var result = await new AutoRestResourceFlatteningTestServiceClient(ClientDiagnostics, pipeline, host).GetResourceCollectionAsync();
+            var result = await GetClient<AutoRestResourceFlatteningTestServiceClient>(pipeline, host).GetResourceCollectionAsync();
             var product1 = result.Value.Dictionaryofresources["Product1"];
             Assert.AreEqual("1", product1.Id);
             Assert.AreEqual("Building 44", product1.Location);
@@ -112,7 +112,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PostModelFlattenCustomParameter() => Test(async (host, pipeline) =>
         {
-            var result = await new AutoRestResourceFlatteningTestServiceClient(ClientDiagnostics, pipeline, host).PostFlattenedSimpleProductAsync(
+            var result = await GetClient<AutoRestResourceFlatteningTestServiceClient>(pipeline, host).PostFlattenedSimpleProductAsync(
                 productId: "123",
                 description: "product description",
                 maxProductDisplayName: "max name",
@@ -145,7 +145,7 @@ namespace AutoRest.TestServer.Tests
                     Location = "Building 44"
                 }
             };
-            return await new AutoRestResourceFlatteningTestServiceClient(ClientDiagnostics, pipeline, host).PutArrayAsync(value);
+            return await GetClient<AutoRestResourceFlatteningTestServiceClient>(pipeline, host).PutArrayAsync(value);
         });
 
         [Test]
@@ -159,7 +159,7 @@ namespace AutoRest.TestServer.Tests
                 OdataValue = "http://foo",
                 GenericValue = "https://generic"
             };
-            var result = await new AutoRestResourceFlatteningTestServiceClient(ClientDiagnostics, pipeline, host).PutSimpleProductAsync(value);
+            var result = await GetClient<AutoRestResourceFlatteningTestServiceClient>(pipeline, host).PutSimpleProductAsync(value);
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);
             Assert.AreEqual("max name", result.Value.MaxProductDisplayName);
@@ -171,7 +171,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutModelFlattenCustomGroupedParameter() => Test(async (host, pipeline) =>
         {
-            var result = await new AutoRestResourceFlatteningTestServiceClient(ClientDiagnostics, pipeline, host).PutSimpleProductWithGroupingAsync(
+            var result = await GetClient<AutoRestResourceFlatteningTestServiceClient>(pipeline, host).PutSimpleProductWithGroupingAsync(
                 new FlattenParameterGroup("groupproduct", productId: "123")
                 {
                     Description = "product description",
@@ -211,7 +211,7 @@ namespace AutoRest.TestServer.Tests
                     }
                 }
             };
-            return await new AutoRestResourceFlatteningTestServiceClient(ClientDiagnostics, pipeline, host).PutDictionaryAsync(value);
+            return await GetClient<AutoRestResourceFlatteningTestServiceClient>(pipeline, host).PutDictionaryAsync(value);
         });
 
         [Test]
@@ -268,7 +268,7 @@ namespace AutoRest.TestServer.Tests
                     TypePropertiesType = "Flat"
                 }
             };
-            return await new AutoRestResourceFlatteningTestServiceClient(ClientDiagnostics, pipeline, host).PutResourceCollectionAsync(value);
+            return await GetClient<AutoRestResourceFlatteningTestServiceClient>(pipeline, host).PutResourceCollectionAsync(value);
         });
     }
 }

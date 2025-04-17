@@ -2,9 +2,11 @@
 // Licensed under the MIT License.
 
 using System.IO;
+using System.Reflection;
 using System.Text;
 using ModelReaderWriterValidationTypeSpec.Models;
 using NUnit.Framework;
+using static AutoRest.TestServer.Tests.Infrastructure.TestServerTestBase;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -17,7 +19,7 @@ namespace AutoRest.TestServer.Tests
         protected override void CompareModels(ModelX model, ModelX model2, string format)
         {
             Assert.AreEqual(model.Name, model2.Name);
-            Assert.AreEqual(model.Kind, model2.Kind);
+            Assert.AreEqual(GetProperty(model, "Kind"), GetProperty(model2, "Kind"));
 
             Assert.AreEqual(model.Fields, model2.Fields);
             Assert.AreEqual(model.KeyValuePairs, model2.KeyValuePairs);
@@ -55,7 +57,7 @@ namespace AutoRest.TestServer.Tests
 
         protected override void VerifyModel(ModelX model, string format)
         {
-            Assert.AreEqual("X", model.Kind);
+            Assert.AreEqual("X", GetProperty(model, "Kind"));
             Assert.AreEqual("xmodel", model.Name);
 
             Assert.AreEqual(1, model.Fields.Count);

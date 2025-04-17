@@ -4,7 +4,10 @@
     <TargetFramework>$(CurrentDotnetFramework)</TargetFramework>
     <IsPackable>false</IsPackable>
     <Nullable>annotations</Nullable>
-    <NoWarn>$(NoWarn);SA1649;SA1633;CS0618</NoWarn>
+    <NoWarn>$(NoWarn);SA1649;SA1633;CS0618;SCM0005;SCM0001</NoWarn>
+    <IncludeAzureTestServerProjects>true</IncludeAzureTestServerProjects>
+    <IncludeAzureTestProjectsTypeSpec>true</IncludeAzureTestProjectsTypeSpec>
+    <IncludeAzureTestProjects>true</IncludeAzureTestProjects>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,15 +34,6 @@
 
   <ItemGroup>
     <None Include="../swaggers/*.json" LinkBase="swaggers" />
-    <Compile Include="../TestServerProjects/**/*.cs" LinkBase="TestServerProjects" />
-    <Compile Include="../TestProjects/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-TypeSpec/**/*.cs;../TestProjects/sdk/core/**" LinkBase="TestProjects" />
-    <None Include="../TestServerProjects/**/*.yaml" LinkBase="TestServerProjects" />
-    <Compile Update="..\TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs">
-      <Link>TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs</Link>
-    </Compile>
-    <Compile Update="..\TestProjects\TypeSchemaMapping\Customized\ModelWithUriProperty.cs">
-      <Link>TestProjects\TypeSchemaMapping\Customized\ModelWithUriProperty.cs</Link>
-    </Compile>
   </ItemGroup>
   
   <ItemGroup>

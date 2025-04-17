@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.ClientModel.Primitives;
 using System.Threading.Tasks;
 using _Type.Model.Inheritance.SingleDiscriminator;
 using _Type.Model.Inheritance.SingleDiscriminator.Models;
@@ -94,12 +95,14 @@ namespace CadlRanchProjects.Tests
             var input = new Eagle(32);
             input.Partner = new Eagle(32);
 
-            JsonAsserts.AssertWireSerialization("{\"kind\":\"eagle\",\"wingspan\":32,\"partner\":{\"kind\":\"eagle\",\"wingspan\":32}}", input);
+            var json = "{\"kind\":\"eagle\",\"wingspan\":32,\"partner\":{\"kind\":\"eagle\",\"wingspan\":32}}";
+            var data = ModelReaderWriter.Write(input);
+            Assert.AreEqual(json, data.ToString());
 
-            var output = Eagle.DeserializeEagle(JsonAsserts.AssertWireSerializes(input));
+            var output = ModelReaderWriter.Read<Eagle>(data);
 
-            Assert.AreEqual(input.Kind, output.Kind);
-            Assert.AreEqual(input.Partner.Kind, output.Partner.Kind);
+            Assert.AreEqual(input.Wingspan, output.Wingspan);
+            Assert.AreEqual(input.Partner.Wingspan, output.Partner.Wingspan);
         }
     }
 }

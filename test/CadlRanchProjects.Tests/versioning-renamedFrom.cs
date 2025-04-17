@@ -17,8 +17,8 @@ namespace CadlRanchProjects.Tests
         public void TestRenamedMembers()
         {
             /* check the renamed model from `OldModel` to `NewModel` */
-            Assert.IsNull(Type.GetType("Versioning.RenamedFrom.Models.OldModel"));
-            Assert.IsNotNull(Type.GetType("Versioning.RenamedFrom.Models.NewModel"));
+            Assert.IsNull(TestServerTestBase.FindType(typeof(NewModel).Assembly, "OldModel"));
+            Assert.IsNotNull(TestServerTestBase.FindType(typeof(NewModel).Assembly, "NewModel"));
 
             /* check the renamed property of model */
             var properties = typeof(NewModel).GetProperties();
@@ -28,8 +28,8 @@ namespace CadlRanchProjects.Tests
             Assert.IsNotNull(typeof(NewModel).GetProperty("NewProp"));
 
             /* check the renamed enum from `OldEnum` to `NewEnum` */
-            Assert.IsNull(Type.GetType("Versioning.RenamedFrom.Models.OldEnum"));
-            Assert.IsNotNull(Type.GetType("Versioning.RenamedFrom.Models.NewEnum"));
+            Assert.IsNull(TestServerTestBase.FindType(typeof(NewEnum).Assembly, "OldEnum"));
+            Assert.IsNotNull(TestServerTestBase.FindType(typeof(NewEnum).Assembly, "NewEnum"));
 
             /* check the renamed enum value */
             var enumValues = typeof(NewEnum).GetEnumNames();
@@ -45,8 +45,8 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(4, newMethods.Count());
 
             /* check the renamed interface */
-            Assert.IsNull(Type.GetType("Versioning.RenamedFrom.OldInterface"));
-            Assert.IsNotNull(Type.GetType("Versioning.RenamedFrom.NewInterface"));
+            Assert.IsNull(TestServerTestBase.FindType(typeof(NewModel).Assembly, "OldInterface"));
+            Assert.IsNotNull(TestServerTestBase.FindType(typeof(NewModel).Assembly, "NewInterface"));
         }
 
         [Test]

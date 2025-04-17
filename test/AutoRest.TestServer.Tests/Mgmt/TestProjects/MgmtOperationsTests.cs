@@ -2,6 +2,7 @@
 using System.Threading;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
+using MgmtOperations;
 using MgmtOperations.Models;
 using NUnit.Framework;
 
@@ -11,11 +12,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtOperationsTests() : base("MgmtOperations") { }
 
+        private protected override Assembly GetAssembly() => typeof(AvailabilitySetResource).Assembly;
+
         [TestCase("TestSetSharedKey")]
         [TestCase("TestSetSharedKeyAsync")]
         public void ValidatePutMethod(string methodName)
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtOperations.AvailabilitySetResource");
+            var resourceOpreations = GetType("AvailabilitySetResource");
             var method = resourceOpreations.GetMethod(methodName);
             Assert.NotNull(method, $"{resourceOpreations.Name} does not implement the {methodName} method.");
 
@@ -32,7 +35,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(true, "UnpatchableResource", "UpdateAsync")]
         public void ValidateMethod(bool exist, string className, string methodName)
         {
-            var resource = Assembly.GetExecutingAssembly().GetType($"MgmtOperations.{className}");
+            var resource = GetType(className);
             Assert.NotNull(resource, $"Class {className} not found");
 
             var method = resource.GetMethod(methodName);

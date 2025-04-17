@@ -51,21 +51,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 InitializationValue = New.Instance(typeof(JsonDocumentOptions), new Dictionary<string, ValueExpression>() { { "MaxDepth", Literal(256) } })
             };
 
-            if (Configuration.EnableInternalRawData)
+            // when we have this configuration, we have a sentinel value for raw data values to let us skip values
+            _sentinelBinaryDataField = new FieldDeclaration(
+                modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
+                type: typeof(BinaryData),
+                name: _sentinelBinaryDataName)
             {
-                // when we have this configuration, we have a sentinel value for raw data values to let us skip values
-                _sentinelBinaryDataField = new FieldDeclaration(
-                    modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
-                    type: typeof(BinaryData),
-                    name: _sentinelBinaryDataName)
-                {
-                    InitializationValue = BinaryDataExpression.FromBytes(
-                        // since this is a hard-coded value, we can just hard-code the bytes directly instead of
-                        // using the BinaryData.FromObjectAsJson method
-                        new InvokeInstanceMethodExpression(
-                            LiteralU8("\"__EMPTY__\""), "ToArray", [], null, false))
-                };
-            }
+                InitializationValue = BinaryDataExpression.FromBytes(
+                    // since this is a hard-coded value, we can just hard-code the bytes directly instead of
+                    // using the BinaryData.FromObjectAsJson method
+                    new InvokeInstanceMethodExpression(
+                        LiteralU8("\"__EMPTY__\""), "ToArray", [], null, false))
+            };
         }
 
         private const string _wireOptionsName = "WireOptions";

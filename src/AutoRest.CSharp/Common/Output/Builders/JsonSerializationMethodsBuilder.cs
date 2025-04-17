@@ -12,6 +12,7 @@ using System.Net;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -72,13 +73,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return new Method(
                 new MethodSignature(nameof(IPersistableModel<object>.Write), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
                 // => ModelReaderWriter.Write<ResourceData>(Data, options);
-                new InvokeStaticMethodExpression(modelReaderWriter, "Write", new List<ValueExpression> { new MemberExpression(This, "Data"), options }, new List<CSharpType> { resourceDataType }));
+                new InvokeStaticMethodExpression(modelReaderWriter, "Write", new List<ValueExpression> { new MemberExpression(This, "Data"), options, ModelReaderWriterContextExpression.Default }, new List<CSharpType> { resourceDataType }));
 
             // T IPersistableModel<T>.Create(BinaryData data, ModelReaderWriterOptions options)
             yield return new Method(
                 new MethodSignature(nameof(IPersistableModel<object>.Create), null, null, MethodSignatureModifiers.None, resourceDataType, null, new[] { KnownParameters.Serializations.Data, KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
                 // => ModelReaderWriter.Read<ResourceData>(new BinaryData(reader.ValueSequence));
-                new InvokeStaticMethodExpression(modelReaderWriter, "Read", new List<ValueExpression> { data, options }, new List<CSharpType> { resourceDataType }));
+                new InvokeStaticMethodExpression(modelReaderWriter, "Read", new List<ValueExpression> { data, options, ModelReaderWriterContextExpression.Default }, new List<CSharpType> { resourceDataType }));
 
             // ModelReaderWriterFormat IPersistableModel<T>.GetFormatFromOptions(ModelReaderWriterOptions options)
             yield return new Method(
@@ -178,7 +179,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static SwitchCase BuildJsonWriteSwitchCase(JsonObjectSerialization json, ModelReaderWriterOptionsExpression options)
         {
             return new SwitchCase(Serializations.JsonFormat,
-                    Return(new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { This, options })));
+                    Return(new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { This, options, ModelReaderWriterContextExpression.Default })));
         }
 
         public static SwitchCase BuildJsonCreateSwitchCase(SerializableObjectType model, BinaryDataExpression data, ModelReaderWriterOptionsExpression options)

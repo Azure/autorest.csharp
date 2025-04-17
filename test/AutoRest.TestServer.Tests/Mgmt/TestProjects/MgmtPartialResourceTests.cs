@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using MgmtPartialResource;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -6,6 +7,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     internal class MgmtPartialResourceTests : TestProjectTests
     {
         public MgmtPartialResourceTests() : base("MgmtPartialResource") { }
+
+        private protected override Assembly GetAssembly() => typeof(MgmtPartialResourceExtensions).Assembly;
 
         [TestCase(false, "VirtualMachineMgmtPartialResource", "Get")]
         [TestCase(false, "VirtualMachineMgmtPartialResource", "GetAsync")]
@@ -24,7 +27,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(true, "MgmtPartialResourceExtensions", "GetPartialVmssResource")]
         public void ValidateMethod(bool exist, string className, string methodName)
         {
-            var resource = Assembly.GetExecutingAssembly().GetType($"MgmtPartialResource.{className}");
+            var resource = GetType(className);
             Assert.NotNull(resource, $"Class {className} not found");
 
             var method = resource.GetMethod(methodName);
@@ -37,7 +40,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(false, "PartialVmssResource", "Data")]
         public void ValidateProperty(bool exist, string className, string propertyName)
         {
-            var resource = Assembly.GetExecutingAssembly().GetType($"MgmtPartialResource.{className}");
+            var resource = GetType(className);
             Assert.NotNull(resource, $"Class {className} not found");
 
             var property = resource.GetProperty(propertyName);

@@ -3,9 +3,9 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using HeaderCollectionPrefix;
-using Microsoft.AspNetCore.Http;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
@@ -25,25 +25,28 @@ namespace AutoRest.TestServer.Tests
                 await content.Response.Body.FlushAsync();
             });
 
-            var client = new HeaderCollectionPrefixRestClient(ClientDiagnostics, HttpPipeline, testServer.Address);
+            var client = GetClient(GetType(typeof(HeaderCollectionPrefixClient).Assembly, "HeaderCollectionPrefixRestClient"), HttpPipeline, testServer.Address);
 
-            var responseHeaders = await client.OperationAsync(new Dictionary<string, string>()
+            var arg = new Dictionary<string, string>()
             {
                 {"a", "a"},
                 {"b", "b"},
                 {"c", "c"},
-            });
+            };
+            object responseHeaders = await InvokeInternalMethod(client, "OperationAsync", arg);
 
             Assert.True(requestHeaders.TryGetValue("x-ms-meta-a", out var value) && value == "a");
             Assert.True(requestHeaders.TryGetValue("x-ms-meta-b", out value) && value == "b");
             Assert.True(requestHeaders.TryGetValue("x-ms-meta-c", out value) && value == "c");
 
-            Assert.True(responseHeaders.Headers.Metadata.TryGetValue("a", out value) && value == "a");
-            Assert.True(responseHeaders.Headers.Metadata.TryGetValue("A", out value) && value == "a");
-            Assert.True(responseHeaders.Headers.Metadata.TryGetValue("b", out value) && value == "b");
-            Assert.True(responseHeaders.Headers.Metadata.TryGetValue("c", out value) && value == "c");
+            var headers = GetInternalProperty(responseHeaders, "Headers");
+            IDictionary<string, string> metadata = GetInternalProperty(headers, "Metadata") as IDictionary<string, string>;
+            Assert.True(metadata.TryGetValue("a", out value) && value == "a");
+            Assert.True(metadata.TryGetValue("A", out value) && value == "a");
+            Assert.True(metadata.TryGetValue("b", out value) && value == "b");
+            Assert.True(metadata.TryGetValue("c", out value) && value == "c");
 
-            Assert.False(responseHeaders.Headers.Metadata.IsReadOnly);
+            Assert.False(metadata.IsReadOnly);
         }
     }
 }

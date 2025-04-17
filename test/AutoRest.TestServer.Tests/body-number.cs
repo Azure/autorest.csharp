@@ -14,74 +14,74 @@ namespace AutoRest.TestServer.Tests
     public class NumberTest : TestServerTestBase
     {
         [Test]
-        public Task PutFloatBigScientificNotation() => TestStatus(async (host, pipeline) => await new NumberClient(ClientDiagnostics, pipeline, host).PutBigFloatAsync(3.402823e+20f));
+        public Task PutFloatBigScientificNotation() => TestStatus(async (host, pipeline) => await GetClient<NumberClient>(pipeline, host).PutBigFloatAsync(3.402823e+20f));
 
         [Test]
-        public Task PutFloatSmallScientificNotation() => TestStatus(async (host, pipeline) => await new NumberClient(ClientDiagnostics, pipeline, host).PutSmallFloatAsync(3.402823e-20f));
+        public Task PutFloatSmallScientificNotation() => TestStatus(async (host, pipeline) => await GetClient<NumberClient>(pipeline, host).PutSmallFloatAsync(3.402823e-20f));
 
         [Test]
-        public Task PutDoubleSmallScientificNotation() => TestStatus(async (host, pipeline) => await new NumberClient(ClientDiagnostics, pipeline, host).PutSmallDoubleAsync(2.5976931e-101d));
+        public Task PutDoubleSmallScientificNotation() => TestStatus(async (host, pipeline) => await GetClient<NumberClient>(pipeline, host).PutSmallDoubleAsync(2.5976931e-101d));
 
         [Test]
-        public Task PutDoubleBigScientificNotation() => TestStatus(async (host, pipeline) => await new NumberClient(ClientDiagnostics, pipeline, host).PutBigDoubleAsync(2.5976931e+101d));
+        public Task PutDoubleBigScientificNotation() => TestStatus(async (host, pipeline) => await GetClient<NumberClient>(pipeline, host).PutBigDoubleAsync(2.5976931e+101d));
 
         [Test]
-        public Task PutDecimalBigPositiveDecimal() => TestStatus(async (host, pipeline) => await new NumberClient(ClientDiagnostics, pipeline, host).PutBigDecimalPositiveDecimalAsync());
+        public Task PutDecimalBigPositiveDecimal() => TestStatus(async (host, pipeline) => await GetClient<NumberClient>(pipeline, host).PutBigDecimalPositiveDecimalAsync());
 
         [Test]
         public Task PutDecimalBig() => Test((host, pipeline) =>
         {
             // Value 2.5976931e+101m is out of range of C# decimal
             var value = decimal.MaxValue;
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new NumberClient(ClientDiagnostics, pipeline, host).PutBigDecimalAsync(value));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await GetClient<NumberClient>(pipeline, host).PutBigDecimalAsync(value));
         }, ignoreScenario: true);
 
         [Test]
-        public Task PutDecimalBigNegativeDecimal() => TestStatus(async (host, pipeline) => await new NumberClient(ClientDiagnostics, pipeline, host).PutBigDecimalNegativeDecimalAsync());
+        public Task PutDecimalBigNegativeDecimal() => TestStatus(async (host, pipeline) => await GetClient<NumberClient>(pipeline, host).PutBigDecimalNegativeDecimalAsync());
 
         [Test]
         public Task PutDecimalSmall() => Test((host, pipeline) =>
         {
             // Value 2.5976931e-101m is out of range of C# decimal
             var value = decimal.MinValue;
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new NumberClient(ClientDiagnostics, pipeline, host).PutSmallDecimalAsync(value));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await GetClient<NumberClient>(pipeline, host).PutSmallDecimalAsync(value));
         }, ignoreScenario: true);
 
         [Test]
-        public Task PutDoubleBigNegativeDecimal() => TestStatus(async (host, pipeline) => await new NumberClient(ClientDiagnostics, pipeline, host).PutBigDoubleNegativeDecimalAsync());
+        public Task PutDoubleBigNegativeDecimal() => TestStatus(async (host, pipeline) => await GetClient<NumberClient>(pipeline, host).PutBigDoubleNegativeDecimalAsync());
 
         [Test]
-        public Task PutDoubleBigPositiveDecimal() => TestStatus(async (host, pipeline) => await new NumberClient(ClientDiagnostics, pipeline, host).PutBigDoublePositiveDecimalAsync());
+        public Task PutDoubleBigPositiveDecimal() => TestStatus(async (host, pipeline) => await GetClient<NumberClient>(pipeline, host).PutBigDoublePositiveDecimalAsync());
 
         [Test]
         public Task GetDecimalInvalid() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new NumberClient(ClientDiagnostics, pipeline, host).GetInvalidDecimalAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<NumberClient>(pipeline, host).GetInvalidDecimalAsync());
         });
 
         [Test]
         public Task GetDoubleInvalid() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new NumberClient(ClientDiagnostics, pipeline, host).GetInvalidDoubleAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<NumberClient>(pipeline, host).GetInvalidDoubleAsync());
         });
 
         [Test]
         public Task GetFloatInvalid() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new NumberClient(ClientDiagnostics, pipeline, host).GetInvalidFloatAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<NumberClient>(pipeline, host).GetInvalidFloatAsync());
         });
 
         [Test]
         public Task GetDecimalBig() => Test((host, pipeline) =>
         {
             // Value 2.5976931e+101m is out of range of C# decimal
-            Assert.ThrowsAsync<FormatException>(async () => await new NumberClient(ClientDiagnostics, pipeline, host).GetBigDecimalAsync());
+            Assert.ThrowsAsync<FormatException>(async () => await GetClient<NumberClient>(pipeline, host).GetBigDecimalAsync());
         });
 
         [Test]
         public Task GetDecimalBigNegativeDecimal() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberClient(ClientDiagnostics, pipeline, host).GetBigDecimalNegativeDecimalAsync();
+            var response = await GetClient<NumberClient>(pipeline, host).GetBigDecimalNegativeDecimalAsync();
             Assert.AreEqual(-99999999.99m, response.Value);
             return response.GetRawResponse();
         });
@@ -89,7 +89,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetDecimalBigPositiveDecimal() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberClient(ClientDiagnostics, pipeline, host).GetBigDecimalPositiveDecimalAsync();
+            var response = await GetClient<NumberClient>(pipeline, host).GetBigDecimalPositiveDecimalAsync();
             Assert.AreEqual(99999999.99m, response.Value);
             return response.GetRawResponse();
         });
@@ -100,14 +100,14 @@ namespace AutoRest.TestServer.Tests
             // Value 2.5976931e-101m is out of range of C# decimal
             // This call should normally fail with a FormatException, but there is an issue in the runtime
             // https://github.com/dotnet/runtime/issues/35586
-            var response = await new NumberClient(ClientDiagnostics, pipeline, host).GetSmallDecimalAsync();
+            var response = await GetClient<NumberClient>(pipeline, host).GetSmallDecimalAsync();
             Assert.AreEqual(0m, response.Value);
         });
 
         [Test]
         public Task GetDoubleBigScientificNotation() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberClient(ClientDiagnostics, pipeline, host).GetBigDoubleAsync();
+            var response = await GetClient<NumberClient>(pipeline, host).GetBigDoubleAsync();
             Assert.AreEqual(2.5976931E+101d, response.Value);
             return response.GetRawResponse();
         });
@@ -115,7 +115,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetDoubleBigNegativeDecimal() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberClient(ClientDiagnostics, pipeline, host).GetBigDoubleNegativeDecimalAsync();
+            var response = await GetClient<NumberClient>(pipeline, host).GetBigDoubleNegativeDecimalAsync();
             Assert.AreEqual(-99999999.989999995d, response.Value);
             return response.GetRawResponse();
         });
@@ -123,7 +123,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetDoubleBigPositiveDecimal() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberClient(ClientDiagnostics, pipeline, host).GetBigDoublePositiveDecimalAsync();
+            var response = await GetClient<NumberClient>(pipeline, host).GetBigDoublePositiveDecimalAsync();
             Assert.AreEqual(99999999.989999995d, response.Value);
             return response.GetRawResponse();
         });
@@ -131,7 +131,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetDoubleSmallScientificNotation() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberClient(ClientDiagnostics, pipeline, host).GetSmallDoubleAsync();
+            var response = await GetClient<NumberClient>(pipeline, host).GetSmallDoubleAsync();
             Assert.AreEqual(2.5976931000000001E-101d, response.Value);
             return response.GetRawResponse();
         });
@@ -139,7 +139,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetFloatBigScientificNotation() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberClient(ClientDiagnostics, pipeline, host).GetBigFloatAsync();
+            var response = await GetClient<NumberClient>(pipeline, host).GetBigFloatAsync();
             Assert.AreEqual(3.40282312E+20f, response.Value);
             return response.GetRawResponse();
         });
@@ -147,7 +147,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetFloatSmallScientificNotation() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new NumberClient(ClientDiagnostics, pipeline, host).GetSmallFloatAsync();
+            var response = await GetClient<NumberClient>(pipeline, host).GetSmallFloatAsync();
             Assert.AreEqual(3.4028229999999997E-20d, response.Value);
             return response.GetRawResponse();
         });
@@ -156,7 +156,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetNumberNull() => Test((host, pipeline) =>
         {
             // Empty response body
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new NumberClient(ClientDiagnostics, pipeline, host).GetNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<NumberClient>(pipeline, host).GetNullAsync());
         });
     }
 }

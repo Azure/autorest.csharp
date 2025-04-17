@@ -8,6 +8,7 @@ using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
 using NUnit.Framework;
 using System.ClientModel;
+using UnbrandedTypeSpec;
 
 namespace CadlRanchProjectsNonAzure.Tests
 {
@@ -173,7 +174,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var response = await new NullableClient(host, null).GetCollectionsByteClient().GetNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             // we will never construct a null collection therefore this property is actually undefined here.
-            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
+            Assert.IsFalse(TestServerTestBase.IsCollectionDefined(typeof(NullableClient).Assembly, response.Value.NullableProperty));
             Assert.IsNotNull(response.Value.NullableProperty);
         });
 
@@ -213,7 +214,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             var response = await new NullableClient(host, null).GetCollectionsModelClient().GetNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             // we will never construct a null collection therefore this property is actually undefined here.
-            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
+            Assert.IsFalse(TestServerTestBase.IsCollectionDefined(typeof(NullableClient).Assembly, response.Value.NullableProperty));
             Assert.IsNotNull(response.Value.NullableProperty);
         });
 

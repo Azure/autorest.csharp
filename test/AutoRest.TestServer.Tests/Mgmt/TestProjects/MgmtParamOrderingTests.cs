@@ -1,8 +1,8 @@
 ﻿using System.Linq;
+using System.Reflection;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 using MgmtParamOrdering;
-using MgmtParamOrdering.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -13,6 +13,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             TagResourceExceptions.Add(typeof(VirtualMachineExtensionImageResource));
         }
+
+        private protected override Assembly GetAssembly() => typeof(AvailabilitySetResource).Assembly;
 
         [TestCase("AvailabilitySetResource", true)]
         [TestCase("DedicatedHostGroupResource", true)]
@@ -57,7 +59,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateAzureLocationFormat()
         {
-            var obj = typeof(LocationFormatObject);
+            var obj = GetType("LocationFormatObject");
             Assert.IsNotNull(obj);
             var stringProperty = obj.GetProperty("StringLocation");
             Assert.IsNotNull(stringProperty);

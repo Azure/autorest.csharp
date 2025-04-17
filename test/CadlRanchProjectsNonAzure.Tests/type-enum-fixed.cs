@@ -27,7 +27,9 @@ namespace CadlRanchProjectsNonAzure.Tests
         [Ignore("type error")]
         public Task Type_Enum_Fixed_String_putUnknownValue() => Test((host) =>
         {
-            var exception = Assert.ThrowsAsync<RequestFailedException>(() => new FixedClient(host, null).GetStringClient().PutUnknownValueAsync(DaysOfWeekEnumExtensions.ToDaysOfWeekEnum("Weekend")));
+            var extensionType = typeof(FixedClient).Assembly.GetType("DaysOfWeekEnumExtensions");
+            var method = extensionType.GetMethod("ToDaysOfWeekEnum");
+            var exception = Assert.ThrowsAsync<RequestFailedException>(() => new FixedClient(host, null).GetStringClient().PutUnknownValueAsync((DaysOfWeekEnum)method.Invoke(null, ["Weekend"])));
             Assert.AreEqual(500, exception.Status);
             return Task.CompletedTask;
         });
