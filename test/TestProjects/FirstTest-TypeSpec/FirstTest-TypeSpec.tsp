@@ -320,6 +320,11 @@ namespace Hello.Demo2 {
     op helloLiteral(@header p1: "test", @path p2: 123, @query p3: true): Thing;
 }
 
+model ListBody {
+    @doc("Metric dimension filter ")
+    filter?: string;
+}
+
 @route("/top")
 @doc("top level method")
 @get
@@ -372,6 +377,20 @@ op projectedNameModel(...ModelWithProjectedName): ModelWithProjectedName;
 @post
 @convenientAPI(true)
 op returnsAnonymousModel(): {@body body: {}};
+
+@summary("This is a list operation with an optional body.")
+@doc("List the metric values for a load test run.")
+@route("/listWithOptionalBody")
+@post
+@convenientAPI(true)
+op listWithOptionalBody is Azure.Core.Foundations.Operation<
+  {
+    @doc("Metric dimension filter ")
+    @bodyRoot
+    body?: ListBody;
+  },
+  Page<Thing>
+>;
 
 // TODO: https://github.com/Azure/typespec-azure/issues/509 
 namespace EnumTest {

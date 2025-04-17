@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         writer
                             .Append($"{protocolParameter.Type} {protocolParameter.Name:D} = {fromName:I}")
-                            .AppendRawIf(".", isOptional)
+                            .AppendRawIf("?", isOptional)
                             .Line($".ToRequestContent();");
                     }
                     else if (convenienceParameter is not null)
