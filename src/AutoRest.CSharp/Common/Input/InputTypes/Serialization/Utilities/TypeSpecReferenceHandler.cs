@@ -21,6 +21,7 @@ namespace AutoRest.CSharp.Common.Input
         private class TypeSpecReferenceResolver : ReferenceResolver
         {
             private readonly Dictionary<string, object> _referenceIdToObjectMap = new();
+            private readonly Dictionary<object, string> _objectToReferenceIdMap = new();
 
             public override void AddReference(string referenceId, object value)
             {
@@ -31,7 +32,20 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             public override string GetReference(object value, out bool alreadyExists)
-                => throw new InvalidOperationException("JSON writing isn't supported");
+            {
+                alreadyExists = false;
+                if (_objectToReferenceIdMap.TryGetValue(value, out var id))
+                {
+                    alreadyExists = true;
+                    return id;
+                }
+                id = _objectToReferenceIdMap.Count.ToString();
+                if (!_objectToReferenceIdMap.TryAdd(value, id))
+                {
+                    throw new JsonException($"Failed to add value type '{value.GetType()}' with reference Id '{id}'");
+                }
+                return id;
+            }
 
             public override object ResolveReference(string referenceId)
                 => _referenceIdToObjectMap.TryGetValue(referenceId, out object? value) ? value : throw new JsonException($"Cannot resolve reference {referenceId}");
