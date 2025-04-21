@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
-    internal class AzurePluginTarget
+    internal class MicrosoftTypeSpecGeneratorTarget
     {
         public static async Task ExecuteAsync(GeneratedCodeWorkspace project, InputNamespace inputNamespace)
         {

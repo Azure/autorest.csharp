@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 CodeModelTransformer.TransformForMgmt(codeModel);
                 var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
-                await AzurePluginTarget.ExecuteAsync(project, inputNamespace);
+                await MicrosoftTypeSpecGeneratorTarget.ExecuteAsync(project, inputNamespace);
             }
             else
             {
