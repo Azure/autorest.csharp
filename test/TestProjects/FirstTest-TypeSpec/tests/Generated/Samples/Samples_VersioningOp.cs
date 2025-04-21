@@ -21,7 +21,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_VersioningOp_Export_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
-            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
 
             Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", null, null);
             BinaryData responseData = operation.Value;
@@ -36,7 +36,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_VersioningOp_Export_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
 
             Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", null, null);
             BinaryData responseData = operation.Value;
@@ -51,7 +51,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_VersioningOp_Export_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
-            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
 
             Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);
             BinaryData responseData = operation.Value;
@@ -66,7 +66,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_VersioningOp_Export_AllParameters_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
 
             Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);
             BinaryData responseData = operation.Value;
@@ -81,7 +81,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_VersioningOp_ExportW_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
-            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
 
             Operation<BinaryData> operation = client.ExportW(WaitUntil.Completed, "<name>", null, null);
             BinaryData responseData = operation.Value;
@@ -96,7 +96,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_VersioningOp_ExportW_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
 
             Operation<BinaryData> operation = await client.ExportWAsync(WaitUntil.Completed, "<name>", null, null);
             BinaryData responseData = operation.Value;
@@ -111,7 +111,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_VersioningOp_ExportW_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
-            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
 
             Operation<BinaryData> operation = client.ExportW(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);
             BinaryData responseData = operation.Value;
@@ -126,7 +126,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_VersioningOp_ExportW_AllParameters_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
 
             Operation<BinaryData> operation = await client.ExportWAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);
             BinaryData responseData = operation.Value;

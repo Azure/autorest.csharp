@@ -29,6 +29,7 @@ export interface AzureCSharpEmitterOptions extends CSharpEmitterOptions {
     "library-name"?: string;
     "examples-dir"?: string;
     "enable-bicep-serialization"?: boolean;
+    "clear-output-folder"?: boolean;
 }
 
 export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterOptions> =
@@ -96,6 +97,11 @@ export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterO
             "enable-bicep-serialization": {
                 type: "boolean",
                 nullable: false
+            },
+            "clear-output-folder": {
+                type: "boolean",
+                nullable: true,
+                default: false
             }
         },
         required: []
@@ -120,7 +126,8 @@ const defaultAzureEmitterOptions = {
     "keep-non-overloadable-protocol-signature": undefined,
     "library-name": undefined,
     "examples-dir": undefined,
-    "enable-bicep-serialization": undefined
+    "enable-bicep-serialization": undefined,
+    "clear-output-folder": false
 };
 
 export function resolveAzureEmitterOptions(
@@ -187,6 +194,9 @@ export function resolveAzureEmitterOptions(
             defaultAzureEmitterOptions["examples-dir"],
         "enable-bicep-serialization":
             context.options["enable-bicep-serialization"] ??
-            defaultAzureEmitterOptions["enable-bicep-serialization"]
+            defaultAzureEmitterOptions["enable-bicep-serialization"],
+        "clear-output-folder":
+            context.options["clear-output-folder"] ??
+            defaultAzureEmitterOptions["clear-output-folder"]
     };
 }

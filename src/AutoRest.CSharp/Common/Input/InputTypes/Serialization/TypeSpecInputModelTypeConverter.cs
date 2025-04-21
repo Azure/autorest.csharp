@@ -152,6 +152,14 @@ namespace AutoRest.CSharp.Common.Input
                     throw new JsonException($"Property of model '{modelName}' cannot be null.");
                 }
 
+                // Previously this was done in the emitter, to avoid a large number of changes in the
+                // generator we are doing it here. If non-body properties are required in the future,
+                // we should consider removing this condition.
+                if (rawProperty.Kind != InputModelPropertyKind.Property)
+                {
+                    continue;
+                }
+
                 if (rawProperty.IsFlattened)
                 {
                     var flattenedProperties = FlattenProperty(rawProperty);

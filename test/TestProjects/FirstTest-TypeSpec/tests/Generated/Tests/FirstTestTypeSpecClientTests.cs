@@ -1157,5 +1157,66 @@ new BaseModel(123)
             AzureLocationModel body = new AzureLocationModel(new AzureLocation("<location>"));
             Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), body: body);
         }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_GetWithOptionalBody_ShortVersion()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = null;
+            await foreach (BinaryData item in client.GetWithOptionalBodyAsync(content))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_GetWithOptionalBody_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            await foreach (Thing item in client.GetWithOptionalBodyAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_GetWithOptionalBody_AllParameters()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                filter = "<filter>",
+            });
+            await foreach (BinaryData item in client.GetWithOptionalBodyAsync(content))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_GetWithOptionalBody_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            ListBody body = new ListBody
+            {
+                Filter = "<filter>",
+            };
+            await foreach (Thing item in client.GetWithOptionalBodyAsync(body: body))
+            {
+            }
+        }
     }
 }
