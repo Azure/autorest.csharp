@@ -13,7 +13,7 @@ namespace NoDocsTypeSpec.Models
 {
     public static partial class NoDocsTypeSpecModelFactory
     {
-        public static Thing Thing(string name = null, BinaryData requiredUnion = null, ThingRequiredLiteralString requiredLiteralString = default, ThingRequiredLiteralInt requiredLiteralInt = default, ThingRequiredLiteralFloat requiredLiteralFloat = default, bool requiredLiteralBool = default, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, string requiredBadDescription = null, IEnumerable<int> optionalNullableList = null, IEnumerable<int> requiredNullableList = null)
+        public static Thing Thing(string name = null, BinaryData requiredUnion = null, string requiredLiteralString = null, int requiredLiteralInt = default, float requiredLiteralFloat = default, bool requiredLiteralBool = default, string optionalLiteralString = null, int? optionalLiteralInt = null, float? optionalLiteralFloat = null, bool? optionalLiteralBool = null, string requiredBadDescription = null, IEnumerable<int> optionalNullableList = null, IEnumerable<int> requiredNullableList = null)
         {
             optionalNullableList ??= new List<int>();
             requiredNullableList ??= new List<int>();

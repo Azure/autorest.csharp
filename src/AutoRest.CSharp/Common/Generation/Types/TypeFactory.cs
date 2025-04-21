@@ -45,7 +45,8 @@ namespace AutoRest.CSharp.Generation.Types
         /// <returns>The <see cref="CSharpType"/> of the input type.</returns>
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
-            InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.ValueType), literalType.Value),
+            InputLiteralType literalType => CreateLiteralType(literalType),
+            InputEnumTypeValue enumValueType => CreateEnumValueType(enumValueType),
             InputUnionType unionType => CSharpType.FromUnion(unionType.VariantTypes.Select(CreateType).ToArray()),
             InputListType { CrossLanguageDefinitionId: "Azure.Core.EmbeddingVector" } listType => new CSharpType(typeof(ReadOnlyMemory<>), CreateType(listType.ValueType)),
             InputListType listType => new CSharpType(typeof(IList<>), CreateType(listType.ValueType)),
@@ -58,6 +59,42 @@ namespace AutoRest.CSharp.Generation.Types
             InputDurationType durationType => new CSharpType(typeof(TimeSpan)),
             _ => throw new InvalidOperationException($"Unknown type: {inputType}")
         };
+
+        private CSharpType CreateLiteralType(in InputLiteralType literalType)
+        {
+            return CSharpType.FromLiteral(CreateType(GetLiteralValueType(literalType)), literalType.Value);
+        }
+
+        private static readonly Dictionary<InputLiteralType, InputType> _literalValueTypeCache = new();
+
+        internal static InputType GetLiteralValueType(in InputLiteralType literal)
+        {
+            if (_literalValueTypeCache.TryGetValue(literal, out var valueType))
+            {
+                return valueType;
+            }
+
+            // we only convert the literal into enum when it is not a boolean
+            if (literal.ValueType.Kind == InputPrimitiveTypeKind.Boolean)
+            {
+                valueType = literal.ValueType;
+            }
+            else
+            {
+                var values = new List<InputEnumTypeValue>();
+                var enumType = new InputEnumType(literal.Name, string.Empty, null, null, null, $"The {literal.Name}", InputModelTypeUsage.Input | InputModelTypeUsage.Output, literal.ValueType, values, true);
+                values.Add(new InputEnumTypeValue(literal.Value.ToString() ?? "Null", literal.Value, literal.ValueType, enumType, null, literal.Value.ToString()));
+                valueType = enumType;
+            }
+
+            _literalValueTypeCache.Add(literal, valueType);
+            return valueType;
+        }
+
+        private CSharpType CreateEnumValueType(in InputEnumTypeValue enumValueType)
+        {
+            return CSharpType.FromLiteral(CreateType(enumValueType.EnumType), enumValueType.Value);
+        }
 
         private CSharpType CreatePrimitiveType(in InputPrimitiveType inputType)
         {

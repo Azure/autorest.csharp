@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
@@ -57,7 +56,19 @@ namespace AutoRest.CSharp.Output.Models
             if (isTspInput)
             {
                 CreateModels(_rootNamespace.Models, models, library.TypeFactory, _sourceInputModel);
-                CreateEnums(_rootNamespace.Enums, enums, models, library.TypeFactory, _sourceInputModel);
+                // add the converted literals into the list
+                var inputEnums = new List<InputEnumType>(_rootNamespace.Enums.Count + _rootNamespace.Constants.Count);
+                inputEnums.AddRange(_rootNamespace.Enums);
+                foreach (var literal in _rootNamespace.Constants)
+                {
+                    var converted = TypeFactory.GetLiteralValueType(literal);
+                    if (converted is InputEnumType convertedEnum)
+                    {
+                        inputEnums.Add(convertedEnum);
+                    }
+                }
+
+                CreateEnums(inputEnums, enums, models, library.TypeFactory, _sourceInputModel);
             }
             CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions, parametersInClientOptions);
 

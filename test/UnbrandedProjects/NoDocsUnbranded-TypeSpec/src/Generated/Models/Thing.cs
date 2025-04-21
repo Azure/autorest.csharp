@@ -25,7 +25,7 @@ namespace NoDocsUnbrandedTypeSpec.Models
             RequiredNullableList = requiredNullableList?.ToList();
         }
 
-        internal Thing(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IReadOnlyList<int> optionalNullableList, IReadOnlyList<int> requiredNullableList, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal Thing(string name, BinaryData requiredUnion, string requiredLiteralString, int requiredLiteralInt, float requiredLiteralFloat, bool requiredLiteralBool, string optionalLiteralString, int? optionalLiteralInt, float? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IReadOnlyList<int> optionalNullableList, IReadOnlyList<int> requiredNullableList, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             RequiredUnion = requiredUnion;
@@ -49,17 +49,17 @@ namespace NoDocsUnbrandedTypeSpec.Models
 
         public string Name { get; }
         public BinaryData RequiredUnion { get; }
-        public ThingRequiredLiteralString RequiredLiteralString { get; } = ThingRequiredLiteralString.Accept;
+        public string RequiredLiteralString { get; } = "accept";
 
-        public ThingRequiredLiteralInt RequiredLiteralInt { get; } = ThingRequiredLiteralInt._123;
+        public int RequiredLiteralInt { get; } = 123;
 
-        public ThingRequiredLiteralFloat RequiredLiteralFloat { get; } = ThingRequiredLiteralFloat._123;
+        public float RequiredLiteralFloat { get; } = 1.23F;
 
         public bool RequiredLiteralBool { get; } = false;
 
-        public ThingOptionalLiteralString? OptionalLiteralString { get; }
-        public ThingOptionalLiteralInt? OptionalLiteralInt { get; }
-        public ThingOptionalLiteralFloat? OptionalLiteralFloat { get; }
+        public string OptionalLiteralString { get; }
+        public int? OptionalLiteralInt { get; }
+        public float? OptionalLiteralFloat { get; }
         public bool? OptionalLiteralBool { get; }
         public string RequiredBadDescription { get; }
         public IReadOnlyList<int> OptionalNullableList { get; }

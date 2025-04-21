@@ -77,7 +77,7 @@ namespace CustomizedTypeSpec.Models
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <param name="requiredNullableList"> required nullable collection. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Thing(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IList<int> optionalNullableList, IList<int> requiredNullableList, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal Thing(string name, BinaryData requiredUnion, string requiredLiteralString, int requiredLiteralInt, float requiredLiteralFloat, bool requiredLiteralBool, string optionalLiteralString, int? optionalLiteralInt, float? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IList<int> optionalNullableList, IList<int> requiredNullableList, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             RequiredUnion = requiredUnion;
@@ -148,23 +148,23 @@ namespace CustomizedTypeSpec.Models
         /// </summary>
         public BinaryData RequiredUnion { get; set; }
         /// <summary> required literal string. </summary>
-        public ThingRequiredLiteralString RequiredLiteralString { get; } = ThingRequiredLiteralString.Accept;
+        public string RequiredLiteralString { get; } = "accept";
 
         /// <summary> required literal int. </summary>
-        public ThingRequiredLiteralInt RequiredLiteralInt { get; } = ThingRequiredLiteralInt._123;
+        public int RequiredLiteralInt { get; } = 123;
 
         /// <summary> required literal float. </summary>
-        public ThingRequiredLiteralFloat RequiredLiteralFloat { get; } = ThingRequiredLiteralFloat._123;
+        public float RequiredLiteralFloat { get; } = 1.23F;
 
         /// <summary> required literal bool. </summary>
         public bool RequiredLiteralBool { get; } = false;
 
         /// <summary> optional literal string. </summary>
-        public ThingOptionalLiteralString? OptionalLiteralString { get; set; }
+        public string OptionalLiteralString { get; set; }
         /// <summary> optional literal int. </summary>
-        public ThingOptionalLiteralInt? OptionalLiteralInt { get; set; }
+        public int? OptionalLiteralInt { get; set; }
         /// <summary> optional literal float. </summary>
-        public ThingOptionalLiteralFloat? OptionalLiteralFloat { get; set; }
+        public float? OptionalLiteralFloat { get; set; }
         /// <summary> optional literal bool. </summary>
         public bool? OptionalLiteralBool { get; set; }
         /// <summary> description with xml &lt;|endoftext|&gt;. </summary>

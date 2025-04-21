@@ -45,9 +45,53 @@
    "decorators": []
   }
  ],
- "models": [
+ "constants": [
   {
    "$id": "6",
+   "kind": "constant",
+   "name": "getContentType",
+   "valueType": {
+    "$id": "7",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "8",
+   "kind": "constant",
+   "name": "putContentType",
+   "valueType": {
+    "$id": "9",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "10",
+   "kind": "constant",
+   "name": "postContentType",
+   "valueType": {
+    "$id": "11",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  }
+ ],
+ "models": [
+  {
+   "$id": "12",
    "kind": "model",
    "name": "AzureEmbeddingModel",
    "namespace": "_Specs_.Azure.Core.Model",
@@ -56,16 +100,16 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "7",
+     "$id": "13",
      "kind": "property",
      "name": "embedding",
      "serializedName": "embedding",
      "type": {
-      "$id": "8",
+      "$id": "14",
       "kind": "array",
       "name": "EmbeddingVector",
       "valueType": {
-       "$id": "9",
+       "$id": "15",
        "kind": "int32",
        "name": "int32",
        "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -81,9 +125,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureEmbeddingModel.embedding",
      "serializationOptions": {
-      "$id": "10",
+      "$id": "16",
       "json": {
-       "$id": "11",
+       "$id": "17",
        "name": "embedding"
       }
      }
@@ -93,19 +137,19 @@
  ],
  "clients": [
   {
-   "$id": "12",
+   "$id": "18",
    "kind": "client",
    "name": "ModelClient",
    "namespace": "_Specs_.Azure.Core.Model",
    "methods": [],
    "parameters": [
     {
-     "$id": "13",
+     "$id": "19",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Service host",
      "type": {
-      "$id": "14",
+      "$id": "20",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -119,9 +163,9 @@
      "explode": false,
      "kind": "Client",
      "defaultValue": {
-      "$id": "15",
+      "$id": "21",
       "type": {
-       "$id": "16",
+       "$id": "22",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"
@@ -137,13 +181,13 @@
    ],
    "children": [
     {
-     "$id": "17",
+     "$id": "23",
      "kind": "client",
      "name": "AzureCoreEmbeddingVector",
      "namespace": "_Specs_.Azure.Core.Model",
      "methods": [
       {
-       "$id": "18",
+       "$id": "24",
        "kind": "basic",
        "name": "get",
        "accessibility": "public",
@@ -152,28 +196,18 @@
        ],
        "doc": "get an embedding vector",
        "operation": {
-        "$id": "19",
+        "$id": "25",
         "name": "get",
         "resourceName": "AzureCoreEmbeddingVector",
         "doc": "get an embedding vector",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "20",
+          "$id": "26",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "21",
-           "kind": "constant",
-           "valueType": {
-            "$id": "22",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "6"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -188,16 +222,16 @@
         ],
         "responses": [
          {
-          "$id": "23",
+          "$id": "27",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$id": "24",
+           "$id": "28",
            "kind": "array",
            "name": "EmbeddingVector",
            "valueType": {
-            "$id": "25",
+            "$id": "29",
             "kind": "int32",
             "name": "int32",
             "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -224,11 +258,11 @@
        },
        "parameters": [
         {
-         "$id": "26",
+         "$id": "30",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "21"
+          "$ref": "6"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -242,9 +276,9 @@
         }
        ],
        "response": {
-        "$id": "27",
+        "$id": "31",
         "type": {
-         "$ref": "24"
+         "$ref": "28"
         }
        },
        "isOverride": false,
@@ -253,7 +287,7 @@
        "crossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureCoreEmbeddingVector.get"
       },
       {
-       "$id": "28",
+       "$id": "32",
        "kind": "basic",
        "name": "put",
        "accessibility": "public",
@@ -262,29 +296,19 @@
        ],
        "doc": "put an embedding vector",
        "operation": {
-        "$id": "29",
+        "$id": "33",
         "name": "put",
         "resourceName": "AzureCoreEmbeddingVector",
         "doc": "put an embedding vector",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "30",
+          "$id": "34",
           "name": "contentType",
           "nameInRequest": "Content-Type",
           "doc": "Body parameter's content type. Known values are application/json",
           "type": {
-           "$id": "31",
-           "kind": "constant",
-           "valueType": {
-            "$id": "32",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "8"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -297,16 +321,16 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "33",
+          "$id": "35",
           "name": "body",
           "nameInRequest": "body",
           "doc": "_",
           "type": {
-           "$id": "34",
+           "$id": "36",
            "kind": "array",
            "name": "EmbeddingVector",
            "valueType": {
-            "$id": "35",
+            "$id": "37",
             "kind": "int32",
             "name": "int32",
             "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -328,7 +352,7 @@
         ],
         "responses": [
          {
-          "$id": "36",
+          "$id": "38",
           "statusCodes": [
            204
           ],
@@ -350,16 +374,16 @@
        },
        "parameters": [
         {
-         "$id": "37",
+         "$id": "39",
          "name": "body",
          "nameInRequest": "body",
          "doc": "_",
          "type": {
-          "$id": "38",
+          "$id": "40",
           "kind": "array",
           "name": "EmbeddingVector",
           "valueType": {
-           "$id": "39",
+           "$id": "41",
            "kind": "int32",
            "name": "int32",
            "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -379,12 +403,12 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "40",
+         "$id": "42",
          "name": "contentType",
          "nameInRequest": "contentType",
          "doc": "Body parameter's content type. Known values are application/json",
          "type": {
-          "$ref": "31"
+          "$ref": "8"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -398,7 +422,7 @@
         }
        ],
        "response": {
-        "$id": "41"
+        "$id": "43"
        },
        "isOverride": false,
        "generateConvenient": true,
@@ -406,7 +430,7 @@
        "crossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureCoreEmbeddingVector.put"
       },
       {
-       "$id": "42",
+       "$id": "44",
        "kind": "basic",
        "name": "post",
        "accessibility": "public",
@@ -415,29 +439,19 @@
        ],
        "doc": "post a model which has an embeddingVector property",
        "operation": {
-        "$id": "43",
+        "$id": "45",
         "name": "post",
         "resourceName": "AzureCoreEmbeddingVector",
         "doc": "post a model which has an embeddingVector property",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "44",
+          "$id": "46",
           "name": "contentType",
           "nameInRequest": "Content-Type",
           "doc": "Body parameter's content type. Known values are application/json",
           "type": {
-           "$id": "45",
-           "kind": "constant",
-           "valueType": {
-            "$id": "46",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "10"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -454,17 +468,7 @@
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "48",
-           "kind": "constant",
-           "valueType": {
-            "$id": "49",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "10"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -477,12 +481,12 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "50",
+          "$id": "48",
           "name": "body",
           "nameInRequest": "body",
           "doc": "_",
           "type": {
-           "$ref": "6"
+           "$ref": "12"
           },
           "location": "Body",
           "isApiVersion": false,
@@ -497,12 +501,12 @@
         ],
         "responses": [
          {
-          "$id": "51",
+          "$id": "49",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$ref": "6"
+           "$ref": "12"
           },
           "headers": [],
           "isErrorResponse": false,
@@ -525,12 +529,12 @@
        },
        "parameters": [
         {
-         "$id": "52",
+         "$id": "50",
          "name": "body",
          "nameInRequest": "body",
          "doc": "_",
          "type": {
-          "$ref": "6"
+          "$ref": "12"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -543,12 +547,12 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "53",
+         "$id": "51",
          "name": "contentType",
          "nameInRequest": "contentType",
          "doc": "Body parameter's content type. Known values are application/json",
          "type": {
-          "$ref": "45"
+          "$ref": "10"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -561,11 +565,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "54",
+         "$id": "52",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "48"
+          "$ref": "10"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -579,9 +583,9 @@
         }
        ],
        "response": {
-        "$id": "55",
+        "$id": "53",
         "type": {
-         "$ref": "6"
+         "$ref": "12"
         }
        },
        "isOverride": false,
@@ -592,12 +596,12 @@
      ],
      "parameters": [
       {
-       "$id": "56",
+       "$id": "54",
        "name": "endpoint",
        "nameInRequest": "endpoint",
        "doc": "Service host",
        "type": {
-        "$id": "57",
+        "$id": "55",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -611,9 +615,9 @@
        "explode": false,
        "kind": "Client",
        "defaultValue": {
-        "$id": "58",
+        "$id": "56",
         "type": {
-         "$id": "59",
+         "$id": "57",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -628,7 +632,7 @@
       "2022-12-01-preview"
      ],
      "parent": {
-      "$ref": "12"
+      "$ref": "18"
      }
     }
    ]

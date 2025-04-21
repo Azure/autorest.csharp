@@ -398,9 +398,9 @@ namespace Azure.NewProject.TypeSpec.Samples
                 },
                 new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
                 {
-                    OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                    OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                    OptionalLiteralString = "reject",
+                    OptionalLiteralInt = 456,
+                    OptionalLiteralFloat = 4.56F,
                     OptionalLiteralBool = true,
                 },
                 BinaryData.FromObjectAsJson(new object()),
@@ -445,9 +445,9 @@ namespace Azure.NewProject.TypeSpec.Samples
                 },
                 new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
                 {
-                    OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                    OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                    OptionalLiteralString = "reject",
+                    OptionalLiteralInt = 456,
+                    OptionalLiteralFloat = 4.56F,
                     OptionalLiteralBool = true,
                 },
                 BinaryData.FromObjectAsJson(new object()),
@@ -956,9 +956,9 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
             {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralString = "reject",
+                OptionalLiteralInt = 456,
+                OptionalLiteralFloat = 4.56F,
                 OptionalLiteralBool = true,
             };
             Response<Thing> response = client.CreateLiteral(body);
@@ -974,9 +974,9 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
             {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralString = "reject",
+                OptionalLiteralInt = 456,
+                OptionalLiteralFloat = 4.56F,
                 OptionalLiteralBool = true,
             };
             Response<Thing> response = await client.CreateLiteralAsync(body);

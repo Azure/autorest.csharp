@@ -26,12 +26,13 @@ namespace AutoRest.CSharp.Common.Input
         {
             var isFirstProperty = id == null && name == null;
             JsonElement? rawValue = null;
-            InputType? valueType = null;
+            InputPrimitiveType? valueType = null;
             IReadOnlyList<InputDecoratorInfo>? decorators = null;
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
+                    || reader.TryReadString("name", ref name)
                     || reader.TryReadComplexType("value", options, ref rawValue)
                     || reader.TryReadComplexType("valueType", options, ref valueType)
                     || reader.TryReadComplexType("decorators", options, ref decorators);
@@ -42,6 +43,7 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
+            name = name ?? throw new JsonException("InputLiteralType must have name");
             valueType = valueType ?? throw new JsonException("InputLiteralType must have type");
 
             if (rawValue == null)
@@ -49,23 +51,17 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("InputLiteralType must have value");
             }
 
-            var valueKind = valueType switch
-            {
-                InputPrimitiveType primitiveType => primitiveType.Kind,
-                InputEnumType enumType => enumType.ValueType.Kind,
-                _ => throw new JsonException($"InputLiteralType does not support type {valueType.GetType()}")
-            };
-            object value = valueKind switch
+            object value = valueType.Kind switch
             {
                 InputPrimitiveTypeKind.String => rawValue.Value.GetString() ?? throw new JsonException(),
                 InputPrimitiveTypeKind.Int32 => rawValue.Value.GetInt32(),
                 InputPrimitiveTypeKind.Float32 => rawValue.Value.GetSingle(),
                 InputPrimitiveTypeKind.Float64 => rawValue.Value.GetDouble(),
                 InputPrimitiveTypeKind.Boolean => rawValue.Value.GetBoolean(),
-                _ => throw new JsonException($"InputLiteralType does not support type {valueKind}")
+                _ => throw new JsonException($"InputLiteralType does not support type {valueType.Kind}")
             };
 
-            var literalType = new InputLiteralType(valueType, value)
+            var literalType = new InputLiteralType(name, valueType, value)
             {
                 Decorators = decorators ?? []
             };

@@ -60,13 +60,13 @@ namespace NoTestTypeSpec.Models
             string myProperty = default;
             string name = default;
             BinaryData requiredUnion = default;
-            ThingRequiredLiteralString requiredLiteralString = default;
-            ThingRequiredLiteralInt requiredLiteralInt = default;
-            ThingRequiredLiteralFloat requiredLiteralFloat = default;
+            string requiredLiteralString = default;
+            int requiredLiteralInt = default;
+            float requiredLiteralFloat = default;
             bool requiredLiteralBool = default;
-            ThingOptionalLiteralString? optionalLiteralString = default;
-            ThingOptionalLiteralInt? optionalLiteralInt = default;
-            ThingOptionalLiteralFloat? optionalLiteralFloat = default;
+            string optionalLiteralString = default;
+            int? optionalLiteralInt = default;
+            float? optionalLiteralFloat = default;
             bool? optionalLiteralBool = default;
             string requiredBadDescription = default;
             IList<int> optionalNullableList = default;
@@ -92,17 +92,17 @@ namespace NoTestTypeSpec.Models
                 }
                 if (property.NameEquals("requiredLiteralString"u8))
                 {
-                    requiredLiteralString = new ThingRequiredLiteralString(property.Value.GetString());
+                    requiredLiteralString = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("requiredLiteralInt"u8))
                 {
-                    requiredLiteralInt = new ThingRequiredLiteralInt(property.Value.GetInt32());
+                    requiredLiteralInt = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("requiredLiteralFloat"u8))
                 {
-                    requiredLiteralFloat = new ThingRequiredLiteralFloat(property.Value.GetSingle());
+                    requiredLiteralFloat = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("requiredLiteralBool"u8))
@@ -112,11 +112,7 @@ namespace NoTestTypeSpec.Models
                 }
                 if (property.NameEquals("optionalLiteralString"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    optionalLiteralString = new ThingOptionalLiteralString(property.Value.GetString());
+                    optionalLiteralString = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("optionalLiteralInt"u8))
@@ -125,7 +121,7 @@ namespace NoTestTypeSpec.Models
                     {
                         continue;
                     }
-                    optionalLiteralInt = new ThingOptionalLiteralInt(property.Value.GetInt32());
+                    optionalLiteralInt = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("optionalLiteralFloat"u8))
@@ -134,7 +130,7 @@ namespace NoTestTypeSpec.Models
                     {
                         continue;
                     }
-                    optionalLiteralFloat = new ThingOptionalLiteralFloat(property.Value.GetSingle());
+                    optionalLiteralFloat = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("optionalLiteralBool"u8))

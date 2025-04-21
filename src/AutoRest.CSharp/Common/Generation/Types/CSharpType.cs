@@ -588,6 +588,24 @@ namespace AutoRest.CSharp.Generation.Types
                 };
             }
 
+            if (type is { Implementation: EnumType enumType })
+            {
+                Constant? literal;
+                try
+                {
+                    literal = new Constant(literalValue, type);
+                }
+                catch
+                {
+                    literal = null;
+                }
+
+                return new CSharpType(enumType, isNullable: type.IsNullable)
+                {
+                    Literal = literal
+                };
+            }
+
             throw new NotSupportedException("Literals are not supported in non-framework type");
         }
 
