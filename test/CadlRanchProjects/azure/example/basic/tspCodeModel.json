@@ -433,51 +433,358 @@
    "kind": "client",
    "name": "AzureExampleClient",
    "namespace": "AzureExampleBasicClient",
-   "operations": [
+   "methods": [
     {
      "$id": "61",
+     "kind": "basic",
      "name": "basicAction",
-     "resourceName": "AzureExampleClient",
      "accessibility": "public",
-     "parameters": [
-      {
-       "$id": "62",
-       "name": "apiVersion",
-       "nameInRequest": "api-version",
-       "doc": "The API version to use for this operation.",
-       "type": {
+     "apiVersions": [
+      "2022-12-01-preview"
+     ],
+     "operation": {
+      "$id": "62",
+      "name": "basicAction",
+      "resourceName": "AzureExampleClient",
+      "accessibility": "public",
+      "parameters": [
+       {
         "$id": "63",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "location": "Query",
-       "isApiVersion": true,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Client",
-       "defaultValue": {
-        "$id": "64",
+        "name": "apiVersion",
+        "nameInRequest": "api-version",
+        "doc": "The API version to use for this operation.",
         "type": {
-         "$id": "65",
+         "$id": "64",
          "kind": "string",
          "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "value": "2022-12-01-preview"
+        "location": "Query",
+        "isApiVersion": true,
+        "isContentType": false,
+        "isEndpoint": false,
+        "explode": false,
+        "isRequired": true,
+        "kind": "Client",
+        "defaultValue": {
+         "$id": "65",
+         "type": {
+          "$id": "66",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string"
+         },
+         "value": "2022-12-01-preview"
+        },
+        "decorators": [],
+        "skipUrlEncoding": false
        },
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
+       {
+        "$id": "67",
+        "name": "queryParam",
+        "nameInRequest": "query-param",
+        "type": {
+         "$id": "68",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "location": "Query",
+        "isApiVersion": false,
+        "isContentType": false,
+        "isEndpoint": false,
+        "explode": false,
+        "isRequired": true,
+        "kind": "Method",
+        "decorators": [],
+        "skipUrlEncoding": false
+       },
+       {
+        "$id": "69",
+        "name": "headerParam",
+        "nameInRequest": "header-param",
+        "type": {
+         "$id": "70",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "location": "Header",
+        "isApiVersion": false,
+        "isContentType": false,
+        "isEndpoint": false,
+        "explode": false,
+        "isRequired": true,
+        "kind": "Method",
+        "decorators": [],
+        "skipUrlEncoding": false
+       },
+       {
+        "$id": "71",
+        "name": "contentType",
+        "nameInRequest": "Content-Type",
+        "doc": "Body parameter's content type. Known values are application/json",
+        "type": {
+         "$id": "72",
+         "kind": "constant",
+         "valueType": {
+          "$id": "73",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "value": "application/json",
+         "decorators": []
+        },
+        "location": "Header",
+        "isApiVersion": false,
+        "isContentType": true,
+        "isEndpoint": false,
+        "explode": false,
+        "isRequired": true,
+        "kind": "Constant",
+        "decorators": [],
+        "skipUrlEncoding": false
+       },
+       {
+        "$id": "74",
+        "name": "accept",
+        "nameInRequest": "Accept",
+        "type": {
+         "$id": "75",
+         "kind": "constant",
+         "valueType": {
+          "$id": "76",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "value": "application/json",
+         "decorators": []
+        },
+        "location": "Header",
+        "isApiVersion": false,
+        "isContentType": false,
+        "isEndpoint": false,
+        "explode": false,
+        "isRequired": true,
+        "kind": "Constant",
+        "decorators": [],
+        "skipUrlEncoding": false
+       },
+       {
+        "$id": "77",
+        "name": "body",
+        "nameInRequest": "body",
+        "type": {
+         "$ref": "10"
+        },
+        "location": "Body",
+        "isApiVersion": false,
+        "isContentType": false,
+        "isEndpoint": false,
+        "explode": false,
+        "isRequired": true,
+        "kind": "Method",
+        "decorators": [],
+        "skipUrlEncoding": false
+       }
+      ],
+      "responses": [
+       {
+        "$id": "78",
+        "statusCodes": [
+         200
+        ],
+        "bodyType": {
+         "$ref": "41"
+        },
+        "headers": [],
+        "isErrorResponse": false,
+        "contentTypes": [
+         "application/json"
+        ]
+       }
+      ],
+      "httpMethod": "POST",
+      "uri": "{endpoint}",
+      "path": "/azure/example/basic/basic",
+      "requestMediaTypes": [
+       "application/json"
+      ],
+      "bufferResponse": true,
+      "generateProtocolMethod": true,
+      "generateConvenienceMethod": true,
+      "crossLanguageDefinitionId": "AzureExampleBasicClient.AzureExampleClient.basicAction",
+      "decorators": [],
+      "examples": [
+       {
+        "$id": "79",
+        "kind": "http",
+        "name": "Basic action",
+        "description": "Basic action",
+        "filePath": "2022-12-01-preview/basic.json",
+        "parameters": [
+         {
+          "$id": "80",
+          "parameter": {
+           "$ref": "63"
+          },
+          "value": {
+           "$id": "81",
+           "kind": "string",
+           "type": {
+            "$ref": "64"
+           },
+           "value": "2022-12-01-preview"
+          }
+         },
+         {
+          "$id": "82",
+          "parameter": {
+           "$ref": "67"
+          },
+          "value": {
+           "$id": "83",
+           "kind": "string",
+           "type": {
+            "$ref": "68"
+           },
+           "value": "query"
+          }
+         },
+         {
+          "$id": "84",
+          "parameter": {
+           "$ref": "69"
+          },
+          "value": {
+           "$id": "85",
+           "kind": "string",
+           "type": {
+            "$ref": "70"
+           },
+           "value": "header"
+          }
+         },
+         {
+          "$id": "86",
+          "parameter": {
+           "$ref": "77"
+          },
+          "value": {
+           "$id": "87",
+           "kind": "model",
+           "type": {
+            "$ref": "10"
+           },
+           "value": {
+            "$id": "88",
+            "stringProperty": {
+             "$id": "89",
+             "kind": "string",
+             "type": {
+              "$ref": "12"
+             },
+             "value": "text"
+            },
+            "modelProperty": {
+             "$id": "90",
+             "kind": "model",
+             "type": {
+              "$ref": "16"
+             },
+             "value": {
+              "$id": "91",
+              "int32Property": {
+               "$id": "92",
+               "kind": "number",
+               "type": {
+                "$ref": "18"
+               },
+               "value": 1
+              },
+              "float32Property": {
+               "$id": "93",
+               "kind": "number",
+               "type": {
+                "$ref": "22"
+               },
+               "value": 1.5
+              },
+              "enumProperty": {
+               "$id": "94",
+               "kind": "string",
+               "type": {
+                "$ref": "2"
+               },
+               "value": "EnumValue1"
+              }
+             }
+            },
+            "arrayProperty": {
+             "$id": "95",
+             "kind": "array",
+             "type": {
+              "$ref": "31"
+             },
+             "value": [
+              {
+               "$id": "96",
+               "kind": "string",
+               "type": {
+                "$ref": "32"
+               },
+               "value": "item"
+              }
+             ]
+            },
+            "recordProperty": {
+             "$id": "97",
+             "kind": "dict",
+             "type": {
+              "$ref": "36"
+             },
+             "value": {
+              "$id": "98",
+              "record": {
+               "$id": "99",
+               "kind": "string",
+               "type": {
+                "$ref": "38"
+               },
+               "value": "value"
+              }
+             }
+            }
+           }
+          }
+         }
+        ],
+        "responses": [
+         {
+          "$id": "100",
+          "response": {
+           "$ref": "78"
+          },
+          "statusCode": 200
+         }
+        ]
+       }
+      ]
+     },
+     "parameters": [
       {
-       "$id": "66",
+       "$id": "101",
        "name": "queryParam",
        "nameInRequest": "query-param",
        "type": {
-        "$id": "67",
+        "$id": "102",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -494,11 +801,11 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "68",
+       "$id": "103",
        "name": "headerParam",
        "nameInRequest": "header-param",
        "type": {
-        "$id": "69",
+        "$id": "104",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -515,62 +822,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "70",
-       "name": "contentType",
-       "nameInRequest": "Content-Type",
-       "doc": "Body parameter's content type. Known values are application/json",
-       "type": {
-        "$id": "71",
-        "kind": "constant",
-        "valueType": {
-         "$id": "72",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": true,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "73",
-       "name": "accept",
-       "nameInRequest": "Accept",
-       "type": {
-        "$id": "74",
-        "kind": "constant",
-        "valueType": {
-         "$id": "75",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "value": "application/json",
-        "decorators": []
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "76",
+       "$id": "105",
        "name": "body",
        "nameInRequest": "body",
        "type": {
@@ -585,200 +837,63 @@
        "kind": "Method",
        "decorators": [],
        "skipUrlEncoding": false
-      }
-     ],
-     "responses": [
+      },
       {
-       "$id": "77",
-       "statusCodes": [
-        200
-       ],
-       "bodyType": {
-        "$ref": "41"
+       "$id": "106",
+       "name": "contentType",
+       "nameInRequest": "contentType",
+       "doc": "Body parameter's content type. Known values are application/json",
+       "type": {
+        "$ref": "72"
        },
-       "headers": [],
-       "isErrorResponse": false,
-       "contentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "httpMethod": "POST",
-     "uri": "{endpoint}",
-     "path": "/azure/example/basic/basic",
-     "requestMediaTypes": [
-      "application/json"
-     ],
-     "bufferResponse": true,
-     "generateProtocolMethod": true,
-     "generateConvenienceMethod": true,
-     "crossLanguageDefinitionId": "AzureExampleBasicClient.AzureExampleClient.basicAction",
-     "decorators": [],
-     "examples": [
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
+      },
       {
-       "$id": "78",
-       "kind": "http",
-       "name": "Basic action",
-       "description": "Basic action",
-       "filePath": "2022-12-01-preview/basic.json",
-       "parameters": [
-        {
-         "$id": "79",
-         "parameter": {
-          "$ref": "62"
-         },
-         "value": {
-          "$id": "80",
-          "kind": "string",
-          "type": {
-           "$ref": "63"
-          },
-          "value": "2022-12-01-preview"
-         }
-        },
-        {
-         "$id": "81",
-         "parameter": {
-          "$ref": "66"
-         },
-         "value": {
-          "$id": "82",
-          "kind": "string",
-          "type": {
-           "$ref": "67"
-          },
-          "value": "query"
-         }
-        },
-        {
-         "$id": "83",
-         "parameter": {
-          "$ref": "68"
-         },
-         "value": {
-          "$id": "84",
-          "kind": "string",
-          "type": {
-           "$ref": "69"
-          },
-          "value": "header"
-         }
-        },
-        {
-         "$id": "85",
-         "parameter": {
-          "$ref": "76"
-         },
-         "value": {
-          "$id": "86",
-          "kind": "model",
-          "type": {
-           "$ref": "10"
-          },
-          "value": {
-           "$id": "87",
-           "stringProperty": {
-            "$id": "88",
-            "kind": "string",
-            "type": {
-             "$ref": "12"
-            },
-            "value": "text"
-           },
-           "modelProperty": {
-            "$id": "89",
-            "kind": "model",
-            "type": {
-             "$ref": "16"
-            },
-            "value": {
-             "$id": "90",
-             "int32Property": {
-              "$id": "91",
-              "kind": "number",
-              "type": {
-               "$ref": "18"
-              },
-              "value": 1
-             },
-             "float32Property": {
-              "$id": "92",
-              "kind": "number",
-              "type": {
-               "$ref": "22"
-              },
-              "value": 1.5
-             },
-             "enumProperty": {
-              "$id": "93",
-              "kind": "string",
-              "type": {
-               "$ref": "2"
-              },
-              "value": "EnumValue1"
-             }
-            }
-           },
-           "arrayProperty": {
-            "$id": "94",
-            "kind": "array",
-            "type": {
-             "$ref": "31"
-            },
-            "value": [
-             {
-              "$id": "95",
-              "kind": "string",
-              "type": {
-               "$ref": "32"
-              },
-              "value": "item"
-             }
-            ]
-           },
-           "recordProperty": {
-            "$id": "96",
-            "kind": "dict",
-            "type": {
-             "$ref": "36"
-            },
-            "value": {
-             "$id": "97",
-             "record": {
-              "$id": "98",
-              "kind": "string",
-              "type": {
-               "$ref": "38"
-              },
-              "value": "value"
-             }
-            }
-           }
-          }
-         }
-        }
-       ],
-       "responses": [
-        {
-         "$id": "99",
-         "response": {
-          "$ref": "77"
-         },
-         "statusCode": 200
-        }
-       ]
+       "$id": "107",
+       "name": "accept",
+       "nameInRequest": "accept",
+       "type": {
+        "$ref": "75"
+       },
+       "location": "Header",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isEndpoint": false,
+       "explode": false,
+       "isRequired": true,
+       "kind": "Constant",
+       "decorators": [],
+       "skipUrlEncoding": false
       }
-     ]
+     ],
+     "response": {
+      "$id": "108",
+      "type": {
+       "$ref": "41"
+      }
+     },
+     "isOverride": false,
+     "generateConvenient": true,
+     "generateProtocol": true,
+     "crossLanguageDefinitionId": "AzureExampleBasicClient.AzureExampleClient.basicAction"
     }
    ],
    "parameters": [
     {
-     "$id": "100",
+     "$id": "109",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Service host",
      "type": {
-      "$id": "101",
+      "$id": "110",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -792,9 +907,9 @@
      "explode": false,
      "kind": "Client",
      "defaultValue": {
-      "$id": "102",
+      "$id": "111",
       "type": {
-       "$id": "103",
+       "$id": "112",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"

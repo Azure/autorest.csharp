@@ -2526,5 +2526,173 @@ new BaseModel(123)
             AzureLocationModel body = new AzureLocationModel(new AzureLocation("<location>"));
             Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), body: body);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_GetWithOptionalBody_ShortVersion()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = null;
+            foreach (BinaryData item in client.GetWithOptionalBody(content))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+                Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+                Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+                Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_GetWithOptionalBody_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = null;
+            await foreach (BinaryData item in client.GetWithOptionalBodyAsync(content))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+                Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+                Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+                Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_GetWithOptionalBody_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            foreach (Thing item in client.GetWithOptionalBody())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_GetWithOptionalBody_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            await foreach (Thing item in client.GetWithOptionalBodyAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_GetWithOptionalBody_AllParameters()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                filter = "<filter>",
+            });
+            foreach (BinaryData item in client.GetWithOptionalBody(content))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+                Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+                Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+                Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+                Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+                Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+                Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+                Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+                Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+                Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+                Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_GetWithOptionalBody_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                filter = "<filter>",
+            });
+            await foreach (BinaryData item in client.GetWithOptionalBodyAsync(content))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+                Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+                Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+                Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+                Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+                Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+                Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+                Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+                Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+                Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+                Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
+                Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_GetWithOptionalBody_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ListBody body = new ListBody
+            {
+                Filter = "<filter>",
+            };
+            foreach (Thing item in client.GetWithOptionalBody(body: body))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_GetWithOptionalBody_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ListBody body = new ListBody
+            {
+                Filter = "<filter>",
+            };
+            await foreach (Thing item in client.GetWithOptionalBodyAsync(body: body))
+            {
+            }
+        }
     }
 }

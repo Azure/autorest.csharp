@@ -25,7 +25,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
-            VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
+            VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient();
 
             Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", null, null);
             BinaryData responseData = operation.Value;
@@ -37,7 +37,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
-            VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
+            VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient();
 
             Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);
             BinaryData responseData = operation.Value;
@@ -49,7 +49,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
-            VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
+            VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient();
 
             Operation<BinaryData> operation = await client.ExportWAsync(WaitUntil.Completed, "<name>", null, null);
             BinaryData responseData = operation.Value;
@@ -61,7 +61,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
-            VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
+            VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient();
 
             Operation<BinaryData> operation = await client.ExportWAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);
             BinaryData responseData = operation.Value;

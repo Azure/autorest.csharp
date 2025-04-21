@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -27,6 +28,7 @@ namespace FirstTestTypeSpec
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -70,6 +72,7 @@ namespace FirstTestTypeSpec
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
+            _apiVersion = options.Version;
         }
 
         /// <summary> Initializes a new instance of FirstTestTypeSpecClient. </summary>
@@ -87,6 +90,7 @@ namespace FirstTestTypeSpec
             _tokenCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
+            _apiVersion = options.Version;
         }
 
         /// <summary> top level method. </summary>
@@ -2365,12 +2369,95 @@ namespace FirstTestTypeSpec
             }
         }
 
+        /// <summary> This is a list operation with an optional body. </summary>
+        /// <param name="body"> Metric dimension filter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List the metric values for a load test run. </remarks>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetWithOptionalBodyAsync(ListBody,CancellationToken)']/*" />
+        public virtual AsyncPageable<Thing> GetWithOptionalBodyAsync(ListBody body = null, CancellationToken cancellationToken = default)
+        {
+            RequestContent content = body?.ToRequestContent();
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithOptionalBodyRequest(content, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithOptionalBodyNextPageRequest(nextLink, content, context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => Thing.DeserializeThing(e), ClientDiagnostics, _pipeline, "FirstTestTypeSpecClient.GetWithOptionalBody", "value", "nextLink", context);
+        }
+
+        /// <summary> This is a list operation with an optional body. </summary>
+        /// <param name="body"> Metric dimension filter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List the metric values for a load test run. </remarks>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetWithOptionalBody(ListBody,CancellationToken)']/*" />
+        public virtual Pageable<Thing> GetWithOptionalBody(ListBody body = null, CancellationToken cancellationToken = default)
+        {
+            RequestContent content = body?.ToRequestContent();
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithOptionalBodyRequest(content, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithOptionalBodyNextPageRequest(nextLink, content, context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => Thing.DeserializeThing(e), ClientDiagnostics, _pipeline, "FirstTestTypeSpecClient.GetWithOptionalBody", "value", "nextLink", context);
+        }
+
+        /// <summary>
+        /// [Protocol Method] This is a list operation with an optional body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetWithOptionalBodyAsync(ListBody,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetWithOptionalBodyAsync(RequestContent,RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetWithOptionalBodyAsync(RequestContent content, RequestContext context = null)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithOptionalBodyRequest(content, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithOptionalBodyNextPageRequest(nextLink, content, context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "FirstTestTypeSpecClient.GetWithOptionalBody", "value", "nextLink", context);
+        }
+
+        /// <summary>
+        /// [Protocol Method] This is a list operation with an optional body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetWithOptionalBody(ListBody,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetWithOptionalBody(RequestContent,RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetWithOptionalBody(RequestContent content, RequestContext context = null)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithOptionalBodyRequest(content, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithOptionalBodyNextPageRequest(nextLink, content, context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "FirstTestTypeSpecClient.GetWithOptionalBody", "value", "nextLink", context);
+        }
+
         private Hello _cachedHello;
         private EnumTest _cachedEnumTest;
         private ProtocolAndConvenient _cachedProtocolAndConvenient;
         private Entity _cachedEntity;
         private Glossary _cachedGlossary;
         private Resource _cachedResource;
+        private VersioningOp _cachedVersioningOp;
 
         /// <summary> Initializes a new instance of Hello. </summary>
         public virtual Hello GetHelloClient()
@@ -2409,13 +2496,9 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Initializes a new instance of VersioningOp. </summary>
-        /// <param name="apiVersion"> The API version to use for this operation. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual VersioningOp GetVersioningOpClient(string apiVersion = "2022-05-15-preview")
+        public virtual VersioningOp GetVersioningOpClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new VersioningOp(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedVersioningOp) ?? Interlocked.CompareExchange(ref _cachedVersioningOp, new VersioningOp(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint, _apiVersion), null) ?? _cachedVersioningOp;
         }
 
         internal HttpMessage CreateTopActionRequest(DateTimeOffset action, RequestContext context)
@@ -2543,6 +2626,22 @@ namespace FirstTestTypeSpec
             uri.AppendPath("/retunsAnonymousModel", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateGetWithOptionalBodyRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/listWithOptionalBody", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
             return message;
         }
 
@@ -2737,6 +2836,19 @@ namespace FirstTestTypeSpec
             request.Headers.Add("regen-location", regenLocation);
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateGetWithOptionalBodyNextPageRequest(string nextLink, RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

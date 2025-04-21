@@ -53,6 +53,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 deserializeNullCollectionAsNullValue: false,
                 useCoreDataFactoryReplacements: true,
                 useModelReaderWriter: true,
+                useAzurePlugin: false,
                 enableBicepSerialization: true,
                 enableInternalRawData: false,
                 modelFactoryForHlc: Array.Empty<string>(),

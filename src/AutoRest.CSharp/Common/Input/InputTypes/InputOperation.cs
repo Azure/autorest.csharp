@@ -150,8 +150,8 @@ internal record InputOperation
     public string? ExternalDocsUrl { get; }
     public IReadOnlyList<string>? RequestMediaTypes { get; }
     public bool BufferResponse { get; }
-    public InputOperationLongRunning? LongRunning { get; }
-    public InputOperationPaging? Paging { get; init; }
+    public InputOperationLongRunning? LongRunning { get; internal set; }
+    public InputOperationPaging? Paging { get; internal set; }
     public bool GenerateProtocolMethod { get; }
     public bool GenerateConvenienceMethod { get; }
     public string CrossLanguageDefinitionId { get; }
