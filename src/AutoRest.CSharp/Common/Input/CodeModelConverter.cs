@@ -809,6 +809,11 @@ namespace AutoRest.CSharp.Common.Input
         {
             var usage = _schemaUsageProvider.GetUsage(schema);
             var valueType = (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, false);
+            // the enum in typespec model only supports string int32 float32 and boolean
+            if (valueType.Kind != InputPrimitiveTypeKind.String && valueType.Kind != InputPrimitiveTypeKind.Int32 && valueType.Kind != InputPrimitiveTypeKind.Float32 && valueType.Kind != InputPrimitiveTypeKind.Boolean)
+            {
+                throw new NotSupportedException($"Enum type {valueType} is not supported");
+            }
             var inputEnumType = new InputEnumType(
                 Name: schema.Name,
                 CrossLanguageDefinitionId: GetCrossLanguageDefinitionId(schema),
@@ -842,20 +847,39 @@ namespace AutoRest.CSharp.Common.Input
         private static InputEnumTypeValue CreateEnumValue(ChoiceValue choiceValue, InputPrimitiveType valueType)
         {
             // in code model, the value of choices are defined to be strings. We need to convert them back to their real values
-            var value = ConvertRawValue(valueType, choiceValue.Value);
+            var value = ConvertRawEnumValue(valueType, choiceValue.Value);
             var name = choiceValue.Language.Default.Name;
             var doc = choiceValue.Language.Default.Description;
             switch (valueType.Kind)
             {
                 case InputPrimitiveTypeKind.String:
-                    return new InputEnumTypeStringValue(name, (string)value!, string.Empty, doc);
+                    return new InputEnumTypeStringValue(name, (string)value, string.Empty, doc);
                 case InputPrimitiveTypeKind.Int32:
-                    return new InputEnumTypeIntegerValue(name, (int)value!, string.Empty, doc);
+                    return new InputEnumTypeIntegerValue(name, (int)value, string.Empty, doc);
                 case InputPrimitiveTypeKind.Float32:
-                case InputPrimitiveTypeKind.Float:
-                    return new InputEnumTypeFloatValue(name, (float)value!, string.Empty, doc);
+                    return new InputEnumTypeFloatValue(name, (float)value, string.Empty, doc);
                 default:
-                    return new InputEnumTypeStringValue(name, value!.ToString()!, string.Empty, doc);
+                    return new InputEnumTypeStringValue(name, value.ToString()!, string.Empty, doc);
+            }
+
+            static object ConvertRawEnumValue(InputPrimitiveType inputType, object originalValue)
+            {
+                if (originalValue is string strValue)
+                {
+                    switch (inputType)
+                    {
+                        case InputPrimitiveType { Kind: InputPrimitiveTypeKind.Int32 }:
+                            return int.TryParse(strValue, out var intValue) ? intValue : default(int);
+                        case InputPrimitiveType { Kind: InputPrimitiveTypeKind.Float32 }:
+                            return float.TryParse(strValue, out var floatValue) ? floatValue : default(float);
+                        case InputPrimitiveType { Kind: InputPrimitiveTypeKind.Boolean }:
+                            return bool.TryParse(strValue, out var boolValue) ? boolValue : default(bool);
+                        default:
+                            return strValue;
+                    }
+                }
+
+                return originalValue;
             }
         }
 
