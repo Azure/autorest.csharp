@@ -464,9 +464,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                 }
                 // [TODO]: Consolidate property initializer generation between HLC and DPG
-                else if (property.InputModelProperty?.ConstantValue is { } constant && !propertyType.IsNullable && Configuration.Generation1ConvenienceClient)
+                else if (property.InputModelProperty?.Type is InputLiteralType literalType && !propertyType.IsNullable && Configuration.Generation1ConvenienceClient)
                 {
-                    initializationValue = BuilderHelpers.ParseConstant(constant.Value, propertyType);
+                    initializationValue = BuilderHelpers.ParseConstant(literalType.Value, propertyType);
                 }
 
                 if (initializationValue != null)

@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 // for classes, only required + not readonly + not constant + not discriminator could get into the public ctor
                 // for structs, all properties must be set in the public ctor
-                if (isStruct || inputModelProperty is { IsRequired: true, IsDiscriminator: false, ConstantValue: null })
+                if (isStruct || inputModelProperty is { IsRequired: true, IsDiscriminator: false, Type: not InputLiteralType })
                 {
                     // [TODO]: Provide a flag to add read/write properties to the public model constructor
                     if (Configuration.Generation1ConvenienceClient || !inputModelProperty.IsReadOnly)
@@ -227,7 +227,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return true;
             }
 
-            if (property.ConstantValue is not null && property.IsRequired) // a property will not have setter when it is required literal type
+            if (property.Type is InputLiteralType && property.IsRequired) // a property will not have setter when it is required literal type
             {
                 return true;
             }
@@ -352,7 +352,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             // if it is not set, we check if this property is a literal type, and use the literal type as its default value.
-            if (inputModelProperty.ConstantValue is null || !inputModelProperty.IsRequired)
+            if (inputModelProperty.Type is not InputLiteralType || !inputModelProperty.IsRequired)
             {
                 return null;
             }
@@ -363,8 +363,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return null;
             }
 
-            var constant = inputModelProperty.ConstantValue is { } constantValue && !propertyType.IsNullable
-                ? BuilderHelpers.ParseConstant(constantValue.Value, propertyType)
+            var constant = inputModelProperty.Type is InputLiteralType literalType && !propertyType.IsNullable
+                ? BuilderHelpers.ParseConstant(literalType.Value, propertyType)
                 : Constant.NewInstanceOf(propertyType);
 
             return new ConstantExpression(constant);

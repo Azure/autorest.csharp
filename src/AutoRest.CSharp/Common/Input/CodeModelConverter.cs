@@ -515,7 +515,7 @@ namespace AutoRest.CSharp.Common.Input
                 Summary: string.Empty,
                 Doc: property.Language.Default.Description,
                 Type: GetOrCreateType(property),
-                ConstantValue: property.Schema is ConstantSchema constantSchema ? CreateConstant(constantSchema, constantSchema.Extensions?.Format, property.IsNullable) : null,
+                //ConstantValue: property.Schema is ConstantSchema constantSchema ? CreateConstant(constantSchema, constantSchema.Extensions?.Format, property.IsNullable) : null,
                 IsRequired: property.IsRequired,
                 IsReadOnly: property.IsReadOnly,
                 IsDiscriminator: property.IsDiscriminator ?? false)

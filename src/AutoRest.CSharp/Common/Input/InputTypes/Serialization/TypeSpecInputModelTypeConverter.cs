@@ -244,7 +244,6 @@ namespace AutoRest.CSharp.Common.Input
                 property.Summary,
                 property.Doc,
                 ConvertPropertyType(property.Type),
-                property.ConstantValue,
                 property.IsRequired,
                 property.IsReadOnly,
                 property.IsDiscriminator)

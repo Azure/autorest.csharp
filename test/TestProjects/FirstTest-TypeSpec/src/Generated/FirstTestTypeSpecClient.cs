@@ -321,10 +321,6 @@ namespace FirstTestTypeSpec
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
         /// <param name="requiredNullableList"> required nullable collection. </param>
         /// <param name="requiredFloatProperty"> required float property. </param>
-        /// <param name="requiredLiteralString"> required literal string. </param>
-        /// <param name="requiredLiteralInt"> required literal int. </param>
-        /// <param name="requiredLiteralFloat"> required literal float. </param>
-        /// <param name="requiredLiteralBool"> required literal bool. </param>
         /// <param name="optionalLiteralString"> optional literal string. </param>
         /// <param name="optionalLiteralInt"> optional literal int. </param>
         /// <param name="optionalLiteralFloat"> optional literal float. </param>
@@ -334,8 +330,8 @@ namespace FirstTestTypeSpec
         /// <param name="optionalResourceId"> optional arm id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},double,string,int,float,bool,string,int?,float?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)']/*" />
-        public virtual async Task<Response<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, double requiredFloatProperty, string requiredLiteralString, int requiredLiteralInt, float requiredLiteralFloat, bool requiredLiteralBool, string optionalLiteralString = null, int? optionalLiteralInt = null, float? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, double? optionalFloatProperty = null, ResourceIdentifier optionalResourceId = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},double,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)']/*" />
+        public virtual async Task<Response<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, double requiredFloatProperty, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, double? optionalFloatProperty = null, ResourceIdentifier optionalResourceId = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
@@ -344,10 +340,10 @@ namespace FirstTestTypeSpec
             Thing thing = new Thing(
                 name,
                 requiredUnion,
-                requiredLiteralString,
-                requiredLiteralInt,
-                requiredLiteralFloat,
-                requiredLiteralBool,
+                default,
+                default,
+                default,
+                default,
                 optionalLiteralString,
                 optionalLiteralInt,
                 optionalLiteralFloat,
@@ -370,10 +366,6 @@ namespace FirstTestTypeSpec
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
         /// <param name="requiredNullableList"> required nullable collection. </param>
         /// <param name="requiredFloatProperty"> required float property. </param>
-        /// <param name="requiredLiteralString"> required literal string. </param>
-        /// <param name="requiredLiteralInt"> required literal int. </param>
-        /// <param name="requiredLiteralFloat"> required literal float. </param>
-        /// <param name="requiredLiteralBool"> required literal bool. </param>
         /// <param name="optionalLiteralString"> optional literal string. </param>
         /// <param name="optionalLiteralInt"> optional literal int. </param>
         /// <param name="optionalLiteralFloat"> optional literal float. </param>
@@ -383,8 +375,8 @@ namespace FirstTestTypeSpec
         /// <param name="optionalResourceId"> optional arm id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(string,BinaryData,string,IEnumerable{int},double,string,int,float,bool,string,int?,float?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)']/*" />
-        public virtual Response<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, double requiredFloatProperty, string requiredLiteralString, int requiredLiteralInt, float requiredLiteralFloat, bool requiredLiteralBool, string optionalLiteralString = null, int? optionalLiteralInt = null, float? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, double? optionalFloatProperty = null, ResourceIdentifier optionalResourceId = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(string,BinaryData,string,IEnumerable{int},double,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)']/*" />
+        public virtual Response<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, double requiredFloatProperty, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, double? optionalFloatProperty = null, ResourceIdentifier optionalResourceId = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
@@ -393,10 +385,10 @@ namespace FirstTestTypeSpec
             Thing thing = new Thing(
                 name,
                 requiredUnion,
-                requiredLiteralString,
-                requiredLiteralInt,
-                requiredLiteralFloat,
-                requiredLiteralBool,
+                default,
+                default,
+                default,
+                default,
                 optionalLiteralString,
                 optionalLiteralInt,
                 optionalLiteralFloat,
@@ -423,7 +415,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},double,string,int,float,bool,string,int?,float?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},double,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -462,7 +454,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousBody(string,BinaryData,string,IEnumerable{int},double,string,int,float,bool,string,int?,float?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousBody(string,BinaryData,string,IEnumerable{int},double,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

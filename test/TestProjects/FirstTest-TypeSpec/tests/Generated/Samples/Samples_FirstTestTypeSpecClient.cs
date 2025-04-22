@@ -512,7 +512,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<endpoint>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, "accept", 123, 1.23F, false);
+            Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
         }
 
         [Test]
@@ -522,7 +522,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<endpoint>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, "accept", 123, 1.23F, false);
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
         }
 
         [Test]
@@ -638,7 +638,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<endpoint>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, "accept", 123, 1.23F, false, optionalLiteralString: "reject", optionalLiteralInt: 456, optionalLiteralFloat: 4.56F, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: new ResourceIdentifier("<optionalResourceId>"));
+            Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, optionalLiteralString: ThingOptionalLiteralString.Reject, optionalLiteralInt: ThingOptionalLiteralInt._456, optionalLiteralFloat: ThingOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: new ResourceIdentifier("<optionalResourceId>"));
         }
 
         [Test]
@@ -648,7 +648,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<endpoint>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, "accept", 123, 1.23F, false, optionalLiteralString: "reject", optionalLiteralInt: 456, optionalLiteralFloat: 4.56F, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: new ResourceIdentifier("<optionalResourceId>"));
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, optionalLiteralString: ThingOptionalLiteralString.Reject, optionalLiteralInt: ThingOptionalLiteralInt._456, optionalLiteralFloat: ThingOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: new ResourceIdentifier("<optionalResourceId>"));
         }
 
         [Test]

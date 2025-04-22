@@ -45,7 +45,8 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
             {
                 var inputParameter = _operation.Parameters.First(p => string.Equals(p.Name, parameter.Name, StringComparison.OrdinalIgnoreCase));
                 var description = (DocHelpers.GetDescription(inputParameter.Summary, inputParameter.Doc) is not null or "") && parameter.Description is not null ? parameter.Description.ToString() : $"The {parameter.Name}";
-                var property = new InputModelProperty(parameter.Name, parameter.Name, string.Empty, description, inputParameter!.Type, parameter.DefaultValue == null ? null : inputParameter.DefaultValue, parameter.DefaultValue == null, false, false);
+                // TODO -- this might be wrong, we need to put the value as a literal type?
+                var property = new InputModelProperty(parameter.Name, parameter.Name, string.Empty, description, inputParameter!.Type, parameter.DefaultValue == null, false, false);
                 properties.Add(property);
             }
             var defaultNamespace = $"{MgmtContext.Context.DefaultNamespace}.Models";

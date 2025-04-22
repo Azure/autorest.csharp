@@ -216,9 +216,9 @@ namespace AutoRest.CSharp.Common.Input.Examples
                     {
                         exampleValue = InputExampleValue.Value(property.Type, model.DiscriminatorValue!);
                     }
-                    else if (property.ConstantValue is { Value: { } constantValue })
+                    else if (property.Type is InputLiteralType literalType )
                     {
-                        exampleValue = InputExampleValue.Value(property.Type, constantValue);
+                        exampleValue = InputExampleValue.Value(literalType.ValueType, literalType.Value);
                     }
                     else
                     {

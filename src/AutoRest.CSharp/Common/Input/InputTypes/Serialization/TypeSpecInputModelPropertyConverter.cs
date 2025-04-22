@@ -31,7 +31,6 @@ namespace AutoRest.CSharp.Common.Input
             string? summary = null;
             string? doc = null;
             InputType? propertyType = null;
-            InputConstant? defaultValue = null;
             bool isReadOnly = false;
             bool isOptional = false;
             bool isDiscriminator = false;
@@ -67,13 +66,7 @@ namespace AutoRest.CSharp.Common.Input
             Enum.TryParse(kind, ignoreCase: true, out InputModelPropertyKind propertyKind);
             propertyType = propertyType ?? throw new JsonException($"{nameof(InputModelProperty)} must have a property type.");
 
-            if (propertyType is InputLiteralType lt)
-            {
-                defaultValue = new InputConstant(lt.Value, lt.ValueType);
-                propertyType = lt.ValueType;
-            }
-
-            var property = new InputModelProperty(name, serializedName ?? name, summary, doc, propertyType, defaultValue, !isOptional, isReadOnly, isDiscriminator, propertyKind)
+            var property = new InputModelProperty(name, serializedName ?? name, summary, doc, propertyType, !isOptional, isReadOnly, isDiscriminator, propertyKind)
             {
                 Decorators = decorators ?? [],
                 IsFlattened = isFlattened

@@ -305,17 +305,16 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Constant? defaultInitializationValue = null;
 
                 var propertyType = property.Declaration.Type;
-                if (property.InputModelProperty?.ConstantValue is not null && property.IsRequired)
+                if (property.InputModelProperty?.Type is InputLiteralType literalType && property.IsRequired)
                 {
                     // Turn constants into initializers
-                    initializationValue = BuilderHelpers.ParseConstant(property.InputModelProperty!.ConstantValue.Value, propertyType);
+                    initializationValue = BuilderHelpers.ParseConstant(literalType.Value, propertyType);
                 }
                 else if (IsStruct || property.InputModelProperty?.IsRequired == true)
                 {
                     // For structs all properties become required
                     Constant? defaultParameterValue = null;
-                    var constantValue = property.InputModelProperty?.ConstantValue;
-                    Constant? clientDefaultValue = constantValue != null ? BuilderHelpers.ParseConstant(constantValue.Value, _typeFactory.CreateType(constantValue.Type)) : null;
+                    Constant? clientDefaultValue = property.InputModelProperty?.Type is InputLiteralType literal ? BuilderHelpers.ParseConstant(literal.Value, _typeFactory.CreateType(literal.ValueType)) : null;
                     if (clientDefaultValue is object defaultValueObject)
                     {
                         defaultInitializationValue = BuilderHelpers.ParseConstant(defaultValueObject, propertyType);
@@ -570,7 +569,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             // we should remove the setter of required constant
-            if (property.ConstantValue is not null && property.IsRequired)
+            if (property.Type is InputLiteralType && property.IsRequired)
             {
                 propertyShouldOmitSetter = true;
             }
