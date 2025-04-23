@@ -104,12 +104,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (Configuration.EnableInternalRawData)
             {
-                writer.WriteXmlDocumentationSummary($"{rawDataField.Description}");
+                writer.WriteXmlDocumentationSummary(rawDataField.FormattedDescription);
                 writer.Append($"{rawDataField.Declaration.Accessibility} {rawDataField.Declaration.Type} {rawDataField.Declaration.Name} {{ get; set; }}");
             }
             else
             {
-                writer.WriteXmlDocumentationSummary($"{rawDataField.Description}");
+                writer.WriteXmlDocumentationSummary(rawDataField.FormattedDescription);
                 writer.Append($"{rawDataField.Declaration.Accessibility} ")
                     .AppendRawIf("readonly ", schema.IsStruct)
                     .Line($"{rawDataField.Declaration.Type} {rawDataField.Declaration.Name};");
@@ -272,11 +272,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
         {
-            if (!string.IsNullOrWhiteSpace(property.PropertyDescription.ToString()))
+            if (!FormattableStringHelpers.IsNullOrEmpty(property.PropertyDescription))
             {
-                return $"{property.PropertyDescription}";
+                return property.PropertyDescription;
             }
-            return $"{ObjectTypeProperty.CreateDefaultPropertyDescription(overrideName ?? property.Declaration.Name, property.IsReadOnly)}";
+            return ObjectTypeProperty.CreateDefaultPropertyDescription(overrideName ?? property.Declaration.Name, property.IsReadOnly);
         }
 
         private string GetAbstract(ObjectType schema)

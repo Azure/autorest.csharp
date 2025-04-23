@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var param in ctor.GetParameters())
             {
                 _backingProperties.TryGetValue(param.Name!.ToCleanName(), out var backingProperty);
-                var parameter = new Parameter(param.Name!, FormattableStringHelpers.FromString(backingProperty?.Description) ?? $"The {param.Name}", GetCSharpType(param.ParameterType), null, ValidationType.None, null);
+                var parameter = new Parameter(param.Name!, backingProperty?.FormattedDescription ?? $"The {param.Name}", GetCSharpType(param.ParameterType), null, ValidationType.None, null);
                 parameters.Add(parameter);
             }
 
@@ -187,7 +187,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 }
 
-                yield return new ObjectTypeProperty(memberDeclarationOptions, DocHelpers.GetDescription(inputModelProperty.Summary, inputModelProperty.Doc) ?? string.Empty, inputModelProperty.IsReadOnly, inputModelProperty, new CSharpType(property.PropertyType)
+                yield return new ObjectTypeProperty(memberDeclarationOptions, FormattableStringHelpers.FromString(DocHelpers.GetDescription(inputModelProperty.Summary, inputModelProperty.Doc) ?? string.Empty), inputModelProperty.IsReadOnly, inputModelProperty, new CSharpType(property.PropertyType)
                 {
                     SerializeAs = GetSerializeAs(property.PropertyType)
                 });

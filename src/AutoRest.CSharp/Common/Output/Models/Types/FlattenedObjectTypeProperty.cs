@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class FlattenedObjectTypeProperty : ObjectTypeProperty
     {
         // The flattened object type property does not participate in the serialization or deserialization process, therefore we pass in null for SchemaProperty.
-        internal FlattenedObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, ObjectTypeProperty underlyingProperty, bool isReadOnly, bool? includeGetterNullCheck, bool includeSetterNullCheck, string childPropertyName, bool isOverriddenValueType, CSharpType? valueType = null, bool optionalViaNullability = false)
+        internal FlattenedObjectTypeProperty(MemberDeclarationOptions declaration, FormattableString parameterDescription, ObjectTypeProperty underlyingProperty, bool isReadOnly, bool? includeGetterNullCheck, bool includeSetterNullCheck, string childPropertyName, bool isOverriddenValueType, CSharpType? valueType = null, bool optionalViaNullability = false)
             : base(declaration, parameterDescription, isReadOnly, null, valueType, optionalViaNullability)
         {
             UnderlyingProperty = underlyingProperty;

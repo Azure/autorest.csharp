@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
                     BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", additionalPropertiesType, "public", existingMember, _typeFactory),
-                    "Additional Properties",
+                    $"Additional Properties",
                     true,
                     null
                     );
@@ -507,7 +507,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var accessibility = propertyWithSerialization.DeclaredAccessibility == Accessibility.Public ? "public" : "internal";
                     yield return new ObjectTypeProperty(
                         new MemberDeclarationOptions(accessibility, propertyWithSerialization.Name, csharpType),
-                        string.Empty,
+                        FormattableStringHelpers.Empty,
                         isReadOnly,
                         null);
                 }
@@ -582,7 +582,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var objectTypeProperty = new ObjectTypeProperty(
                 memberDeclaration,
-                BuilderHelpers.EscapeXmlDocDescription(DocHelpers.GetDescription(property.Summary, property.Doc) ?? string.Empty),
+                FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(DocHelpers.GetDescription(property.Summary, property.Doc) ?? string.Empty)),
                 propertyShouldOmitSetter,
                 property,
                 valueType,

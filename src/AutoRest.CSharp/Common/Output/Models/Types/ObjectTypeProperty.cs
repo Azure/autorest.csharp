@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         public ObjectTypeProperty(FieldDeclaration field, InputModelProperty? inputModelProperty)
             : this(declaration: new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type),
-                  parameterDescription: field.Description?.ToString() ?? string.Empty,
+                  parameterDescription: field.Description ?? FormattableStringHelpers.Empty,
                   isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),
                   isRequired: field.IsRequired,
                   valueType: field.ValueType,
@@ -35,12 +35,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             InitializationValue = field.InitializationValue;
         }
 
-        public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, InputModelProperty? inputModelProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
+        public ObjectTypeProperty(MemberDeclarationOptions declaration, FormattableString parameterDescription, bool isReadOnly, InputModelProperty? inputModelProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
             : this(declaration, parameterDescription, isReadOnly, inputModelProperty, inputModelProperty?.IsRequired ?? false, valueType: valueType, optionalViaNullability: optionalViaNullability)
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, InputModelProperty? inputModelProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, FormattableString parameterDescription, bool isReadOnly, InputModelProperty? inputModelProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default)
         {
             IsReadOnly = isReadOnly;
             OptionalViaNullability = optionalViaNullability;
@@ -51,7 +51,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _baseParameterDescription = parameterDescription;
             SerializationFormat = serializationFormat;
             FormattedDescription = CreatePropertyDescription(parameterDescription, isReadOnly);
-            Description = FormattedDescription.ToString();
             IsFlattenedProperty = isFlattenedProperty;
             GetterModifiers = getterModifiers;
             SetterModifiers = setterModifiers;
@@ -147,13 +146,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool IsRequired { get; }
         public MemberDeclarationOptions Declaration { get; }
-        public string Description { get; }
         public FormattableString FormattedDescription { get; }
         private FormattableString? _propertyDescription;
         public FormattableString PropertyDescription => _propertyDescription ??= $"{FormattedDescription}{CreateExtraPropertyDiscriminatorSummary(ValueType)}";
         public InputModelProperty? InputModelProperty { get; }
         private FormattableString? _parameterDescription;
-        private string _baseParameterDescription; // inherited type "FlattenedObjectTypeProperty" need to pass this value into the base constructor so that some appended information will not be appended again in the flattened property
+        private FormattableString _baseParameterDescription; // inherited type "FlattenedObjectTypeProperty" need to pass this value into the base constructor so that some appended information will not be appended again in the flattened property
         public FormattableString ParameterDescription => _parameterDescription ??= $"{_baseParameterDescription}{CreateExtraPropertyDiscriminatorSummary(ValueType)}";
 
         /// <summary>
@@ -278,10 +276,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         /// <param name="parameterDescription">The parameter description.</param>
         /// <param name="isPropReadOnly">Flag to determine if a property is read only.</param>
         /// <returns>The formatted property description string.</returns>
-        private FormattableString CreatePropertyDescription(string parameterDescription, bool isPropReadOnly)
+        private FormattableString CreatePropertyDescription(FormattableString parameterDescription, bool isPropReadOnly)
         {
             FormattableString description;
-            if (string.IsNullOrEmpty(parameterDescription))
+            if (FormattableStringHelpers.IsNullOrEmpty(parameterDescription))
             {
                 description = CreateDefaultPropertyDescription(Declaration.Name, isPropReadOnly);
             }

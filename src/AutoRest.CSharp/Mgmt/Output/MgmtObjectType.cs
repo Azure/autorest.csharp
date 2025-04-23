@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var newType = new CSharpType(frameworkType.GetGenericTypeDefinition(), type.IsNullable, arguments);
                     return new ObjectTypeProperty(
                         new MemberDeclarationOptions(objectTypeProperty.Declaration.Accessibility, objectTypeProperty.Declaration.Name, newType),
-                        objectTypeProperty.Description,
+                        objectTypeProperty.FormattedDescription,
                         objectTypeProperty.IsReadOnly,
                         objectTypeProperty.InputModelProperty
                     );

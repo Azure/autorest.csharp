@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
@@ -81,7 +82,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             return true;
         }
 
-        protected const string PrivateAdditionalPropertiesPropertyDescription = "Keeps track of any properties unknown to the library.";
+        protected static readonly FormattableString PrivateAdditionalPropertiesPropertyDescription = FormattableStringHelpers.FromString("Keeps track of any properties unknown to the library.");
         protected const string PrivateAdditionalPropertiesPropertyName = "_serializedAdditionalRawData";
         protected const string InternalAdditionalPropertiesPropertyName = "SerializedAdditionalRawData";
         protected static readonly CSharpType _privateAdditionalPropertiesPropertyType = typeof(IDictionary<string, BinaryData>);

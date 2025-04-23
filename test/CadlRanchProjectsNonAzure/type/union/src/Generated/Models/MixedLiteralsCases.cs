@@ -100,10 +100,10 @@ namespace Scm._Type.Union.Models
         /// <description>2</description>
         /// </item>
         /// <item>
-        /// <description>3.3</description>
+        /// <description>3.3F</description>
         /// </item>
         /// <item>
-        /// <description>True</description>
+        /// <description>true</description>
         /// </item>
         /// </list>
         /// </remarks>
@@ -148,10 +148,10 @@ namespace Scm._Type.Union.Models
         /// <description>2</description>
         /// </item>
         /// <item>
-        /// <description>3.3</description>
+        /// <description>3.3F</description>
         /// </item>
         /// <item>
-        /// <description>True</description>
+        /// <description>true</description>
         /// </item>
         /// </list>
         /// </remarks>
@@ -196,10 +196,10 @@ namespace Scm._Type.Union.Models
         /// <description>2</description>
         /// </item>
         /// <item>
-        /// <description>3.3</description>
+        /// <description>3.3F</description>
         /// </item>
         /// <item>
-        /// <description>True</description>
+        /// <description>true</description>
         /// </item>
         /// </list>
         /// </remarks>
@@ -244,10 +244,10 @@ namespace Scm._Type.Union.Models
         /// <description>2</description>
         /// </item>
         /// <item>
-        /// <description>3.3</description>
+        /// <description>3.3F</description>
         /// </item>
         /// <item>
-        /// <description>True</description>
+        /// <description>true</description>
         /// </item>
         /// </list>
         /// </remarks>
