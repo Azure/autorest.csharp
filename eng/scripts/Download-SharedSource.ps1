@@ -32,7 +32,7 @@ Push-Location $clonedPath
 try {
     Invoke-LoggedCommand "git sparse-checkout init"
     Invoke-LoggedCommand "git sparse-checkout set --no-cone $azCoreSharedPath $armCoreSharedPath"
-    Invoke-LoggedCommand "git checkout"
+    Invoke-LoggedCommand "git checkout azureCoreMrw"
 }
 finally {
     Pop-Location

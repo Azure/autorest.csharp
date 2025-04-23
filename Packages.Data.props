@@ -30,7 +30,7 @@
     <PackageReference Update="System.Text.Json" Version="4.7.2" />
   
     <!-- Include analyzers so that we see issues in this repo before we do a regen preview-->
-    <PackageReference Update="Azure.ClientSdk.Analyzers" Version="0.1.1-dev.20240813.2" PrivateAssets="All" />
+    <PackageReference Update="Azure.ClientSdk.Analyzers" Version="0.1.1-dev.20250422.1" PrivateAssets="All" />
     <PackageReference Update="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0" PrivateAssets="All" />
     <PackageReference Update="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="3.3.2" PrivateAssets="All" />
   </ItemGroup>
@@ -38,7 +38,7 @@
   <!-- All csproj dependencies. -->
   <ItemGroup>
     <PackageReference Update="NUnit" Version="3.13.2" />
-    <PackageReference Update="System.ClientModel" Version="1.4.0-beta.3" />
+    <PackageReference Update="System.ClientModel" Version="1.4.0-alpha.20250422.9" />
     <PackageReference Update="Azure.Core" Version="1.42.0" />
     <PackageReference Update="Azure.Core.Experimental" Version="0.1.0-preview.18" />
     <PackageReference Update="Azure.ResourceManager" Version="1.13.0" />
