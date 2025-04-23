@@ -56,7 +56,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         /// <param name="kind"></param>
         /// <param name="start"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal WidgetData2(WidgetData2Kind kind, string start, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal WidgetData2(WidgetData1Kind kind, string start, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Start = start;
@@ -69,7 +69,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Gets the kind. </summary>
-        public WidgetData2Kind Kind { get; } = WidgetData2Kind.Kind1;
+        public WidgetData1Kind Kind { get; } = WidgetData1Kind.Kind1;
 
         /// <summary> Gets or sets the start. </summary>
         public string Start { get; set; }

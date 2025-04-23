@@ -135,7 +135,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, "accept", 123, 1.23F, false);
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
         }
 
         [Test]
@@ -179,7 +179,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, "accept", 123, 1.23F, false, optionalLiteralString: "reject", optionalLiteralInt: 456, optionalLiteralFloat: 4.56F, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 });
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, optionalLiteralString: ThingOptionalLiteralString.Reject, optionalLiteralInt: ThingOptionalLiteralInt._456, optionalLiteralFloat: ThingOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 });
         }
 
         [Test]

@@ -135,7 +135,7 @@ namespace NoDocsTypeSpec
             }
         }
 
-        public virtual async Task<Response<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, string requiredLiteralString, int requiredLiteralInt, float requiredLiteralFloat, bool requiredLiteralBool, string optionalLiteralString = null, int? optionalLiteralInt = null, float? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
@@ -144,10 +144,10 @@ namespace NoDocsTypeSpec
             Thing thing = new Thing(
                 name,
                 requiredUnion,
-                requiredLiteralString,
-                requiredLiteralInt,
-                requiredLiteralFloat,
-                requiredLiteralBool,
+                default,
+                default,
+                default,
+                default,
                 optionalLiteralString,
                 optionalLiteralInt,
                 optionalLiteralFloat,
@@ -161,7 +161,7 @@ namespace NoDocsTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        public virtual Response<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, string requiredLiteralString, int requiredLiteralInt, float requiredLiteralFloat, bool requiredLiteralBool, string optionalLiteralString = null, int? optionalLiteralInt = null, float? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, CancellationToken cancellationToken = default)
+        public virtual Response<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
@@ -170,10 +170,10 @@ namespace NoDocsTypeSpec
             Thing thing = new Thing(
                 name,
                 requiredUnion,
-                requiredLiteralString,
-                requiredLiteralInt,
-                requiredLiteralFloat,
-                requiredLiteralBool,
+                default,
+                default,
+                default,
+                default,
                 optionalLiteralString,
                 optionalLiteralInt,
                 optionalLiteralFloat,

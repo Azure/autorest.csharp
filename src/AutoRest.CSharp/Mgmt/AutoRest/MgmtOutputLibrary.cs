@@ -506,7 +506,22 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
-            => _input.Enums.ToDictionary(e => e, e => new EnumType(e, MgmtContext.Context));
+        {
+            var dict = new Dictionary<InputEnumType, EnumType>();
+            foreach (var inputEnum in _input.Enums)
+            {
+                dict.Add(inputEnum, new EnumType(inputEnum, MgmtContext.Context));
+            }
+            foreach (var literal in _input.Constants)
+            {
+                var converted = TypeFactory.GetLiteralValueType(literal);
+                if (converted is InputEnumType convertedEnum)
+                {
+                    dict.Add(convertedEnum, new EnumType(convertedEnum, MgmtContext.Context));
+                }
+            }
+            return dict;
+        }
 
         private IEnumerable<TypeProvider>? _models;
         public IEnumerable<TypeProvider> Models => _models ??= SchemaMap.Value.Values.Where(m => m is not SystemObjectType);

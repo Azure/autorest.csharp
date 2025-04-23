@@ -210,9 +210,9 @@ BinaryData.FromObjectAsJson("<unionList>")
                 },
                 new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
                 {
-                    OptionalLiteralString = "reject",
-                    OptionalLiteralInt = 456,
-                    OptionalLiteralFloat = 4.56F,
+                    OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                    OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                     OptionalLiteralBool = true,
                     OptionalNullableList = { 1234 },
                 },
@@ -509,9 +509,9 @@ BinaryData.FromObjectAsJson("<unionList>")
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
             {
-                OptionalLiteralString = "reject",
-                OptionalLiteralInt = 456,
-                OptionalLiteralFloat = 4.56F,
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
             };

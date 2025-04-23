@@ -26,7 +26,7 @@ namespace CustomizedTypeSpec.Models
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <param name="requiredNullableList"> required nullable collection. </param>
         /// <returns> A new <see cref="Models.Thing"/> instance for mocking. </returns>
-        public static Thing Thing(string name = null, BinaryData requiredUnion = null, string requiredLiteralString = null, int requiredLiteralInt = default, float requiredLiteralFloat = default, bool requiredLiteralBool = default, string optionalLiteralString = null, int? optionalLiteralInt = null, float? optionalLiteralFloat = null, bool? optionalLiteralBool = null, string requiredBadDescription = null, IEnumerable<int> optionalNullableList = null, IEnumerable<int> requiredNullableList = null)
+        public static Thing Thing(string name = null, BinaryData requiredUnion = null, ThingRequiredLiteralString requiredLiteralString = default, ThingRequiredLiteralInt requiredLiteralInt = default, ThingRequiredLiteralFloat requiredLiteralFloat = default, bool requiredLiteralBool = default, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, string requiredBadDescription = null, IEnumerable<int> optionalNullableList = null, IEnumerable<int> requiredNullableList = null)
         {
             optionalNullableList ??= new List<int>();
             requiredNullableList ??= new List<int>();

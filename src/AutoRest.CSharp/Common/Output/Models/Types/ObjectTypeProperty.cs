@@ -191,14 +191,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (item.IsLiteral && item.Literal?.Value != null)
                 {
                     var literalValue = item.Literal.Value.Value;
-                    if (item.FrameworkType == typeof(string))
-                    {
-                        description = $"<description>{literalValue:L}</description>";
-                    }
-                    else
-                    {
-                        description = $"<description>{literalValue}</description>";
-                    }
+                    description = $"<description>{literalValue:L}</description>";
                 }
                 else
                 {

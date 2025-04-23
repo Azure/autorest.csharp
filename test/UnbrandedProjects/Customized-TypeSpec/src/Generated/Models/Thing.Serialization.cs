@@ -41,27 +41,27 @@ namespace CustomizedTypeSpec.Models
             }
 #endif
             writer.WritePropertyName("requiredLiteralString"u8);
-            writer.WriteStringValue(RequiredLiteralString);
+            writer.WriteStringValue(RequiredLiteralString.ToString());
             writer.WritePropertyName("requiredLiteralInt"u8);
-            writer.WriteNumberValue(RequiredLiteralInt);
+            writer.WriteNumberValue(RequiredLiteralInt.ToSerialInt32());
             writer.WritePropertyName("requiredLiteralFloat"u8);
-            writer.WriteNumberValue(RequiredLiteralFloat);
+            writer.WriteNumberValue(RequiredLiteralFloat.ToSerialSingle());
             writer.WritePropertyName("requiredLiteralBool"u8);
             writer.WriteBooleanValue(RequiredLiteralBool);
             if (Optional.IsDefined(OptionalLiteralString))
             {
                 writer.WritePropertyName("optionalLiteralString"u8);
-                writer.WriteStringValue(OptionalLiteralString);
+                writer.WriteStringValue(OptionalLiteralString.Value.ToString());
             }
             if (Optional.IsDefined(OptionalLiteralInt))
             {
                 writer.WritePropertyName("optionalLiteralInt"u8);
-                writer.WriteNumberValue(OptionalLiteralInt.Value);
+                writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
             }
             if (Optional.IsDefined(OptionalLiteralFloat))
             {
                 writer.WritePropertyName("optionalLiteralFloat"u8);
-                writer.WriteNumberValue(OptionalLiteralFloat.Value);
+                writer.WriteNumberValue(OptionalLiteralFloat.Value.ToSerialSingle());
             }
             if (Optional.IsDefined(OptionalLiteralBool))
             {
@@ -140,13 +140,13 @@ namespace CustomizedTypeSpec.Models
             }
             string name = default;
             BinaryData requiredUnion = default;
-            string requiredLiteralString = default;
-            int requiredLiteralInt = default;
-            float requiredLiteralFloat = default;
+            ThingRequiredLiteralString requiredLiteralString = default;
+            ThingRequiredLiteralInt requiredLiteralInt = default;
+            ThingRequiredLiteralFloat requiredLiteralFloat = default;
             bool requiredLiteralBool = default;
-            string optionalLiteralString = default;
-            int? optionalLiteralInt = default;
-            float? optionalLiteralFloat = default;
+            ThingOptionalLiteralString? optionalLiteralString = default;
+            ThingOptionalLiteralInt? optionalLiteralInt = default;
+            ThingOptionalLiteralFloat? optionalLiteralFloat = default;
             bool? optionalLiteralBool = default;
             string requiredBadDescription = default;
             IList<int> optionalNullableList = default;
@@ -167,17 +167,17 @@ namespace CustomizedTypeSpec.Models
                 }
                 if (property.NameEquals("requiredLiteralString"u8))
                 {
-                    requiredLiteralString = property.Value.GetString();
+                    requiredLiteralString = new ThingRequiredLiteralString(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("requiredLiteralInt"u8))
                 {
-                    requiredLiteralInt = property.Value.GetInt32();
+                    requiredLiteralInt = new ThingRequiredLiteralInt(property.Value.GetInt32());
                     continue;
                 }
                 if (property.NameEquals("requiredLiteralFloat"u8))
                 {
-                    requiredLiteralFloat = property.Value.GetSingle();
+                    requiredLiteralFloat = new ThingRequiredLiteralFloat(property.Value.GetSingle());
                     continue;
                 }
                 if (property.NameEquals("requiredLiteralBool"u8))
@@ -187,7 +187,11 @@ namespace CustomizedTypeSpec.Models
                 }
                 if (property.NameEquals("optionalLiteralString"u8))
                 {
-                    optionalLiteralString = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalLiteralString = new ThingOptionalLiteralString(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("optionalLiteralInt"u8))
@@ -196,7 +200,7 @@ namespace CustomizedTypeSpec.Models
                     {
                         continue;
                     }
-                    optionalLiteralInt = property.Value.GetInt32();
+                    optionalLiteralInt = new ThingOptionalLiteralInt(property.Value.GetInt32());
                     continue;
                 }
                 if (property.NameEquals("optionalLiteralFloat"u8))
@@ -205,7 +209,7 @@ namespace CustomizedTypeSpec.Models
                     {
                         continue;
                     }
-                    optionalLiteralFloat = property.Value.GetSingle();
+                    optionalLiteralFloat = new ThingOptionalLiteralFloat(property.Value.GetSingle());
                     continue;
                 }
                 if (property.NameEquals("optionalLiteralBool"u8))
