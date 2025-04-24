@@ -621,17 +621,13 @@ namespace UnbrandedTypeSpec
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
         /// <param name="requiredNullableList"> required nullable collection. </param>
-        /// <param name="requiredLiteralString"> required literal string. </param>
-        /// <param name="requiredLiteralInt"> required literal int. </param>
-        /// <param name="requiredLiteralFloat"> required literal float. </param>
-        /// <param name="requiredLiteralBool"> required literal bool. </param>
         /// <param name="optionalLiteralString"> optional literal string. </param>
         /// <param name="optionalLiteralInt"> optional literal int. </param>
         /// <param name="optionalLiteralFloat"> optional literal float. </param>
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        public virtual async Task<ClientResult<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null)
+        public virtual async Task<ClientResult<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
@@ -640,10 +636,10 @@ namespace UnbrandedTypeSpec
             Thing thing = new Thing(
                 name,
                 requiredUnion,
-                requiredLiteralString,
-                requiredLiteralInt,
-                requiredLiteralFloat,
-                requiredLiteralBool,
+                default,
+                default,
+                default,
+                default,
                 optionalLiteralString,
                 optionalLiteralInt,
                 optionalLiteralFloat,
@@ -661,17 +657,13 @@ namespace UnbrandedTypeSpec
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
         /// <param name="requiredNullableList"> required nullable collection. </param>
-        /// <param name="requiredLiteralString"> required literal string. </param>
-        /// <param name="requiredLiteralInt"> required literal int. </param>
-        /// <param name="requiredLiteralFloat"> required literal float. </param>
-        /// <param name="requiredLiteralBool"> required literal bool. </param>
         /// <param name="optionalLiteralString"> optional literal string. </param>
         /// <param name="optionalLiteralInt"> optional literal int. </param>
         /// <param name="optionalLiteralFloat"> optional literal float. </param>
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        public virtual ClientResult<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null)
+        public virtual ClientResult<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
@@ -680,10 +672,10 @@ namespace UnbrandedTypeSpec
             Thing thing = new Thing(
                 name,
                 requiredUnion,
-                requiredLiteralString,
-                requiredLiteralInt,
-                requiredLiteralFloat,
-                requiredLiteralBool,
+                default,
+                default,
+                default,
+                default,
                 optionalLiteralString,
                 optionalLiteralInt,
                 optionalLiteralFloat,
@@ -706,7 +698,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int})"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int})"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -734,7 +726,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousBody(string,BinaryData,string,IEnumerable{int},ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int})"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousBody(string,BinaryData,string,IEnumerable{int},ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int})"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

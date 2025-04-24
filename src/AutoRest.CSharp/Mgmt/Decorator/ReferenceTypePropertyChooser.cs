@@ -91,8 +91,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             var extraDescription = IsReplacementTypeManagedServiceIdentity(replacementCSharpType) ? originalType.CreateExtraDescriptionWithManagedServiceIdentity() : string.Empty;
             var originalDescription = originalType.FormattedDescription;
-            var periodAndSpace = originalDescription.Format.EndsWith(".") ? " " : ". ";
-            var description = string.IsNullOrEmpty(extraDescription) ? originalDescription : $"{originalDescription}{periodAndSpace}{extraDescription}";
+            var description = string.IsNullOrEmpty(extraDescription) ? originalDescription : $"{originalDescription}{Environment.NewLine}{extraDescription}";
             return new ObjectTypeProperty(
                     new MemberDeclarationOptions(originalType.Declaration.Accessibility, originalType.Declaration.Name, replacementCSharpType),
                     description,
