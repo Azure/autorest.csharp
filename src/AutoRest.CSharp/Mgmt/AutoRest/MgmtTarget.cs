@@ -236,10 +236,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             //if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
             //    throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
-            var contextWriter = new CodeWriter();
-            var contextWriterInstance = new ModelReaderWriterContextWriter();
-            contextWriterInstance.Write(contextWriter);
-            project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
+            var emitContext = Configuration.MgmtConfiguration.IsArmCore ? Configuration.Namespace == "Azure.ResourceManager" ? true : false : true;
+            if (emitContext)
+            {
+                var contextWriter = new CodeWriter();
+                var contextWriterInstance = new ModelReaderWriterContextWriter();
+                contextWriterInstance.Write(contextWriter);
+                project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
+            }
 
             List<string> modelsToKeepList = [.. Configuration.MgmtConfiguration.KeepOrphanedModels, ModelReaderWriterContextWriter.Name];
             var modelsToKeep = modelsToKeepList.ToImmutableHashSet();
