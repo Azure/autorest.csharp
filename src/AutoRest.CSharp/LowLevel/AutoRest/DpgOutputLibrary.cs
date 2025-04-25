@@ -7,7 +7,6 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.LowLevel.Output;
 using AutoRest.CSharp.LowLevel.Output.Samples;
@@ -20,6 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly string _libraryName;
         private readonly IReadOnlyDictionary<InputEnumType, EnumType> _enums;
         private readonly IReadOnlyDictionary<InputModelType, ModelTypeProvider> _models;
+        private readonly IReadOnlyDictionary<InputLiteralType, InputEnumType> _literalValueTypes;
         private readonly bool _isTspInput;
         private readonly SourceInputModel? _sourceInputModel;
 
@@ -44,11 +44,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ClientOptionsTypeProvider ClientOptions { get; }
         public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(Models);
 
-        public DpgOutputLibrary(string libraryName, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
+        public DpgOutputLibrary(string libraryName, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyDictionary<InputLiteralType, InputEnumType> literals, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {
             TypeFactory = new TypeFactory(this, typeof(BinaryData));
             _libraryName = libraryName;
             _enums = enums;
+            _literalValueTypes = literals;
             _models = models;
             _isTspInput = isTspInput;
              _sourceInputModel = sourceInputModel;
@@ -96,6 +97,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private Dictionary<LowLevelClient, DpgClientSampleProvider>? _dpgClientSampleProviders;
         private Dictionary<LowLevelClient, DpgClientSampleProvider> DpgClientSampleProviders => _dpgClientSampleProviders ??= EnsureDpgSampleProviders();
+
+        public override IReadOnlyDictionary<InputLiteralType, InputEnumType> LiteralValueTypes => _literalValueTypes;
 
         private Dictionary<LowLevelClient, DpgClientSampleProvider> EnsureDpgSampleProviders()
         {

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Input.InputTypes;
@@ -22,6 +23,7 @@ namespace AutoRest.CSharp.Common.Input
         private readonly Dictionary<RequestParameter, Func<InputParameter>> _parametersCache;
         private readonly Dictionary<Schema, InputEnumType> _enumsCache;
         private readonly Dictionary<string, InputEnumType> _enumsNamingCache;
+        private readonly Dictionary<ConstantSchema, InputLiteralType> _constantsCache;
         private readonly Dictionary<ObjectSchema, InputModelType> _modelsCache;
         private readonly Dictionary<ObjectSchema, (List<InputModelProperty> Properties, IReadOnlyList<ObjectSchema> CompositSchemas)> _modelPropertiesCache;
         private readonly Dictionary<ObjectSchema, (List<InputModelType> DerivedModels, Dictionary<string, InputModelType> DiscriminatedSubtypes)> _derivedModelsCache;
@@ -33,6 +35,7 @@ namespace AutoRest.CSharp.Common.Input
             _schemaUsageProvider = schemaUsageProvider;
             _enumsCache = new Dictionary<Schema, InputEnumType>();
             _enumsNamingCache = new Dictionary<string, InputEnumType>();
+            _constantsCache = new Dictionary<ConstantSchema, InputLiteralType>();
             _operationsCache = new Dictionary<ServiceRequest, Func<InputOperation>>();
             _parametersCache = new Dictionary<RequestParameter, Func<InputParameter>>();
             _modelsCache = new Dictionary<ObjectSchema, InputModelType>();
@@ -54,13 +57,14 @@ namespace AutoRest.CSharp.Common.Input
         private InputNamespace CreateNamespace(Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
         {
             CreateEnums();
+            CreateConstants();
             var models = CreateModels();
             var clients = CreateClients(_codeModel.OperationGroups, serviceRequestToInputOperation, inputOperationToOperation);
 
             return new(name: _codeModel.Language.Default.Name,
                 clients: clients,
                 enums: _enumsCache.Values.ToArray(),
-                constants: [],
+                constants: _constantsCache.Values.ToArray(),
                 models: models,
                 apiVersions: GetApiVersions(),
                 auth: GetAuth(_codeModel.Security.Schemes.OfType<SecurityScheme>()));
@@ -372,6 +376,15 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             return new InputOperationPaging(nextLinkName: paging.NextLinkName, itemName: paging.ItemName, null, nextLinkServiceRequest == serviceRequest);
+        }
+
+        private void CreateConstants()
+        {
+            foreach (var constantSchema in _codeModel.Schemas.Constants)
+            {
+                var literalType = CreateConstantType(constantSchema);
+                _constantsCache[constantSchema] = literalType;
+            }
         }
 
         private void CreateEnums()
@@ -714,15 +727,20 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.Any } => InputPrimitiveType.Unknown.WithNullable(isNullable),
             { Type: AllSchemaTypes.AnyObject } => ToDataFactoryElementType(schema.Name, format, isNullable) ?? InputPrimitiveType.Unknown.WithNullable(isNullable),
 
-            ConstantSchema constantSchema => CreateConstant(constantSchema, format, isNullable).Type,
+            ConstantSchema constantSchema => GetInputTypeForConstantSchema(constantSchema),
             ChoiceSchema choiceSchema => GetInputTypeForChoiceSchema(choiceSchema),
             SealedChoiceSchema choiceSchema => GetInputTypeForChoiceSchema(choiceSchema),
             ArraySchema array => new InputListType(array.Name, array.Extensions?.IsEmbeddingsVector == true ? "Azure.Core.EmbeddingVector" : "TypeSpec.Array", GetOrCreateType(array.ElementType, array.NullableItems ?? false)).WithNullable(isNullable),
             DictionarySchema dictionary => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, GetOrCreateType(dictionary.ElementType, dictionary.NullableItems ?? false)).WithNullable(isNullable),
-            ObjectSchema objectSchema => CreateTypeForObjectSchema(objectSchema),
+            ObjectSchema objectSchema => GetInputTypeForObjectSchema(objectSchema),
 
             _ => throw new InvalidCastException($"Unknown schema type {schema.GetType()}")
         };
+
+        private InputLiteralType GetInputTypeForConstantSchema(ConstantSchema constantSchema)
+        {
+            return _constantsCache[constantSchema];
+        }
 
         // For ExampleValue.Schema, the schema is ChoiceSchema or SealedChoiceSchema, but the ChoiceSchema is not the same instance as the one in CodeModel.ChoiceSchemas or CodeModel.SealedChoiceSchemas
         private InputType GetInputTypeForChoiceSchema(SealedChoiceSchema schema)
@@ -743,7 +761,7 @@ namespace AutoRest.CSharp.Common.Input
             return _enumsNamingCache[schema.Language.Default.Name];
         }
 
-        private InputType CreateTypeForObjectSchema(ObjectSchema objectSchema)
+        private InputType GetInputTypeForObjectSchema(ObjectSchema objectSchema)
         {
             if (objectSchema.Language.Default.Name.StartsWith("DataFactoryElement-"))
             {
@@ -776,34 +794,30 @@ namespace AutoRest.CSharp.Common.Input
         private static InputType CreateDataFactoryElementInputType(bool isNullable, InputType argumentType)
             => new InputModelType("DataFactoryElement", "Azure.Core.Resources.DataFactoryElement", null, null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null, new List<InputType> { argumentType }).WithNullable(isNullable);
 
-        private InputConstant CreateConstant(ConstantSchema constantSchema, string? format, bool isNullable)
+        private InputLiteralType CreateConstantType(ConstantSchema constantSchema)
         {
             var rawValue = constantSchema.Value.Value;
-            var valueType = CreateType(constantSchema.ValueType, format, isNullable);
-            if (isNullable && rawValue == null)
-            {
-                return new InputConstant(null, valueType);
-            }
+            var valueType = CreateType(constantSchema.ValueType, constantSchema.Extensions?.Format, false);
 
-            // normalize the value, because the "value" coming from the code model is always a string
-            var kind = valueType.GetImplementType() switch
+            return valueType.GetImplementType() switch
             {
-                InputPrimitiveType primitiveType => primitiveType.Kind,
-                InputEnumType enumType => enumType.ValueType.Kind,
+                InputPrimitiveType primitiveType => new InputLiteralType(constantSchema.Name, primitiveType, NormalizeRawValue(primitiveType.Kind, rawValue)),
+                InputEnumType enumType => new InputLiteralType(enumType.Name, enumType.ValueType, NormalizeRawValue(enumType.ValueType.Kind, rawValue)),
                 _ => throw new InvalidCastException($"Unknown value type {valueType.GetType()} for literal types")
             };
 
-            object normalizedValue = kind switch
+            static object NormalizeRawValue(InputPrimitiveTypeKind kind, object rawValue)
             {
-                InputPrimitiveTypeKind.Boolean => bool.Parse(rawValue.ToString()!),
-                InputPrimitiveTypeKind.Int32 => int.Parse(rawValue.ToString()!),
-                InputPrimitiveTypeKind.Int64 => long.Parse(rawValue.ToString()!),
-                InputPrimitiveTypeKind.Float32 => float.Parse(rawValue.ToString()!),
-                InputPrimitiveTypeKind.Float64 => double.Parse(rawValue.ToString()!),
-                _ => rawValue
-            };
-
-            return new InputConstant(normalizedValue, valueType);
+                return kind switch
+                {
+                    InputPrimitiveTypeKind.Boolean => bool.Parse(rawValue.ToString()!),
+                    InputPrimitiveTypeKind.Int32 => int.Parse(rawValue.ToString()!),
+                    InputPrimitiveTypeKind.Int64 => long.Parse(rawValue.ToString()!),
+                    InputPrimitiveTypeKind.Float32 => float.Parse(rawValue.ToString()!),
+                    InputPrimitiveTypeKind.Float64 => double.Parse(rawValue.ToString()!),
+                    _ => rawValue
+                };
+            }
         }
 
         private InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible)

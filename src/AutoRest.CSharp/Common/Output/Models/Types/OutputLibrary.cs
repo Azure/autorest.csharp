@@ -1,14 +1,16 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal abstract class OutputLibrary
     {
+        public abstract IReadOnlyDictionary<InputLiteralType, InputEnumType> LiteralValueTypes { get; }
+
         public abstract CSharpType? FindTypeByName(string originalName);
 
         /// <summary>

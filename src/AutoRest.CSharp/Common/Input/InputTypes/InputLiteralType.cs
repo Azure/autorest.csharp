@@ -3,7 +3,7 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputLiteralType(string Name, InputPrimitiveType ValueType, object Value) : InputType(Name) // TODO -- name?
+internal record InputLiteralType(string Name, InputPrimitiveType ValueType, object Value) : InputType(Name)
 {
     // Those two types are actually same, can we merge them?
     public static implicit operator InputConstant(InputLiteralType literal) => new(literal.Value, literal.ValueType);

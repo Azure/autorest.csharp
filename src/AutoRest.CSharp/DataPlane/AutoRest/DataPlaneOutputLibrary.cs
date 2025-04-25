@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IReadOnlyDictionary<InputEnumType, EnumType> _enums;
         private IReadOnlyDictionary<InputModelType, ModelTypeProvider> _models;
         private Lazy<IReadOnlyDictionary<string, List<string>>> _protocolMethodsDictionary;
+        private readonly Dictionary<InputLiteralType, InputEnumType> _literalValueTypes;
 
         private readonly InputNamespace _input;
         private readonly SourceInputModel? _sourceInputModel;
@@ -43,7 +44,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var enums = new Dictionary<InputEnumType, EnumType>();
             var models = new Dictionary<InputModelType, ModelTypeProvider>();
+            _literalValueTypes = new();
 
+            DpgOutputLibraryBuilder.ConvertLiteralToEnum(_input.Constants, _literalValueTypes);
             DpgOutputLibraryBuilder.CreateModels(_input.Models, models, _typeFactory, sourceInputModel);
             DpgOutputLibraryBuilder.CreateEnums(_input.Enums, enums, models, _typeFactory, sourceInputModel);
 
@@ -96,6 +99,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 : new CSharpType(typeof(object));
 
         public override CSharpType? FindTypeByName(string originalName) => Models.Where(m => m.Declaration.Name == originalName).Select(m => m.Type).FirstOrDefault();
+
+        public override IReadOnlyDictionary<InputLiteralType, InputEnumType> LiteralValueTypes => _literalValueTypes;
 
         public LongRunningOperation FindLongRunningOperation(InputOperation operation)
         {

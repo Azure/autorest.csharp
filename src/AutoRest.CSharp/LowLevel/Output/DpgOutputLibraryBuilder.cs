@@ -49,30 +49,39 @@ namespace AutoRest.CSharp.Output.Models
 
             var enums = new Dictionary<InputEnumType, EnumType>();
             var models = new Dictionary<InputModelType, ModelTypeProvider>();
+            var literals = new Dictionary<InputLiteralType, InputEnumType>();
             var clients = new List<LowLevelClient>();
 
-            var library = new DpgOutputLibrary(_libraryName, enums, models, clients, clientOptions, isTspInput, _sourceInputModel);
+            var library = new DpgOutputLibrary(_libraryName, enums, models, literals, clients, clientOptions, isTspInput, _sourceInputModel);
 
             if (isTspInput)
             {
+                // convert literals to enums
+                ConvertLiteralToEnum(_rootNamespace.Constants, literals);
                 CreateModels(_rootNamespace.Models, models, library.TypeFactory, _sourceInputModel);
                 // add the converted literals into the list
                 var inputEnums = new List<InputEnumType>(_rootNamespace.Enums.Count + _rootNamespace.Constants.Count);
                 inputEnums.AddRange(_rootNamespace.Enums);
-                foreach (var literal in _rootNamespace.Constants)
-                {
-                    var converted = TypeFactory.GetLiteralValueType(literal);
-                    if (converted is InputEnumType convertedEnum)
-                    {
-                        inputEnums.Add(convertedEnum);
-                    }
-                }
+                inputEnums.AddRange(literals.Values);
 
                 CreateEnums(inputEnums, enums, models, library.TypeFactory, _sourceInputModel);
             }
             CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions, parametersInClientOptions);
 
             return library;
+        }
+
+        public static void ConvertLiteralToEnum(IReadOnlyList<InputLiteralType> constants, Dictionary<InputLiteralType, InputEnumType> literals)
+        {
+            // convert literals to enums
+            foreach (var literal in constants)
+            {
+                var converted = TypeFactory.ConvertLiteralToEnum(literal);
+                if (converted != null)
+                {
+                    literals.Add(literal, converted);
+                }
+            }
         }
 
         public static void CreateEnums(IReadOnlyList<InputEnumType> inputEnums, IDictionary<InputEnumType, EnumType> enums, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)

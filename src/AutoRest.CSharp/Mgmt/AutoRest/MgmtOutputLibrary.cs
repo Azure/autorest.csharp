@@ -81,6 +81,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<InputType, TypeProvider> _schemaToModels = new(ReferenceEqualityComparer.Instance);
         private Lazy<Dictionary<string, TypeProvider>> _schemaNameToModels;
 
+        private readonly Dictionary<InputLiteralType, InputEnumType> _literalValueTypes;
+
         /// <summary>
         /// This is a collection that contains all the models from property bag, we use HashSet here to avoid potential duplicates
         /// </summary>
@@ -97,6 +99,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             // For TypeSpec input, we need to filter out the client that has no operations
             _inputClients = _input.AllClients.Where(c => c.Operations.Count > 0);
+
+            _literalValueTypes = ConvertAllLiterals(_input.Constants, _input.Enums);
 
             // these dictionaries are initialized right now and they would not change later
             RawRequestPathToOperationSets = CategorizeOperationGroups();
@@ -122,6 +126,32 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             // initialize the samples
             SampleProviders = new Lazy<IReadOnlyList<MgmtSampleProvider>>(() => EnsureMgmtClientSampleProviders().ToArray());
+        }
+
+        private static Dictionary<InputLiteralType, InputEnumType> ConvertAllLiterals(IReadOnlyList<InputLiteralType> constants, IReadOnlyList<InputEnumType> enums)
+        {
+            var result = new Dictionary<InputLiteralType, InputEnumType>();
+
+            foreach (var constant in constants)
+            {
+                var converted = TypeFactory.ConvertLiteralToEnum(constant);
+                if (converted == null)
+                {
+                    continue;
+                }
+                // if we need to convert, first we find if there is an enum in the enums already
+                var existing = enums.FirstOrDefault(e => e.Name == constant.Name);
+                if (existing != null)
+                {
+                    result.Add(constant, existing);
+                }
+                else
+                {
+                    result.Add(constant, converted);
+                }
+            }
+
+            return result;
         }
 
         private Dictionary<string, TypeProvider> EnsureSchemaNameToModels() => _schemaToModels.ToDictionary(kv => kv.Key.Name, kv => kv.Value);
@@ -256,11 +286,22 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 _schemaToModels.Add(inputModel, model);
             }
 
-            foreach (var inputEnum in _input.Enums)
+            foreach (var (e, enumType) in AllEnumMap.Value)
             {
-                var model = BuildModel(inputEnum);
-                _schemaToModels.Add(inputEnum, model);
+                _schemaToModels.Add(e, enumType);
             }
+
+            //foreach (var inputEnum in _input.Enums)
+            //{
+            //    var @enum = BuildModel(inputEnum);
+            //    _schemaToModels.Add(inputEnum, @enum);
+            //}
+
+            //foreach (var inputConstant in _input.Constants)
+            //{
+            //    var constant = BuildModel(inputConstant);
+            //    _schemaToModels.Add(inputConstant, constant);
+            //}
 
             //this is where we update
             var updatedTypes = UpdateBodyParameters();
@@ -505,17 +546,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return AllSchemaMap.Value.Where(kv => !(kv.Value is ResourceData)).ToDictionary(kv => kv.Key, kv => kv.Value);
         }
 
-        public Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
+        private Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
         {
             var dict = new Dictionary<InputEnumType, EnumType>();
             foreach (var inputEnum in _input.Enums)
             {
                 dict.Add(inputEnum, new EnumType(inputEnum, MgmtContext.Context));
             }
-            foreach (var literal in _input.Constants)
+            // it is possible that the enums list already contains the converted enum for a literal. We should skip such cases.
+            foreach (var convertedEnum in _literalValueTypes.Values)
             {
-                var converted = TypeFactory.GetLiteralValueType(literal);
-                if (converted is InputEnumType convertedEnum)
+                if (!dict.ContainsKey(convertedEnum))
                 {
                     dict.Add(convertedEnum, new EnumType(convertedEnum, MgmtContext.Context));
                 }
@@ -853,6 +894,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
             return resolvedModel;
         }
+
+        public override IReadOnlyDictionary<InputLiteralType, InputEnumType> LiteralValueTypes => _literalValueTypes;
 
         public override CSharpType? FindTypeByName(string originalName)
         {
