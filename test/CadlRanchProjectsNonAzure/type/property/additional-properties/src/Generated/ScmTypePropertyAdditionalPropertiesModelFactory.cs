@@ -32,7 +32,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         /// <param name="kind"></param>
         /// <param name="start"></param>
         /// <returns> A new <see cref="Models.WidgetData2"/> instance for mocking. </returns>
-        public static WidgetData2 WidgetData2(WidgetData1Kind kind = default, string start = null)
+        public static WidgetData2 WidgetData2(WidgetData1Kind1 kind = default, string start = null)
         {
             return new WidgetData2(kind, start, serializedAdditionalRawData: null);
         }

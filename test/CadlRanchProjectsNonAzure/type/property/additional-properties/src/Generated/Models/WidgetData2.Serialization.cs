@@ -70,7 +70,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
             {
                 return null;
             }
-            WidgetData1Kind kind = default;
+            WidgetData1Kind1 kind = default;
             string start = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
@@ -78,7 +78,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
             {
                 if (property.NameEquals("kind"u8))
                 {
-                    kind = new WidgetData1Kind(property.Value.GetString());
+                    kind = new WidgetData1Kind1(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("start"u8))

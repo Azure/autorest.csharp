@@ -350,7 +350,7 @@
   {
    "$id": "40",
    "kind": "constant",
-   "name": "fooContentType",
+   "name": "roundTripContentType1",
    "valueType": {
     "$id": "41",
     "kind": "string",
@@ -364,9 +364,51 @@
   {
    "$id": "42",
    "kind": "constant",
-   "name": "barContentType",
+   "name": "fooContentType",
    "valueType": {
     "$id": "43",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "44",
+   "kind": "constant",
+   "name": "fooContentType1",
+   "valueType": {
+    "$id": "45",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "46",
+   "kind": "constant",
+   "name": "barContentType",
+   "valueType": {
+    "$id": "47",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "48",
+   "kind": "constant",
+   "name": "barContentType1",
+   "valueType": {
+    "$id": "49",
     "kind": "string",
     "name": "string",
     "crossLanguageDefinitionId": "TypeSpec.string",
@@ -378,7 +420,7 @@
  ],
  "models": [
   {
-   "$id": "44",
+   "$id": "50",
    "kind": "model",
    "name": "RootModel",
    "namespace": "CustomizationsInTsp",
@@ -388,7 +430,7 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "45",
+     "$id": "51",
      "kind": "property",
      "name": "propertyExtensibleEnum",
      "serializedName": "propertyExtensibleEnum",
@@ -403,21 +445,21 @@
      "decorators": [],
      "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyExtensibleEnum",
      "serializationOptions": {
-      "$id": "46",
+      "$id": "52",
       "json": {
-       "$id": "47",
+       "$id": "53",
        "name": "propertyExtensibleEnum"
       }
      }
     },
     {
-     "$id": "48",
+     "$id": "54",
      "kind": "property",
      "name": "propertyModelToMakeInternal",
      "serializedName": "propertyModelToMakeInternal",
      "doc": "ModelToMakeInternal",
      "type": {
-      "$id": "49",
+      "$id": "55",
       "kind": "model",
       "name": "ModelToMakeInternal",
       "namespace": "CustomizationsInTsp",
@@ -427,13 +469,13 @@
       "decorators": [],
       "properties": [
        {
-        "$id": "50",
+        "$id": "56",
         "kind": "property",
         "name": "requiredInt",
         "serializedName": "requiredInt",
         "doc": "Required int",
         "type": {
-         "$id": "51",
+         "$id": "57",
          "kind": "int32",
          "name": "int32",
          "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -446,9 +488,9 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToMakeInternal.requiredInt",
         "serializationOptions": {
-         "$id": "52",
+         "$id": "58",
          "json": {
-          "$id": "53",
+          "$id": "59",
           "name": "requiredInt"
          }
         }
@@ -462,21 +504,21 @@
      "decorators": [],
      "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelToMakeInternal",
      "serializationOptions": {
-      "$id": "54",
+      "$id": "60",
       "json": {
-       "$id": "55",
+       "$id": "61",
        "name": "propertyModelToMakeInternal"
       }
      }
     },
     {
-     "$id": "56",
+     "$id": "62",
      "kind": "property",
      "name": "propertyModelToRename",
      "serializedName": "propertyModelToRename",
      "doc": "ModelToRename",
      "type": {
-      "$id": "57",
+      "$id": "63",
       "kind": "model",
       "name": "ModelToRename",
       "namespace": "CustomizationsInTsp",
@@ -486,13 +528,13 @@
       "decorators": [],
       "properties": [
        {
-        "$id": "58",
+        "$id": "64",
         "kind": "property",
         "name": "requiredIntOnBase",
         "serializedName": "requiredIntOnBase",
         "doc": "Required int",
         "type": {
-         "$id": "59",
+         "$id": "65",
          "kind": "int32",
          "name": "int32",
          "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -505,21 +547,21 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToRename.requiredIntOnBase",
         "serializationOptions": {
-         "$id": "60",
+         "$id": "66",
          "json": {
-          "$id": "61",
+          "$id": "67",
           "name": "requiredIntOnBase"
          }
         }
        },
        {
-        "$id": "62",
+        "$id": "68",
         "kind": "property",
         "name": "optionalInt",
         "serializedName": "optionalInt",
         "doc": "Optional int",
         "type": {
-         "$id": "63",
+         "$id": "69",
          "kind": "int32",
          "name": "int32",
          "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -532,9 +574,9 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToRename.optionalInt",
         "serializationOptions": {
-         "$id": "64",
+         "$id": "70",
          "json": {
-          "$id": "65",
+          "$id": "71",
           "name": "optionalInt"
          }
         }
@@ -548,21 +590,21 @@
      "decorators": [],
      "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelToRename",
      "serializationOptions": {
-      "$id": "66",
+      "$id": "72",
       "json": {
-       "$id": "67",
+       "$id": "73",
        "name": "propertyModelToRename"
       }
      }
     },
     {
-     "$id": "68",
+     "$id": "74",
      "kind": "property",
      "name": "propertyModelToChangeNamespace",
      "serializedName": "propertyModelToChangeNamespace",
      "doc": "ModelToChangeNamespace",
      "type": {
-      "$id": "69",
+      "$id": "75",
       "kind": "model",
       "name": "ModelToChangeNamespace",
       "namespace": "CustomizationsInTsp",
@@ -572,13 +614,13 @@
       "decorators": [],
       "properties": [
        {
-        "$id": "70",
+        "$id": "76",
         "kind": "property",
         "name": "requiredInt",
         "serializedName": "requiredInt",
         "doc": "Required int",
         "type": {
-         "$id": "71",
+         "$id": "77",
          "kind": "int32",
          "name": "int32",
          "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -591,9 +633,9 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToChangeNamespace.requiredInt",
         "serializationOptions": {
-         "$id": "72",
+         "$id": "78",
          "json": {
-          "$id": "73",
+          "$id": "79",
           "name": "requiredInt"
          }
         }
@@ -607,21 +649,21 @@
      "decorators": [],
      "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelToChangeNamespace",
      "serializationOptions": {
-      "$id": "74",
+      "$id": "80",
       "json": {
-       "$id": "75",
+       "$id": "81",
        "name": "propertyModelToChangeNamespace"
       }
      }
     },
     {
-     "$id": "76",
+     "$id": "82",
      "kind": "property",
      "name": "propertyModelWithCustomizedProperties",
      "serializedName": "propertyModelWithCustomizedProperties",
      "doc": "ModelWithCustomizedProperties",
      "type": {
-      "$id": "77",
+      "$id": "83",
       "kind": "model",
       "name": "ModelWithCustomizedProperties",
       "namespace": "CustomizationsInTsp",
@@ -631,13 +673,13 @@
       "decorators": [],
       "properties": [
        {
-        "$id": "78",
+        "$id": "84",
         "kind": "property",
         "name": "propertyToMakeInternal",
         "serializedName": "propertyToMakeInternal",
         "doc": "Public property made internal",
         "type": {
-         "$id": "79",
+         "$id": "85",
          "kind": "int32",
          "name": "int32",
          "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -650,21 +692,21 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeInternal",
         "serializationOptions": {
-         "$id": "80",
+         "$id": "86",
          "json": {
-          "$id": "81",
+          "$id": "87",
           "name": "propertyToMakeInternal"
          }
         }
        },
        {
-        "$id": "82",
+        "$id": "88",
         "kind": "property",
         "name": "propertyToRename",
         "serializedName": "propertyToRename",
         "doc": "Renamed property (original name: PropertyToRename)",
         "type": {
-         "$id": "83",
+         "$id": "89",
          "kind": "int32",
          "name": "int32",
          "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -677,21 +719,21 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToRename",
         "serializationOptions": {
-         "$id": "84",
+         "$id": "90",
          "json": {
-          "$id": "85",
+          "$id": "91",
           "name": "propertyToRename"
          }
         }
        },
        {
-        "$id": "86",
+        "$id": "92",
         "kind": "property",
         "name": "propertyToMakeFloat",
         "serializedName": "propertyToMakeFloat",
         "doc": "Property with type changed to float (original type: int)",
         "type": {
-         "$id": "87",
+         "$id": "93",
          "kind": "int32",
          "name": "int32",
          "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -704,21 +746,21 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeFloat",
         "serializationOptions": {
-         "$id": "88",
+         "$id": "94",
          "json": {
-          "$id": "89",
+          "$id": "95",
           "name": "propertyToMakeFloat"
          }
         }
        },
        {
-        "$id": "90",
+        "$id": "96",
         "kind": "property",
         "name": "propertyToMakeInt",
         "serializedName": "propertyToMakeInt",
         "doc": "Property with type changed to int (original type: float)",
         "type": {
-         "$id": "91",
+         "$id": "97",
          "kind": "float32",
          "name": "float32",
          "crossLanguageDefinitionId": "TypeSpec.float32",
@@ -731,21 +773,21 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeInt",
         "serializationOptions": {
-         "$id": "92",
+         "$id": "98",
          "json": {
-          "$id": "93",
+          "$id": "99",
           "name": "propertyToMakeInt"
          }
         }
        },
        {
-        "$id": "94",
+        "$id": "100",
         "kind": "property",
         "name": "propertyToMakeDuration",
         "serializedName": "propertyToMakeDuration",
         "doc": "Property with type changed to duration (original type: string)",
         "type": {
-         "$id": "95",
+         "$id": "101",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -758,26 +800,26 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeDuration",
         "serializationOptions": {
-         "$id": "96",
+         "$id": "102",
          "json": {
-          "$id": "97",
+          "$id": "103",
           "name": "propertyToMakeDuration"
          }
         }
        },
        {
-        "$id": "98",
+        "$id": "104",
         "kind": "property",
         "name": "propertyToMakeString",
         "serializedName": "propertyToMakeString",
         "doc": "Property with type changed to string (original type: duration)",
         "type": {
-         "$id": "99",
+         "$id": "105",
          "kind": "duration",
          "name": "duration",
          "encode": "ISO8601",
          "wireType": {
-          "$id": "100",
+          "$id": "106",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -793,21 +835,21 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeString",
         "serializationOptions": {
-         "$id": "101",
+         "$id": "107",
          "json": {
-          "$id": "102",
+          "$id": "108",
           "name": "propertyToMakeString"
          }
         }
        },
        {
-        "$id": "103",
+        "$id": "109",
         "kind": "property",
         "name": "propertyToMakeJsonElement",
         "serializedName": "propertyToMakeJsonElement",
         "doc": "Property with type changed to JsonElement (original type: string)",
         "type": {
-         "$id": "104",
+         "$id": "110",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -820,21 +862,21 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeJsonElement",
         "serializationOptions": {
-         "$id": "105",
+         "$id": "111",
          "json": {
-          "$id": "106",
+          "$id": "112",
           "name": "propertyToMakeJsonElement"
          }
         }
        },
        {
-        "$id": "107",
+        "$id": "113",
         "kind": "property",
         "name": "propertyToField",
         "serializedName": "propertyToField",
         "doc": "Field that replaces property (original name: PropertyToField)",
         "type": {
-         "$id": "108",
+         "$id": "114",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -847,25 +889,25 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToField",
         "serializationOptions": {
-         "$id": "109",
+         "$id": "115",
          "json": {
-          "$id": "110",
+          "$id": "116",
           "name": "propertyToField"
          }
         }
        },
        {
-        "$id": "111",
+        "$id": "117",
         "kind": "property",
         "name": "badListName",
         "serializedName": "badListName",
         "doc": "Property renamed that is list",
         "type": {
-         "$id": "112",
+         "$id": "118",
          "kind": "array",
          "name": "Array",
          "valueType": {
-          "$id": "113",
+          "$id": "119",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -881,31 +923,31 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.badListName",
         "serializationOptions": {
-         "$id": "114",
+         "$id": "120",
          "json": {
-          "$id": "115",
+          "$id": "121",
           "name": "badListName"
          }
         }
        },
        {
-        "$id": "116",
+        "$id": "122",
         "kind": "property",
         "name": "badDictionaryName",
         "serializedName": "badDictionaryName",
         "doc": "Property renamed that is dictionary",
         "type": {
-         "$id": "117",
+         "$id": "123",
          "kind": "dict",
          "keyType": {
-          "$id": "118",
+          "$id": "124",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
           "decorators": []
          },
          "valueType": {
-          "$id": "119",
+          "$id": "125",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -920,29 +962,29 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.badDictionaryName",
         "serializationOptions": {
-         "$id": "120",
+         "$id": "126",
          "json": {
-          "$id": "121",
+          "$id": "127",
           "name": "badDictionaryName"
          }
         }
        },
        {
-        "$id": "122",
+        "$id": "128",
         "kind": "property",
         "name": "badListOfListName",
         "serializedName": "badListOfListName",
         "doc": "Property renamed that is listoflist",
         "type": {
-         "$id": "123",
+         "$id": "129",
          "kind": "array",
          "name": "ArrayArray",
          "valueType": {
-          "$id": "124",
+          "$id": "130",
           "kind": "array",
           "name": "Array",
           "valueType": {
-           "$id": "125",
+           "$id": "131",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -961,35 +1003,35 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.badListOfListName",
         "serializationOptions": {
-         "$id": "126",
+         "$id": "132",
          "json": {
-          "$id": "127",
+          "$id": "133",
           "name": "badListOfListName"
          }
         }
        },
        {
-        "$id": "128",
+        "$id": "134",
         "kind": "property",
         "name": "badListOfDictionaryName",
         "serializedName": "badListOfDictionaryName",
         "doc": "Property renamed that is listofdictionary",
         "type": {
-         "$id": "129",
+         "$id": "135",
          "kind": "array",
          "name": "ArrayRecord",
          "valueType": {
-          "$id": "130",
+          "$id": "136",
           "kind": "dict",
           "keyType": {
-           "$id": "131",
+           "$id": "137",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
            "decorators": []
           },
           "valueType": {
-           "$id": "132",
+           "$id": "138",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1007,25 +1049,25 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.badListOfDictionaryName",
         "serializationOptions": {
-         "$id": "133",
+         "$id": "139",
          "json": {
-          "$id": "134",
+          "$id": "140",
           "name": "badListOfDictionaryName"
          }
         }
        },
        {
-        "$id": "135",
+        "$id": "141",
         "kind": "property",
         "name": "vector",
         "serializedName": "vector",
         "doc": "Property type changed to ReadOnlyMemory<float>",
         "type": {
-         "$id": "136",
+         "$id": "142",
          "kind": "array",
          "name": "Array1",
          "valueType": {
-          "$id": "137",
+          "$id": "143",
           "kind": "float32",
           "name": "float32",
           "crossLanguageDefinitionId": "TypeSpec.float32",
@@ -1041,25 +1083,25 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vector",
         "serializationOptions": {
-         "$id": "138",
+         "$id": "144",
          "json": {
-          "$id": "139",
+          "$id": "145",
           "name": "vector"
          }
         }
        },
        {
-        "$id": "140",
+        "$id": "146",
         "kind": "property",
         "name": "vectorOptional",
         "serializedName": "vectorOptional",
         "doc": "Property type changed to ReadOnlyMemory<float>?",
         "type": {
-         "$id": "141",
+         "$id": "147",
          "kind": "array",
          "name": "Array1",
          "valueType": {
-          "$id": "142",
+          "$id": "148",
           "kind": "float32",
           "name": "float32",
           "crossLanguageDefinitionId": "TypeSpec.float32",
@@ -1075,57 +1117,18 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorOptional",
         "serializationOptions": {
-         "$id": "143",
-         "json": {
-          "$id": "144",
-          "name": "vectorOptional"
-         }
-        }
-       },
-       {
-        "$id": "145",
-        "kind": "property",
-        "name": "vectorNullable",
-        "serializedName": "vectorNullable",
-        "doc": "Property type changed to ReadOnlyMemory<float>?",
-        "type": {
-         "$id": "146",
-         "kind": "nullable",
-         "type": {
-          "$id": "147",
-          "kind": "array",
-          "name": "Array1",
-          "valueType": {
-           "$id": "148",
-           "kind": "float32",
-           "name": "float32",
-           "crossLanguageDefinitionId": "TypeSpec.float32",
-           "decorators": []
-          },
-          "crossLanguageDefinitionId": "TypeSpec.Array",
-          "decorators": []
-         },
-         "namespace": ""
-        },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorNullable",
-        "serializationOptions": {
          "$id": "149",
          "json": {
           "$id": "150",
-          "name": "vectorNullable"
+          "name": "vectorOptional"
          }
         }
        },
        {
         "$id": "151",
         "kind": "property",
-        "name": "vectorOptionalNullable",
-        "serializedName": "vectorOptionalNullable",
+        "name": "vectorNullable",
+        "serializedName": "vectorNullable",
         "doc": "Property type changed to ReadOnlyMemory<float>?",
         "type": {
          "$id": "152",
@@ -1146,6 +1149,45 @@
          },
          "namespace": ""
         },
+        "optional": false,
+        "readOnly": false,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorNullable",
+        "serializationOptions": {
+         "$id": "155",
+         "json": {
+          "$id": "156",
+          "name": "vectorNullable"
+         }
+        }
+       },
+       {
+        "$id": "157",
+        "kind": "property",
+        "name": "vectorOptionalNullable",
+        "serializedName": "vectorOptionalNullable",
+        "doc": "Property type changed to ReadOnlyMemory<float>?",
+        "type": {
+         "$id": "158",
+         "kind": "nullable",
+         "type": {
+          "$id": "159",
+          "kind": "array",
+          "name": "Array1",
+          "valueType": {
+           "$id": "160",
+           "kind": "float32",
+           "name": "float32",
+           "crossLanguageDefinitionId": "TypeSpec.float32",
+           "decorators": []
+          },
+          "crossLanguageDefinitionId": "TypeSpec.Array",
+          "decorators": []
+         },
+         "namespace": ""
+        },
         "optional": true,
         "readOnly": false,
         "discriminator": false,
@@ -1153,25 +1195,25 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorOptionalNullable",
         "serializationOptions": {
-         "$id": "155",
+         "$id": "161",
          "json": {
-          "$id": "156",
+          "$id": "162",
           "name": "vectorOptionalNullable"
          }
         }
        },
        {
-        "$id": "157",
+        "$id": "163",
         "kind": "property",
         "name": "vectorReadOnly",
         "serializedName": "vectorReadOnly",
         "doc": "Property type changed to ReadOnlyMemory<float>",
         "type": {
-         "$id": "158",
+         "$id": "164",
          "kind": "array",
          "name": "Array1",
          "valueType": {
-          "$id": "159",
+          "$id": "165",
           "kind": "float32",
           "name": "float32",
           "crossLanguageDefinitionId": "TypeSpec.float32",
@@ -1187,25 +1229,25 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorReadOnly",
         "serializationOptions": {
-         "$id": "160",
+         "$id": "166",
          "json": {
-          "$id": "161",
+          "$id": "167",
           "name": "vectorReadOnly"
          }
         }
        },
        {
-        "$id": "162",
+        "$id": "168",
         "kind": "property",
         "name": "vectorOptionalReadOnly",
         "serializedName": "vectorOptionalReadOnly",
         "doc": "Property type changed to ReadOnlyMemory<float>?",
         "type": {
-         "$id": "163",
+         "$id": "169",
          "kind": "array",
          "name": "Array1",
          "valueType": {
-          "$id": "164",
+          "$id": "170",
           "kind": "float32",
           "name": "float32",
           "crossLanguageDefinitionId": "TypeSpec.float32",
@@ -1221,57 +1263,18 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorOptionalReadOnly",
         "serializationOptions": {
-         "$id": "165",
-         "json": {
-          "$id": "166",
-          "name": "vectorOptionalReadOnly"
-         }
-        }
-       },
-       {
-        "$id": "167",
-        "kind": "property",
-        "name": "vectorNullableReadOnly",
-        "serializedName": "vectorNullableReadOnly",
-        "doc": "Property type changed to ReadOnlyMemory<float>?",
-        "type": {
-         "$id": "168",
-         "kind": "nullable",
-         "type": {
-          "$id": "169",
-          "kind": "array",
-          "name": "Array1",
-          "valueType": {
-           "$id": "170",
-           "kind": "float32",
-           "name": "float32",
-           "crossLanguageDefinitionId": "TypeSpec.float32",
-           "decorators": []
-          },
-          "crossLanguageDefinitionId": "TypeSpec.Array",
-          "decorators": []
-         },
-         "namespace": ""
-        },
-        "optional": false,
-        "readOnly": true,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorNullableReadOnly",
-        "serializationOptions": {
          "$id": "171",
          "json": {
           "$id": "172",
-          "name": "vectorNullableReadOnly"
+          "name": "vectorOptionalReadOnly"
          }
         }
        },
        {
         "$id": "173",
         "kind": "property",
-        "name": "vectorOptionalNullableReadOnly",
-        "serializedName": "vectorOptionalNullableReadOnly",
+        "name": "vectorNullableReadOnly",
+        "serializedName": "vectorNullableReadOnly",
         "doc": "Property type changed to ReadOnlyMemory<float>?",
         "type": {
          "$id": "174",
@@ -1292,6 +1295,45 @@
          },
          "namespace": ""
         },
+        "optional": false,
+        "readOnly": true,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorNullableReadOnly",
+        "serializationOptions": {
+         "$id": "177",
+         "json": {
+          "$id": "178",
+          "name": "vectorNullableReadOnly"
+         }
+        }
+       },
+       {
+        "$id": "179",
+        "kind": "property",
+        "name": "vectorOptionalNullableReadOnly",
+        "serializedName": "vectorOptionalNullableReadOnly",
+        "doc": "Property type changed to ReadOnlyMemory<float>?",
+        "type": {
+         "$id": "180",
+         "kind": "nullable",
+         "type": {
+          "$id": "181",
+          "kind": "array",
+          "name": "Array1",
+          "valueType": {
+           "$id": "182",
+           "kind": "float32",
+           "name": "float32",
+           "crossLanguageDefinitionId": "TypeSpec.float32",
+           "decorators": []
+          },
+          "crossLanguageDefinitionId": "TypeSpec.Array",
+          "decorators": []
+         },
+         "namespace": ""
+        },
         "optional": true,
         "readOnly": true,
         "discriminator": false,
@@ -1299,9 +1341,9 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorOptionalNullableReadOnly",
         "serializationOptions": {
-         "$id": "177",
+         "$id": "183",
          "json": {
-          "$id": "178",
+          "$id": "184",
           "name": "vectorOptionalNullableReadOnly"
          }
         }
@@ -1315,15 +1357,15 @@
      "decorators": [],
      "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelWithCustomizedProperties",
      "serializationOptions": {
-      "$id": "179",
+      "$id": "185",
       "json": {
-       "$id": "180",
+       "$id": "186",
        "name": "propertyModelWithCustomizedProperties"
       }
      }
     },
     {
-     "$id": "181",
+     "$id": "187",
      "kind": "property",
      "name": "propertyEnumToRename",
      "serializedName": "propertyEnumToRename",
@@ -1338,15 +1380,15 @@
      "decorators": [],
      "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyEnumToRename",
      "serializationOptions": {
-      "$id": "182",
+      "$id": "188",
       "json": {
-       "$id": "183",
+       "$id": "189",
        "name": "propertyEnumToRename"
       }
      }
     },
     {
-     "$id": "184",
+     "$id": "190",
      "kind": "property",
      "name": "propertyEnumWithValueToRename",
      "serializedName": "propertyEnumWithValueToRename",
@@ -1361,15 +1403,15 @@
      "decorators": [],
      "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyEnumWithValueToRename",
      "serializationOptions": {
-      "$id": "185",
+      "$id": "191",
       "json": {
-       "$id": "186",
+       "$id": "192",
        "name": "propertyEnumWithValueToRename"
       }
      }
     },
     {
-     "$id": "187",
+     "$id": "193",
      "kind": "property",
      "name": "propertyEnumToBeMadeExtensible",
      "serializedName": "propertyEnumToBeMadeExtensible",
@@ -1384,21 +1426,21 @@
      "decorators": [],
      "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyEnumToBeMadeExtensible",
      "serializationOptions": {
-      "$id": "188",
+      "$id": "194",
       "json": {
-       "$id": "189",
+       "$id": "195",
        "name": "propertyEnumToBeMadeExtensible"
       }
      }
     },
     {
-     "$id": "190",
+     "$id": "196",
      "kind": "property",
      "name": "propertyModelToAddAdditionalSerializableProperty",
      "serializedName": "propertyModelToAddAdditionalSerializableProperty",
      "doc": "ModelToAddAdditionalSerializableProperty",
      "type": {
-      "$id": "191",
+      "$id": "197",
       "kind": "model",
       "name": "ModelToAddAdditionalSerializableProperty",
       "namespace": "CustomizationsInTsp",
@@ -1407,17 +1449,17 @@
       "doc": "Model to add additional serializable property",
       "decorators": [],
       "baseModel": {
-       "$ref": "57"
+       "$ref": "63"
       },
       "properties": [
        {
-        "$id": "192",
+        "$id": "198",
         "kind": "property",
         "name": "requiredInt",
         "serializedName": "requiredInt",
         "doc": "Required int",
         "type": {
-         "$id": "193",
+         "$id": "199",
          "kind": "int32",
          "name": "int32",
          "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -1430,9 +1472,9 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToAddAdditionalSerializableProperty.requiredInt",
         "serializationOptions": {
-         "$id": "194",
+         "$id": "200",
          "json": {
-          "$id": "195",
+          "$id": "201",
           "name": "requiredInt"
          }
         }
@@ -1446,15 +1488,15 @@
      "decorators": [],
      "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelToAddAdditionalSerializableProperty",
      "serializationOptions": {
-      "$id": "196",
+      "$id": "202",
       "json": {
-       "$id": "197",
+       "$id": "203",
        "name": "propertyModelToAddAdditionalSerializableProperty"
       }
      }
     },
     {
-     "$id": "198",
+     "$id": "204",
      "kind": "property",
      "name": "propertyToMoveToCustomization",
      "serializedName": "propertyToMoveToCustomization",
@@ -1469,21 +1511,21 @@
      "decorators": [],
      "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyToMoveToCustomization",
      "serializationOptions": {
-      "$id": "199",
+      "$id": "205",
       "json": {
-       "$id": "200",
+       "$id": "206",
        "name": "propertyToMoveToCustomization"
       }
      }
     },
     {
-     "$id": "201",
+     "$id": "207",
      "kind": "property",
      "name": "propertyModelStruct",
      "serializedName": "propertyModelStruct",
      "doc": "ModelStruct",
      "type": {
-      "$id": "202",
+      "$id": "208",
       "kind": "model",
       "name": "ModelStruct",
       "namespace": "CustomizationsInTsp",
@@ -1493,13 +1535,13 @@
       "decorators": [],
       "properties": [
        {
-        "$id": "203",
+        "$id": "209",
         "kind": "property",
         "name": "requiredInt",
         "serializedName": "requiredInt",
         "doc": "Required int",
         "type": {
-         "$id": "204",
+         "$id": "210",
          "kind": "int32",
          "name": "int32",
          "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -1512,21 +1554,21 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct.requiredInt",
         "serializationOptions": {
-         "$id": "205",
+         "$id": "211",
          "json": {
-          "$id": "206",
+          "$id": "212",
           "name": "requiredInt"
          }
         }
        },
        {
-        "$id": "207",
+        "$id": "213",
         "kind": "property",
         "name": "optionalInt",
         "serializedName": "optionalInt",
         "doc": "Optional int",
         "type": {
-         "$id": "208",
+         "$id": "214",
          "kind": "int32",
          "name": "int32",
          "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -1539,21 +1581,21 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct.optionalInt",
         "serializationOptions": {
-         "$id": "209",
+         "$id": "215",
          "json": {
-          "$id": "210",
+          "$id": "216",
           "name": "optionalInt"
          }
         }
        },
        {
-        "$id": "211",
+        "$id": "217",
         "kind": "property",
         "name": "optionalString",
         "serializedName": "optionalString",
         "doc": "Optional string",
         "type": {
-         "$id": "212",
+         "$id": "218",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1566,9 +1608,9 @@
         "decorators": [],
         "crossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct.optionalString",
         "serializationOptions": {
-         "$id": "213",
+         "$id": "219",
          "json": {
-          "$id": "214",
+          "$id": "220",
           "name": "optionalString"
          }
         }
@@ -1582,9 +1624,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelStruct",
      "serializationOptions": {
-      "$id": "215",
+      "$id": "221",
       "json": {
-       "$id": "216",
+       "$id": "222",
        "name": "propertyModelStruct"
       }
      }
@@ -1592,48 +1634,48 @@
    ]
   },
   {
-   "$ref": "49"
+   "$ref": "55"
   },
   {
-   "$ref": "57"
+   "$ref": "63"
   },
   {
-   "$ref": "69"
+   "$ref": "75"
   },
   {
-   "$ref": "77"
+   "$ref": "83"
   },
   {
-   "$ref": "191"
+   "$ref": "197"
   },
   {
-   "$ref": "202"
+   "$ref": "208"
   }
  ],
  "clients": [
   {
-   "$id": "217",
+   "$id": "223",
    "kind": "client",
    "name": "CustomizationsInTspClient",
    "namespace": "CustomizationsInTsp",
    "doc": "TypeSpec project to test various types of models.",
    "methods": [
     {
-     "$id": "218",
+     "$id": "224",
      "kind": "basic",
      "name": "roundTrip",
      "accessibility": "public",
      "apiVersions": [],
      "doc": "RoundTrip operation to make RootModel round-trip",
      "operation": {
-      "$id": "219",
+      "$id": "225",
       "name": "roundTrip",
       "resourceName": "CustomizationsInTsp",
       "doc": "RoundTrip operation to make RootModel round-trip",
       "accessibility": "public",
       "parameters": [
        {
-        "$id": "220",
+        "$id": "226",
         "name": "contentType",
         "nameInRequest": "Content-Type",
         "doc": "Body parameter's content type. Known values are application/json",
@@ -1651,11 +1693,11 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "221",
+        "$id": "227",
         "name": "accept",
         "nameInRequest": "Accept",
         "type": {
-         "$ref": "38"
+         "$ref": "40"
         },
         "location": "Header",
         "isApiVersion": false,
@@ -1668,11 +1710,11 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "222",
+        "$id": "228",
         "name": "input",
         "nameInRequest": "input",
         "type": {
-         "$ref": "44"
+         "$ref": "50"
         },
         "location": "Body",
         "isApiVersion": false,
@@ -1687,12 +1729,12 @@
       ],
       "responses": [
        {
-        "$id": "223",
+        "$id": "229",
         "statusCodes": [
          200
         ],
         "bodyType": {
-         "$ref": "44"
+         "$ref": "50"
         },
         "headers": [],
         "isErrorResponse": false,
@@ -1715,11 +1757,11 @@
      },
      "parameters": [
       {
-       "$id": "224",
+       "$id": "230",
        "name": "input",
        "nameInRequest": "input",
        "type": {
-        "$ref": "44"
+        "$ref": "50"
        },
        "location": "Body",
        "isApiVersion": false,
@@ -1732,7 +1774,7 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "225",
+       "$id": "231",
        "name": "contentType",
        "nameInRequest": "contentType",
        "doc": "Body parameter's content type. Known values are application/json",
@@ -1750,11 +1792,11 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "226",
+       "$id": "232",
        "name": "accept",
        "nameInRequest": "accept",
        "type": {
-        "$ref": "38"
+        "$ref": "40"
        },
        "location": "Header",
        "isApiVersion": false,
@@ -1768,9 +1810,9 @@
       }
      ],
      "response": {
-      "$id": "227",
+      "$id": "233",
       "type": {
-       "$ref": "44"
+       "$ref": "50"
       }
      },
      "isOverride": false,
@@ -1779,26 +1821,26 @@
      "crossLanguageDefinitionId": "CustomizationsInTsp.roundTrip"
     },
     {
-     "$id": "228",
+     "$id": "234",
      "kind": "basic",
      "name": "foo",
      "accessibility": "public",
      "apiVersions": [],
      "doc": "Sample operation with request body of a renamed model",
      "operation": {
-      "$id": "229",
+      "$id": "235",
       "name": "foo",
       "resourceName": "CustomizationsInTsp",
       "doc": "Sample operation with request body of a renamed model",
       "accessibility": "public",
       "parameters": [
        {
-        "$id": "230",
+        "$id": "236",
         "name": "contentType",
         "nameInRequest": "Content-Type",
         "doc": "Body parameter's content type. Known values are application/json",
         "type": {
-         "$ref": "40"
+         "$ref": "42"
         },
         "location": "Header",
         "isApiVersion": false,
@@ -1811,11 +1853,11 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "231",
+        "$id": "237",
         "name": "accept",
         "nameInRequest": "Accept",
         "type": {
-         "$ref": "40"
+         "$ref": "44"
         },
         "location": "Header",
         "isApiVersion": false,
@@ -1828,11 +1870,11 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "232",
+        "$id": "238",
         "name": "input",
         "nameInRequest": "input",
         "type": {
-         "$ref": "57"
+         "$ref": "63"
         },
         "location": "Body",
         "isApiVersion": false,
@@ -1847,12 +1889,12 @@
       ],
       "responses": [
        {
-        "$id": "233",
+        "$id": "239",
         "statusCodes": [
          200
         ],
         "bodyType": {
-         "$ref": "57"
+         "$ref": "63"
         },
         "headers": [],
         "isErrorResponse": false,
@@ -1875,11 +1917,11 @@
      },
      "parameters": [
       {
-       "$id": "234",
+       "$id": "240",
        "name": "input",
        "nameInRequest": "input",
        "type": {
-        "$ref": "57"
+        "$ref": "63"
        },
        "location": "Body",
        "isApiVersion": false,
@@ -1892,12 +1934,12 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "235",
+       "$id": "241",
        "name": "contentType",
        "nameInRequest": "contentType",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$ref": "40"
+        "$ref": "42"
        },
        "location": "Header",
        "isApiVersion": false,
@@ -1910,11 +1952,11 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "236",
+       "$id": "242",
        "name": "accept",
        "nameInRequest": "accept",
        "type": {
-        "$ref": "40"
+        "$ref": "44"
        },
        "location": "Header",
        "isApiVersion": false,
@@ -1928,9 +1970,9 @@
       }
      ],
      "response": {
-      "$id": "237",
+      "$id": "243",
       "type": {
-       "$ref": "57"
+       "$ref": "63"
       }
      },
      "isOverride": false,
@@ -1939,26 +1981,26 @@
      "crossLanguageDefinitionId": "CustomizationsInTsp.foo"
     },
     {
-     "$id": "238",
+     "$id": "244",
      "kind": "basic",
      "name": "bar",
      "accessibility": "public",
      "apiVersions": [],
      "doc": "Sample operation with request body using a model parameter with a spread operator.",
      "operation": {
-      "$id": "239",
+      "$id": "245",
       "name": "bar",
       "resourceName": "CustomizationsInTsp",
       "doc": "Sample operation with request body using a model parameter with a spread operator.",
       "accessibility": "public",
       "parameters": [
        {
-        "$id": "240",
+        "$id": "246",
         "name": "contentType",
         "nameInRequest": "Content-Type",
         "doc": "Body parameter's content type. Known values are application/json",
         "type": {
-         "$ref": "42"
+         "$ref": "46"
         },
         "location": "Header",
         "isApiVersion": false,
@@ -1971,11 +2013,11 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "241",
+        "$id": "247",
         "name": "accept",
         "nameInRequest": "Accept",
         "type": {
-         "$ref": "42"
+         "$ref": "48"
         },
         "location": "Header",
         "isApiVersion": false,
@@ -1988,11 +2030,11 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "242",
+        "$id": "248",
         "name": "modelToRename",
         "nameInRequest": "modelToRename",
         "type": {
-         "$ref": "57"
+         "$ref": "63"
         },
         "location": "Body",
         "isApiVersion": false,
@@ -2007,12 +2049,12 @@
       ],
       "responses": [
        {
-        "$id": "243",
+        "$id": "249",
         "statusCodes": [
          200
         ],
         "bodyType": {
-         "$ref": "57"
+         "$ref": "63"
         },
         "headers": [],
         "isErrorResponse": false,
@@ -2035,12 +2077,12 @@
      },
      "parameters": [
       {
-       "$id": "244",
+       "$id": "250",
        "name": "requiredIntOnBase",
        "nameInRequest": "requiredIntOnBase",
        "doc": "Required int",
        "type": {
-        "$id": "245",
+        "$id": "251",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -2057,12 +2099,12 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "246",
+       "$id": "252",
        "name": "optionalInt",
        "nameInRequest": "optionalInt",
        "doc": "Optional int",
        "type": {
-        "$id": "247",
+        "$id": "253",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -2079,12 +2121,12 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "248",
+       "$id": "254",
        "name": "contentType",
        "nameInRequest": "contentType",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$ref": "42"
+        "$ref": "46"
        },
        "location": "Header",
        "isApiVersion": false,
@@ -2097,11 +2139,11 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "249",
+       "$id": "255",
        "name": "accept",
        "nameInRequest": "accept",
        "type": {
-        "$ref": "42"
+        "$ref": "48"
        },
        "location": "Header",
        "isApiVersion": false,
@@ -2115,9 +2157,9 @@
       }
      ],
      "response": {
-      "$id": "250",
+      "$id": "256",
       "type": {
-       "$ref": "57"
+       "$ref": "63"
       }
      },
      "isOverride": false,
@@ -2128,12 +2170,12 @@
    ],
    "parameters": [
     {
-     "$id": "251",
+     "$id": "257",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Service host",
      "type": {
-      "$id": "252",
+      "$id": "258",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -2150,12 +2192,12 @@
    ],
    "decorators": [
     {
-     "$id": "253",
+     "$id": "259",
      "name": "TypeSpec.@service",
      "arguments": {
-      "$id": "254",
+      "$id": "260",
       "options": {
-       "$id": "255",
+       "$id": "261",
        "title": "Models in TypeSpec"
       }
      }

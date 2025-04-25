@@ -592,7 +592,7 @@ namespace Encode.Bytes
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/bytes/body/request/default", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Content-Type", "application/octet-stream");
             request.Content = content;
             return message;
         }
