@@ -48,7 +48,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DpgOutputLibraryBuilder.ConvertLiteralToEnum(_input.Constants, _literalValueTypes);
             DpgOutputLibraryBuilder.CreateModels(_input.Models, models, _typeFactory, sourceInputModel);
-            DpgOutputLibraryBuilder.CreateEnums(_input.Enums, enums, models, _typeFactory, sourceInputModel);
+
+            var inputEnums = new List<InputEnumType>(_input.Enums.Count + _input.Constants.Count);
+            inputEnums.AddRange(_input.Enums);
+            inputEnums.AddRange(_literalValueTypes.Values);
+            DpgOutputLibraryBuilder.CreateEnums(inputEnums, enums, models, _typeFactory, sourceInputModel);
 
             _enums = enums;
             _models = models;
