@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
@@ -206,8 +205,8 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
-            new("System.ClientModel", "1.4.0-alpha.20250423.13"),
-            new("System.Text.Json", "6.0.11")
+            new("System.ClientModel", "1.4.0-alpha.20250424.10"),
+            new("System.Text.Json", "8.0.5")
         };
 
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedTestDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
