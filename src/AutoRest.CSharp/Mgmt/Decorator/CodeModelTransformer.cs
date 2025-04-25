@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static void TransformForDataPlane(CodeModel codeModel)
         {
             SchemaUsageTransformer.Transform(codeModel);
-            ConstantSchemaTransformer.Transform(codeModel);
+            //ConstantSchemaTransformer.Transform(codeModel);
             ModelPropertyClientDefaultValueTransformer.Transform(codeModel);
         }
 
@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             SchemaUsageTransformer.Transform(codeModel);
             OmitOperationGroups.RemoveOperationGroups(codeModel);
             SubscriptionIdUpdater.Update(codeModel);
-            ConstantSchemaTransformer.Transform(codeModel);
+            //ConstantSchemaTransformer.Transform(codeModel);
             CommonSingleWordModels.Update(codeModel);
             SchemaNameAndFormatUpdater.ApplyRenameMapping(codeModel);
             SchemaNameAndFormatUpdater.UpdateAcronyms(codeModel);

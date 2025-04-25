@@ -90,8 +90,8 @@ namespace AutoRest.CSharp.Generation.Types
             }
 
             var values = new List<InputEnumTypeValue>();
-            var enumType = new InputEnumType(literal.Name, string.Empty, null, null, null, $"The {literal.Name}", InputModelTypeUsage.Input | InputModelTypeUsage.Output, literal.ValueType, values, true);
-            values.Add(new InputEnumTypeValue(literal.Value.ToString() ?? "Null", literal.Value, literal.ValueType, enumType, null, literal.Value.ToString()));
+            var enumType = new InputEnumType(literal.Name, string.Empty, null, null, null, literal.Doc ?? $"The {literal.Name}", InputModelTypeUsage.Input | InputModelTypeUsage.Output, literal.ValueType, values, true);
+            values.Add(new InputEnumTypeValue(literal.Value.ToString() ?? "Null", literal.Value, literal.ValueType, enumType, null, literal.ValueDescription ?? literal.Value.ToString()));
 
             return enumType;
         }

@@ -430,8 +430,6 @@ internal static class SchemaNameAndFormatUpdater
             case ObjectSchema objSchema: // GroupSchema inherits ObjectSchema, therefore we do not need to handle that
                 TransformObjectSchema(objSchema);
                 break;
-            default:
-                throw new InvalidOperationException($"Unknown schema type {schema.GetType()}");
         }
     }
 

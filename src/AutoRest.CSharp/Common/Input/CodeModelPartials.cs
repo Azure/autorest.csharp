@@ -331,6 +331,8 @@ namespace AutoRest.CSharp.Input
                     yield return schema;
                 foreach (var schema in Schemas.Groups)
                     yield return schema;
+                foreach (var schema in Schemas.Constants)
+                    yield return schema;
             }
         }
     }

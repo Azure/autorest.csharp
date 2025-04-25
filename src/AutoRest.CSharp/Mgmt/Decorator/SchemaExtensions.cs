@@ -181,4 +181,12 @@ internal static class SchemaExtensions
             propertySerializedName = string.Join(".", property.FlattenedNames);
         return $"{inputModel.GetFullSerializedName()}.{propertySerializedName}";
     }
+
+    internal static string GetFullSerializedName(this ConstantSchema constantSchema, ConstantValue constantValue)
+    {
+        if (constantSchema.Value != constantValue)
+            throw new InvalidOperationException($"value {constantValue.Language?.Default.Name ?? constantValue.Value} doesn't belong to object {constantSchema.Name}");
+
+        return $"{constantSchema.GetFullSerializedName()}.{constantValue.Language?.Default.Name ?? constantValue.Value}";
+    }
 }

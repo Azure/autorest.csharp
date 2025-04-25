@@ -801,8 +801,16 @@ namespace AutoRest.CSharp.Common.Input
 
             return valueType.GetImplementType() switch
             {
-                InputPrimitiveType primitiveType => new InputLiteralType(constantSchema.Name, primitiveType, NormalizeRawValue(primitiveType.Kind, rawValue)),
-                InputEnumType enumType => new InputLiteralType(enumType.Name, enumType.ValueType, NormalizeRawValue(enumType.ValueType.Kind, rawValue)),
+                InputPrimitiveType primitiveType => new InputLiteralType(constantSchema.Name, primitiveType, NormalizeRawValue(primitiveType.Kind, rawValue))
+                {
+                    Doc = constantSchema.Language.Default.Description,
+                    ValueDescription = constantSchema.Value.Language?.Default.Description
+                },
+                InputEnumType enumType => new InputLiteralType(enumType.Name, enumType.ValueType, NormalizeRawValue(enumType.ValueType.Kind, rawValue))
+                {
+                    Doc = enumType.Doc,
+                    ValueDescription = constantSchema.Value.Language?.Default.Description
+                },
                 _ => throw new InvalidCastException($"Unknown value type {valueType.GetType()} for literal types")
             };
 

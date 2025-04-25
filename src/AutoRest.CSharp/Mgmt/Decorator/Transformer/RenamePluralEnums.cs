@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
             foreach (var schema in codeModel.AllSchemas)
             {
-                if (schema is not SealedChoiceSchema && schema is not ChoiceSchema)
+                if (schema is not SealedChoiceSchema && schema is not ChoiceSchema && schema is not ConstantSchema)
                     continue;
                 string schemaName = schema.Language.Default.Name;
                 if (enumsToKeepPlural.Contains(schemaName))

@@ -10,6 +10,7 @@ namespace AutoRest.CSharp.Common.Decorator
 {
     internal static class ConstantSchemaTransformer
     {
+        // TODO -- we need to change this so that we do not create the enum here
         public static void Transform(CodeModel codeModel)
         {
             var constantSchemas = new HashSet<ConstantSchema>(codeModel.Schemas.Constants);

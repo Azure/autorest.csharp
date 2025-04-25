@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
-using AzureSample.ResourceManager.Sample.Models;
 
 namespace AzureSample.ResourceManager.Sample.Mocking
 {
@@ -210,7 +209,7 @@ namespace AzureSample.ResourceManager.Sample.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public virtual async Task<Response<DedicatedHostGroupResource>> GetDedicatedHostGroupAsync(string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DedicatedHostGroupResource>> GetDedicatedHostGroupAsync(string hostGroupName, string expand = null, CancellationToken cancellationToken = default)
         {
             return await GetDedicatedHostGroups().GetAsync(hostGroupName, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -242,7 +241,7 @@ namespace AzureSample.ResourceManager.Sample.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public virtual Response<DedicatedHostGroupResource> GetDedicatedHostGroup(string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHostGroupResource> GetDedicatedHostGroup(string hostGroupName, string expand = null, CancellationToken cancellationToken = default)
         {
             return GetDedicatedHostGroups().Get(hostGroupName, expand, cancellationToken);
         }
@@ -350,7 +349,7 @@ namespace AzureSample.ResourceManager.Sample.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public virtual async Task<Response<VirtualMachineResource>> GetVirtualMachineAsync(string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<VirtualMachineResource>> GetVirtualMachineAsync(string vmName, string expand = null, CancellationToken cancellationToken = default)
         {
             return await GetVirtualMachines().GetAsync(vmName, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -382,7 +381,7 @@ namespace AzureSample.ResourceManager.Sample.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public virtual Response<VirtualMachineResource> GetVirtualMachine(string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineResource> GetVirtualMachine(string vmName, string expand = null, CancellationToken cancellationToken = default)
         {
             return GetVirtualMachines().Get(vmName, expand, cancellationToken);
         }

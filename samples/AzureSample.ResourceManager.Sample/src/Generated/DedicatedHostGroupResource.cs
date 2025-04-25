@@ -126,7 +126,7 @@ namespace AzureSample.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public virtual async Task<Response<DedicatedHostResource>> GetDedicatedHostAsync(string hostName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DedicatedHostResource>> GetDedicatedHostAsync(string hostName, string expand = null, CancellationToken cancellationToken = default)
         {
             return await GetDedicatedHosts().GetAsync(hostName, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -158,7 +158,7 @@ namespace AzureSample.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public virtual Response<DedicatedHostResource> GetDedicatedHost(string hostName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHostResource> GetDedicatedHost(string hostName, string expand = null, CancellationToken cancellationToken = default)
         {
             return GetDedicatedHosts().Get(hostName, expand, cancellationToken);
         }
@@ -186,7 +186,7 @@ namespace AzureSample.ResourceManager.Sample
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DedicatedHostGroupResource>> GetAsync(InstanceViewType? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DedicatedHostGroupResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.Get");
             scope.Start();
@@ -227,7 +227,7 @@ namespace AzureSample.ResourceManager.Sample
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DedicatedHostGroupResource> Get(InstanceViewType? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHostGroupResource> Get(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.Get");
             scope.Start();

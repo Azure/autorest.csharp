@@ -22,6 +22,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     case ObjectSchema objectSchema:
                         UpdateObjectSchema(objectSchema);
                         break;
+                    case ConstantSchema constantSchema:
+                        UpdateConstantSchema(constantSchema);
+                        break;
                 }
             }
         }
@@ -58,13 +61,25 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
         }
 
+        private static void UpdateConstantSchema(ConstantSchema constantSchema)
+        {
+            // update the constant type, append the serialized name of this type to its original description
+            constantSchema.Language.Default.Description = $"{CreateDescription(constantSchema)}\n{CreateSerializedNameDescription(constantSchema.GetFullSerializedName())}";
+            constantSchema.Value.Language ??= new();
+            constantSchema.Value.Language.Default.Description = $"{CreateDescription(constantSchema.Value)}\n{CreateSerializedNameDescription(constantSchema.GetFullSerializedName(constantSchema.Value))}";
+        }
+
         private static string CreateDescription(Schema schema) => string.IsNullOrWhiteSpace(schema.Language.Default.Description) ?
-                $"The {schema.Name}.":
+                $"The {schema.Name}." :
                 schema.Language.Default.Description;
 
         private static string CreateDescription(ChoiceValue choiceValue) => string.IsNullOrWhiteSpace(choiceValue.Language.Default.Description)
                 ? choiceValue.Value
                 : choiceValue.Language.Default.Description;
+
+        private static string CreateDescription(ConstantValue value) => string.IsNullOrWhiteSpace(value.Language?.Default.Description)
+                ? value.Value.ToString() ?? "Null"
+                : value.Language.Default.Description;
 
         private static string CreateSerializedNameDescription(string fullSerializedName) => $"Serialized Name: {fullSerializedName}";
     }
