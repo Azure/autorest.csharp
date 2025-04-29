@@ -20,6 +20,7 @@ import {
     resolveAzureEmitterOptions
 } from "./options.js";
 import { azureSDKContextOptions } from "./sdk-context-options.js";
+import { transformCodeModel } from "./backward-compatibility.js";
 
 export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
     const program: Program = context.program;
@@ -43,7 +44,7 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
         azureSDKContextOptions
     );
     const csharpEmitterContext = createCSharpEmitterContext(sdkContext, logger);
-    const root = createModel(csharpEmitterContext);
+    const root = transformCodeModel(createModel(csharpEmitterContext));
 
     const outputFolder = resolvePath(
         context.emitterOutputDir ?? "./tsp-output"
