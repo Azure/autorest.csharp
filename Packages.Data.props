@@ -38,8 +38,8 @@
   <!-- All csproj dependencies. -->
   <ItemGroup>
     <PackageReference Update="NUnit" Version="3.13.2" />
-    <PackageReference Update="System.ClientModel" Version="1.4.0-alpha.20250424.10" />
-    <PackageReference Update="Azure.Core" Version="1.46.0-alpha.20250424.11" />
+    <PackageReference Update="System.ClientModel" Version="1.4.0-beta.6" />
+    <PackageReference Update="Azure.Core" Version="1.46.0-alpha.20250428.10" />
     <PackageReference Update="Azure.Core.Experimental" Version="0.1.0-preview.18" />
     <PackageReference Update="Azure.ResourceManager" Version="1.13.0" />
     <PackageReference Update="Azure.Core.Expressions.DataFactory" Version="1.0.0" />
