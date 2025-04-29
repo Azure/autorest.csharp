@@ -130,7 +130,7 @@ namespace MgmtTypeSpec.Models
             DateTimeOffset? endTime = default;
             IReadOnlyList<OperationStatusResult> operations = default;
             ResponseError error = default;
-            string resourceId = default;
+            ResourceIdentifier resourceId = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -206,7 +206,11 @@ namespace MgmtTypeSpec.Models
                 }
                 if (property.NameEquals("resourceId"u8))
                 {
-                    resourceId = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    resourceId = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
                 if (options.Format != "W")
@@ -396,15 +400,7 @@ namespace MgmtTypeSpec.Models
                 if (Optional.IsDefined(ResourceId))
                 {
                     builder.Append("  resourceId: ");
-                    if (ResourceId.Contains(Environment.NewLine))
-                    {
-                        builder.AppendLine("'''");
-                        builder.AppendLine($"{ResourceId}'''");
-                    }
-                    else
-                    {
-                        builder.AppendLine($"'{ResourceId}'");
-                    }
+                    builder.AppendLine($"'{ResourceId.ToString()}'");
                 }
             }
 
