@@ -299,6 +299,9 @@
         "type": {
          "$id": "42",
          "kind": "constant",
+         "name": "getModelContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "43",
           "kind": "string",
@@ -326,6 +329,9 @@
         "type": {
          "$id": "45",
          "kind": "constant",
+         "name": "getModelContentType1",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "46",
           "kind": "string",
@@ -499,6 +505,9 @@
         "type": {
          "$id": "58",
          "kind": "constant",
+         "name": "headModelContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "59",
           "kind": "string",
@@ -624,6 +633,9 @@
         "type": {
          "$id": "68",
          "kind": "constant",
+         "name": "putModelContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "69",
           "kind": "string",
@@ -749,6 +761,9 @@
         "type": {
          "$id": "78",
          "kind": "constant",
+         "name": "patchModelContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "79",
           "kind": "string",
@@ -874,6 +889,9 @@
         "type": {
          "$id": "88",
          "kind": "constant",
+         "name": "postModelContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "89",
           "kind": "string",
@@ -999,6 +1017,9 @@
         "type": {
          "$id": "98",
          "kind": "constant",
+         "name": "deleteModelContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "99",
           "kind": "string",
@@ -1124,6 +1145,9 @@
         "type": {
          "$id": "108",
          "kind": "constant",
+         "name": "putReadOnlyModelContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "109",
           "kind": "string",
@@ -1151,6 +1175,9 @@
         "type": {
          "$id": "111",
          "kind": "constant",
+         "name": "putReadOnlyModelContentType1",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "112",
           "kind": "string",

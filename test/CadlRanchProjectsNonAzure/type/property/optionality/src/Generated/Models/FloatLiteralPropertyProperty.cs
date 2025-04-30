@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace Scm._Type.Property.Optionality.Models
 {
-    /// <summary> The FloatLiteralProperty_property. </summary>
+    /// <summary> The FloatLiteralPropertyProperty. </summary>
     public readonly partial struct FloatLiteralPropertyProperty : IEquatable<FloatLiteralPropertyProperty>
     {
         private readonly float _value;

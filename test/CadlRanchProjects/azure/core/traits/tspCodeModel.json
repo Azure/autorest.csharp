@@ -488,6 +488,9 @@
         "type": {
          "$id": "56",
          "kind": "constant",
+         "name": "smokeTestContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "57",
           "kind": "string",
@@ -917,6 +920,9 @@
         "type": {
          "$id": "99",
          "kind": "constant",
+         "name": "repeatableActionContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "100",
           "kind": "string",
@@ -944,6 +950,9 @@
         "type": {
          "$id": "102",
          "kind": "constant",
+         "name": "repeatableActionContentType1",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "103",
           "kind": "string",

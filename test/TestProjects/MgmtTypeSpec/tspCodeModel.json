@@ -3031,6 +3031,9 @@
           "type": {
            "$id": "397",
            "kind": "constant",
+           "name": "listContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "398",
             "kind": "string",
@@ -3284,6 +3287,9 @@
           "type": {
            "$id": "422",
            "kind": "constant",
+           "name": "listByMongoClusterContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "423",
             "kind": "string",
@@ -3534,6 +3540,9 @@
           "type": {
            "$id": "446",
            "kind": "constant",
+           "name": "startContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "447",
             "kind": "string",
@@ -3561,6 +3570,9 @@
           "type": {
            "$id": "449",
            "kind": "constant",
+           "name": "startContentType1",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "450",
             "kind": "string",
@@ -3734,6 +3746,9 @@
          "type": {
           "$id": "464",
           "kind": "constant",
+          "name": "startContentType2",
+          "namespace": "",
+          "usage": 0,
           "valueType": {
            "$id": "465",
            "kind": "string",
@@ -3761,6 +3776,9 @@
          "type": {
           "$id": "467",
           "kind": "constant",
+          "name": "startContentType3",
+          "namespace": "",
+          "usage": 0,
           "valueType": {
            "$id": "468",
            "kind": "string",
@@ -3991,6 +4009,9 @@
           "type": {
            "$id": "493",
            "kind": "constant",
+           "name": "createOrUpdateContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "494",
             "kind": "string",
@@ -4018,6 +4039,9 @@
           "type": {
            "$id": "496",
            "kind": "constant",
+           "name": "createOrUpdateContentType1",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "497",
             "kind": "string",
@@ -4409,6 +4433,9 @@
          "type": {
           "$id": "541",
           "kind": "constant",
+          "name": "createOrUpdateContentType2",
+          "namespace": "",
+          "usage": 0,
           "valueType": {
            "$id": "542",
            "kind": "string",
@@ -4436,6 +4463,9 @@
          "type": {
           "$id": "544",
           "kind": "constant",
+          "name": "createOrUpdateContentType3",
+          "namespace": "",
+          "usage": 0,
           "valueType": {
            "$id": "545",
            "kind": "string",
@@ -4609,6 +4639,9 @@
           "type": {
            "$id": "563",
            "kind": "constant",
+           "name": "getContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "564",
             "kind": "string",
@@ -4979,6 +5012,9 @@
           "type": {
            "$id": "603",
            "kind": "constant",
+           "name": "deleteContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "604",
             "kind": "string",
@@ -5106,6 +5142,9 @@
          "type": {
           "$id": "616",
           "kind": "constant",
+          "name": "deleteContentType1",
+          "namespace": "",
+          "usage": 0,
           "valueType": {
            "$id": "617",
            "kind": "string",
@@ -5251,6 +5290,9 @@
           "type": {
            "$id": "633",
            "kind": "constant",
+           "name": "listContentType1",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "634",
             "kind": "string",

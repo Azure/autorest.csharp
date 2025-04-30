@@ -70,6 +70,9 @@
         "type": {
          "$id": "11",
          "kind": "constant",
+         "name": "requiredExplicitContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "12",
           "kind": "string",
@@ -195,6 +198,9 @@
         "type": {
          "$id": "21",
          "kind": "constant",
+         "name": "requiredImplicitContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "22",
           "kind": "string",
@@ -367,6 +373,9 @@
           "type": {
            "$id": "37",
            "kind": "constant",
+           "name": "setContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "38",
             "kind": "string",
@@ -492,6 +501,9 @@
           "type": {
            "$id": "47",
            "kind": "constant",
+           "name": "omitContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "48",
             "kind": "string",

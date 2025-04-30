@@ -74,6 +74,9 @@
           "type": {
            "$id": "11",
            "kind": "constant",
+           "name": "getContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "12",
             "kind": "string",
@@ -116,6 +119,9 @@
             "type": {
              "$id": "16",
              "kind": "constant",
+             "name": "GetResponseContentType",
+             "namespace": "",
+             "usage": 0,
              "valueType": {
               "$id": "17",
               "kind": "string",
@@ -194,6 +200,9 @@
           "type": {
            "$id": "23",
            "kind": "constant",
+           "name": "GetResponseContentType1",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "24",
             "kind": "string",
@@ -267,6 +276,9 @@
          "type": {
           "$id": "29",
           "kind": "constant",
+          "name": "GetResponseContentType2",
+          "namespace": "",
+          "usage": 0,
           "valueType": {
            "$id": "30",
            "kind": "string",
@@ -385,6 +397,9 @@
           "type": {
            "$id": "42",
            "kind": "constant",
+           "name": "getContentType1",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "43",
             "kind": "string",
@@ -427,6 +442,9 @@
             "type": {
              "$id": "47",
              "kind": "constant",
+             "name": "GetResponseContentType3",
+             "namespace": "",
+             "usage": 0,
              "valueType": {
               "$id": "48",
               "kind": "string",
@@ -505,6 +523,9 @@
           "type": {
            "$id": "54",
            "kind": "constant",
+           "name": "GetResponseContentType4",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "55",
             "kind": "string",
@@ -578,6 +599,9 @@
          "type": {
           "$id": "60",
           "kind": "constant",
+          "name": "GetResponseContentType5",
+          "namespace": "",
+          "usage": 0,
           "valueType": {
            "$id": "61",
            "kind": "string",
@@ -696,6 +720,9 @@
           "type": {
            "$id": "73",
            "kind": "constant",
+           "name": "getContentType2",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "74",
             "kind": "string",
@@ -738,6 +765,9 @@
             "type": {
              "$id": "78",
              "kind": "constant",
+             "name": "GetResponseContentType6",
+             "namespace": "",
+             "usage": 0,
              "valueType": {
               "$id": "79",
               "kind": "string",
@@ -816,6 +846,9 @@
           "type": {
            "$id": "85",
            "kind": "constant",
+           "name": "GetResponseContentType7",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "86",
             "kind": "string",
@@ -889,6 +922,9 @@
          "type": {
           "$id": "91",
           "kind": "constant",
+          "name": "GetResponseContentType8",
+          "namespace": "",
+          "usage": 0,
           "valueType": {
            "$id": "92",
            "kind": "string",
@@ -1006,6 +1042,9 @@
           "type": {
            "$id": "104",
            "kind": "constant",
+           "name": "responseBodyContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "105",
             "kind": "string",
@@ -1048,6 +1087,9 @@
             "type": {
              "$id": "109",
              "kind": "constant",
+             "name": "GetResponseContentType9",
+             "namespace": "",
+             "usage": 0,
              "valueType": {
               "$id": "110",
               "kind": "string",
@@ -1124,6 +1166,9 @@
           "type": {
            "$id": "116",
            "kind": "constant",
+           "name": "GetResponseContentType10",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "117",
             "kind": "string",
@@ -1196,6 +1241,9 @@
          "type": {
           "$id": "122",
           "kind": "constant",
+          "name": "GetResponseContentType11",
+          "namespace": "",
+          "usage": 0,
           "valueType": {
            "$id": "123",
            "kind": "string",
@@ -1396,6 +1444,9 @@
           "type": {
            "$id": "143",
            "kind": "constant",
+           "name": "responseBodyContentType1",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "144",
             "kind": "string",
@@ -1438,6 +1489,9 @@
             "type": {
              "$id": "148",
              "kind": "constant",
+             "name": "GetResponseContentType12",
+             "namespace": "",
+             "usage": 0,
              "valueType": {
               "$id": "149",
               "kind": "string",
@@ -1514,6 +1568,9 @@
           "type": {
            "$id": "155",
            "kind": "constant",
+           "name": "GetResponseContentType13",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "156",
             "kind": "string",
@@ -1586,6 +1643,9 @@
          "type": {
           "$id": "161",
           "kind": "constant",
+          "name": "GetResponseContentType14",
+          "namespace": "",
+          "usage": 0,
           "valueType": {
            "$id": "162",
            "kind": "string",
@@ -1786,6 +1846,9 @@
           "type": {
            "$id": "182",
            "kind": "constant",
+           "name": "prepareVerifyContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "183",
             "kind": "string",
@@ -1892,6 +1955,9 @@
           "type": {
            "$id": "192",
            "kind": "constant",
+           "name": "GetResponseContentType15",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "193",
             "kind": "string",
@@ -1964,6 +2030,9 @@
          "type": {
           "$id": "198",
           "kind": "constant",
+          "name": "GetResponseContentType16",
+          "namespace": "",
+          "usage": 0,
           "valueType": {
            "$id": "199",
            "kind": "string",
@@ -2080,6 +2149,9 @@
           "type": {
            "$id": "211",
            "kind": "constant",
+           "name": "prepareVerifyContentType1",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "212",
             "kind": "string",
@@ -2186,6 +2258,9 @@
           "type": {
            "$id": "221",
            "kind": "constant",
+           "name": "GetResponseContentType17",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "222",
             "kind": "string",
@@ -2258,6 +2333,9 @@
          "type": {
           "$id": "227",
           "kind": "constant",
+          "name": "GetResponseContentType18",
+          "namespace": "",
+          "usage": 0,
           "valueType": {
            "$id": "228",
            "kind": "string",

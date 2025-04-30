@@ -459,6 +459,9 @@
           "type": {
            "$id": "64",
            "kind": "constant",
+           "name": "spreadAsRequestBodyContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "65",
             "kind": "string",
@@ -588,6 +591,9 @@
           "type": {
            "$id": "75",
            "kind": "constant",
+           "name": "spreadCompositeRequestOnlyWithBodyContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "76",
             "kind": "string",
@@ -881,6 +887,9 @@
           "type": {
            "$id": "101",
            "kind": "constant",
+           "name": "spreadCompositeRequestContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "102",
             "kind": "string",
@@ -1090,6 +1099,9 @@
           "type": {
            "$id": "119",
            "kind": "constant",
+           "name": "spreadCompositeRequestMixContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "120",
             "kind": "string",
@@ -1307,6 +1319,9 @@
           "type": {
            "$id": "139",
            "kind": "constant",
+           "name": "spreadAsRequestBodyContentType1",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "140",
             "kind": "string",
@@ -1474,6 +1489,9 @@
           "type": {
            "$id": "153",
            "kind": "constant",
+           "name": "spreadParameterWithInnerModelContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "154",
             "kind": "string",
@@ -1687,6 +1705,9 @@
           "type": {
            "$id": "172",
            "kind": "constant",
+           "name": "spreadAsRequestParameterContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "173",
             "kind": "string",
@@ -1900,6 +1921,9 @@
           "type": {
            "$id": "191",
            "kind": "constant",
+           "name": "spreadWithMultipleParametersContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "192",
             "kind": "string",
@@ -2196,6 +2220,9 @@
           "type": {
            "$id": "218",
            "kind": "constant",
+           "name": "spreadParameterWithInnerAliasContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "219",
             "kind": "string",

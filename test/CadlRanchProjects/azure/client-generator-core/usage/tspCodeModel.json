@@ -284,6 +284,9 @@
           "type": {
            "$id": "38",
            "kind": "constant",
+           "name": "inputToInputOutputContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "39",
             "kind": "string",
@@ -410,6 +413,9 @@
           "type": {
            "$id": "48",
            "kind": "constant",
+           "name": "outputToInputOutputContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "49",
             "kind": "string",
@@ -508,6 +514,9 @@
           "type": {
            "$id": "56",
            "kind": "constant",
+           "name": "modelInReadOnlyPropertyContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "57",
             "kind": "string",
@@ -535,6 +544,9 @@
           "type": {
            "$id": "59",
            "kind": "constant",
+           "name": "modelInReadOnlyPropertyContentType1",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "60",
             "kind": "string",
@@ -688,6 +700,9 @@
           "type": {
            "$id": "70",
            "kind": "constant",
+           "name": "orphanModelSerializableContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "71",
             "kind": "string",

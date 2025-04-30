@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace Scm._Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The WidgetData1_kind. </summary>
+    /// <summary> The WidgetData1Kind. </summary>
     public readonly partial struct WidgetData1Kind : IEquatable<WidgetData1Kind>
     {
         private readonly string _value;

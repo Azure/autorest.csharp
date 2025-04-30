@@ -153,6 +153,9 @@
         "type": {
          "$id": "21",
          "kind": "constant",
+         "name": "postValidContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "22",
           "kind": "string",
@@ -277,6 +280,9 @@
         "type": {
          "$id": "31",
          "kind": "constant",
+         "name": "getValidContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "32",
           "kind": "string",
@@ -373,6 +379,9 @@
         "type": {
          "$id": "39",
          "kind": "constant",
+         "name": "putValidContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "40",
           "kind": "string",
@@ -400,6 +409,9 @@
         "type": {
          "$id": "42",
          "kind": "constant",
+         "name": "putValidContentType1",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "43",
           "kind": "string",

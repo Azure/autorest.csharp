@@ -887,6 +887,9 @@
         "type": {
          "$id": "113",
          "kind": "constant",
+         "name": "createOrReplaceContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "114",
           "kind": "string",
@@ -914,6 +917,9 @@
         "type": {
          "$id": "116",
          "kind": "constant",
+         "name": "createOrReplaceContentType1",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "117",
           "kind": "string",
@@ -1086,6 +1092,9 @@
        "type": {
         "$id": "131",
         "kind": "constant",
+        "name": "createOrReplaceContentType2",
+        "namespace": "",
+        "usage": 0,
         "valueType": {
          "$id": "132",
          "kind": "string",
@@ -1113,6 +1122,9 @@
        "type": {
         "$id": "134",
         "kind": "constant",
+        "name": "createOrReplaceContentType3",
+        "namespace": "",
+        "usage": 0,
         "valueType": {
          "$id": "135",
          "kind": "string",
@@ -1237,6 +1249,9 @@
         "type": {
          "$id": "148",
          "kind": "constant",
+         "name": "deleteContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "149",
           "kind": "string",
@@ -1334,6 +1349,9 @@
        "type": {
         "$id": "157",
         "kind": "constant",
+        "name": "deleteContentType1",
+        "namespace": "",
+        "usage": 0,
         "valueType": {
          "$id": "158",
          "kind": "string",
@@ -1474,6 +1492,9 @@
         "type": {
          "$id": "173",
          "kind": "constant",
+         "name": "exportContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "174",
           "kind": "string",
@@ -1593,6 +1614,9 @@
        "type": {
         "$id": "184",
         "kind": "constant",
+        "name": "exportContentType1",
+        "namespace": "",
+        "usage": 0,
         "valueType": {
          "$id": "185",
          "kind": "string",

@@ -277,6 +277,9 @@
         "type": {
          "$id": "39",
          "kind": "constant",
+         "name": "putFlattenModelContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "40",
           "kind": "string",
@@ -304,6 +307,9 @@
         "type": {
          "$id": "42",
          "kind": "constant",
+         "name": "putFlattenModelContentType1",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "43",
           "kind": "string",
@@ -455,6 +461,9 @@
         "type": {
          "$id": "53",
          "kind": "constant",
+         "name": "putNestedFlattenModelContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "54",
           "kind": "string",
@@ -482,6 +491,9 @@
         "type": {
          "$id": "56",
          "kind": "constant",
+         "name": "putNestedFlattenModelContentType1",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "57",
           "kind": "string",

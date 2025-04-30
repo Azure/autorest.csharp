@@ -439,6 +439,9 @@
         "type": {
          "$id": "53",
          "kind": "constant",
+         "name": "clientContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "54",
           "kind": "string",
@@ -564,6 +567,9 @@
         "type": {
          "$id": "63",
          "kind": "constant",
+         "name": "languageContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "64",
           "kind": "string",
@@ -689,6 +695,9 @@
         "type": {
          "$id": "73",
          "kind": "constant",
+         "name": "compatibleWithEncodedNameContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "74",
           "kind": "string",
@@ -994,6 +1003,9 @@
           "type": {
            "$id": "102",
            "kind": "constant",
+           "name": "clientContentType1",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "103",
             "kind": "string",
@@ -1119,6 +1131,9 @@
           "type": {
            "$id": "112",
            "kind": "constant",
+           "name": "languageContentType1",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "113",
             "kind": "string",
@@ -1289,6 +1304,9 @@
           "type": {
            "$id": "127",
            "kind": "constant",
+           "name": "UnionEnumNameRequestContentType",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "128",
             "kind": "string",
@@ -1357,6 +1375,9 @@
          "type": {
           "$id": "132",
           "kind": "constant",
+          "name": "UnionEnumNameRequestContentType1",
+          "namespace": "",
+          "usage": 0,
           "valueType": {
            "$id": "133",
            "kind": "string",
@@ -1422,6 +1443,9 @@
           "type": {
            "$id": "139",
            "kind": "constant",
+           "name": "UnionEnumNameRequestContentType2",
+           "namespace": "",
+           "usage": 0,
            "valueType": {
             "$id": "140",
             "kind": "string",
@@ -1490,6 +1514,9 @@
          "type": {
           "$id": "144",
           "kind": "constant",
+          "name": "UnionEnumNameRequestContentType3",
+          "namespace": "",
+          "usage": 0,
           "valueType": {
            "$id": "145",
            "kind": "string",

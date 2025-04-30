@@ -368,6 +368,9 @@
         "type": {
          "$id": "46",
          "kind": "constant",
+         "name": "v2ContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "47",
           "kind": "string",
@@ -395,6 +398,9 @@
         "type": {
          "$id": "49",
          "kind": "constant",
+         "name": "v2ContentType1",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "50",
           "kind": "string",
@@ -552,6 +558,9 @@
         "type": {
          "$id": "60",
          "kind": "constant",
+         "name": "modelV3ContentType",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "61",
           "kind": "string",
@@ -579,6 +588,9 @@
         "type": {
          "$id": "63",
          "kind": "constant",
+         "name": "modelV3ContentType1",
+         "namespace": "",
+         "usage": 0,
          "valueType": {
           "$id": "64",
           "kind": "string",
