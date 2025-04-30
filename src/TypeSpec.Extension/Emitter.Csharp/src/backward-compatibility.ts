@@ -16,38 +16,63 @@ export function transformCodeModel(
     // iterates all the constants, and replace its valueType with a created enum type
     // TODO -- we only change the constants in models to an enum type
     const convertedEnums: InputEnumType[] = [];
-    for (const constant of codeModel.constants) {
-        // we convert the valueType to an enum when it is not a boolean.
-        if (constant.valueType.kind !== "boolean") {
-            const enumType: InputEnumType = {
-                kind: "enum",
-                name: constant.name,
-                crossLanguageDefinitionId: "",
-                valueType: constant.valueType,
-                values: [],
-                isFixed: false,
-                isFlags: false,
-                usage: constant.usage,
-                access: constant.access,
-                namespace: constant.namespace,
-            };
-            const enumValue : InputEnumValueType = {
-                kind: "enumvalue",
-                name: constant.value === null ? "Null" : constant.value.toString(),
-                value: constant.value as string | number,
-                valueType: constant.valueType,
-                enumType: enumType
-            };
-            enumType.values.push(enumValue);
-            convertedEnums.push(enumType);
-            codeModel.enums.push(enumType);
-            constant.valueType = enumType as any;
+    for (const model of codeModel.models) {
+        for (const property of model.properties) {
+            const propertyType = property.type;
+            if (propertyType.kind === "constant") {
+                const constantType = property.type as InputLiteralType;
+                // we convert the valueType to an enum when it is not a boolean.
+                if (constantType.valueType.kind !== "boolean") {
+                    const enumType: InputEnumType = {
+                        kind: "enum",
+                        name: constantType.name,
+                        crossLanguageDefinitionId: "",
+                        valueType: constantType.valueType as any,
+                        values: [],
+                        isFixed: false,
+                        isFlags: false,
+                        usage: model.usage,
+                        access: model.access,
+                        namespace: model.namespace,
+                        decorators: constantType.decorators,
+                    };
+                    const enumValue : InputEnumValueType = {
+                        kind: "enumvalue",
+                        name: constantType.value === null ? "Null" : constantType.value.toString(),
+                        value: constantType.value as string | number,
+                        valueType: constantType.valueType as any,
+                        enumType: enumType
+                    };
+                    enumType.values.push(enumValue);
+                    convertedEnums.push(enumType);
+                    codeModel.enums.push(enumType);
+                    constantType.valueType = enumType;
+                }
+            }
+            else if (propertyType.kind === "enumvalue") {
+                // we convert the enumvalue into a constant type
+                // the value type of this constant type is enum when it is not a boolean, otherwise the primitive type.
+                const enumValueType = propertyType as InputEnumValueType;
+                const convertedConstant: InputLiteralType = {
+                    kind: "constant",
+                    name: enumValueType.name,
+                    access: model.access,
+                    usage: model.usage,
+                    namespace: model.namespace,
+                    valueType: enumValueType.valueType as any,
+                    value: enumValueType.value,
+                    decorators: enumValueType.decorators,
+                }
+                if (enumValueType.valueType.kind !== "boolean") {
+                    convertedConstant.valueType = enumValueType.enumType;
+                }
+                property.type = convertedConstant as any;
+            }
         }
     }
-    // TODO -- convert enumvalue in property types to be constant type.
     return {
         ...codeModel,
-        constants: undefined,
+        constants: undefined, // TODO -- this is a workaround to reduce the amount of changes in our tspCodeModel.json file. We could remove it later
     } as unknown as CodeModel;
 }
 
