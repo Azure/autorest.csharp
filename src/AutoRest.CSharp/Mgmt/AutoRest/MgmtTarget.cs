@@ -236,8 +236,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             //if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
             //    throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
-            var emitContext = Configuration.MgmtConfiguration.IsArmCore ? Configuration.Namespace == "Azure.ResourceManager" ? true : false : true;
-            if (emitContext)
+            if (ShouldEmitContextClass())
             {
                 var contextWriter = new CodeWriter();
                 var contextWriterInstance = new ModelReaderWriterContextWriter();
@@ -260,6 +259,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     project.AddGeneratedTestFile(Path.Combine(sampleOutputFolder, $"Samples/{sampleProvider.Type.Name}.cs"), sampleWriter.ToString());
                 }
             }
+        }
+
+        private static bool ShouldEmitContextClass()
+        {
+            // Only Azure.ResourceManager is special here since it will have 3 generations
+            // that get combined into one package.
+            if (!Configuration.MgmtConfiguration.IsArmCore)
+                return true;
+
+            // If we are generating Azure.ResourceManager, we should only generate one context
+            // for the entire package so we will do that when generation the core namespace.
+            return Configuration.Namespace == "Azure.ResourceManager";
         }
 
         private static void WriteExtensions(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtMockableExtension> mockableExtensions)
