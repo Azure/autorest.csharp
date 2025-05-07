@@ -532,7 +532,7 @@
          "kind": "constant",
          "name": "basicActionContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "73",
           "kind": "string",
@@ -562,7 +562,7 @@
          "kind": "constant",
          "name": "basicActionContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "76",
           "kind": "string",

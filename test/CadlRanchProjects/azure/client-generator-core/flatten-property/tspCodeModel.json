@@ -279,7 +279,7 @@
          "kind": "constant",
          "name": "putFlattenModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "40",
           "kind": "string",
@@ -309,7 +309,7 @@
          "kind": "constant",
          "name": "putFlattenModelContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "43",
           "kind": "string",
@@ -463,7 +463,7 @@
          "kind": "constant",
          "name": "putNestedFlattenModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "54",
           "kind": "string",
@@ -493,7 +493,7 @@
          "kind": "constant",
          "name": "putNestedFlattenModelContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "57",
           "kind": "string",

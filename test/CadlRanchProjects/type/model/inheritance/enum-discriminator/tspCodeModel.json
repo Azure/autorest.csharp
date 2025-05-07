@@ -173,7 +173,7 @@
         "$id": "21",
         "kind": "constant",
         "name": "Golden",
-        "usage": 262,
+        "usage": "Input,Output,Json",
         "namespace": "_Type.Model.Inheritance.EnumDiscriminator",
         "valueType": {
          "$ref": "2"
@@ -292,7 +292,7 @@
         "$id": "35",
         "kind": "constant",
         "name": "Cobra",
-        "usage": 262,
+        "usage": "Input,Output,Json",
         "namespace": "_Type.Model.Inheritance.EnumDiscriminator",
         "valueType": {
          "$ref": "6"
@@ -353,7 +353,7 @@
          "kind": "constant",
          "name": "getExtensibleModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "43",
           "kind": "string",
@@ -454,7 +454,7 @@
          "kind": "constant",
          "name": "putExtensibleModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "51",
           "kind": "string",
@@ -585,7 +585,7 @@
          "kind": "constant",
          "name": "getExtensibleModelMissingDiscriminatorContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "61",
           "kind": "string",
@@ -685,7 +685,7 @@
          "kind": "constant",
          "name": "getExtensibleModelWrongDiscriminatorContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "69",
           "kind": "string",
@@ -785,7 +785,7 @@
          "kind": "constant",
          "name": "getFixedModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "77",
           "kind": "string",
@@ -886,7 +886,7 @@
          "kind": "constant",
          "name": "putFixedModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "85",
           "kind": "string",
@@ -1017,7 +1017,7 @@
          "kind": "constant",
          "name": "getFixedModelMissingDiscriminatorContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "95",
           "kind": "string",
@@ -1117,7 +1117,7 @@
          "kind": "constant",
          "name": "getFixedModelWrongDiscriminatorContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "103",
           "kind": "string",

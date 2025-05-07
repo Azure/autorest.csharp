@@ -1863,7 +1863,7 @@
            "kind": "constant",
            "name": "getContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "240",
             "kind": "string",
@@ -2108,7 +2108,7 @@
            "kind": "constant",
            "name": "createWithSystemAssignedContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "262",
             "kind": "string",
@@ -2138,7 +2138,7 @@
            "kind": "constant",
            "name": "createWithSystemAssignedContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "265",
             "kind": "string",
@@ -2454,7 +2454,7 @@
            "kind": "constant",
            "name": "updateWithUserAssignedAndSystemAssignedContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "291",
             "kind": "string",
@@ -2484,7 +2484,7 @@
            "kind": "constant",
            "name": "updateWithUserAssignedAndSystemAssignedContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "294",
             "kind": "string",
@@ -2841,7 +2841,7 @@
            "kind": "constant",
            "name": "getForPredefinedErrorContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "326",
             "kind": "string",
@@ -3086,7 +3086,7 @@
            "kind": "constant",
            "name": "createForUserDefinedErrorContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "348",
             "kind": "string",
@@ -3116,7 +3116,7 @@
            "kind": "constant",
            "name": "createForUserDefinedErrorContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "351",
             "kind": "string",

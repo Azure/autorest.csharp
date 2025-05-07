@@ -82,7 +82,7 @@
          "kind": "constant",
          "name": "durationConstantContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "13",
           "kind": "string",

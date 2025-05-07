@@ -152,7 +152,7 @@
            "kind": "constant",
            "name": "simpleContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "22",
             "kind": "string",
@@ -326,7 +326,7 @@
            "kind": "constant",
            "name": "simpleContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "37",
             "kind": "string",

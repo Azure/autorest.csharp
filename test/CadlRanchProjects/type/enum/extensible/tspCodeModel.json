@@ -222,7 +222,7 @@
            "kind": "constant",
            "name": "getKnownValueContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "28",
             "kind": "string",
@@ -263,7 +263,7 @@
              "kind": "constant",
              "name": "GetKnownValueResponseContentType",
              "namespace": "",
-             "usage": 0,
+             "usage": "None",
              "valueType": {
               "$id": "32",
               "kind": "string",
@@ -342,7 +342,7 @@
            "kind": "constant",
            "name": "getUnknownValueContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "39",
             "kind": "string",
@@ -383,7 +383,7 @@
              "kind": "constant",
              "name": "GetKnownValueResponseContentType1",
              "namespace": "",
-             "usage": 0,
+             "usage": "None",
              "valueType": {
               "$id": "43",
               "kind": "string",
@@ -462,7 +462,7 @@
            "kind": "constant",
            "name": "GetKnownValueResponseContentType2",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "50",
             "kind": "string",
@@ -533,7 +533,7 @@
           "kind": "constant",
           "name": "GetKnownValueResponseContentType3",
           "namespace": "",
-          "usage": 0,
+          "usage": "None",
           "valueType": {
            "$id": "55",
            "kind": "string",
@@ -601,7 +601,7 @@
            "kind": "constant",
            "name": "GetKnownValueResponseContentType4",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "62",
             "kind": "string",
@@ -672,7 +672,7 @@
           "kind": "constant",
           "name": "GetKnownValueResponseContentType5",
           "namespace": "",
-          "usage": 0,
+          "usage": "None",
           "valueType": {
            "$id": "67",
            "kind": "string",

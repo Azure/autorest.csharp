@@ -728,7 +728,7 @@
          "kind": "constant",
          "name": "longRunningRpcContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "93",
           "kind": "string",
@@ -758,7 +758,7 @@
          "kind": "constant",
          "name": "longRunningRpcContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "96",
           "kind": "string",
@@ -876,7 +876,7 @@
         "kind": "constant",
         "name": "longRunningRpcContentType2",
         "namespace": "",
-        "usage": 0,
+        "usage": "None",
         "valueType": {
          "$id": "105",
          "kind": "string",
@@ -906,7 +906,7 @@
         "kind": "constant",
         "name": "longRunningRpcContentType3",
         "namespace": "",
-        "usage": 0,
+        "usage": "None",
         "valueType": {
          "$id": "108",
          "kind": "string",

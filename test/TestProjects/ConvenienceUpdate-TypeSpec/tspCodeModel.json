@@ -74,7 +74,7 @@
          "kind": "constant",
          "name": "updateConvenienceContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "12",
           "kind": "string",
@@ -196,7 +196,7 @@
          "kind": "constant",
          "name": "convenienceOptionalBeforeRequiredContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "22",
           "kind": "string",
@@ -346,7 +346,7 @@
          "kind": "constant",
          "name": "noConvenienceContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "34",
           "kind": "string",
@@ -447,7 +447,7 @@
          "kind": "constant",
          "name": "noConvenienceRequiredBodyContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "42",
           "kind": "string",
@@ -577,7 +577,7 @@
          "kind": "constant",
          "name": "noConvenienceOptionalBodyContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "52",
           "kind": "string",
@@ -706,7 +706,7 @@
          "kind": "constant",
          "name": "protocolContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "62",
           "kind": "string",
@@ -806,7 +806,7 @@
          "kind": "constant",
          "name": "convenienceWithOptionalContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "70",
           "kind": "string",
@@ -906,7 +906,7 @@
          "kind": "constant",
          "name": "convenienceWithRequiredContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "78",
           "kind": "string",
@@ -1111,7 +1111,7 @@
          "kind": "constant",
          "name": "protocolOptionalQueryContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "96",
           "kind": "string",
@@ -1253,7 +1253,7 @@
          "kind": "constant",
          "name": "protocolRequiredQueryContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "108",
           "kind": "string",
@@ -1375,7 +1375,7 @@
          "kind": "constant",
          "name": "protocolOptionalModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "118",
           "kind": "string",
@@ -1505,7 +1505,7 @@
          "kind": "constant",
          "name": "protocolRequiredModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "128",
           "kind": "string",
@@ -1655,7 +1655,7 @@
          "kind": "constant",
          "name": "convenienceOptionalQueryWithOptionalContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "140",
           "kind": "string",
@@ -1797,7 +1797,7 @@
          "kind": "constant",
          "name": "convenienceRequiredQueryWithOptionalContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "152",
           "kind": "string",
@@ -1939,7 +1939,7 @@
          "kind": "constant",
          "name": "convenienceOptionalQueryWithRequiredContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "164",
           "kind": "string",
@@ -2081,7 +2081,7 @@
          "kind": "constant",
          "name": "convenienceRequiredQueryWithRequiredContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "176",
           "kind": "string",
@@ -2203,7 +2203,7 @@
          "kind": "constant",
          "name": "convenienceOptionalModelWithOptionalContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "186",
           "kind": "string",
@@ -2333,7 +2333,7 @@
          "kind": "constant",
          "name": "convenienceRequiredModelWithOptionalContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "196",
           "kind": "string",
@@ -2463,7 +2463,7 @@
          "kind": "constant",
          "name": "convenienceOptionalModelWithRequiredContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "206",
           "kind": "string",
@@ -2614,7 +2614,7 @@
          "kind": "constant",
          "name": "protocolOptionalBeforeRequiredContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "218",
           "kind": "string",

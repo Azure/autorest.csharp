@@ -341,7 +341,7 @@
       "kind": "constant",
       "name": "ThingRequiredLiteralString",
       "namespace": "CustomizedTypeSpec",
-      "usage": 326,
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
        "$ref": "6"
       },
@@ -373,7 +373,7 @@
       "kind": "constant",
       "name": "ThingRequiredLiteralInt",
       "namespace": "CustomizedTypeSpec",
-      "usage": 326,
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
        "$ref": "9"
       },
@@ -405,7 +405,7 @@
       "kind": "constant",
       "name": "ThingRequiredLiteralFloat",
       "namespace": "CustomizedTypeSpec",
-      "usage": 326,
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
        "$ref": "12"
       },
@@ -437,7 +437,7 @@
       "kind": "constant",
       "name": "ThingRequiredLiteralBool",
       "namespace": "CustomizedTypeSpec",
-      "usage": 326,
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
        "$id": "51",
        "kind": "boolean",
@@ -473,7 +473,7 @@
       "kind": "constant",
       "name": "ThingOptionalLiteralString",
       "namespace": "CustomizedTypeSpec",
-      "usage": 326,
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
        "$ref": "15"
       },
@@ -505,7 +505,7 @@
       "kind": "constant",
       "name": "ThingOptionalLiteralInt",
       "namespace": "CustomizedTypeSpec",
-      "usage": 326,
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
        "$ref": "18"
       },
@@ -537,7 +537,7 @@
       "kind": "constant",
       "name": "ThingOptionalLiteralFloat",
       "namespace": "CustomizedTypeSpec",
-      "usage": 326,
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
        "$ref": "21"
       },
@@ -569,7 +569,7 @@
       "kind": "constant",
       "name": "ThingOptionalLiteralBool",
       "namespace": "CustomizedTypeSpec",
-      "usage": 326,
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
        "$id": "68",
        "kind": "boolean",
@@ -1073,7 +1073,7 @@
          "kind": "constant",
          "name": "sayHiContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "135",
           "kind": "string",
@@ -1259,7 +1259,7 @@
          "kind": "constant",
          "name": "HelloAgainRequestContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "151",
           "kind": "string",
@@ -1310,7 +1310,7 @@
          "kind": "constant",
          "name": "helloAgainContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "156",
           "kind": "string",
@@ -1425,7 +1425,7 @@
         "kind": "constant",
         "name": "HelloAgainRequestContentType1",
         "namespace": "",
-        "usage": 0,
+        "usage": "None",
         "valueType": {
          "$id": "164",
          "kind": "string",
@@ -1564,7 +1564,7 @@
          "kind": "constant",
          "name": "noContentTypeContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "177",
           "kind": "string",
@@ -1594,7 +1594,7 @@
          "kind": "constant",
          "name": "noContentTypeContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "180",
           "kind": "string",
@@ -1793,7 +1793,7 @@
          "kind": "constant",
          "name": "helloDemo2ContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "195",
           "kind": "string",
@@ -1896,7 +1896,7 @@
          "kind": "constant",
          "name": "createLiteralContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "203",
           "kind": "string",
@@ -1926,7 +1926,7 @@
          "kind": "constant",
          "name": "createLiteralContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "206",
           "kind": "string",
@@ -2083,7 +2083,7 @@
          "kind": "constant",
          "name": "HelloLiteralRequestP1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "217",
           "kind": "string",
@@ -2113,7 +2113,7 @@
          "kind": "constant",
          "name": "ThingRequiredLiteralInt1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "220",
           "kind": "int32",
@@ -2143,7 +2143,7 @@
          "kind": "constant",
          "name": "ThingOptionalLiteralBool1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "223",
           "kind": "boolean",
@@ -2173,7 +2173,7 @@
          "kind": "constant",
          "name": "helloLiteralContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "226",
           "kind": "string",
@@ -2230,7 +2230,7 @@
         "kind": "constant",
         "name": "HelloLiteralRequestP11",
         "namespace": "",
-        "usage": 0,
+        "usage": "None",
         "valueType": {
          "$id": "230",
          "kind": "string",
@@ -2260,7 +2260,7 @@
         "kind": "constant",
         "name": "ThingRequiredLiteralInt2",
         "namespace": "",
-        "usage": 0,
+        "usage": "None",
         "valueType": {
          "$id": "233",
          "kind": "int32",
@@ -2290,7 +2290,7 @@
         "kind": "constant",
         "name": "ThingOptionalLiteralBool2",
         "namespace": "",
-        "usage": 0,
+        "usage": "None",
         "valueType": {
          "$id": "236",
          "kind": "boolean",
@@ -2394,7 +2394,7 @@
          "kind": "constant",
          "name": "topActionContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "246",
           "kind": "string",
@@ -2525,7 +2525,7 @@
          "kind": "constant",
          "name": "topAction2ContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "257",
           "kind": "string",
@@ -2628,7 +2628,7 @@
          "kind": "constant",
          "name": "patchActionContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "265",
           "kind": "string",
@@ -2658,7 +2658,7 @@
          "kind": "constant",
          "name": "patchActionContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "268",
           "kind": "string",
@@ -2816,7 +2816,7 @@
          "kind": "constant",
          "name": "anonymousBodyContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "279",
           "kind": "string",
@@ -2846,7 +2846,7 @@
          "kind": "constant",
          "name": "anonymousBodyContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "282",
           "kind": "string",
@@ -3229,7 +3229,7 @@
          "kind": "constant",
          "name": "friendlyModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "307",
           "kind": "string",
@@ -3259,7 +3259,7 @@
          "kind": "constant",
          "name": "friendlyModelContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "310",
           "kind": "string",
@@ -3541,7 +3541,7 @@
          "kind": "constant",
          "name": "projectedNameModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "333",
           "kind": "string",
@@ -3571,7 +3571,7 @@
          "kind": "constant",
          "name": "projectedNameModelContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "336",
           "kind": "string",
@@ -3733,7 +3733,7 @@
          "kind": "constant",
          "name": "returnsAnonymousModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "348",
           "kind": "string",
@@ -3859,7 +3859,7 @@
          "kind": "constant",
          "name": "GetUnknownValueResponse6",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "358",
           "kind": "string",
@@ -3949,7 +3949,7 @@
          "kind": "constant",
          "name": "internalProtocolContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "365",
           "kind": "string",
@@ -3979,7 +3979,7 @@
          "kind": "constant",
          "name": "internalProtocolContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "368",
           "kind": "string",

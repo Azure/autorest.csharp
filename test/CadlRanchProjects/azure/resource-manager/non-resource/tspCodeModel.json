@@ -589,7 +589,7 @@
            "kind": "constant",
            "name": "getContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "76",
             "kind": "string",
@@ -839,7 +839,7 @@
            "kind": "constant",
            "name": "createContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "99",
             "kind": "string",
@@ -869,7 +869,7 @@
            "kind": "constant",
            "name": "createContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "102",
             "kind": "string",

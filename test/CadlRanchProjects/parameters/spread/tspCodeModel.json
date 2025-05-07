@@ -461,7 +461,7 @@
            "kind": "constant",
            "name": "spreadAsRequestBodyContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "65",
             "kind": "string",
@@ -593,7 +593,7 @@
            "kind": "constant",
            "name": "spreadCompositeRequestOnlyWithBodyContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "76",
             "kind": "string",
@@ -889,7 +889,7 @@
            "kind": "constant",
            "name": "spreadCompositeRequestContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "102",
             "kind": "string",
@@ -1101,7 +1101,7 @@
            "kind": "constant",
            "name": "spreadCompositeRequestMixContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "120",
             "kind": "string",
@@ -1321,7 +1321,7 @@
            "kind": "constant",
            "name": "spreadAsRequestBodyContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "140",
             "kind": "string",
@@ -1491,7 +1491,7 @@
            "kind": "constant",
            "name": "spreadParameterWithInnerModelContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "154",
             "kind": "string",
@@ -1707,7 +1707,7 @@
            "kind": "constant",
            "name": "spreadAsRequestParameterContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "173",
             "kind": "string",
@@ -1923,7 +1923,7 @@
            "kind": "constant",
            "name": "spreadWithMultipleParametersContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "192",
             "kind": "string",
@@ -2222,7 +2222,7 @@
            "kind": "constant",
            "name": "spreadParameterWithInnerAliasContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "219",
             "kind": "string",

@@ -257,7 +257,7 @@
         "kind": "constant",
         "name": "SeaGullKind",
         "namespace": "Scm._Type.Model.Inheritance.SingleDiscriminator",
-        "usage": 262,
+        "usage": "Input,Output,Json",
         "valueType": {
          "$ref": "2"
         },
@@ -304,7 +304,7 @@
         "kind": "constant",
         "name": "SparrowKind",
         "namespace": "Scm._Type.Model.Inheritance.SingleDiscriminator",
-        "usage": 262,
+        "usage": "Input,Output,Json",
         "valueType": {
          "$ref": "5"
         },
@@ -351,7 +351,7 @@
         "kind": "constant",
         "name": "GooseKind",
         "namespace": "Scm._Type.Model.Inheritance.SingleDiscriminator",
-        "usage": 262,
+        "usage": "Input,Output,Json",
         "valueType": {
          "$ref": "8"
         },
@@ -398,7 +398,7 @@
         "kind": "constant",
         "name": "EagleKind",
         "namespace": "Scm._Type.Model.Inheritance.SingleDiscriminator",
-        "usage": 262,
+        "usage": "Input,Output,Json",
         "valueType": {
          "$ref": "11"
         },
@@ -613,7 +613,7 @@
         "kind": "constant",
         "name": "TRexKind",
         "namespace": "Scm._Type.Model.Inheritance.SingleDiscriminator",
-        "usage": 260,
+        "usage": "Output,Json",
         "valueType": {
          "$ref": "14"
         },
@@ -671,7 +671,7 @@
          "kind": "constant",
          "name": "getModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "79",
           "kind": "string",
@@ -770,7 +770,7 @@
          "kind": "constant",
          "name": "putModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "87",
           "kind": "string",
@@ -897,7 +897,7 @@
          "kind": "constant",
          "name": "getRecursiveModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "97",
           "kind": "string",
@@ -996,7 +996,7 @@
          "kind": "constant",
          "name": "putRecursiveModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "105",
           "kind": "string",
@@ -1123,7 +1123,7 @@
          "kind": "constant",
          "name": "getMissingDiscriminatorContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "115",
           "kind": "string",
@@ -1221,7 +1221,7 @@
          "kind": "constant",
          "name": "getWrongDiscriminatorContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "123",
           "kind": "string",
@@ -1319,7 +1319,7 @@
          "kind": "constant",
          "name": "getLegacyModelContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "131",
           "kind": "string",

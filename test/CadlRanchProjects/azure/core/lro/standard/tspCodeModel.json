@@ -889,7 +889,7 @@
          "kind": "constant",
          "name": "createOrReplaceContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "114",
           "kind": "string",
@@ -919,7 +919,7 @@
          "kind": "constant",
          "name": "createOrReplaceContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "117",
           "kind": "string",
@@ -1094,7 +1094,7 @@
         "kind": "constant",
         "name": "createOrReplaceContentType2",
         "namespace": "",
-        "usage": 0,
+        "usage": "None",
         "valueType": {
          "$id": "132",
          "kind": "string",
@@ -1124,7 +1124,7 @@
         "kind": "constant",
         "name": "createOrReplaceContentType3",
         "namespace": "",
-        "usage": 0,
+        "usage": "None",
         "valueType": {
          "$id": "135",
          "kind": "string",
@@ -1251,7 +1251,7 @@
          "kind": "constant",
          "name": "deleteContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "149",
           "kind": "string",
@@ -1351,7 +1351,7 @@
         "kind": "constant",
         "name": "deleteContentType1",
         "namespace": "",
-        "usage": 0,
+        "usage": "None",
         "valueType": {
          "$id": "158",
          "kind": "string",
@@ -1494,7 +1494,7 @@
          "kind": "constant",
          "name": "exportContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "174",
           "kind": "string",
@@ -1616,7 +1616,7 @@
         "kind": "constant",
         "name": "exportContentType1",
         "namespace": "",
-        "usage": 0,
+        "usage": "None",
         "valueType": {
          "$id": "185",
          "kind": "string",

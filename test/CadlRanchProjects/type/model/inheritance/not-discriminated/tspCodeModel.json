@@ -155,7 +155,7 @@
          "kind": "constant",
          "name": "postValidContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "22",
           "kind": "string",
@@ -282,7 +282,7 @@
          "kind": "constant",
          "name": "getValidContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "32",
           "kind": "string",
@@ -381,7 +381,7 @@
          "kind": "constant",
          "name": "putValidContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "40",
           "kind": "string",
@@ -411,7 +411,7 @@
          "kind": "constant",
          "name": "putValidContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "43",
           "kind": "string",

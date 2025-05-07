@@ -75,7 +75,7 @@
            "kind": "constant",
            "name": "SendAsTextRequestContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "12",
             "kind": "string",
@@ -150,7 +150,7 @@
           "kind": "constant",
           "name": "SendAsTextRequestContentType1",
           "namespace": "",
-          "usage": 0,
+          "usage": "None",
           "valueType": {
            "$id": "18",
            "kind": "string",
@@ -222,7 +222,7 @@
            "kind": "constant",
            "name": "getAsTextContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "26",
             "kind": "string",
@@ -267,7 +267,7 @@
              "kind": "constant",
              "name": "SendAsTextRequestContentType2",
              "namespace": "",
-             "usage": 0,
+             "usage": "None",
              "valueType": {
               "$id": "31",
               "kind": "string",
@@ -346,7 +346,7 @@
            "kind": "constant",
            "name": "SendAsJsonRequestContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "38",
             "kind": "string",
@@ -421,7 +421,7 @@
           "kind": "constant",
           "name": "SendAsJsonRequestContentType1",
           "namespace": "",
-          "usage": 0,
+          "usage": "None",
           "valueType": {
            "$id": "44",
            "kind": "string",
@@ -493,7 +493,7 @@
            "kind": "constant",
            "name": "getAsJsonContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "52",
             "kind": "string",
@@ -538,7 +538,7 @@
              "kind": "constant",
              "name": "SendAsJsonRequestContentType2",
              "namespace": "",
-             "usage": 0,
+             "usage": "None",
              "valueType": {
               "$id": "57",
               "kind": "string",

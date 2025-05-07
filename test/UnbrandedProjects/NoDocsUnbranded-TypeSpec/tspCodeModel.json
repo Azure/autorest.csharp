@@ -302,7 +302,7 @@
       "kind": "constant",
       "name": "ThingRequiredLiteralString",
       "namespace": "NoDocsUnbrandedTypeSpec",
-      "usage": 260,
+      "usage": "Output,Json",
       "valueType": {
        "$ref": "2"
       },
@@ -334,7 +334,7 @@
       "kind": "constant",
       "name": "ThingRequiredLiteralInt",
       "namespace": "NoDocsUnbrandedTypeSpec",
-      "usage": 260,
+      "usage": "Output,Json",
       "valueType": {
        "$ref": "5"
       },
@@ -366,7 +366,7 @@
       "kind": "constant",
       "name": "ThingRequiredLiteralFloat",
       "namespace": "NoDocsUnbrandedTypeSpec",
-      "usage": 260,
+      "usage": "Output,Json",
       "valueType": {
        "$ref": "8"
       },
@@ -398,7 +398,7 @@
       "kind": "constant",
       "name": "ThingRequiredLiteralBool",
       "namespace": "NoDocsUnbrandedTypeSpec",
-      "usage": 260,
+      "usage": "Output,Json",
       "valueType": {
        "$id": "47",
        "kind": "boolean",
@@ -434,7 +434,7 @@
       "kind": "constant",
       "name": "ThingOptionalLiteralString",
       "namespace": "NoDocsUnbrandedTypeSpec",
-      "usage": 260,
+      "usage": "Output,Json",
       "valueType": {
        "$ref": "11"
       },
@@ -466,7 +466,7 @@
       "kind": "constant",
       "name": "ThingOptionalLiteralInt",
       "namespace": "NoDocsUnbrandedTypeSpec",
-      "usage": 260,
+      "usage": "Output,Json",
       "valueType": {
        "$ref": "14"
       },
@@ -498,7 +498,7 @@
       "kind": "constant",
       "name": "ThingOptionalLiteralFloat",
       "namespace": "NoDocsUnbrandedTypeSpec",
-      "usage": 260,
+      "usage": "Output,Json",
       "valueType": {
        "$ref": "17"
       },
@@ -530,7 +530,7 @@
       "kind": "constant",
       "name": "ThingOptionalLiteralBool",
       "namespace": "NoDocsUnbrandedTypeSpec",
-      "usage": 260,
+      "usage": "Output,Json",
       "valueType": {
        "$id": "64",
        "kind": "boolean",
@@ -757,7 +757,7 @@
          "kind": "constant",
          "name": "sayHiContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "94",
           "kind": "string",

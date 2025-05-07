@@ -915,7 +915,7 @@
            "kind": "constant",
            "name": "defaultContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "106",
             "kind": "string",
@@ -945,7 +945,7 @@
            "kind": "constant",
            "name": "defaultContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "109",
             "kind": "string",
@@ -1099,7 +1099,7 @@
            "kind": "constant",
            "name": "rfc3339ContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "120",
             "kind": "string",
@@ -1129,7 +1129,7 @@
            "kind": "constant",
            "name": "rfc3339ContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "123",
             "kind": "string",
@@ -1283,7 +1283,7 @@
            "kind": "constant",
            "name": "rfc7231ContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "134",
             "kind": "string",
@@ -1313,7 +1313,7 @@
            "kind": "constant",
            "name": "rfc7231ContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "137",
             "kind": "string",
@@ -1467,7 +1467,7 @@
            "kind": "constant",
            "name": "unixTimestampContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "148",
             "kind": "string",
@@ -1497,7 +1497,7 @@
            "kind": "constant",
            "name": "unixTimestampContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "151",
             "kind": "string",
@@ -1651,7 +1651,7 @@
            "kind": "constant",
            "name": "unixTimestampArrayContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "162",
             "kind": "string",
@@ -1681,7 +1681,7 @@
            "kind": "constant",
            "name": "unixTimestampArrayContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "165",
             "kind": "string",

@@ -4278,7 +4278,7 @@
            "kind": "constant",
            "name": "DetectUnivariateEntireSeriesContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "564",
             "kind": "string",
@@ -4308,7 +4308,7 @@
            "kind": "constant",
            "name": "DetectUnivariateEntireSeriesContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "567",
             "kind": "string",
@@ -8578,7 +8578,7 @@
            "kind": "constant",
            "name": "DetectUnivariateLastPointContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "1128",
             "kind": "string",
@@ -8608,7 +8608,7 @@
            "kind": "constant",
            "name": "DetectUnivariateLastPointContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "1131",
             "kind": "string",
@@ -10199,7 +10199,7 @@
            "kind": "constant",
            "name": "DetectUnivariateChangePointContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "1358",
             "kind": "string",
@@ -10229,7 +10229,7 @@
            "kind": "constant",
            "name": "DetectUnivariateChangePointContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "1361",
             "kind": "string",
@@ -21413,7 +21413,7 @@
            "kind": "constant",
            "name": "GetMultivariateBatchDetectionResultContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "2941",
             "kind": "string",
@@ -22114,7 +22114,7 @@
            "kind": "constant",
            "name": "TrainMultivariateModelContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "3034",
             "kind": "string",
@@ -22144,7 +22144,7 @@
            "kind": "constant",
            "name": "TrainMultivariateModelContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "3037",
             "kind": "string",
@@ -22637,7 +22637,7 @@
            "kind": "constant",
            "name": "ListMultivariateModelsContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "3092",
             "kind": "string",
@@ -23898,7 +23898,7 @@
            "kind": "constant",
            "name": "DeleteMultivariateModelContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "3253",
             "kind": "string",
@@ -24071,7 +24071,7 @@
            "kind": "constant",
            "name": "GetMultivariateModelContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "3269",
             "kind": "string",
@@ -25231,7 +25231,7 @@
            "kind": "constant",
            "name": "DetectMultivariateBatchAnomalyContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "3417",
             "kind": "string",
@@ -25261,7 +25261,7 @@
            "kind": "constant",
            "name": "DetectMultivariateBatchAnomalyContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "3420",
             "kind": "string",
@@ -25684,7 +25684,7 @@
            "kind": "constant",
            "name": "DetectMultivariateLastAnomalyContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "3466",
             "kind": "string",
@@ -25714,7 +25714,7 @@
            "kind": "constant",
            "name": "DetectMultivariateLastAnomalyContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "3469",
             "kind": "string",

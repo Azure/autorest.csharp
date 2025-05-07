@@ -1598,7 +1598,7 @@
          "kind": "constant",
          "name": "roundTripContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "216",
           "kind": "string",
@@ -1628,7 +1628,7 @@
          "kind": "constant",
          "name": "roundTripContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "219",
           "kind": "string",
@@ -1784,7 +1784,7 @@
          "kind": "constant",
          "name": "fooContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "230",
           "kind": "string",
@@ -1814,7 +1814,7 @@
          "kind": "constant",
          "name": "fooContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "233",
           "kind": "string",
@@ -1970,7 +1970,7 @@
          "kind": "constant",
          "name": "barContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "244",
           "kind": "string",
@@ -2000,7 +2000,7 @@
          "kind": "constant",
          "name": "barContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "247",
           "kind": "string",

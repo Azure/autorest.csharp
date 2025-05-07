@@ -1031,7 +1031,7 @@
          "kind": "constant",
          "name": "FileSpecificContentTypeContentType",
          "namespace": "Payload.MultiPart",
-         "usage": 2,
+         "usage": "Input",
          "valueType": {
           "$ref": "2"
          },
@@ -1441,7 +1441,7 @@
       "kind": "constant",
       "name": "FloatRequestTemperatureContentType",
       "namespace": "Payload.MultiPart.FormData.HttpParts.NonString",
-      "usage": 2,
+      "usage": "Input",
       "valueType": {
        "$ref": "5"
       },
@@ -1531,7 +1531,7 @@
            "kind": "constant",
            "name": "BasicRequestContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "5823",
             "kind": "string",
@@ -1602,7 +1602,7 @@
           "kind": "constant",
           "name": "BasicRequestContentType1",
           "namespace": "",
-          "usage": 0,
+          "usage": "None",
           "valueType": {
            "$id": "5828",
            "kind": "string",
@@ -1672,7 +1672,7 @@
            "kind": "constant",
            "name": "BasicRequestContentType2",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "5835",
             "kind": "string",
@@ -1743,7 +1743,7 @@
           "kind": "constant",
           "name": "BasicRequestContentType3",
           "namespace": "",
-          "usage": 0,
+          "usage": "None",
           "valueType": {
            "$id": "5840",
            "kind": "string",
@@ -1813,7 +1813,7 @@
            "kind": "constant",
            "name": "BasicRequestContentType4",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "5847",
             "kind": "string",
@@ -1884,7 +1884,7 @@
           "kind": "constant",
           "name": "BasicRequestContentType5",
           "namespace": "",
-          "usage": 0,
+          "usage": "None",
           "valueType": {
            "$id": "5852",
            "kind": "string",
@@ -1954,7 +1954,7 @@
            "kind": "constant",
            "name": "BasicRequestContentType6",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "5859",
             "kind": "string",
@@ -2025,7 +2025,7 @@
           "kind": "constant",
           "name": "BasicRequestContentType7",
           "namespace": "",
-          "usage": 0,
+          "usage": "None",
           "valueType": {
            "$id": "5864",
            "kind": "string",
@@ -2095,7 +2095,7 @@
            "kind": "constant",
            "name": "BasicRequestContentType8",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "5871",
             "kind": "string",
@@ -2166,7 +2166,7 @@
           "kind": "constant",
           "name": "BasicRequestContentType9",
           "namespace": "",
-          "usage": 0,
+          "usage": "None",
           "valueType": {
            "$id": "5876",
            "kind": "string",
@@ -2236,7 +2236,7 @@
            "kind": "constant",
            "name": "BasicRequestContentType10",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "5883",
             "kind": "string",
@@ -2307,7 +2307,7 @@
           "kind": "constant",
           "name": "BasicRequestContentType11",
           "namespace": "",
-          "usage": 0,
+          "usage": "None",
           "valueType": {
            "$id": "5888",
            "kind": "string",
@@ -2377,7 +2377,7 @@
            "kind": "constant",
            "name": "BasicRequestContentType12",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "5895",
             "kind": "string",
@@ -2448,7 +2448,7 @@
           "kind": "constant",
           "name": "BasicRequestContentType13",
           "namespace": "",
-          "usage": 0,
+          "usage": "None",
           "valueType": {
            "$id": "5900",
            "kind": "string",
@@ -2564,7 +2564,7 @@
              "kind": "constant",
              "name": "BasicRequestContentType14",
              "namespace": "",
-             "usage": 0,
+             "usage": "None",
              "valueType": {
               "$id": "5912",
               "kind": "string",
@@ -2635,7 +2635,7 @@
             "kind": "constant",
             "name": "BasicRequestContentType15",
             "namespace": "",
-            "usage": 0,
+            "usage": "None",
             "valueType": {
              "$id": "5917",
              "kind": "string",
@@ -2751,7 +2751,7 @@
                "kind": "constant",
                "name": "BasicRequestContentType16",
                "namespace": "",
-               "usage": 0,
+               "usage": "None",
                "valueType": {
                 "$id": "5929",
                 "kind": "string",
@@ -2822,7 +2822,7 @@
               "kind": "constant",
               "name": "BasicRequestContentType17",
               "namespace": "",
-              "usage": 0,
+              "usage": "None",
               "valueType": {
                "$id": "5934",
                "kind": "string",
@@ -2892,7 +2892,7 @@
                "kind": "constant",
                "name": "BasicRequestContentType18",
                "namespace": "",
-               "usage": 0,
+               "usage": "None",
                "valueType": {
                 "$id": "5941",
                 "kind": "string",
@@ -2963,7 +2963,7 @@
               "kind": "constant",
               "name": "BasicRequestContentType19",
               "namespace": "",
-              "usage": 0,
+              "usage": "None",
               "valueType": {
                "$id": "5946",
                "kind": "string",
@@ -3033,7 +3033,7 @@
                "kind": "constant",
                "name": "BasicRequestContentType20",
                "namespace": "",
-               "usage": 0,
+               "usage": "None",
                "valueType": {
                 "$id": "5953",
                 "kind": "string",
@@ -3104,7 +3104,7 @@
               "kind": "constant",
               "name": "BasicRequestContentType21",
               "namespace": "",
-              "usage": 0,
+              "usage": "None",
               "valueType": {
                "$id": "5958",
                "kind": "string",
@@ -3220,7 +3220,7 @@
                "kind": "constant",
                "name": "BasicRequestContentType22",
                "namespace": "",
-               "usage": 0,
+               "usage": "None",
                "valueType": {
                 "$id": "5970",
                 "kind": "string",
@@ -3291,7 +3291,7 @@
               "kind": "constant",
               "name": "BasicRequestContentType23",
               "namespace": "",
-              "usage": 0,
+              "usage": "None",
               "valueType": {
                "$id": "5975",
                "kind": "string",

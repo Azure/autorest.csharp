@@ -149,7 +149,7 @@
          "kind": "constant",
          "name": "inputContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "22",
           "kind": "string",
@@ -276,7 +276,7 @@
          "kind": "constant",
          "name": "outputContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "32",
           "kind": "string",
@@ -375,7 +375,7 @@
          "kind": "constant",
          "name": "inputAndOutputContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "40",
           "kind": "string",
@@ -405,7 +405,7 @@
          "kind": "constant",
          "name": "inputAndOutputContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "43",
           "kind": "string",

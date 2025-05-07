@@ -1289,7 +1289,7 @@
            "kind": "constant",
            "name": "MixedLiteralsCasesStringLiteral1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "157",
             "kind": "string",
@@ -1305,7 +1305,7 @@
            "kind": "constant",
            "name": "MixedLiteralsCasesStringLiteral2",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "159",
             "kind": "int32",
@@ -1321,7 +1321,7 @@
            "kind": "constant",
            "name": "MixedLiteralsCasesStringLiteral3",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "161",
             "kind": "float32",
@@ -1337,7 +1337,7 @@
            "kind": "constant",
            "name": "MixedLiteralsCasesStringLiteral4",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "163",
             "kind": "boolean",
@@ -1531,7 +1531,7 @@
            "kind": "constant",
            "name": "MixedLiteralsCasesStringLiteral11",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "187",
             "kind": "string",
@@ -1800,7 +1800,7 @@
            "kind": "constant",
            "name": "getContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "221",
             "kind": "string",
@@ -1899,7 +1899,7 @@
            "kind": "constant",
            "name": "sendContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "229",
             "kind": "string",
@@ -2073,7 +2073,7 @@
            "kind": "constant",
            "name": "getContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "244",
             "kind": "string",
@@ -2172,7 +2172,7 @@
            "kind": "constant",
            "name": "sendContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "252",
             "kind": "string",
@@ -2346,7 +2346,7 @@
            "kind": "constant",
            "name": "getContentType2",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "267",
             "kind": "string",
@@ -2445,7 +2445,7 @@
            "kind": "constant",
            "name": "sendContentType2",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "275",
             "kind": "string",
@@ -2619,7 +2619,7 @@
            "kind": "constant",
            "name": "getContentType3",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "290",
             "kind": "string",
@@ -2718,7 +2718,7 @@
            "kind": "constant",
            "name": "sendContentType3",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "298",
             "kind": "string",
@@ -2892,7 +2892,7 @@
            "kind": "constant",
            "name": "getContentType4",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "313",
             "kind": "string",
@@ -2991,7 +2991,7 @@
            "kind": "constant",
            "name": "sendContentType4",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "321",
             "kind": "string",
@@ -3165,7 +3165,7 @@
            "kind": "constant",
            "name": "getContentType5",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "336",
             "kind": "string",
@@ -3264,7 +3264,7 @@
            "kind": "constant",
            "name": "sendContentType5",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "344",
             "kind": "string",
@@ -3438,7 +3438,7 @@
            "kind": "constant",
            "name": "getContentType6",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "359",
             "kind": "string",
@@ -3537,7 +3537,7 @@
            "kind": "constant",
            "name": "sendContentType6",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "367",
             "kind": "string",
@@ -3711,7 +3711,7 @@
            "kind": "constant",
            "name": "getContentType7",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "382",
             "kind": "string",
@@ -3810,7 +3810,7 @@
            "kind": "constant",
            "name": "sendContentType7",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "390",
             "kind": "string",
@@ -3984,7 +3984,7 @@
            "kind": "constant",
            "name": "getContentType8",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "405",
             "kind": "string",
@@ -4083,7 +4083,7 @@
            "kind": "constant",
            "name": "sendContentType8",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "413",
             "kind": "string",
@@ -4257,7 +4257,7 @@
            "kind": "constant",
            "name": "getContentType9",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "428",
             "kind": "string",
@@ -4356,7 +4356,7 @@
            "kind": "constant",
            "name": "sendContentType9",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "436",
             "kind": "string",

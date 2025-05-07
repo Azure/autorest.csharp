@@ -16,9 +16,7 @@ import { CodeModel } from "@typespec/http-client-csharp";
  */
 export function transformCodeModel(codeModel: CodeModel): CodeModel {
     // Transform the code model if needed
-    // iterates all the constants, and replace its valueType with a created enum type
-    // TODO -- we only change the constants in models to an enum type
-    const convertedEnums: InputEnumType[] = [];
+    // iterates all the constants appearing in models, and replace its valueType with a created enum type
     for (const model of codeModel.models) {
         for (const property of model.properties) {
             const propertyType = property.type;
@@ -50,7 +48,6 @@ export function transformCodeModel(codeModel: CodeModel): CodeModel {
                         enumType: enumType
                     };
                     enumType.values.push(enumValue);
-                    convertedEnums.push(enumType);
                     codeModel.enums.push(enumType);
                     constantType.valueType = enumType;
                 }

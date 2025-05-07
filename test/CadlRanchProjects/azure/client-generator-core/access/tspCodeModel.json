@@ -474,7 +474,7 @@
         "kind": "constant",
         "name": "RealModelKind",
         "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
-        "usage": 260,
+        "usage": "Output,Json",
         "valueType": {
          "$ref": "2"
         },
@@ -595,7 +595,7 @@
            "kind": "constant",
            "name": "noDecoratorInPublicContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "76",
             "kind": "string",
@@ -735,7 +735,7 @@
            "kind": "constant",
            "name": "publicDecoratorInPublicContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "88",
             "kind": "string",
@@ -921,7 +921,7 @@
            "kind": "constant",
            "name": "noDecoratorInInternalContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "105",
             "kind": "string",
@@ -1061,7 +1061,7 @@
            "kind": "constant",
            "name": "internalDecoratorInInternalContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "117",
             "kind": "string",
@@ -1201,7 +1201,7 @@
            "kind": "constant",
            "name": "publicDecoratorInInternalContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "129",
             "kind": "string",
@@ -1387,7 +1387,7 @@
            "kind": "constant",
            "name": "publicContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "146",
             "kind": "string",
@@ -1527,7 +1527,7 @@
            "kind": "constant",
            "name": "internalContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "158",
             "kind": "string",
@@ -1715,7 +1715,7 @@
            "kind": "constant",
            "name": "operationContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "175",
             "kind": "string",
@@ -1857,7 +1857,7 @@
            "kind": "constant",
            "name": "discriminatorContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "187",
             "kind": "string",

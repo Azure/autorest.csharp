@@ -68,7 +68,7 @@
          "kind": "constant",
          "name": "putEmptyContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "10",
           "kind": "string",
@@ -195,7 +195,7 @@
          "kind": "constant",
          "name": "getEmptyContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "20",
           "kind": "string",
@@ -294,7 +294,7 @@
          "kind": "constant",
          "name": "postRoundTripEmptyContentType",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "28",
           "kind": "string",
@@ -324,7 +324,7 @@
          "kind": "constant",
          "name": "postRoundTripEmptyContentType1",
          "namespace": "",
-         "usage": 0,
+         "usage": "None",
          "valueType": {
           "$id": "31",
           "kind": "string",

@@ -167,7 +167,7 @@
            "kind": "constant",
            "name": "getContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "22",
             "kind": "string",
@@ -281,7 +281,7 @@
            "kind": "constant",
            "name": "putContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "32",
             "kind": "string",
@@ -437,7 +437,7 @@
            "kind": "constant",
            "name": "postContentType",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "46",
             "kind": "string",
@@ -467,7 +467,7 @@
            "kind": "constant",
            "name": "postContentType1",
            "namespace": "",
-           "usage": 0,
+           "usage": "None",
            "valueType": {
             "$id": "49",
             "kind": "string",
