@@ -19,8 +19,8 @@ Write-Host "git sparse-checkout init"
 git sparse-checkout init
 Write-Host "git sparse-checkout set --no-cone $azCoreSharedPath $armCoreSharedPath"
 git sparse-checkout set --no-cone $azCoreSharedPath $armCoreSharedPath
-Write-Host "git checkout azureCoreMrw"
-git checkout azureCoreMrw
+Write-Host "git checkout"
+git checkout
 Pop-Location
 
 function CopyAll([string[]]$files, [string]$source, [string]$destination)
