@@ -293,6 +293,100 @@ namespace _Specs_.Azure.Core.Page
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PageClient.GetWithCustomPageModel", "items", "nextLink", context);
         }
 
+        /// <summary> List with parameterized next link that re-injects parameters. </summary>
+        /// <param name="select"> The <see cref="string"/> to use. </param>
+        /// <param name="includePending"> The <see cref="bool"/>? to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="select"/> is null. </exception>
+        /// <include file="Docs/PageClient.xml" path="doc/members/member[@name='WithParameterizedNextLinkAsync(string,bool?,CancellationToken)']/*" />
+        public virtual AsyncPageable<User> WithParameterizedNextLinkAsync(string select, bool? includePending = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(select, nameof(select));
+
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateWithParameterizedNextLinkRequest(select, includePending, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateWithParameterizedNextLinkNextPageRequest(nextLink, select, includePending, context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "PageClient.WithParameterizedNextLink", "values", "nextLink", context);
+        }
+
+        /// <summary> List with parameterized next link that re-injects parameters. </summary>
+        /// <param name="select"> The <see cref="string"/> to use. </param>
+        /// <param name="includePending"> The <see cref="bool"/>? to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="select"/> is null. </exception>
+        /// <include file="Docs/PageClient.xml" path="doc/members/member[@name='WithParameterizedNextLink(string,bool?,CancellationToken)']/*" />
+        public virtual Pageable<User> WithParameterizedNextLink(string select, bool? includePending = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(select, nameof(select));
+
+            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateWithParameterizedNextLinkRequest(select, includePending, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateWithParameterizedNextLinkNextPageRequest(nextLink, select, includePending, context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "PageClient.WithParameterizedNextLink", "values", "nextLink", context);
+        }
+
+        /// <summary>
+        /// [Protocol Method] List with parameterized next link that re-injects parameters.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="WithParameterizedNextLinkAsync(string,bool?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="select"> The <see cref="string"/> to use. </param>
+        /// <param name="includePending"> The <see cref="bool"/>? to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="select"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <include file="Docs/PageClient.xml" path="doc/members/member[@name='WithParameterizedNextLinkAsync(string,bool?,RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> WithParameterizedNextLinkAsync(string select, bool? includePending, RequestContext context)
+        {
+            Argument.AssertNotNull(select, nameof(select));
+
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateWithParameterizedNextLinkRequest(select, includePending, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateWithParameterizedNextLinkNextPageRequest(nextLink, select, includePending, context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PageClient.WithParameterizedNextLink", "values", "nextLink", context);
+        }
+
+        /// <summary>
+        /// [Protocol Method] List with parameterized next link that re-injects parameters.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="WithParameterizedNextLink(string,bool?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="select"> The <see cref="string"/> to use. </param>
+        /// <param name="includePending"> The <see cref="bool"/>? to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="select"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <include file="Docs/PageClient.xml" path="doc/members/member[@name='WithParameterizedNextLink(string,bool?,RequestContext)']/*" />
+        public virtual Pageable<BinaryData> WithParameterizedNextLink(string select, bool? includePending, RequestContext context)
+        {
+            Argument.AssertNotNull(select, nameof(select));
+
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateWithParameterizedNextLinkRequest(select, includePending, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateWithParameterizedNextLinkNextPageRequest(nextLink, select, includePending, context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PageClient.WithParameterizedNextLink", "values", "nextLink", context);
+        }
+
         private TwoModelsAsPageItem _cachedTwoModelsAsPageItem;
 
         /// <summary> Initializes a new instance of TwoModelsAsPageItem. </summary>
@@ -349,6 +443,24 @@ namespace _Specs_.Azure.Core.Page
             return message;
         }
 
+        internal HttpMessage CreateWithParameterizedNextLinkRequest(string select, bool? includePending, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/azure/core/page/with-parameterized-next-link", false);
+            uri.AppendQuery("select", select, true);
+            if (includePending != null)
+            {
+                uri.AppendQuery("includePending", includePending.Value, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
         internal HttpMessage CreateGetWithPageNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -376,6 +488,19 @@ namespace _Specs_.Azure.Core.Page
         }
 
         internal HttpMessage CreateGetWithCustomPageModelNextPageRequest(string nextLink, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateWithParameterizedNextLinkNextPageRequest(string nextLink, string select, bool? includePending, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;

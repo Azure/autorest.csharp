@@ -68,7 +68,7 @@
      "decorators": []
     }
    ],
-   "namespace": "_Type.Union",
+   "namespace": "",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -122,7 +122,7 @@
      "decorators": []
     }
    ],
-   "namespace": "_Type.Union",
+   "namespace": "",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -247,7 +247,7 @@
      "decorators": []
     }
    ],
-   "namespace": "_Type.Union",
+   "namespace": "",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -318,7 +318,7 @@
      "decorators": []
     }
    ],
-   "namespace": "_Type.Union",
+   "namespace": "",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -406,7 +406,7 @@
      "decorators": []
     }
    ],
-   "namespace": "_Type.Union",
+   "namespace": "",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -460,7 +460,7 @@
      "decorators": []
     }
    ],
-   "namespace": "_Type.Union",
+   "namespace": "",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -892,7 +892,7 @@
         ]
        }
       ],
-      "namespace": "_Type.Union",
+      "namespace": "",
       "decorators": []
      },
      "optional": false,
@@ -1129,7 +1129,7 @@
            "decorators": []
           }
          ],
-         "namespace": "_Type.Union",
+         "namespace": "",
          "decorators": []
         },
         "optional": false,
@@ -1179,7 +1179,7 @@
            "decorators": []
           }
          ],
-         "namespace": "_Type.Union",
+         "namespace": "",
          "decorators": []
         },
         "optional": false,
@@ -1337,7 +1337,7 @@
            "decorators": []
           }
          ],
-         "namespace": "_Type.Union",
+         "namespace": "",
          "decorators": []
         },
         "optional": false,
@@ -1542,7 +1542,7 @@
            "decorators": []
           }
          ],
-         "namespace": "_Type.Union",
+         "namespace": "",
          "decorators": []
         },
         "optional": false,
