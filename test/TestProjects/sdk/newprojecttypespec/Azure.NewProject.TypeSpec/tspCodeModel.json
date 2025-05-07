@@ -857,7 +857,7 @@
         "decorators": []
        }
       ],
-      "namespace": "Azure.NewProject.TypeSpec",
+      "namespace": "",
       "decorators": []
      },
      "optional": false,
