@@ -54,21 +54,12 @@ export function transformCodeModel(codeModel: CodeModel): CodeModel {
             } else if (propertyType.kind === "enumvalue") {
                 // we convert the enumvalue into a constant type
                 // the value type of this constant type is enum when it is not a boolean, otherwise the primitive type.
-                const enumValueType = propertyType as InputEnumValueType;
-                const convertedConstant: InputLiteralType = {
-                    kind: "constant",
-                    name: enumValueType.name,
-                    access: model.access,
-                    usage: model.usage,
-                    namespace: model.namespace,
-                    valueType: enumValueType.valueType as any,
-                    value: enumValueType.value,
-                    decorators: enumValueType.decorators
-                };
-                if (enumValueType.valueType.kind !== "boolean") {
-                    convertedConstant.valueType = enumValueType.enumType;
-                }
-                property.type = convertedConstant as any;
+                // in case that this enumvalue is referenced somewhere in other parts, we change every property in place to convert it into a constant.
+                const enumValueType = propertyType as any;
+                enumValueType.kind = "constant" as any;
+                enumValueType.access = model.access;
+                enumValueType.usage = model.usage;
+                enumValueType.namespace = model.namespace;
             }
         }
     }
