@@ -2920,7 +2920,7 @@
              "crossLanguageDefinitionId": "TypeSpec.float32",
              "decorators": []
             },
-            "namespace": ""
+            "namespace": "Scm._Type._Array"
            },
            "crossLanguageDefinitionId": "TypeSpec.Array",
            "decorators": []
@@ -3217,7 +3217,7 @@
              "crossLanguageDefinitionId": "TypeSpec.int32",
              "decorators": []
             },
-            "namespace": ""
+            "namespace": "Scm._Type._Array"
            },
            "crossLanguageDefinitionId": "TypeSpec.Array",
            "decorators": []
@@ -3514,7 +3514,7 @@
              "crossLanguageDefinitionId": "TypeSpec.boolean",
              "decorators": []
             },
-            "namespace": ""
+            "namespace": "Scm._Type._Array"
            },
            "crossLanguageDefinitionId": "TypeSpec.Array",
            "decorators": []
@@ -3811,7 +3811,7 @@
              "crossLanguageDefinitionId": "TypeSpec.string",
              "decorators": []
             },
-            "namespace": ""
+            "namespace": "Scm._Type._Array"
            },
            "crossLanguageDefinitionId": "TypeSpec.Array",
            "decorators": []
@@ -4104,7 +4104,7 @@
             "type": {
              "$ref": "2"
             },
-            "namespace": ""
+            "namespace": "Scm._Type._Array"
            },
            "crossLanguageDefinitionId": "TypeSpec.Array",
            "decorators": []

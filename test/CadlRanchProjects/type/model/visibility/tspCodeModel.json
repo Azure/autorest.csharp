@@ -191,7 +191,7 @@
        "crossLanguageDefinitionId": "TypeSpec.Array",
        "decorators": []
       },
-      "namespace": ""
+      "namespace": "_Type.Model.Visibility"
      },
      "optional": true,
      "readOnly": true,

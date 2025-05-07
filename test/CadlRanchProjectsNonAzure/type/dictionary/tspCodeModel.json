@@ -3369,7 +3369,7 @@
              "crossLanguageDefinitionId": "TypeSpec.float32",
              "decorators": []
             },
-            "namespace": ""
+            "namespace": "Scm._Type._Dictionary"
            },
            "decorators": []
           },

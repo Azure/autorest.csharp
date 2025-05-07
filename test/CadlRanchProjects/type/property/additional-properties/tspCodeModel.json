@@ -1660,7 +1660,7 @@
       "decorators": []
      }
     ],
-    "namespace": "",
+    "namespace": "_Type.Property.AdditionalProperties",
     "decorators": []
    },
    "properties": [
@@ -1722,7 +1722,7 @@
       "decorators": []
      }
     ],
-    "namespace": "",
+    "namespace": "_Type.Property.AdditionalProperties",
     "decorators": []
    },
    "properties": [
@@ -1942,7 +1942,7 @@
       ]
      }
     ],
-    "namespace": "",
+    "namespace": "_Type.Property.AdditionalProperties",
     "decorators": []
    },
    "properties": [
@@ -2064,7 +2064,7 @@
       "$ref": "231"
      }
     ],
-    "namespace": "",
+    "namespace": "_Type.Property.AdditionalProperties",
     "decorators": []
    },
    "properties": [
@@ -2128,7 +2128,7 @@
       "$ref": "231"
      }
     ],
-    "namespace": "",
+    "namespace": "_Type.Property.AdditionalProperties",
     "decorators": []
    },
    "properties": [
