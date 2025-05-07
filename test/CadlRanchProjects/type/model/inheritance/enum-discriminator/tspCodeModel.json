@@ -173,13 +173,14 @@
         "$id": "21",
         "kind": "constant",
         "name": "Golden",
-        "usage": "Input,Output,Json",
-        "namespace": "_Type.Model.Inheritance.EnumDiscriminator",
+        "value": "golden",
         "valueType": {
          "$ref": "2"
         },
-        "value": "golden",
-        "decorators": []
+        "doc": "Species golden",
+        "decorators": [],
+        "usage": "Input,Output,Json",
+        "namespace": "_Type.Model.Inheritance.EnumDiscriminator"
        },
        "optional": false,
        "readOnly": false,
@@ -292,13 +293,14 @@
         "$id": "35",
         "kind": "constant",
         "name": "Cobra",
-        "usage": "Input,Output,Json",
-        "namespace": "_Type.Model.Inheritance.EnumDiscriminator",
+        "value": "cobra",
         "valueType": {
          "$ref": "6"
         },
-        "value": "cobra",
-        "decorators": []
+        "doc": "Species cobra",
+        "decorators": [],
+        "usage": "Input,Output,Json",
+        "namespace": "_Type.Model.Inheritance.EnumDiscriminator"
        },
        "optional": false,
        "readOnly": false,

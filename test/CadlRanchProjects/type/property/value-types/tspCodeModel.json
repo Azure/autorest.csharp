@@ -1583,13 +1583,13 @@
       "$id": "189",
       "kind": "constant",
       "name": "EnumValue2",
-      "usage": "Input,Output,Json",
-      "namespace": "_Type.Property.ValueTypes",
+      "value": "value2",
       "valueType": {
        "$ref": "32"
       },
-      "value": "value2",
-      "decorators": []
+      "decorators": [],
+      "usage": "Input,Output,Json",
+      "namespace": "_Type.Property.ValueTypes"
      },
      "optional": false,
      "readOnly": false,
