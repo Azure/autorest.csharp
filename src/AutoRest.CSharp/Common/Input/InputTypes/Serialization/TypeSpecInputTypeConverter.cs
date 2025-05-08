@@ -53,6 +53,7 @@ namespace AutoRest.CSharp.Common.Input
         private const string UnionKind = "union";
         private const string ModelKind = "model";
         private const string EnumKind = "enum";
+        private const string EnumValueKind = "enumvalue";
         private const string ArrayKind = "array";
         private const string DictionaryKind = "dict";
         private const string NullableKind = "nullable";
@@ -67,6 +68,7 @@ namespace AutoRest.CSharp.Common.Input
             UnionKind => TypeSpecInputUnionTypeConverter.CreateInputUnionType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             ModelKind => TypeSpecInputModelTypeConverter.CreateModelType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             EnumKind => TypeSpecInputEnumTypeConverter.CreateEnumType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            EnumValueKind => TypeSpecInputEnumTypeValueConverter.CreateEnumTypeValue(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             ArrayKind => TypeSpecInputListTypeConverter.CreateListType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             DictionaryKind => TypeSpecInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, options, _referenceHandler.CurrentResolver),
             NullableKind => TypeSpecInputNullableTypeConverter.CreateNullableType(ref reader, id, name, options, _referenceHandler.CurrentResolver),

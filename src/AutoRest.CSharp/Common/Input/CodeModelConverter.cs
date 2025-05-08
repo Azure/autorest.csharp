@@ -810,6 +810,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             var usage = _schemaUsageProvider.GetUsage(schema);
             var valueType = (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, false);
+            var values = new List<InputEnumTypeValue>();
             var inputEnumType = new InputEnumType(
                 Name: schema.Name,
                 CrossLanguageDefinitionId: GetCrossLanguageDefinitionId(schema),
@@ -819,12 +820,18 @@ namespace AutoRest.CSharp.Common.Input
                 Doc: schema.CreateDescription(),
                 Usage: GetUsage(usage),
                 ValueType: valueType,
-                Values: choices.Select(c => CreateEnumValue(c, valueType)).ToList(),
+                Values: values,
                 IsExtensible: isExtensible
             )
             {
                 Serialization = GetSerialization(schema)
             };
+
+            foreach (var choice in choices)
+            {
+                values.Add(CreateEnumValue(choice, valueType, inputEnumType));
+            }
+
             return inputEnumType;
         }
 
@@ -840,7 +847,7 @@ namespace AutoRest.CSharp.Common.Input
             return $"{ns}.{name}";
         }
 
-        private static InputEnumTypeValue CreateEnumValue(ChoiceValue choiceValue, InputPrimitiveType valueType)
+        private static InputEnumTypeValue CreateEnumValue(ChoiceValue choiceValue, InputPrimitiveType valueType, InputEnumType enumType)
         {
             // in code model, the value of choices are defined to be strings. We need to convert them back to their real values
             var value = ConvertRawValue(valueType, choiceValue.Value);
@@ -848,7 +855,9 @@ namespace AutoRest.CSharp.Common.Input
                 Name: choiceValue.Language.Default.Name,
                 Summary: string.Empty,
                 Doc: choiceValue.Language.Default.Description,
-                Value: value!);
+                Value: value!,
+                ValueType: valueType,
+                EnumType: enumType);
         }
 
         private static RequestLocation GetRequestLocation(RequestParameter requestParameter) => requestParameter.In switch
