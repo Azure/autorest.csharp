@@ -17,7 +17,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetDurationInvalid() => Test((host, pipeline) =>
         {
             Assert.ThrowsAsync<FormatException>(async () =>
-                await new DurationClient(ClientDiagnostics, pipeline, host).GetInvalidAsync());
+                await GetClient<DurationClient>(pipeline, host).GetInvalidAsync());
         });
 
         [Test]
@@ -27,13 +27,13 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetDurationNull() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new DurationClient(ClientDiagnostics, pipeline, host).GetNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<DurationClient>(pipeline, host).GetNullAsync());
         });
 
         [Test]
         public Task GetDurationPositive() => Test(async (host, pipeline) =>
         {
-            var result = await new DurationClient(ClientDiagnostics, pipeline, host).GetPositiveDurationAsync();
+            var result = await GetClient<DurationClient>(pipeline, host).GetPositiveDurationAsync();
             Assert.AreEqual(XmlConvert.ToTimeSpan("P3Y6M4DT12H30M5S"), result.Value);
         });
 
@@ -45,7 +45,7 @@ namespace AutoRest.TestServer.Tests
         public Task PutDurationPositive() => TestStatus(async (host, pipeline) =>
         {
             var value = XmlConvert.ToTimeSpan("P123DT22H14M12.011S");
-            return await new DurationClient(ClientDiagnostics, pipeline, host).PutPositiveDurationAsync( value);
+            return await GetClient<DurationClient>(pipeline, host).PutPositiveDurationAsync(value);
         });
     }
 }

@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -41,9 +43,8 @@ namespace AutoRest.TestServer.Tests
         public void Cat_SizeDeserializeIntoInt()
         {
             var json = @"{""kind"":""Cat"",""size"":""10"", ""meow"": ""MEOW"",""tags"":{""like"":""Cheese"",""area"":""China""},""properties"":{""color"":""Red""}}";
-            using var document = JsonDocument.Parse(json);
 
-            var pet = Pet.DeserializePet(document.RootElement);
+            var pet = ModelReaderWriter.Read<Pet>(BinaryData.FromString(json));
             var cat = pet as Cat;
 
             Assert.IsTrue(cat != null);
@@ -86,9 +87,8 @@ namespace AutoRest.TestServer.Tests
         public void Dog_DeserializeFromProperties()
         {
             var json = @"{""kind"":""Dog"",""size"":""0"",""properties"":{""dog"":{""bark"":""dog barks"",""friend"":{""kind"":""Dog"",""size"":""0"",""properties"":{""dog"":{""bark"":""bark again""}}}}}}";
-            using var document = JsonDocument.Parse(json);
 
-            var pet = Pet.DeserializePet(document.RootElement);
+            var pet = ModelReaderWriter.Read<Pet>(BinaryData.FromString(json));
             var dog = pet as Dog;
 
             Assert.IsTrue(dog != null);

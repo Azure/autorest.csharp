@@ -110,7 +110,7 @@ namespace Encode.Duration.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, EncodeDurationContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(FloatSecondsDurationArrayProperty)} does not support writing '{options.Format}' format.");
             }

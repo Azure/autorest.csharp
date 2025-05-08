@@ -102,7 +102,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, Scm_TypePropertyAdditionalPropertiesContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(WidgetData0)} does not support writing '{options.Format}' format.");
             }

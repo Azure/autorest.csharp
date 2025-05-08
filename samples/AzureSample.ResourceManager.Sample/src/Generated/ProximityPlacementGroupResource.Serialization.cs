@@ -17,9 +17,9 @@ namespace AzureSample.ResourceManager.Sample
 
         ProximityPlacementGroupData IJsonModel<ProximityPlacementGroupData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<ProximityPlacementGroupData>)Data).Create(ref reader, options);
 
-        BinaryData IPersistableModel<ProximityPlacementGroupData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write(Data, options);
+        BinaryData IPersistableModel<ProximityPlacementGroupData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<ProximityPlacementGroupData>(Data, options, AzureSampleResourceManagerSampleContext.Default);
 
-        ProximityPlacementGroupData IPersistableModel<ProximityPlacementGroupData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<ProximityPlacementGroupData>(data, options);
+        ProximityPlacementGroupData IPersistableModel<ProximityPlacementGroupData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<ProximityPlacementGroupData>(data, options, AzureSampleResourceManagerSampleContext.Default);
 
         string IPersistableModel<ProximityPlacementGroupData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<ProximityPlacementGroupData>)Data).GetFormatFromOptions(options);
     }

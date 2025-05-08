@@ -17,9 +17,9 @@ namespace AzureSample.ResourceManager.Sample
 
         AvailabilitySetData IJsonModel<AvailabilitySetData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<AvailabilitySetData>)Data).Create(ref reader, options);
 
-        BinaryData IPersistableModel<AvailabilitySetData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write(Data, options);
+        BinaryData IPersistableModel<AvailabilitySetData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<AvailabilitySetData>(Data, options, AzureSampleResourceManagerSampleContext.Default);
 
-        AvailabilitySetData IPersistableModel<AvailabilitySetData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<AvailabilitySetData>(data, options);
+        AvailabilitySetData IPersistableModel<AvailabilitySetData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<AvailabilitySetData>(data, options, AzureSampleResourceManagerSampleContext.Default);
 
         string IPersistableModel<AvailabilitySetData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<AvailabilitySetData>)Data).GetFormatFromOptions(options);
     }

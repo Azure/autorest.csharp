@@ -120,7 +120,7 @@ namespace Scm._Type._Dictionary.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, Scm_Type_DictionaryContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(InnerModel)} does not support writing '{options.Format}' format.");
             }

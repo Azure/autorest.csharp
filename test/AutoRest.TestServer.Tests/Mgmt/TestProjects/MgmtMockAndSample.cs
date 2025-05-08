@@ -6,7 +6,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
     public class MgmtMockAndSample : TestProjectTests
     {
-        public MgmtMockAndSample() : base("MgmtMockAndSample", "src") { }
+        public MgmtMockAndSample() : base("MgmtMockAndSample") { }
 
         protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(DeletedManagedHsmCollection), typeof(DeletedVaultCollection) };
     }

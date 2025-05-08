@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
@@ -105,8 +106,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Internal/{helper.Type.Name}.cs", helperWriter.ToString());
             }
 
+            var contextWriter = new CodeWriter();
+            var contextWriterInstance = new ModelReaderWriterContextWriter();
+            contextWriterInstance.Write(contextWriter);
+            project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
+
+            IEnumerable<string> modelsToKeep = [.. library.AccessOverriddenModels, ModelReaderWriterContextWriter.Name];
             await project.PostProcessAsync(new PostProcessor(
-                modelsToKeep: library.AccessOverriddenModels.ToImmutableHashSet(),
+                modelsToKeep: modelsToKeep.ToImmutableHashSet(),
                 modelFactoryFullName: modelFactoryProvider?.FullName,
                 aspExtensionClassName: library.AspDotNetExtension.FullName));
         }

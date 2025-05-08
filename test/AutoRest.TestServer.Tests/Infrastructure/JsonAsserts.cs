@@ -1,37 +1,31 @@
-using System.IO;
-using System.Text;
+using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
-using Azure.Core;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Infrastructure
 {
     internal static class JsonAsserts
     {
-        public static void AssertWireSerialization(string expected, IUtf8JsonSerializable serializable)
+        public static void AssertWireSerialization<T>(string expected, IJsonModel<T> serializable)
         {
-            using var memoryStream = new MemoryStream();
+            var text = ModelReaderWriter.Write(serializable);
 
-            using (var writer = new Utf8JsonWriter(memoryStream))
-            {
-                serializable.Write(writer);
-            }
-
-            var text = Encoding.UTF8.GetString(memoryStream.ToArray());
-
-            Assert.AreEqual(expected, text);
+            Assert.AreEqual(expected, text.ToString());
         }
 
-        public static JsonElement AssertWireSerializes(IUtf8JsonSerializable serializable)
+        public static void AssertWireSerialization(string expected, object serializable)
         {
-            using var memoryStream = new MemoryStream();
+            var text = ModelReaderWriter.Write(serializable);
 
-            using (var writer = new Utf8JsonWriter(memoryStream))
-            {
-                serializable.Write(writer);
-            }
+            Assert.AreEqual(expected, text.ToString());
+        }
 
-            return JsonDocument.Parse(memoryStream.ToArray()).RootElement;
+        public static JsonElement AssertWireSerializes<T>(IJsonModel<T> serializable)
+        {
+            var data = ModelReaderWriter.Write(serializable);
+
+            return JsonDocument.Parse(data).RootElement;
         }
     }
 }

@@ -94,7 +94,7 @@ namespace Scm.Client.Naming.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ScmClientNamingContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(LanguageClientNameModel)} does not support writing '{options.Format}' format.");
             }

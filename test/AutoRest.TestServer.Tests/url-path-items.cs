@@ -12,11 +12,11 @@ namespace AutoRest.TestServer.Tests
     {
         [Test]
         public Task UrlPathItemGetAll() => TestStatus(async (host, pipeline) =>
-            await new PathItemsClient(ClientDiagnostics,
+            await GetClient<PathItemsClient>(
                     pipeline,
-                    globalStringPath: "globalStringPath",
-                    globalStringQuery: "globalStringQuery",
-                    endpoint: host)
+                    "globalStringPath",
+                    host,
+                    "globalStringQuery")
                 .GetAllWithValuesAsync(
                     pathItemStringPath: "pathItemStringPath",
                     pathItemStringQuery: "pathItemStringQuery",
@@ -25,12 +25,11 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task UrlPathItemGetPathItemAndLocalNull() => TestStatus(async (host, pipeline) =>
-            await new PathItemsClient(
-                    ClientDiagnostics,
+            await GetClient<PathItemsClient>(
                     pipeline,
-                    globalStringPath: "globalStringPath",
-                    globalStringQuery: "globalStringQuery",
-                    endpoint: host)
+                    "globalStringPath",
+                    host,
+                    "globalStringQuery")
                 .GetLocalPathItemQueryNullAsync(
                     pathItemStringPath: "pathItemStringPath",
                     pathItemStringQuery: null,
@@ -39,12 +38,11 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task UrlPathItemGetGlobalNull() => TestStatus(async (host, pipeline) =>
-            await new PathItemsClient(
-                    ClientDiagnostics,
+            await GetClient<PathItemsClient>(
                     pipeline,
-                    globalStringPath: "globalStringPath",
+                    "globalStringPath",
                     host,
-                    globalStringQuery: null)
+                    null)
                 .GetGlobalQueryNullAsync(
                     pathItemStringPath: "pathItemStringPath",
                     pathItemStringQuery: "pathItemStringQuery",
@@ -53,12 +51,11 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task UrlPathItemGetGlobalAndLocalNull() => TestStatus(async (host, pipeline) =>
-            await new PathItemsClient(
-                    ClientDiagnostics,
+            await GetClient<PathItemsClient>(
                     pipeline,
-                    globalStringPath: "globalStringPath",
+                    "globalStringPath",
                     host,
-                    globalStringQuery: null)
+                    null)
                 .GetGlobalAndLocalQueryNullAsync(
                 pathItemStringPath: "pathItemStringPath",
                 pathItemStringQuery: "pathItemStringQuery",

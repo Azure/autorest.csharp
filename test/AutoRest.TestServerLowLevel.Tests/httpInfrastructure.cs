@@ -388,7 +388,7 @@ namespace AutoRest.TestServer.Tests
         public Task ResponsesScenarioA204MatchingNoModel() => Test(async (host) =>
         {
             var result = await new MultipleResponsesClient(host, Key, null).Get200Model204NoModelDefaultError204ValidAsync(new());
-            Assert.IsEmpty(result.Content.ToString());
+            Assert.AreEqual(0, result.Content.ToArray().Length);
         });
 
         [Test]
@@ -500,7 +500,7 @@ namespace AutoRest.TestServer.Tests
         public Task ResponsesScenarioF200DefaultNone() => Test(async (host) =>
         {
             var result = await new MultipleResponsesClient(host, Key, null).GetDefaultModelA200NoneAsync(new());
-            Assert.IsEmpty(result.Content.ToString());
+            Assert.AreEqual(0, result.Content.ToArray().Length);
         });
 
         [Test]
@@ -558,7 +558,7 @@ namespace AutoRest.TestServer.Tests
         public Task ResponsesScenarioH200MatchingNone() => Test(async (host) =>
         {
             var response = await new MultipleResponsesClient(host, Key, null).Get200ModelA200NoneAsync(new());
-            Assert.IsEmpty(response.Content.ToString());
+            Assert.AreEqual(0, response.Content.ToArray().Length);
         });
 
         [Test]

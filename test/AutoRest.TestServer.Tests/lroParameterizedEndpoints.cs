@@ -14,7 +14,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROParameterizedEndpoint() => Test(async (host, pipeline) =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-            var operation = await new LROWithParamaterizedEndpointsClient(ClientDiagnostics, pipeline, "host:" + host.Port).StartPollWithParameterizedEndpointsAsync("local");
+            var operation = await GetClient<LROWithParamaterizedEndpointsClient>(pipeline, "host:" + host.Port).StartPollWithParameterizedEndpointsAsync("local");
             var result = await operation.WaitForCompletionAsync();
 
             Assert.AreEqual("success", result.Value);

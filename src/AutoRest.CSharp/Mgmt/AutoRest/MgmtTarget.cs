@@ -7,6 +7,7 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Writers;
@@ -235,7 +236,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             //if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
             //    throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
-            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
+            if (ShouldEmitContextClass())
+            {
+                var contextWriter = new CodeWriter();
+                var contextWriterInstance = new ModelReaderWriterContextWriter();
+                contextWriterInstance.Write(contextWriter);
+                project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
+            }
+
+            List<string> modelsToKeepList = [.. Configuration.MgmtConfiguration.KeepOrphanedModels, ModelReaderWriterContextWriter.Name];
+            var modelsToKeep = modelsToKeepList.ToImmutableHashSet();
             await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
 
             // write samples if enabled
@@ -249,6 +259,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     project.AddGeneratedTestFile(Path.Combine(sampleOutputFolder, $"Samples/{sampleProvider.Type.Name}.cs"), sampleWriter.ToString());
                 }
             }
+        }
+
+        private static bool ShouldEmitContextClass()
+        {
+            // Only Azure.ResourceManager is special here since it will have 3 generations
+            // that get combined into one package.
+            if (!Configuration.MgmtConfiguration.IsArmCore)
+                return true;
+
+            // If we are generating Azure.ResourceManager, we should only generate one context
+            // for the entire package so we will do that when generation the core namespace.
+            return Configuration.Namespace == "Azure.ResourceManager";
         }
 
         private static void WriteExtensions(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtMockableExtension> mockableExtensions)

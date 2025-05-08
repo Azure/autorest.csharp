@@ -4,7 +4,7 @@
 
 using System.ClientModel.Primitives;
 
-namespace Payload.MultiPart
+namespace Scm.Payload.Multipart
 {
     /// <summary> Client options for MultiPartClient. </summary>
     public partial class MultiPartClientOptions : ClientPipelineOptions

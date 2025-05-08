@@ -90,7 +90,7 @@ namespace body_complex.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, body_complexContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(DotFish)} does not support writing '{options.Format}' format.");
             }

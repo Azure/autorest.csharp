@@ -4,7 +4,9 @@
     <TargetFramework>$(CurrentDotnetFramework)</TargetFramework>
     <IsPackable>false</IsPackable>
     <Nullable>annotations</Nullable>
-    <NoWarn>$(NoWarn);SA1649;SA1633;CS0618</NoWarn>
+    <NoWarn>$(NoWarn);SA1649;SA1633;CS0618;SCM0005;SCM0001</NoWarn>
+    <IncludeAzureTestServerProjectsLowLevel>true</IncludeAzureTestServerProjectsLowLevel>
+    <IncludeAzureTestProjectsLowLevel>true</IncludeAzureTestProjectsLowLevel>
   </PropertyGroup>
   
   <ItemGroup>
@@ -27,20 +29,18 @@
     <PackageReference Include="NUnit3TestAdapter" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />
 
     <ProjectReference Include="../../src/AutoRest.CSharp/AutoRest.CSharp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="../swaggers/*.json" LinkBase="swaggers" />
-    <Compile Include="../TestServerProjectsLowLevel/**/*.cs" LinkBase="TestServerProjectsLowLevel" />
-    <Compile Include="../TestProjectsLowLevel/**/*.cs" LinkBase="TestProjectsLowLevel" />
-    <None Include="../TestServerProjectsLowLevel/**/*.yaml" LinkBase="TestServerProjectsLowLevel" />
-    <Compile Include="../TestProjects/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-TypeSpec/**/*.cs;../TestProjects/sdk/core/**" LinkBase="TestProjects" />
+    <Compile Include="..\CadlRanchProjects\authentication\api-key\src\Generated\Internal\*.cs" LinkBase="Shared/Internal" />
 
-    <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" />
-    <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" />
-    <Compile Include="../AutoRest.TestServer.Tests/TypeAsserts.cs" />
+    <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" LinkBase="Shared/Infrastructure" />
+    <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" LinkBase="Shared/Infrastructure" />
+    <Compile Include="../AutoRest.TestServer.Tests/TypeAsserts.cs" LinkBase="Shared/Infrastructure" />
   </ItemGroup>
 
 </Project>

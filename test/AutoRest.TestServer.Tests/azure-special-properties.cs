@@ -1,9 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
@@ -16,48 +13,57 @@ namespace AutoRest.TestServer.Tests
     public class AzureSpecialPropertiesTest : TestServerTestBase
     {
         [Test]
-        public Task AzureApiVersionMethodGlobalNotProvidedValid() => TestStatus(async (host, pipeline) => await new ApiVersionDefaultClient(ClientDiagnostics, pipeline, host).RestClient.GetMethodGlobalNotProvidedValidAsync());
+        public Task AzureApiVersionMethodGlobalNotProvidedValid() => TestStatus(async (host, pipeline)
+            => await GetClient<ApiVersionDefaultClient>(pipeline, host).GetMethodGlobalNotProvidedValidAsync());
 
         [Test]
-        public Task AzureApiVersionMethodGlobalValid() => TestStatus(async (host, pipeline) => await new ApiVersionDefaultClient(ClientDiagnostics, pipeline, host).RestClient.GetMethodGlobalValidAsync());
+        public Task AzureApiVersionMethodGlobalValid() => TestStatus(async (host, pipeline)
+            => await GetClient<ApiVersionDefaultClient>(pipeline, host).GetMethodGlobalValidAsync());
 
         [Test]
-        public Task AzureApiVersionMethodLocalNull() => TestStatus(async (host, pipeline) => await new ApiVersionLocalClient(ClientDiagnostics, pipeline, host).RestClient.GetMethodLocalNullAsync());
-
-        // Issue with test logic: https://github.com/Azure/autorest.testserver/issues/167
-        [Test]
-        public Task AzureApiVersionMethodLocalValid() => TestStatus(async (host, pipeline) => await new ApiVersionLocalClient(ClientDiagnostics, pipeline, host).RestClient.GetMethodLocalValidAsync());
-
-        [Test]
-        public Task AzureApiVersionPathGlobalValid() => TestStatus(async (host, pipeline) => await new ApiVersionDefaultClient(ClientDiagnostics, pipeline, host).RestClient.GetPathGlobalValidAsync());
+        public Task AzureApiVersionMethodLocalNull() => TestStatus(async (host, pipeline)
+            => await GetClient<ApiVersionLocalClient>(pipeline, host).GetMethodLocalNullAsync());
 
         // Issue with test logic: https://github.com/Azure/autorest.testserver/issues/167
         [Test]
-        public Task AzureApiVersionPathLocalValid() => TestStatus(async (host, pipeline) => await new ApiVersionLocalClient(ClientDiagnostics, pipeline, host).RestClient.GetPathLocalValidAsync());
+        public Task AzureApiVersionMethodLocalValid() => TestStatus(async (host, pipeline)
+            => await GetClient<ApiVersionLocalClient>(pipeline, host).GetMethodLocalValidAsync());
 
         [Test]
-        public Task AzureApiVersionSwaggerGlobalValid() => TestStatus(async (host, pipeline) => await new ApiVersionDefaultClient(ClientDiagnostics, pipeline, host).RestClient.GetSwaggerGlobalValidAsync());
+        public Task AzureApiVersionPathGlobalValid() => TestStatus(async (host, pipeline)
+            => await GetClient<ApiVersionDefaultClient>(pipeline, host).GetPathGlobalValidAsync());
 
         // Issue with test logic: https://github.com/Azure/autorest.testserver/issues/167
         [Test]
-        public Task AzureApiVersionSwaggerLocalValid() => TestStatus(async (host, pipeline) => await new ApiVersionLocalClient(ClientDiagnostics, pipeline, host).RestClient.GetSwaggerLocalValidAsync());
+        public Task AzureApiVersionPathLocalValid() => TestStatus(async (host, pipeline)
+            => await GetClient<ApiVersionLocalClient>(pipeline, host).GetPathLocalValidAsync());
+
+        [Test]
+        public Task AzureApiVersionSwaggerGlobalValid() => TestStatus(async (host, pipeline)
+            => await GetClient<ApiVersionDefaultClient>(pipeline, host).GetSwaggerGlobalValidAsync());
+
+        // Issue with test logic: https://github.com/Azure/autorest.testserver/issues/167
+        [Test]
+        public Task AzureApiVersionSwaggerLocalValid() => TestStatus(async (host, pipeline)
+            => await GetClient<ApiVersionLocalClient>(pipeline, host).GetSwaggerLocalValidAsync());
 
         [Test]
         public Task AzureMethodPathUrlEncoding() => TestStatus(async (host, pipeline) =>
         {
             var value = "path1/path2/path3";
-            return await new SkipUrlEncodingClient(ClientDiagnostics, pipeline, host).RestClient.GetMethodPathValidAsync(value);
+            return await GetClient<SkipUrlEncodingClient>(pipeline, host).GetMethodPathValidAsync(value);
         });
 
         [Test]
         public Task AzureMethodQueryUrlEncoding() => TestStatus(async (host, pipeline) =>
         {
             var value = "value1&q2=value2&q3=value3";
-            return await new SkipUrlEncodingClient(ClientDiagnostics, pipeline, host).RestClient.GetMethodQueryValidAsync(value);
+            return await GetClient<SkipUrlEncodingClient>(pipeline, host).GetMethodQueryValidAsync(value);
         });
 
         [Test]
-        public Task AzureMethodQueryUrlEncodingNull() => TestStatus(async (host, pipeline) => await new SkipUrlEncodingClient(ClientDiagnostics, pipeline, host).RestClient.GetMethodQueryNullAsync());
+        public Task AzureMethodQueryUrlEncodingNull() => TestStatus(async (host, pipeline)
+            => await GetClient<SkipUrlEncodingClient>(pipeline, host).GetMethodQueryNullAsync());
 
         [Test]
         public Task AzureODataFilter() => TestStatus(async (host, pipeline) =>
@@ -65,119 +71,121 @@ namespace AutoRest.TestServer.Tests
             var filter = "id gt 5 and name eq 'foo'";
             var top = 10;
             var orderBy = "id";
-            return await new OdataClient(ClientDiagnostics, pipeline, host).RestClient.GetWithFilterAsync(filter, top, orderBy);
+            return await GetClient<OdataClient>(pipeline, host).GetWithFilterAsync(filter, top, orderBy);
         });
 
         [Test]
         public Task AzurePathPathUrlEncoding() => TestStatus(async (host, pipeline) =>
         {
             var value = "path1/path2/path3";
-            return await new SkipUrlEncodingClient(ClientDiagnostics, pipeline, host).RestClient.GetPathValidAsync(value);
+            return await GetClient<SkipUrlEncodingClient>(pipeline, host).GetPathValidAsync(value);
         });
 
         [Test]
         public Task AzurePathQueryUrlEncoding() => TestStatus(async (host, pipeline) =>
         {
             var value = "value1&q2=value2&q3=value3";
-            return await new SkipUrlEncodingClient(ClientDiagnostics, pipeline, host).RestClient.GetPathQueryValidAsync(value);
+            return await GetClient<SkipUrlEncodingClient>(pipeline, host).GetPathQueryValidAsync(value);
         });
 
         [Test]
         public Task AzureRequestClientIdInError() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new XMsClientRequestIdClient(ClientDiagnostics, pipeline, host).RestClient.GetAsync());
+            Assert.ThrowsAsync<RequestFailedException>(async () => await GetClient<XMsClientRequestIdClient>(pipeline, host).GetAsync());
         });
 
         [Test]
         public Task AzureSubscriptionMethodGlobalNotProvidedValid() => TestStatus(async (host, pipeline) =>
         {
             var value = "1234-5678-9012-3456";
-            return await new SubscriptionInCredentialsClient(ClientDiagnostics, pipeline, value, host).RestClient.PostMethodGlobalNotProvidedValidAsync();
+            return await GetClient<SubscriptionInCredentialsClient>(pipeline, value, host).PostMethodGlobalNotProvidedValidAsync();
         });
 
         [Test]
         public Task AzureSubscriptionMethodGlobalValid() => TestStatus(async (host, pipeline) =>
         {
             var value = "1234-5678-9012-3456";
-            return await new SubscriptionInCredentialsClient(ClientDiagnostics, pipeline, value, host).RestClient.PostMethodGlobalValidAsync();
+            return await GetClient<SubscriptionInCredentialsClient>(pipeline, value, host).PostMethodGlobalValidAsync();
         });
 
         [Test]
         public Task AzureSubscriptionMethodLocalValid() => TestStatus(async (host, pipeline) =>
         {
             var value = "1234-5678-9012-3456";
-            return await new SubscriptionInMethodClient(ClientDiagnostics, pipeline, host).RestClient.PostMethodLocalValidAsync(value);
+            return await GetClient<SubscriptionInMethodClient>(pipeline, host).PostMethodLocalValidAsync(value);
         });
 
         [Test]
         public Task AzureSubscriptionPathGlobalValid() => TestStatus(async (host, pipeline) =>
         {
             var value = "1234-5678-9012-3456";
-            return await new SubscriptionInCredentialsClient(ClientDiagnostics, pipeline, value, host).RestClient.PostPathGlobalValidAsync();
+            return await GetClient<SubscriptionInCredentialsClient>(pipeline, value, host).PostPathGlobalValidAsync();
         });
 
         [Test]
         public Task AzureSubscriptionPathLocalValid() => TestStatus(async (host, pipeline) =>
         {
             var value = "1234-5678-9012-3456";
-            return await new SubscriptionInMethodClient(ClientDiagnostics, pipeline, host).RestClient.PostPathLocalValidAsync(value);
+            return await GetClient<SubscriptionInMethodClient>(pipeline, host).PostPathLocalValidAsync(value);
         });
 
         [Test]
         public Task AzureSubscriptionSwaggerGlobalValid() => TestStatus(async (host, pipeline) =>
         {
             var value = "1234-5678-9012-3456";
-            return await new SubscriptionInCredentialsClient(ClientDiagnostics, pipeline, value, host).RestClient.PostSwaggerGlobalValidAsync();
+            return await GetClient<SubscriptionInCredentialsClient>(pipeline, value, host).PostSwaggerGlobalValidAsync();
         });
 
         [Test]
         public Task AzureSubscriptionSwaggerLocalValid() => TestStatus(async (host, pipeline) =>
         {
             var value = "1234-5678-9012-3456";
-            return await new SubscriptionInMethodClient(ClientDiagnostics, pipeline, host).RestClient.PostSwaggerLocalValidAsync(value);
+            return await GetClient<SubscriptionInMethodClient>(pipeline, host).PostSwaggerLocalValidAsync(value);
         });
 
         [Test]
-        public Task AzureSwaggerPathUrlEncoding() => TestStatus(async (host, pipeline) => await new SkipUrlEncodingClient(ClientDiagnostics, pipeline, host).RestClient.GetSwaggerPathValidAsync());
+        public Task AzureSwaggerPathUrlEncoding() => TestStatus(async (host, pipeline)
+            => await GetClient<SkipUrlEncodingClient>(pipeline, host).GetSwaggerPathValidAsync());
 
         [Test]
-        public Task AzureSwaggerQueryUrlEncoding() => TestStatus(async (host, pipeline) => await new SkipUrlEncodingClient(ClientDiagnostics, pipeline, host).RestClient.GetSwaggerQueryValidAsync());
+        public Task AzureSwaggerQueryUrlEncoding() => TestStatus(async (host, pipeline)
+            => await GetClient<SkipUrlEncodingClient>(pipeline, host).GetSwaggerQueryValidAsync());
 
         [Test]
         public Task AzureXmsCustomNamedRequestId() => TestStatus(async (host, pipeline) =>
         {
             var value = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
-            var result = await new HeaderClient(ClientDiagnostics, pipeline, host).RestClient.CustomNamedRequestIdAsync(value);
-            return result.GetRawResponse();
+            var result = await GetClient<HeaderClient>(pipeline, host).CustomNamedRequestIdAsync(value);
+            return result;
         });
 
         [Test]
         public Task AzureXmsCustomNamedRequestIdParameterGroup() => TestStatus(async (host, pipeline) =>
         {
             var value = new HeaderCustomNamedRequestIdParamGroupingParameters("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-            var result = await new HeaderClient(ClientDiagnostics, pipeline, host).RestClient.CustomNamedRequestIdParamGroupingAsync(value);
-            return result.GetRawResponse();
+            var result = await GetClient<HeaderClient>(pipeline, host).CustomNamedRequestIdParamGroupingAsync(value);
+            return result;
         });
 
         [Test]
         public Task AzureXmsRequestClientIdNull() => TestStatus(async (host, pipeline) =>
         {
             using var _ = ClientRequestIdScope.Start("");
-            return await new XMsClientRequestIdClient(ClientDiagnostics, pipeline, host).RestClient.GetAsync();
+            return await GetClient<XMsClientRequestIdClient>(pipeline, host).GetAsync();
         });
 
         [Test]
         public Task AzureXmsRequestClientOverwrite() => TestStatus(async (host, pipeline) =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-            return await new XMsClientRequestIdClient(ClientDiagnostics, pipeline, host).RestClient.GetAsync();
+            return await GetClient<XMsClientRequestIdClient>(pipeline, host).GetAsync();
         });
 
         [Test]
         public Task AzureXmsRequestClientOverwriteViaParameter() => TestStatus(async (host, pipeline) =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-            return await new XMsClientRequestIdClient(ClientDiagnostics, pipeline, host).RestClient.ParamGetAsync();
+            return await GetClient<XMsClientRequestIdClient>(pipeline, host).ParamGetAsync();
         });
     }
 }

@@ -25,13 +25,13 @@ namespace AzureSample.ResourceManager.Sample
 
         DedicatedHostResource IOperationSource<DedicatedHostResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<DedicatedHostData>(response.Content);
+            var data = ModelReaderWriter.Read<DedicatedHostData>(response.Content, ModelReaderWriterOptions.Json, AzureSampleResourceManagerSampleContext.Default);
             return new DedicatedHostResource(_client, data);
         }
 
         async ValueTask<DedicatedHostResource> IOperationSource<DedicatedHostResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<DedicatedHostData>(response.Content);
+            var data = ModelReaderWriter.Read<DedicatedHostData>(response.Content, ModelReaderWriterOptions.Json, AzureSampleResourceManagerSampleContext.Default);
             return await Task.FromResult(new DedicatedHostResource(_client, data)).ConfigureAwait(false);
         }
     }

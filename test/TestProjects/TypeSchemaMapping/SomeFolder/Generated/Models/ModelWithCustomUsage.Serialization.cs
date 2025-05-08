@@ -132,7 +132,7 @@ namespace TypeSchemaMapping.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, TypeSchemaMappingContext.Default);
                 case "X":
                     {
                         using MemoryStream stream = new MemoryStream();

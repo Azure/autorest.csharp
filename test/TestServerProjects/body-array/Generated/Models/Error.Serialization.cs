@@ -118,7 +118,7 @@ namespace body_array.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, body_arrayContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Error)} does not support writing '{options.Format}' format.");
             }

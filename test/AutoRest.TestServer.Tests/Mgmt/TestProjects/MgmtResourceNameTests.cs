@@ -3,6 +3,7 @@
 
 using System.Linq;
 using System.Reflection;
+using MgmtResourceName;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -10,6 +11,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     public class MgmtResourceNameTests : TestProjectTests
     {
         public MgmtResourceNameTests() : base("MgmtResourceName") { }
+
+        private protected override Assembly GetAssembly() => typeof(DisplayResource).Assembly;
 
         [TestCase("MachineResource", true)]
         [TestCase("Disk", true)]

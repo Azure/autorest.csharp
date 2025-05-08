@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.ResourceManager;
 using MgmtLRO;
@@ -10,6 +11,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     public class MgmtLROTests : TestProjectTests
     {
         public MgmtLROTests() : base("MgmtLRO") { }
+
+        private protected override Assembly GetAssembly() => typeof(MgmtLROExtensions).Assembly;
 
         [TestCase("BarCollection", "CreateOrUpdate", typeof(ArmOperation<BarResource>))]
         [TestCase("FakeCollection", "CreateOrUpdate", typeof(ArmOperation<FakeResource>))]
