@@ -108,7 +108,7 @@ namespace Parameters.Spread.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ParametersSpreadContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(SpreadParameterWithInnerAliasRequest)} does not support writing '{options.Format}' format.");
             }

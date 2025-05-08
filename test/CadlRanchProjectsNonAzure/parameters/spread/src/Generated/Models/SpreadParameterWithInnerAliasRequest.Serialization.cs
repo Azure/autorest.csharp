@@ -102,7 +102,7 @@ namespace Scm.Parameters.Spread.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ScmParametersSpreadContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(SpreadParameterWithInnerAliasRequest)} does not support writing '{options.Format}' format.");
             }

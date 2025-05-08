@@ -6,6 +6,7 @@
     <Nullable>annotations</Nullable>
     <IncludeSharedSourceInLocalBuild>false</IncludeSharedSourceInLocalBuild>
     <NoWarn>$(NoWarn);CS0618</NoWarn>
+    <IncludeUnbrandedProjects>true</IncludeUnbrandedProjects>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,11 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="../UnbrandedProjects/**/*.cs" Exclude="../UnbrandedProjects/**/Properties/**/*.cs" LinkBase="UnbrandedProjects" />
+    <ProjectReference Include="..\TestProjects\Inheritance\Inheritance.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AutoRest.TestServer.Tests\AutoRest.TestServer.Tests.csproj" />
+    <Compile Include="..\UnbrandedProjects\Unbranded-TypeSpec\src\Generated\Internal\*.cs" LinkBase="Shared/Internal" />
+    <Compile Include="..\AutoRest.TestServer.Tests\Infrastructure\BinaryDataAssert.cs" LinkBase="Shared/Infrastructure" />
   </ItemGroup>
-
 </Project>

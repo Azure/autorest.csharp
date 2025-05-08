@@ -115,7 +115,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerSampleContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(VirtualMachineCaptureContent)} does not support writing '{options.Format}' format.");
             }

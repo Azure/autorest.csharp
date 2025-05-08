@@ -100,7 +100,7 @@ namespace Encode.Duration.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, EncodeDurationContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(ISO8601DurationProperty)} does not support writing '{options.Format}' format.");
             }

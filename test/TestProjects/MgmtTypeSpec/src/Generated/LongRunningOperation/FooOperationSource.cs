@@ -25,13 +25,13 @@ namespace MgmtTypeSpec
 
         FooResource IOperationSource<FooResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<FooData>(response.Content);
+            var data = ModelReaderWriter.Read<FooData>(response.Content, ModelReaderWriterOptions.Json, MgmtTypeSpecContext.Default);
             return new FooResource(_client, data);
         }
 
         async ValueTask<FooResource> IOperationSource<FooResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<FooData>(response.Content);
+            var data = ModelReaderWriter.Read<FooData>(response.Content, ModelReaderWriterOptions.Json, MgmtTypeSpecContext.Default);
             return await Task.FromResult(new FooResource(_client, data)).ConfigureAwait(false);
         }
     }

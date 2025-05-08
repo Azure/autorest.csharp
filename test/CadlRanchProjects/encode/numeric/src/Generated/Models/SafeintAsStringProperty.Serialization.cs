@@ -100,7 +100,7 @@ namespace Encode.Numeric.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, EncodeNumericContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(SafeintAsStringProperty)} does not support writing '{options.Format}' format.");
             }

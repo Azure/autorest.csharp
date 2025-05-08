@@ -130,7 +130,7 @@ namespace _Type.Property.Nullable.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _TypePropertyNullableContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(CollectionsStringProperty)} does not support writing '{options.Format}' format.");
             }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection;
+using MgmtOmitOperationGroups;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -9,6 +11,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             : base("MgmtOmitOperationGroups")
         {
         }
+
+        private protected override Assembly GetAssembly() => typeof(Model2Data).Assembly;
 
         [TestCase("Model1Data", false)]
         [TestCase("Model1Update", false)]
@@ -28,21 +32,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         private bool CheckExistence(string className)
         {
-            if (Type.GetType(GetTypeName(className)) == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        private string GetTypeName(string className)
-        {
-            string @namespace = "MgmtOmitOperationGroups";
-
-            return className.EndsWith("Data") ? $"{@namespace}.{className}" : $"{@namespace}.Models.{className}";
+            return GetType(className) is not null;
         }
     }
 }

@@ -15,37 +15,37 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetIntegerOverflow() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync<FormatException>(async () => await new IntClient(ClientDiagnostics, pipeline, host).GetOverflowInt32Async());
+            Assert.ThrowsAsync<FormatException>(async () => await GetClient<IntClient>(pipeline, host).GetOverflowInt32Async());
         });
 
         [Test]
         public Task GetIntegerUnderflow() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync<FormatException>(async () => await new IntClient(ClientDiagnostics, pipeline, host).GetUnderflowInt32Async());
+            Assert.ThrowsAsync<FormatException>(async () => await GetClient<IntClient>(pipeline, host).GetUnderflowInt32Async());
         });
 
         [Test]
         public Task GetIntegerInvalid() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new IntClient(ClientDiagnostics, pipeline, host).GetInvalidAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<IntClient>(pipeline, host).GetInvalidAsync());
         });
 
         [Test]
         public Task GetLongOverflow() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync<FormatException>(async () => await new IntClient(ClientDiagnostics, pipeline, host).GetOverflowInt64Async());
+            Assert.ThrowsAsync<FormatException>(async () => await GetClient<IntClient>(pipeline, host).GetOverflowInt64Async());
         });
 
         [Test]
         public Task GetLongUnderflow() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync<FormatException>(async () => await new IntClient(ClientDiagnostics, pipeline, host).GetUnderflowInt64Async());
+            Assert.ThrowsAsync<FormatException>(async () => await GetClient<IntClient>(pipeline, host).GetUnderflowInt64Async());
         });
 
         [Test]
         public Task GetUnixTime() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new IntClient(ClientDiagnostics, pipeline, host).GetUnixTimeAsync();
+            var response = await GetClient<IntClient>(pipeline, host).GetUnixTimeAsync();
             Assert.AreEqual(DateTimeOffset.FromUnixTimeSeconds(1460505600), response.Value);
             return response.GetRawResponse();
         });
@@ -54,35 +54,36 @@ namespace AutoRest.TestServer.Tests
         public Task GetNullUnixTime() => Test((host, pipeline) =>
         {
             // Empty response body
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new IntClient(ClientDiagnostics, pipeline, host).GetNullUnixTimeAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<IntClient>(pipeline, host).GetNullUnixTimeAsync());
         });
 
         [Test]
         public Task GetIntegerNull() => Test((host, pipeline) =>
         {
             // Empty response body
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new IntClient(ClientDiagnostics, pipeline, host).GetNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<IntClient>(pipeline, host).GetNullAsync());
         });
 
         [Test]
         public Task GetInvalidUnixTime() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(),async () => await new IntClient(ClientDiagnostics, pipeline, host).GetInvalidUnixTimeAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<IntClient>(pipeline, host).GetInvalidUnixTimeAsync());
         });
 
         [Test]
-        public Task PutIntegerMax() => TestStatus(async (host, pipeline) => await new IntClient(ClientDiagnostics, pipeline, host).PutMax32Async( int.MaxValue));
+        public Task PutIntegerMax() => TestStatus(async (host, pipeline) => await GetClient<IntClient>(pipeline, host).PutMax32Async(int.MaxValue));
 
         [Test]
-        public Task PutLongMax() => TestStatus(async (host, pipeline) => await new IntClient(ClientDiagnostics, pipeline, host).PutMax64Async( long.MaxValue));
+        public Task PutLongMax() => TestStatus(async (host, pipeline) => await GetClient<IntClient>(pipeline, host).PutMax64Async(long.MaxValue));
 
         [Test]
-        public Task PutIntegerMin() => TestStatus(async (host, pipeline) => await new IntClient(ClientDiagnostics, pipeline, host).PutMin32Async( int.MinValue));
+        public Task PutIntegerMin() => TestStatus(async (host, pipeline) => await GetClient<IntClient>(pipeline, host).PutMin32Async(int.MinValue));
 
         [Test]
-        public Task PutLongMin() => TestStatus(async (host, pipeline) => await new IntClient(ClientDiagnostics, pipeline, host).PutMin64Async( long.MinValue));
+        public Task PutLongMin() => TestStatus(async (host, pipeline) => await GetClient<IntClient>(pipeline, host).PutMin64Async(long.MinValue));
 
         [Test]
-        public Task PutUnixTime() => TestStatus(async (host, pipeline) => await new IntClient(ClientDiagnostics, pipeline, host).PutUnixTimeDateAsync( DateTimeOffset.FromUnixTimeSeconds(1460505600)));
+        public Task PutUnixTime() => TestStatus(async (host, pipeline)
+            => await GetClient<IntClient>(pipeline, host).PutUnixTimeDateAsync(DateTimeOffset.FromUnixTimeSeconds(1460505600)));
     }
 }

@@ -94,7 +94,7 @@ namespace Scm.Payload.ContentNegotiation.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ScmPayloadContentNegotiationContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(PngImageAsJson)} does not support writing '{options.Format}' format.");
             }

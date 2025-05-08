@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexBasicValid() => Test(async (host, pipeline) =>
         {
-            var result = await new BasicClient(ClientDiagnostics, pipeline, host).GetValidAsync();
+            var result = await GetClient<BasicClient>(pipeline, host).GetValidAsync();
             Assert.AreEqual("abc", result.Value.Name);
             Assert.AreEqual(2, result.Value.Id);
             Assert.AreEqual(CMYKColors.Yellow, result.Value.Color);
@@ -38,13 +39,13 @@ namespace AutoRest.TestServer.Tests
                 Id = 2,
                 Color = CMYKColors.Magenta
             };
-            return await new BasicClient(ClientDiagnostics, pipeline, host).PutValidAsync(value);
+            return await GetClient<BasicClient>(pipeline, host).PutValidAsync(value);
         });
 
         [Test]
         public Task GetComplexBasicEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new BasicClient(ClientDiagnostics, pipeline, host).GetEmptyAsync();
+            var result = await GetClient<BasicClient>(pipeline, host).GetEmptyAsync();
             Assert.AreEqual(null, result.Value.Name);
             Assert.AreEqual(null, result.Value.Id);
             Assert.AreEqual(null, result.Value.Color);
@@ -54,19 +55,20 @@ namespace AutoRest.TestServer.Tests
         public Task GetComplexBasicNotProvided() => Test((host, pipeline) =>
         {
             // Empty response body
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new BasicClient(ClientDiagnostics, pipeline, host).GetNotProvidedAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<BasicClient>(pipeline, host).GetNotProvidedAsync());
         });
 
         [Test]
         public void ThrowsIfApiVersionIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new BasicClient(ClientDiagnostics, HttpPipelineBuilder.Build(new TestOptions()), new Uri("http://test"), null));
+            var ex = Assert.Throws<TargetInvocationException>(() => GetClient<BasicClient>(HttpPipelineBuilder.Build(new TestOptions()), new Uri("http://test"), (string)null));
+            Assert.AreEqual(typeof(ArgumentNullException), ex.InnerException.GetType());
         }
 
         [Test]
         public Task GetComplexBasicNull() => Test(async (host, pipeline) =>
         {
-            var result = await new BasicClient(ClientDiagnostics, pipeline, host).GetNullAsync();
+            var result = await GetClient<BasicClient>(pipeline, host).GetNullAsync();
             Assert.AreEqual(null, result.Value.Name);
             Assert.AreEqual(null, result.Value.Id);
             Assert.AreEqual(null, result.Value.Color);
@@ -75,7 +77,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexBasicInvalid() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(typeof(InvalidOperationException), async () => await new BasicClient(ClientDiagnostics, pipeline, host).GetInvalidAsync());
+            Assert.ThrowsAsync(typeof(InvalidOperationException), async () => await GetClient<BasicClient>(pipeline, host).GetInvalidAsync());
         });
 
         [Test]
@@ -89,7 +91,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexPrimitiveInteger() => Test(async (host, pipeline) =>
         {
-            var result = await new PrimitiveClient(ClientDiagnostics, pipeline, host).GetIntAsync();
+            var result = await GetClient<PrimitiveClient>(pipeline, host).GetIntAsync();
             Assert.AreEqual(-1, result.Value.Field1);
             Assert.AreEqual(2, result.Value.Field2);
         });
@@ -102,7 +104,7 @@ namespace AutoRest.TestServer.Tests
                 Field1 = -1,
                 Field2 = 2
             };
-            return await new PrimitiveClient(ClientDiagnostics, pipeline, host).PutIntAsync( value);
+            return await GetClient<PrimitiveClient>(pipeline, host).PutIntAsync( value);
         });
 
         [Test]
@@ -116,7 +118,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexPrimitiveLong() => Test(async (host, pipeline) =>
         {
-            var result = await new PrimitiveClient(ClientDiagnostics, pipeline, host).GetLongAsync();
+            var result = await GetClient<PrimitiveClient>(pipeline, host).GetLongAsync();
             Assert.AreEqual(1099511627775L, result.Value.Field1);
             Assert.AreEqual(-999511627788L, result.Value.Field2);
         });
@@ -129,7 +131,7 @@ namespace AutoRest.TestServer.Tests
                 Field1 = 1099511627775L,
                 Field2 = -999511627788L
             };
-            return await new PrimitiveClient(ClientDiagnostics, pipeline, host).PutLongAsync( value);
+            return await GetClient<PrimitiveClient>(pipeline, host).PutLongAsync( value);
         });
 
         [Test]
@@ -143,7 +145,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexPrimitiveFloat() => Test(async (host, pipeline) =>
         {
-            var result = await new PrimitiveClient(ClientDiagnostics, pipeline, host).GetFloatAsync();
+            var result = await GetClient<PrimitiveClient>(pipeline, host).GetFloatAsync();
             Assert.AreEqual(1.05F, result.Value.Field1);
             Assert.AreEqual(-0.003F, result.Value.Field2);
         });
@@ -156,7 +158,7 @@ namespace AutoRest.TestServer.Tests
                 Field1 = 1.05F,
                 Field2 = -0.003F
             };
-            return await new PrimitiveClient(ClientDiagnostics, pipeline, host).PutFloatAsync( value);
+            return await GetClient<PrimitiveClient>(pipeline, host).PutFloatAsync( value);
         });
 
         [Test]
@@ -170,7 +172,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexPrimitiveDouble() => Test(async (host, pipeline) =>
         {
-            var result = await new PrimitiveClient(ClientDiagnostics, pipeline, host).GetDoubleAsync();
+            var result = await GetClient<PrimitiveClient>(pipeline, host).GetDoubleAsync();
             Assert.AreEqual(3e-100D, result.Value.Field1);
             Assert.AreEqual(-0.000000000000000000000000000000000000000000000000000000005D, result.Value.Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose);
         });
@@ -183,13 +185,13 @@ namespace AutoRest.TestServer.Tests
                 Field1 = 3e-100D,
                 Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = -0.000000000000000000000000000000000000000000000000000000005D
             };
-            return await new PrimitiveClient(ClientDiagnostics, pipeline, host).PutDoubleAsync( value);
+            return await GetClient<PrimitiveClient>(pipeline, host).PutDoubleAsync( value);
         });
 
         [Test]
         public Task GetComplexPrimitiveBool() => Test(async (host, pipeline) =>
         {
-            var result = await new PrimitiveClient(ClientDiagnostics, pipeline, host).GetBoolAsync();
+            var result = await GetClient<PrimitiveClient>(pipeline, host).GetBoolAsync();
             Assert.AreEqual(true, result.Value.FieldTrue);
             Assert.AreEqual(false, result.Value.FieldFalse);
         });
@@ -202,13 +204,13 @@ namespace AutoRest.TestServer.Tests
                 FieldTrue = true,
                 FieldFalse = false
             };
-            return await new PrimitiveClient(ClientDiagnostics, pipeline, host).PutBoolAsync( value);
+            return await GetClient<PrimitiveClient>(pipeline, host).PutBoolAsync( value);
         });
 
         [Test]
         public Task GetComplexPrimitiveString() => Test(async (host, pipeline) =>
         {
-            var result = await new PrimitiveClient(ClientDiagnostics, pipeline, host).GetStringAsync();
+            var result = await GetClient<PrimitiveClient>(pipeline, host).GetStringAsync();
             Assert.AreEqual("goodrequest", result.Value.Field);
             Assert.AreEqual(string.Empty, result.Value.Empty);
             Assert.AreEqual(null, result.Value.Null);
@@ -223,13 +225,13 @@ namespace AutoRest.TestServer.Tests
                 Empty = string.Empty,
                 Null = null
             };
-            return await new PrimitiveClient(ClientDiagnostics, pipeline, host).PutStringAsync( value);
+            return await GetClient<PrimitiveClient>(pipeline, host).PutStringAsync( value);
         });
 
         [Test]
         public Task GetComplexPrimitiveDate() => Test(async (host, pipeline) =>
         {
-            var result = await new PrimitiveClient(ClientDiagnostics, pipeline, host).GetDateAsync();
+            var result = await GetClient<PrimitiveClient>(pipeline, host).GetDateAsync();
             Assert.AreEqual(DateTimeOffset.MinValue, result.Value.Field);
             Assert.AreEqual(DateTimeOffset.Parse("2016-02-29", styles: DateTimeStyles.AssumeUniversal), result.Value.Leap);
         });
@@ -242,13 +244,13 @@ namespace AutoRest.TestServer.Tests
                 Field = DateTimeOffset.MinValue,
                 Leap = DateTimeOffset.Parse("2016-02-29", styles: DateTimeStyles.AssumeUniversal)
             };
-            return await new PrimitiveClient(ClientDiagnostics, pipeline, host).PutDateAsync( value);
+            return await GetClient<PrimitiveClient>(pipeline, host).PutDateAsync( value);
         });
 
         [Test]
         public Task GetComplexPrimitiveDateTime() => Test(async (host, pipeline) =>
         {
-            var result = await new PrimitiveClient(ClientDiagnostics, pipeline, host).GetDateTimeAsync();
+            var result = await GetClient<PrimitiveClient>(pipeline, host).GetDateTimeAsync();
             Assert.AreEqual(DateTimeOffset.Parse("0001-01-01T00:00:00Z"), result.Value.Field);
             Assert.AreEqual(DateTimeOffset.Parse("2015-05-18T18:38:00Z"), result.Value.Now);
         });
@@ -261,13 +263,13 @@ namespace AutoRest.TestServer.Tests
                 Field = DateTimeOffset.Parse("0001-01-01T00:00:00Z"),
                 Now = DateTimeOffset.Parse("2015-05-18T18:38:00Z")
             };
-            return await new PrimitiveClient(ClientDiagnostics, pipeline, host).PutDateTimeAsync( value);
+            return await GetClient<PrimitiveClient>(pipeline, host).PutDateTimeAsync( value);
         });
 
         [Test]
         public Task GetComplexPrimitiveDateTimeRfc1123() => Test(async (host, pipeline) =>
         {
-            var result = await new PrimitiveClient(ClientDiagnostics, pipeline, host).GetDateTimeRfc1123Async();
+            var result = await GetClient<PrimitiveClient>(pipeline, host).GetDateTimeRfc1123Async();
             Assert.AreEqual(DateTimeOffset.Parse("Mon, 01 Jan 0001 00:00:00 GMT"), result.Value.Field);
             Assert.AreEqual(DateTimeOffset.Parse("Mon, 18 May 2015 11:38:00 GMT"), result.Value.Now);
         });
@@ -280,13 +282,13 @@ namespace AutoRest.TestServer.Tests
                 Field = DateTimeOffset.Parse("Mon, 01 Jan 0001 00:00:00 GMT"),
                 Now = DateTimeOffset.Parse("Mon, 18 May 2015 11:38:00 GMT")
             };
-            return await new PrimitiveClient(ClientDiagnostics, pipeline, host).PutDateTimeRfc1123Async( value);
+            return await GetClient<PrimitiveClient>(pipeline, host).PutDateTimeRfc1123Async( value);
         });
 
         [Test]
         public Task GetComplexPrimitiveDuration() => Test(async (host, pipeline) =>
         {
-            var result = await new PrimitiveClient(ClientDiagnostics, pipeline, host).GetDurationAsync();
+            var result = await GetClient<PrimitiveClient>(pipeline, host).GetDurationAsync();
             Assert.AreEqual(XmlConvert.ToTimeSpan("P123DT22H14M12.011S"), result.Value.Field);
         });
 
@@ -297,13 +299,13 @@ namespace AutoRest.TestServer.Tests
             {
                 Field = XmlConvert.ToTimeSpan("P123DT22H14M12.011S")
             };
-            return await new PrimitiveClient(ClientDiagnostics, pipeline, host).PutDurationAsync( value);
+            return await GetClient<PrimitiveClient>(pipeline, host).PutDurationAsync( value);
         });
 
         [Test]
         public Task GetComplexPrimitiveByte() => Test(async (host, pipeline) =>
         {
-            var result = await new PrimitiveClient(ClientDiagnostics, pipeline, host).GetByteAsync();
+            var result = await GetClient<PrimitiveClient>(pipeline, host).GetByteAsync();
             var content = new byte[] { 0xFF, 0xFE, 0xFD, 0xFC, 0x00, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6 };
             Assert.AreEqual(content, result.Value.Field);
         });
@@ -316,13 +318,13 @@ namespace AutoRest.TestServer.Tests
             {
                 Field = content
             };
-            return await new PrimitiveClient(ClientDiagnostics, pipeline, host).PutByteAsync( value);
+            return await GetClient<PrimitiveClient>(pipeline, host).PutByteAsync( value);
         });
 
         [Test]
         public Task GetComplexArrayValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetValidAsync();
             var content = new[] { "1, 2, 3, 4", string.Empty, null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog" };
             Assert.AreEqual(content, result.Value.Array);
         });
@@ -334,13 +336,13 @@ namespace AutoRest.TestServer.Tests
             {
                 Array = { "1, 2, 3, 4", string.Empty, null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog" }
             };
-            return await new ArrayClient(ClientDiagnostics, pipeline, host).PutValidAsync( value);
+            return await GetClient<ArrayClient>(pipeline, host).PutValidAsync( value);
         });
 
         [Test]
         public Task GetComplexArrayEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetEmptyAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetEmptyAsync();
             Assert.AreEqual(Array.Empty<string>(), result.Value.Array);
         });
 
@@ -349,13 +351,13 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new ArrayWrapper();
             value.Array.Clear();
-            return await new ArrayClient(ClientDiagnostics, pipeline, host).PutEmptyAsync( value);
+            return await GetClient<ArrayClient>(pipeline, host).PutEmptyAsync( value);
         });
 
         [Test]
         public Task GetComplexArrayNotProvided() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetNotProvidedAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetNotProvidedAsync();
             Assert.AreEqual(200, result.GetRawResponse().Status);
             Assert.NotNull(result.Value.Array);
         });
@@ -363,7 +365,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexDictionaryValid() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetValidAsync();
+            var result = await GetClient<DictionaryClient>(pipeline, host).GetValidAsync();
             var content = new Dictionary<string, string?>
             {
                 { "txt", "notepad" },
@@ -389,13 +391,13 @@ namespace AutoRest.TestServer.Tests
                     { string.Empty, null }
                 }
             };
-            return await new DictionaryClient(ClientDiagnostics, pipeline, host).PutValidAsync( value);
+            return await GetClient<DictionaryClient>(pipeline, host).PutValidAsync( value);
         });
 
         [Test]
         public Task GetComplexDictionaryEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetEmptyAsync();
+            var result = await GetClient<DictionaryClient>(pipeline, host).GetEmptyAsync();
             Assert.AreEqual(new Dictionary<string, string?>(), result.Value.DefaultProgram);
         });
 
@@ -405,23 +407,28 @@ namespace AutoRest.TestServer.Tests
             var value = new DictionaryWrapper();
             value.DefaultProgram.Clear();
 
-            return await new DictionaryClient(ClientDiagnostics, pipeline, host).PutEmptyAsync( value);
+            return await GetClient<DictionaryClient>(pipeline, host).PutEmptyAsync( value);
         });
 
         [Test]
         public Task GetComplexDictionaryNull() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetNullAsync();
+            var result = await GetClient<DictionaryClient>(pipeline, host).GetNullAsync();
             Assert.AreEqual(200, result.GetRawResponse().Status);
             // the DefaultProgram should be undefined here
             Assert.IsNotNull(result.Value.DefaultProgram);
-            Assert.IsFalse(!(result.Value.DefaultProgram is ChangeTrackingDictionary<string, string> changeTrackingDictionary && changeTrackingDictionary.IsUndefined));
+            var collectionType = result.Value.DefaultProgram.GetType();
+            Assert.AreEqual("ChangeTrackingDictionary`2", collectionType.Name);
+            Assert.AreEqual(2, collectionType.GetGenericArguments().Length);
+            Assert.AreEqual(typeof(string), collectionType.GenericTypeArguments[0]);
+            Assert.AreEqual(typeof(string), collectionType.GenericTypeArguments[0]);
+            Assert.IsTrue((bool)collectionType.GetProperty("IsUndefined").GetValue(result.Value.DefaultProgram));
         });
 
         [Test]
         public Task GetComplexDictionaryNotProvided() => Test(async (host, pipeline) =>
         {
-            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetNotProvidedAsync();
+            var result = await GetClient<DictionaryClient>(pipeline, host).GetNotProvidedAsync();
             Assert.AreEqual(200, result.GetRawResponse().Status);
             CollectionAssert.IsEmpty(result.Value.DefaultProgram);
         });
@@ -429,7 +436,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexInheritanceValid() => Test(async (host, pipeline) =>
         {
-            var result = await new InheritanceClient(ClientDiagnostics, pipeline, host).GetValidAsync();
+            var result = await GetClient<InheritanceClient>(pipeline, host).GetValidAsync();
             Assert.AreEqual("persian", result.Value.Breed);
             Assert.AreEqual("green", result.Value.Color);
             var hates = result.Value.Hates.ToArray();
@@ -471,7 +478,7 @@ namespace AutoRest.TestServer.Tests
                 Id = 2,
                 Name = "Siameeee"
             };
-            return await new InheritanceClient(ClientDiagnostics, pipeline, host).PutValidAsync( value);
+            return await GetClient<InheritanceClient>(pipeline, host).PutValidAsync( value);
         });
 
         [Test]
@@ -499,16 +506,16 @@ namespace AutoRest.TestServer.Tests
                 Id = 2,
                 Name = "Siameeee"
             };
-            return new InheritanceClient(ClientDiagnostics, pipeline, host).PutValid(value);
+            return GetClient<InheritanceClient>(pipeline, host).PutValid(value);
         });
 
         [Test]
         public Task GetComplexPolymorphismValid() => Test(async (host, pipeline) =>
         {
-            var result = await new PolymorphismClient(ClientDiagnostics, pipeline, host).GetValidAsync();
+            var result = await GetClient<PolymorphismClient>(pipeline, host).GetValidAsync();
 
             var value = (Salmon)result.Value;
-            Assert.AreEqual("salmon", value.Fishtype);
+            Assert.AreEqual("salmon", GetProperty(value, "Fishtype"));
             Assert.AreEqual("alaska", value.Location);
             Assert.AreEqual("king", value.Species);
             Assert.AreEqual(true, value.Iswild);
@@ -517,21 +524,21 @@ namespace AutoRest.TestServer.Tests
             var siblings = value.Siblings.ToArray();
 
             var shark = (Shark)siblings[0];
-            Assert.AreEqual("shark", shark.Fishtype);
+            Assert.AreEqual("shark", GetProperty(shark, "Fishtype"));
             Assert.AreEqual(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), shark.Birthday);
             Assert.AreEqual("predator", shark.Species);
             Assert.AreEqual(6, shark.Age);
             Assert.AreEqual(20, shark.Length);
 
             var sawshark = (Sawshark)siblings[1];
-            Assert.AreEqual("sawshark", sawshark.Fishtype);
+            Assert.AreEqual("sawshark", GetProperty(sawshark, "Fishtype"));
             Assert.AreEqual(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), sawshark.Birthday);
             Assert.AreEqual("dangerous", sawshark.Species);
             Assert.AreEqual(105, sawshark.Age);
             Assert.AreEqual(10, sawshark.Length);
 
             var goblin = (Goblinshark)siblings[2];
-            Assert.AreEqual("goblin", goblin.Fishtype);
+            Assert.AreEqual("goblin", GetProperty(goblin, "Fishtype"));
             Assert.AreEqual(DateTimeOffset.Parse("2015-08-08T00:00:00Z"), goblin.Birthday);
             Assert.AreEqual("scary", goblin.Species);
             Assert.AreEqual(1, goblin.Age);
@@ -570,16 +577,16 @@ namespace AutoRest.TestServer.Tests
                     }
                 }
             };
-            return await new PolymorphismClient(ClientDiagnostics, pipeline, host).PutValidAsync( value);
+            return await GetClient<PolymorphismClient>(pipeline, host).PutValidAsync( value);
         });
 
         [Test]
         public Task GetComplexPolymorphismComplicated() => Test(async (host, pipeline) =>
         {
-            var result = await new PolymorphismClient(ClientDiagnostics, pipeline, host).GetComplicatedAsync();
+            var result = await GetClient<PolymorphismClient>(pipeline, host).GetComplicatedAsync();
 
             var value = (SmartSalmon)result.Value;
-            Assert.AreEqual("smart_salmon", value.Fishtype);
+            Assert.AreEqual("smart_salmon", GetProperty(value, "Fishtype"));
             Assert.AreEqual("alaska", value.Location);
             Assert.AreEqual("king", value.Species);
             Assert.AreEqual(true, value.Iswild);
@@ -588,21 +595,21 @@ namespace AutoRest.TestServer.Tests
             var siblings = value.Siblings.ToArray();
 
             var shark = (Shark)siblings[0];
-            Assert.AreEqual("shark", shark.Fishtype);
+            Assert.AreEqual("shark", GetProperty(shark, "Fishtype"));
             Assert.AreEqual(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), shark.Birthday);
             Assert.AreEqual("predator", shark.Species);
             Assert.AreEqual(6, shark.Age);
             Assert.AreEqual(20, shark.Length);
 
             var sawshark = (Sawshark)siblings[1];
-            Assert.AreEqual("sawshark", sawshark.Fishtype);
+            Assert.AreEqual("sawshark", GetProperty(sawshark, "Fishtype"));
             Assert.AreEqual(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), sawshark.Birthday);
             Assert.AreEqual("dangerous", sawshark.Species);
             Assert.AreEqual(105, sawshark.Age);
             Assert.AreEqual(10, sawshark.Length);
 
             var goblin = (Goblinshark)siblings[2];
-            Assert.AreEqual("goblin", goblin.Fishtype);
+            Assert.AreEqual("goblin", GetProperty(goblin, "Fishtype"));
             Assert.AreEqual(DateTimeOffset.Parse("2015-08-08T00:00:00Z"), goblin.Birthday);
             Assert.AreEqual("scary", goblin.Species);
             Assert.AreEqual(1, goblin.Age);
@@ -658,7 +665,7 @@ namespace AutoRest.TestServer.Tests
             value.AdditionalProperties["additionalProperty4"] = new Dictionary<string, object>() {{"a", 1}, {"b", 2}};
             value.AdditionalProperties["additionalProperty5"] = new object[] {1, 3};
 
-            return await new PolymorphismClient(ClientDiagnostics, pipeline, host).PutComplicatedAsync( value);
+            return await GetClient<PolymorphismClient>(pipeline, host).PutComplicatedAsync( value);
         });
 
         [Test]
@@ -692,10 +699,10 @@ namespace AutoRest.TestServer.Tests
                 }
             };
 
-            var result = await new PolymorphismClient(ClientDiagnostics, pipeline, host).PutMissingDiscriminatorAsync( value);
+            var result = await GetClient<PolymorphismClient>(pipeline, host).PutMissingDiscriminatorAsync( value);
 
             value = result.Value;
-            Assert.AreEqual("salmon", value.Fishtype);
+            Assert.AreEqual("salmon", GetProperty(value, "Fishtype"));
             Assert.AreEqual("alaska", value.Location);
             Assert.AreEqual("king", value.Species);
             Assert.AreEqual(true, value.Iswild);
@@ -704,7 +711,7 @@ namespace AutoRest.TestServer.Tests
             var siblings = value.Siblings.ToArray();
 
             var shark = (Shark)siblings[0];
-            Assert.AreEqual("shark", shark.Fishtype);
+            Assert.AreEqual("shark", GetProperty(shark, "Fishtype"));
             Assert.AreEqual(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), shark.Birthday);
             Assert.AreEqual("predator", shark.Species);
             Assert.AreEqual(6, shark.Age);
@@ -712,7 +719,7 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.IsEmpty(shark.Siblings);
 
             var sawshark = (Sawshark)siblings[1];
-            Assert.AreEqual("sawshark", sawshark.Fishtype);
+            Assert.AreEqual("sawshark", GetProperty(sawshark, "Fishtype"));
             Assert.AreEqual(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), sawshark.Birthday);
             Assert.AreEqual("dangerous", sawshark.Species);
             Assert.AreEqual(105, sawshark.Age);
@@ -720,7 +727,7 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.IsEmpty(sawshark.Siblings);
 
             var goblin = (Goblinshark)siblings[2];
-            Assert.AreEqual("goblin", goblin.Fishtype);
+            Assert.AreEqual("goblin", GetProperty(goblin, "Fishtype"));
             Assert.AreEqual(DateTimeOffset.Parse("2015-08-08T00:00:00Z"), goblin.Birthday);
             Assert.AreEqual("scary", goblin.Species);
             Assert.AreEqual(1, goblin.Age);
@@ -735,10 +742,10 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexPolymorphismDotSyntax() => Test(async (host, pipeline) =>
         {
-            var result = await new PolymorphismClient(ClientDiagnostics, pipeline, host).GetDotSyntaxAsync();
+            var result = await GetClient<PolymorphismClient>(pipeline, host).GetDotSyntaxAsync();
 
             var dotSalmon = (DotSalmon)result.Value;
-            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("DotSalmon", GetProperty(dotSalmon, "FishType"));
             Assert.AreEqual("sweden", dotSalmon.Location);
             Assert.AreEqual(true, dotSalmon.Iswild);
             Assert.AreEqual("king", dotSalmon.Species);
@@ -747,10 +754,10 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComplexPolymorphismDotSyntax_Sync() => Test((host, pipeline) =>
         {
-            var result = new PolymorphismClient(ClientDiagnostics, pipeline, host).GetDotSyntax();
+            var result = GetClient<PolymorphismClient>(pipeline, host).GetDotSyntax();
 
             var dotSalmon = (DotSalmon)result.Value;
-            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("DotSalmon", GetProperty(dotSalmon, "FishType"));
             Assert.AreEqual("sweden", dotSalmon.Location);
             Assert.AreEqual(true, dotSalmon.Iswild);
             Assert.AreEqual("king", dotSalmon.Species);
@@ -759,10 +766,10 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComposedWithDiscriminator() => Test(async (host, pipeline) =>
         {
-            var result = await new PolymorphismClient(ClientDiagnostics, pipeline, host).GetComposedWithDiscriminatorAsync();
+            var result = await GetClient<PolymorphismClient>(pipeline, host).GetComposedWithDiscriminatorAsync();
 
             var dotSalmon = result.Value.SampleSalmon;
-            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("DotSalmon", GetProperty(dotSalmon, "FishType"));
             Assert.AreEqual("sweden", dotSalmon.Location);
             Assert.AreEqual(false, dotSalmon.Iswild);
             Assert.AreEqual("king", dotSalmon.Species);
@@ -770,19 +777,19 @@ namespace AutoRest.TestServer.Tests
             var salmons = result.Value.Salmons.ToArray();
 
             dotSalmon = salmons[0];
-            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("DotSalmon", GetProperty(dotSalmon, "FishType"));
             Assert.AreEqual("sweden", dotSalmon.Location);
             Assert.AreEqual(false, dotSalmon.Iswild);
             Assert.AreEqual("king", dotSalmon.Species);
 
             dotSalmon = salmons[1];
-            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("DotSalmon", GetProperty(dotSalmon, "FishType"));
             Assert.AreEqual("atlantic", dotSalmon.Location);
             Assert.AreEqual(true, dotSalmon.Iswild);
             Assert.AreEqual("king", dotSalmon.Species);
 
             dotSalmon = (DotSalmon) result.Value.SampleFish;
-            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("DotSalmon", GetProperty(dotSalmon, "FishType"));
             Assert.AreEqual("australia", dotSalmon.Location);
             Assert.AreEqual(false, dotSalmon.Iswild);
             Assert.AreEqual("king", dotSalmon.Species);
@@ -790,13 +797,13 @@ namespace AutoRest.TestServer.Tests
             var fishes = result.Value.Fishes.ToArray();
 
             dotSalmon = (DotSalmon) fishes[0];
-            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("DotSalmon", GetProperty(dotSalmon, "FishType"));
             Assert.AreEqual("australia", dotSalmon.Location);
             Assert.AreEqual(false, dotSalmon.Iswild);
             Assert.AreEqual("king", dotSalmon.Species);
 
             dotSalmon = (DotSalmon) fishes[1];
-            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("DotSalmon", GetProperty(dotSalmon, "FishType"));
             Assert.AreEqual("canada", dotSalmon.Location);
             Assert.AreEqual(true, dotSalmon.Iswild);
             Assert.AreEqual("king", dotSalmon.Species);
@@ -805,10 +812,10 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetComposedWithoutDiscriminator() => Test(async (host, pipeline) =>
         {
-            var result = await new PolymorphismClient(ClientDiagnostics, pipeline, host).GetComposedWithoutDiscriminatorAsync();
+            var result = await GetClient<PolymorphismClient>(pipeline, host).GetComposedWithoutDiscriminatorAsync();
 
             var dotSalmon = result.Value.SampleSalmon;
-            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("DotSalmon", GetProperty(dotSalmon, "FishType"));
             Assert.AreEqual("sweden", dotSalmon.Location);
             Assert.AreEqual(false, dotSalmon.Iswild);
             Assert.AreEqual("king", dotSalmon.Species);
@@ -816,38 +823,38 @@ namespace AutoRest.TestServer.Tests
             var salmons = result.Value.Salmons.ToArray();
 
             dotSalmon = salmons[0];
-            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("DotSalmon", GetProperty(dotSalmon, "FishType"));
             Assert.AreEqual("sweden", dotSalmon.Location);
             Assert.AreEqual(false, dotSalmon.Iswild);
             Assert.AreEqual("king", dotSalmon.Species);
 
             dotSalmon = salmons[1];
-            Assert.AreEqual("DotSalmon", dotSalmon.FishType);
+            Assert.AreEqual("DotSalmon", GetProperty(dotSalmon, "FishType"));
             Assert.AreEqual("atlantic", dotSalmon.Location);
             Assert.AreEqual(true, dotSalmon.Iswild);
             Assert.AreEqual("king", dotSalmon.Species);
 
             var dotFish = result.Value.SampleFish;
-            Assert.AreEqual("Unknown", dotFish.FishType);
+            Assert.AreEqual("Unknown", GetProperty(dotFish, "FishType"));
             Assert.AreEqual("king", dotFish.Species);
 
             var fishes = result.Value.Fishes.ToArray();
 
             dotFish = fishes[0];
-            Assert.AreEqual("Unknown", dotFish.FishType);
+            Assert.AreEqual("Unknown", GetProperty(dotFish, "FishType"));
             Assert.AreEqual("king", dotFish.Species);
 
             dotFish = fishes[1];
-            Assert.AreEqual("Unknown", dotFish.FishType);
+            Assert.AreEqual("Unknown", GetProperty(dotFish, "FishType"));
             Assert.AreEqual("king", dotFish.Species);
         });
 
         [Test]
         public Task GetComplexPolymorphicRecursiveValid() => Test(async (host, pipeline) =>
         {
-            var result = await new PolymorphicrecursiveClient(ClientDiagnostics, pipeline, host).GetValidAsync();
+            var result = await GetClient<PolymorphicrecursiveClient>(pipeline, host).GetValidAsync();
             var value = (Salmon)result.Value;
-            Assert.AreEqual("salmon", value.Fishtype);
+            Assert.AreEqual("salmon", GetProperty(value, "Fishtype"));
             Assert.AreEqual("alaska", value.Location);
             Assert.AreEqual("king", value.Species);
             Assert.AreEqual(true, value.Iswild);
@@ -856,7 +863,7 @@ namespace AutoRest.TestServer.Tests
             var siblings = value.Siblings.ToArray();
 
             var shark = (Shark)siblings[0];
-            Assert.AreEqual("shark", shark.Fishtype);
+            Assert.AreEqual("shark", GetProperty(shark, "Fishtype"));
             Assert.AreEqual(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), shark.Birthday);
             Assert.AreEqual("predator", shark.Species);
             Assert.AreEqual(6, shark.Age);
@@ -865,7 +872,7 @@ namespace AutoRest.TestServer.Tests
             var sharkSiblings = shark.Siblings.ToArray();
 
             var innerSalmon = (Salmon)sharkSiblings[0];
-            Assert.AreEqual("salmon", innerSalmon.Fishtype);
+            Assert.AreEqual("salmon", GetProperty(innerSalmon, "Fishtype"));
             Assert.AreEqual("atlantic", innerSalmon.Location);
             Assert.AreEqual("coho", innerSalmon.Species);
             Assert.AreEqual(true, innerSalmon.Iswild);
@@ -874,7 +881,7 @@ namespace AutoRest.TestServer.Tests
             var innerSalmonSiblings = innerSalmon.Siblings.ToArray();
 
             var innerInnerShark = (Shark)innerSalmonSiblings[0];
-            Assert.AreEqual("shark", innerInnerShark.Fishtype);
+            Assert.AreEqual("shark", GetProperty(innerInnerShark, "Fishtype"));
             Assert.AreEqual(DateTimeOffset.Parse("2012-01-05T01:00:00Z"), innerInnerShark.Birthday);
             Assert.AreEqual("predator", innerInnerShark.Species);
             Assert.AreEqual(6, innerInnerShark.Age);
@@ -882,7 +889,7 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.IsEmpty(innerInnerShark.Siblings);
 
             var innerInnerSawshark = (Sawshark)innerSalmonSiblings[1];
-            Assert.AreEqual("sawshark", innerInnerSawshark.Fishtype);
+            Assert.AreEqual("sawshark", GetProperty(innerInnerSawshark, "Fishtype"));
             Assert.AreEqual(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), innerInnerSawshark.Birthday);
             Assert.AreEqual("dangerous", innerInnerSawshark.Species);
             Assert.AreEqual(105, innerInnerSawshark.Age);
@@ -891,7 +898,7 @@ namespace AutoRest.TestServer.Tests
 
 
             var innerSawshark = (Sawshark)sharkSiblings[1];
-            Assert.AreEqual("sawshark", innerSawshark.Fishtype);
+            Assert.AreEqual("sawshark", GetProperty(innerSawshark, "Fishtype"));
             Assert.AreEqual(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), innerSawshark.Birthday);
             Assert.AreEqual("dangerous", innerSawshark.Species);
             Assert.AreEqual(105, innerSawshark.Age);
@@ -899,7 +906,7 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.IsEmpty(innerSawshark.Siblings);
 
             var sawshark = (Sawshark)siblings[1];
-            Assert.AreEqual("sawshark", sawshark.Fishtype);
+            Assert.AreEqual("sawshark", GetProperty(sawshark, "Fishtype"));
             Assert.AreEqual(DateTimeOffset.Parse("1900-01-05T01:00:00Z"), sawshark.Birthday);
             Assert.AreEqual("dangerous", sawshark.Species);
             Assert.AreEqual(105, sawshark.Age);
@@ -958,13 +965,13 @@ namespace AutoRest.TestServer.Tests
                     sawshark,
                 }
             };
-            return await new PolymorphicrecursiveClient(ClientDiagnostics, pipeline, host).PutValidAsync( value);
+            return await GetClient<PolymorphicrecursiveClient>(pipeline, host).PutValidAsync( value);
         });
 
         [Test]
         public Task GetComplexReadOnlyPropertyValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ReadonlypropertyClient(ClientDiagnostics, pipeline, host).GetValidAsync();
+            var result = await GetClient<ReadonlypropertyClient>(pipeline, host).GetValidAsync();
             Assert.AreEqual("1234", result.Value.Id);
             Assert.AreEqual(2, result.Value.Size);
         }, true);
@@ -973,7 +980,7 @@ namespace AutoRest.TestServer.Tests
         public Task PutComplexReadOnlyPropertyValid() => TestStatus(async (host, pipeline) =>
         {
             var value = new ReadonlyObj();
-            return await new ReadonlypropertyClient(ClientDiagnostics, pipeline, host).PutValidAsync( value);
+            return await GetClient<ReadonlypropertyClient>(pipeline, host).PutValidAsync( value);
         });
 
         [Test]
@@ -1010,13 +1017,13 @@ namespace AutoRest.TestServer.Tests
         public void PolymorphicModelsDiscriminatorValueSet()
         {
             var shark = new Shark(default, default);
-            Assert.AreEqual("shark" ,shark.Fishtype);
+            Assert.AreEqual("shark" ,GetProperty(shark, "Fishtype"));
         }
 
         [Test]
         public void DiscriminatorPropertiesAreInternal()
         {
-            var prop = TypeAsserts.HasProperty(typeof(Shark), nameof(Shark.Fishtype), BindingFlags.Instance | BindingFlags.NonPublic);
+            var prop = TypeAsserts.HasProperty(typeof(Shark), "Fishtype", BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.NotNull(prop.SetMethod);
         }
 
@@ -1065,25 +1072,25 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ExceptionSchemaIsInternal()
         {
-            Assert.True(IsInternal(typeof(Error)));
+            Assert.True(IsInternal(FindType(typeof(Fish).Assembly, "Error")));
         }
 
         [Test]
         public void ExceptionSchemaPropertiesReadonly()
         {
-            Assert.Null(typeof(Error).GetProperty(nameof(Error.Message)).SetMethod);
+            Assert.Null(FindType(typeof(Fish).Assembly, "Error").GetProperty("Message").SetMethod);
         }
 
         [Test]
         public void ExceptionSchemaHasDeserializer()
         {
-            Assert.NotNull(typeof(Error).GetMethods(BindingFlags.Static | BindingFlags.NonPublic).Single(mi => mi.Name == "DeserializeError"));
+            Assert.NotNull(FindType(typeof(Fish).Assembly, "Error").GetMethods(BindingFlags.Static | BindingFlags.NonPublic).Single(mi => mi.Name == "DeserializeError"));
         }
 
         [Test]
         public void InitializeAdditionalPropertiesDuringDeserialization()
         {
-            SmartSalmon model = SmartSalmon.DeserializeSmartSalmon(JsonDocument.Parse("{}").RootElement);
+            SmartSalmon model = ModelReaderWriter.Read<SmartSalmon>(BinaryData.FromString("{}"));
             Assert.AreEqual(new Dictionary<string, object>(), model.AdditionalProperties);
         }
     }

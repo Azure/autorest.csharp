@@ -118,7 +118,7 @@ namespace url_multi_collectionFormat.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, url_multi_collectionFormatContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Error)} does not support writing '{options.Format}' format.");
             }

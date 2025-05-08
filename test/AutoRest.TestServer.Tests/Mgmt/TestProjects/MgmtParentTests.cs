@@ -3,6 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using MgmtParent;
+using System.Reflection;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
@@ -13,6 +14,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             TagResourceExceptions.Add(typeof(VirtualMachineExtensionImageResource));
         }
+
+        private protected override Assembly GetAssembly() => typeof(AvailabilitySetResource).Assembly;
 
         protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(DedicatedHostGroupCollection) };
 

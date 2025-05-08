@@ -100,7 +100,7 @@ namespace Payload.MultiPart.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, PayloadMultiPartContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Address)} does not support writing '{options.Format}' format.");
             }

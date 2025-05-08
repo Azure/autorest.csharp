@@ -118,7 +118,7 @@ namespace lro.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, lroContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(CloudError)} does not support writing '{options.Format}' format.");
             }

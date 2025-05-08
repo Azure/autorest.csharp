@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using Azure.Core;
@@ -112,7 +113,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         {
                             _writer.Line($"return null;");
                         }
-                        _writer.Line($"var lroDetails = {typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Write)}(rehydrationToken, ModelReaderWriterOptions.Json).ToObjectFromJson<{typeof(Dictionary<string, string>)}>();");
+                        _writer.Line($"var lroDetails = {typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Write)}(rehydrationToken, ModelReaderWriterOptions.Json, {ModelReaderWriterContextExpression.Default}).ToObjectFromJson<{typeof(Dictionary<string, string>)}>();");
                         _writer.Line($"return lroDetails[\"id\"];");
                     }
 

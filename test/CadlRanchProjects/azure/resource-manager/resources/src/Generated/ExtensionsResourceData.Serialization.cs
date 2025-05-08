@@ -128,7 +128,7 @@ namespace _Azure.ResourceManager.Resources
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _AzureResourceManagerResourcesContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(ExtensionsResourceData)} does not support writing '{options.Format}' format.");
             }

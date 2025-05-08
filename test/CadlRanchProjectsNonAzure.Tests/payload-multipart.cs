@@ -2,8 +2,8 @@ using System.IO;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
-using Payload.MultiPart;
-using Payload.MultiPart.Models;
+using Scm.Payload.Multipart;
+using Scm.Payload.Multipart.Models;
 
 namespace CadlRanchProjectsNonAzure.Tests
 {

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using constants;
 using constants.Models;
 using NUnit.Framework;
@@ -23,7 +24,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum_IsEnumWithTwoValues()
         {
-            var modelType = typeof(NoModelAsStringNoRequiredTwoValueNoDefaultEnum);
+            var modelType = typeof(ContantsClient).Assembly.GetTypes().FirstOrDefault(t => t.Name == "NoModelAsStringNoRequiredTwoValueNoDefaultEnum");
             Assert.True(modelType.IsValueType);
             Assert.True(modelType.IsEnum);
             Assert.AreEqual(2, modelType.GetEnumValues().Length);

@@ -14,35 +14,35 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetBoolFalse() => Test(async (host, pipeline) =>
         {
-            var result = await new BoolClient(ClientDiagnostics, pipeline, host).GetFalseAsync();
+            var result = await GetClient<BoolClient>(pipeline, host).GetFalseAsync();
             Assert.False(result.Value);
         });
 
         [Test]
         public Task GetBoolInvalid() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new BoolClient(ClientDiagnostics, pipeline, host).GetInvalidAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<BoolClient>(pipeline, host).GetInvalidAsync());
         });
 
         [Test]
         public Task GetBoolNull() => Test((host, pipeline) =>
         {
             // Empty response body
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new BoolClient(ClientDiagnostics, pipeline, host).GetNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<BoolClient>(pipeline, host).GetNullAsync());
         });
 
         [Test]
         public Task GetBoolTrue() => Test(async (host, pipeline) =>
         {
-            var result = await new BoolClient(ClientDiagnostics, pipeline, host).GetTrueAsync();
+            var result = await GetClient<BoolClient>(pipeline, host).GetTrueAsync();
             Assert.True(result.Value);
         });
 
         [Test]
-        public Task PutBoolFalse() => TestStatus(async (host, pipeline) => await new BoolClient(ClientDiagnostics, pipeline, host).PutFalseAsync());
+        public Task PutBoolFalse() => TestStatus(async (host, pipeline) => await GetClient<BoolClient>(pipeline, host).PutFalseAsync());
 
         [Test]
-        public Task PutBoolTrue() => TestStatus(async (host, pipeline) => await new BoolClient(ClientDiagnostics, pipeline, host).PutTrueAsync());
+        public Task PutBoolTrue() => TestStatus(async (host, pipeline) => await GetClient<BoolClient>(pipeline, host).PutTrueAsync());
 
     }
 }

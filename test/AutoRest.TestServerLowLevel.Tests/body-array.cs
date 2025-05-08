@@ -12,10 +12,9 @@ using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
 using Azure;
-using Azure.Identity;
 using body_array_LowLevel;
 using NUnit.Framework;
-using FirstTestTypeSpec;
+using Authentication.ApiKey;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -196,7 +195,7 @@ namespace AutoRest.TestServer.Tests
         {
             // Empty response body
             var result = await new ArrayClient(host, Key, null).GetComplexNullAsync(new());
-            Assert.IsEmpty(result.Content.ToString());
+            Assert.AreEqual(0, result.Content.ToArray().Length);
         });
 
         [Test]
@@ -555,7 +554,7 @@ namespace AutoRest.TestServer.Tests
             // Empty response body
             var result = await new ArrayClient(host, Key, null).GetNullAsync(new());
 
-            Assert.IsEmpty(result.Content.ToString());
+            Assert.AreEqual(0, result.Content.ToArray().Length);
         });
 
         [Test]

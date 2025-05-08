@@ -20,7 +20,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayArrayEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetArrayEmptyAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetArrayEmptyAsync();
 
             CollectionAssert.IsEmpty(result.Value);
         });
@@ -28,7 +28,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayArrayItemEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetArrayItemEmptyAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetArrayItemEmptyAsync();
 
             CollectionAssert.AreEqual(new[] { new object[] { "1", "2", "3" }, Enumerable.Empty<object>(), new object[] { "7", "8", "9" } }, result.Value);
         });
@@ -36,7 +36,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayArrayItemNull() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetArrayItemNullAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetArrayItemNullAsync();
 
             CollectionAssert.AreEqual(new[] { new object[] { "1", "2", "3" }, null, new object[] { "7", "8", "9" } }, result.Value);
         });
@@ -45,13 +45,13 @@ namespace AutoRest.TestServer.Tests
         public Task GetArrayArrayNull() => Test((host, pipeline) =>
         {
             // Empty response body
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetArrayNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<ArrayClient>(pipeline, host).GetArrayNullAsync());
         });
 
         [Test]
         public Task GetArrayArrayValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetArrayValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetArrayValidAsync();
 
             CollectionAssert.AreEqual(new[] { new object[] { "1", "2", "3" }, new object[] { "4", "5", "6" }, new object[] { "7", "8", "9" } }, result.Value);
         });
@@ -59,7 +59,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayBase64Url() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetBase64UrlAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetBase64UrlAsync();
 
             var values = result.Value.ToArray();
 
@@ -71,7 +71,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayBooleanValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetBooleanTfftAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetBooleanTfftAsync();
 
             CollectionAssert.AreEqual(new[] { true, false, false, true }, result.Value);
         });
@@ -79,19 +79,19 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayBooleanWithNull() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetBooleanInvalidNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetBooleanInvalidNullAsync());
         });
 
         [Test]
         public Task GetArrayBooleanWithString() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetBooleanInvalidStringAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetBooleanInvalidStringAsync());
         });
 
         [Test]
         public Task GetArrayByteValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetByteValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetByteValidAsync();
 
             CollectionAssert.AreEqual(new[] { new[] { 255, 255, 255, 250 }, new[] { 1, 2, 3 }, new[] { 37, 41, 67 } }, result.Value);
         });
@@ -99,7 +99,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayByteWithNull() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetByteInvalidNullAsync();
 
             CollectionAssert.AreEqual(new[] { new[] { 0x0AB, 0x0AC, 0x0AD } , null }, result.Value);
         });
@@ -107,7 +107,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayComplexEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetComplexEmptyAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetComplexEmptyAsync();
 
             CollectionAssert.IsEmpty(result.Value);
         });
@@ -115,7 +115,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayComplexItemEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetComplexItemEmptyAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetComplexItemEmptyAsync();
             var values = result.Value.ToArray();
 
             Assert.AreEqual(3, values.Length);
@@ -132,7 +132,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayComplexItemNull() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetComplexItemNullAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetComplexItemNullAsync();
             var values = result.Value.ToArray();
 
             Assert.AreEqual(3, values.Length);
@@ -149,13 +149,13 @@ namespace AutoRest.TestServer.Tests
         public Task GetArrayComplexNull() => Test((host, pipeline) =>
         {
             // Empty response body
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetComplexNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<ArrayClient>(pipeline, host).GetComplexNullAsync());
         });
 
         [Test]
         public Task GetArrayComplexValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetComplexValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetComplexValidAsync();
             var values = result.Value.ToArray();
 
             Assert.AreEqual(3, values.Length);
@@ -173,7 +173,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDateTimeRfc1123Valid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetDateTimeRfc1123ValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetDateTimeRfc1123ValidAsync();
             CollectionAssert.AreEqual(new[]
             {
                 DateTimeOffset.Parse("2000-12-01 00:00:01+00:00"),
@@ -185,7 +185,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDateTimeValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetDateTimeValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetDateTimeValidAsync();
             CollectionAssert.AreEqual(new[]
             {
                 DateTimeOffset.Parse("2000-12-01 00:00:01+00:00"),
@@ -197,19 +197,19 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDateTimeWithInvalidChars() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetDateTimeInvalidCharsAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetDateTimeInvalidCharsAsync());
         });
 
         [Test]
         public Task GetArrayDateTimeWithNull() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetDateTimeInvalidNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetDateTimeInvalidNullAsync());
         });
 
         [Test]
         public Task GetArrayDateValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetDateValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetDateValidAsync();
             CollectionAssert.AreEqual(new[]
             {
                 DateTimeOffset.Parse("2000-12-01", styles: DateTimeStyles.AssumeUniversal),
@@ -221,19 +221,19 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDateWithInvalidChars() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetDateInvalidCharsAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetDateInvalidCharsAsync());
         });
 
         [Test]
         public Task GetArrayDateWithNull() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetDateInvalidNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetDateInvalidNullAsync());
         });
 
         [Test]
         public Task GetArrayDictionaryEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetDictionaryEmptyAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetDictionaryEmptyAsync();
 
             CollectionAssert.IsEmpty(result.Value);
         });
@@ -241,7 +241,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDictionaryItemEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetDictionaryItemEmptyAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetDictionaryItemEmptyAsync();
 
             var values = result.Value.ToArray();
 
@@ -255,7 +255,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDictionaryItemNull() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetDictionaryItemNullAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetDictionaryItemNullAsync();
 
             var values = result.Value.ToArray();
 
@@ -270,13 +270,13 @@ namespace AutoRest.TestServer.Tests
         public Task GetArrayDictionaryNull() => Test((host, pipeline) =>
         {
             // Empty response body
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetDictionaryNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<ArrayClient>(pipeline, host).GetDictionaryNullAsync());
         });
 
         [Test]
         public Task GetArrayDictionaryValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetDictionaryValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetDictionaryValidAsync();
 
             var values = result.Value.ToArray();
 
@@ -290,7 +290,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDoubleValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetDoubleValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetDoubleValidAsync();
 
             CollectionAssert.AreEqual(new double[] { 0, -0.01, -1.2e20 }, result.Value);
         });
@@ -298,19 +298,19 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDoubleWithNull() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetDoubleInvalidNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetDoubleInvalidNullAsync());
         });
 
         [Test]
         public Task GetArrayDoubleWithString() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetDoubleInvalidStringAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetDoubleInvalidStringAsync());
         });
 
         [Test]
         public Task GetArrayDurationValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetDurationValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetDurationValidAsync();
 
             CollectionAssert.AreEqual(new[]
             {
@@ -322,14 +322,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetEmptyAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetEmptyAsync();
             CollectionAssert.IsEmpty(result.Value);
         });
 
         [Test]
         public Task GetArrayEnumValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetEnumValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetEnumValidAsync();
 
             CollectionAssert.AreEqual(new[] { FooEnum.Foo1, FooEnum.Foo2, FooEnum.Foo3 }, result.Value);
         });
@@ -337,7 +337,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayFloatValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetFloatValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetFloatValidAsync();
 
             CollectionAssert.AreEqual(new[] { 0, -0.01f, -1.2e20f }, result.Value);
         });
@@ -345,19 +345,19 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayFloatWithNull() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetFloatInvalidNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetFloatInvalidNullAsync());
         });
 
         [Test]
         public Task GetArrayFloatWithString() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetFloatInvalidStringAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetFloatInvalidStringAsync());
         });
 
         [Test]
         public Task GetArrayIntegerValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetIntegerValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetIntegerValidAsync();
 
             CollectionAssert.AreEqual(new[] { 1, -1, 3, 300 }, result.Value);
         });
@@ -365,25 +365,25 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayIntegerWithNull() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetIntInvalidNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetIntInvalidNullAsync());
         });
 
         [Test]
         public Task GetArrayIntegerWithString() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetIntInvalidStringAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetIntInvalidStringAsync());
         });
 
         [Test]
         public Task GetArrayInvalid() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetInvalidAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetInvalidAsync());
         });
 
         [Test]
         public Task GetArrayLongValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetLongValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetLongValidAsync();
 
             CollectionAssert.AreEqual(new[] { 1, -1, 3, 300L }, result.Value);
         });
@@ -391,26 +391,26 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayLongWithNull() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetLongInvalidNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetLongInvalidNullAsync());
         });
 
         [Test]
         public Task GetArrayLongWithString() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetLongInvalidStringAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetLongInvalidStringAsync());
         });
 
         [Test]
         public Task GetArrayNull() => Test((host, pipeline) =>
         {
             // Empty response body
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await GetClient<ArrayClient>(pipeline, host).GetNullAsync());
         });
 
         [Test]
         public Task GetArrayStringEnumValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetStringEnumValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetStringEnumValidAsync();
 
             CollectionAssert.AreEqual(new[]
             {
@@ -423,7 +423,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayStringValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetStringValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetStringValidAsync();
 
             CollectionAssert.AreEqual(new[] { "foo1", "foo2", "foo3" }, result.Value);
         });
@@ -431,7 +431,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayStringWithNull() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetStringWithNullAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetStringWithNullAsync();
 
             CollectionAssert.AreEqual(new[] { "foo", null, "foo2" }, result.Value);
         });
@@ -439,13 +439,13 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayStringWithNumber() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetStringWithInvalidAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetStringWithInvalidAsync());
         });
 
         [Test]
         public Task GetArrayUuidValid() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetUuidValidAsync();
+            var result = await GetClient<ArrayClient>(pipeline, host).GetUuidValidAsync();
 
             CollectionAssert.AreEqual(new[]
             {
@@ -458,27 +458,27 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayUuidWithInvalidChars() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetUuidInvalidCharsAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await GetClient<ArrayClient>(pipeline, host).GetUuidInvalidCharsAsync());
         });
 
         [Test]
-        public Task PutArrayArrayValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutArrayValidAsync(
+        public Task PutArrayArrayValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutArrayValidAsync(
             new[] { new[] { "1", "2", "3" }, new[] { "4", "5", "6" }, new[] { "7", "8", "9" } }));
 
         [Test]
-        public Task PutArrayBooleanValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutBooleanTfftAsync(
+        public Task PutArrayBooleanValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutBooleanTfftAsync(
             new[] { true, false, false, true }));
 
         [Test]
-        public Task PutArrayByteValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutByteValidAsync(
+        public Task PutArrayByteValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutByteValidAsync(
             new[] { new byte[] { 255, 255, 255, 250 }, new byte[] { 1, 2, 3 }, new byte[] { 37, 41, 67 } }));
 
         [Test]
-        public Task PutArrayComplexValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutComplexValidAsync(
+        public Task PutArrayComplexValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutComplexValidAsync(
             new[] { new Product() { Integer = 1, String = "2" }, new Product() { Integer = 3, String = "4" }, new Product() { Integer = 5, String = "6" }}));
 
         [Test]
-        public Task PutArrayDateTimeRfc1123Valid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutDateTimeRfc1123ValidAsync(
+        public Task PutArrayDateTimeRfc1123Valid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutDateTimeRfc1123ValidAsync(
             new[] {
                 DateTimeOffset.Parse("2000-12-01 00:00:01+00:00"),
                 DateTimeOffset.Parse("1980-01-02 00:11:35+00:00"),
@@ -486,7 +486,7 @@ namespace AutoRest.TestServer.Tests
             }));
 
         [Test]
-        public Task PutArrayDateTimeValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutDateTimeValidAsync(
+        public Task PutArrayDateTimeValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutDateTimeValidAsync(
             new[] {
                 DateTimeOffset.Parse("2000-12-01 00:00:01+00:00"),
                 DateTimeOffset.Parse("1980-01-02 00:11:35+00:00"),
@@ -494,7 +494,7 @@ namespace AutoRest.TestServer.Tests
             }));
 
         [Test]
-        public Task PutArrayDateValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutDateValidAsync(
+        public Task PutArrayDateValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutDateValidAsync(
             new[] {
                 DateTimeOffset.Parse("2000-12-01 00:00:01+00:00"),
                 DateTimeOffset.Parse("1980-01-02 00:11:35+00:00"),
@@ -502,7 +502,7 @@ namespace AutoRest.TestServer.Tests
             }));
 
         [Test]
-        public Task PutArrayDictionaryValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutDictionaryValidAsync(
+        public Task PutArrayDictionaryValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutDictionaryValidAsync(
             new[]
             {
                 new Dictionary<string, string>() { { "1", "one" }, { "2", "two" }, { "3", "three" } },
@@ -511,38 +511,38 @@ namespace AutoRest.TestServer.Tests
             }));
 
         [Test]
-        public Task PutArrayDoubleValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutDoubleValidAsync(
+        public Task PutArrayDoubleValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutDoubleValidAsync(
             new[] { 0, -0.01, -1.2e20 }));
 
         [Test]
-        public Task PutArrayDurationValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutDurationValidAsync(
+        public Task PutArrayDurationValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutDurationValidAsync(
             new[] {
                 XmlConvert.ToTimeSpan("P123DT22H14M12.011S"),
                 XmlConvert.ToTimeSpan("P5DT1H0M0S")
             }));
 
         [Test]
-        public Task PutArrayEmpty() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutEmptyAsync(
+        public Task PutArrayEmpty() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutEmptyAsync(
             Enumerable.Empty<string>()));
 
         [Test]
-        public Task PutArrayEnumValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutEnumValidAsync(
+        public Task PutArrayEnumValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutEnumValidAsync(
             new[] { FooEnum.Foo1, FooEnum.Foo2, FooEnum.Foo3 }));
 
         [Test]
-        public Task PutArrayFloatValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutFloatValidAsync(
+        public Task PutArrayFloatValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutFloatValidAsync(
             new[] { 0, -0.01f, -1.2e20f }));
 
         [Test]
-        public Task PutArrayIntegerValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutIntegerValidAsync(
+        public Task PutArrayIntegerValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutIntegerValidAsync(
             new[] { 1, -1, 3, 300 }));
 
         [Test]
-        public Task PutArrayLongValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutLongValidAsync(
+        public Task PutArrayLongValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutLongValidAsync(
            new[] { 1, -1, 3, 300L }));
 
         [Test]
-        public Task PutArrayStringEnumValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutStringEnumValidAsync(
+        public Task PutArrayStringEnumValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutStringEnumValidAsync(
             new[]
             {
                 Enum1.Foo1,
@@ -551,11 +551,11 @@ namespace AutoRest.TestServer.Tests
             }));
 
         [Test]
-        public Task PutArrayStringValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutStringValidAsync(
+        public Task PutArrayStringValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutStringValidAsync(
            new[] { "foo1", "foo2", "foo3" }));
 
         [Test]
-        public Task PutArrayUuidValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutUuidValidAsync(
+        public Task PutArrayUuidValid() => TestStatus(async (host, pipeline) => await GetClient<ArrayClient>(pipeline, host).PutUuidValidAsync(
             new[]
             {
                 Guid.Parse("6dcc7237-45fe-45c4-8a6b-3a8a3f625652"),

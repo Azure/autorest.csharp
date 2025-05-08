@@ -2,13 +2,15 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
+using System.Reflection;
 using System.Threading.Tasks;
 using additionalProperties;
 using additionalProperties.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
+using Azure.Core.Pipeline;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
@@ -18,7 +20,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task AdditionalPropertiesInProperties() => Test(async (host, pipeline) =>
         {
-            var response = await new PetsClient(ClientDiagnostics, pipeline, host).CreateAPInPropertiesAsync(new PetAPInProperties(4)
+            var response = await GetClient<PetsClient>(pipeline, host).CreateAPInPropertiesAsync(new PetAPInProperties(4)
             {
                 Name = "Bunny",
                 AdditionalProperties =
@@ -51,11 +53,15 @@ namespace AutoRest.TestServer.Tests
                 },
             };
 
-            parameter.MoreAdditionalProperties["color"] = "red";
-            parameter.MoreAdditionalProperties["city"] = "Seattle";
-            parameter.MoreAdditionalProperties["food"] = "tikka masala";
+            var moreAdditionalPropertiesProperty = typeof(PetAPInPropertiesWithAPString)
+                .GetProperty("MoreAdditionalProperties", BindingFlags.Instance | BindingFlags.NonPublic);
+            IDictionary<string, string> moreAdditionalProperties = moreAdditionalPropertiesProperty.GetValue(parameter) as IDictionary<string, string>;
 
-            var response = await new PetsClient(ClientDiagnostics, pipeline, host).CreateAPInPropertiesWithAPStringAsync(parameter);
+            moreAdditionalProperties["color"] = "red";
+            moreAdditionalProperties["city"] = "Seattle";
+            moreAdditionalProperties["food"] = "tikka masala";
+
+            var response = await GetClient<PetsClient>(pipeline, host).CreateAPInPropertiesWithAPStringAsync(parameter);
 
             var value = response.Value;
             Assert.AreEqual(5, value.Id);
@@ -65,9 +71,10 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(599f, value.AdditionalProperties["weight"]);
             Assert.AreEqual(11.5f, value.AdditionalProperties["footsize"]);
 
-            Assert.AreEqual("red", value.MoreAdditionalProperties["color"]);
-            Assert.AreEqual("Seattle", value.MoreAdditionalProperties["city"]);
-            Assert.AreEqual("tikka masala", value.MoreAdditionalProperties["food"]);
+            var valueMoreAdditonalProperties = moreAdditionalPropertiesProperty.GetValue(value) as Dictionary<string, string>;
+            Assert.AreEqual("red", valueMoreAdditonalProperties["color"]);
+            Assert.AreEqual("Seattle", valueMoreAdditonalProperties["city"]);
+            Assert.AreEqual("tikka masala", valueMoreAdditonalProperties["food"]);
         });
 
         [Test]
@@ -85,7 +92,7 @@ namespace AutoRest.TestServer.Tests
                 {"color", "Red"}
             };
 
-            var response = await new PetsClient(ClientDiagnostics, pipeline, host).CreateCatAPTrueAsync(catAPTrue);
+            var response = await GetClient<PetsClient>(pipeline, host).CreateCatAPTrueAsync(catAPTrue);
 
             var value = response.Value;
             Assert.AreEqual(1, value.Id);
@@ -110,7 +117,7 @@ namespace AutoRest.TestServer.Tests
                 {"color", "Red"}
             };
 
-            var response = await new PetsClient(ClientDiagnostics, pipeline, host).CreateAPTrueAsync(catAPTrue);
+            var response = await GetClient<PetsClient>(pipeline, host).CreateAPTrueAsync(catAPTrue);
 
             var value = response.Value;
             Assert.AreEqual(1, value.Id);
@@ -144,7 +151,7 @@ namespace AutoRest.TestServer.Tests
             };
             outerAPObject.AdditionalProperties["picture"] = new byte[] { 255, 255, 255, 255, 254 };
 
-            var response = await new PetsClient(ClientDiagnostics, pipeline, host).CreateAPObjectAsync(outerAPObject);
+            var response = await GetClient<PetsClient>(pipeline, host).CreateAPObjectAsync(outerAPObject);
 
             var value = response.Value;
 
@@ -173,7 +180,7 @@ namespace AutoRest.TestServer.Tests
             petAPObject.AdditionalProperties["color"] = "red";
             petAPObject.AdditionalProperties["city"] = "Bombay";
 
-            var response = await new PetsClient(ClientDiagnostics, pipeline, host).CreateAPStringAsync(petAPObject);
+            var response = await GetClient<PetsClient>(pipeline, host).CreateAPStringAsync(petAPObject);
             var value = response.Value;
             Assert.AreEqual(3, value.Id);
             Assert.AreEqual("Tommy", value.Name);
@@ -186,7 +193,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void InitializeAdditionalPropertiesDuringDeserialization()
         {
-            PetAPObject model = PetAPObject.DeserializePetAPObject(JsonDocument.Parse("{}").RootElement);
+            PetAPObject model = ModelReaderWriter.Read<PetAPObject>(BinaryData.FromString("{}"));
             Assert.AreEqual(new Dictionary<string, object>(), model.AdditionalProperties);
         }
     }

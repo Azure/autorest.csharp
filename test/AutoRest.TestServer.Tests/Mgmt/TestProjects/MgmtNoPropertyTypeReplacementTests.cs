@@ -5,7 +5,6 @@ using System;
 using System.Reflection;
 using Azure.ResourceManager.Resources.Models;
 using MgmtNoTypeReplacement;
-using MgmtNoTypeReplacement.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -17,13 +16,20 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
+        private protected override Assembly GetAssembly() => typeof(NoTypeReplacementModel1Data).Assembly;
+
         [TestCase(typeof(SubResource), typeof(NoTypeReplacementModel1Data))]
-        [TestCase(typeof(NoSubResourceModel), typeof(NoTypeReplacementModel2Data))]
-        [TestCase(typeof(NoSubResourceModel2), typeof(MiddleResourceModel))]
         public void ValidateType(Type expectedType, Type targetClass)
         {
             Assert.AreEqual(expectedType, targetClass.GetProperty("Foo", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance).PropertyType);
         }
 
+        [TestCase("NoSubResourceModel", typeof(NoTypeReplacementModel2Data))]
+        public void ValidateType(string expectedTypeName, Type targetClass)
+            => ValidateType(GetType(expectedTypeName), targetClass);
+
+        [TestCase("NoSubResourceModel2", "MiddleResourceModel")]
+        public void ValidateType(string expectedTypeName, string targetClassName)
+            => ValidateType(GetType(expectedTypeName), GetType(targetClassName));
     }
 }

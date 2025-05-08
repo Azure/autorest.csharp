@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Payload.MultiPart
+namespace Scm.Payload.Multipart
 {
     internal static class Optional
     {

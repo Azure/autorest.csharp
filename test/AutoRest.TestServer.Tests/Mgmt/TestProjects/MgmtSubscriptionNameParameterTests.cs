@@ -3,6 +3,7 @@
 
 using System.Linq;
 using System.Reflection;
+using MgmtSubscriptionNameParameter;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -12,6 +13,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public MgmtSubscriptionNameParameterTests() : base("MgmtSubscriptionNameParameter")
         {
         }
+
+        private protected override Assembly GetAssembly() => typeof(SBSubscriptionResource).Assembly;
+
         [TestCase("SBSubscriptionCollection", "CreateOrUpdateAsync", new[] { "waitUntil", "subscriptionName", "data", "cancellationToken" })]
         [TestCase("SBSubscriptionCollection", "CreateOrUpdate", new[] { "waitUntil", "subscriptionName", "data", "cancellationToken" })]
         [TestCase("SBSubscriptionCollection", "Get", new[] { "subscriptionName", "cancellationToken" })]

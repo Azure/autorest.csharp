@@ -236,7 +236,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static ValueExpression BuildValueSerizationExpression(CSharpType valueType, ValueExpression valueExpression) => valueType switch
         {
             { IsFrameworkType: true } => valueExpression,
-            { IsFrameworkType: false, Implementation: SerializableObjectType serializableObjectType } => new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { valueExpression, ModelReaderWriterOptionsExpression.Wire }, new[] { valueType }),
+            { IsFrameworkType: false, Implementation: SerializableObjectType serializableObjectType } => new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { valueExpression, ModelReaderWriterOptionsExpression.Wire, ModelReaderWriterContextExpression.Default }, new[] { valueType }),
             _ => BinaryDataExpression.FromObjectAsJson(valueExpression)
         };
     }

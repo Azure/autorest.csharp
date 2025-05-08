@@ -60,7 +60,7 @@ namespace AzureSample.ResourceManager.Storage
             {
                 return null;
             }
-            var lroDetails = ModelReaderWriter.Write(rehydrationToken, ModelReaderWriterOptions.Json).ToObjectFromJson<Dictionary<string, string>>();
+            var lroDetails = ModelReaderWriter.Write(rehydrationToken, ModelReaderWriterOptions.Json, AzureSampleResourceManagerStorageContext.Default).ToObjectFromJson<Dictionary<string, string>>();
             return lroDetails["id"];
         }
         /// <inheritdoc />

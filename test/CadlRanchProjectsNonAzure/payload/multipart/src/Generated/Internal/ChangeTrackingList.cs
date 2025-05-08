@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Payload.MultiPart
+namespace Scm.Payload.Multipart
 {
     internal class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
     {

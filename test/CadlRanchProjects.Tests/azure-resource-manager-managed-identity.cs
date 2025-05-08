@@ -17,12 +17,12 @@ namespace CadlRanchProjects.Tests
         {
             ArmClient client = MgmtTestHelper.CreateArmClientWithMockAuth(host);
             var resourceId = ManagedIdentityTrackedResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "test-rg", "identity");
-            var resource = new ManagedIdentityTrackedResource(client, resourceId);
+            var resource = client.GetManagedIdentityTrackedResource(resourceId);
             var response = await resource.GetAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(AzureLocation.EastUS, response.Value.Data.Location);
             Assert.AreEqual(resourceId, response.Value.Data.Id);
-            Assert.AreEqual("Succeeded", response.Value.Data.Properties.ProvisioningState);
+            Assert.AreEqual("Succeeded", response.Value.Data.ManagedIdentityTrackedResourceProvisioningState);
             Assert.AreEqual(ManagedServiceIdentityType.SystemAssigned, response.Value.Data.Identity.ManagedServiceIdentityType);
             Assert.AreEqual(Guid.Empty, response.Value.Data.Identity.TenantId);
             Assert.AreEqual(Guid.Empty, response.Value.Data.Identity.PrincipalId);
@@ -33,7 +33,7 @@ namespace CadlRanchProjects.Tests
         {
             ArmClient client = MgmtTestHelper.CreateArmClientWithMockAuth(host);
             var resourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "test-rg");
-            var collection = new ManagedIdentityTrackedResourceCollection(client, resourceId);
+            var collection = client.GetResourceGroupResource(resourceId).GetManagedIdentityTrackedResources();
             var inputData = new ManagedIdentityTrackedResourceData(AzureLocation.EastUS)
             {
                 Identity = new ManagedServiceIdentity(ManagedServiceIdentityType.SystemAssigned)
@@ -42,7 +42,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(AzureLocation.EastUS, response.Value.Data.Location);
             Assert.AreEqual(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Azure.ResourceManager.CommonProperties/managedIdentityTrackedResources/identity"), response.Value.Data.Id);
-            Assert.AreEqual("Succeeded", response.Value.Data.Properties.ProvisioningState);
+            Assert.AreEqual("Succeeded", response.Value.Data.ManagedIdentityTrackedResourceProvisioningState);
             Assert.AreEqual(ManagedServiceIdentityType.SystemAssigned, response.Value.Data.Identity.ManagedServiceIdentityType);
             Assert.AreEqual(Guid.Empty, response.Value.Data.Identity.TenantId);
             Assert.AreEqual(Guid.Empty, response.Value.Data.Identity.PrincipalId);
@@ -54,7 +54,7 @@ namespace CadlRanchProjects.Tests
             ArmClient client = MgmtTestHelper.CreateArmClientWithMockAuth(host);
             var resourceId = ManagedIdentityTrackedResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "test-rg", "identity");
             var resourceIdentifier = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1");
-            var resource = new ManagedIdentityTrackedResource(client, resourceId);
+            var resource = client.GetManagedIdentityTrackedResource(resourceId);
             var patch = new ManagedIdentityTrackedResourceData(AzureLocation.EastUS)
             {
                 Identity = new ManagedServiceIdentity(ManagedServiceIdentityType.SystemAssignedUserAssigned)
@@ -69,7 +69,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(AzureLocation.EastUS, response.Value.Data.Location);
             Assert.AreEqual(resourceId, response.Value.Data.Id);
-            Assert.AreEqual("Succeeded", response.Value.Data.Properties.ProvisioningState);
+            Assert.AreEqual("Succeeded", response.Value.Data.ManagedIdentityTrackedResourceProvisioningState);
             Assert.AreEqual(ManagedServiceIdentityType.SystemAssignedUserAssigned, response.Value.Data.Identity.ManagedServiceIdentityType);
             Assert.AreEqual(Guid.Empty, response.Value.Data.Identity.UserAssignedIdentities[resourceIdentifier].ClientId);
             Assert.AreEqual(Guid.Empty, response.Value.Data.Identity.UserAssignedIdentities[resourceIdentifier].PrincipalId);

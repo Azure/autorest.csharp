@@ -111,7 +111,7 @@ namespace body_string.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, body_stringContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(RefColorConstant)} does not support writing '{options.Format}' format.");
             }

@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Reflection;
+using MgmtCustomizations.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -6,6 +8,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     internal class MgmtCustomizationTests : TestProjectTests
     {
         public MgmtCustomizationTests() : base("MgmtCustomizations") { }
+
+        private protected override Assembly GetAssembly() => typeof(Cat).Assembly;
 
         [TestCase("Cat", new string[] { "sleep", "jump" })]
         [TestCase("Dog", new string[] { "jump" })]

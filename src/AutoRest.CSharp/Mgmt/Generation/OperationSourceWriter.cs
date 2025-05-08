@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 else
                 {
-                    deserializeExpression = new InvokeStaticMethodExpression(typeof(ModelReaderWriter), "Read", [responseVariable.Property("Content")], [resourceData.Type]);
+                    deserializeExpression = new InvokeStaticMethodExpression(typeof(ModelReaderWriter), "Read", [responseVariable.Property("Content"), ModelReaderWriterOptionsExpression.Json, ModelReaderWriterContextExpression.Default], [resourceData.Type]);
                 }
 
                 if (_operationIdMappings is not null)

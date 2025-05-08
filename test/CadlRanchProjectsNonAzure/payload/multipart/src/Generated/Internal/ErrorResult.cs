@@ -5,7 +5,7 @@
 using System.ClientModel;
 using System.ClientModel.Primitives;
 
-namespace Payload.MultiPart
+namespace Scm.Payload.Multipart
 {
     internal class ErrorResult<T> : ClientResult<T>
     {

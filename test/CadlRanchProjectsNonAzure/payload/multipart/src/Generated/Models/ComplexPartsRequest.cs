@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Payload.MultiPart.Models
+namespace Scm.Payload.Multipart.Models
 {
     /// <summary> The ComplexPartsRequest. </summary>
     public partial class ComplexPartsRequest

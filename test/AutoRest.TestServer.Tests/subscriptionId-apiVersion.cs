@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task SubscriptionIdAndApiVersion() => Test(async (host, pipeline) =>
         {
-            var result = await new GroupClient(ClientDiagnostics, pipeline, "sub", host, "2014-04-01-preview").GetSampleResourceGroupAsync("testgroup101");
+            var result = await GetClient<GroupClient>(pipeline, "sub", host, "2014-04-01-preview").GetSampleResourceGroupAsync("testgroup101");
             Assert.AreEqual("West US", result.Value.Location);
             Assert.AreEqual("testgroup101", result.Value.Name);
         });

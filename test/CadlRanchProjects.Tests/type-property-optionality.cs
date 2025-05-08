@@ -9,6 +9,7 @@ using _Type.Property.Optionality;
 using _Type.Property.Optionality.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
+using System.ClientModel.Primitives;
 
 namespace CadlRanchProjects.Tests
 {
@@ -551,10 +552,11 @@ namespace CadlRanchProjects.Tests
             var input = new PlainDateProperty();
             input.Property = PlainDateData;
 
-            JsonAsserts.AssertWireSerialization("{\"property\":\"2022-12-12\"}", input);
+            var json = "{\"property\":\"2022-12-12\"}";
+            var data = ModelReaderWriter.Write(input);
+            Assert.AreEqual(json, data.ToString());
 
-            using var document = JsonDocument.Parse("{\"property\":\"2022-12-12\"}");
-            var output = PlainDateProperty.DeserializePlainDateProperty(document.RootElement);
+            var output = ModelReaderWriter.Read<PlainDateProperty>(BinaryData.FromString(json));
             Assert.AreEqual(PlainDateData, output.Property);
         }
 
@@ -564,10 +566,11 @@ namespace CadlRanchProjects.Tests
             var input = new PlainDateProperty();
             input.Property = new DateTimeOffset(2022, 12, 12, 13, 06, 0, 0, new TimeSpan());
 
-            JsonAsserts.AssertWireSerialization("{\"property\":\"2022-12-12\"}", input);
+            var json = "{\"property\":\"2022-12-12\"}";
+            var data = ModelReaderWriter.Write(input);
+            Assert.AreEqual(json, data.ToString());
 
-            using var document = JsonDocument.Parse("{\"property\":\"2022-12-12T13:06:00\"}");
-            var output = PlainDateProperty.DeserializePlainDateProperty(document.RootElement);
+            var output = ModelReaderWriter.Read<PlainDateProperty>(BinaryData.FromString("{\"property\":\"2022-12-12T13:06:00\"}"));
             Assert.IsNotNull(output.Property.Value);
             Assert.AreEqual(2022, output.Property.Value.Year);
             Assert.AreEqual(12, output.Property.Value.Month);
@@ -583,10 +586,11 @@ namespace CadlRanchProjects.Tests
             var input = new PlainTimeProperty();
             input.Property = PlainTimeData;
 
-            JsonAsserts.AssertWireSerialization("{\"property\":\"13:06:12\"}", input);
+            var json = "{\"property\":\"13:06:12\"}";
+            var data = ModelReaderWriter.Write(input);
+            Assert.AreEqual(json, data.ToString());
 
-            using var document = JsonDocument.Parse("{\"property\":\"13:06:12\"}");
-            var output = PlainTimeProperty.DeserializePlainTimeProperty(document.RootElement);
+            var output = ModelReaderWriter.Read<PlainTimeProperty>(BinaryData.FromString(json));
             Assert.AreEqual(PlainTimeData, output.Property);
         }
 
@@ -595,21 +599,21 @@ namespace CadlRanchProjects.Tests
         {
             var inputModel = new PlainTimeProperty();
 
-            var element = JsonAsserts.AssertWireSerializes(inputModel);
-            Assert.False(element.TryGetProperty("property", out _));
+            var data = ModelReaderWriter.Write(inputModel);
+            Assert.IsFalse(data.ToString().Contains("property"));
         }
 
         [Test]
         public void OptionalPropertiesDeserializedWithNullsWhenUndefined()
         {
-            var model = PlainTimeProperty.DeserializePlainTimeProperty(JsonDocument.Parse("{}").RootElement);
+            var model = ModelReaderWriter.Read<PlainTimeProperty>(BinaryData.FromString("{}"));
             Assert.Null(model.Property);
         }
 
         [Test]
         public void OptionalPropertiesDeserializedWithValues()
         {
-            var model = StringProperty.DeserializeStringProperty(JsonDocument.Parse("{\"property\": \"2\"}").RootElement);
+            var model = ModelReaderWriter.Read<StringProperty>(BinaryData.FromString("{\"property\": \"2\"}"));
             Assert.AreEqual("2", model.Property);
         }
 
@@ -623,9 +627,8 @@ namespace CadlRanchProjects.Tests
             _ = inputModel.Property.IsReadOnly;
             _ = inputModel.Property.Remove(BinaryData.FromString("a"));
 
-            var element = JsonAsserts.AssertWireSerializes(inputModel);
-
-            Assert.False(element.TryGetProperty("property", out _));
+            var data = ModelReaderWriter.Write(inputModel);
+            Assert.IsFalse(data.ToString().Contains("property"));
         }
 
         [Test]
@@ -638,9 +641,8 @@ namespace CadlRanchProjects.Tests
                 Property = "abc"
             });
 
-            var element = JsonAsserts.AssertWireSerializes(inputModel);
-
-            Assert.AreEqual("[{\"property\":\"abc\"}]", element.GetProperty("property").ToString());
+            var data = ModelReaderWriter.Write(inputModel);
+            Assert.IsTrue(data.ToString().Contains("[{\"property\":\"abc\"}]"));
         }
 
         [Test]
@@ -651,15 +653,15 @@ namespace CadlRanchProjects.Tests
             inputModel.Property.Add(BinaryData.FromString("abc"));
             inputModel.Property.Clear();
 
-            var element = JsonAsserts.AssertWireSerializes(inputModel);
+            var data = ModelReaderWriter.Write(inputModel);
 
-            Assert.AreEqual("[]", element.GetProperty("property").ToString());
+            Assert.IsTrue(data.ToString().Contains("\"property\":[]"));
         }
 
         [Test]
         public void OptionalPropertyWithNullIsAccepted()
         {
-            var model = StringProperty.DeserializeStringProperty(JsonDocument.Parse("{\"property\":null}").RootElement);
+            var model = ModelReaderWriter.Read<StringProperty>(BinaryData.FromString("{\"property\":null}"));
             Assert.Null(model.Property);
         }
     }
