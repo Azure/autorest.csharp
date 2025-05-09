@@ -19,6 +19,10 @@ export function transformCodeModel(codeModel: CodeModel): CodeModel {
     // iterates all the constants appearing in models, and replace its valueType with a created enum type
     for (const model of codeModel.models) {
         for (const property of model.properties) {
+            // we do not do this for discriminator
+            if (property.discriminator) {
+                continue;
+            }
             const propertyType = property.type;
             if (propertyType.kind === "constant") {
                 const constantType = property.type as InputLiteralType;
