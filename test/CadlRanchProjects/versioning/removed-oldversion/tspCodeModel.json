@@ -525,6 +525,9 @@
         "type": {
          "$id": "68",
          "kind": "constant",
+         "name": "v1ContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "69",
           "kind": "string",
@@ -552,6 +555,9 @@
         "type": {
          "$id": "71",
          "kind": "constant",
+         "name": "v1ContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "72",
           "kind": "string",
@@ -726,6 +732,9 @@
         "type": {
          "$id": "84",
          "kind": "constant",
+         "name": "v2ContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "85",
           "kind": "string",
@@ -753,6 +762,9 @@
         "type": {
          "$id": "87",
          "kind": "constant",
+         "name": "v2ContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "88",
           "kind": "string",
@@ -929,6 +941,9 @@
         "type": {
          "$id": "100",
          "kind": "constant",
+         "name": "modelV3ContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "101",
           "kind": "string",
@@ -956,6 +971,9 @@
         "type": {
          "$id": "103",
          "kind": "constant",
+         "name": "modelV3ContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "104",
           "kind": "string",
@@ -1170,6 +1188,9 @@
           "type": {
            "$id": "120",
            "kind": "constant",
+           "name": "v1InInterfaceContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "121",
             "kind": "string",
@@ -1197,6 +1218,9 @@
           "type": {
            "$id": "123",
            "kind": "constant",
+           "name": "v1InInterfaceContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "124",
             "kind": "string",

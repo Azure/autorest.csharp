@@ -6,7 +6,8 @@
   {
    "$id": "2",
    "kind": "enum",
-   "name": "Thing_requiredLiteralString",
+   "name": "ThingRequiredLiteralString",
+   "crossLanguageDefinitionId": "",
    "valueType": {
     "$id": "3",
     "kind": "string",
@@ -20,7 +21,6 @@
      "kind": "enumvalue",
      "name": "accept",
      "value": "accept",
-     "doc": "accept",
      "valueType": {
       "$ref": "3"
      },
@@ -29,18 +29,17 @@
      }
     }
    ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "NoDocsUnbrandedTypeSpec",
-   "doc": "The Thing_requiredLiteralString",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
+   "namespace": "NoDocsUnbrandedTypeSpec",
    "decorators": []
   },
   {
    "$id": "5",
    "kind": "enum",
-   "name": "Thing_requiredLiteralInt",
+   "name": "ThingRequiredLiteralInt",
+   "crossLanguageDefinitionId": "",
    "valueType": {
     "$id": "6",
     "kind": "int32",
@@ -54,7 +53,6 @@
      "kind": "enumvalue",
      "name": "123",
      "value": 123,
-     "doc": "123",
      "valueType": {
       "$ref": "6"
      },
@@ -63,18 +61,17 @@
      }
     }
    ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "NoDocsUnbrandedTypeSpec",
-   "doc": "The Thing_requiredLiteralInt",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
+   "namespace": "NoDocsUnbrandedTypeSpec",
    "decorators": []
   },
   {
    "$id": "8",
    "kind": "enum",
-   "name": "Thing_requiredLiteralFloat",
+   "name": "ThingRequiredLiteralFloat",
+   "crossLanguageDefinitionId": "",
    "valueType": {
     "$id": "9",
     "kind": "float32",
@@ -88,7 +85,6 @@
      "kind": "enumvalue",
      "name": "1.23",
      "value": 1.23,
-     "doc": "1.23",
      "valueType": {
       "$ref": "9"
      },
@@ -97,18 +93,17 @@
      }
     }
    ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "NoDocsUnbrandedTypeSpec",
-   "doc": "The Thing_requiredLiteralFloat",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
+   "namespace": "NoDocsUnbrandedTypeSpec",
    "decorators": []
   },
   {
    "$id": "11",
    "kind": "enum",
-   "name": "Thing_optionalLiteralString",
+   "name": "ThingOptionalLiteralString",
+   "crossLanguageDefinitionId": "",
    "valueType": {
     "$id": "12",
     "kind": "string",
@@ -122,7 +117,6 @@
      "kind": "enumvalue",
      "name": "reject",
      "value": "reject",
-     "doc": "reject",
      "valueType": {
       "$ref": "12"
      },
@@ -131,18 +125,17 @@
      }
     }
    ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "NoDocsUnbrandedTypeSpec",
-   "doc": "The Thing_optionalLiteralString",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
+   "namespace": "NoDocsUnbrandedTypeSpec",
    "decorators": []
   },
   {
    "$id": "14",
    "kind": "enum",
-   "name": "Thing_optionalLiteralInt",
+   "name": "ThingOptionalLiteralInt",
+   "crossLanguageDefinitionId": "",
    "valueType": {
     "$id": "15",
     "kind": "int32",
@@ -156,7 +149,6 @@
      "kind": "enumvalue",
      "name": "456",
      "value": 456,
-     "doc": "456",
      "valueType": {
       "$ref": "15"
      },
@@ -165,18 +157,17 @@
      }
     }
    ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "NoDocsUnbrandedTypeSpec",
-   "doc": "The Thing_optionalLiteralInt",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
+   "namespace": "NoDocsUnbrandedTypeSpec",
    "decorators": []
   },
   {
    "$id": "17",
    "kind": "enum",
-   "name": "Thing_optionalLiteralFloat",
+   "name": "ThingOptionalLiteralFloat",
+   "crossLanguageDefinitionId": "",
    "valueType": {
     "$id": "18",
     "kind": "float32",
@@ -190,7 +181,6 @@
      "kind": "enumvalue",
      "name": "4.56",
      "value": 4.56,
-     "doc": "4.56",
      "valueType": {
       "$ref": "18"
      },
@@ -199,12 +189,10 @@
      }
     }
    ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "NoDocsUnbrandedTypeSpec",
-   "doc": "The Thing_optionalLiteralFloat",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
+   "namespace": "NoDocsUnbrandedTypeSpec",
    "decorators": []
   }
  ],
@@ -312,6 +300,9 @@
      "type": {
       "$id": "34",
       "kind": "constant",
+      "name": "ThingRequiredLiteralString",
+      "namespace": "NoDocsUnbrandedTypeSpec",
+      "usage": "Output,Json",
       "valueType": {
        "$ref": "2"
       },
@@ -341,6 +332,9 @@
      "type": {
       "$id": "38",
       "kind": "constant",
+      "name": "ThingRequiredLiteralInt",
+      "namespace": "NoDocsUnbrandedTypeSpec",
+      "usage": "Output,Json",
       "valueType": {
        "$ref": "5"
       },
@@ -370,6 +364,9 @@
      "type": {
       "$id": "42",
       "kind": "constant",
+      "name": "ThingRequiredLiteralFloat",
+      "namespace": "NoDocsUnbrandedTypeSpec",
+      "usage": "Output,Json",
       "valueType": {
        "$ref": "8"
       },
@@ -399,6 +396,9 @@
      "type": {
       "$id": "46",
       "kind": "constant",
+      "name": "ThingRequiredLiteralBool",
+      "namespace": "NoDocsUnbrandedTypeSpec",
+      "usage": "Output,Json",
       "valueType": {
        "$id": "47",
        "kind": "boolean",
@@ -432,6 +432,9 @@
      "type": {
       "$id": "51",
       "kind": "constant",
+      "name": "ThingOptionalLiteralString",
+      "namespace": "NoDocsUnbrandedTypeSpec",
+      "usage": "Output,Json",
       "valueType": {
        "$ref": "11"
       },
@@ -461,6 +464,9 @@
      "type": {
       "$id": "55",
       "kind": "constant",
+      "name": "ThingOptionalLiteralInt",
+      "namespace": "NoDocsUnbrandedTypeSpec",
+      "usage": "Output,Json",
       "valueType": {
        "$ref": "14"
       },
@@ -490,6 +496,9 @@
      "type": {
       "$id": "59",
       "kind": "constant",
+      "name": "ThingOptionalLiteralFloat",
+      "namespace": "NoDocsUnbrandedTypeSpec",
+      "usage": "Output,Json",
       "valueType": {
        "$ref": "17"
       },
@@ -519,6 +528,9 @@
      "type": {
       "$id": "63",
       "kind": "constant",
+      "name": "ThingOptionalLiteralBool",
+      "namespace": "NoDocsUnbrandedTypeSpec",
+      "usage": "Output,Json",
       "valueType": {
        "$id": "64",
        "kind": "boolean",
@@ -743,6 +755,9 @@
         "type": {
          "$id": "93",
          "kind": "constant",
+         "name": "sayHiContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "94",
           "kind": "string",

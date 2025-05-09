@@ -1058,6 +1058,9 @@
           "type": {
            "$id": "121",
            "kind": "constant",
+           "name": "defaultContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "122",
             "kind": "string",
@@ -1085,6 +1088,9 @@
           "type": {
            "$id": "124",
            "kind": "constant",
+           "name": "defaultContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "125",
             "kind": "string",
@@ -1236,6 +1242,9 @@
           "type": {
            "$id": "135",
            "kind": "constant",
+           "name": "iso8601ContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "136",
             "kind": "string",
@@ -1263,6 +1272,9 @@
           "type": {
            "$id": "138",
            "kind": "constant",
+           "name": "iso8601ContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "139",
             "kind": "string",
@@ -1414,6 +1426,9 @@
           "type": {
            "$id": "149",
            "kind": "constant",
+           "name": "int32SecondsContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "150",
             "kind": "string",
@@ -1441,6 +1456,9 @@
           "type": {
            "$id": "152",
            "kind": "constant",
+           "name": "int32SecondsContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "153",
             "kind": "string",
@@ -1592,6 +1610,9 @@
           "type": {
            "$id": "163",
            "kind": "constant",
+           "name": "floatSecondsContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "164",
             "kind": "string",
@@ -1619,6 +1640,9 @@
           "type": {
            "$id": "166",
            "kind": "constant",
+           "name": "floatSecondsContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "167",
             "kind": "string",
@@ -1770,6 +1794,9 @@
           "type": {
            "$id": "177",
            "kind": "constant",
+           "name": "float64SecondsContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "178",
             "kind": "string",
@@ -1797,6 +1824,9 @@
           "type": {
            "$id": "180",
            "kind": "constant",
+           "name": "float64SecondsContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "181",
             "kind": "string",
@@ -1948,6 +1978,9 @@
           "type": {
            "$id": "191",
            "kind": "constant",
+           "name": "floatSecondsArrayContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "192",
             "kind": "string",
@@ -1975,6 +2008,9 @@
           "type": {
            "$id": "194",
            "kind": "constant",
+           "name": "floatSecondsArrayContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "195",
             "kind": "string",

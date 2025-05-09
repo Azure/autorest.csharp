@@ -94,6 +94,9 @@
        "type": {
         "$id": "14",
         "kind": "constant",
+        "name": "SeaGullKind",
+        "namespace": "_Type.Model.Inheritance.SingleDiscriminator",
+        "usage": "Input,Output,Json",
         "valueType": {
          "$id": "15",
          "kind": "string",
@@ -142,6 +145,9 @@
        "type": {
         "$id": "20",
         "kind": "constant",
+        "name": "SparrowKind",
+        "namespace": "_Type.Model.Inheritance.SingleDiscriminator",
+        "usage": "Input,Output,Json",
         "valueType": {
          "$id": "21",
          "kind": "string",
@@ -190,6 +196,9 @@
        "type": {
         "$id": "26",
         "kind": "constant",
+        "name": "GooseKind",
+        "namespace": "_Type.Model.Inheritance.SingleDiscriminator",
+        "usage": "Input,Output,Json",
         "valueType": {
          "$id": "27",
          "kind": "string",
@@ -238,6 +247,9 @@
        "type": {
         "$id": "32",
         "kind": "constant",
+        "name": "EagleKind",
+        "namespace": "_Type.Model.Inheritance.SingleDiscriminator",
+        "usage": "Input,Output,Json",
         "valueType": {
          "$id": "33",
          "kind": "string",
@@ -454,6 +466,9 @@
        "type": {
         "$id": "60",
         "kind": "constant",
+        "name": "TRexKind",
+        "namespace": "_Type.Model.Inheritance.SingleDiscriminator",
+        "usage": "Output,Json",
         "valueType": {
          "$id": "61",
          "kind": "string",
@@ -513,6 +528,9 @@
         "type": {
          "$id": "68",
          "kind": "constant",
+         "name": "getModelContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "69",
           "kind": "string",
@@ -609,6 +627,9 @@
         "type": {
          "$id": "76",
          "kind": "constant",
+         "name": "putModelContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "77",
           "kind": "string",
@@ -733,6 +754,9 @@
         "type": {
          "$id": "86",
          "kind": "constant",
+         "name": "getRecursiveModelContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "87",
           "kind": "string",
@@ -829,6 +853,9 @@
         "type": {
          "$id": "94",
          "kind": "constant",
+         "name": "putRecursiveModelContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "95",
           "kind": "string",
@@ -953,6 +980,9 @@
         "type": {
          "$id": "104",
          "kind": "constant",
+         "name": "getMissingDiscriminatorContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "105",
           "kind": "string",
@@ -1048,6 +1078,9 @@
         "type": {
          "$id": "112",
          "kind": "constant",
+         "name": "getWrongDiscriminatorContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "113",
           "kind": "string",
@@ -1143,6 +1176,9 @@
         "type": {
          "$id": "120",
          "kind": "constant",
+         "name": "getLegacyModelContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "121",
           "kind": "string",

@@ -73,6 +73,9 @@
           "type": {
            "$id": "11",
            "kind": "constant",
+           "name": "SendAsTextRequestContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "12",
             "kind": "string",
@@ -145,6 +148,9 @@
          "type": {
           "$id": "17",
           "kind": "constant",
+          "name": "SendAsTextRequestContentType1",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "18",
            "kind": "string",
@@ -214,6 +220,9 @@
           "type": {
            "$id": "25",
            "kind": "constant",
+           "name": "getAsTextContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "26",
             "kind": "string",
@@ -256,6 +265,9 @@
             "type": {
              "$id": "30",
              "kind": "constant",
+             "name": "SendAsTextRequestContentType2",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "31",
               "kind": "string",
@@ -332,6 +344,9 @@
           "type": {
            "$id": "37",
            "kind": "constant",
+           "name": "SendAsJsonRequestContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "38",
             "kind": "string",
@@ -404,6 +419,9 @@
          "type": {
           "$id": "43",
           "kind": "constant",
+          "name": "SendAsJsonRequestContentType1",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "44",
            "kind": "string",
@@ -473,6 +491,9 @@
           "type": {
            "$id": "51",
            "kind": "constant",
+           "name": "getAsJsonContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "52",
             "kind": "string",
@@ -515,6 +536,9 @@
             "type": {
              "$id": "56",
              "kind": "constant",
+             "name": "SendAsJsonRequestContentType2",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "57",
               "kind": "string",

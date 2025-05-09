@@ -115,6 +115,9 @@
         "type": {
          "$id": "16",
          "kind": "constant",
+         "name": "putContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "17",
           "kind": "string",
@@ -239,6 +242,9 @@
         "type": {
          "$id": "26",
          "kind": "constant",
+         "name": "getContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "27",
           "kind": "string",

@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace CustomizedTypeSpec.Models
 {
-    /// <summary> The Thing_optionalLiteralString. </summary>
+    /// <summary> The ThingOptionalLiteralString. </summary>
     public readonly partial struct ThingOptionalLiteralString : IEquatable<ThingOptionalLiteralString>
     {
         private readonly string _value;

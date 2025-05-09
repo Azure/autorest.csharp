@@ -98,24 +98,29 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             internal EnumWrapper(EnumType enumType) => this.EnumType = enumType;
         }
 
-        private static readonly InputEnumType ExtensibleEnumType = new InputEnumType("TranslationLanguageValues", "Cadl.TestServer.EnumPropertiesBasic", "public", null, null, "The supported languages to translate input text into.", InputModelTypeUsage.Input | InputModelTypeUsage.Output, InputPrimitiveType.String,
-                    new List<InputEnumTypeValue>() {
-                        new("English", "English", null, "Translate to English"),
-                        new("Spanish", "Spanish", null, "Translate to Spanish"),
-                        new("Mandarin", "Mandarin", null, "Translate to Mandarin"),
-                        new("Undocumented", "Undocumented", null, null)
-                    }, true);
+        static EnumWritingTests()
+        {
+            var extensibleEnumValues = new List<InputEnumTypeValue>();
+            ExtensibleEnumType = new InputEnumType("TranslationLanguageValues", "Cadl.TestServer.EnumPropertiesBasic", "public", null, null, "The supported languages to translate input text into.", InputModelTypeUsage.Input | InputModelTypeUsage.Output, InputPrimitiveType.String, extensibleEnumValues, true);
+            extensibleEnumValues.Add(new("English", "English", InputPrimitiveType.String, ExtensibleEnumType, null, "Translate to English"));
+            extensibleEnumValues.Add(new("Spanish", "Spanish", InputPrimitiveType.String, ExtensibleEnumType, null, "Translate to Spanish"));
+            extensibleEnumValues.Add(new("Mandarin", "Mandarin", InputPrimitiveType.String, ExtensibleEnumType, null, "Translate to Mandarin"));
+            extensibleEnumValues.Add(new("Undocumented", "Undocumented", InputPrimitiveType.String, ExtensibleEnumType, null, null));
+            var fixedEnumValues = new List<InputEnumTypeValue>();
+            FixedEnumType = new InputEnumType("DayOfTheWeek", "Cadl.TestServer.EnumPropertiesBasic", "public", null, null, "Represents the days of the week using a standard, non-string enum.", InputModelTypeUsage.Input | InputModelTypeUsage.Output, InputPrimitiveType.String, fixedEnumValues, false);
+            fixedEnumValues.Add(new("Monday", "Monday", InputPrimitiveType.String, FixedEnumType, null, null));
+            fixedEnumValues.Add(new("Tuesday", "Tuesday", InputPrimitiveType.String, FixedEnumType, null, null));
+            fixedEnumValues.Add(new("Wednesday", "Wednesday", InputPrimitiveType.String, FixedEnumType, null, null));
+            fixedEnumValues.Add(new("Thursday", "Thursday", InputPrimitiveType.String, FixedEnumType, null, "Wednesday is documented to test this case."));
+            fixedEnumValues.Add(new("Friday", "Friday", InputPrimitiveType.String, FixedEnumType, null, null));
+            fixedEnumValues.Add(new("Saturday", "Saturday", InputPrimitiveType.String, FixedEnumType, null, null));
+            fixedEnumValues.Add(new("Sunday", "Sunday", InputPrimitiveType.String, FixedEnumType, null, null));
+        }
 
-        private static readonly InputEnumType FixedEnumType = new InputEnumType("DayOfTheWeek", "Cadl.TestServer.EnumPropertiesBasic", "public", null, null, "Represents the days of the week using a standard, non-string enum.", InputModelTypeUsage.Input | InputModelTypeUsage.Output, InputPrimitiveType.String,
-                    new List<InputEnumTypeValue>() {
-                        new("Monday", "Monday", null, null),
-                        new("Tuesday", "Tuesday", null, null),
-                        new("Wednesday", "Wednesday", null, null),
-                        new("Thursday", "Thursday", null, "Wednesday is documented to test this case."),
-                        new("Friday", "Friday", null, null),
-                        new("Saturday", "Saturday", null, null),
-                        new("Sunday", "Sunday", null, null)
-                    }, false);
+
+        private static readonly InputEnumType ExtensibleEnumType;
+
+        private static readonly InputEnumType FixedEnumType;
 
         private static readonly object[] ExtensibleEnumCase =
         {

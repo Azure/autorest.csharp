@@ -2154,6 +2154,9 @@
           "type": {
            "$id": "270",
            "kind": "constant",
+           "name": "createOrUpdateContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "271",
             "kind": "string",
@@ -2181,6 +2184,9 @@
           "type": {
            "$id": "273",
            "kind": "constant",
+           "name": "createOrUpdateContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "274",
             "kind": "string",
@@ -2352,6 +2358,9 @@
          "type": {
           "$id": "288",
           "kind": "constant",
+          "name": "createOrUpdateContentType2",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "289",
            "kind": "string",
@@ -2379,6 +2388,9 @@
          "type": {
           "$id": "291",
           "kind": "constant",
+          "name": "createOrUpdateContentType3",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "292",
            "kind": "string",
@@ -2500,6 +2512,9 @@
           "type": {
            "$id": "305",
            "kind": "constant",
+           "name": "getContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "306",
             "kind": "string",
@@ -2673,6 +2688,9 @@
           "type": {
            "$id": "321",
            "kind": "constant",
+           "name": "deleteContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "322",
             "kind": "string",
@@ -2769,6 +2787,9 @@
          "type": {
           "$id": "330",
           "kind": "constant",
+          "name": "deleteContentType1",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "331",
            "kind": "string",
@@ -2863,6 +2884,9 @@
           "type": {
            "$id": "342",
            "kind": "constant",
+           "name": "listContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "343",
             "kind": "string",
@@ -3059,6 +3083,9 @@
           "type": {
            "$id": "361",
            "kind": "constant",
+           "name": "exportContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "362",
             "kind": "string",
@@ -3170,6 +3197,9 @@
          "type": {
           "$id": "372",
           "kind": "constant",
+          "name": "exportContentType1",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "373",
            "kind": "string",
@@ -3285,6 +3315,9 @@
           "type": {
            "$id": "386",
            "kind": "constant",
+           "name": "importxContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "387",
             "kind": "string",
@@ -3375,6 +3408,9 @@
          "type": {
           "$id": "395",
           "kind": "constant",
+          "name": "importxContentType1",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "396",
            "kind": "string",
@@ -3491,6 +3527,9 @@
           "type": {
            "$id": "409",
            "kind": "constant",
+           "name": "trainContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "410",
             "kind": "string",
@@ -3518,6 +3557,9 @@
           "type": {
            "$id": "412",
            "kind": "constant",
+           "name": "trainContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "413",
             "kind": "string",
@@ -3646,6 +3688,9 @@
          "type": {
           "$id": "423",
           "kind": "constant",
+          "name": "trainContentType2",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "424",
            "kind": "string",
@@ -3673,6 +3718,9 @@
          "type": {
           "$id": "426",
           "kind": "constant",
+          "name": "trainContentType3",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "427",
            "kind": "string",
@@ -3846,6 +3894,9 @@
           "type": {
            "$id": "445",
            "kind": "constant",
+           "name": "getDeploymentContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "446",
             "kind": "string",
@@ -4062,6 +4113,9 @@
           "type": {
            "$id": "465",
            "kind": "constant",
+           "name": "deployProjectContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "466",
             "kind": "string",
@@ -4089,6 +4143,9 @@
           "type": {
            "$id": "468",
            "kind": "constant",
+           "name": "deployProjectContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "469",
             "kind": "string",
@@ -4281,6 +4338,9 @@
          "type": {
           "$id": "485",
           "kind": "constant",
+          "name": "deployProjectContentType2",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "486",
            "kind": "string",
@@ -4308,6 +4368,9 @@
          "type": {
           "$id": "488",
           "kind": "constant",
+          "name": "deployProjectContentType3",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "489",
            "kind": "string",
@@ -4450,6 +4513,9 @@
           "type": {
            "$id": "504",
            "kind": "constant",
+           "name": "deleteDeploymentContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "505",
             "kind": "string",
@@ -4567,6 +4633,9 @@
          "type": {
           "$id": "515",
           "kind": "constant",
+          "name": "deleteDeploymentContentType1",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "516",
            "kind": "string",
@@ -4682,6 +4751,9 @@
           "type": {
            "$id": "529",
            "kind": "constant",
+           "name": "listContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "530",
             "kind": "string",
@@ -4879,6 +4951,9 @@
           "type": {
            "$id": "548",
            "kind": "constant",
+           "name": "swapDeploymentsContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "549",
             "kind": "string",
@@ -4906,6 +4981,9 @@
           "type": {
            "$id": "551",
            "kind": "constant",
+           "name": "swapDeploymentsContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "552",
             "kind": "string",
@@ -5036,6 +5114,9 @@
          "type": {
           "$id": "562",
           "kind": "constant",
+          "name": "swapDeploymentsContentType2",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "563",
            "kind": "string",
@@ -5063,6 +5144,9 @@
          "type": {
           "$id": "565",
           "kind": "constant",
+          "name": "swapDeploymentsContentType3",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "566",
            "kind": "string",
@@ -5257,6 +5341,9 @@
           "type": {
            "$id": "586",
            "kind": "constant",
+           "name": "getDeploymentStatusContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "587",
             "kind": "string",
@@ -5514,6 +5601,9 @@
           "type": {
            "$id": "610",
            "kind": "constant",
+           "name": "getSwapDeploymentsStatusContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "611",
             "kind": "string",
@@ -5806,6 +5896,9 @@
           "type": {
            "$id": "637",
            "kind": "constant",
+           "name": "getSupportedLanguagesContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "638",
             "kind": "string",
@@ -6084,6 +6177,9 @@
           "type": {
            "$id": "664",
            "kind": "constant",
+           "name": "listTrainingConfigVersionsContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "665",
             "kind": "string",

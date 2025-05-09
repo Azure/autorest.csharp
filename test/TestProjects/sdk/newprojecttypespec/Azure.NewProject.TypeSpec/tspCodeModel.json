@@ -6,7 +6,8 @@
   {
    "$id": "2",
    "kind": "enum",
-   "name": "Thing_requiredLiteralString",
+   "name": "StringFixedEnum",
+   "crossLanguageDefinitionId": "NewProjectTypeSpec.StringFixedEnum",
    "valueType": {
     "$id": "3",
     "kind": "string",
@@ -18,256 +19,51 @@
     {
      "$id": "4",
      "kind": "enumvalue",
-     "name": "accept",
-     "value": "accept",
-     "doc": "accept",
-     "valueType": {
-      "$ref": "3"
-     },
-     "enumType": {
-      "$ref": "2"
-     }
-    }
-   ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "Azure.NewProject.TypeSpec",
-   "doc": "The Thing_requiredLiteralString",
-   "isFixed": false,
-   "isFlags": false,
-   "usage": "Input,Output,Spread,Json",
-   "decorators": []
-  },
-  {
-   "$id": "5",
-   "kind": "enum",
-   "name": "Thing_requiredLiteralInt",
-   "valueType": {
-    "$id": "6",
-    "kind": "int32",
-    "name": "int32",
-    "crossLanguageDefinitionId": "TypeSpec.int32",
-    "decorators": []
-   },
-   "values": [
-    {
-     "$id": "7",
-     "kind": "enumvalue",
-     "name": "123",
-     "value": 123,
-     "doc": "123",
-     "valueType": {
-      "$ref": "6"
-     },
-     "enumType": {
-      "$ref": "5"
-     }
-    }
-   ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "Azure.NewProject.TypeSpec",
-   "doc": "The Thing_requiredLiteralInt",
-   "isFixed": false,
-   "isFlags": false,
-   "usage": "Input,Output,Spread,Json",
-   "decorators": []
-  },
-  {
-   "$id": "8",
-   "kind": "enum",
-   "name": "Thing_requiredLiteralFloat",
-   "valueType": {
-    "$id": "9",
-    "kind": "float32",
-    "name": "float32",
-    "crossLanguageDefinitionId": "TypeSpec.float32",
-    "decorators": []
-   },
-   "values": [
-    {
-     "$id": "10",
-     "kind": "enumvalue",
-     "name": "1.23",
-     "value": 1.23,
-     "doc": "1.23",
-     "valueType": {
-      "$ref": "9"
-     },
-     "enumType": {
-      "$ref": "8"
-     }
-    }
-   ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "Azure.NewProject.TypeSpec",
-   "doc": "The Thing_requiredLiteralFloat",
-   "isFixed": false,
-   "isFlags": false,
-   "usage": "Input,Output,Spread,Json",
-   "decorators": []
-  },
-  {
-   "$id": "11",
-   "kind": "enum",
-   "name": "Thing_optionalLiteralString",
-   "valueType": {
-    "$id": "12",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "values": [
-    {
-     "$id": "13",
-     "kind": "enumvalue",
-     "name": "reject",
-     "value": "reject",
-     "doc": "reject",
-     "valueType": {
-      "$ref": "12"
-     },
-     "enumType": {
-      "$ref": "11"
-     }
-    }
-   ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "Azure.NewProject.TypeSpec",
-   "doc": "The Thing_optionalLiteralString",
-   "isFixed": false,
-   "isFlags": false,
-   "usage": "Input,Output,Spread,Json",
-   "decorators": []
-  },
-  {
-   "$id": "14",
-   "kind": "enum",
-   "name": "Thing_optionalLiteralInt",
-   "valueType": {
-    "$id": "15",
-    "kind": "int32",
-    "name": "int32",
-    "crossLanguageDefinitionId": "TypeSpec.int32",
-    "decorators": []
-   },
-   "values": [
-    {
-     "$id": "16",
-     "kind": "enumvalue",
-     "name": "456",
-     "value": 456,
-     "doc": "456",
-     "valueType": {
-      "$ref": "15"
-     },
-     "enumType": {
-      "$ref": "14"
-     }
-    }
-   ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "Azure.NewProject.TypeSpec",
-   "doc": "The Thing_optionalLiteralInt",
-   "isFixed": false,
-   "isFlags": false,
-   "usage": "Input,Output,Spread,Json",
-   "decorators": []
-  },
-  {
-   "$id": "17",
-   "kind": "enum",
-   "name": "Thing_optionalLiteralFloat",
-   "valueType": {
-    "$id": "18",
-    "kind": "float32",
-    "name": "float32",
-    "crossLanguageDefinitionId": "TypeSpec.float32",
-    "decorators": []
-   },
-   "values": [
-    {
-     "$id": "19",
-     "kind": "enumvalue",
-     "name": "4.56",
-     "value": 4.56,
-     "doc": "4.56",
-     "valueType": {
-      "$ref": "18"
-     },
-     "enumType": {
-      "$ref": "17"
-     }
-    }
-   ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "Azure.NewProject.TypeSpec",
-   "doc": "The Thing_optionalLiteralFloat",
-   "isFixed": false,
-   "isFlags": false,
-   "usage": "Input,Output,Spread,Json",
-   "decorators": []
-  },
-  {
-   "$id": "20",
-   "kind": "enum",
-   "name": "StringFixedEnum",
-   "crossLanguageDefinitionId": "NewProjectTypeSpec.StringFixedEnum",
-   "valueType": {
-    "$id": "21",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "values": [
-    {
-     "$id": "22",
-     "kind": "enumvalue",
      "name": "One",
      "value": "1",
      "valueType": {
-      "$id": "23",
+      "$id": "5",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "20"
+      "$ref": "2"
      },
      "decorators": []
     },
     {
-     "$id": "24",
+     "$id": "6",
      "kind": "enumvalue",
      "name": "Two",
      "value": "2",
      "valueType": {
-      "$id": "25",
+      "$id": "7",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "20"
+      "$ref": "2"
      },
      "decorators": []
     },
     {
-     "$id": "26",
+     "$id": "8",
      "kind": "enumvalue",
      "name": "Four",
      "value": "4",
      "valueType": {
-      "$id": "27",
+      "$id": "9",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "20"
+      "$ref": "2"
      },
      "decorators": []
     }
@@ -280,12 +76,12 @@
    "decorators": []
   },
   {
-   "$id": "28",
+   "$id": "10",
    "kind": "enum",
    "name": "StringExtensibleEnum",
    "crossLanguageDefinitionId": "NewProjectTypeSpec.StringExtensibleEnum",
    "valueType": {
-    "$id": "29",
+    "$id": "11",
     "kind": "string",
     "name": "string",
     "crossLanguageDefinitionId": "TypeSpec.string",
@@ -293,53 +89,53 @@
    },
    "values": [
     {
-     "$id": "30",
+     "$id": "12",
      "kind": "enumvalue",
      "name": "One",
      "value": "1",
      "valueType": {
-      "$id": "31",
+      "$id": "13",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "28"
+      "$ref": "10"
      },
      "decorators": []
     },
     {
-     "$id": "32",
+     "$id": "14",
      "kind": "enumvalue",
      "name": "Two",
      "value": "2",
      "valueType": {
-      "$id": "33",
+      "$id": "15",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "28"
+      "$ref": "10"
      },
      "decorators": []
     },
     {
-     "$id": "34",
+     "$id": "16",
      "kind": "enumvalue",
      "name": "Four",
      "value": "4",
      "valueType": {
-      "$id": "35",
+      "$id": "17",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "28"
+      "$ref": "10"
      },
      "decorators": []
     }
@@ -352,12 +148,12 @@
    "decorators": []
   },
   {
-   "$id": "36",
+   "$id": "18",
    "kind": "enum",
    "name": "IntExtensibleEnum",
    "crossLanguageDefinitionId": "NewProjectTypeSpec.IntExtensibleEnum",
    "valueType": {
-    "$id": "37",
+    "$id": "19",
     "kind": "int32",
     "name": "int32",
     "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -365,53 +161,53 @@
    },
    "values": [
     {
-     "$id": "38",
+     "$id": "20",
      "kind": "enumvalue",
      "name": "One",
      "value": 1,
      "valueType": {
-      "$id": "39",
+      "$id": "21",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "36"
+      "$ref": "18"
      },
      "decorators": []
     },
     {
-     "$id": "40",
+     "$id": "22",
      "kind": "enumvalue",
      "name": "Two",
      "value": 2,
      "valueType": {
-      "$id": "41",
+      "$id": "23",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "36"
+      "$ref": "18"
      },
      "decorators": []
     },
     {
-     "$id": "42",
+     "$id": "24",
      "kind": "enumvalue",
      "name": "Four",
      "value": 4,
      "valueType": {
-      "$id": "43",
+      "$id": "25",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "36"
+      "$ref": "18"
      },
      "decorators": []
     }
@@ -424,12 +220,12 @@
    "decorators": []
   },
   {
-   "$id": "44",
+   "$id": "26",
    "kind": "enum",
    "name": "FloatExtensibleEnum",
    "crossLanguageDefinitionId": "NewProjectTypeSpec.FloatExtensibleEnum",
    "valueType": {
-    "$id": "45",
+    "$id": "27",
     "kind": "float32",
     "name": "float32",
     "crossLanguageDefinitionId": "TypeSpec.float32",
@@ -437,53 +233,53 @@
    },
    "values": [
     {
-     "$id": "46",
+     "$id": "28",
      "kind": "enumvalue",
      "name": "One",
      "value": 1,
      "valueType": {
-      "$id": "47",
+      "$id": "29",
       "kind": "float32",
       "name": "float32",
       "crossLanguageDefinitionId": "TypeSpec.float32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "44"
+      "$ref": "26"
      },
      "decorators": []
     },
     {
-     "$id": "48",
+     "$id": "30",
      "kind": "enumvalue",
      "name": "Two",
      "value": 2,
      "valueType": {
-      "$id": "49",
+      "$id": "31",
       "kind": "float32",
       "name": "float32",
       "crossLanguageDefinitionId": "TypeSpec.float32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "44"
+      "$ref": "26"
      },
      "decorators": []
     },
     {
-     "$id": "50",
+     "$id": "32",
      "kind": "enumvalue",
      "name": "Four",
      "value": 4,
      "valueType": {
-      "$id": "51",
+      "$id": "33",
       "kind": "float32",
       "name": "float32",
       "crossLanguageDefinitionId": "TypeSpec.float32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "44"
+      "$ref": "26"
      },
      "decorators": []
     }
@@ -496,12 +292,12 @@
    "decorators": []
   },
   {
-   "$id": "52",
+   "$id": "34",
    "kind": "enum",
    "name": "FloatFixedEnum",
    "crossLanguageDefinitionId": "NewProjectTypeSpec.FloatFixedEnum",
    "valueType": {
-    "$id": "53",
+    "$id": "35",
     "kind": "float32",
     "name": "float32",
     "crossLanguageDefinitionId": "TypeSpec.float32",
@@ -509,53 +305,53 @@
    },
    "values": [
     {
-     "$id": "54",
+     "$id": "36",
      "kind": "enumvalue",
      "name": "One",
      "value": 1.1,
      "valueType": {
-      "$id": "55",
+      "$id": "37",
       "kind": "float32",
       "name": "float32",
       "crossLanguageDefinitionId": "TypeSpec.float32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "52"
+      "$ref": "34"
      },
      "decorators": []
     },
     {
-     "$id": "56",
+     "$id": "38",
      "kind": "enumvalue",
      "name": "Two",
      "value": 2.2,
      "valueType": {
-      "$id": "57",
+      "$id": "39",
       "kind": "float32",
       "name": "float32",
       "crossLanguageDefinitionId": "TypeSpec.float32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "52"
+      "$ref": "34"
      },
      "decorators": []
     },
     {
-     "$id": "58",
+     "$id": "40",
      "kind": "enumvalue",
      "name": "Four",
      "value": 4.4,
      "valueType": {
-      "$id": "59",
+      "$id": "41",
       "kind": "float32",
       "name": "float32",
       "crossLanguageDefinitionId": "TypeSpec.float32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "52"
+      "$ref": "34"
      },
      "decorators": []
     }
@@ -568,12 +364,12 @@
    "decorators": []
   },
   {
-   "$id": "60",
+   "$id": "42",
    "kind": "enum",
    "name": "IntFixedEnum",
    "crossLanguageDefinitionId": "NewProjectTypeSpec.IntFixedEnum",
    "valueType": {
-    "$id": "61",
+    "$id": "43",
     "kind": "int32",
     "name": "int32",
     "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -581,53 +377,53 @@
    },
    "values": [
     {
-     "$id": "62",
+     "$id": "44",
      "kind": "enumvalue",
      "name": "One",
      "value": 1,
      "valueType": {
-      "$id": "63",
+      "$id": "45",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "60"
+      "$ref": "42"
      },
      "decorators": []
     },
     {
-     "$id": "64",
+     "$id": "46",
      "kind": "enumvalue",
      "name": "Two",
      "value": 2,
      "valueType": {
-      "$id": "65",
+      "$id": "47",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "60"
+      "$ref": "42"
      },
      "decorators": []
     },
     {
-     "$id": "66",
+     "$id": "48",
      "kind": "enumvalue",
      "name": "Four",
      "value": 4,
      "valueType": {
-      "$id": "67",
+      "$id": "49",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "60"
+      "$ref": "42"
      },
      "decorators": []
     }
@@ -640,12 +436,12 @@
    "decorators": []
   },
   {
-   "$id": "68",
+   "$id": "50",
    "kind": "enum",
    "name": "DaysOfWeekExtensibleEnum",
    "crossLanguageDefinitionId": "NewProjectTypeSpec.DaysOfWeekExtensibleEnum",
    "valueType": {
-    "$id": "69",
+    "$id": "51",
     "kind": "string",
     "name": "string",
     "crossLanguageDefinitionId": "TypeSpec.string",
@@ -653,121 +449,121 @@
    },
    "values": [
     {
-     "$id": "70",
+     "$id": "52",
      "kind": "enumvalue",
      "name": "Monday",
      "value": "Monday",
      "valueType": {
-      "$id": "71",
+      "$id": "53",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "68"
+      "$ref": "50"
      },
      "decorators": []
     },
     {
-     "$id": "72",
+     "$id": "54",
      "kind": "enumvalue",
      "name": "Tuesday",
      "value": "Tuesday",
      "valueType": {
-      "$id": "73",
+      "$id": "55",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "68"
+      "$ref": "50"
      },
      "decorators": []
     },
     {
-     "$id": "74",
+     "$id": "56",
      "kind": "enumvalue",
      "name": "Wednesday",
      "value": "Wednesday",
      "valueType": {
-      "$id": "75",
+      "$id": "57",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "68"
+      "$ref": "50"
      },
      "decorators": []
     },
     {
-     "$id": "76",
+     "$id": "58",
      "kind": "enumvalue",
      "name": "Thursday",
      "value": "Thursday",
      "valueType": {
-      "$id": "77",
+      "$id": "59",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "68"
+      "$ref": "50"
      },
      "decorators": []
     },
     {
-     "$id": "78",
+     "$id": "60",
      "kind": "enumvalue",
      "name": "Friday",
      "value": "Friday",
      "valueType": {
-      "$id": "79",
+      "$id": "61",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "68"
+      "$ref": "50"
      },
      "decorators": []
     },
     {
-     "$id": "80",
+     "$id": "62",
      "kind": "enumvalue",
      "name": "Saturday",
      "value": "Saturday",
      "valueType": {
-      "$id": "81",
+      "$id": "63",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "68"
+      "$ref": "50"
      },
      "decorators": []
     },
     {
-     "$id": "82",
+     "$id": "64",
      "kind": "enumvalue",
      "name": "Sunday",
      "value": "Sunday",
      "valueType": {
-      "$id": "83",
+      "$id": "65",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "68"
+      "$ref": "50"
      },
      "decorators": []
     }
@@ -776,6 +572,198 @@
    "isFixed": false,
    "isFlags": false,
    "usage": "None",
+   "decorators": []
+  },
+  {
+   "$id": "66",
+   "kind": "enum",
+   "name": "ThingRequiredLiteralString",
+   "crossLanguageDefinitionId": "",
+   "valueType": {
+    "$id": "67",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "68",
+     "kind": "enumvalue",
+     "name": "accept",
+     "value": "accept",
+     "valueType": {
+      "$ref": "67"
+     },
+     "enumType": {
+      "$ref": "66"
+     }
+    }
+   ],
+   "isFixed": false,
+   "isFlags": false,
+   "usage": "Input,Output,Spread,Json",
+   "namespace": "Azure.NewProject.TypeSpec",
+   "decorators": []
+  },
+  {
+   "$id": "69",
+   "kind": "enum",
+   "name": "ThingRequiredLiteralInt",
+   "crossLanguageDefinitionId": "",
+   "valueType": {
+    "$id": "70",
+    "kind": "int32",
+    "name": "int32",
+    "crossLanguageDefinitionId": "TypeSpec.int32",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "71",
+     "kind": "enumvalue",
+     "name": "123",
+     "value": 123,
+     "valueType": {
+      "$ref": "70"
+     },
+     "enumType": {
+      "$ref": "69"
+     }
+    }
+   ],
+   "isFixed": false,
+   "isFlags": false,
+   "usage": "Input,Output,Spread,Json",
+   "namespace": "Azure.NewProject.TypeSpec",
+   "decorators": []
+  },
+  {
+   "$id": "72",
+   "kind": "enum",
+   "name": "ThingRequiredLiteralFloat",
+   "crossLanguageDefinitionId": "",
+   "valueType": {
+    "$id": "73",
+    "kind": "float32",
+    "name": "float32",
+    "crossLanguageDefinitionId": "TypeSpec.float32",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "74",
+     "kind": "enumvalue",
+     "name": "1.23",
+     "value": 1.23,
+     "valueType": {
+      "$ref": "73"
+     },
+     "enumType": {
+      "$ref": "72"
+     }
+    }
+   ],
+   "isFixed": false,
+   "isFlags": false,
+   "usage": "Input,Output,Spread,Json",
+   "namespace": "Azure.NewProject.TypeSpec",
+   "decorators": []
+  },
+  {
+   "$id": "75",
+   "kind": "enum",
+   "name": "ThingOptionalLiteralString",
+   "crossLanguageDefinitionId": "",
+   "valueType": {
+    "$id": "76",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "77",
+     "kind": "enumvalue",
+     "name": "reject",
+     "value": "reject",
+     "valueType": {
+      "$ref": "76"
+     },
+     "enumType": {
+      "$ref": "75"
+     }
+    }
+   ],
+   "isFixed": false,
+   "isFlags": false,
+   "usage": "Input,Output,Spread,Json",
+   "namespace": "Azure.NewProject.TypeSpec",
+   "decorators": []
+  },
+  {
+   "$id": "78",
+   "kind": "enum",
+   "name": "ThingOptionalLiteralInt",
+   "crossLanguageDefinitionId": "",
+   "valueType": {
+    "$id": "79",
+    "kind": "int32",
+    "name": "int32",
+    "crossLanguageDefinitionId": "TypeSpec.int32",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "80",
+     "kind": "enumvalue",
+     "name": "456",
+     "value": 456,
+     "valueType": {
+      "$ref": "79"
+     },
+     "enumType": {
+      "$ref": "78"
+     }
+    }
+   ],
+   "isFixed": false,
+   "isFlags": false,
+   "usage": "Input,Output,Spread,Json",
+   "namespace": "Azure.NewProject.TypeSpec",
+   "decorators": []
+  },
+  {
+   "$id": "81",
+   "kind": "enum",
+   "name": "ThingOptionalLiteralFloat",
+   "crossLanguageDefinitionId": "",
+   "valueType": {
+    "$id": "82",
+    "kind": "float32",
+    "name": "float32",
+    "crossLanguageDefinitionId": "TypeSpec.float32",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "83",
+     "kind": "enumvalue",
+     "name": "4.56",
+     "value": 4.56,
+     "valueType": {
+      "$ref": "82"
+     },
+     "enumType": {
+      "$ref": "81"
+     }
+    }
+   ],
+   "isFixed": false,
+   "isFlags": false,
+   "usage": "Input,Output,Spread,Json",
+   "namespace": "Azure.NewProject.TypeSpec",
    "decorators": []
   }
  ],
@@ -883,8 +871,11 @@
      "type": {
       "$id": "98",
       "kind": "constant",
+      "name": "ThingRequiredLiteralString",
+      "namespace": "Azure.NewProject.TypeSpec",
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
-       "$ref": "2"
+       "$ref": "66"
       },
       "value": "accept",
       "decorators": []
@@ -912,8 +903,11 @@
      "type": {
       "$id": "102",
       "kind": "constant",
+      "name": "ThingRequiredLiteralInt",
+      "namespace": "Azure.NewProject.TypeSpec",
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
-       "$ref": "5"
+       "$ref": "69"
       },
       "value": 123,
       "decorators": []
@@ -941,8 +935,11 @@
      "type": {
       "$id": "106",
       "kind": "constant",
+      "name": "ThingRequiredLiteralFloat",
+      "namespace": "Azure.NewProject.TypeSpec",
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
-       "$ref": "8"
+       "$ref": "72"
       },
       "value": 1.23,
       "decorators": []
@@ -970,6 +967,9 @@
      "type": {
       "$id": "110",
       "kind": "constant",
+      "name": "ThingRequiredLiteralBool",
+      "namespace": "Azure.NewProject.TypeSpec",
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
        "$id": "111",
        "kind": "boolean",
@@ -1003,8 +1003,11 @@
      "type": {
       "$id": "115",
       "kind": "constant",
+      "name": "ThingOptionalLiteralString",
+      "namespace": "Azure.NewProject.TypeSpec",
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
-       "$ref": "11"
+       "$ref": "75"
       },
       "value": "reject",
       "decorators": []
@@ -1032,8 +1035,11 @@
      "type": {
       "$id": "119",
       "kind": "constant",
+      "name": "ThingOptionalLiteralInt",
+      "namespace": "Azure.NewProject.TypeSpec",
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
-       "$ref": "14"
+       "$ref": "78"
       },
       "value": 456,
       "decorators": []
@@ -1061,8 +1067,11 @@
      "type": {
       "$id": "123",
       "kind": "constant",
+      "name": "ThingOptionalLiteralFloat",
+      "namespace": "Azure.NewProject.TypeSpec",
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
-       "$ref": "17"
+       "$ref": "81"
       },
       "value": 4.56,
       "decorators": []
@@ -1090,6 +1099,9 @@
      "type": {
       "$id": "127",
       "kind": "constant",
+      "name": "ThingOptionalLiteralBool",
+      "namespace": "Azure.NewProject.TypeSpec",
+      "usage": "Input,Output,Spread,Json",
       "valueType": {
        "$id": "128",
        "kind": "boolean",
@@ -1257,7 +1269,7 @@
       "kind": "array",
       "name": "ArrayStringFixedEnum",
       "valueType": {
-       "$ref": "20"
+       "$ref": "2"
       },
       "crossLanguageDefinitionId": "TypeSpec.Array",
       "decorators": []
@@ -1293,7 +1305,7 @@
        "decorators": []
       },
       "valueType": {
-       "$ref": "28"
+       "$ref": "10"
       },
       "decorators": []
      },
@@ -1341,7 +1353,7 @@
      "serializedName": "intExtensibleEnum",
      "doc": "this is an int based extensible enum",
      "type": {
-      "$ref": "36"
+      "$ref": "18"
      },
      "optional": true,
      "readOnly": false,
@@ -1368,7 +1380,7 @@
       "kind": "array",
       "name": "ArrayIntExtensibleEnum",
       "valueType": {
-       "$ref": "36"
+       "$ref": "18"
       },
       "crossLanguageDefinitionId": "TypeSpec.Array",
       "decorators": []
@@ -1394,7 +1406,7 @@
      "serializedName": "floatExtensibleEnum",
      "doc": "this is a float based extensible enum",
      "type": {
-      "$ref": "44"
+      "$ref": "26"
      },
      "optional": true,
      "readOnly": false,
@@ -1421,7 +1433,7 @@
       "kind": "array",
       "name": "ArrayFloatExtensibleEnum",
       "valueType": {
-       "$ref": "44"
+       "$ref": "26"
       },
       "crossLanguageDefinitionId": "TypeSpec.Array",
       "decorators": []
@@ -1447,7 +1459,7 @@
      "serializedName": "floatFixedEnum",
      "doc": "this is a float based fixed enum",
      "type": {
-      "$ref": "52"
+      "$ref": "34"
      },
      "optional": true,
      "readOnly": false,
@@ -1474,7 +1486,7 @@
       "kind": "array",
       "name": "ArrayFloatFixedEnum",
       "valueType": {
-       "$ref": "52"
+       "$ref": "34"
       },
       "crossLanguageDefinitionId": "TypeSpec.Array",
       "decorators": []
@@ -1500,7 +1512,7 @@
      "serializedName": "intFixedEnum",
      "doc": "this is a int based fixed enum",
      "type": {
-      "$ref": "60"
+      "$ref": "42"
      },
      "optional": true,
      "readOnly": false,
@@ -1527,7 +1539,7 @@
       "kind": "array",
       "name": "ArrayIntFixedEnum",
       "valueType": {
-       "$ref": "60"
+       "$ref": "42"
       },
       "crossLanguageDefinitionId": "TypeSpec.Array",
       "decorators": []
@@ -1553,7 +1565,7 @@
      "serializedName": "stringFixedEnum",
      "doc": "this is a string based fixed enum",
      "type": {
-      "$ref": "20"
+      "$ref": "2"
      },
      "optional": true,
      "readOnly": false,
@@ -1840,6 +1852,9 @@
         "type": {
          "$id": "231",
          "kind": "constant",
+         "name": "topActionContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "232",
           "kind": "string",
@@ -1966,6 +1981,9 @@
         "type": {
          "$id": "242",
          "kind": "constant",
+         "name": "topAction2ContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "243",
           "kind": "string",
@@ -2064,6 +2082,9 @@
         "type": {
          "$id": "250",
          "kind": "constant",
+         "name": "patchActionContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "251",
           "kind": "string",
@@ -2091,6 +2112,9 @@
         "type": {
          "$id": "253",
          "kind": "constant",
+         "name": "patchActionContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "254",
           "kind": "string",
@@ -2244,6 +2268,9 @@
         "type": {
          "$id": "264",
          "kind": "constant",
+         "name": "anonymousBodyContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "265",
           "kind": "string",
@@ -2271,6 +2298,9 @@
         "type": {
          "$id": "267",
          "kind": "constant",
+         "name": "anonymousBodyContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "268",
           "kind": "string",
@@ -2613,6 +2643,9 @@
         "type": {
          "$id": "290",
          "kind": "constant",
+         "name": "friendlyModelContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "291",
           "kind": "string",
@@ -2640,6 +2673,9 @@
         "type": {
          "$id": "293",
          "kind": "constant",
+         "name": "friendlyModelContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "294",
           "kind": "string",
@@ -3039,6 +3075,9 @@
             "type": {
              "$id": "330",
              "kind": "constant",
+             "name": "sayHiContentType",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "331",
               "kind": "string",
@@ -3255,6 +3294,9 @@
             "type": {
              "$id": "349",
              "kind": "constant",
+             "name": "HelloAgainRequestContentType",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "350",
               "kind": "string",
@@ -3303,6 +3345,9 @@
             "type": {
              "$id": "354",
              "kind": "constant",
+             "name": "helloAgainContentType",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "355",
               "kind": "string",
@@ -3415,6 +3460,9 @@
            "type": {
             "$id": "362",
             "kind": "constant",
+            "name": "HelloAgainRequestContentType1",
+            "namespace": "",
+            "usage": "None",
             "valueType": {
              "$id": "363",
              "kind": "string",
@@ -3549,6 +3597,9 @@
             "type": {
              "$id": "375",
              "kind": "constant",
+             "name": "noContentTypeContentType",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "376",
               "kind": "string",
@@ -3576,6 +3627,9 @@
             "type": {
              "$id": "378",
              "kind": "constant",
+             "name": "noContentTypeContentType1",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "379",
               "kind": "string",
@@ -3771,6 +3825,9 @@
             "type": {
              "$id": "393",
              "kind": "constant",
+             "name": "createLiteralContentType",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "394",
               "kind": "string",
@@ -3798,6 +3855,9 @@
             "type": {
              "$id": "396",
              "kind": "constant",
+             "name": "createLiteralContentType1",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "397",
               "kind": "string",
@@ -3950,6 +4010,9 @@
             "type": {
              "$id": "407",
              "kind": "constant",
+             "name": "HelloLiteralRequestP1",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "408",
               "kind": "string",
@@ -3977,6 +4040,9 @@
             "type": {
              "$id": "410",
              "kind": "constant",
+             "name": "ThingRequiredLiteralInt2",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "411",
               "kind": "int32",
@@ -4004,6 +4070,9 @@
             "type": {
              "$id": "413",
              "kind": "constant",
+             "name": "ThingOptionalLiteralBool2",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "414",
               "kind": "boolean",
@@ -4031,6 +4100,9 @@
             "type": {
              "$id": "416",
              "kind": "constant",
+             "name": "helloLiteralContentType",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "417",
               "kind": "string",
@@ -4085,6 +4157,9 @@
            "type": {
             "$id": "420",
             "kind": "constant",
+            "name": "HelloLiteralRequestP11",
+            "namespace": "",
+            "usage": "None",
             "valueType": {
              "$id": "421",
              "kind": "string",
@@ -4112,6 +4187,9 @@
            "type": {
             "$id": "423",
             "kind": "constant",
+            "name": "ThingRequiredLiteralInt3",
+            "namespace": "",
+            "usage": "None",
             "valueType": {
              "$id": "424",
              "kind": "int32",
@@ -4139,6 +4217,9 @@
            "type": {
             "$id": "426",
             "kind": "constant",
+            "name": "ThingOptionalLiteralBool3",
+            "namespace": "",
+            "usage": "None",
             "valueType": {
              "$id": "427",
              "kind": "boolean",
@@ -4247,6 +4328,9 @@
           "type": {
            "$id": "436",
            "kind": "constant",
+           "name": "getUnknownValueContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "437",
             "kind": "string",
@@ -4272,7 +4356,7 @@
           "name": "input",
           "nameInRequest": "input",
           "type": {
-           "$ref": "68"
+           "$ref": "50"
           },
           "location": "Body",
           "isApiVersion": false,
@@ -4313,7 +4397,7 @@
          "name": "input",
          "nameInRequest": "input",
          "type": {
-          "$ref": "68"
+          "$ref": "50"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -4409,6 +4493,9 @@
           "type": {
            "$id": "449",
            "kind": "constant",
+           "name": "internalProtocolContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "450",
             "kind": "string",
@@ -4436,6 +4523,9 @@
           "type": {
            "$id": "452",
            "kind": "constant",
+           "name": "internalProtocolContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "453",
             "kind": "string",

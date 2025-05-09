@@ -52,19 +52,13 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            apiVersions ??= Array.Empty<string>();
-            enums ??= Array.Empty<InputEnumType>();
-            models ??= Array.Empty<InputModelType>();
-            clients ??= Array.Empty<InputClient>();
-            auth ??= new();
-
             return new InputNamespace(
                 name ?? throw new JsonException(),
-                apiVersions,
-                enums,
-                models,
-                clients,
-                auth);
+                apiVersions ?? [],
+                enums ?? [],
+                models ?? [],
+                clients ?? [],
+                auth ?? new());
         }
     }
 }

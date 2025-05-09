@@ -663,6 +663,9 @@
           "type": {
            "$id": "74",
            "kind": "constant",
+           "name": "defaultContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "75",
             "kind": "string",
@@ -690,6 +693,9 @@
           "type": {
            "$id": "77",
            "kind": "constant",
+           "name": "defaultContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "78",
             "kind": "string",
@@ -841,6 +847,9 @@
           "type": {
            "$id": "88",
            "kind": "constant",
+           "name": "base64ContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "89",
             "kind": "string",
@@ -868,6 +877,9 @@
           "type": {
            "$id": "91",
            "kind": "constant",
+           "name": "base64ContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "92",
             "kind": "string",
@@ -1019,6 +1031,9 @@
           "type": {
            "$id": "102",
            "kind": "constant",
+           "name": "base64urlContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "103",
             "kind": "string",
@@ -1046,6 +1061,9 @@
           "type": {
            "$id": "105",
            "kind": "constant",
+           "name": "base64urlContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "106",
             "kind": "string",
@@ -1197,6 +1215,9 @@
           "type": {
            "$id": "116",
            "kind": "constant",
+           "name": "base64urlArrayContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "117",
             "kind": "string",
@@ -1224,6 +1245,9 @@
           "type": {
            "$id": "119",
            "kind": "constant",
+           "name": "base64urlArrayContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "120",
             "kind": "string",
@@ -1842,6 +1866,9 @@
           "type": {
            "$id": "176",
            "kind": "constant",
+           "name": "defaultContentType2",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "177",
             "kind": "string",
@@ -1974,6 +2001,9 @@
           "type": {
            "$id": "188",
            "kind": "constant",
+           "name": "OctetStreamRequestContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "189",
             "kind": "string",
@@ -2046,6 +2076,9 @@
          "type": {
           "$id": "194",
           "kind": "constant",
+          "name": "OctetStreamRequestContentType1",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "195",
            "kind": "string",
@@ -2115,6 +2148,9 @@
           "type": {
            "$id": "202",
            "kind": "constant",
+           "name": "CustomContentTypeRequestContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "203",
             "kind": "string",
@@ -2187,6 +2223,9 @@
          "type": {
           "$id": "208",
           "kind": "constant",
+          "name": "CustomContentTypeRequestContentType1",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "209",
            "kind": "string",
@@ -2256,6 +2295,9 @@
           "type": {
            "$id": "216",
            "kind": "constant",
+           "name": "Base64RequestContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "217",
             "kind": "string",
@@ -2329,6 +2371,9 @@
          "type": {
           "$id": "222",
           "kind": "constant",
+          "name": "Base64RequestContentType1",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "223",
            "kind": "string",
@@ -2399,6 +2444,9 @@
           "type": {
            "$id": "230",
            "kind": "constant",
+           "name": "Base64RequestContentType2",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "231",
             "kind": "string",
@@ -2472,6 +2520,9 @@
          "type": {
           "$id": "236",
           "kind": "constant",
+          "name": "Base64RequestContentType3",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "237",
            "kind": "string",
@@ -2588,6 +2639,9 @@
           "type": {
            "$id": "249",
            "kind": "constant",
+           "name": "defaultContentType3",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "250",
             "kind": "string",
@@ -2687,6 +2741,9 @@
           "type": {
            "$id": "258",
            "kind": "constant",
+           "name": "octetStreamContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "259",
             "kind": "string",
@@ -2729,6 +2786,9 @@
             "type": {
              "$id": "263",
              "kind": "constant",
+             "name": "OctetStreamRequestContentType2",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "264",
               "kind": "string",
@@ -2805,6 +2865,9 @@
           "type": {
            "$id": "270",
            "kind": "constant",
+           "name": "customContentTypeContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "271",
             "kind": "string",
@@ -2847,6 +2910,9 @@
             "type": {
              "$id": "275",
              "kind": "constant",
+             "name": "CustomContentTypeRequestContentType2",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "276",
               "kind": "string",
@@ -2923,6 +2989,9 @@
           "type": {
            "$id": "282",
            "kind": "constant",
+           "name": "base64ContentType2",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "283",
             "kind": "string",
@@ -2966,6 +3035,9 @@
             "type": {
              "$id": "287",
              "kind": "constant",
+             "name": "Base64RequestContentType4",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "288",
               "kind": "string",
@@ -3042,6 +3114,9 @@
           "type": {
            "$id": "294",
            "kind": "constant",
+           "name": "base64urlContentType2",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "295",
             "kind": "string",
@@ -3093,6 +3168,9 @@
             "type": {
              "$id": "300",
              "kind": "constant",
+             "name": "Base64RequestContentType5",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "301",
               "kind": "string",

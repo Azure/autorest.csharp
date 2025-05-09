@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace Scm._Type.Property.Optionality.Models
 {
-    /// <summary> The IntLiteralProperty_property. </summary>
+    /// <summary> The IntLiteralPropertyProperty. </summary>
     public readonly partial struct IntLiteralPropertyProperty : IEquatable<IntLiteralPropertyProperty>
     {
         private readonly int _value;

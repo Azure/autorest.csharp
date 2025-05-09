@@ -572,19 +572,17 @@ namespace AutoRest.CSharp.Generation.Types
         {
             if (type.IsFrameworkType)
             {
-                Constant? literal;
-                try
-                {
-                    literal = new Constant(literalValue, type);
-                }
-                catch
-                {
-                    literal = null;
-                }
-
                 return new CSharpType(type.FrameworkType, type.IsNullable)
                 {
-                    Literal = literal
+                    Literal = new Constant(literalValue, type)
+                };
+            }
+
+            if (type is { Implementation: EnumType enumType })
+            {
+                return new CSharpType(enumType, isNullable: type.IsNullable)
+                {
+                    Literal = new Constant(literalValue, type)
                 };
             }
 

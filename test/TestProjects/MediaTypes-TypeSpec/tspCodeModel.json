@@ -442,6 +442,9 @@
         "type": {
          "$id": "45",
          "kind": "constant",
+         "name": "OneStringBodyThreeContentTypesRequestContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "46",
           "kind": "string",
@@ -527,6 +530,9 @@
        "type": {
         "$id": "51",
         "kind": "constant",
+        "name": "OneStringBodyThreeContentTypesRequestContentType11",
+        "namespace": "",
+        "usage": "None",
         "valueType": {
          "$id": "52",
          "kind": "string",

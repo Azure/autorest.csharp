@@ -27,6 +27,16 @@ namespace AutoRest.CSharp.Common.Input
         public static InputEnumType CreateEnumType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null && name == null;
+            if (id == null)
+            {
+                reader.TryReadReferenceId(ref isFirstProperty, ref id);
+            }
+            id = id ?? throw new JsonException("Enum must have an id");
+
+            var enumType = new InputEnumType(null!, null!, null, null, null, null, InputModelTypeUsage.None, null!, null!, false);
+
+            resolver.AddReference(id, enumType);
+
             string? crossLanguageDefinitionId = null;
             string? access = null;
             string? deprecation = null;
@@ -40,8 +50,7 @@ namespace AutoRest.CSharp.Common.Input
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString("name", ref name)
+                var isKnownProperty = reader.TryReadString("name", ref name)
                     || reader.TryReadString("crossLanguageDefinitionId", ref crossLanguageDefinitionId)
                     || reader.TryReadString("access", ref access)
                     || reader.TryReadString("deprecation", ref deprecation)
@@ -61,7 +70,6 @@ namespace AutoRest.CSharp.Common.Input
 
             name = name ?? throw new JsonException("Enum must have name");
             // TODO: roll back to throw JSON error when there is linter on the upstream to check enum without @doc
-            //description = description ?? throw new JsonException("Enum must have a description");
             if (doc.IsNullOrEmpty() && summary.IsNullOrEmpty())
             {
                 Console.Error.WriteLine($"[Warn]: Enum '{name}' must have either a summary or description");
@@ -84,14 +92,9 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("The ValueType of an EnumType must be a primitive type.");
             }
 
-            var enumType = new InputEnumType(name, crossLanguageDefinitionId ?? string.Empty, access, deprecation, summary!, doc!, usage, inputValueType, values, !isFixed)
-            {
-                Decorators = decorators ?? []
-            };
-            if (id != null)
-            {
-                resolver.AddReference(id, enumType);
-            }
+            enumType.Update(name, crossLanguageDefinitionId ?? string.Empty, access, deprecation, summary!, doc!, usage, inputValueType, values, !isFixed);
+            enumType.Decorators = decorators ?? [];
+
             return enumType;
         }
     }

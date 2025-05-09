@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The WidgetData2_kind. </summary>
+    /// <summary> The WidgetData2Kind. </summary>
     public readonly partial struct WidgetData2Kind : IEquatable<WidgetData2Kind>
     {
         private readonly string _value;

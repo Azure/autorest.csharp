@@ -1596,6 +1596,9 @@
         "type": {
          "$id": "215",
          "kind": "constant",
+         "name": "roundTripContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "216",
           "kind": "string",
@@ -1623,6 +1626,9 @@
         "type": {
          "$id": "218",
          "kind": "constant",
+         "name": "roundTripContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "219",
           "kind": "string",
@@ -1776,6 +1782,9 @@
         "type": {
          "$id": "229",
          "kind": "constant",
+         "name": "fooContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "230",
           "kind": "string",
@@ -1803,6 +1812,9 @@
         "type": {
          "$id": "232",
          "kind": "constant",
+         "name": "fooContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "233",
           "kind": "string",
@@ -1956,6 +1968,9 @@
         "type": {
          "$id": "243",
          "kind": "constant",
+         "name": "barContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "244",
           "kind": "string",
@@ -1983,6 +1998,9 @@
         "type": {
          "$id": "246",
          "kind": "constant",
+         "name": "barContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "247",
           "kind": "string",

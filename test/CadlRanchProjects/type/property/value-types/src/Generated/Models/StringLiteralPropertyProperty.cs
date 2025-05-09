@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace _Type.Property.ValueTypes.Models
 {
-    /// <summary> The StringLiteralProperty_property. </summary>
+    /// <summary> The StringLiteralPropertyProperty. </summary>
     public readonly partial struct StringLiteralPropertyProperty : IEquatable<StringLiteralPropertyProperty>
     {
         private readonly string _value;

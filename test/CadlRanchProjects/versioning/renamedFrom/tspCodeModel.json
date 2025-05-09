@@ -263,6 +263,9 @@
         "type": {
          "$id": "33",
          "kind": "constant",
+         "name": "newOpContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "34",
           "kind": "string",
@@ -290,6 +293,9 @@
         "type": {
          "$id": "36",
          "kind": "constant",
+         "name": "newOpContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "37",
           "kind": "string",
@@ -526,6 +532,9 @@
           "type": {
            "$id": "55",
            "kind": "constant",
+           "name": "newOpInNewInterfaceContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "56",
             "kind": "string",
@@ -553,6 +562,9 @@
           "type": {
            "$id": "58",
            "kind": "constant",
+           "name": "newOpInNewInterfaceContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "59",
             "kind": "string",

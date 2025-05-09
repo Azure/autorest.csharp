@@ -6,7 +6,8 @@
   {
    "$id": "2",
    "kind": "enum",
-   "name": "WidgetData0_kind",
+   "name": "WidgetData0Kind",
+   "crossLanguageDefinitionId": "",
    "valueType": {
     "$id": "3",
     "kind": "string",
@@ -20,7 +21,6 @@
      "kind": "enumvalue",
      "name": "kind0",
      "value": "kind0",
-     "doc": "kind0",
      "valueType": {
       "$ref": "3"
      },
@@ -29,18 +29,17 @@
      }
     }
    ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "_Type.Property.AdditionalProperties",
-   "doc": "The WidgetData0_kind",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
+   "namespace": "_Type.Property.AdditionalProperties",
    "decorators": []
   },
   {
    "$id": "5",
    "kind": "enum",
-   "name": "WidgetData1_kind",
+   "name": "WidgetData1Kind",
+   "crossLanguageDefinitionId": "",
    "valueType": {
     "$id": "6",
     "kind": "string",
@@ -54,7 +53,6 @@
      "kind": "enumvalue",
      "name": "kind1",
      "value": "kind1",
-     "doc": "kind1",
      "valueType": {
       "$ref": "6"
      },
@@ -63,18 +61,17 @@
      }
     }
    ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "_Type.Property.AdditionalProperties",
-   "doc": "The WidgetData1_kind",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
+   "namespace": "_Type.Property.AdditionalProperties",
    "decorators": []
   },
   {
    "$id": "8",
    "kind": "enum",
-   "name": "WidgetData2_kind",
+   "name": "WidgetData2Kind",
+   "crossLanguageDefinitionId": "",
    "valueType": {
     "$id": "9",
     "kind": "string",
@@ -88,7 +85,6 @@
      "kind": "enumvalue",
      "name": "kind1",
      "value": "kind1",
-     "doc": "kind1",
      "valueType": {
       "$ref": "9"
      },
@@ -97,12 +93,10 @@
      }
     }
    ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "_Type.Property.AdditionalProperties",
-   "doc": "The WidgetData2_kind",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
+   "namespace": "_Type.Property.AdditionalProperties",
    "decorators": []
   }
  ],
@@ -321,6 +315,9 @@
        "type": {
         "$id": "39",
         "kind": "constant",
+        "name": "ExtendsUnknownAdditionalPropertiesDiscriminatedDerivedKind",
+        "namespace": "_Type.Property.AdditionalProperties",
+        "usage": "Input,Output,Json",
         "valueType": {
          "$id": "40",
          "kind": "string",
@@ -620,6 +617,9 @@
        "type": {
         "$id": "79",
         "kind": "constant",
+        "name": "IsUnknownAdditionalPropertiesDiscriminatedDerivedKind",
+        "namespace": "_Type.Property.AdditionalProperties",
+        "usage": "Input,Output,Json",
         "valueType": {
          "$id": "80",
          "kind": "string",
@@ -1786,6 +1786,9 @@
         "type": {
          "$id": "224",
          "kind": "constant",
+         "name": "WidgetData0Kind",
+         "namespace": "_Type.Property.AdditionalProperties",
+         "usage": "Input,Output,Json",
          "valueType": {
           "$ref": "2"
          },
@@ -1851,6 +1854,9 @@
         "type": {
          "$id": "233",
          "kind": "constant",
+         "name": "WidgetData1Kind",
+         "namespace": "_Type.Property.AdditionalProperties",
+         "usage": "Input,Output,Json",
          "valueType": {
           "$ref": "5"
          },
@@ -2012,6 +2018,9 @@
         "type": {
          "$id": "254",
          "kind": "constant",
+         "name": "WidgetData2Kind",
+         "namespace": "_Type.Property.AdditionalProperties",
+         "usage": "Input,Output,Json",
          "valueType": {
           "$ref": "8"
          },
@@ -2233,6 +2242,9 @@
           "type": {
            "$id": "281",
            "kind": "constant",
+           "name": "getContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "282",
             "kind": "string",
@@ -2331,6 +2343,9 @@
           "type": {
            "$id": "289",
            "kind": "constant",
+           "name": "putContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "290",
             "kind": "string",
@@ -2505,6 +2520,9 @@
           "type": {
            "$id": "304",
            "kind": "constant",
+           "name": "getContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "305",
             "kind": "string",
@@ -2603,6 +2621,9 @@
           "type": {
            "$id": "312",
            "kind": "constant",
+           "name": "putContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "313",
             "kind": "string",
@@ -2777,6 +2798,9 @@
           "type": {
            "$id": "327",
            "kind": "constant",
+           "name": "getContentType2",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "328",
             "kind": "string",
@@ -2875,6 +2899,9 @@
           "type": {
            "$id": "335",
            "kind": "constant",
+           "name": "putContentType2",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "336",
             "kind": "string",
@@ -3049,6 +3076,9 @@
           "type": {
            "$id": "350",
            "kind": "constant",
+           "name": "getContentType3",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "351",
             "kind": "string",
@@ -3147,6 +3177,9 @@
           "type": {
            "$id": "358",
            "kind": "constant",
+           "name": "putContentType3",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "359",
             "kind": "string",
@@ -3321,6 +3354,9 @@
           "type": {
            "$id": "373",
            "kind": "constant",
+           "name": "getContentType4",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "374",
             "kind": "string",
@@ -3419,6 +3455,9 @@
           "type": {
            "$id": "381",
            "kind": "constant",
+           "name": "putContentType4",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "382",
             "kind": "string",
@@ -3593,6 +3632,9 @@
           "type": {
            "$id": "396",
            "kind": "constant",
+           "name": "getContentType5",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "397",
             "kind": "string",
@@ -3691,6 +3733,9 @@
           "type": {
            "$id": "404",
            "kind": "constant",
+           "name": "putContentType5",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "405",
             "kind": "string",
@@ -3865,6 +3910,9 @@
           "type": {
            "$id": "419",
            "kind": "constant",
+           "name": "getContentType6",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "420",
             "kind": "string",
@@ -3963,6 +4011,9 @@
           "type": {
            "$id": "427",
            "kind": "constant",
+           "name": "putContentType6",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "428",
             "kind": "string",
@@ -4137,6 +4188,9 @@
           "type": {
            "$id": "442",
            "kind": "constant",
+           "name": "getContentType7",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "443",
             "kind": "string",
@@ -4235,6 +4289,9 @@
           "type": {
            "$id": "450",
            "kind": "constant",
+           "name": "putContentType7",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "451",
             "kind": "string",
@@ -4409,6 +4466,9 @@
           "type": {
            "$id": "465",
            "kind": "constant",
+           "name": "getContentType8",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "466",
             "kind": "string",
@@ -4507,6 +4567,9 @@
           "type": {
            "$id": "473",
            "kind": "constant",
+           "name": "putContentType8",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "474",
             "kind": "string",
@@ -4681,6 +4744,9 @@
           "type": {
            "$id": "488",
            "kind": "constant",
+           "name": "getContentType9",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "489",
             "kind": "string",
@@ -4779,6 +4845,9 @@
           "type": {
            "$id": "496",
            "kind": "constant",
+           "name": "putContentType9",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "497",
             "kind": "string",
@@ -4953,6 +5022,9 @@
           "type": {
            "$id": "511",
            "kind": "constant",
+           "name": "getContentType10",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "512",
             "kind": "string",
@@ -5051,6 +5123,9 @@
           "type": {
            "$id": "519",
            "kind": "constant",
+           "name": "putContentType10",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "520",
             "kind": "string",
@@ -5225,6 +5300,9 @@
           "type": {
            "$id": "534",
            "kind": "constant",
+           "name": "getContentType11",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "535",
             "kind": "string",
@@ -5323,6 +5401,9 @@
           "type": {
            "$id": "542",
            "kind": "constant",
+           "name": "putContentType11",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "543",
             "kind": "string",
@@ -5497,6 +5578,9 @@
           "type": {
            "$id": "557",
            "kind": "constant",
+           "name": "getContentType12",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "558",
             "kind": "string",
@@ -5595,6 +5679,9 @@
           "type": {
            "$id": "565",
            "kind": "constant",
+           "name": "putContentType12",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "566",
             "kind": "string",
@@ -5769,6 +5856,9 @@
           "type": {
            "$id": "580",
            "kind": "constant",
+           "name": "getContentType13",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "581",
             "kind": "string",
@@ -5867,6 +5957,9 @@
           "type": {
            "$id": "588",
            "kind": "constant",
+           "name": "putContentType13",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "589",
             "kind": "string",
@@ -6041,6 +6134,9 @@
           "type": {
            "$id": "603",
            "kind": "constant",
+           "name": "getContentType14",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "604",
             "kind": "string",
@@ -6139,6 +6235,9 @@
           "type": {
            "$id": "611",
            "kind": "constant",
+           "name": "putContentType14",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "612",
             "kind": "string",
@@ -6313,6 +6412,9 @@
           "type": {
            "$id": "626",
            "kind": "constant",
+           "name": "getContentType15",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "627",
             "kind": "string",
@@ -6411,6 +6513,9 @@
           "type": {
            "$id": "634",
            "kind": "constant",
+           "name": "putContentType15",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "635",
             "kind": "string",
@@ -6585,6 +6690,9 @@
           "type": {
            "$id": "649",
            "kind": "constant",
+           "name": "getContentType16",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "650",
             "kind": "string",
@@ -6683,6 +6791,9 @@
           "type": {
            "$id": "657",
            "kind": "constant",
+           "name": "putContentType16",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "658",
             "kind": "string",
@@ -6857,6 +6968,9 @@
           "type": {
            "$id": "672",
            "kind": "constant",
+           "name": "getContentType17",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "673",
             "kind": "string",
@@ -6955,6 +7069,9 @@
           "type": {
            "$id": "680",
            "kind": "constant",
+           "name": "putContentType17",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "681",
             "kind": "string",
@@ -7129,6 +7246,9 @@
           "type": {
            "$id": "695",
            "kind": "constant",
+           "name": "getContentType18",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "696",
             "kind": "string",
@@ -7227,6 +7347,9 @@
           "type": {
            "$id": "703",
            "kind": "constant",
+           "name": "putContentType18",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "704",
             "kind": "string",
@@ -7401,6 +7524,9 @@
           "type": {
            "$id": "718",
            "kind": "constant",
+           "name": "getContentType19",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "719",
             "kind": "string",
@@ -7499,6 +7625,9 @@
           "type": {
            "$id": "726",
            "kind": "constant",
+           "name": "putContentType19",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "727",
             "kind": "string",
@@ -7673,6 +7802,9 @@
           "type": {
            "$id": "741",
            "kind": "constant",
+           "name": "getContentType20",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "742",
             "kind": "string",
@@ -7771,6 +7903,9 @@
           "type": {
            "$id": "749",
            "kind": "constant",
+           "name": "putContentType20",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "750",
             "kind": "string",
@@ -7945,6 +8080,9 @@
           "type": {
            "$id": "764",
            "kind": "constant",
+           "name": "getContentType21",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "765",
             "kind": "string",
@@ -8043,6 +8181,9 @@
           "type": {
            "$id": "772",
            "kind": "constant",
+           "name": "putContentType21",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "773",
             "kind": "string",
@@ -8217,6 +8358,9 @@
           "type": {
            "$id": "787",
            "kind": "constant",
+           "name": "getContentType22",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "788",
             "kind": "string",
@@ -8315,6 +8459,9 @@
           "type": {
            "$id": "795",
            "kind": "constant",
+           "name": "putContentType22",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "796",
             "kind": "string",
@@ -8489,6 +8636,9 @@
           "type": {
            "$id": "810",
            "kind": "constant",
+           "name": "getContentType23",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "811",
             "kind": "string",
@@ -8587,6 +8737,9 @@
           "type": {
            "$id": "818",
            "kind": "constant",
+           "name": "putContentType23",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "819",
             "kind": "string",
@@ -8761,6 +8914,9 @@
           "type": {
            "$id": "833",
            "kind": "constant",
+           "name": "getContentType24",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "834",
             "kind": "string",
@@ -8859,6 +9015,9 @@
           "type": {
            "$id": "841",
            "kind": "constant",
+           "name": "putContentType24",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "842",
             "kind": "string",
@@ -9033,6 +9192,9 @@
           "type": {
            "$id": "856",
            "kind": "constant",
+           "name": "getContentType25",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "857",
             "kind": "string",
@@ -9131,6 +9293,9 @@
           "type": {
            "$id": "864",
            "kind": "constant",
+           "name": "putContentType25",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "865",
             "kind": "string",
@@ -9305,6 +9470,9 @@
           "type": {
            "$id": "879",
            "kind": "constant",
+           "name": "getContentType26",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "880",
             "kind": "string",
@@ -9403,6 +9571,9 @@
           "type": {
            "$id": "887",
            "kind": "constant",
+           "name": "putContentType26",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "888",
             "kind": "string",
@@ -9577,6 +9748,9 @@
           "type": {
            "$id": "902",
            "kind": "constant",
+           "name": "getContentType27",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "903",
             "kind": "string",
@@ -9675,6 +9849,9 @@
           "type": {
            "$id": "910",
            "kind": "constant",
+           "name": "putContentType27",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "911",
             "kind": "string",
@@ -9849,6 +10026,9 @@
           "type": {
            "$id": "925",
            "kind": "constant",
+           "name": "getContentType28",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "926",
             "kind": "string",
@@ -9947,6 +10127,9 @@
           "type": {
            "$id": "933",
            "kind": "constant",
+           "name": "putContentType28",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "934",
             "kind": "string",
@@ -10121,6 +10304,9 @@
           "type": {
            "$id": "948",
            "kind": "constant",
+           "name": "getContentType29",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "949",
             "kind": "string",
@@ -10219,6 +10405,9 @@
           "type": {
            "$id": "956",
            "kind": "constant",
+           "name": "putContentType29",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "957",
             "kind": "string",
@@ -10393,6 +10582,9 @@
           "type": {
            "$id": "971",
            "kind": "constant",
+           "name": "getContentType30",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "972",
             "kind": "string",
@@ -10491,6 +10683,9 @@
           "type": {
            "$id": "979",
            "kind": "constant",
+           "name": "putContentType30",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "980",
             "kind": "string",

@@ -11,7 +11,7 @@ using System.Globalization;
 
 namespace _Type.Property.ValueTypes.Models
 {
-    /// <summary> The FloatLiteralProperty_property. </summary>
+    /// <summary> The FloatLiteralPropertyProperty. </summary>
     public readonly partial struct FloatLiteralPropertyProperty : IEquatable<FloatLiteralPropertyProperty>
     {
         private readonly float _value;

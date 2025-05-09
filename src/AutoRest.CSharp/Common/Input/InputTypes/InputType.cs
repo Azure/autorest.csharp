@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input.InputTypes;
 
@@ -42,7 +41,6 @@ internal abstract record InputType
         }
     }
 
-    //public bool IsNullable { get; init; }
     public string Name { get; internal set; }
 
     public IReadOnlyList<InputDecoratorInfo> Decorators { get; internal set; } = new List<InputDecoratorInfo>();
