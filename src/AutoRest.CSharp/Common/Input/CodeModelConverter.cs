@@ -60,7 +60,6 @@ namespace AutoRest.CSharp.Common.Input
             return new(name: _codeModel.Language.Default.Name,
                 clients: clients,
                 enums: _enumsCache.Values.ToArray(),
-                constants: [],
                 models: models,
                 apiVersions: GetApiVersions(),
                 auth: GetAuth(_codeModel.Security.Schemes.OfType<SecurityScheme>()));

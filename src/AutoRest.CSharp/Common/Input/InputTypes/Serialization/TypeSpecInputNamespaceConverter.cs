@@ -33,7 +33,6 @@ namespace AutoRest.CSharp.Common.Input
             string? name = null;
             IReadOnlyList<string>? apiVersions = null;
             IReadOnlyList<InputEnumType>? enums = null;
-            IReadOnlyList<InputLiteralType>? constants = null;
             IReadOnlyList<InputModelType>? models = null;
             IReadOnlyList<InputClient>? clients = null;
             InputAuth? auth = null;
@@ -43,7 +42,6 @@ namespace AutoRest.CSharp.Common.Input
                 var isKnownProperty = reader.TryReadString("name", ref name)
                     || reader.TryReadComplexType("apiVersions", options, ref apiVersions)
                     || reader.TryReadComplexType("enums", options, ref enums)
-                    || reader.TryReadComplexType("constants", options, ref constants)
                     || reader.TryReadComplexType("models", options, ref models)
                     || reader.TryReadComplexType("clients", options, ref clients)
                     || reader.TryReadComplexType("auth", options, ref auth);
@@ -58,7 +56,6 @@ namespace AutoRest.CSharp.Common.Input
                 name ?? throw new JsonException(),
                 apiVersions ?? [],
                 enums ?? [],
-                constants ?? [],
                 models ?? [],
                 clients ?? [],
                 auth ?? new());
