@@ -4,6 +4,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -18,9 +19,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public override InputPrimitiveType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => reader.ReadReferenceAndResolve<InputPrimitiveType>(_referenceHandler.CurrentResolver) ?? CreatePrimitiveType(ref reader, null, null, null, options, _referenceHandler.CurrentResolver);
-
-        public override void Write(Utf8JsonWriter writer, InputPrimitiveType value, JsonSerializerOptions options)
-            => throw new NotSupportedException("Writing not supported");
 
         public static InputPrimitiveType CreatePrimitiveType(ref Utf8JsonReader reader, string? id, string? kind, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
@@ -58,6 +56,25 @@ namespace AutoRest.CSharp.Common.Input
                 resolver.AddReference(id, primitiveType);
             }
             return primitiveType;
+        }
+
+        public override void Write(Utf8JsonWriter writer, InputPrimitiveType value, JsonSerializerOptions options)
+            => writer.WriteObjectOrReference(value, options, _referenceHandler.CurrentResolver, WriteInputPrimitiveTypeProperties);
+
+        private static void WriteInputPrimitiveTypeProperties(Utf8JsonWriter writer, InputPrimitiveType value, JsonSerializerOptions options)
+        {
+            // kind
+            writer.WriteString("kind", value.Kind.ToString().FirstCharToLowerCase());
+            // name
+            writer.WriteString("name", value.Name);
+            // encode
+            writer.WriteStringIfPresent("encode", value.Encode);
+            // crossLanguageDefinitionId
+            writer.WriteString("crossLanguageDefinitionId", value.CrossLanguageDefinitionId);
+            // baseType
+            writer.WriteObjectIfPresent("baseType", value.BaseType, options);
+            // decorators
+            writer.WriteArray("decorators", value.Decorators, options);
         }
     }
 }
