@@ -2,43 +2,10 @@
  "$id": "1",
  "name": "_Specs_.Azure.ClientGenerator.Core.Access",
  "apiVersions": [],
- "enums": [
-  {
-   "$id": "2",
-   "kind": "enum",
-   "name": "RealModelKind",
-   "crossLanguageDefinitionId": "",
-   "valueType": {
-    "$id": "3",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "values": [
-    {
-     "$id": "4",
-     "kind": "enumvalue",
-     "name": "real",
-     "value": "real",
-     "valueType": {
-      "$ref": "3"
-     },
-     "enumType": {
-      "$ref": "2"
-     }
-    }
-   ],
-   "isFixed": false,
-   "isFlags": false,
-   "usage": "Output,Json",
-   "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
-   "decorators": []
-  }
- ],
+ "enums": [],
  "models": [
   {
-   "$id": "5",
+   "$id": "2",
    "kind": "model",
    "name": "NoDecoratorModelInPublic",
    "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
@@ -48,12 +15,12 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "6",
+     "$id": "3",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
      "type": {
-      "$id": "7",
+      "$id": "4",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -66,9 +33,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation.NoDecoratorModelInPublic.name",
      "serializationOptions": {
-      "$id": "8",
+      "$id": "5",
       "json": {
-       "$id": "9",
+       "$id": "6",
        "name": "name"
       }
      }
@@ -76,7 +43,7 @@
    ]
   },
   {
-   "$id": "10",
+   "$id": "7",
    "kind": "model",
    "name": "PublicDecoratorModelInPublic",
    "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
@@ -87,12 +54,12 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "11",
+     "$id": "8",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
      "type": {
-      "$id": "12",
+      "$id": "9",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -105,9 +72,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation.PublicDecoratorModelInPublic.name",
      "serializationOptions": {
-      "$id": "13",
+      "$id": "10",
       "json": {
-       "$id": "14",
+       "$id": "11",
        "name": "name"
       }
      }
@@ -115,7 +82,7 @@
    ]
   },
   {
-   "$id": "15",
+   "$id": "12",
    "kind": "model",
    "name": "NoDecoratorModelInInternal",
    "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
@@ -125,12 +92,12 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "16",
+     "$id": "13",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
      "type": {
-      "$id": "17",
+      "$id": "14",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -143,9 +110,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.NoDecoratorModelInInternal.name",
      "serializationOptions": {
-      "$id": "18",
+      "$id": "15",
       "json": {
-       "$id": "19",
+       "$id": "16",
        "name": "name"
       }
      }
@@ -153,7 +120,7 @@
    ]
   },
   {
-   "$id": "20",
+   "$id": "17",
    "kind": "model",
    "name": "InternalDecoratorModelInInternal",
    "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
@@ -164,12 +131,12 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "21",
+     "$id": "18",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
      "type": {
-      "$id": "22",
+      "$id": "19",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -182,9 +149,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.InternalDecoratorModelInInternal.name",
      "serializationOptions": {
-      "$id": "23",
+      "$id": "20",
       "json": {
-       "$id": "24",
+       "$id": "21",
        "name": "name"
       }
      }
@@ -192,7 +159,7 @@
    ]
   },
   {
-   "$id": "25",
+   "$id": "22",
    "kind": "model",
    "name": "PublicDecoratorModelInInternal",
    "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
@@ -203,12 +170,12 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "26",
+     "$id": "23",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
      "type": {
-      "$id": "27",
+      "$id": "24",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -221,9 +188,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.PublicDecoratorModelInInternal.name",
      "serializationOptions": {
-      "$id": "28",
+      "$id": "25",
       "json": {
-       "$id": "29",
+       "$id": "26",
        "name": "name"
       }
      }
@@ -231,7 +198,7 @@
    ]
   },
   {
-   "$id": "30",
+   "$id": "27",
    "kind": "model",
    "name": "SharedModel",
    "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation",
@@ -241,12 +208,12 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "31",
+     "$id": "28",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
      "type": {
-      "$id": "32",
+      "$id": "29",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -259,9 +226,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation.SharedModel.name",
      "serializationOptions": {
-      "$id": "33",
+      "$id": "30",
       "json": {
-       "$id": "34",
+       "$id": "31",
        "name": "name"
       }
      }
@@ -269,7 +236,7 @@
    ]
   },
   {
-   "$id": "35",
+   "$id": "32",
    "kind": "model",
    "name": "OuterModel",
    "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
@@ -278,7 +245,7 @@
    "doc": "Used in internal operations, should be generated but not exported.",
    "decorators": [],
    "baseModel": {
-    "$id": "36",
+    "$id": "33",
     "kind": "model",
     "name": "BaseModel",
     "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
@@ -288,12 +255,12 @@
     "decorators": [],
     "properties": [
      {
-      "$id": "37",
+      "$id": "34",
       "kind": "property",
       "name": "name",
       "serializedName": "name",
       "type": {
-       "$id": "38",
+       "$id": "35",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
@@ -306,9 +273,9 @@
       "decorators": [],
       "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.BaseModel.name",
       "serializationOptions": {
-       "$id": "39",
+       "$id": "36",
        "json": {
-        "$id": "40",
+        "$id": "37",
         "name": "name"
        }
       }
@@ -317,12 +284,12 @@
    },
    "properties": [
     {
-     "$id": "41",
+     "$id": "38",
      "kind": "property",
      "name": "inner",
      "serializedName": "inner",
      "type": {
-      "$id": "42",
+      "$id": "39",
       "kind": "model",
       "name": "InnerModel",
       "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
@@ -332,12 +299,12 @@
       "decorators": [],
       "properties": [
        {
-        "$id": "43",
+        "$id": "40",
         "kind": "property",
         "name": "name",
         "serializedName": "name",
         "type": {
-         "$id": "44",
+         "$id": "41",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -350,9 +317,9 @@
         "decorators": [],
         "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.InnerModel.name",
         "serializationOptions": {
-         "$id": "45",
+         "$id": "42",
          "json": {
-          "$id": "46",
+          "$id": "43",
           "name": "name"
          }
         }
@@ -366,9 +333,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.OuterModel.inner",
      "serializationOptions": {
-      "$id": "47",
+      "$id": "44",
       "json": {
-       "$id": "48",
+       "$id": "45",
        "name": "inner"
       }
      }
@@ -376,13 +343,13 @@
    ]
   },
   {
-   "$ref": "42"
+   "$ref": "39"
   },
   {
-   "$ref": "36"
+   "$ref": "33"
   },
   {
-   "$id": "49",
+   "$id": "46",
    "kind": "model",
    "name": "AbstractModel",
    "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
@@ -391,13 +358,13 @@
    "doc": "Used in internal operations, should be generated but not exported.",
    "decorators": [],
    "discriminatorProperty": {
-    "$id": "50",
+    "$id": "47",
     "kind": "property",
     "name": "kind",
     "serializedName": "kind",
     "doc": "Discriminator property for AbstractModel.",
     "type": {
-     "$id": "51",
+     "$id": "48",
      "kind": "string",
      "name": "string",
      "crossLanguageDefinitionId": "TypeSpec.string",
@@ -410,24 +377,24 @@
     "decorators": [],
     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.AbstractModel.kind",
     "serializationOptions": {
-     "$id": "52",
+     "$id": "49",
      "json": {
-      "$id": "53",
+      "$id": "50",
       "name": "kind"
      }
     }
    },
    "properties": [
     {
-     "$ref": "50"
+     "$ref": "47"
     },
     {
-     "$id": "54",
+     "$id": "51",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
      "type": {
-      "$id": "55",
+      "$id": "52",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -440,18 +407,18 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.AbstractModel.name",
      "serializationOptions": {
-      "$id": "56",
+      "$id": "53",
       "json": {
-       "$id": "57",
+       "$id": "54",
        "name": "name"
       }
      }
     }
    ],
    "discriminatedSubtypes": {
-    "$id": "58",
+    "$id": "55",
     "real": {
-     "$id": "59",
+     "$id": "56",
      "kind": "model",
      "name": "RealModel",
      "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
@@ -461,22 +428,26 @@
      "discriminatorValue": "real",
      "decorators": [],
      "baseModel": {
-      "$ref": "49"
+      "$ref": "46"
      },
      "properties": [
       {
-       "$id": "60",
+       "$id": "57",
        "kind": "property",
        "name": "kind",
        "serializedName": "kind",
        "type": {
-        "$id": "61",
+        "$id": "58",
         "kind": "constant",
         "name": "RealModelKind",
         "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
         "usage": "Output,Json",
         "valueType": {
-         "$ref": "2"
+         "$id": "59",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
         "value": "real",
         "decorators": []
@@ -488,9 +459,9 @@
        "decorators": [],
        "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.RealModel.kind",
        "serializationOptions": {
-        "$id": "62",
+        "$id": "60",
         "json": {
-         "$id": "63",
+         "$id": "61",
          "name": "kind"
         }
        }
@@ -500,12 +471,12 @@
    }
   },
   {
-   "$ref": "59"
+   "$ref": "56"
   }
  ],
  "clients": [
   {
-   "$id": "64",
+   "$id": "62",
    "kind": "client",
    "name": "AccessClient",
    "namespace": "_Specs_.Azure.ClientGenerator.Core.Access",
@@ -513,12 +484,12 @@
    "methods": [],
    "parameters": [
     {
-     "$id": "65",
+     "$id": "63",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Service host",
      "type": {
-      "$id": "66",
+      "$id": "64",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -532,9 +503,9 @@
      "explode": false,
      "kind": "Client",
      "defaultValue": {
-      "$id": "67",
+      "$id": "65",
       "type": {
-       "$id": "68",
+       "$id": "66",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"
@@ -548,29 +519,29 @@
    "apiVersions": [],
    "children": [
     {
-     "$id": "69",
+     "$id": "67",
      "kind": "client",
      "name": "PublicOperation",
      "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
      "methods": [
       {
-       "$id": "70",
+       "$id": "68",
        "kind": "basic",
        "name": "noDecoratorInPublic",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "71",
+        "$id": "69",
         "name": "noDecoratorInPublic",
         "resourceName": "PublicOperation",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "72",
+          "$id": "70",
           "name": "name",
           "nameInRequest": "name",
           "type": {
-           "$id": "73",
+           "$id": "71",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -587,17 +558,17 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "74",
+          "$id": "72",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "75",
+           "$id": "73",
            "kind": "constant",
            "name": "noDecoratorInPublicContentType",
            "namespace": "",
            "usage": "None",
            "valueType": {
-            "$id": "76",
+            "$id": "74",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string",
@@ -619,12 +590,12 @@
         ],
         "responses": [
          {
-          "$id": "77",
+          "$id": "75",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$ref": "5"
+           "$ref": "2"
           },
           "headers": [],
           "isErrorResponse": false,
@@ -644,11 +615,11 @@
        },
        "parameters": [
         {
-         "$id": "78",
+         "$id": "76",
          "name": "name",
          "nameInRequest": "name",
          "type": {
-          "$id": "79",
+          "$id": "77",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -665,11 +636,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "80",
+         "$id": "78",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "75"
+          "$ref": "73"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -683,9 +654,9 @@
         }
        ],
        "response": {
-        "$id": "81",
+        "$id": "79",
         "type": {
-         "$ref": "5"
+         "$ref": "2"
         }
        },
        "isOverride": false,
@@ -694,23 +665,23 @@
        "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation.noDecoratorInPublic"
       },
       {
-       "$id": "82",
+       "$id": "80",
        "kind": "basic",
        "name": "publicDecoratorInPublic",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "83",
+        "$id": "81",
         "name": "publicDecoratorInPublic",
         "resourceName": "PublicOperation",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "84",
+          "$id": "82",
           "name": "name",
           "nameInRequest": "name",
           "type": {
-           "$id": "85",
+           "$id": "83",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -727,17 +698,17 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "86",
+          "$id": "84",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "87",
+           "$id": "85",
            "kind": "constant",
            "name": "publicDecoratorInPublicContentType",
            "namespace": "",
            "usage": "None",
            "valueType": {
-            "$id": "88",
+            "$id": "86",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string",
@@ -759,12 +730,12 @@
         ],
         "responses": [
          {
-          "$id": "89",
+          "$id": "87",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$ref": "10"
+           "$ref": "7"
           },
           "headers": [],
           "isErrorResponse": false,
@@ -784,11 +755,11 @@
        },
        "parameters": [
         {
-         "$id": "90",
+         "$id": "88",
          "name": "name",
          "nameInRequest": "name",
          "type": {
-          "$id": "91",
+          "$id": "89",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -805,11 +776,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "92",
+         "$id": "90",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "87"
+          "$ref": "85"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -823,9 +794,9 @@
         }
        ],
        "response": {
-        "$id": "93",
+        "$id": "91",
         "type": {
-         "$ref": "10"
+         "$ref": "7"
         }
        },
        "isOverride": false,
@@ -836,12 +807,12 @@
      ],
      "parameters": [
       {
-       "$id": "94",
+       "$id": "92",
        "name": "endpoint",
        "nameInRequest": "endpoint",
        "doc": "Service host",
        "type": {
-        "$id": "95",
+        "$id": "93",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -855,9 +826,9 @@
        "explode": false,
        "kind": "Client",
        "defaultValue": {
-        "$id": "96",
+        "$id": "94",
         "type": {
-         "$id": "97",
+         "$id": "95",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -870,33 +841,33 @@
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation",
      "apiVersions": [],
      "parent": {
-      "$ref": "64"
+      "$ref": "62"
      }
     },
     {
-     "$id": "98",
+     "$id": "96",
      "kind": "client",
      "name": "InternalOperation",
      "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
      "methods": [
       {
-       "$id": "99",
+       "$id": "97",
        "kind": "basic",
        "name": "noDecoratorInInternal",
        "accessibility": "internal",
        "apiVersions": [],
        "operation": {
-        "$id": "100",
+        "$id": "98",
         "name": "noDecoratorInInternal",
         "resourceName": "InternalOperation",
         "accessibility": "internal",
         "parameters": [
          {
-          "$id": "101",
+          "$id": "99",
           "name": "name",
           "nameInRequest": "name",
           "type": {
-           "$id": "102",
+           "$id": "100",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -913,17 +884,17 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "103",
+          "$id": "101",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "104",
+           "$id": "102",
            "kind": "constant",
            "name": "noDecoratorInInternalContentType",
            "namespace": "",
            "usage": "None",
            "valueType": {
-            "$id": "105",
+            "$id": "103",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string",
@@ -945,12 +916,12 @@
         ],
         "responses": [
          {
-          "$id": "106",
+          "$id": "104",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$ref": "15"
+           "$ref": "12"
           },
           "headers": [],
           "isErrorResponse": false,
@@ -970,11 +941,11 @@
        },
        "parameters": [
         {
-         "$id": "107",
+         "$id": "105",
          "name": "name",
          "nameInRequest": "name",
          "type": {
-          "$id": "108",
+          "$id": "106",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -991,11 +962,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "109",
+         "$id": "107",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "104"
+          "$ref": "102"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1009,9 +980,9 @@
         }
        ],
        "response": {
-        "$id": "110",
+        "$id": "108",
         "type": {
-         "$ref": "15"
+         "$ref": "12"
         }
        },
        "isOverride": false,
@@ -1020,23 +991,23 @@
        "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.noDecoratorInInternal"
       },
       {
-       "$id": "111",
+       "$id": "109",
        "kind": "basic",
        "name": "internalDecoratorInInternal",
        "accessibility": "internal",
        "apiVersions": [],
        "operation": {
-        "$id": "112",
+        "$id": "110",
         "name": "internalDecoratorInInternal",
         "resourceName": "InternalOperation",
         "accessibility": "internal",
         "parameters": [
          {
-          "$id": "113",
+          "$id": "111",
           "name": "name",
           "nameInRequest": "name",
           "type": {
-           "$id": "114",
+           "$id": "112",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1053,17 +1024,17 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "115",
+          "$id": "113",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "116",
+           "$id": "114",
            "kind": "constant",
            "name": "internalDecoratorInInternalContentType",
            "namespace": "",
            "usage": "None",
            "valueType": {
-            "$id": "117",
+            "$id": "115",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1085,12 +1056,12 @@
         ],
         "responses": [
          {
-          "$id": "118",
+          "$id": "116",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$ref": "20"
+           "$ref": "17"
           },
           "headers": [],
           "isErrorResponse": false,
@@ -1110,11 +1081,11 @@
        },
        "parameters": [
         {
-         "$id": "119",
+         "$id": "117",
          "name": "name",
          "nameInRequest": "name",
          "type": {
-          "$id": "120",
+          "$id": "118",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1131,11 +1102,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "121",
+         "$id": "119",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "116"
+          "$ref": "114"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1149,9 +1120,9 @@
         }
        ],
        "response": {
-        "$id": "122",
+        "$id": "120",
         "type": {
-         "$ref": "20"
+         "$ref": "17"
         }
        },
        "isOverride": false,
@@ -1160,23 +1131,23 @@
        "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.internalDecoratorInInternal"
       },
       {
-       "$id": "123",
+       "$id": "121",
        "kind": "basic",
        "name": "publicDecoratorInInternal",
        "accessibility": "internal",
        "apiVersions": [],
        "operation": {
-        "$id": "124",
+        "$id": "122",
         "name": "publicDecoratorInInternal",
         "resourceName": "InternalOperation",
         "accessibility": "internal",
         "parameters": [
          {
-          "$id": "125",
+          "$id": "123",
           "name": "name",
           "nameInRequest": "name",
           "type": {
-           "$id": "126",
+           "$id": "124",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1193,17 +1164,17 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "127",
+          "$id": "125",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "128",
+           "$id": "126",
            "kind": "constant",
            "name": "publicDecoratorInInternalContentType",
            "namespace": "",
            "usage": "None",
            "valueType": {
-            "$id": "129",
+            "$id": "127",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1225,12 +1196,12 @@
         ],
         "responses": [
          {
-          "$id": "130",
+          "$id": "128",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$ref": "25"
+           "$ref": "22"
           },
           "headers": [],
           "isErrorResponse": false,
@@ -1250,11 +1221,11 @@
        },
        "parameters": [
         {
-         "$id": "131",
+         "$id": "129",
          "name": "name",
          "nameInRequest": "name",
          "type": {
-          "$id": "132",
+          "$id": "130",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1271,11 +1242,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "133",
+         "$id": "131",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "128"
+          "$ref": "126"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1289,9 +1260,9 @@
         }
        ],
        "response": {
-        "$id": "134",
+        "$id": "132",
         "type": {
-         "$ref": "25"
+         "$ref": "22"
         }
        },
        "isOverride": false,
@@ -1302,12 +1273,12 @@
      ],
      "parameters": [
       {
-       "$id": "135",
+       "$id": "133",
        "name": "endpoint",
        "nameInRequest": "endpoint",
        "doc": "Service host",
        "type": {
-        "$id": "136",
+        "$id": "134",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -1321,9 +1292,9 @@
        "explode": false,
        "kind": "Client",
        "defaultValue": {
-        "$id": "137",
+        "$id": "135",
         "type": {
-         "$id": "138",
+         "$id": "136",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1336,33 +1307,33 @@
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation",
      "apiVersions": [],
      "parent": {
-      "$ref": "64"
+      "$ref": "62"
      }
     },
     {
-     "$id": "139",
+     "$id": "137",
      "kind": "client",
      "name": "SharedModelInOperation",
      "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation",
      "methods": [
       {
-       "$id": "140",
+       "$id": "138",
        "kind": "basic",
        "name": "public",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "141",
+        "$id": "139",
         "name": "public",
         "resourceName": "SharedModelInOperation",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "142",
+          "$id": "140",
           "name": "name",
           "nameInRequest": "name",
           "type": {
-           "$id": "143",
+           "$id": "141",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1379,17 +1350,17 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "144",
+          "$id": "142",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "145",
+           "$id": "143",
            "kind": "constant",
            "name": "publicContentType",
            "namespace": "",
            "usage": "None",
            "valueType": {
-            "$id": "146",
+            "$id": "144",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1411,12 +1382,12 @@
         ],
         "responses": [
          {
-          "$id": "147",
+          "$id": "145",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$ref": "30"
+           "$ref": "27"
           },
           "headers": [],
           "isErrorResponse": false,
@@ -1436,11 +1407,11 @@
        },
        "parameters": [
         {
-         "$id": "148",
+         "$id": "146",
          "name": "name",
          "nameInRequest": "name",
          "type": {
-          "$id": "149",
+          "$id": "147",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1457,11 +1428,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "150",
+         "$id": "148",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "145"
+          "$ref": "143"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1475,9 +1446,9 @@
         }
        ],
        "response": {
-        "$id": "151",
+        "$id": "149",
         "type": {
-         "$ref": "30"
+         "$ref": "27"
         }
        },
        "isOverride": false,
@@ -1486,23 +1457,23 @@
        "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation.public"
       },
       {
-       "$id": "152",
+       "$id": "150",
        "kind": "basic",
        "name": "internal",
        "accessibility": "internal",
        "apiVersions": [],
        "operation": {
-        "$id": "153",
+        "$id": "151",
         "name": "internal",
         "resourceName": "SharedModelInOperation",
         "accessibility": "internal",
         "parameters": [
          {
-          "$id": "154",
+          "$id": "152",
           "name": "name",
           "nameInRequest": "name",
           "type": {
-           "$id": "155",
+           "$id": "153",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1519,17 +1490,17 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "156",
+          "$id": "154",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "157",
+           "$id": "155",
            "kind": "constant",
            "name": "internalContentType",
            "namespace": "",
            "usage": "None",
            "valueType": {
-            "$id": "158",
+            "$id": "156",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1551,12 +1522,12 @@
         ],
         "responses": [
          {
-          "$id": "159",
+          "$id": "157",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$ref": "30"
+           "$ref": "27"
           },
           "headers": [],
           "isErrorResponse": false,
@@ -1576,11 +1547,11 @@
        },
        "parameters": [
         {
-         "$id": "160",
+         "$id": "158",
          "name": "name",
          "nameInRequest": "name",
          "type": {
-          "$id": "161",
+          "$id": "159",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1597,11 +1568,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "162",
+         "$id": "160",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "157"
+          "$ref": "155"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1615,9 +1586,9 @@
         }
        ],
        "response": {
-        "$id": "163",
+        "$id": "161",
         "type": {
-         "$ref": "30"
+         "$ref": "27"
         }
        },
        "isOverride": false,
@@ -1628,12 +1599,12 @@
      ],
      "parameters": [
       {
-       "$id": "164",
+       "$id": "162",
        "name": "endpoint",
        "nameInRequest": "endpoint",
        "doc": "Service host",
        "type": {
-        "$id": "165",
+        "$id": "163",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -1647,9 +1618,9 @@
        "explode": false,
        "kind": "Client",
        "defaultValue": {
-        "$id": "166",
+        "$id": "164",
         "type": {
-         "$id": "167",
+         "$id": "165",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1662,35 +1633,35 @@
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation",
      "apiVersions": [],
      "parent": {
-      "$ref": "64"
+      "$ref": "62"
      }
     },
     {
-     "$id": "168",
+     "$id": "166",
      "kind": "client",
      "name": "RelativeModelInOperation",
      "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
      "methods": [
       {
-       "$id": "169",
+       "$id": "167",
        "kind": "basic",
        "name": "operation",
        "accessibility": "internal",
        "apiVersions": [],
        "doc": "Expected query parameter: name=\"Madge\"\nExpected response body:\n```json\n{\n  \"name\": \"Madge\",\n  \"inner\":\n  {\n    \"name\": \"Madge\"\n  }\n}\n```",
        "operation": {
-        "$id": "170",
+        "$id": "168",
         "name": "operation",
         "resourceName": "RelativeModelInOperation",
         "doc": "Expected query parameter: name=\"Madge\"\nExpected response body:\n```json\n{\n  \"name\": \"Madge\",\n  \"inner\":\n  {\n    \"name\": \"Madge\"\n  }\n}\n```",
         "accessibility": "internal",
         "parameters": [
          {
-          "$id": "171",
+          "$id": "169",
           "name": "name",
           "nameInRequest": "name",
           "type": {
-           "$id": "172",
+           "$id": "170",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1707,17 +1678,17 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "173",
+          "$id": "171",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "174",
+           "$id": "172",
            "kind": "constant",
            "name": "operationContentType",
            "namespace": "",
            "usage": "None",
            "valueType": {
-            "$id": "175",
+            "$id": "173",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1739,12 +1710,12 @@
         ],
         "responses": [
          {
-          "$id": "176",
+          "$id": "174",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$ref": "35"
+           "$ref": "32"
           },
           "headers": [],
           "isErrorResponse": false,
@@ -1764,11 +1735,11 @@
        },
        "parameters": [
         {
-         "$id": "177",
+         "$id": "175",
          "name": "name",
          "nameInRequest": "name",
          "type": {
-          "$id": "178",
+          "$id": "176",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1785,11 +1756,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "179",
+         "$id": "177",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "174"
+          "$ref": "172"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1803,9 +1774,9 @@
         }
        ],
        "response": {
-        "$id": "180",
+        "$id": "178",
         "type": {
-         "$ref": "35"
+         "$ref": "32"
         }
        },
        "isOverride": false,
@@ -1814,25 +1785,25 @@
        "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.operation"
       },
       {
-       "$id": "181",
+       "$id": "179",
        "kind": "basic",
        "name": "discriminator",
        "accessibility": "internal",
        "apiVersions": [],
        "doc": "Expected query parameter: kind=\"real\"\nExpected response body:\n```json\n{\n  \"name\": \"Madge\",\n  \"kind\": \"real\"\n}\n```",
        "operation": {
-        "$id": "182",
+        "$id": "180",
         "name": "discriminator",
         "resourceName": "RelativeModelInOperation",
         "doc": "Expected query parameter: kind=\"real\"\nExpected response body:\n```json\n{\n  \"name\": \"Madge\",\n  \"kind\": \"real\"\n}\n```",
         "accessibility": "internal",
         "parameters": [
          {
-          "$id": "183",
+          "$id": "181",
           "name": "kind",
           "nameInRequest": "kind",
           "type": {
-           "$id": "184",
+           "$id": "182",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1849,17 +1820,17 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "185",
+          "$id": "183",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "186",
+           "$id": "184",
            "kind": "constant",
            "name": "discriminatorContentType",
            "namespace": "",
            "usage": "None",
            "valueType": {
-            "$id": "187",
+            "$id": "185",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1881,12 +1852,12 @@
         ],
         "responses": [
          {
-          "$id": "188",
+          "$id": "186",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$ref": "49"
+           "$ref": "46"
           },
           "headers": [],
           "isErrorResponse": false,
@@ -1906,11 +1877,11 @@
        },
        "parameters": [
         {
-         "$id": "189",
+         "$id": "187",
          "name": "kind",
          "nameInRequest": "kind",
          "type": {
-          "$id": "190",
+          "$id": "188",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1927,11 +1898,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "191",
+         "$id": "189",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "186"
+          "$ref": "184"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1945,9 +1916,9 @@
         }
        ],
        "response": {
-        "$id": "192",
+        "$id": "190",
         "type": {
-         "$ref": "49"
+         "$ref": "46"
         }
        },
        "isOverride": false,
@@ -1958,12 +1929,12 @@
      ],
      "parameters": [
       {
-       "$id": "193",
+       "$id": "191",
        "name": "endpoint",
        "nameInRequest": "endpoint",
        "doc": "Service host",
        "type": {
-        "$id": "194",
+        "$id": "192",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -1977,9 +1948,9 @@
        "explode": false,
        "kind": "Client",
        "defaultValue": {
-        "$id": "195",
+        "$id": "193",
         "type": {
-         "$id": "196",
+         "$id": "194",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1992,7 +1963,7 @@
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
      "apiVersions": [],
      "parent": {
-      "$ref": "64"
+      "$ref": "62"
      }
     }
    ]
