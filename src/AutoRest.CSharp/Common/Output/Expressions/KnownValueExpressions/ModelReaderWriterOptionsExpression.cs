@@ -11,6 +11,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
     {
         public static readonly ModelReaderWriterOptionsExpression Wire = ModelSerializationExtensionsProvider.Instance.WireOptions;
 
+        public static readonly ModelReaderWriterOptionsExpression Json = new(new MemberExpression(typeof(ModelReaderWriterOptions), "Json"));
+
         public ValueExpression Format => new MemberExpression(this, nameof(ModelReaderWriterOptions.Format));
     }
 }

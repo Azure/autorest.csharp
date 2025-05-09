@@ -8,7 +8,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Payload.MultiPart.Models
+namespace Scm.Payload.Multipart.Models
 {
     public partial class Address : IJsonModel<Address>
     {
@@ -94,7 +94,7 @@ namespace Payload.MultiPart.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ScmPayloadMultipartContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Address)} does not support writing '{options.Format}' format.");
             }

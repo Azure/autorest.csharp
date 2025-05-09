@@ -150,7 +150,7 @@ namespace _Type.Model.Visibility.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _TypeModelVisibilityContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(ReadOnlyModel)} does not support writing '{options.Format}' format.");
             }

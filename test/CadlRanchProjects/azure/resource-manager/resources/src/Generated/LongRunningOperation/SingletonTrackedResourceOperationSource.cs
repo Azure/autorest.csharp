@@ -25,13 +25,13 @@ namespace _Azure.ResourceManager.Resources
 
         SingletonTrackedResource IOperationSource<SingletonTrackedResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<SingletonTrackedResourceData>(response.Content);
+            var data = ModelReaderWriter.Read<SingletonTrackedResourceData>(response.Content, ModelReaderWriterOptions.Json, _AzureResourceManagerResourcesContext.Default);
             return new SingletonTrackedResource(_client, data);
         }
 
         async ValueTask<SingletonTrackedResource> IOperationSource<SingletonTrackedResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<SingletonTrackedResourceData>(response.Content);
+            var data = ModelReaderWriter.Read<SingletonTrackedResourceData>(response.Content, ModelReaderWriterOptions.Json, _AzureResourceManagerResourcesContext.Default);
             return await Task.FromResult(new SingletonTrackedResource(_client, data)).ConfigureAwait(false);
         }
     }

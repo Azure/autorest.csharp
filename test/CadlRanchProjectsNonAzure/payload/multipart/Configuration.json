@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
-  "namespace": "Payload.MultiPart",
-  "library-name": "Payload.MultiPart",
+  "namespace": "Scm.Payload.Multipart",
+  "library-name": "Scm.Payload.Multipart",
   "use-model-reader-writer": true,
   "shared-source-folders": [
     "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net9.0/Generator.Shared",

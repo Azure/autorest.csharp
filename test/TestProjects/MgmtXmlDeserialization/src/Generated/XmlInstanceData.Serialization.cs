@@ -168,7 +168,7 @@ namespace MgmtXmlDeserialization
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, MgmtXmlDeserializationContext.Default);
                 case "X":
                     {
                         using MemoryStream stream = new MemoryStream();

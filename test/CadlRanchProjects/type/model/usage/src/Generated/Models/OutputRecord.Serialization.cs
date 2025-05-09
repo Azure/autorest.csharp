@@ -100,7 +100,7 @@ namespace _Type.Model.Usage.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _TypeModelUsageContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(OutputRecord)} does not support writing '{options.Format}' format.");
             }

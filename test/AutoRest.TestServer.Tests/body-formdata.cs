@@ -20,7 +20,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task FormdataStreamUploadFile() => Test(async (host, pipeline) =>
         {
-            var client = new FormdataClient(ClientDiagnostics, pipeline, host);
+            var client = GetClient<FormdataClient>(pipeline, host);
 
             var stream = MakeStream("Test data stream");
             var output = await client.UploadFileAsync(stream, "MyFile");
@@ -31,7 +31,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task StreamUploadFile() => Test(async  (host, pipeline) =>
         {
-            var client = new FormdataClient(ClientDiagnostics, pipeline, host);
+            var client = GetClient<FormdataClient>(pipeline, host);
 
             var stream = MakeStream("Test data stream");
             var output = await client.UploadFileViaBodyAsync(stream);

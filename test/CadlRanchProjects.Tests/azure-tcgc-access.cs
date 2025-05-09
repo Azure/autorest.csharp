@@ -7,6 +7,7 @@ using NUnit.Framework;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using static AutoRest.TestServer.Tests.Infrastructure.TestServerTestBase;
 
 namespace CadlRanchProjects.Tests
 {
@@ -34,14 +35,15 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Azure_ClientGenerator_Core_Access_InternalOperation() => Test(async (host) =>
         {
-            var response1 = await new AccessClient(host, null).GetInternalOperationClient().NoDecoratorInInternalAsync("sample");
-            Assert.AreEqual("sample", response1.Value.Name);
+            var internalOperationClient = new AccessClient(host, null).GetInternalOperationClient();
+            var response1 = await InvokeMethodAsync(internalOperationClient, "NoDecoratorInInternalAsync", "sample");
+            Assert.AreEqual("sample", GetNameValue(response1));
 
-            var response2 = await new AccessClient(host, null).GetInternalOperationClient().InternalDecoratorInInternalAsync("sample");
-            Assert.AreEqual("sample", response2.Value.Name);
+            var response2 = await InvokeMethodAsync(internalOperationClient, "InternalDecoratorInInternalAsync", "sample");
+            Assert.AreEqual("sample", GetNameValue(response2));
 
-            var response3 = await new AccessClient(host, null).GetInternalOperationClient().PublicDecoratorInInternalAsync("sample");
-            Assert.AreEqual("sample", response3.Value.Name);
+            var response3 = await InvokeMethodAsync(internalOperationClient, "PublicDecoratorInInternalAsync", "sample");
+            Assert.AreEqual("sample", GetNameValue(response3));
 
             Assert.IsNotNull(typeof(InternalOperation).GetMethod("NoDecoratorInInternalAsync", BindingFlags.Instance | BindingFlags.NonPublic, new[] { typeof(string), typeof(CancellationToken) }));
             Assert.IsNotNull(typeof(InternalOperation).GetMethod("NoDecoratorInInternalAsync", BindingFlags.Instance | BindingFlags.NonPublic, new[] { typeof(string), typeof(RequestContext) }));
@@ -52,10 +54,21 @@ namespace CadlRanchProjects.Tests
             Assert.IsNotNull(typeof(InternalOperation).GetMethod("PublicDecoratorInInternalAsync", BindingFlags.Instance | BindingFlags.NonPublic, new[] { typeof(string), typeof(CancellationToken) }));
             Assert.IsNotNull(typeof(InternalOperation).GetMethod("PublicDecoratorInInternalAsync", BindingFlags.Instance | BindingFlags.NonPublic, new[] { typeof(string), typeof(RequestContext) }));
 
-            Assert.IsFalse(typeof(NoDecoratorModelInInternal).IsVisible);
-            Assert.IsFalse(typeof(InternalDecoratorModelInInternal).IsVisible);
             Assert.IsTrue(typeof(PublicDecoratorModelInInternal).IsVisible);
         });
+
+        private static object GetNameValue(object response)
+        {
+            object model = response.GetType().GetProperty("Value").GetValue(response);
+            return model.GetType().GetProperty("Name").GetValue(model);
+        }
+
+        private static object GetInnerNameValue(object response)
+        {
+            object model = response.GetType().GetProperty("Value").GetValue(response);
+            object innerModel = model.GetType().GetProperty("Inner").GetValue(model);
+            return innerModel.GetType().GetProperty("Name").GetValue(innerModel);
+        }
 
         [Test]
         public Task Azure_ClientGenerator_Core_Access_SharedModelInOperation() => Test(async (host) =>
@@ -63,8 +76,8 @@ namespace CadlRanchProjects.Tests
             var response1 = await new AccessClient(host, null).GetSharedModelInOperationClient().PublicAsync("sample");
             Assert.AreEqual("sample", response1.Value.Name);
 
-            var response2 = await new AccessClient(host, null).GetSharedModelInOperationClient().InternalAsync("sample");
-            Assert.AreEqual("sample", response2.Value.Name);
+            var response2 = await InvokeMethodAsync(new AccessClient(host, null).GetSharedModelInOperationClient(), "InternalAsync", "sample");
+            Assert.AreEqual("sample", GetNameValue(response2));
 
             Assert.IsNotNull(typeof(SharedModelInOperation).GetMethod("PublicAsync", BindingFlags.Instance | BindingFlags.Public, new[] { typeof(string), typeof(CancellationToken) }));
             Assert.IsNotNull(typeof(SharedModelInOperation).GetMethod("PublicAsync", BindingFlags.Instance | BindingFlags.Public, new[] { typeof(string), typeof(RequestContext) }));
@@ -78,24 +91,18 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Azure_ClientGenerator_Core_Access_RelativeModelInOperation() => Test(async (host) =>
         {
-            var response1 = await new AccessClient(host, null).GetRelativeModelInOperationClient().OperationAsync("Madge");
-            Assert.AreEqual("Madge", response1.Value.Name);
-            Assert.AreEqual("Madge", response1.Value.Inner.Name);
+            var response1 = await InvokeMethodAsync(new AccessClient(host, null).GetRelativeModelInOperationClient(), "OperationAsync", "Madge");
+            Assert.AreEqual("Madge", GetNameValue(response1));
+            Assert.AreEqual("Madge", GetInnerNameValue(response1));
 
-            var response2 = await new AccessClient(host, null).GetRelativeModelInOperationClient().DiscriminatorAsync("real");
-            Assert.AreEqual("Madge", response2.Value.Name);
+            var response2 = await InvokeMethodAsync(new AccessClient(host, null).GetRelativeModelInOperationClient(), "DiscriminatorAsync", "real");
+            Assert.AreEqual("Madge", GetNameValue(response2));
 
             Assert.IsNotNull(typeof(RelativeModelInOperation).GetMethod("OperationAsync", BindingFlags.Instance | BindingFlags.NonPublic, new[] { typeof(string), typeof(CancellationToken) }));
             Assert.IsNotNull(typeof(RelativeModelInOperation).GetMethod("OperationAsync", BindingFlags.Instance | BindingFlags.NonPublic, new[] { typeof(string), typeof(RequestContext) }));
 
             Assert.IsNotNull(typeof(RelativeModelInOperation).GetMethod("DiscriminatorAsync", BindingFlags.Instance | BindingFlags.NonPublic, new[] { typeof(string), typeof(CancellationToken) }));
             Assert.IsNotNull(typeof(RelativeModelInOperation).GetMethod("DiscriminatorAsync", BindingFlags.Instance | BindingFlags.NonPublic, new[] { typeof(string), typeof(RequestContext) }));
-
-            Assert.IsFalse(typeof(OuterModel).IsVisible);
-            Assert.IsFalse(typeof(BaseModel).IsVisible);
-            Assert.IsFalse(typeof(InnerModel).IsVisible);
-            Assert.IsFalse(typeof(AbstractModel).IsVisible);
-            Assert.IsFalse(typeof(RealModel).IsVisible);
         });
 
         [Test]

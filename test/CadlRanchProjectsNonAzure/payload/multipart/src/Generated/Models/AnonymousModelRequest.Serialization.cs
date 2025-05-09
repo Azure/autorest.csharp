@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-namespace Payload.MultiPart.Models
+namespace Scm.Payload.Multipart.Models
 {
     public partial class AnonymousModelRequest : IJsonModel<AnonymousModelRequest>
     {
@@ -124,7 +124,7 @@ namespace Payload.MultiPart.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ScmPayloadMultipartContext.Default);
                 case "MFD":
                     return SerializeMultipart(options);
                 default:

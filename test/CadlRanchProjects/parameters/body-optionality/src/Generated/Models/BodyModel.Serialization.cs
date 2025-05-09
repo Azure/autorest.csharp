@@ -100,7 +100,7 @@ namespace Parameters.BodyOptionality.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ParametersBodyOptionalityContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(BodyModel)} does not support writing '{options.Format}' format.");
             }

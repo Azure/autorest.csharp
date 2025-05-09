@@ -114,7 +114,7 @@ namespace _Specs_.Azure.Core.Traits.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _Specs_AzureCoreTraitsContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(User)} does not support writing '{options.Format}' format.");
             }

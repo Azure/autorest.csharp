@@ -7,8 +7,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using Azure.Core.Expressions.DataFactory;
+using Inheritance;
 using Inheritance.Models;
 using NUnit.Framework;
+using static AutoRest.TestServer.Tests.Infrastructure.TestServerTestBase;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -49,7 +51,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void MultipleInheritanceBaseTypeOverride()
         {
-            var type = typeof(ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride);
+            var type = FindType(typeof(SchemaMappingClient).Assembly, "ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride");
             Assert.AreEqual(typeof(SomeProperties), type.BaseType);
             // public
             Assert.AreEqual(NumberOfPublicPropertiesOnBase, type.GetProperties().Length);
@@ -87,14 +89,14 @@ namespace AutoRest.TestServer.Tests
         public void DiscriminatorValueIsSetOnSubClassConstruction()
         {
             var baseClassWithDiscriminator = new ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties();
-            Assert.AreEqual("ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties", baseClassWithDiscriminator.DiscriminatorProperty);
+            Assert.AreEqual("ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties", GetProperty(baseClassWithDiscriminator, "DiscriminatorProperty"));
         }
 
         [Test]
         public void DiscriminatorValueIsSetOnSubClassSerializationConstruction()
         {
             var baseClassWithDiscriminator = new ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties();
-            Assert.AreEqual("ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties", baseClassWithDiscriminator.DiscriminatorProperty);
+            Assert.AreEqual("ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties", GetProperty(baseClassWithDiscriminator, "DiscriminatorProperty"));
         }
 
         [Test]
@@ -113,18 +115,19 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void CanCreateInstanceOfDerivedClassWithEnumDiscriminator()
         {
-            var derived = new DerivedClassWithEnumDiscriminator();
-            Assert.AreEqual(BaseClassWithEnumDiscriminatorEnum.Derived, derived.DiscriminatorProperty);
+            var derived = GetObject(FindType(typeof(SchemaMappingClient).Assembly, "DerivedClassWithEnumDiscriminator"));
+            var expectedEnum = Enum.Parse(FindType(typeof(SchemaMappingClient).Assembly, "BaseClassWithEnumDiscriminatorEnum"), "Derived");
+            Assert.AreEqual(expectedEnum, GetProperty(derived, "DiscriminatorProperty"));
         }
 
         [Test]
         public void CanCreateInstanceOfDerivedClassWithExtensibleEnumDiscriminator()
         {
             var derived = new DerivedClassWithExtensibleEnumDiscriminator();
-            Assert.AreEqual(BaseClassWithEntensibleEnumDiscriminatorEnum.Derived, derived.DiscriminatorProperty);
+            Assert.AreEqual(BaseClassWithEntensibleEnumDiscriminatorEnum.Derived, GetProperty(derived, "DiscriminatorProperty"));
 
             var anotherDerived = new AnotherDerivedClassWithExtensibleEnumDiscriminator();
-            Assert.AreEqual(new BaseClassWithEntensibleEnumDiscriminatorEnum("random value"), anotherDerived.DiscriminatorProperty);
+            Assert.AreEqual(new BaseClassWithEntensibleEnumDiscriminatorEnum("random value"), GetProperty(anotherDerived, "DiscriminatorProperty"));
         }
 
         [Test]

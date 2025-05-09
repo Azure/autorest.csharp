@@ -6,8 +6,7 @@ using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 using Scm._Type.Model.Inheritance.Recursive;
 using Scm._Type.Model.Inheritance.Recursive.Models;
-using Azure.Core;
-using System.Linq;
+using UnbrandedTypeSpec;
 
 namespace CadlRanchProjectsNonAzure.Tests
 {
@@ -25,7 +24,7 @@ namespace CadlRanchProjectsNonAzure.Tests
             Assert.AreEqual(2, response.Value.Extension[0].Extension[0].Level);
             Assert.AreEqual(1, response.Value.Extension[1].Level);
             Assert.AreEqual(0, response.Value.Extension[0].Extension[0].Extension.Count);
-            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.Extension[1].Extension));
+            Assert.IsFalse(TestServerTestBase.IsCollectionDefined(typeof(RecursiveClient).Assembly, response.Value.Extension[1].Extension));
         });
         [Test]
         public Task Type_Model_Inheritance_Recursive_put() => Test(async (host) =>

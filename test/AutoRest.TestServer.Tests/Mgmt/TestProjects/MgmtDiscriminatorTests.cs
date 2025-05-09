@@ -5,9 +5,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using Azure.Core;
 using Azure.ResourceManager;
 using MgmtDiscriminator;
@@ -22,6 +20,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
+        private protected override Assembly GetAssembly() => typeof(DeliveryRuleData).Assembly;
+
         [TestCase("DeliveryRuleListResult", false)]
         [TestCase("DeliveryRuleAction", true)]
         [TestCase("UrlRedirectAction", true)]
@@ -35,30 +35,31 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("DeliveryRuleRouteConfigurationOverrideAction", true)]
         public void ValidateTypesAccessibility(string className, bool isPublic)
         {
-            var type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name.Equals(className));
+            var type = GetType(className);
             Assert.NotNull(type);
             Assert.AreEqual(isPublic, type.IsPublic);
         }
 
+
         [Test]
         public void ToBicep()
         {
-            var condition = new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, "query", null,
+            var condition = GetModel<DeliveryRuleQueryStringCondition>(GetStaticProperty(GetType("MatchVariable"), "QueryString"), "query", null,
                 new QueryStringMatchConditionParameters(
                     QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
                     QueryStringOperator.Any) { MatchValues = { $"firstline{Environment.NewLine}secondline", "val2" } });
             var actions =
                 new[]
                 {
-                    new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null),
-                    new DeliveryRuleAction(DeliveryRuleActionType.UrlSigning, "foo2", null)
+                    GetModel<DeliveryRuleAction>(GetStaticProperty(GetType("DeliveryRuleActionType"), "CacheExpiration"), "foo1", null),
+                    GetModel<DeliveryRuleAction>(GetStaticProperty(GetType("DeliveryRuleActionType"), "UrlSigning"), "foo2", null)
                 };
             var data = new DeliveryRuleData
             {
-                Properties = new DeliveryRuleProperties(3, condition, actions,
+                Properties = GetModel<DeliveryRuleProperties>(3, condition, actions,
                     new Dictionary<string, DeliveryRuleAction>()
-                        {{ "dictionaryKey", new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null) }},
-                    new Dog { DogKind = DogKind.GermanShepherd, PetType = "dog" }, foo: $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
+                        {{ "dictionaryKey", GetModel<DeliveryRuleAction>(GetStaticProperty(GetType("DeliveryRuleActionType"), "CacheExpiration"), "foo1", null) }},
+                    new Dog { DogKind = DogKind.GermanShepherd, PetType = "dog" }, $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
                 {
                     {$"foo{Environment.NewLine}bar", new BinaryData("bar") }
                 }),
@@ -85,21 +86,21 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var queryParams = new QueryStringMatchConditionParameters(
                 QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
                 QueryStringOperator.Any) { MatchValues = { $"firstline{Environment.NewLine}secondline", "val2" }};
-            var condition = new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, "query", null,
+            var condition = GetModel<DeliveryRuleQueryStringCondition>(GetStaticProperty(GetType("MatchVariable"), "QueryString"), "query", null,
                 queryParams);
-            var firstAction = new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null);
+            var firstAction = GetModel<DeliveryRuleAction>(GetStaticProperty(GetType("DeliveryRuleActionType"), "CacheExpiration"), "foo1", null);
             var actions =
                 new[]
                 {
                     firstAction,
-                    new DeliveryRuleAction(DeliveryRuleActionType.UrlSigning, "foo2", null)
+                    GetModel<DeliveryRuleAction>(GetStaticProperty(GetType("DeliveryRuleActionType"), "UrlSigning"), "foo2", null)
                 };
             var data = new DeliveryRuleData
             {
-                Properties = new DeliveryRuleProperties(3, condition, actions,
+                Properties = GetModel<DeliveryRuleProperties>(3, condition, actions,
                     new Dictionary<string, DeliveryRuleAction>()
-                        {{ "dictionaryKey", new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null) }},
-                    new Dog { DogKind = DogKind.GermanShepherd }, foo: $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
+                        {{ "dictionaryKey", GetModel<DeliveryRuleAction>(GetStaticProperty(GetType("DeliveryRuleActionType"), "CacheExpiration"), "foo1", null) }},
+                    new Dog { DogKind = DogKind.GermanShepherd }, $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
                 {
                     {$"foo{Environment.NewLine}bar", new BinaryData("bar") }
                 }),
@@ -160,21 +161,21 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var queryParams = new QueryStringMatchConditionParameters(
                 QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
                 QueryStringOperator.Any) { MatchValues = { $"firstline{Environment.NewLine}secondline", "val2" }};
-            var condition = new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, "query", null,
+            var condition = GetModel<DeliveryRuleQueryStringCondition>(GetStaticProperty(GetType("MatchVariable"), "QueryString"), "query", null,
                 queryParams);
-            var firstAction = new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null);
+            var firstAction = GetModel<DeliveryRuleAction>(GetStaticProperty(GetType("DeliveryRuleActionType"), "CacheExpiration"), "foo1", null);
             var actions =
                 new[]
                 {
                     firstAction,
-                    new DeliveryRuleAction(DeliveryRuleActionType.UrlSigning, "foo2", null)
+                    GetModel<DeliveryRuleAction>(GetStaticProperty(GetType("DeliveryRuleActionType"), "UrlSigning"), "foo2", null)
                 };
             var data = new DeliveryRuleData
             {
-                Properties = new DeliveryRuleProperties(3, condition, actions,
+                Properties = GetModel<DeliveryRuleProperties>(3, condition, actions,
                     new Dictionary<string, DeliveryRuleAction>()
-                        {{ "dictionaryKey", new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null) }},
-                    new Dog { DogKind = DogKind.GermanShepherd }, foo: $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
+                        {{ "dictionaryKey", GetModel<DeliveryRuleAction>(GetStaticProperty(GetType("DeliveryRuleActionType"), "CacheExpiration"), "foo1", null) }},
+                    new Dog { DogKind = DogKind.GermanShepherd }, $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
                 {
                     {$"foo{Environment.NewLine}bar", new BinaryData("bar") }
                 }),
@@ -226,22 +227,22 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ToBicepEmptyChildObject()
         {
-            var condition = new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, "query", null,
+            var condition = GetModel<DeliveryRuleQueryStringCondition>(GetStaticProperty(GetType("MatchVariable"), "QueryString"), "query", null,
                 new QueryStringMatchConditionParameters(
                     QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
                     QueryStringOperator.Any) { MatchValues = { $"firstline{Environment.NewLine}secondline", "val2" } });
             var actions =
                 new[]
                 {
-                    new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null),
-                    new DeliveryRuleAction(DeliveryRuleActionType.UrlSigning, "foo2", null)
+                    GetModel<DeliveryRuleAction>(GetStaticProperty(GetType("DeliveryRuleActionType"), "CacheExpiration"), "foo1", null),
+                    GetModel<DeliveryRuleAction>(GetStaticProperty(GetType("DeliveryRuleActionType"), "UrlSigning"), "foo2", null)
                 };
             var data = new DeliveryRuleData
             {
-                Properties = new DeliveryRuleProperties(3, condition, actions,
+                Properties = GetModel<DeliveryRuleProperties>(3, condition, actions,
                     new Dictionary<string, DeliveryRuleAction>()
-                        {{ "dictionaryKey", new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null) }},
-                    new Dog { DogKind = DogKind.GermanShepherd }, foo: $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
+                        {{ "dictionaryKey", GetModel<DeliveryRuleAction>(GetStaticProperty(GetType("DeliveryRuleActionType"), "CacheExpiration"), "foo1", null) }},
+                    new Dog { DogKind = DogKind.GermanShepherd }, $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
                 {
                     {$"foo{Environment.NewLine}bar", new BinaryData("bar") }
                 }),

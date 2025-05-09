@@ -18,7 +18,7 @@ namespace CustomizedTypeSpec.Tests
         [Test]
         public void VerifyCodeGenMember()
         {
-            Assert.NotNull(this.GetType().Assembly.GetType("CustomizedTypeSpec.Models.SuperRoundTripModel").GetProperty("RequiredSuperInt"));
+            Assert.NotNull(typeof(SuperRoundTripModel).Assembly.GetType("CustomizedTypeSpec.Models.SuperRoundTripModel").GetProperty("RequiredSuperInt"));
         }
 
         [Test]
@@ -39,28 +39,28 @@ namespace CustomizedTypeSpec.Tests
         [Test]
         public void VerifyCodeGenType()
         {
-            Assert.NotNull(this.GetType().Assembly.GetType("CustomizedTypeSpec.Models.SuperRoundTripModel"));
-            Assert.Null(this.GetType().Assembly.GetType("CustomizedTypeSpec.Models.RoundTripModel"));
+            Assert.NotNull(typeof(SuperRoundTripModel).Assembly.GetType("CustomizedTypeSpec.Models.SuperRoundTripModel"));
+            Assert.Null(typeof(SuperRoundTripModel).Assembly.GetType("CustomizedTypeSpec.Models.RoundTripModel"));
         }
 
         [Test]
         public void VerifyCodeGenModel()
         {
-            Assert.NotNull(this.GetType().Assembly.GetType("CustomizedTypeSpec.Models.SuperFriend"));
+            Assert.NotNull(typeof(SuperRoundTripModel).Assembly.GetType("CustomizedTypeSpec.Models.SuperFriend"));
         }
 
         [Test]
         public void VerifyCodeGenClient()
         {
-            var x = this.GetType().Assembly.GetTypes();
-            Assert.NotNull(this.GetType().Assembly.GetType("CustomizedTypeSpec.Models.SuperClient"));
-            Assert.Null(this.GetType().Assembly.GetType("CustomizedTypeSpec.Models.CustomizedTypeSpecClient"));
+            var x = typeof(SuperRoundTripModel).Assembly.GetTypes();
+            Assert.NotNull(typeof(SuperRoundTripModel).Assembly.GetType("CustomizedTypeSpec.Models.SuperClient"));
+            Assert.Null(typeof(SuperRoundTripModel).Assembly.GetType("CustomizedTypeSpec.Models.CustomizedTypeSpecClient"));
         }
 
         [Test]
         public void VerifyCodeGenSuppress()
         {
-            var t = GetType().Assembly.GetType("CustomizedTypeSpec.Models.ModelWithFormat");
+            var t = typeof(SuperRoundTripModel).Assembly.GetType("CustomizedTypeSpec.Models.ModelWithFormat");
 
             Type[] parameterTypes = { typeof(Uri), typeof(Guid), typeof(string), typeof(IDictionary<string, BinaryData>)};
             var constructor = t.GetConstructor(parameterTypes);

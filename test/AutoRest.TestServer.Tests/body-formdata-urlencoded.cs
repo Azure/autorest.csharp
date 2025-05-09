@@ -16,7 +16,7 @@ namespace AutoRest.TestServer.Tests
     {
         [Test]
         public Task UpdatePetWithForm() => TestStatus(async (host, pipeline) =>
-            await new FormdataurlencodedClient(ClientDiagnostics, pipeline, host)
+            await GetClient<FormdataurlencodedClient>(pipeline, host)
                 .UpdatePetWithFormAsync(1, PetType.Dog, "meat", 42, "Fido"));
     }
 }

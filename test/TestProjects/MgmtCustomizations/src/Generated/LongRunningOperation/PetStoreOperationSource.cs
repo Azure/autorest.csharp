@@ -25,13 +25,13 @@ namespace MgmtCustomizations
 
         PetStoreResource IOperationSource<PetStoreResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<PetStoreData>(response.Content);
+            var data = ModelReaderWriter.Read<PetStoreData>(response.Content, ModelReaderWriterOptions.Json, MgmtCustomizationsContext.Default);
             return new PetStoreResource(_client, data);
         }
 
         async ValueTask<PetStoreResource> IOperationSource<PetStoreResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<PetStoreData>(response.Content);
+            var data = ModelReaderWriter.Read<PetStoreData>(response.Content, ModelReaderWriterOptions.Json, MgmtCustomizationsContext.Default);
             return await Task.FromResult(new PetStoreResource(_client, data)).ConfigureAwait(false);
         }
     }

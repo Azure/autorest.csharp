@@ -481,5 +481,22 @@ namespace AutoRest.CSharp.Utilities
             }
             return methodName;
         }
+
+        public static string RemovePeriods(this string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            Span<char> buffer = stackalloc char[input.Length];
+            int index = 0;
+
+            foreach (char c in input)
+            {
+                if (c != '.')
+                    buffer[index++] = c;
+            }
+
+            return buffer.Slice(0, index).ToString();
+        }
     }
 }

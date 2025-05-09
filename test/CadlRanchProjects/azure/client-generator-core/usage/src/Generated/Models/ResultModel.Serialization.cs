@@ -100,7 +100,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _Specs_AzureClientGeneratorCoreUsageContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(ResultModel)} does not support writing '{options.Format}' format.");
             }

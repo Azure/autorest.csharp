@@ -112,7 +112,7 @@ namespace Payload.MultiPart.Models
         internal virtual MultipartFormDataRequestContent ToMultipartRequestContent()
         {
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
-            content.Add(ModelReaderWriter.Write(ProfileImage, ModelSerializationExtensions.WireOptions), "profileImage");
+            content.Add(ModelReaderWriter.Write<FileSpecificContentType>(ProfileImage, ModelSerializationExtensions.WireOptions, PayloadMultiPartContext.Default), "profileImage");
             return content;
         }
 
@@ -123,7 +123,7 @@ namespace Payload.MultiPart.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, PayloadMultiPartContext.Default);
                 case "MFD":
                     return SerializeMultipart(options);
                 default:

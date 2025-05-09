@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
-using NameConflicts.Models;
+using AutoRest.TestServer.Tests.Infrastructure;
+using NameConflicts;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
@@ -9,7 +10,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ExtensibleEnumNameDoesNotConflictWithPropertyNames()
         {
-            var modelType = typeof(ItemValue);
+            var modelType = TestServerTestBase.FindType(typeof(AutoRestParameterFlatteningClient).Assembly, "ItemValue");
             Assert.True(modelType.IsValueType);
             Assert.False(modelType.IsEnum);
 

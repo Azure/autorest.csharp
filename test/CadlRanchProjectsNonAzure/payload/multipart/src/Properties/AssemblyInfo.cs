@@ -3,4 +3,4 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Payload.MultiPart.Tests")]
+[assembly: InternalsVisibleTo("Scm.Payload.Multipart.Tests")]

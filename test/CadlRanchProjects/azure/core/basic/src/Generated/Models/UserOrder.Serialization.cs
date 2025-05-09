@@ -119,7 +119,7 @@ namespace _Specs_.Azure.Core.Basic.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _Specs_AzureCoreBasicContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(UserOrder)} does not support writing '{options.Format}' format.");
             }

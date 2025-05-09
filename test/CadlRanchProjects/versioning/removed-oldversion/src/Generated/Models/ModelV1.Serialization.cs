@@ -123,7 +123,7 @@ namespace Versioning.Removed.OldVersion.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, VersioningRemovedOldVersionContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(ModelV1)} does not support writing '{options.Format}' format.");
             }

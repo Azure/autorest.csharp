@@ -111,7 +111,7 @@ namespace Scm._Type.Property.Optionality.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, Scm_TypePropertyOptionalityContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(CollectionsModelProperty)} does not support writing '{options.Format}' format.");
             }

@@ -3,7 +3,9 @@
 
 using System;
 using System.Linq;
+using System.Reflection;
 using Azure.ResourceManager.Resources;
+using MgmtSingletonResource;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -11,6 +13,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     public class MgmtSingletonResourceTests : TestProjectTests
     {
         public MgmtSingletonResourceTests() : base("MgmtSingletonResource") { }
+
+        private protected override Assembly GetAssembly() => typeof(MgmtSingletonResourceExtensions).Assembly;
 
         [TestCase("CarResource", true)]
         [TestCase("IgnitionResource", true)]

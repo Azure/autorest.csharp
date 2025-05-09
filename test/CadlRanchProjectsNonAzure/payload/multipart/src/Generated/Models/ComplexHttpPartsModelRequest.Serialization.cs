@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-namespace Payload.MultiPart.Models
+namespace Scm.Payload.Multipart.Models
 {
     public partial class ComplexHttpPartsModelRequest : IJsonModel<ComplexHttpPartsModelRequest>
     {
@@ -165,15 +165,15 @@ namespace Payload.MultiPart.Models
         {
             MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
             content.Add(Id, "id");
-            content.Add(ModelReaderWriter.Write(Address, ModelSerializationExtensions.WireOptions), "address");
-            content.Add(ModelReaderWriter.Write(ProfileImage, ModelSerializationExtensions.WireOptions), "profileImage");
+            content.Add(ModelReaderWriter.Write<Address>(Address, ModelSerializationExtensions.WireOptions, ScmPayloadMultipartContext.Default), "address");
+            content.Add(ModelReaderWriter.Write<FileRequiredMetaData>(ProfileImage, ModelSerializationExtensions.WireOptions, ScmPayloadMultipartContext.Default), "profileImage");
             foreach (Address item in PreviousAddresses)
             {
-                content.Add(ModelReaderWriter.Write(item, ModelSerializationExtensions.WireOptions), "previousAddresses");
+                content.Add(ModelReaderWriter.Write<Address>(item, ModelSerializationExtensions.WireOptions, ScmPayloadMultipartContext.Default), "previousAddresses");
             }
             foreach (FileRequiredMetaData item in Pictures)
             {
-                content.Add(ModelReaderWriter.Write(item, ModelSerializationExtensions.WireOptions), "pictures");
+                content.Add(ModelReaderWriter.Write<FileRequiredMetaData>(item, ModelSerializationExtensions.WireOptions, ScmPayloadMultipartContext.Default), "pictures");
             }
             return content;
         }
@@ -185,7 +185,7 @@ namespace Payload.MultiPart.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ScmPayloadMultipartContext.Default);
                 case "MFD":
                     return SerializeMultipart(options);
                 default:

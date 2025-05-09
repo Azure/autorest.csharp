@@ -87,7 +87,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, Scm_TypeModelInheritanceEnumDiscriminatorContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Snake)} does not support writing '{options.Format}' format.");
             }

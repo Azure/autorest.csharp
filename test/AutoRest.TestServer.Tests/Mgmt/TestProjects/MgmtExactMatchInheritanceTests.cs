@@ -65,7 +65,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("Type4", "ExactMatchModel1Data", typeof(object))]
         public void ValidatePropertyType(string propertyName, string className, Type expectedType)
         {
-            var type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == className);
+            var type = GetType(className);
             Assert.NotNull(type, $"Type {className} should exist");
             var property = type.GetProperty(propertyName);
             Assert.AreEqual(property.PropertyType, expectedType);
@@ -87,7 +87,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(false, "Type", "ExactMatchModel9")]
         public void ValidatePropertyName(bool exist, string propertyName, string className)
         {
-            var type = FindTypeByName(className);
+            var type = GetType(className);
             Assert.NotNull(type, $"Type {className} should exist");
             var property = type.GetProperty(propertyName);
             Assert.AreEqual(exist, property != null, $"Property {propertyName} should {(exist ? string.Empty : "not")} exist");
@@ -112,12 +112,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(typeof(DataFactoryKeyVaultSecret), typeof(ExactMatchModel1Data).GetProperty("Type19").PropertyType);
             Assert.AreEqual(typeof(DataFactoryElement<IDictionary<string, BinaryData>>), typeof(ExactMatchModel1Data).GetProperty("Type20").PropertyType);
             Assert.IsTrue(typeof(SeparateClass).GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute)));
-        }
-
-        private Type? FindTypeByName(string name)
-        {
-            var allTypes = Assembly.GetExecutingAssembly().GetTypes();
-            return allTypes.FirstOrDefault(t => t.Name == name);
         }
     }
 }

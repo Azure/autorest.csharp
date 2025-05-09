@@ -31,6 +31,7 @@
     <PackageReference Include="NuGet.Configuration" />
     <PackageReference Include="Microsoft.Build" />
     <PackageReference Include="System.ClientModel" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />
   </ItemGroup>
 
   <!-- Enable SourceLink  -->

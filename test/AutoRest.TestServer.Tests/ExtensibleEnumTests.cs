@@ -11,7 +11,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task RoundTripEnum() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new PetClient(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet(IntEnum.Two)
+            var response = await GetClient<PetClient>(pipeline, host).AddPetAsync(new Pet(IntEnum.Two)
             {
                 Name = "Retriever",
                 DaysOfWeek = DaysOfWeekExtensibleEnum.Friday
@@ -27,7 +27,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task RoundTripEnum_Custom() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new PetClient(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet("77")
+            var response = await GetClient<PetClient>(pipeline, host).AddPetAsync(new Pet("77")
             {
                 Name = "Retriever",
                 DaysOfWeek = "WED"
@@ -43,7 +43,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task RoundTripEnum_Null() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new PetClient(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet("77")
+            var response = await GetClient<PetClient>(pipeline, host).AddPetAsync(new Pet("77")
             {
                 Name = "Retriever",
                 DaysOfWeek = null
@@ -59,7 +59,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task AllowedValueEnum() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new PetClient(ClientDiagnostics, pipeline, host).GetByPetIdAsync( "scooby");
+            var response = await GetClient<PetClient>(pipeline, host).GetByPetIdAsync("scooby");
 
             Assert.AreEqual("Scooby Scarface", response.Value.Name);
             Assert.AreEqual("2.1", response.Value.IntEnum.ToString());
@@ -71,7 +71,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task ExpectedEnum() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new PetClient(ClientDiagnostics, pipeline, host).GetByPetIdAsync( "tommy");
+            var response = await GetClient<PetClient>(pipeline, host).GetByPetIdAsync("tommy");
 
             Assert.AreEqual("Tommy Tomson", response.Value.Name);
             Assert.AreEqual(IntEnum.One, response.Value.IntEnum);
@@ -83,7 +83,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task UnexpectedEnum() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new PetClient(ClientDiagnostics, pipeline, host).GetByPetIdAsync( "casper");
+            var response = await GetClient<PetClient>(pipeline, host).GetByPetIdAsync("casper");
 
             Assert.AreEqual("Casper Ghosty", response.Value.Name);
             Assert.AreEqual(IntEnum.Two, response.Value.IntEnum);

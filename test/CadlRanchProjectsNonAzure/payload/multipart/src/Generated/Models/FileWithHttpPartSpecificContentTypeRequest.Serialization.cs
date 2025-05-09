@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-namespace Payload.MultiPart.Models
+namespace Scm.Payload.Multipart.Models
 {
     public partial class FileWithHttpPartSpecificContentTypeRequest : IJsonModel<FileWithHttpPartSpecificContentTypeRequest>
     {
@@ -106,7 +106,7 @@ namespace Payload.MultiPart.Models
         internal virtual MultipartFormDataBinaryContent ToMultipartBinaryBody()
         {
             MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
-            content.Add(ModelReaderWriter.Write(ProfileImage, ModelSerializationExtensions.WireOptions), "profileImage");
+            content.Add(ModelReaderWriter.Write<FileSpecificContentType>(ProfileImage, ModelSerializationExtensions.WireOptions, ScmPayloadMultipartContext.Default), "profileImage");
             return content;
         }
 
@@ -117,7 +117,7 @@ namespace Payload.MultiPart.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ScmPayloadMultipartContext.Default);
                 case "MFD":
                     return SerializeMultipart(options);
                 default:
