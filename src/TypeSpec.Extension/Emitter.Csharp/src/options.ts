@@ -30,6 +30,7 @@ export interface AzureCSharpEmitterOptions extends CSharpEmitterOptions {
     "examples-dir"?: string;
     "enable-bicep-serialization"?: boolean;
     "clear-output-folder"?: boolean;
+    "suppress-abstract-base-class"?: string[];
 }
 
 export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterOptions> =
@@ -102,7 +103,12 @@ export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterO
                 type: "boolean",
                 nullable: true,
                 default: false
-            }
+            },
+            "suppress-abstract-base-class": {
+                type: "array",
+                nullable: true,
+                items: { type: "string" }
+            },
         },
         required: []
     };
@@ -127,7 +133,8 @@ const defaultAzureEmitterOptions = {
     "library-name": undefined,
     "examples-dir": undefined,
     "enable-bicep-serialization": undefined,
-    "clear-output-folder": false
+    "clear-output-folder": false,
+    "suppress-abstract-base-class": undefined
 };
 
 export function resolveAzureEmitterOptions(
@@ -197,6 +204,9 @@ export function resolveAzureEmitterOptions(
             defaultAzureEmitterOptions["enable-bicep-serialization"],
         "clear-output-folder":
             context.options["clear-output-folder"] ??
-            defaultAzureEmitterOptions["clear-output-folder"]
+            defaultAzureEmitterOptions["clear-output-folder"],
+        "suppress-abstract-base-class":
+            context.options["suppress-abstract-base-class"] ??
+            defaultAzureEmitterOptions["suppress-abstract-base-class"]
     };
 }
