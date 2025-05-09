@@ -108,7 +108,7 @@ export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterO
                 type: "array",
                 nullable: true,
                 items: { type: "string" }
-            },
+            }
         },
         required: []
     };
