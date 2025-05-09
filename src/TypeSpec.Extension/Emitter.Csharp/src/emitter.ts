@@ -163,6 +163,9 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
         configurations["azure-arm"] =
             sdkContext.arm === false ? undefined : sdkContext.arm;
 
+        configurations["suppress-abstract-base-class"] =
+            options["suppress-abstract-base-class"];
+
         // Write the config file
         await program.host.writeFile(
             resolvePath(outputFolder, configurationFileName),
