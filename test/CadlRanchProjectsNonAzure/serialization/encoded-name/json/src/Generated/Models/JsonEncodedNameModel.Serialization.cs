@@ -94,7 +94,7 @@ namespace Scm.Serialization.EncodedName.Json.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ScmSerializationEncodedNameJsonContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(JsonEncodedNameModel)} does not support writing '{options.Format}' format.");
             }

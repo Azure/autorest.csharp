@@ -86,7 +86,7 @@ namespace Scm._Type.Model.Empty.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, Scm_TypeModelEmptyContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(EmptyOutput)} does not support writing '{options.Format}' format.");
             }

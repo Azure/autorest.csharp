@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-namespace Payload.MultiPart.Models
+namespace Scm.Payload.Multipart.Models
 {
     public partial class ComplexPartsRequest : IJsonModel<ComplexPartsRequest>
     {
@@ -167,7 +167,7 @@ namespace Payload.MultiPart.Models
         {
             MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
             content.Add(Id, "id");
-            content.Add(ModelReaderWriter.Write(Address, ModelSerializationExtensions.WireOptions), "address");
+            content.Add(ModelReaderWriter.Write<Address>(Address, ModelSerializationExtensions.WireOptions, ScmPayloadMultipartContext.Default), "address");
             content.Add(ProfileImage, "profileImage", "profileImage", "application/octet-stream");
             foreach (Stream item in Pictures)
             {
@@ -183,7 +183,7 @@ namespace Payload.MultiPart.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ScmPayloadMultipartContext.Default);
                 case "MFD":
                     return SerializeMultipart(options);
                 default:

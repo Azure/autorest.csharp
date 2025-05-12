@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+using System.Linq;
 using System.Reflection;
 using ExtensionClientName;
 using ExtensionClientName.Models;
@@ -30,13 +32,16 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ResponseHeadersAreRenamed()
         {
-            TypeAsserts.HasProperty(typeof(AutoRestParameterFlatteningRenamedOperationHeaders), "RenamedHeader", BindingFlags.Instance | BindingFlags.Public);
+            TypeAsserts.HasProperty(GetType("AutoRestParameterFlatteningRenamedOperationHeaders"), "RenamedHeader", BindingFlags.Instance | BindingFlags.Public);
         }
 
         [Test]
         public void HeaderTypesAreRenamed()
         {
-            Assert.AreEqual("AutoRestParameterFlatteningRenamedOperationHeaders", typeof(AutoRestParameterFlatteningRenamedOperationHeaders).Name);
+            Assert.AreEqual("AutoRestParameterFlatteningRenamedOperationHeaders", GetType("AutoRestParameterFlatteningRenamedOperationHeaders").Name);
         }
+
+        private static Type GetType(string name)
+            => typeof(AutoRestParameterFlatteningClient).Assembly.GetTypes().FirstOrDefault(t => t.Name == name);
     }
 }

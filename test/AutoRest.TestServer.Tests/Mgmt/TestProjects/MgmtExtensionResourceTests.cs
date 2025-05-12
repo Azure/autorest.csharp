@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using MgmtExpandResourceTypes.Models;
+using MgmtExtensionResource;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -8,6 +10,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     public class MgmtExtensionResourceTests : TestProjectTests
     {
         public MgmtExtensionResourceTests() : base("MgmtExtensionResource") { }
+
+        private protected override Assembly GetAssembly() => typeof(MgmtExtensionResourceExtensions).Assembly;
 
         [TestCase("MgmtExtensionResourceExtensions", "GetManagementGroupPolicyDefinitions", true)]
         [TestCase("MgmtExtensionResourceExtensions", "GetSubscriptionPolicyDefinitions", true)]

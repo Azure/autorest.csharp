@@ -25,13 +25,13 @@ namespace _Azure.ResourceManager.Resources
 
         NestedProxyResource IOperationSource<NestedProxyResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<NestedProxyResourceData>(response.Content);
+            var data = ModelReaderWriter.Read<NestedProxyResourceData>(response.Content, ModelReaderWriterOptions.Json, _AzureResourceManagerResourcesContext.Default);
             return new NestedProxyResource(_client, data);
         }
 
         async ValueTask<NestedProxyResource> IOperationSource<NestedProxyResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<NestedProxyResourceData>(response.Content);
+            var data = ModelReaderWriter.Read<NestedProxyResourceData>(response.Content, ModelReaderWriterOptions.Json, _AzureResourceManagerResourcesContext.Default);
             return await Task.FromResult(new NestedProxyResource(_client, data)).ConfigureAwait(false);
         }
     }

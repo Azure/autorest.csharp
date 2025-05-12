@@ -96,7 +96,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         {
             var response = await new UnionClient(host, null).GetModelsOnlyClient().GetModelsOnlyAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
-            AssertEqual(new Cat("test"), Cat.DeserializeCat(JsonDocument.Parse(response.Value.Prop).RootElement));
+            AssertEqual(new Cat("test"), ModelReaderWriter.Read<Cat>(response.Value.Prop));
         });
 
         [Test]

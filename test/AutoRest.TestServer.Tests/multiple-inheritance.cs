@@ -14,7 +14,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task MultipleInheritanceCatGet() => Test(async (host, pipeline) =>
         {
-            var result = await new MultipleInheritanceServiceClient(ClientDiagnostics, pipeline, host).RestClient.GetCatAsync();
+            var result = await GetClient<MultipleInheritanceServiceClient>(pipeline, host).GetCatAsync();
             Assert.AreEqual("Whiskers", result.Value.Name);
             Assert.IsTrue(result.Value.LikesMilk);
             Assert.IsTrue(result.Value.Meows);
@@ -30,7 +30,7 @@ namespace AutoRest.TestServer.Tests
                 Meows = true,
                 Hisses = false
             };
-            var result = await new MultipleInheritanceServiceClient(ClientDiagnostics, pipeline, host).RestClient.PutCatAsync(value);
+            var result = await GetClient<MultipleInheritanceServiceClient>(pipeline, host).PutCatAsync(value);
             Assert.AreEqual(200, result.GetRawResponse().Status);
             Assert.AreEqual("Cat was correct!", result.Value);
         });
@@ -38,7 +38,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task MultipleInheritanceFelineGet() => Test(async (host, pipeline) =>
         {
-            var result = await new MultipleInheritanceServiceClient(ClientDiagnostics, pipeline, host).RestClient.GetFelineAsync();
+            var result = await GetClient<MultipleInheritanceServiceClient>(pipeline, host).GetFelineAsync();
             Assert.IsTrue(result.Value.Meows);
             Assert.IsTrue(result.Value.Hisses);
         });
@@ -51,7 +51,7 @@ namespace AutoRest.TestServer.Tests
                 Meows = false,
                 Hisses = true
             };
-            var result = await new MultipleInheritanceServiceClient(ClientDiagnostics, pipeline, host).RestClient.PutFelineAsync(value);
+            var result = await GetClient<MultipleInheritanceServiceClient>(pipeline, host).PutFelineAsync(value);
             Assert.AreEqual(200, result.GetRawResponse().Status);
             Assert.AreEqual("Feline was correct!", result.Value);
         });
@@ -59,7 +59,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task MultipleInheritanceHorseGet() => Test(async (host, pipeline) =>
         {
-            var result = await new MultipleInheritanceServiceClient(ClientDiagnostics, pipeline, host).RestClient.GetHorseAsync();
+            var result = await GetClient<MultipleInheritanceServiceClient>(pipeline, host).GetHorseAsync();
             Assert.AreEqual("Fred", result.Value.Name);
             Assert.IsTrue(result.Value.IsAShowHorse);
         });
@@ -71,7 +71,7 @@ namespace AutoRest.TestServer.Tests
             {
                 IsAShowHorse = false
             };
-            var result = await new MultipleInheritanceServiceClient(ClientDiagnostics, pipeline, host).RestClient.PutHorseAsync(value);
+            var result = await GetClient<MultipleInheritanceServiceClient>(pipeline, host).PutHorseAsync(value);
             Assert.AreEqual(200, result.GetRawResponse().Status);
             Assert.AreEqual("Horse was correct!", result.Value);
         });
@@ -79,7 +79,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task MultipleInheritanceKittenGet() => Test(async (host, pipeline) =>
         {
-            var result = await new MultipleInheritanceServiceClient(ClientDiagnostics, pipeline, host).RestClient.GetKittenAsync();
+            var result = await GetClient<MultipleInheritanceServiceClient>(pipeline, host).GetKittenAsync();
             Assert.AreEqual("Gatito", result.Value.Name);
             Assert.IsTrue(result.Value.LikesMilk);
             Assert.IsTrue(result.Value.Meows);
@@ -97,7 +97,7 @@ namespace AutoRest.TestServer.Tests
                 Hisses = false,
                 EatsMiceYet = true
             };
-            var result = await new MultipleInheritanceServiceClient(ClientDiagnostics, pipeline, host).RestClient.PutKittenAsync(value);
+            var result = await GetClient<MultipleInheritanceServiceClient>(pipeline, host).PutKittenAsync(value);
             Assert.AreEqual(200, result.GetRawResponse().Status);
             Assert.AreEqual("Kitten was correct!", result.Value);
         });
@@ -105,7 +105,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task MultipleInheritancePetGet() => Test(async (host, pipeline) =>
         {
-            var result = await new MultipleInheritanceServiceClient(ClientDiagnostics, pipeline, host).RestClient.GetPetAsync();
+            var result = await GetClient<MultipleInheritanceServiceClient>(pipeline, host).GetPetAsync();
             Assert.AreEqual("Peanut", result.Value.Name);
         });
 
@@ -113,7 +113,7 @@ namespace AutoRest.TestServer.Tests
         public Task MultipleInheritancePetPut() => Test(async (host, pipeline) =>
         {
             var value = new Pet("Butter");
-            var result = await new MultipleInheritanceServiceClient(ClientDiagnostics, pipeline, host).RestClient.PutPetAsync(value);
+            var result = await GetClient<MultipleInheritanceServiceClient>(pipeline, host).PutPetAsync(value);
             Assert.AreEqual(200, result.GetRawResponse().Status);
             Assert.AreEqual("Pet was correct!", result.Value);
         });

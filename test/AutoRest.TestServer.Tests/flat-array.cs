@@ -22,7 +22,7 @@ namespace AutoRest.TestServer.Tests
                 await content.Request.Body.CopyToAsync(requestMemoryStream);
             });
 
-            var client = new FlattenedParametersClient(ClientDiagnostics, HttpPipeline, testServer.Address);
+            var client = GetClient<FlattenedParametersClient>(HttpPipeline, testServer.Address);
 
             await testProc(client);
 

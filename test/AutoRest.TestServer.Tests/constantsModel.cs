@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using constants;
 using constants.Models;
 using NUnit.Framework;
 
@@ -8,26 +9,29 @@ namespace AutoRest.TestServer.Tests
 {
     public class ConstantsModelTest
     {
+        private static Type GetType(string name)
+            => typeof(ContantsClient).Assembly.GetTypes().FirstOrDefault(t => t.Name == name);
+
         [Test]
         public void NoModelAsStringNoRequiredTwoValueDefault_IsInternal()
         {
-            Assert.True(IsInternal(typeof(NoModelAsStringNoRequiredTwoValueDefault)));
+            Assert.True(IsInternal(GetType("NoModelAsStringNoRequiredTwoValueDefault")));
         }
 
         [Test]
         public void NoModelAsStringNoRequiredTwoValueDefault_HasOneDefaultCtor()
         {
-            AssertHasDefaultCtor(typeof(NoModelAsStringNoRequiredTwoValueDefault));
+            AssertHasDefaultCtor(GetType("NoModelAsStringNoRequiredTwoValueDefault"));
         }
 
         [Test]
         public void NoModelAsStringNoRequiredTwoValueDefault_PropertiesAreOptionalGetOnly()
         {
-            var modelType = typeof(NoModelAsStringNoRequiredTwoValueDefault);
+            var modelType = GetType("NoModelAsStringNoRequiredTwoValueDefault");
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(NoModelAsStringNoRequiredTwoValueDefaultEnum?), prop.PropertyType);
+            Assert.AreEqual(typeof(Nullable<>).MakeGenericType(GetType("NoModelAsStringNoRequiredTwoValueDefaultEnum")), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -35,7 +39,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoModelAsStringNoRequiredTwoValueDefaultEnum_IsEnumWithTwoValues()
         {
-            var modelType = typeof(NoModelAsStringNoRequiredTwoValueDefaultEnum);
+            var modelType = GetType("NoModelAsStringNoRequiredTwoValueDefaultEnum");
             Assert.True(modelType.IsValueType);
             Assert.True(modelType.IsEnum);
             Assert.AreEqual(2, modelType.GetEnumValues().Length);
@@ -46,23 +50,23 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoModelAsStringNoRequiredTwoValueNoDefault_IsInternal()
         {
-            Assert.True(IsInternal(typeof(NoModelAsStringNoRequiredTwoValueNoDefault)));
+            Assert.True(IsInternal(GetType("NoModelAsStringNoRequiredTwoValueNoDefault")));
         }
 
         [Test]
         public void NoModelAsStringNoRequiredTwoValueNoDefault_HasOneDefaultCtor()
         {
-            AssertHasDefaultCtor(typeof(NoModelAsStringNoRequiredTwoValueNoDefault));
+            AssertHasDefaultCtor(GetType("NoModelAsStringNoRequiredTwoValueNoDefault"));
         }
 
         [Test]
         public void NoModelAsStringNoRequiredTwoValueNoDefault_PropertiesAreOptionalGetOnly()
         {
-            var modelType = typeof(NoModelAsStringNoRequiredTwoValueNoDefault);
+            var modelType = GetType("NoModelAsStringNoRequiredTwoValueNoDefault");
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(NoModelAsStringNoRequiredTwoValueNoDefaultEnum?), prop.PropertyType);
+            Assert.AreEqual(typeof(Nullable<>).MakeGenericType(GetType("NoModelAsStringNoRequiredTwoValueNoDefaultEnum")), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -70,7 +74,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoModelAsStringNoRequiredTwoValueNoDefaultEnum_IsEnumWithTwoValues()
         {
-            var modelType = typeof(NoModelAsStringNoRequiredTwoValueNoDefaultEnum);
+            var modelType = GetType("NoModelAsStringNoRequiredTwoValueNoDefaultEnum");
             Assert.True(modelType.IsValueType);
             Assert.True(modelType.IsEnum);
             Assert.AreEqual(2, modelType.GetEnumValues().Length);
@@ -81,23 +85,23 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoModelAsStringNoRequiredOneValueNoDefault_IsInternal()
         {
-            Assert.True(IsInternal(typeof(NoModelAsStringNoRequiredOneValueNoDefault)));
+            Assert.True(IsInternal(GetType("NoModelAsStringNoRequiredOneValueNoDefault")));
         }
 
         [Test]
         public void NoModelAsStringNoRequiredOneValueNoDefault_HasOneDefaultCtor()
         {
-            AssertHasDefaultCtor(typeof(NoModelAsStringNoRequiredOneValueNoDefault));
+            AssertHasDefaultCtor(GetType("NoModelAsStringNoRequiredOneValueNoDefault"));
         }
 
         [Test]
         public void NoModelAsStringNoRequiredOneValueNoDefault_PropertiesAreGetOnly()
         {
-            var modelType = typeof(NoModelAsStringNoRequiredOneValueNoDefault);
+            var modelType = GetType("NoModelAsStringNoRequiredOneValueNoDefault");
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(NoModelAsStringNoRequiredOneValueNoDefaultEnum?), prop.PropertyType);
+            Assert.AreEqual(typeof(Nullable<>).MakeGenericType(GetType("NoModelAsStringNoRequiredOneValueNoDefaultEnum")), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -105,23 +109,23 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoModelAsStringNoRequiredOneValueDefault_IsInternal()
         {
-            Assert.True(IsInternal(typeof(NoModelAsStringNoRequiredOneValueDefault)));
+            Assert.True(IsInternal(GetType("NoModelAsStringNoRequiredOneValueDefault")));
         }
 
         [Test]
         public void NoModelAsStringNoRequiredOneValueDefault_HasOneDefaultCtor()
         {
-            AssertHasDefaultCtor(typeof(NoModelAsStringNoRequiredOneValueDefault));
+            AssertHasDefaultCtor(GetType("NoModelAsStringNoRequiredOneValueDefault"));
         }
 
         [Test]
         public void NoModelAsStringNoRequiredOneValueDefault_PropertiesAreGetOnly()
         {
-            var modelType = typeof(NoModelAsStringNoRequiredOneValueDefault);
+            var modelType = GetType("NoModelAsStringNoRequiredOneValueNoDefault");
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(NoModelAsStringNoRequiredOneValueDefaultEnum?), prop.PropertyType);
+            Assert.AreEqual(typeof(Nullable<>).MakeGenericType(GetType("NoModelAsStringNoRequiredOneValueNoDefaultEnum")), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -129,27 +133,27 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoModelAsStringRequiredTwoValueNoDefault_IsInternal()
         {
-            Assert.True(IsInternal(typeof(NoModelAsStringRequiredTwoValueNoDefault)));
+            Assert.True(IsInternal(GetType("NoModelAsStringRequiredTwoValueNoDefault")));
         }
 
         [Test]
         public void NoModelAsStringRequiredTwoValueNoDefault_HasOneCtorWithRequiredParam()
         {
-            var constructors = typeof(NoModelAsStringRequiredTwoValueNoDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
+            var constructors = GetType("NoModelAsStringRequiredTwoValueNoDefault").GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.AreEqual(3, constructors.Length);
             var ctor = constructors.SingleOrDefault(ctor => ctor.GetParameters().Length == 1);
             Assert.IsNotNull(ctor);
-            Assert.AreEqual(typeof(NoModelAsStringRequiredTwoValueNoDefaultEnum), ctor.GetParameters()[0].ParameterType);
+            Assert.AreEqual(GetType("NoModelAsStringRequiredTwoValueNoDefaultEnum"), ctor.GetParameters()[0].ParameterType);
         }
 
         [Test]
         public void NoModelAsStringRequiredTwoValueNoDefault_PropertiesAreGetOnly()
         {
-            var modelType = typeof(NoModelAsStringRequiredTwoValueNoDefault);
+            var modelType = GetType("NoModelAsStringRequiredTwoValueNoDefault");
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(NoModelAsStringRequiredTwoValueNoDefaultEnum), prop.PropertyType);
+            Assert.AreEqual(GetType("NoModelAsStringRequiredTwoValueNoDefaultEnum"), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -157,7 +161,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoModelAsStringRequiredTwoValueNoDefaultEnum_IsEnumWithTwoValues()
         {
-            var modelType = typeof(NoModelAsStringRequiredTwoValueNoDefaultEnum);
+            var modelType = GetType("NoModelAsStringRequiredTwoValueNoDefaultEnum");
             Assert.True(modelType.IsValueType);
             Assert.True(modelType.IsEnum);
             Assert.AreEqual(2, modelType.GetEnumValues().Length);
@@ -168,34 +172,35 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoModelAsStringRequiredTwoValueDefault()
         {
-            Assert.True(IsInternal(typeof(NoModelAsStringRequiredTwoValueDefault)));
+            Assert.True(IsInternal(GetType("NoModelAsStringRequiredTwoValueDefault")));
         }
 
         [Test]
         public void NoModelAsStringRequiredTwoValueDefault_HasOneCtorWithRequiredParam()
         {
-            var constructors = typeof(NoModelAsStringRequiredTwoValueDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
+            var constructors = GetType("NoModelAsStringRequiredTwoValueDefault").GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.AreEqual(3, constructors.Length);
             var ctor = constructors.SingleOrDefault(ctor => ctor.GetParameters().Length == 1);
             Assert.IsNotNull(ctor);
-            Assert.AreEqual(typeof(NoModelAsStringRequiredTwoValueDefaultEnum), ctor.GetParameters()[0].ParameterType);
+            Assert.AreEqual(GetType("NoModelAsStringRequiredTwoValueDefaultEnum"), ctor.GetParameters()[0].ParameterType);
         }
 
         [Test]
         public void NoModelAsStringRequiredTwoValueDefault_HasCtorWithDefaultValue()
         {
-            var model = new NoModelAsStringRequiredTwoValueDefault(NoModelAsStringRequiredTwoValueDefaultEnum.Value1);
-            Assert.AreEqual(NoModelAsStringRequiredTwoValueDefaultEnum.Value1, model.Parameter);
+            var value1 = GetType("NoModelAsStringRequiredTwoValueDefaultEnum").GetField("Value1", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic).GetValue(null);
+            var model = Activator.CreateInstance(GetType("NoModelAsStringRequiredTwoValueDefault"), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, [value1, null], null);
+            Assert.AreEqual(value1, model.GetType().GetProperty("Parameter", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).GetValue(model));
         }
 
         [Test]
         public void NoModelAsStringRequiredTwoValueDefault_PropertiesAreGetOnly()
         {
-            var modelType = typeof(NoModelAsStringRequiredTwoValueDefault);
+            var modelType = GetType("NoModelAsStringRequiredTwoValueDefault");
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(NoModelAsStringRequiredTwoValueDefaultEnum), prop.PropertyType);
+            Assert.AreEqual(GetType("NoModelAsStringRequiredTwoValueDefaultEnum"), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -203,7 +208,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoModelAsStringRequiredTwoValueDefaultEnum_IsEnumWithTwoValues()
         {
-            var modelType = typeof(NoModelAsStringRequiredTwoValueDefaultEnum);
+            var modelType = GetType("NoModelAsStringRequiredTwoValueDefaultEnum");
             Assert.True(modelType.IsValueType);
             Assert.True(modelType.IsEnum);
             Assert.AreEqual(2, modelType.GetEnumValues().Length);
@@ -214,23 +219,23 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoModelAsStringRequiredOneValueNoDefault()
         {
-            Assert.True(IsInternal(typeof(NoModelAsStringRequiredOneValueNoDefault)));
+            Assert.True(IsInternal(GetType("NoModelAsStringRequiredOneValueNoDefault")));
         }
 
         [Test]
         public void NoModelAsStringRequiredOneValueNoDefault_HasOneDefaultCtor()
         {
-            AssertHasDefaultCtor(typeof(NoModelAsStringRequiredOneValueNoDefault));
+            AssertHasDefaultCtor(GetType("NoModelAsStringRequiredOneValueNoDefault"));
         }
 
         [Test]
         public void NoModelAsStringRequiredOneValueNoDefault_PropertiesAreGetOnly()
         {
-            var modelType = typeof(NoModelAsStringRequiredOneValueNoDefault);
+            var modelType = GetType("NoModelAsStringRequiredOneValueNoDefault");
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(NoModelAsStringRequiredOneValueNoDefaultEnum), prop.PropertyType);
+            Assert.AreEqual(GetType("NoModelAsStringRequiredOneValueNoDefaultEnum"), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -238,30 +243,31 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoModelAsStringRequiredOneValueNoDefault_GetPropertyValue()
         {
-            var model = new NoModelAsStringRequiredOneValueNoDefault();
-            Assert.AreEqual(NoModelAsStringRequiredOneValueNoDefaultEnum.Value1, model.Parameter);
+            var value1 = GetType("NoModelAsStringRequiredOneValueNoDefaultEnum").GetProperty("Value1", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic).GetValue(null);
+            var model = Activator.CreateInstance(GetType("NoModelAsStringRequiredOneValueNoDefault"), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, [value1, null], null);
+            Assert.AreEqual(value1, model.GetType().GetProperty("Parameter", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).GetValue(model));
         }
 
         [Test]
         public void NoModelAsStringRequiredOneValueDefault()
         {
-            Assert.True(IsInternal(typeof(NoModelAsStringRequiredOneValueDefault)));
+            Assert.True(IsInternal(GetType("NoModelAsStringRequiredOneValueDefault")));
         }
 
         [Test]
         public void NoModelAsStringRequiredOneValueDefault_HasOneDefaultCtor()
         {
-            AssertHasDefaultCtor(typeof(NoModelAsStringRequiredOneValueDefault));
+            AssertHasDefaultCtor(GetType("NoModelAsStringRequiredOneValueDefault"));
         }
 
         [Test]
         public void NoModelAsStringRequiredOneValueDefault_PropertiesAreGetOnly()
         {
-            var modelType = typeof(NoModelAsStringRequiredOneValueDefault);
+            var modelType = GetType("NoModelAsStringRequiredOneValueDefault");
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(NoModelAsStringRequiredOneValueDefaultEnum), prop.PropertyType);
+            Assert.AreEqual(GetType("NoModelAsStringRequiredOneValueDefaultEnum"), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -269,30 +275,31 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoModelAsStringRequiredOneValueDefault_GetPropertyValue()
         {
-            var model = new NoModelAsStringRequiredOneValueDefault();
-            Assert.AreEqual(NoModelAsStringRequiredOneValueDefaultEnum.Value1, model.Parameter);
+            var value1 = GetType("NoModelAsStringRequiredOneValueDefaultEnum").GetProperty("Value1", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic).GetValue(null);
+            var model = Activator.CreateInstance(GetType("NoModelAsStringRequiredOneValueDefault"), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, [value1, null], null);
+            Assert.AreEqual(value1, model.GetType().GetProperty("Parameter", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).GetValue(model));
         }
 
         [Test]
         public void ModelAsStringNoRequiredTwoValueNoDefault_IsInternal()
         {
-            Assert.True(IsInternal(typeof(ModelAsStringNoRequiredTwoValueNoDefault)));
+            Assert.True(IsInternal(GetType("ModelAsStringNoRequiredTwoValueNoDefault")));
         }
 
         [Test]
         public void ModelAsStringNoRequiredTwoValueNoDefault_HasOneDefaultCtor()
         {
-            AssertHasDefaultCtor(typeof(ModelAsStringNoRequiredTwoValueNoDefault));
+            AssertHasDefaultCtor(GetType("ModelAsStringNoRequiredTwoValueNoDefault"));
         }
 
         [Test]
         public void ModelAsStringNoRequiredTwoValueNoDefault_PropertiesAreOptionalGetOnly()
         {
-            var modelType = typeof(ModelAsStringNoRequiredTwoValueNoDefault);
+            var modelType = GetType("ModelAsStringNoRequiredTwoValueNoDefault");
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(ModelAsStringNoRequiredTwoValueNoDefaultEnum?), prop.PropertyType);
+            Assert.AreEqual(typeof(Nullable<>).MakeGenericType(GetType("ModelAsStringNoRequiredTwoValueNoDefaultEnum")), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -300,7 +307,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelAsStringNoRequiredTwoValueNoDefaultEnum_IsStructWithTwoValues()
         {
-            var modelType = typeof(ModelAsStringNoRequiredTwoValueNoDefaultEnum);
+            var modelType = GetType("ModelAsStringNoRequiredTwoValueNoDefaultEnum");
             Assert.True(modelType.IsValueType);
             Assert.False(modelType.IsEnum);
             Assert.AreEqual(2, modelType.GetProperties().Length);
@@ -311,23 +318,23 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelAsStringNoRequiredTwoValueDefault_IsInternal()
         {
-            Assert.True(IsInternal(typeof(ModelAsStringNoRequiredTwoValueDefault)));
+            Assert.True(IsInternal(GetType("ModelAsStringNoRequiredTwoValueDefault")));
         }
 
         [Test]
         public void ModelAsStringNoRequiredTwoValueDefault_HasOneDefaultCtor()
         {
-            AssertHasDefaultCtor(typeof(ModelAsStringNoRequiredTwoValueDefault));
+            AssertHasDefaultCtor(GetType("ModelAsStringNoRequiredTwoValueDefault"));
         }
 
         [Test]
         public void ModelAsStringNoRequiredTwoValueDefault_PropertiesAreOptionalGetOnly()
         {
-            var modelType = typeof(ModelAsStringNoRequiredTwoValueDefault);
+            var modelType = GetType("ModelAsStringNoRequiredTwoValueDefault");
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(ModelAsStringNoRequiredTwoValueDefaultEnum?), prop.PropertyType);
+            Assert.AreEqual(typeof(Nullable<>).MakeGenericType(GetType("ModelAsStringNoRequiredTwoValueDefaultEnum")), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -335,7 +342,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelAsStringNoRequiredTwoValueDefaultEnum_IsStructWithTwoValues()
         {
-            var modelType = typeof(ModelAsStringNoRequiredTwoValueDefaultEnum);
+            var modelType = GetType("ModelAsStringNoRequiredTwoValueDefaultEnum");
             Assert.True(modelType.IsValueType);
             Assert.False(modelType.IsEnum);
             Assert.AreEqual(2, modelType.GetProperties().Length);
@@ -346,13 +353,13 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelAsStringNoRequiredOneValueDefault_IsInternal()
         {
-            Assert.True(IsInternal(typeof(ModelAsStringNoRequiredOneValueDefault)));
+            Assert.True(IsInternal(GetType("ModelAsStringNoRequiredOneValueDefault")));
         }
 
         [Test]
         public void ModelAsStringNoRequiredOneValueDefault_HasOneDefaultCtor()
         {
-            AssertHasDefaultCtor(typeof(ModelAsStringNoRequiredOneValueDefault));
+            AssertHasDefaultCtor(GetType("ModelAsStringNoRequiredOneValueDefault"));
         }
 
         private static void AssertHasDefaultCtor(Type type)
@@ -366,11 +373,11 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelAsStringNoRequiredOneValueDefault_PropertiesAreOptionalGetOnly()
         {
-            var modelType = typeof(ModelAsStringNoRequiredOneValueDefault);
+            var modelType = GetType("ModelAsStringNoRequiredOneValueDefault");
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(ModelAsStringNoRequiredOneValueDefaultEnum?), prop.PropertyType);
+            Assert.AreEqual(typeof(Nullable<>).MakeGenericType(GetType("ModelAsStringNoRequiredOneValueDefaultEnum")), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -378,7 +385,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelAsStringNoRequiredOneValueDefaultEnum_IsStructWithOneValue()
         {
-            var modelType = typeof(ModelAsStringNoRequiredOneValueDefaultEnum);
+            var modelType = GetType("ModelAsStringNoRequiredOneValueDefaultEnum");
             Assert.True(modelType.IsValueType);
             Assert.False(modelType.IsEnum);
             Assert.AreEqual(1, modelType.GetProperties().Length);
@@ -388,27 +395,27 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelAsStringRequiredTwoValueNoDefault_IsInternal()
         {
-            Assert.True(IsInternal(typeof(ModelAsStringRequiredTwoValueNoDefault)));
+            Assert.True(IsInternal(GetType("ModelAsStringRequiredTwoValueNoDefault")));
         }
 
         [Test]
         public void ModelAsStringRequiredTwoValueNoDefault_HasOneCtorWithRequiredParam()
         {
-            var constructors = typeof(ModelAsStringRequiredTwoValueNoDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
+            var constructors = GetType("ModelAsStringRequiredTwoValueNoDefault").GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.AreEqual(3, constructors.Length);
             var ctor = constructors.SingleOrDefault(ctor => ctor.GetParameters().Length == 1);
             Assert.IsNotNull(ctor);
-            Assert.AreEqual(typeof(ModelAsStringRequiredTwoValueNoDefaultEnum), ctor.GetParameters()[0].ParameterType);
+            Assert.AreEqual(GetType("ModelAsStringRequiredTwoValueNoDefaultEnum"), ctor.GetParameters()[0].ParameterType);
         }
 
         [Test]
         public void ModelAsStringRequiredTwoValueNoDefault_PropertiesAreGetOnly()
         {
-            var modelType = typeof(ModelAsStringRequiredTwoValueNoDefault);
+            var modelType = GetType("ModelAsStringRequiredTwoValueNoDefault");
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(ModelAsStringRequiredTwoValueNoDefaultEnum), prop.PropertyType);
+            Assert.AreEqual(GetType("ModelAsStringRequiredTwoValueNoDefaultEnum"), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -416,7 +423,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelAsStringRequiredTwoValueNoDefaultEnum_IsStructWithTwoValues()
         {
-            var modelType = typeof(ModelAsStringRequiredTwoValueNoDefaultEnum);
+            var modelType = GetType("ModelAsStringRequiredTwoValueNoDefaultEnum");
             Assert.True(modelType.IsValueType);
             Assert.False(modelType.IsEnum);
             Assert.AreEqual(2, modelType.GetProperties().Length);
@@ -427,35 +434,36 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelAsStringRequiredTwoValueDefault_IsInternal()
         {
-            Assert.True(IsInternal(typeof(ModelAsStringRequiredTwoValueDefault)));
+            Assert.True(IsInternal(GetType("ModelAsStringRequiredTwoValueDefault")));
         }
 
         [Test]
         public void ModelAsStringRequiredTwoValueDefault_HasOneCtorWithOptionalParam()
         {
-            var constructors = typeof(ModelAsStringRequiredTwoValueDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
+            var constructors = GetType("ModelAsStringRequiredTwoValueDefault").GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.AreEqual(3, constructors.Length);
             var ctor = constructors.SingleOrDefault(ctor => ctor.GetParameters().Length == 1);
             Assert.IsNotNull(ctor);
             /* eliminate the default value for the parameter property, so the type is not Nullable. */
-            Assert.AreEqual(typeof(ModelAsStringRequiredTwoValueDefaultEnum), ctor.GetParameters()[0].ParameterType);
+            Assert.AreEqual(GetType("ModelAsStringRequiredTwoValueDefaultEnum"), ctor.GetParameters()[0].ParameterType);
         }
 
         [Test]
         public void ModelAsStringRequiredTwoValueDefault_HasCtorWithDefaultValue()
         {
-            var model = new ModelAsStringRequiredTwoValueDefault(ModelAsStringRequiredTwoValueDefaultEnum.Value1);
-            Assert.AreEqual(ModelAsStringRequiredTwoValueDefaultEnum.Value1, model.Parameter);
+            var value1 = GetType("ModelAsStringRequiredTwoValueDefaultEnum").GetProperty("Value1", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic).GetValue(null);
+            var model = Activator.CreateInstance(GetType("ModelAsStringRequiredTwoValueDefault"), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, [value1], null);
+            Assert.AreEqual(value1, model.GetType().GetProperty("Parameter", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).GetValue(model));
         }
 
         [Test]
         public void ModelAsStringRequiredTwoValueDefault_PropertiesAreGetOnly()
         {
-            var modelType = typeof(ModelAsStringRequiredTwoValueDefault);
+            var modelType = GetType("ModelAsStringRequiredTwoValueDefault");
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(ModelAsStringRequiredTwoValueDefaultEnum), prop.PropertyType);
+            Assert.AreEqual(GetType("ModelAsStringRequiredTwoValueDefaultEnum"), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -463,7 +471,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelAsStringRequiredTwoValueDefaultEnum_IsStructWithTwoValues()
         {
-            var modelType = typeof(ModelAsStringRequiredTwoValueDefaultEnum);
+            var modelType = GetType("ModelAsStringRequiredTwoValueDefaultEnum");
             Assert.True(modelType.IsValueType);
             Assert.False(modelType.IsEnum);
             Assert.AreEqual(2, modelType.GetProperties().Length);
@@ -474,27 +482,27 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelAsStringRequiredOneValueNoDefault_IsInternal()
         {
-            Assert.True(IsInternal(typeof(ModelAsStringRequiredOneValueNoDefault)));
+            Assert.True(IsInternal(GetType("ModelAsStringRequiredOneValueNoDefault")));
         }
 
         [Test]
         public void ModelAsStringRequiredOneValueNoDefault_HasOneCtorWithRequiredParam()
         {
-            var constructors = typeof(ModelAsStringRequiredOneValueNoDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
+            var constructors = GetType("ModelAsStringRequiredOneValueNoDefault").GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.AreEqual(3, constructors.Length);
             var ctor = constructors.SingleOrDefault(ctor => ctor.GetParameters().Length == 1);
             Assert.IsNotNull(ctor);
-            Assert.AreEqual(typeof(ModelAsStringRequiredOneValueNoDefaultEnum), ctor.GetParameters()[0].ParameterType);
+            Assert.AreEqual(GetType("ModelAsStringRequiredOneValueNoDefaultEnum"), ctor.GetParameters()[0].ParameterType);
         }
 
         [Test]
         public void ModelAsStringRequiredOneValueNoDefault_PropertiesAreOptionalGetOnly()
         {
-            var modelType = typeof(ModelAsStringRequiredOneValueNoDefault);
+            var modelType = GetType("ModelAsStringRequiredOneValueNoDefault");
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(ModelAsStringRequiredOneValueNoDefaultEnum), prop.PropertyType);
+            Assert.AreEqual(GetType("ModelAsStringRequiredOneValueNoDefaultEnum"), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -502,7 +510,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelAsStringRequiredOneValueNoDefaultEnum_IsStructWithOneValue()
         {
-            var modelType = typeof(ModelAsStringRequiredOneValueNoDefaultEnum);
+            var modelType = GetType("ModelAsStringRequiredOneValueNoDefaultEnum");
             Assert.True(modelType.IsValueType);
             Assert.False(modelType.IsEnum);
             Assert.AreEqual(1, modelType.GetProperties().Length);
@@ -512,35 +520,36 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelAsStringRequiredOneValueDefault_IsInternal()
         {
-            Assert.True(IsInternal(typeof(ModelAsStringRequiredOneValueDefault)));
+            Assert.True(IsInternal(GetType("ModelAsStringRequiredOneValueDefault")));
         }
 
         [Test]
         public void ModelAsStringRequiredOneValueDefault_HasOneCtorWithOptionalParam()
         {
-            var constructors = typeof(ModelAsStringRequiredOneValueDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
+            var constructors = GetType("ModelAsStringRequiredOneValueDefault").GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.AreEqual(3, constructors.Length); // one with required parameter, one with required parameter and extra raw data, and a default ctor
             var ctor = constructors.SingleOrDefault(ctor => ctor.GetParameters().Length == 1);
             Assert.IsNotNull(ctor);
             /* eliminate the default value for the parameter property, so the type is not Nullable. */
-            Assert.AreEqual(typeof(ModelAsStringRequiredOneValueDefaultEnum), ctor.GetParameters()[0].ParameterType);
+            Assert.AreEqual(GetType("ModelAsStringRequiredOneValueDefaultEnum"), ctor.GetParameters()[0].ParameterType);
         }
 
         [Test]
         public void ModelAsStringRequiredOneValueDefault_HasCtorWithDefaultValue()
         {
-            var model = new ModelAsStringRequiredOneValueDefault(ModelAsStringRequiredOneValueDefaultEnum.Value1);
-            Assert.AreEqual(ModelAsStringRequiredOneValueDefaultEnum.Value1, model.Parameter);
+            var value1 = GetType("ModelAsStringRequiredOneValueDefaultEnum").GetProperty("Value1", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public).GetValue(null);
+            var model = Activator.CreateInstance(GetType("ModelAsStringRequiredOneValueDefault"), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, [value1], null);
+            Assert.AreEqual(value1, model.GetType().GetProperty("Parameter", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).GetValue(model));
         }
 
         [Test]
         public void ModelAsStringRequiredOneValueDefault_PropertiesAreGetOnly()
         {
-            var modelType = typeof(ModelAsStringRequiredOneValueDefault);
+            var modelType = GetType("ModelAsStringRequiredOneValueDefault");
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(ModelAsStringRequiredOneValueDefaultEnum), prop.PropertyType);
+            Assert.AreEqual(GetType("ModelAsStringRequiredOneValueDefaultEnum"), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -548,7 +557,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelAsStringRequiredOneValueDefaultEnum_IsStructWithOneValue()
         {
-            var modelType = typeof(ModelAsStringRequiredOneValueDefaultEnum);
+            var modelType = GetType("ModelAsStringRequiredOneValueDefaultEnum");
             Assert.True(modelType.IsValueType);
             Assert.False(modelType.IsEnum);
             Assert.AreEqual(1, modelType.GetProperties().Length);

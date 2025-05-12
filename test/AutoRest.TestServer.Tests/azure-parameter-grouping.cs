@@ -17,7 +17,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PostParameterGroupingMultipleParameterGroups() => TestStatus(async (host, pipeline) =>
         {
-            return await new ParameterGroupingClient(ClientDiagnostics, pipeline, host).PostMultiParamGroupsAsync(
+            return await GetClient<ParameterGroupingClient>(pipeline, host).PostMultiParamGroupsAsync(
                 new FirstParameterGroup()
                     {
                         HeaderOne = "header",
@@ -34,7 +34,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PostParameterGroupingOptionalParameters() => TestStatus(async (host, pipeline) =>
         {
-            return await new ParameterGroupingClient(ClientDiagnostics, pipeline, host).PostOptionalAsync(
+            return await GetClient<ParameterGroupingClient>(pipeline, host).PostOptionalAsync(
                 new ParameterGroupingPostOptionalParameters()
                 {
                     Query = 21,
@@ -46,7 +46,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PostParameterGroupingRequiredParameters() => TestStatus(async (host, pipeline) =>
         {
-            return await new ParameterGroupingClient(ClientDiagnostics, pipeline, host).PostRequiredAsync(
+            return await GetClient<ParameterGroupingClient>(pipeline, host).PostRequiredAsync(
                 new ParameterGroupingPostRequiredParameters("path", 1234)
                 {
                     CustomHeader = "header",
@@ -58,7 +58,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PostParameterGroupingSharedParameterGroupObject() => TestStatus(async (host, pipeline) =>
         {
-            return await new ParameterGroupingClient(ClientDiagnostics, pipeline, host).PostSharedParameterGroupObjectAsync(
+            return await GetClient<ParameterGroupingClient>(pipeline, host).PostSharedParameterGroupObjectAsync(
                 new FirstParameterGroup()
                 {
                     HeaderOne = "header"

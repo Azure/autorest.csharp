@@ -16,60 +16,60 @@ namespace AutoRest.TestServer.Tests
         public Task GetDateTimeRfc1123Invalid() => Test((host, pipeline) =>
         {
             Assert.ThrowsAsync<FormatException>(async () =>
-                await new Datetimerfc1123Client(ClientDiagnostics, pipeline, host).GetInvalidAsync());
+                await GetClient<Datetimerfc1123Client>(pipeline, host).GetInvalidAsync());
         });
 
         [Test]
         public Task GetDateTimeRfc1123MaxUtcLowercase() => Test(async (host, pipeline) =>
         {
-            var result = await new Datetimerfc1123Client(ClientDiagnostics, pipeline, host).GetUtcLowercaseMaxDateTimeAsync();
+            var result = await GetClient<Datetimerfc1123Client>(pipeline, host).GetUtcLowercaseMaxDateTimeAsync();
             Assert.AreEqual(DateTimeOffset.Parse("fri, 31 dec 9999 23:59:59 gmt"), result.Value);
         });
 
         [Test]
         public Task GetDateTimeRfc1123MaxUtcUppercase() => Test(async (host, pipeline) =>
         {
-            var result = await new Datetimerfc1123Client(ClientDiagnostics, pipeline, host).GetUtcUppercaseMaxDateTimeAsync();
+            var result = await GetClient<Datetimerfc1123Client>(pipeline, host).GetUtcUppercaseMaxDateTimeAsync();
             Assert.AreEqual(DateTimeOffset.Parse("FRI, 31 DEC 9999 23:59:59 GMT"), result.Value);
         });
 
         [Test]
         public Task GetDateTimeRfc1123MinUtc() => Test(async (host, pipeline) =>
         {
-            var result = await new Datetimerfc1123Client(ClientDiagnostics, pipeline, host).GetUtcMinDateTimeAsync();
+            var result = await GetClient<Datetimerfc1123Client>(pipeline, host).GetUtcMinDateTimeAsync();
             Assert.AreEqual(DateTimeOffset.Parse("Mon, 01 Jan 0001 00:00:00 GMT"), result.Value);
         });
 
         [Test]
         public Task GetDateTimeRfc1123Null() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () =>  await new Datetimerfc1123Client(ClientDiagnostics, pipeline, host).GetNullAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () =>  await GetClient<Datetimerfc1123Client>(pipeline, host).GetNullAsync());
         });
 
         [Test]
         public Task GetDateTimeRfc1123Overflow() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<FormatException>(), async () => await new Datetimerfc1123Client(ClientDiagnostics, pipeline, host).GetOverflowAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<FormatException>(), async () => await GetClient<Datetimerfc1123Client>(pipeline, host).GetOverflowAsync());
         });
 
         [Test]
         public Task GetDateTimeRfc1123Underflow() => Test((host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<FormatException>(), async () => await new Datetimerfc1123Client(ClientDiagnostics, pipeline, host).GetUnderflowAsync());
+            Assert.ThrowsAsync(Is.InstanceOf<FormatException>(), async () => await GetClient<Datetimerfc1123Client>(pipeline, host).GetUnderflowAsync());
         });
 
         [Test]
         public Task PutDateTimeRfc1123Max() => TestStatus(async (host, pipeline) =>
         {
             var value = DateTimeOffset.Parse("Fri, 31 Dec 9999 23:59:59 GMT");
-            return await new Datetimerfc1123Client(ClientDiagnostics, pipeline, host).PutUtcMaxDateTimeAsync( value);
+            return await GetClient<Datetimerfc1123Client>(pipeline, host).PutUtcMaxDateTimeAsync(value);
         });
 
         [Test]
         public Task PutDateTimeRfc1123Min() => TestStatus(async (host, pipeline) =>
         {
             var value = DateTimeOffset.Parse("Mon, 01 Jan 0001 00:00:00 GMT");
-            return await new Datetimerfc1123Client(ClientDiagnostics, pipeline, host).PutUtcMinDateTimeAsync( value);
+            return await GetClient<Datetimerfc1123Client>(pipeline, host).PutUtcMinDateTimeAsync(value);
         });
     }
 }

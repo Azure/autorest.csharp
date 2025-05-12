@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 {
     public class TestServerV1 : TestServerBase
     {
-        public TestServerV1(): base(GetProcessPath(), $"--port 0 --coverageDirectory {GetCoverageDirectory()}")
+        public TestServerV1(): base(GetProcessPath(), $"--port 0 --coverageDirectory {GetCoverageDirectory()}", "Started server on port ")
         {
         }
 

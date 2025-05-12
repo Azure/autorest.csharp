@@ -100,7 +100,7 @@ namespace ParametersTypeSpec.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ParametersTypeSpecContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Result)} does not support writing '{options.Format}' format.");
             }

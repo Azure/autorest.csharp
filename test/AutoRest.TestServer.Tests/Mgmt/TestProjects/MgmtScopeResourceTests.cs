@@ -13,6 +13,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtScopeResourceTests() : base("MgmtScopeResource") { }
 
+        private protected override Assembly GetAssembly() => typeof(FakePolicyAssignmentResource).Assembly;
+
         protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(ResourceLinkCollection) };
 
         [TestCase("MgmtScopeResourceExtensions", "GetFakePolicyAssignments", false, typeof(Azure.ResourceManager.Resources.TenantResource))]

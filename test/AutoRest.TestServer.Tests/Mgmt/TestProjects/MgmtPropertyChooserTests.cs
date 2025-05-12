@@ -14,10 +14,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtPropertyChooserTests() : base("MgmtPropertyChooser") { }
 
+        private protected override Assembly GetAssembly() => typeof(MgmtPropertyChooserExtensions).Assembly;
+
         [TestCase]
         public void ValidateModelUsingUserIdentities()
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.IdentityWithDifferentPropertyType");
+            var resourceOpreations = GetType("IdentityWithDifferentPropertyType");
             var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             var userAssignedProperty = properties[3];
@@ -45,7 +47,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase]
         public void ValidatePropertyReplacement()
         {
-            var virtualMachineData = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.VirtualMachineData");
+            var virtualMachineData = GetType("VirtualMachineData");
             var properties = virtualMachineData.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             // Resource in the test swagger will be replaced by TrackedResource when used as the base class for inheritance,
             // but is not replaced when used as a property.
@@ -55,7 +57,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.IsFalse(properties.Any(p => p.Name == "ManagedServiceIdentity"));
             Assert.IsTrue(properties.Any(p => p.Name == "Identity" && p.PropertyType == typeof(ManagedServiceIdentity)));
             // VirtualMachineIdentity is not generated
-            var virtualMachineIdentityModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.VirtualMachineIdentity");
+            var virtualMachineIdentityModel = GetType("Models.VirtualMachineIdentity");
             Assert.Null(virtualMachineIdentityModel);
             //IdentityV3 is replaced by ManagedServiceIdentity
             Assert.IsTrue(properties.Any(p => p.Name == "IdentityV3" && p.PropertyType == typeof(ManagedServiceIdentity)));
@@ -70,7 +72,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase]
         public void ValidateIdentityWithRenamedProperty()
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.IdentityWithRenamedProperty");
+            var resourceOpreations = GetType("IdentityWithRenamedProperty");
             var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             var principalIdProperty = properties[0];
@@ -92,7 +94,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase]
         public void ValidateIdentityWithRenamedPropertyNotReplaced()
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.VirtualMachineData");
+            var resourceOpreations = GetType("VirtualMachineData");
             var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             Assert.IsTrue(properties.Any(p => p.Name == "IdentityWithRenamedProperty"));
@@ -102,7 +104,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase]
         public void ValidateIdentityWithDifferentPropertyType()
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.IdentityWithDifferentPropertyType");
+            var resourceOpreations = GetType("IdentityWithDifferentPropertyType");
             var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             var principalIdProperty = properties[0];
@@ -124,7 +126,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase]
         public void ValidateIdentityWithDifferentPropertyTypeNotReplaced()
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.VirtualMachineData");
+            var resourceOpreations = GetType("VirtualMachineData");
             var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             Assert.IsTrue(properties.Any(p => p.Name == "IdentityWithDifferentPropertyType"));
@@ -134,7 +136,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase]
         public void ValidateIdentityWithNoSystemIdentity()
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.IdentityWithNoSystemIdentity");
+            var resourceOpreations = GetType("IdentityWithNoSystemIdentity");
             var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             Assert.IsFalse(properties.Any(p => p.Name == "PrincipalId"));
@@ -149,7 +151,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase]
         public void ValidateIdentityWithNoSystemIdentityNotReplaced()
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.VirtualMachineData");
+            var resourceOpreations = GetType("VirtualMachineData");
             var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             Assert.IsTrue(properties.Any(p => p.Name == "IdentityWithNoSystemIdentity"));

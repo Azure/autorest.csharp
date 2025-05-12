@@ -7,9 +7,9 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
-using Payload.MultiPart.Models;
+using Scm.Payload.Multipart.Models;
 
-namespace Payload.MultiPart
+namespace Scm.Payload.Multipart
 {
     // Data plane generated sub-client.
     /// <summary> The FormDataHttpParts sub-client. </summary>

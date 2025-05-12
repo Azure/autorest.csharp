@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using _Azure.ResourceManager.NonResources.Mocking;
+using _Azure.ResourceManager.NonResources;
 using _Azure.ResourceManager.NonResources.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.ResourceManager;
@@ -15,7 +15,7 @@ namespace CadlRanchProjects.Tests
         {
             ArmClient client = MgmtTestHelper.CreateArmClientWithMockAuth(host);
             var resourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            var subscriptionResource = new Mockable_AzureResourceManagerNonResourcesSubscriptionResource(client, resourceId);
+            var subscriptionResource = client.GetSubscriptionResource(resourceId);
             var response = await subscriptionResource.GetNonResourceOperationAsync("eastus", "hello");
 
             Assert.AreEqual(200, response.GetRawResponse().Status);
@@ -29,7 +29,7 @@ namespace CadlRanchProjects.Tests
         {
             ArmClient client = MgmtTestHelper.CreateArmClientWithMockAuth(host);
             var resourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            var subscriptionResource = new Mockable_AzureResourceManagerNonResourcesSubscriptionResource(client, resourceId);
+            var subscriptionResource = client.GetSubscriptionResource(resourceId);
             var response = await subscriptionResource.CreateNonResourceOperationAsync("eastus", "hello", new NonResource()
             {
                 Id = "id",

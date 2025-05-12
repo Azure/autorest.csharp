@@ -17,9 +17,9 @@ namespace _Azure.ResourceManager.Resources
 
         SingletonTrackedResourceData IJsonModel<SingletonTrackedResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<SingletonTrackedResourceData>)Data).Create(ref reader, options);
 
-        BinaryData IPersistableModel<SingletonTrackedResourceData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write(Data, options);
+        BinaryData IPersistableModel<SingletonTrackedResourceData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<SingletonTrackedResourceData>(Data, options, _AzureResourceManagerResourcesContext.Default);
 
-        SingletonTrackedResourceData IPersistableModel<SingletonTrackedResourceData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<SingletonTrackedResourceData>(data, options);
+        SingletonTrackedResourceData IPersistableModel<SingletonTrackedResourceData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<SingletonTrackedResourceData>(data, options, _AzureResourceManagerResourcesContext.Default);
 
         string IPersistableModel<SingletonTrackedResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<SingletonTrackedResourceData>)Data).GetFormatFromOptions(options);
     }

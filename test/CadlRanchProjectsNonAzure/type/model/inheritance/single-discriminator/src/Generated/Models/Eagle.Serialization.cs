@@ -156,7 +156,7 @@ namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, Scm_TypeModelInheritanceSingleDiscriminatorContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Eagle)} does not support writing '{options.Format}' format.");
             }

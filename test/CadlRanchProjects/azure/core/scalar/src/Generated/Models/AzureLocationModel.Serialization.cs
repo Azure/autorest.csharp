@@ -100,7 +100,7 @@ namespace _Specs_.Azure.Core.Scalar.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _Specs_AzureCoreScalarContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(AzureLocationModel)} does not support writing '{options.Format}' format.");
             }

@@ -25,13 +25,13 @@ namespace MgmtDiscriminator
 
         DeliveryRuleResource IOperationSource<DeliveryRuleResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<DeliveryRuleData>(response.Content);
+            var data = ModelReaderWriter.Read<DeliveryRuleData>(response.Content, ModelReaderWriterOptions.Json, MgmtDiscriminatorContext.Default);
             return new DeliveryRuleResource(_client, data);
         }
 
         async ValueTask<DeliveryRuleResource> IOperationSource<DeliveryRuleResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<DeliveryRuleData>(response.Content);
+            var data = ModelReaderWriter.Read<DeliveryRuleData>(response.Content, ModelReaderWriterOptions.Json, MgmtDiscriminatorContext.Default);
             return await Task.FromResult(new DeliveryRuleResource(_client, data)).ConfigureAwait(false);
         }
     }

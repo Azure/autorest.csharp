@@ -100,7 +100,7 @@ namespace CustomizationsInTsp.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, CustomizationsInTspContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(ModelToMakeInternal)} does not support writing '{options.Format}' format.");
             }

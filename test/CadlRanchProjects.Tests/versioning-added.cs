@@ -33,10 +33,10 @@ namespace CadlRanchProjects.Tests
             Assert.IsTrue(enumValues.Contains("EnumMemberV2"));
 
             /* check existence of the added model ModelV2. */
-            Assert.IsNotNull(Type.GetType("Versioning.Added.Models.ModelV2"));
+            Assert.IsNotNull(TestServerTestBase.FindType(typeof(ModelV1).Assembly, "ModelV2"));
 
             /* check existence of the added enum EnumV2. */
-            Assert.IsNotNull(Type.GetType("Versioning.Added.Models.EnumV2"));
+            Assert.IsNotNull(TestServerTestBase.FindType(typeof(ModelV1).Assembly, "EnumV2"));
 
             /* check the added parameter. */
             var methods = typeof(AddedClient).GetMethods().Where(m => m.Name == "V1" || m.Name == "V1Async");
@@ -54,7 +54,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(4, addedMethods.Count());
 
             /* check the existence of added interface in V2. */
-            Assert.IsNotNull(Type.GetType("Versioning.Added.InterfaceV2"));
+            Assert.IsNotNull(TestServerTestBase.FindType(typeof(ModelV1).Assembly, "InterfaceV2"));
         }
 
         [Test]

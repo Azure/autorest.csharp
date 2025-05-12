@@ -94,7 +94,7 @@ namespace Scm._Type.Model.Usage.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, Scm_TypeModelUsageContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(InputRecord)} does not support writing '{options.Format}' format.");
             }

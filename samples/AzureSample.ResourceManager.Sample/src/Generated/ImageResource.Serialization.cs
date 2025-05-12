@@ -17,9 +17,9 @@ namespace AzureSample.ResourceManager.Sample
 
         ImageData IJsonModel<ImageData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<ImageData>)Data).Create(ref reader, options);
 
-        BinaryData IPersistableModel<ImageData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write(Data, options);
+        BinaryData IPersistableModel<ImageData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<ImageData>(Data, options, AzureSampleResourceManagerSampleContext.Default);
 
-        ImageData IPersistableModel<ImageData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<ImageData>(data, options);
+        ImageData IPersistableModel<ImageData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<ImageData>(data, options, AzureSampleResourceManagerSampleContext.Default);
 
         string IPersistableModel<ImageData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<ImageData>)Data).GetFormatFromOptions(options);
     }

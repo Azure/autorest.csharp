@@ -18,8 +18,10 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
+using Azure.Core;
 using Azure.ResourceManager;
 using NUnit.Framework;
+using static AutoRest.TestServer.Tests.Infrastructure.TestServerTestBase;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
@@ -27,6 +29,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
     internal abstract class OutputLibraryTestBase
     {
         private string _projectName;
+
+        private Assembly? _assembly;
+        private protected Assembly Assembly => _assembly ??= GetAssembly();
+        private protected virtual Assembly GetAssembly()
+            => AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == _projectName);
 
         public OutputLibraryTestBase(string projectName)
         {
@@ -73,6 +80,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 
             foreach (var mgmtObject in MgmtContext.Library.Models.OfType<MgmtObjectType>())
             {
+                if (!mgmtObject.Declaration.Accessibility.Equals("public", StringComparison.Ordinal) ||
+                    mgmtObject.Declaration.IsAbstract)
+                {
+                    continue;
+                }
+
                 if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObject) == null)
                 {
                     ValidateModelRequiredCtorParams(mgmtObject.InputModel, mgmtObject.Type.Name);
@@ -80,15 +93,21 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             }
             foreach (var resourceData in MgmtContext.Library.ResourceData)
             {
+                if (!resourceData.Declaration.Accessibility.Equals("public", StringComparison.Ordinal) ||
+                    resourceData.Declaration.IsAbstract)
+                {
+                    continue;
+                }
+
                 ValidateModelRequiredCtorParams(resourceData.InputModel, resourceData.Type.Name);
             }
         }
 
         private void ValidateModelRequiredCtorParams(InputModelType inputModel, string typeName)
         {
-            var requiredParams = inputModel.Properties.Where(p => p.Type is not InputPrimitiveType && p.IsRequired);
+            var requiredParams = inputModel.Properties.Where(p => p.IsRequired && p.ConstantValue is null);
 
-            Type generatedModel = Assembly.GetExecutingAssembly().GetType(typeName);
+            Type generatedModel = FindType(Assembly, typeName);
             if (generatedModel == null)
                 return; //for some reason we are losing the cache during generation to know which models were removed
             Assert.NotNull(generatedModel, $"Generated type not found for {inputModel.Name}");
@@ -99,7 +118,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             Assert.AreEqual(fullRequiredParams.Count(), leastParamCtor.GetParameters().Length, $"{inputModel.Name} had a mismatch in required ctor params");
             foreach (var param in fullRequiredParams)
             {
-                Assert.NotNull(leastParamCtor.GetParameters().FirstOrDefault(p => string.Equals(p.Name, param, StringComparison.InvariantCultureIgnoreCase)), $"{param} was not found in {inputModel.Name}'s ctor");
+                var normalized = param.EndsWith("Url", StringComparison.Ordinal) ? param.Substring(0, param.Length - 1) + "i" : param;
+                Assert.NotNull(leastParamCtor.GetParameters().FirstOrDefault(p => string.Equals(p.Name, normalized, StringComparison.OrdinalIgnoreCase)), $"{normalized} was not found in {inputModel.Name}'s ctor");
             }
         }
 
@@ -137,7 +157,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
                 var name = $"{_projectName}.{resource.Type.Name}";
-                var generatedResourceType = Assembly.GetExecutingAssembly().GetType(name);
+                var generatedResourceType = FindType(Assembly, resource.Type.Name);
                 Assert.NotNull(generatedResourceType, $"class {name} is not found in {MgmtContext.RPName}");
                 if (IsSingletonOperation(generatedResourceType) || resource is PartialResource)
                 {
@@ -164,7 +184,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
                 var name = $"{_projectName}.{resource.Type.Name}";
-                var generatedResourceType = Assembly.GetExecutingAssembly().GetType(name);
+                var generatedResourceType = FindType(Assembly, resource.Type.Name);
                 Assert.NotNull(generatedResourceType, $"class {name} is not found");
                 if (IsSingletonOperation(generatedResourceType) || resource is PartialResource)
                 {
@@ -187,7 +207,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                 if (Configuration.MgmtConfiguration.ListException.Contains(collection.RequestPath))
                     continue;
                 var name = $"{_projectName}.{collection.Type.Name}";
-                var generatedCollectionType = Assembly.GetExecutingAssembly().GetType(name);
+                var generatedCollectionType = FindType(Assembly, collection.Type.Name);
                 Assert.NotNull(generatedCollectionType, $"Type ({name}) was not found.");
 
                 Assert.NotNull(generatedCollectionType.GetInterface("IEnumerable"), $"{generatedCollectionType.Name} did not implement IEnumerable");

@@ -16,14 +16,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task BodyTimeGet() => Test(async (host, pipeline) =>
         {
-            var result = await new TimeClient(ClientDiagnostics, pipeline, host).GetAsync();
+            var result = await GetClient<TimeClient>(pipeline, host).GetAsync();
             Assert.AreEqual(TimeSpan.Parse("11:34:56"), result.Value);
         });
 
         [Test]
         public Task BodyTimePut() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new TimeClient(ClientDiagnostics, pipeline, host).PutAsync(new TimeSpan(0, 8, 7, 56));
+            var response = await GetClient<TimeClient>(pipeline, host).PutAsync(new TimeSpan(0, 8, 7, 56));
             Assert.AreEqual("Nice job posting time", response.Value);
             return response.GetRawResponse();
         });

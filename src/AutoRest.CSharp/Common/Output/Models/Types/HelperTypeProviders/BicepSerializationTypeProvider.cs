@@ -105,7 +105,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                     new[]
                     {
                         new ParameterReference(ChildObject),
-                        new ParameterReference(KnownParameters.Serializations.Options)
+                        new ParameterReference(KnownParameters.Serializations.Options),
+                        ModelReaderWriterContextExpression.Default
                     })));
             VariableReference lines = new VariableReference(typeof(string[]), "lines");
             statements.Add(Declare(

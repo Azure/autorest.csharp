@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using Azure.ResourceManager.Resources;
+using MgmtListMethods;
 using MgmtListMethods.Models;
 using NUnit.Framework;
 
@@ -12,6 +13,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     public class MgmtListMethodsTests : TestProjectTests
     {
         public MgmtListMethodsTests() : base("MgmtListMethods") { }
+
+        private protected override Assembly GetAssembly() => typeof(ResGrpParentCollection).Assembly;
 
         // Added tests based on https://microsoft-my.sharepoint.com/:x:/r/personal/micnash_microsoft_com/_layouts/15/Doc.aspx?sourcedoc=%7B181E196F-FC6E-48FB-9CE1-FF143C31B11C%7D&file=ListTestMatrix.xlsx&wdLOR=cE86BCE07-4BBA-48BB-A656-DD19A49E42B5&action=default&mobileredirect=true&share=IQFvGR4Ybvz7SJzh_xQ8MbEcAXMqmVNmXOiC_wmRJHx17jE&cid=c36f7b84-dc61-40e3-bc9d-b82a4509a6e9
 

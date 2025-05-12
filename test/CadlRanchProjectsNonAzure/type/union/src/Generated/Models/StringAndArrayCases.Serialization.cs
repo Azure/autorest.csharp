@@ -116,7 +116,7 @@ namespace Scm._Type.Union.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, Scm_TypeUnionContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(StringAndArrayCases)} does not support writing '{options.Format}' format.");
             }

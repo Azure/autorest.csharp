@@ -126,7 +126,7 @@ namespace extensible_enums_swagger.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, extensible_enums_swaggerContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Pet)} does not support writing '{options.Format}' format.");
             }

@@ -11,6 +11,7 @@ using NUnit.Framework;
 using System.Reflection;
 using System.Text.Json;
 using System.Collections.Generic;
+using Authentication.ApiKey;
 
 namespace CadlRanchProjects.Tests
 {
@@ -176,7 +177,7 @@ namespace CadlRanchProjects.Tests
             var response = await new NullableClient(host, null).GetCollectionsByteClient().GetNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             // we will never construct a null collection therefore this property is actually undefined here.
-            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
+            Assert.IsFalse(TestServerTestBase.IsCollectionDefined(typeof(NullableClient).Assembly, response.Value.NullableProperty));
             Assert.IsNotNull(response.Value.NullableProperty);
         });
 
@@ -216,7 +217,7 @@ namespace CadlRanchProjects.Tests
             var response = await new NullableClient(host, null).GetCollectionsModelClient().GetNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             // we will never construct a null collection therefore this property is actually undefined here.
-            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
+            Assert.IsFalse(TestServerTestBase.IsCollectionDefined(typeof(NullableClient).Assembly, response.Value.NullableProperty));
             Assert.IsNotNull(response.Value.NullableProperty);
         });
 
@@ -266,7 +267,7 @@ namespace CadlRanchProjects.Tests
             var response = await new NullableClient(host, null).GetCollectionsStringClient().GetNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
             // we will never construct a null collection therefore this property is actually undefined here.
-            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
+            Assert.IsFalse(TestServerTestBase.IsCollectionDefined(typeof(NullableClient).Assembly, response.Value.NullableProperty));
             Assert.IsNotNull(response.Value.NullableProperty);
         });
 
@@ -305,8 +306,8 @@ namespace CadlRanchProjects.Tests
         {
             var inputModel = new CollectionsStringProperty("required", null);
 
-            var element = JsonAsserts.AssertWireSerializes(inputModel);
-            Assert.AreEqual(JsonValueKind.Null, element.GetProperty("nullableProperty").ValueKind);
+            var data = ModelReaderWriter.Write(inputModel);
+            Assert.IsTrue(data.ToString().Contains("\"nullableProperty\":null"));
         }
 
         [Test]
@@ -315,9 +316,8 @@ namespace CadlRanchProjects.Tests
             var inputModel = new CollectionsStringProperty("required", new List<string> {"1", "2"});
             inputModel.NullableProperty.Clear();
 
-            var element = JsonAsserts.AssertWireSerializes(inputModel);
-            Assert.AreEqual(JsonValueKind.Array, element.GetProperty("nullableProperty").ValueKind);
-            Assert.AreEqual(0, element.GetProperty("nullableProperty").GetArrayLength());
+            var data = ModelReaderWriter.Write(inputModel);
+            Assert.IsTrue(data.ToString().Contains("\"nullableProperty\":[]"));
         }
 
         [Test]
@@ -325,16 +325,14 @@ namespace CadlRanchProjects.Tests
         {
             var inputModel = new CollectionsStringProperty("required", new List<string> { "1", "2" });
 
-            var element = JsonAsserts.AssertWireSerializes(inputModel);
-            Assert.AreEqual("1", element.GetProperty("nullableProperty")[0].GetString());
-            Assert.AreEqual("2", element.GetProperty("nullableProperty")[1].GetString());
-            Assert.AreEqual(2, element.GetProperty("nullableProperty").GetArrayLength());
+            var data = ModelReaderWriter.Write(inputModel);
+            Assert.IsTrue(data.ToString().Contains("\"nullableProperty\":[\"1\",\"2\"]"));
         }
 
         [Test]
         public void RequiredNullablePropertiesInputDeserializedWithNulls()
         {
-            var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{\"NullableProperty\": null}").RootElement);
+            var model = ModelReaderWriter.Read<CollectionsStringProperty>(BinaryData.FromString("{\"NullableProperty\": null}"));
             Assert.Null(model.NullableProperty);
         }
 
@@ -343,8 +341,8 @@ namespace CadlRanchProjects.Tests
         {
             var inputModel = new CollectionsStringProperty("required", null);
 
-            var element = JsonAsserts.AssertWireSerializes(inputModel);
-            Assert.AreEqual(JsonValueKind.Null, element.GetProperty("nullableProperty").ValueKind);
+            var data = ModelReaderWriter.Write(inputModel);
+            Assert.IsTrue(data.ToString().Contains("\"nullableProperty\":null"));
         }
 
         [Test]
@@ -352,15 +350,14 @@ namespace CadlRanchProjects.Tests
         {
             var inputModel = new CollectionsStringProperty("required", Array.Empty<string>());
 
-            var element = JsonAsserts.AssertWireSerializes(inputModel);
-            Assert.AreEqual(JsonValueKind.Array, element.GetProperty("nullableProperty").ValueKind);
-            Assert.AreEqual(0, element.GetProperty("nullableProperty").GetArrayLength());
+            var data = ModelReaderWriter.Write(inputModel);
+            Assert.IsTrue(data.ToString().Contains("\"nullableProperty\":[]"));
         }
 
         [Test]
         public void NullablePropertiesDeserializedAsValues()
         {
-            var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{\"nullableProperty\": [\"a\", \"b\"]}").RootElement);
+            var model = ModelReaderWriter.Read<CollectionsStringProperty>(BinaryData.FromString("{\"nullableProperty\": [\"a\", \"b\"]}"));
             CollectionAssert.AreEqual(new List<string> { "a", "b" }, model.NullableProperty);
         }
 

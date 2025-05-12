@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Payload.MultiPart.Models
+namespace Scm.Payload.Multipart.Models
 {
     /// <summary> The FileSpecificContentType. </summary>
     public partial class FileSpecificContentType : File

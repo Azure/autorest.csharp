@@ -6,7 +6,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Threading;
 
-namespace Payload.MultiPart
+namespace Scm.Payload.Multipart
 {
     // Data plane generated client.
     /// <summary> Test for multipart. </summary>

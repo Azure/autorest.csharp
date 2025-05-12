@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Payload.MultiPart
+namespace Scm.Payload.Multipart
 {
     internal static class Argument
     {
