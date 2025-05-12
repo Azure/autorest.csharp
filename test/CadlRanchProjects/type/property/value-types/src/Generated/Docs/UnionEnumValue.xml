@@ -79,14 +79,14 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
 
-UnionEnumValueProperty body = new UnionEnumValueProperty(default);
+UnionEnumValueProperty body = new UnionEnumValueProperty();
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
 
-UnionEnumValueProperty body = new UnionEnumValueProperty(default);
+UnionEnumValueProperty body = new UnionEnumValueProperty();
 Response response = await client.PutAsync(body);
 ]]></code></example>
     </member>
@@ -96,14 +96,14 @@ This sample shows how to call Put.
 <code><![CDATA[
 UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
 
-UnionEnumValueProperty body = new UnionEnumValueProperty(default);
+UnionEnumValueProperty body = new UnionEnumValueProperty();
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
 
-UnionEnumValueProperty body = new UnionEnumValueProperty(default);
+UnionEnumValueProperty body = new UnionEnumValueProperty();
 Response response = client.Put(body);
 ]]></code></example>
     </member>
@@ -115,7 +115,7 @@ UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = new object(),
+    property = "value2",
 });
 Response response = await client.PutAsync(content);
 
@@ -127,7 +127,7 @@ UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = new object(),
+    property = "value2",
 });
 Response response = await client.PutAsync(content);
 
@@ -142,7 +142,7 @@ UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = new object(),
+    property = "value2",
 });
 Response response = client.Put(content);
 
@@ -154,7 +154,7 @@ UnionEnumValue client = new ValueTypesClient().GetUnionEnumValueClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = new object(),
+    property = "value2",
 });
 Response response = client.Put(content);
 
