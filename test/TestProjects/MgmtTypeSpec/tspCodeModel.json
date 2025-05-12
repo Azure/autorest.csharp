@@ -506,6 +506,7 @@
        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Operation",
        "usage": "Output,Json",
        "doc": "Details of a REST API operation, returned from the Resource Provider Operations API",
+       "summary": "REST API Operation",
        "decorators": [],
        "properties": [
         {
@@ -817,6 +818,7 @@
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
    "usage": "Json,Exception",
    "doc": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+   "summary": "Error response",
    "decorators": [],
    "properties": [
     {
@@ -1106,6 +1108,7 @@
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ProxyResource",
         "usage": "Output,Json",
         "doc": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+        "summary": "Proxy Resource",
         "decorators": [],
         "baseModel": {
          "$id": "136",
@@ -1115,6 +1118,7 @@
          "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
          "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
          "doc": "Common fields that are returned in the response for all Azure Resource Manager resources",
+         "summary": "Resource",
          "decorators": [],
          "properties": [
           {
@@ -1705,9 +1709,9 @@
                 {
                  "$id": "219",
                  "kind": "property",
-                 "name": "clientId",
-                 "serializedName": "clientId",
-                 "doc": "The client ID of the assigned identity.",
+                 "name": "principalId",
+                 "serializedName": "principalId",
+                 "doc": "The principal ID of the assigned identity.",
                  "type": {
                   "$id": "220",
                   "kind": "string",
@@ -1727,21 +1731,21 @@
                  "discriminator": false,
                  "flatten": false,
                  "decorators": [],
-                 "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity.clientId",
+                 "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity.principalId",
                  "serializationOptions": {
                   "$id": "222",
                   "json": {
                    "$id": "223",
-                   "name": "clientId"
+                   "name": "principalId"
                   }
                  }
                 },
                 {
                  "$id": "224",
                  "kind": "property",
-                 "name": "principalId",
-                 "serializedName": "principalId",
-                 "doc": "The principal ID of the assigned identity.",
+                 "name": "clientId",
+                 "serializedName": "clientId",
+                 "doc": "The client ID of the assigned identity.",
                  "type": {
                   "$id": "225",
                   "kind": "string",
@@ -1761,12 +1765,12 @@
                  "discriminator": false,
                  "flatten": false,
                  "decorators": [],
-                 "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity.principalId",
+                 "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity.clientId",
                  "serializationOptions": {
                   "$id": "227",
                   "json": {
                    "$id": "228",
-                   "name": "principalId"
+                   "name": "clientId"
                   }
                  }
                 }
@@ -2434,6 +2438,7 @@
     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
     "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
     "doc": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+    "summary": "Tracked Resource",
     "decorators": [],
     "baseModel": {
      "$ref": "136"

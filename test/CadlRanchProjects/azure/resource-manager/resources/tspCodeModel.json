@@ -373,6 +373,7 @@
     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
     "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
     "doc": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+    "summary": "Tracked Resource",
     "decorators": [],
     "baseModel": {
      "$id": "42",
@@ -382,6 +383,7 @@
      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
      "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
      "doc": "Common fields that are returned in the response for all Azure Resource Manager resources",
+     "summary": "Resource",
      "decorators": [],
      "properties": [
       {
@@ -877,6 +879,7 @@
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
    "usage": "Json,Exception",
    "doc": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+   "summary": "Error response",
    "decorators": [],
    "properties": [
     {
@@ -1490,6 +1493,7 @@
     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ProxyResource",
     "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
     "doc": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+    "summary": "Proxy Resource",
     "decorators": [],
     "baseModel": {
      "$ref": "42"
