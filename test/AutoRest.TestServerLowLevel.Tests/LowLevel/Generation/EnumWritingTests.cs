@@ -9,15 +9,24 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
     public class EnumWritingTests : ModelGenerationTestBase
     {
         [TestCaseSource(nameof(ExtensibleEnumCase))]
-        public void ExtensibleEnums(EnumWrapper enumType, string expectedModelCodes)
+        public void ExtensibleEnums(string expectedModelCodes)
         {
-            ValidateGeneratedCodes(enumType.EnumType, expectedModelCodes, "");
+            var enumType = new EnumType(ExtensibleEnumType,
+                    "Cadl.TestServer.EnumPropertiesBasic", "public",
+                    CadlTypeFactory, null
+                );
+            ValidateGeneratedCodes(enumType, expectedModelCodes, "");
         }
 
         [TestCaseSource(nameof(FixedEnumCase))]
-        public void FixedEnums(EnumWrapper enumType, string expectedModelCodes, string expectedSerializationCodes)
+        public void FixedEnums(string expectedModelCodes, string expectedSerializationCodes)
         {
-            ValidateGeneratedCodes(enumType.EnumType, expectedModelCodes, expectedSerializationCodes);
+            // see cadl definition: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/enum-properties/main.cadl#L35-L45
+            var enumType = new EnumType(FixedEnumType,
+                "Cadl.TestServer.EnumPropertiesBasic", "public",
+                CadlTypeFactory, null
+            );
+            ValidateGeneratedCodes(enumType, expectedModelCodes, expectedSerializationCodes);
         }
 
         [TestCaseSource(nameof(RoundTripEnumPropertiesCase))]
@@ -90,14 +99,6 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             Assert.AreEqual(expected, codes);
         }
 
-        // Bypass the internal accessibility restriction
-        public class EnumWrapper
-        {
-            internal EnumType EnumType;
-
-            internal EnumWrapper(EnumType enumType) => this.EnumType = enumType;
-        }
-
         static EnumWritingTests()
         {
             var extensibleEnumValues = new List<InputEnumTypeValue>();
@@ -127,10 +128,6 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
 
             new object[]
             {
-                new EnumWrapper(new EnumType(ExtensibleEnumType,
-                    "Cadl.TestServer.EnumPropertiesBasic", "public",
-                    CadlTypeFactory, null
-                )),
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
@@ -196,11 +193,6 @@ public override string ToString() => _value;
         {
             new object[]
             {
-                // see cadl definition: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/enum-properties/main.cadl#L35-L45
-                new EnumWrapper(new EnumType(FixedEnumType,
-                    "Cadl.TestServer.EnumPropertiesBasic", "public",
-                    CadlTypeFactory, null
-                )),
                 @"// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
