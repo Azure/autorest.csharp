@@ -6,7 +6,8 @@
   {
    "$id": "2",
    "kind": "enum",
-   "name": "PngImageAsJson_content-type",
+   "name": "PngImageAsJsonContentType",
+   "crossLanguageDefinitionId": "",
    "valueType": {
     "$id": "3",
     "kind": "string",
@@ -20,7 +21,6 @@
      "kind": "enumvalue",
      "name": "application/json",
      "value": "application/json",
-     "doc": "application/json",
      "valueType": {
       "$ref": "3"
      },
@@ -29,12 +29,10 @@
      }
     }
    ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "Payload.ContentNegotiation.DifferentBody",
-   "doc": "The PngImageAsJson_content-type",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
+   "namespace": "Payload.ContentNegotiation.DifferentBody",
    "decorators": []
   }
  ],
@@ -56,6 +54,9 @@
      "type": {
       "$id": "7",
       "kind": "constant",
+      "name": "PngImageAsJsonContentType",
+      "namespace": "Payload.ContentNegotiation.DifferentBody",
+      "usage": "Output,Json",
       "valueType": {
        "$ref": "2"
       },
@@ -168,6 +169,9 @@
           "type": {
            "$id": "21",
            "kind": "constant",
+           "name": "PngImageContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "22",
             "kind": "string",
@@ -210,6 +214,9 @@
             "type": {
              "$id": "26",
              "kind": "constant",
+             "name": "PngImageContentType1",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "27",
               "kind": "string",
@@ -245,6 +252,9 @@
          "type": {
           "$id": "29",
           "kind": "constant",
+          "name": "PngImageContentType2",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "30",
            "kind": "string",
@@ -296,6 +306,9 @@
           "type": {
            "$id": "35",
            "kind": "constant",
+           "name": "JpegImageContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "36",
             "kind": "string",
@@ -338,6 +351,9 @@
             "type": {
              "$id": "40",
              "kind": "constant",
+             "name": "JpegImageContentType1",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "41",
               "kind": "string",
@@ -373,6 +389,9 @@
          "type": {
           "$id": "43",
           "kind": "constant",
+          "name": "JpegImageContentType2",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "44",
            "kind": "string",
@@ -470,6 +489,9 @@
           "type": {
            "$id": "54",
            "kind": "constant",
+           "name": "PngImageContentType3",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "55",
             "kind": "string",
@@ -512,6 +534,9 @@
             "type": {
              "$id": "59",
              "kind": "constant",
+             "name": "PngImageContentType4",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "60",
               "kind": "string",
@@ -547,6 +572,9 @@
          "type": {
           "$id": "62",
           "kind": "constant",
+          "name": "PngImageContentType5",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "63",
            "kind": "string",
@@ -598,6 +626,9 @@
           "type": {
            "$id": "68",
            "kind": "constant",
+           "name": "PngImageAsJsonContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "69",
             "kind": "string",
@@ -636,6 +667,9 @@
             "type": {
              "$id": "72",
              "kind": "constant",
+             "name": "PngImageAsJsonContentType2",
+             "namespace": "",
+             "usage": "None",
              "valueType": {
               "$id": "73",
               "kind": "string",
@@ -671,6 +705,9 @@
          "type": {
           "$id": "75",
           "kind": "constant",
+          "name": "PngImageAsJsonContentType3",
+          "namespace": "",
+          "usage": "None",
           "valueType": {
            "$id": "76",
            "kind": "string",

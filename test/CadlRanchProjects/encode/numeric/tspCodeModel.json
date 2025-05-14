@@ -189,6 +189,9 @@
           "type": {
            "$id": "26",
            "kind": "constant",
+           "name": "safeintAsStringContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "27",
             "kind": "string",
@@ -216,6 +219,9 @@
           "type": {
            "$id": "29",
            "kind": "constant",
+           "name": "safeintAsStringContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "30",
             "kind": "string",
@@ -367,6 +373,9 @@
           "type": {
            "$id": "40",
            "kind": "constant",
+           "name": "uint32AsStringOptionalContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "41",
             "kind": "string",
@@ -394,6 +403,9 @@
           "type": {
            "$id": "43",
            "kind": "constant",
+           "name": "uint32AsStringOptionalContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "44",
             "kind": "string",
@@ -545,6 +557,9 @@
           "type": {
            "$id": "54",
            "kind": "constant",
+           "name": "uint8AsStringContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "55",
             "kind": "string",
@@ -572,6 +587,9 @@
           "type": {
            "$id": "57",
            "kind": "constant",
+           "name": "uint8AsStringContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "58",
             "kind": "string",

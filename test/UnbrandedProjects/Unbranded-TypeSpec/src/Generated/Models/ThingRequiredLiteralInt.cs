@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace UnbrandedTypeSpec.Models
 {
-    /// <summary> The Thing_requiredLiteralInt. </summary>
+    /// <summary> The ThingRequiredLiteralInt. </summary>
     public readonly partial struct ThingRequiredLiteralInt : IEquatable<ThingRequiredLiteralInt>
     {
         private readonly int _value;

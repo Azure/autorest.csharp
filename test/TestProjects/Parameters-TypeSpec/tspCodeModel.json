@@ -229,6 +229,9 @@
           "type": {
            "$id": "29",
            "kind": "constant",
+           "name": "OperationContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "30",
             "kind": "string",
@@ -410,6 +413,9 @@
           "type": {
            "$id": "45",
            "kind": "constant",
+           "name": "Operation2ContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "46",
             "kind": "string",

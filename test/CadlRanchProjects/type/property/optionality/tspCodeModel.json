@@ -6,7 +6,8 @@
   {
    "$id": "2",
    "kind": "enum",
-   "name": "StringLiteralProperty_property",
+   "name": "UnionStringLiteralPropertyProperty",
+   "crossLanguageDefinitionId": "Type.Property.Optional.UnionStringLiteralProperty.property.anonymous",
    "valueType": {
     "$id": "3",
     "kind": "string",
@@ -20,53 +21,38 @@
      "kind": "enumvalue",
      "name": "hello",
      "value": "hello",
-     "doc": "hello",
      "valueType": {
-      "$ref": "3"
+      "$id": "5",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
      "enumType": {
       "$ref": "2"
-     }
-    }
-   ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "_Type.Property.Optionality",
-   "doc": "The StringLiteralProperty_property",
-   "isFixed": false,
-   "isFlags": false,
-   "usage": "Input,Output,Json",
-   "decorators": []
-  },
-  {
-   "$id": "5",
-   "kind": "enum",
-   "name": "IntLiteralProperty_property",
-   "valueType": {
-    "$id": "6",
-    "kind": "int32",
-    "name": "int32",
-    "crossLanguageDefinitionId": "TypeSpec.int32",
-    "decorators": []
-   },
-   "values": [
+     },
+     "decorators": []
+    },
     {
-     "$id": "7",
+     "$id": "6",
      "kind": "enumvalue",
-     "name": "1",
-     "value": 1,
-     "doc": "1",
+     "name": "world",
+     "value": "world",
      "valueType": {
-      "$ref": "6"
+      "$id": "7",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
      "enumType": {
-      "$ref": "5"
-     }
+      "$ref": "2"
+     },
+     "decorators": []
     }
    ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "_Type.Property.Optionality",
-   "doc": "The IntLiteralProperty_property",
-   "isFixed": false,
+   "namespace": "",
+   "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
    "decorators": []
@@ -74,98 +60,10 @@
   {
    "$id": "8",
    "kind": "enum",
-   "name": "FloatLiteralProperty_property",
-   "valueType": {
-    "$id": "9",
-    "kind": "float32",
-    "name": "float32",
-    "crossLanguageDefinitionId": "TypeSpec.float32",
-    "decorators": []
-   },
-   "values": [
-    {
-     "$id": "10",
-     "kind": "enumvalue",
-     "name": "1.25",
-     "value": 1.25,
-     "doc": "1.25",
-     "valueType": {
-      "$ref": "9"
-     },
-     "enumType": {
-      "$ref": "8"
-     }
-    }
-   ],
-   "crossLanguageDefinitionId": "",
-   "namespace": "_Type.Property.Optionality",
-   "doc": "The FloatLiteralProperty_property",
-   "isFixed": false,
-   "isFlags": false,
-   "usage": "Input,Output,Json",
-   "decorators": []
-  },
-  {
-   "$id": "11",
-   "kind": "enum",
-   "name": "UnionStringLiteralPropertyProperty",
-   "crossLanguageDefinitionId": "Type.Property.Optional.UnionStringLiteralProperty.property.anonymous",
-   "valueType": {
-    "$id": "12",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "values": [
-    {
-     "$id": "13",
-     "kind": "enumvalue",
-     "name": "hello",
-     "value": "hello",
-     "valueType": {
-      "$id": "14",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "enumType": {
-      "$ref": "11"
-     },
-     "decorators": []
-    },
-    {
-     "$id": "15",
-     "kind": "enumvalue",
-     "name": "world",
-     "value": "world",
-     "valueType": {
-      "$id": "16",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "enumType": {
-      "$ref": "11"
-     },
-     "decorators": []
-    }
-   ],
-   "namespace": "",
-   "isFixed": true,
-   "isFlags": false,
-   "usage": "Input,Output,Json",
-   "decorators": []
-  },
-  {
-   "$id": "17",
-   "kind": "enum",
    "name": "UnionIntLiteralPropertyProperty",
    "crossLanguageDefinitionId": "Type.Property.Optional.UnionIntLiteralProperty.property.anonymous",
    "valueType": {
-    "$id": "18",
+    "$id": "9",
     "kind": "int32",
     "name": "int32",
     "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -173,36 +71,36 @@
    },
    "values": [
     {
-     "$id": "19",
+     "$id": "10",
      "kind": "enumvalue",
      "name": "1",
      "value": 1,
      "valueType": {
-      "$id": "20",
+      "$id": "11",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "17"
+      "$ref": "8"
      },
      "decorators": []
     },
     {
-     "$id": "21",
+     "$id": "12",
      "kind": "enumvalue",
      "name": "2",
      "value": 2,
      "valueType": {
-      "$id": "22",
+      "$id": "13",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "17"
+      "$ref": "8"
      },
      "decorators": []
     }
@@ -214,12 +112,12 @@
    "decorators": []
   },
   {
-   "$id": "23",
+   "$id": "14",
    "kind": "enum",
    "name": "UnionFloatLiteralPropertyProperty",
    "crossLanguageDefinitionId": "Type.Property.Optional.UnionFloatLiteralProperty.property.anonymous",
    "valueType": {
-    "$id": "24",
+    "$id": "15",
     "kind": "float32",
     "name": "float32",
     "crossLanguageDefinitionId": "TypeSpec.float32",
@@ -227,36 +125,36 @@
    },
    "values": [
     {
-     "$id": "25",
+     "$id": "16",
      "kind": "enumvalue",
      "name": "1.25",
      "value": 1.25,
      "valueType": {
-      "$id": "26",
+      "$id": "17",
       "kind": "float32",
       "name": "float32",
       "crossLanguageDefinitionId": "TypeSpec.float32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "23"
+      "$ref": "14"
      },
      "decorators": []
     },
     {
-     "$id": "27",
+     "$id": "18",
      "kind": "enumvalue",
      "name": "2.375",
      "value": 2.375,
      "valueType": {
-      "$id": "28",
+      "$id": "19",
       "kind": "float32",
       "name": "float32",
       "crossLanguageDefinitionId": "TypeSpec.float32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "23"
+      "$ref": "14"
      },
      "decorators": []
     }
@@ -265,6 +163,102 @@
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
+   "decorators": []
+  },
+  {
+   "$id": "20",
+   "kind": "enum",
+   "name": "StringLiteralPropertyProperty",
+   "crossLanguageDefinitionId": "",
+   "valueType": {
+    "$id": "21",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "22",
+     "kind": "enumvalue",
+     "name": "hello",
+     "value": "hello",
+     "valueType": {
+      "$ref": "21"
+     },
+     "enumType": {
+      "$ref": "20"
+     }
+    }
+   ],
+   "isFixed": false,
+   "isFlags": false,
+   "usage": "Input,Output,Json",
+   "namespace": "_Type.Property.Optionality",
+   "decorators": []
+  },
+  {
+   "$id": "23",
+   "kind": "enum",
+   "name": "IntLiteralPropertyProperty",
+   "crossLanguageDefinitionId": "",
+   "valueType": {
+    "$id": "24",
+    "kind": "int32",
+    "name": "int32",
+    "crossLanguageDefinitionId": "TypeSpec.int32",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "25",
+     "kind": "enumvalue",
+     "name": "1",
+     "value": 1,
+     "valueType": {
+      "$ref": "24"
+     },
+     "enumType": {
+      "$ref": "23"
+     }
+    }
+   ],
+   "isFixed": false,
+   "isFlags": false,
+   "usage": "Input,Output,Json",
+   "namespace": "_Type.Property.Optionality",
+   "decorators": []
+  },
+  {
+   "$id": "26",
+   "kind": "enum",
+   "name": "FloatLiteralPropertyProperty",
+   "crossLanguageDefinitionId": "",
+   "valueType": {
+    "$id": "27",
+    "kind": "float32",
+    "name": "float32",
+    "crossLanguageDefinitionId": "TypeSpec.float32",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "28",
+     "kind": "enumvalue",
+     "name": "1.25",
+     "value": 1.25,
+     "valueType": {
+      "$ref": "27"
+     },
+     "enumType": {
+      "$ref": "26"
+     }
+    }
+   ],
+   "isFixed": false,
+   "isFlags": false,
+   "usage": "Input,Output,Json",
+   "namespace": "_Type.Property.Optionality",
    "decorators": []
   }
  ],
@@ -628,8 +622,11 @@
      "type": {
       "$id": "74",
       "kind": "constant",
+      "name": "StringLiteralPropertyProperty",
+      "namespace": "_Type.Property.Optionality",
+      "usage": "Input,Output,Json",
       "valueType": {
-       "$ref": "2"
+       "$ref": "20"
       },
       "value": "hello",
       "decorators": []
@@ -669,8 +666,11 @@
      "type": {
       "$id": "79",
       "kind": "constant",
+      "name": "IntLiteralPropertyProperty",
+      "namespace": "_Type.Property.Optionality",
+      "usage": "Input,Output,Json",
       "valueType": {
-       "$ref": "5"
+       "$ref": "23"
       },
       "value": 1,
       "decorators": []
@@ -710,8 +710,11 @@
      "type": {
       "$id": "84",
       "kind": "constant",
+      "name": "FloatLiteralPropertyProperty",
+      "namespace": "_Type.Property.Optionality",
+      "usage": "Input,Output,Json",
       "valueType": {
-       "$ref": "8"
+       "$ref": "26"
       },
       "value": 1.25,
       "decorators": []
@@ -751,6 +754,9 @@
      "type": {
       "$id": "89",
       "kind": "constant",
+      "name": "BooleanLiteralPropertyProperty",
+      "namespace": "_Type.Property.Optionality",
+      "usage": "Input,Output,Json",
       "valueType": {
        "$id": "90",
        "kind": "boolean",
@@ -794,7 +800,7 @@
      "serializedName": "property",
      "doc": "Property",
      "type": {
-      "$ref": "11"
+      "$ref": "2"
      },
      "optional": true,
      "readOnly": false,
@@ -829,7 +835,7 @@
      "serializedName": "property",
      "doc": "Property",
      "type": {
-      "$ref": "17"
+      "$ref": "8"
      },
      "optional": true,
      "readOnly": false,
@@ -864,7 +870,7 @@
      "serializedName": "property",
      "doc": "Property",
      "type": {
-      "$ref": "23"
+      "$ref": "14"
      },
      "optional": true,
      "readOnly": false,
@@ -1020,6 +1026,9 @@
           "type": {
            "$id": "123",
            "kind": "constant",
+           "name": "getAllContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "124",
             "kind": "string",
@@ -1117,6 +1126,9 @@
           "type": {
            "$id": "131",
            "kind": "constant",
+           "name": "getDefaultContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "132",
             "kind": "string",
@@ -1215,6 +1227,9 @@
           "type": {
            "$id": "139",
            "kind": "constant",
+           "name": "putAllContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "140",
             "kind": "string",
@@ -1342,6 +1357,9 @@
           "type": {
            "$id": "149",
            "kind": "constant",
+           "name": "putDefaultContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "150",
             "kind": "string",
@@ -1514,6 +1532,9 @@
           "type": {
            "$id": "164",
            "kind": "constant",
+           "name": "getAllContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "165",
             "kind": "string",
@@ -1611,6 +1632,9 @@
           "type": {
            "$id": "172",
            "kind": "constant",
+           "name": "getDefaultContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "173",
             "kind": "string",
@@ -1709,6 +1733,9 @@
           "type": {
            "$id": "180",
            "kind": "constant",
+           "name": "putAllContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "181",
             "kind": "string",
@@ -1836,6 +1863,9 @@
           "type": {
            "$id": "190",
            "kind": "constant",
+           "name": "putDefaultContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "191",
             "kind": "string",
@@ -2008,6 +2038,9 @@
           "type": {
            "$id": "205",
            "kind": "constant",
+           "name": "getAllContentType2",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "206",
             "kind": "string",
@@ -2105,6 +2138,9 @@
           "type": {
            "$id": "213",
            "kind": "constant",
+           "name": "getDefaultContentType2",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "214",
             "kind": "string",
@@ -2203,6 +2239,9 @@
           "type": {
            "$id": "221",
            "kind": "constant",
+           "name": "putAllContentType2",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "222",
             "kind": "string",
@@ -2330,6 +2369,9 @@
           "type": {
            "$id": "231",
            "kind": "constant",
+           "name": "putDefaultContentType2",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "232",
             "kind": "string",
@@ -2502,6 +2544,9 @@
           "type": {
            "$id": "246",
            "kind": "constant",
+           "name": "getAllContentType3",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "247",
             "kind": "string",
@@ -2599,6 +2644,9 @@
           "type": {
            "$id": "254",
            "kind": "constant",
+           "name": "getDefaultContentType3",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "255",
             "kind": "string",
@@ -2697,6 +2745,9 @@
           "type": {
            "$id": "262",
            "kind": "constant",
+           "name": "putAllContentType3",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "263",
             "kind": "string",
@@ -2824,6 +2875,9 @@
           "type": {
            "$id": "272",
            "kind": "constant",
+           "name": "putDefaultContentType3",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "273",
             "kind": "string",
@@ -2996,6 +3050,9 @@
           "type": {
            "$id": "287",
            "kind": "constant",
+           "name": "getAllContentType4",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "288",
             "kind": "string",
@@ -3093,6 +3150,9 @@
           "type": {
            "$id": "295",
            "kind": "constant",
+           "name": "getDefaultContentType4",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "296",
             "kind": "string",
@@ -3191,6 +3251,9 @@
           "type": {
            "$id": "303",
            "kind": "constant",
+           "name": "putAllContentType4",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "304",
             "kind": "string",
@@ -3318,6 +3381,9 @@
           "type": {
            "$id": "313",
            "kind": "constant",
+           "name": "putDefaultContentType4",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "314",
             "kind": "string",
@@ -3490,6 +3556,9 @@
           "type": {
            "$id": "328",
            "kind": "constant",
+           "name": "getAllContentType5",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "329",
             "kind": "string",
@@ -3587,6 +3656,9 @@
           "type": {
            "$id": "336",
            "kind": "constant",
+           "name": "getDefaultContentType5",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "337",
             "kind": "string",
@@ -3685,6 +3757,9 @@
           "type": {
            "$id": "344",
            "kind": "constant",
+           "name": "putAllContentType5",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "345",
             "kind": "string",
@@ -3812,6 +3887,9 @@
           "type": {
            "$id": "354",
            "kind": "constant",
+           "name": "putDefaultContentType5",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "355",
             "kind": "string",
@@ -3984,6 +4062,9 @@
           "type": {
            "$id": "369",
            "kind": "constant",
+           "name": "getAllContentType6",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "370",
             "kind": "string",
@@ -4081,6 +4162,9 @@
           "type": {
            "$id": "377",
            "kind": "constant",
+           "name": "getDefaultContentType6",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "378",
             "kind": "string",
@@ -4179,6 +4263,9 @@
           "type": {
            "$id": "385",
            "kind": "constant",
+           "name": "putAllContentType6",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "386",
             "kind": "string",
@@ -4306,6 +4393,9 @@
           "type": {
            "$id": "395",
            "kind": "constant",
+           "name": "putDefaultContentType6",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "396",
             "kind": "string",
@@ -4478,6 +4568,9 @@
           "type": {
            "$id": "410",
            "kind": "constant",
+           "name": "getAllContentType7",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "411",
             "kind": "string",
@@ -4575,6 +4668,9 @@
           "type": {
            "$id": "418",
            "kind": "constant",
+           "name": "getDefaultContentType7",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "419",
             "kind": "string",
@@ -4673,6 +4769,9 @@
           "type": {
            "$id": "426",
            "kind": "constant",
+           "name": "putAllContentType7",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "427",
             "kind": "string",
@@ -4800,6 +4899,9 @@
           "type": {
            "$id": "436",
            "kind": "constant",
+           "name": "putDefaultContentType7",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "437",
             "kind": "string",
@@ -4972,6 +5074,9 @@
           "type": {
            "$id": "451",
            "kind": "constant",
+           "name": "getAllContentType8",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "452",
             "kind": "string",
@@ -5069,6 +5174,9 @@
           "type": {
            "$id": "459",
            "kind": "constant",
+           "name": "getDefaultContentType8",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "460",
             "kind": "string",
@@ -5167,6 +5275,9 @@
           "type": {
            "$id": "467",
            "kind": "constant",
+           "name": "putAllContentType8",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "468",
             "kind": "string",
@@ -5294,6 +5405,9 @@
           "type": {
            "$id": "477",
            "kind": "constant",
+           "name": "putDefaultContentType8",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "478",
             "kind": "string",
@@ -5466,6 +5580,9 @@
           "type": {
            "$id": "492",
            "kind": "constant",
+           "name": "getAllContentType9",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "493",
             "kind": "string",
@@ -5563,6 +5680,9 @@
           "type": {
            "$id": "500",
            "kind": "constant",
+           "name": "getDefaultContentType9",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "501",
             "kind": "string",
@@ -5661,6 +5781,9 @@
           "type": {
            "$id": "508",
            "kind": "constant",
+           "name": "putAllContentType9",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "509",
             "kind": "string",
@@ -5788,6 +5911,9 @@
           "type": {
            "$id": "518",
            "kind": "constant",
+           "name": "putDefaultContentType9",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "519",
             "kind": "string",
@@ -5960,6 +6086,9 @@
           "type": {
            "$id": "533",
            "kind": "constant",
+           "name": "getAllContentType10",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "534",
             "kind": "string",
@@ -6057,6 +6186,9 @@
           "type": {
            "$id": "541",
            "kind": "constant",
+           "name": "getDefaultContentType10",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "542",
             "kind": "string",
@@ -6155,6 +6287,9 @@
           "type": {
            "$id": "549",
            "kind": "constant",
+           "name": "putAllContentType10",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "550",
             "kind": "string",
@@ -6282,6 +6417,9 @@
           "type": {
            "$id": "559",
            "kind": "constant",
+           "name": "putDefaultContentType10",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "560",
             "kind": "string",
@@ -6454,6 +6592,9 @@
           "type": {
            "$id": "574",
            "kind": "constant",
+           "name": "getAllContentType11",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "575",
             "kind": "string",
@@ -6551,6 +6692,9 @@
           "type": {
            "$id": "582",
            "kind": "constant",
+           "name": "getDefaultContentType11",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "583",
             "kind": "string",
@@ -6649,6 +6793,9 @@
           "type": {
            "$id": "590",
            "kind": "constant",
+           "name": "putAllContentType11",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "591",
             "kind": "string",
@@ -6776,6 +6923,9 @@
           "type": {
            "$id": "600",
            "kind": "constant",
+           "name": "putDefaultContentType11",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "601",
             "kind": "string",
@@ -6948,6 +7098,9 @@
           "type": {
            "$id": "615",
            "kind": "constant",
+           "name": "getAllContentType12",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "616",
             "kind": "string",
@@ -7045,6 +7198,9 @@
           "type": {
            "$id": "623",
            "kind": "constant",
+           "name": "getDefaultContentType12",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "624",
             "kind": "string",
@@ -7143,6 +7299,9 @@
           "type": {
            "$id": "631",
            "kind": "constant",
+           "name": "putAllContentType12",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "632",
             "kind": "string",
@@ -7270,6 +7429,9 @@
           "type": {
            "$id": "641",
            "kind": "constant",
+           "name": "putDefaultContentType12",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "642",
             "kind": "string",
@@ -7442,6 +7604,9 @@
           "type": {
            "$id": "656",
            "kind": "constant",
+           "name": "getAllContentType13",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "657",
             "kind": "string",
@@ -7539,6 +7704,9 @@
           "type": {
            "$id": "664",
            "kind": "constant",
+           "name": "getDefaultContentType13",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "665",
             "kind": "string",
@@ -7637,6 +7805,9 @@
           "type": {
            "$id": "672",
            "kind": "constant",
+           "name": "putAllContentType13",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "673",
             "kind": "string",
@@ -7764,6 +7935,9 @@
           "type": {
            "$id": "682",
            "kind": "constant",
+           "name": "putDefaultContentType13",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "683",
             "kind": "string",
@@ -7936,6 +8110,9 @@
           "type": {
            "$id": "697",
            "kind": "constant",
+           "name": "getAllContentType14",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "698",
             "kind": "string",
@@ -8033,6 +8210,9 @@
           "type": {
            "$id": "705",
            "kind": "constant",
+           "name": "getDefaultContentType14",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "706",
             "kind": "string",
@@ -8131,6 +8311,9 @@
           "type": {
            "$id": "713",
            "kind": "constant",
+           "name": "putAllContentType14",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "714",
             "kind": "string",
@@ -8258,6 +8441,9 @@
           "type": {
            "$id": "723",
            "kind": "constant",
+           "name": "putDefaultContentType14",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "724",
             "kind": "string",
@@ -8431,6 +8617,9 @@
           "type": {
            "$id": "738",
            "kind": "constant",
+           "name": "getAllContentType15",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "739",
             "kind": "string",
@@ -8528,6 +8717,9 @@
           "type": {
            "$id": "746",
            "kind": "constant",
+           "name": "getRequiredOnlyContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "747",
             "kind": "string",
@@ -8626,6 +8818,9 @@
           "type": {
            "$id": "754",
            "kind": "constant",
+           "name": "putAllContentType15",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "755",
             "kind": "string",
@@ -8753,6 +8948,9 @@
           "type": {
            "$id": "764",
            "kind": "constant",
+           "name": "putRequiredOnlyContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "765",
             "kind": "string",

@@ -748,6 +748,9 @@
        "type": {
         "$id": "91",
         "kind": "constant",
+        "name": "ModelXKind",
+        "namespace": "ModelReaderWriterValidationTypeSpec",
+        "usage": "Input,Output,Json",
         "valueType": {
          "$id": "92",
          "kind": "string",
@@ -923,6 +926,9 @@
        "type": {
         "$id": "116",
         "kind": "constant",
+        "name": "ModelYKind",
+        "namespace": "ModelReaderWriterValidationTypeSpec",
+        "usage": "Input,Output,Json",
         "valueType": {
          "$id": "117",
          "kind": "string",
@@ -2921,6 +2927,9 @@
         "type": {
          "$id": "390",
          "kind": "constant",
+         "name": "op1ContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "391",
           "kind": "string",
@@ -2948,6 +2957,9 @@
         "type": {
          "$id": "393",
          "kind": "constant",
+         "name": "op1ContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "394",
           "kind": "string",
@@ -3099,6 +3111,9 @@
         "type": {
          "$id": "404",
          "kind": "constant",
+         "name": "op2ContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "405",
           "kind": "string",
@@ -3126,6 +3141,9 @@
         "type": {
          "$id": "407",
          "kind": "constant",
+         "name": "op2ContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "408",
           "kind": "string",
@@ -3277,6 +3295,9 @@
         "type": {
          "$id": "418",
          "kind": "constant",
+         "name": "op3ContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "419",
           "kind": "string",
@@ -3304,6 +3325,9 @@
         "type": {
          "$id": "421",
          "kind": "constant",
+         "name": "op3ContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "422",
           "kind": "string",
@@ -3455,6 +3479,9 @@
         "type": {
          "$id": "432",
          "kind": "constant",
+         "name": "op4ContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "433",
           "kind": "string",
@@ -3482,6 +3509,9 @@
         "type": {
          "$id": "435",
          "kind": "constant",
+         "name": "op4ContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "436",
           "kind": "string",
@@ -3632,6 +3662,9 @@
         "type": {
          "$id": "446",
          "kind": "constant",
+         "name": "op5ContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "447",
           "kind": "string",
@@ -3728,6 +3761,9 @@
         "type": {
          "$id": "454",
          "kind": "constant",
+         "name": "op6ContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "455",
           "kind": "string",
@@ -3755,6 +3791,9 @@
         "type": {
          "$id": "457",
          "kind": "constant",
+         "name": "op6ContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "458",
           "kind": "string",
@@ -3906,6 +3945,9 @@
         "type": {
          "$id": "468",
          "kind": "constant",
+         "name": "op7ContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "469",
           "kind": "string",
@@ -3933,6 +3975,9 @@
         "type": {
          "$id": "471",
          "kind": "constant",
+         "name": "op7ContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "472",
           "kind": "string",
@@ -4084,6 +4129,9 @@
         "type": {
          "$id": "482",
          "kind": "constant",
+         "name": "op8ContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "483",
           "kind": "string",
@@ -4111,6 +4159,9 @@
         "type": {
          "$id": "485",
          "kind": "constant",
+         "name": "op8ContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "486",
           "kind": "string",

@@ -474,6 +474,9 @@
         "type": {
          "$id": "62",
          "kind": "constant",
+         "name": "CreateOrUpdateRequestContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "63",
           "kind": "string",
@@ -501,6 +504,9 @@
         "type": {
          "$id": "65",
          "kind": "constant",
+         "name": "createOrUpdateContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "66",
           "kind": "string",
@@ -613,6 +619,9 @@
        "type": {
         "$id": "73",
         "kind": "constant",
+        "name": "CreateOrUpdateRequestContentType1",
+        "namespace": "",
+        "usage": "None",
         "valueType": {
          "$id": "74",
          "kind": "string",
@@ -760,6 +769,9 @@
         "type": {
          "$id": "87",
          "kind": "constant",
+         "name": "createOrReplaceContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "88",
           "kind": "string",
@@ -787,6 +799,9 @@
         "type": {
          "$id": "90",
          "kind": "constant",
+         "name": "createOrReplaceContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "91",
           "kind": "string",
@@ -1035,6 +1050,9 @@
         "type": {
          "$id": "110",
          "kind": "constant",
+         "name": "getContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "111",
           "kind": "string",
@@ -1365,6 +1383,9 @@
         "type": {
          "$id": "141",
          "kind": "constant",
+         "name": "listContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "142",
           "kind": "string",
@@ -1718,6 +1739,9 @@
         "type": {
          "$id": "175",
          "kind": "constant",
+         "name": "deleteContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "176",
           "kind": "string",
@@ -1908,6 +1932,9 @@
         "type": {
          "$id": "193",
          "kind": "constant",
+         "name": "exportContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "194",
           "kind": "string",
@@ -2107,6 +2134,9 @@
         "type": {
          "$id": "211",
          "kind": "constant",
+         "name": "exportAllUsersContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "212",
           "kind": "string",

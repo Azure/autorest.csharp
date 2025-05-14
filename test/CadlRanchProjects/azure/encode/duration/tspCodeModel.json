@@ -80,6 +80,9 @@
         "type": {
          "$id": "12",
          "kind": "constant",
+         "name": "durationConstantContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "13",
           "kind": "string",
