@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
-            new("System.ClientModel", "1.4.0"),
+            new("System.ClientModel", "1.4.1"),
         };
 
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedTestDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
