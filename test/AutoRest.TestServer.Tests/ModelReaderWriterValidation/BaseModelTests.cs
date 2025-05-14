@@ -3,8 +3,10 @@
 
 using System;
 using System.Linq;
+using System.Reflection;
 using ModelReaderWriterValidationTypeSpec.Models;
 using NUnit.Framework;
+using static AutoRest.TestServer.Tests.Infrastructure.TestServerTestBase;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -23,7 +25,7 @@ namespace AutoRest.TestServer.Tests
         protected override void CompareModels(BaseModel model, BaseModel model2, string format)
         {
             Assert.AreEqual(model.Name, model2.Name);
-            Assert.AreEqual(model.Kind, model2.Kind);
+            Assert.AreEqual(GetProperty(model, "Kind"), GetProperty(model2, "Kind"));
             if (format == "J")
             {
                 var rawData = GetRawData(model);
@@ -48,7 +50,7 @@ namespace AutoRest.TestServer.Tests
 
         protected override void VerifyModel(BaseModel model, string format)
         {
-            Assert.AreEqual("X", model.Kind);
+            Assert.AreEqual("X", GetProperty(model, "Kind"));
             Assert.AreEqual("xmodel", model.Name);
             var rawData = GetRawData(model);
             Assert.IsNotNull(rawData);

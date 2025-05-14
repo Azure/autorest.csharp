@@ -18,7 +18,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task JsonInputInXMLSwagger() => TestStatus(async (host, pipeline) =>
         {
-            return await new XmlClient(ClientDiagnostics, pipeline, host).JsonInputAsync(new JsonInput()
+            return await GetClient<XmlClient>(pipeline, host).JsonInputAsync(new JsonInput()
             {
                 Id = 42
             });
@@ -27,14 +27,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task JsonOutputInXMLSwagger() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).JsonOutputAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).JsonOutputAsync();
             Assert.AreEqual(42, result.Value.Id);
         });
 
         [Test]
         public Task GetWithXMsText() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetXMsTextAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).GetXMsTextAsync();
             Assert.AreEqual("I am text", result.Value.Content);
             Assert.AreEqual("english", result.Value.Language);
         });
@@ -68,13 +68,13 @@ namespace AutoRest.TestServer.Tests
                 }
             };
 
-            return await new XmlClient(ClientDiagnostics, pipeline, host).PutSimpleAsync(slideshow);
+            return await GetClient<XmlClient>(pipeline, host).PutSimpleAsync(slideshow);
         });
 
         [Test]
         public Task GetSimpleXML() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetSimpleAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).GetSimpleAsync();
             var value = result.Value;
 
             Assert.AreEqual("Yours Truly", value.Author);
@@ -110,7 +110,7 @@ namespace AutoRest.TestServer.Tests
                 }
             };
 
-            return await new XmlClient(ClientDiagnostics, pipeline, host).PutComplexTypeRefNoMetaAsync(root);
+            return await GetClient<XmlClient>(pipeline, host).PutComplexTypeRefNoMetaAsync(root);
         });
 
 
@@ -126,13 +126,13 @@ namespace AutoRest.TestServer.Tests
                 }
             };
 
-            return new XmlClient(ClientDiagnostics, pipeline, host).PutComplexTypeRefNoMeta(root);
+            return GetClient<XmlClient>(pipeline, host).PutComplexTypeRefNoMeta(root);
         });
 
         [Test]
         public Task GetRootWithRefAndNoMetaXML() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetComplexTypeRefNoMetaAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).GetComplexTypeRefNoMetaAsync();
             var value = result.Value;
 
             Assert.AreEqual("else", value.Something);
@@ -142,7 +142,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetRootWithRefAndNoMetaXML_Sync() => Test((host, pipeline) =>
         {
-            var result = new XmlClient(ClientDiagnostics, pipeline, host).GetComplexTypeRefNoMeta();
+            var result = GetClient<XmlClient>(pipeline, host).GetComplexTypeRefNoMeta();
             var value = result.Value;
 
             Assert.AreEqual("else", value.Something);
@@ -161,13 +161,13 @@ namespace AutoRest.TestServer.Tests
                 }
             };
 
-            return await new XmlClient(ClientDiagnostics, pipeline, host).PutComplexTypeRefWithMetaAsync(root);
+            return await GetClient<XmlClient>(pipeline, host).PutComplexTypeRefWithMetaAsync(root);
         });
 
         [Test]
         public Task GetRootWithRefAndMetaXML() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetComplexTypeRefWithMetaAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).GetComplexTypeRefWithMetaAsync();
             var value = result.Value;
 
             Assert.AreEqual("else", value.Something);
@@ -187,13 +187,13 @@ namespace AutoRest.TestServer.Tests
                 }
             };
 
-            return await new XmlClient(ClientDiagnostics, pipeline, host).PutRootListSingleItemAsync(root);
+            return await GetClient<XmlClient>(pipeline, host).PutRootListSingleItemAsync(root);
         });
 
         [Test]
         public Task GetXMLListAtRootSingle() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetRootListSingleItemAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).GetRootListSingleItemAsync();
             var value = result.Value;
             var item = value.Single();
 
@@ -209,13 +209,13 @@ namespace AutoRest.TestServer.Tests
             {
             };
 
-            return await new XmlClient(ClientDiagnostics, pipeline, host).PutEmptyListAsync(root);
+            return await GetClient<XmlClient>(pipeline, host).PutEmptyListAsync(root);
         });
 
         [Test]
         public Task GetEmptyXMLList() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetEmptyListAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).GetEmptyListAsync();
             var value = result.Value;
 
             Assert.AreEqual(0, value.Slides.Count);
@@ -234,13 +234,13 @@ namespace AutoRest.TestServer.Tests
                 Expiration = DateTimeOffset.Parse("2012-02-24T00:53:52.789Z")
             };
 
-            return await new XmlClient(ClientDiagnostics, pipeline, host).PutEmptyChildElementAsync(root);
+            return await GetClient<XmlClient>(pipeline, host).PutEmptyChildElementAsync(root);
         });
 
         [Test]
         public Task GetXMLEmptyNode() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetEmptyChildElementAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).GetEmptyChildElementAsync();
             var value = result.Value;
 
             Assert.AreEqual("Unknown Banana", value.Name);
@@ -257,13 +257,13 @@ namespace AutoRest.TestServer.Tests
                 GoodApples = { "Fuji", "Gala" }
             };
 
-            return await new XmlClient(ClientDiagnostics, pipeline, host).PutWrappedListsAsync(root);
+            return await GetClient<XmlClient>(pipeline, host).PutWrappedListsAsync(root);
         });
 
         [Test]
         public Task GetWrappedXMLList() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetWrappedListsAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).GetWrappedListsAsync();
             var value = result.Value;
 
             CollectionAssert.AreEqual(new[] { "Red Delicious" }, value.BadApples);
@@ -277,13 +277,13 @@ namespace AutoRest.TestServer.Tests
             root.GoodApples.Clear();
             root.BadApples.Clear();
 
-            return await new XmlClient(ClientDiagnostics, pipeline, host).PutEmptyWrappedListsAsync(root);
+            return await GetClient<XmlClient>(pipeline, host).PutEmptyWrappedListsAsync(root);
         });
 
         [Test]
         public Task GetEmptyWrappedXMLList() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetEmptyWrappedListsAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).GetEmptyWrappedListsAsync();
             var value = result.Value;
 
             CollectionAssert.AreEqual(Enumerable.Empty<string>(), value.BadApples);
@@ -303,13 +303,13 @@ namespace AutoRest.TestServer.Tests
                         "rwd"))
             };
 
-            return await new XmlClient(ClientDiagnostics, pipeline, host).PutAclsAsync(root);
+            return await GetClient<XmlClient>(pipeline, host).PutAclsAsync(root);
         });
 
         [Test]
         public Task StorageGetContainerACLXML() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetAclsAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).GetAclsAsync();
             var value = result.Value;
 
             Assert.AreEqual(1, value.Count);
@@ -341,13 +341,13 @@ namespace AutoRest.TestServer.Tests
                 }
             };
 
-            return await new XmlClient(ClientDiagnostics, pipeline, host).PutRootListAsync(root);
+            return await GetClient<XmlClient>(pipeline, host).PutRootListAsync(root);
         });
 
         [Test]
         public Task GetXMLListAtRoot() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetRootListAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).GetRootListAsync();
             var values = result.Value.ToArray();
 
             Assert.AreEqual(2, values.Length);
@@ -366,13 +366,13 @@ namespace AutoRest.TestServer.Tests
         {
             var root = new List<Banana>();
 
-            return await new XmlClient(ClientDiagnostics, pipeline, host).PutEmptyRootListAsync(root);
+            return await GetClient<XmlClient>(pipeline, host).PutEmptyRootListAsync(root);
         });
 
         [Test]
         public Task GetEmptyXMLListAtRoot() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetEmptyRootListAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).GetEmptyRootListAsync();
             var values = result.Value.ToArray();
 
             Assert.AreEqual(0, values.Length);
@@ -381,7 +381,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task StorageListContainersXML() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).ListContainersAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).ListContainersAsync();
             var value = result.Value;
 
             Assert.AreEqual("video", value.NextMarker);
@@ -407,16 +407,16 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetHeadersAsync() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).RestClient.GetHeadersAsync();
-            var value = result.Headers;
+            var result = await InvokeRestClient(GetClient<XmlClient>(pipeline, host), "GetHeadersAsync");
+            var value = GetProperty(result, "Headers");
 
-            Assert.AreEqual("custom-value", value.CustomHeader);
+            Assert.AreEqual("custom-value", GetProperty(value, "CustomHeader"));
         }, true);
 
         [Test]
         public Task StorageListBlobsXML() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).ListBlobsAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).ListBlobsAsync();
             var value = result.Value;
 
             Assert.AreEqual("https://myaccount.blob.core.windows.net/mycontainer", value.ContainerName);
@@ -525,13 +525,13 @@ namespace AutoRest.TestServer.Tests
                     }
                 }
             };
-            return await new XmlClient(ClientDiagnostics, pipeline, host).PutServicePropertiesAsync(properties);
+            return await GetClient<XmlClient>(pipeline, host).PutServicePropertiesAsync(properties);
         });
 
         [Test]
         public Task StorageGetServicePropertiesXML() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetServicePropertiesAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).GetServicePropertiesAsync();
             var value = result.Value;
 
             Assert.AreEqual("1.0", value.Logging.Version);
@@ -557,13 +557,13 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task XmlGetBytes() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetBytesAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).GetBytesAsync();
             Assert.AreEqual(Encoding.UTF8.GetBytes("Hello world"), result.Value.Bytes);
         });
 
         [Test]
         public Task XmlPutBytes() => TestStatus(async (host, pipeline) =>
-            await new XmlClient(ClientDiagnostics, pipeline, host).PutBinaryAsync(new ModelWithByteProperty()
+            await GetClient<XmlClient>(pipeline, host).PutBinaryAsync(new ModelWithByteProperty()
             {
                 Bytes = Encoding.UTF8.GetBytes("Hello world")
             }));
@@ -571,13 +571,13 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task XmlGetUrl() => Test(async (host, pipeline) =>
         {
-            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetUriAsync();
+            var result = await GetClient<XmlClient>(pipeline, host).GetUriAsync();
             Assert.AreEqual("https://myaccount.blob.core.windows.net/", result.Value.Url.ToString());
         });
 
         [Test]
         public Task XmlPutUrl() => TestStatus(async (host, pipeline) =>
-            await new XmlClient(ClientDiagnostics, pipeline, host).PutUriAsync(new ModelWithUrlProperty()
+            await GetClient<XmlClient>(pipeline, host).PutUriAsync(new ModelWithUrlProperty()
             {
                 Url = new Uri("https://myaccount.blob.core.windows.net/")
             }));

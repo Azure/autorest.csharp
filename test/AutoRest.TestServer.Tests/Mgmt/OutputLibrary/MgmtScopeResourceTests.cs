@@ -2,9 +2,11 @@
 // Licensed under the MIT License
 
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using MgmtScopeResource;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
@@ -26,5 +28,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var parents = resource.GetParents();
             Assert.IsTrue(parents.Any(p => p.Type.Name == parentName));
         }
+
+        private protected override Assembly GetAssembly() => typeof(FakePolicyAssignmentResource).Assembly;
     }
 }

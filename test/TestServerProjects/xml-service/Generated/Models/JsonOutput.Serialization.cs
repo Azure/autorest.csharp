@@ -107,7 +107,7 @@ namespace xml_service.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, xml_serviceContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(JsonOutput)} does not support writing '{options.Format}' format.");
             }

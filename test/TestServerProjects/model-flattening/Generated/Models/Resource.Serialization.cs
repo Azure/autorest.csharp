@@ -168,7 +168,7 @@ namespace model_flattening.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, model_flatteningContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Resource)} does not support writing '{options.Format}' format.");
             }

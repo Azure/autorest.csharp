@@ -108,7 +108,7 @@ namespace AuthoringTypeSpec.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, AuthoringTypeSpecContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(JobWarning)} does not support writing '{options.Format}' format.");
             }

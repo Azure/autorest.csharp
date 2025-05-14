@@ -17,9 +17,9 @@ namespace MgmtXmlDeserialization
 
         XmlInstanceData IJsonModel<XmlInstanceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<XmlInstanceData>)Data).Create(ref reader, options);
 
-        BinaryData IPersistableModel<XmlInstanceData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write(Data, options);
+        BinaryData IPersistableModel<XmlInstanceData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<XmlInstanceData>(Data, options, MgmtXmlDeserializationContext.Default);
 
-        XmlInstanceData IPersistableModel<XmlInstanceData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<XmlInstanceData>(data, options);
+        XmlInstanceData IPersistableModel<XmlInstanceData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<XmlInstanceData>(data, options, MgmtXmlDeserializationContext.Default);
 
         string IPersistableModel<XmlInstanceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<XmlInstanceData>)Data).GetFormatFromOptions(options);
     }

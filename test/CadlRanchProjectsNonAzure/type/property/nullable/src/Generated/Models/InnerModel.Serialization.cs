@@ -94,7 +94,7 @@ namespace Scm._Type.Property.Nullable.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, Scm_TypePropertyNullableContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(InnerModel)} does not support writing '{options.Format}' format.");
             }

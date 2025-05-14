@@ -171,15 +171,15 @@ namespace Payload.MultiPart.Models
         {
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
             content.Add(Id, "id");
-            content.Add(ModelReaderWriter.Write(Address, ModelSerializationExtensions.WireOptions), "address");
-            content.Add(ModelReaderWriter.Write(ProfileImage, ModelSerializationExtensions.WireOptions), "profileImage");
+            content.Add(ModelReaderWriter.Write<Address>(Address, ModelSerializationExtensions.WireOptions, PayloadMultiPartContext.Default), "address");
+            content.Add(ModelReaderWriter.Write<FileRequiredMetaData>(ProfileImage, ModelSerializationExtensions.WireOptions, PayloadMultiPartContext.Default), "profileImage");
             foreach (Address item in PreviousAddresses)
             {
-                content.Add(ModelReaderWriter.Write(item, ModelSerializationExtensions.WireOptions), "previousAddresses");
+                content.Add(ModelReaderWriter.Write<Address>(item, ModelSerializationExtensions.WireOptions, PayloadMultiPartContext.Default), "previousAddresses");
             }
             foreach (FileRequiredMetaData item in Pictures)
             {
-                content.Add(ModelReaderWriter.Write(item, ModelSerializationExtensions.WireOptions), "pictures");
+                content.Add(ModelReaderWriter.Write<FileRequiredMetaData>(item, ModelSerializationExtensions.WireOptions, PayloadMultiPartContext.Default), "pictures");
             }
             return content;
         }
@@ -191,7 +191,7 @@ namespace Payload.MultiPart.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, PayloadMultiPartContext.Default);
                 case "MFD":
                     return SerializeMultipart(options);
                 default:

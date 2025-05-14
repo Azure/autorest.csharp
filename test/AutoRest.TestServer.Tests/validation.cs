@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core.Pipeline;
@@ -17,7 +18,7 @@ namespace AutoRest.TestServer.Tests
         public Task ConstantsInBody() => Test(async (host, pipeline) =>
         {
             var value = new Product(new ChildProduct(), new ConstantProduct());
-            var result = await new AutoRestValidationTestClient(ClientDiagnostics, pipeline, string.Empty, host).PostWithConstantInBodyAsync(value);
+            var result = await GetClient<AutoRestValidationTestClient>(pipeline, string.Empty, host).PostWithConstantInBodyAsync(value);
             Assert.AreEqual(value.ConstString, result.Value.ConstString);
             Assert.AreEqual(value.ConstInt, result.Value.ConstInt);
             Assert.AreEqual(value.Child.ConstProperty, result.Value.Child.ConstProperty);
@@ -26,7 +27,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task ConstantsInPath() => TestStatus(async (host, pipeline) => await new AutoRestValidationTestClient(ClientDiagnostics, pipeline, string.Empty, host).GetWithConstantInPathAsync());
+        public Task ConstantsInPath() => TestStatus(async (host, pipeline) => await GetClient<AutoRestValidationTestClient>(pipeline, string.Empty, host).GetWithConstantInPathAsync());
 
         [Test]
         public void ConstructorsCheckRequiredProperties()
@@ -38,7 +39,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ThrowsIfApiVersionIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new AutoRestValidationTestClient(ClientDiagnostics, HttpPipelineBuilder.Build(new TestOptions()), string.Empty, new Uri("http://test"), null));
+            var ex = Assert.Throws<TargetInvocationException>(() => GetClient<AutoRestValidationTestClient>(HttpPipelineBuilder.Build(new TestOptions()), string.Empty, new Uri("http://test"), null));
+            Assert.IsInstanceOf<ArgumentNullException>(ex.InnerException);
         }
     }
 }

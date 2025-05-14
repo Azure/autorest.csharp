@@ -136,11 +136,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 builder.PackageReferences.Add(new("Azure.Core.Experimental"));
             }
 
-            if (Configuration.UseModelReaderWriter)
-            {
-                builder.PackageReferences.Add(new("System.ClientModel"));
-            }
-
             if (_needAzureKeyAuth)
             {
                 builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs", "Shared/Core"));

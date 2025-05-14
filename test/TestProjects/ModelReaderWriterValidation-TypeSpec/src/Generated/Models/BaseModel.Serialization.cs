@@ -97,7 +97,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ModelReaderWriterValidationTypeSpecContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(BaseModel)} does not support writing '{options.Format}' format.");
             }

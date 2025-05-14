@@ -129,7 +129,7 @@ namespace _Type.Property.Optionality.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _TypePropertyOptionalityContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(CollectionsByteProperty)} does not support writing '{options.Format}' format.");
             }

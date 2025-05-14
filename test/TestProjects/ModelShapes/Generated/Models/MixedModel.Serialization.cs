@@ -718,7 +718,7 @@ namespace ModelShapes.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, ModelShapesContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(MixedModel)} does not support writing '{options.Format}' format.");
             }

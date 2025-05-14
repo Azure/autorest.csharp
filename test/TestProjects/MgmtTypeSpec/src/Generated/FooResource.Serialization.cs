@@ -17,9 +17,9 @@ namespace MgmtTypeSpec
 
         FooData IJsonModel<FooData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<FooData>)Data).Create(ref reader, options);
 
-        BinaryData IPersistableModel<FooData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write(Data, options);
+        BinaryData IPersistableModel<FooData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<FooData>(Data, options, MgmtTypeSpecContext.Default);
 
-        FooData IPersistableModel<FooData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<FooData>(data, options);
+        FooData IPersistableModel<FooData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<FooData>(data, options, MgmtTypeSpecContext.Default);
 
         string IPersistableModel<FooData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<FooData>)Data).GetFormatFromOptions(options);
     }

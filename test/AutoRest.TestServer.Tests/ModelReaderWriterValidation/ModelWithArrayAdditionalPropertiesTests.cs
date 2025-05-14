@@ -14,7 +14,7 @@ namespace AutoRest.TestServer.Tests
     {
         protected override string JsonPayload => WirePayload;
 
-        protected override string WirePayload => "{\"id\":\"X\",\"name\":\"xmodel\",\"age\":100,\"extra1\":[null,{\"tokenType\": \"String\"}],\"extra2\":[],\"invalid\":10}";
+        protected override string WirePayload => "{\"id\":\"X\",\"name\":\"xmodel\",\"age\":100,\"extra1\":[null,{\"tokenType\":\"String\"}],\"extra2\":[],\"invalid\":10}";
 
         protected override void CompareModels(ModelWithArrayAdditionalProperties model, ModelWithArrayAdditionalProperties model2, string format)
         {

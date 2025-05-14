@@ -100,7 +100,7 @@ namespace _Azure.Lro.Rpc.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _AzureLroRpcContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(GenerationOptions)} does not support writing '{options.Format}' format.");
             }

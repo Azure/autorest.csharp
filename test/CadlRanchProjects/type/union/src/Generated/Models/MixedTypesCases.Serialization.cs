@@ -195,7 +195,7 @@ namespace _Type.Union.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _TypeUnionContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(MixedTypesCases)} does not support writing '{options.Format}' format.");
             }

@@ -318,7 +318,7 @@ namespace MgmtTypeSpec
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, MgmtTypeSpecContext.Default);
                 case "bicep":
                     return SerializeBicep(options);
                 default:

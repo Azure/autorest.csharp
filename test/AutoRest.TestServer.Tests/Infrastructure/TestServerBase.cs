@@ -18,10 +18,8 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         public Uri Host { get; }
         public string Port { get; }
 
-        public TestServerBase(string processPath, string processArguments)
+        public TestServerBase(string processPath, string processArguments, string portPhrase = "Started server on ")
         {
-            var portPhrase = "Started server on port ";
-
             var processStartInfo = new ProcessStartInfo("node", $"{processPath} {processArguments}")
             {
                 RedirectStandardOutput = true,

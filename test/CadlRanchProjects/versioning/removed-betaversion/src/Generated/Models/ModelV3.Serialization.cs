@@ -100,7 +100,7 @@ namespace Versioning.Removed.BetaVersion.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, VersioningRemovedBetaVersionContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(ModelV3)} does not support writing '{options.Format}' format.");
             }

@@ -118,7 +118,7 @@ namespace custom_baseUrl_more_options.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, custom_baseUrl_more_optionsContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Error)} does not support writing '{options.Format}' format.");
             }

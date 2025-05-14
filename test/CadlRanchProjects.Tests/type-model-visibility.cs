@@ -2,10 +2,10 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text.Json;
 using System.Threading.Tasks;
 using _Type.Model.Visibility;
 using _Type.Model.Visibility.Models;
@@ -59,7 +59,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public void ReadOnlyPropertiesAreDeserialized()
         {
-            var model = VisibilityModel.DeserializeVisibilityModel(JsonDocument.Parse("{\"readProp\":\"abc\"}").RootElement);
+            var model = ModelReaderWriter.Read<VisibilityModel>(BinaryData.FromString("{\"readProp\":\"abc\"}"));
             Assert.AreEqual("abc", model.ReadProp);
         }
     }

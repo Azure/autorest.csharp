@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Utilities;
+using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -18,30 +19,38 @@ using NUnit.Framework;
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
     [Parallelizable(ParallelScope.All)]
-    public class TestProjectTests
+    public abstract class TestProjectTests
     {
         private string _projectName;
-        private string? _subFolder;
         protected HashSet<Type> TagResourceExceptions { get; } = new HashSet<Type>();
 
-        public TestProjectTests() : this("")
-        {
-        }
+        private Assembly? _assembly;
+        private protected Assembly Assembly => _assembly ??= GetAssembly();
+        private protected virtual Assembly GetAssembly()
+            => AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == _projectName);
 
-        public TestProjectTests(string projectName, string subFolder = null)
+        public TestProjectTests(string projectName)
         {
             _projectName = projectName;
-            _subFolder = subFolder;
         }
 
-        protected virtual IEnumerable<Type> MyTypes()
-        {
-            foreach (var type in GetType().Assembly.GetTypes())
-            {
-                if (type.Namespace == _projectName || type.Namespace == _projectName + ".Models")
-                    yield return type;
-            }
-        }
+        private protected T GetModel<T>(params object[] args)
+            => (T)TestServerTestBase.GetObject(typeof(T), args);
+
+        private protected object GetModel(Type type, params object[] args)
+            => TestServerTestBase.GetObject(type, args);
+
+        private protected object InvokeInternalMethod(object obj, string methodName, params object[] args)
+            => TestServerTestBase.InvokeMethod(obj, methodName, args);
+
+        private protected object GetStaticProperty(Type type, string property)
+            => TestServerTestBase.GetStaticProperty(type, property);
+
+        private protected object GetProperty(object obj, string property)
+            => TestServerTestBase.GetProperty(obj, property);
+
+        private IEnumerable<Type>? _myTypes;
+        protected virtual IEnumerable<Type> MyTypes() => _myTypes ??= Assembly.GetTypes().Where(t => t.Namespace?.StartsWith(_projectName, StringComparison.Ordinal) == true);
 
         protected Type? GetType(string name) => MyTypes().FirstOrDefault(t => t.Name == name);
 
@@ -324,7 +333,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static).Where(m => m.ReturnType.IsSubclassOf(typeof(Task))))
                 {
                     var typeArg = method.ReturnType.GenericTypeArguments.FirstOrDefault();
-                    if (typeArg.IsSubclassOf(typeof(Azure.Operation)))
+                    if (typeArg.IsSubclassOf(typeof(Operation)))
                         continue; //skip LROs
 
                     Assert.IsNotNull(typeArg);
@@ -524,7 +533,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         public IEnumerable<Type> FindAllExtensionClients()
         {
-            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+            Type[] allTypes = Assembly.GetTypes();
 
             foreach (Type t in allTypes)
             {
@@ -537,7 +546,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         public IEnumerable<Type> FindAllExtensions()
         {
-            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+            Type[] allTypes = Assembly.GetTypes();
 
             foreach (Type t in allTypes)
             {
@@ -550,11 +559,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         public IEnumerable<Type> FindAllResources()
         {
-            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+            Type[] allTypes = Assembly.GetTypes();
 
             foreach (Type t in allTypes)
             {
-                if (t.BaseType.FullName == typeof(ArmResource).FullName &&
+                if (typeof(ArmResource).Equals(t.BaseType) &&
                     !t.Name.Contains("Tests") &&
                     t.Namespace == _projectName &&
                     !t.Name.EndsWith("ExtensionClient"))
@@ -566,11 +575,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         public IEnumerable<Type> FindAllResourceData()
         {
-            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+            Type[] allTypes = Assembly.GetTypes();
 
             foreach (Type t in allTypes)
             {
-                if ((t.BaseType.FullName == typeof(ResourceData).FullName || t.BaseType.FullName == typeof(TrackedResourceData).FullName) &&
+                if ((typeof(ResourceData).Equals(t.BaseType) || typeof(TrackedResourceData).Equals(t.BaseType)) &&
                     !t.Name.Contains("Tests") &&
                     t.Namespace == _projectName &&
                     !t.Name.EndsWith("ExtensionClient"))
@@ -582,11 +591,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         public IEnumerable<Type> FindAllCollections()
         {
-            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+            Type[] allTypes = Assembly.GetTypes();
 
             foreach (Type t in allTypes)
             {
-                if (t.BaseType.FullName == typeof(ArmCollection).FullName && !t.Name.Contains("Tests") && t.Namespace == _projectName)
+                if (typeof(ArmCollection).Equals(t.BaseType) && !t.Name.Contains("Tests") && t.Namespace == _projectName)
                 {
                     yield return t;
                 }
@@ -597,7 +606,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         private IEnumerable<Type> FindAllRestOperations()
         {
-            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+            Type[] allTypes = Assembly.GetTypes();
 
             foreach (Type t in allTypes)
             {
@@ -812,7 +821,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         protected void ValidateMethodExist(string fullClassName, string methodName, params string[] argTypes)
         {
-            var classToCheck = Assembly.GetExecutingAssembly().GetType(fullClassName);
+            var classToCheck = Assembly.GetType(fullClassName);
             Assert.NotNull(classToCheck, $"Can't find class {fullClassName}!");
             var methods = classToCheck.GetMethods().Where(m => m.Name == methodName);
             Assert.Greater(methods.Count(), 0, $"Can't find method {fullClassName}.{methodName}!");

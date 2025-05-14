@@ -130,7 +130,7 @@ namespace Payload.MultiPart.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, PayloadMultiPartContext.Default);
                 case "MFD":
                     return SerializeMultipart(options);
                 default:

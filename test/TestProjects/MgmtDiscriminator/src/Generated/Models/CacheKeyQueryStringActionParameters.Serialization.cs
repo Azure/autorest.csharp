@@ -194,7 +194,7 @@ namespace MgmtDiscriminator.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, MgmtDiscriminatorContext.Default);
                 case "bicep":
                     return SerializeBicep(options);
                 default:

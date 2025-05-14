@@ -109,7 +109,7 @@ namespace CustomizedTypeSpec.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, CustomizedTypeSpecContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(SuperFriend)} does not support writing '{options.Format}' format.");
             }

@@ -90,7 +90,7 @@ namespace _Type.Property.AdditionalProperties.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _TypePropertyAdditionalPropertiesContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(ExtendsUnknownAdditionalPropertiesDiscriminated)} does not support writing '{options.Format}' format.");
             }

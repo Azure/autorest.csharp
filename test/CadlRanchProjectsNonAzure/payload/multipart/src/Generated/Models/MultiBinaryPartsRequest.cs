@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Payload.MultiPart.Models
+namespace Scm.Payload.Multipart.Models
 {
     /// <summary> The MultiBinaryPartsRequest. </summary>
     public partial class MultiBinaryPartsRequest

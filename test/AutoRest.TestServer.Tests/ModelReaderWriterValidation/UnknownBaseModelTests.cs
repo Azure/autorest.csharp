@@ -3,8 +3,10 @@
 
 using System;
 using System.Linq;
+using System.Reflection;
 using ModelReaderWriterValidationTypeSpec.Models;
 using NUnit.Framework;
+using static AutoRest.TestServer.Tests.Infrastructure.TestServerTestBase;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -24,7 +26,7 @@ namespace AutoRest.TestServer.Tests
         {
             Assert.AreEqual("UnknownBaseModel", model.GetType().Name);
             Assert.AreEqual("UnknownBaseModel", model2.GetType().Name);
-            Assert.AreEqual(model.Kind, model2.Kind);
+            Assert.AreEqual(GetProperty(model, "Kind"), GetProperty(model2, "Kind"));
             Assert.AreEqual(model.Name, model2.Name);
             var rawData = GetRawData(model);
             var rawData2 = GetRawData(model2);
@@ -50,7 +52,7 @@ namespace AutoRest.TestServer.Tests
         protected override void VerifyModel(BaseModel model, string format)
         {
             Assert.AreEqual("UnknownBaseModel", model.GetType().Name);
-            Assert.AreEqual("Z", model.Kind);
+            Assert.AreEqual("Z", GetProperty(model, "Kind"));
             Assert.AreEqual("zmodel", model.Name);
             var rawData = GetRawData(model);
             Assert.IsNotNull(rawData);

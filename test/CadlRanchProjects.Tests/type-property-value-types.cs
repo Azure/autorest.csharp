@@ -25,7 +25,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_Boolean_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetBooleanClient().PutAsync(new BooleanProperty(true).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetBooleanClient().PutAsync(new BooleanProperty(true));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -39,7 +39,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_BooleanLiteral_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetBooleanLiteralClient().PutAsync(new BooleanLiteralProperty().ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetBooleanLiteralClient().PutAsync(new BooleanLiteralProperty());
             Assert.AreEqual(204, response.Status);
         });
 
@@ -53,7 +53,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_String_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetStringClient().PutAsync(new StringProperty("hello").ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetStringClient().PutAsync(new StringProperty("hello"));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -67,7 +67,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_StringLiteral_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetStringLiteralClient().PutAsync(new StringProperty("hello").ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetStringLiteralClient().PutAsync(new StringLiteralProperty());
             Assert.AreEqual(204, response.Status);
         });
 
@@ -81,7 +81,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_Bytes_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetBytesClient().PutAsync(new BytesProperty(BinaryData.FromString("hello, world!")).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetBytesClient().PutAsync(new BytesProperty(BinaryData.FromString("hello, world!")));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -95,7 +95,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_Int_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetIntClient().PutAsync(new IntProperty(42).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetIntClient().PutAsync(new IntProperty(42));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -109,7 +109,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_IntLiteral_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetIntLiteralClient().PutAsync(new IntProperty(42).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetIntLiteralClient().PutAsync(new IntLiteralProperty());
             Assert.AreEqual(204, response.Status);
         });
 
@@ -123,7 +123,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_Float_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetFloatClient().PutAsync(new FloatProperty((float)43.125).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetFloatClient().PutAsync(new FloatProperty((float)43.125));
             Assert.AreEqual(204, response.Status);
         });
         [Test]
@@ -136,7 +136,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_FloatLiteral_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetFloatLiteralClient().PutAsync(new FloatLiteralProperty().ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetFloatLiteralClient().PutAsync(new FloatLiteralProperty());
             Assert.AreEqual(204, response.Status);
         });
 
@@ -150,7 +150,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_Datetime_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetDatetimeClient().PutAsync(new DatetimeProperty(DateTimeOffset.Parse("2022-08-26T18:38:00Z")).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetDatetimeClient().PutAsync(new DatetimeProperty(DateTimeOffset.Parse("2022-08-26T18:38:00Z")));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -164,7 +164,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_Duration_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetDurationClient().PutAsync(new DurationProperty(XmlConvert.ToTimeSpan("P123DT22H14M12.011S")).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetDurationClient().PutAsync(new DurationProperty(XmlConvert.ToTimeSpan("P123DT22H14M12.011S")));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -178,7 +178,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_Enum_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetEnumClient().PutAsync(new EnumProperty(FixedInnerEnum.ValueOne).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetEnumClient().PutAsync(new EnumProperty(FixedInnerEnum.ValueOne));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -192,7 +192,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_ExtensibleEnum_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetExtensibleEnumClient().PutAsync(new ExtensibleEnumProperty(new InnerEnum("UnknownValue")).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetExtensibleEnumClient().PutAsync(new ExtensibleEnumProperty(new InnerEnum("UnknownValue")));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -206,7 +206,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_Model_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetModelClient().PutAsync(new ModelProperty(new InnerModel("hello")).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetModelClient().PutAsync(new ModelProperty(new InnerModel("hello")));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -220,7 +220,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_CollectionsString_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetCollectionsStringClient().PutAsync(new CollectionsStringProperty(new[] { "hello", "world" }).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetCollectionsStringClient().PutAsync(new CollectionsStringProperty(new[] { "hello", "world" }));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -234,7 +234,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_CollectionsInt_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetCollectionsIntClient().PutAsync(new CollectionsIntProperty(new[] { 1, 2 }).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetCollectionsIntClient().PutAsync(new CollectionsIntProperty(new[] { 1, 2 }));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -251,7 +251,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_CollectionsModel_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetCollectionsModelClient().PutAsync(new CollectionsModelProperty(new[] { new InnerModel("hello"), new InnerModel("world") }).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetCollectionsModelClient().PutAsync(new CollectionsModelProperty(new[] { new InnerModel("hello"), new InnerModel("world") }));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -268,7 +268,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_DictionaryString_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetDictionaryStringClient().PutAsync(new DictionaryStringProperty(new Dictionary<string, string> { ["k1"] = "hello", ["k2"] = "world" }).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetDictionaryStringClient().PutAsync(new DictionaryStringProperty(new Dictionary<string, string> { ["k1"] = "hello", ["k2"] = "world" }));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -283,7 +283,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_Never_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetNeverClient().PutAsync(new NeverProperty().ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetNeverClient().PutAsync(new NeverProperty());
             Assert.AreEqual(204, response.Status);
         });
 
@@ -297,7 +297,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_UnknownString_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetUnknownStringClient().PutAsync(new UnknownStringProperty(new BinaryData("\"hello\"")).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetUnknownStringClient().PutAsync(new UnknownStringProperty(new BinaryData("\"hello\"")));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -311,7 +311,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Property_ValueTypes_UnknownInt_put() => Test(async (host) =>
         {
-            Response response = await new ValueTypesClient(host, null).GetUnknownIntClient().PutAsync(new UnknownIntProperty(new BinaryData(42)).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetUnknownIntClient().PutAsync(new UnknownIntProperty(new BinaryData(42)));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -335,7 +335,7 @@ namespace CadlRanchProjects.Tests
                 {"k2", 42 }
             };
 
-            Response response = await new ValueTypesClient(host, null).GetUnknownDictClient().PutAsync(new UnknownDictProperty(new BinaryData(input)).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetUnknownDictClient().PutAsync(new UnknownDictProperty(new BinaryData(input)));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -355,7 +355,7 @@ namespace CadlRanchProjects.Tests
         {
             var input = new[] { "hello", "world" };
 
-            Response response = await new ValueTypesClient(host, null).GetUnknownArrayClient().PutAsync(new UnknownArrayProperty(new BinaryData(input)).ToRequestContent());
+            Response response = await new ValueTypesClient(host, null).GetUnknownArrayClient().PutAsync(new UnknownArrayProperty(new BinaryData(input)));
             Assert.AreEqual(204, response.Status);
         });
         [Test]

@@ -8,6 +8,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using MgmtParamOrdering;
 using NUnit.Framework;
+using static AutoRest.TestServer.Tests.Infrastructure.TestServerTestBase;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
@@ -51,10 +52,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase(typeof(VirtualMachineScaleSetResource), "Deallocate", true, new[]{ "vmInstanceIds", "expand" }, new[] { false, false })]
         [TestCase(typeof(VirtualMachineScaleSetResource), "DeleteInstances", true, new[]{ "vmInstanceIds", "forceDeletion"}, new[] { true, false })]
         [TestCase(typeof(VirtualMachineScaleSetResource), "GetInstanceView", false, new[]{ "filter", "expand" }, new[] { true, false })]
-        [TestCase(typeof(AvailabilitySetsRestOperations), "Update", false, new[]{ "subscriptionId", "resourceGroupName", "availabilitySetName", "patch" }, new[] { true, true, true, true })]
         public void ValidateOperationMethodParameterList(Type type, string methodName, bool isLro, string[] parameterNames, bool[] isRequiredParameters)
         {
-            var parameters = type.GetMethod(methodName).GetParameters();
+            var method = type.GetMethod(methodName);
+            Assert.IsNotNull(method, $"Method {methodName} not found in type {type.Name}");
+            var parameters = method.GetParameters();
             Assert.That(parameters, Has.Length.EqualTo(parameterNames.Length + (isLro ? 2 : 1))); // need to exclude "waitUntil" and "cancellationToken"
 
             var customParameters = parameters.SkipLast(1);// skip "cancellationToken"
@@ -65,5 +67,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             Assert.AreEqual(parameterNames, customParameters.Select(p => p.Name).ToArray());
             Assert.AreEqual(isRequiredParameters, customParameters.Select(p => !p.HasDefaultValue).ToArray());
         }
+
+        [TestCase("AvailabilitySetsRestOperations", "Update", false, new[] { "subscriptionId", "resourceGroupName", "availabilitySetName", "patch" }, new[] { true, true, true, true })]
+        public void ValidateOperationMethodParameterList(string typeName, string methodName, bool isLro, string[] parameterNames, bool[] isRequiredParameters)
+            => ValidateOperationMethodParameterList(FindType(Assembly, typeName), methodName, isLro, parameterNames, isRequiredParameters);
     }
 }

@@ -9,25 +9,27 @@ using Azure.Core;
 using NUnit.Framework;
 using ProtocolMethodsInRestClient;
 using ProtocolMethodsInRestClient.Models;
+using static AutoRest.TestServer.Tests.Infrastructure.TestServerTestBase;
 
 namespace AutoRest.TestServer.Tests
 {
     internal class ProtocolMethodsInRestClientTests
     {
-        [TestCase("Create", typeof(TestServiceRestClient))]
-        [TestCase("CreateAsync", typeof(TestServiceRestClient))]
-        [TestCase("Delete", typeof(TestServiceRestClient))]
-        [TestCase("DeleteAsync", typeof(TestServiceRestClient))]
+        [TestCase("Create", "TestServiceRestClient")]
+        [TestCase("CreateAsync", "TestServiceRestClient")]
+        [TestCase("Delete", "TestServiceRestClient")]
+        [TestCase("DeleteAsync", "TestServiceRestClient")]
 
-        [TestCase("Create", typeof(FirstTemplateRestClient))]
-        [TestCase("CreateAsync", typeof(FirstTemplateRestClient))]
-        [TestCase("Get", typeof(FirstTemplateRestClient))]
-        [TestCase("GetAsync", typeof(FirstTemplateRestClient))]
+        [TestCase("Create", "FirstTemplateRestClient")]
+        [TestCase("CreateAsync", "FirstTemplateRestClient")]
+        [TestCase("Get", "FirstTemplateRestClient")]
+        [TestCase("GetAsync", "FirstTemplateRestClient")]
 
-        [TestCase("Get", typeof(SecondTemplateRestClient))]
-        [TestCase("GetAsync", typeof(SecondTemplateRestClient))]
-        public void ProtocolMethodGeneratedInRestClient(string methodName, Type clientType)
+        [TestCase("Get", "SecondTemplateRestClient")]
+        [TestCase("GetAsync", "SecondTemplateRestClient")]
+        public void ProtocolMethodGeneratedInRestClient(string methodName, string clientTypeName)
         {
+            var clientType = FindType(typeof(TestServiceClient).Assembly, clientTypeName);
             var methods = clientType.GetMethods();
             Assert.IsNotNull(methods);
 
@@ -46,25 +48,26 @@ namespace AutoRest.TestServer.Tests
             Assert.IsTrue(isProtocolMethodExists);
         }
 
-        [TestCase("Get", typeof(TestServiceRestClient))]
-        [TestCase("GetAsync", typeof(TestServiceRestClient))]
+        [TestCase("Get", "TestServiceRestClient")]
+        [TestCase("GetAsync", "TestServiceRestClient")]
 
-        [TestCase("Delete", typeof(FirstTemplateRestClient))]
-        [TestCase("DeleteAsync", typeof(FirstTemplateRestClient))]
+        [TestCase("Delete", "FirstTemplateRestClient")]
+        [TestCase("DeleteAsync", "FirstTemplateRestClient")]
 
-        [TestCase("Create", typeof(SecondTemplateRestClient))]
-        [TestCase("CreateAsync", typeof(SecondTemplateRestClient))]
-        [TestCase("Delete", typeof(SecondTemplateRestClient))]
-        [TestCase("DeleteAsync", typeof(SecondTemplateRestClient))]
+        [TestCase("Create", "SecondTemplateRestClient")]
+        [TestCase("CreateAsync", "SecondTemplateRestClient")]
+        [TestCase("Delete", "SecondTemplateRestClient")]
+        [TestCase("DeleteAsync", "SecondTemplateRestClient")]
 
-        [TestCase("Create", typeof(ThirdTemplateRestClient))]
-        [TestCase("CreateAsync", typeof(ThirdTemplateRestClient))]
-        [TestCase("Delete", typeof(ThirdTemplateRestClient))]
-        [TestCase("DeleteAsync", typeof(ThirdTemplateRestClient))]
-        [TestCase("Get", typeof(ThirdTemplateRestClient))]
-        [TestCase("GetAsync", typeof(ThirdTemplateRestClient))]
-        public void ProtocolMethodNotGeneratedInRestClient(string methodName, Type clientType)
+        [TestCase("Create", "ThirdTemplateRestClient")]
+        [TestCase("CreateAsync", "ThirdTemplateRestClient")]
+        [TestCase("Delete", "ThirdTemplateRestClient")]
+        [TestCase("DeleteAsync", "ThirdTemplateRestClient")]
+        [TestCase("Get", "ThirdTemplateRestClient")]
+        [TestCase("GetAsync", "ThirdTemplateRestClient")]
+        public void ProtocolMethodNotGeneratedInRestClient(string methodName, string clientTypeName)
         {
+            var clientType = FindType(typeof(TestServiceClient).Assembly, clientTypeName);
             var methods = clientType.GetMethods();
             Assert.IsNotNull(methods);
 
@@ -78,16 +81,16 @@ namespace AutoRest.TestServer.Tests
         public void CorrectSignatureForGroupedParameters()
         {
             TypeAsserts.HasInternalInstanceMethod(
-                typeof(TestServiceRestClient),
-                nameof(TestServiceRestClient.CreateCreateRequest),
+                FindType(typeof(TestServiceClient).Assembly, "TestServiceRestClient"),
+                "CreateCreateRequest",
                 new TypeAsserts.Parameter[] {
                     new("grouped", typeof(Grouped)),
                     new("resource", typeof(Resource))
                 });
 
             TypeAsserts.HasInternalInstanceMethod(
-                typeof(TestServiceRestClient),
-                nameof(TestServiceRestClient.CreateCreateRequest),
+                FindType(typeof(TestServiceClient).Assembly, "TestServiceRestClient"),
+                "CreateCreateRequest",
                 new TypeAsserts.Parameter[] {
                     new("second", typeof(int)),
                     new("content", typeof(RequestContent)),
@@ -99,7 +102,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void RepeatabilityHeadersNotInMethodSignature()
         {
-            foreach (var m in typeof(TestServiceRestClient).GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(m => m.Name.StartsWith("Create")))
+            foreach (var m in FindType(typeof(TestServiceClient).Assembly, "TestServiceRestClient").GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(m => m.Name.StartsWith("Create")))
             {
                 Assert.False(m.GetParameters().Any(p => p.Name == "repeatabilityRequestId" || p.Name == "repeatabilityFirstSent"));
             }

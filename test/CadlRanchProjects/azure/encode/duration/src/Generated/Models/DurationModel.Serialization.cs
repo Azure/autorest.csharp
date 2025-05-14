@@ -100,7 +100,7 @@ namespace _Specs_.Azure.Encode.Duration.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _Specs_AzureEncodeDurationContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(DurationModel)} does not support writing '{options.Format}' format.");
             }

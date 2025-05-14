@@ -25,13 +25,13 @@ namespace AzureSample.ResourceManager.Sample
 
         VirtualMachineScaleSetVirtualMachineExtensionResource IOperationSource<VirtualMachineScaleSetVirtualMachineExtensionResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<VirtualMachineExtensionData>(response.Content);
+            var data = ModelReaderWriter.Read<VirtualMachineExtensionData>(response.Content, ModelReaderWriterOptions.Json, AzureSampleResourceManagerSampleContext.Default);
             return new VirtualMachineScaleSetVirtualMachineExtensionResource(_client, data);
         }
 
         async ValueTask<VirtualMachineScaleSetVirtualMachineExtensionResource> IOperationSource<VirtualMachineScaleSetVirtualMachineExtensionResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<VirtualMachineExtensionData>(response.Content);
+            var data = ModelReaderWriter.Read<VirtualMachineExtensionData>(response.Content, ModelReaderWriterOptions.Json, AzureSampleResourceManagerSampleContext.Default);
             return await Task.FromResult(new VirtualMachineScaleSetVirtualMachineExtensionResource(_client, data)).ConfigureAwait(false);
         }
     }

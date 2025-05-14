@@ -14,7 +14,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task NonStringEnumsGetFloat() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new FloatClient(ClientDiagnostics, pipeline, host).GetAsync();
+            var response = await GetClient<FloatClient>(pipeline, host).GetAsync();
             Assert.AreEqual(response.Value, FloatEnum.FourHundredTwentyNine1);
             return response.GetRawResponse();
         });
@@ -22,7 +22,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task NonStringEnumsGetInt() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new IntClient(ClientDiagnostics, pipeline, host).GetAsync();
+            var response = await GetClient<IntClient>(pipeline, host).GetAsync();
             Assert.AreEqual(response.Value, IntEnum.FourHundredTwentyNine);
             return response.GetRawResponse();
         });
@@ -30,7 +30,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task NonStringEnumsPostInt() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new IntClient(ClientDiagnostics, pipeline, host).PutAsync(IntEnum.TwoHundred);
+            var response = await GetClient<IntClient>(pipeline, host).PutAsync(IntEnum.TwoHundred);
             Assert.AreEqual("Nice job posting an int enum", response.Value);
             return response.GetRawResponse();
         });
@@ -38,7 +38,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task NonStringEnumsPostFloat() => TestStatus(async (host, pipeline) =>
         {
-            var response = await new FloatClient(ClientDiagnostics, pipeline, host).PutAsync(FloatEnum.TwoHundred4);
+            var response = await GetClient<FloatClient>(pipeline, host).PutAsync(FloatEnum.TwoHundred4);
             Assert.AreEqual("Nice job posting a float enum", response.Value);
             return response.GetRawResponse();
         });

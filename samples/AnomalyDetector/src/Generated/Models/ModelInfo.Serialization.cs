@@ -238,7 +238,7 @@ namespace AnomalyDetector.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, AnomalyDetectorContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(ModelInfo)} does not support writing '{options.Format}' format.");
             }

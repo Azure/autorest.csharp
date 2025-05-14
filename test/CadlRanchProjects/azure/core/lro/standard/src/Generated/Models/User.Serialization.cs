@@ -111,7 +111,7 @@ namespace _Azure.Lro.Standard.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, _AzureLroStandardContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(User)} does not support writing '{options.Format}' format.");
             }

@@ -23,6 +23,9 @@
     <NoWarn Condition="'$(IsUnbranded)' == 'true'">AZC0107</NoWarn>
     <NoWarn Condition="'$(IsNoDocProject)' == 'true'">$(NoWarn);CS1591</NoWarn>
     <NoWarn Condition="'$(IsTestGenerationSampleProject)' == 'true'">$(NoWarn);CS1591</NoWarn>
+    <!-- Since Resource classes implement IPersistableModel and don't have a public or internal parameterless ctor we need to suppress this -->
+    <!-- We should consider fixing this in the future for more info see https://aka.ms/system-clientmodel/diagnostics#scm0005 -->
+    <NoWarn Condition="'$(IsMgmtLibrary)' == 'true'">$(NoWarn);SCM0005</NoWarn>
     <IncludeSharedSourceInLocalBuild Condition="!$(MSBuildProjectName.StartsWith('AutoRest.')) And '$(IsTestGenerationTestProject)' != 'true'">true</IncludeSharedSourceInLocalBuild>
   </PropertyGroup>
 

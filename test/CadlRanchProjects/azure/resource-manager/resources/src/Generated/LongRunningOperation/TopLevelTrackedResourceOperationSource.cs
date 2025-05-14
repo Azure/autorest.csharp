@@ -25,13 +25,13 @@ namespace _Azure.ResourceManager.Resources
 
         TopLevelTrackedResource IOperationSource<TopLevelTrackedResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<TopLevelTrackedResourceData>(response.Content);
+            var data = ModelReaderWriter.Read<TopLevelTrackedResourceData>(response.Content, ModelReaderWriterOptions.Json, _AzureResourceManagerResourcesContext.Default);
             return new TopLevelTrackedResource(_client, data);
         }
 
         async ValueTask<TopLevelTrackedResource> IOperationSource<TopLevelTrackedResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<TopLevelTrackedResourceData>(response.Content);
+            var data = ModelReaderWriter.Read<TopLevelTrackedResourceData>(response.Content, ModelReaderWriterOptions.Json, _AzureResourceManagerResourcesContext.Default);
             return await Task.FromResult(new TopLevelTrackedResource(_client, data)).ConfigureAwait(false);
         }
     }

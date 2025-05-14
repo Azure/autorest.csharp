@@ -94,7 +94,7 @@ namespace Scm._Type.Model.Inheritance.NotDiscriminated.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options);
+                    return ModelReaderWriter.Write(this, options, Scm_TypeModelInheritanceNotDiscriminatedContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Pet)} does not support writing '{options.Format}' format.");
             }

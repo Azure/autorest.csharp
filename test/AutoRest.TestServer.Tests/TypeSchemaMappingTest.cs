@@ -3,6 +3,7 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
@@ -10,12 +11,9 @@ using System.Xml.Linq;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
-using CustomNamespace;
-using NamespaceForEnums;
 using NUnit.Framework;
-using TypeSchemaMapping;
 using TypeSchemaMapping.Models;
-using Very.Custom.Namespace.From.Swagger;
+using static AutoRest.TestServer.Tests.Infrastructure.TestServerTestBase;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -24,7 +22,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ObjectTypesAreMappedToSchema()
         {
-            var modelType = typeof(CustomizedModel);
+            var modelType = FindType(typeof(AbstractModel).Assembly, "CustomizedModel");
             Assert.AreEqual(false, modelType.IsPublic);
             Assert.AreEqual("CustomNamespace", modelType.Namespace);
 
@@ -32,13 +30,13 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(typeof(int?), property.PropertyType);
 
             var field = TypeAsserts.HasField(modelType, "CustomizedFancyField", BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.AreEqual(typeof(CustomFruitEnum), field.FieldType);
+            Assert.AreEqual(FindType(typeof(AbstractModel).Assembly, "CustomFruitEnum"), field.FieldType);
         }
 
         [Test]
         public void ModelsAreMappedUsingClassNameOnly()
         {
-            var modelType = typeof(SecondModel);
+            var modelType = FindType(typeof(AbstractModel).Assembly, "SecondModel");
 
             Assert.AreEqual(3, modelType.GetProperties().Length);
             Assert.AreEqual(1, modelType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Length);
@@ -48,7 +46,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ExtensibleEnumTypesAreMappedToSchema()
         {
-            var modelType = typeof(CustomDaysOfWeek);
+            var modelType = FindType(typeof(AbstractModel).Assembly, "CustomDaysOfWeek");
             Assert.AreEqual(false, modelType.IsPublic);
             Assert.AreEqual("NamespaceForEnums", modelType.Namespace);
             TypeAsserts.HasProperty(modelType, "FancyMonday", BindingFlags.Static | BindingFlags.Public);
@@ -57,7 +55,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void EnumTypesAreMappedToSchema()
         {
-            var modelType = typeof(CustomFruitEnum);
+            var modelType = FindType(typeof(AbstractModel).Assembly, "CustomFruitEnum");
 
             Assert.True(modelType.IsEnum);
             Assert.AreEqual(false, modelType.IsPublic);
@@ -68,7 +66,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void StructsAreMappedToSchemas()
         {
-            var modelType = typeof(RenamedModelStruct);
+            var modelType = FindType(typeof(AbstractModel).Assembly, "RenamedModelStruct");
             Assert.AreEqual(false, modelType.IsPublic);
             Assert.AreEqual(true, modelType.IsValueType);
             Assert.AreEqual("CustomNamespace", modelType.Namespace);
@@ -78,13 +76,13 @@ namespace AutoRest.TestServer.Tests
 
             var field = TypeAsserts.HasProperty(modelType, "Fruit", BindingFlags.Instance | BindingFlags.Public);
             // TODO: Remove nullable after https://github.com/Azure/autorest.modelerfour/issues/231 is done
-            Assert.AreEqual(typeof(CustomFruitEnum?), field.PropertyType);
+            Assert.AreEqual(typeof(Nullable<>).MakeGenericType(FindType(typeof(AbstractModel).Assembly, "CustomFruitEnum")), field.PropertyType);
         }
 
         [Test]
         public void ObjectsAreMappedToSchemas()
         {
-            Type modelType = typeof(RenamedThirdModel);
+            Type modelType = FindType(typeof(AbstractModel).Assembly, "RenamedThirdModel");
             Assert.AreEqual(false, modelType.IsPublic);
             Assert.AreEqual("CustomNamespace", modelType.Namespace);
 
@@ -101,20 +99,18 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NullableParamsAsNull()
         {
-            var model = new RenamedModelStruct("test", "test", null, null);
-            Assert.Null(model.DaysOfWeek);
-            Assert.Null(model.Fruit);
+            var model = GetObject(FindType(typeof(AbstractModel).Assembly, "RenamedModelStruct"), ["test", "test", null, null]);
+            Assert.Null(GetProperty(model, "DaysOfWeek"));
+            Assert.Null(GetProperty(model, "Fruit"));
         }
 
         [Test]
         public void ObjectTypePropertiesSerializedAsValues()
         {
             DateTime date = DateTime.UtcNow;
-            var inputModel = new RenamedThirdModel()
-            {
-                CustomizedETagProperty = new ETag("Id"),
-                CustomizedCreatedAtProperty = date
-            };
+            var inputModel = GetObject(FindType(typeof(AbstractModel).Assembly, "RenamedThirdModel"));
+            SetProperty(inputModel, "CustomizedETagProperty", new ETag("Id"));
+            SetProperty(inputModel, "CustomizedCreatedAtProperty", date);
 
             JsonAsserts.AssertWireSerialization(
                 @"{""ETag"":""Id"",""CreatedAt"":" + JsonSerializer.Serialize(date) + "}",
@@ -125,16 +121,16 @@ namespace AutoRest.TestServer.Tests
         public void ObjectTypePropertiesDeserializedAsValues()
         {
             DateTime date = DateTime.UtcNow;
-            RenamedThirdModel model = RenamedThirdModel.DeserializeRenamedThirdModel(JsonDocument.Parse("{\"ETag\":\"ETagValue\", \"CreatedAt\":" + JsonSerializer.Serialize(date) + "}").RootElement);
+            var model = ModelReaderWriter.Read(BinaryData.FromString("{\"ETag\":\"ETagValue\", \"CreatedAt\":" + JsonSerializer.Serialize(date) + "}"), FindType(typeof(AbstractModel).Assembly, "RenamedThirdModel"));
 
-            Assert.AreEqual("ETagValue", model.CustomizedETagProperty.ToString());
-            Assert.AreEqual(date, model.CustomizedCreatedAtProperty);
+            Assert.AreEqual("ETagValue", GetProperty(model, "CustomizedETagProperty").ToString());
+            Assert.AreEqual(date, GetProperty(model, "CustomizedCreatedAtProperty"));
         }
 
         [Test]
         public void ObjectTypePropertiesSerializedAsNull()
         {
-            var inputModel = new RenamedThirdModel();
+            var inputModel = Activator.CreateInstance(FindType(typeof(AbstractModel).Assembly, "RenamedThirdModel"));
             JsonAsserts.AssertWireSerialization(
                 @"{""ETag"":"""",""CreatedAt"":" + JsonSerializer.Serialize(new DateTime()) + "}",
                 inputModel);
@@ -142,15 +138,15 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ObjectTypePropertiesDeserializedAsNull()
         {
-            var model = RenamedThirdModel.DeserializeRenamedThirdModel(JsonDocument.Parse("{}").RootElement);
-            Assert.AreEqual(default(ETag), model.CustomizedETagProperty);
-            Assert.AreEqual(default(DateTime), model.CustomizedCreatedAtProperty);
+            var model = ModelReaderWriter.Read(BinaryData.FromString("{}"), FindType(typeof(AbstractModel).Assembly, "RenamedThirdModel"));
+            Assert.AreEqual(default(ETag), GetProperty(model, "CustomizedETagProperty"));
+            Assert.AreEqual(default(DateTime), GetProperty(model, "CustomizedCreatedAtProperty"));
         }
 
         [Test]
         public void MembersAreSuppressed()
         {
-            var modelType = typeof(CustomizedModel);
+            var modelType = FindType(typeof(AbstractModel).Assembly, "CustomizedModel");
 
             Assert.That(modelType.GetConstructors().Where(c => c.GetParameters().Length == 2), Is.Empty);
         }
@@ -158,34 +154,34 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ClientsAreMappedToTypes()
         {
-            Assert.AreEqual("MainClient", typeof(MainClient).Name);
-            Assert.AreEqual("MainRestClient", typeof(MainRestClient).Name);
+            Assert.AreEqual("MainClient", FindType(typeof(AbstractModel).Assembly, "MainClient").Name);
+            Assert.AreEqual("MainRestClient", FindType(typeof(AbstractModel).Assembly, "MainRestClient").Name);
         }
 
         [Test]
         public void OperationTypeCanBeMapped()
         {
-            Assert.AreEqual("MainOperation", typeof(MainOperation).Name);
+            Assert.AreEqual("MainOperation", FindType(typeof(AbstractModel).Assembly, "MainOperation").Name);
         }
 
         [Test]
         public void ModelsUseNamespaceAndAccessibilityFromSwagger()
         {
-            Assert.AreEqual("Very.Custom.Namespace.From.Swagger", typeof(ModelWithCustomNamespace).Namespace);
-            Assert.False(typeof(ModelWithCustomNamespace).IsPublic);
+            Assert.AreEqual("Very.Custom.Namespace.From.Swagger", FindType(typeof(AbstractModel).Assembly, "ModelWithCustomNamespace").Namespace);
+            Assert.False(FindType(typeof(AbstractModel).Assembly, "ModelWithCustomNamespace").IsPublic);
         }
 
         [Test]
         public void EnumsUseNamespaceAndAccessibilityFromSwagger()
         {
-            Assert.AreEqual("Very.Custom.Namespace.From.Swagger", typeof(EnumWithCustomNamespace).Namespace);
-            Assert.False(typeof(EnumWithCustomNamespace).IsPublic);
+            Assert.AreEqual("Very.Custom.Namespace.From.Swagger", FindType(typeof(AbstractModel).Assembly, "EnumWithCustomNamespace").Namespace);
+            Assert.False(FindType(typeof(AbstractModel).Assembly, "EnumWithCustomNamespace").IsPublic);
         }
 
         [Test]
         public void CanChangeEnumKindToExtensible()
         {
-            var type = typeof(NonExtensibleEnumTurnedExtensible);
+            var type = FindType(typeof(AbstractModel).Assembly, "NonExtensibleEnumTurnedExtensible");
             Assert.True(type.IsValueType && !type.IsEnum);
         }
 
@@ -194,8 +190,8 @@ namespace AutoRest.TestServer.Tests
         [TestCase(typeof(ModelWithCustomUsageViaAttribute))]
         public void TypesWithCustomUsageGeneratedCorrectly(Type type)
         {
-            Assert.True(typeof(IUtf8JsonSerializable).IsAssignableFrom(type));
-            Assert.True(typeof(IXmlSerializable).IsAssignableFrom(type));
+            Assert.True(type.GetInterfaces().Any(i => i.Name == nameof(IUtf8JsonSerializable)));
+            Assert.True(type.GetInterfaces().Any(i => i.Name == nameof(IXmlSerializable)));
 
             Assert.NotNull(type.GetMethod("Deserialize" + type.Name,
                 BindingFlags.Static | BindingFlags.NonPublic,
@@ -215,7 +211,7 @@ namespace AutoRest.TestServer.Tests
             Guid guid = Guid.NewGuid();
             var testel = new XElement("Root");
             testel.SetElementValue(XName.Get("ModelProperty"), guid);
-            ModelWithGuidProperty model = ModelWithGuidProperty.DeserializeModelWithGuidProperty(testel);
+            ModelWithGuidProperty model = ModelReaderWriter.Read<ModelWithGuidProperty>(BinaryData.FromString(testel.ToString()), ModelReaderWriterOptions.Xml);
 
             Assert.AreEqual(guid.ToString(), model.ModelProperty.ToString());
         }
@@ -224,7 +220,7 @@ namespace AutoRest.TestServer.Tests
         public void UriPropertyDeserializedCorrectly()
         {
             DateTime date = DateTime.UtcNow;
-            ModelWithUriProperty model = ModelWithUriProperty.DeserializeModelWithUriProperty(JsonDocument.Parse("{\"Uri\":\"http://localhost\"}").RootElement);
+            ModelWithUriProperty model = ModelReaderWriter.Read<ModelWithUriProperty>(BinaryData.FromString("{\"Uri\":\"http://localhost\"}"));
 
             Assert.AreEqual("http://localhost/", model.Uri.AbsoluteUri);
         }
@@ -243,40 +239,40 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void UnexposedExtensibleEnumsAreInternal()
         {
-            var modelType = typeof(UnexposedExtensibleEnum);
+            var modelType = FindType(typeof(AbstractModel).Assembly, "UnexposedExtensibleEnum");
             Assert.AreEqual(false, modelType.IsPublic);
         }
 
         [Test]
         public void UnexposedNonExtensibleEnumsAreInternal()
         {
-            TypeAsserts.TypeIsNotPublic(typeof(UnexposedNonExtensibleEnum));
+            TypeAsserts.TypeIsNotPublic(FindType(typeof(AbstractModel).Assembly, "UnexposedNonExtensibleEnum"));
         }
 
         [Test]
         public void ModelFactoryIsRenamed()
         {
-            TypeAsserts.HasNoType(typeof(MainModelFactory).Assembly, "TypeSchemaMapping.SchemaMappingModelFactory");
+            TypeAsserts.HasNoType(FindType(typeof(AbstractModel).Assembly, "MainModelFactory").Assembly, "TypeSchemaMapping.SchemaMappingModelFactory");
         }
 
         [Test]
         public void ModelFactoryIsInternal()
         {
-            TypeAsserts.TypeIsNotPublic(typeof(MainModelFactory));
+            TypeAsserts.TypeIsNotPublic(FindType(typeof(AbstractModel).Assembly, "MainModelFactory"));
         }
 
         [Test]
         public void ModelFactoryPublicMethods()
         {
-            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(MainModelFactory), nameof(ModelWithGuidProperty), nameof(ModelWithAbstractModel));
+            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(FindType(typeof(AbstractModel).Assembly, "MainModelFactory"), nameof(ModelWithGuidProperty), nameof(ModelWithAbstractModel));
         }
 
         [Test]
         public void TypesAreSkipped()
         {
-            TypeAsserts.HasNoType(typeof(CustomizedModel).Assembly, "ModelToBeSkipped");
-            TypeAsserts.HasNoType(typeof(CustomizedModel).Assembly, "EnumToBeSkipped");
-            TypeAsserts.HasNoType(typeof(CustomizedModel).Assembly, "EnumToBeSkippedExtensions");
+            TypeAsserts.HasNoType(FindType(typeof(AbstractModel).Assembly, "CustomizedModel").Assembly, "ModelToBeSkipped");
+            TypeAsserts.HasNoType(FindType(typeof(AbstractModel).Assembly, "CustomizedModel").Assembly, "EnumToBeSkipped");
+            TypeAsserts.HasNoType(FindType(typeof(AbstractModel).Assembly, "CustomizedModel").Assembly, "EnumToBeSkippedExtensions");
         }
     }
 }
