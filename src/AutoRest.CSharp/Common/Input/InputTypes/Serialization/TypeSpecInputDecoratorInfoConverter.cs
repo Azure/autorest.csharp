@@ -20,9 +20,6 @@ namespace AutoRest.CSharp.Common.Input
         public override InputDecoratorInfo? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => reader.ReadReferenceAndResolve<InputDecoratorInfo>(_referenceHandler.CurrentResolver) ?? CreateDecoratorInfo(ref reader, null, options, _referenceHandler.CurrentResolver);
 
-        public override void Write(Utf8JsonWriter writer, InputDecoratorInfo value, JsonSerializerOptions options)
-            => throw new NotSupportedException("Writing not supported");
-
         private static InputDecoratorInfo? CreateDecoratorInfo(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
@@ -40,13 +37,24 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
             reader.Read();
-            var decoratorInfo = new InputDecoratorInfo(name ?? throw new JsonException("InputDecoratorInfo must have name"), arguments);
+            var decoratorInfo = new InputDecoratorInfo(name ?? throw new JsonException("InputDecoratorInfo must have name"), arguments ?? new Dictionary<string, BinaryData>());
 
             if (id != null)
             {
                 resolver.AddReference(id, decoratorInfo);
             }
             return decoratorInfo;
+        }
+
+        public override void Write(Utf8JsonWriter writer, InputDecoratorInfo value, JsonSerializerOptions options)
+        {
+            // the decorators do not need an id
+            writer.WriteStartObject();
+
+            writer.WriteString("name", value.Name);
+            writer.WriteDictionary("arguments", value.Arguments);
+
+            writer.WriteEndObject();
         }
     }
 }

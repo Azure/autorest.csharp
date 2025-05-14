@@ -11,6 +11,8 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal sealed class TypeSpecInputModelTypeConverter : JsonConverter<InputModelType>
     {
+        internal const string ModelKind = "model";
+
         private readonly TypeSpecReferenceHandler _referenceHandler;
 
         public TypeSpecInputModelTypeConverter(TypeSpecReferenceHandler referenceHandler)
@@ -20,9 +22,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public override InputModelType? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => ReadModelType(ref reader, options, _referenceHandler.CurrentResolver);
-
-        public override void Write(Utf8JsonWriter writer, InputModelType value, JsonSerializerOptions options)
-            => throw new NotSupportedException("Writing not supported");
 
         private static InputModelType? ReadModelType(ref Utf8JsonReader reader, JsonSerializerOptions options, ReferenceResolver resolver)
             => reader.ReadReferenceAndResolve<InputModelType>(resolver) ?? CreateModelType(ref reader, null, null, options, resolver);
@@ -273,6 +272,48 @@ namespace AutoRest.CSharp.Common.Input
                 },
                 _ => propertyType
             };
+        }
+
+        public override void Write(Utf8JsonWriter writer, InputModelType value, JsonSerializerOptions options)
+            => writer.WriteObjectOrReference(value, options, _referenceHandler.CurrentResolver, WriteInputModelTypeProperties);
+
+        private static void WriteInputModelTypeProperties(Utf8JsonWriter writer, InputModelType value, JsonSerializerOptions options)
+        {
+            // kind
+            writer.WriteString("kind", ModelKind);
+            // name
+            writer.WriteString("name", value.Name);
+            // namespace - swagger does not have a concept of namespace, just write empty
+            writer.WriteString("namespace", string.Empty);
+            // crossLanguageDefinitionId
+            writer.WriteString("crossLanguageDefinitionId", value.CrossLanguageDefinitionId);
+            // access
+            writer.WriteStringIfPresent("access", value.Access);
+            // usage
+            writer.WriteString("usage", value.Usage.ToString());
+            // deprecation
+            writer.WriteStringIfPresent("deprecation", value.Deprecation);
+            // summary
+            writer.WriteStringIfPresent("summary", value.Summary);
+            // doc
+            writer.WriteStringIfPresent("doc", value.Doc);
+            // discriminatorValue
+            writer.WriteStringIfPresent("discriminatorValue", value.DiscriminatorValue);
+            // decorators
+            writer.WriteArray("decorators", value.Decorators, options);
+            // additionalProperties
+            writer.WriteObjectIfPresent("additionalProperties", value.AdditionalProperties, options);
+            // discriminatorProperty
+            writer.WriteObjectIfPresent("discriminatorProperty", value.DiscriminatorProperty, options);
+            // baseModel
+            writer.WriteObjectIfPresent("baseModel", value.BaseModel, options);
+            // properties
+            writer.WriteArray("properties", value.Properties, options);
+            // discriminatedSubtypes
+            if (value.DiscriminatedSubtypes.Count > 0)
+            {
+                writer.WriteDictionary("discriminatedSubtypes", value.DiscriminatedSubtypes, options);
+            }
         }
     }
 }

@@ -11,10 +11,23 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal static class TypeSpecSerialization
     {
+        public static string Serialize(InputNamespace inputNamespace)
+        {
+            var options = CreateOptions();
+            options.WriteIndented = true;
+            return JsonSerializer.Serialize(inputNamespace, options);
+        }
+
         public static InputNamespace? Deserialize(string json)
         {
+            var options = CreateOptions();
+            return JsonSerializer.Deserialize<InputNamespace>(json, options);
+        }
+
+        private static JsonSerializerOptions CreateOptions()
+        {
             var referenceHandler = new TypeSpecReferenceHandler();
-            var options = new JsonSerializerOptions
+            return new JsonSerializerOptions
             {
                 ReferenceHandler = referenceHandler,
                 AllowTrailingCommas = true,
@@ -62,8 +75,6 @@ namespace AutoRest.CSharp.Common.Input
                     new TypeSpecInputLongRunningPagingServiceMethodConverter(referenceHandler),
                 }
             };
-
-            return JsonSerializer.Deserialize<InputNamespace>(json, options);
         }
 
         private class RequestMethodConverter : JsonConverter<RequestMethod>
