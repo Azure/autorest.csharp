@@ -13,14 +13,17 @@ namespace AzureSample.ResourceManager.Sample
 {
     public partial class AvailabilitySetResource : IJsonModel<AvailabilitySetData>
     {
+        private static AvailabilitySetData s_dataDeserializationInstance;
+        private static AvailabilitySetData DataDeserializationInstance => s_dataDeserializationInstance ??= new();
+
         void IJsonModel<AvailabilitySetData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<AvailabilitySetData>)Data).Write(writer, options);
 
-        AvailabilitySetData IJsonModel<AvailabilitySetData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<AvailabilitySetData>)new AvailabilitySetData()).Create(ref reader, options);
+        AvailabilitySetData IJsonModel<AvailabilitySetData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<AvailabilitySetData>)DataDeserializationInstance).Create(ref reader, options);
 
         BinaryData IPersistableModel<AvailabilitySetData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<AvailabilitySetData>(Data, options, AzureSampleResourceManagerSampleContext.Default);
 
         AvailabilitySetData IPersistableModel<AvailabilitySetData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<AvailabilitySetData>(data, options, AzureSampleResourceManagerSampleContext.Default);
 
-        string IPersistableModel<AvailabilitySetData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<AvailabilitySetData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<AvailabilitySetData>)DataDeserializationInstance).GetFormatFromOptions(options);
     }
 }

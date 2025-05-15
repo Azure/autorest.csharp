@@ -13,14 +13,17 @@ namespace _Azure.ResourceManager.Resources
 {
     public partial class NestedProxyResource : IJsonModel<NestedProxyResourceData>
     {
+        private static NestedProxyResourceData s_dataDeserializationInstance;
+        private static NestedProxyResourceData DataDeserializationInstance => s_dataDeserializationInstance ??= new();
+
         void IJsonModel<NestedProxyResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<NestedProxyResourceData>)Data).Write(writer, options);
 
-        NestedProxyResourceData IJsonModel<NestedProxyResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<NestedProxyResourceData>)new NestedProxyResourceData()).Create(ref reader, options);
+        NestedProxyResourceData IJsonModel<NestedProxyResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<NestedProxyResourceData>)DataDeserializationInstance).Create(ref reader, options);
 
         BinaryData IPersistableModel<NestedProxyResourceData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<NestedProxyResourceData>(Data, options, _AzureResourceManagerResourcesContext.Default);
 
         NestedProxyResourceData IPersistableModel<NestedProxyResourceData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<NestedProxyResourceData>(data, options, _AzureResourceManagerResourcesContext.Default);
 
-        string IPersistableModel<NestedProxyResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<NestedProxyResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<NestedProxyResourceData>)DataDeserializationInstance).GetFormatFromOptions(options);
     }
 }

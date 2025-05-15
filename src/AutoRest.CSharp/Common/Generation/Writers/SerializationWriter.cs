@@ -5,14 +5,10 @@ using System;
 using System.ClientModel.Primitives;
 using System.Linq;
 using System.Text.Json.Serialization;
-using AutoRest.CSharp.Common.Output.Models.Types;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Serialization.Bicep;
-using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Serialization.Json;
-using AutoRest.CSharp.Output.Models.Serialization.Xml;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -48,9 +44,14 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 var resourceDataType = resource.ResourceData.Type;
                 writer.Append($"{declaration.Accessibility} partial class {declaration.Name} : IJsonModel<{resourceDataType}>");
+                var deserializationType = resource.ResourceData.Serialization.PersistableModelProxyType ?? resource.ResourceData.Type;
 
                 using (writer.Scope())
                 {
+                    writer.Line($"private static {deserializationType} s_dataDeserializationInstance;");
+                    writer.Line($"private static {deserializationType} DataDeserializationInstance => s_dataDeserializationInstance ??= new();");
+                    writer.Line();
+
                     foreach (var method in JsonSerializationMethodsBuilder.BuildResourceJsonSerializationMethods(resource))
                     {
                         writer.WriteMethod(method);

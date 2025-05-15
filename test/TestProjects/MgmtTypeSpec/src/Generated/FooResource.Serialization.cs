@@ -13,14 +13,17 @@ namespace MgmtTypeSpec
 {
     public partial class FooResource : IJsonModel<FooData>
     {
+        private static FooData s_dataDeserializationInstance;
+        private static FooData DataDeserializationInstance => s_dataDeserializationInstance ??= new();
+
         void IJsonModel<FooData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<FooData>)Data).Write(writer, options);
 
-        FooData IJsonModel<FooData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<FooData>)new FooData()).Create(ref reader, options);
+        FooData IJsonModel<FooData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<FooData>)DataDeserializationInstance).Create(ref reader, options);
 
         BinaryData IPersistableModel<FooData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<FooData>(Data, options, MgmtTypeSpecContext.Default);
 
         FooData IPersistableModel<FooData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<FooData>(data, options, MgmtTypeSpecContext.Default);
 
-        string IPersistableModel<FooData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<FooData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<FooData>)DataDeserializationInstance).GetFormatFromOptions(options);
     }
 }
