@@ -15,12 +15,12 @@ namespace _Azure.ResourceManager.CommonProperties
     {
         void IJsonModel<ConfidentialResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<ConfidentialResourceData>)Data).Write(writer, options);
 
-        ConfidentialResourceData IJsonModel<ConfidentialResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<ConfidentialResourceData>)Data).Create(ref reader, options);
+        ConfidentialResourceData IJsonModel<ConfidentialResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<ConfidentialResourceData>)new ConfidentialResourceData()).Create(ref reader, options);
 
         BinaryData IPersistableModel<ConfidentialResourceData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<ConfidentialResourceData>(Data, options, _AzureResourceManagerCommonPropertiesContext.Default);
 
         ConfidentialResourceData IPersistableModel<ConfidentialResourceData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<ConfidentialResourceData>(data, options, _AzureResourceManagerCommonPropertiesContext.Default);
 
-        string IPersistableModel<ConfidentialResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<ConfidentialResourceData>)Data).GetFormatFromOptions(options);
+        string IPersistableModel<ConfidentialResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

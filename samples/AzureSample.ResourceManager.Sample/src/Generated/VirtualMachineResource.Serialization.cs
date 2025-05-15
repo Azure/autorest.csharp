@@ -15,12 +15,12 @@ namespace AzureSample.ResourceManager.Sample
     {
         void IJsonModel<VirtualMachineData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<VirtualMachineData>)Data).Write(writer, options);
 
-        VirtualMachineData IJsonModel<VirtualMachineData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<VirtualMachineData>)Data).Create(ref reader, options);
+        VirtualMachineData IJsonModel<VirtualMachineData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<VirtualMachineData>)new VirtualMachineData()).Create(ref reader, options);
 
         BinaryData IPersistableModel<VirtualMachineData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<VirtualMachineData>(Data, options, AzureSampleResourceManagerSampleContext.Default);
 
         VirtualMachineData IPersistableModel<VirtualMachineData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<VirtualMachineData>(data, options, AzureSampleResourceManagerSampleContext.Default);
 
-        string IPersistableModel<VirtualMachineData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<VirtualMachineData>)Data).GetFormatFromOptions(options);
+        string IPersistableModel<VirtualMachineData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

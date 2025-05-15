@@ -15,12 +15,12 @@ namespace _Azure.ResourceManager.Resources
     {
         void IJsonModel<NestedProxyResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<NestedProxyResourceData>)Data).Write(writer, options);
 
-        NestedProxyResourceData IJsonModel<NestedProxyResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<NestedProxyResourceData>)Data).Create(ref reader, options);
+        NestedProxyResourceData IJsonModel<NestedProxyResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<NestedProxyResourceData>)new NestedProxyResourceData()).Create(ref reader, options);
 
         BinaryData IPersistableModel<NestedProxyResourceData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<NestedProxyResourceData>(Data, options, _AzureResourceManagerResourcesContext.Default);
 
         NestedProxyResourceData IPersistableModel<NestedProxyResourceData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<NestedProxyResourceData>(data, options, _AzureResourceManagerResourcesContext.Default);
 
-        string IPersistableModel<NestedProxyResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<NestedProxyResourceData>)Data).GetFormatFromOptions(options);
+        string IPersistableModel<NestedProxyResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

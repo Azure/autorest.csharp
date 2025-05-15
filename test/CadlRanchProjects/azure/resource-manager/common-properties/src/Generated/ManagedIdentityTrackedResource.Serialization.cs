@@ -15,12 +15,12 @@ namespace _Azure.ResourceManager.CommonProperties
     {
         void IJsonModel<ManagedIdentityTrackedResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<ManagedIdentityTrackedResourceData>)Data).Write(writer, options);
 
-        ManagedIdentityTrackedResourceData IJsonModel<ManagedIdentityTrackedResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<ManagedIdentityTrackedResourceData>)Data).Create(ref reader, options);
+        ManagedIdentityTrackedResourceData IJsonModel<ManagedIdentityTrackedResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<ManagedIdentityTrackedResourceData>)new ManagedIdentityTrackedResourceData()).Create(ref reader, options);
 
         BinaryData IPersistableModel<ManagedIdentityTrackedResourceData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<ManagedIdentityTrackedResourceData>(Data, options, _AzureResourceManagerCommonPropertiesContext.Default);
 
         ManagedIdentityTrackedResourceData IPersistableModel<ManagedIdentityTrackedResourceData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<ManagedIdentityTrackedResourceData>(data, options, _AzureResourceManagerCommonPropertiesContext.Default);
 
-        string IPersistableModel<ManagedIdentityTrackedResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<ManagedIdentityTrackedResourceData>)Data).GetFormatFromOptions(options);
+        string IPersistableModel<ManagedIdentityTrackedResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

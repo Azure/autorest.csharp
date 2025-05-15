@@ -15,12 +15,12 @@ namespace MgmtDiscriminator
     {
         void IJsonModel<DeliveryRuleData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<DeliveryRuleData>)Data).Write(writer, options);
 
-        DeliveryRuleData IJsonModel<DeliveryRuleData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<DeliveryRuleData>)Data).Create(ref reader, options);
+        DeliveryRuleData IJsonModel<DeliveryRuleData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<DeliveryRuleData>)new DeliveryRuleData()).Create(ref reader, options);
 
         BinaryData IPersistableModel<DeliveryRuleData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<DeliveryRuleData>(Data, options, MgmtDiscriminatorContext.Default);
 
         DeliveryRuleData IPersistableModel<DeliveryRuleData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<DeliveryRuleData>(data, options, MgmtDiscriminatorContext.Default);
 
-        string IPersistableModel<DeliveryRuleData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<DeliveryRuleData>)Data).GetFormatFromOptions(options);
+        string IPersistableModel<DeliveryRuleData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

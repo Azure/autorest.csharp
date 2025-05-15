@@ -15,12 +15,12 @@ namespace AzureSample.ResourceManager.Sample
     {
         void IJsonModel<VirtualMachineScaleSetRollingUpgradeData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<VirtualMachineScaleSetRollingUpgradeData>)Data).Write(writer, options);
 
-        VirtualMachineScaleSetRollingUpgradeData IJsonModel<VirtualMachineScaleSetRollingUpgradeData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<VirtualMachineScaleSetRollingUpgradeData>)Data).Create(ref reader, options);
+        VirtualMachineScaleSetRollingUpgradeData IJsonModel<VirtualMachineScaleSetRollingUpgradeData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<VirtualMachineScaleSetRollingUpgradeData>)new VirtualMachineScaleSetRollingUpgradeData()).Create(ref reader, options);
 
         BinaryData IPersistableModel<VirtualMachineScaleSetRollingUpgradeData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<VirtualMachineScaleSetRollingUpgradeData>(Data, options, AzureSampleResourceManagerSampleContext.Default);
 
         VirtualMachineScaleSetRollingUpgradeData IPersistableModel<VirtualMachineScaleSetRollingUpgradeData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<VirtualMachineScaleSetRollingUpgradeData>(data, options, AzureSampleResourceManagerSampleContext.Default);
 
-        string IPersistableModel<VirtualMachineScaleSetRollingUpgradeData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<VirtualMachineScaleSetRollingUpgradeData>)Data).GetFormatFromOptions(options);
+        string IPersistableModel<VirtualMachineScaleSetRollingUpgradeData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -15,12 +15,12 @@ namespace MgmtXmlDeserialization
     {
         void IJsonModel<XmlInstanceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<XmlInstanceData>)Data).Write(writer, options);
 
-        XmlInstanceData IJsonModel<XmlInstanceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<XmlInstanceData>)Data).Create(ref reader, options);
+        XmlInstanceData IJsonModel<XmlInstanceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<XmlInstanceData>)new XmlInstanceData()).Create(ref reader, options);
 
         BinaryData IPersistableModel<XmlInstanceData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<XmlInstanceData>(Data, options, MgmtXmlDeserializationContext.Default);
 
         XmlInstanceData IPersistableModel<XmlInstanceData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<XmlInstanceData>(data, options, MgmtXmlDeserializationContext.Default);
 
-        string IPersistableModel<XmlInstanceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<XmlInstanceData>)Data).GetFormatFromOptions(options);
+        string IPersistableModel<XmlInstanceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

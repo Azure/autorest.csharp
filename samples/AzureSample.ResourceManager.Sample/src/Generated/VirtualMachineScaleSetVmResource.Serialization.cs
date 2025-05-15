@@ -15,12 +15,12 @@ namespace AzureSample.ResourceManager.Sample
     {
         void IJsonModel<VirtualMachineScaleSetVmData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<VirtualMachineScaleSetVmData>)Data).Write(writer, options);
 
-        VirtualMachineScaleSetVmData IJsonModel<VirtualMachineScaleSetVmData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<VirtualMachineScaleSetVmData>)Data).Create(ref reader, options);
+        VirtualMachineScaleSetVmData IJsonModel<VirtualMachineScaleSetVmData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<VirtualMachineScaleSetVmData>)new VirtualMachineScaleSetVmData()).Create(ref reader, options);
 
         BinaryData IPersistableModel<VirtualMachineScaleSetVmData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<VirtualMachineScaleSetVmData>(Data, options, AzureSampleResourceManagerSampleContext.Default);
 
         VirtualMachineScaleSetVmData IPersistableModel<VirtualMachineScaleSetVmData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<VirtualMachineScaleSetVmData>(data, options, AzureSampleResourceManagerSampleContext.Default);
 
-        string IPersistableModel<VirtualMachineScaleSetVmData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<VirtualMachineScaleSetVmData>)Data).GetFormatFromOptions(options);
+        string IPersistableModel<VirtualMachineScaleSetVmData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }
