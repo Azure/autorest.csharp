@@ -13,14 +13,17 @@ namespace _Azure.ResourceManager.Resources
 {
     public partial class LocationResource : IJsonModel<LocationResourceData>
     {
+        private static LocationResourceData s_dataDeserializationInstance;
+        private static LocationResourceData DataDeserializationInstance => s_dataDeserializationInstance ??= new();
+
         void IJsonModel<LocationResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<LocationResourceData>)Data).Write(writer, options);
 
-        LocationResourceData IJsonModel<LocationResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<LocationResourceData>)Data).Create(ref reader, options);
+        LocationResourceData IJsonModel<LocationResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<LocationResourceData>)DataDeserializationInstance).Create(ref reader, options);
 
         BinaryData IPersistableModel<LocationResourceData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<LocationResourceData>(Data, options, _AzureResourceManagerResourcesContext.Default);
 
         LocationResourceData IPersistableModel<LocationResourceData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<LocationResourceData>(data, options, _AzureResourceManagerResourcesContext.Default);
 
-        string IPersistableModel<LocationResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<LocationResourceData>)Data).GetFormatFromOptions(options);
+        string IPersistableModel<LocationResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<LocationResourceData>)DataDeserializationInstance).GetFormatFromOptions(options);
     }
 }

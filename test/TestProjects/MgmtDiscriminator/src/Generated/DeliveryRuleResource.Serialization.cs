@@ -13,14 +13,17 @@ namespace MgmtDiscriminator
 {
     public partial class DeliveryRuleResource : IJsonModel<DeliveryRuleData>
     {
+        private static DeliveryRuleData s_dataDeserializationInstance;
+        private static DeliveryRuleData DataDeserializationInstance => s_dataDeserializationInstance ??= new();
+
         void IJsonModel<DeliveryRuleData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<DeliveryRuleData>)Data).Write(writer, options);
 
-        DeliveryRuleData IJsonModel<DeliveryRuleData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<DeliveryRuleData>)Data).Create(ref reader, options);
+        DeliveryRuleData IJsonModel<DeliveryRuleData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<DeliveryRuleData>)DataDeserializationInstance).Create(ref reader, options);
 
         BinaryData IPersistableModel<DeliveryRuleData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<DeliveryRuleData>(Data, options, MgmtDiscriminatorContext.Default);
 
         DeliveryRuleData IPersistableModel<DeliveryRuleData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<DeliveryRuleData>(data, options, MgmtDiscriminatorContext.Default);
 
-        string IPersistableModel<DeliveryRuleData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<DeliveryRuleData>)Data).GetFormatFromOptions(options);
+        string IPersistableModel<DeliveryRuleData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<DeliveryRuleData>)DataDeserializationInstance).GetFormatFromOptions(options);
     }
 }

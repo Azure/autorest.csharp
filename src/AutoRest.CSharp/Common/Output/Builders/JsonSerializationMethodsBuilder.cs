@@ -12,7 +12,6 @@ using System.Net;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -66,8 +65,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var reader = KnownParameters.Serializations.Utf8JsonReader;
             yield return new Method(
                 new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, resourceDataType, null, new[] { reader, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
-                // => ((IJsonModel<T>)Data).Create(reader, options);
-                new MemberExpression(This, "Data").CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Create), reader, options));
+                // => ((IJsonModel<T>)DataDeserializationInstance).Create(reader, options);
+                new MemberExpression(null, "DataDeserializationInstance").CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Create), reader, options));
 
             // BinaryData IPersistableModel<T>.Write(ModelReaderWriterOptions options)
             yield return new Method(
@@ -84,8 +83,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             // ModelReaderWriterFormat IPersistableModel<T>.GetFormatFromOptions(ModelReaderWriterOptions options)
             yield return new Method(
                 new MethodSignature(nameof(IPersistableModel<object>.GetFormatFromOptions), null, null, MethodSignatureModifiers.None, typeof(string), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
-                // => Data.GetFormatFromOptions(options);
-                new MemberExpression(This, "Data").CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.GetFormatFromOptions), options));
+                // => DataDeserializationInstance.GetFormatFromOptions(options);
+                new MemberExpression(null, "DataDeserializationInstance").CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.GetFormatFromOptions), options));
         }
 
         public static IEnumerable<Method> BuildJsonSerializationMethods(JsonObjectSerialization json, SerializationInterfaces? interfaces, bool hasInherits, bool isSealed)

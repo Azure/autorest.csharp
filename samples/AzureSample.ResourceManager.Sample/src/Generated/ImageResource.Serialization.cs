@@ -13,14 +13,17 @@ namespace AzureSample.ResourceManager.Sample
 {
     public partial class ImageResource : IJsonModel<ImageData>
     {
+        private static ImageData s_dataDeserializationInstance;
+        private static ImageData DataDeserializationInstance => s_dataDeserializationInstance ??= new();
+
         void IJsonModel<ImageData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<ImageData>)Data).Write(writer, options);
 
-        ImageData IJsonModel<ImageData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<ImageData>)Data).Create(ref reader, options);
+        ImageData IJsonModel<ImageData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<ImageData>)DataDeserializationInstance).Create(ref reader, options);
 
         BinaryData IPersistableModel<ImageData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<ImageData>(Data, options, AzureSampleResourceManagerSampleContext.Default);
 
         ImageData IPersistableModel<ImageData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<ImageData>(data, options, AzureSampleResourceManagerSampleContext.Default);
 
-        string IPersistableModel<ImageData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<ImageData>)Data).GetFormatFromOptions(options);
+        string IPersistableModel<ImageData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<ImageData>)DataDeserializationInstance).GetFormatFromOptions(options);
     }
 }

@@ -13,14 +13,17 @@ namespace _Azure.ResourceManager.Resources
 {
     public partial class SingletonTrackedResource : IJsonModel<SingletonTrackedResourceData>
     {
+        private static SingletonTrackedResourceData s_dataDeserializationInstance;
+        private static SingletonTrackedResourceData DataDeserializationInstance => s_dataDeserializationInstance ??= new();
+
         void IJsonModel<SingletonTrackedResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<SingletonTrackedResourceData>)Data).Write(writer, options);
 
-        SingletonTrackedResourceData IJsonModel<SingletonTrackedResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<SingletonTrackedResourceData>)Data).Create(ref reader, options);
+        SingletonTrackedResourceData IJsonModel<SingletonTrackedResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<SingletonTrackedResourceData>)DataDeserializationInstance).Create(ref reader, options);
 
         BinaryData IPersistableModel<SingletonTrackedResourceData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<SingletonTrackedResourceData>(Data, options, _AzureResourceManagerResourcesContext.Default);
 
         SingletonTrackedResourceData IPersistableModel<SingletonTrackedResourceData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<SingletonTrackedResourceData>(data, options, _AzureResourceManagerResourcesContext.Default);
 
-        string IPersistableModel<SingletonTrackedResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<SingletonTrackedResourceData>)Data).GetFormatFromOptions(options);
+        string IPersistableModel<SingletonTrackedResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<SingletonTrackedResourceData>)DataDeserializationInstance).GetFormatFromOptions(options);
     }
 }

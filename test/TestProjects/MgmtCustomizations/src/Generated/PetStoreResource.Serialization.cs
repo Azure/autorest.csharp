@@ -13,14 +13,17 @@ namespace MgmtCustomizations
 {
     public partial class PetStoreResource : IJsonModel<PetStoreData>
     {
+        private static PetStoreData s_dataDeserializationInstance;
+        private static PetStoreData DataDeserializationInstance => s_dataDeserializationInstance ??= new();
+
         void IJsonModel<PetStoreData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<PetStoreData>)Data).Write(writer, options);
 
-        PetStoreData IJsonModel<PetStoreData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<PetStoreData>)Data).Create(ref reader, options);
+        PetStoreData IJsonModel<PetStoreData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<PetStoreData>)DataDeserializationInstance).Create(ref reader, options);
 
         BinaryData IPersistableModel<PetStoreData>.Write(ModelReaderWriterOptions options) => ModelReaderWriter.Write<PetStoreData>(Data, options, MgmtCustomizationsContext.Default);
 
         PetStoreData IPersistableModel<PetStoreData>.Create(BinaryData data, ModelReaderWriterOptions options) => ModelReaderWriter.Read<PetStoreData>(data, options, MgmtCustomizationsContext.Default);
 
-        string IPersistableModel<PetStoreData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<PetStoreData>)Data).GetFormatFromOptions(options);
+        string IPersistableModel<PetStoreData>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<PetStoreData>)DataDeserializationInstance).GetFormatFromOptions(options);
     }
 }
