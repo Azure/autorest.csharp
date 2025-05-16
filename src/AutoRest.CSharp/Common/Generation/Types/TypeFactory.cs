@@ -46,6 +46,7 @@ namespace AutoRest.CSharp.Generation.Types
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
             InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.ValueType), literalType.Value),
+            InputEnumTypeValue enumValueType => CSharpType.FromLiteral(CreateType(enumValueType.EnumType), enumValueType.Value),
             InputUnionType unionType => CSharpType.FromUnion(unionType.VariantTypes.Select(CreateType).ToArray()),
             InputListType { CrossLanguageDefinitionId: "Azure.Core.EmbeddingVector" } listType => new CSharpType(typeof(ReadOnlyMemory<>), CreateType(listType.ValueType)),
             InputListType listType => new CSharpType(typeof(IList<>), CreateType(listType.ValueType)),

@@ -876,6 +876,9 @@
         "type": {
          "$id": "115",
          "kind": "constant",
+         "name": "listWithPageContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "116",
           "kind": "string",
@@ -1049,6 +1052,9 @@
         "type": {
          "$id": "131",
          "kind": "constant",
+         "name": "listWithParametersContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "132",
           "kind": "string",
@@ -1076,6 +1082,9 @@
         "type": {
          "$id": "134",
          "kind": "constant",
+         "name": "listWithParametersContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "135",
           "kind": "string",
@@ -1305,6 +1314,9 @@
         "type": {
          "$id": "153",
          "kind": "constant",
+         "name": "listWithCustomPageModelContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "154",
           "kind": "string",
@@ -1469,6 +1481,9 @@
         "type": {
          "$id": "168",
          "kind": "constant",
+         "name": "withParameterizedNextLinkContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "169",
           "kind": "string",
@@ -1710,6 +1725,9 @@
           "type": {
            "$id": "192",
            "kind": "constant",
+           "name": "listFirstItemContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "193",
             "kind": "string",
@@ -1864,6 +1882,9 @@
           "type": {
            "$id": "207",
            "kind": "constant",
+           "name": "listSecondItemContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "208",
             "kind": "string",

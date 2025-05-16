@@ -66,6 +66,9 @@
         "type": {
          "$id": "9",
          "kind": "constant",
+         "name": "putEmptyContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "10",
           "kind": "string",
@@ -190,6 +193,9 @@
         "type": {
          "$id": "19",
          "kind": "constant",
+         "name": "getEmptyContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "20",
           "kind": "string",
@@ -286,6 +292,9 @@
         "type": {
          "$id": "27",
          "kind": "constant",
+         "name": "postRoundTripEmptyContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "28",
           "kind": "string",
@@ -313,6 +322,9 @@
         "type": {
          "$id": "30",
          "kind": "constant",
+         "name": "postRoundTripEmptyContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "31",
           "kind": "string",

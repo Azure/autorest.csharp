@@ -20,6 +20,7 @@ import {
     resolveAzureEmitterOptions
 } from "./options.js";
 import { azureSDKContextOptions } from "./sdk-context-options.js";
+import { transformCodeModel } from "./backward-compatibility.js";
 
 export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
     const program: Program = context.program;
@@ -43,7 +44,7 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
         azureSDKContextOptions
     );
     const csharpEmitterContext = createCSharpEmitterContext(sdkContext, logger);
-    const root = createModel(csharpEmitterContext);
+    const root = transformCodeModel(createModel(csharpEmitterContext));
 
     const outputFolder = resolvePath(
         context.emitterOutputDir ?? "./tsp-output"
@@ -162,6 +163,9 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
 
         configurations["azure-arm"] =
             sdkContext.arm === false ? undefined : sdkContext.arm;
+
+        configurations["suppress-abstract-base-class"] =
+            options["suppress-abstract-base-class"];
 
         // Write the config file
         await program.host.writeFile(

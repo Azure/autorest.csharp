@@ -165,6 +165,9 @@
           "type": {
            "$id": "21",
            "kind": "constant",
+           "name": "getContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "22",
             "kind": "string",
@@ -276,6 +279,9 @@
           "type": {
            "$id": "31",
            "kind": "constant",
+           "name": "putContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "32",
             "kind": "string",
@@ -429,6 +435,9 @@
           "type": {
            "$id": "45",
            "kind": "constant",
+           "name": "postContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "46",
             "kind": "string",
@@ -456,6 +465,9 @@
           "type": {
            "$id": "48",
            "kind": "constant",
+           "name": "postContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "49",
             "kind": "string",

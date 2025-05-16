@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace Scm._Type.Property.Optionality.Models
 {
-    /// <summary> The StringLiteralProperty_property. </summary>
+    /// <summary> The StringLiteralPropertyProperty. </summary>
     public readonly partial struct StringLiteralPropertyProperty : IEquatable<StringLiteralPropertyProperty>
     {
         private readonly string _value;

@@ -95,6 +95,9 @@
         "type": {
          "$id": "12",
          "kind": "constant",
+         "name": "TestRequestContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "13",
           "kind": "string",
@@ -122,6 +125,9 @@
         "type": {
          "$id": "15",
          "kind": "constant",
+         "name": "testContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "16",
           "kind": "string",
@@ -185,6 +191,9 @@
           "type": {
            "$id": "22",
            "kind": "constant",
+           "name": "TestRequestContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "23",
             "kind": "string",
@@ -223,6 +232,9 @@
        "type": {
         "$id": "25",
         "kind": "constant",
+        "name": "TestRequestContentType2",
+        "namespace": "",
+        "usage": "None",
         "valueType": {
          "$id": "26",
          "kind": "string",

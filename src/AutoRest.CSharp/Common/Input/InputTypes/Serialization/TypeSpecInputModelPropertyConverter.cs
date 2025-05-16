@@ -73,6 +73,12 @@ namespace AutoRest.CSharp.Common.Input
                 propertyType = lt.ValueType;
             }
 
+            if (propertyType is InputEnumTypeValue enumTypeValue)
+            {
+                defaultValue = new InputConstant(enumTypeValue.Value, enumTypeValue.ValueType);
+                propertyType = enumTypeValue.EnumType;
+            }
+
             var property = new InputModelProperty(name, serializedName ?? name, summary, doc, propertyType, defaultValue, !isOptional, isReadOnly, isDiscriminator, propertyKind)
             {
                 Decorators = decorators ?? [],

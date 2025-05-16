@@ -530,6 +530,9 @@
         "type": {
          "$id": "72",
          "kind": "constant",
+         "name": "basicActionContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "73",
           "kind": "string",
@@ -557,6 +560,9 @@
         "type": {
          "$id": "75",
          "kind": "constant",
+         "name": "basicActionContentType1",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "76",
           "kind": "string",

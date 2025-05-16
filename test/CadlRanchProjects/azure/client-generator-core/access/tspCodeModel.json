@@ -439,6 +439,9 @@
        "type": {
         "$id": "58",
         "kind": "constant",
+        "name": "RealModelKind",
+        "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
+        "usage": "Output,Json",
         "valueType": {
          "$id": "59",
          "kind": "string",
@@ -561,6 +564,9 @@
           "type": {
            "$id": "73",
            "kind": "constant",
+           "name": "noDecoratorInPublicContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "74",
             "kind": "string",
@@ -698,6 +704,9 @@
           "type": {
            "$id": "85",
            "kind": "constant",
+           "name": "publicDecoratorInPublicContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "86",
             "kind": "string",
@@ -881,6 +890,9 @@
           "type": {
            "$id": "102",
            "kind": "constant",
+           "name": "noDecoratorInInternalContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "103",
             "kind": "string",
@@ -1018,6 +1030,9 @@
           "type": {
            "$id": "114",
            "kind": "constant",
+           "name": "internalDecoratorInInternalContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "115",
             "kind": "string",
@@ -1155,6 +1170,9 @@
           "type": {
            "$id": "126",
            "kind": "constant",
+           "name": "publicDecoratorInInternalContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "127",
             "kind": "string",
@@ -1338,6 +1356,9 @@
           "type": {
            "$id": "143",
            "kind": "constant",
+           "name": "publicContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "144",
             "kind": "string",
@@ -1475,6 +1496,9 @@
           "type": {
            "$id": "155",
            "kind": "constant",
+           "name": "internalContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "156",
             "kind": "string",
@@ -1660,6 +1684,9 @@
           "type": {
            "$id": "172",
            "kind": "constant",
+           "name": "operationContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "173",
             "kind": "string",
@@ -1799,6 +1826,9 @@
           "type": {
            "$id": "184",
            "kind": "constant",
+           "name": "discriminatorContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "185",
             "kind": "string",

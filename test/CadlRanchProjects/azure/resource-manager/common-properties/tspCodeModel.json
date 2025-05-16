@@ -1864,6 +1864,9 @@
           "type": {
            "$id": "239",
            "kind": "constant",
+           "name": "getContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "240",
             "kind": "string",
@@ -2106,6 +2109,9 @@
           "type": {
            "$id": "261",
            "kind": "constant",
+           "name": "createWithSystemAssignedContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "262",
             "kind": "string",
@@ -2133,6 +2139,9 @@
           "type": {
            "$id": "264",
            "kind": "constant",
+           "name": "createWithSystemAssignedContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "265",
             "kind": "string",
@@ -2446,6 +2455,9 @@
           "type": {
            "$id": "290",
            "kind": "constant",
+           "name": "updateWithUserAssignedAndSystemAssignedContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "291",
             "kind": "string",
@@ -2473,6 +2485,9 @@
           "type": {
            "$id": "293",
            "kind": "constant",
+           "name": "updateWithUserAssignedAndSystemAssignedContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "294",
             "kind": "string",
@@ -2827,6 +2842,9 @@
           "type": {
            "$id": "325",
            "kind": "constant",
+           "name": "getForPredefinedErrorContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "326",
             "kind": "string",
@@ -3069,6 +3087,9 @@
           "type": {
            "$id": "347",
            "kind": "constant",
+           "name": "createForUserDefinedErrorContentType",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "348",
             "kind": "string",
@@ -3096,6 +3117,9 @@
           "type": {
            "$id": "350",
            "kind": "constant",
+           "name": "createForUserDefinedErrorContentType1",
+           "namespace": "",
+           "usage": "None",
            "valueType": {
             "$id": "351",
             "kind": "string",

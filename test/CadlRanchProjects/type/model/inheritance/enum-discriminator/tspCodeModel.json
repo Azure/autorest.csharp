@@ -171,7 +171,9 @@
        "doc": "discriminator property",
        "type": {
         "$id": "21",
-        "kind": "constant",
+        "kind": "enumvalue",
+        "name": "Golden",
+        "value": "golden",
         "valueType": {
          "$id": "22",
          "kind": "string",
@@ -179,7 +181,10 @@
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
-        "value": "golden",
+        "enumType": {
+         "$ref": "2"
+        },
+        "doc": "Species golden",
         "decorators": []
        },
        "optional": false,
@@ -291,7 +296,9 @@
        "doc": "discriminator property",
        "type": {
         "$id": "36",
-        "kind": "constant",
+        "kind": "enumvalue",
+        "name": "Cobra",
+        "value": "cobra",
         "valueType": {
          "$id": "37",
          "kind": "string",
@@ -299,7 +306,10 @@
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
-        "value": "cobra",
+        "enumType": {
+         "$ref": "6"
+        },
+        "doc": "Species cobra",
         "decorators": []
        },
        "optional": false,
@@ -353,6 +363,9 @@
         "type": {
          "$id": "44",
          "kind": "constant",
+         "name": "getExtensibleModelContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "45",
           "kind": "string",
@@ -451,6 +464,9 @@
         "type": {
          "$id": "52",
          "kind": "constant",
+         "name": "putExtensibleModelContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "53",
           "kind": "string",
@@ -579,6 +595,9 @@
         "type": {
          "$id": "62",
          "kind": "constant",
+         "name": "getExtensibleModelMissingDiscriminatorContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "63",
           "kind": "string",
@@ -676,6 +695,9 @@
         "type": {
          "$id": "70",
          "kind": "constant",
+         "name": "getExtensibleModelWrongDiscriminatorContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "71",
           "kind": "string",
@@ -773,6 +795,9 @@
         "type": {
          "$id": "78",
          "kind": "constant",
+         "name": "getFixedModelContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "79",
           "kind": "string",
@@ -871,6 +896,9 @@
         "type": {
          "$id": "86",
          "kind": "constant",
+         "name": "putFixedModelContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "87",
           "kind": "string",
@@ -999,6 +1027,9 @@
         "type": {
          "$id": "96",
          "kind": "constant",
+         "name": "getFixedModelMissingDiscriminatorContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "97",
           "kind": "string",
@@ -1096,6 +1127,9 @@
         "type": {
          "$id": "104",
          "kind": "constant",
+         "name": "getFixedModelWrongDiscriminatorContentType",
+         "namespace": "",
+         "usage": "None",
          "valueType": {
           "$id": "105",
           "kind": "string",
