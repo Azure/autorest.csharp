@@ -372,7 +372,7 @@
     <ProjectReference Include="..\CadlRanchProjectsNonAzure\parameters\body-optionality\src\Scm.Parameters.BodyOptionality.csproj" />
     <ProjectReference Include="..\CadlRanchProjectsNonAzure\parameters\spread\src\Scm.Parameters.Spread.csproj" />
     <ProjectReference Include="..\CadlRanchProjectsNonAzure\payload\content-negotiation\src\Scm.Payload.ContentNegotiation.csproj" />
-    <ProjectReference Include="..\CadlRanchProjectsNonAzure\payload\multipart\src\Scm.Payload.MultiPart.csproj" />
+    <ProjectReference Include="..\CadlRanchProjectsNonAzure\payload\multipart\src\Scm.Payload.Multipart.csproj" />
     <ProjectReference Include="..\CadlRanchProjectsNonAzure\serialization\encoded-name\json\src\Scm.Serialization.EncodedName.Json.csproj" />
     <ProjectReference Include="..\CadlRanchProjectsNonAzure\server\endpoint\not-defined\src\Scm.Server.Endpoint.NotDefined.csproj" />
     <ProjectReference Include="..\CadlRanchProjectsNonAzure\special-words\src\Scm.SpecialWords.csproj" />
