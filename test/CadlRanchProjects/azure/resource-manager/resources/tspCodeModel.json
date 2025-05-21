@@ -854,8 +854,10 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResource.name",
-     "discriminator": false,
-     "flatten": false
+     "explode": false,
+     "style": "simple",
+     "allowReserved": false,
+     "correspondingMethodParams": []
     }
    ]
   },
@@ -1182,8 +1184,10 @@
      "readOnly": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ArmOperationStatus.id",
-     "discriminator": false,
-     "flatten": false
+     "explode": false,
+     "style": "simple",
+     "allowReserved": false,
+     "correspondingMethodParams": []
     },
     {
      "$id": "148",
@@ -1600,8 +1604,10 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NestedProxyResource.name",
-     "discriminator": false,
-     "flatten": false
+     "explode": false,
+     "style": "simple",
+     "allowReserved": false,
+     "correspondingMethodParams": []
     }
    ]
   },
@@ -1799,8 +1805,10 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResource.name",
-     "discriminator": false,
-     "flatten": false
+     "explode": false,
+     "style": "simple",
+     "allowReserved": false,
+     "correspondingMethodParams": []
     }
    ]
   },
@@ -2006,8 +2014,10 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResource.name",
-     "discriminator": false,
-     "flatten": false
+     "explode": false,
+     "style": "simple",
+     "allowReserved": false,
+     "correspondingMethodParams": []
     }
    ]
   },
@@ -2205,8 +2215,10 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResource.name",
-     "discriminator": false,
-     "flatten": false
+     "explode": false,
+     "style": "simple",
+     "allowReserved": false,
+     "correspondingMethodParams": []
     }
    ]
   },
