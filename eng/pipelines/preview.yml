@@ -11,6 +11,10 @@ parameters:
   displayName: Run code generation checks
   type: boolean
   default: true
+- name: SDKRepoRef
+  displayName: SDK repo ref
+  type: string
+  default: refs/heads/main
 
 resources:
   repositories:
@@ -18,7 +22,7 @@ resources:
       type: github
       endpoint: Azure
       name: Azure/azure-sdk-for-net
-      ref: refs/heads/main
+      ref: ${{ parameters.SDKRepoRef }}
     - repository: azure-sdk-tools
       type: github
       endpoint: Azure
