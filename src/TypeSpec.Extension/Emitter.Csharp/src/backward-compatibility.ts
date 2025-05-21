@@ -20,7 +20,7 @@ export function transformCodeModel(codeModel: CodeModel): CodeModel {
     for (const model of codeModel.models) {
         for (const property of model.properties) {
             // we do not do this for discriminator
-            if (property.discriminator) {
+            if (property.kind === "property" && property.discriminator) {
                 continue;
             }
             const propertyType = property.type;
