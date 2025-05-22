@@ -449,7 +449,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         };
                     }
 
-                    return JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
+                    var cast = new CastExpression(value, new CSharpType(typeof(IJsonModel<>), value.Type));
+                    return JsonModelExpression.Write(cast, value, options).ToStatement();
 
                 case ObjectType:
                     return utf8JsonWriter.WriteObjectValue(value, options: options);
