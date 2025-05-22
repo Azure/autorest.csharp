@@ -442,18 +442,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
                     var jsonModelInterface = new CSharpType(typeof(IJsonModel<>), value.Type);
                     var cast = value.CastTo(jsonModelInterface);
-                    if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
+                    return new[]
                     {
-                        return new[]
-                        {
-                            Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions),
-                            // ((IJsonModel<T>)Value).Write(writer, options)
-                            cast.Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriter, serializeOptions).ToStatement(),
-                        };
-                    }
-
-                    // ((IJsonModel<T>)Value).Write(writer);
-                    return cast.Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriter, options!).ToStatement();
+                        Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions),
+                        // ((IJsonModel<T>)Value).Write(writer, options)
+                        cast.Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriter, serializeOptions).ToStatement(),
+                    };
 
                 case ObjectType:
                     return utf8JsonWriter.WriteObjectValue(value, options: options);
