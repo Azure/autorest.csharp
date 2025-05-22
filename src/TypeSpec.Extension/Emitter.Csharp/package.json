@@ -35,7 +35,7 @@
     ],
     "dependencies": {
         "@autorest/csharp": "3.0.0-beta.20240625.4",
-        "@typespec/http-client-csharp": "1.0.0-alpha.20250513.4"
+        "@typespec/http-client-csharp": "1.0.0-alpha.20250521.5"
     },
     "peerDependencies": {
         "@azure-tools/typespec-azure-core": ">=0.56.0 <1.0.0",

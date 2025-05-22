@@ -1545,8 +1545,7 @@
      "readOnly": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorError.x-ms-error-code",
-     "discriminator": false,
-     "flatten": false
+     "correspondingMethodParams": []
     },
     {
      "$id": "192",
