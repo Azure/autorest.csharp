@@ -440,17 +440,20 @@ namespace AutoRest.CSharp.Common.Output.Builders
             switch (valueSerialization.Type.Implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
+                    var jsonModelInterface = new CSharpType(typeof(IJsonModel<>), value.Type);
+                    var cast = value.CastTo(jsonModelInterface);
                     if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
                     {
                         return new[]
                         {
                             Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions),
-                            JsonSerializerExpression.Serialize(utf8JsonWriter, value, serializeOptions).ToStatement()
+                            // ((IJsonModel<T>)Value).Write(writer, options)
+                            cast.Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriter, serializeOptions).ToStatement(),
                         };
                     }
 
-                    var cast = new CastExpression(value, new CSharpType(typeof(IJsonModel<>), value.Type));
-                    return JsonModelExpression.Write(cast, value, options).ToStatement();
+                    // ((IJsonModel<T>)Value).Write(writer);
+                    return cast.Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriter).ToStatement();
 
                 case ObjectType:
                     return utf8JsonWriter.WriteObjectValue(value, options: options);
@@ -568,7 +571,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (IsCustomJsonConverterAdded(valueType))
             {
-                return JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
+                var jsonModelInterface = new CSharpType(typeof(IJsonModel<>), valueType);
+                var cast = value.CastTo(jsonModelInterface);
+                // ((IJsonModel<T>)Value).Write(writer)
+                return cast.Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriter).ToStatement();
             }
 
             throw new NotSupportedException($"Framework type {valueType} serialization not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
