@@ -440,7 +440,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             switch (valueSerialization.Type.Implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
-                    var jsonModelInterface = new CSharpType(typeof(IJsonModel<>), value.Type);
+                    var jsonModelInterface = new CSharpType(typeof(IJsonModel<>), systemObjectType.Type);
                     var cast = value.CastTo(jsonModelInterface);
                     // ((IJsonModel<T>)Value).Write(writer, options)
                     options ??= ModelReaderWriterOptionsExpression.Wire;
