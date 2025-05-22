@@ -443,7 +443,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     var jsonModelInterface = new CSharpType(typeof(IJsonModel<>), value.Type);
                     var cast = value.CastTo(jsonModelInterface);
                     // ((IJsonModel<T>)Value).Write(writer, options)
-                    options ??= ModelReaderWriterOptionsExpression.Wire,
+                    options ??= ModelReaderWriterOptionsExpression.Wire;
                     return cast.Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriter, options).ToStatement();
 
                 case ObjectType:
@@ -566,7 +566,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 var cast = value.CastTo(jsonModelInterface);
                 // ((IJsonModel<T>)Value).Write(writer)
                 options ??= ModelReaderWriterOptionsExpression.Wire;
-                return cast.Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriter, options).ToStatement()
+                return cast.Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriter, options).ToStatement();
             }
 
             throw new NotSupportedException($"Framework type {valueType} serialization not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
