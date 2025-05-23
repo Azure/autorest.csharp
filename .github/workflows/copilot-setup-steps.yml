@@ -1,0 +1,46 @@
+name: GitHub Copilot Setup
+
+# This file contains actions that are used to prepare the environment when GitHub Copilot
+# is interacting with this repository. It preinstalls the required tools.
+
+on:
+  workflow_dispatch: # Allows manual triggering
+  # This workflow is also automatically invoked by Copilot when needed
+
+permissions:
+  contents: read
+
+jobs:
+  copilot-setup:
+    name: Setup Copilot Environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js v22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          
+      - name: Setup .NET 9 SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'
+          
+      - name: Install NPM 10.x
+        run: npm install -g npm@10.x
+        
+      - name: Setup PowerShell
+        uses: PowerShell/PowerShell-action@v1
+        with:
+          pwsh-version: '7.x'
+          
+      - name: Verify installations
+        run: |
+          echo "Node.js version:"
+          node -v
+          echo "NPM version:"
+          npm -v
+          echo ".NET SDK version:"
+          dotnet --version
+          echo "PowerShell version:"
+          pwsh -Version
