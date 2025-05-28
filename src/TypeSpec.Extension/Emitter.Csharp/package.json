@@ -35,7 +35,7 @@
     ],
     "dependencies": {
         "@autorest/csharp": "3.0.0-beta.20240625.4",
-        "@typespec/http-client-csharp": "1.0.0-alpha.20250521.5"
+        "@typespec/http-client-csharp": "1.0.0-alpha.20250527.7"
     },
     "peerDependencies": {
         "@azure-tools/typespec-azure-core": ">=0.56.0 <1.0.0",
@@ -56,7 +56,7 @@
     },
     "devDependencies": {
         "@azure-tools/typespec-azure-core": "0.56.0",
-        "@azure-tools/typespec-client-generator-core": "0.56.0",
+        "@azure-tools/typespec-client-generator-core": "0.56.2",
         "@azure-tools/typespec-azure-resource-manager": "0.56.1",
         "@azure-tools/typespec-azure-rulesets": "0.56.0",
         "@azure-tools/typespec-autorest": "0.56.0",
