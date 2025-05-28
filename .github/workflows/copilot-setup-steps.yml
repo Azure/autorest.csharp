@@ -3,17 +3,18 @@ name: GitHub Copilot Setup
 # This file contains actions that are used to prepare the environment when GitHub Copilot
 # is interacting with this repository. It preinstalls the required tools.
 
-on:
-  workflow_dispatch: # Allows manual triggering
-  # This workflow is also automatically invoked by Copilot when needed
-
-permissions:
-  contents: read
+# Allow testing of the setup steps from your repository's "Actions" tab.
+on: workflow_dispatch
 
 jobs:
-  copilot-setup:
-    name: Setup Copilot Environment
+  copilot-setup-steps:
     runs-on: ubuntu-latest
+
+    # Set the permissions to the lowest permissions possible needed for your steps.
+    # Copilot will be given its own token for its operations.
+    permissions:
+      contents: read
+
     steps:
       - name: Setup Node.js v22
         uses: actions/setup-node@v4
