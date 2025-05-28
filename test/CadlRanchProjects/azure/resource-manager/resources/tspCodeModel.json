@@ -854,10 +854,8 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResource.name",
-     "explode": false,
-     "style": "simple",
-     "allowReserved": false,
-     "correspondingMethodParams": []
+     "discriminator": false,
+     "flatten": false
     }
    ]
   },
@@ -1184,10 +1182,8 @@
      "readOnly": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ArmOperationStatus.id",
-     "explode": false,
-     "style": "simple",
-     "allowReserved": false,
-     "correspondingMethodParams": []
+     "discriminator": false,
+     "flatten": false
     },
     {
      "$id": "148",
@@ -1604,10 +1600,8 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NestedProxyResource.name",
-     "explode": false,
-     "style": "simple",
-     "allowReserved": false,
-     "correspondingMethodParams": []
+     "discriminator": false,
+     "flatten": false
     }
    ]
   },
@@ -1805,10 +1799,8 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResource.name",
-     "explode": false,
-     "style": "simple",
-     "allowReserved": false,
-     "correspondingMethodParams": []
+     "discriminator": false,
+     "flatten": false
     }
    ]
   },
@@ -2014,10 +2006,8 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResource.name",
-     "explode": false,
-     "style": "simple",
-     "allowReserved": false,
-     "correspondingMethodParams": []
+     "discriminator": false,
+     "flatten": false
     }
    ]
   },
@@ -2215,10 +2205,8 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResource.name",
-     "explode": false,
-     "style": "simple",
-     "allowReserved": false,
-     "correspondingMethodParams": []
+     "discriminator": false,
+     "flatten": false
     }
    ]
   },

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Azure;
 using Azure.Core.Extensions;
 using NoDocsTypeSpec;
@@ -26,6 +27,8 @@ namespace Microsoft.Extensions.Azure
             return builder.RegisterClientFactory<NoDocsTypeSpecClient, NoDocsTypeSpecClientOptions>((options, cred) => new NoDocsTypeSpecClient(endpoint, cred, options));
         }
 
+        [RequiresUnreferencedCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
+        [RequiresDynamicCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
         public static IAzureClientBuilder<NoDocsTypeSpecClient, NoDocsTypeSpecClientOptions> AddNoDocsTypeSpecClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
