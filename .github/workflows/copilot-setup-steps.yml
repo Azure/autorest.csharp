@@ -27,9 +27,6 @@ jobs:
         with:
           dotnet-version: '9.0.x'
           
-      - name: Install NPM 10.x
-        run: npm install -g npm@10.x
-          
       - name: Verify installations
         run: |
           echo "Node.js version:"
