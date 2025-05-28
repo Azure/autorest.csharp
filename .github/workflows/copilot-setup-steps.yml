@@ -29,11 +29,6 @@ jobs:
           
       - name: Install NPM 10.x
         run: npm install -g npm@10.x
-        
-      - name: Setup PowerShell
-        uses: PowerShell/PowerShell-action@v1
-        with:
-          pwsh-version: '7.x'
           
       - name: Verify installations
         run: |
@@ -43,5 +38,3 @@ jobs:
           npm -v
           echo ".NET SDK version:"
           dotnet --version
-          echo "PowerShell version:"
-          pwsh -Version
