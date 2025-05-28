@@ -5,6 +5,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
@@ -63,6 +64,19 @@ namespace AutoRest.CSharp.Output.Models.Types
                     new InvokeInstanceMethodExpression(
                         LiteralU8("\"__EMPTY__\""), "ToArray", [], null, false))
             };
+
+            _jsonSerializerOptionsField = new FieldDeclaration(
+                modifiers: FieldModifiers.Private | FieldModifiers.Static | FieldModifiers.ReadOnly,
+                type: typeof(JsonSerializerOptions),
+                name: _jsonSerializerOptionsName)
+            {
+                InitializationValue = New.Instance(
+                    typeof(JsonSerializerOptions),
+                    new Dictionary<string, ValueExpression>
+                    {
+                        { "Converters", new ArrayInitializerExpression([New.Instance(typeof(JsonModelConverter), [new MemberExpression(null, _wireOptionsName), ModelReaderWriterContextExpression.Default])]) }
+                    })
+            };
         }
 
         private const string _wireOptionsName = "WireOptions";
@@ -71,6 +85,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly FieldDeclaration _jsonDocumentOptionsField;
         private const string _sentinelBinaryDataName = "SentinelValue";
         private readonly FieldDeclaration? _sentinelBinaryDataField;
+        private readonly FieldDeclaration _jsonSerializerOptionsField;
+        private const string _jsonSerializerOptionsName = "s_options";
 
         private ModelReaderWriterOptionsExpression? _wireOptions;
         public ModelReaderWriterOptionsExpression WireOptions => _wireOptions ??= new ModelReaderWriterOptionsExpression(new MemberExpression(Type, _wireOptionsName));
@@ -82,6 +98,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<FieldDeclaration> BuildFields()
         {
+            yield return _jsonSerializerOptionsField;
             yield return _jsonDocumentOptionsField;
             yield return _wireOptionsField;
 
@@ -138,6 +155,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return new(signature, body);
             }
             #endregion
+
+            yield return BuildJsonDeserializeMethod();
         }
 
         private const string _isSentinelValueMethodName = "IsSentinelValue";
@@ -682,6 +701,39 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new InvokeStaticMethodStatement(Type, _writeObjectValueMethodName, parameters, CallAsExtension: true, TypeArguments: new[] { value.Type });
         }
         #endregion
+
+        private Method BuildJsonDeserializeMethod()
+        {
+            var propertyParameter = new Parameter("property", null, typeof(JsonProperty), null, ValidationType.None, null);
+            var optionsParameter = new Parameter("options", null, typeof(ModelReaderWriterOptions), null, ValidationType.None, null);
+            var justificationExpression = new KeywordExpression("Justification =", Literal("By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.");
+            var signature = new MethodSignature(
+                "JsonDeserialize",
+                null,
+                null,
+                MethodSignatureModifiers.Static | MethodSignatureModifiers.Public,
+                _t,
+                null,
+                [propertyParameter, optionsParameter],
+                Attributes:
+                [
+                    new CSharpAttribute(typeof(UnconditionalSuppressMessageAttribute), Literal("Trimming"), Literal("IL2026"), justificationExpression),
+                    new CSharpAttribute(typeof(UnconditionalSuppressMessageAttribute), Literal("Trimming"), Literal("IL3050"), justificationExpression)
+                ],
+                GenericArguments: [_t]);
+            return new Method(signature, new MethodBodyStatement[]
+            {
+                Return(new InvokeStaticMethodExpression(
+                    typeof(JsonSerializer),
+                    $"{nameof(JsonSerializer.Deserialize)}",
+                    [
+                        new MemberExpression(propertyParameter, nameof(JsonProperty.Value)).Invoke(nameof(JsonElement.GetRawText)),
+                        new MemberExpression(null, _jsonSerializerOptionsName)
+                    ],
+                    TypeArguments: [_t]
+                    ))
+            });
+        }
 
         public BoolExpression IsSentinelValue(ValueExpression value)
         {
