@@ -67,8 +67,7 @@
      "readOnly": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson.contentType",
-     "discriminator": false,
-     "flatten": false
+     "correspondingMethodParams": []
     },
     {
      "$id": "8",
