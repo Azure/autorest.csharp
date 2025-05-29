@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Azure;
 using Azure.Core.Extensions;
 using body_complex_LowLevel;
@@ -108,6 +109,8 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="BasicClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="configuration"> The configuration values. </param>
+        [RequiresUnreferencedCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
+        [RequiresDynamicCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
         public static IAzureClientBuilder<BasicClient, AutoRestComplexTestServiceClientOptions> AddBasicClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
@@ -116,6 +119,8 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="PrimitiveClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="configuration"> The configuration values. </param>
+        [RequiresUnreferencedCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
+        [RequiresDynamicCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
         public static IAzureClientBuilder<PrimitiveClient, AutoRestComplexTestServiceClientOptions> AddPrimitiveClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
@@ -124,6 +129,8 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="ArrayClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="configuration"> The configuration values. </param>
+        [RequiresUnreferencedCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
+        [RequiresDynamicCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
         public static IAzureClientBuilder<ArrayClient, AutoRestComplexTestServiceClientOptions> AddArrayClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
@@ -132,6 +139,8 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="DictionaryClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="configuration"> The configuration values. </param>
+        [RequiresUnreferencedCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
+        [RequiresDynamicCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
         public static IAzureClientBuilder<DictionaryClient, AutoRestComplexTestServiceClientOptions> AddDictionaryClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
@@ -140,6 +149,8 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="InheritanceClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="configuration"> The configuration values. </param>
+        [RequiresUnreferencedCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
+        [RequiresDynamicCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
         public static IAzureClientBuilder<InheritanceClient, AutoRestComplexTestServiceClientOptions> AddInheritanceClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
@@ -148,6 +159,8 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="PolymorphismClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="configuration"> The configuration values. </param>
+        [RequiresUnreferencedCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
+        [RequiresDynamicCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
         public static IAzureClientBuilder<PolymorphismClient, AutoRestComplexTestServiceClientOptions> AddPolymorphismClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
@@ -156,6 +169,8 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="PolymorphicrecursiveClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="configuration"> The configuration values. </param>
+        [RequiresUnreferencedCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
+        [RequiresDynamicCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
         public static IAzureClientBuilder<PolymorphicrecursiveClient, AutoRestComplexTestServiceClientOptions> AddPolymorphicrecursiveClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
@@ -164,6 +179,8 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="ReadonlypropertyClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="configuration"> The configuration values. </param>
+        [RequiresUnreferencedCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
+        [RequiresDynamicCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
         public static IAzureClientBuilder<ReadonlypropertyClient, AutoRestComplexTestServiceClientOptions> AddReadonlypropertyClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
@@ -172,6 +189,8 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="FlattencomplexClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="configuration"> The configuration values. </param>
+        [RequiresUnreferencedCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
+        [RequiresDynamicCode("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")]
         public static IAzureClientBuilder<FlattencomplexClient, AutoRestComplexTestServiceClientOptions> AddFlattencomplexClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
