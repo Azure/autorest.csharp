@@ -113,7 +113,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            policy = RollingUpgradePolicy.DeserializeRollingUpgradePolicy(property0.Value);
+                            policy = ModelSerializationExtensions.JsonDeserialize<RollingUpgradePolicy>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("runningStatus"u8))
@@ -122,7 +122,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            runningStatus = RollingUpgradeRunningStatus.DeserializeRollingUpgradeRunningStatus(property0.Value);
+                            runningStatus = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeRunningStatus>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("progress"u8))
@@ -131,7 +131,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            progress = RollingUpgradeProgressInfo.DeserializeRollingUpgradeProgressInfo(property0.Value);
+                            progress = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeProgressInfo>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("error"u8))
@@ -140,7 +140,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            error = ApiError.DeserializeApiError(property0.Value);
+                            error = ModelSerializationExtensions.JsonDeserialize<ApiError>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                     }

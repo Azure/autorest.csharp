@@ -10,8 +10,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
     internal static class JsonSerializerExpression
     {
-        public static InvokeInstanceMethodExpression SerializeIJsonModel(CSharpType type, ValueExpression writer, ValueExpression value, ValueExpression? options = null)
-            => value.CastTo(new CSharpType(typeof(IJsonModel<>), type)).Invoke("Write", options is null ? [writer] :[writer, options]);
+        public static InvokeInstanceMethodExpression SerializeIJsonModel(CSharpType type, ValueExpression writer, ValueExpression value, ValueExpression options)
+            => value.CastTo(new CSharpType(typeof(IJsonModel<>), type)).Invoke("Write", [writer, options]);
 
         public static InvokeStaticMethodExpression Serialize(ValueExpression writer, ValueExpression value, ValueExpression? options = null)
         {

@@ -104,7 +104,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    encryptionSettings = DiskEncryptionSettings.DeserializeDiskEncryptionSettings(property.Value);
+                    encryptionSettings = ModelSerializationExtensions.JsonDeserialize<DiskEncryptionSettings>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("name"u8))
@@ -118,7 +118,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    vhd = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value);
+                    vhd = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("image"u8))
@@ -127,7 +127,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    image = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value);
+                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("caching"u8))
@@ -154,7 +154,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    diffDiskSettings = DiffDiskSettings.DeserializeDiffDiskSettings(property.Value);
+                    diffDiskSettings = ModelSerializationExtensions.JsonDeserialize<DiffDiskSettings>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("createOption"u8))
@@ -177,7 +177,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    managedDisk = ManagedDiskParameters.DeserializeManagedDiskParameters(property.Value);
+                    managedDisk = ModelSerializationExtensions.JsonDeserialize<ManagedDiskParameters>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

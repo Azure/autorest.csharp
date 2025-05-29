@@ -53,7 +53,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    properties = GuestConfigurationAssignmentProperties.DeserializeGuestConfigurationAssignmentProperties(property.Value);
+                    properties = ModelSerializationExtensions.JsonDeserialize<GuestConfigurationAssignmentProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

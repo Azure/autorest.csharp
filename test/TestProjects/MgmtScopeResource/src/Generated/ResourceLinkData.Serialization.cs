@@ -44,7 +44,7 @@ namespace MgmtScopeResource
                     {
                         continue;
                     }
-                    properties = ResourceLinkProperties.DeserializeResourceLinkProperties(property.Value);
+                    properties = ModelSerializationExtensions.JsonDeserialize<ResourceLinkProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

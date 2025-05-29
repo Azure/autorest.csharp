@@ -36,7 +36,7 @@ namespace _Type.Union.Models
             }
 
             writer.WritePropertyName("prop"u8);
-            writer.WriteObjectValue(Prop, options);
+            ((IJsonModel<StringAndArrayCases>)Prop).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -81,7 +81,7 @@ namespace _Type.Union.Models
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = StringAndArrayCases.DeserializeStringAndArrayCases(property.Value, options);
+                    prop = ModelSerializationExtensions.JsonDeserialize<StringAndArrayCases>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

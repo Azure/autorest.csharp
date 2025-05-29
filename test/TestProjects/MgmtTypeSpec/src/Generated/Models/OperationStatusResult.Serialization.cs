@@ -71,7 +71,7 @@ namespace MgmtTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in Operations)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<OperationStatusResult>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

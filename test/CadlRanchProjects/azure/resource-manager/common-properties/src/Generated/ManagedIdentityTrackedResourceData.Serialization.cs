@@ -40,7 +40,7 @@ namespace _Azure.ResourceManager.CommonProperties
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties, options);
+                ((IJsonModel<ManagedIdentityTrackedResourceProperties>)Properties).Write(writer, options);
             }
             if (Optional.IsDefined(Identity))
             {
@@ -88,7 +88,7 @@ namespace _Azure.ResourceManager.CommonProperties
                     {
                         continue;
                     }
-                    properties = ManagedIdentityTrackedResourceProperties.DeserializeManagedIdentityTrackedResourceProperties(property.Value, options);
+                    properties = ModelSerializationExtensions.JsonDeserialize<ManagedIdentityTrackedResourceProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))

@@ -47,7 +47,7 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("tag"u8))
                 {
-                    tag = TagScoringParameters.DeserializeTagScoringParameters(property.Value);
+                    tag = ModelSerializationExtensions.JsonDeserialize<TagScoringParameters>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("type"u8))

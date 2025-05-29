@@ -39,7 +39,7 @@ namespace Payload.MultiPart.Models
             writer.WritePropertyName("id"u8);
             writer.WriteStringValue(Id);
             writer.WritePropertyName("address"u8);
-            writer.WriteObjectValue(Address, options);
+            ((IJsonModel<Address>)Address).Write(writer, options);
             writer.WritePropertyName("profileImage"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(global::System.BinaryData.FromStream(ProfileImage));
@@ -120,7 +120,7 @@ namespace Payload.MultiPart.Models
                 }
                 if (property.NameEquals("address"u8))
                 {
-                    address = Address.DeserializeAddress(property.Value, options);
+                    address = ModelSerializationExtensions.JsonDeserialize<Address>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("profileImage"u8))

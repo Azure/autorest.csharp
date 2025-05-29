@@ -91,7 +91,7 @@ namespace AzureSample.ResourceManager.Sample
             if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                writer.WriteObjectValue(InstanceView, options);
+                ((IJsonModel<DedicatedHostGroupInstanceView>)InstanceView).Write(writer, options);
             }
             if (Optional.IsDefined(SupportAutomaticPlacement))
             {
@@ -263,7 +263,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            instanceView = DedicatedHostGroupInstanceView.DeserializeDedicatedHostGroupInstanceView(property0.Value, options);
+                            instanceView = ModelSerializationExtensions.JsonDeserialize<DedicatedHostGroupInstanceView>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("supportAutomaticPlacement"u8))

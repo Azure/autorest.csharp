@@ -38,7 +38,7 @@ namespace custom_baseUrl_paging.Models
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties, options);
+                ((IJsonModel<ProductProperties>)Properties).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -88,7 +88,7 @@ namespace custom_baseUrl_paging.Models
                     {
                         continue;
                     }
-                    properties = ProductProperties.DeserializeProductProperties(property.Value, options);
+                    properties = ModelSerializationExtensions.JsonDeserialize<ProductProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

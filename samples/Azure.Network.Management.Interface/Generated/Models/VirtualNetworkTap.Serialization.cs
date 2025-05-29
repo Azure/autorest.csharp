@@ -160,7 +160,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            destinationNetworkInterfaceIPConfiguration = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(property0.Value);
+                            destinationNetworkInterfaceIPConfiguration = ModelSerializationExtensions.JsonDeserialize<NetworkInterfaceIPConfiguration>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("destinationLoadBalancerFrontEndIPConfiguration"u8))
@@ -169,7 +169,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            destinationLoadBalancerFrontEndIPConfiguration = FrontendIPConfiguration.DeserializeFrontendIPConfiguration(property0.Value);
+                            destinationLoadBalancerFrontEndIPConfiguration = ModelSerializationExtensions.JsonDeserialize<FrontendIPConfiguration>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("destinationPort"u8))

@@ -56,7 +56,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(PublicIPAddressConfiguration))
             {
                 writer.WritePropertyName("publicIPAddressConfiguration"u8);
-                writer.WriteObjectValue(PublicIPAddressConfiguration, options);
+                ((IJsonModel<VirtualMachineScaleSetPublicIPAddressConfiguration>)PublicIPAddressConfiguration).Write(writer, options);
             }
             if (Optional.IsDefined(PrivateIPAddressVersion))
             {
@@ -183,7 +183,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            publicIPAddressConfiguration = VirtualMachineScaleSetPublicIPAddressConfiguration.DeserializeVirtualMachineScaleSetPublicIPAddressConfiguration(property0.Value, options);
+                            publicIPAddressConfiguration = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetPublicIPAddressConfiguration>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("privateIPAddressVersion"u8))

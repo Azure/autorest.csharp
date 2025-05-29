@@ -43,7 +43,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Errors)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<ErrorResponse>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -53,12 +53,12 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in VariableStates)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<VariableState>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
             writer.WritePropertyName("setupInfo"u8);
-            writer.WriteObjectValue(SetupInfo, options);
+            ((IJsonModel<MultivariateBatchDetectionOptions>)SetupInfo).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -139,7 +139,7 @@ namespace AnomalyDetector.Models
                 }
                 if (property.NameEquals("setupInfo"u8))
                 {
-                    setupInfo = MultivariateBatchDetectionOptions.DeserializeMultivariateBatchDetectionOptions(property.Value, options);
+                    setupInfo = ModelSerializationExtensions.JsonDeserialize<MultivariateBatchDetectionOptions>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

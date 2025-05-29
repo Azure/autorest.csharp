@@ -44,12 +44,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(RollingUpgradePolicy))
             {
                 writer.WritePropertyName("rollingUpgradePolicy"u8);
-                writer.WriteObjectValue(RollingUpgradePolicy, options);
+                ((IJsonModel<RollingUpgradePolicy>)RollingUpgradePolicy).Write(writer, options);
             }
             if (Optional.IsDefined(AutomaticOSUpgradePolicy))
             {
                 writer.WritePropertyName("automaticOSUpgradePolicy"u8);
-                writer.WriteObjectValue(AutomaticOSUpgradePolicy, options);
+                ((IJsonModel<AutomaticOSUpgradePolicy>)AutomaticOSUpgradePolicy).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -110,7 +110,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    rollingUpgradePolicy = RollingUpgradePolicy.DeserializeRollingUpgradePolicy(property.Value, options);
+                    rollingUpgradePolicy = ModelSerializationExtensions.JsonDeserialize<RollingUpgradePolicy>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("automaticOSUpgradePolicy"u8))
@@ -119,7 +119,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    automaticOSUpgradePolicy = AutomaticOSUpgradePolicy.DeserializeAutomaticOSUpgradePolicy(property.Value, options);
+                    automaticOSUpgradePolicy = ModelSerializationExtensions.JsonDeserialize<AutomaticOSUpgradePolicy>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

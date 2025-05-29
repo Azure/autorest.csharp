@@ -56,7 +56,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    tierToCool = DateAfterModification.DeserializeDateAfterModification(property.Value);
+                    tierToCool = ModelSerializationExtensions.JsonDeserialize<DateAfterModification>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("tierToArchive"u8))
@@ -65,7 +65,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    tierToArchive = DateAfterModification.DeserializeDateAfterModification(property.Value);
+                    tierToArchive = ModelSerializationExtensions.JsonDeserialize<DateAfterModification>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("delete"u8))
@@ -74,7 +74,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    delete = DateAfterModification.DeserializeDateAfterModification(property.Value);
+                    delete = ModelSerializationExtensions.JsonDeserialize<DateAfterModification>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("enableAutoTierToHotFromCool"u8))

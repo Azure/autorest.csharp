@@ -38,7 +38,7 @@ namespace body_complex.Models
             if (Optional.IsDefined(SampleSalmon))
             {
                 writer.WritePropertyName("sampleSalmon"u8);
-                writer.WriteObjectValue(SampleSalmon, options);
+                ((IJsonModel<DotSalmon>)SampleSalmon).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Salmons))
             {
@@ -46,14 +46,14 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Salmons)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<DotSalmon>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(SampleFish))
             {
                 writer.WritePropertyName("sampleFish"u8);
-                writer.WriteObjectValue(SampleFish, options);
+                ((IJsonModel<DotFish>)SampleFish).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Fishes))
             {
@@ -61,7 +61,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Fishes)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<DotFish>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -116,7 +116,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    sampleSalmon = DotSalmon.DeserializeDotSalmon(property.Value, options);
+                    sampleSalmon = ModelSerializationExtensions.JsonDeserialize<DotSalmon>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("salmons"u8))
@@ -139,7 +139,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    sampleFish = DotFish.DeserializeDotFish(property.Value, options);
+                    sampleFish = ModelSerializationExtensions.JsonDeserialize<DotFish>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("fishes"u8))

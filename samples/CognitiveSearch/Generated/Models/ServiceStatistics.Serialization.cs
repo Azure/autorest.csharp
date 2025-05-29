@@ -24,12 +24,12 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("counters"u8))
                 {
-                    counters = ServiceCounters.DeserializeServiceCounters(property.Value);
+                    counters = ModelSerializationExtensions.JsonDeserialize<ServiceCounters>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("limits"u8))
                 {
-                    limits = ServiceLimits.DeserializeServiceLimits(property.Value);
+                    limits = ModelSerializationExtensions.JsonDeserialize<ServiceLimits>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

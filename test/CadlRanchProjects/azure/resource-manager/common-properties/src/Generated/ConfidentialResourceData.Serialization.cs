@@ -40,7 +40,7 @@ namespace _Azure.ResourceManager.CommonProperties
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties, options);
+                ((IJsonModel<ConfidentialResourceProperties>)Properties).Write(writer, options);
             }
         }
 
@@ -81,7 +81,7 @@ namespace _Azure.ResourceManager.CommonProperties
                     {
                         continue;
                     }
-                    properties = ConfidentialResourceProperties.DeserializeConfidentialResourceProperties(property.Value, options);
+                    properties = ModelSerializationExtensions.JsonDeserialize<ConfidentialResourceProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

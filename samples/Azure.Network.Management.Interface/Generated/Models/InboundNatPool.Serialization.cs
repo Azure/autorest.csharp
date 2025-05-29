@@ -127,7 +127,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            frontendIPConfiguration = DeserializeSubResource(property0.Value);
+                            frontendIPConfiguration = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("protocol"u8))

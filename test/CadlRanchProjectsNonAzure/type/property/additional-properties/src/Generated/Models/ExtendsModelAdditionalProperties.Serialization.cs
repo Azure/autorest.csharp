@@ -30,7 +30,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
             }
 
             writer.WritePropertyName("knownProp"u8);
-            writer.WriteObjectValue(KnownProp, options);
+            ((IJsonModel<ModelForRecord>)KnownProp).Write(writer, options);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
@@ -72,7 +72,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
             {
                 if (property.NameEquals("knownProp"u8))
                 {
-                    knownProp = ModelForRecord.DeserializeModelForRecord(property.Value, options);
+                    knownProp = ModelSerializationExtensions.JsonDeserialize<ModelForRecord>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));

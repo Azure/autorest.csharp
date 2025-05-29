@@ -233,7 +233,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    networkAcls = MhsmNetworkRuleSet.DeserializeMhsmNetworkRuleSet(property.Value);
+                    networkAcls = ModelSerializationExtensions.JsonDeserialize<MhsmNetworkRuleSet>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("privateEndpointConnections"u8))

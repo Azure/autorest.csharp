@@ -39,7 +39,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(BootDiagnostics))
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
-                writer.WriteObjectValue(BootDiagnostics, options);
+                ((IJsonModel<BootDiagnostics>)BootDiagnostics).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -89,7 +89,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    bootDiagnostics = BootDiagnostics.DeserializeBootDiagnostics(property.Value, options);
+                    bootDiagnostics = ModelSerializationExtensions.JsonDeserialize<BootDiagnostics>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

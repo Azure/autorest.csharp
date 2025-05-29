@@ -50,7 +50,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    baseBlob = ManagementPolicyBaseBlob.DeserializeManagementPolicyBaseBlob(property.Value);
+                    baseBlob = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyBaseBlob>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("snapshot"u8))
@@ -59,7 +59,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    snapshot = ManagementPolicySnapShot.DeserializeManagementPolicySnapShot(property.Value);
+                    snapshot = ModelSerializationExtensions.JsonDeserialize<ManagementPolicySnapShot>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("version"u8))
@@ -68,7 +68,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    version = ManagementPolicyVersion.DeserializeManagementPolicyVersion(property.Value);
+                    version = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyVersion>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

@@ -33,7 +33,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    properties = DeletedVaultProperties.DeserializeDeletedVaultProperties(property.Value);
+                    properties = ModelSerializationExtensions.JsonDeserialize<DeletedVaultProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

@@ -39,7 +39,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(Name1))
             {
                 writer.WritePropertyName("name1"u8);
-                writer.WriteObjectValue(Name1, options);
+                ((IJsonModel<Sku2>)Name1).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -89,7 +89,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    name1 = Sku2.DeserializeSku2(property.Value, options);
+                    name1 = ModelSerializationExtensions.JsonDeserialize<Sku2>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

@@ -58,7 +58,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    mappingFunction = FieldMappingFunction.DeserializeFieldMappingFunction(property.Value);
+                    mappingFunction = ModelSerializationExtensions.JsonDeserialize<FieldMappingFunction>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

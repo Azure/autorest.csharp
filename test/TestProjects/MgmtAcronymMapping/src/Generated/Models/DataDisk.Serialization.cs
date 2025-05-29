@@ -98,7 +98,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    vhd = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value);
+                    vhd = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("image"u8))
@@ -107,7 +107,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    image = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value);
+                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("caching"u8))
@@ -148,7 +148,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    managedDisk = ManagedDiskParameters.DeserializeManagedDiskParameters(property.Value);
+                    managedDisk = ModelSerializationExtensions.JsonDeserialize<ManagedDiskParameters>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("toBeDetached"u8))

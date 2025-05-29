@@ -36,7 +36,7 @@ namespace _Type.Union.Models
             }
 
             writer.WritePropertyName("prop"u8);
-            writer.WriteObjectValue(Prop, options);
+            ((IJsonModel<EnumsOnlyCases>)Prop).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -81,7 +81,7 @@ namespace _Type.Union.Models
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = EnumsOnlyCases.DeserializeEnumsOnlyCases(property.Value, options);
+                    prop = ModelSerializationExtensions.JsonDeserialize<EnumsOnlyCases>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

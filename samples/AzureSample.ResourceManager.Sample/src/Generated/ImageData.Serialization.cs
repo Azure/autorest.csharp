@@ -51,7 +51,7 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                writer.WriteObjectValue(StorageProfile, options);
+                ((IJsonModel<ImageStorageProfile>)StorageProfile).Write(writer, options);
             }
             if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
@@ -167,7 +167,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            storageProfile = ImageStorageProfile.DeserializeImageStorageProfile(property0.Value, options);
+                            storageProfile = ModelSerializationExtensions.JsonDeserialize<ImageStorageProfile>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

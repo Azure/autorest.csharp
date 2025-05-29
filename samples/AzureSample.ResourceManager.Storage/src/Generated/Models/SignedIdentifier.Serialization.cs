@@ -49,7 +49,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    accessPolicy = AccessPolicy.DeserializeAccessPolicy(property.Value);
+                    accessPolicy = ModelSerializationExtensions.JsonDeserialize<AccessPolicy>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

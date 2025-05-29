@@ -62,7 +62,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                 }
                 if (property.NameEquals("definition"u8))
                 {
-                    definition = ManagementPolicyDefinition.DeserializeManagementPolicyDefinition(property.Value);
+                    definition = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyDefinition>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

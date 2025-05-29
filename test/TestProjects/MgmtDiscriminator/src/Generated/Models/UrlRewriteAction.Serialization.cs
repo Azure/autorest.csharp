@@ -38,7 +38,7 @@ namespace MgmtDiscriminator.Models
 
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("parameters"u8);
-            writer.WriteObjectValue(Parameters, options);
+            ((IJsonModel<UrlRewriteActionParameters>)Parameters).Write(writer, options);
         }
 
         UrlRewriteAction IJsonModel<UrlRewriteAction>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
@@ -70,7 +70,7 @@ namespace MgmtDiscriminator.Models
             {
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = UrlRewriteActionParameters.DeserializeUrlRewriteActionParameters(property.Value, options);
+                    parameters = ModelSerializationExtensions.JsonDeserialize<UrlRewriteActionParameters>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

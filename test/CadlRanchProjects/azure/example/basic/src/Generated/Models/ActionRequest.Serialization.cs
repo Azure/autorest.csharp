@@ -40,7 +40,7 @@ namespace _Specs_.Azure.Example.Basic.Models
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("modelProperty"u8);
-                writer.WriteObjectValue(ModelProperty, options);
+                ((IJsonModel<Model>)ModelProperty).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(ArrayProperty))
             {
@@ -119,7 +119,7 @@ namespace _Specs_.Azure.Example.Basic.Models
                     {
                         continue;
                     }
-                    modelProperty = Model.DeserializeModel(property.Value, options);
+                    modelProperty = ModelSerializationExtensions.JsonDeserialize<Model>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("arrayProperty"u8))

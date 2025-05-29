@@ -37,7 +37,7 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("confidenceScores"u8))
                 {
-                    confidenceScores = SentimentConfidenceScorePerLabel.DeserializeSentimentConfidenceScorePerLabel(property.Value);
+                    confidenceScores = ModelSerializationExtensions.JsonDeserialize<SentimentConfidenceScorePerLabel>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("offset"u8))

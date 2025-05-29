@@ -65,7 +65,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    action = FirewallPolicyNatRuleCollectionAction.DeserializeFirewallPolicyNatRuleCollectionAction(property.Value);
+                    action = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyNatRuleCollectionAction>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("rules"u8))

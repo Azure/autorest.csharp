@@ -160,7 +160,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            activeKey = KeyForDiskEncryptionSet.DeserializeKeyForDiskEncryptionSet(property0.Value);
+                            activeKey = ModelSerializationExtensions.JsonDeserialize<KeyForDiskEncryptionSet>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("previousKeys"u8))

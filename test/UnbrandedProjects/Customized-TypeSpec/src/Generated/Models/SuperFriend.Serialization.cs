@@ -34,7 +34,7 @@ namespace CustomizedTypeSpec.Models
             if (Optional.IsDefined(Format))
             {
                 writer.WritePropertyName("format"u8);
-                writer.WriteObjectValue(Format, options);
+                ((IJsonModel<ModelWithFormat>)Format).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -90,7 +90,7 @@ namespace CustomizedTypeSpec.Models
                     {
                         continue;
                     }
-                    format = ModelWithFormat.DeserializeModelWithFormat(property.Value, options);
+                    format = ModelSerializationExtensions.JsonDeserialize<ModelWithFormat>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

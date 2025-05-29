@@ -39,12 +39,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(DiskEncryptionKey))
             {
                 writer.WritePropertyName("diskEncryptionKey"u8);
-                writer.WriteObjectValue(DiskEncryptionKey, options);
+                ((IJsonModel<KeyVaultSecretReference>)DiskEncryptionKey).Write(writer, options);
             }
             if (Optional.IsDefined(KeyEncryptionKey))
             {
                 writer.WritePropertyName("keyEncryptionKey"u8);
-                writer.WriteObjectValue(KeyEncryptionKey, options);
+                ((IJsonModel<KeyVaultKeyReference>)KeyEncryptionKey).Write(writer, options);
             }
             if (Optional.IsDefined(Enabled))
             {
@@ -101,7 +101,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    diskEncryptionKey = KeyVaultSecretReference.DeserializeKeyVaultSecretReference(property.Value, options);
+                    diskEncryptionKey = ModelSerializationExtensions.JsonDeserialize<KeyVaultSecretReference>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("keyEncryptionKey"u8))
@@ -110,7 +110,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    keyEncryptionKey = KeyVaultKeyReference.DeserializeKeyVaultKeyReference(property.Value, options);
+                    keyEncryptionKey = ModelSerializationExtensions.JsonDeserialize<KeyVaultKeyReference>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("enabled"u8))

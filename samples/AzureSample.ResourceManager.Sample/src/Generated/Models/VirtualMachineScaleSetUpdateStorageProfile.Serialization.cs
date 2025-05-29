@@ -37,12 +37,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(ImageReference))
             {
                 writer.WritePropertyName("imageReference"u8);
-                writer.WriteObjectValue(ImageReference, options);
+                ((IJsonModel<ImageReference>)ImageReference).Write(writer, options);
             }
             if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                writer.WriteObjectValue(OSDisk, options);
+                ((IJsonModel<VirtualMachineScaleSetUpdateOSDisk>)OSDisk).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -50,7 +50,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<VirtualMachineScaleSetDataDisk>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -104,7 +104,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    imageReference = ImageReference.DeserializeImageReference(property.Value, options);
+                    imageReference = ModelSerializationExtensions.JsonDeserialize<ImageReference>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("osDisk"u8))
@@ -113,7 +113,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    osDisk = VirtualMachineScaleSetUpdateOSDisk.DeserializeVirtualMachineScaleSetUpdateOSDisk(property.Value, options);
+                    osDisk = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetUpdateOSDisk>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("dataDisks"u8))

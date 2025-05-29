@@ -46,12 +46,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
-                writer.WriteObjectValue(Vhd, options);
+                ((IJsonModel<VirtualHardDisk>)Vhd).Write(writer, options);
             }
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue(Image, options);
+                ((IJsonModel<VirtualHardDisk>)Image).Write(writer, options);
             }
             if (Optional.IsDefined(Caching))
             {
@@ -73,7 +73,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue(ManagedDisk, options);
+                ((IJsonModel<ManagedDiskParameters>)ManagedDisk).Write(writer, options);
             }
             if (Optional.IsDefined(ToBeDetached))
             {
@@ -159,7 +159,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    vhd = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value, options);
+                    vhd = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("image"u8))
@@ -168,7 +168,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    image = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value, options);
+                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("caching"u8))
@@ -209,7 +209,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    managedDisk = ManagedDiskParameters.DeserializeManagedDiskParameters(property.Value, options);
+                    managedDisk = ModelSerializationExtensions.JsonDeserialize<ManagedDiskParameters>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("toBeDetached"u8))

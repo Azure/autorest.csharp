@@ -56,9 +56,9 @@ namespace validation.Models
                 writer.WriteStringValue(Image);
             }
             writer.WritePropertyName("child"u8);
-            writer.WriteObjectValue(Child, options);
+            ((IJsonModel<ChildProduct>)Child).Write(writer, options);
             writer.WritePropertyName("constChild"u8);
-            writer.WriteObjectValue(ConstChild, options);
+            ((IJsonModel<ConstantProduct>)ConstChild).Write(writer, options);
             writer.WritePropertyName("constInt"u8);
             writer.WriteNumberValue(ConstInt.ToSerialInt32());
             writer.WritePropertyName("constString"u8);
@@ -147,12 +147,12 @@ namespace validation.Models
                 }
                 if (property.NameEquals("child"u8))
                 {
-                    child = ChildProduct.DeserializeChildProduct(property.Value, options);
+                    child = ModelSerializationExtensions.JsonDeserialize<ChildProduct>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("constChild"u8))
                 {
-                    constChild = ConstantProduct.DeserializeConstantProduct(property.Value, options);
+                    constChild = ModelSerializationExtensions.JsonDeserialize<ConstantProduct>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("constInt"u8))

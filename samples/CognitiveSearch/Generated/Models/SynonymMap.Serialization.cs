@@ -69,7 +69,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
+                    encryptionKey = ModelSerializationExtensions.JsonDeserialize<EncryptionKey>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"u8))

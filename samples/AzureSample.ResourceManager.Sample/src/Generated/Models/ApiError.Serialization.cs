@@ -43,14 +43,14 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Details)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<ApiErrorBase>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(Innererror))
             {
                 writer.WritePropertyName("innererror"u8);
-                writer.WriteObjectValue(Innererror, options);
+                ((IJsonModel<InnerError>)Innererror).Write(writer, options);
             }
             if (Optional.IsDefined(Code))
             {
@@ -133,7 +133,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    innererror = InnerError.DeserializeInnerError(property.Value, options);
+                    innererror = ModelSerializationExtensions.JsonDeserialize<InnerError>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("code"u8))

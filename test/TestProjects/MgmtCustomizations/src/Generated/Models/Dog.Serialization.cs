@@ -52,7 +52,7 @@ namespace MgmtCustomizations.Models
             if (Optional.IsDefined(Friend))
             {
                 writer.WritePropertyName("friend"u8);
-                writer.WriteObjectValue<Pet>(Friend, options);
+                ((IJsonModel<Pet>)Friend).Write(writer, options);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -168,7 +168,7 @@ namespace MgmtCustomizations.Models
                                     {
                                         continue;
                                     }
-                                    friend = DeserializePet(property1.Value, options);
+                                    friend = ModelSerializationExtensions.JsonDeserialize<Pet>(property1, ModelSerializationExtensions.JsonSerializerOptions);
                                     continue;
                                 }
                             }

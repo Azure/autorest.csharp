@@ -49,7 +49,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (options.Format != "W" && Optional.IsDefined(RollbackError))
             {
                 writer.WritePropertyName("rollbackError"u8);
-                writer.WriteObjectValue(RollbackError, options);
+                ((IJsonModel<ApiError>)RollbackError).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -119,7 +119,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    rollbackError = ApiError.DeserializeApiError(property.Value, options);
+                    rollbackError = ModelSerializationExtensions.JsonDeserialize<ApiError>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

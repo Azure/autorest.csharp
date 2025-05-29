@@ -53,12 +53,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             if (Optional.IsDefined(Pattern))
             {
                 writer.WritePropertyName("pattern"u8);
-                writer.WriteObjectValue(Pattern, options);
+                ((IJsonModel<ResourceTypeAliasPattern>)Pattern).Write(writer, options);
             }
             if (Optional.IsDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
-                writer.WriteObjectValue(Metadata, options);
+                ((IJsonModel<ResourceTypeAliasPathMetadata>)Metadata).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -130,7 +130,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    pattern = ResourceTypeAliasPattern.DeserializeResourceTypeAliasPattern(property.Value, options);
+                    pattern = ModelSerializationExtensions.JsonDeserialize<ResourceTypeAliasPattern>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("metadata"u8))
@@ -139,7 +139,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    metadata = ResourceTypeAliasPathMetadata.DeserializeResourceTypeAliasPathMetadata(property.Value, options);
+                    metadata = ModelSerializationExtensions.JsonDeserialize<ResourceTypeAliasPathMetadata>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

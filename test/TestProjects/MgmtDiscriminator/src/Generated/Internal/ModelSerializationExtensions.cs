@@ -269,8 +269,8 @@ namespace MgmtDiscriminator
             return sentinelSpan.SequenceEqual(valueSpan);
         }
 
-        [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
-        [UnconditionalSuppressMessage("Trimming", "IL3050", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
+        [SuppressMessage("Trimming", "IL2026", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
+        [SuppressMessage("Trimming", "IL3050", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
         public static T JsonDeserialize<T>(JsonProperty property, JsonSerializerOptions options)
         {
             return JsonSerializer.Deserialize<T>(property.Value.GetRawText(), JsonSerializerOptions);

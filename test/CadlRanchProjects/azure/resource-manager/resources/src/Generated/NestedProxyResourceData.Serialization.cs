@@ -40,7 +40,7 @@ namespace _Azure.ResourceManager.Resources
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties, options);
+                ((IJsonModel<NestedProxyResourceProperties>)Properties).Write(writer, options);
             }
         }
 
@@ -79,7 +79,7 @@ namespace _Azure.ResourceManager.Resources
                     {
                         continue;
                     }
-                    properties = NestedProxyResourceProperties.DeserializeNestedProxyResourceProperties(property.Value, options);
+                    properties = ModelSerializationExtensions.JsonDeserialize<NestedProxyResourceProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

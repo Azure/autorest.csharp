@@ -36,7 +36,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    lastResult = IndexerExecutionResult.DeserializeIndexerExecutionResult(property.Value);
+                    lastResult = ModelSerializationExtensions.JsonDeserialize<IndexerExecutionResult>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("executionHistory"u8))
@@ -51,7 +51,7 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("limits"u8))
                 {
-                    limits = IndexerLimits.DeserializeIndexerLimits(property.Value);
+                    limits = ModelSerializationExtensions.JsonDeserialize<IndexerLimits>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

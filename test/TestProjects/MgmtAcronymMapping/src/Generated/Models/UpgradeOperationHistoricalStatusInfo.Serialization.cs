@@ -29,7 +29,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    properties = UpgradeOperationHistoricalStatusInfoProperties.DeserializeUpgradeOperationHistoricalStatusInfoProperties(property.Value);
+                    properties = ModelSerializationExtensions.JsonDeserialize<UpgradeOperationHistoricalStatusInfoProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("type"u8))

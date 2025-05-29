@@ -46,7 +46,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in NetworkInterfaceConfigurations)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<VirtualMachineScaleSetUpdateNetworkConfiguration>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

@@ -96,7 +96,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    sku = AzureSampleResourceManagerStorageSku.DeserializeAzureSampleResourceManagerStorageSku(property.Value);
+                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerStorageSku>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -138,7 +138,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            cors = CorsRules.DeserializeCorsRules(property0.Value);
+                            cors = ModelSerializationExtensions.JsonDeserialize<CorsRules>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("defaultServiceVersion"u8))
@@ -152,7 +152,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            deleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
+                            deleteRetentionPolicy = ModelSerializationExtensions.JsonDeserialize<DeleteRetentionPolicy>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("isVersioningEnabled"u8))
@@ -179,7 +179,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            changeFeed = ChangeFeed.DeserializeChangeFeed(property0.Value);
+                            changeFeed = ModelSerializationExtensions.JsonDeserialize<ChangeFeed>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("restorePolicy"u8))
@@ -188,7 +188,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            restorePolicy = RestorePolicyProperties.DeserializeRestorePolicyProperties(property0.Value);
+                            restorePolicy = ModelSerializationExtensions.JsonDeserialize<RestorePolicyProperties>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("containerDeleteRetentionPolicy"u8))
@@ -197,7 +197,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            containerDeleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
+                            containerDeleteRetentionPolicy = ModelSerializationExtensions.JsonDeserialize<DeleteRetentionPolicy>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("lastAccessTimeTrackingPolicy"u8))
@@ -206,7 +206,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            lastAccessTimeTrackingPolicy = LastAccessTimeTrackingPolicy.DeserializeLastAccessTimeTrackingPolicy(property0.Value);
+                            lastAccessTimeTrackingPolicy = ModelSerializationExtensions.JsonDeserialize<LastAccessTimeTrackingPolicy>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                     }

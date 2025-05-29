@@ -39,21 +39,21 @@ namespace Payload.MultiPart.Models
             writer.WritePropertyName("id"u8);
             writer.WriteStringValue(Id);
             writer.WritePropertyName("address"u8);
-            writer.WriteObjectValue(Address, options);
+            ((IJsonModel<Address>)Address).Write(writer, options);
             writer.WritePropertyName("profileImage"u8);
-            writer.WriteObjectValue(ProfileImage, options);
+            ((IJsonModel<FileRequiredMetaData>)ProfileImage).Write(writer, options);
             writer.WritePropertyName("previousAddresses"u8);
             writer.WriteStartArray();
             foreach (var item in PreviousAddresses)
             {
-                writer.WriteObjectValue(item, options);
+                ((IJsonModel<Address>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("pictures"u8);
             writer.WriteStartArray();
             foreach (var item in Pictures)
             {
-                writer.WriteObjectValue(item, options);
+                ((IJsonModel<FileRequiredMetaData>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -109,12 +109,12 @@ namespace Payload.MultiPart.Models
                 }
                 if (property.NameEquals("address"u8))
                 {
-                    address = Address.DeserializeAddress(property.Value, options);
+                    address = ModelSerializationExtensions.JsonDeserialize<Address>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("profileImage"u8))
                 {
-                    profileImage = FileRequiredMetaData.DeserializeFileRequiredMetaData(property.Value, options);
+                    profileImage = ModelSerializationExtensions.JsonDeserialize<FileRequiredMetaData>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("previousAddresses"u8))

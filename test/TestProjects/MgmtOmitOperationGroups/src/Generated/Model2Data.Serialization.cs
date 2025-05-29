@@ -57,7 +57,7 @@ namespace MgmtOmitOperationGroups
                     {
                         continue;
                     }
-                    modelx = ModelX.DeserializeModelX(property.Value);
+                    modelx = ModelSerializationExtensions.JsonDeserialize<ModelX>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("f"u8))

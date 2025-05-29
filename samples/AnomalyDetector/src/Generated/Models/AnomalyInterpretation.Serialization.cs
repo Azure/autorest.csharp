@@ -48,7 +48,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(CorrelationChanges))
             {
                 writer.WritePropertyName("correlationChanges"u8);
-                writer.WriteObjectValue(CorrelationChanges, options);
+                ((IJsonModel<CorrelationChanges>)CorrelationChanges).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -114,7 +114,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    correlationChanges = CorrelationChanges.DeserializeCorrelationChanges(property.Value, options);
+                    correlationChanges = ModelSerializationExtensions.JsonDeserialize<CorrelationChanges>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

@@ -36,7 +36,7 @@ namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Friends)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<Bird>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -47,14 +47,14 @@ namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
                 foreach (var item in Hate)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value, options);
+                    ((IJsonModel<Bird>)item.Value).Write(writer, options);
                 }
                 writer.WriteEndObject();
             }
             if (Optional.IsDefined(Partner))
             {
                 writer.WritePropertyName("partner"u8);
-                writer.WriteObjectValue(Partner, options);
+                ((IJsonModel<Bird>)Partner).Write(writer, options);
             }
         }
 
@@ -121,7 +121,7 @@ namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
                     {
                         continue;
                     }
-                    partner = DeserializeBird(property.Value, options);
+                    partner = ModelSerializationExtensions.JsonDeserialize<Bird>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("kind"u8))

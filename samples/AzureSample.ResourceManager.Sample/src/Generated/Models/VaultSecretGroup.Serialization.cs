@@ -49,7 +49,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in VaultCertificates)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<VaultCertificate>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

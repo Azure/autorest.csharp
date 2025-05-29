@@ -59,7 +59,7 @@ namespace AzureSample.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in VirtualMachines)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<SubResourceWithColocationStatus>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -69,7 +69,7 @@ namespace AzureSample.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in VirtualMachineScaleSets)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<SubResourceWithColocationStatus>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -79,14 +79,14 @@ namespace AzureSample.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in AvailabilitySets)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<SubResourceWithColocationStatus>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(ColocationStatus))
             {
                 writer.WritePropertyName("colocationStatus"u8);
-                writer.WriteObjectValue(ColocationStatus, options);
+                ((IJsonModel<InstanceViewStatus>)ColocationStatus).Write(writer, options);
             }
             writer.WriteEndObject();
         }
@@ -245,7 +245,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            colocationStatus = InstanceViewStatus.DeserializeInstanceViewStatus(property0.Value, options);
+                            colocationStatus = ModelSerializationExtensions.JsonDeserialize<InstanceViewStatus>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                     }

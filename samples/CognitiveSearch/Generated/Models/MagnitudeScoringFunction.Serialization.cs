@@ -47,7 +47,7 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("magnitude"u8))
                 {
-                    magnitude = MagnitudeScoringParameters.DeserializeMagnitudeScoringParameters(property.Value);
+                    magnitude = ModelSerializationExtensions.JsonDeserialize<MagnitudeScoringParameters>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("type"u8))

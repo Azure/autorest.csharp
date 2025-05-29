@@ -38,7 +38,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    bootDiagnostics = BootDiagnostics.DeserializeBootDiagnostics(property.Value);
+                    bootDiagnostics = ModelSerializationExtensions.JsonDeserialize<BootDiagnostics>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

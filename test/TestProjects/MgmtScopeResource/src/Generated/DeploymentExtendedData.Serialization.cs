@@ -41,7 +41,7 @@ namespace MgmtScopeResource
                     {
                         continue;
                     }
-                    properties = DeploymentPropertiesExtended.DeserializeDeploymentPropertiesExtended(property.Value);
+                    properties = ModelSerializationExtensions.JsonDeserialize<DeploymentPropertiesExtended>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

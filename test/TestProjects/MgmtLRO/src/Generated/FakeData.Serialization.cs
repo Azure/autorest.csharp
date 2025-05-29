@@ -60,7 +60,7 @@ namespace MgmtLRO
                     {
                         continue;
                     }
-                    properties = FakeProperties.DeserializeFakeProperties(property.Value);
+                    properties = ModelSerializationExtensions.JsonDeserialize<FakeProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

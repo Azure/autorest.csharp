@@ -36,7 +36,7 @@ namespace FirstTestTypeSpec.Models
             }
 
             writer.WritePropertyName("self"u8);
-            writer.WriteObjectValue(Self, options);
+            ((IJsonModel<ContainSelf>)Self).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -81,7 +81,7 @@ namespace FirstTestTypeSpec.Models
             {
                 if (property.NameEquals("self"u8))
                 {
-                    self = DeserializeContainSelf(property.Value, options);
+                    self = ModelSerializationExtensions.JsonDeserialize<ContainSelf>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

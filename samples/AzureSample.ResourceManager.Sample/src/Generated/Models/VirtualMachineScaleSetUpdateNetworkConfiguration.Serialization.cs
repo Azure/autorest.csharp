@@ -64,7 +64,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings, options);
+                ((IJsonModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)DnsSettings).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(IPConfigurations))
             {
@@ -72,7 +72,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in IPConfigurations)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<VirtualMachineScaleSetUpdateIPConfiguration>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -168,7 +168,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            dnsSettings = VirtualMachineScaleSetNetworkConfigurationDnsSettings.DeserializeVirtualMachineScaleSetNetworkConfigurationDnsSettings(property0.Value, options);
+                            dnsSettings = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetNetworkConfigurationDnsSettings>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("ipConfigurations"u8))

@@ -24,7 +24,7 @@ namespace Azure.AI.FormRecognizer.Models
             {
                 if (property.NameEquals("modelInfo"u8))
                 {
-                    modelInfo = ModelInfo.DeserializeModelInfo(property.Value);
+                    modelInfo = ModelSerializationExtensions.JsonDeserialize<ModelInfo>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("keys"u8))
@@ -33,7 +33,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    keys = KeysResult.DeserializeKeysResult(property.Value);
+                    keys = ModelSerializationExtensions.JsonDeserialize<KeysResult>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("trainResult"u8))
@@ -42,7 +42,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    trainResult = TrainResult.DeserializeTrainResult(property.Value);
+                    trainResult = ModelSerializationExtensions.JsonDeserialize<TrainResult>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

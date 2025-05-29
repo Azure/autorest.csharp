@@ -60,12 +60,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(WindowsConfiguration))
             {
                 writer.WritePropertyName("windowsConfiguration"u8);
-                writer.WriteObjectValue(WindowsConfiguration, options);
+                ((IJsonModel<WindowsConfiguration>)WindowsConfiguration).Write(writer, options);
             }
             if (Optional.IsDefined(LinuxConfiguration))
             {
                 writer.WritePropertyName("linuxConfiguration"u8);
-                writer.WriteObjectValue(LinuxConfiguration, options);
+                ((IJsonModel<LinuxConfiguration>)LinuxConfiguration).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Secrets))
             {
@@ -73,7 +73,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Secrets)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<VaultSecretGroup>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -151,7 +151,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    windowsConfiguration = WindowsConfiguration.DeserializeWindowsConfiguration(property.Value, options);
+                    windowsConfiguration = ModelSerializationExtensions.JsonDeserialize<WindowsConfiguration>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("linuxConfiguration"u8))
@@ -160,7 +160,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    linuxConfiguration = LinuxConfiguration.DeserializeLinuxConfiguration(property.Value, options);
+                    linuxConfiguration = ModelSerializationExtensions.JsonDeserialize<LinuxConfiguration>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("secrets"u8))

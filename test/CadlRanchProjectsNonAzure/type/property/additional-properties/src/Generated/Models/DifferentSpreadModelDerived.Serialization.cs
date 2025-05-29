@@ -31,7 +31,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
 
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("derivedProp"u8);
-            writer.WriteObjectValue(DerivedProp, options);
+            ((IJsonModel<ModelForRecord>)DerivedProp).Write(writer, options);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
@@ -74,7 +74,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
             {
                 if (property.NameEquals("derivedProp"u8))
                 {
-                    derivedProp = ModelForRecord.DeserializeModelForRecord(property.Value, options);
+                    derivedProp = ModelSerializationExtensions.JsonDeserialize<ModelForRecord>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("knownProp"u8))

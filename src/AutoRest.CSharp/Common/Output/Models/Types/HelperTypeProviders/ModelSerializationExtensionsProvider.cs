@@ -499,7 +499,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public ValueExpression Deserialize(JsonPropertyExpression jsonProperty, ValueExpression options, CSharpType type)
-            => new InvokeStaticMethodExpression(Type, _jsonDeserializeMethodName, [jsonProperty, options], TypeArguments: [type]);
+            => new InvokeStaticMethodExpression(Type, JsonDeserializeMethodName, [jsonProperty, options], TypeArguments: [type]);
 
         public MethodBodyStatement WriteBase64StringValue(Utf8JsonWriterExpression writer, ValueExpression value, string? format)
             => new InvokeStaticMethodStatement(Type, _writeBase64StringValueMethodName, new[] { writer, value, Literal(format) }, CallAsExtension: true);
@@ -739,7 +739,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var optionsParameter = new Parameter("options", null, typeof(JsonSerializerOptions), null, ValidationType.None, null);
             var justificationExpression = new KeywordExpression("Justification =", Literal("By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue."));
             var signature = new MethodSignature(
-                _jsonDeserializeMethodName,
+                JsonDeserializeMethodName,
                 null,
                 null,
                 MethodSignatureModifiers.Static | MethodSignatureModifiers.Public,
@@ -748,8 +748,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 [propertyParameter, optionsParameter],
                 Attributes:
                 [
-                    new CSharpAttribute(typeof(UnconditionalSuppressMessageAttribute), Literal("Trimming"), Literal("IL2026"), justificationExpression),
-                    new CSharpAttribute(typeof(UnconditionalSuppressMessageAttribute), Literal("Trimming"), Literal("IL3050"), justificationExpression)
+                    new CSharpAttribute(typeof(SuppressMessageAttribute), Literal("Trimming"), Literal("IL2026"), justificationExpression),
+                    new CSharpAttribute(typeof(SuppressMessageAttribute), Literal("Trimming"), Literal("IL3050"), justificationExpression)
                 ],
                 GenericArguments: [_t]);
             return new Method(signature, new MethodBodyStatement[]
@@ -762,7 +762,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         new MemberExpression(null, JsonSerializerOptionsName)
                     ],
                     TypeArguments: [_t]
-                    ))
+                ))
             });
         }
 

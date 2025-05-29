@@ -56,7 +56,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    osDisk = ImageOSDisk.DeserializeImageOSDisk(property.Value);
+                    osDisk = ModelSerializationExtensions.JsonDeserialize<ImageOSDisk>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("dataDisks"u8))

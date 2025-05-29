@@ -38,7 +38,7 @@ namespace MgmtSafeFlatten.Models
                     {
                         continue;
                     }
-                    layerTwo = LayerTwoSingle.DeserializeLayerTwoSingle(property.Value);
+                    layerTwo = ModelSerializationExtensions.JsonDeserialize<LayerTwoSingle>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

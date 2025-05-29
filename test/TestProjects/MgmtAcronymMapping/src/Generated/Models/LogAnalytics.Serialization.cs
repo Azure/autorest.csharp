@@ -32,7 +32,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    properties = Models.LogAnalyticsOutput.DeserializeLogAnalyticsOutput(property.Value);
+                    properties = ModelSerializationExtensions.JsonDeserialize<LogAnalyticsOutput>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("contentType"u8))

@@ -37,7 +37,7 @@ namespace Payload.MultiPart.Models
             }
 
             writer.WritePropertyName("profileImage"u8);
-            writer.WriteObjectValue(ProfileImage, options);
+            ((IJsonModel<FileRequiredMetaData>)ProfileImage).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -82,7 +82,7 @@ namespace Payload.MultiPart.Models
             {
                 if (property.NameEquals("profileImage"u8))
                 {
-                    profileImage = FileRequiredMetaData.DeserializeFileRequiredMetaData(property.Value, options);
+                    profileImage = ModelSerializationExtensions.JsonDeserialize<FileRequiredMetaData>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

@@ -38,7 +38,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(ModelState))
             {
                 writer.WritePropertyName("modelState"u8);
-                writer.WriteObjectValue(ModelState, options);
+                ((IJsonModel<ModelState>)ModelState).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(VariableStates))
             {
@@ -46,7 +46,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in VariableStates)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<VariableState>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -99,7 +99,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    modelState = ModelState.DeserializeModelState(property.Value, options);
+                    modelState = ModelSerializationExtensions.JsonDeserialize<ModelState>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("variableStates"u8))

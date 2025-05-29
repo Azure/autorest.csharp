@@ -353,7 +353,7 @@ namespace MgmtExpandResourceTypes
                             {
                                 continue;
                             }
-                            cnameRecord = CnameRecord.DeserializeCnameRecord(property0.Value);
+                            cnameRecord = ModelSerializationExtensions.JsonDeserialize<CnameRecord>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("SOARecord"u8))
@@ -362,7 +362,7 @@ namespace MgmtExpandResourceTypes
                             {
                                 continue;
                             }
-                            soaRecord = SoaRecord.DeserializeSoaRecord(property0.Value);
+                            soaRecord = ModelSerializationExtensions.JsonDeserialize<SoaRecord>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("caaRecords"u8))

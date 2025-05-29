@@ -39,12 +39,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(AvailablePatchSummary))
             {
                 writer.WritePropertyName("availablePatchSummary"u8);
-                writer.WriteObjectValue(AvailablePatchSummary, options);
+                ((IJsonModel<AvailablePatchSummary>)AvailablePatchSummary).Write(writer, options);
             }
             if (Optional.IsDefined(LastPatchInstallationSummary))
             {
                 writer.WritePropertyName("lastPatchInstallationSummary"u8);
-                writer.WriteObjectValue(LastPatchInstallationSummary, options);
+                ((IJsonModel<LastPatchInstallationSummary>)LastPatchInstallationSummary).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -95,7 +95,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    availablePatchSummary = AvailablePatchSummary.DeserializeAvailablePatchSummary(property.Value, options);
+                    availablePatchSummary = ModelSerializationExtensions.JsonDeserialize<AvailablePatchSummary>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("lastPatchInstallationSummary"u8))
@@ -104,7 +104,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    lastPatchInstallationSummary = LastPatchInstallationSummary.DeserializeLastPatchInstallationSummary(property.Value, options);
+                    lastPatchInstallationSummary = ModelSerializationExtensions.JsonDeserialize<LastPatchInstallationSummary>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

@@ -36,7 +36,7 @@ namespace required_optional.Models
             }
 
             writer.WritePropertyName("value"u8);
-            writer.WriteObjectValue(Value, options);
+            ((IJsonModel<Product>)Value).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -81,7 +81,7 @@ namespace required_optional.Models
             {
                 if (property.NameEquals("value"u8))
                 {
-                    value = Product.DeserializeProduct(property.Value, options);
+                    value = ModelSerializationExtensions.JsonDeserialize<Product>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

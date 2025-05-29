@@ -93,7 +93,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    sku = ManagedHsmSku.DeserializeManagedHsmSku(property.Value);
+                    sku = ModelSerializationExtensions.JsonDeserialize<ManagedHsmSku>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -163,7 +163,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            privateLinkServiceConnectionState = MhsmPrivateLinkServiceConnectionState.DeserializeMhsmPrivateLinkServiceConnectionState(property0.Value);
+                            privateLinkServiceConnectionState = ModelSerializationExtensions.JsonDeserialize<MhsmPrivateLinkServiceConnectionState>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

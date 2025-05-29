@@ -38,7 +38,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    terminateNotificationProfile = TerminateNotificationProfile.DeserializeTerminateNotificationProfile(property.Value);
+                    terminateNotificationProfile = ModelSerializationExtensions.JsonDeserialize<TerminateNotificationProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

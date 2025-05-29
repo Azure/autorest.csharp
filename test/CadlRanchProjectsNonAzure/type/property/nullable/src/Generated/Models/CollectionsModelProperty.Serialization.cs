@@ -37,7 +37,7 @@ namespace Scm._Type.Property.Nullable.Models
                 writer.WriteStartArray();
                 foreach (var item in NullableProperty)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<InnerModel>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

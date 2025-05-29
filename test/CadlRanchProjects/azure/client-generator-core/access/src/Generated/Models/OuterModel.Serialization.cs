@@ -37,7 +37,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("inner"u8);
-            writer.WriteObjectValue(Inner, options);
+            ((IJsonModel<InnerModel>)Inner).Write(writer, options);
         }
 
         OuterModel IJsonModel<OuterModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
@@ -68,7 +68,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             {
                 if (property.NameEquals("inner"u8))
                 {
-                    inner = InnerModel.DeserializeInnerModel(property.Value, options);
+                    inner = ModelSerializationExtensions.JsonDeserialize<InnerModel>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

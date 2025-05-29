@@ -39,7 +39,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(TerminateNotificationProfile))
             {
                 writer.WritePropertyName("terminateNotificationProfile"u8);
-                writer.WriteObjectValue(TerminateNotificationProfile, options);
+                ((IJsonModel<TerminateNotificationProfile>)TerminateNotificationProfile).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -89,7 +89,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    terminateNotificationProfile = TerminateNotificationProfile.DeserializeTerminateNotificationProfile(property.Value, options);
+                    terminateNotificationProfile = ModelSerializationExtensions.JsonDeserialize<TerminateNotificationProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

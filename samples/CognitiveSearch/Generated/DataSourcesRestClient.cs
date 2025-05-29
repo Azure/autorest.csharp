@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace CognitiveSearch
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string dataSourceName, Enum0 prefer, DataSource dataSource, RequestOptions requestOptions, AccessCondition accessCondition)
+        internal HttpMessage CreateCreateOrUpdateRequest(string dataSourceName, Enum0 prefer, DataSource dataSource, Models.RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -63,7 +64,7 @@ namespace CognitiveSearch
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(dataSource);
+            ((IJsonModel<DataSource>)dataSource).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -76,7 +77,7 @@ namespace CognitiveSearch
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="dataSourceName"/> or <paramref name="dataSource"/> is null. </exception>
-        public async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, Enum0 prefer, DataSource dataSource, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, Enum0 prefer, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -112,7 +113,7 @@ namespace CognitiveSearch
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="dataSourceName"/> or <paramref name="dataSource"/> is null. </exception>
-        public Response<DataSource> CreateOrUpdate(string dataSourceName, Enum0 prefer, DataSource dataSource, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public Response<DataSource> CreateOrUpdate(string dataSourceName, Enum0 prefer, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -140,7 +141,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string dataSourceName, RequestOptions requestOptions, AccessCondition accessCondition)
+        internal HttpMessage CreateDeleteRequest(string dataSourceName, Models.RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -170,7 +171,7 @@ namespace CognitiveSearch
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="dataSourceName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string dataSourceName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsync(string dataSourceName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -195,7 +196,7 @@ namespace CognitiveSearch
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="dataSourceName"/> is null. </exception>
-        public Response Delete(string dataSourceName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public Response Delete(string dataSourceName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -214,7 +215,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateGetRequest(string dataSourceName, RequestOptions requestOptions)
+        internal HttpMessage CreateGetRequest(string dataSourceName, Models.RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -235,7 +236,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="dataSourceName"/> is null. </exception>
-        public async Task<Response<DataSource>> GetAsync(string dataSourceName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<DataSource>> GetAsync(string dataSourceName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -263,7 +264,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="dataSourceName"/> is null. </exception>
-        public Response<DataSource> Get(string dataSourceName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<DataSource> Get(string dataSourceName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (dataSourceName == null)
             {
@@ -286,7 +287,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateListRequest(string select, RequestOptions requestOptions)
+        internal HttpMessage CreateListRequest(string select, Models.RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -308,7 +309,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ListDataSourcesResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ListDataSourcesResult>> ListAsync(string select = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateListRequest(select, requestOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -330,7 +331,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ListDataSourcesResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<ListDataSourcesResult> List(string select = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateListRequest(select, requestOptions);
             _pipeline.Send(message, cancellationToken);
@@ -348,7 +349,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateCreateRequest(DataSource dataSource, RequestOptions requestOptions)
+        internal HttpMessage CreateCreateRequest(DataSource dataSource, Models.RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -361,7 +362,7 @@ namespace CognitiveSearch
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(dataSource);
+            ((IJsonModel<DataSource>)dataSource).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -371,7 +372,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="dataSource"/> is null. </exception>
-        public async Task<Response<DataSource>> CreateAsync(DataSource dataSource, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<DataSource>> CreateAsync(DataSource dataSource, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (dataSource == null)
             {
@@ -399,7 +400,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="dataSource"/> is null. </exception>
-        public Response<DataSource> Create(DataSource dataSource, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<DataSource> Create(DataSource dataSource, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (dataSource == null)
             {

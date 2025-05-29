@@ -38,7 +38,7 @@ namespace ModelShapes.Models
             if (options.Format != "W" && Optional.IsDefined(ReadonlyProperty))
             {
                 writer.WritePropertyName("ReadonlyProperty"u8);
-                writer.WriteObjectValue(ReadonlyProperty, options);
+                ((IJsonModel<ReadonlyModel>)ReadonlyProperty).Write(writer, options);
             }
             if (options.Format != "W" && Optional.IsCollectionDefined(ReadonlyListProperty))
             {
@@ -46,7 +46,7 @@ namespace ModelShapes.Models
                 writer.WriteStartArray();
                 foreach (var item in ReadonlyListProperty)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<ReadonlyModel>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -99,7 +99,7 @@ namespace ModelShapes.Models
                     {
                         continue;
                     }
-                    readonlyProperty = ReadonlyModel.DeserializeReadonlyModel(property.Value, options);
+                    readonlyProperty = ModelSerializationExtensions.JsonDeserialize<ReadonlyModel>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("ReadonlyListProperty"u8))

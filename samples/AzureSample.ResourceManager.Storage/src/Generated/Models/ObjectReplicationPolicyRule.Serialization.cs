@@ -65,7 +65,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    filters = ObjectReplicationPolicyFilter.DeserializeObjectReplicationPolicyFilter(property.Value);
+                    filters = ModelSerializationExtensions.JsonDeserialize<ObjectReplicationPolicyFilter>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

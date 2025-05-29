@@ -47,7 +47,7 @@ namespace ModelWithConverterUsage.Models
             if (Optional.IsDefined(ObjProperty))
             {
                 writer.WritePropertyName("Obj_Property"u8);
-                writer.WriteObjectValue(ObjProperty, options);
+                ((IJsonModel<Product>)ObjProperty).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -109,7 +109,7 @@ namespace ModelWithConverterUsage.Models
                     {
                         continue;
                     }
-                    objProperty = Product.DeserializeProduct(property.Value, options);
+                    objProperty = ModelSerializationExtensions.JsonDeserialize<Product>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

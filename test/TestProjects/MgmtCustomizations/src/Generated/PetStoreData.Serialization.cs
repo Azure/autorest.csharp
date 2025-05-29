@@ -40,7 +40,7 @@ namespace MgmtCustomizations
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties, options);
+                ((IJsonModel<PetStoreProperties>)Properties).Write(writer, options);
             }
         }
 
@@ -79,7 +79,7 @@ namespace MgmtCustomizations
                     {
                         continue;
                     }
-                    properties = PetStoreProperties.DeserializePetStoreProperties(property.Value, options);
+                    properties = ModelSerializationExtensions.JsonDeserialize<PetStoreProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

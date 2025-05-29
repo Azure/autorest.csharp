@@ -40,7 +40,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (options.Format != "W" && Optional.IsDefined(VirtualMachine))
             {
                 writer.WritePropertyName("virtualMachine"u8);
-                writer.WriteObjectValue(VirtualMachine, options);
+                ((IJsonModel<VirtualMachineScaleSetInstanceViewStatusesSummary>)VirtualMachine).Write(writer, options);
             }
             if (options.Format != "W" && Optional.IsCollectionDefined(Extensions))
             {
@@ -48,7 +48,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Extensions)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<VirtualMachineScaleSetVmExtensionsSummary>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -58,7 +58,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<InstanceViewStatus>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -68,7 +68,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in OrchestrationServices)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<OrchestrationServiceSummary>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -123,7 +123,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    virtualMachine = VirtualMachineScaleSetInstanceViewStatusesSummary.DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(property.Value, options);
+                    virtualMachine = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetInstanceViewStatusesSummary>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("extensions"u8))

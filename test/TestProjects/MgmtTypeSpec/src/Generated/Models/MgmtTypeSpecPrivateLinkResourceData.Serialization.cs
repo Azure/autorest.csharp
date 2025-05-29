@@ -41,7 +41,7 @@ namespace MgmtTypeSpec.Models
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties, options);
+                ((IJsonModel<MgmtTypeSpecPrivateLinkResourceProperties>)Properties).Write(writer, options);
             }
             if (Optional.IsDefined(Identity))
             {
@@ -87,7 +87,7 @@ namespace MgmtTypeSpec.Models
                     {
                         continue;
                     }
-                    properties = MgmtTypeSpecPrivateLinkResourceProperties.DeserializeMgmtTypeSpecPrivateLinkResourceProperties(property.Value, options);
+                    properties = ModelSerializationExtensions.JsonDeserialize<MgmtTypeSpecPrivateLinkResourceProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))

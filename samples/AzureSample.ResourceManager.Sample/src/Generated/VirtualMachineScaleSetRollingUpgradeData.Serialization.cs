@@ -45,22 +45,22 @@ namespace AzureSample.ResourceManager.Sample
             if (options.Format != "W" && Optional.IsDefined(Policy))
             {
                 writer.WritePropertyName("policy"u8);
-                writer.WriteObjectValue(Policy, options);
+                ((IJsonModel<RollingUpgradePolicy>)Policy).Write(writer, options);
             }
             if (options.Format != "W" && Optional.IsDefined(RunningStatus))
             {
                 writer.WritePropertyName("runningStatus"u8);
-                writer.WriteObjectValue(RunningStatus, options);
+                ((IJsonModel<RollingUpgradeRunningStatus>)RunningStatus).Write(writer, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Progress))
             {
                 writer.WritePropertyName("progress"u8);
-                writer.WriteObjectValue(Progress, options);
+                ((IJsonModel<RollingUpgradeProgressInfo>)Progress).Write(writer, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Error))
             {
                 writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue(Error, options);
+                ((IJsonModel<ApiError>)Error).Write(writer, options);
             }
             writer.WriteEndObject();
         }
@@ -157,7 +157,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            policy = RollingUpgradePolicy.DeserializeRollingUpgradePolicy(property0.Value, options);
+                            policy = ModelSerializationExtensions.JsonDeserialize<RollingUpgradePolicy>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("runningStatus"u8))
@@ -166,7 +166,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            runningStatus = RollingUpgradeRunningStatus.DeserializeRollingUpgradeRunningStatus(property0.Value, options);
+                            runningStatus = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeRunningStatus>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("progress"u8))
@@ -175,7 +175,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            progress = RollingUpgradeProgressInfo.DeserializeRollingUpgradeProgressInfo(property0.Value, options);
+                            progress = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeProgressInfo>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("error"u8))
@@ -184,7 +184,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            error = ApiError.DeserializeApiError(property0.Value, options);
+                            error = ModelSerializationExtensions.JsonDeserialize<ApiError>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                     }

@@ -45,7 +45,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    innererror = InnerError.DeserializeInnerError(property.Value);
+                    innererror = ModelSerializationExtensions.JsonDeserialize<InnerError>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("code"u8))

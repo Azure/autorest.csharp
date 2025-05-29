@@ -137,7 +137,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            keyVaultProperties = EncryptionScopeKeyVaultProperties.DeserializeEncryptionScopeKeyVaultProperties(property0.Value);
+                            keyVaultProperties = ModelSerializationExtensions.JsonDeserialize<EncryptionScopeKeyVaultProperties>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("requireInfrastructureEncryption"u8))

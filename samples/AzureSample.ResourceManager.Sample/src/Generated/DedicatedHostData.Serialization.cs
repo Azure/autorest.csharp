@@ -42,7 +42,7 @@ namespace AzureSample.ResourceManager.Sample
 
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("sku"u8);
-            writer.WriteObjectValue(Sku, options);
+            ((IJsonModel<AzureSampleResourceManagerSampleSku>)Sku).Write(writer, options);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(PlatformFaultDomain))
@@ -88,7 +88,7 @@ namespace AzureSample.ResourceManager.Sample
             if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                writer.WriteObjectValue(InstanceView, options);
+                ((IJsonModel<DedicatedHostInstanceView>)InstanceView).Write(writer, options);
             }
             writer.WriteEndObject();
         }
@@ -134,7 +134,7 @@ namespace AzureSample.ResourceManager.Sample
             {
                 if (property.NameEquals("sku"u8))
                 {
-                    sku = AzureSampleResourceManagerSampleSku.DeserializeAzureSampleResourceManagerSampleSku(property.Value, options);
+                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerSampleSku>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -255,7 +255,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            instanceView = DedicatedHostInstanceView.DeserializeDedicatedHostInstanceView(property0.Value, options);
+                            instanceView = ModelSerializationExtensions.JsonDeserialize<DedicatedHostInstanceView>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                     }

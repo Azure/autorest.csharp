@@ -53,7 +53,7 @@ namespace Inheritance.Models
                     {
                         continue;
                     }
-                    modelProperty = BaseClassWithExtensibleEnumDiscriminator.DeserializeBaseClassWithExtensibleEnumDiscriminator(property.Value);
+                    modelProperty = ModelSerializationExtensions.JsonDeserialize<BaseClassWithExtensibleEnumDiscriminator>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

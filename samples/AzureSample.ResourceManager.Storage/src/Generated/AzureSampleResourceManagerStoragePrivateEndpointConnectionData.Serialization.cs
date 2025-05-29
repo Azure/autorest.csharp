@@ -97,7 +97,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            privateLinkServiceConnectionState = AzureSampleResourceManagerStoragePrivateLinkServiceConnectionState.DeserializeAzureSampleResourceManagerStoragePrivateLinkServiceConnectionState(property0.Value);
+                            privateLinkServiceConnectionState = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerStoragePrivateLinkServiceConnectionState>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

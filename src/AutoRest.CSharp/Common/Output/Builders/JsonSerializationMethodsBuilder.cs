@@ -34,6 +34,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 using Microsoft.CodeAnalysis;
+using static AutoRest.CSharp.Common.Input.Configuration;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using MemberExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.MemberExpression;
 using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
@@ -445,16 +446,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         return new[]
                         {
                             Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions),
-                            JsonSerializerExpression.SerializeIJsonModel(valueSerialization.Type, utf8JsonWriter, value, serializeOptions).ToStatement()
+                            JsonSerializerExpression.Serialize(utf8JsonWriter, value, serializeOptions).ToStatement()
                         };
                     }
 
-                    return JsonSerializerExpression.SerializeIJsonModel(valueSerialization.Type, utf8JsonWriter, value).ToStatement();
+                    return JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
 
                 case ObjectType:
                     return options is null
                         ? utf8JsonWriter.WriteObjectValue(value, options: options)
-                        : JsonSerializerExpression.SerializeIJsonModel(valueSerialization.Type, utf8JsonWriter, value, options).ToStatement();
+                        : JsonSerializerExpression.SerializeIJsonModel(valueSerialization.Type.WithNullable(false), utf8JsonWriter, value, options).ToStatement();
 
                 case EnumType { IsIntValueType: true, IsExtensible: false } enumType:
                     return utf8JsonWriter.WriteNumberValue(new CastExpression(value.NullableStructValue(valueSerialization.Type), enumType.ValueType));
@@ -799,7 +800,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return new[]
                 {
                     CreatePropertyNullCheckStatement(jsonPropertySerialization, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull),
-                    DeserializeValue(jsonPropertySerialization.ValueSerialization, jsonProperty.Value, options, out var value),
+                    // TODO: replace with IJsonModel
+                    DeserializeProperty(jsonPropertySerialization.ValueSerialization, jsonProperty, options, out var value),
                     Assign(propertyVariables[jsonPropertySerialization], value),
                     Continue
                 };
@@ -820,6 +822,24 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             throw new InvalidOperationException($"Either {nameof(JsonPropertySerialization.ValueSerialization)} must not be null or {nameof(JsonPropertySerialization.PropertySerializations)} must not be null.");
+        }
+
+        private static MethodBodyStatement DeserializeProperty(JsonSerialization serialization, JsonPropertyExpression jsonProperty, ModelReaderWriterOptionsExpression? options, out ValueExpression value)
+        {
+            if (!serialization.Type.IsFrameworkType && serialization.Type.Implementation is SerializableObjectType)
+            {
+                var type = ModelSerializationExtensionsProvider.Instance.Type.WithNullable(false);
+                value = new InvokeStaticMethodExpression(
+                        type,
+                        ModelSerializationExtensionsProvider.JsonDeserializeMethodName,
+                        [jsonProperty, new MemberExpression(type, ModelSerializationExtensionsProvider.JsonSerializerOptionsName)],
+                        TypeArguments: [serialization.Type]);
+                return EmptyStatement;
+            }
+            else
+            {
+                return DeserializeValue(serialization, jsonProperty.Value, options, out value);
+            }
         }
 
         private static MethodBodyStatement CreatePropertyNullCheckStatement(JsonPropertySerialization jsonPropertySerialization, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
@@ -1157,18 +1177,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return New.Instance(resource.Type, new MemberExpression(null, "Client"), SerializableObjectTypeExpression.Deserialize(resourceDataType, element));
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.InputModel):
-                    return new InvokeStaticMethodExpression(
-                            ModelSerializationExtensionsProvider.Instance.Type,
-                            nameof(ModelSerializationExtensionsProvider.Instance.JsonDeserializeMethodName),
-                            [element, mgmtObjectType.Type, new MemberExpression(ModelSerializationExtensionsProvider.Instance.Type, useManagedServiceIdentityV3 ? ModelSerializationExtensionsProvider.JsonSerializerOptionsUseManagedServiceIdentityV3Name : ModelSerializationExtensionsProvider.JsonSerializerOptionsName)],
-                            TypeArguments: [implementation.Type]);
+                    return JsonSerializerExpression.Deserialize(element, implementation.Type);
 
                 case SerializableObjectType type:
-                    return new InvokeStaticMethodExpression(
-                            ModelSerializationExtensionsProvider.Instance.Type,
-                            nameof(ModelSerializationExtensionsProvider.Instance.JsonDeserializeMethodName),
-                            [element, type.Type, new MemberExpression(ModelSerializationExtensionsProvider.Instance.Type, ModelSerializationExtensionsProvider.JsonSerializerOptionsName)],
-                            TypeArguments: [implementation.Type]);
+                    return SerializableObjectTypeExpression.Deserialize(type, element, options);
 
                 case EnumType clientEnum:
                     var value = GetFrameworkTypeValueExpression(clientEnum.ValueType.FrameworkType, element, SerializationFormat.Default, null);

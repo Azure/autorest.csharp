@@ -46,7 +46,7 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("properties"u8))
                 {
-                    properties = VaultAccessPolicyProperties.DeserializeVaultAccessPolicyProperties(property.Value);
+                    properties = ModelSerializationExtensions.JsonDeserialize<VaultAccessPolicyProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

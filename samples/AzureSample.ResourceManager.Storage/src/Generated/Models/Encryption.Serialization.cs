@@ -59,7 +59,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    services = EncryptionServices.DeserializeEncryptionServices(property.Value);
+                    services = ModelSerializationExtensions.JsonDeserialize<EncryptionServices>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("keySource"u8))
@@ -82,7 +82,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    keyvaultproperties = KeyVaultProperties.DeserializeKeyVaultProperties(property.Value);
+                    keyvaultproperties = ModelSerializationExtensions.JsonDeserialize<KeyVaultProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))
@@ -91,7 +91,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    identity = EncryptionIdentity.DeserializeEncryptionIdentity(property.Value);
+                    identity = ModelSerializationExtensions.JsonDeserialize<EncryptionIdentity>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

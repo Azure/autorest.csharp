@@ -38,7 +38,7 @@ namespace MgmtDiscriminator.Models
 
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("parameters"u8);
-            writer.WriteObjectValue(Parameters, options);
+            ((IJsonModel<HeaderActionParameters>)Parameters).Write(writer, options);
         }
 
         DeliveryRuleRequestHeaderAction IJsonModel<DeliveryRuleRequestHeaderAction>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
@@ -70,7 +70,7 @@ namespace MgmtDiscriminator.Models
             {
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = HeaderActionParameters.DeserializeHeaderActionParameters(property.Value, options);
+                    parameters = ModelSerializationExtensions.JsonDeserialize<HeaderActionParameters>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

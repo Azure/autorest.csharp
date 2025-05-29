@@ -38,7 +38,7 @@ namespace TypeSchemaMapping.Models
             if (Optional.IsDefined(InternalProperty))
             {
                 writer.WritePropertyName("InternalProperty"u8);
-                writer.WriteObjectValue<InternalModel>(InternalProperty, options);
+                ((IJsonModel<InternalModel>)InternalProperty).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -88,7 +88,7 @@ namespace TypeSchemaMapping.Models
                     {
                         continue;
                     }
-                    internalProperty = InternalModel.DeserializeInternalModel(property.Value, options);
+                    internalProperty = ModelSerializationExtensions.JsonDeserialize<InternalModel>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

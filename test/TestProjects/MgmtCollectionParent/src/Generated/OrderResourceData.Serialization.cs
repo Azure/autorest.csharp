@@ -83,7 +83,7 @@ namespace MgmtCollectionParent
                             {
                                 continue;
                             }
-                            currentStage = StageDetails.DeserializeStageDetails(property0.Value);
+                            currentStage = ModelSerializationExtensions.JsonDeserialize<StageDetails>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("orderStageHistory"u8))

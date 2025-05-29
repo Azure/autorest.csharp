@@ -38,7 +38,7 @@ namespace TypeSchemaMapping.Models
             if (Optional.IsDefined(AbstractModelProperty))
             {
                 writer.WritePropertyName("AbstractModelProperty"u8);
-                writer.WriteObjectValue(AbstractModelProperty, options);
+                ((IJsonModel<AbstractModel>)AbstractModelProperty).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -88,7 +88,7 @@ namespace TypeSchemaMapping.Models
                     {
                         continue;
                     }
-                    abstractModelProperty = AbstractModel.DeserializeAbstractModel(property.Value, options);
+                    abstractModelProperty = ModelSerializationExtensions.JsonDeserialize<AbstractModel>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

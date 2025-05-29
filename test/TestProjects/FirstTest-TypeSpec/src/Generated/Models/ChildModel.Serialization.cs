@@ -40,7 +40,7 @@ namespace FirstTestTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in Parent)
             {
-                writer.WriteObjectValue(item, options);
+                ((IJsonModel<BaseModel>)item).Write(writer, options);
             }
             writer.WriteEndArray();
         }

@@ -27,7 +27,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    subnet = SubResource.DeserializeSubResource(property.Value);
+                    subnet = ModelSerializationExtensions.JsonDeserialize<SubResource>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("networkInterface"u8))
@@ -36,7 +36,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    networkInterface = SubResource.DeserializeSubResource(property.Value);
+                    networkInterface = ModelSerializationExtensions.JsonDeserialize<SubResource>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

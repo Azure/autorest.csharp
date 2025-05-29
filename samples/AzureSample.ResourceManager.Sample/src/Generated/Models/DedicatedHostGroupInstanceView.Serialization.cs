@@ -43,7 +43,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Hosts)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<DedicatedHostInstanceViewWithName>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

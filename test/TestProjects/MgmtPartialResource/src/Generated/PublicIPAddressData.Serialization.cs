@@ -109,7 +109,7 @@ namespace MgmtPartialResource
                     {
                         continue;
                     }
-                    sku = PublicIPAddressSku.DeserializePublicIPAddressSku(property.Value);
+                    sku = ModelSerializationExtensions.JsonDeserialize<PublicIPAddressSku>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("etag"u8))
@@ -207,7 +207,7 @@ namespace MgmtPartialResource
                             {
                                 continue;
                             }
-                            servicePublicIPAddress = DeserializePublicIPAddressData(property0.Value);
+                            servicePublicIPAddress = ModelSerializationExtensions.JsonDeserialize<PublicIPAddressData>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("migrationPhase"u8))
@@ -225,7 +225,7 @@ namespace MgmtPartialResource
                             {
                                 continue;
                             }
-                            linkedPublicIPAddress = DeserializePublicIPAddressData(property0.Value);
+                            linkedPublicIPAddress = ModelSerializationExtensions.JsonDeserialize<PublicIPAddressData>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("deleteOption"u8))

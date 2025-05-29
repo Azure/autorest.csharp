@@ -38,7 +38,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
             if (options.Format != "W")
             {
                 writer.WritePropertyName("result"u8);
-                writer.WriteObjectValue(Result, options);
+                ((IJsonModel<ResultModel>)Result).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -84,7 +84,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
             {
                 if (property.NameEquals("result"u8))
                 {
-                    result = ResultModel.DeserializeResultModel(property.Value, options);
+                    result = ModelSerializationExtensions.JsonDeserialize<ResultModel>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

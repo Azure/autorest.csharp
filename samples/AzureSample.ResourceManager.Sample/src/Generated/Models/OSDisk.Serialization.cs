@@ -44,7 +44,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(EncryptionSettings))
             {
                 writer.WritePropertyName("encryptionSettings"u8);
-                writer.WriteObjectValue(EncryptionSettings, options);
+                ((IJsonModel<DiskEncryptionSettings>)EncryptionSettings).Write(writer, options);
             }
             if (Optional.IsDefined(Name))
             {
@@ -54,12 +54,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
-                writer.WriteObjectValue(Vhd, options);
+                ((IJsonModel<VirtualHardDisk>)Vhd).Write(writer, options);
             }
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue(Image, options);
+                ((IJsonModel<VirtualHardDisk>)Image).Write(writer, options);
             }
             if (Optional.IsDefined(Caching))
             {
@@ -74,7 +74,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
-                writer.WriteObjectValue(DiffDiskSettings, options);
+                ((IJsonModel<DiffDiskSettings>)DiffDiskSettings).Write(writer, options);
             }
             writer.WritePropertyName("createOption"u8);
             writer.WriteStringValue(CreateOption.ToString());
@@ -86,7 +86,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue(ManagedDisk, options);
+                ((IJsonModel<ManagedDiskParameters>)ManagedDisk).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -155,7 +155,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    encryptionSettings = DiskEncryptionSettings.DeserializeDiskEncryptionSettings(property.Value, options);
+                    encryptionSettings = ModelSerializationExtensions.JsonDeserialize<DiskEncryptionSettings>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("name"u8))
@@ -169,7 +169,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    vhd = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value, options);
+                    vhd = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("image"u8))
@@ -178,7 +178,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    image = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value, options);
+                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("caching"u8))
@@ -205,7 +205,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    diffDiskSettings = DiffDiskSettings.DeserializeDiffDiskSettings(property.Value, options);
+                    diffDiskSettings = ModelSerializationExtensions.JsonDeserialize<DiffDiskSettings>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("createOption"u8))
@@ -228,7 +228,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    managedDisk = ManagedDiskParameters.DeserializeManagedDiskParameters(property.Value, options);
+                    managedDisk = ModelSerializationExtensions.JsonDeserialize<ManagedDiskParameters>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

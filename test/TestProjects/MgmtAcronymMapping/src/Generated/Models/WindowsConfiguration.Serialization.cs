@@ -111,7 +111,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    patchSettings = PatchSettings.DeserializePatchSettings(property.Value);
+                    patchSettings = ModelSerializationExtensions.JsonDeserialize<PatchSettings>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("winRM"u8))
@@ -120,7 +120,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    winRM = WinRMConfiguration.DeserializeWinRMConfiguration(property.Value);
+                    winRM = ModelSerializationExtensions.JsonDeserialize<WinRMConfiguration>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

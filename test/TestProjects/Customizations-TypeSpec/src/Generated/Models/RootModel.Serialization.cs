@@ -43,22 +43,22 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelToMakeInternal))
             {
                 writer.WritePropertyName("propertyModelToMakeInternal"u8);
-                writer.WriteObjectValue<ModelToMakeInternal>(PropertyModelToMakeInternal, options);
+                ((IJsonModel<ModelToMakeInternal>)PropertyModelToMakeInternal).Write(writer, options);
             }
             if (Optional.IsDefined(PropertyModelToRename))
             {
                 writer.WritePropertyName("propertyModelToRename"u8);
-                writer.WriteObjectValue(PropertyModelToRename, options);
+                ((IJsonModel<RenamedModel>)PropertyModelToRename).Write(writer, options);
             }
             if (Optional.IsDefined(PropertyModelToChangeNamespace))
             {
                 writer.WritePropertyName("propertyModelToChangeNamespace"u8);
-                writer.WriteObjectValue(PropertyModelToChangeNamespace, options);
+                ((IJsonModel<ModelToChangeNamespace>)PropertyModelToChangeNamespace).Write(writer, options);
             }
             if (Optional.IsDefined(PropertyModelWithCustomizedProperties))
             {
                 writer.WritePropertyName("propertyModelWithCustomizedProperties"u8);
-                writer.WriteObjectValue(PropertyModelWithCustomizedProperties, options);
+                ((IJsonModel<ModelWithCustomizedProperties>)PropertyModelWithCustomizedProperties).Write(writer, options);
             }
             if (Optional.IsDefined(PropertyEnumToRename))
             {
@@ -78,7 +78,7 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelToAddAdditionalSerializableProperty))
             {
                 writer.WritePropertyName("propertyModelToAddAdditionalSerializableProperty"u8);
-                writer.WriteObjectValue(PropertyModelToAddAdditionalSerializableProperty, options);
+                ((IJsonModel<ModelToAddAdditionalSerializableProperty>)PropertyModelToAddAdditionalSerializableProperty).Write(writer, options);
             }
             if (Optional.IsDefined(PropertyToMoveToCustomization))
             {
@@ -88,7 +88,7 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelStruct))
             {
                 writer.WritePropertyName("propertyModelStruct"u8);
-                writer.WriteObjectValue(PropertyModelStruct, options);
+                ((IJsonModel<ModelStruct>)PropertyModelStruct).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -157,7 +157,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelToMakeInternal = ModelToMakeInternal.DeserializeModelToMakeInternal(property.Value, options);
+                    propertyModelToMakeInternal = ModelSerializationExtensions.JsonDeserialize<ModelToMakeInternal>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("propertyModelToRename"u8))
@@ -166,7 +166,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelToRename = RenamedModel.DeserializeRenamedModel(property.Value, options);
+                    propertyModelToRename = ModelSerializationExtensions.JsonDeserialize<RenamedModel>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("propertyModelToChangeNamespace"u8))
@@ -175,7 +175,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelToChangeNamespace = ModelToChangeNamespace.DeserializeModelToChangeNamespace(property.Value, options);
+                    propertyModelToChangeNamespace = ModelSerializationExtensions.JsonDeserialize<ModelToChangeNamespace>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("propertyModelWithCustomizedProperties"u8))
@@ -184,7 +184,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelWithCustomizedProperties = ModelWithCustomizedProperties.DeserializeModelWithCustomizedProperties(property.Value, options);
+                    propertyModelWithCustomizedProperties = ModelSerializationExtensions.JsonDeserialize<ModelWithCustomizedProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("propertyEnumToRename"u8))
@@ -220,7 +220,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelToAddAdditionalSerializableProperty = ModelToAddAdditionalSerializableProperty.DeserializeModelToAddAdditionalSerializableProperty(property.Value, options);
+                    propertyModelToAddAdditionalSerializableProperty = ModelSerializationExtensions.JsonDeserialize<ModelToAddAdditionalSerializableProperty>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("propertyToMoveToCustomization"u8))
@@ -238,7 +238,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelStruct = ModelStruct.DeserializeModelStruct(property.Value, options);
+                    propertyModelStruct = ModelSerializationExtensions.JsonDeserialize<ModelStruct?>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

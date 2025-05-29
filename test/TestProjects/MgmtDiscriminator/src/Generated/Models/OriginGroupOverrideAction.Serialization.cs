@@ -38,7 +38,7 @@ namespace MgmtDiscriminator.Models
 
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("parameters"u8);
-            writer.WriteObjectValue(Parameters, options);
+            ((IJsonModel<OriginGroupOverrideActionParameters>)Parameters).Write(writer, options);
         }
 
         OriginGroupOverrideAction IJsonModel<OriginGroupOverrideAction>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
@@ -70,7 +70,7 @@ namespace MgmtDiscriminator.Models
             {
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = OriginGroupOverrideActionParameters.DeserializeOriginGroupOverrideActionParameters(property.Value, options);
+                    parameters = ModelSerializationExtensions.JsonDeserialize<OriginGroupOverrideActionParameters>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

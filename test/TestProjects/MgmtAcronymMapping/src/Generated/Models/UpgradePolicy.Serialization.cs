@@ -59,7 +59,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    rollingUpgradePolicy = RollingUpgradePolicy.DeserializeRollingUpgradePolicy(property.Value);
+                    rollingUpgradePolicy = ModelSerializationExtensions.JsonDeserialize<RollingUpgradePolicy>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("automaticOSUpgradePolicy"u8))
@@ -68,7 +68,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    automaticOSUpgradePolicy = AutomaticOSUpgradePolicy.DeserializeAutomaticOSUpgradePolicy(property.Value);
+                    automaticOSUpgradePolicy = ModelSerializationExtensions.JsonDeserialize<AutomaticOSUpgradePolicy>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

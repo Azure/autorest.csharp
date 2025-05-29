@@ -138,7 +138,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            storageProfile = ImageStorageProfile.DeserializeImageStorageProfile(property0.Value);
+                            storageProfile = ModelSerializationExtensions.JsonDeserialize<ImageStorageProfile>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

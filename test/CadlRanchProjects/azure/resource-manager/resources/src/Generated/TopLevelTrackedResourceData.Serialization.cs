@@ -40,7 +40,7 @@ namespace _Azure.ResourceManager.Resources
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties, options);
+                ((IJsonModel<TopLevelTrackedResourceProperties>)Properties).Write(writer, options);
             }
         }
 
@@ -81,7 +81,7 @@ namespace _Azure.ResourceManager.Resources
                     {
                         continue;
                     }
-                    properties = TopLevelTrackedResourceProperties.DeserializeTopLevelTrackedResourceProperties(property.Value, options);
+                    properties = ModelSerializationExtensions.JsonDeserialize<TopLevelTrackedResourceProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

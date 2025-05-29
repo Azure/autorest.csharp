@@ -43,7 +43,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in StatusesSummary)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<VirtualMachineStatusCodeCount>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

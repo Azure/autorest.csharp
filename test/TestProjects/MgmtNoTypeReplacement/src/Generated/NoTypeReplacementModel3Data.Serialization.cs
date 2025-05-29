@@ -44,7 +44,7 @@ namespace MgmtNoTypeReplacement
                     {
                         continue;
                     }
-                    foo = MiddleResourceModel.DeserializeMiddleResourceModel(property.Value);
+                    foo = ModelSerializationExtensions.JsonDeserialize<MiddleResourceModel>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

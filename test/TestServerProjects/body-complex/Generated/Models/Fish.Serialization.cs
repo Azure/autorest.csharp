@@ -50,7 +50,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Siblings)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<Fish>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

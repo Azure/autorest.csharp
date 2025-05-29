@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    super = VeryDeepSinglePropertyModel.DeserializeVeryDeepSinglePropertyModel(property.Value);
+                    super = ModelSerializationExtensions.JsonDeserialize<VeryDeepSinglePropertyModel>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

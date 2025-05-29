@@ -42,7 +42,7 @@ namespace MgmtCustomizations.Models
             if (Optional.IsDefined(Pet))
             {
                 writer.WritePropertyName("pet"u8);
-                writer.WriteObjectValue(Pet, options);
+                ((IJsonModel<Pet>)Pet).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -102,7 +102,7 @@ namespace MgmtCustomizations.Models
                     {
                         continue;
                     }
-                    pet = Pet.DeserializePet(property.Value, options);
+                    pet = ModelSerializationExtensions.JsonDeserialize<Pet>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

@@ -85,7 +85,7 @@ namespace MgmtHierarchicalNonResource.Models
                             {
                                 continue;
                             }
-                            identifier = GalleryImageIdentifier.DeserializeGalleryImageIdentifier(property0.Value);
+                            identifier = ModelSerializationExtensions.JsonDeserialize<GalleryImageIdentifier>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("recommended"u8))
@@ -94,7 +94,7 @@ namespace MgmtHierarchicalNonResource.Models
                             {
                                 continue;
                             }
-                            recommended = RecommendedMachineConfiguration.DeserializeRecommendedMachineConfiguration(property0.Value);
+                            recommended = ModelSerializationExtensions.JsonDeserialize<RecommendedMachineConfiguration>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("disallowed"u8))
@@ -103,7 +103,7 @@ namespace MgmtHierarchicalNonResource.Models
                             {
                                 continue;
                             }
-                            disallowed = Disallowed.DeserializeDisallowed(property0.Value);
+                            disallowed = ModelSerializationExtensions.JsonDeserialize<Disallowed>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("hyperVGeneration"u8))
@@ -135,7 +135,7 @@ namespace MgmtHierarchicalNonResource.Models
                             {
                                 continue;
                             }
-                            purchasePlan = ImagePurchasePlan.DeserializeImagePurchasePlan(property0.Value);
+                            purchasePlan = ModelSerializationExtensions.JsonDeserialize<ImagePurchasePlan>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                     }

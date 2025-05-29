@@ -84,7 +84,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    layerOne = LayerOneSingle.DeserializeLayerOneSingle(property.Value);
+                    layerOne = ModelSerializationExtensions.JsonDeserialize<LayerOneSingle>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("layerOneType"u8))
@@ -93,7 +93,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    layerOneType = LayerOneBaseType.DeserializeLayerOneBaseType(property.Value);
+                    layerOneType = ModelSerializationExtensions.JsonDeserialize<LayerOneBaseType>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("layerOneConflict"u8))

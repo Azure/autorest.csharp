@@ -47,7 +47,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(ModelInfo))
             {
                 writer.WritePropertyName("modelInfo"u8);
-                writer.WriteObjectValue(ModelInfo, options);
+                ((IJsonModel<ModelInfo>)ModelInfo).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -115,7 +115,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    modelInfo = ModelInfo.DeserializeModelInfo(property.Value, options);
+                    modelInfo = ModelSerializationExtensions.JsonDeserialize<ModelInfo>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

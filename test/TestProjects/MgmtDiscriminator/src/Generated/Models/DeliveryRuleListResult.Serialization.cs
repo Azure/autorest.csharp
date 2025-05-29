@@ -43,7 +43,7 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<DeliveryRuleData>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

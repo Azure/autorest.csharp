@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    deep = SinglePropertyModel.DeserializeSinglePropertyModel(property.Value);
+                    deep = ModelSerializationExtensions.JsonDeserialize<SinglePropertyModel>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

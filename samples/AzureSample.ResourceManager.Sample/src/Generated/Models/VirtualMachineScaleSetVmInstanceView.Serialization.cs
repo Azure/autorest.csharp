@@ -55,12 +55,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(VmAgent))
             {
                 writer.WritePropertyName("vmAgent"u8);
-                writer.WriteObjectValue(VmAgent, options);
+                ((IJsonModel<VirtualMachineAgentInstanceView>)VmAgent).Write(writer, options);
             }
             if (Optional.IsDefined(MaintenanceRedeployStatus))
             {
                 writer.WritePropertyName("maintenanceRedeployStatus"u8);
-                writer.WriteObjectValue(MaintenanceRedeployStatus, options);
+                ((IJsonModel<MaintenanceRedeployStatus>)MaintenanceRedeployStatus).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Disks))
             {
@@ -68,7 +68,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Disks)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<DiskInstanceView>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -78,19 +78,19 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Extensions)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<VirtualMachineExtensionInstanceView>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (options.Format != "W" && Optional.IsDefined(VmHealth))
             {
                 writer.WritePropertyName("vmHealth"u8);
-                writer.WriteObjectValue(VmHealth, options);
+                ((IJsonModel<VirtualMachineHealthStatus>)VmHealth).Write(writer, options);
             }
             if (Optional.IsDefined(BootDiagnostics))
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
-                writer.WriteObjectValue(BootDiagnostics, options);
+                ((IJsonModel<BootDiagnosticsInstanceView>)BootDiagnostics).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Statuses))
             {
@@ -98,7 +98,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<InstanceViewStatus>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -194,7 +194,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    vmAgent = VirtualMachineAgentInstanceView.DeserializeVirtualMachineAgentInstanceView(property.Value, options);
+                    vmAgent = ModelSerializationExtensions.JsonDeserialize<VirtualMachineAgentInstanceView>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("maintenanceRedeployStatus"u8))
@@ -203,7 +203,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    maintenanceRedeployStatus = MaintenanceRedeployStatus.DeserializeMaintenanceRedeployStatus(property.Value, options);
+                    maintenanceRedeployStatus = ModelSerializationExtensions.JsonDeserialize<MaintenanceRedeployStatus>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("disks"u8))
@@ -240,7 +240,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    vmHealth = VirtualMachineHealthStatus.DeserializeVirtualMachineHealthStatus(property.Value, options);
+                    vmHealth = ModelSerializationExtensions.JsonDeserialize<VirtualMachineHealthStatus>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("bootDiagnostics"u8))
@@ -249,7 +249,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    bootDiagnostics = BootDiagnosticsInstanceView.DeserializeBootDiagnosticsInstanceView(property.Value, options);
+                    bootDiagnostics = ModelSerializationExtensions.JsonDeserialize<BootDiagnosticsInstanceView>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("statuses"u8))

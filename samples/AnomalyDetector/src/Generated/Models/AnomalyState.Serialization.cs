@@ -40,7 +40,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
-                writer.WriteObjectValue(Value, options);
+                ((IJsonModel<AnomalyValue>)Value).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Errors))
             {
@@ -48,7 +48,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Errors)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<ErrorResponse>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -107,7 +107,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    value = AnomalyValue.DeserializeAnomalyValue(property.Value, options);
+                    value = ModelSerializationExtensions.JsonDeserialize<AnomalyValue>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("errors"u8))

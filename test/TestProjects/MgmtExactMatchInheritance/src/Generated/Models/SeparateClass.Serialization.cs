@@ -52,7 +52,7 @@ namespace MgmtExactMatchInheritance.Models
                     {
                         continue;
                     }
-                    modelProperty = ExactMatchModel10.DeserializeExactMatchModel10(property.Value);
+                    modelProperty = ModelSerializationExtensions.JsonDeserialize<ExactMatchModel10>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

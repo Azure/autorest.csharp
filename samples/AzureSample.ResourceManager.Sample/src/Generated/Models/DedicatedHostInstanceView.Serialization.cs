@@ -45,7 +45,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(AvailableCapacity))
             {
                 writer.WritePropertyName("availableCapacity"u8);
-                writer.WriteObjectValue(AvailableCapacity, options);
+                ((IJsonModel<DedicatedHostAvailableCapacity>)AvailableCapacity).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Statuses))
             {
@@ -53,7 +53,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<InstanceViewStatus>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -112,7 +112,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    availableCapacity = DedicatedHostAvailableCapacity.DeserializeDedicatedHostAvailableCapacity(property.Value, options);
+                    availableCapacity = ModelSerializationExtensions.JsonDeserialize<DedicatedHostAvailableCapacity>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("statuses"u8))

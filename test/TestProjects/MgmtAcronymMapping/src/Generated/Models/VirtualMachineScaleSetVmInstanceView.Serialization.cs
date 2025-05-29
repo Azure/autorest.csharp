@@ -61,7 +61,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    vmAgent = VirtualMachineAgentInstanceView.DeserializeVirtualMachineAgentInstanceView(property.Value);
+                    vmAgent = ModelSerializationExtensions.JsonDeserialize<VirtualMachineAgentInstanceView>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("maintenanceRedeployStatus"u8))
@@ -70,7 +70,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    maintenanceRedeployStatus = MaintenanceRedeployStatus.DeserializeMaintenanceRedeployStatus(property.Value);
+                    maintenanceRedeployStatus = ModelSerializationExtensions.JsonDeserialize<MaintenanceRedeployStatus>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("disks"u8))
@@ -93,7 +93,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    vmHealth = VirtualMachineHealthStatus.DeserializeVirtualMachineHealthStatus(property.Value);
+                    vmHealth = ModelSerializationExtensions.JsonDeserialize<VirtualMachineHealthStatus>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("bootDiagnostics"u8))
@@ -102,7 +102,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    bootDiagnostics = BootDiagnosticsInstanceView.DeserializeBootDiagnosticsInstanceView(property.Value);
+                    bootDiagnostics = ModelSerializationExtensions.JsonDeserialize<BootDiagnosticsInstanceView>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("statuses"u8))

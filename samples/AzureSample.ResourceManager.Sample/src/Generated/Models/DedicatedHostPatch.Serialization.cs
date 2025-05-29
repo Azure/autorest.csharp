@@ -81,7 +81,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                writer.WriteObjectValue(InstanceView, options);
+                ((IJsonModel<DedicatedHostInstanceView>)InstanceView).Write(writer, options);
             }
             writer.WriteEndObject();
         }
@@ -208,7 +208,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            instanceView = DedicatedHostInstanceView.DeserializeDedicatedHostInstanceView(property0.Value, options);
+                            instanceView = ModelSerializationExtensions.JsonDeserialize<DedicatedHostInstanceView>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                     }

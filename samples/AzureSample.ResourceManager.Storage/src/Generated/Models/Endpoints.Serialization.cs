@@ -63,7 +63,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    microsoftEndpoints = StorageAccountMicrosoftEndpoints.DeserializeStorageAccountMicrosoftEndpoints(property.Value);
+                    microsoftEndpoints = ModelSerializationExtensions.JsonDeserialize<StorageAccountMicrosoftEndpoints>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("internetEndpoints"u8))
@@ -72,7 +72,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    internetEndpoints = StorageAccountInternetEndpoints.DeserializeStorageAccountInternetEndpoints(property.Value);
+                    internetEndpoints = ModelSerializationExtensions.JsonDeserialize<StorageAccountInternetEndpoints>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -175,7 +176,7 @@ namespace ProtocolMethodsInRestClient
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(resource);
+                ((IJsonModel<Resource>)resource).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;

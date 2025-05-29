@@ -112,7 +112,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            outboundRule = DeserializeSubResource(property0.Value);
+                            outboundRule = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("outboundRules"u8))

@@ -54,7 +54,7 @@ namespace Azure.NewProject.TypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue(RequiredModel, options);
+            ((IJsonModel<Thing>)RequiredModel).Write(writer, options);
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
@@ -323,7 +323,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 }
                 if (property.NameEquals("requiredModel"u8))
                 {
-                    requiredModel = Thing.DeserializeThing(property.Value, options);
+                    requiredModel = ModelSerializationExtensions.JsonDeserialize<Thing>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("intExtensibleEnum"u8))

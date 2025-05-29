@@ -43,12 +43,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                writer.WriteObjectValue(Plan, options);
+                ((IJsonModel<PurchasePlan>)Plan).Write(writer, options);
             }
             if (Optional.IsDefined(OSDiskImage))
             {
                 writer.WritePropertyName("osDiskImage"u8);
-                writer.WriteObjectValue(OSDiskImage, options);
+                ((IJsonModel<OSDiskImage>)OSDiskImage).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(DataDiskImages))
             {
@@ -56,14 +56,14 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDiskImages)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<DataDiskImage>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(AutomaticOSUpgradeProperties))
             {
                 writer.WritePropertyName("automaticOSUpgradeProperties"u8);
-                writer.WriteObjectValue(AutomaticOSUpgradeProperties, options);
+                ((IJsonModel<AutomaticOSUpgradeProperties>)AutomaticOSUpgradeProperties).Write(writer, options);
             }
             if (Optional.IsDefined(HyperVGeneration))
             {
@@ -73,7 +73,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Disallowed))
             {
                 writer.WritePropertyName("disallowed"u8);
-                writer.WriteObjectValue(Disallowed, options);
+                ((IJsonModel<DisallowedConfiguration>)Disallowed).Write(writer, options);
             }
             writer.WriteEndObject();
         }
@@ -156,7 +156,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            plan = PurchasePlan.DeserializePurchasePlan(property0.Value, options);
+                            plan = ModelSerializationExtensions.JsonDeserialize<PurchasePlan>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("osDiskImage"u8))
@@ -165,7 +165,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            osDiskImage = OSDiskImage.DeserializeOSDiskImage(property0.Value, options);
+                            osDiskImage = ModelSerializationExtensions.JsonDeserialize<OSDiskImage>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("dataDiskImages"u8))
@@ -188,7 +188,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            automaticOSUpgradeProperties = AutomaticOSUpgradeProperties.DeserializeAutomaticOSUpgradeProperties(property0.Value, options);
+                            automaticOSUpgradeProperties = ModelSerializationExtensions.JsonDeserialize<AutomaticOSUpgradeProperties>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("hyperVGeneration"u8))
@@ -206,7 +206,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            disallowed = DisallowedConfiguration.DeserializeDisallowedConfiguration(property0.Value, options);
+                            disallowed = ModelSerializationExtensions.JsonDeserialize<DisallowedConfiguration>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                     }

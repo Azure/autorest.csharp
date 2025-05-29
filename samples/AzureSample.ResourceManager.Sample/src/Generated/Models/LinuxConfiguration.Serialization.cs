@@ -44,7 +44,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Ssh))
             {
                 writer.WritePropertyName("ssh"u8);
-                writer.WriteObjectValue(Ssh, options);
+                ((IJsonModel<SshConfiguration>)Ssh).Write(writer, options);
             }
             if (Optional.IsDefined(ProvisionVmAgent))
             {
@@ -110,7 +110,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    ssh = SshConfiguration.DeserializeSshConfiguration(property.Value, options);
+                    ssh = ModelSerializationExtensions.JsonDeserialize<SshConfiguration>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("provisionVMAgent"u8))

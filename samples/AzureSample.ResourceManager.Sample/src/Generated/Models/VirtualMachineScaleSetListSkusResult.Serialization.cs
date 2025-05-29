@@ -41,7 +41,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             writer.WriteStartArray();
             foreach (var item in VmssSkus)
             {
-                writer.WriteObjectValue(item, options);
+                ((IJsonModel<VirtualMachineScaleSetSku>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))

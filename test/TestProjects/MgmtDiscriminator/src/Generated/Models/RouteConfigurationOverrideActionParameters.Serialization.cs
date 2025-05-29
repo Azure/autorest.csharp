@@ -41,7 +41,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(OriginGroupOverride))
             {
                 writer.WritePropertyName("originGroupOverride"u8);
-                writer.WriteObjectValue(OriginGroupOverride, options);
+                ((IJsonModel<OriginGroupOverride>)OriginGroupOverride).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -97,7 +97,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    originGroupOverride = OriginGroupOverride.DeserializeOriginGroupOverride(property.Value, options);
+                    originGroupOverride = ModelSerializationExtensions.JsonDeserialize<OriginGroupOverride>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

@@ -22,7 +22,7 @@ namespace Azure.AI.FormRecognizer.Models
             {
                 if (property.NameEquals("error"u8))
                 {
-                    error = ErrorInformation.DeserializeErrorInformation(property.Value);
+                    error = ModelSerializationExtensions.JsonDeserialize<ErrorInformation>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

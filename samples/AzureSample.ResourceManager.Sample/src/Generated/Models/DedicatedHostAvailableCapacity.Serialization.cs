@@ -43,7 +43,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in AllocatableVms)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<DedicatedHostAllocatableVm>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

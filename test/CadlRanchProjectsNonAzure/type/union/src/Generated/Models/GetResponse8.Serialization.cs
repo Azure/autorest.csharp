@@ -30,7 +30,7 @@ namespace Scm._Type.Union.Models
             }
 
             writer.WritePropertyName("prop"u8);
-            writer.WriteObjectValue(Prop, options);
+            ((IJsonModel<MixedLiteralsCases>)Prop).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -75,7 +75,7 @@ namespace Scm._Type.Union.Models
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = MixedLiteralsCases.DeserializeMixedLiteralsCases(property.Value, options);
+                    prop = ModelSerializationExtensions.JsonDeserialize<MixedLiteralsCases>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

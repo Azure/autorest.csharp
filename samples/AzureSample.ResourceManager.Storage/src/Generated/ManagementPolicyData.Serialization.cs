@@ -91,7 +91,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            policy = ManagementPolicySchema.DeserializeManagementPolicySchema(property0.Value);
+                            policy = ModelSerializationExtensions.JsonDeserialize<ManagementPolicySchema>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                     }

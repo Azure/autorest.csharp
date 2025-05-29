@@ -44,7 +44,7 @@ namespace MgmtTypeSpec
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties, options);
+                ((IJsonModel<FooProperties>)Properties).Write(writer, options);
             }
             if (Optional.IsDefined(ExtendedLocation))
             {
@@ -91,7 +91,7 @@ namespace MgmtTypeSpec
                     {
                         continue;
                     }
-                    properties = FooProperties.DeserializeFooProperties(property.Value, options);
+                    properties = ModelSerializationExtensions.JsonDeserialize<FooProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("extendedLocation"u8))

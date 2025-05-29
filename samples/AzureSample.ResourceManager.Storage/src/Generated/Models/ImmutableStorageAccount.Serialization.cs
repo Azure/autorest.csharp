@@ -53,7 +53,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    immutabilityPolicy = AccountImmutabilityPolicyProperties.DeserializeAccountImmutabilityPolicyProperties(property.Value);
+                    immutabilityPolicy = ModelSerializationExtensions.JsonDeserialize<AccountImmutabilityPolicyProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

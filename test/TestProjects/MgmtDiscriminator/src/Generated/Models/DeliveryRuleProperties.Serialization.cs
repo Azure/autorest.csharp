@@ -45,7 +45,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(Conditions))
             {
                 writer.WritePropertyName("conditions"u8);
-                writer.WriteObjectValue(Conditions, options);
+                ((IJsonModel<DeliveryRuleCondition>)Conditions).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Actions))
             {
@@ -53,7 +53,7 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Actions)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<DeliveryRuleAction>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -64,14 +64,14 @@ namespace MgmtDiscriminator.Models
                 foreach (var item in ExtraMappingInfo)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value, options);
+                    ((IJsonModel<DeliveryRuleAction>)item.Value).Write(writer, options);
                 }
                 writer.WriteEndObject();
             }
             if (Optional.IsDefined(Pet))
             {
                 writer.WritePropertyName("pet"u8);
-                writer.WriteObjectValue(Pet, options);
+                ((IJsonModel<Pet>)Pet).Write(writer, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Foo))
             {
@@ -140,7 +140,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    conditions = DeliveryRuleCondition.DeserializeDeliveryRuleCondition(property.Value, options);
+                    conditions = ModelSerializationExtensions.JsonDeserialize<DeliveryRuleCondition>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("actions"u8))
@@ -177,7 +177,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    pet = Pet.DeserializePet(property.Value, options);
+                    pet = ModelSerializationExtensions.JsonDeserialize<Pet>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("foo"u8))

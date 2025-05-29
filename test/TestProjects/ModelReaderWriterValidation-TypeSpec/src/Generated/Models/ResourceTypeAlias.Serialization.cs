@@ -46,7 +46,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in Paths)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<ResourceTypeAliasPath>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -63,12 +63,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             if (Optional.IsDefined(DefaultPattern))
             {
                 writer.WritePropertyName("defaultPattern"u8);
-                writer.WriteObjectValue(DefaultPattern, options);
+                ((IJsonModel<ResourceTypeAliasPattern>)DefaultPattern).Write(writer, options);
             }
             if (Optional.IsDefined(DefaultMetadata))
             {
                 writer.WritePropertyName("defaultMetadata"u8);
-                writer.WriteObjectValue(DefaultMetadata, options);
+                ((IJsonModel<ResourceTypeAliasPathMetadata>)DefaultMetadata).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -156,7 +156,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    defaultPattern = ResourceTypeAliasPattern.DeserializeResourceTypeAliasPattern(property.Value, options);
+                    defaultPattern = ModelSerializationExtensions.JsonDeserialize<ResourceTypeAliasPattern>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("defaultMetadata"u8))
@@ -165,7 +165,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    defaultMetadata = ResourceTypeAliasPathMetadata.DeserializeResourceTypeAliasPathMetadata(property.Value, options);
+                    defaultMetadata = ModelSerializationExtensions.JsonDeserialize<ResourceTypeAliasPathMetadata>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

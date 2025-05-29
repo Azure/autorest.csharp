@@ -40,7 +40,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(ColocationStatus))
             {
                 writer.WritePropertyName("colocationStatus"u8);
-                writer.WriteObjectValue(ColocationStatus, options);
+                ((IJsonModel<InstanceViewStatus>)ColocationStatus).Write(writer, options);
             }
         }
 
@@ -76,7 +76,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    colocationStatus = InstanceViewStatus.DeserializeInstanceViewStatus(property.Value, options);
+                    colocationStatus = ModelSerializationExtensions.JsonDeserialize<InstanceViewStatus>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

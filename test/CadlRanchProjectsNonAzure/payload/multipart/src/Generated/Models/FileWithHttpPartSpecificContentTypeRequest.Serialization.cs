@@ -31,7 +31,7 @@ namespace Scm.Payload.Multipart.Models
             }
 
             writer.WritePropertyName("profileImage"u8);
-            writer.WriteObjectValue(ProfileImage, options);
+            ((IJsonModel<FileSpecificContentType>)ProfileImage).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -76,7 +76,7 @@ namespace Scm.Payload.Multipart.Models
             {
                 if (property.NameEquals("profileImage"u8))
                 {
-                    profileImage = FileSpecificContentType.DeserializeFileSpecificContentType(property.Value, options);
+                    profileImage = ModelSerializationExtensions.JsonDeserialize<FileSpecificContentType>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

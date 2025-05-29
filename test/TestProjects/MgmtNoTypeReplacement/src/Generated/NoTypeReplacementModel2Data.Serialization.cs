@@ -44,7 +44,7 @@ namespace MgmtNoTypeReplacement
                     {
                         continue;
                     }
-                    foo = NoSubResourceModel.DeserializeNoSubResourceModel(property.Value);
+                    foo = ModelSerializationExtensions.JsonDeserialize<NoSubResourceModel>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

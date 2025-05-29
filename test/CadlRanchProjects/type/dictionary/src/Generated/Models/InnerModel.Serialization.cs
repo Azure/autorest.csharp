@@ -44,7 +44,7 @@ namespace _Type._Dictionary.Models
                 foreach (var item in Children)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value, options);
+                    ((IJsonModel<InnerModel>)item.Value).Write(writer, options);
                 }
                 writer.WriteEndObject();
             }

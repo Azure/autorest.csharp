@@ -245,7 +245,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            subnet = Subnet.DeserializeSubnet(property0.Value);
+                            subnet = ModelSerializationExtensions.JsonDeserialize<Subnet>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("primary"u8))
@@ -263,7 +263,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            publicIPAddress = PublicIPAddress.DeserializePublicIPAddress(property0.Value);
+                            publicIPAddress = ModelSerializationExtensions.JsonDeserialize<PublicIPAddress>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("applicationSecurityGroups"u8))
@@ -295,7 +295,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            privateLinkConnectionProperties = NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties.DeserializeNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(property0.Value);
+                            privateLinkConnectionProperties = ModelSerializationExtensions.JsonDeserialize<NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                     }

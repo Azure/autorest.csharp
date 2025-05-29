@@ -38,7 +38,7 @@ namespace MgmtDiscriminator.Models
 
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("parameters"u8);
-            writer.WriteObjectValue(Parameters, options);
+            ((IJsonModel<RemoteAddressMatchConditionParameters>)Parameters).Write(writer, options);
         }
 
         DeliveryRuleRemoteAddressCondition IJsonModel<DeliveryRuleRemoteAddressCondition>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
@@ -70,7 +70,7 @@ namespace MgmtDiscriminator.Models
             {
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = RemoteAddressMatchConditionParameters.DeserializeRemoteAddressMatchConditionParameters(property.Value, options);
+                    parameters = ModelSerializationExtensions.JsonDeserialize<RemoteAddressMatchConditionParameters>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

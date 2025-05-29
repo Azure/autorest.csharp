@@ -47,7 +47,7 @@ namespace MgmtMockAndSample.Models
                             {
                                 continue;
                             }
-                            privateLinkServiceConnectionState = MhsmPrivateLinkServiceConnectionState.DeserializeMhsmPrivateLinkServiceConnectionState(property0.Value);
+                            privateLinkServiceConnectionState = ModelSerializationExtensions.JsonDeserialize<MhsmPrivateLinkServiceConnectionState>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

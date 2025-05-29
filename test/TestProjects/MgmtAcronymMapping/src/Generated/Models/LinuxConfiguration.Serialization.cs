@@ -59,7 +59,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    ssh = SshConfiguration.DeserializeSshConfiguration(property.Value);
+                    ssh = ModelSerializationExtensions.JsonDeserialize<SshConfiguration>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("provisionVMAgent"u8))

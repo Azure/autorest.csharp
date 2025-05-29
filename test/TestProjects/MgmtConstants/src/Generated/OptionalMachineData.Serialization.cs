@@ -121,7 +121,7 @@ namespace MgmtConstants
                             {
                                 continue;
                             }
-                            listener = ModelWithRequiredConstant.DeserializeModelWithRequiredConstant(property0.Value);
+                            listener = ModelSerializationExtensions.JsonDeserialize<ModelWithRequiredConstant>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("content"u8))
@@ -130,7 +130,7 @@ namespace MgmtConstants
                             {
                                 continue;
                             }
-                            content = ModelWithOptionalConstant.DeserializeModelWithOptionalConstant(property0.Value);
+                            content = ModelSerializationExtensions.JsonDeserialize<ModelWithOptionalConstant>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                     }

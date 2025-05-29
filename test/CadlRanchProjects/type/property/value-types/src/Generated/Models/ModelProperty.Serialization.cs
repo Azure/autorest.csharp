@@ -36,7 +36,7 @@ namespace _Type.Property.ValueTypes.Models
             }
 
             writer.WritePropertyName("property"u8);
-            writer.WriteObjectValue(Property, options);
+            ((IJsonModel<InnerModel>)Property).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -81,7 +81,7 @@ namespace _Type.Property.ValueTypes.Models
             {
                 if (property0.NameEquals("property"u8))
                 {
-                    property = InnerModel.DeserializeInnerModel(property0.Value, options);
+                    property = ModelSerializationExtensions.JsonDeserialize<InnerModel>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (options.Format != "W")

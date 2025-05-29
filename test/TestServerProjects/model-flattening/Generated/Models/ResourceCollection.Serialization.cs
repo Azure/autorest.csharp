@@ -38,7 +38,7 @@ namespace model_flattening.Models
             if (Optional.IsDefined(Productresource))
             {
                 writer.WritePropertyName("productresource"u8);
-                writer.WriteObjectValue(Productresource, options);
+                ((IJsonModel<FlattenedProduct>)Productresource).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Arrayofresources))
             {
@@ -46,7 +46,7 @@ namespace model_flattening.Models
                 writer.WriteStartArray();
                 foreach (var item in Arrayofresources)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<FlattenedProduct>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -57,7 +57,7 @@ namespace model_flattening.Models
                 foreach (var item in Dictionaryofresources)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value, options);
+                    ((IJsonModel<FlattenedProduct>)item.Value).Write(writer, options);
                 }
                 writer.WriteEndObject();
             }
@@ -111,7 +111,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    productresource = FlattenedProduct.DeserializeFlattenedProduct(property.Value, options);
+                    productresource = ModelSerializationExtensions.JsonDeserialize<FlattenedProduct>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("arrayofresources"u8))

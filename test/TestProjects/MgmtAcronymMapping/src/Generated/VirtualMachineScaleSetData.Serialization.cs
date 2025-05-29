@@ -179,7 +179,7 @@ namespace MgmtAcronymMapping
                     {
                         continue;
                     }
-                    sku = MgmtAcronymMappingSku.DeserializeMgmtAcronymMappingSku(property.Value);
+                    sku = ModelSerializationExtensions.JsonDeserialize<MgmtAcronymMappingSku>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("plan"u8))
@@ -188,7 +188,7 @@ namespace MgmtAcronymMapping
                     {
                         continue;
                     }
-                    plan = MgmtAcronymMappingPlan.DeserializeMgmtAcronymMappingPlan(property.Value);
+                    plan = ModelSerializationExtensions.JsonDeserialize<MgmtAcronymMappingPlan>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))
@@ -287,7 +287,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            upgradePolicy = UpgradePolicy.DeserializeUpgradePolicy(property0.Value);
+                            upgradePolicy = ModelSerializationExtensions.JsonDeserialize<UpgradePolicy>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("automaticRepairsPolicy"u8))
@@ -296,7 +296,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            automaticRepairsPolicy = AutomaticRepairsPolicy.DeserializeAutomaticRepairsPolicy(property0.Value);
+                            automaticRepairsPolicy = ModelSerializationExtensions.JsonDeserialize<AutomaticRepairsPolicy>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("virtualMachineProfile"u8))
@@ -305,7 +305,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            virtualMachineProfile = VirtualMachineScaleSetVmProfile.DeserializeVirtualMachineScaleSetVmProfile(property0.Value);
+                            virtualMachineProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetVmProfile>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))
@@ -387,7 +387,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            additionalCapabilities = AdditionalCapabilities.DeserializeAdditionalCapabilities(property0.Value);
+                            additionalCapabilities = ModelSerializationExtensions.JsonDeserialize<AdditionalCapabilities>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                         if (property0.NameEquals("scaleInPolicy"u8))
@@ -396,7 +396,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            scaleInPolicy = ScaleInPolicy.DeserializeScaleInPolicy(property0.Value);
+                            scaleInPolicy = ModelSerializationExtensions.JsonDeserialize<ScaleInPolicy>(property0, ModelSerializationExtensions.JsonSerializerOptions);
                             continue;
                         }
                     }

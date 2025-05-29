@@ -80,12 +80,12 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("credentials"u8))
                 {
-                    credentials = DataSourceCredentials.DeserializeDataSourceCredentials(property.Value);
+                    credentials = ModelSerializationExtensions.JsonDeserialize<DataSourceCredentials>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("container"u8))
                 {
-                    container = DataContainer.DeserializeDataContainer(property.Value);
+                    container = ModelSerializationExtensions.JsonDeserialize<DataContainer>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("dataChangeDetectionPolicy"u8))
@@ -94,7 +94,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    dataChangeDetectionPolicy = DataChangeDetectionPolicy.DeserializeDataChangeDetectionPolicy(property.Value);
+                    dataChangeDetectionPolicy = ModelSerializationExtensions.JsonDeserialize<DataChangeDetectionPolicy>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("dataDeletionDetectionPolicy"u8))
@@ -103,7 +103,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    dataDeletionDetectionPolicy = DataDeletionDetectionPolicy.DeserializeDataDeletionDetectionPolicy(property.Value);
+                    dataDeletionDetectionPolicy = ModelSerializationExtensions.JsonDeserialize<DataDeletionDetectionPolicy>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"u8))

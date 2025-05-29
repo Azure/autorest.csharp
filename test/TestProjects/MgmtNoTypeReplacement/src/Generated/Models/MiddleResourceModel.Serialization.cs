@@ -38,7 +38,7 @@ namespace MgmtNoTypeReplacement.Models
                     {
                         continue;
                     }
-                    foo = NoSubResourceModel2.DeserializeNoSubResourceModel2(property.Value);
+                    foo = ModelSerializationExtensions.JsonDeserialize<NoSubResourceModel2>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }

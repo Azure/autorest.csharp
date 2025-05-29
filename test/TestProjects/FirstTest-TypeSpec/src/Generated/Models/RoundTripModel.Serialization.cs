@@ -55,7 +55,7 @@ namespace FirstTestTypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue(RequiredModel, options);
+            ((IJsonModel<Thing>)RequiredModel).Write(writer, options);
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
@@ -232,7 +232,7 @@ namespace FirstTestTypeSpec.Models
                 writer.WriteEndObject();
             }
             writer.WritePropertyName("modelWithRequiredNullable"u8);
-            writer.WriteObjectValue(ModelWithRequiredNullable, options);
+            ((IJsonModel<ModelWithRequiredNullableProperties>)ModelWithRequiredNullable).Write(writer, options);
             writer.WritePropertyName("unionList"u8);
             writer.WriteStartArray();
             foreach (var item in UnionList)
@@ -360,7 +360,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 if (property.NameEquals("requiredModel"u8))
                 {
-                    requiredModel = Thing.DeserializeThing(property.Value, options);
+                    requiredModel = ModelSerializationExtensions.JsonDeserialize<Thing>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("intExtensibleEnum"u8))
@@ -556,7 +556,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 if (property.NameEquals("modelWithRequiredNullable"u8))
                 {
-                    modelWithRequiredNullable = ModelWithRequiredNullableProperties.DeserializeModelWithRequiredNullableProperties(property.Value, options);
+                    modelWithRequiredNullable = ModelSerializationExtensions.JsonDeserialize<ModelWithRequiredNullableProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
                 if (property.NameEquals("unionList"u8))

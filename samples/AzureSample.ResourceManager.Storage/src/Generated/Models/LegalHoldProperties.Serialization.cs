@@ -52,7 +52,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    protectedAppendWritesHistory = ProtectedAppendWritesHistory.DeserializeProtectedAppendWritesHistory(property.Value);
+                    protectedAppendWritesHistory = ModelSerializationExtensions.JsonDeserialize<ProtectedAppendWritesHistory>(property, ModelSerializationExtensions.JsonSerializerOptions);
                     continue;
                 }
             }
