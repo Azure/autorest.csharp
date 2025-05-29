@@ -445,14 +445,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         return new[]
                         {
                             Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions),
-                            JsonSerializerExpression.Serialize(utf8JsonWriter, value, serializeOptions).ToStatement()
+                            JsonSerializerExpression.SerializeIJsonModel(valueSerialization.Type, utf8JsonWriter, value, serializeOptions).ToStatement()
                         };
                     }
 
-                    return JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
+                    return JsonSerializerExpression.SerializeIJsonModel(valueSerialization.Type, utf8JsonWriter, value).ToStatement();
 
                 case ObjectType:
-                    return utf8JsonWriter.WriteObjectValue(value, options: options);
+                    return options is null
+                        ? utf8JsonWriter.WriteObjectValue(value, options: options)
+                        : JsonSerializerExpression.SerializeIJsonModel(valueSerialization.Type, utf8JsonWriter, value, options).ToStatement();
 
                 case EnumType { IsIntValueType: true, IsExtensible: false } enumType:
                     return utf8JsonWriter.WriteNumberValue(new CastExpression(value.NullableStructValue(valueSerialization.Type), enumType.ValueType));
@@ -1071,7 +1073,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 case JsonValueSerialization { Options: JsonSerializationOptions.UseManagedServiceIdentityV3 } valueSerialization:
                     var declareSerializeOptions = Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions);
-                    value = GetDeserializeValueExpression(element, valueSerialization.Type, options, valueSerialization.Format, serializeOptions);
+                    value = GetDeserializeValueExpression(element, valueSerialization.Type, options, valueSerialization.Format, serializeOptions, useManagedServiceIdentityV3: true);
                     return declareSerializeOptions;
 
                 case JsonValueSerialization valueSerialization:
@@ -1123,7 +1125,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return deserializeValueBlock;
         }
 
-        public static ValueExpression GetDeserializeValueExpression(JsonElementExpression element, CSharpType serializationType, ModelReaderWriterOptionsExpression? options, SerializationFormat serializationFormat = SerializationFormat.Default, ValueExpression? serializerOptions = null)
+        public static ValueExpression GetDeserializeValueExpression(JsonElementExpression element, CSharpType serializationType, ModelReaderWriterOptionsExpression? options, SerializationFormat serializationFormat = SerializationFormat.Default, ValueExpression? serializerOptions = null, bool useManagedServiceIdentityV3 = false)
         {
             if (serializationType.SerializeAs != null)
             {
@@ -1144,7 +1146,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return GetDeserializeImplementation(serializationType.Implementation, element, options, serializerOptions);
         }
 
-        private static ValueExpression GetDeserializeImplementation(TypeProvider implementation, JsonElementExpression element, ModelReaderWriterOptionsExpression? options, ValueExpression? serializerOptions)
+        private static ValueExpression GetDeserializeImplementation(TypeProvider implementation, JsonElementExpression element, ModelReaderWriterOptionsExpression? options, ValueExpression? serializerOptions, bool useManagedServiceIdentityV3 = false)
         {
             switch (implementation)
             {
@@ -1155,10 +1157,18 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return New.Instance(resource.Type, new MemberExpression(null, "Client"), SerializableObjectTypeExpression.Deserialize(resourceDataType, element));
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.InputModel):
-                    return JsonSerializerExpression.Deserialize(element, implementation.Type);
+                    return new InvokeStaticMethodExpression(
+                            ModelSerializationExtensionsProvider.Instance.Type,
+                            nameof(ModelSerializationExtensionsProvider.Instance.JsonDeserializeMethodName),
+                            [element, mgmtObjectType.Type, new MemberExpression(ModelSerializationExtensionsProvider.Instance.Type, useManagedServiceIdentityV3 ? ModelSerializationExtensionsProvider.JsonSerializerOptionsUseManagedServiceIdentityV3Name : ModelSerializationExtensionsProvider.JsonSerializerOptionsName)],
+                            TypeArguments: [implementation.Type]);
 
                 case SerializableObjectType type:
-                    return SerializableObjectTypeExpression.Deserialize(type, element, options);
+                    return new InvokeStaticMethodExpression(
+                            ModelSerializationExtensionsProvider.Instance.Type,
+                            nameof(ModelSerializationExtensionsProvider.Instance.JsonDeserializeMethodName),
+                            [element, type.Type, new MemberExpression(ModelSerializationExtensionsProvider.Instance.Type, ModelSerializationExtensionsProvider.JsonSerializerOptionsName)],
+                            TypeArguments: [implementation.Type]);
 
                 case EnumType clientEnum:
                     var value = GetFrameworkTypeValueExpression(clientEnum.ValueType.FrameworkType, element, SerializationFormat.Default, null);

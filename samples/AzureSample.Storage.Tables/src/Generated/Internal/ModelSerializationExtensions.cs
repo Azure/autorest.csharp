@@ -19,7 +19,7 @@ namespace AzureSample.Storage.Tables
 {
     internal static class ModelSerializationExtensions
     {
-        private static readonly JsonSerializerOptions s_options = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, AzureSampleStorageTablesContext.Default) } };
+        internal static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, AzureSampleStorageTablesContext.Default) } };
         internal static readonly JsonDocumentOptions JsonDocumentOptions = new JsonDocumentOptions { MaxDepth = 256 };
         internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
         internal static readonly BinaryData SentinelValue = BinaryData.FromBytes("\"__EMPTY__\""u8.ToArray());
@@ -266,9 +266,9 @@ namespace AzureSample.Storage.Tables
 
         [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
         [UnconditionalSuppressMessage("Trimming", "IL3050", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
-        public static T JsonDeserialize<T>(JsonProperty property, ModelReaderWriterOptions options)
+        public static T JsonDeserialize<T>(JsonProperty property, JsonSerializerOptions options)
         {
-            return JsonSerializer.Deserialize<T>(property.Value.GetRawText(), s_options);
+            return JsonSerializer.Deserialize<T>(property.Value.GetRawText(), JsonSerializerOptions);
         }
 
         internal static class TypeFormatters

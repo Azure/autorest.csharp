@@ -16,6 +16,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -66,15 +67,33 @@ namespace AutoRest.CSharp.Output.Models.Types
             };
 
             _jsonSerializerOptionsField = new FieldDeclaration(
-                modifiers: FieldModifiers.Private | FieldModifiers.Static | FieldModifiers.ReadOnly,
+                modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
                 type: typeof(JsonSerializerOptions),
-                name: _jsonSerializerOptionsName)
+                name: JsonSerializerOptionsName)
             {
                 InitializationValue = New.Instance(
                     typeof(JsonSerializerOptions),
                     new Dictionary<string, ValueExpression>
                     {
                         { "Converters", new ArrayInitializerExpression([New.Instance(typeof(JsonModelConverter), [new MemberExpression(null, _wireOptionsName), ModelReaderWriterContextExpression.Default])]) }
+                    })
+            };
+            _jsonSerializerOptionsUseManagedServiceIdentityV3Field = new FieldDeclaration(
+                modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
+                type: typeof(JsonSerializerOptions),
+                name: JsonSerializerOptionsUseManagedServiceIdentityV3Name)
+            {
+                InitializationValue = New.Instance(
+                    typeof(JsonSerializerOptions),
+                    new Dictionary<string, ValueExpression>
+                    {
+                        {
+                            "Converters",
+                            new ArrayInitializerExpression([
+                                    New.Instance(typeof(JsonModelConverter), [new MemberExpression(null, _wireOptionsName), ModelReaderWriterContextExpression.Default]),
+                                    New.Instance(typeof(ManagedServiceIdentityTypeV3Converter))
+                                    ])
+                        }
                     })
             };
         }
@@ -86,7 +105,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         private const string _sentinelBinaryDataName = "SentinelValue";
         private readonly FieldDeclaration? _sentinelBinaryDataField;
         private readonly FieldDeclaration _jsonSerializerOptionsField;
-        private const string _jsonSerializerOptionsName = "s_options";
+        internal const string JsonSerializerOptionsName = "JsonSerializerOptions";
+        private readonly FieldDeclaration _jsonSerializerOptionsUseManagedServiceIdentityV3Field;
+        internal const string JsonSerializerOptionsUseManagedServiceIdentityV3Name = "JsonSerializerOptionsUseManagedServiceIdentityV3";
+        internal const string JsonDeserializeMethodName = "JsonDeserialize";
 
         private ModelReaderWriterOptionsExpression? _wireOptions;
         public ModelReaderWriterOptionsExpression WireOptions => _wireOptions ??= new ModelReaderWriterOptionsExpression(new MemberExpression(Type, _wireOptionsName));
@@ -99,6 +121,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override IEnumerable<FieldDeclaration> BuildFields()
         {
             yield return _jsonSerializerOptionsField;
+
+            if (Configuration.AzureArm)
+            {
+                yield return _jsonSerializerOptionsUseManagedServiceIdentityV3Field;
+            }
+
             yield return _jsonDocumentOptionsField;
             yield return _wireOptionsField;
 
@@ -470,6 +498,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new Method(signature, body);
         }
 
+        public ValueExpression Deserialize(JsonPropertyExpression jsonProperty, ValueExpression options, CSharpType type)
+            => new InvokeStaticMethodExpression(Type, _jsonDeserializeMethodName, [jsonProperty, options], TypeArguments: [type]);
+
         public MethodBodyStatement WriteBase64StringValue(Utf8JsonWriterExpression writer, ValueExpression value, string? format)
             => new InvokeStaticMethodStatement(Type, _writeBase64StringValueMethodName, new[] { writer, value, Literal(format) }, CallAsExtension: true);
 
@@ -705,10 +736,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Method BuildJsonDeserializeMethod()
         {
             var propertyParameter = new Parameter("property", null, typeof(JsonProperty), null, ValidationType.None, null);
-            var optionsParameter = new Parameter("options", null, typeof(ModelReaderWriterOptions), null, ValidationType.None, null);
-            var justificationExpression = new KeywordExpression("Justification =", Literal("By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.");
+            var optionsParameter = new Parameter("options", null, typeof(JsonSerializerOptions), null, ValidationType.None, null);
+            var justificationExpression = new KeywordExpression("Justification =", Literal("By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue."));
             var signature = new MethodSignature(
-                "JsonDeserialize",
+                _jsonDeserializeMethodName,
                 null,
                 null,
                 MethodSignatureModifiers.Static | MethodSignatureModifiers.Public,
@@ -728,7 +759,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     $"{nameof(JsonSerializer.Deserialize)}",
                     [
                         new MemberExpression(propertyParameter, nameof(JsonProperty.Value)).Invoke(nameof(JsonElement.GetRawText)),
-                        new MemberExpression(null, _jsonSerializerOptionsName)
+                        new MemberExpression(null, JsonSerializerOptionsName)
                     ],
                     TypeArguments: [_t]
                     ))
