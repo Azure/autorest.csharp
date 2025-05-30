@@ -21,7 +21,7 @@ namespace MgmtScopeResource.Models
                 writer.WriteStringValue(Location);
             }
             writer.WritePropertyName("properties"u8);
-            writer.WriteObjectValue(Properties);
+            JsonSerializer.Serialize(writer, Properties);
             writer.WriteEndObject();
         }
     }

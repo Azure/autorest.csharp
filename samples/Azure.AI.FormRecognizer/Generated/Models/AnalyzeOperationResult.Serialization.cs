@@ -45,7 +45,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    analyzeResult = ModelSerializationExtensions.JsonDeserialize<AnalyzeResult>(property);
+                    analyzeResult = ModelSerializationExtensions.JsonDeserialize<AnalyzeResult>(property.Value);
                     continue;
                 }
             }

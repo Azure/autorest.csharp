@@ -115,7 +115,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    windowsConfiguration = ModelSerializationExtensions.JsonDeserialize<WindowsConfiguration>(property);
+                    windowsConfiguration = ModelSerializationExtensions.JsonDeserialize<WindowsConfiguration>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("linuxConfiguration"u8))
@@ -124,7 +124,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    linuxConfiguration = ModelSerializationExtensions.JsonDeserialize<LinuxConfiguration>(property);
+                    linuxConfiguration = ModelSerializationExtensions.JsonDeserialize<LinuxConfiguration>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("secrets"u8))

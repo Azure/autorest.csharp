@@ -18,7 +18,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Smb))
             {
                 writer.WritePropertyName("smb"u8);
-                writer.WriteObjectValue(Smb);
+                JsonSerializer.Serialize(writer, Smb);
             }
             writer.WriteEndObject();
         }
@@ -38,7 +38,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    smb = ModelSerializationExtensions.JsonDeserialize<SmbSetting>(property);
+                    smb = ModelSerializationExtensions.JsonDeserialize<SmbSetting>(property.Value);
                     continue;
                 }
             }

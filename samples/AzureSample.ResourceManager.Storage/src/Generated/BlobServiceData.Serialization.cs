@@ -22,7 +22,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(Cors))
             {
                 writer.WritePropertyName("cors"u8);
-                writer.WriteObjectValue(Cors);
+                JsonSerializer.Serialize(writer, Cors);
             }
             if (Optional.IsDefined(DefaultServiceVersion))
             {
@@ -32,7 +32,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(DeleteRetentionPolicy))
             {
                 writer.WritePropertyName("deleteRetentionPolicy"u8);
-                writer.WriteObjectValue(DeleteRetentionPolicy);
+                JsonSerializer.Serialize(writer, DeleteRetentionPolicy);
             }
             if (Optional.IsDefined(IsVersioningEnabled))
             {
@@ -47,22 +47,22 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(ChangeFeed))
             {
                 writer.WritePropertyName("changeFeed"u8);
-                writer.WriteObjectValue(ChangeFeed);
+                JsonSerializer.Serialize(writer, ChangeFeed);
             }
             if (Optional.IsDefined(RestorePolicy))
             {
                 writer.WritePropertyName("restorePolicy"u8);
-                writer.WriteObjectValue(RestorePolicy);
+                JsonSerializer.Serialize(writer, RestorePolicy);
             }
             if (Optional.IsDefined(ContainerDeleteRetentionPolicy))
             {
                 writer.WritePropertyName("containerDeleteRetentionPolicy"u8);
-                writer.WriteObjectValue(ContainerDeleteRetentionPolicy);
+                JsonSerializer.Serialize(writer, ContainerDeleteRetentionPolicy);
             }
             if (Optional.IsDefined(LastAccessTimeTrackingPolicy))
             {
                 writer.WritePropertyName("lastAccessTimeTrackingPolicy"u8);
-                writer.WriteObjectValue(LastAccessTimeTrackingPolicy);
+                JsonSerializer.Serialize(writer, LastAccessTimeTrackingPolicy);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -96,7 +96,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerStorageSku>(property);
+                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerStorageSku>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -120,7 +120,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -138,7 +138,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            cors = ModelSerializationExtensions.JsonDeserialize<CorsRules>(property0);
+                            cors = ModelSerializationExtensions.JsonDeserialize<CorsRules>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("defaultServiceVersion"u8))
@@ -152,7 +152,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            deleteRetentionPolicy = ModelSerializationExtensions.JsonDeserialize<DeleteRetentionPolicy>(property0);
+                            deleteRetentionPolicy = ModelSerializationExtensions.JsonDeserialize<DeleteRetentionPolicy>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("isVersioningEnabled"u8))
@@ -179,7 +179,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            changeFeed = ModelSerializationExtensions.JsonDeserialize<ChangeFeed>(property0);
+                            changeFeed = ModelSerializationExtensions.JsonDeserialize<ChangeFeed>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("restorePolicy"u8))
@@ -188,7 +188,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            restorePolicy = ModelSerializationExtensions.JsonDeserialize<RestorePolicyProperties>(property0);
+                            restorePolicy = ModelSerializationExtensions.JsonDeserialize<RestorePolicyProperties>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("containerDeleteRetentionPolicy"u8))
@@ -197,7 +197,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            containerDeleteRetentionPolicy = ModelSerializationExtensions.JsonDeserialize<DeleteRetentionPolicy>(property0);
+                            containerDeleteRetentionPolicy = ModelSerializationExtensions.JsonDeserialize<DeleteRetentionPolicy>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("lastAccessTimeTrackingPolicy"u8))
@@ -206,7 +206,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            lastAccessTimeTrackingPolicy = ModelSerializationExtensions.JsonDeserialize<LastAccessTimeTrackingPolicy>(property0);
+                            lastAccessTimeTrackingPolicy = ModelSerializationExtensions.JsonDeserialize<LastAccessTimeTrackingPolicy>(property0.Value);
                             continue;
                         }
                     }

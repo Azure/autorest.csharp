@@ -23,7 +23,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(EncryptionSettings))
             {
                 writer.WritePropertyName("encryptionSettings"u8);
-                writer.WriteObjectValue(EncryptionSettings);
+                JsonSerializer.Serialize(writer, EncryptionSettings);
             }
             if (Optional.IsDefined(Name))
             {
@@ -33,12 +33,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
-                writer.WriteObjectValue(Vhd);
+                JsonSerializer.Serialize(writer, Vhd);
             }
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue(Image);
+                JsonSerializer.Serialize(writer, Image);
             }
             if (Optional.IsDefined(Caching))
             {
@@ -53,7 +53,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
-                writer.WriteObjectValue(DiffDiskSettings);
+                JsonSerializer.Serialize(writer, DiffDiskSettings);
             }
             writer.WritePropertyName("createOption"u8);
             writer.WriteStringValue(CreateOption.ToString());
@@ -65,7 +65,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue(ManagedDisk);
+                JsonSerializer.Serialize(writer, ManagedDisk);
             }
             writer.WriteEndObject();
         }
@@ -104,7 +104,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    encryptionSettings = ModelSerializationExtensions.JsonDeserialize<DiskEncryptionSettings>(property);
+                    encryptionSettings = ModelSerializationExtensions.JsonDeserialize<DiskEncryptionSettings>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("name"u8))
@@ -118,7 +118,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    vhd = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property);
+                    vhd = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("image"u8))
@@ -127,7 +127,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property);
+                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("caching"u8))
@@ -154,7 +154,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    diffDiskSettings = ModelSerializationExtensions.JsonDeserialize<DiffDiskSettings>(property);
+                    diffDiskSettings = ModelSerializationExtensions.JsonDeserialize<DiffDiskSettings>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("createOption"u8))
@@ -177,7 +177,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    managedDisk = ModelSerializationExtensions.JsonDeserialize<ManagedDiskParameters>(property);
+                    managedDisk = ModelSerializationExtensions.JsonDeserialize<ManagedDiskParameters>(property.Value);
                     continue;
                 }
             }

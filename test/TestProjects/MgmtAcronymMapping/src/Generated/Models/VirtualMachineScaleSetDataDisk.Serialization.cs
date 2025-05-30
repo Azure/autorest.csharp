@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue(ManagedDisk);
+                JsonSerializer.Serialize(writer, ManagedDisk);
             }
             if (Optional.IsDefined(DiskIopsReadWrite))
             {
@@ -122,7 +122,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    managedDisk = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetManagedDiskParameters>(property);
+                    managedDisk = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetManagedDiskParameters>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("diskIOPSReadWrite"u8))

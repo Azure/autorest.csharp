@@ -26,7 +26,7 @@ namespace MgmtSafeFlatten
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                JsonSerializer.Serialize(writer, Properties);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -71,7 +71,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<LayerOneSingle>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<LayerOneSingle>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -114,7 +114,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
             }

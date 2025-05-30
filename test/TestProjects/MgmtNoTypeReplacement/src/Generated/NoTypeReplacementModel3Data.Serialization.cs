@@ -20,7 +20,7 @@ namespace MgmtNoTypeReplacement
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
-                writer.WriteObjectValue(Foo);
+                JsonSerializer.Serialize(writer, Foo);
             }
             writer.WriteEndObject();
         }
@@ -44,7 +44,7 @@ namespace MgmtNoTypeReplacement
                     {
                         continue;
                     }
-                    foo = ModelSerializationExtensions.JsonDeserialize<MiddleResourceModel>(property);
+                    foo = ModelSerializationExtensions.JsonDeserialize<MiddleResourceModel>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -68,7 +68,7 @@ namespace MgmtNoTypeReplacement
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
             }

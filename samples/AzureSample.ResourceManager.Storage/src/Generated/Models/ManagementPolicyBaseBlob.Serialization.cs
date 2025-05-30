@@ -18,17 +18,17 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(TierToCool))
             {
                 writer.WritePropertyName("tierToCool"u8);
-                writer.WriteObjectValue(TierToCool);
+                JsonSerializer.Serialize(writer, TierToCool);
             }
             if (Optional.IsDefined(TierToArchive))
             {
                 writer.WritePropertyName("tierToArchive"u8);
-                writer.WriteObjectValue(TierToArchive);
+                JsonSerializer.Serialize(writer, TierToArchive);
             }
             if (Optional.IsDefined(Delete))
             {
                 writer.WritePropertyName("delete"u8);
-                writer.WriteObjectValue(Delete);
+                JsonSerializer.Serialize(writer, Delete);
             }
             if (Optional.IsDefined(EnableAutoTierToHotFromCool))
             {
@@ -56,7 +56,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    tierToCool = ModelSerializationExtensions.JsonDeserialize<DateAfterModification>(property);
+                    tierToCool = ModelSerializationExtensions.JsonDeserialize<DateAfterModification>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tierToArchive"u8))
@@ -65,7 +65,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    tierToArchive = ModelSerializationExtensions.JsonDeserialize<DateAfterModification>(property);
+                    tierToArchive = ModelSerializationExtensions.JsonDeserialize<DateAfterModification>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("delete"u8))
@@ -74,7 +74,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    delete = ModelSerializationExtensions.JsonDeserialize<DateAfterModification>(property);
+                    delete = ModelSerializationExtensions.JsonDeserialize<DateAfterModification>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("enableAutoTierToHotFromCool"u8))

@@ -25,7 +25,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(RuleType.ToString());
             writer.WritePropertyName("definition"u8);
-            writer.WriteObjectValue(Definition);
+            JsonSerializer.Serialize(writer, Definition);
             writer.WriteEndObject();
         }
 
@@ -62,7 +62,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                 }
                 if (property.NameEquals("definition"u8))
                 {
-                    definition = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyDefinition>(property);
+                    definition = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyDefinition>(property.Value);
                     continue;
                 }
             }

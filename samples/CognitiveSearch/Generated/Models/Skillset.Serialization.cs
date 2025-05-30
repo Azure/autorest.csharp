@@ -25,13 +25,13 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Skills)
             {
-                writer.WriteObjectValue(item);
+                JsonSerializer.Serialize(writer, item);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(CognitiveServicesAccount))
             {
                 writer.WritePropertyName("cognitiveServices"u8);
-                writer.WriteObjectValue(CognitiveServicesAccount);
+                JsonSerializer.Serialize(writer, CognitiveServicesAccount);
             }
             if (Optional.IsDefined(ETag))
             {
@@ -80,7 +80,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    cognitiveServices = ModelSerializationExtensions.JsonDeserialize<CognitiveServicesAccount>(property);
+                    cognitiveServices = ModelSerializationExtensions.JsonDeserialize<CognitiveServicesAccount>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"u8))

@@ -19,7 +19,7 @@ namespace _Specs_.Azure.Core.Model
 {
     internal static class ModelSerializationExtensions
     {
-        private static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, _Specs_AzureCoreModelContext.Default) } };
+        private static readonly JsonSerializerOptions s_options = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, _Specs_AzureCoreModelContext.Default) } };
         internal static readonly JsonDocumentOptions JsonDocumentOptions = new JsonDocumentOptions { MaxDepth = 256 };
         internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
         internal static readonly BinaryData SentinelValue = BinaryData.FromBytes("\"__EMPTY__\""u8.ToArray());
@@ -267,11 +267,11 @@ namespace _Specs_.Azure.Core.Model
             return sentinelSpan.SequenceEqual(valueSpan);
         }
 
-        [SuppressMessage("Trimming", "IL2026", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
-        [SuppressMessage("Trimming", "IL3050", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
-        public static T JsonDeserialize<T>(JsonProperty property)
+        [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
+        [UnconditionalSuppressMessage("Trimming", "IL3050", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
+        public static T JsonDeserialize<T>(JsonElement element)
         {
-            return JsonSerializer.Deserialize<T>(property.Value.GetRawText(), JsonSerializerOptions);
+            return JsonSerializer.Deserialize<T>(element.GetRawText(), s_options);
         }
 
         internal static class TypeFormatters

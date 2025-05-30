@@ -27,7 +27,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                JsonSerializer.Serialize(writer, Sku);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -52,7 +52,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(PrivateLinkServiceConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                writer.WriteObjectValue(PrivateLinkServiceConnectionState);
+                JsonSerializer.Serialize(writer, PrivateLinkServiceConnectionState);
             }
             if (Optional.IsDefined(ProvisioningState))
             {
@@ -93,7 +93,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<ManagedHsmSku>(property);
+                    sku = ModelSerializationExtensions.JsonDeserialize<ManagedHsmSku>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -136,7 +136,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -154,7 +154,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            privateEndpoint = JsonSerializer.Deserialize<Azure.ResourceManager.Resources.Models.SubResource>(property0.Value.GetRawText());
+                            privateEndpoint = ModelSerializationExtensions.JsonDeserialize<Azure.ResourceManager.Resources.Models.SubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnectionState"u8))
@@ -163,7 +163,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            privateLinkServiceConnectionState = ModelSerializationExtensions.JsonDeserialize<MhsmPrivateLinkServiceConnectionState>(property0);
+                            privateLinkServiceConnectionState = ModelSerializationExtensions.JsonDeserialize<MhsmPrivateLinkServiceConnectionState>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

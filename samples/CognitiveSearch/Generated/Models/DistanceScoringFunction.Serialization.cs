@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("distance"u8);
-            writer.WriteObjectValue(Parameters);
+            JsonSerializer.Serialize(writer, Parameters);
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type);
             writer.WritePropertyName("fieldName"u8);
@@ -47,7 +47,7 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("distance"u8))
                 {
-                    distance = ModelSerializationExtensions.JsonDeserialize<DistanceScoringParameters>(property);
+                    distance = ModelSerializationExtensions.JsonDeserialize<DistanceScoringParameters>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("type"u8))

@@ -88,7 +88,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    vmAgent = ModelSerializationExtensions.JsonDeserialize<VirtualMachineAgentInstanceView>(property);
+                    vmAgent = ModelSerializationExtensions.JsonDeserialize<VirtualMachineAgentInstanceView>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("maintenanceRedeployStatus"u8))
@@ -97,7 +97,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    maintenanceRedeployStatus = ModelSerializationExtensions.JsonDeserialize<MaintenanceRedeployStatus>(property);
+                    maintenanceRedeployStatus = ModelSerializationExtensions.JsonDeserialize<MaintenanceRedeployStatus>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("disks"u8))
@@ -120,7 +120,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    vmHealth = ModelSerializationExtensions.JsonDeserialize<VirtualMachineHealthStatus>(property);
+                    vmHealth = ModelSerializationExtensions.JsonDeserialize<VirtualMachineHealthStatus>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("bootDiagnostics"u8))
@@ -129,7 +129,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    bootDiagnostics = ModelSerializationExtensions.JsonDeserialize<BootDiagnosticsInstanceView>(property);
+                    bootDiagnostics = ModelSerializationExtensions.JsonDeserialize<BootDiagnosticsInstanceView>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("assignedHost"u8))
@@ -157,7 +157,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    patchStatus = ModelSerializationExtensions.JsonDeserialize<VirtualMachinePatchStatus>(property);
+                    patchStatus = ModelSerializationExtensions.JsonDeserialize<VirtualMachinePatchStatus>(property.Value);
                     continue;
                 }
             }

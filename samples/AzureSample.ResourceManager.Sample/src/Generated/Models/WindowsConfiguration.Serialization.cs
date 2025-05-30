@@ -162,7 +162,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    patchSettings = ModelSerializationExtensions.JsonDeserialize<PatchSettings>(property);
+                    patchSettings = ModelSerializationExtensions.JsonDeserialize<PatchSettings>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("winRM"u8))
@@ -171,7 +171,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    winRM = ModelSerializationExtensions.JsonDeserialize<WinRMConfiguration>(property);
+                    winRM = ModelSerializationExtensions.JsonDeserialize<WinRMConfiguration>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

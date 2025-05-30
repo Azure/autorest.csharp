@@ -23,7 +23,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(Policy))
             {
                 writer.WritePropertyName("policy"u8);
-                writer.WriteObjectValue(Policy);
+                JsonSerializer.Serialize(writer, Policy);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -64,7 +64,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -91,7 +91,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            policy = ModelSerializationExtensions.JsonDeserialize<ManagementPolicySchema>(property0);
+                            policy = ModelSerializationExtensions.JsonDeserialize<ManagementPolicySchema>(property0.Value);
                             continue;
                         }
                     }

@@ -20,8 +20,8 @@ namespace MgmtNoTypeReplacement
 {
     internal static class ModelSerializationExtensions
     {
-        private static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, MgmtNoTypeReplacementContext.Default) } };
-        internal static readonly JsonSerializerOptions JsonSerializerOptionsUseManagedServiceIdentityV3 = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, MgmtNoTypeReplacementContext.Default), new Azure.ResourceManager.Models.ManagedServiceIdentityTypeV3Converter() } };
+        private static readonly JsonSerializerOptions s_options = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, MgmtNoTypeReplacementContext.Default) } };
+        private static readonly JsonSerializerOptions s_optionsUseManagedServiceIdentityV3 = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, MgmtNoTypeReplacementContext.Default), new Azure.ResourceManager.Models.ManagedServiceIdentityTypeV3Converter() } };
         internal static readonly JsonDocumentOptions JsonDocumentOptions = new JsonDocumentOptions { MaxDepth = 256 };
         internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
         internal static readonly BinaryData SentinelValue = BinaryData.FromBytes("\"__EMPTY__\""u8.ToArray());
@@ -266,11 +266,11 @@ namespace MgmtNoTypeReplacement
             return sentinelSpan.SequenceEqual(valueSpan);
         }
 
-        [SuppressMessage("Trimming", "IL2026", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
-        [SuppressMessage("Trimming", "IL3050", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
-        public static T JsonDeserialize<T>(JsonProperty property)
+        [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
+        [UnconditionalSuppressMessage("Trimming", "IL3050", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
+        public static T JsonDeserialize<T>(JsonElement element)
         {
-            return JsonSerializer.Deserialize<T>(property.Value.GetRawText(), JsonSerializerOptions);
+            return JsonSerializer.Deserialize<T>(element.GetRawText(), s_options);
         }
 
         internal static class TypeFormatters

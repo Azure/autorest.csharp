@@ -323,7 +323,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 }
                 if (property.NameEquals("requiredModel"u8))
                 {
-                    requiredModel = ModelSerializationExtensions.JsonDeserialize<Thing>(property);
+                    requiredModel = ModelSerializationExtensions.JsonDeserialize<Thing>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("intExtensibleEnum"u8))

@@ -88,7 +88,7 @@ namespace paging.Models
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<ProductProperties>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<ProductProperties>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

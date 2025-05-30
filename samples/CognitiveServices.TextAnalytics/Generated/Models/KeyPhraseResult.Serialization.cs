@@ -51,7 +51,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    statistics = ModelSerializationExtensions.JsonDeserialize<RequestStatistics>(property);
+                    statistics = ModelSerializationExtensions.JsonDeserialize<RequestStatistics>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("modelVersion"u8))

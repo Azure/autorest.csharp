@@ -22,7 +22,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(TextWeights))
             {
                 writer.WritePropertyName("text"u8);
-                writer.WriteObjectValue(TextWeights);
+                JsonSerializer.Serialize(writer, TextWeights);
             }
             if (Optional.IsCollectionDefined(Functions))
             {
@@ -30,7 +30,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Functions)
                 {
-                    writer.WriteObjectValue(item);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    text = ModelSerializationExtensions.JsonDeserialize<TextWeights>(property);
+                    text = ModelSerializationExtensions.JsonDeserialize<TextWeights>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("functions"u8))

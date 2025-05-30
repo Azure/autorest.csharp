@@ -41,7 +41,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(HealthProbe))
             {
                 writer.WritePropertyName("healthProbe"u8);
-                JsonSerializer.Serialize(writer, HealthProbe);
+                ((IJsonModel<WritableSubResource>)HealthProbe).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(NetworkInterfaceConfigurations))
             {
@@ -102,7 +102,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    healthProbe = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    healthProbe = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("networkInterfaceConfigurations"u8))

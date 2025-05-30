@@ -59,7 +59,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualMachines)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<Azure.ResourceManager.Resources.Models.SubResource>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -174,7 +174,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             List<Azure.ResourceManager.Resources.Models.SubResource> array = new List<Azure.ResourceManager.Resources.Models.SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(JsonSerializer.Deserialize<Azure.ResourceManager.Resources.Models.SubResource>(item.GetRawText()));
+                                array.Add(ModelSerializationExtensions.JsonDeserialize<Azure.ResourceManager.Resources.Models.SubResource>(item));
                             }
                             virtualMachines = array;
                             continue;
@@ -208,7 +208,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            instanceView = ModelSerializationExtensions.JsonDeserialize<DedicatedHostInstanceView>(property0);
+                            instanceView = ModelSerializationExtensions.JsonDeserialize<DedicatedHostInstanceView>(property0.Value);
                             continue;
                         }
                     }

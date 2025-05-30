@@ -211,7 +211,7 @@ namespace MgmtDiscriminator
                     {
                         continue;
                     }
-                    shellProperty = ModelSerializationExtensions.JsonDeserialize<Shell>(property);
+                    shellProperty = ModelSerializationExtensions.JsonDeserialize<Shell>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("sku"u8))
@@ -220,7 +220,7 @@ namespace MgmtDiscriminator
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<Sku1>(property);
+                    sku = ModelSerializationExtensions.JsonDeserialize<Sku1>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("unflattened"u8))
@@ -229,7 +229,7 @@ namespace MgmtDiscriminator
                     {
                         continue;
                     }
-                    unflattened = ModelSerializationExtensions.JsonDeserialize<Unflattened>(property);
+                    unflattened = ModelSerializationExtensions.JsonDeserialize<Unflattened>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -238,7 +238,7 @@ namespace MgmtDiscriminator
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<DeliveryRuleProperties>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<DeliveryRuleProperties>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -262,7 +262,7 @@ namespace MgmtDiscriminator
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (property.Value.ValueKind == JsonValueKind.String || property.Value.ValueKind == JsonValueKind.Null)

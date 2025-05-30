@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(BootDiagnostics))
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
-                writer.WriteObjectValue(BootDiagnostics);
+                JsonSerializer.Serialize(writer, BootDiagnostics);
             }
             writer.WriteEndObject();
         }
@@ -38,7 +38,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    bootDiagnostics = ModelSerializationExtensions.JsonDeserialize<BootDiagnostics>(property);
+                    bootDiagnostics = ModelSerializationExtensions.JsonDeserialize<BootDiagnostics>(property.Value);
                     continue;
                 }
             }

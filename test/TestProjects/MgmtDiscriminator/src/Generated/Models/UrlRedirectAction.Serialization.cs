@@ -70,7 +70,7 @@ namespace MgmtDiscriminator.Models
             {
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = ModelSerializationExtensions.JsonDeserialize<UrlRedirectActionParameters>(property);
+                    parameters = ModelSerializationExtensions.JsonDeserialize<UrlRedirectActionParameters>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

@@ -20,7 +20,7 @@ namespace MgmtScopeResource
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                JsonSerializer.Serialize(writer, Properties);
             }
             writer.WriteEndObject();
         }
@@ -44,7 +44,7 @@ namespace MgmtScopeResource
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<ResourceLinkProperties>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<ResourceLinkProperties>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -68,7 +68,7 @@ namespace MgmtScopeResource
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
             }

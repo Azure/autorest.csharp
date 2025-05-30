@@ -45,7 +45,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                JsonSerializer.Serialize(writer, Identity);
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -97,17 +97,17 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(AvailabilitySet))
             {
                 writer.WritePropertyName("availabilitySet"u8);
-                JsonSerializer.Serialize(writer, AvailabilitySet);
+                ((IJsonModel<WritableSubResource>)AvailabilitySet).Write(writer, options);
             }
             if (Optional.IsDefined(VirtualMachineScaleSet))
             {
                 writer.WritePropertyName("virtualMachineScaleSet"u8);
-                JsonSerializer.Serialize(writer, VirtualMachineScaleSet);
+                ((IJsonModel<WritableSubResource>)VirtualMachineScaleSet).Write(writer, options);
             }
             if (Optional.IsDefined(ProximityPlacementGroup))
             {
                 writer.WritePropertyName("proximityPlacementGroup"u8);
-                JsonSerializer.Serialize(writer, ProximityPlacementGroup);
+                ((IJsonModel<WritableSubResource>)ProximityPlacementGroup).Write(writer, options);
             }
             if (Optional.IsDefined(Priority))
             {
@@ -127,12 +127,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Host))
             {
                 writer.WritePropertyName("host"u8);
-                JsonSerializer.Serialize(writer, Host);
+                ((IJsonModel<WritableSubResource>)Host).Write(writer, options);
             }
             if (Optional.IsDefined(HostGroup))
             {
                 writer.WritePropertyName("hostGroup"u8);
-                JsonSerializer.Serialize(writer, HostGroup);
+                ((IJsonModel<WritableSubResource>)HostGroup).Write(writer, options);
             }
             if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
@@ -216,7 +216,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    plan = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerSamplePlan>(property);
+                    plan = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerSamplePlan>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))
@@ -225,7 +225,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
+                    identity = ModelSerializationExtensions.JsonDeserialize<ManagedServiceIdentity>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("zones"u8))
@@ -271,7 +271,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            hardwareProfile = ModelSerializationExtensions.JsonDeserialize<HardwareProfile>(property0);
+                            hardwareProfile = ModelSerializationExtensions.JsonDeserialize<HardwareProfile>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("storageProfile"u8))
@@ -280,7 +280,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            storageProfile = ModelSerializationExtensions.JsonDeserialize<StorageProfile>(property0);
+                            storageProfile = ModelSerializationExtensions.JsonDeserialize<StorageProfile>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("additionalCapabilities"u8))
@@ -289,7 +289,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            additionalCapabilities = ModelSerializationExtensions.JsonDeserialize<AdditionalCapabilities>(property0);
+                            additionalCapabilities = ModelSerializationExtensions.JsonDeserialize<AdditionalCapabilities>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("osProfile"u8))
@@ -298,7 +298,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            osProfile = ModelSerializationExtensions.JsonDeserialize<OSProfile>(property0);
+                            osProfile = ModelSerializationExtensions.JsonDeserialize<OSProfile>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("networkProfile"u8))
@@ -307,7 +307,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            networkProfile = ModelSerializationExtensions.JsonDeserialize<NetworkProfile>(property0);
+                            networkProfile = ModelSerializationExtensions.JsonDeserialize<NetworkProfile>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("securityProfile"u8))
@@ -316,7 +316,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            securityProfile = ModelSerializationExtensions.JsonDeserialize<SecurityProfile>(property0);
+                            securityProfile = ModelSerializationExtensions.JsonDeserialize<SecurityProfile>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("diagnosticsProfile"u8))
@@ -325,7 +325,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            diagnosticsProfile = ModelSerializationExtensions.JsonDeserialize<DiagnosticsProfile>(property0);
+                            diagnosticsProfile = ModelSerializationExtensions.JsonDeserialize<DiagnosticsProfile>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("availabilitySet"u8))
@@ -334,7 +334,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            availabilitySet = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            availabilitySet = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("virtualMachineScaleSet"u8))
@@ -343,7 +343,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            virtualMachineScaleSet = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            virtualMachineScaleSet = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("proximityPlacementGroup"u8))
@@ -352,7 +352,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            proximityPlacementGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            proximityPlacementGroup = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("priority"u8))
@@ -379,7 +379,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            billingProfile = ModelSerializationExtensions.JsonDeserialize<BillingProfile>(property0);
+                            billingProfile = ModelSerializationExtensions.JsonDeserialize<BillingProfile>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("host"u8))
@@ -388,7 +388,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            host = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            host = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("hostGroup"u8))
@@ -397,7 +397,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            hostGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            hostGroup = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))
@@ -411,7 +411,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            instanceView = ModelSerializationExtensions.JsonDeserialize<VirtualMachineInstanceView>(property0);
+                            instanceView = ModelSerializationExtensions.JsonDeserialize<VirtualMachineInstanceView>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("licenseType"u8))

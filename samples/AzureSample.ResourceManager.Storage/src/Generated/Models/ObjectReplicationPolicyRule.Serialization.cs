@@ -27,7 +27,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Filters))
             {
                 writer.WritePropertyName("filters"u8);
-                writer.WriteObjectValue(Filters);
+                JsonSerializer.Serialize(writer, Filters);
             }
             writer.WriteEndObject();
         }
@@ -65,7 +65,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    filters = ModelSerializationExtensions.JsonDeserialize<ObjectReplicationPolicyFilter>(property);
+                    filters = ModelSerializationExtensions.JsonDeserialize<ObjectReplicationPolicyFilter>(property.Value);
                     continue;
                 }
             }

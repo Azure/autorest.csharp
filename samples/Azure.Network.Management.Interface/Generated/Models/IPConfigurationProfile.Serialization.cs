@@ -30,7 +30,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                writer.WriteObjectValue(Subnet);
+                JsonSerializer.Serialize(writer, Subnet);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -85,7 +85,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            subnet = ModelSerializationExtensions.JsonDeserialize<Subnet>(property0);
+                            subnet = ModelSerializationExtensions.JsonDeserialize<Subnet>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

@@ -30,7 +30,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(VirtualNetworkTap))
             {
                 writer.WritePropertyName("virtualNetworkTap"u8);
-                writer.WriteObjectValue(VirtualNetworkTap);
+                JsonSerializer.Serialize(writer, VirtualNetworkTap);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -85,7 +85,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            virtualNetworkTap = ModelSerializationExtensions.JsonDeserialize<VirtualNetworkTap>(property0);
+                            virtualNetworkTap = ModelSerializationExtensions.JsonDeserialize<VirtualNetworkTap>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

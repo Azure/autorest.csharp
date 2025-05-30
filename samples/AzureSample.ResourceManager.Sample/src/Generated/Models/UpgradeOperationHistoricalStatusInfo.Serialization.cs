@@ -101,7 +101,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<UpgradeOperationHistoricalStatusInfoProperties>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<UpgradeOperationHistoricalStatusInfoProperties>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("type"u8))

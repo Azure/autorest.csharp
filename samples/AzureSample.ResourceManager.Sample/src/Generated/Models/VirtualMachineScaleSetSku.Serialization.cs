@@ -110,7 +110,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerSampleSku>(property);
+                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerSampleSku>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("capacity"u8))
@@ -119,7 +119,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    capacity = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetSkuCapacity>(property);
+                    capacity = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetSkuCapacity>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

@@ -27,12 +27,12 @@ namespace MgmtSafeFlatten
             if (Optional.IsDefined(LayerOne))
             {
                 writer.WritePropertyName("layerOne"u8);
-                writer.WriteObjectValue(LayerOne);
+                JsonSerializer.Serialize(writer, LayerOne);
             }
             if (Optional.IsDefined(LayerOneType))
             {
                 writer.WritePropertyName("layerOneType"u8);
-                writer.WriteObjectValue(LayerOneType);
+                JsonSerializer.Serialize(writer, LayerOneType);
             }
             if (Optional.IsDefined(LayerOneConflict))
             {
@@ -84,7 +84,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    layerOne = ModelSerializationExtensions.JsonDeserialize<LayerOneSingle>(property);
+                    layerOne = ModelSerializationExtensions.JsonDeserialize<LayerOneSingle>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("layerOneType"u8))
@@ -93,7 +93,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    layerOneType = ModelSerializationExtensions.JsonDeserialize<LayerOneBaseType>(property);
+                    layerOneType = ModelSerializationExtensions.JsonDeserialize<LayerOneBaseType>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("layerOneConflict"u8))
@@ -102,7 +102,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    layerOneConflict = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    layerOneConflict = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -145,7 +145,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
             }

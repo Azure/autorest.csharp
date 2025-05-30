@@ -22,7 +22,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             writer.WritePropertyName("destination"u8);
             writer.WriteStringValue(Destination);
             writer.WritePropertyName("definition"u8);
-            writer.WriteObjectValue(Definition);
+            JsonSerializer.Serialize(writer, Definition);
             writer.WriteEndObject();
         }
 
@@ -55,7 +55,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                 }
                 if (property.NameEquals("definition"u8))
                 {
-                    definition = ModelSerializationExtensions.JsonDeserialize<BlobInventoryPolicyDefinition>(property);
+                    definition = ModelSerializationExtensions.JsonDeserialize<BlobInventoryPolicyDefinition>(property.Value);
                     continue;
                 }
             }

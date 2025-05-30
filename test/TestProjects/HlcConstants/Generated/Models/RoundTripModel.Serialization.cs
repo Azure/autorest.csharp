@@ -19,12 +19,12 @@ namespace HlcConstants.Models
             if (Optional.IsDefined(RequiredConstantModel))
             {
                 writer.WritePropertyName("requiredConstantModel"u8);
-                writer.WriteObjectValue(RequiredConstantModel);
+                JsonSerializer.Serialize(writer, RequiredConstantModel);
             }
             if (Optional.IsDefined(OptionalConstantModel))
             {
                 writer.WritePropertyName("optionalConstantModel"u8);
-                writer.WriteObjectValue(OptionalConstantModel);
+                JsonSerializer.Serialize(writer, OptionalConstantModel);
             }
             writer.WriteEndObject();
         }
@@ -45,7 +45,7 @@ namespace HlcConstants.Models
                     {
                         continue;
                     }
-                    requiredConstantModel = ModelSerializationExtensions.JsonDeserialize<ModelWithRequiredConstant>(property);
+                    requiredConstantModel = ModelSerializationExtensions.JsonDeserialize<ModelWithRequiredConstant>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("optionalConstantModel"u8))
@@ -54,7 +54,7 @@ namespace HlcConstants.Models
                     {
                         continue;
                     }
-                    optionalConstantModel = ModelSerializationExtensions.JsonDeserialize<ModelWithOptionalConstant>(property);
+                    optionalConstantModel = ModelSerializationExtensions.JsonDeserialize<ModelWithOptionalConstant>(property.Value);
                     continue;
                 }
             }

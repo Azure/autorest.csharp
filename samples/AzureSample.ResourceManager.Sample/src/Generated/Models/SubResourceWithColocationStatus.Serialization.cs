@@ -76,7 +76,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    colocationStatus = ModelSerializationExtensions.JsonDeserialize<InstanceViewStatus>(property);
+                    colocationStatus = ModelSerializationExtensions.JsonDeserialize<InstanceViewStatus>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

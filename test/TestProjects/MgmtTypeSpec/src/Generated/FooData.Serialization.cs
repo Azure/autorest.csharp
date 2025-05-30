@@ -49,7 +49,7 @@ namespace MgmtTypeSpec
             if (Optional.IsDefined(ExtendedLocation))
             {
                 writer.WritePropertyName("extendedLocation"u8);
-                JsonSerializer.Serialize(writer, ExtendedLocation);
+                ((IJsonModel<ExtendedLocation>)ExtendedLocation).Write(writer, options);
             }
         }
 
@@ -91,7 +91,7 @@ namespace MgmtTypeSpec
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<FooProperties>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<FooProperties>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("extendedLocation"u8))
@@ -100,7 +100,7 @@ namespace MgmtTypeSpec
                     {
                         continue;
                     }
-                    extendedLocation = JsonSerializer.Deserialize<ExtendedLocation>(property.Value.GetRawText());
+                    extendedLocation = ModelSerializationExtensions.JsonDeserialize<ExtendedLocation>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -143,7 +143,7 @@ namespace MgmtTypeSpec
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

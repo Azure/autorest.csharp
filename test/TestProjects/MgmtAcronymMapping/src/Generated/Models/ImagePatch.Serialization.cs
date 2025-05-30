@@ -36,7 +36,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                writer.WriteObjectValue(StorageProfile);
+                JsonSerializer.Serialize(writer, StorageProfile);
             }
             if (Optional.IsDefined(HyperVGeneration))
             {

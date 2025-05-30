@@ -22,7 +22,7 @@ namespace MgmtAcronymMapping
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                writer.WriteObjectValue(Plan);
+                JsonSerializer.Serialize(writer, Plan);
             }
             if (Optional.IsDefined(Identity))
             {
@@ -57,37 +57,37 @@ namespace MgmtAcronymMapping
             if (Optional.IsDefined(HardwareProfile))
             {
                 writer.WritePropertyName("hardwareProfile"u8);
-                writer.WriteObjectValue(HardwareProfile);
+                JsonSerializer.Serialize(writer, HardwareProfile);
             }
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                writer.WriteObjectValue(StorageProfile);
+                JsonSerializer.Serialize(writer, StorageProfile);
             }
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                writer.WriteObjectValue(AdditionalCapabilities);
+                JsonSerializer.Serialize(writer, AdditionalCapabilities);
             }
             if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                writer.WriteObjectValue(OSProfile);
+                JsonSerializer.Serialize(writer, OSProfile);
             }
             if (Optional.IsDefined(NetworkProfile))
             {
                 writer.WritePropertyName("networkProfile"u8);
-                writer.WriteObjectValue(NetworkProfile);
+                JsonSerializer.Serialize(writer, NetworkProfile);
             }
             if (Optional.IsDefined(SecurityProfile))
             {
                 writer.WritePropertyName("securityProfile"u8);
-                writer.WriteObjectValue(SecurityProfile);
+                JsonSerializer.Serialize(writer, SecurityProfile);
             }
             if (Optional.IsDefined(DiagnosticsProfile))
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
-                writer.WriteObjectValue(DiagnosticsProfile);
+                JsonSerializer.Serialize(writer, DiagnosticsProfile);
             }
             if (Optional.IsDefined(AvailabilitySet))
             {
@@ -117,7 +117,7 @@ namespace MgmtAcronymMapping
             if (Optional.IsDefined(BillingProfile))
             {
                 writer.WritePropertyName("billingProfile"u8);
-                writer.WriteObjectValue(BillingProfile);
+                JsonSerializer.Serialize(writer, BillingProfile);
             }
             if (Optional.IsDefined(Host))
             {
@@ -186,7 +186,7 @@ namespace MgmtAcronymMapping
                     {
                         continue;
                     }
-                    plan = ModelSerializationExtensions.JsonDeserialize<MgmtAcronymMappingPlan>(property);
+                    plan = ModelSerializationExtensions.JsonDeserialize<MgmtAcronymMappingPlan>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))
@@ -195,7 +195,7 @@ namespace MgmtAcronymMapping
                     {
                         continue;
                     }
-                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
+                    identity = ModelSerializationExtensions.JsonDeserialize<ManagedServiceIdentity>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("zones"u8))
@@ -252,7 +252,7 @@ namespace MgmtAcronymMapping
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -270,7 +270,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            hardwareProfile = ModelSerializationExtensions.JsonDeserialize<HardwareProfile>(property0);
+                            hardwareProfile = ModelSerializationExtensions.JsonDeserialize<HardwareProfile>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("storageProfile"u8))
@@ -279,7 +279,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            storageProfile = ModelSerializationExtensions.JsonDeserialize<StorageProfile>(property0);
+                            storageProfile = ModelSerializationExtensions.JsonDeserialize<StorageProfile>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("additionalCapabilities"u8))
@@ -288,7 +288,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            additionalCapabilities = ModelSerializationExtensions.JsonDeserialize<AdditionalCapabilities>(property0);
+                            additionalCapabilities = ModelSerializationExtensions.JsonDeserialize<AdditionalCapabilities>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("osProfile"u8))
@@ -297,7 +297,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            osProfile = ModelSerializationExtensions.JsonDeserialize<OSProfile>(property0);
+                            osProfile = ModelSerializationExtensions.JsonDeserialize<OSProfile>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("networkProfile"u8))
@@ -306,7 +306,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            networkProfile = ModelSerializationExtensions.JsonDeserialize<NetworkProfile>(property0);
+                            networkProfile = ModelSerializationExtensions.JsonDeserialize<NetworkProfile>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("securityProfile"u8))
@@ -315,7 +315,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            securityProfile = ModelSerializationExtensions.JsonDeserialize<SecurityProfile>(property0);
+                            securityProfile = ModelSerializationExtensions.JsonDeserialize<SecurityProfile>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("diagnosticsProfile"u8))
@@ -324,7 +324,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            diagnosticsProfile = ModelSerializationExtensions.JsonDeserialize<DiagnosticsProfile>(property0);
+                            diagnosticsProfile = ModelSerializationExtensions.JsonDeserialize<DiagnosticsProfile>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("availabilitySet"u8))
@@ -333,7 +333,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            availabilitySet = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            availabilitySet = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("virtualMachineScaleSet"u8))
@@ -342,7 +342,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            virtualMachineScaleSet = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            virtualMachineScaleSet = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("proximityPlacementGroup"u8))
@@ -351,7 +351,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            proximityPlacementGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            proximityPlacementGroup = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("priority"u8))
@@ -378,7 +378,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            billingProfile = ModelSerializationExtensions.JsonDeserialize<BillingProfile>(property0);
+                            billingProfile = ModelSerializationExtensions.JsonDeserialize<BillingProfile>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("host"u8))
@@ -387,7 +387,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            host = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            host = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("hostGroup"u8))
@@ -396,7 +396,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            hostGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            hostGroup = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))
@@ -410,7 +410,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            instanceView = ModelSerializationExtensions.JsonDeserialize<VirtualMachineInstanceView>(property0);
+                            instanceView = ModelSerializationExtensions.JsonDeserialize<VirtualMachineInstanceView>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("licenseType"u8))

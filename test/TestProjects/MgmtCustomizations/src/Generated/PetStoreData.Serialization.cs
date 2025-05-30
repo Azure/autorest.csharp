@@ -79,7 +79,7 @@ namespace MgmtCustomizations
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<PetStoreProperties>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<PetStoreProperties>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -103,7 +103,7 @@ namespace MgmtCustomizations
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

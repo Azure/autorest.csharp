@@ -27,7 +27,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    availablePatchSummary = ModelSerializationExtensions.JsonDeserialize<AvailablePatchSummary>(property);
+                    availablePatchSummary = ModelSerializationExtensions.JsonDeserialize<AvailablePatchSummary>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("lastPatchInstallationSummary"u8))
@@ -36,7 +36,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    lastPatchInstallationSummary = ModelSerializationExtensions.JsonDeserialize<LastPatchInstallationSummary>(property);
+                    lastPatchInstallationSummary = ModelSerializationExtensions.JsonDeserialize<LastPatchInstallationSummary>(property.Value);
                     continue;
                 }
             }

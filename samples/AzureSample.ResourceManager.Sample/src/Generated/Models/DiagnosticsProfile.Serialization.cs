@@ -89,7 +89,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    bootDiagnostics = ModelSerializationExtensions.JsonDeserialize<BootDiagnostics>(property);
+                    bootDiagnostics = ModelSerializationExtensions.JsonDeserialize<BootDiagnostics>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

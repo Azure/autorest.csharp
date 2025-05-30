@@ -27,7 +27,7 @@ namespace MgmtScopeResource.Models
                     {
                         continue;
                     }
-                    errorResponse = ModelSerializationExtensions.JsonDeserialize<ErrorResponse>(property);
+                    errorResponse = ModelSerializationExtensions.JsonDeserialize<ErrorResponse>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -36,7 +36,7 @@ namespace MgmtScopeResource.Models
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<DeploymentPropertiesExtended>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<DeploymentPropertiesExtended>(property.Value);
                     continue;
                 }
             }

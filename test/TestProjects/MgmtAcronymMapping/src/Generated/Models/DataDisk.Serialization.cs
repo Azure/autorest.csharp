@@ -25,12 +25,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
-                writer.WriteObjectValue(Vhd);
+                JsonSerializer.Serialize(writer, Vhd);
             }
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue(Image);
+                JsonSerializer.Serialize(writer, Image);
             }
             if (Optional.IsDefined(Caching))
             {
@@ -52,7 +52,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue(ManagedDisk);
+                JsonSerializer.Serialize(writer, ManagedDisk);
             }
             if (Optional.IsDefined(ToBeDetached))
             {
@@ -98,7 +98,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    vhd = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property);
+                    vhd = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("image"u8))
@@ -107,7 +107,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property);
+                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("caching"u8))
@@ -148,7 +148,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    managedDisk = ModelSerializationExtensions.JsonDeserialize<ManagedDiskParameters>(property);
+                    managedDisk = ModelSerializationExtensions.JsonDeserialize<ManagedDiskParameters>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("toBeDetached"u8))

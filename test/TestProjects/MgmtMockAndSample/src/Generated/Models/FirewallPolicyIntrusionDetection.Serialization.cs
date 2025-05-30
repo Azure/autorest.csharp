@@ -23,7 +23,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Configuration))
             {
                 writer.WritePropertyName("configuration"u8);
-                writer.WriteObjectValue(Configuration);
+                JsonSerializer.Serialize(writer, Configuration);
             }
             writer.WriteEndObject();
         }
@@ -53,7 +53,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    configuration = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyIntrusionDetectionConfiguration>(property);
+                    configuration = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyIntrusionDetectionConfiguration>(property.Value);
                     continue;
                 }
             }

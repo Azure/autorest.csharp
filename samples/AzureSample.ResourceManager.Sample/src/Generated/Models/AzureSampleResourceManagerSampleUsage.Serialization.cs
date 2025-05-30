@@ -106,7 +106,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
                 if (property.NameEquals("name"u8))
                 {
-                    name = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerSampleUsageName>(property);
+                    name = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerSampleUsageName>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

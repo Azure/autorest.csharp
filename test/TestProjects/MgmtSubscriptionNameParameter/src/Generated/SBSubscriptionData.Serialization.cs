@@ -83,7 +83,7 @@ namespace MgmtSubscriptionNameParameter
             if (Optional.IsDefined(ClientAffineProperties))
             {
                 writer.WritePropertyName("clientAffineProperties"u8);
-                writer.WriteObjectValue(ClientAffineProperties);
+                JsonSerializer.Serialize(writer, ClientAffineProperties);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -139,7 +139,7 @@ namespace MgmtSubscriptionNameParameter
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -293,7 +293,7 @@ namespace MgmtSubscriptionNameParameter
                             {
                                 continue;
                             }
-                            clientAffineProperties = ModelSerializationExtensions.JsonDeserialize<SBClientAffineProperties>(property0);
+                            clientAffineProperties = ModelSerializationExtensions.JsonDeserialize<SBClientAffineProperties>(property0.Value);
                             continue;
                         }
                     }

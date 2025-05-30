@@ -20,7 +20,7 @@ namespace Azure.AI.FormRecognizer.Models
             if (Optional.IsDefined(SourceFilter))
             {
                 writer.WritePropertyName("sourceFilter"u8);
-                writer.WriteObjectValue(SourceFilter);
+                JsonSerializer.Serialize(writer, SourceFilter);
             }
             if (Optional.IsDefined(UseLabelFile))
             {

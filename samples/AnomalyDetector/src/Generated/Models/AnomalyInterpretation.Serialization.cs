@@ -114,7 +114,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    correlationChanges = ModelSerializationExtensions.JsonDeserialize<CorrelationChanges>(property);
+                    correlationChanges = ModelSerializationExtensions.JsonDeserialize<CorrelationChanges>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

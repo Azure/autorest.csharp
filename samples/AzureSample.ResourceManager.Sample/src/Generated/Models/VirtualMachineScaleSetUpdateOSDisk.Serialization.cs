@@ -149,7 +149,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property);
+                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("vhdContainers"u8))
@@ -172,7 +172,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    managedDisk = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetManagedDiskParameters>(property);
+                    managedDisk = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetManagedDiskParameters>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

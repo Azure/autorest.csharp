@@ -56,7 +56,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    name = ModelSerializationExtensions.JsonDeserialize<UsageName>(property);
+                    name = ModelSerializationExtensions.JsonDeserialize<UsageName>(property.Value);
                     continue;
                 }
             }

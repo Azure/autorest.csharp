@@ -111,7 +111,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    productresource = ModelSerializationExtensions.JsonDeserialize<FlattenedProduct>(property);
+                    productresource = ModelSerializationExtensions.JsonDeserialize<FlattenedProduct>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("arrayofresources"u8))

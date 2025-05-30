@@ -201,7 +201,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    error = ModelSerializationExtensions.JsonDeserialize<ApiError>(property);
+                    error = ModelSerializationExtensions.JsonDeserialize<ApiError>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

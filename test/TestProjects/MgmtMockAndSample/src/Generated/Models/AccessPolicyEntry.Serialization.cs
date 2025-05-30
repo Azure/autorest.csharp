@@ -26,7 +26,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStringValue(ApplicationId.Value);
             }
             writer.WritePropertyName("permissions"u8);
-            writer.WriteObjectValue(Permissions);
+            JsonSerializer.Serialize(writer, Permissions);
             writer.WriteEndObject();
         }
 
@@ -63,7 +63,7 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("permissions"u8))
                 {
-                    permissions = ModelSerializationExtensions.JsonDeserialize<Permissions>(property);
+                    permissions = ModelSerializationExtensions.JsonDeserialize<Permissions>(property.Value);
                     continue;
                 }
             }

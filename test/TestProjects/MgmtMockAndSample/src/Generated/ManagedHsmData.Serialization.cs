@@ -21,12 +21,12 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                JsonSerializer.Serialize(writer, Properties);
             }
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                JsonSerializer.Serialize(writer, Sku);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -66,7 +66,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<ManagedHsmProperties>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<ManagedHsmProperties>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("sku"u8))
@@ -75,7 +75,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<ManagedHsmSku>(property);
+                    sku = ModelSerializationExtensions.JsonDeserialize<ManagedHsmSku>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -118,7 +118,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
             }

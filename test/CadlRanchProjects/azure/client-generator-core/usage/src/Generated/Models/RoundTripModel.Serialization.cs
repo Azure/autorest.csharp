@@ -84,7 +84,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
             {
                 if (property.NameEquals("result"u8))
                 {
-                    result = ModelSerializationExtensions.JsonDeserialize<ResultModel>(property);
+                    result = ModelSerializationExtensions.JsonDeserialize<ResultModel>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

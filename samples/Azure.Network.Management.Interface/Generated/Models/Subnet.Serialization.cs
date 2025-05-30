@@ -46,17 +46,17 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
-                writer.WriteObjectValue(NetworkSecurityGroup);
+                JsonSerializer.Serialize(writer, NetworkSecurityGroup);
             }
             if (Optional.IsDefined(RouteTable))
             {
                 writer.WritePropertyName("routeTable"u8);
-                writer.WriteObjectValue(RouteTable);
+                JsonSerializer.Serialize(writer, RouteTable);
             }
             if (Optional.IsDefined(NatGateway))
             {
                 writer.WritePropertyName("natGateway"u8);
-                writer.WriteObjectValue(NatGateway);
+                JsonSerializer.Serialize(writer, NatGateway);
             }
             if (Optional.IsCollectionDefined(ServiceEndpoints))
             {
@@ -64,7 +64,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ServiceEndpoints)
                 {
-                    writer.WriteObjectValue(item);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
@@ -74,7 +74,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ServiceEndpointPolicies)
                 {
-                    writer.WriteObjectValue(item);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
@@ -84,7 +84,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Delegations)
                 {
-                    writer.WriteObjectValue(item);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
@@ -179,7 +179,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            networkSecurityGroup = ModelSerializationExtensions.JsonDeserialize<NetworkSecurityGroup>(property0);
+                            networkSecurityGroup = ModelSerializationExtensions.JsonDeserialize<NetworkSecurityGroup>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("routeTable"u8))
@@ -188,7 +188,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            routeTable = ModelSerializationExtensions.JsonDeserialize<RouteTable>(property0);
+                            routeTable = ModelSerializationExtensions.JsonDeserialize<RouteTable>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("natGateway"u8))
@@ -197,7 +197,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            natGateway = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0);
+                            natGateway = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("serviceEndpoints"u8))

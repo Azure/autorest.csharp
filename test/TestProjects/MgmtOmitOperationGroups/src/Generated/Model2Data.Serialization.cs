@@ -25,7 +25,7 @@ namespace MgmtOmitOperationGroups
             if (Optional.IsDefined(Modelx))
             {
                 writer.WritePropertyName("modelx"u8);
-                writer.WriteObjectValue(Modelx);
+                JsonSerializer.Serialize(writer, Modelx);
             }
             writer.WriteEndObject();
         }
@@ -57,7 +57,7 @@ namespace MgmtOmitOperationGroups
                     {
                         continue;
                     }
-                    modelx = ModelSerializationExtensions.JsonDeserialize<ModelX>(property);
+                    modelx = ModelSerializationExtensions.JsonDeserialize<ModelX>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("f"u8))
@@ -91,7 +91,7 @@ namespace MgmtOmitOperationGroups
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
             }

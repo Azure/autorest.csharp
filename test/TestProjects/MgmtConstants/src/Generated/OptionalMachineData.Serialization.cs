@@ -36,12 +36,12 @@ namespace MgmtConstants
             if (Optional.IsDefined(Listener))
             {
                 writer.WritePropertyName("listener"u8);
-                writer.WriteObjectValue(Listener);
+                JsonSerializer.Serialize(writer, Listener);
             }
             if (Optional.IsDefined(Content))
             {
                 writer.WritePropertyName("content"u8);
-                writer.WriteObjectValue(Content);
+                JsonSerializer.Serialize(writer, Content);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -103,7 +103,7 @@ namespace MgmtConstants
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -121,7 +121,7 @@ namespace MgmtConstants
                             {
                                 continue;
                             }
-                            listener = ModelSerializationExtensions.JsonDeserialize<ModelWithRequiredConstant>(property0);
+                            listener = ModelSerializationExtensions.JsonDeserialize<ModelWithRequiredConstant>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("content"u8))
@@ -130,7 +130,7 @@ namespace MgmtConstants
                             {
                                 continue;
                             }
-                            content = ModelSerializationExtensions.JsonDeserialize<ModelWithOptionalConstant>(property0);
+                            content = ModelSerializationExtensions.JsonDeserialize<ModelWithOptionalConstant>(property0.Value);
                             continue;
                         }
                     }

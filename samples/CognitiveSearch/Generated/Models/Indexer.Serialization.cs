@@ -36,12 +36,12 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(Schedule))
             {
                 writer.WritePropertyName("schedule"u8);
-                writer.WriteObjectValue(Schedule);
+                JsonSerializer.Serialize(writer, Schedule);
             }
             if (Optional.IsDefined(Parameters))
             {
                 writer.WritePropertyName("parameters"u8);
-                writer.WriteObjectValue(Parameters);
+                JsonSerializer.Serialize(writer, Parameters);
             }
             if (Optional.IsCollectionDefined(FieldMappings))
             {
@@ -49,7 +49,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in FieldMappings)
                 {
-                    writer.WriteObjectValue(item);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
@@ -59,7 +59,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in OutputFieldMappings)
                 {
-                    writer.WriteObjectValue(item);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
@@ -126,7 +126,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    schedule = ModelSerializationExtensions.JsonDeserialize<IndexingSchedule>(property);
+                    schedule = ModelSerializationExtensions.JsonDeserialize<IndexingSchedule>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("parameters"u8))
@@ -135,7 +135,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    parameters = ModelSerializationExtensions.JsonDeserialize<IndexingParameters>(property);
+                    parameters = ModelSerializationExtensions.JsonDeserialize<IndexingParameters>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("fieldMappings"u8))

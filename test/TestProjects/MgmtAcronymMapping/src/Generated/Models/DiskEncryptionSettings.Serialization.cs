@@ -18,12 +18,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DiskEncryptionKey))
             {
                 writer.WritePropertyName("diskEncryptionKey"u8);
-                writer.WriteObjectValue(DiskEncryptionKey);
+                JsonSerializer.Serialize(writer, DiskEncryptionKey);
             }
             if (Optional.IsDefined(KeyEncryptionKey))
             {
                 writer.WritePropertyName("keyEncryptionKey"u8);
-                writer.WriteObjectValue(KeyEncryptionKey);
+                JsonSerializer.Serialize(writer, KeyEncryptionKey);
             }
             if (Optional.IsDefined(Enabled))
             {
@@ -50,7 +50,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    diskEncryptionKey = ModelSerializationExtensions.JsonDeserialize<KeyVaultSecretReference>(property);
+                    diskEncryptionKey = ModelSerializationExtensions.JsonDeserialize<KeyVaultSecretReference>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("keyEncryptionKey"u8))
@@ -59,7 +59,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    keyEncryptionKey = ModelSerializationExtensions.JsonDeserialize<KeyVaultKeyReference>(property);
+                    keyEncryptionKey = ModelSerializationExtensions.JsonDeserialize<KeyVaultKeyReference>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("enabled"u8))

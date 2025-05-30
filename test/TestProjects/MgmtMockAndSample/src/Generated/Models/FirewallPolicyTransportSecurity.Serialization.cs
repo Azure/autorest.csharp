@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(CertificateAuthority))
             {
                 writer.WritePropertyName("certificateAuthority"u8);
-                writer.WriteObjectValue(CertificateAuthority);
+                JsonSerializer.Serialize(writer, CertificateAuthority);
             }
             writer.WriteEndObject();
         }
@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    certificateAuthority = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyCertificateAuthority>(property);
+                    certificateAuthority = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyCertificateAuthority>(property.Value);
                     continue;
                 }
             }

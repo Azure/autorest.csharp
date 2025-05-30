@@ -42,12 +42,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DestinationNetworkInterfaceIPConfiguration))
             {
                 writer.WritePropertyName("destinationNetworkInterfaceIPConfiguration"u8);
-                writer.WriteObjectValue(DestinationNetworkInterfaceIPConfiguration);
+                JsonSerializer.Serialize(writer, DestinationNetworkInterfaceIPConfiguration);
             }
             if (Optional.IsDefined(DestinationLoadBalancerFrontEndIPConfiguration))
             {
                 writer.WritePropertyName("destinationLoadBalancerFrontEndIPConfiguration"u8);
-                writer.WriteObjectValue(DestinationLoadBalancerFrontEndIPConfiguration);
+                JsonSerializer.Serialize(writer, DestinationLoadBalancerFrontEndIPConfiguration);
             }
             if (Optional.IsDefined(DestinationPort))
             {
@@ -160,7 +160,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            destinationNetworkInterfaceIPConfiguration = ModelSerializationExtensions.JsonDeserialize<NetworkInterfaceIPConfiguration>(property0);
+                            destinationNetworkInterfaceIPConfiguration = ModelSerializationExtensions.JsonDeserialize<NetworkInterfaceIPConfiguration>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("destinationLoadBalancerFrontEndIPConfiguration"u8))
@@ -169,7 +169,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            destinationLoadBalancerFrontEndIPConfiguration = ModelSerializationExtensions.JsonDeserialize<FrontendIPConfiguration>(property0);
+                            destinationLoadBalancerFrontEndIPConfiguration = ModelSerializationExtensions.JsonDeserialize<FrontendIPConfiguration>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("destinationPort"u8))

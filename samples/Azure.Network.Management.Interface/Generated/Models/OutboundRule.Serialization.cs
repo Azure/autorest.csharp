@@ -39,14 +39,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in FrontendIPConfigurations)
                 {
-                    writer.WriteObjectValue(item);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(BackendAddressPool))
             {
                 writer.WritePropertyName("backendAddressPool"u8);
-                writer.WriteObjectValue(BackendAddressPool);
+                JsonSerializer.Serialize(writer, BackendAddressPool);
             }
             if (Optional.IsDefined(Protocol))
             {
@@ -144,7 +144,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            backendAddressPool = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0);
+                            backendAddressPool = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

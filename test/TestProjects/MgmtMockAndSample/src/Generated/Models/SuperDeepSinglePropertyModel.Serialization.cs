@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Super))
             {
                 writer.WritePropertyName("super"u8);
-                writer.WriteObjectValue(Super);
+                JsonSerializer.Serialize(writer, Super);
             }
             writer.WriteEndObject();
         }
@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    super = ModelSerializationExtensions.JsonDeserialize<VeryDeepSinglePropertyModel>(property);
+                    super = ModelSerializationExtensions.JsonDeserialize<VeryDeepSinglePropertyModel>(property.Value);
                     continue;
                 }
             }

@@ -75,7 +75,7 @@ namespace Scm._Type.Property.ValueTypes.Models
             {
                 if (property0.NameEquals("property"u8))
                 {
-                    property = ModelSerializationExtensions.JsonDeserialize<InnerModel>(property0);
+                    property = ModelSerializationExtensions.JsonDeserialize<InnerModel>(property0.Value);
                     continue;
                 }
                 if (options.Format != "W")

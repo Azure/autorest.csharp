@@ -30,12 +30,12 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("key"u8))
                 {
-                    key = ModelSerializationExtensions.JsonDeserialize<KeyValueElement>(property);
+                    key = ModelSerializationExtensions.JsonDeserialize<KeyValueElement>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("value"u8))
                 {
-                    value = ModelSerializationExtensions.JsonDeserialize<KeyValueElement>(property);
+                    value = ModelSerializationExtensions.JsonDeserialize<KeyValueElement>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("confidence"u8))

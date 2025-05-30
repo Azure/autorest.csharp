@@ -130,7 +130,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    pattern = ModelSerializationExtensions.JsonDeserialize<ResourceTypeAliasPattern>(property);
+                    pattern = ModelSerializationExtensions.JsonDeserialize<ResourceTypeAliasPattern>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("metadata"u8))
@@ -139,7 +139,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    metadata = ModelSerializationExtensions.JsonDeserialize<ResourceTypeAliasPathMetadata>(property);
+                    metadata = ModelSerializationExtensions.JsonDeserialize<ResourceTypeAliasPathMetadata>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

@@ -103,12 +103,12 @@ namespace Scm.Payload.Multipart.Models
                 }
                 if (property.NameEquals("address"u8))
                 {
-                    address = ModelSerializationExtensions.JsonDeserialize<Address>(property);
+                    address = ModelSerializationExtensions.JsonDeserialize<Address>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("profileImage"u8))
                 {
-                    profileImage = ModelSerializationExtensions.JsonDeserialize<FileRequiredMetaData>(property);
+                    profileImage = ModelSerializationExtensions.JsonDeserialize<FileRequiredMetaData>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("previousAddresses"u8))

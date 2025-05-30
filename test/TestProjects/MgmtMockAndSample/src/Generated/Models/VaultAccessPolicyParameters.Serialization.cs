@@ -17,7 +17,7 @@ namespace MgmtMockAndSample.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
-            writer.WriteObjectValue(Properties);
+            JsonSerializer.Serialize(writer, Properties);
             writer.WriteEndObject();
         }
 
@@ -46,7 +46,7 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("properties"u8))
                 {
-                    properties = ModelSerializationExtensions.JsonDeserialize<VaultAccessPolicyProperties>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<VaultAccessPolicyProperties>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -70,7 +70,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
             }

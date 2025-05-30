@@ -59,7 +59,7 @@ namespace MgmtExtensionResource.Models
             if (Optional.IsDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
-                writer.WriteObjectValue(Metadata);
+                JsonSerializer.Serialize(writer, Metadata);
             }
             writer.WriteEndObject();
         }
@@ -121,7 +121,7 @@ namespace MgmtExtensionResource.Models
                     {
                         continue;
                     }
-                    metadata = ModelSerializationExtensions.JsonDeserialize<ParameterDefinitionsValueMetadata>(property);
+                    metadata = ModelSerializationExtensions.JsonDeserialize<ParameterDefinitionsValueMetadata>(property.Value);
                     continue;
                 }
             }

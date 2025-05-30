@@ -37,19 +37,19 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in AdditionalUnattendContent)
                 {
-                    writer.WriteObjectValue(item);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(PatchSettings))
             {
                 writer.WritePropertyName("patchSettings"u8);
-                writer.WriteObjectValue(PatchSettings);
+                JsonSerializer.Serialize(writer, PatchSettings);
             }
             if (Optional.IsDefined(WinRM))
             {
                 writer.WritePropertyName("winRM"u8);
-                writer.WriteObjectValue(WinRM);
+                JsonSerializer.Serialize(writer, WinRM);
             }
             writer.WriteEndObject();
         }
@@ -111,7 +111,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    patchSettings = ModelSerializationExtensions.JsonDeserialize<PatchSettings>(property);
+                    patchSettings = ModelSerializationExtensions.JsonDeserialize<PatchSettings>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("winRM"u8))
@@ -120,7 +120,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    winRM = ModelSerializationExtensions.JsonDeserialize<WinRMConfiguration>(property);
+                    winRM = ModelSerializationExtensions.JsonDeserialize<WinRMConfiguration>(property.Value);
                     continue;
                 }
             }

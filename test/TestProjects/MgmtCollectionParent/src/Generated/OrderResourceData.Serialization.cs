@@ -51,7 +51,7 @@ namespace MgmtCollectionParent
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -83,7 +83,7 @@ namespace MgmtCollectionParent
                             {
                                 continue;
                             }
-                            currentStage = ModelSerializationExtensions.JsonDeserialize<StageDetails>(property0);
+                            currentStage = ModelSerializationExtensions.JsonDeserialize<StageDetails>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("orderStageHistory"u8))

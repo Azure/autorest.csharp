@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _jsonSerializerOptionsField = new FieldDeclaration(
                 modifiers: FieldModifiers.Private | FieldModifiers.Static | FieldModifiers.ReadOnly,
                 type: typeof(JsonSerializerOptions),
-                name: JsonSerializerOptionsName)
+                name: _jsonSerializerOptionsName)
             {
                 InitializationValue = New.Instance(
                     typeof(JsonSerializerOptions),
@@ -79,9 +79,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                     })
             };
             _jsonSerializerOptionsUseManagedServiceIdentityV3Field = new FieldDeclaration(
-                modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
+                modifiers: FieldModifiers.Private | FieldModifiers.Static | FieldModifiers.ReadOnly,
                 type: typeof(JsonSerializerOptions),
-                name: JsonSerializerOptionsUseManagedServiceIdentityV3Name)
+                name: _jsonSerializerOptionsUseManagedServiceIdentityV3Name)
             {
                 InitializationValue = New.Instance(
                     typeof(JsonSerializerOptions),
@@ -105,10 +105,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         private const string _sentinelBinaryDataName = "SentinelValue";
         private readonly FieldDeclaration? _sentinelBinaryDataField;
         private readonly FieldDeclaration _jsonSerializerOptionsField;
-        internal const string JsonSerializerOptionsName = "JsonSerializerOptions";
+        private const string _jsonSerializerOptionsName = "s_options";
         private readonly FieldDeclaration _jsonSerializerOptionsUseManagedServiceIdentityV3Field;
-        internal const string JsonSerializerOptionsUseManagedServiceIdentityV3Name = "JsonSerializerOptionsUseManagedServiceIdentityV3";
-        internal const string JsonDeserializeMethodName = "JsonDeserialize";
+        private const string _jsonSerializerOptionsUseManagedServiceIdentityV3Name = "s_optionsUseManagedServiceIdentityV3";
+        private const string _jsonDeserializeMethodName = "JsonDeserialize";
+        private const string _jsonDeserializeUseManagedServiceIdentityV3MethodName = "JsonDeserializeUseManagedServiceIdentityV3";
 
         private ModelReaderWriterOptionsExpression? _wireOptions;
         public ModelReaderWriterOptionsExpression WireOptions => _wireOptions ??= new ModelReaderWriterOptionsExpression(new MemberExpression(Type, _wireOptionsName));
@@ -498,8 +499,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new Method(signature, body);
         }
 
-        public static ValueExpression Deserialize(JsonPropertyExpression jsonProperty, CSharpType type)
-            => new InvokeStaticMethodExpression(Instance.Type, JsonDeserializeMethodName, [jsonProperty], TypeArguments: [type]);
+        public static ValueExpression Deserialize(JsonElementExpression element, CSharpType type, bool useManagedServiceIdentityV3 = false)
+            => new InvokeStaticMethodExpression(Instance.Type, useManagedServiceIdentityV3 ? _jsonDeserializeUseManagedServiceIdentityV3MethodName : _jsonDeserializeMethodName, [element], TypeArguments: [type]);
 
         public MethodBodyStatement WriteBase64StringValue(Utf8JsonWriterExpression writer, ValueExpression value, string? format)
             => new InvokeStaticMethodStatement(Type, _writeBase64StringValueMethodName, new[] { writer, value, Literal(format) }, CallAsExtension: true);
@@ -735,21 +736,22 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private Method BuildJsonDeserializeMethod()
         {
-            var propertyParameter = new Parameter("property", null, typeof(JsonProperty), null, ValidationType.None, null);
+            var elementParameter = new Parameter("element", null, typeof(JsonElement), null, ValidationType.None, null);
             var justificationExpression = new KeywordExpression("Justification =", Literal("By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue."));
             var signature = new MethodSignature(
-                JsonDeserializeMethodName,
+                _jsonDeserializeMethodName,
                 null,
                 null,
                 MethodSignatureModifiers.Static | MethodSignatureModifiers.Public,
                 _t,
                 null,
-                [propertyParameter],
-                Attributes:
-                [
-                    new CSharpAttribute(typeof(SuppressMessageAttribute), Literal("Trimming"), Literal("IL2026"), justificationExpression),
-                    new CSharpAttribute(typeof(SuppressMessageAttribute), Literal("Trimming"), Literal("IL3050"), justificationExpression)
-                ],
+                [elementParameter],
+                Attributes: Configuration.Flavor == "azure"
+                ? [
+                    new CSharpAttribute(typeof(UnconditionalSuppressMessageAttribute), Literal("Trimming"), Literal("IL2026"), justificationExpression),
+                    new CSharpAttribute(typeof(UnconditionalSuppressMessageAttribute), Literal("Trimming"), Literal("IL3050"), justificationExpression)
+                ]
+                : [],
                 GenericArguments: [_t]);
             return new Method(signature, new MethodBodyStatement[]
             {
@@ -757,8 +759,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                     typeof(JsonSerializer),
                     $"{nameof(JsonSerializer.Deserialize)}",
                     [
-                        new MemberExpression(propertyParameter, nameof(JsonProperty.Value)).Invoke(nameof(JsonElement.GetRawText)),
-                        new MemberExpression(null, JsonSerializerOptionsName)
+                        new InvokeInstanceMethodExpression(elementParameter, nameof(JsonElement.GetRawText), [], false),
+                        new MemberExpression(null, _jsonSerializerOptionsName)
                     ],
                     TypeArguments: [_t]
                 ))

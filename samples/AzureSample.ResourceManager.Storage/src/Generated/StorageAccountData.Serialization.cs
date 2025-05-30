@@ -23,8 +23,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
-                JsonSerializer.Serialize(writer, Identity, serializeOptions);
+                JsonSerializer.Serialize(writer, Identity);
             }
             if (Optional.IsDefined(ExtendedLocation))
             {
@@ -49,7 +48,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(AzureFilesIdentityBasedAuthentication))
             {
                 writer.WritePropertyName("azureFilesIdentityBasedAuthentication"u8);
-                writer.WriteObjectValue(AzureFilesIdentityBasedAuthentication);
+                JsonSerializer.Serialize(writer, AzureFilesIdentityBasedAuthentication);
             }
             if (Optional.IsDefined(EnableHttpsTrafficOnly))
             {
@@ -69,7 +68,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(RoutingPreference))
             {
                 writer.WritePropertyName("routingPreference"u8);
-                writer.WriteObjectValue(RoutingPreference);
+                JsonSerializer.Serialize(writer, RoutingPreference);
             }
             if (Optional.IsDefined(AllowBlobPublicAccess))
             {
@@ -109,7 +108,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
-                writer.WriteObjectValue(ImmutableStorageWithVersioning);
+                JsonSerializer.Serialize(writer, ImmutableStorageWithVersioning);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -172,7 +171,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerStorageSku>(property);
+                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerStorageSku>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("kind"u8))
@@ -191,7 +190,7 @@ namespace AzureSample.ResourceManager.Storage
                         continue;
                     }
                     var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
-                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText(), serializeOptions);
+                    identity = ModelSerializationExtensions.JsonDeserialize<ManagedServiceIdentity>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("extendedLocation"u8))
@@ -200,7 +199,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    extendedLocation = JsonSerializer.Deserialize<ExtendedLocation>(property.Value.GetRawText());
+                    extendedLocation = ModelSerializationExtensions.JsonDeserialize<ExtendedLocation>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -243,7 +242,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -270,7 +269,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            primaryEndpoints = ModelSerializationExtensions.JsonDeserialize<Endpoints>(property0);
+                            primaryEndpoints = ModelSerializationExtensions.JsonDeserialize<Endpoints>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("primaryLocation"u8))
@@ -325,7 +324,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            customDomain = ModelSerializationExtensions.JsonDeserialize<CustomDomain>(property0);
+                            customDomain = ModelSerializationExtensions.JsonDeserialize<CustomDomain>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("sasPolicy"u8))
@@ -334,7 +333,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            sasPolicy = ModelSerializationExtensions.JsonDeserialize<SasPolicy>(property0);
+                            sasPolicy = ModelSerializationExtensions.JsonDeserialize<SasPolicy>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("keyPolicy"u8))
@@ -343,7 +342,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            keyPolicy = ModelSerializationExtensions.JsonDeserialize<KeyPolicy>(property0);
+                            keyPolicy = ModelSerializationExtensions.JsonDeserialize<KeyPolicy>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("keyCreationTime"u8))
@@ -352,7 +351,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            keyCreationTime = ModelSerializationExtensions.JsonDeserialize<KeyCreationTime>(property0);
+                            keyCreationTime = ModelSerializationExtensions.JsonDeserialize<KeyCreationTime>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("secondaryEndpoints"u8))
@@ -361,7 +360,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            secondaryEndpoints = ModelSerializationExtensions.JsonDeserialize<Endpoints>(property0);
+                            secondaryEndpoints = ModelSerializationExtensions.JsonDeserialize<Endpoints>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("encryption"u8))
@@ -370,7 +369,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            encryption = ModelSerializationExtensions.JsonDeserialize<Encryption>(property0);
+                            encryption = ModelSerializationExtensions.JsonDeserialize<Encryption>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("accessTier"u8))
@@ -388,7 +387,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            azureFilesIdentityBasedAuthentication = ModelSerializationExtensions.JsonDeserialize<AzureFilesIdentityBasedAuthentication>(property0);
+                            azureFilesIdentityBasedAuthentication = ModelSerializationExtensions.JsonDeserialize<AzureFilesIdentityBasedAuthentication>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("supportsHttpsTrafficOnly"u8))
@@ -406,7 +405,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            networkAcls = ModelSerializationExtensions.JsonDeserialize<NetworkRuleSet>(property0);
+                            networkAcls = ModelSerializationExtensions.JsonDeserialize<NetworkRuleSet>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("isHnsEnabled"u8))
@@ -424,7 +423,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            geoReplicationStats = ModelSerializationExtensions.JsonDeserialize<GeoReplicationStats>(property0);
+                            geoReplicationStats = ModelSerializationExtensions.JsonDeserialize<GeoReplicationStats>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("failoverInProgress"u8))
@@ -465,7 +464,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            routingPreference = ModelSerializationExtensions.JsonDeserialize<RoutingPreference>(property0);
+                            routingPreference = ModelSerializationExtensions.JsonDeserialize<RoutingPreference>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("blobRestoreStatus"u8))
@@ -474,7 +473,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            blobRestoreStatus = ModelSerializationExtensions.JsonDeserialize<BlobRestoreStatus>(property0);
+                            blobRestoreStatus = ModelSerializationExtensions.JsonDeserialize<BlobRestoreStatus>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("allowBlobPublicAccess"u8))
@@ -546,7 +545,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            immutableStorageWithVersioning = ModelSerializationExtensions.JsonDeserialize<ImmutableStorageAccount>(property0);
+                            immutableStorageWithVersioning = ModelSerializationExtensions.JsonDeserialize<ImmutableStorageAccount>(property0.Value);
                             continue;
                         }
                     }

@@ -34,7 +34,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(ConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                writer.WriteObjectValue(ConnectionState);
+                JsonSerializer.Serialize(writer, ConnectionState);
             }
             if (Optional.IsDefined(ProvisioningState))
             {
@@ -112,7 +112,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -130,7 +130,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            privateEndpoint = JsonSerializer.Deserialize<Azure.ResourceManager.Resources.Models.SubResource>(property0.Value.GetRawText());
+                            privateEndpoint = ModelSerializationExtensions.JsonDeserialize<Azure.ResourceManager.Resources.Models.SubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnectionState"u8))
@@ -139,7 +139,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            privateLinkServiceConnectionState = ModelSerializationExtensions.JsonDeserialize<MgmtMockAndSamplePrivateLinkServiceConnectionState>(property0);
+                            privateLinkServiceConnectionState = ModelSerializationExtensions.JsonDeserialize<MgmtMockAndSamplePrivateLinkServiceConnectionState>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

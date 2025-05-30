@@ -25,7 +25,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(EncryptionKey))
             {
                 writer.WritePropertyName("encryptionKey"u8);
-                writer.WriteObjectValue(EncryptionKey);
+                JsonSerializer.Serialize(writer, EncryptionKey);
             }
             if (Optional.IsDefined(ETag))
             {
@@ -69,7 +69,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    encryptionKey = ModelSerializationExtensions.JsonDeserialize<EncryptionKey>(property);
+                    encryptionKey = ModelSerializationExtensions.JsonDeserialize<EncryptionKey>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"u8))

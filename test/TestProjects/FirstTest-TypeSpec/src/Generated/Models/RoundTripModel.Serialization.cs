@@ -360,7 +360,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 if (property.NameEquals("requiredModel"u8))
                 {
-                    requiredModel = ModelSerializationExtensions.JsonDeserialize<Thing>(property);
+                    requiredModel = ModelSerializationExtensions.JsonDeserialize<Thing>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("intExtensibleEnum"u8))
@@ -556,7 +556,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 if (property.NameEquals("modelWithRequiredNullable"u8))
                 {
-                    modelWithRequiredNullable = ModelSerializationExtensions.JsonDeserialize<ModelWithRequiredNullableProperties>(property);
+                    modelWithRequiredNullable = ModelSerializationExtensions.JsonDeserialize<ModelWithRequiredNullableProperties>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("unionList"u8))

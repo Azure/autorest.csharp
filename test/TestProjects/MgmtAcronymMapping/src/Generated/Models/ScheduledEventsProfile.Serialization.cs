@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(TerminateNotificationProfile))
             {
                 writer.WritePropertyName("terminateNotificationProfile"u8);
-                writer.WriteObjectValue(TerminateNotificationProfile);
+                JsonSerializer.Serialize(writer, TerminateNotificationProfile);
             }
             writer.WriteEndObject();
         }
@@ -38,7 +38,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    terminateNotificationProfile = ModelSerializationExtensions.JsonDeserialize<TerminateNotificationProfile>(property);
+                    terminateNotificationProfile = ModelSerializationExtensions.JsonDeserialize<TerminateNotificationProfile>(property.Value);
                     continue;
                 }
             }

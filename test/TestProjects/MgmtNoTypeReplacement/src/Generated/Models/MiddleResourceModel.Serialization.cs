@@ -18,7 +18,7 @@ namespace MgmtNoTypeReplacement.Models
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
-                writer.WriteObjectValue(Foo);
+                JsonSerializer.Serialize(writer, Foo);
             }
             writer.WriteEndObject();
         }
@@ -38,7 +38,7 @@ namespace MgmtNoTypeReplacement.Models
                     {
                         continue;
                     }
-                    foo = ModelSerializationExtensions.JsonDeserialize<NoSubResourceModel2>(property);
+                    foo = ModelSerializationExtensions.JsonDeserialize<NoSubResourceModel2>(property.Value);
                     continue;
                 }
             }

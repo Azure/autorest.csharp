@@ -18,7 +18,7 @@ namespace MgmtSafeFlatten.Models
             if (Optional.IsDefined(LayerTwo))
             {
                 writer.WritePropertyName("layerTwo"u8);
-                writer.WriteObjectValue(LayerTwo);
+                JsonSerializer.Serialize(writer, LayerTwo);
             }
             writer.WriteEndObject();
         }
@@ -38,7 +38,7 @@ namespace MgmtSafeFlatten.Models
                     {
                         continue;
                     }
-                    layerTwo = ModelSerializationExtensions.JsonDeserialize<LayerTwoSingle>(property);
+                    layerTwo = ModelSerializationExtensions.JsonDeserialize<LayerTwoSingle>(property.Value);
                     continue;
                 }
             }

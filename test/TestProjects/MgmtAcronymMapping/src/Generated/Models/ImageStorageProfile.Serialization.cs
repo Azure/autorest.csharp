@@ -19,7 +19,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                writer.WriteObjectValue(OSDisk);
+                JsonSerializer.Serialize(writer, OSDisk);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -27,7 +27,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    writer.WriteObjectValue(item);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
@@ -56,7 +56,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    osDisk = ModelSerializationExtensions.JsonDeserialize<ImageOSDisk>(property);
+                    osDisk = ModelSerializationExtensions.JsonDeserialize<ImageOSDisk>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("dataDisks"u8))

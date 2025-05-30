@@ -176,7 +176,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    alignPolicy = ModelSerializationExtensions.JsonDeserialize<AlignPolicy>(property);
+                    alignPolicy = ModelSerializationExtensions.JsonDeserialize<AlignPolicy>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("status"u8))
@@ -208,7 +208,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    diagnosticsInfo = ModelSerializationExtensions.JsonDeserialize<DiagnosticsInfo>(property);
+                    diagnosticsInfo = ModelSerializationExtensions.JsonDeserialize<DiagnosticsInfo>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

@@ -20,7 +20,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                JsonSerializer.Serialize(writer, Sku);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -75,7 +75,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<ManagedHsmSku>(property);
+                    sku = ModelSerializationExtensions.JsonDeserialize<ManagedHsmSku>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -118,7 +118,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

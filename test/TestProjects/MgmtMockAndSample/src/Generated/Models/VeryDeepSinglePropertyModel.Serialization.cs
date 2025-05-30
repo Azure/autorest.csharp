@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Very))
             {
                 writer.WritePropertyName("very"u8);
-                writer.WriteObjectValue(Very);
+                JsonSerializer.Serialize(writer, Very);
             }
             writer.WriteEndObject();
         }
@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    very = ModelSerializationExtensions.JsonDeserialize<DeepSinglePropertyModel>(property);
+                    very = ModelSerializationExtensions.JsonDeserialize<DeepSinglePropertyModel>(property.Value);
                     continue;
                 }
             }

@@ -21,7 +21,7 @@ namespace MgmtNonStringPathVariable
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                JsonSerializer.Serialize(writer, Properties);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -60,7 +60,7 @@ namespace MgmtNonStringPathVariable
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<BarProperties>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<BarProperties>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -103,7 +103,7 @@ namespace MgmtNonStringPathVariable
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
             }

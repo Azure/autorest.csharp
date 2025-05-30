@@ -81,7 +81,7 @@ namespace _Azure.ResourceManager.CommonProperties
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<ConfidentialResourceProperties>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<ConfidentialResourceProperties>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -124,7 +124,7 @@ namespace _Azure.ResourceManager.CommonProperties
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

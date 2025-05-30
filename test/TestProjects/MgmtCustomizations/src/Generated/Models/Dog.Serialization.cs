@@ -168,7 +168,7 @@ namespace MgmtCustomizations.Models
                                     {
                                         continue;
                                     }
-                                    friend = ModelSerializationExtensions.JsonDeserialize<Pet>(property1);
+                                    friend = ModelSerializationExtensions.JsonDeserialize<Pet>(property1.Value);
                                     continue;
                                 }
                             }

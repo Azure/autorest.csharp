@@ -189,7 +189,7 @@ namespace AzureSample.ResourceManager.Sample
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -268,7 +268,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            instanceView = ModelSerializationExtensions.JsonDeserialize<VirtualMachineExtensionInstanceView>(property0);
+                            instanceView = ModelSerializationExtensions.JsonDeserialize<VirtualMachineExtensionInstanceView>(property0.Value);
                             continue;
                         }
                     }

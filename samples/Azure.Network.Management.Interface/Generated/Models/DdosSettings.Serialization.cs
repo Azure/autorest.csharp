@@ -18,7 +18,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DdosCustomPolicy))
             {
                 writer.WritePropertyName("ddosCustomPolicy"u8);
-                writer.WriteObjectValue(DdosCustomPolicy);
+                JsonSerializer.Serialize(writer, DdosCustomPolicy);
             }
             if (Optional.IsDefined(ProtectionCoverage))
             {
@@ -50,7 +50,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    ddosCustomPolicy = ModelSerializationExtensions.JsonDeserialize<SubResource>(property);
+                    ddosCustomPolicy = ModelSerializationExtensions.JsonDeserialize<SubResource>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("protectionCoverage"u8))

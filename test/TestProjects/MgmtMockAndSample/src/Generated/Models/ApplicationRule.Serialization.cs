@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Protocols)
                 {
-                    writer.WriteObjectValue(item);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
@@ -116,7 +116,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NewGeneratedTypeSerializeProperty))
             {
                 writer.WritePropertyName("newGeneratedTypeSerializeProperty"u8);
-                writer.WriteObjectValue<VaultKey>(NewGeneratedTypeSerializeProperty);
+                JsonSerializer.Serialize(writer, NewGeneratedTypeSerializeProperty);
             }
             if (Optional.IsDefined(Name))
             {
@@ -318,7 +318,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    newGeneratedTypeSerializeProperty = ModelSerializationExtensions.JsonDeserialize<VaultKey>(property);
+                    newGeneratedTypeSerializeProperty = ModelSerializationExtensions.JsonDeserialize<VaultKey>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

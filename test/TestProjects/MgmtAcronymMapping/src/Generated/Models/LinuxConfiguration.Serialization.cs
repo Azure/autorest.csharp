@@ -23,7 +23,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Ssh))
             {
                 writer.WritePropertyName("ssh"u8);
-                writer.WriteObjectValue(Ssh);
+                JsonSerializer.Serialize(writer, Ssh);
             }
             if (Optional.IsDefined(ProvisionVmAgent))
             {
@@ -59,7 +59,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    ssh = ModelSerializationExtensions.JsonDeserialize<SshConfiguration>(property);
+                    ssh = ModelSerializationExtensions.JsonDeserialize<SshConfiguration>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("provisionVMAgent"u8))

@@ -28,7 +28,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(LogAnalyticsResources))
             {
                 writer.WritePropertyName("logAnalyticsResources"u8);
-                writer.WriteObjectValue(LogAnalyticsResources);
+                JsonSerializer.Serialize(writer, LogAnalyticsResources);
             }
             writer.WriteEndObject();
         }
@@ -68,7 +68,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    logAnalyticsResources = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyLogAnalyticsResources>(property);
+                    logAnalyticsResources = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyLogAnalyticsResources>(property.Value);
                     continue;
                 }
             }

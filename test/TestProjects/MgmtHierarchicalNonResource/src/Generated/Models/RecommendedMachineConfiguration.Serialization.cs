@@ -27,7 +27,7 @@ namespace MgmtHierarchicalNonResource.Models
                     {
                         continue;
                     }
-                    vCpus = ModelSerializationExtensions.JsonDeserialize<ResourceRange>(property);
+                    vCpus = ModelSerializationExtensions.JsonDeserialize<ResourceRange>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("memory"u8))
@@ -36,7 +36,7 @@ namespace MgmtHierarchicalNonResource.Models
                     {
                         continue;
                     }
-                    memory = ModelSerializationExtensions.JsonDeserialize<ResourceRange>(property);
+                    memory = ModelSerializationExtensions.JsonDeserialize<ResourceRange>(property.Value);
                     continue;
                 }
             }

@@ -26,7 +26,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(MappingFunction))
             {
                 writer.WritePropertyName("mappingFunction"u8);
-                writer.WriteObjectValue(MappingFunction);
+                JsonSerializer.Serialize(writer, MappingFunction);
             }
             writer.WriteEndObject();
         }
@@ -58,7 +58,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    mappingFunction = ModelSerializationExtensions.JsonDeserialize<FieldMappingFunction>(property);
+                    mappingFunction = ModelSerializationExtensions.JsonDeserialize<FieldMappingFunction>(property.Value);
                     continue;
                 }
             }

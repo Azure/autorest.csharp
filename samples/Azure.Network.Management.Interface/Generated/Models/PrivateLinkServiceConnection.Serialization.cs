@@ -51,7 +51,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(PrivateLinkServiceConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                writer.WriteObjectValue(PrivateLinkServiceConnectionState);
+                JsonSerializer.Serialize(writer, PrivateLinkServiceConnectionState);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -142,7 +142,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            privateLinkServiceConnectionState = ModelSerializationExtensions.JsonDeserialize<PrivateLinkServiceConnectionState>(property0);
+                            privateLinkServiceConnectionState = ModelSerializationExtensions.JsonDeserialize<PrivateLinkServiceConnectionState>(property0.Value);
                             continue;
                         }
                     }

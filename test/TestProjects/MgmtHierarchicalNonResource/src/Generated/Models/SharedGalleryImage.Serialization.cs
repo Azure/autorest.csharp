@@ -85,7 +85,7 @@ namespace MgmtHierarchicalNonResource.Models
                             {
                                 continue;
                             }
-                            identifier = ModelSerializationExtensions.JsonDeserialize<GalleryImageIdentifier>(property0);
+                            identifier = ModelSerializationExtensions.JsonDeserialize<GalleryImageIdentifier>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("recommended"u8))
@@ -94,7 +94,7 @@ namespace MgmtHierarchicalNonResource.Models
                             {
                                 continue;
                             }
-                            recommended = ModelSerializationExtensions.JsonDeserialize<RecommendedMachineConfiguration>(property0);
+                            recommended = ModelSerializationExtensions.JsonDeserialize<RecommendedMachineConfiguration>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("disallowed"u8))
@@ -103,7 +103,7 @@ namespace MgmtHierarchicalNonResource.Models
                             {
                                 continue;
                             }
-                            disallowed = ModelSerializationExtensions.JsonDeserialize<Disallowed>(property0);
+                            disallowed = ModelSerializationExtensions.JsonDeserialize<Disallowed>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("hyperVGeneration"u8))
@@ -135,7 +135,7 @@ namespace MgmtHierarchicalNonResource.Models
                             {
                                 continue;
                             }
-                            purchasePlan = ModelSerializationExtensions.JsonDeserialize<ImagePurchasePlan>(property0);
+                            purchasePlan = ModelSerializationExtensions.JsonDeserialize<ImagePurchasePlan>(property0.Value);
                             continue;
                         }
                     }

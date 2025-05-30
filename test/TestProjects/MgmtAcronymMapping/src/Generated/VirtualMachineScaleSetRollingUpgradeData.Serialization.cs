@@ -95,7 +95,7 @@ namespace MgmtAcronymMapping
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -113,7 +113,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            policy = ModelSerializationExtensions.JsonDeserialize<RollingUpgradePolicy>(property0);
+                            policy = ModelSerializationExtensions.JsonDeserialize<RollingUpgradePolicy>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("runningStatus"u8))
@@ -122,7 +122,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            runningStatus = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeRunningStatus>(property0);
+                            runningStatus = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeRunningStatus>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("progress"u8))
@@ -131,7 +131,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            progress = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeProgressInfo>(property0);
+                            progress = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeProgressInfo>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("error"u8))
@@ -140,7 +140,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            error = ModelSerializationExtensions.JsonDeserialize<ApiError>(property0);
+                            error = ModelSerializationExtensions.JsonDeserialize<ApiError>(property0.Value);
                             continue;
                         }
                     }

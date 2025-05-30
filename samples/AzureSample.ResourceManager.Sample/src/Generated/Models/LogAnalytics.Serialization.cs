@@ -89,7 +89,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<LogAnalyticsOutput>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<LogAnalyticsOutput>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

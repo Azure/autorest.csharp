@@ -81,7 +81,7 @@ namespace _Type.Union.Models
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = ModelSerializationExtensions.JsonDeserialize<EnumsOnlyCases>(property);
+                    prop = ModelSerializationExtensions.JsonDeserialize<EnumsOnlyCases>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

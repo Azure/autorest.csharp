@@ -115,7 +115,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    modelInfo = ModelSerializationExtensions.JsonDeserialize<ModelInfo>(property);
+                    modelInfo = ModelSerializationExtensions.JsonDeserialize<ModelInfo>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

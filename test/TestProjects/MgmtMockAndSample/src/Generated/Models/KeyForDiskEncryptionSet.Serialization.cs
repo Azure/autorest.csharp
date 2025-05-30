@@ -62,7 +62,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    sourceVault = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    sourceVault = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("keyUrl"u8))

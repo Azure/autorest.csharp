@@ -100,7 +100,7 @@ namespace AnomalyDetector.Models
                 }
                 if (property.NameEquals("summary"u8))
                 {
-                    summary = ModelSerializationExtensions.JsonDeserialize<MultivariateBatchDetectionResultSummary>(property);
+                    summary = ModelSerializationExtensions.JsonDeserialize<MultivariateBatchDetectionResultSummary>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("results"u8))

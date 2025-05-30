@@ -36,7 +36,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
-                writer.WriteObjectValue(DiffDiskSettings);
+                JsonSerializer.Serialize(writer, DiffDiskSettings);
             }
             if (Optional.IsDefined(DiskSizeGB))
             {
@@ -51,7 +51,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue(Image);
+                JsonSerializer.Serialize(writer, Image);
             }
             if (Optional.IsCollectionDefined(VhdContainers))
             {
@@ -66,7 +66,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue(ManagedDisk);
+                JsonSerializer.Serialize(writer, ManagedDisk);
             }
             if (Optional.IsDefined(SecurityType))
             {
@@ -129,7 +129,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    diffDiskSettings = ModelSerializationExtensions.JsonDeserialize<DiffDiskSettings>(property);
+                    diffDiskSettings = ModelSerializationExtensions.JsonDeserialize<DiffDiskSettings>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("diskSizeGB"u8))
@@ -156,7 +156,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property);
+                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("vhdContainers"u8))
@@ -179,7 +179,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    managedDisk = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetManagedDiskParameters>(property);
+                    managedDisk = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetManagedDiskParameters>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("securityType"u8))

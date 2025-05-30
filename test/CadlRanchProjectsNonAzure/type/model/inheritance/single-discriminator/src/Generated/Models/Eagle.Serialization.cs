@@ -121,7 +121,7 @@ namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
                     {
                         continue;
                     }
-                    partner = ModelSerializationExtensions.JsonDeserialize<Bird>(property);
+                    partner = ModelSerializationExtensions.JsonDeserialize<Bird>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("kind"u8))

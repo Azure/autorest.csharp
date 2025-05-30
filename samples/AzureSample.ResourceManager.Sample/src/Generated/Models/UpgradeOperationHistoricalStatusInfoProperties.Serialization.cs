@@ -119,7 +119,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    runningStatus = ModelSerializationExtensions.JsonDeserialize<UpgradeOperationHistoryStatus>(property);
+                    runningStatus = ModelSerializationExtensions.JsonDeserialize<UpgradeOperationHistoryStatus>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("progress"u8))
@@ -128,7 +128,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    progress = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeProgressInfo>(property);
+                    progress = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeProgressInfo>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("error"u8))
@@ -137,7 +137,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    error = ModelSerializationExtensions.JsonDeserialize<ApiError>(property);
+                    error = ModelSerializationExtensions.JsonDeserialize<ApiError>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("startedBy"u8))
@@ -155,7 +155,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    targetImageReference = ModelSerializationExtensions.JsonDeserialize<ImageReference>(property);
+                    targetImageReference = ModelSerializationExtensions.JsonDeserialize<ImageReference>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("rollbackInfo"u8))
@@ -164,7 +164,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    rollbackInfo = ModelSerializationExtensions.JsonDeserialize<RollbackStatusInfo>(property);
+                    rollbackInfo = ModelSerializationExtensions.JsonDeserialize<RollbackStatusInfo>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

@@ -18,17 +18,17 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(BaseBlob))
             {
                 writer.WritePropertyName("baseBlob"u8);
-                writer.WriteObjectValue(BaseBlob);
+                JsonSerializer.Serialize(writer, BaseBlob);
             }
             if (Optional.IsDefined(Snapshot))
             {
                 writer.WritePropertyName("snapshot"u8);
-                writer.WriteObjectValue(Snapshot);
+                JsonSerializer.Serialize(writer, Snapshot);
             }
             if (Optional.IsDefined(Version))
             {
                 writer.WritePropertyName("version"u8);
-                writer.WriteObjectValue(Version);
+                JsonSerializer.Serialize(writer, Version);
             }
             writer.WriteEndObject();
         }
@@ -50,7 +50,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    baseBlob = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyBaseBlob>(property);
+                    baseBlob = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyBaseBlob>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("snapshot"u8))
@@ -59,7 +59,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    snapshot = ModelSerializationExtensions.JsonDeserialize<ManagementPolicySnapShot>(property);
+                    snapshot = ModelSerializationExtensions.JsonDeserialize<ManagementPolicySnapShot>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("version"u8))
@@ -68,7 +68,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    version = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyVersion>(property);
+                    version = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyVersion>(property.Value);
                     continue;
                 }
             }

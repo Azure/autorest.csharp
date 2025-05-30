@@ -21,7 +21,7 @@ namespace MgmtPartialResource
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                JsonSerializer.Serialize(writer, Properties);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -60,7 +60,7 @@ namespace MgmtPartialResource
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<ConfigurationProfileAssignmentProperties>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<ConfigurationProfileAssignmentProperties>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -103,7 +103,7 @@ namespace MgmtPartialResource
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
             }

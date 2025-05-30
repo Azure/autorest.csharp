@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("magnitude"u8);
-            writer.WriteObjectValue(Parameters);
+            JsonSerializer.Serialize(writer, Parameters);
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type);
             writer.WritePropertyName("fieldName"u8);
@@ -47,7 +47,7 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("magnitude"u8))
                 {
-                    magnitude = ModelSerializationExtensions.JsonDeserialize<MagnitudeScoringParameters>(property);
+                    magnitude = ModelSerializationExtensions.JsonDeserialize<MagnitudeScoringParameters>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("type"u8))

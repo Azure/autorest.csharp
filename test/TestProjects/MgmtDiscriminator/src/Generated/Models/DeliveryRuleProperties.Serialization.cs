@@ -140,7 +140,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    conditions = ModelSerializationExtensions.JsonDeserialize<DeliveryRuleCondition>(property);
+                    conditions = ModelSerializationExtensions.JsonDeserialize<DeliveryRuleCondition>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("actions"u8))
@@ -177,7 +177,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    pet = ModelSerializationExtensions.JsonDeserialize<Pet>(property);
+                    pet = ModelSerializationExtensions.JsonDeserialize<Pet>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("foo"u8))

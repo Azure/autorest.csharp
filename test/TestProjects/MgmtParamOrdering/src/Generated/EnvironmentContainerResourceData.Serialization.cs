@@ -19,7 +19,7 @@ namespace MgmtParamOrdering
         {
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
-            writer.WriteObjectValue(Properties);
+            JsonSerializer.Serialize(writer, Properties);
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
@@ -53,7 +53,7 @@ namespace MgmtParamOrdering
             {
                 if (property.NameEquals("properties"u8))
                 {
-                    properties = ModelSerializationExtensions.JsonDeserialize<EnvironmentContainer>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<EnvironmentContainer>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -96,7 +96,7 @@ namespace MgmtParamOrdering
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
             }

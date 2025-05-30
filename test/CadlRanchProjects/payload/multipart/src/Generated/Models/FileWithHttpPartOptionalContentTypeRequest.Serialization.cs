@@ -82,7 +82,7 @@ namespace Payload.MultiPart.Models
             {
                 if (property.NameEquals("profileImage"u8))
                 {
-                    profileImage = ModelSerializationExtensions.JsonDeserialize<FileOptionalContentType>(property);
+                    profileImage = ModelSerializationExtensions.JsonDeserialize<FileOptionalContentType>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

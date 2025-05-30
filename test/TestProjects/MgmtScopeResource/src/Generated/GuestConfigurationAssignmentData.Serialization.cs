@@ -19,7 +19,7 @@ namespace MgmtScopeResource
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                JsonSerializer.Serialize(writer, Properties);
             }
             if (Optional.IsDefined(Name))
             {
@@ -53,7 +53,7 @@ namespace MgmtScopeResource
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<GuestConfigurationAssignmentProperties>(property);
+                    properties = ModelSerializationExtensions.JsonDeserialize<GuestConfigurationAssignmentProperties>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

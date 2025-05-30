@@ -22,8 +22,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
-                JsonSerializer.Serialize(writer, Identity, serializeOptions);
+                JsonSerializer.Serialize(writer, Identity);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -43,12 +42,12 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(StartupProbe))
             {
                 writer.WritePropertyName("startupProbe"u8);
-                writer.WriteObjectValue(StartupProbe);
+                JsonSerializer.Serialize(writer, StartupProbe);
             }
             if (Optional.IsDefined(ReadinessProbe))
             {
                 writer.WritePropertyName("readinessProbe"u8);
-                writer.WriteObjectValue(ReadinessProbe);
+                JsonSerializer.Serialize(writer, ReadinessProbe);
             }
             if (Optional.IsDefined(DesiredStatusCode))
             {
@@ -63,37 +62,37 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(ThreatIntelWhitelist))
             {
                 writer.WritePropertyName("threatIntelWhitelist"u8);
-                writer.WriteObjectValue(ThreatIntelWhitelist);
+                JsonSerializer.Serialize(writer, ThreatIntelWhitelist);
             }
             if (Optional.IsDefined(Insights))
             {
                 writer.WritePropertyName("insights"u8);
-                writer.WriteObjectValue(Insights);
+                JsonSerializer.Serialize(writer, Insights);
             }
             if (Optional.IsDefined(Snat))
             {
                 writer.WritePropertyName("snat"u8);
-                writer.WriteObjectValue(Snat);
+                JsonSerializer.Serialize(writer, Snat);
             }
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
+                JsonSerializer.Serialize(writer, DnsSettings);
             }
             if (Optional.IsDefined(IntrusionDetection))
             {
                 writer.WritePropertyName("intrusionDetection"u8);
-                writer.WriteObjectValue(IntrusionDetection);
+                JsonSerializer.Serialize(writer, IntrusionDetection);
             }
             if (Optional.IsDefined(TransportSecurity))
             {
                 writer.WritePropertyName("transportSecurity"u8);
-                writer.WriteObjectValue(TransportSecurity);
+                JsonSerializer.Serialize(writer, TransportSecurity);
             }
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                JsonSerializer.Serialize(writer, Sku);
             }
             if (Optional.IsCollectionDefined(NetworkConfigurations))
             {
@@ -164,7 +163,7 @@ namespace MgmtMockAndSample
                         continue;
                     }
                     var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
-                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText(), serializeOptions);
+                    identity = ModelSerializationExtensions.JsonDeserialize<ManagedServiceIdentity>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -207,7 +206,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -225,7 +224,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            startupProbe = ModelSerializationExtensions.JsonDeserialize<Probe>(property0);
+                            startupProbe = ModelSerializationExtensions.JsonDeserialize<Probe>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("readinessProbe"u8))
@@ -234,7 +233,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            readinessProbe = ModelSerializationExtensions.JsonDeserialize<Probe>(property0);
+                            readinessProbe = ModelSerializationExtensions.JsonDeserialize<Probe>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("desiredStatusCode"u8))
@@ -255,7 +254,7 @@ namespace MgmtMockAndSample
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
+                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item));
                             }
                             ruleCollectionGroups = array;
                             continue;
@@ -275,7 +274,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            basePolicy = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            basePolicy = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("firewalls"u8))
@@ -287,7 +286,7 @@ namespace MgmtMockAndSample
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
+                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item));
                             }
                             firewalls = array;
                             continue;
@@ -301,7 +300,7 @@ namespace MgmtMockAndSample
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
+                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item));
                             }
                             childPolicies = array;
                             continue;
@@ -312,7 +311,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            threatIntelWhitelist = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyThreatIntelWhitelist>(property0);
+                            threatIntelWhitelist = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyThreatIntelWhitelist>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("insights"u8))
@@ -321,7 +320,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            insights = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyInsights>(property0);
+                            insights = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyInsights>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("snat"u8))
@@ -330,7 +329,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            snat = ModelSerializationExtensions.JsonDeserialize<FirewallPolicySnat>(property0);
+                            snat = ModelSerializationExtensions.JsonDeserialize<FirewallPolicySnat>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("dnsSettings"u8))
@@ -339,7 +338,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            dnsSettings = ModelSerializationExtensions.JsonDeserialize<DnsSettings>(property0);
+                            dnsSettings = ModelSerializationExtensions.JsonDeserialize<DnsSettings>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("intrusionDetection"u8))
@@ -348,7 +347,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            intrusionDetection = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyIntrusionDetection>(property0);
+                            intrusionDetection = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyIntrusionDetection>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("transportSecurity"u8))
@@ -357,7 +356,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            transportSecurity = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyTransportSecurity>(property0);
+                            transportSecurity = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyTransportSecurity>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("sku"u8))
@@ -366,7 +365,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            sku = ModelSerializationExtensions.JsonDeserialize<FirewallPolicySku>(property0);
+                            sku = ModelSerializationExtensions.JsonDeserialize<FirewallPolicySku>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("networkConfigurations"u8))

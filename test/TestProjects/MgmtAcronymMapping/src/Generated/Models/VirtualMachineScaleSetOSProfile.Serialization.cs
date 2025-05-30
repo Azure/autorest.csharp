@@ -39,12 +39,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(WindowsConfiguration))
             {
                 writer.WritePropertyName("windowsConfiguration"u8);
-                writer.WriteObjectValue(WindowsConfiguration);
+                JsonSerializer.Serialize(writer, WindowsConfiguration);
             }
             if (Optional.IsDefined(LinuxConfiguration))
             {
                 writer.WritePropertyName("linuxConfiguration"u8);
-                writer.WriteObjectValue(LinuxConfiguration);
+                JsonSerializer.Serialize(writer, LinuxConfiguration);
             }
             if (Optional.IsCollectionDefined(Secrets))
             {
@@ -52,7 +52,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in Secrets)
                 {
-                    writer.WriteObjectValue(item);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
@@ -100,7 +100,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    windowsConfiguration = ModelSerializationExtensions.JsonDeserialize<WindowsConfiguration>(property);
+                    windowsConfiguration = ModelSerializationExtensions.JsonDeserialize<WindowsConfiguration>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("linuxConfiguration"u8))
@@ -109,7 +109,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    linuxConfiguration = ModelSerializationExtensions.JsonDeserialize<LinuxConfiguration>(property);
+                    linuxConfiguration = ModelSerializationExtensions.JsonDeserialize<LinuxConfiguration>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("secrets"u8))
