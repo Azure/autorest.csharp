@@ -631,18 +631,7 @@
       "$id": "78",
       "kind": "nullable",
       "type": {
-       "$id": "79",
-       "kind": "array",
-       "name": "Array1",
-       "valueType": {
-        "$id": "80",
-        "kind": "int32",
-        "name": "int32",
-        "crossLanguageDefinitionId": "TypeSpec.int32",
-        "decorators": []
-       },
-       "crossLanguageDefinitionId": "TypeSpec.Array",
-       "decorators": []
+       "$ref": "73"
       },
       "namespace": ""
      },
@@ -653,9 +642,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing.requiredNullableList",
      "serializationOptions": {
-      "$id": "81",
+      "$id": "79",
       "json": {
-       "$id": "82",
+       "$id": "80",
        "name": "requiredNullableList"
       }
      }
@@ -665,32 +654,32 @@
  ],
  "clients": [
   {
-   "$id": "83",
+   "$id": "81",
    "kind": "client",
    "name": "NoDocsUnbrandedTypeSpecClient",
    "namespace": "NoDocsUnbrandedTypeSpec",
    "doc": "This is a sample typespec project.",
    "methods": [
     {
-     "$id": "84",
+     "$id": "82",
      "kind": "basic",
      "name": "sayHi",
      "accessibility": "public",
      "apiVersions": [],
      "doc": "Return hi",
      "operation": {
-      "$id": "85",
+      "$id": "83",
       "name": "sayHi",
       "resourceName": "NoDocsUnbrandedTypeSpec",
       "doc": "Return hi",
       "accessibility": "public",
       "parameters": [
        {
-        "$id": "86",
+        "$id": "84",
         "name": "headParameter",
         "nameInRequest": "head-parameter",
         "type": {
-         "$id": "87",
+         "$id": "85",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -707,11 +696,11 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "88",
+        "$id": "86",
         "name": "queryParameter",
         "nameInRequest": "queryParameter",
         "type": {
-         "$id": "89",
+         "$id": "87",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -728,11 +717,11 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "90",
+        "$id": "88",
         "name": "optionalQuery",
         "nameInRequest": "optionalQuery",
         "type": {
-         "$id": "91",
+         "$id": "89",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -749,17 +738,17 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "92",
+        "$id": "90",
         "name": "accept",
         "nameInRequest": "Accept",
         "type": {
-         "$id": "93",
+         "$id": "91",
          "kind": "constant",
          "name": "sayHiContentType",
          "namespace": "",
          "usage": "None",
          "valueType": {
-          "$id": "94",
+          "$id": "92",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -781,7 +770,7 @@
       ],
       "responses": [
        {
-        "$id": "95",
+        "$id": "93",
         "statusCodes": [
          200
         ],
@@ -806,11 +795,11 @@
      },
      "parameters": [
       {
-       "$id": "96",
+       "$id": "94",
        "name": "headParameter",
        "nameInRequest": "head-parameter",
        "type": {
-        "$id": "97",
+        "$id": "95",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -827,11 +816,11 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "98",
+       "$id": "96",
        "name": "queryParameter",
        "nameInRequest": "queryParameter",
        "type": {
-        "$id": "99",
+        "$id": "97",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -848,11 +837,11 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "100",
+       "$id": "98",
        "name": "optionalQuery",
        "nameInRequest": "optionalQuery",
        "type": {
-        "$id": "101",
+        "$id": "99",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -869,11 +858,11 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "102",
+       "$id": "100",
        "name": "accept",
        "nameInRequest": "accept",
        "type": {
-        "$ref": "93"
+        "$ref": "91"
        },
        "location": "Header",
        "isApiVersion": false,
@@ -887,7 +876,7 @@
       }
      ],
      "response": {
-      "$id": "103",
+      "$id": "101",
       "type": {
        "$ref": "20"
       }
@@ -900,11 +889,11 @@
    ],
    "parameters": [
     {
-     "$id": "104",
+     "$id": "102",
      "name": "noTestTypeSpecUrl",
      "nameInRequest": "noTestTypeSpecUrl",
      "type": {
-      "$id": "105",
+      "$id": "103",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -921,12 +910,12 @@
    ],
    "decorators": [
     {
-     "$id": "106",
+     "$id": "104",
      "name": "TypeSpec.@service",
      "arguments": {
-      "$id": "107",
+      "$id": "105",
       "options": {
-       "$id": "108",
+       "$id": "106",
        "title": "hello world"
       }
      }
@@ -937,9 +926,9 @@
   }
  ],
  "auth": {
-  "$id": "109",
+  "$id": "107",
   "apiKey": {
-   "$id": "110",
+   "$id": "108",
    "name": "my-api-key",
    "in": "header"
   }
