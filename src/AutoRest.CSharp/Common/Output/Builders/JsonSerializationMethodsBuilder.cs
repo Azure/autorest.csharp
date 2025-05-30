@@ -441,6 +441,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             switch (valueSerialization.Type.Implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
+                    // TODO: remove this check once ResponseError and DataFactoryElement implements IJsonModel<T>
                     // SystemObjectType from Azure.ResourceManager has implemented IJsonModel<T>
                     var useIJsonModel = systemObjectType.Declaration.Namespace.StartsWith("Azure.ResourceManager");
                     return  useIJsonModel
@@ -793,7 +794,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return new[]
                 {
                     CreatePropertyNullCheckStatement(jsonPropertySerialization, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull),
-                    // TODO: replace with IJsonModel
                     DeserializeProperty(jsonPropertySerialization.ValueSerialization, jsonProperty, options, out var value),
                     Assign(propertyVariables[jsonPropertySerialization], value),
                     Continue
