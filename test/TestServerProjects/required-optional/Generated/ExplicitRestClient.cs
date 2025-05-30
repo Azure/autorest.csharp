@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
@@ -259,7 +260,7 @@ namespace required_optional
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(bodyParameter, ModelSerializationExtensions.WireOptions);
+            ((IJsonModel<IntWrapper>)bodyParameter).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -322,7 +323,7 @@ namespace required_optional
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(bodyParameter, ModelSerializationExtensions.WireOptions);
+                ((IJsonModel<IntOptionalWrapper>)bodyParameter).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -580,7 +581,7 @@ namespace required_optional
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(bodyParameter, ModelSerializationExtensions.WireOptions);
+            ((IJsonModel<StringWrapper>)bodyParameter).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -643,7 +644,7 @@ namespace required_optional
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(bodyParameter, ModelSerializationExtensions.WireOptions);
+                ((IJsonModel<StringOptionalWrapper>)bodyParameter).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -800,7 +801,7 @@ namespace required_optional
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(bodyParameter, ModelSerializationExtensions.WireOptions);
+            ((IJsonModel<Product>)bodyParameter).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -863,7 +864,7 @@ namespace required_optional
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(bodyParameter, ModelSerializationExtensions.WireOptions);
+                ((IJsonModel<Product>)bodyParameter).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -913,7 +914,7 @@ namespace required_optional
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(bodyParameter, ModelSerializationExtensions.WireOptions);
+            ((IJsonModel<ClassWrapper>)bodyParameter).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -976,7 +977,7 @@ namespace required_optional
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(bodyParameter, ModelSerializationExtensions.WireOptions);
+                ((IJsonModel<ClassOptionalWrapper>)bodyParameter).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -1149,7 +1150,7 @@ namespace required_optional
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(bodyParameter, ModelSerializationExtensions.WireOptions);
+            ((IJsonModel<ArrayWrapper>)bodyParameter).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -1212,7 +1213,7 @@ namespace required_optional
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(bodyParameter, ModelSerializationExtensions.WireOptions);
+                ((IJsonModel<ArrayOptionalWrapper>)bodyParameter).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;

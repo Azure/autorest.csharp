@@ -77,7 +77,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    searchNextPageParameters = SearchRequest.DeserializeSearchRequest(property.Value);
+                    searchNextPageParameters = ModelSerializationExtensions.JsonDeserialize<SearchRequest>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("value"u8))

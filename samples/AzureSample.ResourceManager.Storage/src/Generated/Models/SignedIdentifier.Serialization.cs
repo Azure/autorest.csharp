@@ -23,7 +23,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(AccessPolicy))
             {
                 writer.WritePropertyName("accessPolicy"u8);
-                writer.WriteObjectValue(AccessPolicy);
+                JsonSerializer.Serialize(writer, AccessPolicy);
             }
             writer.WriteEndObject();
         }
@@ -49,7 +49,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    accessPolicy = AccessPolicy.DeserializeAccessPolicy(property.Value);
+                    accessPolicy = ModelSerializationExtensions.JsonDeserialize<AccessPolicy>(property.Value);
                     continue;
                 }
             }

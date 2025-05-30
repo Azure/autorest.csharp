@@ -44,7 +44,7 @@ namespace MgmtNoTypeReplacement
                     {
                         continue;
                     }
-                    foo = JsonSerializer.Deserialize<SubResource>(property.Value.GetRawText());
+                    foo = ModelSerializationExtensions.JsonDeserialize<SubResource>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -68,7 +68,7 @@ namespace MgmtNoTypeReplacement
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
             }

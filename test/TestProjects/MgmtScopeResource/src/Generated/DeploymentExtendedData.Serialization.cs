@@ -41,7 +41,7 @@ namespace MgmtScopeResource
                     {
                         continue;
                     }
-                    properties = DeploymentPropertiesExtended.DeserializeDeploymentPropertiesExtended(property.Value);
+                    properties = ModelSerializationExtensions.JsonDeserialize<DeploymentPropertiesExtended>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -79,7 +79,7 @@ namespace MgmtScopeResource
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
             }

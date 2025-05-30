@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.IO;
 using System.Text.Json;
 using System.Threading;
@@ -55,7 +56,7 @@ namespace NameConflicts
             request0.Headers.Add("Accept", "application/json");
             request0.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(@class);
+            ((IJsonModel<Class>)@class).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
             request0.Content = content;
             return message0;
         }
@@ -286,7 +287,7 @@ namespace NameConflicts
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(httpMessage);
+                ((IJsonModel<Models.HttpMessage>)httpMessage).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -346,7 +347,7 @@ namespace NameConflicts
             {
                 request0.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(request);
+                ((IJsonModel<Models.Request>)request).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
                 request0.Content = content;
             }
             return message;
@@ -406,7 +407,7 @@ namespace NameConflicts
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(response);
+                ((IJsonModel<Models.Response>)response).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;

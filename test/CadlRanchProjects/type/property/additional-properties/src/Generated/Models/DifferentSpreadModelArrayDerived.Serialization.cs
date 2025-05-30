@@ -40,7 +40,7 @@ namespace _Type.Property.AdditionalProperties.Models
             writer.WriteStartArray();
             foreach (var item in DerivedProp)
             {
-                writer.WriteObjectValue(item, options);
+                ((IJsonModel<ModelForRecord>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             foreach (var item in AdditionalProperties)

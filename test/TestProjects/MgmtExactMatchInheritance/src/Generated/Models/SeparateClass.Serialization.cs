@@ -26,7 +26,7 @@ namespace MgmtExactMatchInheritance.Models
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
-                writer.WriteObjectValue(ModelProperty);
+                JsonSerializer.Serialize(writer, ModelProperty);
             }
             writer.WriteEndObject();
         }
@@ -52,7 +52,7 @@ namespace MgmtExactMatchInheritance.Models
                     {
                         continue;
                     }
-                    modelProperty = ExactMatchModel10.DeserializeExactMatchModel10(property.Value);
+                    modelProperty = ModelSerializationExtensions.JsonDeserialize<ExactMatchModel10>(property.Value);
                     continue;
                 }
             }

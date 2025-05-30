@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
@@ -494,7 +495,7 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Content-Type", "application/vnd.microsoft.appconfig.kv+json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(entity);
+                ((IJsonModel<KeyValue>)entity).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;

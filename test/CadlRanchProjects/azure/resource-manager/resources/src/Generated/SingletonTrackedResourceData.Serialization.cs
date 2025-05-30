@@ -40,7 +40,7 @@ namespace _Azure.ResourceManager.Resources
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties, options);
+                ((IJsonModel<SingletonTrackedResourceProperties>)Properties).Write(writer, options);
             }
         }
 
@@ -81,7 +81,7 @@ namespace _Azure.ResourceManager.Resources
                     {
                         continue;
                     }
-                    properties = SingletonTrackedResourceProperties.DeserializeSingletonTrackedResourceProperties(property.Value, options);
+                    properties = ModelSerializationExtensions.JsonDeserialize<SingletonTrackedResourceProperties>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -124,7 +124,7 @@ namespace _Azure.ResourceManager.Resources
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

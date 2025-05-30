@@ -50,7 +50,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    workspaceId = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    workspaceId = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
                     continue;
                 }
             }

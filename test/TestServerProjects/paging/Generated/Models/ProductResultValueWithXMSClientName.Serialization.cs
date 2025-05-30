@@ -41,7 +41,7 @@ namespace paging.Models
                 writer.WriteStartArray();
                 foreach (var item in Indexes)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<Product>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

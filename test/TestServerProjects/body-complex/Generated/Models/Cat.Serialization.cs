@@ -47,7 +47,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Hates)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<Dog>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

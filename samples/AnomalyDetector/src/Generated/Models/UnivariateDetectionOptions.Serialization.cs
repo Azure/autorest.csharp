@@ -39,7 +39,7 @@ namespace AnomalyDetector.Models
             writer.WriteStartArray();
             foreach (var item in Series)
             {
-                writer.WriteObjectValue(item, options);
+                ((IJsonModel<TimeSeriesPoint>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(Granularity))

@@ -30,17 +30,17 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(FrontendIPConfiguration))
             {
                 writer.WritePropertyName("frontendIPConfiguration"u8);
-                writer.WriteObjectValue(FrontendIPConfiguration);
+                JsonSerializer.Serialize(writer, FrontendIPConfiguration);
             }
             if (Optional.IsDefined(BackendAddressPool))
             {
                 writer.WritePropertyName("backendAddressPool"u8);
-                writer.WriteObjectValue(BackendAddressPool);
+                JsonSerializer.Serialize(writer, BackendAddressPool);
             }
             if (Optional.IsDefined(Probe))
             {
                 writer.WritePropertyName("probe"u8);
-                writer.WriteObjectValue(Probe);
+                JsonSerializer.Serialize(writer, Probe);
             }
             if (Optional.IsDefined(Protocol))
             {
@@ -145,7 +145,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            frontendIPConfiguration = DeserializeSubResource(property0.Value);
+                            frontendIPConfiguration = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("backendAddressPool"u8))
@@ -154,7 +154,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            backendAddressPool = DeserializeSubResource(property0.Value);
+                            backendAddressPool = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("probe"u8))
@@ -163,7 +163,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            probe = DeserializeSubResource(property0.Value);
+                            probe = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("protocol"u8))

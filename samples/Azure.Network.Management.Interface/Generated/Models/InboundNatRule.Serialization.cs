@@ -30,7 +30,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(FrontendIPConfiguration))
             {
                 writer.WritePropertyName("frontendIPConfiguration"u8);
-                writer.WriteObjectValue(FrontendIPConfiguration);
+                JsonSerializer.Serialize(writer, FrontendIPConfiguration);
             }
             if (Optional.IsDefined(Protocol))
             {
@@ -122,7 +122,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            frontendIPConfiguration = DeserializeSubResource(property0.Value);
+                            frontendIPConfiguration = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("backendIPConfiguration"u8))
@@ -131,7 +131,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            backendIPConfiguration = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(property0.Value);
+                            backendIPConfiguration = ModelSerializationExtensions.JsonDeserialize<NetworkInterfaceIPConfiguration>(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("protocol"u8))

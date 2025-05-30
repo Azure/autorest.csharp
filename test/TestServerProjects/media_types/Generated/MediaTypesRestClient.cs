@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.IO;
 using System.Text.Json;
 using System.Threading;
@@ -113,7 +114,7 @@ namespace media_types
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(input, ModelSerializationExtensions.WireOptions);
+                ((IJsonModel<SourcePath>)input).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -225,7 +226,7 @@ namespace media_types
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(input, ModelSerializationExtensions.WireOptions);
+                ((IJsonModel<SourcePath>)input).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;

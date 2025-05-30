@@ -27,7 +27,7 @@ namespace Inheritance.Models
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
-                writer.WriteObjectValue(ModelProperty);
+                JsonSerializer.Serialize(writer, ModelProperty);
             }
             writer.WriteEndObject();
         }
@@ -53,7 +53,7 @@ namespace Inheritance.Models
                     {
                         continue;
                     }
-                    modelProperty = BaseClassWithExtensibleEnumDiscriminator.DeserializeBaseClassWithExtensibleEnumDiscriminator(property.Value);
+                    modelProperty = ModelSerializationExtensions.JsonDeserialize<BaseClassWithExtensibleEnumDiscriminator>(property.Value);
                     continue;
                 }
             }

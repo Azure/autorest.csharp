@@ -35,7 +35,7 @@ namespace Scm._Type.Model.Inheritance.Recursive.Models
                 writer.WriteStartArray();
                 foreach (var item in Extension)
                 {
-                    writer.WriteObjectValue(item, options);
+                    ((IJsonModel<Extension>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

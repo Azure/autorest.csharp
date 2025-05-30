@@ -104,7 +104,7 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                writer.WriteObjectValue(InstanceView, options);
+                ((IJsonModel<VirtualMachineExtensionInstanceView>)InstanceView).Write(writer, options);
             }
             writer.WriteEndObject();
         }
@@ -189,7 +189,7 @@ namespace AzureSample.ResourceManager.Sample
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -268,7 +268,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            instanceView = VirtualMachineExtensionInstanceView.DeserializeVirtualMachineExtensionInstanceView(property0.Value, options);
+                            instanceView = ModelSerializationExtensions.JsonDeserialize<VirtualMachineExtensionInstanceView>(property0.Value);
                             continue;
                         }
                     }

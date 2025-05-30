@@ -41,13 +41,12 @@ namespace MgmtTypeSpec.Models
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties, options);
+                ((IJsonModel<MgmtTypeSpecPrivateLinkResourceProperties>)Properties).Write(writer, options);
             }
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
-                JsonSerializer.Serialize(writer, Identity, serializeOptions);
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, options);
             }
         }
 
@@ -87,7 +86,7 @@ namespace MgmtTypeSpec.Models
                     {
                         continue;
                     }
-                    properties = MgmtTypeSpecPrivateLinkResourceProperties.DeserializeMgmtTypeSpecPrivateLinkResourceProperties(property.Value, options);
+                    properties = ModelSerializationExtensions.JsonDeserialize<MgmtTypeSpecPrivateLinkResourceProperties>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))
@@ -97,7 +96,7 @@ namespace MgmtTypeSpec.Models
                         continue;
                     }
                     var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
-                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText(), serializeOptions);
+                    identity = ModelSerializationExtensions.JsonDeserialize<ManagedServiceIdentity>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -121,7 +120,7 @@ namespace MgmtTypeSpec.Models
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
                 if (options.Format != "W")

@@ -84,7 +84,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
-                writer.WriteObjectValue(NetworkAcls);
+                JsonSerializer.Serialize(writer, NetworkAcls);
             }
             if (Optional.IsDefined(PublicNetworkAccess))
             {
@@ -233,7 +233,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    networkAcls = MhsmNetworkRuleSet.DeserializeMhsmNetworkRuleSet(property.Value);
+                    networkAcls = ModelSerializationExtensions.JsonDeserialize<MhsmNetworkRuleSet>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("privateEndpointConnections"u8))

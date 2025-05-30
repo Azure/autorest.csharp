@@ -58,7 +58,7 @@ namespace AuthoringTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in Warnings)
             {
-                writer.WriteObjectValue(item, options);
+                ((IJsonModel<JobWarning>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("errors"u8);
@@ -154,7 +154,7 @@ namespace AuthoringTypeSpec.Models
                 }
                 if (property.NameEquals("errors"u8))
                 {
-                    errors = JsonSerializer.Deserialize<ResponseError>(property.Value.GetRawText());
+                    errors = ModelSerializationExtensions.JsonDeserialize<ResponseError>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

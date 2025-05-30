@@ -33,7 +33,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    properties = DeletedVaultProperties.DeserializeDeletedVaultProperties(property.Value);
+                    properties = ModelSerializationExtensions.JsonDeserialize<DeletedVaultProperties>(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -57,7 +57,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
                     continue;
                 }
             }

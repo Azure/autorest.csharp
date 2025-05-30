@@ -32,7 +32,7 @@ namespace MgmtExpandResourceTypes.Models
                     List<WritableSubResource> array = new List<WritableSubResource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
+                        array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item));
                     }
                     dnsResources = array;
                     continue;
@@ -43,7 +43,7 @@ namespace MgmtExpandResourceTypes.Models
                     {
                         continue;
                     }
-                    targetResource = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    targetResource = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
                     continue;
                 }
             }
