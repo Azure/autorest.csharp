@@ -1003,13 +1003,10 @@
             "doc": "The additional info.",
             "type": {
              "$id": "124",
-             "kind": "model",
-             "name": "ErrorAdditionalInfoInfo",
-             "namespace": "MgmtTypeSpec",
-             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
-             "usage": "Output,Json,Exception,LroInitial,LroPolling,LroFinalEnvelope",
-             "decorators": [],
-             "properties": []
+             "kind": "unknown",
+             "name": "unknown",
+             "crossLanguageDefinitionId": "",
+             "decorators": []
             },
             "optional": true,
             "readOnly": true,
@@ -1067,9 +1064,6 @@
   },
   {
    "$ref": "118"
-  },
-  {
-   "$ref": "124"
   },
   {
    "$id": "131",
