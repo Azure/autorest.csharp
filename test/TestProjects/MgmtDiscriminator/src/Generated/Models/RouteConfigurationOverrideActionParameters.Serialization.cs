@@ -97,7 +97,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    originGroupOverride = ModelSerializationExtensions.JsonDeserialize<OriginGroupOverride>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    originGroupOverride = ModelSerializationExtensions.JsonDeserialize<OriginGroupOverride>(property);
                     continue;
                 }
                 if (options.Format != "W")

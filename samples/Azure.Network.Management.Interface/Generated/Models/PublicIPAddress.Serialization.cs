@@ -136,7 +136,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<PublicIPAddressSku>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    sku = ModelSerializationExtensions.JsonDeserialize<PublicIPAddressSku>(property);
                     continue;
                 }
                 if (property.NameEquals("etag"u8))
@@ -225,7 +225,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            ipConfiguration = ModelSerializationExtensions.JsonDeserialize<IPConfiguration>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            ipConfiguration = ModelSerializationExtensions.JsonDeserialize<IPConfiguration>(property0);
                             continue;
                         }
                         if (property0.NameEquals("dnsSettings"u8))
@@ -234,7 +234,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            dnsSettings = ModelSerializationExtensions.JsonDeserialize<PublicIPAddressDnsSettings>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            dnsSettings = ModelSerializationExtensions.JsonDeserialize<PublicIPAddressDnsSettings>(property0);
                             continue;
                         }
                         if (property0.NameEquals("ddosSettings"u8))
@@ -243,7 +243,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            ddosSettings = ModelSerializationExtensions.JsonDeserialize<DdosSettings>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            ddosSettings = ModelSerializationExtensions.JsonDeserialize<DdosSettings>(property0);
                             continue;
                         }
                         if (property0.NameEquals("ipTags"u8))
@@ -271,7 +271,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            publicIPPrefix = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            publicIPPrefix = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0);
                             continue;
                         }
                         if (property0.NameEquals("idleTimeoutInMinutes"u8))

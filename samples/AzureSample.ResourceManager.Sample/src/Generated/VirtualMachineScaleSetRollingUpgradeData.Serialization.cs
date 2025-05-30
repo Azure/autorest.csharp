@@ -157,7 +157,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            policy = ModelSerializationExtensions.JsonDeserialize<RollingUpgradePolicy>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            policy = ModelSerializationExtensions.JsonDeserialize<RollingUpgradePolicy>(property0);
                             continue;
                         }
                         if (property0.NameEquals("runningStatus"u8))
@@ -166,7 +166,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            runningStatus = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeRunningStatus>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            runningStatus = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeRunningStatus>(property0);
                             continue;
                         }
                         if (property0.NameEquals("progress"u8))
@@ -175,7 +175,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            progress = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeProgressInfo>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            progress = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeProgressInfo>(property0);
                             continue;
                         }
                         if (property0.NameEquals("error"u8))
@@ -184,7 +184,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            error = ModelSerializationExtensions.JsonDeserialize<ApiError>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            error = ModelSerializationExtensions.JsonDeserialize<ApiError>(property0);
                             continue;
                         }
                     }

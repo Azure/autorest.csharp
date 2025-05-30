@@ -47,7 +47,7 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("distance"u8))
                 {
-                    distance = ModelSerializationExtensions.JsonDeserialize<DistanceScoringParameters>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    distance = ModelSerializationExtensions.JsonDeserialize<DistanceScoringParameters>(property);
                     continue;
                 }
                 if (property.NameEquals("type"u8))

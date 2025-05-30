@@ -33,7 +33,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<DeletedManagedHsmProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    properties = ModelSerializationExtensions.JsonDeserialize<DeletedManagedHsmProperties>(property);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

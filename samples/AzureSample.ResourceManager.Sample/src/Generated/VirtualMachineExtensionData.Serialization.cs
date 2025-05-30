@@ -268,7 +268,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            instanceView = ModelSerializationExtensions.JsonDeserialize<VirtualMachineExtensionInstanceView>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            instanceView = ModelSerializationExtensions.JsonDeserialize<VirtualMachineExtensionInstanceView>(property0);
                             continue;
                         }
                     }

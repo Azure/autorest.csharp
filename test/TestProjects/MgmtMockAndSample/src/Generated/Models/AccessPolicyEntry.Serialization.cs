@@ -63,7 +63,7 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("permissions"u8))
                 {
-                    permissions = ModelSerializationExtensions.JsonDeserialize<Permissions>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    permissions = ModelSerializationExtensions.JsonDeserialize<Permissions>(property);
                     continue;
                 }
             }

@@ -114,7 +114,7 @@ namespace model_flattening.Models
                     {
                         continue;
                     }
-                    parentError = ModelSerializationExtensions.JsonDeserialize<Error>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    parentError = ModelSerializationExtensions.JsonDeserialize<Error>(property);
                     continue;
                 }
                 if (options.Format != "W")

@@ -53,7 +53,7 @@ namespace MgmtScopeResource
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<GuestConfigurationAssignmentProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    properties = ModelSerializationExtensions.JsonDeserialize<GuestConfigurationAssignmentProperties>(property);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

@@ -172,7 +172,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identityWithRenamedProperty = ModelSerializationExtensions.JsonDeserialize<IdentityWithRenamedProperty>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    identityWithRenamedProperty = ModelSerializationExtensions.JsonDeserialize<IdentityWithRenamedProperty>(property);
                     continue;
                 }
                 if (property.NameEquals("identityWithDifferentPropertyType"u8))
@@ -181,7 +181,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identityWithDifferentPropertyType = ModelSerializationExtensions.JsonDeserialize<IdentityWithDifferentPropertyType>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    identityWithDifferentPropertyType = ModelSerializationExtensions.JsonDeserialize<IdentityWithDifferentPropertyType>(property);
                     continue;
                 }
                 if (property.NameEquals("identityWithNoUserIdentity"u8))
@@ -199,7 +199,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identityWithNoSystemIdentity = ModelSerializationExtensions.JsonDeserialize<IdentityWithNoSystemIdentity>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    identityWithNoSystemIdentity = ModelSerializationExtensions.JsonDeserialize<IdentityWithNoSystemIdentity>(property);
                     continue;
                 }
                 if (property.NameEquals("identityV3"u8))

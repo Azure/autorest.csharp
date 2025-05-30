@@ -75,7 +75,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<ManagedHsmSku>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    sku = ModelSerializationExtensions.JsonDeserialize<ManagedHsmSku>(property);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

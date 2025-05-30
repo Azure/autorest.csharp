@@ -91,7 +91,7 @@ namespace MgmtTypeSpec
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<FooProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    properties = ModelSerializationExtensions.JsonDeserialize<FooProperties>(property);
                     continue;
                 }
                 if (property.NameEquals("extendedLocation"u8))

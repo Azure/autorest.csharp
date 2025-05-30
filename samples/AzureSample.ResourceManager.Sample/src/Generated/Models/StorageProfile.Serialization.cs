@@ -107,7 +107,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    imageReference = ModelSerializationExtensions.JsonDeserialize<ImageReference>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    imageReference = ModelSerializationExtensions.JsonDeserialize<ImageReference>(property);
                     continue;
                 }
                 if (property.NameEquals("osDisk"u8))
@@ -116,7 +116,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    osDisk = ModelSerializationExtensions.JsonDeserialize<OSDisk>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    osDisk = ModelSerializationExtensions.JsonDeserialize<OSDisk>(property);
                     continue;
                 }
                 if (property.NameEquals("dataDisks"u8))

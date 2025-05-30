@@ -208,7 +208,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            instanceView = ModelSerializationExtensions.JsonDeserialize<DedicatedHostInstanceView>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            instanceView = ModelSerializationExtensions.JsonDeserialize<DedicatedHostInstanceView>(property0);
                             continue;
                         }
                     }

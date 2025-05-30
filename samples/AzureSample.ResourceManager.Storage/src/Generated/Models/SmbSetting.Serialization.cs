@@ -62,7 +62,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    multichannel = ModelSerializationExtensions.JsonDeserialize<Multichannel>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    multichannel = ModelSerializationExtensions.JsonDeserialize<Multichannel>(property);
                     continue;
                 }
                 if (property.NameEquals("versions"u8))

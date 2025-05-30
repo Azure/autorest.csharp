@@ -60,7 +60,7 @@ namespace MgmtLRO
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<BarProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    properties = ModelSerializationExtensions.JsonDeserialize<BarProperties>(property);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

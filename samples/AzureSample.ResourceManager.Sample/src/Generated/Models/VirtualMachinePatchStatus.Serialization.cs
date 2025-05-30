@@ -95,7 +95,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    availablePatchSummary = ModelSerializationExtensions.JsonDeserialize<AvailablePatchSummary>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    availablePatchSummary = ModelSerializationExtensions.JsonDeserialize<AvailablePatchSummary>(property);
                     continue;
                 }
                 if (property.NameEquals("lastPatchInstallationSummary"u8))
@@ -104,7 +104,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    lastPatchInstallationSummary = ModelSerializationExtensions.JsonDeserialize<LastPatchInstallationSummary>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    lastPatchInstallationSummary = ModelSerializationExtensions.JsonDeserialize<LastPatchInstallationSummary>(property);
                     continue;
                 }
                 if (options.Format != "W")

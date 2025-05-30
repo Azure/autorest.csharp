@@ -81,7 +81,7 @@ namespace _Azure.ResourceManager.CommonProperties
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<ConfidentialResourceProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    properties = ModelSerializationExtensions.JsonDeserialize<ConfidentialResourceProperties>(property);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

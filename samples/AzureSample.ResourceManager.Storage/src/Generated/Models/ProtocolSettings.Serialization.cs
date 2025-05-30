@@ -38,7 +38,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    smb = ModelSerializationExtensions.JsonDeserialize<SmbSetting>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    smb = ModelSerializationExtensions.JsonDeserialize<SmbSetting>(property);
                     continue;
                 }
             }

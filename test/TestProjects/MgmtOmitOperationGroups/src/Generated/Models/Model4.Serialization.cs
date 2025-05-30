@@ -38,7 +38,7 @@ namespace MgmtOmitOperationGroups.Models
                     {
                         continue;
                     }
-                    modelz = ModelSerializationExtensions.JsonDeserialize<ModelZ>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    modelz = ModelSerializationExtensions.JsonDeserialize<ModelZ>(property);
                     continue;
                 }
             }

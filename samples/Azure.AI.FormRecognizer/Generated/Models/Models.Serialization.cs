@@ -29,7 +29,7 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    summary = ModelSerializationExtensions.JsonDeserialize<ModelsSummary>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    summary = ModelSerializationExtensions.JsonDeserialize<ModelsSummary>(property);
                     continue;
                 }
                 if (property.NameEquals("modelList"u8))

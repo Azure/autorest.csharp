@@ -88,7 +88,7 @@ namespace TypeSchemaMapping.Models
                     {
                         continue;
                     }
-                    internalProperty = ModelSerializationExtensions.JsonDeserialize<InternalModel>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    internalProperty = ModelSerializationExtensions.JsonDeserialize<InternalModel>(property);
                     continue;
                 }
                 if (options.Format != "W")

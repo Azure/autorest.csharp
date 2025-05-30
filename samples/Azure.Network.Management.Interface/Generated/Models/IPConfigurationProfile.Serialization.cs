@@ -85,7 +85,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            subnet = ModelSerializationExtensions.JsonDeserialize<Subnet>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            subnet = ModelSerializationExtensions.JsonDeserialize<Subnet>(property0);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

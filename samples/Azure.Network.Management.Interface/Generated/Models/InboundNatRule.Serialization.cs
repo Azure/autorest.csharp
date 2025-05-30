@@ -122,7 +122,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            frontendIPConfiguration = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            frontendIPConfiguration = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0);
                             continue;
                         }
                         if (property0.NameEquals("backendIPConfiguration"u8))
@@ -131,7 +131,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            backendIPConfiguration = ModelSerializationExtensions.JsonDeserialize<NetworkInterfaceIPConfiguration>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            backendIPConfiguration = ModelSerializationExtensions.JsonDeserialize<NetworkInterfaceIPConfiguration>(property0);
                             continue;
                         }
                         if (property0.NameEquals("protocol"u8))

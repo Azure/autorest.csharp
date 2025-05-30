@@ -33,7 +33,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<MgmtAcronymMappingSku>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    sku = ModelSerializationExtensions.JsonDeserialize<MgmtAcronymMappingSku>(property);
                     continue;
                 }
                 if (property.NameEquals("capacity"u8))
@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    capacity = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetSkuCapacity>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    capacity = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetSkuCapacity>(property);
                     continue;
                 }
             }

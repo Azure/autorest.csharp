@@ -116,7 +116,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    sampleSalmon = ModelSerializationExtensions.JsonDeserialize<DotSalmon>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    sampleSalmon = ModelSerializationExtensions.JsonDeserialize<DotSalmon>(property);
                     continue;
                 }
                 if (property.NameEquals("salmons"u8))
@@ -139,7 +139,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    sampleFish = ModelSerializationExtensions.JsonDeserialize<DotFish>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    sampleFish = ModelSerializationExtensions.JsonDeserialize<DotFish>(property);
                     continue;
                 }
                 if (property.NameEquals("fishes"u8))

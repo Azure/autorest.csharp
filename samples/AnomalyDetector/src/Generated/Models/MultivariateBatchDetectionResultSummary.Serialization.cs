@@ -139,7 +139,7 @@ namespace AnomalyDetector.Models
                 }
                 if (property.NameEquals("setupInfo"u8))
                 {
-                    setupInfo = ModelSerializationExtensions.JsonDeserialize<MultivariateBatchDetectionOptions>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    setupInfo = ModelSerializationExtensions.JsonDeserialize<MultivariateBatchDetectionOptions>(property);
                     continue;
                 }
                 if (options.Format != "W")

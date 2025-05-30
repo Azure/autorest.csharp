@@ -31,7 +31,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    runningStatus = ModelSerializationExtensions.JsonDeserialize<UpgradeOperationHistoryStatus>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    runningStatus = ModelSerializationExtensions.JsonDeserialize<UpgradeOperationHistoryStatus>(property);
                     continue;
                 }
                 if (property.NameEquals("progress"u8))
@@ -40,7 +40,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    progress = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeProgressInfo>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    progress = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeProgressInfo>(property);
                     continue;
                 }
                 if (property.NameEquals("error"u8))
@@ -49,7 +49,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    error = ModelSerializationExtensions.JsonDeserialize<ApiError>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    error = ModelSerializationExtensions.JsonDeserialize<ApiError>(property);
                     continue;
                 }
                 if (property.NameEquals("startedBy"u8))
@@ -67,7 +67,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    targetImageReference = ModelSerializationExtensions.JsonDeserialize<ImageReference>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    targetImageReference = ModelSerializationExtensions.JsonDeserialize<ImageReference>(property);
                     continue;
                 }
                 if (property.NameEquals("rollbackInfo"u8))
@@ -76,7 +76,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    rollbackInfo = ModelSerializationExtensions.JsonDeserialize<RollbackStatusInfo>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    rollbackInfo = ModelSerializationExtensions.JsonDeserialize<RollbackStatusInfo>(property);
                     continue;
                 }
             }

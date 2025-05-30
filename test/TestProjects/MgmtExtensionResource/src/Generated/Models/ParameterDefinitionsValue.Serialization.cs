@@ -121,7 +121,7 @@ namespace MgmtExtensionResource.Models
                     {
                         continue;
                     }
-                    metadata = ModelSerializationExtensions.JsonDeserialize<ParameterDefinitionsValueMetadata>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    metadata = ModelSerializationExtensions.JsonDeserialize<ParameterDefinitionsValueMetadata>(property);
                     continue;
                 }
             }

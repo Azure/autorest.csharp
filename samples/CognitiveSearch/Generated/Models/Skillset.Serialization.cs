@@ -80,7 +80,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    cognitiveServices = ModelSerializationExtensions.JsonDeserialize<CognitiveServicesAccount>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    cognitiveServices = ModelSerializationExtensions.JsonDeserialize<CognitiveServicesAccount>(property);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"u8))

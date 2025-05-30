@@ -111,7 +111,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            subnet = ModelSerializationExtensions.JsonDeserialize<Subnet>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            subnet = ModelSerializationExtensions.JsonDeserialize<Subnet>(property0);
                             continue;
                         }
                         if (property0.NameEquals("publicIPAddress"u8))
@@ -120,7 +120,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            publicIPAddress = ModelSerializationExtensions.JsonDeserialize<PublicIPAddress>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            publicIPAddress = ModelSerializationExtensions.JsonDeserialize<PublicIPAddress>(property0);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

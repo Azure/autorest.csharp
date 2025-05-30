@@ -98,7 +98,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    osProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetOSProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    osProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetOSProfile>(property);
                     continue;
                 }
                 if (property.NameEquals("storageProfile"u8))
@@ -107,7 +107,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    storageProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetStorageProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    storageProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetStorageProfile>(property);
                     continue;
                 }
                 if (property.NameEquals("networkProfile"u8))
@@ -116,7 +116,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    networkProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetNetworkProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    networkProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetNetworkProfile>(property);
                     continue;
                 }
                 if (property.NameEquals("securityProfile"u8))
@@ -125,7 +125,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    securityProfile = ModelSerializationExtensions.JsonDeserialize<SecurityProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    securityProfile = ModelSerializationExtensions.JsonDeserialize<SecurityProfile>(property);
                     continue;
                 }
                 if (property.NameEquals("diagnosticsProfile"u8))
@@ -134,7 +134,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    diagnosticsProfile = ModelSerializationExtensions.JsonDeserialize<DiagnosticsProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    diagnosticsProfile = ModelSerializationExtensions.JsonDeserialize<DiagnosticsProfile>(property);
                     continue;
                 }
                 if (property.NameEquals("extensionProfile"u8))
@@ -143,7 +143,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    extensionProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetExtensionProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    extensionProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetExtensionProfile>(property);
                     continue;
                 }
                 if (property.NameEquals("licenseType"u8))
@@ -175,7 +175,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    billingProfile = ModelSerializationExtensions.JsonDeserialize<BillingProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    billingProfile = ModelSerializationExtensions.JsonDeserialize<BillingProfile>(property);
                     continue;
                 }
                 if (property.NameEquals("scheduledEventsProfile"u8))
@@ -184,7 +184,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    scheduledEventsProfile = ModelSerializationExtensions.JsonDeserialize<ScheduledEventsProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    scheduledEventsProfile = ModelSerializationExtensions.JsonDeserialize<ScheduledEventsProfile>(property);
                     continue;
                 }
             }

@@ -120,7 +120,7 @@ namespace Payload.MultiPart.Models
                 }
                 if (property.NameEquals("address"u8))
                 {
-                    address = ModelSerializationExtensions.JsonDeserialize<Address>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    address = ModelSerializationExtensions.JsonDeserialize<Address>(property);
                     continue;
                 }
                 if (property.NameEquals("profileImage"u8))

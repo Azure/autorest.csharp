@@ -70,7 +70,7 @@ namespace MgmtDiscriminator.Models
             {
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = ModelSerializationExtensions.JsonDeserialize<CacheExpirationActionParameters>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    parameters = ModelSerializationExtensions.JsonDeserialize<CacheExpirationActionParameters>(property);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

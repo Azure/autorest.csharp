@@ -52,7 +52,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    activeDirectoryProperties = ModelSerializationExtensions.JsonDeserialize<ActiveDirectoryProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    activeDirectoryProperties = ModelSerializationExtensions.JsonDeserialize<ActiveDirectoryProperties>(property);
                     continue;
                 }
                 if (property.NameEquals("defaultSharePermission"u8))

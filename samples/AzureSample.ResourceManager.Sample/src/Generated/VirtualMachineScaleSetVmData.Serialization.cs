@@ -223,7 +223,7 @@ namespace AzureSample.ResourceManager.Sample
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerSampleSku>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerSampleSku>(property);
                     continue;
                 }
                 if (property.NameEquals("plan"u8))
@@ -232,7 +232,7 @@ namespace AzureSample.ResourceManager.Sample
                     {
                         continue;
                     }
-                    plan = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerSamplePlan>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    plan = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerSamplePlan>(property);
                     continue;
                 }
                 if (property.NameEquals("resources"u8))
@@ -335,7 +335,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            instanceView = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetVmInstanceView>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            instanceView = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetVmInstanceView>(property0);
                             continue;
                         }
                         if (property0.NameEquals("hardwareProfile"u8))
@@ -344,7 +344,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            hardwareProfile = ModelSerializationExtensions.JsonDeserialize<HardwareProfile>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            hardwareProfile = ModelSerializationExtensions.JsonDeserialize<HardwareProfile>(property0);
                             continue;
                         }
                         if (property0.NameEquals("storageProfile"u8))
@@ -353,7 +353,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            storageProfile = ModelSerializationExtensions.JsonDeserialize<StorageProfile>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            storageProfile = ModelSerializationExtensions.JsonDeserialize<StorageProfile>(property0);
                             continue;
                         }
                         if (property0.NameEquals("additionalCapabilities"u8))
@@ -362,7 +362,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            additionalCapabilities = ModelSerializationExtensions.JsonDeserialize<AdditionalCapabilities>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            additionalCapabilities = ModelSerializationExtensions.JsonDeserialize<AdditionalCapabilities>(property0);
                             continue;
                         }
                         if (property0.NameEquals("osProfile"u8))
@@ -371,7 +371,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            osProfile = ModelSerializationExtensions.JsonDeserialize<OSProfile>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            osProfile = ModelSerializationExtensions.JsonDeserialize<OSProfile>(property0);
                             continue;
                         }
                         if (property0.NameEquals("securityProfile"u8))
@@ -380,7 +380,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            securityProfile = ModelSerializationExtensions.JsonDeserialize<SecurityProfile>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            securityProfile = ModelSerializationExtensions.JsonDeserialize<SecurityProfile>(property0);
                             continue;
                         }
                         if (property0.NameEquals("networkProfile"u8))
@@ -389,7 +389,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            networkProfile = ModelSerializationExtensions.JsonDeserialize<NetworkProfile>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            networkProfile = ModelSerializationExtensions.JsonDeserialize<NetworkProfile>(property0);
                             continue;
                         }
                         if (property0.NameEquals("networkProfileConfiguration"u8))
@@ -398,7 +398,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            networkProfileConfiguration = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetVmNetworkProfileConfiguration>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            networkProfileConfiguration = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetVmNetworkProfileConfiguration>(property0);
                             continue;
                         }
                         if (property0.NameEquals("diagnosticsProfile"u8))
@@ -407,7 +407,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            diagnosticsProfile = ModelSerializationExtensions.JsonDeserialize<DiagnosticsProfile>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            diagnosticsProfile = ModelSerializationExtensions.JsonDeserialize<DiagnosticsProfile>(property0);
                             continue;
                         }
                         if (property0.NameEquals("availabilitySet"u8))
@@ -440,7 +440,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            protectionPolicy = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetVmProtectionPolicy>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            protectionPolicy = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetVmProtectionPolicy>(property0);
                             continue;
                         }
                     }

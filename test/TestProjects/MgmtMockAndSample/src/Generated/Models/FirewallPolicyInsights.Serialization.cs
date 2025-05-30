@@ -68,7 +68,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    logAnalyticsResources = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyLogAnalyticsResources>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    logAnalyticsResources = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyLogAnalyticsResources>(property);
                     continue;
                 }
             }

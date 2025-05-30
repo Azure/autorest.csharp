@@ -50,7 +50,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    ddosCustomPolicy = ModelSerializationExtensions.JsonDeserialize<SubResource>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    ddosCustomPolicy = ModelSerializationExtensions.JsonDeserialize<SubResource>(property);
                     continue;
                 }
                 if (property.NameEquals("protectionCoverage"u8))

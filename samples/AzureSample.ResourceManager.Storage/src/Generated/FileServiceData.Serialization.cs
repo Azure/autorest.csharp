@@ -60,7 +60,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerStorageSku>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerStorageSku>(property);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -102,7 +102,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            cors = ModelSerializationExtensions.JsonDeserialize<CorsRules>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            cors = ModelSerializationExtensions.JsonDeserialize<CorsRules>(property0);
                             continue;
                         }
                         if (property0.NameEquals("shareDeleteRetentionPolicy"u8))
@@ -111,7 +111,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            shareDeleteRetentionPolicy = ModelSerializationExtensions.JsonDeserialize<DeleteRetentionPolicy>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            shareDeleteRetentionPolicy = ModelSerializationExtensions.JsonDeserialize<DeleteRetentionPolicy>(property0);
                             continue;
                         }
                         if (property0.NameEquals("protocolSettings"u8))
@@ -120,7 +120,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            protocolSettings = ModelSerializationExtensions.JsonDeserialize<ProtocolSettings>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            protocolSettings = ModelSerializationExtensions.JsonDeserialize<ProtocolSettings>(property0);
                             continue;
                         }
                     }

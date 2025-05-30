@@ -28,7 +28,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    authorization = ModelSerializationExtensions.JsonDeserialize<SenderAuthorization>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    authorization = ModelSerializationExtensions.JsonDeserialize<SenderAuthorization>(property);
                     continue;
                 }
                 if (property.NameEquals("tenantId"u8))

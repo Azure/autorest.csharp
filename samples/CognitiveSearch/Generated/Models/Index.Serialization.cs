@@ -175,7 +175,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    corsOptions = ModelSerializationExtensions.JsonDeserialize<CorsOptions>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    corsOptions = ModelSerializationExtensions.JsonDeserialize<CorsOptions>(property);
                     continue;
                 }
                 if (property.NameEquals("suggesters"u8))
@@ -254,7 +254,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    encryptionKey = ModelSerializationExtensions.JsonDeserialize<EncryptionKey>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    encryptionKey = ModelSerializationExtensions.JsonDeserialize<EncryptionKey>(property);
                     continue;
                 }
                 if (property.NameEquals("similarity"u8))
@@ -263,7 +263,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    similarity = ModelSerializationExtensions.JsonDeserialize<Similarity>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    similarity = ModelSerializationExtensions.JsonDeserialize<Similarity>(property);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"u8))

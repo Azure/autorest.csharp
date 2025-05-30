@@ -38,7 +38,7 @@ namespace MgmtScopeResource.Models
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<DeploymentOperationProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    properties = ModelSerializationExtensions.JsonDeserialize<DeploymentOperationProperties>(property);
                     continue;
                 }
             }

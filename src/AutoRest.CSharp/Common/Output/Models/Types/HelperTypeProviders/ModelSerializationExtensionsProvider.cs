@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             };
 
             _jsonSerializerOptionsField = new FieldDeclaration(
-                modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
+                modifiers: FieldModifiers.Private | FieldModifiers.Static | FieldModifiers.ReadOnly,
                 type: typeof(JsonSerializerOptions),
                 name: JsonSerializerOptionsName)
             {
@@ -498,8 +498,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new Method(signature, body);
         }
 
-        public ValueExpression Deserialize(JsonPropertyExpression jsonProperty, ValueExpression options, CSharpType type)
-            => new InvokeStaticMethodExpression(Type, JsonDeserializeMethodName, [jsonProperty, options], TypeArguments: [type]);
+        public static ValueExpression Deserialize(JsonPropertyExpression jsonProperty, CSharpType type)
+            => new InvokeStaticMethodExpression(Instance.Type, JsonDeserializeMethodName, [jsonProperty], TypeArguments: [type]);
 
         public MethodBodyStatement WriteBase64StringValue(Utf8JsonWriterExpression writer, ValueExpression value, string? format)
             => new InvokeStaticMethodStatement(Type, _writeBase64StringValueMethodName, new[] { writer, value, Literal(format) }, CallAsExtension: true);
@@ -736,7 +736,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Method BuildJsonDeserializeMethod()
         {
             var propertyParameter = new Parameter("property", null, typeof(JsonProperty), null, ValidationType.None, null);
-            var optionsParameter = new Parameter("options", null, typeof(JsonSerializerOptions), null, ValidationType.None, null);
             var justificationExpression = new KeywordExpression("Justification =", Literal("By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue."));
             var signature = new MethodSignature(
                 JsonDeserializeMethodName,
@@ -745,7 +744,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 MethodSignatureModifiers.Static | MethodSignatureModifiers.Public,
                 _t,
                 null,
-                [propertyParameter, optionsParameter],
+                [propertyParameter],
                 Attributes:
                 [
                     new CSharpAttribute(typeof(SuppressMessageAttribute), Literal("Trimming"), Literal("IL2026"), justificationExpression),

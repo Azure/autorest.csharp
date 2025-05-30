@@ -60,7 +60,7 @@ namespace MgmtNonStringPathVariable
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<FakeProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    properties = ModelSerializationExtensions.JsonDeserialize<FakeProperties>(property);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

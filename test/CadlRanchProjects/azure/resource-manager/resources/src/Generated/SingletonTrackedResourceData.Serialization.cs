@@ -81,7 +81,7 @@ namespace _Azure.ResourceManager.Resources
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<SingletonTrackedResourceProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    properties = ModelSerializationExtensions.JsonDeserialize<SingletonTrackedResourceProperties>(property);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

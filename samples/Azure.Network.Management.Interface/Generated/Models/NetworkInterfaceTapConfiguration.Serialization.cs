@@ -85,7 +85,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            virtualNetworkTap = ModelSerializationExtensions.JsonDeserialize<VirtualNetworkTap>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            virtualNetworkTap = ModelSerializationExtensions.JsonDeserialize<VirtualNetworkTap>(property0);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

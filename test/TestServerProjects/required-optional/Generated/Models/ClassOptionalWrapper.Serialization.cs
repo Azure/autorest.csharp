@@ -88,7 +88,7 @@ namespace required_optional.Models
                     {
                         continue;
                     }
-                    value = ModelSerializationExtensions.JsonDeserialize<Product>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    value = ModelSerializationExtensions.JsonDeserialize<Product>(property);
                     continue;
                 }
                 if (options.Format != "W")

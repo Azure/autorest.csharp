@@ -93,7 +93,7 @@ namespace MgmtScopeResource.Models
                     {
                         continue;
                     }
-                    errorResponse = ModelSerializationExtensions.JsonDeserialize<ErrorResponse>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    errorResponse = ModelSerializationExtensions.JsonDeserialize<ErrorResponse>(property);
                     continue;
                 }
             }

@@ -29,37 +29,37 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("documentCount"u8))
                 {
-                    documentCount = ModelSerializationExtensions.JsonDeserialize<ResourceCounter>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    documentCount = ModelSerializationExtensions.JsonDeserialize<ResourceCounter>(property);
                     continue;
                 }
                 if (property.NameEquals("indexesCount"u8))
                 {
-                    indexesCount = ModelSerializationExtensions.JsonDeserialize<ResourceCounter>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    indexesCount = ModelSerializationExtensions.JsonDeserialize<ResourceCounter>(property);
                     continue;
                 }
                 if (property.NameEquals("indexersCount"u8))
                 {
-                    indexersCount = ModelSerializationExtensions.JsonDeserialize<ResourceCounter>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    indexersCount = ModelSerializationExtensions.JsonDeserialize<ResourceCounter>(property);
                     continue;
                 }
                 if (property.NameEquals("dataSourcesCount"u8))
                 {
-                    dataSourcesCount = ModelSerializationExtensions.JsonDeserialize<ResourceCounter>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    dataSourcesCount = ModelSerializationExtensions.JsonDeserialize<ResourceCounter>(property);
                     continue;
                 }
                 if (property.NameEquals("storageSize"u8))
                 {
-                    storageSize = ModelSerializationExtensions.JsonDeserialize<ResourceCounter>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    storageSize = ModelSerializationExtensions.JsonDeserialize<ResourceCounter>(property);
                     continue;
                 }
                 if (property.NameEquals("synonymMaps"u8))
                 {
-                    synonymMaps = ModelSerializationExtensions.JsonDeserialize<ResourceCounter>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    synonymMaps = ModelSerializationExtensions.JsonDeserialize<ResourceCounter>(property);
                     continue;
                 }
                 if (property.NameEquals("skillsetCount"u8))
                 {
-                    skillsetCount = ModelSerializationExtensions.JsonDeserialize<ResourceCounter>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    skillsetCount = ModelSerializationExtensions.JsonDeserialize<ResourceCounter>(property);
                     continue;
                 }
             }

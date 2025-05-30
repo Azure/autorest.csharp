@@ -109,7 +109,7 @@ namespace ModelWithConverterUsage.Models
                     {
                         continue;
                     }
-                    objProperty = ModelSerializationExtensions.JsonDeserialize<Product>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    objProperty = ModelSerializationExtensions.JsonDeserialize<Product>(property);
                     continue;
                 }
                 if (options.Format != "W")

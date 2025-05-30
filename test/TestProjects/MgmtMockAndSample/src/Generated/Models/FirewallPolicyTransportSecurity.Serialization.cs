@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    certificateAuthority = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyCertificateAuthority>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    certificateAuthority = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyCertificateAuthority>(property);
                     continue;
                 }
             }

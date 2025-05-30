@@ -79,7 +79,7 @@ namespace MgmtCustomizations
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<PetStoreProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    properties = ModelSerializationExtensions.JsonDeserialize<PetStoreProperties>(property);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

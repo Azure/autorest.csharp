@@ -80,12 +80,12 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("credentials"u8))
                 {
-                    credentials = ModelSerializationExtensions.JsonDeserialize<DataSourceCredentials>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    credentials = ModelSerializationExtensions.JsonDeserialize<DataSourceCredentials>(property);
                     continue;
                 }
                 if (property.NameEquals("container"u8))
                 {
-                    container = ModelSerializationExtensions.JsonDeserialize<DataContainer>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    container = ModelSerializationExtensions.JsonDeserialize<DataContainer>(property);
                     continue;
                 }
                 if (property.NameEquals("dataChangeDetectionPolicy"u8))
@@ -94,7 +94,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    dataChangeDetectionPolicy = ModelSerializationExtensions.JsonDeserialize<DataChangeDetectionPolicy>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    dataChangeDetectionPolicy = ModelSerializationExtensions.JsonDeserialize<DataChangeDetectionPolicy>(property);
                     continue;
                 }
                 if (property.NameEquals("dataDeletionDetectionPolicy"u8))
@@ -103,7 +103,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    dataDeletionDetectionPolicy = ModelSerializationExtensions.JsonDeserialize<DataDeletionDetectionPolicy>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    dataDeletionDetectionPolicy = ModelSerializationExtensions.JsonDeserialize<DataDeletionDetectionPolicy>(property);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"u8))

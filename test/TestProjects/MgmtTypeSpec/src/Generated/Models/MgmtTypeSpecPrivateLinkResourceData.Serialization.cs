@@ -87,7 +87,7 @@ namespace MgmtTypeSpec.Models
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<MgmtTypeSpecPrivateLinkResourceProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    properties = ModelSerializationExtensions.JsonDeserialize<MgmtTypeSpecPrivateLinkResourceProperties>(property);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))

@@ -68,7 +68,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             {
                 if (property.NameEquals("inner"u8))
                 {
-                    inner = ModelSerializationExtensions.JsonDeserialize<InnerModel>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    inner = ModelSerializationExtensions.JsonDeserialize<InnerModel>(property);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

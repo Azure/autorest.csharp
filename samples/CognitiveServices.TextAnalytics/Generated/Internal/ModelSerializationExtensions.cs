@@ -19,7 +19,7 @@ namespace CognitiveServices.TextAnalytics
 {
     internal static class ModelSerializationExtensions
     {
-        internal static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, CognitiveServicesTextAnalyticsContext.Default) } };
+        private static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, CognitiveServicesTextAnalyticsContext.Default) } };
         internal static readonly JsonDocumentOptions JsonDocumentOptions = new JsonDocumentOptions { MaxDepth = 256 };
         internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
         internal static readonly BinaryData SentinelValue = BinaryData.FromBytes("\"__EMPTY__\""u8.ToArray());
@@ -266,7 +266,7 @@ namespace CognitiveServices.TextAnalytics
 
         [SuppressMessage("Trimming", "IL2026", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
         [SuppressMessage("Trimming", "IL3050", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
-        public static T JsonDeserialize<T>(JsonProperty property, JsonSerializerOptions options)
+        public static T JsonDeserialize<T>(JsonProperty property)
         {
             return JsonSerializer.Deserialize<T>(property.Value.GetRawText(), JsonSerializerOptions);
         }

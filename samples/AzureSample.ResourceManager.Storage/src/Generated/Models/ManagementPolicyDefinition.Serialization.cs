@@ -37,7 +37,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             {
                 if (property.NameEquals("actions"u8))
                 {
-                    actions = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyAction>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    actions = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyAction>(property);
                     continue;
                 }
                 if (property.NameEquals("filters"u8))
@@ -46,7 +46,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    filters = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyFilter>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    filters = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyFilter>(property);
                     continue;
                 }
             }

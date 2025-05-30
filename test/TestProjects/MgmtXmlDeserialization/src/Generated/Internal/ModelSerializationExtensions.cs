@@ -20,7 +20,7 @@ namespace MgmtXmlDeserialization
 {
     internal static class ModelSerializationExtensions
     {
-        internal static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, MgmtXmlDeserializationContext.Default) } };
+        private static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, MgmtXmlDeserializationContext.Default) } };
         internal static readonly JsonSerializerOptions JsonSerializerOptionsUseManagedServiceIdentityV3 = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, MgmtXmlDeserializationContext.Default), new Azure.ResourceManager.Models.ManagedServiceIdentityTypeV3Converter() } };
         internal static readonly JsonDocumentOptions JsonDocumentOptions = new JsonDocumentOptions { MaxDepth = 256 };
         internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
@@ -271,7 +271,7 @@ namespace MgmtXmlDeserialization
 
         [SuppressMessage("Trimming", "IL2026", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
         [SuppressMessage("Trimming", "IL3050", Justification = "By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue.")]
-        public static T JsonDeserialize<T>(JsonProperty property, JsonSerializerOptions options)
+        public static T JsonDeserialize<T>(JsonProperty property)
         {
             return JsonSerializer.Deserialize<T>(property.Value.GetRawText(), JsonSerializerOptions);
         }

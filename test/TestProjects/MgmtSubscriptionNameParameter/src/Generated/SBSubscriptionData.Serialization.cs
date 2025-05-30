@@ -293,7 +293,7 @@ namespace MgmtSubscriptionNameParameter
                             {
                                 continue;
                             }
-                            clientAffineProperties = ModelSerializationExtensions.JsonDeserialize<SBClientAffineProperties>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            clientAffineProperties = ModelSerializationExtensions.JsonDeserialize<SBClientAffineProperties>(property0);
                             continue;
                         }
                     }

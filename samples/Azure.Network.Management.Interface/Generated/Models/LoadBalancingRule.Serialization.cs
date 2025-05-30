@@ -145,7 +145,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            frontendIPConfiguration = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            frontendIPConfiguration = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0);
                             continue;
                         }
                         if (property0.NameEquals("backendAddressPool"u8))
@@ -154,7 +154,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            backendAddressPool = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            backendAddressPool = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0);
                             continue;
                         }
                         if (property0.NameEquals("probe"u8))
@@ -163,7 +163,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            probe = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            probe = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0);
                             continue;
                         }
                         if (property0.NameEquals("protocol"u8))

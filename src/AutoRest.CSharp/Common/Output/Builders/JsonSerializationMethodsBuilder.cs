@@ -828,12 +828,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             if (!serialization.Type.IsFrameworkType && serialization.Type.Implementation is SerializableObjectType)
             {
-                var type = ModelSerializationExtensionsProvider.Instance.Type.WithNullable(false);
-                value = new InvokeStaticMethodExpression(
-                        type,
-                        ModelSerializationExtensionsProvider.JsonDeserializeMethodName,
-                        [jsonProperty, new MemberExpression(type, ModelSerializationExtensionsProvider.JsonSerializerOptionsName)],
-                        TypeArguments: [serialization.Type]);
+                value = ModelSerializationExtensionsProvider.Deserialize(jsonProperty, serialization.Type.WithNullable(false));
                 return EmptyStatement;
             }
             else

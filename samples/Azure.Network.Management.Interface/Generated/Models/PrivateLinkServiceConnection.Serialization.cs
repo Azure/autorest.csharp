@@ -142,7 +142,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            privateLinkServiceConnectionState = ModelSerializationExtensions.JsonDeserialize<PrivateLinkServiceConnectionState>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            privateLinkServiceConnectionState = ModelSerializationExtensions.JsonDeserialize<PrivateLinkServiceConnectionState>(property0);
                             continue;
                         }
                     }

@@ -154,7 +154,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            virtualMachine = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            virtualMachine = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0);
                             continue;
                         }
                         if (property0.NameEquals("networkSecurityGroup"u8))
@@ -163,7 +163,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            networkSecurityGroup = ModelSerializationExtensions.JsonDeserialize<NetworkSecurityGroup>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            networkSecurityGroup = ModelSerializationExtensions.JsonDeserialize<NetworkSecurityGroup>(property0);
                             continue;
                         }
                         if (property0.NameEquals("privateEndpoint"u8))
@@ -172,7 +172,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            privateEndpoint = ModelSerializationExtensions.JsonDeserialize<PrivateEndpoint>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            privateEndpoint = ModelSerializationExtensions.JsonDeserialize<PrivateEndpoint>(property0);
                             continue;
                         }
                         if (property0.NameEquals("ipConfigurations"u8))
@@ -209,7 +209,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            dnsSettings = ModelSerializationExtensions.JsonDeserialize<NetworkInterfaceDnsSettings>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            dnsSettings = ModelSerializationExtensions.JsonDeserialize<NetworkInterfaceDnsSettings>(property0);
                             continue;
                         }
                         if (property0.NameEquals("macAddress"u8))

@@ -104,7 +104,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    encryptionSettings = ModelSerializationExtensions.JsonDeserialize<DiskEncryptionSettings>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    encryptionSettings = ModelSerializationExtensions.JsonDeserialize<DiskEncryptionSettings>(property);
                     continue;
                 }
                 if (property.NameEquals("name"u8))
@@ -118,7 +118,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    vhd = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    vhd = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property);
                     continue;
                 }
                 if (property.NameEquals("image"u8))
@@ -127,7 +127,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property);
                     continue;
                 }
                 if (property.NameEquals("caching"u8))
@@ -154,7 +154,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    diffDiskSettings = ModelSerializationExtensions.JsonDeserialize<DiffDiskSettings>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    diffDiskSettings = ModelSerializationExtensions.JsonDeserialize<DiffDiskSettings>(property);
                     continue;
                 }
                 if (property.NameEquals("createOption"u8))
@@ -177,7 +177,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    managedDisk = ModelSerializationExtensions.JsonDeserialize<ManagedDiskParameters>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    managedDisk = ModelSerializationExtensions.JsonDeserialize<ManagedDiskParameters>(property);
                     continue;
                 }
             }

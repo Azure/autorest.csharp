@@ -32,7 +32,7 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("detectedLanguage"u8))
                 {
-                    detectedLanguage = ModelSerializationExtensions.JsonDeserialize<DetectedLanguage>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    detectedLanguage = ModelSerializationExtensions.JsonDeserialize<DetectedLanguage>(property);
                     continue;
                 }
                 if (property.NameEquals("warnings"u8))
@@ -51,7 +51,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    statistics = ModelSerializationExtensions.JsonDeserialize<DocumentStatistics>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    statistics = ModelSerializationExtensions.JsonDeserialize<DocumentStatistics>(property);
                     continue;
                 }
             }

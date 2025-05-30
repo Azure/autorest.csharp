@@ -135,7 +135,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    osProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetUpdateOSProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    osProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetUpdateOSProfile>(property);
                     continue;
                 }
                 if (property.NameEquals("storageProfile"u8))
@@ -144,7 +144,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    storageProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetUpdateStorageProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    storageProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetUpdateStorageProfile>(property);
                     continue;
                 }
                 if (property.NameEquals("networkProfile"u8))
@@ -153,7 +153,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    networkProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetUpdateNetworkProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    networkProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetUpdateNetworkProfile>(property);
                     continue;
                 }
                 if (property.NameEquals("securityProfile"u8))
@@ -162,7 +162,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    securityProfile = ModelSerializationExtensions.JsonDeserialize<SecurityProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    securityProfile = ModelSerializationExtensions.JsonDeserialize<SecurityProfile>(property);
                     continue;
                 }
                 if (property.NameEquals("diagnosticsProfile"u8))
@@ -171,7 +171,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    diagnosticsProfile = ModelSerializationExtensions.JsonDeserialize<DiagnosticsProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    diagnosticsProfile = ModelSerializationExtensions.JsonDeserialize<DiagnosticsProfile>(property);
                     continue;
                 }
                 if (property.NameEquals("extensionProfile"u8))
@@ -180,7 +180,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    extensionProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetExtensionProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    extensionProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetExtensionProfile>(property);
                     continue;
                 }
                 if (property.NameEquals("licenseType"u8))
@@ -194,7 +194,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    billingProfile = ModelSerializationExtensions.JsonDeserialize<BillingProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    billingProfile = ModelSerializationExtensions.JsonDeserialize<BillingProfile>(property);
                     continue;
                 }
                 if (property.NameEquals("scheduledEventsProfile"u8))
@@ -203,7 +203,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    scheduledEventsProfile = ModelSerializationExtensions.JsonDeserialize<ScheduledEventsProfile>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    scheduledEventsProfile = ModelSerializationExtensions.JsonDeserialize<ScheduledEventsProfile>(property);
                     continue;
                 }
                 if (options.Format != "W")

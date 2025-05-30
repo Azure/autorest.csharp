@@ -88,7 +88,7 @@ namespace custom_baseUrl_paging.Models
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<ProductProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    properties = ModelSerializationExtensions.JsonDeserialize<ProductProperties>(property);
                     continue;
                 }
                 if (options.Format != "W")

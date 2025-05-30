@@ -89,7 +89,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    availableCapacity = ModelSerializationExtensions.JsonDeserialize<DedicatedHostAvailableCapacity>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    availableCapacity = ModelSerializationExtensions.JsonDeserialize<DedicatedHostAvailableCapacity>(property);
                     continue;
                 }
                 if (property.NameEquals("statuses"u8))

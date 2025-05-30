@@ -22,7 +22,7 @@ namespace MgmtScopeResource.Models
             {
                 if (property.NameEquals("workspace"u8))
                 {
-                    workspace = ModelSerializationExtensions.JsonDeserialize<WorkspaceInfo>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    workspace = ModelSerializationExtensions.JsonDeserialize<WorkspaceInfo>(property);
                     continue;
                 }
             }

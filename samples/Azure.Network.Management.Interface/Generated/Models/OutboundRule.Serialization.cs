@@ -144,7 +144,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            backendAddressPool = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            backendAddressPool = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

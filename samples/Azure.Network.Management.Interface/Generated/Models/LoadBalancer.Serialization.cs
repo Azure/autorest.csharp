@@ -148,7 +148,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<LoadBalancerSku>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    sku = ModelSerializationExtensions.JsonDeserialize<LoadBalancerSku>(property);
                     continue;
                 }
                 if (property.NameEquals("etag"u8))

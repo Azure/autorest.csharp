@@ -60,7 +60,7 @@ namespace MgmtPartialResource
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<ConfigurationProfileAssignmentProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    properties = ModelSerializationExtensions.JsonDeserialize<ConfigurationProfileAssignmentProperties>(property);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

@@ -112,7 +112,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    windowsConfiguration = ModelSerializationExtensions.JsonDeserialize<WindowsConfiguration>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    windowsConfiguration = ModelSerializationExtensions.JsonDeserialize<WindowsConfiguration>(property);
                     continue;
                 }
                 if (property.NameEquals("linuxConfiguration"u8))
@@ -121,7 +121,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    linuxConfiguration = ModelSerializationExtensions.JsonDeserialize<LinuxConfiguration>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    linuxConfiguration = ModelSerializationExtensions.JsonDeserialize<LinuxConfiguration>(property);
                     continue;
                 }
                 if (property.NameEquals("secrets"u8))

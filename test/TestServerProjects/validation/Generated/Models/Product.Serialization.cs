@@ -147,12 +147,12 @@ namespace validation.Models
                 }
                 if (property.NameEquals("child"u8))
                 {
-                    child = ModelSerializationExtensions.JsonDeserialize<ChildProduct>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    child = ModelSerializationExtensions.JsonDeserialize<ChildProduct>(property);
                     continue;
                 }
                 if (property.NameEquals("constChild"u8))
                 {
-                    constChild = ModelSerializationExtensions.JsonDeserialize<ConstantProduct>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    constChild = ModelSerializationExtensions.JsonDeserialize<ConstantProduct>(property);
                     continue;
                 }
                 if (property.NameEquals("constInt"u8))

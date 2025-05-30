@@ -107,7 +107,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    value = ModelSerializationExtensions.JsonDeserialize<AnomalyValue>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    value = ModelSerializationExtensions.JsonDeserialize<AnomalyValue>(property);
                     continue;
                 }
                 if (property.NameEquals("errors"u8))

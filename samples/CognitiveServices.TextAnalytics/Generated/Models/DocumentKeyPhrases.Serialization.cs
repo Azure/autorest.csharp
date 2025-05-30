@@ -56,7 +56,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    statistics = ModelSerializationExtensions.JsonDeserialize<DocumentStatistics>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    statistics = ModelSerializationExtensions.JsonDeserialize<DocumentStatistics>(property);
                     continue;
                 }
             }

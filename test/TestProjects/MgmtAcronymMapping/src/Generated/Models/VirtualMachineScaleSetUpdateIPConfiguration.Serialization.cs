@@ -154,7 +154,7 @@ namespace MgmtAcronymMapping.Models
                             {
                                 continue;
                             }
-                            publicIPAddressConfiguration = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetUpdatePublicIPAddressConfiguration>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            publicIPAddressConfiguration = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetUpdatePublicIPAddressConfiguration>(property0);
                             continue;
                         }
                         if (property0.NameEquals("privateIPAddressVersion"u8))

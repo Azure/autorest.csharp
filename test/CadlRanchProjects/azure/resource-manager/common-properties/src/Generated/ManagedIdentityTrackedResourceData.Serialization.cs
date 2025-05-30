@@ -88,7 +88,7 @@ namespace _Azure.ResourceManager.CommonProperties
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<ManagedIdentityTrackedResourceProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    properties = ModelSerializationExtensions.JsonDeserialize<ManagedIdentityTrackedResourceProperties>(property);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))

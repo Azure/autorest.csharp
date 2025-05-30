@@ -245,7 +245,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            colocationStatus = ModelSerializationExtensions.JsonDeserialize<InstanceViewStatus>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            colocationStatus = ModelSerializationExtensions.JsonDeserialize<InstanceViewStatus>(property0);
                             continue;
                         }
                     }

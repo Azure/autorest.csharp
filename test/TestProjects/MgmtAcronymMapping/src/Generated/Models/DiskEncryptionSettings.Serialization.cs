@@ -50,7 +50,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    diskEncryptionKey = ModelSerializationExtensions.JsonDeserialize<KeyVaultSecretReference>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    diskEncryptionKey = ModelSerializationExtensions.JsonDeserialize<KeyVaultSecretReference>(property);
                     continue;
                 }
                 if (property.NameEquals("keyEncryptionKey"u8))
@@ -59,7 +59,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    keyEncryptionKey = ModelSerializationExtensions.JsonDeserialize<KeyVaultKeyReference>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    keyEncryptionKey = ModelSerializationExtensions.JsonDeserialize<KeyVaultKeyReference>(property);
                     continue;
                 }
                 if (property.NameEquals("enabled"u8))

@@ -53,7 +53,7 @@ namespace MgmtParamOrdering
             {
                 if (property.NameEquals("properties"u8))
                 {
-                    properties = ModelSerializationExtensions.JsonDeserialize<EnvironmentContainer>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    properties = ModelSerializationExtensions.JsonDeserialize<EnvironmentContainer>(property);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

@@ -47,7 +47,7 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("freshness"u8))
                 {
-                    freshness = ModelSerializationExtensions.JsonDeserialize<FreshnessScoringParameters>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    freshness = ModelSerializationExtensions.JsonDeserialize<FreshnessScoringParameters>(property);
                     continue;
                 }
                 if (property.NameEquals("type"u8))

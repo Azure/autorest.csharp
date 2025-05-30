@@ -110,7 +110,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    ssh = ModelSerializationExtensions.JsonDeserialize<SshConfiguration>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    ssh = ModelSerializationExtensions.JsonDeserialize<SshConfiguration>(property);
                     continue;
                 }
                 if (property.NameEquals("provisionVMAgent"u8))

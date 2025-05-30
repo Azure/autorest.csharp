@@ -26,7 +26,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    error = ModelSerializationExtensions.JsonDeserialize<CloudErrorBody>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    error = ModelSerializationExtensions.JsonDeserialize<CloudErrorBody>(property);
                     continue;
                 }
             }

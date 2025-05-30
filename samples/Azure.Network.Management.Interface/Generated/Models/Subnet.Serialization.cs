@@ -179,7 +179,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            networkSecurityGroup = ModelSerializationExtensions.JsonDeserialize<NetworkSecurityGroup>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            networkSecurityGroup = ModelSerializationExtensions.JsonDeserialize<NetworkSecurityGroup>(property0);
                             continue;
                         }
                         if (property0.NameEquals("routeTable"u8))
@@ -188,7 +188,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            routeTable = ModelSerializationExtensions.JsonDeserialize<RouteTable>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            routeTable = ModelSerializationExtensions.JsonDeserialize<RouteTable>(property0);
                             continue;
                         }
                         if (property0.NameEquals("natGateway"u8))
@@ -197,7 +197,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            natGateway = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            natGateway = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0);
                             continue;
                         }
                         if (property0.NameEquals("serviceEndpoints"u8))

@@ -78,7 +78,7 @@ namespace _Type.Property.AdditionalProperties.Models
             {
                 if (property.NameEquals("knownProp"u8))
                 {
-                    knownProp = ModelSerializationExtensions.JsonDeserialize<ModelForRecord>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    knownProp = ModelSerializationExtensions.JsonDeserialize<ModelForRecord>(property);
                     continue;
                 }
                 additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));

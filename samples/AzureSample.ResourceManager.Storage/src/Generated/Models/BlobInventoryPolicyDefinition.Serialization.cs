@@ -56,7 +56,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    filters = ModelSerializationExtensions.JsonDeserialize<BlobInventoryPolicyFilter>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    filters = ModelSerializationExtensions.JsonDeserialize<BlobInventoryPolicyFilter>(property);
                     continue;
                 }
                 if (property.NameEquals("format"u8))

@@ -47,7 +47,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    status = ModelSerializationExtensions.JsonDeserialize<InstanceViewStatus>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    status = ModelSerializationExtensions.JsonDeserialize<InstanceViewStatus>(property);
                     continue;
                 }
             }

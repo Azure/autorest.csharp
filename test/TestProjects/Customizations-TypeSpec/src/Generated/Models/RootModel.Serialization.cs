@@ -157,7 +157,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelToMakeInternal = ModelSerializationExtensions.JsonDeserialize<ModelToMakeInternal>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    propertyModelToMakeInternal = ModelSerializationExtensions.JsonDeserialize<ModelToMakeInternal>(property);
                     continue;
                 }
                 if (property.NameEquals("propertyModelToRename"u8))
@@ -166,7 +166,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelToRename = ModelSerializationExtensions.JsonDeserialize<RenamedModel>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    propertyModelToRename = ModelSerializationExtensions.JsonDeserialize<RenamedModel>(property);
                     continue;
                 }
                 if (property.NameEquals("propertyModelToChangeNamespace"u8))
@@ -175,7 +175,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelToChangeNamespace = ModelSerializationExtensions.JsonDeserialize<ModelToChangeNamespace>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    propertyModelToChangeNamespace = ModelSerializationExtensions.JsonDeserialize<ModelToChangeNamespace>(property);
                     continue;
                 }
                 if (property.NameEquals("propertyModelWithCustomizedProperties"u8))
@@ -184,7 +184,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelWithCustomizedProperties = ModelSerializationExtensions.JsonDeserialize<ModelWithCustomizedProperties>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    propertyModelWithCustomizedProperties = ModelSerializationExtensions.JsonDeserialize<ModelWithCustomizedProperties>(property);
                     continue;
                 }
                 if (property.NameEquals("propertyEnumToRename"u8))
@@ -220,7 +220,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelToAddAdditionalSerializableProperty = ModelSerializationExtensions.JsonDeserialize<ModelToAddAdditionalSerializableProperty>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    propertyModelToAddAdditionalSerializableProperty = ModelSerializationExtensions.JsonDeserialize<ModelToAddAdditionalSerializableProperty>(property);
                     continue;
                 }
                 if (property.NameEquals("propertyToMoveToCustomization"u8))
@@ -238,7 +238,7 @@ namespace CustomizationsInTsp.Models
                     {
                         continue;
                     }
-                    propertyModelStruct = ModelSerializationExtensions.JsonDeserialize<ModelStruct?>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    propertyModelStruct = ModelSerializationExtensions.JsonDeserialize<ModelStruct>(property);
                     continue;
                 }
                 if (options.Format != "W")

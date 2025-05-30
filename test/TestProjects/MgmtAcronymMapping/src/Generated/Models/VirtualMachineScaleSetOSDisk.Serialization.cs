@@ -129,7 +129,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    diffDiskSettings = ModelSerializationExtensions.JsonDeserialize<DiffDiskSettings>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    diffDiskSettings = ModelSerializationExtensions.JsonDeserialize<DiffDiskSettings>(property);
                     continue;
                 }
                 if (property.NameEquals("diskSizeGB"u8))
@@ -156,7 +156,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property);
                     continue;
                 }
                 if (property.NameEquals("vhdContainers"u8))
@@ -179,7 +179,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    managedDisk = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetManagedDiskParameters>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    managedDisk = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetManagedDiskParameters>(property);
                     continue;
                 }
                 if (property.NameEquals("securityType"u8))

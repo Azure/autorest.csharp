@@ -96,7 +96,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerStorageSku>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerStorageSku>(property);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -138,7 +138,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            cors = ModelSerializationExtensions.JsonDeserialize<CorsRules>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            cors = ModelSerializationExtensions.JsonDeserialize<CorsRules>(property0);
                             continue;
                         }
                         if (property0.NameEquals("defaultServiceVersion"u8))
@@ -152,7 +152,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            deleteRetentionPolicy = ModelSerializationExtensions.JsonDeserialize<DeleteRetentionPolicy>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            deleteRetentionPolicy = ModelSerializationExtensions.JsonDeserialize<DeleteRetentionPolicy>(property0);
                             continue;
                         }
                         if (property0.NameEquals("isVersioningEnabled"u8))
@@ -179,7 +179,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            changeFeed = ModelSerializationExtensions.JsonDeserialize<ChangeFeed>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            changeFeed = ModelSerializationExtensions.JsonDeserialize<ChangeFeed>(property0);
                             continue;
                         }
                         if (property0.NameEquals("restorePolicy"u8))
@@ -188,7 +188,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            restorePolicy = ModelSerializationExtensions.JsonDeserialize<RestorePolicyProperties>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            restorePolicy = ModelSerializationExtensions.JsonDeserialize<RestorePolicyProperties>(property0);
                             continue;
                         }
                         if (property0.NameEquals("containerDeleteRetentionPolicy"u8))
@@ -197,7 +197,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            containerDeleteRetentionPolicy = ModelSerializationExtensions.JsonDeserialize<DeleteRetentionPolicy>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            containerDeleteRetentionPolicy = ModelSerializationExtensions.JsonDeserialize<DeleteRetentionPolicy>(property0);
                             continue;
                         }
                         if (property0.NameEquals("lastAccessTimeTrackingPolicy"u8))
@@ -206,7 +206,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            lastAccessTimeTrackingPolicy = ModelSerializationExtensions.JsonDeserialize<LastAccessTimeTrackingPolicy>(property0, ModelSerializationExtensions.JsonSerializerOptions);
+                            lastAccessTimeTrackingPolicy = ModelSerializationExtensions.JsonDeserialize<LastAccessTimeTrackingPolicy>(property0);
                             continue;
                         }
                     }

@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    text = ModelSerializationExtensions.JsonDeserialize<TextWeights>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    text = ModelSerializationExtensions.JsonDeserialize<TextWeights>(property);
                     continue;
                 }
                 if (property.NameEquals("functions"u8))

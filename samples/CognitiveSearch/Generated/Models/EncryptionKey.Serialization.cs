@@ -63,7 +63,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    accessCredentials = ModelSerializationExtensions.JsonDeserialize<AzureActiveDirectoryApplicationCredentials>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    accessCredentials = ModelSerializationExtensions.JsonDeserialize<AzureActiveDirectoryApplicationCredentials>(property);
                     continue;
                 }
             }

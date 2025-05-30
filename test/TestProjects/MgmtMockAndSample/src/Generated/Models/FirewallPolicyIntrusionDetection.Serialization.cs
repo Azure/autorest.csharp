@@ -53,7 +53,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    configuration = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyIntrusionDetectionConfiguration>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    configuration = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyIntrusionDetectionConfiguration>(property);
                     continue;
                 }
             }

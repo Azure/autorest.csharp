@@ -46,7 +46,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    rollbackError = ModelSerializationExtensions.JsonDeserialize<ApiError>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    rollbackError = ModelSerializationExtensions.JsonDeserialize<ApiError>(property);
                     continue;
                 }
             }

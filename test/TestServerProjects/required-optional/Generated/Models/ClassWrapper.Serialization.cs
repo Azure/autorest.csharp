@@ -81,7 +81,7 @@ namespace required_optional.Models
             {
                 if (property.NameEquals("value"u8))
                 {
-                    value = ModelSerializationExtensions.JsonDeserialize<Product>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    value = ModelSerializationExtensions.JsonDeserialize<Product>(property);
                     continue;
                 }
                 if (options.Format != "W")

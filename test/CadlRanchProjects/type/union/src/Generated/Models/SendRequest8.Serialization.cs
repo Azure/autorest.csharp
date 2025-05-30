@@ -81,7 +81,7 @@ namespace _Type.Union.Models
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = ModelSerializationExtensions.JsonDeserialize<MixedLiteralsCases>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    prop = ModelSerializationExtensions.JsonDeserialize<MixedLiteralsCases>(property);
                     continue;
                 }
                 if (options.Format != "W")

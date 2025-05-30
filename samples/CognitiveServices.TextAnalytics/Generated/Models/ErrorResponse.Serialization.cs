@@ -23,7 +23,7 @@ namespace CognitiveServices.TextAnalytics.Models
             {
                 if (property.NameEquals("error"u8))
                 {
-                    error = ModelSerializationExtensions.JsonDeserialize<TextAnalyticsError>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    error = ModelSerializationExtensions.JsonDeserialize<TextAnalyticsError>(property);
                     continue;
                 }
             }

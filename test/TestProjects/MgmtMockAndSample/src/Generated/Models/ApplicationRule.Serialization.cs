@@ -318,7 +318,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    newGeneratedTypeSerializeProperty = ModelSerializationExtensions.JsonDeserialize<VaultKey>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    newGeneratedTypeSerializeProperty = ModelSerializationExtensions.JsonDeserialize<VaultKey>(property);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

@@ -119,7 +119,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    rollbackError = ModelSerializationExtensions.JsonDeserialize<ApiError>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    rollbackError = ModelSerializationExtensions.JsonDeserialize<ApiError>(property);
                     continue;
                 }
                 if (options.Format != "W")

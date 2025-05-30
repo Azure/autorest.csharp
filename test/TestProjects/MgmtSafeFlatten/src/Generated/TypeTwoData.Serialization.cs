@@ -71,7 +71,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<LayerOneSingle>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    properties = ModelSerializationExtensions.JsonDeserialize<LayerOneSingle>(property);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

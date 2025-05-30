@@ -88,7 +88,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    vmAgent = ModelSerializationExtensions.JsonDeserialize<VirtualMachineAgentInstanceView>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    vmAgent = ModelSerializationExtensions.JsonDeserialize<VirtualMachineAgentInstanceView>(property);
                     continue;
                 }
                 if (property.NameEquals("maintenanceRedeployStatus"u8))
@@ -97,7 +97,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    maintenanceRedeployStatus = ModelSerializationExtensions.JsonDeserialize<MaintenanceRedeployStatus>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    maintenanceRedeployStatus = ModelSerializationExtensions.JsonDeserialize<MaintenanceRedeployStatus>(property);
                     continue;
                 }
                 if (property.NameEquals("disks"u8))
@@ -120,7 +120,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    vmHealth = ModelSerializationExtensions.JsonDeserialize<VirtualMachineHealthStatus>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    vmHealth = ModelSerializationExtensions.JsonDeserialize<VirtualMachineHealthStatus>(property);
                     continue;
                 }
                 if (property.NameEquals("bootDiagnostics"u8))
@@ -129,7 +129,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    bootDiagnostics = ModelSerializationExtensions.JsonDeserialize<BootDiagnosticsInstanceView>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    bootDiagnostics = ModelSerializationExtensions.JsonDeserialize<BootDiagnosticsInstanceView>(property);
                     continue;
                 }
                 if (property.NameEquals("assignedHost"u8))
@@ -157,7 +157,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    patchStatus = ModelSerializationExtensions.JsonDeserialize<VirtualMachinePatchStatus>(property, ModelSerializationExtensions.JsonSerializerOptions);
+                    patchStatus = ModelSerializationExtensions.JsonDeserialize<VirtualMachinePatchStatus>(property);
                     continue;
                 }
             }
