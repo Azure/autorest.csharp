@@ -1,8 +1,12 @@
 name: Regenerate all code
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  issue_comment:
+    types: [created]
 
 jobs:
   build:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'issue_comment' && github.event.issue.pull_request && contains(github.event.comment.body, 'regen'))
     timeout-minutes: 120
     runs-on: windows-latest
     steps:
@@ -11,15 +15,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup node 18
+      - name: Setup node 22
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '22'
 
       - name: Setup .net core sdk
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '7.0.x'
+          dotnet-version: '9.0.x'
 
       - name: Install packages
         run: |
