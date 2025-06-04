@@ -700,8 +700,10 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonProperties.ManagedIdentityTrackedResource.name",
-     "discriminator": false,
-     "flatten": false
+     "explode": false,
+     "style": "simple",
+     "allowReserved": false,
+     "correspondingMethodParams": []
     },
     {
      "$id": "90",
@@ -1151,13 +1153,10 @@
             "doc": "The additional info.",
             "type": {
              "$id": "150",
-             "kind": "model",
-             "name": "ErrorAdditionalInfoInfo",
-             "namespace": "_Azure.ResourceManager.CommonProperties",
-             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
-             "usage": "Json,Exception",
-             "decorators": [],
-             "properties": []
+             "kind": "unknown",
+             "name": "unknown",
+             "crossLanguageDefinitionId": "",
+             "decorators": []
             },
             "optional": true,
             "readOnly": true,
@@ -1215,9 +1214,6 @@
   },
   {
    "$ref": "144"
-  },
-  {
-   "$ref": "150"
   },
   {
    "$id": "157",
@@ -1334,8 +1330,10 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonProperties.ConfidentialResource.name",
-     "discriminator": false,
-     "flatten": false
+     "explode": false,
+     "style": "simple",
+     "allowReserved": false,
+     "correspondingMethodParams": []
     }
    ]
   },

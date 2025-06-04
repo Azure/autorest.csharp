@@ -854,8 +854,10 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResource.name",
-     "discriminator": false,
-     "flatten": false
+     "explode": false,
+     "style": "simple",
+     "allowReserved": false,
+     "correspondingMethodParams": []
     }
    ]
   },
@@ -1064,13 +1066,10 @@
             "doc": "The additional info.",
             "type": {
              "$id": "135",
-             "kind": "model",
-             "name": "ErrorAdditionalInfoInfo",
-             "namespace": "_Azure.ResourceManager.Resources",
-             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
-             "usage": "Json,Exception,LroPolling",
-             "decorators": [],
-             "properties": []
+             "kind": "unknown",
+             "name": "unknown",
+             "crossLanguageDefinitionId": "",
+             "decorators": []
             },
             "optional": true,
             "readOnly": true,
@@ -1130,9 +1129,6 @@
    "$ref": "129"
   },
   {
-   "$ref": "135"
-  },
-  {
    "$id": "142",
    "kind": "model",
    "name": "ArmOperationStatusResourceProvisioningState",
@@ -1182,8 +1178,10 @@
      "readOnly": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ArmOperationStatus.id",
-     "discriminator": false,
-     "flatten": false
+     "explode": false,
+     "style": "simple",
+     "allowReserved": false,
+     "correspondingMethodParams": []
     },
     {
      "$id": "148",
@@ -1600,8 +1598,10 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NestedProxyResource.name",
-     "discriminator": false,
-     "flatten": false
+     "explode": false,
+     "style": "simple",
+     "allowReserved": false,
+     "correspondingMethodParams": []
     }
    ]
   },
@@ -1799,8 +1799,10 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResource.name",
-     "discriminator": false,
-     "flatten": false
+     "explode": false,
+     "style": "simple",
+     "allowReserved": false,
+     "correspondingMethodParams": []
     }
    ]
   },
@@ -2006,8 +2008,10 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.ExtensionsResource.name",
-     "discriminator": false,
-     "flatten": false
+     "explode": false,
+     "style": "simple",
+     "allowReserved": false,
+     "correspondingMethodParams": []
     }
    ]
   },
@@ -2205,8 +2209,10 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.LocationResource.name",
-     "discriminator": false,
-     "flatten": false
+     "explode": false,
+     "style": "simple",
+     "allowReserved": false,
+     "correspondingMethodParams": []
     }
    ]
   },
