@@ -367,7 +367,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Samples
             var actualDiscriminatorValue = exampleRawValue.RawValue;
             var implementation = discriminator.Implementations.FirstOrDefault(info => info.Key.Equals(actualDiscriminatorValue));
             if (implementation == null)
-                throw new InvalidOperationException($"Cannot find an implementation corresponding to the discriminator value {actualDiscriminatorValue} for object model type {objectType.Type.Name}");
+            {
+                return discriminator.DefaultObjectType;
+            }
 
             return (ObjectType)implementation.Type.Implementation;
         }
