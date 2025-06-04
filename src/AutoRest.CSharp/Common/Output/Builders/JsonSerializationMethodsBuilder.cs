@@ -32,9 +32,9 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Resources.Models;
 using Microsoft.CodeAnalysis;
-using static AutoRest.CSharp.Common.Input.Configuration;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using MemberExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.MemberExpression;
 using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
@@ -444,7 +444,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     // TODO: remove this check once ResponseError and DataFactoryElement implements IJsonModel<T>
                     // SystemObjectType from Azure.ResourceManager has implemented IJsonModel<T>
                     var useIJsonModel = systemObjectType.Declaration.Namespace.StartsWith("Azure.ResourceManager");
-                    return  useIJsonModel
+                    return useIJsonModel
                         ? JsonSerializerExpression.SerializeIJsonModel(valueSerialization.Type.WithNullable(false), utf8JsonWriter, value, options, valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
                         : JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
 
@@ -564,7 +564,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (IsCustomJsonConverterAdded(valueType))
             {
-                return JsonSerializerExpression.SerializeIJsonModel(valueType, utf8JsonWriter, new TypedValueExpression(valueType, value), options);
+                // TODO: remove this check once ResponseError and DataFactoryElement implements IJsonModel<T>
+                var useIJsonModel = valueType != typeof(ResponseError) && valueType != typeof(DataFactoryElement<>);
+
+                return useIJsonModel
+                    ? JsonSerializerExpression.SerializeIJsonModel(valueType, utf8JsonWriter, new TypedValueExpression(valueType, value), options)
+                    : JsonSerializerExpression.Serialize(utf8JsonWriter, value, options).ToStatement();
             }
 
             throw new NotSupportedException($"Framework type {valueType} serialization not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
@@ -794,7 +799,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return new[]
                 {
                     CreatePropertyNullCheckStatement(jsonPropertySerialization, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull),
-                    DeserializeProperty(jsonPropertySerialization.ValueSerialization, jsonProperty, options, out var value),
+                    DeserializeValue(jsonPropertySerialization.ValueSerialization, jsonProperty.Value, options, out var value),
                     Assign(propertyVariables[jsonPropertySerialization], value),
                     Continue
                 };
@@ -815,19 +820,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             throw new InvalidOperationException($"Either {nameof(JsonPropertySerialization.ValueSerialization)} must not be null or {nameof(JsonPropertySerialization.PropertySerializations)} must not be null.");
-        }
-
-        private static MethodBodyStatement DeserializeProperty(JsonSerialization serialization, JsonPropertyExpression jsonProperty, ModelReaderWriterOptionsExpression? options, out ValueExpression value)
-        {
-            if (!serialization.Type.IsFrameworkType && serialization.Type.Implementation is SerializableObjectType)
-            {
-                value = ModelSerializationExtensionsProvider.Deserialize(jsonProperty.Value, serialization.Type);
-                return EmptyStatement;
-            }
-            else
-            {
-                return DeserializeValue(serialization, jsonProperty.Value, options, out value);
-            }
         }
 
         private static MethodBodyStatement CreatePropertyNullCheckStatement(JsonPropertySerialization jsonPropertySerialization, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)

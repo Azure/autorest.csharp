@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -59,7 +60,7 @@ namespace MgmtExtensionResource.Models
             if (Optional.IsDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
-                JsonSerializer.Serialize(writer, Metadata);
+                ((IJsonModel<ParameterDefinitionsValueMetadata>)Metadata).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -121,7 +122,7 @@ namespace MgmtExtensionResource.Models
                     {
                         continue;
                     }
-                    metadata = ModelSerializationExtensions.JsonDeserialize<ParameterDefinitionsValueMetadata>(property.Value);
+                    metadata = ParameterDefinitionsValueMetadata.DeserializeParameterDefinitionsValueMetadata(property.Value);
                     continue;
                 }
             }

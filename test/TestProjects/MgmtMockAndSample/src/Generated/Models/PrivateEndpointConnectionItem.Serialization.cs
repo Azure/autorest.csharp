@@ -59,7 +59,7 @@ namespace MgmtMockAndSample.Models
                             {
                                 continue;
                             }
-                            privateLinkServiceConnectionState = ModelSerializationExtensions.JsonDeserialize<MgmtMockAndSamplePrivateLinkServiceConnectionState>(property0.Value);
+                            privateLinkServiceConnectionState = MgmtMockAndSamplePrivateLinkServiceConnectionState.DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -42,7 +43,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
-                JsonSerializer.Serialize(writer, NetworkSecurityGroup);
+                ((IJsonModel<NetworkSecurityGroup>)NetworkSecurityGroup).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(IpConfigurations))
             {
@@ -50,14 +51,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in IpConfigurations)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<NetworkInterfaceIPConfiguration>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                JsonSerializer.Serialize(writer, DnsSettings);
+                ((IJsonModel<NetworkInterfaceDnsSettings>)DnsSettings).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(EnableAcceleratedNetworking))
             {
@@ -154,7 +155,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            virtualMachine = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0.Value);
+                            virtualMachine = SubResource.DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("networkSecurityGroup"u8))
@@ -163,7 +164,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            networkSecurityGroup = ModelSerializationExtensions.JsonDeserialize<NetworkSecurityGroup>(property0.Value);
+                            networkSecurityGroup = NetworkSecurityGroup.DeserializeNetworkSecurityGroup(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("privateEndpoint"u8))
@@ -172,7 +173,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            privateEndpoint = ModelSerializationExtensions.JsonDeserialize<PrivateEndpoint>(property0.Value);
+                            privateEndpoint = PrivateEndpoint.DeserializePrivateEndpoint(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("ipConfigurations"u8))
@@ -209,7 +210,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            dnsSettings = ModelSerializationExtensions.JsonDeserialize<NetworkInterfaceDnsSettings>(property0.Value);
+                            dnsSettings = NetworkInterfaceDnsSettings.DeserializeNetworkInterfaceDnsSettings(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("macAddress"u8))

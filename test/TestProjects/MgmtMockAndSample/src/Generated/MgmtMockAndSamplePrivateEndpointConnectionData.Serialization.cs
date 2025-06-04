@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -29,12 +30,12 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(PrivateEndpoint))
             {
                 writer.WritePropertyName("privateEndpoint"u8);
-                JsonSerializer.Serialize(writer, PrivateEndpoint);
+                ((IJsonModel<Azure.ResourceManager.Resources.Models.SubResource>)PrivateEndpoint).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                JsonSerializer.Serialize(writer, ConnectionState);
+                ((IJsonModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>)ConnectionState).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ProvisioningState))
             {
@@ -139,7 +140,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            privateLinkServiceConnectionState = ModelSerializationExtensions.JsonDeserialize<MgmtMockAndSamplePrivateLinkServiceConnectionState>(property0.Value);
+                            privateLinkServiceConnectionState = MgmtMockAndSamplePrivateLinkServiceConnectionState.DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

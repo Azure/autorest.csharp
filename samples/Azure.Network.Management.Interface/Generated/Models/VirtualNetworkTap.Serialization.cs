@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -42,12 +43,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DestinationNetworkInterfaceIPConfiguration))
             {
                 writer.WritePropertyName("destinationNetworkInterfaceIPConfiguration"u8);
-                JsonSerializer.Serialize(writer, DestinationNetworkInterfaceIPConfiguration);
+                ((IJsonModel<NetworkInterfaceIPConfiguration>)DestinationNetworkInterfaceIPConfiguration).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(DestinationLoadBalancerFrontEndIPConfiguration))
             {
                 writer.WritePropertyName("destinationLoadBalancerFrontEndIPConfiguration"u8);
-                JsonSerializer.Serialize(writer, DestinationLoadBalancerFrontEndIPConfiguration);
+                ((IJsonModel<FrontendIPConfiguration>)DestinationLoadBalancerFrontEndIPConfiguration).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(DestinationPort))
             {
@@ -160,7 +161,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            destinationNetworkInterfaceIPConfiguration = ModelSerializationExtensions.JsonDeserialize<NetworkInterfaceIPConfiguration>(property0.Value);
+                            destinationNetworkInterfaceIPConfiguration = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("destinationLoadBalancerFrontEndIPConfiguration"u8))
@@ -169,7 +170,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            destinationLoadBalancerFrontEndIPConfiguration = ModelSerializationExtensions.JsonDeserialize<FrontendIPConfiguration>(property0.Value);
+                            destinationLoadBalancerFrontEndIPConfiguration = FrontendIPConfiguration.DeserializeFrontendIPConfiguration(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("destinationPort"u8))

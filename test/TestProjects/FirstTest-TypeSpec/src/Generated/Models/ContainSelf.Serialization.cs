@@ -81,7 +81,7 @@ namespace FirstTestTypeSpec.Models
             {
                 if (property.NameEquals("self"u8))
                 {
-                    self = ModelSerializationExtensions.JsonDeserialize<ContainSelf>(property.Value);
+                    self = DeserializeContainSelf(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

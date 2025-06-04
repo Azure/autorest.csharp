@@ -89,7 +89,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    name1 = ModelSerializationExtensions.JsonDeserialize<Sku2>(property.Value);
+                    name1 = Sku2.DeserializeSku2(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

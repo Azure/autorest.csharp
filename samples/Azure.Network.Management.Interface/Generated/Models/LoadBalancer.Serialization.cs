@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -19,7 +20,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                JsonSerializer.Serialize(writer, Sku);
+                ((IJsonModel<LoadBalancerSku>)Sku).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Id))
             {
@@ -50,7 +51,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in FrontendIPConfigurations)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<FrontendIPConfiguration>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -60,7 +61,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in BackendAddressPools)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<BackendAddressPool>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -70,7 +71,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancingRules)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<LoadBalancingRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -80,7 +81,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Probes)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<Probe>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -90,7 +91,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in InboundNatRules)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<InboundNatRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -100,7 +101,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in InboundNatPools)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<InboundNatPool>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -110,7 +111,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in OutboundRules)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<OutboundRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -148,7 +149,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<LoadBalancerSku>(property.Value);
+                    sku = LoadBalancerSku.DeserializeLoadBalancerSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("etag"u8))

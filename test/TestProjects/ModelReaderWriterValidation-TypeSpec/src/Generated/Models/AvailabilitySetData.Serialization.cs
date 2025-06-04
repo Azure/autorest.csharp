@@ -85,7 +85,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<ComputeSku>(property.Value);
+                    sku = ComputeSku.DeserializeComputeSku(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -94,7 +94,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<AvailabilitySetProperties>(property.Value);
+                    properties = AvailabilitySetProperties.DeserializeAvailabilitySetProperties(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

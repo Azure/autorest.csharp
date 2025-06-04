@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -19,7 +20,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Action))
             {
                 writer.WritePropertyName("action"u8);
-                JsonSerializer.Serialize(writer, Action);
+                ((IJsonModel<FirewallPolicyFilterRuleCollectionAction>)Action).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Rules))
             {
@@ -27,7 +28,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Rules)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<FirewallPolicyRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -65,7 +66,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    action = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyFilterRuleCollectionAction>(property.Value);
+                    action = FirewallPolicyFilterRuleCollectionAction.DeserializeFirewallPolicyFilterRuleCollectionAction(property.Value);
                     continue;
                 }
                 if (property.NameEquals("rules"u8))

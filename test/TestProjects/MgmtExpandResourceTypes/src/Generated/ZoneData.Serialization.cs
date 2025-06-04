@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -65,7 +66,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in RegistrationVirtualNetworks)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<WritableSubResource>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -75,7 +76,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in ResolutionVirtualNetworks)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<WritableSubResource>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }

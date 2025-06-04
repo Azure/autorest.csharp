@@ -107,7 +107,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    osDisk = ModelSerializationExtensions.JsonDeserialize<ImageOSDisk>(property.Value);
+                    osDisk = ImageOSDisk.DeserializeImageOSDisk(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("dataDisks"u8))

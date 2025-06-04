@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -20,7 +21,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(SourceVault))
             {
                 writer.WritePropertyName("sourceVault"u8);
-                JsonSerializer.Serialize(writer, SourceVault);
+                ((IJsonModel<WritableSubResource>)SourceVault).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(VaultCertificates))
             {
@@ -28,7 +29,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in VaultCertificates)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<VaultCertificate>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }

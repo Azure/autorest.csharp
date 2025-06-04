@@ -159,7 +159,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    vhd = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property.Value);
+                    vhd = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("image"u8))
@@ -168,7 +168,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property.Value);
+                    image = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("caching"u8))
@@ -209,7 +209,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    managedDisk = ModelSerializationExtensions.JsonDeserialize<ManagedDiskParameters>(property.Value);
+                    managedDisk = ManagedDiskParameters.DeserializeManagedDiskParameters(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("toBeDetached"u8))

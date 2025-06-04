@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +17,11 @@ namespace AzureSample.ResourceManager.Storage.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("actions"u8);
-            JsonSerializer.Serialize(writer, Actions);
+            ((IJsonModel<ManagementPolicyAction>)Actions).Write(writer, ModelSerializationExtensions.WireOptions);
             if (Optional.IsDefined(Filters))
             {
                 writer.WritePropertyName("filters"u8);
-                JsonSerializer.Serialize(writer, Filters);
+                ((IJsonModel<ManagementPolicyFilter>)Filters).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -37,7 +38,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             {
                 if (property.NameEquals("actions"u8))
                 {
-                    actions = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyAction>(property.Value);
+                    actions = ManagementPolicyAction.DeserializeManagementPolicyAction(property.Value);
                     continue;
                 }
                 if (property.NameEquals("filters"u8))
@@ -46,7 +47,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    filters = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyFilter>(property.Value);
+                    filters = ManagementPolicyFilter.DeserializeManagementPolicyFilter(property.Value);
                     continue;
                 }
             }

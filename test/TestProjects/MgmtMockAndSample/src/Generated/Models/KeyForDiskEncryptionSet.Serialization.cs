@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -21,7 +22,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(SourceVault))
             {
                 writer.WritePropertyName("sourceVault"u8);
-                JsonSerializer.Serialize(writer, SourceVault);
+                ((IJsonModel<WritableSubResource>)SourceVault).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WritePropertyName("keyUrl"u8);
             writer.WriteStringValue(KeyUri.AbsoluteUri);

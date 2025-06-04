@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -39,12 +40,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
-                JsonSerializer.Serialize(writer, NetworkSecurityGroup);
+                ((IJsonModel<WritableSubResource>)NetworkSecurityGroup).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                JsonSerializer.Serialize(writer, DnsSettings);
+                ((IJsonModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)DnsSettings).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(IPConfigurations))
             {
@@ -52,7 +53,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in IPConfigurations)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<VirtualMachineScaleSetIPConfiguration>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -133,7 +134,7 @@ namespace MgmtAcronymMapping.Models
                             {
                                 continue;
                             }
-                            dnsSettings = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetNetworkConfigurationDnsSettings>(property0.Value);
+                            dnsSettings = VirtualMachineScaleSetNetworkConfigurationDnsSettings.DeserializeVirtualMachineScaleSetNetworkConfigurationDnsSettings(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("ipConfigurations"u8))

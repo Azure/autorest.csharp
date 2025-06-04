@@ -155,7 +155,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    encryptionSettings = ModelSerializationExtensions.JsonDeserialize<DiskEncryptionSettings>(property.Value);
+                    encryptionSettings = DiskEncryptionSettings.DeserializeDiskEncryptionSettings(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("name"u8))
@@ -169,7 +169,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    vhd = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property.Value);
+                    vhd = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("image"u8))
@@ -178,7 +178,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property.Value);
+                    image = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("caching"u8))
@@ -205,7 +205,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    diffDiskSettings = ModelSerializationExtensions.JsonDeserialize<DiffDiskSettings>(property.Value);
+                    diffDiskSettings = DiffDiskSettings.DeserializeDiffDiskSettings(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("createOption"u8))
@@ -228,7 +228,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    managedDisk = ModelSerializationExtensions.JsonDeserialize<ManagedDiskParameters>(property.Value);
+                    managedDisk = ManagedDiskParameters.DeserializeManagedDiskParameters(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

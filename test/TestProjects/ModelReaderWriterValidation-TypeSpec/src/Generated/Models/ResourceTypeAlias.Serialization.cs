@@ -156,7 +156,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    defaultPattern = ModelSerializationExtensions.JsonDeserialize<ResourceTypeAliasPattern>(property.Value);
+                    defaultPattern = ResourceTypeAliasPattern.DeserializeResourceTypeAliasPattern(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("defaultMetadata"u8))
@@ -165,7 +165,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     {
                         continue;
                     }
-                    defaultMetadata = ModelSerializationExtensions.JsonDeserialize<ResourceTypeAliasPathMetadata>(property.Value);
+                    defaultMetadata = ResourceTypeAliasPathMetadata.DeserializeResourceTypeAliasPathMetadata(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

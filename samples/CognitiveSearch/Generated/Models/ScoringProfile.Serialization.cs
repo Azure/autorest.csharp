@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -22,7 +23,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(TextWeights))
             {
                 writer.WritePropertyName("text"u8);
-                JsonSerializer.Serialize(writer, TextWeights);
+                ((IJsonModel<TextWeights>)TextWeights).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Functions))
             {
@@ -30,7 +31,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Functions)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<ScoringFunction>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -65,7 +66,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    text = ModelSerializationExtensions.JsonDeserialize<TextWeights>(property.Value);
+                    text = TextWeights.DeserializeTextWeights(property.Value);
                     continue;
                 }
                 if (property.NameEquals("functions"u8))

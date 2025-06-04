@@ -90,7 +90,7 @@ namespace CustomizedTypeSpec.Models
                     {
                         continue;
                     }
-                    format = ModelSerializationExtensions.JsonDeserialize<ModelWithFormat>(property.Value);
+                    format = ModelWithFormat.DeserializeModelWithFormat(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

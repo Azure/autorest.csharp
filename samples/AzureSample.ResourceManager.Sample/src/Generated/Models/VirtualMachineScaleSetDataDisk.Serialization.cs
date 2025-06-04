@@ -173,7 +173,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    managedDisk = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetManagedDiskParameters>(property.Value);
+                    managedDisk = VirtualMachineScaleSetManagedDiskParameters.DeserializeVirtualMachineScaleSetManagedDiskParameters(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("diskIOPSReadWrite"u8))

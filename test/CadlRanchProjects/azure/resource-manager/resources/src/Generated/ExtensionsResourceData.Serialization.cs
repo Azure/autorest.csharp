@@ -79,7 +79,7 @@ namespace _Azure.ResourceManager.Resources
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<ExtensionsResourceProperties>(property.Value);
+                    properties = ExtensionsResourceProperties.DeserializeExtensionsResourceProperties(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

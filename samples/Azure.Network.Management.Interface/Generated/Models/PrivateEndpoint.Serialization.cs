@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -42,7 +43,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                JsonSerializer.Serialize(writer, Subnet);
+                ((IJsonModel<Subnet>)Subnet).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(PrivateLinkServiceConnections))
             {
@@ -50,7 +51,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in PrivateLinkServiceConnections)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<PrivateLinkServiceConnection>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -60,7 +61,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ManualPrivateLinkServiceConnections)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<PrivateLinkServiceConnection>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -141,7 +142,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            subnet = ModelSerializationExtensions.JsonDeserialize<Subnet>(property0.Value);
+                            subnet = Subnet.DeserializeSubnet(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("networkInterfaces"u8))

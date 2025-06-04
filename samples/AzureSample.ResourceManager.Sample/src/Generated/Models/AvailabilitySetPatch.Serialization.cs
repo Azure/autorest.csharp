@@ -118,7 +118,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerSampleSku>(property.Value);
+                    sku = AzureSampleResourceManagerSampleSku.DeserializeAzureSampleResourceManagerSampleSku(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

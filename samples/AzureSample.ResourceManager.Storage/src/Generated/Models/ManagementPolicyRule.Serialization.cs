@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -25,7 +26,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(RuleType.ToString());
             writer.WritePropertyName("definition"u8);
-            JsonSerializer.Serialize(writer, Definition);
+            ((IJsonModel<ManagementPolicyDefinition>)Definition).Write(writer, ModelSerializationExtensions.WireOptions);
             writer.WriteEndObject();
         }
 
@@ -62,7 +63,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                 }
                 if (property.NameEquals("definition"u8))
                 {
-                    definition = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyDefinition>(property.Value);
+                    definition = ManagementPolicyDefinition.DeserializeManagementPolicyDefinition(property.Value);
                     continue;
                 }
             }

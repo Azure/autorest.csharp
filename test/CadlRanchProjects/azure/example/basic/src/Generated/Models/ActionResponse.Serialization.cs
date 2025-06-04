@@ -119,7 +119,7 @@ namespace _Specs_.Azure.Example.Basic.Models
                     {
                         continue;
                     }
-                    modelProperty = ModelSerializationExtensions.JsonDeserialize<Model>(property.Value);
+                    modelProperty = Model.DeserializeModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("arrayProperty"u8))

@@ -81,7 +81,7 @@ namespace _Type.Property.ValueTypes.Models
             {
                 if (property0.NameEquals("property"u8))
                 {
-                    property = ModelSerializationExtensions.JsonDeserialize<InnerModel>(property0.Value);
+                    property = InnerModel.DeserializeInnerModel(property0.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

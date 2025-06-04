@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -30,14 +31,14 @@ namespace MgmtMockAndSample.Models
             writer.WritePropertyName("tenantId"u8);
             writer.WriteStringValue(TenantId);
             writer.WritePropertyName("sku"u8);
-            JsonSerializer.Serialize(writer, Sku);
+            ((IJsonModel<MgmtMockAndSampleSku>)Sku).Write(writer, ModelSerializationExtensions.WireOptions);
             if (Optional.IsCollectionDefined(AccessPolicies))
             {
                 writer.WritePropertyName("accessPolicies"u8);
                 writer.WriteStartArray();
                 foreach (var item in AccessPolicies)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<AccessPolicyEntry>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -94,7 +95,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
-                JsonSerializer.Serialize(writer, NetworkAcls);
+                ((IJsonModel<NetworkRuleSet>)NetworkAcls).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ProvisioningState))
             {
@@ -109,17 +110,17 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(ReadWriteSingleStringProperty))
             {
                 writer.WritePropertyName("readWriteSingleStringProperty"u8);
-                JsonSerializer.Serialize(writer, ReadWriteSingleStringProperty);
+                ((IJsonModel<SinglePropertyModel>)ReadWriteSingleStringProperty).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ReadOnlySingleStringProperty))
             {
                 writer.WritePropertyName("readOnlySingleStringProperty"u8);
-                JsonSerializer.Serialize(writer, ReadOnlySingleStringProperty);
+                ((IJsonModel<ReadOnlySinglePropertyModel>)ReadOnlySingleStringProperty).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ExtremelyDeepStringProperty))
             {
                 writer.WritePropertyName("extremelyDeepStringProperty"u8);
-                JsonSerializer.Serialize(writer, ExtremelyDeepStringProperty);
+                ((IJsonModel<ExtremelyDeepSinglePropertyModel>)ExtremelyDeepStringProperty).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -179,7 +180,7 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("sku"u8))
                 {
-                    sku = ModelSerializationExtensions.JsonDeserialize<MgmtMockAndSampleSku>(property.Value);
+                    sku = MgmtMockAndSampleSku.DeserializeMgmtMockAndSampleSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("accessPolicies"u8))
@@ -293,7 +294,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    networkAcls = ModelSerializationExtensions.JsonDeserialize<NetworkRuleSet>(property.Value);
+                    networkAcls = NetworkRuleSet.DeserializeNetworkRuleSet(property.Value);
                     continue;
                 }
                 if (property.NameEquals("provisioningState"u8))
@@ -330,7 +331,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    readWriteSingleStringProperty = ModelSerializationExtensions.JsonDeserialize<SinglePropertyModel>(property.Value);
+                    readWriteSingleStringProperty = SinglePropertyModel.DeserializeSinglePropertyModel(property.Value);
                     continue;
                 }
                 if (property.NameEquals("readOnlySingleStringProperty"u8))
@@ -339,7 +340,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    readOnlySingleStringProperty = ModelSerializationExtensions.JsonDeserialize<ReadOnlySinglePropertyModel>(property.Value);
+                    readOnlySingleStringProperty = ReadOnlySinglePropertyModel.DeserializeReadOnlySinglePropertyModel(property.Value);
                     continue;
                 }
                 if (property.NameEquals("extremelyDeepStringProperty"u8))
@@ -348,7 +349,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    extremelyDeepStringProperty = ModelSerializationExtensions.JsonDeserialize<ExtremelyDeepSinglePropertyModel>(property.Value);
+                    extremelyDeepStringProperty = ExtremelyDeepSinglePropertyModel.DeserializeExtremelyDeepSinglePropertyModel(property.Value);
                     continue;
                 }
             }

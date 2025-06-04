@@ -149,7 +149,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    osProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetOSProfile>(property.Value);
+                    osProfile = VirtualMachineScaleSetOSProfile.DeserializeVirtualMachineScaleSetOSProfile(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("storageProfile"u8))
@@ -158,7 +158,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    storageProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetStorageProfile>(property.Value);
+                    storageProfile = VirtualMachineScaleSetStorageProfile.DeserializeVirtualMachineScaleSetStorageProfile(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("networkProfile"u8))
@@ -167,7 +167,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    networkProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetNetworkProfile>(property.Value);
+                    networkProfile = VirtualMachineScaleSetNetworkProfile.DeserializeVirtualMachineScaleSetNetworkProfile(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("securityProfile"u8))
@@ -176,7 +176,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    securityProfile = ModelSerializationExtensions.JsonDeserialize<SecurityProfile>(property.Value);
+                    securityProfile = SecurityProfile.DeserializeSecurityProfile(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("diagnosticsProfile"u8))
@@ -185,7 +185,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    diagnosticsProfile = ModelSerializationExtensions.JsonDeserialize<DiagnosticsProfile>(property.Value);
+                    diagnosticsProfile = DiagnosticsProfile.DeserializeDiagnosticsProfile(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("extensionProfile"u8))
@@ -194,7 +194,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    extensionProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetExtensionProfile>(property.Value);
+                    extensionProfile = VirtualMachineScaleSetExtensionProfile.DeserializeVirtualMachineScaleSetExtensionProfile(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("licenseType"u8))
@@ -226,7 +226,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    billingProfile = ModelSerializationExtensions.JsonDeserialize<BillingProfile>(property.Value);
+                    billingProfile = BillingProfile.DeserializeBillingProfile(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("scheduledEventsProfile"u8))
@@ -235,7 +235,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    scheduledEventsProfile = ModelSerializationExtensions.JsonDeserialize<ScheduledEventsProfile>(property.Value);
+                    scheduledEventsProfile = ScheduledEventsProfile.DeserializeScheduledEventsProfile(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

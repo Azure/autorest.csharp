@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -22,7 +23,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(Cors))
             {
                 writer.WritePropertyName("cors"u8);
-                JsonSerializer.Serialize(writer, Cors);
+                ((IJsonModel<CorsRules>)Cors).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(DefaultServiceVersion))
             {
@@ -32,7 +33,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(DeleteRetentionPolicy))
             {
                 writer.WritePropertyName("deleteRetentionPolicy"u8);
-                JsonSerializer.Serialize(writer, DeleteRetentionPolicy);
+                ((IJsonModel<DeleteRetentionPolicy>)DeleteRetentionPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(IsVersioningEnabled))
             {
@@ -47,22 +48,22 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(ChangeFeed))
             {
                 writer.WritePropertyName("changeFeed"u8);
-                JsonSerializer.Serialize(writer, ChangeFeed);
+                ((IJsonModel<ChangeFeed>)ChangeFeed).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(RestorePolicy))
             {
                 writer.WritePropertyName("restorePolicy"u8);
-                JsonSerializer.Serialize(writer, RestorePolicy);
+                ((IJsonModel<RestorePolicyProperties>)RestorePolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ContainerDeleteRetentionPolicy))
             {
                 writer.WritePropertyName("containerDeleteRetentionPolicy"u8);
-                JsonSerializer.Serialize(writer, ContainerDeleteRetentionPolicy);
+                ((IJsonModel<DeleteRetentionPolicy>)ContainerDeleteRetentionPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(LastAccessTimeTrackingPolicy))
             {
                 writer.WritePropertyName("lastAccessTimeTrackingPolicy"u8);
-                JsonSerializer.Serialize(writer, LastAccessTimeTrackingPolicy);
+                ((IJsonModel<LastAccessTimeTrackingPolicy>)LastAccessTimeTrackingPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -96,7 +97,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerStorageSku>(property.Value);
+                    sku = AzureSampleResourceManagerStorageSku.DeserializeAzureSampleResourceManagerStorageSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -138,7 +139,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            cors = ModelSerializationExtensions.JsonDeserialize<CorsRules>(property0.Value);
+                            cors = CorsRules.DeserializeCorsRules(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("defaultServiceVersion"u8))
@@ -152,7 +153,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            deleteRetentionPolicy = ModelSerializationExtensions.JsonDeserialize<DeleteRetentionPolicy>(property0.Value);
+                            deleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("isVersioningEnabled"u8))
@@ -179,7 +180,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            changeFeed = ModelSerializationExtensions.JsonDeserialize<ChangeFeed>(property0.Value);
+                            changeFeed = ChangeFeed.DeserializeChangeFeed(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("restorePolicy"u8))
@@ -188,7 +189,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            restorePolicy = ModelSerializationExtensions.JsonDeserialize<RestorePolicyProperties>(property0.Value);
+                            restorePolicy = RestorePolicyProperties.DeserializeRestorePolicyProperties(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("containerDeleteRetentionPolicy"u8))
@@ -197,7 +198,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            containerDeleteRetentionPolicy = ModelSerializationExtensions.JsonDeserialize<DeleteRetentionPolicy>(property0.Value);
+                            containerDeleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("lastAccessTimeTrackingPolicy"u8))
@@ -206,7 +207,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            lastAccessTimeTrackingPolicy = ModelSerializationExtensions.JsonDeserialize<LastAccessTimeTrackingPolicy>(property0.Value);
+                            lastAccessTimeTrackingPolicy = LastAccessTimeTrackingPolicy.DeserializeLastAccessTimeTrackingPolicy(property0.Value);
                             continue;
                         }
                     }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -30,7 +31,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                JsonSerializer.Serialize(writer, Subnet);
+                ((IJsonModel<Subnet>)Subnet).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -85,7 +86,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            subnet = ModelSerializationExtensions.JsonDeserialize<Subnet>(property0.Value);
+                            subnet = Subnet.DeserializeSubnet(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

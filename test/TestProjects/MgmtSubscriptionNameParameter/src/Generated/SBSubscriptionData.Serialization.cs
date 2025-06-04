@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -83,7 +84,7 @@ namespace MgmtSubscriptionNameParameter
             if (Optional.IsDefined(ClientAffineProperties))
             {
                 writer.WritePropertyName("clientAffineProperties"u8);
-                JsonSerializer.Serialize(writer, ClientAffineProperties);
+                ((IJsonModel<SBClientAffineProperties>)ClientAffineProperties).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -293,7 +294,7 @@ namespace MgmtSubscriptionNameParameter
                             {
                                 continue;
                             }
-                            clientAffineProperties = ModelSerializationExtensions.JsonDeserialize<SBClientAffineProperties>(property0.Value);
+                            clientAffineProperties = SBClientAffineProperties.DeserializeSBClientAffineProperties(property0.Value);
                             continue;
                         }
                     }

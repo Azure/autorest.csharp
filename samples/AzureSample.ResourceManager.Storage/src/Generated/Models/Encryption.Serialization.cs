@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -18,7 +19,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Services))
             {
                 writer.WritePropertyName("services"u8);
-                JsonSerializer.Serialize(writer, Services);
+                ((IJsonModel<EncryptionServices>)Services).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WritePropertyName("keySource"u8);
             writer.WriteStringValue(KeySource.ToString());
@@ -30,12 +31,12 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(KeyVaultProperties))
             {
                 writer.WritePropertyName("keyvaultproperties"u8);
-                JsonSerializer.Serialize(writer, KeyVaultProperties);
+                ((IJsonModel<KeyVaultProperties>)KeyVaultProperties).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(EncryptionIdentity))
             {
                 writer.WritePropertyName("identity"u8);
-                JsonSerializer.Serialize(writer, EncryptionIdentity);
+                ((IJsonModel<EncryptionIdentity>)EncryptionIdentity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -59,7 +60,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    services = ModelSerializationExtensions.JsonDeserialize<EncryptionServices>(property.Value);
+                    services = EncryptionServices.DeserializeEncryptionServices(property.Value);
                     continue;
                 }
                 if (property.NameEquals("keySource"u8))
@@ -82,7 +83,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    keyvaultproperties = ModelSerializationExtensions.JsonDeserialize<KeyVaultProperties>(property.Value);
+                    keyvaultproperties = KeyVaultProperties.DeserializeKeyVaultProperties(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))
@@ -91,7 +92,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    identity = ModelSerializationExtensions.JsonDeserialize<EncryptionIdentity>(property.Value);
+                    identity = EncryptionIdentity.DeserializeEncryptionIdentity(property.Value);
                     continue;
                 }
             }

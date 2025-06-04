@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,7 +18,7 @@ namespace MgmtMockAndSample.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
-            JsonSerializer.Serialize(writer, Properties);
+            ((IJsonModel<VaultAccessPolicyProperties>)Properties).Write(writer, ModelSerializationExtensions.WireOptions);
             writer.WriteEndObject();
         }
 
@@ -46,7 +47,7 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("properties"u8))
                 {
-                    properties = ModelSerializationExtensions.JsonDeserialize<VaultAccessPolicyProperties>(property.Value);
+                    properties = VaultAccessPolicyProperties.DeserializeVaultAccessPolicyProperties(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

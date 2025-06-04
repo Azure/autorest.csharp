@@ -110,7 +110,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    rollingUpgradePolicy = ModelSerializationExtensions.JsonDeserialize<RollingUpgradePolicy>(property.Value);
+                    rollingUpgradePolicy = RollingUpgradePolicy.DeserializeRollingUpgradePolicy(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("automaticOSUpgradePolicy"u8))
@@ -119,7 +119,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    automaticOSUpgradePolicy = ModelSerializationExtensions.JsonDeserialize<AutomaticOSUpgradePolicy>(property.Value);
+                    automaticOSUpgradePolicy = AutomaticOSUpgradePolicy.DeserializeAutomaticOSUpgradePolicy(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

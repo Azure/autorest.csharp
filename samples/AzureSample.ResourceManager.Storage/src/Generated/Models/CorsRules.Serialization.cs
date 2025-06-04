@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -22,7 +23,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in CorsRulesValue)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<CorsRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }

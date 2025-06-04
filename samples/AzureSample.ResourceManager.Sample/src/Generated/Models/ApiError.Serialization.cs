@@ -133,7 +133,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    innererror = ModelSerializationExtensions.JsonDeserialize<InnerError>(property.Value);
+                    innererror = InnerError.DeserializeInnerError(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("code"u8))

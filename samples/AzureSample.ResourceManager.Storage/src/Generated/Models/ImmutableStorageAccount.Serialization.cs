@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -23,7 +24,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(ImmutabilityPolicy))
             {
                 writer.WritePropertyName("immutabilityPolicy"u8);
-                JsonSerializer.Serialize(writer, ImmutabilityPolicy);
+                ((IJsonModel<AccountImmutabilityPolicyProperties>)ImmutabilityPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -53,7 +54,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    immutabilityPolicy = ModelSerializationExtensions.JsonDeserialize<AccountImmutabilityPolicyProperties>(property.Value);
+                    immutabilityPolicy = AccountImmutabilityPolicyProperties.DeserializeAccountImmutabilityPolicyProperties(property.Value);
                     continue;
                 }
             }

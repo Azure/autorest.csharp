@@ -30,7 +30,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    virtualMachine = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetInstanceViewStatusesSummary>(property.Value);
+                    virtualMachine = VirtualMachineScaleSetInstanceViewStatusesSummary.DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(property.Value);
                     continue;
                 }
                 if (property.NameEquals("extensions"u8))

@@ -20,9 +20,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
             {
                 writer.WriteStringValue(Snippets.Literal(SystemAssignedUserAssignedV3Value));
             }
-            return options is null
-            ? Serialize(writer, value, options).ToStatement()
-            : value.CastTo(new CSharpType(typeof(IJsonModel<>), type)).Invoke("Write", [writer, options]).ToStatement();
+
+            return value.CastTo(new CSharpType(typeof(IJsonModel<>), type)).Invoke("Write", [writer, options ?? ModelReaderWriterOptionsExpression.Wire]).ToStatement();
         }
 
         public static InvokeStaticMethodExpression Serialize(ValueExpression writer, ValueExpression value, ValueExpression? options = null)

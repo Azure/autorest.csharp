@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -19,7 +20,7 @@ namespace MgmtParamOrdering
         {
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
-            JsonSerializer.Serialize(writer, Properties);
+            ((IJsonModel<EnvironmentContainer>)Properties).Write(writer, ModelSerializationExtensions.WireOptions);
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);
@@ -53,7 +54,7 @@ namespace MgmtParamOrdering
             {
                 if (property.NameEquals("properties"u8))
                 {
-                    properties = ModelSerializationExtensions.JsonDeserialize<EnvironmentContainer>(property.Value);
+                    properties = EnvironmentContainer.DeserializeEnvironmentContainer(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

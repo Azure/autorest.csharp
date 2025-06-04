@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -22,12 +23,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Snapshot))
             {
                 writer.WritePropertyName("snapshot"u8);
-                JsonSerializer.Serialize(writer, Snapshot);
+                ((IJsonModel<WritableSubResource>)Snapshot).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                JsonSerializer.Serialize(writer, ManagedDisk);
+                ((IJsonModel<WritableSubResource>)ManagedDisk).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(BlobUri))
             {
@@ -52,7 +53,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DiskEncryptionSet))
             {
                 writer.WritePropertyName("diskEncryptionSet"u8);
-                JsonSerializer.Serialize(writer, DiskEncryptionSet);
+                ((IJsonModel<WritableSubResource>)DiskEncryptionSet).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }

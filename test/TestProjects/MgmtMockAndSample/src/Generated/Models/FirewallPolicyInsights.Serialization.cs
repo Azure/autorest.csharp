@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -28,7 +29,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(LogAnalyticsResources))
             {
                 writer.WritePropertyName("logAnalyticsResources"u8);
-                JsonSerializer.Serialize(writer, LogAnalyticsResources);
+                ((IJsonModel<FirewallPolicyLogAnalyticsResources>)LogAnalyticsResources).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -68,7 +69,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    logAnalyticsResources = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyLogAnalyticsResources>(property.Value);
+                    logAnalyticsResources = FirewallPolicyLogAnalyticsResources.DeserializeFirewallPolicyLogAnalyticsResources(property.Value);
                     continue;
                 }
             }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -25,13 +26,13 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Skills)
             {
-                JsonSerializer.Serialize(writer, item);
+                ((IJsonModel<Skill>)item).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(CognitiveServicesAccount))
             {
                 writer.WritePropertyName("cognitiveServices"u8);
-                JsonSerializer.Serialize(writer, CognitiveServicesAccount);
+                ((IJsonModel<CognitiveServicesAccount>)CognitiveServicesAccount).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ETag))
             {
@@ -80,7 +81,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    cognitiveServices = ModelSerializationExtensions.JsonDeserialize<CognitiveServicesAccount>(property.Value);
+                    cognitiveServices = CognitiveServicesAccount.DeserializeCognitiveServicesAccount(property.Value);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"u8))

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -22,37 +23,37 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                JsonSerializer.Serialize(writer, Plan);
+                ((IJsonModel<ArmPlan>)Plan).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                JsonSerializer.Serialize(writer, Identity);
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(IdentityWithRenamedProperty))
             {
                 writer.WritePropertyName("identityWithRenamedProperty"u8);
-                JsonSerializer.Serialize(writer, IdentityWithRenamedProperty);
+                ((IJsonModel<IdentityWithRenamedProperty>)IdentityWithRenamedProperty).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(IdentityWithDifferentPropertyType))
             {
                 writer.WritePropertyName("identityWithDifferentPropertyType"u8);
-                JsonSerializer.Serialize(writer, IdentityWithDifferentPropertyType);
+                ((IJsonModel<IdentityWithDifferentPropertyType>)IdentityWithDifferentPropertyType).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(IdentityWithNoUserIdentity))
             {
                 writer.WritePropertyName("identityWithNoUserIdentity"u8);
-                JsonSerializer.Serialize(writer, IdentityWithNoUserIdentity);
+                ((IJsonModel<ManagedServiceIdentity>)IdentityWithNoUserIdentity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(IdentityWithNoSystemIdentity))
             {
                 writer.WritePropertyName("identityWithNoSystemIdentity"u8);
-                JsonSerializer.Serialize(writer, IdentityWithNoSystemIdentity);
+                ((IJsonModel<IdentityWithNoSystemIdentity>)IdentityWithNoSystemIdentity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(IdentityV3))
             {
                 writer.WritePropertyName("identityV3"u8);
-                JsonSerializer.Serialize(writer, IdentityV3);
+                ((IJsonModel<ManagedServiceIdentity>)IdentityV3).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -67,12 +68,12 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(FakeSubResource))
             {
                 writer.WritePropertyName("fakeSubResource"u8);
-                JsonSerializer.Serialize(writer, FakeSubResource);
+                ((IJsonModel<SubResource>)FakeSubResource).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(FakeWritableSubResource))
             {
                 writer.WritePropertyName("fakeWritableSubResource"u8);
-                JsonSerializer.Serialize(writer, FakeWritableSubResource);
+                ((IJsonModel<WritableSubResource>)FakeWritableSubResource).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -171,7 +172,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identityWithRenamedProperty = ModelSerializationExtensions.JsonDeserialize<IdentityWithRenamedProperty>(property.Value);
+                    identityWithRenamedProperty = IdentityWithRenamedProperty.DeserializeIdentityWithRenamedProperty(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identityWithDifferentPropertyType"u8))
@@ -180,7 +181,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identityWithDifferentPropertyType = ModelSerializationExtensions.JsonDeserialize<IdentityWithDifferentPropertyType>(property.Value);
+                    identityWithDifferentPropertyType = IdentityWithDifferentPropertyType.DeserializeIdentityWithDifferentPropertyType(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identityWithNoUserIdentity"u8))
@@ -198,7 +199,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identityWithNoSystemIdentity = ModelSerializationExtensions.JsonDeserialize<IdentityWithNoSystemIdentity>(property.Value);
+                    identityWithNoSystemIdentity = IdentityWithNoSystemIdentity.DeserializeIdentityWithNoSystemIdentity(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identityV3"u8))

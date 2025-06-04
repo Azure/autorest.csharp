@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -22,7 +23,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                JsonSerializer.Serialize(writer, Identity);
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -34,7 +35,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(ActiveKey))
             {
                 writer.WritePropertyName("activeKey"u8);
-                JsonSerializer.Serialize(writer, ActiveKey);
+                ((IJsonModel<KeyForDiskEncryptionSet>)ActiveKey).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(RotationToLatestKeyVersionEnabled))
             {
@@ -159,7 +160,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            activeKey = ModelSerializationExtensions.JsonDeserialize<KeyForDiskEncryptionSet>(property0.Value);
+                            activeKey = KeyForDiskEncryptionSet.DeserializeKeyForDiskEncryptionSet(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("previousKeys"u8))

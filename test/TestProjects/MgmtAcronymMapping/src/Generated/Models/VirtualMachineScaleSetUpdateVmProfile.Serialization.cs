@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -18,32 +19,32 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                JsonSerializer.Serialize(writer, OSProfile);
+                ((IJsonModel<VirtualMachineScaleSetUpdateOSProfile>)OSProfile).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                JsonSerializer.Serialize(writer, StorageProfile);
+                ((IJsonModel<VirtualMachineScaleSetUpdateStorageProfile>)StorageProfile).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(NetworkProfile))
             {
                 writer.WritePropertyName("networkProfile"u8);
-                JsonSerializer.Serialize(writer, NetworkProfile);
+                ((IJsonModel<VirtualMachineScaleSetUpdateNetworkProfile>)NetworkProfile).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(SecurityProfile))
             {
                 writer.WritePropertyName("securityProfile"u8);
-                JsonSerializer.Serialize(writer, SecurityProfile);
+                ((IJsonModel<SecurityProfile>)SecurityProfile).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(DiagnosticsProfile))
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
-                JsonSerializer.Serialize(writer, DiagnosticsProfile);
+                ((IJsonModel<DiagnosticsProfile>)DiagnosticsProfile).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ExtensionProfile))
             {
                 writer.WritePropertyName("extensionProfile"u8);
-                JsonSerializer.Serialize(writer, ExtensionProfile);
+                ((IJsonModel<VirtualMachineScaleSetExtensionProfile>)ExtensionProfile).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(LicenseType))
             {
@@ -53,12 +54,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(BillingProfile))
             {
                 writer.WritePropertyName("billingProfile"u8);
-                JsonSerializer.Serialize(writer, BillingProfile);
+                ((IJsonModel<BillingProfile>)BillingProfile).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ScheduledEventsProfile))
             {
                 writer.WritePropertyName("scheduledEventsProfile"u8);
-                JsonSerializer.Serialize(writer, ScheduledEventsProfile);
+                ((IJsonModel<ScheduledEventsProfile>)ScheduledEventsProfile).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }

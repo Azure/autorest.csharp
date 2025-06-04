@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -27,7 +28,7 @@ namespace MgmtScopeResource
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                JsonSerializer.Serialize(writer, Identity);
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -58,7 +59,7 @@ namespace MgmtScopeResource
                 foreach (var item in Parameters)
                 {
                     writer.WritePropertyName(item.Key);
-                    JsonSerializer.Serialize(writer, item.Value);
+                    ((IJsonModel<ParameterValuesValue>)item.Value).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndObject();
             }
@@ -90,7 +91,7 @@ namespace MgmtScopeResource
                 writer.WriteStartArray();
                 foreach (var item in NonComplianceMessages)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<NonComplianceMessage>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }

@@ -113,7 +113,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            policy = ModelSerializationExtensions.JsonDeserialize<RollingUpgradePolicy>(property0.Value);
+                            policy = RollingUpgradePolicy.DeserializeRollingUpgradePolicy(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("runningStatus"u8))
@@ -122,7 +122,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            runningStatus = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeRunningStatus>(property0.Value);
+                            runningStatus = RollingUpgradeRunningStatus.DeserializeRollingUpgradeRunningStatus(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("progress"u8))
@@ -131,7 +131,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            progress = ModelSerializationExtensions.JsonDeserialize<RollingUpgradeProgressInfo>(property0.Value);
+                            progress = RollingUpgradeProgressInfo.DeserializeRollingUpgradeProgressInfo(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("error"u8))
@@ -140,7 +140,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            error = ModelSerializationExtensions.JsonDeserialize<ApiError>(property0.Value);
+                            error = ApiError.DeserializeApiError(property0.Value);
                             continue;
                         }
                     }

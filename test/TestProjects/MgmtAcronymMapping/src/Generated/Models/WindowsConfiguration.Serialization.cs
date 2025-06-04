@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -37,19 +38,19 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in AdditionalUnattendContent)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<AdditionalUnattendContent>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(PatchSettings))
             {
                 writer.WritePropertyName("patchSettings"u8);
-                JsonSerializer.Serialize(writer, PatchSettings);
+                ((IJsonModel<PatchSettings>)PatchSettings).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(WinRM))
             {
                 writer.WritePropertyName("winRM"u8);
-                JsonSerializer.Serialize(writer, WinRM);
+                ((IJsonModel<WinRMConfiguration>)WinRM).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -111,7 +112,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    patchSettings = ModelSerializationExtensions.JsonDeserialize<PatchSettings>(property.Value);
+                    patchSettings = PatchSettings.DeserializePatchSettings(property.Value);
                     continue;
                 }
                 if (property.NameEquals("winRM"u8))
@@ -120,7 +121,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    winRM = ModelSerializationExtensions.JsonDeserialize<WinRMConfiguration>(property.Value);
+                    winRM = WinRMConfiguration.DeserializeWinRMConfiguration(property.Value);
                     continue;
                 }
             }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -18,17 +19,17 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(BaseBlob))
             {
                 writer.WritePropertyName("baseBlob"u8);
-                JsonSerializer.Serialize(writer, BaseBlob);
+                ((IJsonModel<ManagementPolicyBaseBlob>)BaseBlob).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Snapshot))
             {
                 writer.WritePropertyName("snapshot"u8);
-                JsonSerializer.Serialize(writer, Snapshot);
+                ((IJsonModel<ManagementPolicySnapShot>)Snapshot).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Version))
             {
                 writer.WritePropertyName("version"u8);
-                JsonSerializer.Serialize(writer, Version);
+                ((IJsonModel<ManagementPolicyVersion>)Version).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -50,7 +51,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    baseBlob = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyBaseBlob>(property.Value);
+                    baseBlob = ManagementPolicyBaseBlob.DeserializeManagementPolicyBaseBlob(property.Value);
                     continue;
                 }
                 if (property.NameEquals("snapshot"u8))
@@ -59,7 +60,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    snapshot = ModelSerializationExtensions.JsonDeserialize<ManagementPolicySnapShot>(property.Value);
+                    snapshot = ManagementPolicySnapShot.DeserializeManagementPolicySnapShot(property.Value);
                     continue;
                 }
                 if (property.NameEquals("version"u8))
@@ -68,7 +69,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    version = ModelSerializationExtensions.JsonDeserialize<ManagementPolicyVersion>(property.Value);
+                    version = ManagementPolicyVersion.DeserializeManagementPolicyVersion(property.Value);
                     continue;
                 }
             }

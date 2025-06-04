@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -18,12 +19,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ImageReference))
             {
                 writer.WritePropertyName("imageReference"u8);
-                JsonSerializer.Serialize(writer, ImageReference);
+                ((IJsonModel<ImageReference>)ImageReference).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                JsonSerializer.Serialize(writer, OSDisk);
+                ((IJsonModel<VirtualMachineScaleSetUpdateOSDisk>)OSDisk).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -31,7 +32,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<VirtualMachineScaleSetDataDisk>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }

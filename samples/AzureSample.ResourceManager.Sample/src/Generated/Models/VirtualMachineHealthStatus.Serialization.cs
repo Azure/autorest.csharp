@@ -89,7 +89,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    status = ModelSerializationExtensions.JsonDeserialize<InstanceViewStatus>(property.Value);
+                    status = InstanceViewStatus.DeserializeInstanceViewStatus(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

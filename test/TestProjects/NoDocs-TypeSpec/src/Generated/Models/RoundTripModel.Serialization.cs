@@ -345,7 +345,7 @@ namespace NoDocsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredModel"u8))
                 {
-                    requiredModel = ModelSerializationExtensions.JsonDeserialize<Thing>(property.Value);
+                    requiredModel = Thing.DeserializeThing(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("intExtensibleEnum"u8))
@@ -541,7 +541,7 @@ namespace NoDocsTypeSpec.Models
                 }
                 if (property.NameEquals("modelWithRequiredNullable"u8))
                 {
-                    modelWithRequiredNullable = ModelSerializationExtensions.JsonDeserialize<ModelWithRequiredNullableProperties>(property.Value);
+                    modelWithRequiredNullable = ModelWithRequiredNullableProperties.DeserializeModelWithRequiredNullableProperties(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("unionList"u8))

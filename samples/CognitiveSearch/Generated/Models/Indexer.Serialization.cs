@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -36,12 +37,12 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(Schedule))
             {
                 writer.WritePropertyName("schedule"u8);
-                JsonSerializer.Serialize(writer, Schedule);
+                ((IJsonModel<IndexingSchedule>)Schedule).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Parameters))
             {
                 writer.WritePropertyName("parameters"u8);
-                JsonSerializer.Serialize(writer, Parameters);
+                ((IJsonModel<IndexingParameters>)Parameters).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(FieldMappings))
             {
@@ -49,7 +50,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in FieldMappings)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<FieldMapping>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -59,7 +60,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in OutputFieldMappings)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<FieldMapping>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -126,7 +127,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    schedule = ModelSerializationExtensions.JsonDeserialize<IndexingSchedule>(property.Value);
+                    schedule = IndexingSchedule.DeserializeIndexingSchedule(property.Value);
                     continue;
                 }
                 if (property.NameEquals("parameters"u8))
@@ -135,7 +136,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    parameters = ModelSerializationExtensions.JsonDeserialize<IndexingParameters>(property.Value);
+                    parameters = IndexingParameters.DeserializeIndexingParameters(property.Value);
                     continue;
                 }
                 if (property.NameEquals("fieldMappings"u8))

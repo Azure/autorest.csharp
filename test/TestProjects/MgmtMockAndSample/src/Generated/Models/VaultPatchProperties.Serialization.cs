@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -23,7 +24,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                JsonSerializer.Serialize(writer, Sku);
+                ((IJsonModel<MgmtMockAndSampleSku>)Sku).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(AccessPolicies))
             {
@@ -31,7 +32,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in AccessPolicies)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<AccessPolicyEntry>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -78,7 +79,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
-                JsonSerializer.Serialize(writer, NetworkAcls);
+                ((IJsonModel<NetworkRuleSet>)NetworkAcls).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(PublicNetworkAccess))
             {

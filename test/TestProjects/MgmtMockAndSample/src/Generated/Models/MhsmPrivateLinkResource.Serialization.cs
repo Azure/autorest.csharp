@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -20,7 +21,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                JsonSerializer.Serialize(writer, Sku);
+                ((IJsonModel<ManagedHsmSku>)Sku).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -75,7 +76,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<ManagedHsmSku>(property.Value);
+                    sku = ManagedHsmSku.DeserializeManagedHsmSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

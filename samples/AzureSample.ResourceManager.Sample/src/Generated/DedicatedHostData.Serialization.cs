@@ -134,7 +134,7 @@ namespace AzureSample.ResourceManager.Sample
             {
                 if (property.NameEquals("sku"u8))
                 {
-                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerSampleSku>(property.Value);
+                    sku = AzureSampleResourceManagerSampleSku.DeserializeAzureSampleResourceManagerSampleSku(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -255,7 +255,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            instanceView = ModelSerializationExtensions.JsonDeserialize<DedicatedHostInstanceView>(property0.Value);
+                            instanceView = DedicatedHostInstanceView.DeserializeDedicatedHostInstanceView(property0.Value, options);
                             continue;
                         }
                     }

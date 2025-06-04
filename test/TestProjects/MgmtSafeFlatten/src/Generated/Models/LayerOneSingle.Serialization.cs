@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -18,7 +19,7 @@ namespace MgmtSafeFlatten.Models
             if (Optional.IsDefined(LayerTwo))
             {
                 writer.WritePropertyName("layerTwo"u8);
-                JsonSerializer.Serialize(writer, LayerTwo);
+                ((IJsonModel<LayerTwoSingle>)LayerTwo).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -38,7 +39,7 @@ namespace MgmtSafeFlatten.Models
                     {
                         continue;
                     }
-                    layerTwo = ModelSerializationExtensions.JsonDeserialize<LayerTwoSingle>(property.Value);
+                    layerTwo = LayerTwoSingle.DeserializeLayerTwoSingle(property.Value);
                     continue;
                 }
             }

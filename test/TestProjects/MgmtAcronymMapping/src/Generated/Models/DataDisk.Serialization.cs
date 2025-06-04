@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -25,12 +26,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
-                JsonSerializer.Serialize(writer, Vhd);
+                ((IJsonModel<VirtualHardDisk>)Vhd).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                JsonSerializer.Serialize(writer, Image);
+                ((IJsonModel<VirtualHardDisk>)Image).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Caching))
             {
@@ -52,7 +53,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                JsonSerializer.Serialize(writer, ManagedDisk);
+                ((IJsonModel<ManagedDiskParameters>)ManagedDisk).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ToBeDetached))
             {
@@ -98,7 +99,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    vhd = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property.Value);
+                    vhd = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value);
                     continue;
                 }
                 if (property.NameEquals("image"u8))
@@ -107,7 +108,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    image = ModelSerializationExtensions.JsonDeserialize<VirtualHardDisk>(property.Value);
+                    image = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value);
                     continue;
                 }
                 if (property.NameEquals("caching"u8))
@@ -148,7 +149,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    managedDisk = ModelSerializationExtensions.JsonDeserialize<ManagedDiskParameters>(property.Value);
+                    managedDisk = ManagedDiskParameters.DeserializeManagedDiskParameters(property.Value);
                     continue;
                 }
                 if (property.NameEquals("toBeDetached"u8))

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -27,17 +28,17 @@ namespace MgmtSafeFlatten
             if (Optional.IsDefined(LayerOne))
             {
                 writer.WritePropertyName("layerOne"u8);
-                JsonSerializer.Serialize(writer, LayerOne);
+                ((IJsonModel<LayerOneSingle>)LayerOne).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(LayerOneType))
             {
                 writer.WritePropertyName("layerOneType"u8);
-                JsonSerializer.Serialize(writer, LayerOneType);
+                ((IJsonModel<LayerOneBaseType>)LayerOneType).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(LayerOneConflict))
             {
                 writer.WritePropertyName("layerOneConflict"u8);
-                JsonSerializer.Serialize(writer, LayerOneConflict);
+                ((IJsonModel<WritableSubResource>)LayerOneConflict).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -84,7 +85,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    layerOne = ModelSerializationExtensions.JsonDeserialize<LayerOneSingle>(property.Value);
+                    layerOne = LayerOneSingle.DeserializeLayerOneSingle(property.Value);
                     continue;
                 }
                 if (property.NameEquals("layerOneType"u8))
@@ -93,7 +94,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    layerOneType = ModelSerializationExtensions.JsonDeserialize<LayerOneBaseType>(property.Value);
+                    layerOneType = LayerOneBaseType.DeserializeLayerOneBaseType(property.Value);
                     continue;
                 }
                 if (property.NameEquals("layerOneConflict"u8))

@@ -76,7 +76,7 @@ namespace Scm.Payload.Multipart.Models
             {
                 if (property.NameEquals("profileImage"u8))
                 {
-                    profileImage = ModelSerializationExtensions.JsonDeserialize<FileSpecificContentType>(property.Value);
+                    profileImage = FileSpecificContentType.DeserializeFileSpecificContentType(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

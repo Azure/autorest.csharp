@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -23,7 +24,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             writer.WriteStartArray();
             foreach (var item in BlobRanges)
             {
-                JsonSerializer.Serialize(writer, item);
+                ((IJsonModel<BlobRestoreRange>)item).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();

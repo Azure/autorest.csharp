@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -29,7 +30,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                JsonSerializer.Serialize(writer, DnsSettings);
+                ((IJsonModel<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings>)DnsSettings).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(IPTags))
             {
@@ -37,14 +38,14 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in IPTags)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<VirtualMachineScaleSetIPTag>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(PublicIPPrefix))
             {
                 writer.WritePropertyName("publicIPPrefix"u8);
-                JsonSerializer.Serialize(writer, PublicIPPrefix);
+                ((IJsonModel<WritableSubResource>)PublicIPPrefix).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(PublicIPAddressVersion))
             {
@@ -98,7 +99,7 @@ namespace MgmtAcronymMapping.Models
                             {
                                 continue;
                             }
-                            dnsSettings = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings>(property0.Value);
+                            dnsSettings = VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.DeserializeVirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("ipTags"u8))

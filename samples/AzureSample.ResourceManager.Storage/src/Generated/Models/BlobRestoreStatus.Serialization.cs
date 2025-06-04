@@ -48,7 +48,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    parameters = ModelSerializationExtensions.JsonDeserialize<BlobRestoreContent>(property.Value);
+                    parameters = BlobRestoreContent.DeserializeBlobRestoreContent(property.Value);
                     continue;
                 }
             }

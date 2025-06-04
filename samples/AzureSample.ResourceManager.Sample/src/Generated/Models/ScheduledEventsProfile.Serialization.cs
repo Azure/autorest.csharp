@@ -89,7 +89,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    terminateNotificationProfile = ModelSerializationExtensions.JsonDeserialize<TerminateNotificationProfile>(property.Value);
+                    terminateNotificationProfile = TerminateNotificationProfile.DeserializeTerminateNotificationProfile(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

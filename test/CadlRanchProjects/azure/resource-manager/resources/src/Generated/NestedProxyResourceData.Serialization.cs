@@ -79,7 +79,7 @@ namespace _Azure.ResourceManager.Resources
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<NestedProxyResourceProperties>(property.Value);
+                    properties = NestedProxyResourceProperties.DeserializeNestedProxyResourceProperties(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

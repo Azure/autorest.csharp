@@ -102,7 +102,7 @@ namespace MgmtCustomizations.Models
                     {
                         continue;
                     }
-                    pet = ModelSerializationExtensions.JsonDeserialize<Pet>(property.Value);
+                    pet = Pet.DeserializePet(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

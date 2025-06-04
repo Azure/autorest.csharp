@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -84,7 +85,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
-                JsonSerializer.Serialize(writer, NetworkAcls);
+                ((IJsonModel<MhsmNetworkRuleSet>)NetworkAcls).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(PublicNetworkAccess))
             {
@@ -233,7 +234,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    networkAcls = ModelSerializationExtensions.JsonDeserialize<MhsmNetworkRuleSet>(property.Value);
+                    networkAcls = MhsmNetworkRuleSet.DeserializeMhsmNetworkRuleSet(property.Value);
                     continue;
                 }
                 if (property.NameEquals("privateEndpointConnections"u8))

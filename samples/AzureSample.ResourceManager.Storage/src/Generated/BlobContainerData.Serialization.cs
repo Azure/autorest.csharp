@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -51,7 +52,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
-                JsonSerializer.Serialize(writer, ImmutableStorageWithVersioning);
+                ((IJsonModel<ImmutableStorageWithVersioning>)ImmutableStorageWithVersioning).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(EnableNfsV3RootSquash))
             {
@@ -252,7 +253,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            immutabilityPolicy = ModelSerializationExtensions.JsonDeserialize<ImmutabilityPolicyProperties>(property0.Value);
+                            immutabilityPolicy = ImmutabilityPolicyProperties.DeserializeImmutabilityPolicyProperties(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("legalHold"u8))
@@ -261,7 +262,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            legalHold = ModelSerializationExtensions.JsonDeserialize<LegalHoldProperties>(property0.Value);
+                            legalHold = LegalHoldProperties.DeserializeLegalHoldProperties(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("hasLegalHold"u8))
@@ -288,7 +289,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            immutableStorageWithVersioning = ModelSerializationExtensions.JsonDeserialize<ImmutableStorageWithVersioning>(property0.Value);
+                            immutableStorageWithVersioning = ImmutableStorageWithVersioning.DeserializeImmutableStorageWithVersioning(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("enableNfsV3RootSquash"u8))

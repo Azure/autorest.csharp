@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -26,18 +27,18 @@ namespace CognitiveSearch.Models
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type.ToString());
             writer.WritePropertyName("credentials"u8);
-            JsonSerializer.Serialize(writer, Credentials);
+            ((IJsonModel<DataSourceCredentials>)Credentials).Write(writer, ModelSerializationExtensions.WireOptions);
             writer.WritePropertyName("container"u8);
-            JsonSerializer.Serialize(writer, Container);
+            ((IJsonModel<DataContainer>)Container).Write(writer, ModelSerializationExtensions.WireOptions);
             if (Optional.IsDefined(DataChangeDetectionPolicy))
             {
                 writer.WritePropertyName("dataChangeDetectionPolicy"u8);
-                JsonSerializer.Serialize(writer, DataChangeDetectionPolicy);
+                ((IJsonModel<DataChangeDetectionPolicy>)DataChangeDetectionPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(DataDeletionDetectionPolicy))
             {
                 writer.WritePropertyName("dataDeletionDetectionPolicy"u8);
-                JsonSerializer.Serialize(writer, DataDeletionDetectionPolicy);
+                ((IJsonModel<DataDeletionDetectionPolicy>)DataDeletionDetectionPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ETag))
             {
@@ -80,12 +81,12 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("credentials"u8))
                 {
-                    credentials = ModelSerializationExtensions.JsonDeserialize<DataSourceCredentials>(property.Value);
+                    credentials = DataSourceCredentials.DeserializeDataSourceCredentials(property.Value);
                     continue;
                 }
                 if (property.NameEquals("container"u8))
                 {
-                    container = ModelSerializationExtensions.JsonDeserialize<DataContainer>(property.Value);
+                    container = DataContainer.DeserializeDataContainer(property.Value);
                     continue;
                 }
                 if (property.NameEquals("dataChangeDetectionPolicy"u8))
@@ -94,7 +95,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    dataChangeDetectionPolicy = ModelSerializationExtensions.JsonDeserialize<DataChangeDetectionPolicy>(property.Value);
+                    dataChangeDetectionPolicy = DataChangeDetectionPolicy.DeserializeDataChangeDetectionPolicy(property.Value);
                     continue;
                 }
                 if (property.NameEquals("dataDeletionDetectionPolicy"u8))
@@ -103,7 +104,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    dataDeletionDetectionPolicy = ModelSerializationExtensions.JsonDeserialize<DataDeletionDetectionPolicy>(property.Value);
+                    dataDeletionDetectionPolicy = DataDeletionDetectionPolicy.DeserializeDataDeletionDetectionPolicy(property.Value);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"u8))

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -27,7 +28,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                JsonSerializer.Serialize(writer, Sku);
+                ((IJsonModel<ManagedHsmSku>)Sku).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -47,12 +48,12 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(PrivateEndpoint))
             {
                 writer.WritePropertyName("privateEndpoint"u8);
-                JsonSerializer.Serialize(writer, PrivateEndpoint);
+                ((IJsonModel<Azure.ResourceManager.Resources.Models.SubResource>)PrivateEndpoint).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(PrivateLinkServiceConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                JsonSerializer.Serialize(writer, PrivateLinkServiceConnectionState);
+                ((IJsonModel<MhsmPrivateLinkServiceConnectionState>)PrivateLinkServiceConnectionState).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ProvisioningState))
             {
@@ -93,7 +94,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<ManagedHsmSku>(property.Value);
+                    sku = ManagedHsmSku.DeserializeManagedHsmSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -163,7 +164,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            privateLinkServiceConnectionState = ModelSerializationExtensions.JsonDeserialize<MhsmPrivateLinkServiceConnectionState>(property0.Value);
+                            privateLinkServiceConnectionState = MhsmPrivateLinkServiceConnectionState.DeserializeMhsmPrivateLinkServiceConnectionState(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

@@ -149,7 +149,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            dnsSettings = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings>(property0.Value);
+                            dnsSettings = VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.DeserializeVirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("ipTags"u8))

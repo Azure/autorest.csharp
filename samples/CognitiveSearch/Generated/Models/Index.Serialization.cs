@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -23,7 +24,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Fields)
             {
-                JsonSerializer.Serialize(writer, item);
+                ((IJsonModel<Field>)item).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndArray();
             if (Optional.IsCollectionDefined(ScoringProfiles))
@@ -32,7 +33,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in ScoringProfiles)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<ScoringProfile>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -44,7 +45,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(CorsOptions))
             {
                 writer.WritePropertyName("corsOptions"u8);
-                JsonSerializer.Serialize(writer, CorsOptions);
+                ((IJsonModel<CorsOptions>)CorsOptions).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Suggesters))
             {
@@ -52,7 +53,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Suggesters)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<Suggester>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -62,7 +63,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Analyzers)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<Analyzer>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -72,7 +73,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Tokenizers)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<Tokenizer>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -82,7 +83,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in TokenFilters)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<TokenFilter>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -92,19 +93,19 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in CharFilters)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<CharFilter>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(EncryptionKey))
             {
                 writer.WritePropertyName("encryptionKey"u8);
-                JsonSerializer.Serialize(writer, EncryptionKey);
+                ((IJsonModel<EncryptionKey>)EncryptionKey).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Similarity))
             {
                 writer.WritePropertyName("similarity"u8);
-                JsonSerializer.Serialize(writer, Similarity);
+                ((IJsonModel<Similarity>)Similarity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ETag))
             {
@@ -175,7 +176,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    corsOptions = ModelSerializationExtensions.JsonDeserialize<CorsOptions>(property.Value);
+                    corsOptions = CorsOptions.DeserializeCorsOptions(property.Value);
                     continue;
                 }
                 if (property.NameEquals("suggesters"u8))
@@ -254,7 +255,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    encryptionKey = ModelSerializationExtensions.JsonDeserialize<EncryptionKey>(property.Value);
+                    encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
                     continue;
                 }
                 if (property.NameEquals("similarity"u8))
@@ -263,7 +264,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    similarity = ModelSerializationExtensions.JsonDeserialize<Similarity>(property.Value);
+                    similarity = Similarity.DeserializeSimilarity(property.Value);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"u8))

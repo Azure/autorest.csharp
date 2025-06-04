@@ -88,7 +88,7 @@ namespace TypeSchemaMapping.Models
                     {
                         continue;
                     }
-                    abstractModelProperty = ModelSerializationExtensions.JsonDeserialize<AbstractModel>(property.Value);
+                    abstractModelProperty = AbstractModel.DeserializeAbstractModel(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure;
@@ -27,7 +28,7 @@ namespace Inheritance.Models
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
-                JsonSerializer.Serialize(writer, ModelProperty);
+                ((IJsonModel<BaseClassWithExtensibleEnumDiscriminator>)ModelProperty).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -53,7 +54,7 @@ namespace Inheritance.Models
                     {
                         continue;
                     }
-                    modelProperty = ModelSerializationExtensions.JsonDeserialize<BaseClassWithExtensibleEnumDiscriminator>(property.Value);
+                    modelProperty = BaseClassWithExtensibleEnumDiscriminator.DeserializeBaseClassWithExtensibleEnumDiscriminator(property.Value);
                     continue;
                 }
             }

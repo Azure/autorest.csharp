@@ -75,7 +75,7 @@ namespace Scm._Type.Union.Models
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = ModelSerializationExtensions.JsonDeserialize<MixedLiteralsCases>(property.Value);
+                    prop = MixedLiteralsCases.DeserializeMixedLiteralsCases(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

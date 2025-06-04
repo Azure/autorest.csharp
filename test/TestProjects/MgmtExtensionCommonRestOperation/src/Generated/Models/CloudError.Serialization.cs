@@ -26,7 +26,7 @@ namespace MgmtExtensionCommonRestOperation.Models
                     {
                         continue;
                     }
-                    error = ModelSerializationExtensions.JsonDeserialize<ErrorResponse>(property.Value);
+                    error = Models.ErrorResponse.DeserializeErrorResponse(property.Value);
                     continue;
                 }
             }

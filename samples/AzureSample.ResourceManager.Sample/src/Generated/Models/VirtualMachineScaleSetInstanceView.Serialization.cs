@@ -123,7 +123,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    virtualMachine = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetInstanceViewStatusesSummary>(property.Value);
+                    virtualMachine = VirtualMachineScaleSetInstanceViewStatusesSummary.DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("extensions"u8))

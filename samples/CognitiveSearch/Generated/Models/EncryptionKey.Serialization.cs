@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -25,7 +26,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(AccessCredentials))
             {
                 writer.WritePropertyName("accessCredentials"u8);
-                JsonSerializer.Serialize(writer, AccessCredentials);
+                ((IJsonModel<AzureActiveDirectoryApplicationCredentials>)AccessCredentials).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -63,7 +64,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    accessCredentials = ModelSerializationExtensions.JsonDeserialize<AzureActiveDirectoryApplicationCredentials>(property.Value);
+                    accessCredentials = AzureActiveDirectoryApplicationCredentials.DeserializeAzureActiveDirectoryApplicationCredentials(property.Value);
                     continue;
                 }
             }

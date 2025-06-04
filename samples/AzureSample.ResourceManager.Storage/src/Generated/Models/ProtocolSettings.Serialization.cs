@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -18,7 +19,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Smb))
             {
                 writer.WritePropertyName("smb"u8);
-                JsonSerializer.Serialize(writer, Smb);
+                ((IJsonModel<SmbSetting>)Smb).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -38,7 +39,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    smb = ModelSerializationExtensions.JsonDeserialize<SmbSetting>(property.Value);
+                    smb = SmbSetting.DeserializeSmbSetting(property.Value);
                     continue;
                 }
             }

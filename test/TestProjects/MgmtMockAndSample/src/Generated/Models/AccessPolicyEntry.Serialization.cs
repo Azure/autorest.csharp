@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -26,7 +27,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStringValue(ApplicationId.Value);
             }
             writer.WritePropertyName("permissions"u8);
-            JsonSerializer.Serialize(writer, Permissions);
+            ((IJsonModel<Permissions>)Permissions).Write(writer, ModelSerializationExtensions.WireOptions);
             writer.WriteEndObject();
         }
 
@@ -63,7 +64,7 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("permissions"u8))
                 {
-                    permissions = ModelSerializationExtensions.JsonDeserialize<Permissions>(property.Value);
+                    permissions = Permissions.DeserializePermissions(property.Value);
                     continue;
                 }
             }

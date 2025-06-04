@@ -99,7 +99,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    error = ModelSerializationExtensions.JsonDeserialize<ApiError>(property.Value);
+                    error = ApiError.DeserializeApiError(property.Value);
                     continue;
                 }
             }

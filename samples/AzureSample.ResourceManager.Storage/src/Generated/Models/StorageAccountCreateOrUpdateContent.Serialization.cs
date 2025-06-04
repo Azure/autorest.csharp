@@ -5,8 +5,11 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources.Models;
 
 namespace AzureSample.ResourceManager.Storage.Models
 {
@@ -16,7 +19,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("sku"u8);
-            JsonSerializer.Serialize(writer, Sku);
+            ((IJsonModel<AzureSampleResourceManagerStorageSku>)Sku).Write(writer, ModelSerializationExtensions.WireOptions);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToString());
             writer.WritePropertyName("location"u8);
@@ -24,7 +27,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(ExtendedLocation))
             {
                 writer.WritePropertyName("extendedLocation"u8);
-                JsonSerializer.Serialize(writer, ExtendedLocation);
+                ((IJsonModel<ExtendedLocation>)ExtendedLocation).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -40,7 +43,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                JsonSerializer.Serialize(writer, Identity);
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -52,27 +55,27 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(SasPolicy))
             {
                 writer.WritePropertyName("sasPolicy"u8);
-                JsonSerializer.Serialize(writer, SasPolicy);
+                ((IJsonModel<SasPolicy>)SasPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(KeyPolicy))
             {
                 writer.WritePropertyName("keyPolicy"u8);
-                JsonSerializer.Serialize(writer, KeyPolicy);
+                ((IJsonModel<KeyPolicy>)KeyPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(CustomDomain))
             {
                 writer.WritePropertyName("customDomain"u8);
-                JsonSerializer.Serialize(writer, CustomDomain);
+                ((IJsonModel<CustomDomain>)CustomDomain).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Encryption))
             {
                 writer.WritePropertyName("encryption"u8);
-                JsonSerializer.Serialize(writer, Encryption);
+                ((IJsonModel<Encryption>)Encryption).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(NetworkRuleSet))
             {
                 writer.WritePropertyName("networkAcls"u8);
-                JsonSerializer.Serialize(writer, NetworkRuleSet);
+                ((IJsonModel<NetworkRuleSet>)NetworkRuleSet).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(AccessTier))
             {
@@ -82,7 +85,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(AzureFilesIdentityBasedAuthentication))
             {
                 writer.WritePropertyName("azureFilesIdentityBasedAuthentication"u8);
-                JsonSerializer.Serialize(writer, AzureFilesIdentityBasedAuthentication);
+                ((IJsonModel<AzureFilesIdentityBasedAuthentication>)AzureFilesIdentityBasedAuthentication).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(EnableHttpsTrafficOnly))
             {
@@ -102,7 +105,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(RoutingPreference))
             {
                 writer.WritePropertyName("routingPreference"u8);
-                JsonSerializer.Serialize(writer, RoutingPreference);
+                ((IJsonModel<RoutingPreference>)RoutingPreference).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(AllowBlobPublicAccess))
             {
@@ -137,7 +140,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
-                JsonSerializer.Serialize(writer, ImmutableStorageWithVersioning);
+                ((IJsonModel<ImmutableStorageAccount>)ImmutableStorageWithVersioning).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

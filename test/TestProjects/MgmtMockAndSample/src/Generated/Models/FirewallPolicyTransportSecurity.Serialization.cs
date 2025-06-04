@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -18,7 +19,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(CertificateAuthority))
             {
                 writer.WritePropertyName("certificateAuthority"u8);
-                JsonSerializer.Serialize(writer, CertificateAuthority);
+                ((IJsonModel<FirewallPolicyCertificateAuthority>)CertificateAuthority).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -38,7 +39,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    certificateAuthority = ModelSerializationExtensions.JsonDeserialize<FirewallPolicyCertificateAuthority>(property.Value);
+                    certificateAuthority = FirewallPolicyCertificateAuthority.DeserializeFirewallPolicyCertificateAuthority(property.Value);
                     continue;
                 }
             }

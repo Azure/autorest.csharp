@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -72,7 +73,7 @@ namespace MgmtExtensionResource
                 foreach (var item in Parameters)
                 {
                     writer.WritePropertyName(item.Key);
-                    JsonSerializer.Serialize(writer, item.Value);
+                    ((IJsonModel<ParameterDefinitionsValue>)item.Value).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndObject();
             }

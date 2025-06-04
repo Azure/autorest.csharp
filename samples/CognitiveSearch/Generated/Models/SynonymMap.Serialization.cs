@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -25,7 +26,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(EncryptionKey))
             {
                 writer.WritePropertyName("encryptionKey"u8);
-                JsonSerializer.Serialize(writer, EncryptionKey);
+                ((IJsonModel<EncryptionKey>)EncryptionKey).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ETag))
             {
@@ -69,7 +70,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    encryptionKey = ModelSerializationExtensions.JsonDeserialize<EncryptionKey>(property.Value);
+                    encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"u8))

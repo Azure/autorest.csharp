@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -46,17 +47,17 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
-                JsonSerializer.Serialize(writer, NetworkSecurityGroup);
+                ((IJsonModel<NetworkSecurityGroup>)NetworkSecurityGroup).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(RouteTable))
             {
                 writer.WritePropertyName("routeTable"u8);
-                JsonSerializer.Serialize(writer, RouteTable);
+                ((IJsonModel<RouteTable>)RouteTable).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(NatGateway))
             {
                 writer.WritePropertyName("natGateway"u8);
-                JsonSerializer.Serialize(writer, NatGateway);
+                ((IJsonModel<SubResource>)NatGateway).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(ServiceEndpoints))
             {
@@ -64,7 +65,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ServiceEndpoints)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<ServiceEndpointPropertiesFormat>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -74,7 +75,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ServiceEndpointPolicies)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<ServiceEndpointPolicy>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -84,7 +85,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Delegations)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<Delegation>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -179,7 +180,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            networkSecurityGroup = ModelSerializationExtensions.JsonDeserialize<NetworkSecurityGroup>(property0.Value);
+                            networkSecurityGroup = NetworkSecurityGroup.DeserializeNetworkSecurityGroup(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("routeTable"u8))
@@ -188,7 +189,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            routeTable = ModelSerializationExtensions.JsonDeserialize<RouteTable>(property0.Value);
+                            routeTable = RouteTable.DeserializeRouteTable(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("natGateway"u8))
@@ -197,7 +198,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            natGateway = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0.Value);
+                            natGateway = DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("serviceEndpoints"u8))

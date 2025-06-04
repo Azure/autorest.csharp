@@ -63,7 +63,7 @@ namespace MgmtSupersetInheritance
                     {
                         continue;
                     }
-                    systemData = ModelSerializationExtensions.JsonDeserialize<SupersetModel7SystemData>(property.Value);
+                    systemData = SupersetModel7SystemData.DeserializeSupersetModel7SystemData(property.Value);
                     continue;
                 }
             }

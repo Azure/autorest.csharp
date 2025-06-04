@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -18,12 +19,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DiskEncryptionKey))
             {
                 writer.WritePropertyName("diskEncryptionKey"u8);
-                JsonSerializer.Serialize(writer, DiskEncryptionKey);
+                ((IJsonModel<KeyVaultSecretReference>)DiskEncryptionKey).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(KeyEncryptionKey))
             {
                 writer.WritePropertyName("keyEncryptionKey"u8);
-                JsonSerializer.Serialize(writer, KeyEncryptionKey);
+                ((IJsonModel<KeyVaultKeyReference>)KeyEncryptionKey).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Enabled))
             {
@@ -50,7 +51,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    diskEncryptionKey = ModelSerializationExtensions.JsonDeserialize<KeyVaultSecretReference>(property.Value);
+                    diskEncryptionKey = KeyVaultSecretReference.DeserializeKeyVaultSecretReference(property.Value);
                     continue;
                 }
                 if (property.NameEquals("keyEncryptionKey"u8))
@@ -59,7 +60,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    keyEncryptionKey = ModelSerializationExtensions.JsonDeserialize<KeyVaultKeyReference>(property.Value);
+                    keyEncryptionKey = KeyVaultKeyReference.DeserializeKeyVaultKeyReference(property.Value);
                     continue;
                 }
                 if (property.NameEquals("enabled"u8))

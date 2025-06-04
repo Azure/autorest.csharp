@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -69,7 +70,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in SourceApplicationSecurityGroups)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<ApplicationSecurityGroup>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -94,7 +95,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in DestinationApplicationSecurityGroups)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<ApplicationSecurityGroup>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }

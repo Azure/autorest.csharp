@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -22,17 +23,17 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(Cors))
             {
                 writer.WritePropertyName("cors"u8);
-                JsonSerializer.Serialize(writer, Cors);
+                ((IJsonModel<CorsRules>)Cors).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ShareDeleteRetentionPolicy))
             {
                 writer.WritePropertyName("shareDeleteRetentionPolicy"u8);
-                JsonSerializer.Serialize(writer, ShareDeleteRetentionPolicy);
+                ((IJsonModel<DeleteRetentionPolicy>)ShareDeleteRetentionPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ProtocolSettings))
             {
                 writer.WritePropertyName("protocolSettings"u8);
-                JsonSerializer.Serialize(writer, ProtocolSettings);
+                ((IJsonModel<ProtocolSettings>)ProtocolSettings).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -60,7 +61,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerStorageSku>(property.Value);
+                    sku = AzureSampleResourceManagerStorageSku.DeserializeAzureSampleResourceManagerStorageSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -102,7 +103,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            cors = ModelSerializationExtensions.JsonDeserialize<CorsRules>(property0.Value);
+                            cors = CorsRules.DeserializeCorsRules(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("shareDeleteRetentionPolicy"u8))
@@ -111,7 +112,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            shareDeleteRetentionPolicy = ModelSerializationExtensions.JsonDeserialize<DeleteRetentionPolicy>(property0.Value);
+                            shareDeleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("protocolSettings"u8))
@@ -120,7 +121,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            protocolSettings = ModelSerializationExtensions.JsonDeserialize<ProtocolSettings>(property0.Value);
+                            protocolSettings = ProtocolSettings.DeserializeProtocolSettings(property0.Value);
                             continue;
                         }
                     }

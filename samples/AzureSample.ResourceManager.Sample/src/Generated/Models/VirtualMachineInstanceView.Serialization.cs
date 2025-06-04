@@ -242,7 +242,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    vmAgent = ModelSerializationExtensions.JsonDeserialize<VirtualMachineAgentInstanceView>(property.Value);
+                    vmAgent = VirtualMachineAgentInstanceView.DeserializeVirtualMachineAgentInstanceView(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("maintenanceRedeployStatus"u8))
@@ -251,7 +251,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    maintenanceRedeployStatus = ModelSerializationExtensions.JsonDeserialize<MaintenanceRedeployStatus>(property.Value);
+                    maintenanceRedeployStatus = MaintenanceRedeployStatus.DeserializeMaintenanceRedeployStatus(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("disks"u8))
@@ -288,7 +288,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    vmHealth = ModelSerializationExtensions.JsonDeserialize<VirtualMachineHealthStatus>(property.Value);
+                    vmHealth = VirtualMachineHealthStatus.DeserializeVirtualMachineHealthStatus(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("bootDiagnostics"u8))
@@ -297,7 +297,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    bootDiagnostics = ModelSerializationExtensions.JsonDeserialize<BootDiagnosticsInstanceView>(property.Value);
+                    bootDiagnostics = BootDiagnosticsInstanceView.DeserializeBootDiagnosticsInstanceView(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("assignedHost"u8))
@@ -325,7 +325,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    patchStatus = ModelSerializationExtensions.JsonDeserialize<VirtualMachinePatchStatus>(property.Value);
+                    patchStatus = VirtualMachinePatchStatus.DeserializeVirtualMachinePatchStatus(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

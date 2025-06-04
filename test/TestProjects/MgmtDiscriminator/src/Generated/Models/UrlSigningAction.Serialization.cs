@@ -70,7 +70,7 @@ namespace MgmtDiscriminator.Models
             {
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = ModelSerializationExtensions.JsonDeserialize<UrlSigningActionParameters>(property.Value);
+                    parameters = UrlSigningActionParameters.DeserializeUrlSigningActionParameters(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

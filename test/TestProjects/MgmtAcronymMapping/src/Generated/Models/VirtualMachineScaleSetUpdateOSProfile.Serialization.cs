@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -23,12 +24,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(WindowsConfiguration))
             {
                 writer.WritePropertyName("windowsConfiguration"u8);
-                JsonSerializer.Serialize(writer, WindowsConfiguration);
+                ((IJsonModel<WindowsConfiguration>)WindowsConfiguration).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(LinuxConfiguration))
             {
                 writer.WritePropertyName("linuxConfiguration"u8);
-                JsonSerializer.Serialize(writer, LinuxConfiguration);
+                ((IJsonModel<LinuxConfiguration>)LinuxConfiguration).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Secrets))
             {
@@ -36,7 +37,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in Secrets)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<VaultSecretGroup>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }

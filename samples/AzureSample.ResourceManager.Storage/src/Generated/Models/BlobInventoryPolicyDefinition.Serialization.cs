@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -19,7 +20,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Filters))
             {
                 writer.WritePropertyName("filters"u8);
-                JsonSerializer.Serialize(writer, Filters);
+                ((IJsonModel<BlobInventoryPolicyFilter>)Filters).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WritePropertyName("format"u8);
             writer.WriteStringValue(Format.ToString());
@@ -56,7 +57,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    filters = ModelSerializationExtensions.JsonDeserialize<BlobInventoryPolicyFilter>(property.Value);
+                    filters = BlobInventoryPolicyFilter.DeserializeBlobInventoryPolicyFilter(property.Value);
                     continue;
                 }
                 if (property.NameEquals("format"u8))

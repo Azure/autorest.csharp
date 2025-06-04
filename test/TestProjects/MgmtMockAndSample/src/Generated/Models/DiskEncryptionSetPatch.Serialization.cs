@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace MgmtMockAndSample.Models
 {
@@ -29,7 +31,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                JsonSerializer.Serialize(writer, Identity);
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -41,7 +43,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(ActiveKey))
             {
                 writer.WritePropertyName("activeKey"u8);
-                JsonSerializer.Serialize(writer, ActiveKey);
+                ((IJsonModel<KeyForDiskEncryptionSet>)ActiveKey).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(RotationToLatestKeyVersionEnabled))
             {

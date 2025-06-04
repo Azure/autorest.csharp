@@ -87,7 +87,7 @@ namespace MgmtScopeResource.Models
                     {
                         continue;
                     }
-                    statusMessage = ModelSerializationExtensions.JsonDeserialize<StatusMessage>(property.Value);
+                    statusMessage = StatusMessage.DeserializeStatusMessage(property.Value);
                     continue;
                 }
                 if (property.NameEquals("request"u8))
@@ -96,7 +96,7 @@ namespace MgmtScopeResource.Models
                     {
                         continue;
                     }
-                    request = ModelSerializationExtensions.JsonDeserialize<HttpMessage>(property.Value);
+                    request = HttpMessage.DeserializeHttpMessage(property.Value);
                     continue;
                 }
                 if (property.NameEquals("response"u8))
@@ -105,7 +105,7 @@ namespace MgmtScopeResource.Models
                     {
                         continue;
                     }
-                    response = ModelSerializationExtensions.JsonDeserialize<HttpMessage>(property.Value);
+                    response = HttpMessage.DeserializeHttpMessage(property.Value);
                     continue;
                 }
             }

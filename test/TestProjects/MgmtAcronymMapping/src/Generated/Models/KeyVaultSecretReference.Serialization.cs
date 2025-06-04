@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -20,7 +21,7 @@ namespace MgmtAcronymMapping.Models
             writer.WritePropertyName("secretUrl"u8);
             writer.WriteStringValue(SecretUri.AbsoluteUri);
             writer.WritePropertyName("sourceVault"u8);
-            JsonSerializer.Serialize(writer, SourceVault);
+            ((IJsonModel<WritableSubResource>)SourceVault).Write(writer, ModelSerializationExtensions.WireOptions);
             writer.WriteEndObject();
         }
 

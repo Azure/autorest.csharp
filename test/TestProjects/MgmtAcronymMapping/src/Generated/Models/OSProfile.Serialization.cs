@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -39,12 +40,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(WindowsConfiguration))
             {
                 writer.WritePropertyName("windowsConfiguration"u8);
-                JsonSerializer.Serialize(writer, WindowsConfiguration);
+                ((IJsonModel<WindowsConfiguration>)WindowsConfiguration).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(LinuxConfiguration))
             {
                 writer.WritePropertyName("linuxConfiguration"u8);
-                JsonSerializer.Serialize(writer, LinuxConfiguration);
+                ((IJsonModel<LinuxConfiguration>)LinuxConfiguration).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Secrets))
             {
@@ -52,7 +53,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in Secrets)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<VaultSecretGroup>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -112,7 +113,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    windowsConfiguration = ModelSerializationExtensions.JsonDeserialize<WindowsConfiguration>(property.Value);
+                    windowsConfiguration = WindowsConfiguration.DeserializeWindowsConfiguration(property.Value);
                     continue;
                 }
                 if (property.NameEquals("linuxConfiguration"u8))
@@ -121,7 +122,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    linuxConfiguration = ModelSerializationExtensions.JsonDeserialize<LinuxConfiguration>(property.Value);
+                    linuxConfiguration = LinuxConfiguration.DeserializeLinuxConfiguration(property.Value);
                     continue;
                 }
                 if (property.NameEquals("secrets"u8))

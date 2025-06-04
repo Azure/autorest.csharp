@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -34,7 +35,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualNetworkTaps)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<VirtualNetworkTap>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -44,7 +45,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ApplicationGatewayBackendAddressPools)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<ApplicationGatewayBackendAddressPool>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -54,7 +55,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancerBackendAddressPools)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<BackendAddressPool>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -64,7 +65,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancerInboundNatRules)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<InboundNatRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -86,7 +87,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                JsonSerializer.Serialize(writer, Subnet);
+                ((IJsonModel<Subnet>)Subnet).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Primary))
             {
@@ -96,7 +97,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(PublicIPAddress))
             {
                 writer.WritePropertyName("publicIPAddress"u8);
-                JsonSerializer.Serialize(writer, PublicIPAddress);
+                ((IJsonModel<PublicIPAddress>)PublicIPAddress).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(ApplicationSecurityGroups))
             {
@@ -104,7 +105,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ApplicationSecurityGroups)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<ApplicationSecurityGroup>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -245,7 +246,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            subnet = ModelSerializationExtensions.JsonDeserialize<Subnet>(property0.Value);
+                            subnet = Subnet.DeserializeSubnet(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("primary"u8))
@@ -263,7 +264,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            publicIPAddress = ModelSerializationExtensions.JsonDeserialize<PublicIPAddress>(property0.Value);
+                            publicIPAddress = PublicIPAddress.DeserializePublicIPAddress(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("applicationSecurityGroups"u8))
@@ -295,7 +296,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            privateLinkConnectionProperties = ModelSerializationExtensions.JsonDeserialize<NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties>(property0.Value);
+                            privateLinkConnectionProperties = NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties.DeserializeNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(property0.Value);
                             continue;
                         }
                     }

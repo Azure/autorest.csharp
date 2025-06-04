@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -20,7 +21,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(ActiveDirectoryProperties))
             {
                 writer.WritePropertyName("activeDirectoryProperties"u8);
-                JsonSerializer.Serialize(writer, ActiveDirectoryProperties);
+                ((IJsonModel<ActiveDirectoryProperties>)ActiveDirectoryProperties).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(DefaultSharePermission))
             {
@@ -52,7 +53,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    activeDirectoryProperties = ModelSerializationExtensions.JsonDeserialize<ActiveDirectoryProperties>(property.Value);
+                    activeDirectoryProperties = ActiveDirectoryProperties.DeserializeActiveDirectoryProperties(property.Value);
                     continue;
                 }
                 if (property.NameEquals("defaultSharePermission"u8))

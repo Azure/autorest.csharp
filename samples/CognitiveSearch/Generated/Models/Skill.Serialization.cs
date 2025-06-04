@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -37,14 +38,14 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Inputs)
             {
-                JsonSerializer.Serialize(writer, item);
+                ((IJsonModel<InputFieldMappingEntry>)item).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("outputs"u8);
             writer.WriteStartArray();
             foreach (var item in Outputs)
             {
-                JsonSerializer.Serialize(writer, item);
+                ((IJsonModel<OutputFieldMappingEntry>)item).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();

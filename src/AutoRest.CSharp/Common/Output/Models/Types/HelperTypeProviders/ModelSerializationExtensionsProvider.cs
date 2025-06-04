@@ -121,11 +121,14 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<FieldDeclaration> BuildFields()
         {
-            yield return _jsonSerializerOptionsField;
-
-            if (Configuration.AzureArm)
+            if (Configuration.UseModelReaderWriter)
             {
-                yield return _jsonSerializerOptionsUseManagedServiceIdentityV3Field;
+                yield return _jsonSerializerOptionsField;
+
+                if (Configuration.AzureArm)
+                {
+                    yield return _jsonSerializerOptionsUseManagedServiceIdentityV3Field;
+                }
             }
 
             yield return _jsonDocumentOptionsField;
@@ -185,7 +188,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             #endregion
 
-            yield return BuildJsonDeserializeMethod();
+            if (Configuration.UseModelReaderWriter)
+            {
+                yield return BuildJsonDeserializeMethod();
+            }
         }
 
         private const string _isSentinelValueMethodName = "IsSentinelValue";

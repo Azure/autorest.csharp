@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -18,7 +19,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Very))
             {
                 writer.WritePropertyName("very"u8);
-                JsonSerializer.Serialize(writer, Very);
+                ((IJsonModel<DeepSinglePropertyModel>)Very).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -38,7 +39,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    very = ModelSerializationExtensions.JsonDeserialize<DeepSinglePropertyModel>(property.Value);
+                    very = DeepSinglePropertyModel.DeserializeDeepSinglePropertyModel(property.Value);
                     continue;
                 }
             }

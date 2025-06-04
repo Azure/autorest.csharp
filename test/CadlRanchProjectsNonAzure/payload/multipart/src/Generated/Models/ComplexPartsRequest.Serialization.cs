@@ -114,7 +114,7 @@ namespace Scm.Payload.Multipart.Models
                 }
                 if (property.NameEquals("address"u8))
                 {
-                    address = ModelSerializationExtensions.JsonDeserialize<Address>(property.Value);
+                    address = Address.DeserializeAddress(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("profileImage"u8))

@@ -5,8 +5,11 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -18,17 +21,17 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                JsonSerializer.Serialize(writer, Sku);
+                ((IJsonModel<MgmtAcronymMappingSku>)Sku).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                JsonSerializer.Serialize(writer, Plan);
+                ((IJsonModel<MgmtAcronymMappingPlan>)Plan).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                JsonSerializer.Serialize(writer, Identity);
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -46,17 +49,17 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(UpgradePolicy))
             {
                 writer.WritePropertyName("upgradePolicy"u8);
-                JsonSerializer.Serialize(writer, UpgradePolicy);
+                ((IJsonModel<UpgradePolicy>)UpgradePolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(AutomaticRepairsPolicy))
             {
                 writer.WritePropertyName("automaticRepairsPolicy"u8);
-                JsonSerializer.Serialize(writer, AutomaticRepairsPolicy);
+                ((IJsonModel<AutomaticRepairsPolicy>)AutomaticRepairsPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(VirtualMachineProfile))
             {
                 writer.WritePropertyName("virtualMachineProfile"u8);
-                JsonSerializer.Serialize(writer, VirtualMachineProfile);
+                ((IJsonModel<VirtualMachineScaleSetUpdateVmProfile>)VirtualMachineProfile).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Overprovision))
             {
@@ -76,17 +79,17 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                JsonSerializer.Serialize(writer, AdditionalCapabilities);
+                ((IJsonModel<AdditionalCapabilities>)AdditionalCapabilities).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ScaleInPolicy))
             {
                 writer.WritePropertyName("scaleInPolicy"u8);
-                JsonSerializer.Serialize(writer, ScaleInPolicy);
+                ((IJsonModel<ScaleInPolicy>)ScaleInPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ProximityPlacementGroup))
             {
                 writer.WritePropertyName("proximityPlacementGroup"u8);
-                JsonSerializer.Serialize(writer, ProximityPlacementGroup);
+                ((IJsonModel<WritableSubResource>)ProximityPlacementGroup).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

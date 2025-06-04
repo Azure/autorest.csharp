@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -23,7 +24,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Ssh))
             {
                 writer.WritePropertyName("ssh"u8);
-                JsonSerializer.Serialize(writer, Ssh);
+                ((IJsonModel<SshConfiguration>)Ssh).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ProvisionVmAgent))
             {
@@ -59,7 +60,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    ssh = ModelSerializationExtensions.JsonDeserialize<SshConfiguration>(property.Value);
+                    ssh = SshConfiguration.DeserializeSshConfiguration(property.Value);
                     continue;
                 }
                 if (property.NameEquals("provisionVMAgent"u8))

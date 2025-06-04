@@ -26,7 +26,7 @@ namespace MgmtLRO.Models
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<FakePostResultProperties>(property.Value);
+                    properties = FakePostResultProperties.DeserializeFakePostResultProperties(property.Value);
                     continue;
                 }
             }

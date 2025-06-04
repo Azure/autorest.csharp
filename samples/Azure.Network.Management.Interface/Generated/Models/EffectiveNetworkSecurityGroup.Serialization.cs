@@ -30,7 +30,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    networkSecurityGroup = ModelSerializationExtensions.JsonDeserialize<SubResource>(property.Value);
+                    networkSecurityGroup = SubResource.DeserializeSubResource(property.Value);
                     continue;
                 }
                 if (property.NameEquals("association"u8))
@@ -39,7 +39,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    association = ModelSerializationExtensions.JsonDeserialize<EffectiveNetworkSecurityGroupAssociation>(property.Value);
+                    association = EffectiveNetworkSecurityGroupAssociation.DeserializeEffectiveNetworkSecurityGroupAssociation(property.Value);
                     continue;
                 }
                 if (property.NameEquals("effectiveSecurityRules"u8))

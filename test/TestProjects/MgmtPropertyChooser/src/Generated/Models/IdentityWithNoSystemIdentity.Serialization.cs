@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -29,7 +30,7 @@ namespace MgmtPropertyChooser.Models
                 foreach (var item in UserAssignedIdentities)
                 {
                     writer.WritePropertyName(item.Key);
-                    JsonSerializer.Serialize(writer, item.Value);
+                    ((IJsonModel<UserAssignedIdentity>)item.Value).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndObject();
             }

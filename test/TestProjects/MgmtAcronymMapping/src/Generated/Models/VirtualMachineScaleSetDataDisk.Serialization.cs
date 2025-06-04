@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -42,7 +43,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                JsonSerializer.Serialize(writer, ManagedDisk);
+                ((IJsonModel<VirtualMachineScaleSetManagedDiskParameters>)ManagedDisk).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(DiskIopsReadWrite))
             {
@@ -122,7 +123,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    managedDisk = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetManagedDiskParameters>(property.Value);
+                    managedDisk = VirtualMachineScaleSetManagedDiskParameters.DeserializeVirtualMachineScaleSetManagedDiskParameters(property.Value);
                     continue;
                 }
                 if (property.NameEquals("diskIOPSReadWrite"u8))

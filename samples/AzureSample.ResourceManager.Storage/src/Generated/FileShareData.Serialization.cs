@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -59,7 +60,7 @@ namespace AzureSample.ResourceManager.Storage
                 writer.WriteStartArray();
                 foreach (var item in SignedIdentifiers)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<SignedIdentifier>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }

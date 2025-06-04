@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -37,12 +38,12 @@ namespace MgmtAcronymMapping
             if (Optional.IsDefined(SourceVirtualMachine))
             {
                 writer.WritePropertyName("sourceVirtualMachine"u8);
-                JsonSerializer.Serialize(writer, SourceVirtualMachine);
+                ((IJsonModel<WritableSubResource>)SourceVirtualMachine).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                JsonSerializer.Serialize(writer, StorageProfile);
+                ((IJsonModel<ImageStorageProfile>)StorageProfile).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(HyperVGeneration))
             {
@@ -138,7 +139,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            storageProfile = ModelSerializationExtensions.JsonDeserialize<ImageStorageProfile>(property0.Value);
+                            storageProfile = ImageStorageProfile.DeserializeImageStorageProfile(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

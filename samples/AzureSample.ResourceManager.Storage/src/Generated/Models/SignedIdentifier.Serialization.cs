@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -23,7 +24,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(AccessPolicy))
             {
                 writer.WritePropertyName("accessPolicy"u8);
-                JsonSerializer.Serialize(writer, AccessPolicy);
+                ((IJsonModel<AccessPolicy>)AccessPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -49,7 +50,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    accessPolicy = ModelSerializationExtensions.JsonDeserialize<AccessPolicy>(property.Value);
+                    accessPolicy = AccessPolicy.DeserializeAccessPolicy(property.Value);
                     continue;
                 }
             }

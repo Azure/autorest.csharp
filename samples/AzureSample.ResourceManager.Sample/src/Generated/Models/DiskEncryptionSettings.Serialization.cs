@@ -101,7 +101,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    diskEncryptionKey = ModelSerializationExtensions.JsonDeserialize<KeyVaultSecretReference>(property.Value);
+                    diskEncryptionKey = KeyVaultSecretReference.DeserializeKeyVaultSecretReference(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("keyEncryptionKey"u8))
@@ -110,7 +110,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    keyEncryptionKey = ModelSerializationExtensions.JsonDeserialize<KeyVaultKeyReference>(property.Value);
+                    keyEncryptionKey = KeyVaultKeyReference.DeserializeKeyVaultKeyReference(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("enabled"u8))

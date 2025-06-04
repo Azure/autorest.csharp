@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -36,12 +37,12 @@ namespace MgmtConstants
             if (Optional.IsDefined(Listener))
             {
                 writer.WritePropertyName("listener"u8);
-                JsonSerializer.Serialize(writer, Listener);
+                ((IJsonModel<ModelWithRequiredConstant>)Listener).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Content))
             {
                 writer.WritePropertyName("content"u8);
-                JsonSerializer.Serialize(writer, Content);
+                ((IJsonModel<ModelWithOptionalConstant>)Content).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -121,7 +122,7 @@ namespace MgmtConstants
                             {
                                 continue;
                             }
-                            listener = ModelSerializationExtensions.JsonDeserialize<ModelWithRequiredConstant>(property0.Value);
+                            listener = ModelWithRequiredConstant.DeserializeModelWithRequiredConstant(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("content"u8))
@@ -130,7 +131,7 @@ namespace MgmtConstants
                             {
                                 continue;
                             }
-                            content = ModelSerializationExtensions.JsonDeserialize<ModelWithOptionalConstant>(property0.Value);
+                            content = ModelWithOptionalConstant.DeserializeModelWithOptionalConstant(property0.Value);
                             continue;
                         }
                     }

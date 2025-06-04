@@ -74,7 +74,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
             {
                 if (property.NameEquals("derivedProp"u8))
                 {
-                    derivedProp = ModelSerializationExtensions.JsonDeserialize<ModelForRecord>(property.Value);
+                    derivedProp = ModelForRecord.DeserializeModelForRecord(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("knownProp"u8))

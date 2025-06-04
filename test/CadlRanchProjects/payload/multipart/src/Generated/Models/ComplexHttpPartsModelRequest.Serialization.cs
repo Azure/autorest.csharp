@@ -109,12 +109,12 @@ namespace Payload.MultiPart.Models
                 }
                 if (property.NameEquals("address"u8))
                 {
-                    address = ModelSerializationExtensions.JsonDeserialize<Address>(property.Value);
+                    address = Address.DeserializeAddress(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("profileImage"u8))
                 {
-                    profileImage = ModelSerializationExtensions.JsonDeserialize<FileRequiredMetaData>(property.Value);
+                    profileImage = FileRequiredMetaData.DeserializeFileRequiredMetaData(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("previousAddresses"u8))

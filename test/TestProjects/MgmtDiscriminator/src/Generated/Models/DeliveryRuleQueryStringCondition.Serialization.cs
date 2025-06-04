@@ -70,7 +70,7 @@ namespace MgmtDiscriminator.Models
             {
                 if (property.NameEquals("parameters"u8))
                 {
-                    parameters = ModelSerializationExtensions.JsonDeserialize<QueryStringMatchConditionParameters>(property.Value);
+                    parameters = QueryStringMatchConditionParameters.DeserializeQueryStringMatchConditionParameters(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

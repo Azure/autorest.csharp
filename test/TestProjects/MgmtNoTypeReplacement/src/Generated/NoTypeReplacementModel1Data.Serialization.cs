@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -20,7 +21,7 @@ namespace MgmtNoTypeReplacement
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
-                JsonSerializer.Serialize(writer, Foo);
+                ((IJsonModel<SubResource>)Foo).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
@@ -26,7 +27,7 @@ namespace MgmtExactMatchInheritance.Models
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
-                JsonSerializer.Serialize(writer, ModelProperty);
+                ((IJsonModel<ExactMatchModel10>)ModelProperty).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -52,7 +53,7 @@ namespace MgmtExactMatchInheritance.Models
                     {
                         continue;
                     }
-                    modelProperty = ModelSerializationExtensions.JsonDeserialize<ExactMatchModel10>(property.Value);
+                    modelProperty = ExactMatchModel10.DeserializeExactMatchModel10(property.Value);
                     continue;
                 }
             }

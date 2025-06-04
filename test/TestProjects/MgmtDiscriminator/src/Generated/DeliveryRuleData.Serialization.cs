@@ -211,7 +211,7 @@ namespace MgmtDiscriminator
                     {
                         continue;
                     }
-                    shellProperty = ModelSerializationExtensions.JsonDeserialize<Shell>(property.Value);
+                    shellProperty = Shell.DeserializeShell(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("sku"u8))
@@ -220,7 +220,7 @@ namespace MgmtDiscriminator
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<Sku1>(property.Value);
+                    sku = Sku1.DeserializeSku1(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("unflattened"u8))
@@ -229,7 +229,7 @@ namespace MgmtDiscriminator
                     {
                         continue;
                     }
-                    unflattened = ModelSerializationExtensions.JsonDeserialize<Unflattened>(property.Value);
+                    unflattened = Unflattened.DeserializeUnflattened(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -238,7 +238,7 @@ namespace MgmtDiscriminator
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<DeliveryRuleProperties>(property.Value);
+                    properties = DeliveryRuleProperties.DeserializeDeliveryRuleProperties(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

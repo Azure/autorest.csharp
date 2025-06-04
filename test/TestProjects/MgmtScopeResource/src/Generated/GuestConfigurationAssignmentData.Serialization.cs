@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using MgmtScopeResource.Models;
@@ -19,7 +20,7 @@ namespace MgmtScopeResource
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                JsonSerializer.Serialize(writer, Properties);
+                ((IJsonModel<GuestConfigurationAssignmentProperties>)Properties).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Name))
             {
@@ -53,7 +54,7 @@ namespace MgmtScopeResource
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<GuestConfigurationAssignmentProperties>(property.Value);
+                    properties = GuestConfigurationAssignmentProperties.DeserializeGuestConfigurationAssignmentProperties(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

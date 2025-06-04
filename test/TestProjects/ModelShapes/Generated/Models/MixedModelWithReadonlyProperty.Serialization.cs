@@ -99,7 +99,7 @@ namespace ModelShapes.Models
                     {
                         continue;
                     }
-                    readonlyProperty = ModelSerializationExtensions.JsonDeserialize<ReadonlyModel>(property.Value);
+                    readonlyProperty = ReadonlyModel.DeserializeReadonlyModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("ReadonlyListProperty"u8))

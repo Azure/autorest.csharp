@@ -43,12 +43,12 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    statistics = ModelSerializationExtensions.JsonDeserialize<DocumentStatistics>(property.Value);
+                    statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
                     continue;
                 }
                 if (property.NameEquals("confidenceScores"u8))
                 {
-                    confidenceScores = ModelSerializationExtensions.JsonDeserialize<SentimentConfidenceScorePerLabel>(property.Value);
+                    confidenceScores = SentimentConfidenceScorePerLabel.DeserializeSentimentConfidenceScorePerLabel(property.Value);
                     continue;
                 }
                 if (property.NameEquals("sentences"u8))

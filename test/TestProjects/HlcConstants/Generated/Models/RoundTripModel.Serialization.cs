@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -19,12 +20,12 @@ namespace HlcConstants.Models
             if (Optional.IsDefined(RequiredConstantModel))
             {
                 writer.WritePropertyName("requiredConstantModel"u8);
-                JsonSerializer.Serialize(writer, RequiredConstantModel);
+                ((IJsonModel<ModelWithRequiredConstant>)RequiredConstantModel).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(OptionalConstantModel))
             {
                 writer.WritePropertyName("optionalConstantModel"u8);
-                JsonSerializer.Serialize(writer, OptionalConstantModel);
+                ((IJsonModel<ModelWithOptionalConstant>)OptionalConstantModel).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -45,7 +46,7 @@ namespace HlcConstants.Models
                     {
                         continue;
                     }
-                    requiredConstantModel = ModelSerializationExtensions.JsonDeserialize<ModelWithRequiredConstant>(property.Value);
+                    requiredConstantModel = ModelWithRequiredConstant.DeserializeModelWithRequiredConstant(property.Value);
                     continue;
                 }
                 if (property.NameEquals("optionalConstantModel"u8))
@@ -54,7 +55,7 @@ namespace HlcConstants.Models
                     {
                         continue;
                     }
-                    optionalConstantModel = ModelSerializationExtensions.JsonDeserialize<ModelWithOptionalConstant>(property.Value);
+                    optionalConstantModel = ModelWithOptionalConstant.DeserializeModelWithOptionalConstant(property.Value);
                     continue;
                 }
             }

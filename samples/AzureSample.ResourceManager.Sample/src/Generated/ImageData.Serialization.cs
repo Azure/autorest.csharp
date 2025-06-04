@@ -167,7 +167,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            storageProfile = ModelSerializationExtensions.JsonDeserialize<ImageStorageProfile>(property0.Value);
+                            storageProfile = ImageStorageProfile.DeserializeImageStorageProfile(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

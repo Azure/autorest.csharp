@@ -47,7 +47,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    innererror = ModelSerializationExtensions.JsonDeserialize<InnerError>(property.Value);
+                    innererror = InnerError.DeserializeInnerError(property.Value);
                     continue;
                 }
                 if (property.NameEquals("details"u8))

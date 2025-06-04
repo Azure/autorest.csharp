@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -23,12 +24,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(RollingUpgradePolicy))
             {
                 writer.WritePropertyName("rollingUpgradePolicy"u8);
-                JsonSerializer.Serialize(writer, RollingUpgradePolicy);
+                ((IJsonModel<RollingUpgradePolicy>)RollingUpgradePolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(AutomaticOSUpgradePolicy))
             {
                 writer.WritePropertyName("automaticOSUpgradePolicy"u8);
-                JsonSerializer.Serialize(writer, AutomaticOSUpgradePolicy);
+                ((IJsonModel<AutomaticOSUpgradePolicy>)AutomaticOSUpgradePolicy).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -59,7 +60,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    rollingUpgradePolicy = ModelSerializationExtensions.JsonDeserialize<RollingUpgradePolicy>(property.Value);
+                    rollingUpgradePolicy = RollingUpgradePolicy.DeserializeRollingUpgradePolicy(property.Value);
                     continue;
                 }
                 if (property.NameEquals("automaticOSUpgradePolicy"u8))
@@ -68,7 +69,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    automaticOSUpgradePolicy = ModelSerializationExtensions.JsonDeserialize<AutomaticOSUpgradePolicy>(property.Value);
+                    automaticOSUpgradePolicy = AutomaticOSUpgradePolicy.DeserializeAutomaticOSUpgradePolicy(property.Value);
                     continue;
                 }
             }

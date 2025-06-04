@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -23,12 +24,12 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(PrivateEndpoint))
             {
                 writer.WritePropertyName("privateEndpoint"u8);
-                JsonSerializer.Serialize(writer, PrivateEndpoint);
+                ((IJsonModel<SubResource>)PrivateEndpoint).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                JsonSerializer.Serialize(writer, ConnectionState);
+                ((IJsonModel<AzureSampleResourceManagerStoragePrivateLinkServiceConnectionState>)ConnectionState).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -97,7 +98,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            privateLinkServiceConnectionState = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerStoragePrivateLinkServiceConnectionState>(property0.Value);
+                            privateLinkServiceConnectionState = AzureSampleResourceManagerStoragePrivateLinkServiceConnectionState.DeserializeAzureSampleResourceManagerStoragePrivateLinkServiceConnectionState(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

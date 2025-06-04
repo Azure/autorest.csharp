@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -42,7 +43,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Protocols)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<FirewallPolicyRuleApplicationProtocol>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -116,7 +117,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NewGeneratedTypeSerializeProperty))
             {
                 writer.WritePropertyName("newGeneratedTypeSerializeProperty"u8);
-                JsonSerializer.Serialize(writer, NewGeneratedTypeSerializeProperty);
+                ((IJsonModel<VaultKey>)NewGeneratedTypeSerializeProperty).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Name))
             {
@@ -318,7 +319,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    newGeneratedTypeSerializeProperty = ModelSerializationExtensions.JsonDeserialize<VaultKey>(property.Value);
+                    newGeneratedTypeSerializeProperty = VaultKey.DeserializeVaultKey(property.Value);
                     continue;
                 }
                 if (property.NameEquals("name"u8))

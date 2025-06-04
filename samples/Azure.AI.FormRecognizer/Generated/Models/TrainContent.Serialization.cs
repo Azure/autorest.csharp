@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -20,7 +21,7 @@ namespace Azure.AI.FormRecognizer.Models
             if (Optional.IsDefined(SourceFilter))
             {
                 writer.WritePropertyName("sourceFilter"u8);
-                JsonSerializer.Serialize(writer, SourceFilter);
+                ((IJsonModel<TrainSourceFilter>)SourceFilter).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(UseLabelFile))
             {

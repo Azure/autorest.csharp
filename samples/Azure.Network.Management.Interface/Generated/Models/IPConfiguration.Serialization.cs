@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -40,12 +41,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                JsonSerializer.Serialize(writer, Subnet);
+                ((IJsonModel<Subnet>)Subnet).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(PublicIPAddress))
             {
                 writer.WritePropertyName("publicIPAddress"u8);
-                JsonSerializer.Serialize(writer, PublicIPAddress);
+                ((IJsonModel<PublicIPAddress>)PublicIPAddress).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -111,7 +112,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            subnet = ModelSerializationExtensions.JsonDeserialize<Subnet>(property0.Value);
+                            subnet = Subnet.DeserializeSubnet(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("publicIPAddress"u8))
@@ -120,7 +121,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            publicIPAddress = ModelSerializationExtensions.JsonDeserialize<PublicIPAddress>(property0.Value);
+                            publicIPAddress = PublicIPAddress.DeserializePublicIPAddress(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

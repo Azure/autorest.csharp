@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -18,7 +19,7 @@ namespace MgmtNoTypeReplacement.Models
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
-                JsonSerializer.Serialize(writer, Foo);
+                ((IJsonModel<NoSubResourceModel2>)Foo).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -38,7 +39,7 @@ namespace MgmtNoTypeReplacement.Models
                     {
                         continue;
                     }
-                    foo = ModelSerializationExtensions.JsonDeserialize<NoSubResourceModel2>(property.Value);
+                    foo = NoSubResourceModel2.DeserializeNoSubResourceModel2(property.Value);
                     continue;
                 }
             }

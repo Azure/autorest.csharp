@@ -168,7 +168,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            dnsSettings = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetNetworkConfigurationDnsSettings>(property0.Value);
+                            dnsSettings = VirtualMachineScaleSetNetworkConfigurationDnsSettings.DeserializeVirtualMachineScaleSetNetworkConfigurationDnsSettings(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("ipConfigurations"u8))

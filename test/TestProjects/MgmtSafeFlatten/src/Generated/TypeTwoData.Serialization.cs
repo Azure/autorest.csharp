@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -26,7 +27,7 @@ namespace MgmtSafeFlatten
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                JsonSerializer.Serialize(writer, Properties);
+                ((IJsonModel<LayerOneSingle>)Properties).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -71,7 +72,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<LayerOneSingle>(property.Value);
+                    properties = LayerOneSingle.DeserializeLayerOneSingle(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

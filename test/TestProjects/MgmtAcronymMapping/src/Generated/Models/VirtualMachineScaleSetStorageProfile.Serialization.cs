@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -19,12 +20,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ImageReference))
             {
                 writer.WritePropertyName("imageReference"u8);
-                JsonSerializer.Serialize(writer, ImageReference);
+                ((IJsonModel<ImageReference>)ImageReference).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                JsonSerializer.Serialize(writer, OSDisk);
+                ((IJsonModel<VirtualMachineScaleSetOSDisk>)OSDisk).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -32,7 +33,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<VirtualMachineScaleSetDataDisk>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -56,7 +57,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    imageReference = ModelSerializationExtensions.JsonDeserialize<ImageReference>(property.Value);
+                    imageReference = ImageReference.DeserializeImageReference(property.Value);
                     continue;
                 }
                 if (property.NameEquals("osDisk"u8))
@@ -65,7 +66,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    osDisk = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetOSDisk>(property.Value);
+                    osDisk = VirtualMachineScaleSetOSDisk.DeserializeVirtualMachineScaleSetOSDisk(property.Value);
                     continue;
                 }
                 if (property.NameEquals("dataDisks"u8))

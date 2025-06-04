@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -18,7 +19,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Extreme))
             {
                 writer.WritePropertyName("extreme"u8);
-                JsonSerializer.Serialize(writer, Extreme);
+                ((IJsonModel<SuperDeepSinglePropertyModel>)Extreme).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -38,7 +39,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    extreme = ModelSerializationExtensions.JsonDeserialize<SuperDeepSinglePropertyModel>(property.Value);
+                    extreme = SuperDeepSinglePropertyModel.DeserializeSuperDeepSinglePropertyModel(property.Value);
                     continue;
                 }
             }

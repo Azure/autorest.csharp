@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -21,7 +22,7 @@ namespace MgmtScopeResource.Models
                 writer.WriteStringValue(Location);
             }
             writer.WritePropertyName("properties"u8);
-            JsonSerializer.Serialize(writer, Properties);
+            ((IJsonModel<DeploymentWhatIfProperties>)Properties).Write(writer, ModelSerializationExtensions.WireOptions);
             writer.WriteEndObject();
         }
     }

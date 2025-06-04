@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -21,7 +22,7 @@ namespace MgmtLRO
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                JsonSerializer.Serialize(writer, Properties);
+                ((IJsonModel<BarProperties>)Properties).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -60,7 +61,7 @@ namespace MgmtLRO
                     {
                         continue;
                     }
-                    properties = ModelSerializationExtensions.JsonDeserialize<BarProperties>(property.Value);
+                    properties = BarProperties.DeserializeBarProperties(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

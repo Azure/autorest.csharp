@@ -145,7 +145,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    sku = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerSampleSku>(property.Value);
+                    sku = AzureSampleResourceManagerSampleSku.DeserializeAzureSampleResourceManagerSampleSku(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("plan"u8))
@@ -154,7 +154,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    plan = ModelSerializationExtensions.JsonDeserialize<AzureSampleResourceManagerSamplePlan>(property.Value);
+                    plan = AzureSampleResourceManagerSamplePlan.DeserializeAzureSampleResourceManagerSamplePlan(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))
@@ -195,7 +195,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            upgradePolicy = ModelSerializationExtensions.JsonDeserialize<UpgradePolicy>(property0.Value);
+                            upgradePolicy = UpgradePolicy.DeserializeUpgradePolicy(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("automaticRepairsPolicy"u8))
@@ -204,7 +204,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            automaticRepairsPolicy = ModelSerializationExtensions.JsonDeserialize<AutomaticRepairsPolicy>(property0.Value);
+                            automaticRepairsPolicy = AutomaticRepairsPolicy.DeserializeAutomaticRepairsPolicy(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("virtualMachineProfile"u8))
@@ -213,7 +213,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            virtualMachineProfile = ModelSerializationExtensions.JsonDeserialize<VirtualMachineScaleSetUpdateVmProfile>(property0.Value);
+                            virtualMachineProfile = VirtualMachineScaleSetUpdateVmProfile.DeserializeVirtualMachineScaleSetUpdateVmProfile(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("overprovision"u8))
@@ -249,7 +249,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            additionalCapabilities = ModelSerializationExtensions.JsonDeserialize<AdditionalCapabilities>(property0.Value);
+                            additionalCapabilities = AdditionalCapabilities.DeserializeAdditionalCapabilities(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("scaleInPolicy"u8))
@@ -258,7 +258,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            scaleInPolicy = ModelSerializationExtensions.JsonDeserialize<ScaleInPolicy>(property0.Value);
+                            scaleInPolicy = ScaleInPolicy.DeserializeScaleInPolicy(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("proximityPlacementGroup"u8))

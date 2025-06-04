@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -18,7 +19,7 @@ namespace MgmtScopeResource.Models
             if (Optional.IsDefined(WhatIfSettings))
             {
                 writer.WritePropertyName("whatIfSettings"u8);
-                JsonSerializer.Serialize(writer, WhatIfSettings);
+                ((IJsonModel<DeploymentWhatIfSettings>)WhatIfSettings).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Template))
             {

@@ -99,7 +99,7 @@ namespace AnomalyDetector.Models
                     {
                         continue;
                     }
-                    modelState = ModelSerializationExtensions.JsonDeserialize<ModelState>(property.Value);
+                    modelState = ModelState.DeserializeModelState(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("variableStates"u8))

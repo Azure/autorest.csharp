@@ -75,7 +75,7 @@ namespace Scm._Type.Union.Models
             {
                 if (property.NameEquals("prop"u8))
                 {
-                    prop = ModelSerializationExtensions.JsonDeserialize<EnumsOnlyCases>(property.Value);
+                    prop = EnumsOnlyCases.DeserializeEnumsOnlyCases(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")

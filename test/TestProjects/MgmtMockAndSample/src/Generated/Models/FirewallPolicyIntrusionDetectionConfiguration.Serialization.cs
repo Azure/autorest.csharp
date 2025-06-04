@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -22,7 +23,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in SignatureOverrides)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<FirewallPolicyIntrusionDetectionSignatureSpecification>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -32,7 +33,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in BypassTrafficSettings)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }

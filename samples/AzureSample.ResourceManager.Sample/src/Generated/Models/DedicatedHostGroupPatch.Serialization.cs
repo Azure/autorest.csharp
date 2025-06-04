@@ -172,7 +172,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            instanceView = ModelSerializationExtensions.JsonDeserialize<DedicatedHostGroupInstanceView>(property0.Value);
+                            instanceView = DedicatedHostGroupInstanceView.DeserializeDedicatedHostGroupInstanceView(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("supportAutomaticPlacement"u8))
