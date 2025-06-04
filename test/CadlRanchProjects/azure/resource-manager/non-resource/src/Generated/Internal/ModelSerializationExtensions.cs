@@ -20,11 +20,11 @@ namespace _Azure.ResourceManager.NonResources
 {
     internal static class ModelSerializationExtensions
     {
-        internal static readonly JsonSerializerOptions Options = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, _AzureResourceManagerNonResourcesContext.Default) } };
-        internal static readonly JsonSerializerOptions OptionsUseManagedServiceIdentityV3 = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, _AzureResourceManagerNonResourcesContext.Default), new Azure.ResourceManager.Models.ManagedServiceIdentityTypeV3Converter() } };
         internal static readonly JsonDocumentOptions JsonDocumentOptions = new JsonDocumentOptions { MaxDepth = 256 };
         internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
         internal static readonly BinaryData SentinelValue = BinaryData.FromBytes("\"__EMPTY__\""u8.ToArray());
+        internal static readonly JsonSerializerOptions Options = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, _AzureResourceManagerNonResourcesContext.Default) } };
+        internal static readonly JsonSerializerOptions OptionsUseManagedServiceIdentityV3 = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, _AzureResourceManagerNonResourcesContext.Default), new Azure.ResourceManager.Models.ManagedServiceIdentityTypeV3Converter() } };
 
         public static object GetObject(this JsonElement element)
         {

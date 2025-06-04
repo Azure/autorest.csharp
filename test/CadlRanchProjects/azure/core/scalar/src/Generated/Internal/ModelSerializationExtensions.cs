@@ -19,10 +19,10 @@ namespace _Specs_.Azure.Core.Scalar
 {
     internal static class ModelSerializationExtensions
     {
-        internal static readonly JsonSerializerOptions Options = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, _Specs_AzureCoreScalarContext.Default) } };
         internal static readonly JsonDocumentOptions JsonDocumentOptions = new JsonDocumentOptions { MaxDepth = 256 };
         internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
         internal static readonly BinaryData SentinelValue = BinaryData.FromBytes("\"__EMPTY__\""u8.ToArray());
+        internal static readonly JsonSerializerOptions Options = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, _Specs_AzureCoreScalarContext.Default) } };
 
         public static object GetObject(this JsonElement element)
         {

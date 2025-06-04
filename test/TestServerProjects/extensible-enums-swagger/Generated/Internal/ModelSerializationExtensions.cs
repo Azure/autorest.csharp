@@ -19,10 +19,10 @@ namespace extensible_enums_swagger
 {
     internal static class ModelSerializationExtensions
     {
-        internal static readonly JsonSerializerOptions Options = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, extensible_enums_swaggerContext.Default) } };
         internal static readonly JsonDocumentOptions JsonDocumentOptions = new JsonDocumentOptions { MaxDepth = 256 };
         internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
         internal static readonly BinaryData SentinelValue = BinaryData.FromBytes("\"__EMPTY__\""u8.ToArray());
+        internal static readonly JsonSerializerOptions Options = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, extensible_enums_swaggerContext.Default) } };
 
         public static object GetObject(this JsonElement element)
         {

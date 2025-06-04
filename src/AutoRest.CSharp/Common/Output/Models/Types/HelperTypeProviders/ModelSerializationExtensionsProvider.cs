@@ -122,6 +122,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<FieldDeclaration> BuildFields()
         {
+            yield return _jsonDocumentOptionsField;
+            yield return _wireOptionsField;
+
+            if (_sentinelBinaryDataField != null)
+            {
+                yield return _sentinelBinaryDataField;
+            }
             if (Configuration.UseModelReaderWriter)
             {
                 yield return _jsonSerializerOptionsField;
@@ -130,14 +137,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     yield return _jsonSerializerOptionsUseManagedServiceIdentityV3Field;
                 }
-            }
-
-            yield return _jsonDocumentOptionsField;
-            yield return _wireOptionsField;
-
-            if (_sentinelBinaryDataField != null)
-            {
-                yield return _sentinelBinaryDataField;
             }
         }
 
