@@ -351,7 +351,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Samples
             };
         }
 
-        private static ObjectType GetActualImplementation(ObjectType objectType, IReadOnlyDictionary<string, InputExampleValue> valueDict)
+        private static ObjectType? GetActualImplementation(ObjectType objectType, IReadOnlyDictionary<string, InputExampleValue> valueDict)
         {
             var discriminator = objectType.Discriminator;
             // check if this has a discriminator
@@ -368,7 +368,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Samples
             var implementation = discriminator.Implementations.FirstOrDefault(info => info.Key.Equals(actualDiscriminatorValue));
             if (implementation == null)
             {
-                return discriminator.DefaultObjectType;
+                return null;
             }
 
             return (ObjectType)implementation.Type.Implementation;
@@ -380,10 +380,15 @@ namespace AutoRest.CSharp.Common.Output.Models.Samples
                 return Default;
 
             // need to get the actual ObjectType if this type has a discrinimator
-            objectType = GetActualImplementation(objectType, valueDict);
+            var actualImplementation = GetActualImplementation(objectType, valueDict);
+            if (actualImplementation == null)
+            {
+                // we cannot find an implementation for this discriminator value, so we return a null here.
+                return Default;
+            }
             // get all the properties on this type, including the properties from its base type
-            var properties = new HashSet<ObjectTypeProperty>(objectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties));
-            var constructor = objectType.InitializationConstructor;
+            var properties = new HashSet<ObjectTypeProperty>(actualImplementation.EnumerateHierarchy().SelectMany(objectType => objectType.Properties));
+            var constructor = actualImplementation.InitializationConstructor;
             // build a map from parameter name to property
             // before the ToDictionary, we use GroupBy to group the properties by their name first because there might be cases that we define the same property in both this model and its base model
             // by taking the first in the group, we are taking the property defined the lower level of the inheritance tree aka from the derived model
