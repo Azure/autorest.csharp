@@ -14,6 +14,7 @@ namespace Scm.Payload.Multipart
 {
     internal static class ModelSerializationExtensions
     {
+        internal static readonly JsonSerializerOptions Options = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, ScmPayloadMultipartContext.Default) } };
         internal static readonly JsonDocumentOptions JsonDocumentOptions = new JsonDocumentOptions { MaxDepth = 256 };
         internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
         internal static readonly BinaryData SentinelValue = BinaryData.FromBytes("\"__EMPTY__\""u8.ToArray());
@@ -256,6 +257,16 @@ namespace Scm.Payload.Multipart
             ReadOnlySpan<byte> sentinelSpan = SentinelValue.ToMemory().Span;
             ReadOnlySpan<byte> valueSpan = value.ToMemory().Span;
             return sentinelSpan.SequenceEqual(valueSpan);
+        }
+
+        public static T JsonDeserialize<T>(JsonElement element, JsonSerializerOptions options)
+        {
+            return JsonSerializer.Deserialize<T>(element.GetRawText(), options);
+        }
+
+        public static string JsonSerialize<T>(T data, JsonSerializerOptions options)
+        {
+            return JsonSerializer.Serialize(data, options);
         }
 
         internal static class TypeFormatters

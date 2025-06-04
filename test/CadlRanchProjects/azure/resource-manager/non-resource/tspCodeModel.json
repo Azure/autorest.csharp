@@ -332,10 +332,13 @@
             "doc": "The additional info.",
             "type": {
              "$id": "46",
-             "kind": "unknown",
-             "name": "unknown",
-             "crossLanguageDefinitionId": "",
-             "decorators": []
+             "kind": "model",
+             "name": "ErrorAdditionalInfoInfo",
+             "namespace": "_Azure.ResourceManager.NonResources",
+             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
+             "usage": "Json,Exception",
+             "decorators": [],
+             "properties": []
             },
             "optional": true,
             "readOnly": true,
@@ -393,6 +396,9 @@
   },
   {
    "$ref": "40"
+  },
+  {
+   "$ref": "46"
   }
  ],
  "clients": [

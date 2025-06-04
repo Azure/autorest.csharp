@@ -1003,10 +1003,13 @@
             "doc": "The additional info.",
             "type": {
              "$id": "124",
-             "kind": "unknown",
-             "name": "unknown",
-             "crossLanguageDefinitionId": "",
-             "decorators": []
+             "kind": "model",
+             "name": "ErrorAdditionalInfoInfo",
+             "namespace": "MgmtTypeSpec",
+             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
+             "usage": "Output,Json,Exception,LroInitial,LroPolling,LroFinalEnvelope",
+             "decorators": [],
+             "properties": []
             },
             "optional": true,
             "readOnly": true,
@@ -1064,6 +1067,9 @@
   },
   {
    "$ref": "118"
+  },
+  {
+   "$ref": "124"
   },
   {
    "$id": "131",
@@ -1561,10 +1567,8 @@
          "readOnly": true,
          "decorators": [],
          "crossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinkResource.name",
-         "explode": false,
-         "style": "simple",
-         "allowReserved": false,
-         "correspondingMethodParams": []
+         "discriminator": false,
+         "flatten": false
         },
         {
          "$id": "199",
@@ -2265,10 +2269,8 @@
      "readOnly": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ArmOperationStatus.id",
-     "explode": false,
-     "style": "simple",
-     "allowReserved": false,
-     "correspondingMethodParams": []
+     "discriminator": false,
+     "flatten": false
     },
     {
      "$id": "292",
@@ -2744,10 +2746,8 @@
      "readOnly": true,
      "decorators": [],
      "crossLanguageDefinitionId": "MgmtTypeSpec.Foo.name",
-     "explode": false,
-     "style": "simple",
-     "allowReserved": false,
-     "correspondingMethodParams": []
+     "discriminator": false,
+     "flatten": false
     },
     {
      "$id": "360",

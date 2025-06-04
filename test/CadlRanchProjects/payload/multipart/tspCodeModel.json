@@ -1452,7 +1452,8 @@
      "readOnly": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Payload.MultiPart.FormData.HttpParts.NonString.float.Request.temperature.anonymous.contentType",
-     "correspondingMethodParams": []
+     "discriminator": false,
+     "flatten": false
     }
    ]
   }

@@ -159,6 +159,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         foreach (var argument in attribute.Arguments)
                         {
                             argument.Write(writer);
+                            writer.AppendRaw(", ");
                         }
                         writer.RemoveTrailingComma();
                         writer.LineRaw(")]");
