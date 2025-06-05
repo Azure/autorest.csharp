@@ -746,7 +746,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private Method BuildJsonDeserializeMethod()
         {
-            var elementParameter = new Parameter("element", null, typeof(JsonElement), null, ValidationType.None, null);
+            var jsonParameter = new Parameter("json", null, typeof(string), null, ValidationType.None, null);
             var optionsParameter = new Parameter("options", null, typeof(JsonSerializerOptions), null, ValidationType.None, null);
             var justificationExpression = new KeywordExpression("Justification =", Literal("By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue."));
             var signature = new MethodSignature(
@@ -756,7 +756,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 MethodSignatureModifiers.Static | MethodSignatureModifiers.Public,
                 _t,
                 null,
-                [elementParameter, optionsParameter],
+                [jsonParameter, optionsParameter],
                 Attributes: Configuration.Flavor == "azure"
                 ? [
                     new CSharpAttribute(typeof(UnconditionalSuppressMessageAttribute), Literal("Trimming"), Literal("IL2026"), justificationExpression),
@@ -769,10 +769,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Return(new InvokeStaticMethodExpression(
                     typeof(JsonSerializer),
                     $"{nameof(JsonSerializer.Deserialize)}",
-                    [
-                        new InvokeInstanceMethodExpression(elementParameter, nameof(JsonElement.GetRawText), [], false),
-                        optionsParameter
-                    ],
+                    [jsonParameter, optionsParameter],
                     TypeArguments: [_t]
                 ))
             });
@@ -780,6 +777,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private Method BuildJsonSerializeMethod()
         {
+            var writerParameter = new Parameter("writer", null, typeof(Utf8JsonWriter), null, ValidationType.None, null);
             var dataParameter = new Parameter("data", null, _t, null, ValidationType.None, null);
             var optionsParameter = new Parameter("options", null, typeof(JsonSerializerOptions), null, ValidationType.None, null);
             var justificationExpression = new KeywordExpression("Justification =", Literal("By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue."));
@@ -788,9 +786,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 null,
                 null,
                 MethodSignatureModifiers.Static | MethodSignatureModifiers.Public,
-                typeof(string),
                 null,
-                [dataParameter, optionsParameter],
+                null,
+                [writerParameter, dataParameter, optionsParameter],
                 Attributes: Configuration.Flavor == "azure"
                 ? [
                     new CSharpAttribute(typeof(UnconditionalSuppressMessageAttribute), Literal("Trimming"), Literal("IL2026"), justificationExpression),
@@ -800,12 +798,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 GenericArguments: [_t]);
             return new Method(signature, new MethodBodyStatement[]
             {
-                Return(new InvokeStaticMethodExpression(
+                new InvokeStaticMethodExpression(
                     typeof(JsonSerializer),
                     $"{nameof(JsonSerializer.Serialize)}",
-                    [dataParameter, optionsParameter],
+                    [writerParameter, dataParameter, optionsParameter],
                     TypeArguments: [_t]
-                ))
+                ).ToStatement()
             });
         }
 

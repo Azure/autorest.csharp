@@ -259,14 +259,14 @@ namespace Scm._Type.Property.Nullable
             return sentinelSpan.SequenceEqual(valueSpan);
         }
 
-        public static T JsonDeserialize<T>(JsonElement element, JsonSerializerOptions options)
+        public static T JsonDeserialize<T>(string json, JsonSerializerOptions options)
         {
-            return JsonSerializer.Deserialize<T>(element.GetRawText(), options);
+            return JsonSerializer.Deserialize<T>(json, options);
         }
 
-        public static string JsonSerialize<T>(T data, JsonSerializerOptions options)
+        public static void JsonSerialize<T>(Utf8JsonWriter writer, T data, JsonSerializerOptions options)
         {
-            return JsonSerializer.Serialize(data, options);
+            JsonSerializer.Serialize(writer, data, options);
         }
 
         internal static class TypeFormatters
