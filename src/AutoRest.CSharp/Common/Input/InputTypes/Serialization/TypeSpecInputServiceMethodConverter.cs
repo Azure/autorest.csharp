@@ -21,9 +21,7 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public override InputServiceMethod? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            return reader.ReadReferenceAndResolve<InputServiceMethod>(_referenceHandler.CurrentResolver) ?? CreateInputServiceMethod(ref reader, options, _referenceHandler.CurrentResolver);
-        }
+            => reader.ReadReferenceAndResolve<InputServiceMethod>(_referenceHandler.CurrentResolver) ?? CreateInputServiceMethod(ref reader, options, _referenceHandler.CurrentResolver);
 
         public override void Write(Utf8JsonWriter writer, InputServiceMethod value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
@@ -32,31 +30,30 @@ namespace AutoRest.CSharp.Common.Input
         {
             string? id = null;
             string? kind = null;
-            string? name = null;
             InputServiceMethod? method = null;
-            var isFirstProperty = true;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isIdOrKind = reader.TryReadReferenceId(ref isFirstProperty, ref id) || reader.TryReadString("kind", ref kind);
+                var isIdOrKind = reader.TryReadReferenceId(ref id)
+                    || reader.TryReadString("kind", ref kind);
 
                 if (isIdOrKind)
                 {
                     continue;
                 }
-                method = CreateDerivedType(ref reader, id, kind, name, options);
+                method = CreateDerivedType(ref reader, id, kind, options);
             }
 
-            return method ?? CreateDerivedType(ref reader, id, kind, name, options);
+            return method ?? CreateDerivedType(ref reader, id, kind, options);
         }
 
-        private InputServiceMethod CreateDerivedType(ref Utf8JsonReader reader, string? id, string? kind, string? name, JsonSerializerOptions options) => kind switch
+        private InputServiceMethod CreateDerivedType(ref Utf8JsonReader reader, string? id, string? kind, JsonSerializerOptions options) => kind switch
         {
-            null => throw new JsonException($"InputType (id: '{id}', name: '{name}') must have a 'Kind' property"),
-            BasicKind => TypeSpecInputBasicServiceMethodConverter.CreateInputBasicServiceMethod(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            PagingKind => TypeSpecInputPagingServiceMethodConverter.CreateInputPagingServiceMethod(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            LongRunningKind => TypeSpecInputLongRunningServiceMethodConverter.CreateInputLongRunningServiceMethod(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            LongRunningPagingKind => TypeSpecInputLongRunningPagingServiceMethodConverter.CreateInputLongRunningPagingServiceMethod(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            _ => TypeSpecInputBasicServiceMethodConverter.CreateInputBasicServiceMethod(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            null => throw new JsonException($"InputMethod (id: '{id}') must have a 'Kind' property"),
+            BasicKind => TypeSpecInputBasicServiceMethodConverter.CreateInputBasicServiceMethod(ref reader, id, options, _referenceHandler.CurrentResolver),
+            PagingKind => TypeSpecInputPagingServiceMethodConverter.CreateInputPagingServiceMethod(ref reader, id, options, _referenceHandler.CurrentResolver),
+            LongRunningKind => TypeSpecInputLongRunningServiceMethodConverter.CreateInputLongRunningServiceMethod(ref reader, id, options, _referenceHandler.CurrentResolver),
+            LongRunningPagingKind => TypeSpecInputLongRunningPagingServiceMethodConverter.CreateInputLongRunningPagingServiceMethod(ref reader, id, options, _referenceHandler.CurrentResolver),
+            _ => TypeSpecInputBasicServiceMethodConverter.CreateInputBasicServiceMethod(ref reader, id, options, _referenceHandler.CurrentResolver),
         };
     }
 }

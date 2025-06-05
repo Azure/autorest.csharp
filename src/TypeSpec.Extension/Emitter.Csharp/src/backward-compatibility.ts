@@ -7,14 +7,14 @@ import {
     SdkBuiltInKinds,
     UsageFlags
 } from "@azure-tools/typespec-client-generator-core";
-import { CodeModel } from "@typespec/http-client-csharp";
+import { CodeModel, CSharpEmitterContext } from "@typespec/http-client-csharp";
 
 /*
  * This function transforms the code model for backward compatibility to avoid massive code on autorest.csharp's csharp part.
  * @param codeModel - The code model to transform
  * @returns The transformed code model
  */
-export function transformCodeModel(codeModel: CodeModel): CodeModel {
+export function transformCodeModel(sdkContext: CSharpEmitterContext, codeModel: CodeModel): CodeModel {
     // Transform the code model if needed
     // iterates all the constants appearing in models, and replace its valueType with a created enum type
     for (const model of codeModel.models) {

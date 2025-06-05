@@ -24,13 +24,12 @@ namespace AutoRest.CSharp.Common.Input
 
         public static InputUnionType CreateInputUnionType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
-            var isFirstProperty = id == null;
             var variantTypes = new List<InputType>();
             IReadOnlyList<InputDecoratorInfo>? decorators = null;
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
+                var isKnownProperty = reader.TryReadReferenceId(ref id)
                     || reader.TryReadString("name", ref name)
                     || reader.TryReadComplexType("variantTypes", options, ref variantTypes)
                     || reader.TryReadComplexType("decorators", options, ref decorators);
