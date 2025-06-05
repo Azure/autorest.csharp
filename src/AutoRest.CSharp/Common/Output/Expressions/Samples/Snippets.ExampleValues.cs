@@ -379,7 +379,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Samples
             if (valueDict == null)
                 return Default;
 
-            // need to get the actual ObjectType if this type has a discrinimator
+            // need to get the actual ObjectType if this type has a discriminator
             var actualImplementation = GetActualImplementation(objectType, valueDict);
             if (actualImplementation == null)
             {
@@ -429,7 +429,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Samples
                 objectPropertyInitializer = new(initializerDict, false);
             }
 
-            return new NewInstanceExpression(objectType.Type, arguments, objectPropertyInitializer);
+            return new NewInstanceExpression(actualImplementation.Type, arguments, objectPropertyInitializer);
 
             static SerializationFormat GetSerializationFormat(ObjectTypeProperty property, CSharpType propertyType)
             {
