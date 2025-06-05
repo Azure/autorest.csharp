@@ -5,16 +5,7 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputServiceMethodResponse
+internal record InputServiceMethodResponse(InputType? Type, IReadOnlyList<string> ResultSegments)
 {
-    public InputServiceMethodResponse(InputType? type, IReadOnlyList<string>? resultSegments)
-    {
-        Type = type;
-        ResultSegments = resultSegments;
-    }
-
-    internal InputServiceMethodResponse() : this(null, null) { }
-
-    public InputType? Type { get; internal set; }
-    public IReadOnlyList<string>? ResultSegments { get; internal set; }
+    internal InputServiceMethodResponse() : this(null, []) { }
 }
