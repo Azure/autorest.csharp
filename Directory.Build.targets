@@ -398,7 +398,6 @@
     <ProjectReference Include="..\UnbrandedProjects\Customized-TypeSpec\src\CustomizedTypeSpec.csproj" />
     <ProjectReference Include="..\UnbrandedProjects\NoDocsUnbranded-TypeSpec\src\NoDocsUnbrandedTypeSpec.csproj" />
     <ProjectReference Include="..\UnbrandedProjects\NoTest-TypeSpec\src\NoTestTypeSpec.csproj" />
-    <ProjectReference Include="..\UnbrandedProjects\Unbranded-TypeSpec\src\UnbrandedTypeSpec.csproj" />
   </ItemGroup>
 
   <Import Project="$(CentralPackagesFile)" Condition="'$(ShouldUseCentralVersions)' == 'true'" />
