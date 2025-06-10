@@ -5,6 +5,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
@@ -15,6 +16,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -63,6 +65,38 @@ namespace AutoRest.CSharp.Output.Models.Types
                     new InvokeInstanceMethodExpression(
                         LiteralU8("\"__EMPTY__\""), "ToArray", [], null, false))
             };
+
+            _jsonSerializerOptionsField = new FieldDeclaration(
+                modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
+                type: typeof(JsonSerializerOptions),
+                name: _jsonSerializerOptionsName)
+            {
+                InitializationValue = New.Instance(
+                    typeof(JsonSerializerOptions),
+                    new Dictionary<string, ValueExpression>
+                    {
+                        { "Converters", new ArrayInitializerExpression([New.Instance(typeof(JsonModelConverter), [new MemberExpression(null, _wireOptionsName), ModelReaderWriterContextExpression.Default])]) }
+                    })
+            };
+
+            _jsonSerializerOptionsUseManagedServiceIdentityV3Field = new FieldDeclaration(
+                modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
+                type: typeof(JsonSerializerOptions),
+                name: _jsonSerializerOptionsUseManagedServiceIdentityV3Name)
+            {
+                InitializationValue = New.Instance(
+                    typeof(JsonSerializerOptions),
+                    new Dictionary<string, ValueExpression>
+                    {
+                        {
+                            "Converters",
+                            new ArrayInitializerExpression([
+                                New.Instance(typeof(JsonModelConverter), [new MemberExpression(null, _wireOptionsName), ModelReaderWriterContextExpression.Default]),
+                                New.Instance(typeof(ManagedServiceIdentityTypeV3Converter))
+                                ])
+                        }
+                    })
+            };
         }
 
         private const string _wireOptionsName = "WireOptions";
@@ -71,6 +105,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly FieldDeclaration _jsonDocumentOptionsField;
         private const string _sentinelBinaryDataName = "SentinelValue";
         private readonly FieldDeclaration? _sentinelBinaryDataField;
+        private readonly FieldDeclaration _jsonSerializerOptionsField;
+        private const string _jsonSerializerOptionsName = "Options";
+        private readonly FieldDeclaration _jsonSerializerOptionsUseManagedServiceIdentityV3Field;
+        private const string _jsonSerializerOptionsUseManagedServiceIdentityV3Name = "OptionsUseManagedServiceIdentityV3";
+        private const string _jsonDeserializeMethodName = "JsonDeserialize";
+        private const string _jsonSerializeMethodName = "JsonSerialize";
 
         private ModelReaderWriterOptionsExpression? _wireOptions;
         public ModelReaderWriterOptionsExpression WireOptions => _wireOptions ??= new ModelReaderWriterOptionsExpression(new MemberExpression(Type, _wireOptionsName));
@@ -88,6 +128,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (_sentinelBinaryDataField != null)
             {
                 yield return _sentinelBinaryDataField;
+            }
+            if (Configuration.UseModelReaderWriter)
+            {
+                yield return _jsonSerializerOptionsField;
+
+                if (Configuration.AzureArm)
+                {
+                    yield return _jsonSerializerOptionsUseManagedServiceIdentityV3Field;
+                }
             }
         }
 
@@ -138,6 +187,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return new(signature, body);
             }
             #endregion
+
+            if (Configuration.UseModelReaderWriter)
+            {
+                yield return BuildJsonDeserializeMethod();
+                yield return BuildJsonSerializeMethod();
+            }
         }
 
         private const string _isSentinelValueMethodName = "IsSentinelValue";
@@ -451,6 +506,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new Method(signature, body);
         }
 
+        public static ValueExpression Deserialize(JsonElementExpression element, CSharpType type, bool useManagedServiceIdentityV3 = false)
+            => new InvokeStaticMethodExpression(Instance.Type, _jsonDeserializeMethodName, [element, new MemberExpression(null, useManagedServiceIdentityV3 ? _jsonSerializerOptionsUseManagedServiceIdentityV3Name : _jsonSerializerOptionsName)], TypeArguments: [type]);
+
+        public static ValueExpression Serialize(ValueExpression data, CSharpType type, bool useManagedServiceIdentityV3 = false)
+            => new InvokeStaticMethodExpression(Instance.Type, _jsonSerializeMethodName, [data, new MemberExpression(null, useManagedServiceIdentityV3 ? _jsonSerializerOptionsUseManagedServiceIdentityV3Name : _jsonSerializerOptionsName)], TypeArguments: [type]);
+
         public MethodBodyStatement WriteBase64StringValue(Utf8JsonWriterExpression writer, ValueExpression value, string? format)
             => new InvokeStaticMethodStatement(Type, _writeBase64StringValueMethodName, new[] { writer, value, Literal(format) }, CallAsExtension: true);
 
@@ -682,6 +743,70 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new InvokeStaticMethodStatement(Type, _writeObjectValueMethodName, parameters, CallAsExtension: true, TypeArguments: new[] { value.Type });
         }
         #endregion
+
+        private Method BuildJsonDeserializeMethod()
+        {
+            var jsonParameter = new Parameter("json", null, typeof(string), null, ValidationType.None, null);
+            var optionsParameter = new Parameter("options", null, typeof(JsonSerializerOptions), null, ValidationType.None, null);
+            var justificationExpression = new KeywordExpression("Justification =", Literal("By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue."));
+            var signature = new MethodSignature(
+                _jsonDeserializeMethodName,
+                null,
+                null,
+                MethodSignatureModifiers.Static | MethodSignatureModifiers.Public,
+                _t,
+                null,
+                [jsonParameter, optionsParameter],
+                Attributes: Configuration.Flavor == "azure"
+                ? [
+                    new CSharpAttribute(typeof(UnconditionalSuppressMessageAttribute), Literal("Trimming"), Literal("IL2026"), justificationExpression),
+                    new CSharpAttribute(typeof(UnconditionalSuppressMessageAttribute), Literal("Trimming"), Literal("IL3050"), justificationExpression)
+                ]
+                : [],
+                GenericArguments: [_t]);
+            return new Method(signature, new MethodBodyStatement[]
+            {
+                Return(new InvokeStaticMethodExpression(
+                    typeof(JsonSerializer),
+                    $"{nameof(JsonSerializer.Deserialize)}",
+                    [jsonParameter, optionsParameter],
+                    TypeArguments: [_t]
+                ))
+            });
+        }
+
+        private Method BuildJsonSerializeMethod()
+        {
+            var writerParameter = new Parameter("writer", null, typeof(Utf8JsonWriter), null, ValidationType.None, null);
+            var dataParameter = new Parameter("data", null, _t, null, ValidationType.None, null);
+            var optionsParameter = new Parameter("options", null, typeof(JsonSerializerOptions), null, ValidationType.None, null);
+            var justificationExpression = new KeywordExpression("Justification =", Literal("By passing in the JsonSerializerOptions with a reference to AzureResourceManagerCosmosDBContext.Default we are certain there is no AOT compat issue."));
+            var signature = new MethodSignature(
+                _jsonSerializeMethodName,
+                null,
+                null,
+                MethodSignatureModifiers.Static | MethodSignatureModifiers.Public,
+                null,
+                null,
+                [writerParameter, dataParameter, optionsParameter],
+                Attributes: Configuration.Flavor == "azure"
+                ? [
+                    new CSharpAttribute(typeof(UnconditionalSuppressMessageAttribute), Literal("Trimming"), Literal("IL2026"), justificationExpression),
+                    new CSharpAttribute(typeof(UnconditionalSuppressMessageAttribute), Literal("Trimming"), Literal("IL3050"), justificationExpression)
+                ]
+                : [],
+                GenericArguments: [_t]);
+            return new Method(signature, new MethodBodyStatement[]
+            {
+                new InvokeStaticMethodExpression(
+                    typeof(JsonSerializer),
+                    $"{nameof(JsonSerializer.Serialize)}",
+                    [writerParameter, dataParameter, optionsParameter],
+                    TypeArguments: [_t]
+                ).ToStatement()
+            });
+        }
+
 
         public BoolExpression IsSentinelValue(ValueExpression value)
         {
