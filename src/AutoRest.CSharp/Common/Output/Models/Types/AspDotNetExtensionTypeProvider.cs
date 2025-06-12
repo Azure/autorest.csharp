@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -120,12 +121,17 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                     MethodSignatureModifiers.Public | MethodSignatureModifiers.Static | MethodSignatureModifiers.Extension,
                     returnType,
                     null,
-                    new[] { FactoryBuilderParameter, ConfigurationParameter },
-                    GenericArguments: new[] { TBuilderType, TConfigurationType },
-                    GenericParameterConstraints: new[]
-                    {
+                    [FactoryBuilderParameter, ConfigurationParameter],
+                    Attributes:
+                    [
+                        new CSharpAttribute(typeof(RequiresUnreferencedCodeAttribute), Literal("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")),
+                        new CSharpAttribute(typeof(RequiresDynamicCodeAttribute), Literal("Requires unreferenced code until we opt into EnableConfigurationBindingGenerator.")),
+                    ],
+                    GenericArguments: [TBuilderType, TConfigurationType],
+                    GenericParameterConstraints:
+                    [
                         Where.Implements(TBuilderType, new CSharpType(typeof(IAzureClientFactoryBuilderWithConfiguration<>), TConfigurationType))
-                    });
+                    ]);
             }
         }
 
