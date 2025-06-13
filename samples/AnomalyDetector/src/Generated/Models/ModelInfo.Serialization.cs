@@ -59,7 +59,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(AlignPolicy))
             {
                 writer.WritePropertyName("alignPolicy"u8);
-                ((IJsonModel<AlignPolicy>)AlignPolicy).Write(writer, options);
+                writer.WriteObjectValue(AlignPolicy, options);
             }
             if (Optional.IsDefined(Status))
             {
@@ -72,14 +72,14 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Errors)
                 {
-                    ((IJsonModel<ErrorResponse>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(DiagnosticsInfo))
             {
                 writer.WritePropertyName("diagnosticsInfo"u8);
-                ((IJsonModel<DiagnosticsInfo>)DiagnosticsInfo).Write(writer, options);
+                writer.WriteObjectValue(DiagnosticsInfo, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

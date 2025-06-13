@@ -28,7 +28,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                ((IJsonModel<ManagedHsmSku>)Sku).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Sku);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -53,7 +53,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(PrivateLinkServiceConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                ((IJsonModel<MhsmPrivateLinkServiceConnectionState>)PrivateLinkServiceConnectionState).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(PrivateLinkServiceConnectionState);
             }
             if (Optional.IsDefined(ProvisioningState))
             {

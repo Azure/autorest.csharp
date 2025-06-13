@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -27,7 +26,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStringValue(ApplicationId.Value);
             }
             writer.WritePropertyName("permissions"u8);
-            ((IJsonModel<Permissions>)Permissions).Write(writer, ModelSerializationExtensions.WireOptions);
+            writer.WriteObjectValue(Permissions);
             writer.WriteEndObject();
         }
 

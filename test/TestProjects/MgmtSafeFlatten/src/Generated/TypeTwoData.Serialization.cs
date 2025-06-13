@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -27,7 +26,7 @@ namespace MgmtSafeFlatten
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                ((IJsonModel<LayerOneSingle>)Properties).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Properties);
             }
             if (Optional.IsCollectionDefined(Tags))
             {

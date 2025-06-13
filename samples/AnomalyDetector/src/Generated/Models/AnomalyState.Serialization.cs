@@ -40,7 +40,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
-                ((IJsonModel<AnomalyValue>)Value).Write(writer, options);
+                writer.WriteObjectValue(Value, options);
             }
             if (Optional.IsCollectionDefined(Errors))
             {
@@ -48,7 +48,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Errors)
                 {
-                    ((IJsonModel<ErrorResponse>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

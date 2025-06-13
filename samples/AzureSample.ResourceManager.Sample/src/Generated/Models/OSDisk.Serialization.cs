@@ -44,7 +44,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(EncryptionSettings))
             {
                 writer.WritePropertyName("encryptionSettings"u8);
-                ((IJsonModel<DiskEncryptionSettings>)EncryptionSettings).Write(writer, options);
+                writer.WriteObjectValue(EncryptionSettings, options);
             }
             if (Optional.IsDefined(Name))
             {
@@ -54,12 +54,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
-                ((IJsonModel<VirtualHardDisk>)Vhd).Write(writer, options);
+                writer.WriteObjectValue(Vhd, options);
             }
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                ((IJsonModel<VirtualHardDisk>)Image).Write(writer, options);
+                writer.WriteObjectValue(Image, options);
             }
             if (Optional.IsDefined(Caching))
             {
@@ -74,7 +74,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
-                ((IJsonModel<DiffDiskSettings>)DiffDiskSettings).Write(writer, options);
+                writer.WriteObjectValue(DiffDiskSettings, options);
             }
             writer.WritePropertyName("createOption"u8);
             writer.WriteStringValue(CreateOption.ToString());
@@ -86,7 +86,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                ((IJsonModel<ManagedDiskParameters>)ManagedDisk).Write(writer, options);
+                writer.WriteObjectValue(ManagedDisk, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

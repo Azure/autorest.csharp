@@ -55,7 +55,7 @@ namespace FirstTestTypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            ((IJsonModel<Thing>)RequiredModel).Write(writer, options);
+            writer.WriteObjectValue(RequiredModel, options);
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
@@ -232,7 +232,7 @@ namespace FirstTestTypeSpec.Models
                 writer.WriteEndObject();
             }
             writer.WritePropertyName("modelWithRequiredNullable"u8);
-            ((IJsonModel<ModelWithRequiredNullableProperties>)ModelWithRequiredNullable).Write(writer, options);
+            writer.WriteObjectValue(ModelWithRequiredNullable, options);
             writer.WritePropertyName("unionList"u8);
             writer.WriteStartArray();
             foreach (var item in UnionList)

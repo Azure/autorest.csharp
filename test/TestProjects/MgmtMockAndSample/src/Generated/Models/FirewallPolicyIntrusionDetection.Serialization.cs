@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -24,7 +23,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Configuration))
             {
                 writer.WritePropertyName("configuration"u8);
-                ((IJsonModel<FirewallPolicyIntrusionDetectionConfiguration>)Configuration).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Configuration);
             }
             writer.WriteEndObject();
         }

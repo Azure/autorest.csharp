@@ -40,7 +40,7 @@ namespace MgmtCustomizations.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    ((IJsonModel<PetStoreData>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

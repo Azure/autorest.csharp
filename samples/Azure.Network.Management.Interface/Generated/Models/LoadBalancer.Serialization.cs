@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -20,7 +19,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                ((IJsonModel<LoadBalancerSku>)Sku).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Sku);
             }
             if (Optional.IsDefined(Id))
             {
@@ -51,7 +50,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in FrontendIPConfigurations)
                 {
-                    ((IJsonModel<FrontendIPConfiguration>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -61,7 +60,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in BackendAddressPools)
                 {
-                    ((IJsonModel<BackendAddressPool>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -71,7 +70,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancingRules)
                 {
-                    ((IJsonModel<LoadBalancingRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -81,7 +80,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Probes)
                 {
-                    ((IJsonModel<Probe>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -91,7 +90,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in InboundNatRules)
                 {
-                    ((IJsonModel<InboundNatRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -101,7 +100,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in InboundNatPools)
                 {
-                    ((IJsonModel<InboundNatPool>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -111,7 +110,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in OutboundRules)
                 {
-                    ((IJsonModel<OutboundRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

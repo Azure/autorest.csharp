@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -34,7 +33,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                ((IJsonModel<VirtualHardDisk>)Image).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Image);
             }
             if (Optional.IsCollectionDefined(VhdContainers))
             {
@@ -49,7 +48,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                ((IJsonModel<VirtualMachineScaleSetManagedDiskParameters>)ManagedDisk).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ManagedDisk);
             }
             writer.WriteEndObject();
         }

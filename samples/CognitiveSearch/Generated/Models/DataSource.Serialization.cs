@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -27,18 +26,18 @@ namespace CognitiveSearch.Models
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type.ToString());
             writer.WritePropertyName("credentials"u8);
-            ((IJsonModel<DataSourceCredentials>)Credentials).Write(writer, ModelSerializationExtensions.WireOptions);
+            writer.WriteObjectValue(Credentials);
             writer.WritePropertyName("container"u8);
-            ((IJsonModel<DataContainer>)Container).Write(writer, ModelSerializationExtensions.WireOptions);
+            writer.WriteObjectValue(Container);
             if (Optional.IsDefined(DataChangeDetectionPolicy))
             {
                 writer.WritePropertyName("dataChangeDetectionPolicy"u8);
-                ((IJsonModel<DataChangeDetectionPolicy>)DataChangeDetectionPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(DataChangeDetectionPolicy);
             }
             if (Optional.IsDefined(DataDeletionDetectionPolicy))
             {
                 writer.WritePropertyName("dataDeletionDetectionPolicy"u8);
-                ((IJsonModel<DataDeletionDetectionPolicy>)DataDeletionDetectionPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(DataDeletionDetectionPolicy);
             }
             if (Optional.IsDefined(ETag))
             {

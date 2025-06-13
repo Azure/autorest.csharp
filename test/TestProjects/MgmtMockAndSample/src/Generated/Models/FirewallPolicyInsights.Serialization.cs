@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -29,7 +28,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(LogAnalyticsResources))
             {
                 writer.WritePropertyName("logAnalyticsResources"u8);
-                ((IJsonModel<FirewallPolicyLogAnalyticsResources>)LogAnalyticsResources).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(LogAnalyticsResources);
             }
             writer.WriteEndObject();
         }

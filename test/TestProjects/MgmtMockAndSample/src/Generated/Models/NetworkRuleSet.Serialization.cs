@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -33,7 +32,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in IpRules)
                 {
-                    ((IJsonModel<IPRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -43,7 +42,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualNetworkRules)
                 {
-                    ((IJsonModel<VirtualNetworkRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

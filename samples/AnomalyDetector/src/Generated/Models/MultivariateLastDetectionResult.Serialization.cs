@@ -41,7 +41,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in VariableStates)
                 {
-                    ((IJsonModel<VariableState>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -51,7 +51,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Results)
                 {
-                    ((IJsonModel<AnomalyState>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

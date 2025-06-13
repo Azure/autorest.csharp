@@ -43,7 +43,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(ActiveKey))
             {
                 writer.WritePropertyName("activeKey"u8);
-                ((IJsonModel<KeyForDiskEncryptionSet>)ActiveKey).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ActiveKey);
             }
             if (Optional.IsDefined(RotationToLatestKeyVersionEnabled))
             {

@@ -38,7 +38,7 @@ namespace MgmtDiscriminator.Models
 
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("parameters"u8);
-            ((IJsonModel<RouteConfigurationOverrideActionParameters>)Parameters).Write(writer, options);
+            writer.WriteObjectValue(Parameters, options);
         }
 
         DeliveryRuleRouteConfigurationOverrideAction IJsonModel<DeliveryRuleRouteConfigurationOverrideAction>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

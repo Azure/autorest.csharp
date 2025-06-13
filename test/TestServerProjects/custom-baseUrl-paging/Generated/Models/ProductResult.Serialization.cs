@@ -41,7 +41,7 @@ namespace custom_baseUrl_paging.Models
                 writer.WriteStartArray();
                 foreach (var item in Values)
                 {
-                    ((IJsonModel<Product>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

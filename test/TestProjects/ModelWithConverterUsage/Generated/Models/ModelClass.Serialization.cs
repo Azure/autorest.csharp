@@ -47,7 +47,7 @@ namespace ModelWithConverterUsage.Models
             if (Optional.IsDefined(ObjProperty))
             {
                 writer.WritePropertyName("Obj_Property"u8);
-                ((IJsonModel<Product>)ObjProperty).Write(writer, options);
+                writer.WriteObjectValue(ObjProperty, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

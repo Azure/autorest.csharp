@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -70,7 +69,7 @@ namespace MgmtAcronymMapping
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<VirtualMachineScaleSetData>)data).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -162,7 +161,7 @@ namespace MgmtAcronymMapping
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<VirtualMachineScaleSetPatch>)patch).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(patch);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -436,7 +435,7 @@ namespace MgmtAcronymMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<VirtualMachineScaleSetVmInstanceIds>)vmInstanceIds).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(vmInstanceIds);
                 request.Content = content;
             }
             _userAgent.Apply(message);
@@ -528,7 +527,7 @@ namespace MgmtAcronymMapping
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<VirtualMachineScaleSetVmInstanceRequiredIds>)vmInstanceIds).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(vmInstanceIds);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -1077,7 +1076,7 @@ namespace MgmtAcronymMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<VirtualMachineScaleSetVmInstanceIds>)vmInstanceIds).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(vmInstanceIds);
                 request.Content = content;
             }
             _userAgent.Apply(message);
@@ -1173,7 +1172,7 @@ namespace MgmtAcronymMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<VirtualMachineScaleSetVmInstanceIds>)vmInstanceIds).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(vmInstanceIds);
                 request.Content = content;
             }
             _userAgent.Apply(message);
@@ -1267,7 +1266,7 @@ namespace MgmtAcronymMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<VirtualMachineScaleSetVmInstanceIds>)vmInstanceIds).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(vmInstanceIds);
                 request.Content = content;
             }
             _userAgent.Apply(message);
@@ -1361,7 +1360,7 @@ namespace MgmtAcronymMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<VirtualMachineScaleSetVmInstanceIds>)vmInstanceIds).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(vmInstanceIds);
                 request.Content = content;
             }
             _userAgent.Apply(message);
@@ -1455,7 +1454,7 @@ namespace MgmtAcronymMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<VirtualMachineScaleSetVmInstanceIds>)vmInstanceIds).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(vmInstanceIds);
                 request.Content = content;
             }
             _userAgent.Apply(message);
@@ -1547,7 +1546,7 @@ namespace MgmtAcronymMapping
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<VirtualMachineScaleSetVmInstanceRequiredIds>)vmInstanceIds).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(vmInstanceIds);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -1642,7 +1641,7 @@ namespace MgmtAcronymMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content0 = new Utf8JsonRequestContent();
-                ((IJsonModel<VirtualMachineScaleSetReimageContent>)content).Write(content0.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content0.JsonWriter.WriteObjectValue(content);
                 request.Content = content0;
             }
             _userAgent.Apply(message);
@@ -1736,7 +1735,7 @@ namespace MgmtAcronymMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<VirtualMachineScaleSetVmInstanceIds>)vmInstanceIds).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(vmInstanceIds);
                 request.Content = content;
             }
             _userAgent.Apply(message);
@@ -1926,7 +1925,7 @@ namespace MgmtAcronymMapping
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var content0 = new Utf8JsonRequestContent();
-            ((IJsonModel<VmScaleSetConvertToSinglePlacementGroupContent>)content).Write(content0.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content0.JsonWriter.WriteObjectValue(content);
             request.Content = content0;
             _userAgent.Apply(message);
             return message;
@@ -2017,7 +2016,7 @@ namespace MgmtAcronymMapping
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var content0 = new Utf8JsonRequestContent();
-            ((IJsonModel<OrchestrationServiceStateContent>)content).Write(content0.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content0.JsonWriter.WriteObjectValue(content);
             request.Content = content0;
             _userAgent.Apply(message);
             return message;

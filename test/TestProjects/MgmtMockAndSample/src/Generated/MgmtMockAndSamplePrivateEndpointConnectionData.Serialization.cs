@@ -35,7 +35,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(ConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                ((IJsonModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>)ConnectionState).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ConnectionState);
             }
             if (Optional.IsDefined(ProvisioningState))
             {

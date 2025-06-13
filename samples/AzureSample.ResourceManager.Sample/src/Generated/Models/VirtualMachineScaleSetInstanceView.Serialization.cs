@@ -40,7 +40,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (options.Format != "W" && Optional.IsDefined(VirtualMachine))
             {
                 writer.WritePropertyName("virtualMachine"u8);
-                ((IJsonModel<VirtualMachineScaleSetInstanceViewStatusesSummary>)VirtualMachine).Write(writer, options);
+                writer.WriteObjectValue(VirtualMachine, options);
             }
             if (options.Format != "W" && Optional.IsCollectionDefined(Extensions))
             {
@@ -48,7 +48,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Extensions)
                 {
-                    ((IJsonModel<VirtualMachineScaleSetVmExtensionsSummary>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -58,7 +58,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
                 {
-                    ((IJsonModel<InstanceViewStatus>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -68,7 +68,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in OrchestrationServices)
                 {
-                    ((IJsonModel<OrchestrationServiceSummary>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

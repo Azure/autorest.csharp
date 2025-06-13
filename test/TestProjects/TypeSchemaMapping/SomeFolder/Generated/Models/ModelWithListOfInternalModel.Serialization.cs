@@ -46,7 +46,7 @@ namespace TypeSchemaMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in InternalListProperty)
                 {
-                    ((IJsonModel<InternalModel>)item).Write(writer, options);
+                    writer.WriteObjectValue<InternalModel>(item, options);
                 }
                 writer.WriteEndArray();
             }

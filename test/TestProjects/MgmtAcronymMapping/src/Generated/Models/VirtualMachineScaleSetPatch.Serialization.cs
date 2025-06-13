@@ -21,12 +21,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                ((IJsonModel<MgmtAcronymMappingSku>)Sku).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Sku);
             }
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                ((IJsonModel<MgmtAcronymMappingPlan>)Plan).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Plan);
             }
             if (Optional.IsDefined(Identity))
             {
@@ -49,17 +49,17 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(UpgradePolicy))
             {
                 writer.WritePropertyName("upgradePolicy"u8);
-                ((IJsonModel<UpgradePolicy>)UpgradePolicy).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(UpgradePolicy);
             }
             if (Optional.IsDefined(AutomaticRepairsPolicy))
             {
                 writer.WritePropertyName("automaticRepairsPolicy"u8);
-                ((IJsonModel<AutomaticRepairsPolicy>)AutomaticRepairsPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(AutomaticRepairsPolicy);
             }
             if (Optional.IsDefined(VirtualMachineProfile))
             {
                 writer.WritePropertyName("virtualMachineProfile"u8);
-                ((IJsonModel<VirtualMachineScaleSetUpdateVmProfile>)VirtualMachineProfile).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(VirtualMachineProfile);
             }
             if (Optional.IsDefined(Overprovision))
             {
@@ -79,12 +79,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                ((IJsonModel<AdditionalCapabilities>)AdditionalCapabilities).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(AdditionalCapabilities);
             }
             if (Optional.IsDefined(ScaleInPolicy))
             {
                 writer.WritePropertyName("scaleInPolicy"u8);
-                ((IJsonModel<ScaleInPolicy>)ScaleInPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ScaleInPolicy);
             }
             if (Optional.IsDefined(ProximityPlacementGroup))
             {

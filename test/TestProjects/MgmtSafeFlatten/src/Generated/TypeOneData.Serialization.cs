@@ -28,12 +28,12 @@ namespace MgmtSafeFlatten
             if (Optional.IsDefined(LayerOne))
             {
                 writer.WritePropertyName("layerOne"u8);
-                ((IJsonModel<LayerOneSingle>)LayerOne).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(LayerOne);
             }
             if (Optional.IsDefined(LayerOneType))
             {
                 writer.WritePropertyName("layerOneType"u8);
-                ((IJsonModel<LayerOneBaseType>)LayerOneType).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(LayerOneType);
             }
             if (Optional.IsDefined(LayerOneConflict))
             {

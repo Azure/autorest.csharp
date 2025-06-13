@@ -34,7 +34,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in IpRules)
                 {
-                    ((IJsonModel<MhsmipRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -20,7 +19,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStartArray();
             foreach (var item in Documents)
             {
-                ((IJsonModel<LanguageInput>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();

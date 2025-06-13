@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -28,7 +27,7 @@ namespace MgmtOmitOperationGroups.Models
                 writer.WriteStartArray();
                 foreach (var item in Modelqs)
                 {
-                    ((IJsonModel<ModelQ>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

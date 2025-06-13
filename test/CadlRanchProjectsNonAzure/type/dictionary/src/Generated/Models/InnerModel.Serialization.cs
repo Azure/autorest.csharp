@@ -38,7 +38,7 @@ namespace Scm._Type._Dictionary.Models
                 foreach (var item in Children)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IJsonModel<InnerModel>)item.Value).Write(writer, options);
+                    writer.WriteObjectValue(item.Value, options);
                 }
                 writer.WriteEndObject();
             }

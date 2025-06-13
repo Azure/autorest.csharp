@@ -38,7 +38,7 @@ namespace body_complex.Models
             if (Optional.IsDefined(SampleSalmon))
             {
                 writer.WritePropertyName("sampleSalmon"u8);
-                ((IJsonModel<DotSalmon>)SampleSalmon).Write(writer, options);
+                writer.WriteObjectValue(SampleSalmon, options);
             }
             if (Optional.IsCollectionDefined(Salmons))
             {
@@ -46,14 +46,14 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Salmons)
                 {
-                    ((IJsonModel<DotSalmon>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(SampleFish))
             {
                 writer.WritePropertyName("sampleFish"u8);
-                ((IJsonModel<DotFish>)SampleFish).Write(writer, options);
+                writer.WriteObjectValue(SampleFish, options);
             }
             if (Optional.IsCollectionDefined(Fishes))
             {
@@ -61,7 +61,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Fishes)
                 {
-                    ((IJsonModel<DotFish>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

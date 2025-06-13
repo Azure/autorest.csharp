@@ -44,12 +44,12 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                ((IJsonModel<AzureSampleResourceManagerSampleSku>)Sku).Write(writer, options);
+                writer.WriteObjectValue(Sku, options);
             }
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                ((IJsonModel<AzureSampleResourceManagerSamplePlan>)Plan).Write(writer, options);
+                writer.WriteObjectValue(Plan, options);
             }
             if (Optional.IsDefined(Identity))
             {
@@ -71,17 +71,17 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(UpgradePolicy))
             {
                 writer.WritePropertyName("upgradePolicy"u8);
-                ((IJsonModel<UpgradePolicy>)UpgradePolicy).Write(writer, options);
+                writer.WriteObjectValue(UpgradePolicy, options);
             }
             if (Optional.IsDefined(AutomaticRepairsPolicy))
             {
                 writer.WritePropertyName("automaticRepairsPolicy"u8);
-                ((IJsonModel<AutomaticRepairsPolicy>)AutomaticRepairsPolicy).Write(writer, options);
+                writer.WriteObjectValue(AutomaticRepairsPolicy, options);
             }
             if (Optional.IsDefined(VirtualMachineProfile))
             {
                 writer.WritePropertyName("virtualMachineProfile"u8);
-                ((IJsonModel<VirtualMachineScaleSetVmProfile>)VirtualMachineProfile).Write(writer, options);
+                writer.WriteObjectValue(VirtualMachineProfile, options);
             }
             if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
@@ -131,12 +131,12 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                ((IJsonModel<AdditionalCapabilities>)AdditionalCapabilities).Write(writer, options);
+                writer.WriteObjectValue(AdditionalCapabilities, options);
             }
             if (Optional.IsDefined(ScaleInPolicy))
             {
                 writer.WritePropertyName("scaleInPolicy"u8);
-                ((IJsonModel<ScaleInPolicy>)ScaleInPolicy).Write(writer, options);
+                writer.WriteObjectValue(ScaleInPolicy, options);
             }
             writer.WriteEndObject();
         }

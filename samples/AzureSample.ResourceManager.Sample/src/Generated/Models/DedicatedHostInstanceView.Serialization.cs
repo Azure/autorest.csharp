@@ -45,7 +45,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(AvailableCapacity))
             {
                 writer.WritePropertyName("availableCapacity"u8);
-                ((IJsonModel<DedicatedHostAvailableCapacity>)AvailableCapacity).Write(writer, options);
+                writer.WriteObjectValue(AvailableCapacity, options);
             }
             if (Optional.IsCollectionDefined(Statuses))
             {
@@ -53,7 +53,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
                 {
-                    ((IJsonModel<InstanceViewStatus>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

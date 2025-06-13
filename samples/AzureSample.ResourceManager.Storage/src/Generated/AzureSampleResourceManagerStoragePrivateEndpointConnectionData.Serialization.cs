@@ -29,7 +29,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(ConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                ((IJsonModel<AzureSampleResourceManagerStoragePrivateLinkServiceConnectionState>)ConnectionState).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ConnectionState);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

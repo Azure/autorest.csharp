@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -52,7 +51,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(PrivateLinkServiceConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                ((IJsonModel<PrivateLinkServiceConnectionState>)PrivateLinkServiceConnectionState).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(PrivateLinkServiceConnectionState);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

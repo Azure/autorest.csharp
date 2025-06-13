@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -28,7 +27,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in ResourceAccessRules)
                 {
-                    ((IJsonModel<ResourceAccessRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -38,7 +37,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualNetworkRules)
                 {
-                    ((IJsonModel<VirtualNetworkRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -48,7 +47,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in IpRules)
                 {
-                    ((IJsonModel<IPRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

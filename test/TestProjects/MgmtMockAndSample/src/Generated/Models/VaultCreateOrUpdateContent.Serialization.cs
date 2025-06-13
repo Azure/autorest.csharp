@@ -31,7 +31,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteEndObject();
             }
             writer.WritePropertyName("properties"u8);
-            ((IJsonModel<VaultProperties>)Properties).Write(writer, ModelSerializationExtensions.WireOptions);
+            writer.WriteObjectValue(Properties);
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);

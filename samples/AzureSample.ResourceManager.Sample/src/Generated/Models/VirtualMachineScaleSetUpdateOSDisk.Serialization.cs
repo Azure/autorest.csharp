@@ -52,7 +52,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                ((IJsonModel<VirtualHardDisk>)Image).Write(writer, options);
+                writer.WriteObjectValue(Image, options);
             }
             if (Optional.IsCollectionDefined(VhdContainers))
             {
@@ -67,7 +67,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                ((IJsonModel<VirtualMachineScaleSetManagedDiskParameters>)ManagedDisk).Write(writer, options);
+                writer.WriteObjectValue(ManagedDisk, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

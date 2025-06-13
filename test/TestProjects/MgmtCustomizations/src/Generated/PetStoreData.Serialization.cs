@@ -40,7 +40,7 @@ namespace MgmtCustomizations
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                ((IJsonModel<PetStoreProperties>)Properties).Write(writer, options);
+                writer.WriteObjectValue(Properties, options);
             }
         }
 

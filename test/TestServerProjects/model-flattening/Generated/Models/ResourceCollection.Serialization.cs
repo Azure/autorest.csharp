@@ -38,7 +38,7 @@ namespace model_flattening.Models
             if (Optional.IsDefined(Productresource))
             {
                 writer.WritePropertyName("productresource"u8);
-                ((IJsonModel<FlattenedProduct>)Productresource).Write(writer, options);
+                writer.WriteObjectValue(Productresource, options);
             }
             if (Optional.IsCollectionDefined(Arrayofresources))
             {
@@ -46,7 +46,7 @@ namespace model_flattening.Models
                 writer.WriteStartArray();
                 foreach (var item in Arrayofresources)
                 {
-                    ((IJsonModel<FlattenedProduct>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -57,7 +57,7 @@ namespace model_flattening.Models
                 foreach (var item in Dictionaryofresources)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IJsonModel<FlattenedProduct>)item.Value).Write(writer, options);
+                    writer.WriteObjectValue(item.Value, options);
                 }
                 writer.WriteEndObject();
             }

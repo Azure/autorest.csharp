@@ -38,7 +38,7 @@ namespace _Azure.ResourceManager.Resources.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                ((IJsonModel<SingletonTrackedResourceData>)item).Write(writer, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))

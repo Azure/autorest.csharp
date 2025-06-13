@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -19,17 +18,17 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(BaseBlob))
             {
                 writer.WritePropertyName("baseBlob"u8);
-                ((IJsonModel<ManagementPolicyBaseBlob>)BaseBlob).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(BaseBlob);
             }
             if (Optional.IsDefined(Snapshot))
             {
                 writer.WritePropertyName("snapshot"u8);
-                ((IJsonModel<ManagementPolicySnapShot>)Snapshot).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Snapshot);
             }
             if (Optional.IsDefined(Version))
             {
                 writer.WritePropertyName("version"u8);
-                ((IJsonModel<ManagementPolicyVersion>)Version).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Version);
             }
             writer.WriteEndObject();
         }

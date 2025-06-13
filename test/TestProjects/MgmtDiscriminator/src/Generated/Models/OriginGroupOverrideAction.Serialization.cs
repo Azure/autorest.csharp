@@ -38,7 +38,7 @@ namespace MgmtDiscriminator.Models
 
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("parameters"u8);
-            ((IJsonModel<OriginGroupOverrideActionParameters>)Parameters).Write(writer, options);
+            writer.WriteObjectValue(Parameters, options);
         }
 
         OriginGroupOverrideAction IJsonModel<OriginGroupOverrideAction>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

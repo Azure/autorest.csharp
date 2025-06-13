@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
@@ -3392,7 +3391,7 @@ namespace body_dictionary
             foreach (var item in arrayBody)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
-                ((IJsonModel<Widget>)item.Value).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(item.Value, ModelSerializationExtensions.WireOptions);
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;

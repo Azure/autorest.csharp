@@ -44,7 +44,7 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                ((IJsonModel<AzureSampleResourceManagerSamplePlan>)Plan).Write(writer, options);
+                writer.WriteObjectValue(Plan, options);
             }
             if (options.Format != "W" && Optional.IsCollectionDefined(Resources))
             {
@@ -52,7 +52,7 @@ namespace AzureSample.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in Resources)
                 {
-                    ((IJsonModel<VirtualMachineExtensionData>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -76,37 +76,37 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(HardwareProfile))
             {
                 writer.WritePropertyName("hardwareProfile"u8);
-                ((IJsonModel<HardwareProfile>)HardwareProfile).Write(writer, options);
+                writer.WriteObjectValue(HardwareProfile, options);
             }
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                ((IJsonModel<StorageProfile>)StorageProfile).Write(writer, options);
+                writer.WriteObjectValue(StorageProfile, options);
             }
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                ((IJsonModel<AdditionalCapabilities>)AdditionalCapabilities).Write(writer, options);
+                writer.WriteObjectValue(AdditionalCapabilities, options);
             }
             if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                ((IJsonModel<OSProfile>)OSProfile).Write(writer, options);
+                writer.WriteObjectValue(OSProfile, options);
             }
             if (Optional.IsDefined(NetworkProfile))
             {
                 writer.WritePropertyName("networkProfile"u8);
-                ((IJsonModel<NetworkProfile>)NetworkProfile).Write(writer, options);
+                writer.WriteObjectValue(NetworkProfile, options);
             }
             if (Optional.IsDefined(SecurityProfile))
             {
                 writer.WritePropertyName("securityProfile"u8);
-                ((IJsonModel<SecurityProfile>)SecurityProfile).Write(writer, options);
+                writer.WriteObjectValue(SecurityProfile, options);
             }
             if (Optional.IsDefined(DiagnosticsProfile))
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
-                ((IJsonModel<DiagnosticsProfile>)DiagnosticsProfile).Write(writer, options);
+                writer.WriteObjectValue(DiagnosticsProfile, options);
             }
             if (Optional.IsDefined(AvailabilitySet))
             {
@@ -136,7 +136,7 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(BillingProfile))
             {
                 writer.WritePropertyName("billingProfile"u8);
-                ((IJsonModel<BillingProfile>)BillingProfile).Write(writer, options);
+                writer.WriteObjectValue(BillingProfile, options);
             }
             if (Optional.IsDefined(Host))
             {
@@ -156,7 +156,7 @@ namespace AzureSample.ResourceManager.Sample
             if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                ((IJsonModel<VirtualMachineInstanceView>)InstanceView).Write(writer, options);
+                writer.WriteObjectValue(InstanceView, options);
             }
             if (Optional.IsDefined(LicenseType))
             {

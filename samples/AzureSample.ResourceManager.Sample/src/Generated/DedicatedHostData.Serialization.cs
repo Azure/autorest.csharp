@@ -42,7 +42,7 @@ namespace AzureSample.ResourceManager.Sample
 
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("sku"u8);
-            ((IJsonModel<AzureSampleResourceManagerSampleSku>)Sku).Write(writer, options);
+            writer.WriteObjectValue(Sku, options);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(PlatformFaultDomain))
@@ -88,7 +88,7 @@ namespace AzureSample.ResourceManager.Sample
             if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                ((IJsonModel<DedicatedHostInstanceView>)InstanceView).Write(writer, options);
+                writer.WriteObjectValue(InstanceView, options);
             }
             writer.WriteEndObject();
         }

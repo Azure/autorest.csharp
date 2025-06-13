@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -31,7 +30,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                ((IJsonModel<Subnet>)Subnet).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Subnet);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

@@ -40,7 +40,7 @@ namespace _Azure.ResourceManager.Resources
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                ((IJsonModel<LocationResourceProperties>)Properties).Write(writer, options);
+                writer.WriteObjectValue(Properties, options);
             }
         }
 

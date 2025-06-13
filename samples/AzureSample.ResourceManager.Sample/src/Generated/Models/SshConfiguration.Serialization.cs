@@ -43,7 +43,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in PublicKeys)
                 {
-                    ((IJsonModel<SshPublicKeyInfo>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

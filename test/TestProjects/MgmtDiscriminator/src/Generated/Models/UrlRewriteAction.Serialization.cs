@@ -38,7 +38,7 @@ namespace MgmtDiscriminator.Models
 
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("parameters"u8);
-            ((IJsonModel<UrlRewriteActionParameters>)Parameters).Write(writer, options);
+            writer.WriteObjectValue(Parameters, options);
         }
 
         UrlRewriteAction IJsonModel<UrlRewriteAction>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

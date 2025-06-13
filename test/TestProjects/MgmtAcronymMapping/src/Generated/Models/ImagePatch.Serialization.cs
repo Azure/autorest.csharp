@@ -38,7 +38,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                ((IJsonModel<ImageStorageProfile>)StorageProfile).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(StorageProfile);
             }
             if (Optional.IsDefined(HyperVGeneration))
             {

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -20,7 +19,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                ((IJsonModel<ImageOSDisk>)OSDisk).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(OSDisk);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -28,7 +27,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    ((IJsonModel<ImageDataDisk>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

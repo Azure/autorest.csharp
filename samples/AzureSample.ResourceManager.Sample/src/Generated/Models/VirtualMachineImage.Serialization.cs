@@ -43,12 +43,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                ((IJsonModel<PurchasePlan>)Plan).Write(writer, options);
+                writer.WriteObjectValue(Plan, options);
             }
             if (Optional.IsDefined(OSDiskImage))
             {
                 writer.WritePropertyName("osDiskImage"u8);
-                ((IJsonModel<OSDiskImage>)OSDiskImage).Write(writer, options);
+                writer.WriteObjectValue(OSDiskImage, options);
             }
             if (Optional.IsCollectionDefined(DataDiskImages))
             {
@@ -56,14 +56,14 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDiskImages)
                 {
-                    ((IJsonModel<DataDiskImage>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(AutomaticOSUpgradeProperties))
             {
                 writer.WritePropertyName("automaticOSUpgradeProperties"u8);
-                ((IJsonModel<AutomaticOSUpgradeProperties>)AutomaticOSUpgradeProperties).Write(writer, options);
+                writer.WriteObjectValue(AutomaticOSUpgradeProperties, options);
             }
             if (Optional.IsDefined(HyperVGeneration))
             {
@@ -73,7 +73,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Disallowed))
             {
                 writer.WritePropertyName("disallowed"u8);
-                ((IJsonModel<DisallowedConfiguration>)Disallowed).Write(writer, options);
+                writer.WriteObjectValue(Disallowed, options);
             }
             writer.WriteEndObject();
         }

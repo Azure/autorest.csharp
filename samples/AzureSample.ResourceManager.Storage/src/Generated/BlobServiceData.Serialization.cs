@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -23,7 +22,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(Cors))
             {
                 writer.WritePropertyName("cors"u8);
-                ((IJsonModel<CorsRules>)Cors).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Cors);
             }
             if (Optional.IsDefined(DefaultServiceVersion))
             {
@@ -33,7 +32,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(DeleteRetentionPolicy))
             {
                 writer.WritePropertyName("deleteRetentionPolicy"u8);
-                ((IJsonModel<DeleteRetentionPolicy>)DeleteRetentionPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(DeleteRetentionPolicy);
             }
             if (Optional.IsDefined(IsVersioningEnabled))
             {
@@ -48,22 +47,22 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(ChangeFeed))
             {
                 writer.WritePropertyName("changeFeed"u8);
-                ((IJsonModel<ChangeFeed>)ChangeFeed).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ChangeFeed);
             }
             if (Optional.IsDefined(RestorePolicy))
             {
                 writer.WritePropertyName("restorePolicy"u8);
-                ((IJsonModel<RestorePolicyProperties>)RestorePolicy).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(RestorePolicy);
             }
             if (Optional.IsDefined(ContainerDeleteRetentionPolicy))
             {
                 writer.WritePropertyName("containerDeleteRetentionPolicy"u8);
-                ((IJsonModel<DeleteRetentionPolicy>)ContainerDeleteRetentionPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ContainerDeleteRetentionPolicy);
             }
             if (Optional.IsDefined(LastAccessTimeTrackingPolicy))
             {
                 writer.WritePropertyName("lastAccessTimeTrackingPolicy"u8);
-                ((IJsonModel<LastAccessTimeTrackingPolicy>)LastAccessTimeTrackingPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(LastAccessTimeTrackingPolicy);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

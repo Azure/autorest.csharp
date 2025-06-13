@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -57,17 +56,17 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                ((IJsonModel<Subnet>)Subnet).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Subnet);
             }
             if (Optional.IsDefined(PublicIPAddress))
             {
                 writer.WritePropertyName("publicIPAddress"u8);
-                ((IJsonModel<PublicIPAddress>)PublicIPAddress).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(PublicIPAddress);
             }
             if (Optional.IsDefined(PublicIPPrefix))
             {
                 writer.WritePropertyName("publicIPPrefix"u8);
-                ((IJsonModel<SubResource>)PublicIPPrefix).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(PublicIPPrefix);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

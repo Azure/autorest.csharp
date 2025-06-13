@@ -30,7 +30,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                ((IJsonModel<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings>)DnsSettings).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(DnsSettings);
             }
             if (Optional.IsCollectionDefined(IPTags))
             {
@@ -38,7 +38,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in IPTags)
                 {
-                    ((IJsonModel<VirtualMachineScaleSetIPTag>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

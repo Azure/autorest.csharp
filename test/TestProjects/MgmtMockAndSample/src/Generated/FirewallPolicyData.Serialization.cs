@@ -43,12 +43,12 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(StartupProbe))
             {
                 writer.WritePropertyName("startupProbe"u8);
-                ((IJsonModel<Probe>)StartupProbe).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(StartupProbe);
             }
             if (Optional.IsDefined(ReadinessProbe))
             {
                 writer.WritePropertyName("readinessProbe"u8);
-                ((IJsonModel<Probe>)ReadinessProbe).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ReadinessProbe);
             }
             if (Optional.IsDefined(DesiredStatusCode))
             {
@@ -63,37 +63,37 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(ThreatIntelWhitelist))
             {
                 writer.WritePropertyName("threatIntelWhitelist"u8);
-                ((IJsonModel<FirewallPolicyThreatIntelWhitelist>)ThreatIntelWhitelist).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ThreatIntelWhitelist);
             }
             if (Optional.IsDefined(Insights))
             {
                 writer.WritePropertyName("insights"u8);
-                ((IJsonModel<FirewallPolicyInsights>)Insights).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Insights);
             }
             if (Optional.IsDefined(Snat))
             {
                 writer.WritePropertyName("snat"u8);
-                ((IJsonModel<FirewallPolicySnat>)Snat).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Snat);
             }
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                ((IJsonModel<DnsSettings>)DnsSettings).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(DnsSettings);
             }
             if (Optional.IsDefined(IntrusionDetection))
             {
                 writer.WritePropertyName("intrusionDetection"u8);
-                ((IJsonModel<FirewallPolicyIntrusionDetection>)IntrusionDetection).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(IntrusionDetection);
             }
             if (Optional.IsDefined(TransportSecurity))
             {
                 writer.WritePropertyName("transportSecurity"u8);
-                ((IJsonModel<FirewallPolicyTransportSecurity>)TransportSecurity).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(TransportSecurity);
             }
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                ((IJsonModel<FirewallPolicySku>)Sku).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Sku);
             }
             if (Optional.IsCollectionDefined(NetworkConfigurations))
             {

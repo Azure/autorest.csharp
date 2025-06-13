@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -60,7 +59,7 @@ namespace MgmtExtensionResource.Models
             if (Optional.IsDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
-                ((IJsonModel<ParameterDefinitionsValueMetadata>)Metadata).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Metadata);
             }
             writer.WriteEndObject();
         }

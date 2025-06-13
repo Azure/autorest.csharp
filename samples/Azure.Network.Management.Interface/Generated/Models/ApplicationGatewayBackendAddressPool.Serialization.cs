@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -35,7 +34,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in BackendAddresses)
                 {
-                    ((IJsonModel<ApplicationGatewayBackendAddress>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

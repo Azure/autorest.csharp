@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -43,12 +42,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DestinationNetworkInterfaceIPConfiguration))
             {
                 writer.WritePropertyName("destinationNetworkInterfaceIPConfiguration"u8);
-                ((IJsonModel<NetworkInterfaceIPConfiguration>)DestinationNetworkInterfaceIPConfiguration).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(DestinationNetworkInterfaceIPConfiguration);
             }
             if (Optional.IsDefined(DestinationLoadBalancerFrontEndIPConfiguration))
             {
                 writer.WritePropertyName("destinationLoadBalancerFrontEndIPConfiguration"u8);
-                ((IJsonModel<FrontendIPConfiguration>)DestinationLoadBalancerFrontEndIPConfiguration).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(DestinationLoadBalancerFrontEndIPConfiguration);
             }
             if (Optional.IsDefined(DestinationPort))
             {

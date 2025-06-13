@@ -58,19 +58,19 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in AdditionalUnattendContent)
                 {
-                    ((IJsonModel<AdditionalUnattendContent>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(PatchSettings))
             {
                 writer.WritePropertyName("patchSettings"u8);
-                ((IJsonModel<PatchSettings>)PatchSettings).Write(writer, options);
+                writer.WriteObjectValue(PatchSettings, options);
             }
             if (Optional.IsDefined(WinRM))
             {
                 writer.WritePropertyName("winRM"u8);
-                ((IJsonModel<WinRMConfiguration>)WinRM).Write(writer, options);
+                writer.WriteObjectValue(WinRM, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -38,7 +37,7 @@ namespace AzureSample.ResourceManager.Storage
                 writer.WriteStartArray();
                 foreach (var item in Rules)
                 {
-                    ((IJsonModel<ObjectReplicationPolicyRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

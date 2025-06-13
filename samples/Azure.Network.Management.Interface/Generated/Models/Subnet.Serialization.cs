@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -47,17 +46,17 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
-                ((IJsonModel<NetworkSecurityGroup>)NetworkSecurityGroup).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(NetworkSecurityGroup);
             }
             if (Optional.IsDefined(RouteTable))
             {
                 writer.WritePropertyName("routeTable"u8);
-                ((IJsonModel<RouteTable>)RouteTable).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(RouteTable);
             }
             if (Optional.IsDefined(NatGateway))
             {
                 writer.WritePropertyName("natGateway"u8);
-                ((IJsonModel<SubResource>)NatGateway).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(NatGateway);
             }
             if (Optional.IsCollectionDefined(ServiceEndpoints))
             {
@@ -65,7 +64,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ServiceEndpoints)
                 {
-                    ((IJsonModel<ServiceEndpointPropertiesFormat>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -75,7 +74,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ServiceEndpointPolicies)
                 {
-                    ((IJsonModel<ServiceEndpointPolicy>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -85,7 +84,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Delegations)
                 {
-                    ((IJsonModel<Delegation>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

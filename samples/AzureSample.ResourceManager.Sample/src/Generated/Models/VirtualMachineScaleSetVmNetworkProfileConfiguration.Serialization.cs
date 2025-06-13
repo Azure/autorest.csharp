@@ -43,7 +43,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in NetworkInterfaceConfigurations)
                 {
-                    ((IJsonModel<VirtualMachineScaleSetNetworkConfiguration>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

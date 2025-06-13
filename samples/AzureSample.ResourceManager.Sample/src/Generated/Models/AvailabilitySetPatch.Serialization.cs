@@ -39,7 +39,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                ((IJsonModel<AzureSampleResourceManagerSampleSku>)Sku).Write(writer, options);
+                writer.WriteObjectValue(Sku, options);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -74,7 +74,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
                 {
-                    ((IJsonModel<InstanceViewStatus>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

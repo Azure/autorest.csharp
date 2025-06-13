@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -23,17 +22,17 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(Cors))
             {
                 writer.WritePropertyName("cors"u8);
-                ((IJsonModel<CorsRules>)Cors).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Cors);
             }
             if (Optional.IsDefined(ShareDeleteRetentionPolicy))
             {
                 writer.WritePropertyName("shareDeleteRetentionPolicy"u8);
-                ((IJsonModel<DeleteRetentionPolicy>)ShareDeleteRetentionPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ShareDeleteRetentionPolicy);
             }
             if (Optional.IsDefined(ProtocolSettings))
             {
                 writer.WritePropertyName("protocolSettings"u8);
-                ((IJsonModel<ProtocolSettings>)ProtocolSettings).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ProtocolSettings);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

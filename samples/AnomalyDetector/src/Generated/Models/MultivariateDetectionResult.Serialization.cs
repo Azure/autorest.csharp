@@ -41,12 +41,12 @@ namespace AnomalyDetector.Models
                 writer.WriteStringValue(ResultId);
             }
             writer.WritePropertyName("summary"u8);
-            ((IJsonModel<MultivariateBatchDetectionResultSummary>)Summary).Write(writer, options);
+            writer.WriteObjectValue(Summary, options);
             writer.WritePropertyName("results"u8);
             writer.WriteStartArray();
             foreach (var item in Results)
             {
-                ((IJsonModel<AnomalyState>)item).Write(writer, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -20,7 +19,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                ((IJsonModel<PublicIPAddressSku>)Sku).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Sku);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -68,12 +67,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                ((IJsonModel<PublicIPAddressDnsSettings>)DnsSettings).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(DnsSettings);
             }
             if (Optional.IsDefined(DdosSettings))
             {
                 writer.WritePropertyName("ddosSettings"u8);
-                ((IJsonModel<DdosSettings>)DdosSettings).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(DdosSettings);
             }
             if (Optional.IsCollectionDefined(IpTags))
             {
@@ -81,7 +80,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in IpTags)
                 {
-                    ((IJsonModel<IpTag>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -93,7 +92,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(PublicIPPrefix))
             {
                 writer.WritePropertyName("publicIPPrefix"u8);
-                ((IJsonModel<SubResource>)PublicIPPrefix).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(PublicIPPrefix);
             }
             if (Optional.IsDefined(IdleTimeoutInMinutes))
             {

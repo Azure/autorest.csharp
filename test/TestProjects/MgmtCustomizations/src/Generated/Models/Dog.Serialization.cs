@@ -52,7 +52,7 @@ namespace MgmtCustomizations.Models
             if (Optional.IsDefined(Friend))
             {
                 writer.WritePropertyName("friend"u8);
-                ((IJsonModel<Pet>)Friend).Write(writer, options);
+                writer.WriteObjectValue<Pet>(Friend, options);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

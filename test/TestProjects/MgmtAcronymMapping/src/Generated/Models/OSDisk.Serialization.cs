@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -24,7 +23,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(EncryptionSettings))
             {
                 writer.WritePropertyName("encryptionSettings"u8);
-                ((IJsonModel<DiskEncryptionSettings>)EncryptionSettings).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(EncryptionSettings);
             }
             if (Optional.IsDefined(Name))
             {
@@ -34,12 +33,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
-                ((IJsonModel<VirtualHardDisk>)Vhd).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Vhd);
             }
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                ((IJsonModel<VirtualHardDisk>)Image).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Image);
             }
             if (Optional.IsDefined(Caching))
             {
@@ -54,7 +53,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
-                ((IJsonModel<DiffDiskSettings>)DiffDiskSettings).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(DiffDiskSettings);
             }
             writer.WritePropertyName("createOption"u8);
             writer.WriteStringValue(CreateOption.ToString());
@@ -66,7 +65,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                ((IJsonModel<ManagedDiskParameters>)ManagedDisk).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ManagedDisk);
             }
             writer.WriteEndObject();
         }

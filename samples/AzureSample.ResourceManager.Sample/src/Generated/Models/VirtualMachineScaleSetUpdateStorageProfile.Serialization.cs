@@ -37,12 +37,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(ImageReference))
             {
                 writer.WritePropertyName("imageReference"u8);
-                ((IJsonModel<ImageReference>)ImageReference).Write(writer, options);
+                writer.WriteObjectValue(ImageReference, options);
             }
             if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                ((IJsonModel<VirtualMachineScaleSetUpdateOSDisk>)OSDisk).Write(writer, options);
+                writer.WriteObjectValue(OSDisk, options);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -50,7 +50,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    ((IJsonModel<VirtualMachineScaleSetDataDisk>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

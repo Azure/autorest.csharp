@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -74,7 +73,7 @@ namespace MgmtParamOrdering
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<VirtualMachineScaleSetData>)data).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -168,7 +167,7 @@ namespace MgmtParamOrdering
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<VirtualMachineScaleSetPatch>)patch).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(patch);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -464,7 +463,7 @@ namespace MgmtParamOrdering
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<VirtualMachineScaleSetVMInstanceIDs>)vmInstanceIds).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(vmInstanceIds);
                 request.Content = content;
             }
             _userAgent.Apply(message);
@@ -566,7 +565,7 @@ namespace MgmtParamOrdering
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<VirtualMachineScaleSetVMInstanceRequiredIDs>)vmInstanceIds).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(vmInstanceIds);
             request.Content = content;
             _userAgent.Apply(message);
             return message;

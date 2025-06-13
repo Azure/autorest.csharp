@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -19,7 +18,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(TerminateNotificationProfile))
             {
                 writer.WritePropertyName("terminateNotificationProfile"u8);
-                ((IJsonModel<TerminateNotificationProfile>)TerminateNotificationProfile).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(TerminateNotificationProfile);
             }
             writer.WriteEndObject();
         }

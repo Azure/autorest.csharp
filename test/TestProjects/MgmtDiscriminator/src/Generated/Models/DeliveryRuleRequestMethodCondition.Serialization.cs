@@ -38,7 +38,7 @@ namespace MgmtDiscriminator.Models
 
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("parameters"u8);
-            ((IJsonModel<RequestMethodMatchConditionParameters>)Parameters).Write(writer, options);
+            writer.WriteObjectValue(Parameters, options);
         }
 
         DeliveryRuleRequestMethodCondition IJsonModel<DeliveryRuleRequestMethodCondition>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

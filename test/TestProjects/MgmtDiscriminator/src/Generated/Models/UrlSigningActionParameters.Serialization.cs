@@ -50,7 +50,7 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in ParameterNameOverride)
                 {
-                    ((IJsonModel<UrlSigningParamIdentifier>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

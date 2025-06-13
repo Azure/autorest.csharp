@@ -59,7 +59,7 @@ namespace AzureSample.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in VirtualMachines)
                 {
-                    ((IJsonModel<SubResourceWithColocationStatus>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -69,7 +69,7 @@ namespace AzureSample.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in VirtualMachineScaleSets)
                 {
-                    ((IJsonModel<SubResourceWithColocationStatus>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -79,14 +79,14 @@ namespace AzureSample.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in AvailabilitySets)
                 {
-                    ((IJsonModel<SubResourceWithColocationStatus>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(ColocationStatus))
             {
                 writer.WritePropertyName("colocationStatus"u8);
-                ((IJsonModel<InstanceViewStatus>)ColocationStatus).Write(writer, options);
+                writer.WriteObjectValue(ColocationStatus, options);
             }
             writer.WriteEndObject();
         }

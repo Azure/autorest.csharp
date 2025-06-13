@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -22,7 +21,7 @@ namespace MgmtPartialResource
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                ((IJsonModel<PublicIPAddressSku>)Sku).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Sku);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -59,7 +58,7 @@ namespace MgmtPartialResource
             if (Optional.IsDefined(ServicePublicIPAddress))
             {
                 writer.WritePropertyName("servicePublicIPAddress"u8);
-                ((IJsonModel<PublicIPAddressData>)ServicePublicIPAddress).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ServicePublicIPAddress);
             }
             if (Optional.IsDefined(MigrationPhase))
             {
@@ -69,7 +68,7 @@ namespace MgmtPartialResource
             if (Optional.IsDefined(LinkedPublicIPAddress))
             {
                 writer.WritePropertyName("linkedPublicIPAddress"u8);
-                ((IJsonModel<PublicIPAddressData>)LinkedPublicIPAddress).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(LinkedPublicIPAddress);
             }
             if (Optional.IsDefined(DeleteOption))
             {

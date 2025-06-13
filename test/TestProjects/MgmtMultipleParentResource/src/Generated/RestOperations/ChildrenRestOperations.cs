@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -78,7 +77,7 @@ namespace MgmtMultipleParentResource
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<ChildBodyData>)data).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -186,7 +185,7 @@ namespace MgmtMultipleParentResource
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<ChildBodyUpdate>)childBody).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(childBody);
             request.Content = content;
             _userAgent.Apply(message);
             return message;

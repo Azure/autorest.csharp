@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -18,7 +17,7 @@ namespace CognitiveSearch.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("magnitude"u8);
-            ((IJsonModel<MagnitudeScoringParameters>)Parameters).Write(writer, ModelSerializationExtensions.WireOptions);
+            writer.WriteObjectValue(Parameters);
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type);
             writer.WritePropertyName("fieldName"u8);

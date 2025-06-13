@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -22,7 +21,7 @@ namespace MgmtLRO
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                ((IJsonModel<BarProperties>)Properties).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Properties);
             }
             if (Optional.IsCollectionDefined(Tags))
             {

@@ -38,7 +38,7 @@ namespace TypeSchemaMapping.Models
             if (Optional.IsDefined(AbstractModelProperty))
             {
                 writer.WritePropertyName("AbstractModelProperty"u8);
-                ((IJsonModel<AbstractModel>)AbstractModelProperty).Write(writer, options);
+                writer.WriteObjectValue(AbstractModelProperty, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

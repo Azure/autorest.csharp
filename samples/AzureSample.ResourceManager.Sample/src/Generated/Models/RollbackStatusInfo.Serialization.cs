@@ -49,7 +49,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (options.Format != "W" && Optional.IsDefined(RollbackError))
             {
                 writer.WritePropertyName("rollbackError"u8);
-                ((IJsonModel<ApiError>)RollbackError).Write(writer, options);
+                writer.WriteObjectValue(RollbackError, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

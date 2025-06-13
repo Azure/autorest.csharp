@@ -21,7 +21,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                ((IJsonModel<MgmtAcronymMappingPlan>)Plan).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Plan);
             }
             if (Optional.IsDefined(Identity))
             {
@@ -54,37 +54,37 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(HardwareProfile))
             {
                 writer.WritePropertyName("hardwareProfile"u8);
-                ((IJsonModel<HardwareProfile>)HardwareProfile).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(HardwareProfile);
             }
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                ((IJsonModel<StorageProfile>)StorageProfile).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(StorageProfile);
             }
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                ((IJsonModel<AdditionalCapabilities>)AdditionalCapabilities).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(AdditionalCapabilities);
             }
             if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                ((IJsonModel<OSProfile>)OSProfile).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(OSProfile);
             }
             if (Optional.IsDefined(NetworkProfile))
             {
                 writer.WritePropertyName("networkProfile"u8);
-                ((IJsonModel<NetworkProfile>)NetworkProfile).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(NetworkProfile);
             }
             if (Optional.IsDefined(SecurityProfile))
             {
                 writer.WritePropertyName("securityProfile"u8);
-                ((IJsonModel<SecurityProfile>)SecurityProfile).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(SecurityProfile);
             }
             if (Optional.IsDefined(DiagnosticsProfile))
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
-                ((IJsonModel<DiagnosticsProfile>)DiagnosticsProfile).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(DiagnosticsProfile);
             }
             if (Optional.IsDefined(AvailabilitySet))
             {
@@ -114,7 +114,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(BillingProfile))
             {
                 writer.WritePropertyName("billingProfile"u8);
-                ((IJsonModel<BillingProfile>)BillingProfile).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(BillingProfile);
             }
             if (Optional.IsDefined(Host))
             {

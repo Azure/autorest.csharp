@@ -43,7 +43,7 @@ namespace _Type._Array.Models
                 writer.WriteStartArray();
                 foreach (var item in Children)
                 {
-                    ((IJsonModel<InnerModel>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

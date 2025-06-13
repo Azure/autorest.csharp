@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -21,7 +20,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(ActiveDirectoryProperties))
             {
                 writer.WritePropertyName("activeDirectoryProperties"u8);
-                ((IJsonModel<ActiveDirectoryProperties>)ActiveDirectoryProperties).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ActiveDirectoryProperties);
             }
             if (Optional.IsDefined(DefaultSharePermission))
             {

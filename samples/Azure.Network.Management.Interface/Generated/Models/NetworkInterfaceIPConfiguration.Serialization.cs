@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -35,7 +34,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualNetworkTaps)
                 {
-                    ((IJsonModel<VirtualNetworkTap>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -45,7 +44,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ApplicationGatewayBackendAddressPools)
                 {
-                    ((IJsonModel<ApplicationGatewayBackendAddressPool>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -55,7 +54,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancerBackendAddressPools)
                 {
-                    ((IJsonModel<BackendAddressPool>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -65,7 +64,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancerInboundNatRules)
                 {
-                    ((IJsonModel<InboundNatRule>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -87,7 +86,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                ((IJsonModel<Subnet>)Subnet).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Subnet);
             }
             if (Optional.IsDefined(Primary))
             {
@@ -97,7 +96,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(PublicIPAddress))
             {
                 writer.WritePropertyName("publicIPAddress"u8);
-                ((IJsonModel<PublicIPAddress>)PublicIPAddress).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(PublicIPAddress);
             }
             if (Optional.IsCollectionDefined(ApplicationSecurityGroups))
             {
@@ -105,7 +104,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ApplicationSecurityGroups)
                 {
-                    ((IJsonModel<ApplicationSecurityGroup>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

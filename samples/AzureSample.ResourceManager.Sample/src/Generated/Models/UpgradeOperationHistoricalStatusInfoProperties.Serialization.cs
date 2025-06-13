@@ -39,17 +39,17 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (options.Format != "W" && Optional.IsDefined(RunningStatus))
             {
                 writer.WritePropertyName("runningStatus"u8);
-                ((IJsonModel<UpgradeOperationHistoryStatus>)RunningStatus).Write(writer, options);
+                writer.WriteObjectValue(RunningStatus, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Progress))
             {
                 writer.WritePropertyName("progress"u8);
-                ((IJsonModel<RollingUpgradeProgressInfo>)Progress).Write(writer, options);
+                writer.WriteObjectValue(Progress, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Error))
             {
                 writer.WritePropertyName("error"u8);
-                ((IJsonModel<ApiError>)Error).Write(writer, options);
+                writer.WriteObjectValue(Error, options);
             }
             if (options.Format != "W" && Optional.IsDefined(StartedBy))
             {
@@ -59,12 +59,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (options.Format != "W" && Optional.IsDefined(TargetImageReference))
             {
                 writer.WritePropertyName("targetImageReference"u8);
-                ((IJsonModel<ImageReference>)TargetImageReference).Write(writer, options);
+                writer.WriteObjectValue(TargetImageReference, options);
             }
             if (options.Format != "W" && Optional.IsDefined(RollbackInfo))
             {
                 writer.WritePropertyName("rollbackInfo"u8);
-                ((IJsonModel<RollbackStatusInfo>)RollbackInfo).Write(writer, options);
+                writer.WriteObjectValue(RollbackInfo, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -19,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Super))
             {
                 writer.WritePropertyName("super"u8);
-                ((IJsonModel<VeryDeepSinglePropertyModel>)Super).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Super);
             }
             writer.WriteEndObject();
         }

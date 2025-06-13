@@ -77,22 +77,22 @@ namespace MgmtDiscriminator
             if (Optional.IsDefined(ShellProperty))
             {
                 writer.WritePropertyName("shellProperty"u8);
-                ((IJsonModel<Shell>)ShellProperty).Write(writer, options);
+                writer.WriteObjectValue(ShellProperty, options);
             }
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                ((IJsonModel<Sku1>)Sku).Write(writer, options);
+                writer.WriteObjectValue(Sku, options);
             }
             if (Optional.IsDefined(Unflattened))
             {
                 writer.WritePropertyName("unflattened"u8);
-                ((IJsonModel<Unflattened>)Unflattened).Write(writer, options);
+                writer.WriteObjectValue(Unflattened, options);
             }
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                ((IJsonModel<DeliveryRuleProperties>)Properties).Write(writer, options);
+                writer.WriteObjectValue(Properties, options);
             }
             foreach (var item in AdditionalProperties)
             {

@@ -40,7 +40,7 @@ namespace _Specs_.Azure.Example.Basic.Models
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("modelProperty"u8);
-                ((IJsonModel<Model>)ModelProperty).Write(writer, options);
+                writer.WriteObjectValue(ModelProperty, options);
             }
             if (Optional.IsCollectionDefined(ArrayProperty))
             {

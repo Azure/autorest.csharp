@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -26,7 +25,7 @@ namespace MgmtOmitOperationGroups
             if (Optional.IsDefined(Modelx))
             {
                 writer.WritePropertyName("modelx"u8);
-                ((IJsonModel<ModelX>)Modelx).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Modelx);
             }
             writer.WriteEndObject();
         }

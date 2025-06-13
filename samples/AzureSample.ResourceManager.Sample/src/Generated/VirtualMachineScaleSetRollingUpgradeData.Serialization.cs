@@ -45,22 +45,22 @@ namespace AzureSample.ResourceManager.Sample
             if (options.Format != "W" && Optional.IsDefined(Policy))
             {
                 writer.WritePropertyName("policy"u8);
-                ((IJsonModel<RollingUpgradePolicy>)Policy).Write(writer, options);
+                writer.WriteObjectValue(Policy, options);
             }
             if (options.Format != "W" && Optional.IsDefined(RunningStatus))
             {
                 writer.WritePropertyName("runningStatus"u8);
-                ((IJsonModel<RollingUpgradeRunningStatus>)RunningStatus).Write(writer, options);
+                writer.WriteObjectValue(RunningStatus, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Progress))
             {
                 writer.WritePropertyName("progress"u8);
-                ((IJsonModel<RollingUpgradeProgressInfo>)Progress).Write(writer, options);
+                writer.WriteObjectValue(Progress, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Error))
             {
                 writer.WritePropertyName("error"u8);
-                ((IJsonModel<ApiError>)Error).Write(writer, options);
+                writer.WriteObjectValue(Error, options);
             }
             writer.WriteEndObject();
         }

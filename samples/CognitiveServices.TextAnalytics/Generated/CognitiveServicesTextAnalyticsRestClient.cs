@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -58,7 +57,7 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<MultiLanguageBatchInput>)input).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
             return message;
         }
@@ -144,7 +143,7 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<MultiLanguageBatchInput>)input).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
             return message;
         }
@@ -230,7 +229,7 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<MultiLanguageBatchInput>)input).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
             return message;
         }
@@ -316,7 +315,7 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<LanguageBatchInput>)input).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
             return message;
         }
@@ -402,7 +401,7 @@ namespace CognitiveServices.TextAnalytics
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<MultiLanguageBatchInput>)input).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
             return message;
         }

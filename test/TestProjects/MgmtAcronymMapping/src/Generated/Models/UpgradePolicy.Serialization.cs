@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -24,12 +23,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(RollingUpgradePolicy))
             {
                 writer.WritePropertyName("rollingUpgradePolicy"u8);
-                ((IJsonModel<RollingUpgradePolicy>)RollingUpgradePolicy).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(RollingUpgradePolicy);
             }
             if (Optional.IsDefined(AutomaticOSUpgradePolicy))
             {
                 writer.WritePropertyName("automaticOSUpgradePolicy"u8);
-                ((IJsonModel<AutomaticOSUpgradePolicy>)AutomaticOSUpgradePolicy).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(AutomaticOSUpgradePolicy);
             }
             writer.WriteEndObject();
         }

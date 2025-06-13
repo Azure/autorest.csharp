@@ -39,32 +39,32 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                ((IJsonModel<VirtualMachineScaleSetOSProfile>)OSProfile).Write(writer, options);
+                writer.WriteObjectValue(OSProfile, options);
             }
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                ((IJsonModel<VirtualMachineScaleSetStorageProfile>)StorageProfile).Write(writer, options);
+                writer.WriteObjectValue(StorageProfile, options);
             }
             if (Optional.IsDefined(NetworkProfile))
             {
                 writer.WritePropertyName("networkProfile"u8);
-                ((IJsonModel<VirtualMachineScaleSetNetworkProfile>)NetworkProfile).Write(writer, options);
+                writer.WriteObjectValue(NetworkProfile, options);
             }
             if (Optional.IsDefined(SecurityProfile))
             {
                 writer.WritePropertyName("securityProfile"u8);
-                ((IJsonModel<SecurityProfile>)SecurityProfile).Write(writer, options);
+                writer.WriteObjectValue(SecurityProfile, options);
             }
             if (Optional.IsDefined(DiagnosticsProfile))
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
-                ((IJsonModel<DiagnosticsProfile>)DiagnosticsProfile).Write(writer, options);
+                writer.WriteObjectValue(DiagnosticsProfile, options);
             }
             if (Optional.IsDefined(ExtensionProfile))
             {
                 writer.WritePropertyName("extensionProfile"u8);
-                ((IJsonModel<VirtualMachineScaleSetExtensionProfile>)ExtensionProfile).Write(writer, options);
+                writer.WriteObjectValue(ExtensionProfile, options);
             }
             if (Optional.IsDefined(LicenseType))
             {
@@ -84,12 +84,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(BillingProfile))
             {
                 writer.WritePropertyName("billingProfile"u8);
-                ((IJsonModel<BillingProfile>)BillingProfile).Write(writer, options);
+                writer.WriteObjectValue(BillingProfile, options);
             }
             if (Optional.IsDefined(ScheduledEventsProfile))
             {
                 writer.WritePropertyName("scheduledEventsProfile"u8);
-                ((IJsonModel<ScheduledEventsProfile>)ScheduledEventsProfile).Write(writer, options);
+                writer.WriteObjectValue(ScheduledEventsProfile, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

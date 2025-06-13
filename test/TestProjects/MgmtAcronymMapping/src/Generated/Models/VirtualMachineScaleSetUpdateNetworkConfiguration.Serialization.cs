@@ -48,7 +48,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                ((IJsonModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)DnsSettings).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(DnsSettings);
             }
             if (Optional.IsCollectionDefined(IPConfigurations))
             {
@@ -56,7 +56,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in IPConfigurations)
                 {
-                    ((IJsonModel<VirtualMachineScaleSetUpdateIPConfiguration>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

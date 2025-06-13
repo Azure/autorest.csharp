@@ -48,7 +48,7 @@ namespace model_flattening.Models
             if (Optional.IsDefined(ParentError))
             {
                 writer.WritePropertyName("parentError"u8);
-                ((IJsonModel<Error>)ParentError).Write(writer, options);
+                writer.WriteObjectValue(ParentError, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

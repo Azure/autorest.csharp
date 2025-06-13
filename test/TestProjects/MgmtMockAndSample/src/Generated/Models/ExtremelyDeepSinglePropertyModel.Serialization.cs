@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -19,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Extreme))
             {
                 writer.WritePropertyName("extreme"u8);
-                ((IJsonModel<SuperDeepSinglePropertyModel>)Extreme).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Extreme);
             }
             writer.WriteEndObject();
         }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -63,7 +62,7 @@ namespace MgmtExtensionResource
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content0 = new Utf8JsonRequestContent();
-            ((IJsonModel<ValidateSomethingContent>)content).Write(content0.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content0.JsonWriter.WriteObjectValue(content);
             request.Content = content0;
             _userAgent.Apply(message);
             return message;

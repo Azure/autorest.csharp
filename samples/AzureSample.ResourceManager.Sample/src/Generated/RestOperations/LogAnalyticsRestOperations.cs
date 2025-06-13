@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -67,7 +66,7 @@ namespace AzureSample.ResourceManager.Sample
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content0 = new Utf8JsonRequestContent();
-            ((IJsonModel<RequestRateByIntervalContent>)content).Write(content0.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content0.JsonWriter.WriteObjectValue(content, ModelSerializationExtensions.WireOptions);
             request.Content = content0;
             _userAgent.Apply(message);
             return message;
@@ -151,7 +150,7 @@ namespace AzureSample.ResourceManager.Sample
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content0 = new Utf8JsonRequestContent();
-            ((IJsonModel<ThrottledRequestsContent>)content).Write(content0.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content0.JsonWriter.WriteObjectValue(content, ModelSerializationExtensions.WireOptions);
             request.Content = content0;
             _userAgent.Apply(message);
             return message;

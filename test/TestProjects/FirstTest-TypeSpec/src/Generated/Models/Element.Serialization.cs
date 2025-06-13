@@ -41,7 +41,7 @@ namespace FirstTestTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in Extension)
                 {
-                    ((IJsonModel<Extension>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

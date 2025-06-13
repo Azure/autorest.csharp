@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -21,7 +20,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WritePropertyName("targetResourceRegion"u8);
             writer.WriteStringValue(TargetResourceRegion);
             writer.WritePropertyName("copyAuthorization"u8);
-            ((IJsonModel<CopyAuthorizationResult>)CopyAuthorization).Write(writer, ModelSerializationExtensions.WireOptions);
+            writer.WriteObjectValue(CopyAuthorization);
             writer.WriteEndObject();
         }
 

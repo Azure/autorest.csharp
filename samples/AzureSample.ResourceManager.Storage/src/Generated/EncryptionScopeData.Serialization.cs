@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -34,7 +33,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(KeyVaultProperties))
             {
                 writer.WritePropertyName("keyVaultProperties"u8);
-                ((IJsonModel<EncryptionScopeKeyVaultProperties>)KeyVaultProperties).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(KeyVaultProperties);
             }
             if (Optional.IsDefined(RequireInfrastructureEncryption))
             {

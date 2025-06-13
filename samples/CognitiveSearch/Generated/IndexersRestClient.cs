@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,7 +39,7 @@ namespace CognitiveSearch
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
-        internal HttpMessage CreateResetRequest(string indexerName, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateResetRequest(string indexerName, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -61,7 +60,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> is null. </exception>
-        public async Task<Response> ResetAsync(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ResetAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -84,7 +83,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> is null. </exception>
-        public Response Reset(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response Reset(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -102,7 +101,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateRunRequest(string indexerName, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateRunRequest(string indexerName, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -123,7 +122,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> is null. </exception>
-        public async Task<Response> RunAsync(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response> RunAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -146,7 +145,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> is null. </exception>
-        public Response Run(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response Run(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -164,7 +163,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string indexerName, Enum0 prefer, Indexer indexer, Models.RequestOptions requestOptions, AccessCondition accessCondition)
+        internal HttpMessage CreateCreateOrUpdateRequest(string indexerName, Enum0 prefer, Indexer indexer, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -188,7 +187,7 @@ namespace CognitiveSearch
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<Indexer>)indexer).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(indexer);
             request.Content = content;
             return message;
         }
@@ -201,7 +200,7 @@ namespace CognitiveSearch
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> or <paramref name="indexer"/> is null. </exception>
-        public async Task<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Enum0 prefer, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Enum0 prefer, Indexer indexer, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -237,7 +236,7 @@ namespace CognitiveSearch
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> or <paramref name="indexer"/> is null. </exception>
-        public Response<Indexer> CreateOrUpdate(string indexerName, Enum0 prefer, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public Response<Indexer> CreateOrUpdate(string indexerName, Enum0 prefer, Indexer indexer, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -265,7 +264,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string indexerName, Models.RequestOptions requestOptions, AccessCondition accessCondition)
+        internal HttpMessage CreateDeleteRequest(string indexerName, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -295,7 +294,7 @@ namespace CognitiveSearch
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string indexerName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsync(string indexerName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -320,7 +319,7 @@ namespace CognitiveSearch
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> is null. </exception>
-        public Response Delete(string indexerName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public Response Delete(string indexerName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -339,7 +338,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateGetRequest(string indexerName, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateGetRequest(string indexerName, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -360,7 +359,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> is null. </exception>
-        public async Task<Response<Indexer>> GetAsync(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Indexer>> GetAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -388,7 +387,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> is null. </exception>
-        public Response<Indexer> Get(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<Indexer> Get(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -411,7 +410,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateListRequest(string select, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateListRequest(string select, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -433,7 +432,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ListIndexersResult>> ListAsync(string select = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ListIndexersResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateListRequest(select, requestOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -455,7 +454,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ListIndexersResult> List(string select = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<ListIndexersResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateListRequest(select, requestOptions);
             _pipeline.Send(message, cancellationToken);
@@ -473,7 +472,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateCreateRequest(Indexer indexer, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateCreateRequest(Indexer indexer, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -486,7 +485,7 @@ namespace CognitiveSearch
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<Indexer>)indexer).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(indexer);
             request.Content = content;
             return message;
         }
@@ -496,7 +495,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexer"/> is null. </exception>
-        public async Task<Response<Indexer>> CreateAsync(Indexer indexer, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Indexer>> CreateAsync(Indexer indexer, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexer == null)
             {
@@ -524,7 +523,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexer"/> is null. </exception>
-        public Response<Indexer> Create(Indexer indexer, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<Indexer> Create(Indexer indexer, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexer == null)
             {
@@ -547,7 +546,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateGetStatusRequest(string indexerName, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateGetStatusRequest(string indexerName, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -568,7 +567,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> is null. </exception>
-        public async Task<Response<IndexerExecutionInfo>> GetStatusAsync(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<IndexerExecutionInfo>> GetStatusAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -596,7 +595,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexerName"/> is null. </exception>
-        public Response<IndexerExecutionInfo> GetStatus(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<IndexerExecutionInfo> GetStatus(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {

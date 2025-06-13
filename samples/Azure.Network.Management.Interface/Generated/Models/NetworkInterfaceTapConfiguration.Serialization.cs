@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -31,7 +30,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(VirtualNetworkTap))
             {
                 writer.WritePropertyName("virtualNetworkTap"u8);
-                ((IJsonModel<VirtualNetworkTap>)VirtualNetworkTap).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(VirtualNetworkTap);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

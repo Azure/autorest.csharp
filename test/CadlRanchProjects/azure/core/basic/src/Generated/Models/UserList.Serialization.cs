@@ -39,7 +39,7 @@ namespace _Specs_.Azure.Core.Basic.Models
             writer.WriteStartArray();
             foreach (var item in Users)
             {
-                ((IJsonModel<User>)item).Write(writer, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

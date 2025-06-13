@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -102,7 +101,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<IntWrapper>)complexBody).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(complexBody, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -216,7 +215,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<LongWrapper>)complexBody).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(complexBody, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -330,7 +329,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<FloatWrapper>)complexBody).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(complexBody, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -444,7 +443,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<DoubleWrapper>)complexBody).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(complexBody, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -558,7 +557,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<BooleanWrapper>)complexBody).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(complexBody, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -672,7 +671,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<StringWrapper>)complexBody).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(complexBody, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -786,7 +785,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<DateWrapper>)complexBody).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(complexBody, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -900,7 +899,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<DatetimeWrapper>)complexBody).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(complexBody, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -1014,7 +1013,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<Datetimerfc1123Wrapper>)complexBody).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(complexBody, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -1128,7 +1127,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<DurationWrapper>)complexBody).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(complexBody, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -1242,7 +1241,7 @@ namespace body_complex
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<ByteWrapper>)complexBody).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(complexBody, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -52,7 +51,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
-                ((IJsonModel<ImmutableStorageWithVersioning>)ImmutableStorageWithVersioning).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ImmutableStorageWithVersioning);
             }
             if (Optional.IsDefined(EnableNfsV3RootSquash))
             {

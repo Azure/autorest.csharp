@@ -42,7 +42,7 @@ namespace MgmtCustomizations.Models
             if (Optional.IsDefined(Pet))
             {
                 writer.WritePropertyName("pet"u8);
-                ((IJsonModel<Pet>)Pet).Write(writer, options);
+                writer.WriteObjectValue(Pet, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
@@ -45,7 +44,7 @@ namespace CognitiveSearch
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
-        internal HttpMessage CreateCountRequest(Models.RequestOptions requestOptions)
+        internal HttpMessage CreateCountRequest(RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -65,7 +64,7 @@ namespace CognitiveSearch
         /// <summary> Queries the number of documents in the index. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<long>> CountAsync(Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<long>> CountAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateCountRequest(requestOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -86,7 +85,7 @@ namespace CognitiveSearch
         /// <summary> Queries the number of documents in the index. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<long> Count(Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<long> Count(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateCountRequest(requestOptions);
             _pipeline.Send(message, cancellationToken);
@@ -104,7 +103,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateSearchGetRequest(string searchText, SearchOptions searchOptions, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateSearchGetRequest(string searchText, SearchOptions searchOptions, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -200,7 +199,7 @@ namespace CognitiveSearch
         /// <param name="searchOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<SearchDocumentsResult>> SearchGetAsync(string searchText = null, SearchOptions searchOptions = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<SearchDocumentsResult>> SearchGetAsync(string searchText = null, SearchOptions searchOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateSearchGetRequest(searchText, searchOptions, requestOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -223,7 +222,7 @@ namespace CognitiveSearch
         /// <param name="searchOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SearchDocumentsResult> SearchGet(string searchText = null, SearchOptions searchOptions = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<SearchDocumentsResult> SearchGet(string searchText = null, SearchOptions searchOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateSearchGetRequest(searchText, searchOptions, requestOptions);
             _pipeline.Send(message, cancellationToken);
@@ -241,7 +240,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateSearchPostRequest(SearchRequest searchRequest, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateSearchPostRequest(SearchRequest searchRequest, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -257,7 +256,7 @@ namespace CognitiveSearch
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<SearchRequest>)searchRequest).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(searchRequest);
             request.Content = content;
             return message;
         }
@@ -267,7 +266,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="searchRequest"/> is null. </exception>
-        public async Task<Response<SearchDocumentsResult>> SearchPostAsync(SearchRequest searchRequest, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<SearchDocumentsResult>> SearchPostAsync(SearchRequest searchRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (searchRequest == null)
             {
@@ -295,7 +294,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="searchRequest"/> is null. </exception>
-        public Response<SearchDocumentsResult> SearchPost(SearchRequest searchRequest, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<SearchDocumentsResult> SearchPost(SearchRequest searchRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (searchRequest == null)
             {
@@ -318,7 +317,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateGetRequest(string key, IEnumerable<string> selectedFields, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateGetRequest(string key, IEnumerable<string> selectedFields, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -347,7 +346,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async Task<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -376,7 +375,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public Response<object> Get(string key, IEnumerable<string> selectedFields = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<object> Get(string key, IEnumerable<string> selectedFields = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -399,7 +398,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateSuggestGetRequest(string searchText, string suggesterName, SuggestOptions suggestOptions, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateSuggestGetRequest(string searchText, string suggesterName, SuggestOptions suggestOptions, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -461,7 +460,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="searchText"/> or <paramref name="suggesterName"/> is null. </exception>
-        public async Task<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, SuggestOptions suggestOptions = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, SuggestOptions suggestOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -495,7 +494,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="searchText"/> or <paramref name="suggesterName"/> is null. </exception>
-        public Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, SuggestOptions suggestOptions = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, SuggestOptions suggestOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -522,7 +521,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateSuggestPostRequest(SuggestRequest suggestRequest, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateSuggestPostRequest(SuggestRequest suggestRequest, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -538,7 +537,7 @@ namespace CognitiveSearch
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<SuggestRequest>)suggestRequest).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(suggestRequest);
             request.Content = content;
             return message;
         }
@@ -548,7 +547,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="suggestRequest"/> is null. </exception>
-        public async Task<Response<SuggestDocumentsResult>> SuggestPostAsync(SuggestRequest suggestRequest, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<SuggestDocumentsResult>> SuggestPostAsync(SuggestRequest suggestRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (suggestRequest == null)
             {
@@ -576,7 +575,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="suggestRequest"/> is null. </exception>
-        public Response<SuggestDocumentsResult> SuggestPost(SuggestRequest suggestRequest, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<SuggestDocumentsResult> SuggestPost(SuggestRequest suggestRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (suggestRequest == null)
             {
@@ -599,7 +598,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateIndexRequest(IndexBatch batch, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateIndexRequest(IndexBatch batch, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -615,7 +614,7 @@ namespace CognitiveSearch
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<IndexBatch>)batch).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(batch);
             request.Content = content;
             return message;
         }
@@ -625,7 +624,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="batch"/> is null. </exception>
-        public async Task<Response<IndexDocumentsResult>> IndexAsync(IndexBatch batch, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<IndexDocumentsResult>> IndexAsync(IndexBatch batch, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (batch == null)
             {
@@ -654,7 +653,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="batch"/> is null. </exception>
-        public Response<IndexDocumentsResult> Index(IndexBatch batch, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<IndexDocumentsResult> Index(IndexBatch batch, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (batch == null)
             {
@@ -678,7 +677,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateAutocompleteGetRequest(string searchText, string suggesterName, Models.RequestOptions requestOptions, AutocompleteOptions autocompleteOptions)
+        internal HttpMessage CreateAutocompleteGetRequest(string searchText, string suggesterName, RequestOptions requestOptions, AutocompleteOptions autocompleteOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -736,7 +735,7 @@ namespace CognitiveSearch
         /// <param name="autocompleteOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="searchText"/> or <paramref name="suggesterName"/> is null. </exception>
-        public async Task<Response<AutocompleteResult>> AutocompleteGetAsync(string searchText, string suggesterName, Models.RequestOptions requestOptions = null, AutocompleteOptions autocompleteOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<AutocompleteResult>> AutocompleteGetAsync(string searchText, string suggesterName, RequestOptions requestOptions = null, AutocompleteOptions autocompleteOptions = null, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -770,7 +769,7 @@ namespace CognitiveSearch
         /// <param name="autocompleteOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="searchText"/> or <paramref name="suggesterName"/> is null. </exception>
-        public Response<AutocompleteResult> AutocompleteGet(string searchText, string suggesterName, Models.RequestOptions requestOptions = null, AutocompleteOptions autocompleteOptions = null, CancellationToken cancellationToken = default)
+        public Response<AutocompleteResult> AutocompleteGet(string searchText, string suggesterName, RequestOptions requestOptions = null, AutocompleteOptions autocompleteOptions = null, CancellationToken cancellationToken = default)
         {
             if (searchText == null)
             {
@@ -797,7 +796,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateAutocompletePostRequest(AutocompleteRequest autocompleteRequest, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateAutocompletePostRequest(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -813,7 +812,7 @@ namespace CognitiveSearch
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<AutocompleteRequest>)autocompleteRequest).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(autocompleteRequest);
             request.Content = content;
             return message;
         }
@@ -823,7 +822,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="autocompleteRequest"/> is null. </exception>
-        public async Task<Response<AutocompleteResult>> AutocompletePostAsync(AutocompleteRequest autocompleteRequest, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<AutocompleteResult>> AutocompletePostAsync(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (autocompleteRequest == null)
             {
@@ -851,7 +850,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="autocompleteRequest"/> is null. </exception>
-        public Response<AutocompleteResult> AutocompletePost(AutocompleteRequest autocompleteRequest, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<AutocompleteResult> AutocompletePost(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (autocompleteRequest == null)
             {

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -160,7 +159,7 @@ namespace MgmtExactMatchFlattenInheritance
                 Foo = foo
             };
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<AzureResourceFlattenModel5>)model).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             _userAgent.Apply(message);
             return message;

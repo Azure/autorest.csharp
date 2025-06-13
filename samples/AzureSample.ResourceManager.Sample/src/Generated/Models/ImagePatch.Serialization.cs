@@ -46,7 +46,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                ((IJsonModel<ImageStorageProfile>)StorageProfile).Write(writer, options);
+                writer.WriteObjectValue(StorageProfile, options);
             }
             if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {

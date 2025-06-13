@@ -39,21 +39,21 @@ namespace Payload.MultiPart.Models
             writer.WritePropertyName("id"u8);
             writer.WriteStringValue(Id);
             writer.WritePropertyName("address"u8);
-            ((IJsonModel<Address>)Address).Write(writer, options);
+            writer.WriteObjectValue(Address, options);
             writer.WritePropertyName("profileImage"u8);
-            ((IJsonModel<FileRequiredMetaData>)ProfileImage).Write(writer, options);
+            writer.WriteObjectValue(ProfileImage, options);
             writer.WritePropertyName("previousAddresses"u8);
             writer.WriteStartArray();
             foreach (var item in PreviousAddresses)
             {
-                ((IJsonModel<Address>)item).Write(writer, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("pictures"u8);
             writer.WriteStartArray();
             foreach (var item in Pictures)
             {
-                ((IJsonModel<FileRequiredMetaData>)item).Write(writer, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

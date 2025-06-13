@@ -59,7 +59,7 @@ namespace MgmtScopeResource
                 foreach (var item in Parameters)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IJsonModel<ParameterValuesValue>)item.Value).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item.Value);
                 }
                 writer.WriteEndObject();
             }
@@ -91,7 +91,7 @@ namespace MgmtScopeResource
                 writer.WriteStartArray();
                 foreach (var item in NonComplianceMessages)
                 {
-                    ((IJsonModel<NonComplianceMessage>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

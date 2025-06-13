@@ -44,12 +44,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (options.Format != "W" && Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                ((IJsonModel<AzureSampleResourceManagerSampleSku>)Sku).Write(writer, options);
+                writer.WriteObjectValue(Sku, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Capacity))
             {
                 writer.WritePropertyName("capacity"u8);
-                ((IJsonModel<VirtualMachineScaleSetSkuCapacity>)Capacity).Write(writer, options);
+                writer.WriteObjectValue(Capacity, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

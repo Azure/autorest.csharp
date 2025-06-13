@@ -39,7 +39,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(Name1))
             {
                 writer.WritePropertyName("name1"u8);
-                ((IJsonModel<Sku2>)Name1).Write(writer, options);
+                writer.WriteObjectValue(Name1, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

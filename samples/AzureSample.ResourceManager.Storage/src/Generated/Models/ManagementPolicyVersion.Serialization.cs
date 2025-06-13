@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -19,17 +18,17 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(TierToCool))
             {
                 writer.WritePropertyName("tierToCool"u8);
-                ((IJsonModel<DateAfterCreation>)TierToCool).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(TierToCool);
             }
             if (Optional.IsDefined(TierToArchive))
             {
                 writer.WritePropertyName("tierToArchive"u8);
-                ((IJsonModel<DateAfterCreation>)TierToArchive).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(TierToArchive);
             }
             if (Optional.IsDefined(Delete))
             {
                 writer.WritePropertyName("delete"u8);
-                ((IJsonModel<DateAfterCreation>)Delete).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Delete);
             }
             writer.WriteEndObject();
         }

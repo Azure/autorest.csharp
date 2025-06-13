@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -24,7 +23,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(AccessPolicy))
             {
                 writer.WritePropertyName("accessPolicy"u8);
-                ((IJsonModel<AccessPolicy>)AccessPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(AccessPolicy);
             }
             writer.WriteEndObject();
         }

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -36,7 +35,7 @@ namespace MgmtMockAndSample
                 writer.WriteStartArray();
                 foreach (var item in RuleCollections)
                 {
-                    ((IJsonModel<FirewallPolicyRuleCollection>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

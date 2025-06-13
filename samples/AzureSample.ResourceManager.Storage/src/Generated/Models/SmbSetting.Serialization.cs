@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -19,7 +18,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Multichannel))
             {
                 writer.WritePropertyName("multichannel"u8);
-                ((IJsonModel<Multichannel>)Multichannel).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Multichannel);
             }
             if (Optional.IsDefined(Versions))
             {

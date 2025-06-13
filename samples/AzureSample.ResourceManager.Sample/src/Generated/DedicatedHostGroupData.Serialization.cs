@@ -91,7 +91,7 @@ namespace AzureSample.ResourceManager.Sample
             if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                ((IJsonModel<DedicatedHostGroupInstanceView>)InstanceView).Write(writer, options);
+                writer.WriteObjectValue(InstanceView, options);
             }
             if (Optional.IsDefined(SupportAutomaticPlacement))
             {

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -26,13 +25,13 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Skills)
             {
-                ((IJsonModel<Skill>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(CognitiveServicesAccount))
             {
                 writer.WritePropertyName("cognitiveServices"u8);
-                ((IJsonModel<CognitiveServicesAccount>)CognitiveServicesAccount).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(CognitiveServicesAccount);
             }
             if (Optional.IsDefined(ETag))
             {

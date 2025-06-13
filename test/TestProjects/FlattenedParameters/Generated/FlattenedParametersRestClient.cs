@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -53,7 +52,7 @@ namespace FlattenedParameters
                 Items = items?.ToList()
             };
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>)model).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
@@ -108,7 +107,7 @@ namespace FlattenedParameters
             }
             var model = pathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema;
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema>)model).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
@@ -159,7 +158,7 @@ namespace FlattenedParameters
                 NonRequired = nonRequired
             };
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>)model).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
@@ -211,7 +210,7 @@ namespace FlattenedParameters
                 NonRequired = nonRequired
             };
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>)model).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }

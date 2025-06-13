@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -38,19 +37,19 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in AdditionalUnattendContent)
                 {
-                    ((IJsonModel<AdditionalUnattendContent>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(PatchSettings))
             {
                 writer.WritePropertyName("patchSettings"u8);
-                ((IJsonModel<PatchSettings>)PatchSettings).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(PatchSettings);
             }
             if (Optional.IsDefined(WinRM))
             {
                 writer.WritePropertyName("winRM"u8);
-                ((IJsonModel<WinRMConfiguration>)WinRM).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(WinRM);
             }
             writer.WriteEndObject();
         }

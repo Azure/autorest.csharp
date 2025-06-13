@@ -36,7 +36,7 @@ namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Friends)
                 {
-                    ((IJsonModel<Bird>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -47,14 +47,14 @@ namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
                 foreach (var item in Hate)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IJsonModel<Bird>)item.Value).Write(writer, options);
+                    writer.WriteObjectValue(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
             if (Optional.IsDefined(Partner))
             {
                 writer.WritePropertyName("partner"u8);
-                ((IJsonModel<Bird>)Partner).Write(writer, options);
+                writer.WriteObjectValue(Partner, options);
             }
         }
 

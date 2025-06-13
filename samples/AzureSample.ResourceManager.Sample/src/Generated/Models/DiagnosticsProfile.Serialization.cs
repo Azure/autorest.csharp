@@ -39,7 +39,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(BootDiagnostics))
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
-                ((IJsonModel<BootDiagnostics>)BootDiagnostics).Write(writer, options);
+                writer.WriteObjectValue(BootDiagnostics, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

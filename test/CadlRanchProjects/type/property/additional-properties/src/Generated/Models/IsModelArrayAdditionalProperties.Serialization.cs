@@ -39,7 +39,7 @@ namespace _Type.Property.AdditionalProperties.Models
             writer.WriteStartArray();
             foreach (var item in KnownProp)
             {
-                ((IJsonModel<ModelForRecord>)item).Write(writer, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             foreach (var item in AdditionalProperties)

@@ -49,7 +49,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(Status))
             {
                 writer.WritePropertyName("status"u8);
-                ((IJsonModel<InstanceViewStatus>)Status).Write(writer, options);
+                writer.WriteObjectValue(Status, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

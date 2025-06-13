@@ -56,7 +56,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(PublicIPAddressConfiguration))
             {
                 writer.WritePropertyName("publicIPAddressConfiguration"u8);
-                ((IJsonModel<VirtualMachineScaleSetPublicIPAddressConfiguration>)PublicIPAddressConfiguration).Write(writer, options);
+                writer.WriteObjectValue(PublicIPAddressConfiguration, options);
             }
             if (Optional.IsDefined(PrivateIPAddressVersion))
             {

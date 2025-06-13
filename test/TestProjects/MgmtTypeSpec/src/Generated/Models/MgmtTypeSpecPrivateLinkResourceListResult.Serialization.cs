@@ -41,7 +41,7 @@ namespace MgmtTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                ((IJsonModel<MgmtTypeSpecPrivateLinkResourceData>)item).Write(writer, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))

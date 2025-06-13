@@ -58,7 +58,7 @@ namespace AuthoringTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in Warnings)
             {
-                ((IJsonModel<JobWarning>)item).Write(writer, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("errors"u8);

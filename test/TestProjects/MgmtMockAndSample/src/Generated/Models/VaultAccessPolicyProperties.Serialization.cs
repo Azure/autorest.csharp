@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -21,7 +20,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartArray();
             foreach (var item in AccessPolicies)
             {
-                ((IJsonModel<AccessPolicyEntry>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();

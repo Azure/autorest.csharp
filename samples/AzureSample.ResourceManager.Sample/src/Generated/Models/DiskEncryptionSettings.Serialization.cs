@@ -39,12 +39,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(DiskEncryptionKey))
             {
                 writer.WritePropertyName("diskEncryptionKey"u8);
-                ((IJsonModel<KeyVaultSecretReference>)DiskEncryptionKey).Write(writer, options);
+                writer.WriteObjectValue(DiskEncryptionKey, options);
             }
             if (Optional.IsDefined(KeyEncryptionKey))
             {
                 writer.WritePropertyName("keyEncryptionKey"u8);
-                ((IJsonModel<KeyVaultKeyReference>)KeyEncryptionKey).Write(writer, options);
+                writer.WriteObjectValue(KeyEncryptionKey, options);
             }
             if (Optional.IsDefined(Enabled))
             {

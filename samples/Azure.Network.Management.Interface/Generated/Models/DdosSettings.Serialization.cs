@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -19,7 +18,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DdosCustomPolicy))
             {
                 writer.WritePropertyName("ddosCustomPolicy"u8);
-                ((IJsonModel<SubResource>)DdosCustomPolicy).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(DdosCustomPolicy);
             }
             if (Optional.IsDefined(ProtectionCoverage))
             {

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -22,7 +21,7 @@ namespace MgmtScopeResource.Models
                 writer.WriteStringValue(Location);
             }
             writer.WritePropertyName("properties"u8);
-            ((IJsonModel<DeploymentProperties>)Properties).Write(writer, ModelSerializationExtensions.WireOptions);
+            writer.WriteObjectValue(Properties);
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);

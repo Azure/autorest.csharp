@@ -449,7 +449,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         : JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
 
                 case ObjectType:
-                    return JsonSerializerExpression.SerializeIJsonModel(valueSerialization.Type.WithNullable(false), utf8JsonWriter, value, options);
+                    return utf8JsonWriter.WriteObjectValue(value, options: options);
 
                 case EnumType { IsIntValueType: true, IsExtensible: false } enumType:
                     return utf8JsonWriter.WriteNumberValue(new CastExpression(value.NullableStructValue(valueSerialization.Type), enumType.ValueType));

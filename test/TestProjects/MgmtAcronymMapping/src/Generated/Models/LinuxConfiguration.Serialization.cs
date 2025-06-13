@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -24,7 +23,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Ssh))
             {
                 writer.WritePropertyName("ssh"u8);
-                ((IJsonModel<SshConfiguration>)Ssh).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Ssh);
             }
             if (Optional.IsDefined(ProvisionVmAgent))
             {

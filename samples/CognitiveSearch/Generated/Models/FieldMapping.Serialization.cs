@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -27,7 +26,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(MappingFunction))
             {
                 writer.WritePropertyName("mappingFunction"u8);
-                ((IJsonModel<FieldMappingFunction>)MappingFunction).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(MappingFunction);
             }
             writer.WriteEndObject();
         }

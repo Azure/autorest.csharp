@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -19,7 +18,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(BootDiagnostics))
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
-                ((IJsonModel<BootDiagnostics>)BootDiagnostics).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(BootDiagnostics);
             }
             writer.WriteEndObject();
         }

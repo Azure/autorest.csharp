@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -23,7 +22,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             writer.WritePropertyName("destination"u8);
             writer.WriteStringValue(Destination);
             writer.WritePropertyName("definition"u8);
-            ((IJsonModel<BlobInventoryPolicyDefinition>)Definition).Write(writer, ModelSerializationExtensions.WireOptions);
+            writer.WriteObjectValue(Definition);
             writer.WriteEndObject();
         }
 

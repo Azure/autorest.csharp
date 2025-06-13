@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -37,12 +36,12 @@ namespace MgmtConstants
             if (Optional.IsDefined(Listener))
             {
                 writer.WritePropertyName("listener"u8);
-                ((IJsonModel<ModelWithRequiredConstant>)Listener).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Listener);
             }
             if (Optional.IsDefined(Content))
             {
                 writer.WritePropertyName("content"u8);
-                ((IJsonModel<ModelWithOptionalConstant>)Content).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Content);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

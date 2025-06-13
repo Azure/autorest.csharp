@@ -38,7 +38,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
             if (options.Format != "W")
             {
                 writer.WritePropertyName("result"u8);
-                ((IJsonModel<ResultModel>)Result).Write(writer, options);
+                writer.WriteObjectValue(Result, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

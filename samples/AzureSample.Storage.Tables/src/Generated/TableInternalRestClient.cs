@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
@@ -137,7 +136,7 @@ namespace AzureSample.Storage.Tables
             request.Headers.Add("Accept", "application/json;odata=nometadata");
             request.Headers.Add("Content-Type", "application/json;odata=nometadata");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<TableProperties>)tableProperties).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(tableProperties);
             request.Content = content;
             return message;
         }

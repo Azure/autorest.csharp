@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.IO;
 using System.Text.Json;
 using System.Threading;
@@ -50,7 +49,7 @@ namespace Azure.AI.FormRecognizer
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<TrainContent>)trainContent).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(trainContent);
             request.Content = content;
             return message;
         }
@@ -305,7 +304,7 @@ namespace Azure.AI.FormRecognizer
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<SourcePath>)fileStream).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(fileStream);
                 request.Content = content;
             }
             return message;
@@ -429,7 +428,7 @@ namespace Azure.AI.FormRecognizer
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            ((IJsonModel<CopyContent>)copyContent).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(copyContent);
             request.Content = content;
             return message;
         }
@@ -687,7 +686,7 @@ namespace Azure.AI.FormRecognizer
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<SourcePath>)fileStream).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(fileStream);
                 request.Content = content;
             }
             return message;
@@ -862,7 +861,7 @@ namespace Azure.AI.FormRecognizer
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<SourcePath>)fileStream).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(fileStream);
                 request.Content = content;
             }
             return message;

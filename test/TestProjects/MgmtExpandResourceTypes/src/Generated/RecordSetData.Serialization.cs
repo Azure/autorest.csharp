@@ -54,7 +54,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in ARecords)
                 {
-                    ((IJsonModel<ARecord>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -64,7 +64,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in AaaaRecords)
                 {
-                    ((IJsonModel<AaaaRecord>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -74,7 +74,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in MxRecords)
                 {
-                    ((IJsonModel<MxRecord>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -84,7 +84,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in NsRecords)
                 {
-                    ((IJsonModel<NsRecord>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -94,7 +94,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in PtrRecords)
                 {
-                    ((IJsonModel<PtrRecord>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -104,7 +104,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in SrvRecords)
                 {
-                    ((IJsonModel<SrvRecord>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -114,19 +114,19 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in TxtRecords)
                 {
-                    ((IJsonModel<TxtRecord>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(CnameRecord))
             {
                 writer.WritePropertyName("CNAMERecord"u8);
-                ((IJsonModel<CnameRecord>)CnameRecord).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(CnameRecord);
             }
             if (Optional.IsDefined(SoaRecord))
             {
                 writer.WritePropertyName("SOARecord"u8);
-                ((IJsonModel<SoaRecord>)SoaRecord).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(SoaRecord);
             }
             if (Optional.IsCollectionDefined(CaaRecords))
             {
@@ -134,7 +134,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in CaaRecords)
                 {
-                    ((IJsonModel<CaaRecord>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

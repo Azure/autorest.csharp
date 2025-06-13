@@ -33,12 +33,12 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(IdentityWithRenamedProperty))
             {
                 writer.WritePropertyName("identityWithRenamedProperty"u8);
-                ((IJsonModel<IdentityWithRenamedProperty>)IdentityWithRenamedProperty).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(IdentityWithRenamedProperty);
             }
             if (Optional.IsDefined(IdentityWithDifferentPropertyType))
             {
                 writer.WritePropertyName("identityWithDifferentPropertyType"u8);
-                ((IJsonModel<IdentityWithDifferentPropertyType>)IdentityWithDifferentPropertyType).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(IdentityWithDifferentPropertyType);
             }
             if (Optional.IsDefined(IdentityWithNoUserIdentity))
             {
@@ -48,7 +48,7 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(IdentityWithNoSystemIdentity))
             {
                 writer.WritePropertyName("identityWithNoSystemIdentity"u8);
-                ((IJsonModel<IdentityWithNoSystemIdentity>)IdentityWithNoSystemIdentity).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(IdentityWithNoSystemIdentity);
             }
             if (Optional.IsDefined(IdentityV3))
             {

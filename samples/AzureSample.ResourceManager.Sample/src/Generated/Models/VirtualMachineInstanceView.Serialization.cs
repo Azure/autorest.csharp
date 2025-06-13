@@ -75,12 +75,12 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(VmAgent))
             {
                 writer.WritePropertyName("vmAgent"u8);
-                ((IJsonModel<VirtualMachineAgentInstanceView>)VmAgent).Write(writer, options);
+                writer.WriteObjectValue(VmAgent, options);
             }
             if (Optional.IsDefined(MaintenanceRedeployStatus))
             {
                 writer.WritePropertyName("maintenanceRedeployStatus"u8);
-                ((IJsonModel<MaintenanceRedeployStatus>)MaintenanceRedeployStatus).Write(writer, options);
+                writer.WriteObjectValue(MaintenanceRedeployStatus, options);
             }
             if (Optional.IsCollectionDefined(Disks))
             {
@@ -88,7 +88,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Disks)
                 {
-                    ((IJsonModel<DiskInstanceView>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -98,19 +98,19 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Extensions)
                 {
-                    ((IJsonModel<VirtualMachineExtensionInstanceView>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (options.Format != "W" && Optional.IsDefined(VmHealth))
             {
                 writer.WritePropertyName("vmHealth"u8);
-                ((IJsonModel<VirtualMachineHealthStatus>)VmHealth).Write(writer, options);
+                writer.WriteObjectValue(VmHealth, options);
             }
             if (Optional.IsDefined(BootDiagnostics))
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
-                ((IJsonModel<BootDiagnosticsInstanceView>)BootDiagnostics).Write(writer, options);
+                writer.WriteObjectValue(BootDiagnostics, options);
             }
             if (options.Format != "W" && Optional.IsDefined(AssignedHost))
             {
@@ -123,14 +123,14 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
                 {
-                    ((IJsonModel<InstanceViewStatus>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(PatchStatus))
             {
                 writer.WritePropertyName("patchStatus"u8);
-                ((IJsonModel<VirtualMachinePatchStatus>)PatchStatus).Write(writer, options);
+                writer.WriteObjectValue(PatchStatus, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

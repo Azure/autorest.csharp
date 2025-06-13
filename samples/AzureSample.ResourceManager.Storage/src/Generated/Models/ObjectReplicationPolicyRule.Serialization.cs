@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -28,7 +27,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Filters))
             {
                 writer.WritePropertyName("filters"u8);
-                ((IJsonModel<ObjectReplicationPolicyFilter>)Filters).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Filters);
             }
             writer.WriteEndObject();
         }

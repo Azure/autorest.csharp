@@ -40,7 +40,7 @@ namespace _Azure.ResourceManager.CommonProperties
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                ((IJsonModel<ConfidentialResourceProperties>)Properties).Write(writer, options);
+                writer.WriteObjectValue(Properties, options);
             }
         }
 

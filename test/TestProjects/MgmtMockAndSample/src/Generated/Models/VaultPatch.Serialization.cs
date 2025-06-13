@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -30,7 +29,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                ((IJsonModel<VaultPatchProperties>)Properties).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Properties);
             }
             writer.WriteEndObject();
         }

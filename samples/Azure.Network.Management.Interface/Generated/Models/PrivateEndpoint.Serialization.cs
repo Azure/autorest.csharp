@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -43,7 +42,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                ((IJsonModel<Subnet>)Subnet).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Subnet);
             }
             if (Optional.IsCollectionDefined(PrivateLinkServiceConnections))
             {
@@ -51,7 +50,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in PrivateLinkServiceConnections)
                 {
-                    ((IJsonModel<PrivateLinkServiceConnection>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -61,7 +60,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ManualPrivateLinkServiceConnections)
                 {
-                    ((IJsonModel<PrivateLinkServiceConnection>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

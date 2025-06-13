@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -31,7 +30,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                ((IJsonModel<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings>)DnsSettings).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(DnsSettings);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

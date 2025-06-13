@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -52,7 +51,7 @@ namespace TypeSchemaMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<CustomizedModel>)body).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(body, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -102,7 +101,7 @@ namespace TypeSchemaMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<RenamedModelStruct>)body).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(body, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -162,7 +161,7 @@ namespace TypeSchemaMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<SecondModel>)body).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(body, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -222,7 +221,7 @@ namespace TypeSchemaMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<RenamedThirdModel>)body).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(body, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -282,7 +281,7 @@ namespace TypeSchemaMapping
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                ((IJsonModel<ModelWithArrayOfEnum>)body).Write(content.JsonWriter, ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue(body, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;

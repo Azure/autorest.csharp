@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -31,14 +30,14 @@ namespace MgmtMockAndSample.Models
             writer.WritePropertyName("tenantId"u8);
             writer.WriteStringValue(TenantId);
             writer.WritePropertyName("sku"u8);
-            ((IJsonModel<MgmtMockAndSampleSku>)Sku).Write(writer, ModelSerializationExtensions.WireOptions);
+            writer.WriteObjectValue(Sku);
             if (Optional.IsCollectionDefined(AccessPolicies))
             {
                 writer.WritePropertyName("accessPolicies"u8);
                 writer.WriteStartArray();
                 foreach (var item in AccessPolicies)
                 {
-                    ((IJsonModel<AccessPolicyEntry>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -95,7 +94,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
-                ((IJsonModel<NetworkRuleSet>)NetworkAcls).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(NetworkAcls);
             }
             if (Optional.IsDefined(ProvisioningState))
             {
@@ -110,17 +109,17 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(ReadWriteSingleStringProperty))
             {
                 writer.WritePropertyName("readWriteSingleStringProperty"u8);
-                ((IJsonModel<SinglePropertyModel>)ReadWriteSingleStringProperty).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ReadWriteSingleStringProperty);
             }
             if (Optional.IsDefined(ReadOnlySingleStringProperty))
             {
                 writer.WritePropertyName("readOnlySingleStringProperty"u8);
-                ((IJsonModel<ReadOnlySinglePropertyModel>)ReadOnlySingleStringProperty).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ReadOnlySingleStringProperty);
             }
             if (Optional.IsDefined(ExtremelyDeepStringProperty))
             {
                 writer.WritePropertyName("extremelyDeepStringProperty"u8);
-                ((IJsonModel<ExtremelyDeepSinglePropertyModel>)ExtremelyDeepStringProperty).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(ExtremelyDeepStringProperty);
             }
             writer.WriteEndObject();
         }

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -43,7 +42,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
-                ((IJsonModel<NetworkSecurityGroup>)NetworkSecurityGroup).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(NetworkSecurityGroup);
             }
             if (Optional.IsCollectionDefined(IpConfigurations))
             {
@@ -51,14 +50,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in IpConfigurations)
                 {
-                    ((IJsonModel<NetworkInterfaceIPConfiguration>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                ((IJsonModel<NetworkInterfaceDnsSettings>)DnsSettings).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(DnsSettings);
             }
             if (Optional.IsDefined(EnableAcceleratedNetworking))
             {

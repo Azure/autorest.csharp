@@ -33,7 +33,7 @@ namespace Scm._Type.Property.ValueTypes.Models
             writer.WriteStartArray();
             foreach (var item in Property)
             {
-                ((IJsonModel<InnerModel>)item).Write(writer, options);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

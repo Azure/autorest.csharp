@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -19,7 +18,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Services))
             {
                 writer.WritePropertyName("services"u8);
-                ((IJsonModel<EncryptionServices>)Services).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Services);
             }
             writer.WritePropertyName("keySource"u8);
             writer.WriteStringValue(KeySource.ToString());
@@ -31,12 +30,12 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(KeyVaultProperties))
             {
                 writer.WritePropertyName("keyvaultproperties"u8);
-                ((IJsonModel<KeyVaultProperties>)KeyVaultProperties).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(KeyVaultProperties);
             }
             if (Optional.IsDefined(EncryptionIdentity))
             {
                 writer.WritePropertyName("identity"u8);
-                ((IJsonModel<EncryptionIdentity>)EncryptionIdentity).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(EncryptionIdentity);
             }
             writer.WriteEndObject();
         }

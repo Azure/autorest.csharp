@@ -41,7 +41,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(OriginGroupOverride))
             {
                 writer.WritePropertyName("originGroupOverride"u8);
-                ((IJsonModel<OriginGroupOverride>)OriginGroupOverride).Write(writer, options);
+                writer.WriteObjectValue(OriginGroupOverride, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

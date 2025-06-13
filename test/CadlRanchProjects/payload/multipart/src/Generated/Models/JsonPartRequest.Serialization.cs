@@ -37,7 +37,7 @@ namespace Payload.MultiPart.Models
             }
 
             writer.WritePropertyName("address"u8);
-            ((IJsonModel<Address>)Address).Write(writer, options);
+            writer.WriteObjectValue(Address, options);
             writer.WritePropertyName("profileImage"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(global::System.BinaryData.FromStream(ProfileImage));

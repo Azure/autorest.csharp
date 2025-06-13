@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -31,17 +30,17 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(FrontendIPConfiguration))
             {
                 writer.WritePropertyName("frontendIPConfiguration"u8);
-                ((IJsonModel<SubResource>)FrontendIPConfiguration).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(FrontendIPConfiguration);
             }
             if (Optional.IsDefined(BackendAddressPool))
             {
                 writer.WritePropertyName("backendAddressPool"u8);
-                ((IJsonModel<SubResource>)BackendAddressPool).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(BackendAddressPool);
             }
             if (Optional.IsDefined(Probe))
             {
                 writer.WritePropertyName("probe"u8);
-                ((IJsonModel<SubResource>)Probe).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Probe);
             }
             if (Optional.IsDefined(Protocol))
             {

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -24,7 +23,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(Policy))
             {
                 writer.WritePropertyName("policy"u8);
-                ((IJsonModel<BlobInventoryPolicySchema>)Policy).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Policy);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

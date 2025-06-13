@@ -81,7 +81,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                ((IJsonModel<DedicatedHostInstanceView>)InstanceView).Write(writer, options);
+                writer.WriteObjectValue(InstanceView, options);
             }
             writer.WriteEndObject();
         }

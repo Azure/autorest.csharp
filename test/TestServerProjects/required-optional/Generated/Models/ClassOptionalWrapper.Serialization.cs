@@ -38,7 +38,7 @@ namespace required_optional.Models
             if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
-                ((IJsonModel<Product>)Value).Write(writer, options);
+                writer.WriteObjectValue(Value, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

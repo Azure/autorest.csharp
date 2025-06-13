@@ -43,7 +43,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(PublicIPAddressConfiguration))
             {
                 writer.WritePropertyName("publicIPAddressConfiguration"u8);
-                ((IJsonModel<VirtualMachineScaleSetUpdatePublicIPAddressConfiguration>)PublicIPAddressConfiguration).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(PublicIPAddressConfiguration);
             }
             if (Optional.IsDefined(PrivateIPAddressVersion))
             {

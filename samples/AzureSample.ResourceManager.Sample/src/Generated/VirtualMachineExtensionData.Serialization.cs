@@ -104,7 +104,7 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                ((IJsonModel<VirtualMachineExtensionInstanceView>)InstanceView).Write(writer, options);
+                writer.WriteObjectValue(InstanceView, options);
             }
             writer.WriteEndObject();
         }

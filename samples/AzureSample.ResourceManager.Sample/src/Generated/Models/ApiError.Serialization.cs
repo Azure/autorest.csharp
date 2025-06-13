@@ -43,14 +43,14 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Details)
                 {
-                    ((IJsonModel<ApiErrorBase>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(Innererror))
             {
                 writer.WritePropertyName("innererror"u8);
-                ((IJsonModel<InnerError>)Innererror).Write(writer, options);
+                writer.WriteObjectValue(Innererror, options);
             }
             if (Optional.IsDefined(Code))
             {

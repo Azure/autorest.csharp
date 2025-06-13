@@ -35,7 +35,7 @@ namespace Scm._Type.Property.Optionality.Models
                 writer.WriteStartArray();
                 foreach (var item in Property)
                 {
-                    ((IJsonModel<StringProperty>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

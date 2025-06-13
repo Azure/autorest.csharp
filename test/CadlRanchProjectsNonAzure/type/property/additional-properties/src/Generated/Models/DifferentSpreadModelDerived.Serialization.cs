@@ -31,7 +31,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
 
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("derivedProp"u8);
-            ((IJsonModel<ModelForRecord>)DerivedProp).Write(writer, options);
+            writer.WriteObjectValue(DerivedProp, options);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);

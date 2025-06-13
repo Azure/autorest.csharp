@@ -38,7 +38,7 @@ namespace ModelShapes.Models
             if (options.Format != "W" && Optional.IsDefined(ReadonlyProperty))
             {
                 writer.WritePropertyName("ReadonlyProperty"u8);
-                ((IJsonModel<ReadonlyModel>)ReadonlyProperty).Write(writer, options);
+                writer.WriteObjectValue(ReadonlyProperty, options);
             }
             if (options.Format != "W" && Optional.IsCollectionDefined(ReadonlyListProperty))
             {
@@ -46,7 +46,7 @@ namespace ModelShapes.Models
                 writer.WriteStartArray();
                 foreach (var item in ReadonlyListProperty)
                 {
-                    ((IJsonModel<ReadonlyModel>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }

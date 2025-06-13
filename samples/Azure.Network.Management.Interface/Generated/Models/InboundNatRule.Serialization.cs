@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -31,7 +30,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(FrontendIPConfiguration))
             {
                 writer.WritePropertyName("frontendIPConfiguration"u8);
-                ((IJsonModel<SubResource>)FrontendIPConfiguration).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(FrontendIPConfiguration);
             }
             if (Optional.IsDefined(Protocol))
             {

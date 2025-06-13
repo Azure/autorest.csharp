@@ -36,7 +36,7 @@ namespace _Type.Property.ValueTypes.Models
             }
 
             writer.WritePropertyName("property"u8);
-            ((IJsonModel<InnerModel>)Property).Write(writer, options);
+            writer.WriteObjectValue(Property, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

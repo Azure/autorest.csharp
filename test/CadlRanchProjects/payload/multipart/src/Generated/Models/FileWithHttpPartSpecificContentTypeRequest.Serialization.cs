@@ -37,7 +37,7 @@ namespace Payload.MultiPart.Models
             }
 
             writer.WritePropertyName("profileImage"u8);
-            ((IJsonModel<FileSpecificContentType>)ProfileImage).Write(writer, options);
+            writer.WriteObjectValue(ProfileImage, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

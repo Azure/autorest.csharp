@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -37,12 +36,12 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(Schedule))
             {
                 writer.WritePropertyName("schedule"u8);
-                ((IJsonModel<IndexingSchedule>)Schedule).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Schedule);
             }
             if (Optional.IsDefined(Parameters))
             {
                 writer.WritePropertyName("parameters"u8);
-                ((IJsonModel<IndexingParameters>)Parameters).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(Parameters);
             }
             if (Optional.IsCollectionDefined(FieldMappings))
             {
@@ -50,7 +49,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in FieldMappings)
                 {
-                    ((IJsonModel<FieldMapping>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -60,7 +59,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in OutputFieldMappings)
                 {
-                    ((IJsonModel<FieldMapping>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

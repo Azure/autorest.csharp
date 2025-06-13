@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -19,7 +18,7 @@ namespace MgmtSafeFlatten.Models
             if (Optional.IsDefined(LayerTwo))
             {
                 writer.WritePropertyName("layerTwo"u8);
-                ((IJsonModel<LayerTwoSingle>)LayerTwo).Write(writer, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(LayerTwo);
             }
             writer.WriteEndObject();
         }

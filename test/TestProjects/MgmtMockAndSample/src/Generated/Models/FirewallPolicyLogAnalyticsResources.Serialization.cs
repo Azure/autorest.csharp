@@ -24,7 +24,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Workspaces)
                 {
-                    ((IJsonModel<FirewallPolicyLogAnalyticsWorkspace>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }

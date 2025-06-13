@@ -48,7 +48,7 @@ namespace _Specs_.Azure.Core.Page.Models
                 writer.WriteStartArray();
                 foreach (var item in Orders)
                 {
-                    ((IJsonModel<UserOrder>)item).Write(writer, options);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
