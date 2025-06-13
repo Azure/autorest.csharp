@@ -22,6 +22,10 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputOperationResponse CreateOperationResponse(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
+            if (reader.TokenType == JsonTokenType.StartObject)
+            {
+                reader.Read();
+            }
             IReadOnlyList<int>? statusCodes = null;
             InputType? bodyType = null;
             IReadOnlyList<InputOperationResponseHeader>? headers = null;
