@@ -446,7 +446,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     var useIJsonModel = systemObjectType.Declaration.Namespace.StartsWith("Azure.ResourceManager");
                     return useIJsonModel
                         ? JsonSerializerExpression.SerializeIJsonModel(valueSerialization.Type.WithNullable(false), utf8JsonWriter, value, options, valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
-                        : JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
+                        : ModelSerializationExtensionsProvider.Serialize(utf8JsonWriter, value);
 
                 case ObjectType:
                     return utf8JsonWriter.WriteObjectValue(value, options: options);
@@ -569,7 +569,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 return useIJsonModel
                     ? JsonSerializerExpression.SerializeIJsonModel(valueType, utf8JsonWriter, new TypedValueExpression(valueType, value), options)
-                    : JsonSerializerExpression.Serialize(utf8JsonWriter, value, options).ToStatement();
+                    : ModelSerializationExtensionsProvider.Serialize(utf8JsonWriter, value);
             }
 
             throw new NotSupportedException($"Framework type {valueType} serialization not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
@@ -1143,7 +1143,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return GetFrameworkTypeValueExpression(frameworkType, element, serializationFormat, serializationType);
             }
 
-            return GetDeserializeImplementation(serializationType.Implementation, element, options, serializerOptions);
+            return GetDeserializeImplementation(serializationType.Implementation, element, options, serializerOptions, useManagedServiceIdentityV3);
         }
 
         private static ValueExpression GetDeserializeImplementation(TypeProvider implementation, JsonElementExpression element, ModelReaderWriterOptionsExpression? options, ValueExpression? serializerOptions, bool useManagedServiceIdentityV3 = false)

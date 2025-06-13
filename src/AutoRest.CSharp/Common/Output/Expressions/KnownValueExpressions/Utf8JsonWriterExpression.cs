@@ -61,10 +61,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
                 (
                     "NET6_0_OR_GREATER",
                     WriteRawValue(value),
-                    new UsingScopeStatement(typeof(JsonDocument), "document", JsonDocumentExpression.Parse(value), out var jsonDocumentVar)
-                    {
-                        JsonSerializerExpression.Serialize(this, new JsonDocumentExpression(jsonDocumentVar).RootElement).ToStatement()
-                    }
+                    ModelSerializationExtensionsProvider.Serialize(this, value)
                 );
 
         public MethodBodyStatement Flush()

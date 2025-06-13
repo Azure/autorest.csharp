@@ -504,6 +504,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         public static ValueExpression Deserialize(JsonElementExpression element, CSharpType type, bool useManagedServiceIdentityV3 = false)
             => new InvokeStaticMethodExpression(Instance.Type, _jsonDeserializeMethodName, [element.Invoke(nameof(JsonElement.GetRawText)), new MemberExpression(Instance.Type, useManagedServiceIdentityV3 ?  _jsonSerializerOptionsUseManagedServiceIdentityV3Name : _jsonSerializerOptionsName)], TypeArguments: [type]);
 
+        public static MethodBodyStatement Serialize(Utf8JsonWriterExpression writer, ValueExpression value, bool useManagedServiceIdentityV3 = false)
+            => new InvokeStaticMethodExpression(Instance.Type, _jsonSerializeMethodName, [writer, value, new MemberExpression(Instance.Type, useManagedServiceIdentityV3 ? _jsonSerializerOptionsUseManagedServiceIdentityV3Name : _jsonSerializerOptionsName)]).ToStatement();
+
         public MethodBodyStatement WriteBase64StringValue(Utf8JsonWriterExpression writer, ValueExpression value, string? format)
             => new InvokeStaticMethodStatement(Type, _writeBase64StringValueMethodName, new[] { writer, value, Literal(format) }, CallAsExtension: true);
 
