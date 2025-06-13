@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -20,7 +21,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(HealthProbe))
             {
                 writer.WritePropertyName("healthProbe"u8);
-                JsonSerializer.Serialize(writer, HealthProbe);
+                ((IJsonModel<WritableSubResource>)HealthProbe).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(NetworkInterfaceConfigurations))
             {
@@ -51,7 +52,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    healthProbe = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    healthProbe = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("networkInterfaceConfigurations"u8))

@@ -62,7 +62,7 @@ namespace AuthoringTypeSpec.Models
             }
             writer.WriteEndArray();
             writer.WritePropertyName("errors"u8);
-            JsonSerializer.Serialize(writer, Errors);
+            ((IJsonModel<ResponseError>)Errors).Write(writer, options);
             if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
@@ -154,7 +154,7 @@ namespace AuthoringTypeSpec.Models
                 }
                 if (property.NameEquals("errors"u8))
                 {
-                    errors = JsonSerializer.Deserialize<ResponseError>(property.Value.GetRawText());
+                    errors = ModelSerializationExtensions.JsonDeserialize<ResponseError>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
