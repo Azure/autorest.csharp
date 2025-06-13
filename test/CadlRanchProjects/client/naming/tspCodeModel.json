@@ -95,9 +95,155 @@
    "decorators": []
   }
  ],
- "models": [
+ "constants": [
   {
    "$id": "12",
+   "kind": "constant",
+   "name": "clientContentType",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "13",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "14",
+   "kind": "constant",
+   "name": "languageContentType",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "15",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "16",
+   "kind": "constant",
+   "name": "compatibleWithEncodedNameContentType",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "17",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "18",
+   "kind": "constant",
+   "name": "clientContentType1",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "19",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "20",
+   "kind": "constant",
+   "name": "languageContentType1",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "21",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "22",
+   "kind": "constant",
+   "name": "UnionEnumNameRequestContentType",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "23",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "24",
+   "kind": "constant",
+   "name": "UnionEnumNameRequestContentType1",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "25",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "26",
+   "kind": "constant",
+   "name": "UnionEnumNameRequestContentType2",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "27",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "28",
+   "kind": "constant",
+   "name": "UnionEnumNameRequestContentType3",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "29",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  }
+ ],
+ "models": [
+  {
+   "$id": "30",
    "kind": "model",
    "name": "ClientNameModel",
    "namespace": "Client.Naming.Property",
@@ -106,13 +252,13 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "13",
+     "$id": "31",
      "kind": "property",
      "name": "clientName",
      "serializedName": "defaultName",
      "doc": "Pass in true",
      "type": {
-      "$id": "14",
+      "$id": "32",
       "kind": "boolean",
       "name": "boolean",
       "crossLanguageDefinitionId": "TypeSpec.boolean",
@@ -125,9 +271,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Client.Naming.Property.ClientNameModel.defaultName",
      "serializationOptions": {
-      "$id": "15",
+      "$id": "33",
       "json": {
-       "$id": "16",
+       "$id": "34",
        "name": "defaultName"
       }
      }
@@ -135,7 +281,7 @@
    ]
   },
   {
-   "$id": "17",
+   "$id": "35",
    "kind": "model",
    "name": "LanguageClientNameModel",
    "namespace": "Client.Naming.Property",
@@ -144,13 +290,13 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "18",
+     "$id": "36",
      "kind": "property",
      "name": "CSName",
      "serializedName": "defaultName",
      "doc": "Pass in true",
      "type": {
-      "$id": "19",
+      "$id": "37",
       "kind": "boolean",
       "name": "boolean",
       "crossLanguageDefinitionId": "TypeSpec.boolean",
@@ -163,9 +309,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Client.Naming.Property.LanguageClientNameModel.defaultName",
      "serializationOptions": {
-      "$id": "20",
+      "$id": "38",
       "json": {
-       "$id": "21",
+       "$id": "39",
        "name": "defaultName"
       }
      }
@@ -173,7 +319,7 @@
    ]
   },
   {
-   "$id": "22",
+   "$id": "40",
    "kind": "model",
    "name": "ClientNameAndJsonEncodedNameModel",
    "namespace": "Client.Naming.Property",
@@ -182,13 +328,13 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "23",
+     "$id": "41",
      "kind": "property",
      "name": "clientName",
      "serializedName": "wireName",
      "doc": "Pass in true",
      "type": {
-      "$id": "24",
+      "$id": "42",
       "kind": "boolean",
       "name": "boolean",
       "crossLanguageDefinitionId": "TypeSpec.boolean",
@@ -201,9 +347,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Client.Naming.Property.ClientNameAndJsonEncodedNameModel.defaultName",
      "serializationOptions": {
-      "$id": "25",
+      "$id": "43",
       "json": {
-       "$id": "26",
+       "$id": "44",
        "name": "wireName"
       }
      }
@@ -211,7 +357,7 @@
    ]
   },
   {
-   "$id": "27",
+   "$id": "45",
    "kind": "model",
    "name": "ClientModel",
    "namespace": "Client.Naming.Model",
@@ -220,13 +366,13 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "28",
+     "$id": "46",
      "kind": "property",
      "name": "defaultName",
      "serializedName": "defaultName",
      "doc": "Pass in true",
      "type": {
-      "$id": "29",
+      "$id": "47",
       "kind": "boolean",
       "name": "boolean",
       "crossLanguageDefinitionId": "TypeSpec.boolean",
@@ -239,9 +385,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Client.Naming.Model.ModelWithClientClientName.defaultName",
      "serializationOptions": {
-      "$id": "30",
+      "$id": "48",
       "json": {
-       "$id": "31",
+       "$id": "49",
        "name": "defaultName"
       }
      }
@@ -249,7 +395,7 @@
    ]
   },
   {
-   "$id": "32",
+   "$id": "50",
    "kind": "model",
    "name": "CSModel",
    "namespace": "Client.Naming.Model",
@@ -258,13 +404,13 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "33",
+     "$id": "51",
      "kind": "property",
      "name": "defaultName",
      "serializedName": "defaultName",
      "doc": "Pass in true",
      "type": {
-      "$id": "34",
+      "$id": "52",
       "kind": "boolean",
       "name": "boolean",
       "crossLanguageDefinitionId": "TypeSpec.boolean",
@@ -277,9 +423,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Client.Naming.Model.ModelWithLanguageClientName.defaultName",
      "serializationOptions": {
-      "$id": "35",
+      "$id": "53",
       "json": {
-       "$id": "36",
+       "$id": "54",
        "name": "defaultName"
       }
      }
@@ -289,27 +435,27 @@
  ],
  "clients": [
   {
-   "$id": "37",
+   "$id": "55",
    "kind": "client",
    "name": "NamingClient",
    "namespace": "Client.Naming",
    "doc": "Describe changing names of types in a client with `@clientName`",
    "methods": [
     {
-     "$id": "38",
+     "$id": "56",
      "kind": "basic",
      "name": "clientName",
      "accessibility": "public",
      "apiVersions": [],
      "operation": {
-      "$id": "39",
+      "$id": "57",
       "name": "clientName",
       "resourceName": "Naming",
       "accessibility": "public",
       "parameters": [],
       "responses": [
        {
-        "$id": "40",
+        "$id": "58",
         "statusCodes": [
          204
         ],
@@ -328,7 +474,7 @@
      },
      "parameters": [],
      "response": {
-      "$id": "41"
+      "$id": "59"
      },
      "isOverride": false,
      "generateConvenient": true,
@@ -336,23 +482,23 @@
      "crossLanguageDefinitionId": "Client.Naming.operation"
     },
     {
-     "$id": "42",
+     "$id": "60",
      "kind": "basic",
      "name": "parameter",
      "accessibility": "public",
      "apiVersions": [],
      "operation": {
-      "$id": "43",
+      "$id": "61",
       "name": "parameter",
       "resourceName": "Naming",
       "accessibility": "public",
       "parameters": [
        {
-        "$id": "44",
+        "$id": "62",
         "name": "clientName",
         "nameInRequest": "defaultName",
         "type": {
-         "$id": "45",
+         "$id": "63",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -371,7 +517,7 @@
       ],
       "responses": [
        {
-        "$id": "46",
+        "$id": "64",
         "statusCodes": [
          204
         ],
@@ -390,11 +536,11 @@
      },
      "parameters": [
       {
-       "$id": "47",
+       "$id": "65",
        "name": "clientName",
        "nameInRequest": "defaultName",
        "type": {
-        "$id": "48",
+        "$id": "66",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -412,7 +558,7 @@
       }
      ],
      "response": {
-      "$id": "49"
+      "$id": "67"
      },
      "isOverride": false,
      "generateConvenient": true,
@@ -420,37 +566,24 @@
      "crossLanguageDefinitionId": "Client.Naming.parameter"
     },
     {
-     "$id": "50",
+     "$id": "68",
      "kind": "basic",
      "name": "client",
      "accessibility": "public",
      "apiVersions": [],
      "operation": {
-      "$id": "51",
+      "$id": "69",
       "name": "client",
       "resourceName": "Property",
       "accessibility": "public",
       "parameters": [
        {
-        "$id": "52",
+        "$id": "70",
         "name": "contentType",
         "nameInRequest": "Content-Type",
         "doc": "Body parameter's content type. Known values are application/json",
         "type": {
-         "$id": "53",
-         "kind": "constant",
-         "name": "clientContentType",
-         "namespace": "",
-         "usage": "None",
-         "valueType": {
-          "$id": "54",
-          "kind": "string",
-          "name": "string",
-          "crossLanguageDefinitionId": "TypeSpec.string",
-          "decorators": []
-         },
-         "value": "application/json",
-         "decorators": []
+         "$ref": "12"
         },
         "location": "Header",
         "isApiVersion": false,
@@ -463,11 +596,11 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "55",
+        "$id": "71",
         "name": "body",
         "nameInRequest": "body",
         "type": {
-         "$ref": "12"
+         "$ref": "30"
         },
         "location": "Body",
         "isApiVersion": false,
@@ -482,7 +615,7 @@
       ],
       "responses": [
        {
-        "$id": "56",
+        "$id": "72",
         "statusCodes": [
          204
         ],
@@ -504,11 +637,11 @@
      },
      "parameters": [
       {
-       "$id": "57",
+       "$id": "73",
        "name": "body",
        "nameInRequest": "body",
        "type": {
-        "$ref": "12"
+        "$ref": "30"
        },
        "location": "Body",
        "isApiVersion": false,
@@ -521,12 +654,12 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "58",
+       "$id": "74",
        "name": "contentType",
        "nameInRequest": "contentType",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$ref": "53"
+        "$ref": "12"
        },
        "location": "Header",
        "isApiVersion": false,
@@ -540,7 +673,7 @@
       }
      ],
      "response": {
-      "$id": "59"
+      "$id": "75"
      },
      "isOverride": false,
      "generateConvenient": true,
@@ -548,37 +681,24 @@
      "crossLanguageDefinitionId": "Client.Naming.Property.client"
     },
     {
-     "$id": "60",
+     "$id": "76",
      "kind": "basic",
      "name": "language",
      "accessibility": "public",
      "apiVersions": [],
      "operation": {
-      "$id": "61",
+      "$id": "77",
       "name": "language",
       "resourceName": "Property",
       "accessibility": "public",
       "parameters": [
        {
-        "$id": "62",
+        "$id": "78",
         "name": "contentType",
         "nameInRequest": "Content-Type",
         "doc": "Body parameter's content type. Known values are application/json",
         "type": {
-         "$id": "63",
-         "kind": "constant",
-         "name": "languageContentType",
-         "namespace": "",
-         "usage": "None",
-         "valueType": {
-          "$id": "64",
-          "kind": "string",
-          "name": "string",
-          "crossLanguageDefinitionId": "TypeSpec.string",
-          "decorators": []
-         },
-         "value": "application/json",
-         "decorators": []
+         "$ref": "14"
         },
         "location": "Header",
         "isApiVersion": false,
@@ -591,11 +711,11 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "65",
+        "$id": "79",
         "name": "body",
         "nameInRequest": "body",
         "type": {
-         "$ref": "17"
+         "$ref": "35"
         },
         "location": "Body",
         "isApiVersion": false,
@@ -610,7 +730,7 @@
       ],
       "responses": [
        {
-        "$id": "66",
+        "$id": "80",
         "statusCodes": [
          204
         ],
@@ -632,11 +752,11 @@
      },
      "parameters": [
       {
-       "$id": "67",
+       "$id": "81",
        "name": "body",
        "nameInRequest": "body",
        "type": {
-        "$ref": "17"
+        "$ref": "35"
        },
        "location": "Body",
        "isApiVersion": false,
@@ -649,12 +769,12 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "68",
+       "$id": "82",
        "name": "contentType",
        "nameInRequest": "contentType",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$ref": "63"
+        "$ref": "14"
        },
        "location": "Header",
        "isApiVersion": false,
@@ -668,7 +788,7 @@
       }
      ],
      "response": {
-      "$id": "69"
+      "$id": "83"
      },
      "isOverride": false,
      "generateConvenient": true,
@@ -676,37 +796,24 @@
      "crossLanguageDefinitionId": "Client.Naming.Property.language"
     },
     {
-     "$id": "70",
+     "$id": "84",
      "kind": "basic",
      "name": "compatibleWithEncodedName",
      "accessibility": "public",
      "apiVersions": [],
      "operation": {
-      "$id": "71",
+      "$id": "85",
       "name": "compatibleWithEncodedName",
       "resourceName": "Property",
       "accessibility": "public",
       "parameters": [
        {
-        "$id": "72",
+        "$id": "86",
         "name": "contentType",
         "nameInRequest": "Content-Type",
         "doc": "Body parameter's content type. Known values are application/json",
         "type": {
-         "$id": "73",
-         "kind": "constant",
-         "name": "compatibleWithEncodedNameContentType",
-         "namespace": "",
-         "usage": "None",
-         "valueType": {
-          "$id": "74",
-          "kind": "string",
-          "name": "string",
-          "crossLanguageDefinitionId": "TypeSpec.string",
-          "decorators": []
-         },
-         "value": "application/json",
-         "decorators": []
+         "$ref": "16"
         },
         "location": "Header",
         "isApiVersion": false,
@@ -719,11 +826,11 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "75",
+        "$id": "87",
         "name": "body",
         "nameInRequest": "body",
         "type": {
-         "$ref": "22"
+         "$ref": "40"
         },
         "location": "Body",
         "isApiVersion": false,
@@ -738,7 +845,7 @@
       ],
       "responses": [
        {
-        "$id": "76",
+        "$id": "88",
         "statusCodes": [
          204
         ],
@@ -760,11 +867,11 @@
      },
      "parameters": [
       {
-       "$id": "77",
+       "$id": "89",
        "name": "body",
        "nameInRequest": "body",
        "type": {
-        "$ref": "22"
+        "$ref": "40"
        },
        "location": "Body",
        "isApiVersion": false,
@@ -777,12 +884,12 @@
        "skipUrlEncoding": false
       },
       {
-       "$id": "78",
+       "$id": "90",
        "name": "contentType",
        "nameInRequest": "contentType",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$ref": "73"
+        "$ref": "16"
        },
        "location": "Header",
        "isApiVersion": false,
@@ -796,7 +903,7 @@
       }
      ],
      "response": {
-      "$id": "79"
+      "$id": "91"
      },
      "isOverride": false,
      "generateConvenient": true,
@@ -804,23 +911,23 @@
      "crossLanguageDefinitionId": "Client.Naming.Property.compatibleWithEncodedName"
     },
     {
-     "$id": "80",
+     "$id": "92",
      "kind": "basic",
      "name": "request",
      "accessibility": "public",
      "apiVersions": [],
      "operation": {
-      "$id": "81",
+      "$id": "93",
       "name": "request",
       "resourceName": "Header",
       "accessibility": "public",
       "parameters": [
        {
-        "$id": "82",
+        "$id": "94",
         "name": "clientName",
         "nameInRequest": "default-name",
         "type": {
-         "$id": "83",
+         "$id": "95",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -839,7 +946,7 @@
       ],
       "responses": [
        {
-        "$id": "84",
+        "$id": "96",
         "statusCodes": [
          204
         ],
@@ -858,11 +965,11 @@
      },
      "parameters": [
       {
-       "$id": "85",
+       "$id": "97",
        "name": "clientName",
        "nameInRequest": "default-name",
        "type": {
-        "$id": "86",
+        "$id": "98",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -880,7 +987,7 @@
       }
      ],
      "response": {
-      "$id": "87"
+      "$id": "99"
      },
      "isOverride": false,
      "generateConvenient": true,
@@ -888,30 +995,30 @@
      "crossLanguageDefinitionId": "Client.Naming.Header.request"
     },
     {
-     "$id": "88",
+     "$id": "100",
      "kind": "basic",
      "name": "response",
      "accessibility": "public",
      "apiVersions": [],
      "operation": {
-      "$id": "89",
+      "$id": "101",
       "name": "response",
       "resourceName": "Header",
       "accessibility": "public",
       "parameters": [],
       "responses": [
        {
-        "$id": "90",
+        "$id": "102",
         "statusCodes": [
          204
         ],
         "headers": [
          {
-          "$id": "91",
+          "$id": "103",
           "name": "default-name",
           "nameInResponse": "default-name",
           "type": {
-           "$id": "92",
+           "$id": "104",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -933,7 +1040,7 @@
      },
      "parameters": [],
      "response": {
-      "$id": "93"
+      "$id": "105"
      },
      "isOverride": false,
      "generateConvenient": true,
@@ -943,12 +1050,12 @@
    ],
    "parameters": [
     {
-     "$id": "94",
+     "$id": "106",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Service host",
      "type": {
-      "$id": "95",
+      "$id": "107",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -962,9 +1069,9 @@
      "explode": false,
      "kind": "Client",
      "defaultValue": {
-      "$id": "96",
+      "$id": "108",
       "type": {
-       "$id": "97",
+       "$id": "109",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"
@@ -978,171 +1085,30 @@
    "apiVersions": [],
    "children": [
     {
-     "$id": "98",
+     "$id": "110",
      "kind": "client",
      "name": "ClientModel",
      "namespace": "Client.Naming.Model",
      "methods": [
       {
-       "$id": "99",
+       "$id": "111",
        "kind": "basic",
        "name": "client",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "100",
+        "$id": "112",
         "name": "client",
         "resourceName": "Model",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "101",
+          "$id": "113",
           "name": "contentType",
           "nameInRequest": "Content-Type",
           "doc": "Body parameter's content type. Known values are application/json",
           "type": {
-           "$id": "102",
-           "kind": "constant",
-           "name": "clientContentType1",
-           "namespace": "",
-           "usage": "None",
-           "valueType": {
-            "$id": "103",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
-          },
-          "location": "Header",
-          "isApiVersion": false,
-          "isContentType": true,
-          "isEndpoint": false,
-          "explode": false,
-          "isRequired": true,
-          "kind": "Constant",
-          "decorators": [],
-          "skipUrlEncoding": false
-         },
-         {
-          "$id": "104",
-          "name": "body",
-          "nameInRequest": "body",
-          "type": {
-           "$ref": "27"
-          },
-          "location": "Body",
-          "isApiVersion": false,
-          "isContentType": false,
-          "isEndpoint": false,
-          "explode": false,
-          "isRequired": true,
-          "kind": "Method",
-          "decorators": [],
-          "skipUrlEncoding": false
-         }
-        ],
-        "responses": [
-         {
-          "$id": "105",
-          "statusCodes": [
-           204
-          ],
-          "headers": [],
-          "isErrorResponse": false
-         }
-        ],
-        "httpMethod": "POST",
-        "uri": "{endpoint}",
-        "path": "/client/naming/model/client",
-        "requestMediaTypes": [
-         "application/json"
-        ],
-        "bufferResponse": true,
-        "generateProtocolMethod": true,
-        "generateConvenienceMethod": true,
-        "crossLanguageDefinitionId": "Client.Naming.Model.client",
-        "decorators": []
-       },
-       "parameters": [
-        {
-         "$id": "106",
-         "name": "body",
-         "nameInRequest": "body",
-         "type": {
-          "$ref": "27"
-         },
-         "location": "Body",
-         "isApiVersion": false,
-         "isContentType": false,
-         "isEndpoint": false,
-         "explode": false,
-         "isRequired": true,
-         "kind": "Method",
-         "decorators": [],
-         "skipUrlEncoding": false
-        },
-        {
-         "$id": "107",
-         "name": "contentType",
-         "nameInRequest": "contentType",
-         "doc": "Body parameter's content type. Known values are application/json",
-         "type": {
-          "$ref": "102"
-         },
-         "location": "Header",
-         "isApiVersion": false,
-         "isContentType": false,
-         "isEndpoint": false,
-         "explode": false,
-         "isRequired": true,
-         "kind": "Constant",
-         "decorators": [],
-         "skipUrlEncoding": false
-        }
-       ],
-       "response": {
-        "$id": "108"
-       },
-       "isOverride": false,
-       "generateConvenient": true,
-       "generateProtocol": true,
-       "crossLanguageDefinitionId": "Client.Naming.Model.client"
-      },
-      {
-       "$id": "109",
-       "kind": "basic",
-       "name": "language",
-       "accessibility": "public",
-       "apiVersions": [],
-       "operation": {
-        "$id": "110",
-        "name": "language",
-        "resourceName": "Model",
-        "accessibility": "public",
-        "parameters": [
-         {
-          "$id": "111",
-          "name": "contentType",
-          "nameInRequest": "Content-Type",
-          "doc": "Body parameter's content type. Known values are application/json",
-          "type": {
-           "$id": "112",
-           "kind": "constant",
-           "name": "languageContentType1",
-           "namespace": "",
-           "usage": "None",
-           "valueType": {
-            "$id": "113",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "18"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -1159,7 +1125,7 @@
           "name": "body",
           "nameInRequest": "body",
           "type": {
-           "$ref": "32"
+           "$ref": "45"
           },
           "location": "Body",
           "isApiVersion": false,
@@ -1184,14 +1150,14 @@
         ],
         "httpMethod": "POST",
         "uri": "{endpoint}",
-        "path": "/client/naming/model/language",
+        "path": "/client/naming/model/client",
         "requestMediaTypes": [
          "application/json"
         ],
         "bufferResponse": true,
         "generateProtocolMethod": true,
         "generateConvenienceMethod": true,
-        "crossLanguageDefinitionId": "Client.Naming.Model.language",
+        "crossLanguageDefinitionId": "Client.Naming.Model.client",
         "decorators": []
        },
        "parameters": [
@@ -1200,7 +1166,7 @@
          "name": "body",
          "nameInRequest": "body",
          "type": {
-          "$ref": "32"
+          "$ref": "45"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -1218,7 +1184,7 @@
          "nameInRequest": "contentType",
          "doc": "Body parameter's content type. Known values are application/json",
          "type": {
-          "$ref": "112"
+          "$ref": "18"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1237,17 +1203,132 @@
        "isOverride": false,
        "generateConvenient": true,
        "generateProtocol": true,
+       "crossLanguageDefinitionId": "Client.Naming.Model.client"
+      },
+      {
+       "$id": "119",
+       "kind": "basic",
+       "name": "language",
+       "accessibility": "public",
+       "apiVersions": [],
+       "operation": {
+        "$id": "120",
+        "name": "language",
+        "resourceName": "Model",
+        "accessibility": "public",
+        "parameters": [
+         {
+          "$id": "121",
+          "name": "contentType",
+          "nameInRequest": "Content-Type",
+          "doc": "Body parameter's content type. Known values are application/json",
+          "type": {
+           "$ref": "20"
+          },
+          "location": "Header",
+          "isApiVersion": false,
+          "isContentType": true,
+          "isEndpoint": false,
+          "explode": false,
+          "isRequired": true,
+          "kind": "Constant",
+          "decorators": [],
+          "skipUrlEncoding": false
+         },
+         {
+          "$id": "122",
+          "name": "body",
+          "nameInRequest": "body",
+          "type": {
+           "$ref": "50"
+          },
+          "location": "Body",
+          "isApiVersion": false,
+          "isContentType": false,
+          "isEndpoint": false,
+          "explode": false,
+          "isRequired": true,
+          "kind": "Method",
+          "decorators": [],
+          "skipUrlEncoding": false
+         }
+        ],
+        "responses": [
+         {
+          "$id": "123",
+          "statusCodes": [
+           204
+          ],
+          "headers": [],
+          "isErrorResponse": false
+         }
+        ],
+        "httpMethod": "POST",
+        "uri": "{endpoint}",
+        "path": "/client/naming/model/language",
+        "requestMediaTypes": [
+         "application/json"
+        ],
+        "bufferResponse": true,
+        "generateProtocolMethod": true,
+        "generateConvenienceMethod": true,
+        "crossLanguageDefinitionId": "Client.Naming.Model.language",
+        "decorators": []
+       },
+       "parameters": [
+        {
+         "$id": "124",
+         "name": "body",
+         "nameInRequest": "body",
+         "type": {
+          "$ref": "50"
+         },
+         "location": "Body",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "125",
+         "name": "contentType",
+         "nameInRequest": "contentType",
+         "doc": "Body parameter's content type. Known values are application/json",
+         "type": {
+          "$ref": "20"
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "response": {
+        "$id": "126"
+       },
+       "isOverride": false,
+       "generateConvenient": true,
+       "generateProtocol": true,
        "crossLanguageDefinitionId": "Client.Naming.Model.language"
       }
      ],
      "parameters": [
       {
-       "$id": "119",
+       "$id": "127",
        "name": "endpoint",
        "nameInRequest": "endpoint",
        "doc": "Service host",
        "type": {
-        "$id": "120",
+        "$id": "128",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -1261,9 +1342,9 @@
        "explode": false,
        "kind": "Client",
        "defaultValue": {
-        "$id": "121",
+        "$id": "129",
         "type": {
-         "$id": "122",
+         "$id": "130",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1276,46 +1357,33 @@
      "crossLanguageDefinitionId": "Client.Naming.Model",
      "apiVersions": [],
      "parent": {
-      "$ref": "37"
+      "$ref": "55"
      }
     },
     {
-     "$id": "123",
+     "$id": "131",
      "kind": "client",
      "name": "UnionEnum",
      "namespace": "Client.Naming.UnionEnum",
      "methods": [
       {
-       "$id": "124",
+       "$id": "132",
        "kind": "basic",
        "name": "unionEnumName",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "125",
+        "$id": "133",
         "name": "unionEnumName",
         "resourceName": "UnionEnum",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "126",
+          "$id": "134",
           "name": "contentType",
           "nameInRequest": "Content-Type",
           "type": {
-           "$id": "127",
-           "kind": "constant",
-           "name": "UnionEnumNameRequestContentType",
-           "namespace": "",
-           "usage": "None",
-           "valueType": {
-            "$id": "128",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "22"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -1328,7 +1396,7 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "129",
+          "$id": "135",
           "name": "body",
           "nameInRequest": "body",
           "type": {
@@ -1347,7 +1415,7 @@
         ],
         "responses": [
          {
-          "$id": "130",
+          "$id": "136",
           "statusCodes": [
            204
           ],
@@ -1369,24 +1437,11 @@
        },
        "parameters": [
         {
-         "$id": "131",
+         "$id": "137",
          "name": "contentType",
          "nameInRequest": "content-type",
          "type": {
-          "$id": "132",
-          "kind": "constant",
-          "name": "UnionEnumNameRequestContentType1",
-          "namespace": "",
-          "usage": "None",
-          "valueType": {
-           "$id": "133",
-           "kind": "string",
-           "name": "string",
-           "crossLanguageDefinitionId": "TypeSpec.string",
-           "decorators": []
-          },
-          "value": "application/json",
-          "decorators": []
+          "$ref": "24"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1399,7 +1454,7 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "134",
+         "$id": "138",
          "name": "body",
          "nameInRequest": "body",
          "type": {
@@ -1417,7 +1472,7 @@
         }
        ],
        "response": {
-        "$id": "135"
+        "$id": "139"
        },
        "isOverride": false,
        "generateConvenient": true,
@@ -1425,36 +1480,23 @@
        "crossLanguageDefinitionId": "Client.Naming.UnionEnum.unionEnumName"
       },
       {
-       "$id": "136",
+       "$id": "140",
        "kind": "basic",
        "name": "unionEnumMemberName",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "137",
+        "$id": "141",
         "name": "unionEnumMemberName",
         "resourceName": "UnionEnum",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "138",
+          "$id": "142",
           "name": "contentType",
           "nameInRequest": "Content-Type",
           "type": {
-           "$id": "139",
-           "kind": "constant",
-           "name": "UnionEnumNameRequestContentType2",
-           "namespace": "",
-           "usage": "None",
-           "valueType": {
-            "$id": "140",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "26"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -1467,7 +1509,7 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "141",
+          "$id": "143",
           "name": "body",
           "nameInRequest": "body",
           "type": {
@@ -1486,7 +1528,7 @@
         ],
         "responses": [
          {
-          "$id": "142",
+          "$id": "144",
           "statusCodes": [
            204
           ],
@@ -1508,24 +1550,11 @@
        },
        "parameters": [
         {
-         "$id": "143",
+         "$id": "145",
          "name": "contentType",
          "nameInRequest": "content-type",
          "type": {
-          "$id": "144",
-          "kind": "constant",
-          "name": "UnionEnumNameRequestContentType3",
-          "namespace": "",
-          "usage": "None",
-          "valueType": {
-           "$id": "145",
-           "kind": "string",
-           "name": "string",
-           "crossLanguageDefinitionId": "TypeSpec.string",
-           "decorators": []
-          },
-          "value": "application/json",
-          "decorators": []
+          "$ref": "28"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1600,7 +1629,7 @@
      "crossLanguageDefinitionId": "Client.Naming.UnionEnum",
      "apiVersions": [],
      "parent": {
-      "$ref": "37"
+      "$ref": "55"
      }
     }
    ]

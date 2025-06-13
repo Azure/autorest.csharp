@@ -65,8 +65,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 },
                 null, new List<InputModelType>(), null, null, null, null);
 
-            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ModelCollectionProperties.Models", new List<string>(),
-                new List<InputEnumType>(), new List<InputModelType> { elementModelType, collectionModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ModelCollectionProperties.Models", [], [], [], [elementModelType, collectionModelType], [], new InputAuth()), default).Build(true);
 
             ValidateGeneratedCodes("ModelCollectionModel", expectedModelCodes, expectedSerializationCodes, library);
         }
@@ -88,8 +87,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 },
                 null, new List<InputModelType>(), null, null, null, null);
 
-            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ModelCollectionProperties.Models", new List<string>(),
-                new List<InputEnumType>(), new List<InputModelType> { elementModelType, collectionModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ModelCollectionProperties.Models", [], [], [], [elementModelType, collectionModelType], [], new InputAuth()), default).Build(true);
 
             ValidateGeneratedCodes("ModelCollectionModel", expectedModelCodes, expectedSerializationCodes, library);
         }

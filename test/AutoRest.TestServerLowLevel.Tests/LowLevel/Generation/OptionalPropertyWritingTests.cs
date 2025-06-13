@@ -15,8 +15,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var model = new InputModelType("RoundTripModel", "Cadl.TestServer.OptionalProperties.Models", "public", null, null, "Round-trip model with optional properties.", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                     OptionalProperties, null, Array.Empty<InputModelType>(), null, null, null, null);
 
-            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.OptionalProperties.Models", new List<string>(),
-                new List<InputEnumType>(), new List<InputModelType> { ElementModelType, model }, new List<InputClient>(), new InputAuth()), default).Build(true);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.OptionalProperties.Models", [], [], [], [ElementModelType, model], [], new InputAuth()), default).Build(true);
 
             ValidateGeneratedCodes("RoundTripModel", expectedModelCodes, expectedSerializationCodes, library);
         }
@@ -28,8 +27,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var model = new InputModelType("InputModel", "Cadl.TestServer.OptionalProperties.Models", "public", null, null, "Input model with optional properties.", InputModelTypeUsage.Input,
                     OptionalProperties, null, Array.Empty<InputModelType>(), null, null, null, null);
 
-            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.OptionalProperties.Models", new List<string>(),
-                new List<InputEnumType>(), new List<InputModelType> { ElementModelType, model }, new List<InputClient>(), new InputAuth()), default).Build(true);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.OptionalProperties.Models", [], [], [], [ElementModelType, model], [], new InputAuth()), default).Build(true);
 
             ValidateGeneratedCodes("InputModel", expectedModelCodes, expectedSerializationCodes, library);
         }
@@ -41,8 +39,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var model = new InputModelType("OutputModel", "Cadl.TestServer.OptionalProperties.Models", "public", null, null, "Output model with optional properties.", InputModelTypeUsage.Output,
                     OptionalProperties, null, Array.Empty<InputModelType>(), null, null, null, null);
 
-            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.OptionalProperties.Models", new List<string>(),
-                new List<InputEnumType>(), new List<InputModelType> { ElementModelType, model }, new List<InputClient>(), new InputAuth()), default).Build(true);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.OptionalProperties.Models", [], [], [], [ElementModelType, model], [], new InputAuth()), default).Build(true);
 
             ValidateGeneratedCodes("OutputModel", expectedModelCodes, expectedSerializationCodes, library);
         }

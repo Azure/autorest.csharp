@@ -58,10 +58,7 @@ export function transformCodeModel(codeModel: CodeModel): CodeModel {
             }
         }
     }
-    return {
-        ...codeModel,
-        constants: undefined // TODO -- this is a workaround to reduce the amount of changes in our tspCodeModel.json file. We could remove it later
-    } as unknown as CodeModel;
+    return codeModel;
 }
 
 interface DecoratedType {

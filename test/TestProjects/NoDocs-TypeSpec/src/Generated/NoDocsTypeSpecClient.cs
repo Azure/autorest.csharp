@@ -1249,7 +1249,7 @@ namespace NoDocsTypeSpec
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/retunsAnonymousModel", false);
+            uri.AppendPath("/returnsAnonymousModel", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
