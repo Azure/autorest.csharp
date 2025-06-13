@@ -45,10 +45,7 @@ namespace _Type.Property.Nullable.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
+                    ModelSerializationExtensions.JsonSerialize(writer, item.Value, ModelSerializationExtensions.Options);
 #endif
                 }
             }

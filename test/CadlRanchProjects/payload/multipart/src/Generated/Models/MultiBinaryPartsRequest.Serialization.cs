@@ -40,10 +40,7 @@ namespace Payload.MultiPart.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(global::System.BinaryData.FromStream(ProfileImage));
 #else
-            using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(ProfileImage), ModelSerializationExtensions.JsonDocumentOptions))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+            ModelSerializationExtensions.JsonSerialize(writer, BinaryData.FromStream(ProfileImage), ModelSerializationExtensions.Options);
 #endif
             if (Optional.IsDefined(Picture))
             {
@@ -51,10 +48,7 @@ namespace Payload.MultiPart.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(global::System.BinaryData.FromStream(Picture));
 #else
-                using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(Picture), ModelSerializationExtensions.JsonDocumentOptions))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
+                ModelSerializationExtensions.JsonSerialize(writer, BinaryData.FromStream(Picture), ModelSerializationExtensions.Options);
 #endif
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -65,10 +59,7 @@ namespace Payload.MultiPart.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
+                    ModelSerializationExtensions.JsonSerialize(writer, item.Value, ModelSerializationExtensions.Options);
 #endif
                 }
             }

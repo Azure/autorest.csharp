@@ -39,19 +39,13 @@ namespace _Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(String);
 #else
-            using (JsonDocument document = JsonDocument.Parse(String, ModelSerializationExtensions.JsonDocumentOptions))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+            ModelSerializationExtensions.JsonSerialize(writer, String, ModelSerializationExtensions.Options);
 #endif
             writer.WritePropertyName("array"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Array);
 #else
-            using (JsonDocument document = JsonDocument.Parse(Array, ModelSerializationExtensions.JsonDocumentOptions))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+            ModelSerializationExtensions.JsonSerialize(writer, Array, ModelSerializationExtensions.Options);
 #endif
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -61,10 +55,7 @@ namespace _Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
+                    ModelSerializationExtensions.JsonSerialize(writer, item.Value, ModelSerializationExtensions.Options);
 #endif
                 }
             }

@@ -33,37 +33,25 @@ namespace Scm._Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(StringLiteral);
 #else
-            using (JsonDocument document = JsonDocument.Parse(StringLiteral, ModelSerializationExtensions.JsonDocumentOptions))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+            ModelSerializationExtensions.JsonSerialize(writer, StringLiteral, ModelSerializationExtensions.Options);
 #endif
             writer.WritePropertyName("intLiteral"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(IntLiteral);
 #else
-            using (JsonDocument document = JsonDocument.Parse(IntLiteral, ModelSerializationExtensions.JsonDocumentOptions))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+            ModelSerializationExtensions.JsonSerialize(writer, IntLiteral, ModelSerializationExtensions.Options);
 #endif
             writer.WritePropertyName("floatLiteral"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(FloatLiteral);
 #else
-            using (JsonDocument document = JsonDocument.Parse(FloatLiteral, ModelSerializationExtensions.JsonDocumentOptions))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+            ModelSerializationExtensions.JsonSerialize(writer, FloatLiteral, ModelSerializationExtensions.Options);
 #endif
             writer.WritePropertyName("booleanLiteral"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(BooleanLiteral);
 #else
-            using (JsonDocument document = JsonDocument.Parse(BooleanLiteral, ModelSerializationExtensions.JsonDocumentOptions))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+            ModelSerializationExtensions.JsonSerialize(writer, BooleanLiteral, ModelSerializationExtensions.Options);
 #endif
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -73,10 +61,7 @@ namespace Scm._Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
+                    ModelSerializationExtensions.JsonSerialize(writer, item.Value, ModelSerializationExtensions.Options);
 #endif
                 }
             }

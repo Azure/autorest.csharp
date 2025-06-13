@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using Azure.Core;
 
 namespace model_flattening
@@ -43,10 +42,7 @@ namespace model_flattening
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(item);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
-                    }
+                    ModelSerializationExtensions.JsonSerialize(content.JsonWriter, item, ModelSerializationExtensions.Options);
 #endif
                 }
             }
@@ -100,10 +96,7 @@ namespace model_flattening
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(item.Value);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
-                    }
+                    ModelSerializationExtensions.JsonSerialize(content.JsonWriter, item.Value, ModelSerializationExtensions.Options);
 #endif
                 }
             }
@@ -125,10 +118,7 @@ namespace model_flattening
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(value);
 #else
-            using (JsonDocument document = JsonDocument.Parse(value, ModelSerializationExtensions.JsonDocumentOptions))
-            {
-                JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
-            }
+            ModelSerializationExtensions.JsonSerialize(content.JsonWriter, value, ModelSerializationExtensions.Options);
 #endif
             return content;
         }

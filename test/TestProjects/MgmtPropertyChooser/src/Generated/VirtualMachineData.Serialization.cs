@@ -53,7 +53,7 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(IdentityV3))
             {
                 writer.WritePropertyName("identityV3"u8);
-                ((IJsonModel<ManagedServiceIdentity>)IdentityV3).Write(writer, ModelSerializationExtensions.WireOptions);
+                ModelSerializationExtensions.JsonSerialize(writer, IdentityV3, ModelSerializationExtensions.OptionsUseManagedServiceIdentityV3);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -209,7 +209,7 @@ namespace MgmtPropertyChooser
                         continue;
                     }
                     var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
-                    identityV3 = ModelSerializationExtensions.JsonDeserialize<ManagedServiceIdentity>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    identityV3 = ModelSerializationExtensions.JsonDeserialize<ManagedServiceIdentity>(property.Value.GetRawText(), ModelSerializationExtensions.OptionsUseManagedServiceIdentityV3);
                     continue;
                 }
                 if (property.NameEquals("zones"u8))

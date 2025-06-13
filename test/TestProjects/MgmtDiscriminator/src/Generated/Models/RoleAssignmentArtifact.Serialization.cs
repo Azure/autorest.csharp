@@ -46,10 +46,7 @@ namespace MgmtDiscriminator.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(PrincipalIds);
 #else
-            using (JsonDocument document = JsonDocument.Parse(PrincipalIds, ModelSerializationExtensions.JsonDocumentOptions))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+            ModelSerializationExtensions.JsonSerialize(writer, PrincipalIds, ModelSerializationExtensions.Options);
 #endif
             if (Optional.IsDefined(ResourceGroup))
             {

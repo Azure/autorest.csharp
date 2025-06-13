@@ -1090,10 +1090,7 @@ namespace MgmtScopeResource
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(template);
 #else
-            using (JsonDocument document = JsonDocument.Parse(template, ModelSerializationExtensions.JsonDocumentOptions))
-            {
-                JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
-            }
+            ModelSerializationExtensions.JsonSerialize(content.JsonWriter, template, ModelSerializationExtensions.Options);
 #endif
             request.Content = content;
             _userAgent.Apply(message);
