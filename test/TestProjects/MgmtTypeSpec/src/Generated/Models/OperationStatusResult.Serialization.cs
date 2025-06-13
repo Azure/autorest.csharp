@@ -78,7 +78,7 @@ namespace MgmtTypeSpec.Models
             if (Optional.IsDefined(Error))
             {
                 writer.WritePropertyName("error"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Error, ModelSerializationExtensions.Options);
+                ((IJsonModel<ResponseError>)Error).Write(writer, options);
             }
             if (options.Format != "W" && Optional.IsDefined(ResourceId))
             {

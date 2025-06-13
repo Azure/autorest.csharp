@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Net;
 using System.Text.Json;
@@ -64,82 +65,82 @@ namespace MgmtExactMatchInheritance
             if (Optional.IsDefined(Type5))
             {
                 writer.WritePropertyName("type5"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type5, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactoryElement<string>>)Type5).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type6))
             {
                 writer.WritePropertyName("type6"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type6, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactoryElement<double>>)Type6).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type7))
             {
                 writer.WritePropertyName("type7"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type7, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactoryElement<bool>>)Type7).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type8))
             {
                 writer.WritePropertyName("type8"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type8, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactoryElement<int>>)Type8).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type9))
             {
                 writer.WritePropertyName("type9"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type9, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactoryElement<BinaryData>>)Type9).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type10))
             {
                 writer.WritePropertyName("type10"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type10, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactoryElement<IList<SeparateClass>>>)Type10).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type11))
             {
                 writer.WritePropertyName("type11"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type11, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactoryElement<IList<string>>>)Type11).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type12))
             {
                 writer.WritePropertyName("type12"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type12, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactoryElement<IDictionary<string, string>>>)Type12).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type13))
             {
                 writer.WritePropertyName("type13"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type13, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactoryElement<IList<SeparateClass>>>)Type13).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type14))
             {
                 writer.WritePropertyName("type14"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type14, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactoryElement<DateTimeOffset>>)Type14).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type15))
             {
                 writer.WritePropertyName("type15"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type15, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactoryElement<TimeSpan>>)Type15).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type16))
             {
                 writer.WritePropertyName("type16"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type16, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactoryElement<Uri>>)Type16).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type17))
             {
                 writer.WritePropertyName("type17"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type17, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactoryLinkedServiceReference>)Type17).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type18))
             {
                 writer.WritePropertyName("type18"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type18, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactorySecretString>)Type18).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type19))
             {
                 writer.WritePropertyName("type19"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type19, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactoryKeyVaultSecret>)Type19).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type20))
             {
                 writer.WritePropertyName("type20"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Type20, ModelSerializationExtensions.Options);
+                ((IJsonModel<DataFactoryElement<IDictionary<string, BinaryData>>>)Type20).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
