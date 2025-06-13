@@ -22,8 +22,7 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
                 },
                 null, new List<InputModelType>(), null, null, null, null);
 
-            var library = new DpgOutputLibraryBuilder(new InputNamespace("NestedModelsBasic.Models", new List<string>(),
-                new List<InputEnumType>(), new List<InputModelType> { model, NestedRoundTripOnlyModelType, NestedRoundTripSharedModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("NestedModelsBasic.Models", [], [], [], [model, NestedRoundTripOnlyModelType, NestedRoundTripSharedModelType], [], new InputAuth()), default).Build(true);
 
             ValidateGeneratedCodes("RoundTripModel", expectedModelCodes, expectedSerializationCodes, library);
         }
@@ -40,8 +39,7 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
                 },
                 null, new List<InputModelType>(), null, null, null, null);
 
-            var library = new DpgOutputLibraryBuilder(new InputNamespace("NestedModelsBasic.Models", new List<string>(),
-                new List<InputEnumType>(), new List<InputModelType> { model, NestedInputOnlyModelType, NestedRoundTripSharedModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("NestedModelsBasic.Models", [], [], [], [model, NestedInputOnlyModelType, NestedRoundTripSharedModelType], [], new InputAuth()), default).Build(true);
 
             ValidateGeneratedCodes("InputModel", expectedModelCodes, expectedSerializationCodes, library);
         }
@@ -58,8 +56,7 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
                 },
                 null, new List<InputModelType>(), null, null, null, null);
 
-            var library = new DpgOutputLibraryBuilder(new InputNamespace("NestedModelsBasic.Models", new List<string>(),
-                new List<InputEnumType>(), new List<InputModelType> { model, NestedOutputOnlyModelType, NestedRoundTripSharedModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("NestedModelsBasic.Models", [], [], [], [model, NestedOutputOnlyModelType, NestedRoundTripSharedModelType], [], new InputAuth()), default).Build(true);
 
             ValidateGeneratedCodes("OutputModel", expectedModelCodes, expectedSerializationCodes, library);
         }

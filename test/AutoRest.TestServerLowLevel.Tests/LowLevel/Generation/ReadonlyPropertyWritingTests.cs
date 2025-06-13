@@ -15,8 +15,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var model = new InputModelType("RoundTripModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", null, null, "Readonly model", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                     ReadOnlyProperties, null, Array.Empty<InputModelType>(), null, null, null, null);
 
-            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ReadonlyProperties.Models", new List<string>(),
-                new List<InputEnumType>(), new List<InputModelType> { ReadonlyModel, model }, new List<InputClient>(), new InputAuth()), default).Build(true);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ReadonlyProperties.Models", [], [], [], [ReadonlyModel, model], [], new InputAuth()), default).Build(true);
 
             ValidateGeneratedCodes("RoundTripModel", expectedModelCodes, expectedSerializationCodes, library);
         }
@@ -28,8 +27,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var model = new InputModelType("OutputModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", null, null, "Readonly model", InputModelTypeUsage.Output,
                     ReadOnlyProperties, null, Array.Empty<InputModelType>(), null, null, null, null);
 
-            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ReadonlyProperties.Models", new List<string>(),
-                new List<InputEnumType>(), new List<InputModelType> { ReadonlyModel, model }, new List<InputClient>(), new InputAuth()), default).Build(true);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ReadonlyProperties.Models", [], [], [], [ReadonlyModel, model], [], new InputAuth()), default).Build(true);
 
             ValidateGeneratedCodes("OutputModel", expectedModelCodes, expectedSerializationCodes, library);
         }
