@@ -69,7 +69,10 @@ namespace MgmtPropertyChooser.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Settings);
 #else
-                ModelSerializationExtensions.JsonSerialize(writer, Settings, ModelSerializationExtensions.Options);
+                using (JsonDocument document = JsonDocument.Parse(Settings, ModelSerializationExtensions.JsonDocumentOptions))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             if (Optional.IsDefined(ProtectedSettings))
@@ -78,7 +81,10 @@ namespace MgmtPropertyChooser.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(ProtectedSettings);
 #else
-                ModelSerializationExtensions.JsonSerialize(writer, ProtectedSettings, ModelSerializationExtensions.Options);
+                using (JsonDocument document = JsonDocument.Parse(ProtectedSettings, ModelSerializationExtensions.JsonDocumentOptions))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             writer.WriteEndObject();

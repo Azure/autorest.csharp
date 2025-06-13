@@ -54,7 +54,10 @@ namespace AzureSample.ResourceManager.Sample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Parameters);
 #else
-                ModelSerializationExtensions.JsonSerialize(writer, Parameters, ModelSerializationExtensions.Options);
+                using (JsonDocument document = JsonDocument.Parse(Parameters, ModelSerializationExtensions.JsonDocumentOptions))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             if (options.Format != "W" && Optional.IsCollectionDefined(Resources))
@@ -71,7 +74,10 @@ namespace AzureSample.ResourceManager.Sample.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item);
 #else
-                    ModelSerializationExtensions.JsonSerialize(writer, item, ModelSerializationExtensions.Options);
+                    using (JsonDocument document = JsonDocument.Parse(item, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
                 writer.WriteEndArray();

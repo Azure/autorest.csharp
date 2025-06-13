@@ -36,7 +36,10 @@ namespace MgmtExtensionResource.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item);
 #else
-                    ModelSerializationExtensions.JsonSerialize(writer, item, ModelSerializationExtensions.Options);
+                    using (JsonDocument document = JsonDocument.Parse(item, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
                 writer.WriteEndArray();
@@ -47,7 +50,10 @@ namespace MgmtExtensionResource.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(DefaultValue);
 #else
-                ModelSerializationExtensions.JsonSerialize(writer, DefaultValue, ModelSerializationExtensions.Options);
+                using (JsonDocument document = JsonDocument.Parse(DefaultValue, ModelSerializationExtensions.JsonDocumentOptions))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             if (Optional.IsDefined(Metadata))

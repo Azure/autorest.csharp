@@ -45,7 +45,10 @@ namespace MgmtDiscriminator.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Template);
 #else
-            ModelSerializationExtensions.JsonSerialize(writer, Template, ModelSerializationExtensions.Options);
+            using (JsonDocument document = JsonDocument.Parse(Template, ModelSerializationExtensions.JsonDocumentOptions))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             if (Optional.IsDefined(ResourceGroup))
             {
@@ -65,7 +68,10 @@ namespace MgmtDiscriminator.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                ModelSerializationExtensions.JsonSerialize(writer, item.Value, ModelSerializationExtensions.Options);
+                using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             writer.WriteEndObject();

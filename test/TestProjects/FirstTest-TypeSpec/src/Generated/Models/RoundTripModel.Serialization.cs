@@ -125,7 +125,10 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnknown);
 #else
-            ModelSerializationExtensions.JsonSerialize(writer, RequiredUnknown, ModelSerializationExtensions.Options);
+            using (JsonDocument document = JsonDocument.Parse(RequiredUnknown, ModelSerializationExtensions.JsonDocumentOptions))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             if (Optional.IsDefined(OptionalUnknown))
             {
@@ -133,7 +136,10 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(OptionalUnknown);
 #else
-                ModelSerializationExtensions.JsonSerialize(writer, OptionalUnknown, ModelSerializationExtensions.Options);
+                using (JsonDocument document = JsonDocument.Parse(OptionalUnknown, ModelSerializationExtensions.JsonDocumentOptions))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             writer.WritePropertyName("requiredRecordUnknown"u8);
@@ -149,7 +155,10 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                ModelSerializationExtensions.JsonSerialize(writer, item.Value, ModelSerializationExtensions.Options);
+                using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             writer.WriteEndObject();
@@ -168,7 +177,10 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    ModelSerializationExtensions.JsonSerialize(writer, item.Value, ModelSerializationExtensions.Options);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
                 writer.WriteEndObject();
@@ -188,7 +200,10 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    ModelSerializationExtensions.JsonSerialize(writer, item.Value, ModelSerializationExtensions.Options);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
                 writer.WriteEndObject();
@@ -208,7 +223,10 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    ModelSerializationExtensions.JsonSerialize(writer, item.Value, ModelSerializationExtensions.Options);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
                 writer.WriteEndObject();
@@ -227,7 +245,10 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item);
 #else
-                ModelSerializationExtensions.JsonSerialize(writer, item, ModelSerializationExtensions.Options);
+                using (JsonDocument document = JsonDocument.Parse(item, ModelSerializationExtensions.JsonDocumentOptions))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             writer.WriteEndArray();
@@ -237,7 +258,10 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(BinaryDataRecord);
 #else
-                ModelSerializationExtensions.JsonSerialize(writer, BinaryDataRecord, ModelSerializationExtensions.Options);
+                using (JsonDocument document = JsonDocument.Parse(BinaryDataRecord, ModelSerializationExtensions.JsonDocumentOptions))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -248,7 +272,10 @@ namespace FirstTestTypeSpec.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    ModelSerializationExtensions.JsonSerialize(writer, item.Value, ModelSerializationExtensions.Options);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }

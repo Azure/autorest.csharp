@@ -22,7 +22,10 @@ namespace MgmtScopeResource.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Value);
 #else
-                ModelSerializationExtensions.JsonSerialize(writer, Value, ModelSerializationExtensions.Options);
+                using (JsonDocument document = JsonDocument.Parse(Value, ModelSerializationExtensions.JsonDocumentOptions))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             writer.WriteEndObject();

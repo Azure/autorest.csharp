@@ -39,25 +39,37 @@ namespace _Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Model);
 #else
-            ModelSerializationExtensions.JsonSerialize(writer, Model, ModelSerializationExtensions.Options);
+            using (JsonDocument document = JsonDocument.Parse(Model, ModelSerializationExtensions.JsonDocumentOptions))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             writer.WritePropertyName("literal"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Literal);
 #else
-            ModelSerializationExtensions.JsonSerialize(writer, Literal, ModelSerializationExtensions.Options);
+            using (JsonDocument document = JsonDocument.Parse(Literal, ModelSerializationExtensions.JsonDocumentOptions))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             writer.WritePropertyName("int"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Int);
 #else
-            ModelSerializationExtensions.JsonSerialize(writer, Int, ModelSerializationExtensions.Options);
+            using (JsonDocument document = JsonDocument.Parse(Int, ModelSerializationExtensions.JsonDocumentOptions))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             writer.WritePropertyName("boolean"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Boolean);
 #else
-            ModelSerializationExtensions.JsonSerialize(writer, Boolean, ModelSerializationExtensions.Options);
+            using (JsonDocument document = JsonDocument.Parse(Boolean, ModelSerializationExtensions.JsonDocumentOptions))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             writer.WritePropertyName("array"u8);
             writer.WriteStartArray();
@@ -71,7 +83,10 @@ namespace _Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item);
 #else
-                ModelSerializationExtensions.JsonSerialize(writer, item, ModelSerializationExtensions.Options);
+                using (JsonDocument document = JsonDocument.Parse(item, ModelSerializationExtensions.JsonDocumentOptions))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
             }
             writer.WriteEndArray();
@@ -83,7 +98,10 @@ namespace _Type.Union.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    ModelSerializationExtensions.JsonSerialize(writer, item.Value, ModelSerializationExtensions.Options);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using Azure.Core;
 
 namespace custom_baseUrl
@@ -42,7 +43,10 @@ namespace custom_baseUrl
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(item);
 #else
-                    ModelSerializationExtensions.JsonSerialize(content.JsonWriter, item, ModelSerializationExtensions.Options);
+                    using (JsonDocument document = JsonDocument.Parse(item, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
+                    }
 #endif
                 }
             }
@@ -96,7 +100,10 @@ namespace custom_baseUrl
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(item.Value);
 #else
-                    ModelSerializationExtensions.JsonSerialize(content.JsonWriter, item.Value, ModelSerializationExtensions.Options);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
+                    }
 #endif
                 }
             }
@@ -118,7 +125,10 @@ namespace custom_baseUrl
 #if NET6_0_OR_GREATER
 				content.JsonWriter.WriteRawValue(value);
 #else
-            ModelSerializationExtensions.JsonSerialize(content.JsonWriter, value, ModelSerializationExtensions.Options);
+            using (JsonDocument document = JsonDocument.Parse(value, ModelSerializationExtensions.JsonDocumentOptions))
+            {
+                JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
+            }
 #endif
             return content;
         }

@@ -36,7 +36,10 @@ namespace Scm.Payload.Multipart.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(global::System.BinaryData.FromStream(ProfileImage));
 #else
-            ModelSerializationExtensions.JsonSerialize(writer, BinaryData.FromStream(ProfileImage), ModelSerializationExtensions.Options);
+            using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(ProfileImage), ModelSerializationExtensions.JsonDocumentOptions))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
+            }
 #endif
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -46,7 +49,10 @@ namespace Scm.Payload.Multipart.Models
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
 #else
-                    ModelSerializationExtensions.JsonSerialize(writer, item.Value, ModelSerializationExtensions.Options);
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
 #endif
                 }
             }
