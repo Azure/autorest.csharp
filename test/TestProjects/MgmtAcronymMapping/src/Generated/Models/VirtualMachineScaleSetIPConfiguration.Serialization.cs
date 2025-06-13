@@ -151,7 +151,7 @@ namespace MgmtAcronymMapping.Models
                             {
                                 continue;
                             }
-                            subnet = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
+                            subnet = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value.GetRawText(), ModelSerializationExtensions.Options);
                             continue;
                         }
                         if (property0.NameEquals("primary"u8))
@@ -211,7 +211,7 @@ namespace MgmtAcronymMapping.Models
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item));
+                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item.GetRawText(), ModelSerializationExtensions.Options));
                             }
                             applicationGatewayBackendAddressPools = array;
                             continue;
@@ -225,7 +225,7 @@ namespace MgmtAcronymMapping.Models
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item));
+                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item.GetRawText(), ModelSerializationExtensions.Options));
                             }
                             applicationSecurityGroups = array;
                             continue;
@@ -239,7 +239,7 @@ namespace MgmtAcronymMapping.Models
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item));
+                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item.GetRawText(), ModelSerializationExtensions.Options));
                             }
                             loadBalancerBackendAddressPools = array;
                             continue;
@@ -253,7 +253,7 @@ namespace MgmtAcronymMapping.Models
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item));
+                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item.GetRawText(), ModelSerializationExtensions.Options));
                             }
                             loadBalancerInboundNatPools = array;
                             continue;

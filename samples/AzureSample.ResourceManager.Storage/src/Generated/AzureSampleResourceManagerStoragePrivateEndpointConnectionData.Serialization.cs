@@ -71,7 +71,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -89,7 +89,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            privateEndpoint = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0.Value);
+                            privateEndpoint = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0.Value.GetRawText(), ModelSerializationExtensions.Options);
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnectionState"u8))

@@ -196,7 +196,7 @@ namespace MgmtExpandResourceTypes
                     {
                         continue;
                     }
-                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -247,7 +247,7 @@ namespace MgmtExpandResourceTypes
                             {
                                 continue;
                             }
-                            targetResource = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
+                            targetResource = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value.GetRawText(), ModelSerializationExtensions.Options);
                             continue;
                         }
                         if (property0.NameEquals("ARecords"u8))

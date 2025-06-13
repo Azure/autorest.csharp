@@ -177,7 +177,7 @@ namespace AzureSample.ResourceManager.Sample
                     {
                         continue;
                     }
-                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -221,7 +221,7 @@ namespace AzureSample.ResourceManager.Sample
                             List<Azure.ResourceManager.Resources.Models.SubResource> array = new List<Azure.ResourceManager.Resources.Models.SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelSerializationExtensions.JsonDeserialize<Azure.ResourceManager.Resources.Models.SubResource>(item));
+                                array.Add(ModelSerializationExtensions.JsonDeserialize<Azure.ResourceManager.Resources.Models.SubResource>(item.GetRawText(), ModelSerializationExtensions.Options));
                             }
                             virtualMachines = array;
                             continue;

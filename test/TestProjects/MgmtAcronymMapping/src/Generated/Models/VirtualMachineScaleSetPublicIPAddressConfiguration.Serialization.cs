@@ -122,7 +122,7 @@ namespace MgmtAcronymMapping.Models
                             {
                                 continue;
                             }
-                            publicIPPrefix = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
+                            publicIPPrefix = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value.GetRawText(), ModelSerializationExtensions.Options);
                             continue;
                         }
                         if (property0.NameEquals("publicIPAddressVersion"u8))

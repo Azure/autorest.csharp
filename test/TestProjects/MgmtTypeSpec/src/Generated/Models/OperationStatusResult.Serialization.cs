@@ -201,7 +201,7 @@ namespace MgmtTypeSpec.Models
                     {
                         continue;
                     }
-                    error = ModelSerializationExtensions.JsonDeserialize<ResponseError>(property.Value);
+                    error = ModelSerializationExtensions.JsonDeserialize<ResponseError>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("resourceId"u8))

@@ -154,7 +154,7 @@ namespace AuthoringTypeSpec.Models
                 }
                 if (property.NameEquals("errors"u8))
                 {
-                    errors = ModelSerializationExtensions.JsonDeserialize<ResponseError>(property.Value);
+                    errors = ModelSerializationExtensions.JsonDeserialize<ResponseError>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

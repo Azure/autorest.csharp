@@ -20,8 +20,6 @@ namespace MgmtCustomizations
 {
     internal static class ModelSerializationExtensions
     {
-        private static readonly JsonSerializerOptions s_options = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, MgmtCustomizationsContext.Default) } };
-        private static readonly JsonSerializerOptions s_optionsUseManagedServiceIdentityV3 = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, MgmtCustomizationsContext.Default), new Azure.ResourceManager.Models.ManagedServiceIdentityTypeV3Converter() } };
         internal static readonly JsonDocumentOptions JsonDocumentOptions = new JsonDocumentOptions { MaxDepth = 256 };
         internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
         internal static readonly BinaryData SentinelValue = BinaryData.FromBytes("\"__EMPTY__\""u8.ToArray());

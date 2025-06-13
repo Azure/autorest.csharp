@@ -104,7 +104,7 @@ namespace MgmtMockAndSample.Models
                     List<WritableSubResource> array = new List<WritableSubResource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item));
+                        array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item.GetRawText(), ModelSerializationExtensions.Options));
                     }
                     virtualNetworkRules = array;
                     continue;

@@ -91,7 +91,7 @@ namespace MgmtDiscriminator.Models
                 }
                 if (property.NameEquals("originGroup"u8))
                 {
-                    originGroup = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
+                    originGroup = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (options.Format != "W")

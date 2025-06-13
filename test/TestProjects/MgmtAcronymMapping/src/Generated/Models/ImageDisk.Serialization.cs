@@ -77,7 +77,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    snapshot = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
+                    snapshot = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("managedDisk"u8))
@@ -86,7 +86,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    managedDisk = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
+                    managedDisk = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("blobUri"u8))
@@ -131,7 +131,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    diskEncryptionSet = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
+                    diskEncryptionSet = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
             }

@@ -14,7 +14,6 @@ namespace Scm._Type.Model.Empty
 {
     internal static class ModelSerializationExtensions
     {
-        private static readonly JsonSerializerOptions s_options = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, Scm_TypeModelEmptyContext.Default) } };
         internal static readonly JsonDocumentOptions JsonDocumentOptions = new JsonDocumentOptions { MaxDepth = 256 };
         internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
         internal static readonly BinaryData SentinelValue = BinaryData.FromBytes("\"__EMPTY__\""u8.ToArray());

@@ -174,7 +174,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             List<Azure.ResourceManager.Resources.Models.SubResource> array = new List<Azure.ResourceManager.Resources.Models.SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelSerializationExtensions.JsonDeserialize<Azure.ResourceManager.Resources.Models.SubResource>(item));
+                                array.Add(ModelSerializationExtensions.JsonDeserialize<Azure.ResourceManager.Resources.Models.SubResource>(item.GetRawText(), ModelSerializationExtensions.Options));
                             }
                             virtualMachines = array;
                             continue;

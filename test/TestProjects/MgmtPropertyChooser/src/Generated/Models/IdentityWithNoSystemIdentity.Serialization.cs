@@ -65,7 +65,7 @@ namespace MgmtPropertyChooser.Models
                     Dictionary<string, UserAssignedIdentity> dictionary = new Dictionary<string, UserAssignedIdentity>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, ModelSerializationExtensions.JsonDeserialize<UserAssignedIdentity>(property0.Value));
+                        dictionary.Add(property0.Name, ModelSerializationExtensions.JsonDeserialize<UserAssignedIdentity>(property0.Value.GetRawText(), ModelSerializationExtensions.Options));
                     }
                     userAssignedIdentities = dictionary;
                     continue;

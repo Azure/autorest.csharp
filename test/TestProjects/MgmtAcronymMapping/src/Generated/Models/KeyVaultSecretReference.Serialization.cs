@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
                 }
                 if (property.NameEquals("sourceVault"u8))
                 {
-                    sourceVault = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
+                    sourceVault = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
             }

@@ -103,7 +103,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    layerOneConflict = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
+                    layerOneConflict = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -146,7 +146,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
             }

@@ -92,7 +92,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    diskEncryptionSet = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
+                    diskEncryptionSet = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

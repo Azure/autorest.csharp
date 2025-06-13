@@ -119,7 +119,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            sourceVirtualMachine = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
+                            sourceVirtualMachine = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value.GetRawText(), ModelSerializationExtensions.Options);
                             continue;
                         }
                         if (property0.NameEquals("storageProfile"u8))

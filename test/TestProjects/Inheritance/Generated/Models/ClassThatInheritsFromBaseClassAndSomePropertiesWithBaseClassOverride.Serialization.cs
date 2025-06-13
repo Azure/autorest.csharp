@@ -125,7 +125,7 @@ namespace Inheritance.Models
                     {
                         continue;
                     }
-                    dfeString = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<string>>(property.Value);
+                    dfeString = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<string>>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("DfeDouble"u8))
@@ -134,7 +134,7 @@ namespace Inheritance.Models
                     {
                         continue;
                     }
-                    dfeDouble = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<double>>(property.Value);
+                    dfeDouble = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<double>>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("DfeBool"u8))
@@ -143,7 +143,7 @@ namespace Inheritance.Models
                     {
                         continue;
                     }
-                    dfeBool = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<bool>>(property.Value);
+                    dfeBool = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<bool>>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("DfeInt"u8))
@@ -152,7 +152,7 @@ namespace Inheritance.Models
                     {
                         continue;
                     }
-                    dfeInt = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<int>>(property.Value);
+                    dfeInt = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<int>>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("DfeObject"u8))
@@ -161,7 +161,7 @@ namespace Inheritance.Models
                     {
                         continue;
                     }
-                    dfeObject = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<BinaryData>>(property.Value);
+                    dfeObject = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<BinaryData>>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("DfeListOfT"u8))
@@ -170,7 +170,7 @@ namespace Inheritance.Models
                     {
                         continue;
                     }
-                    dfeListOfT = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<IList<SeparateClass>>>(property.Value);
+                    dfeListOfT = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<IList<SeparateClass>>>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("DfeListOfString"u8))
@@ -179,7 +179,7 @@ namespace Inheritance.Models
                     {
                         continue;
                     }
-                    dfeListOfString = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<IList<string>>>(property.Value);
+                    dfeListOfString = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<IList<string>>>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("DfeKeyValuePairs"u8))
@@ -188,7 +188,7 @@ namespace Inheritance.Models
                     {
                         continue;
                     }
-                    dfeKeyValuePairs = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<IDictionary<string, string>>>(property.Value);
+                    dfeKeyValuePairs = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<IDictionary<string, string>>>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("DfeDateTime"u8))
@@ -197,7 +197,7 @@ namespace Inheritance.Models
                     {
                         continue;
                     }
-                    dfeDateTime = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<DateTimeOffset>>(property.Value);
+                    dfeDateTime = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<DateTimeOffset>>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("DfeDuration"u8))
@@ -206,7 +206,7 @@ namespace Inheritance.Models
                     {
                         continue;
                     }
-                    dfeDuration = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<TimeSpan>>(property.Value);
+                    dfeDuration = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<TimeSpan>>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("DfeUri"u8))
@@ -215,7 +215,7 @@ namespace Inheritance.Models
                     {
                         continue;
                     }
-                    dfeUri = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<Uri>>(property.Value);
+                    dfeUri = ModelSerializationExtensions.JsonDeserialize<DataFactoryElement<Uri>>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("SomeProperty"u8))

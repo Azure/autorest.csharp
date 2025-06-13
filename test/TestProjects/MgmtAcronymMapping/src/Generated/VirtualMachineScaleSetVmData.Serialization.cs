@@ -210,7 +210,7 @@ namespace MgmtAcronymMapping
                     {
                         continue;
                     }
-                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value);
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -323,7 +323,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            availabilitySet = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
+                            availabilitySet = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value.GetRawText(), ModelSerializationExtensions.Options);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

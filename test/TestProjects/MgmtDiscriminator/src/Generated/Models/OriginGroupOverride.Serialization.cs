@@ -96,7 +96,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    originGroup = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
+                    originGroup = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("forwardingProtocol"u8))

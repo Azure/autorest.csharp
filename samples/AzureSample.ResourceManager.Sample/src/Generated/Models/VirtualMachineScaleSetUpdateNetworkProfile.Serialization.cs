@@ -99,7 +99,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    healthProbe = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
+                    healthProbe = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("networkInterfaceConfigurations"u8))

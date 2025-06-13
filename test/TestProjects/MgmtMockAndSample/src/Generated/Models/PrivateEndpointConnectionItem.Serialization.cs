@@ -50,7 +50,7 @@ namespace MgmtMockAndSample.Models
                             {
                                 continue;
                             }
-                            privateEndpoint = ModelSerializationExtensions.JsonDeserialize<Azure.ResourceManager.Resources.Models.SubResource>(property0.Value);
+                            privateEndpoint = ModelSerializationExtensions.JsonDeserialize<Azure.ResourceManager.Resources.Models.SubResource>(property0.Value.GetRawText(), ModelSerializationExtensions.Options);
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnectionState"u8))

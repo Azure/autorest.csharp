@@ -51,7 +51,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    workspaceId = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
+                    workspaceId = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
             }

@@ -91,7 +91,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
                 if (property.NameEquals("sourceVault"u8))
                 {
-                    sourceVault = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
+                    sourceVault = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (options.Format != "W")

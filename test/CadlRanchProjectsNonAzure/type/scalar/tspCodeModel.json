@@ -2180,7 +2180,18 @@
            200
           ],
           "bodyType": {
-           "$ref": "185"
+           "$id": "214",
+           "kind": "array",
+           "name": "Array",
+           "valueType": {
+            "$id": "215",
+            "kind": "decimal",
+            "name": "decimal",
+            "crossLanguageDefinitionId": "TypeSpec.decimal",
+            "decorators": []
+           },
+           "crossLanguageDefinitionId": "TypeSpec.Array",
+           "decorators": []
           },
           "headers": [],
           "isErrorResponse": false,
@@ -2200,7 +2211,7 @@
        },
        "parameters": [
         {
-         "$id": "214",
+         "$id": "216",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
@@ -2218,9 +2229,9 @@
         }
        ],
        "response": {
-        "$id": "215",
+        "$id": "217",
         "type": {
-         "$ref": "185"
+         "$ref": "214"
         }
        },
        "isOverride": false,
@@ -2229,29 +2240,29 @@
        "crossLanguageDefinitionId": "Type.Scalar.Decimal128Verify.prepareVerify"
       },
       {
-       "$id": "216",
+       "$id": "218",
        "kind": "basic",
        "name": "verify",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "217",
+        "$id": "219",
         "name": "verify",
         "resourceName": "Decimal128Verify",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "218",
+          "$id": "220",
           "name": "contentType",
           "nameInRequest": "Content-Type",
           "type": {
-           "$id": "219",
+           "$id": "221",
            "kind": "constant",
            "name": "GetResponseContentType17",
            "namespace": "",
            "usage": "None",
            "valueType": {
-            "$id": "220",
+            "$id": "222",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2271,11 +2282,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "221",
+          "$id": "223",
           "name": "body",
           "nameInRequest": "body",
           "type": {
-           "$id": "222",
+           "$id": "224",
            "kind": "decimal",
            "name": "decimal",
            "crossLanguageDefinitionId": "TypeSpec.decimal",
@@ -2294,7 +2305,7 @@
         ],
         "responses": [
          {
-          "$id": "223",
+          "$id": "225",
           "statusCodes": [
            204
           ],
@@ -2316,17 +2327,17 @@
        },
        "parameters": [
         {
-         "$id": "224",
+         "$id": "226",
          "name": "contentType",
          "nameInRequest": "content-type",
          "type": {
-          "$id": "225",
+          "$id": "227",
           "kind": "constant",
           "name": "GetResponseContentType18",
           "namespace": "",
           "usage": "None",
           "valueType": {
-           "$id": "226",
+           "$id": "228",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2346,11 +2357,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "227",
+         "$id": "229",
          "name": "body",
          "nameInRequest": "body",
          "type": {
-          "$id": "228",
+          "$id": "230",
           "kind": "decimal",
           "name": "decimal",
           "crossLanguageDefinitionId": "TypeSpec.decimal",
@@ -2368,7 +2379,7 @@
         }
        ],
        "response": {
-        "$id": "229"
+        "$id": "231"
        },
        "isOverride": false,
        "generateConvenient": true,
@@ -2378,12 +2389,12 @@
      ],
      "parameters": [
       {
-       "$id": "230",
+       "$id": "232",
        "name": "endpoint",
        "nameInRequest": "endpoint",
        "doc": "Service host",
        "type": {
-        "$id": "231",
+        "$id": "233",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -2397,9 +2408,9 @@
        "explode": false,
        "kind": "Client",
        "defaultValue": {
-        "$id": "232",
+        "$id": "234",
         "type": {
-         "$id": "233",
+         "$id": "235",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"

@@ -129,14 +129,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 yield return _sentinelBinaryDataField;
             }
-            if (Configuration.UseModelReaderWriter)
-            {
-                yield return _jsonSerializerOptionsField;
 
-                if (Configuration.AzureArm)
-                {
-                    yield return _jsonSerializerOptionsUseManagedServiceIdentityV3Field;
-                }
+            yield return _jsonSerializerOptionsField;
+
+            if (Configuration.AzureArm)
+            {
+                yield return _jsonSerializerOptionsUseManagedServiceIdentityV3Field;
             }
         }
 
@@ -188,11 +186,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             #endregion
 
-            if (Configuration.UseModelReaderWriter)
-            {
-                yield return BuildJsonDeserializeMethod();
-                yield return BuildJsonSerializeMethod();
-            }
+            yield return BuildJsonDeserializeMethod();
+            yield return BuildJsonSerializeMethod();
         }
 
         private const string _isSentinelValueMethodName = "IsSentinelValue";
@@ -507,10 +502,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public static ValueExpression Deserialize(JsonElementExpression element, CSharpType type, bool useManagedServiceIdentityV3 = false)
-            => new InvokeStaticMethodExpression(Instance.Type, _jsonDeserializeMethodName, [element, new MemberExpression(null, useManagedServiceIdentityV3 ? _jsonSerializerOptionsUseManagedServiceIdentityV3Name : _jsonSerializerOptionsName)], TypeArguments: [type]);
-
-        public static ValueExpression Serialize(ValueExpression data, CSharpType type, bool useManagedServiceIdentityV3 = false)
-            => new InvokeStaticMethodExpression(Instance.Type, _jsonSerializeMethodName, [data, new MemberExpression(null, useManagedServiceIdentityV3 ? _jsonSerializerOptionsUseManagedServiceIdentityV3Name : _jsonSerializerOptionsName)], TypeArguments: [type]);
+            => new InvokeStaticMethodExpression(Instance.Type, _jsonDeserializeMethodName, [element.Invoke(nameof(JsonElement.GetRawText)), new MemberExpression(Instance.Type, useManagedServiceIdentityV3 ?  _jsonSerializerOptionsUseManagedServiceIdentityV3Name : _jsonSerializerOptionsName)], TypeArguments: [type]);
 
         public MethodBodyStatement WriteBase64StringValue(Utf8JsonWriterExpression writer, ValueExpression value, string? format)
             => new InvokeStaticMethodStatement(Type, _writeBase64StringValueMethodName, new[] { writer, value, Literal(format) }, CallAsExtension: true);

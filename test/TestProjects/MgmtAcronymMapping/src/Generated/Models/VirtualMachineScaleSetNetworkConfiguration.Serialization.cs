@@ -125,7 +125,7 @@ namespace MgmtAcronymMapping.Models
                             {
                                 continue;
                             }
-                            networkSecurityGroup = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value);
+                            networkSecurityGroup = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value.GetRawText(), ModelSerializationExtensions.Options);
                             continue;
                         }
                         if (property0.NameEquals("dnsSettings"u8))

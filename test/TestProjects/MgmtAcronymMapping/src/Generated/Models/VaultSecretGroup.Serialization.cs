@@ -52,7 +52,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    sourceVault = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value);
+                    sourceVault = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("vaultCertificates"u8))
