@@ -3,9 +3,171 @@
  "name": "Encode.Datetime",
  "apiVersions": [],
  "enums": [],
- "models": [
+ "constants": [
   {
    "$id": "2",
+   "kind": "constant",
+   "name": "defaultContentType",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "3",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "4",
+   "kind": "constant",
+   "name": "defaultContentType1",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "5",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "6",
+   "kind": "constant",
+   "name": "rfc3339ContentType",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "7",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "8",
+   "kind": "constant",
+   "name": "rfc3339ContentType1",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "9",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "10",
+   "kind": "constant",
+   "name": "rfc7231ContentType",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "11",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "12",
+   "kind": "constant",
+   "name": "rfc7231ContentType1",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "13",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "14",
+   "kind": "constant",
+   "name": "unixTimestampContentType",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "15",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "16",
+   "kind": "constant",
+   "name": "unixTimestampContentType1",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "17",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "18",
+   "kind": "constant",
+   "name": "unixTimestampArrayContentType",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "19",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "20",
+   "kind": "constant",
+   "name": "unixTimestampArrayContentType1",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "21",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  }
+ ],
+ "models": [
+  {
+   "$id": "22",
    "kind": "model",
    "name": "DefaultDatetimeProperty",
    "namespace": "Encode.Datetime",
@@ -14,17 +176,17 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "3",
+     "$id": "23",
      "kind": "property",
      "name": "value",
      "serializedName": "value",
      "type": {
-      "$id": "4",
+      "$id": "24",
       "kind": "utcDateTime",
       "name": "utcDateTime",
       "encode": "rfc3339",
       "wireType": {
-       "$id": "5",
+       "$id": "25",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
@@ -40,9 +202,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Encode.Datetime.DefaultDatetimeProperty.value",
      "serializationOptions": {
-      "$id": "6",
+      "$id": "26",
       "json": {
-       "$id": "7",
+       "$id": "27",
        "name": "value"
       }
      }
@@ -50,7 +212,7 @@
    ]
   },
   {
-   "$id": "8",
+   "$id": "28",
    "kind": "model",
    "name": "Rfc3339DatetimeProperty",
    "namespace": "Encode.Datetime",
@@ -59,17 +221,17 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "9",
+     "$id": "29",
      "kind": "property",
      "name": "value",
      "serializedName": "value",
      "type": {
-      "$id": "10",
+      "$id": "30",
       "kind": "utcDateTime",
       "name": "utcDateTime",
       "encode": "rfc3339",
       "wireType": {
-       "$id": "11",
+       "$id": "31",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
@@ -85,9 +247,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Encode.Datetime.Rfc3339DatetimeProperty.value",
      "serializationOptions": {
-      "$id": "12",
+      "$id": "32",
       "json": {
-       "$id": "13",
+       "$id": "33",
        "name": "value"
       }
      }
@@ -95,7 +257,7 @@
    ]
   },
   {
-   "$id": "14",
+   "$id": "34",
    "kind": "model",
    "name": "Rfc7231DatetimeProperty",
    "namespace": "Encode.Datetime",
@@ -104,17 +266,17 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "15",
+     "$id": "35",
      "kind": "property",
      "name": "value",
      "serializedName": "value",
      "type": {
-      "$id": "16",
+      "$id": "36",
       "kind": "utcDateTime",
       "name": "utcDateTime",
       "encode": "rfc7231",
       "wireType": {
-       "$id": "17",
+       "$id": "37",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
@@ -130,9 +292,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Encode.Datetime.Rfc7231DatetimeProperty.value",
      "serializationOptions": {
-      "$id": "18",
+      "$id": "38",
       "json": {
-       "$id": "19",
+       "$id": "39",
        "name": "value"
       }
      }
@@ -140,7 +302,7 @@
    ]
   },
   {
-   "$id": "20",
+   "$id": "40",
    "kind": "model",
    "name": "UnixTimestampDatetimeProperty",
    "namespace": "Encode.Datetime",
@@ -149,17 +311,17 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "21",
+     "$id": "41",
      "kind": "property",
      "name": "value",
      "serializedName": "value",
      "type": {
-      "$id": "22",
+      "$id": "42",
       "kind": "utcDateTime",
       "name": "utcDateTime",
       "encode": "unixTimestamp",
       "wireType": {
-       "$id": "23",
+       "$id": "43",
        "kind": "int64",
        "name": "int64",
        "crossLanguageDefinitionId": "TypeSpec.int64",
@@ -175,9 +337,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Encode.Datetime.UnixTimestampDatetimeProperty.value",
      "serializationOptions": {
-      "$id": "24",
+      "$id": "44",
       "json": {
-       "$id": "25",
+       "$id": "45",
        "name": "value"
       }
      }
@@ -185,7 +347,7 @@
    ]
   },
   {
-   "$id": "26",
+   "$id": "46",
    "kind": "model",
    "name": "UnixTimestampArrayDatetimeProperty",
    "namespace": "Encode.Datetime",
@@ -194,21 +356,21 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "27",
+     "$id": "47",
      "kind": "property",
      "name": "value",
      "serializedName": "value",
      "type": {
-      "$id": "28",
+      "$id": "48",
       "kind": "array",
       "name": "Array",
       "valueType": {
-       "$id": "29",
+       "$id": "49",
        "kind": "utcDateTime",
        "name": "unixTimestampDatetime",
        "encode": "unixTimestamp",
        "wireType": {
-        "$id": "30",
+        "$id": "50",
         "kind": "int64",
         "name": "int64",
         "crossLanguageDefinitionId": "TypeSpec.int64",
@@ -216,12 +378,12 @@
        },
        "crossLanguageDefinitionId": "Encode.Datetime.unixTimestampDatetime",
        "baseType": {
-        "$id": "31",
+        "$id": "51",
         "kind": "utcDateTime",
         "name": "utcDateTime",
         "encode": "rfc3339",
         "wireType": {
-         "$id": "32",
+         "$id": "52",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -242,9 +404,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "Encode.Datetime.UnixTimestampArrayDatetimeProperty.value",
      "serializationOptions": {
-      "$id": "33",
+      "$id": "53",
       "json": {
-       "$id": "34",
+       "$id": "54",
        "name": "value"
       }
      }
@@ -254,7 +416,7 @@
  ],
  "clients": [
   {
-   "$id": "35",
+   "$id": "55",
    "kind": "client",
    "name": "DatetimeClient",
    "namespace": "Encode.Datetime",
@@ -262,12 +424,12 @@
    "methods": [],
    "parameters": [
     {
-     "$id": "36",
+     "$id": "56",
      "name": "endpoint",
      "nameInRequest": "endpoint",
      "doc": "Service host",
      "type": {
-      "$id": "37",
+      "$id": "57",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -281,9 +443,9 @@
      "explode": false,
      "kind": "Client",
      "defaultValue": {
-      "$id": "38",
+      "$id": "58",
       "type": {
-       "$id": "39",
+       "$id": "59",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"
@@ -297,220 +459,20 @@
    "apiVersions": [],
    "children": [
     {
-     "$id": "40",
+     "$id": "60",
      "kind": "client",
      "name": "Query",
      "namespace": "Encode.Datetime.Query",
      "methods": [
       {
-       "$id": "41",
+       "$id": "61",
        "kind": "basic",
        "name": "default",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "42",
-        "name": "default",
-        "resourceName": "Query",
-        "accessibility": "public",
-        "parameters": [
-         {
-          "$id": "43",
-          "name": "value",
-          "nameInRequest": "value",
-          "type": {
-           "$id": "44",
-           "kind": "utcDateTime",
-           "name": "utcDateTime",
-           "encode": "rfc3339",
-           "wireType": {
-            "$id": "45",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
-           "decorators": []
-          },
-          "location": "Query",
-          "isApiVersion": false,
-          "isContentType": false,
-          "isEndpoint": false,
-          "explode": false,
-          "isRequired": true,
-          "kind": "Method",
-          "decorators": [],
-          "skipUrlEncoding": false
-         }
-        ],
-        "responses": [
-         {
-          "$id": "46",
-          "statusCodes": [
-           204
-          ],
-          "headers": [],
-          "isErrorResponse": false
-         }
-        ],
-        "httpMethod": "GET",
-        "uri": "{endpoint}",
-        "path": "/encode/datetime/query/default",
-        "bufferResponse": true,
-        "generateProtocolMethod": true,
-        "generateConvenienceMethod": true,
-        "crossLanguageDefinitionId": "Encode.Datetime.Query.default",
-        "decorators": []
-       },
-       "parameters": [
-        {
-         "$id": "47",
-         "name": "value",
-         "nameInRequest": "value",
-         "type": {
-          "$id": "48",
-          "kind": "utcDateTime",
-          "name": "utcDateTime",
-          "encode": "rfc3339",
-          "wireType": {
-           "$id": "49",
-           "kind": "string",
-           "name": "string",
-           "crossLanguageDefinitionId": "TypeSpec.string",
-           "decorators": []
-          },
-          "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
-          "decorators": []
-         },
-         "location": "Query",
-         "isApiVersion": false,
-         "isContentType": false,
-         "isEndpoint": false,
-         "explode": false,
-         "isRequired": true,
-         "kind": "Method",
-         "decorators": [],
-         "skipUrlEncoding": false
-        }
-       ],
-       "response": {
-        "$id": "50"
-       },
-       "isOverride": false,
-       "generateConvenient": true,
-       "generateProtocol": true,
-       "crossLanguageDefinitionId": "Encode.Datetime.Query.default"
-      },
-      {
-       "$id": "51",
-       "kind": "basic",
-       "name": "rfc3339",
-       "accessibility": "public",
-       "apiVersions": [],
-       "operation": {
-        "$id": "52",
-        "name": "rfc3339",
-        "resourceName": "Query",
-        "accessibility": "public",
-        "parameters": [
-         {
-          "$id": "53",
-          "name": "value",
-          "nameInRequest": "value",
-          "type": {
-           "$id": "54",
-           "kind": "utcDateTime",
-           "name": "utcDateTime",
-           "encode": "rfc3339",
-           "wireType": {
-            "$id": "55",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
-           "decorators": []
-          },
-          "location": "Query",
-          "isApiVersion": false,
-          "isContentType": false,
-          "isEndpoint": false,
-          "explode": false,
-          "isRequired": true,
-          "kind": "Method",
-          "decorators": [],
-          "skipUrlEncoding": false
-         }
-        ],
-        "responses": [
-         {
-          "$id": "56",
-          "statusCodes": [
-           204
-          ],
-          "headers": [],
-          "isErrorResponse": false
-         }
-        ],
-        "httpMethod": "GET",
-        "uri": "{endpoint}",
-        "path": "/encode/datetime/query/rfc3339",
-        "bufferResponse": true,
-        "generateProtocolMethod": true,
-        "generateConvenienceMethod": true,
-        "crossLanguageDefinitionId": "Encode.Datetime.Query.rfc3339",
-        "decorators": []
-       },
-       "parameters": [
-        {
-         "$id": "57",
-         "name": "value",
-         "nameInRequest": "value",
-         "type": {
-          "$id": "58",
-          "kind": "utcDateTime",
-          "name": "utcDateTime",
-          "encode": "rfc3339",
-          "wireType": {
-           "$id": "59",
-           "kind": "string",
-           "name": "string",
-           "crossLanguageDefinitionId": "TypeSpec.string",
-           "decorators": []
-          },
-          "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
-          "decorators": []
-         },
-         "location": "Query",
-         "isApiVersion": false,
-         "isContentType": false,
-         "isEndpoint": false,
-         "explode": false,
-         "isRequired": true,
-         "kind": "Method",
-         "decorators": [],
-         "skipUrlEncoding": false
-        }
-       ],
-       "response": {
-        "$id": "60"
-       },
-       "isOverride": false,
-       "generateConvenient": true,
-       "generateProtocol": true,
-       "crossLanguageDefinitionId": "Encode.Datetime.Query.rfc3339"
-      },
-      {
-       "$id": "61",
-       "kind": "basic",
-       "name": "rfc7231",
-       "accessibility": "public",
-       "apiVersions": [],
-       "operation": {
         "$id": "62",
-        "name": "rfc7231",
+        "name": "default",
         "resourceName": "Query",
         "accessibility": "public",
         "parameters": [
@@ -522,7 +484,7 @@
            "$id": "64",
            "kind": "utcDateTime",
            "name": "utcDateTime",
-           "encode": "rfc7231",
+           "encode": "rfc3339",
            "wireType": {
             "$id": "65",
             "kind": "string",
@@ -556,11 +518,11 @@
         ],
         "httpMethod": "GET",
         "uri": "{endpoint}",
-        "path": "/encode/datetime/query/rfc7231",
+        "path": "/encode/datetime/query/default",
         "bufferResponse": true,
         "generateProtocolMethod": true,
         "generateConvenienceMethod": true,
-        "crossLanguageDefinitionId": "Encode.Datetime.Query.rfc7231",
+        "crossLanguageDefinitionId": "Encode.Datetime.Query.default",
         "decorators": []
        },
        "parameters": [
@@ -572,7 +534,7 @@
           "$id": "68",
           "kind": "utcDateTime",
           "name": "utcDateTime",
-          "encode": "rfc7231",
+          "encode": "rfc3339",
           "wireType": {
            "$id": "69",
            "kind": "string",
@@ -600,17 +562,17 @@
        "isOverride": false,
        "generateConvenient": true,
        "generateProtocol": true,
-       "crossLanguageDefinitionId": "Encode.Datetime.Query.rfc7231"
+       "crossLanguageDefinitionId": "Encode.Datetime.Query.default"
       },
       {
        "$id": "71",
        "kind": "basic",
-       "name": "unixTimestamp",
+       "name": "rfc3339",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
         "$id": "72",
-        "name": "unixTimestamp",
+        "name": "rfc3339",
         "resourceName": "Query",
         "accessibility": "public",
         "parameters": [
@@ -622,12 +584,12 @@
            "$id": "74",
            "kind": "utcDateTime",
            "name": "utcDateTime",
-           "encode": "unixTimestamp",
+           "encode": "rfc3339",
            "wireType": {
             "$id": "75",
-            "kind": "int64",
-            "name": "int64",
-            "crossLanguageDefinitionId": "TypeSpec.int64",
+            "kind": "string",
+            "name": "string",
+            "crossLanguageDefinitionId": "TypeSpec.string",
             "decorators": []
            },
            "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
@@ -656,11 +618,11 @@
         ],
         "httpMethod": "GET",
         "uri": "{endpoint}",
-        "path": "/encode/datetime/query/unix-timestamp",
+        "path": "/encode/datetime/query/rfc3339",
         "bufferResponse": true,
         "generateProtocolMethod": true,
         "generateConvenienceMethod": true,
-        "crossLanguageDefinitionId": "Encode.Datetime.Query.unixTimestamp",
+        "crossLanguageDefinitionId": "Encode.Datetime.Query.rfc3339",
         "decorators": []
        },
        "parameters": [
@@ -672,12 +634,12 @@
           "$id": "78",
           "kind": "utcDateTime",
           "name": "utcDateTime",
-          "encode": "unixTimestamp",
+          "encode": "rfc3339",
           "wireType": {
            "$id": "79",
-           "kind": "int64",
-           "name": "int64",
-           "crossLanguageDefinitionId": "TypeSpec.int64",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
            "decorators": []
           },
           "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
@@ -700,17 +662,17 @@
        "isOverride": false,
        "generateConvenient": true,
        "generateProtocol": true,
-       "crossLanguageDefinitionId": "Encode.Datetime.Query.unixTimestamp"
+       "crossLanguageDefinitionId": "Encode.Datetime.Query.rfc3339"
       },
       {
        "$id": "81",
        "kind": "basic",
-       "name": "unixTimestampArray",
+       "name": "rfc7231",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
         "$id": "82",
-        "name": "unixTimestampArray",
+        "name": "rfc7231",
         "resourceName": "Query",
         "accessibility": "public",
         "parameters": [
@@ -719,7 +681,241 @@
           "name": "value",
           "nameInRequest": "value",
           "type": {
-           "$ref": "28"
+           "$id": "84",
+           "kind": "utcDateTime",
+           "name": "utcDateTime",
+           "encode": "rfc7231",
+           "wireType": {
+            "$id": "85",
+            "kind": "string",
+            "name": "string",
+            "crossLanguageDefinitionId": "TypeSpec.string",
+            "decorators": []
+           },
+           "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+           "decorators": []
+          },
+          "location": "Query",
+          "isApiVersion": false,
+          "isContentType": false,
+          "isEndpoint": false,
+          "explode": false,
+          "isRequired": true,
+          "kind": "Method",
+          "decorators": [],
+          "skipUrlEncoding": false
+         }
+        ],
+        "responses": [
+         {
+          "$id": "86",
+          "statusCodes": [
+           204
+          ],
+          "headers": [],
+          "isErrorResponse": false
+         }
+        ],
+        "httpMethod": "GET",
+        "uri": "{endpoint}",
+        "path": "/encode/datetime/query/rfc7231",
+        "bufferResponse": true,
+        "generateProtocolMethod": true,
+        "generateConvenienceMethod": true,
+        "crossLanguageDefinitionId": "Encode.Datetime.Query.rfc7231",
+        "decorators": []
+       },
+       "parameters": [
+        {
+         "$id": "87",
+         "name": "value",
+         "nameInRequest": "value",
+         "type": {
+          "$id": "88",
+          "kind": "utcDateTime",
+          "name": "utcDateTime",
+          "encode": "rfc7231",
+          "wireType": {
+           "$id": "89",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+          "decorators": []
+         },
+         "location": "Query",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "response": {
+        "$id": "90"
+       },
+       "isOverride": false,
+       "generateConvenient": true,
+       "generateProtocol": true,
+       "crossLanguageDefinitionId": "Encode.Datetime.Query.rfc7231"
+      },
+      {
+       "$id": "91",
+       "kind": "basic",
+       "name": "unixTimestamp",
+       "accessibility": "public",
+       "apiVersions": [],
+       "operation": {
+        "$id": "92",
+        "name": "unixTimestamp",
+        "resourceName": "Query",
+        "accessibility": "public",
+        "parameters": [
+         {
+          "$id": "93",
+          "name": "value",
+          "nameInRequest": "value",
+          "type": {
+           "$id": "94",
+           "kind": "utcDateTime",
+           "name": "utcDateTime",
+           "encode": "unixTimestamp",
+           "wireType": {
+            "$id": "95",
+            "kind": "int64",
+            "name": "int64",
+            "crossLanguageDefinitionId": "TypeSpec.int64",
+            "decorators": []
+           },
+           "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+           "decorators": []
+          },
+          "location": "Query",
+          "isApiVersion": false,
+          "isContentType": false,
+          "isEndpoint": false,
+          "explode": false,
+          "isRequired": true,
+          "kind": "Method",
+          "decorators": [],
+          "skipUrlEncoding": false
+         }
+        ],
+        "responses": [
+         {
+          "$id": "96",
+          "statusCodes": [
+           204
+          ],
+          "headers": [],
+          "isErrorResponse": false
+         }
+        ],
+        "httpMethod": "GET",
+        "uri": "{endpoint}",
+        "path": "/encode/datetime/query/unix-timestamp",
+        "bufferResponse": true,
+        "generateProtocolMethod": true,
+        "generateConvenienceMethod": true,
+        "crossLanguageDefinitionId": "Encode.Datetime.Query.unixTimestamp",
+        "decorators": []
+       },
+       "parameters": [
+        {
+         "$id": "97",
+         "name": "value",
+         "nameInRequest": "value",
+         "type": {
+          "$id": "98",
+          "kind": "utcDateTime",
+          "name": "utcDateTime",
+          "encode": "unixTimestamp",
+          "wireType": {
+           "$id": "99",
+           "kind": "int64",
+           "name": "int64",
+           "crossLanguageDefinitionId": "TypeSpec.int64",
+           "decorators": []
+          },
+          "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+          "decorators": []
+         },
+         "location": "Query",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "response": {
+        "$id": "100"
+       },
+       "isOverride": false,
+       "generateConvenient": true,
+       "generateProtocol": true,
+       "crossLanguageDefinitionId": "Encode.Datetime.Query.unixTimestamp"
+      },
+      {
+       "$id": "101",
+       "kind": "basic",
+       "name": "unixTimestampArray",
+       "accessibility": "public",
+       "apiVersions": [],
+       "operation": {
+        "$id": "102",
+        "name": "unixTimestampArray",
+        "resourceName": "Query",
+        "accessibility": "public",
+        "parameters": [
+         {
+          "$id": "103",
+          "name": "value",
+          "nameInRequest": "value",
+          "type": {
+           "$id": "104",
+           "kind": "array",
+           "name": "Array",
+           "valueType": {
+            "$id": "105",
+            "kind": "utcDateTime",
+            "name": "unixTimestampDatetime",
+            "encode": "unixTimestamp",
+            "wireType": {
+             "$id": "106",
+             "kind": "int64",
+             "name": "int64",
+             "crossLanguageDefinitionId": "TypeSpec.int64",
+             "decorators": []
+            },
+            "crossLanguageDefinitionId": "Encode.Datetime.unixTimestampDatetime",
+            "baseType": {
+             "$id": "107",
+             "kind": "utcDateTime",
+             "name": "utcDateTime",
+             "encode": "rfc3339",
+             "wireType": {
+              "$id": "108",
+              "kind": "string",
+              "name": "string",
+              "crossLanguageDefinitionId": "TypeSpec.string",
+              "decorators": []
+             },
+             "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+             "decorators": []
+            },
+            "decorators": []
+           },
+           "crossLanguageDefinitionId": "TypeSpec.Array",
+           "decorators": []
           },
           "location": "Query",
           "isApiVersion": false,
@@ -735,7 +931,7 @@
         ],
         "responses": [
          {
-          "$id": "84",
+          "$id": "109",
           "statusCodes": [
            204
           ],
@@ -754,11 +950,45 @@
        },
        "parameters": [
         {
-         "$id": "85",
+         "$id": "110",
          "name": "value",
          "nameInRequest": "value",
          "type": {
-          "$ref": "28"
+          "$id": "111",
+          "kind": "array",
+          "name": "Array",
+          "valueType": {
+           "$id": "112",
+           "kind": "utcDateTime",
+           "name": "unixTimestampDatetime",
+           "encode": "unixTimestamp",
+           "wireType": {
+            "$id": "113",
+            "kind": "int64",
+            "name": "int64",
+            "crossLanguageDefinitionId": "TypeSpec.int64",
+            "decorators": []
+           },
+           "crossLanguageDefinitionId": "Encode.Datetime.unixTimestampDatetime",
+           "baseType": {
+            "$id": "114",
+            "kind": "utcDateTime",
+            "name": "utcDateTime",
+            "encode": "rfc3339",
+            "wireType": {
+             "$id": "115",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+            "decorators": []
+           },
+           "decorators": []
+          },
+          "crossLanguageDefinitionId": "TypeSpec.Array",
+          "decorators": []
          },
          "location": "Query",
          "isApiVersion": false,
@@ -772,7 +1002,7 @@
         }
        ],
        "response": {
-        "$id": "86"
+        "$id": "116"
        },
        "isOverride": false,
        "generateConvenient": true,
@@ -782,12 +1012,12 @@
      ],
      "parameters": [
       {
-       "$id": "87",
+       "$id": "117",
        "name": "endpoint",
        "nameInRequest": "endpoint",
        "doc": "Service host",
        "type": {
-        "$id": "88",
+        "$id": "118",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -801,9 +1031,9 @@
        "explode": false,
        "kind": "Client",
        "defaultValue": {
-        "$id": "89",
+        "$id": "119",
         "type": {
-         "$id": "90",
+         "$id": "120",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -816,47 +1046,34 @@
      "crossLanguageDefinitionId": "Encode.Datetime.Query",
      "apiVersions": [],
      "parent": {
-      "$ref": "35"
+      "$ref": "55"
      }
     },
     {
-     "$id": "91",
+     "$id": "121",
      "kind": "client",
      "name": "Property",
      "namespace": "Encode.Datetime.Property",
      "methods": [
       {
-       "$id": "92",
+       "$id": "122",
        "kind": "basic",
        "name": "default",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "93",
+        "$id": "123",
         "name": "default",
         "resourceName": "Property",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "94",
+          "$id": "124",
           "name": "contentType",
           "nameInRequest": "Content-Type",
           "doc": "Body parameter's content type. Known values are application/json",
           "type": {
-           "$id": "95",
-           "kind": "constant",
-           "name": "defaultContentType",
-           "namespace": "",
-           "usage": "None",
-           "valueType": {
-            "$id": "96",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "2"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -869,24 +1086,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "97",
+          "$id": "125",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "98",
-           "kind": "constant",
-           "name": "defaultContentType1",
-           "namespace": "",
-           "usage": "None",
-           "valueType": {
-            "$id": "99",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "4"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -899,11 +1103,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "100",
+          "$id": "126",
           "name": "body",
           "nameInRequest": "body",
           "type": {
-           "$ref": "2"
+           "$ref": "22"
           },
           "location": "Body",
           "isApiVersion": false,
@@ -918,12 +1122,12 @@
         ],
         "responses": [
          {
-          "$id": "101",
+          "$id": "127",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$ref": "2"
+           "$ref": "22"
           },
           "headers": [],
           "isErrorResponse": false,
@@ -946,11 +1150,11 @@
        },
        "parameters": [
         {
-         "$id": "102",
+         "$id": "128",
          "name": "body",
          "nameInRequest": "body",
          "type": {
-          "$ref": "2"
+          "$ref": "22"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -963,12 +1167,12 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "103",
+         "$id": "129",
          "name": "contentType",
          "nameInRequest": "contentType",
          "doc": "Body parameter's content type. Known values are application/json",
          "type": {
-          "$ref": "95"
+          "$ref": "2"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -981,11 +1185,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "104",
+         "$id": "130",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "98"
+          "$ref": "4"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -999,9 +1203,9 @@
         }
        ],
        "response": {
-        "$id": "105",
+        "$id": "131",
         "type": {
-         "$ref": "2"
+         "$ref": "22"
         }
        },
        "isOverride": false,
@@ -1010,37 +1214,24 @@
        "crossLanguageDefinitionId": "Encode.Datetime.Property.default"
       },
       {
-       "$id": "106",
+       "$id": "132",
        "kind": "basic",
        "name": "rfc3339",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "107",
+        "$id": "133",
         "name": "rfc3339",
         "resourceName": "Property",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "108",
+          "$id": "134",
           "name": "contentType",
           "nameInRequest": "Content-Type",
           "doc": "Body parameter's content type. Known values are application/json",
           "type": {
-           "$id": "109",
-           "kind": "constant",
-           "name": "rfc3339ContentType",
-           "namespace": "",
-           "usage": "None",
-           "valueType": {
-            "$id": "110",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "6"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -1053,24 +1244,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "111",
+          "$id": "135",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "112",
-           "kind": "constant",
-           "name": "rfc3339ContentType1",
-           "namespace": "",
-           "usage": "None",
-           "valueType": {
-            "$id": "113",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "8"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -1083,11 +1261,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "114",
+          "$id": "136",
           "name": "body",
           "nameInRequest": "body",
           "type": {
-           "$ref": "8"
+           "$ref": "28"
           },
           "location": "Body",
           "isApiVersion": false,
@@ -1102,12 +1280,12 @@
         ],
         "responses": [
          {
-          "$id": "115",
+          "$id": "137",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$ref": "8"
+           "$ref": "28"
           },
           "headers": [],
           "isErrorResponse": false,
@@ -1130,11 +1308,11 @@
        },
        "parameters": [
         {
-         "$id": "116",
+         "$id": "138",
          "name": "body",
          "nameInRequest": "body",
          "type": {
-          "$ref": "8"
+          "$ref": "28"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -1147,12 +1325,12 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "117",
+         "$id": "139",
          "name": "contentType",
          "nameInRequest": "contentType",
          "doc": "Body parameter's content type. Known values are application/json",
          "type": {
-          "$ref": "109"
+          "$ref": "6"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1165,11 +1343,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "118",
+         "$id": "140",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "112"
+          "$ref": "8"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1183,9 +1361,9 @@
         }
        ],
        "response": {
-        "$id": "119",
+        "$id": "141",
         "type": {
-         "$ref": "8"
+         "$ref": "28"
         }
        },
        "isOverride": false,
@@ -1194,37 +1372,24 @@
        "crossLanguageDefinitionId": "Encode.Datetime.Property.rfc3339"
       },
       {
-       "$id": "120",
+       "$id": "142",
        "kind": "basic",
        "name": "rfc7231",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "121",
+        "$id": "143",
         "name": "rfc7231",
         "resourceName": "Property",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "122",
+          "$id": "144",
           "name": "contentType",
           "nameInRequest": "Content-Type",
           "doc": "Body parameter's content type. Known values are application/json",
           "type": {
-           "$id": "123",
-           "kind": "constant",
-           "name": "rfc7231ContentType",
-           "namespace": "",
-           "usage": "None",
-           "valueType": {
-            "$id": "124",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "10"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -1237,24 +1402,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "125",
+          "$id": "145",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "126",
-           "kind": "constant",
-           "name": "rfc7231ContentType1",
-           "namespace": "",
-           "usage": "None",
-           "valueType": {
-            "$id": "127",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "12"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -1267,11 +1419,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "128",
+          "$id": "146",
           "name": "body",
           "nameInRequest": "body",
           "type": {
-           "$ref": "14"
+           "$ref": "34"
           },
           "location": "Body",
           "isApiVersion": false,
@@ -1286,12 +1438,12 @@
         ],
         "responses": [
          {
-          "$id": "129",
+          "$id": "147",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$ref": "14"
+           "$ref": "34"
           },
           "headers": [],
           "isErrorResponse": false,
@@ -1314,11 +1466,11 @@
        },
        "parameters": [
         {
-         "$id": "130",
+         "$id": "148",
          "name": "body",
          "nameInRequest": "body",
          "type": {
-          "$ref": "14"
+          "$ref": "34"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -1331,12 +1483,12 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "131",
+         "$id": "149",
          "name": "contentType",
          "nameInRequest": "contentType",
          "doc": "Body parameter's content type. Known values are application/json",
          "type": {
-          "$ref": "123"
+          "$ref": "10"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1349,11 +1501,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "132",
+         "$id": "150",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "126"
+          "$ref": "12"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1367,9 +1519,9 @@
         }
        ],
        "response": {
-        "$id": "133",
+        "$id": "151",
         "type": {
-         "$ref": "14"
+         "$ref": "34"
         }
        },
        "isOverride": false,
@@ -1378,37 +1530,24 @@
        "crossLanguageDefinitionId": "Encode.Datetime.Property.rfc7231"
       },
       {
-       "$id": "134",
+       "$id": "152",
        "kind": "basic",
        "name": "unixTimestamp",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "135",
+        "$id": "153",
         "name": "unixTimestamp",
         "resourceName": "Property",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "136",
+          "$id": "154",
           "name": "contentType",
           "nameInRequest": "Content-Type",
           "doc": "Body parameter's content type. Known values are application/json",
           "type": {
-           "$id": "137",
-           "kind": "constant",
-           "name": "unixTimestampContentType",
-           "namespace": "",
-           "usage": "None",
-           "valueType": {
-            "$id": "138",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "14"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -1421,24 +1560,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "139",
+          "$id": "155",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "140",
-           "kind": "constant",
-           "name": "unixTimestampContentType1",
-           "namespace": "",
-           "usage": "None",
-           "valueType": {
-            "$id": "141",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "16"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -1451,11 +1577,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "142",
+          "$id": "156",
           "name": "body",
           "nameInRequest": "body",
           "type": {
-           "$ref": "20"
+           "$ref": "40"
           },
           "location": "Body",
           "isApiVersion": false,
@@ -1470,12 +1596,12 @@
         ],
         "responses": [
          {
-          "$id": "143",
+          "$id": "157",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$ref": "20"
+           "$ref": "40"
           },
           "headers": [],
           "isErrorResponse": false,
@@ -1498,11 +1624,11 @@
        },
        "parameters": [
         {
-         "$id": "144",
+         "$id": "158",
          "name": "body",
          "nameInRequest": "body",
          "type": {
-          "$ref": "20"
+          "$ref": "40"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -1515,12 +1641,12 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "145",
+         "$id": "159",
          "name": "contentType",
          "nameInRequest": "contentType",
          "doc": "Body parameter's content type. Known values are application/json",
          "type": {
-          "$ref": "137"
+          "$ref": "14"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1533,11 +1659,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "146",
+         "$id": "160",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "140"
+          "$ref": "16"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1551,9 +1677,9 @@
         }
        ],
        "response": {
-        "$id": "147",
+        "$id": "161",
         "type": {
-         "$ref": "20"
+         "$ref": "40"
         }
        },
        "isOverride": false,
@@ -1562,37 +1688,24 @@
        "crossLanguageDefinitionId": "Encode.Datetime.Property.unixTimestamp"
       },
       {
-       "$id": "148",
+       "$id": "162",
        "kind": "basic",
        "name": "unixTimestampArray",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "149",
+        "$id": "163",
         "name": "unixTimestampArray",
         "resourceName": "Property",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "150",
+          "$id": "164",
           "name": "contentType",
           "nameInRequest": "Content-Type",
           "doc": "Body parameter's content type. Known values are application/json",
           "type": {
-           "$id": "151",
-           "kind": "constant",
-           "name": "unixTimestampArrayContentType",
-           "namespace": "",
-           "usage": "None",
-           "valueType": {
-            "$id": "152",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "18"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -1605,24 +1718,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "153",
+          "$id": "165",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
-           "$id": "154",
-           "kind": "constant",
-           "name": "unixTimestampArrayContentType1",
-           "namespace": "",
-           "usage": "None",
-           "valueType": {
-            "$id": "155",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "value": "application/json",
-           "decorators": []
+           "$ref": "20"
           },
           "location": "Header",
           "isApiVersion": false,
@@ -1635,11 +1735,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "156",
+          "$id": "166",
           "name": "body",
           "nameInRequest": "body",
           "type": {
-           "$ref": "26"
+           "$ref": "46"
           },
           "location": "Body",
           "isApiVersion": false,
@@ -1654,12 +1754,12 @@
         ],
         "responses": [
          {
-          "$id": "157",
+          "$id": "167",
           "statusCodes": [
            200
           ],
           "bodyType": {
-           "$ref": "26"
+           "$ref": "46"
           },
           "headers": [],
           "isErrorResponse": false,
@@ -1682,11 +1782,11 @@
        },
        "parameters": [
         {
-         "$id": "158",
+         "$id": "168",
          "name": "body",
          "nameInRequest": "body",
          "type": {
-          "$ref": "26"
+          "$ref": "46"
          },
          "location": "Body",
          "isApiVersion": false,
@@ -1699,12 +1799,12 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "159",
+         "$id": "169",
          "name": "contentType",
          "nameInRequest": "contentType",
          "doc": "Body parameter's content type. Known values are application/json",
          "type": {
-          "$ref": "151"
+          "$ref": "18"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1717,11 +1817,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "160",
+         "$id": "170",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
-          "$ref": "154"
+          "$ref": "20"
          },
          "location": "Header",
          "isApiVersion": false,
@@ -1735,9 +1835,9 @@
         }
        ],
        "response": {
-        "$id": "161",
+        "$id": "171",
         "type": {
-         "$ref": "26"
+         "$ref": "46"
         }
        },
        "isOverride": false,
@@ -1748,12 +1848,12 @@
      ],
      "parameters": [
       {
-       "$id": "162",
+       "$id": "172",
        "name": "endpoint",
        "nameInRequest": "endpoint",
        "doc": "Service host",
        "type": {
-        "$id": "163",
+        "$id": "173",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -1767,9 +1867,9 @@
        "explode": false,
        "kind": "Client",
        "defaultValue": {
-        "$id": "164",
+        "$id": "174",
         "type": {
-         "$id": "165",
+         "$id": "175",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1782,124 +1882,24 @@
      "crossLanguageDefinitionId": "Encode.Datetime.Property",
      "apiVersions": [],
      "parent": {
-      "$ref": "35"
+      "$ref": "55"
      }
     },
     {
-     "$id": "166",
+     "$id": "176",
      "kind": "client",
      "name": "Header",
      "namespace": "Encode.Datetime.Header",
      "methods": [
       {
-       "$id": "167",
+       "$id": "177",
        "kind": "basic",
        "name": "default",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "168",
-        "name": "default",
-        "resourceName": "Header",
-        "accessibility": "public",
-        "parameters": [
-         {
-          "$id": "169",
-          "name": "value",
-          "nameInRequest": "value",
-          "type": {
-           "$id": "170",
-           "kind": "utcDateTime",
-           "name": "utcDateTime",
-           "encode": "rfc7231",
-           "wireType": {
-            "$id": "171",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
-           "decorators": []
-          },
-          "location": "Header",
-          "isApiVersion": false,
-          "isContentType": false,
-          "isEndpoint": false,
-          "explode": false,
-          "isRequired": true,
-          "kind": "Method",
-          "decorators": [],
-          "skipUrlEncoding": false
-         }
-        ],
-        "responses": [
-         {
-          "$id": "172",
-          "statusCodes": [
-           204
-          ],
-          "headers": [],
-          "isErrorResponse": false
-         }
-        ],
-        "httpMethod": "GET",
-        "uri": "{endpoint}",
-        "path": "/encode/datetime/header/default",
-        "bufferResponse": true,
-        "generateProtocolMethod": true,
-        "generateConvenienceMethod": true,
-        "crossLanguageDefinitionId": "Encode.Datetime.Header.default",
-        "decorators": []
-       },
-       "parameters": [
-        {
-         "$id": "173",
-         "name": "value",
-         "nameInRequest": "value",
-         "type": {
-          "$id": "174",
-          "kind": "utcDateTime",
-          "name": "utcDateTime",
-          "encode": "rfc7231",
-          "wireType": {
-           "$id": "175",
-           "kind": "string",
-           "name": "string",
-           "crossLanguageDefinitionId": "TypeSpec.string",
-           "decorators": []
-          },
-          "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
-          "decorators": []
-         },
-         "location": "Header",
-         "isApiVersion": false,
-         "isContentType": false,
-         "isEndpoint": false,
-         "explode": false,
-         "isRequired": true,
-         "kind": "Method",
-         "decorators": [],
-         "skipUrlEncoding": false
-        }
-       ],
-       "response": {
-        "$id": "176"
-       },
-       "isOverride": false,
-       "generateConvenient": true,
-       "generateProtocol": true,
-       "crossLanguageDefinitionId": "Encode.Datetime.Header.default"
-      },
-      {
-       "$id": "177",
-       "kind": "basic",
-       "name": "rfc3339",
-       "accessibility": "public",
-       "apiVersions": [],
-       "operation": {
         "$id": "178",
-        "name": "rfc3339",
+        "name": "default",
         "resourceName": "Header",
         "accessibility": "public",
         "parameters": [
@@ -1911,7 +1911,7 @@
            "$id": "180",
            "kind": "utcDateTime",
            "name": "utcDateTime",
-           "encode": "rfc3339",
+           "encode": "rfc7231",
            "wireType": {
             "$id": "181",
             "kind": "string",
@@ -1945,11 +1945,11 @@
         ],
         "httpMethod": "GET",
         "uri": "{endpoint}",
-        "path": "/encode/datetime/header/rfc3339",
+        "path": "/encode/datetime/header/default",
         "bufferResponse": true,
         "generateProtocolMethod": true,
         "generateConvenienceMethod": true,
-        "crossLanguageDefinitionId": "Encode.Datetime.Header.rfc3339",
+        "crossLanguageDefinitionId": "Encode.Datetime.Header.default",
         "decorators": []
        },
        "parameters": [
@@ -1961,7 +1961,7 @@
           "$id": "184",
           "kind": "utcDateTime",
           "name": "utcDateTime",
-          "encode": "rfc3339",
+          "encode": "rfc7231",
           "wireType": {
            "$id": "185",
            "kind": "string",
@@ -1989,17 +1989,17 @@
        "isOverride": false,
        "generateConvenient": true,
        "generateProtocol": true,
-       "crossLanguageDefinitionId": "Encode.Datetime.Header.rfc3339"
+       "crossLanguageDefinitionId": "Encode.Datetime.Header.default"
       },
       {
        "$id": "187",
        "kind": "basic",
-       "name": "rfc7231",
+       "name": "rfc3339",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
         "$id": "188",
-        "name": "rfc7231",
+        "name": "rfc3339",
         "resourceName": "Header",
         "accessibility": "public",
         "parameters": [
@@ -2011,7 +2011,7 @@
            "$id": "190",
            "kind": "utcDateTime",
            "name": "utcDateTime",
-           "encode": "rfc7231",
+           "encode": "rfc3339",
            "wireType": {
             "$id": "191",
             "kind": "string",
@@ -2045,11 +2045,11 @@
         ],
         "httpMethod": "GET",
         "uri": "{endpoint}",
-        "path": "/encode/datetime/header/rfc7231",
+        "path": "/encode/datetime/header/rfc3339",
         "bufferResponse": true,
         "generateProtocolMethod": true,
         "generateConvenienceMethod": true,
-        "crossLanguageDefinitionId": "Encode.Datetime.Header.rfc7231",
+        "crossLanguageDefinitionId": "Encode.Datetime.Header.rfc3339",
         "decorators": []
        },
        "parameters": [
@@ -2061,7 +2061,7 @@
           "$id": "194",
           "kind": "utcDateTime",
           "name": "utcDateTime",
-          "encode": "rfc7231",
+          "encode": "rfc3339",
           "wireType": {
            "$id": "195",
            "kind": "string",
@@ -2089,17 +2089,17 @@
        "isOverride": false,
        "generateConvenient": true,
        "generateProtocol": true,
-       "crossLanguageDefinitionId": "Encode.Datetime.Header.rfc7231"
+       "crossLanguageDefinitionId": "Encode.Datetime.Header.rfc3339"
       },
       {
        "$id": "197",
        "kind": "basic",
-       "name": "unixTimestamp",
+       "name": "rfc7231",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
         "$id": "198",
-        "name": "unixTimestamp",
+        "name": "rfc7231",
         "resourceName": "Header",
         "accessibility": "public",
         "parameters": [
@@ -2111,12 +2111,12 @@
            "$id": "200",
            "kind": "utcDateTime",
            "name": "utcDateTime",
-           "encode": "unixTimestamp",
+           "encode": "rfc7231",
            "wireType": {
             "$id": "201",
-            "kind": "int64",
-            "name": "int64",
-            "crossLanguageDefinitionId": "TypeSpec.int64",
+            "kind": "string",
+            "name": "string",
+            "crossLanguageDefinitionId": "TypeSpec.string",
             "decorators": []
            },
            "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
@@ -2145,11 +2145,11 @@
         ],
         "httpMethod": "GET",
         "uri": "{endpoint}",
-        "path": "/encode/datetime/header/unix-timestamp",
+        "path": "/encode/datetime/header/rfc7231",
         "bufferResponse": true,
         "generateProtocolMethod": true,
         "generateConvenienceMethod": true,
-        "crossLanguageDefinitionId": "Encode.Datetime.Header.unixTimestamp",
+        "crossLanguageDefinitionId": "Encode.Datetime.Header.rfc7231",
         "decorators": []
        },
        "parameters": [
@@ -2161,12 +2161,12 @@
           "$id": "204",
           "kind": "utcDateTime",
           "name": "utcDateTime",
-          "encode": "unixTimestamp",
+          "encode": "rfc7231",
           "wireType": {
            "$id": "205",
-           "kind": "int64",
-           "name": "int64",
-           "crossLanguageDefinitionId": "TypeSpec.int64",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
            "decorators": []
           },
           "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
@@ -2189,17 +2189,17 @@
        "isOverride": false,
        "generateConvenient": true,
        "generateProtocol": true,
-       "crossLanguageDefinitionId": "Encode.Datetime.Header.unixTimestamp"
+       "crossLanguageDefinitionId": "Encode.Datetime.Header.rfc7231"
       },
       {
        "$id": "207",
        "kind": "basic",
-       "name": "unixTimestampArray",
+       "name": "unixTimestamp",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
         "$id": "208",
-        "name": "unixTimestampArray",
+        "name": "unixTimestamp",
         "resourceName": "Header",
         "accessibility": "public",
         "parameters": [
@@ -2208,7 +2208,141 @@
           "name": "value",
           "nameInRequest": "value",
           "type": {
-           "$ref": "28"
+           "$id": "210",
+           "kind": "utcDateTime",
+           "name": "utcDateTime",
+           "encode": "unixTimestamp",
+           "wireType": {
+            "$id": "211",
+            "kind": "int64",
+            "name": "int64",
+            "crossLanguageDefinitionId": "TypeSpec.int64",
+            "decorators": []
+           },
+           "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+           "decorators": []
+          },
+          "location": "Header",
+          "isApiVersion": false,
+          "isContentType": false,
+          "isEndpoint": false,
+          "explode": false,
+          "isRequired": true,
+          "kind": "Method",
+          "decorators": [],
+          "skipUrlEncoding": false
+         }
+        ],
+        "responses": [
+         {
+          "$id": "212",
+          "statusCodes": [
+           204
+          ],
+          "headers": [],
+          "isErrorResponse": false
+         }
+        ],
+        "httpMethod": "GET",
+        "uri": "{endpoint}",
+        "path": "/encode/datetime/header/unix-timestamp",
+        "bufferResponse": true,
+        "generateProtocolMethod": true,
+        "generateConvenienceMethod": true,
+        "crossLanguageDefinitionId": "Encode.Datetime.Header.unixTimestamp",
+        "decorators": []
+       },
+       "parameters": [
+        {
+         "$id": "213",
+         "name": "value",
+         "nameInRequest": "value",
+         "type": {
+          "$id": "214",
+          "kind": "utcDateTime",
+          "name": "utcDateTime",
+          "encode": "unixTimestamp",
+          "wireType": {
+           "$id": "215",
+           "kind": "int64",
+           "name": "int64",
+           "crossLanguageDefinitionId": "TypeSpec.int64",
+           "decorators": []
+          },
+          "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "response": {
+        "$id": "216"
+       },
+       "isOverride": false,
+       "generateConvenient": true,
+       "generateProtocol": true,
+       "crossLanguageDefinitionId": "Encode.Datetime.Header.unixTimestamp"
+      },
+      {
+       "$id": "217",
+       "kind": "basic",
+       "name": "unixTimestampArray",
+       "accessibility": "public",
+       "apiVersions": [],
+       "operation": {
+        "$id": "218",
+        "name": "unixTimestampArray",
+        "resourceName": "Header",
+        "accessibility": "public",
+        "parameters": [
+         {
+          "$id": "219",
+          "name": "value",
+          "nameInRequest": "value",
+          "type": {
+           "$id": "220",
+           "kind": "array",
+           "name": "Array",
+           "valueType": {
+            "$id": "221",
+            "kind": "utcDateTime",
+            "name": "unixTimestampDatetime",
+            "encode": "unixTimestamp",
+            "wireType": {
+             "$id": "222",
+             "kind": "int64",
+             "name": "int64",
+             "crossLanguageDefinitionId": "TypeSpec.int64",
+             "decorators": []
+            },
+            "crossLanguageDefinitionId": "Encode.Datetime.unixTimestampDatetime",
+            "baseType": {
+             "$id": "223",
+             "kind": "utcDateTime",
+             "name": "utcDateTime",
+             "encode": "rfc3339",
+             "wireType": {
+              "$id": "224",
+              "kind": "string",
+              "name": "string",
+              "crossLanguageDefinitionId": "TypeSpec.string",
+              "decorators": []
+             },
+             "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+             "decorators": []
+            },
+            "decorators": []
+           },
+           "crossLanguageDefinitionId": "TypeSpec.Array",
+           "decorators": []
           },
           "location": "Header",
           "isApiVersion": false,
@@ -2224,7 +2358,7 @@
         ],
         "responses": [
          {
-          "$id": "210",
+          "$id": "225",
           "statusCodes": [
            204
           ],
@@ -2243,11 +2377,45 @@
        },
        "parameters": [
         {
-         "$id": "211",
+         "$id": "226",
          "name": "value",
          "nameInRequest": "value",
          "type": {
-          "$ref": "28"
+          "$id": "227",
+          "kind": "array",
+          "name": "Array",
+          "valueType": {
+           "$id": "228",
+           "kind": "utcDateTime",
+           "name": "unixTimestampDatetime",
+           "encode": "unixTimestamp",
+           "wireType": {
+            "$id": "229",
+            "kind": "int64",
+            "name": "int64",
+            "crossLanguageDefinitionId": "TypeSpec.int64",
+            "decorators": []
+           },
+           "crossLanguageDefinitionId": "Encode.Datetime.unixTimestampDatetime",
+           "baseType": {
+            "$id": "230",
+            "kind": "utcDateTime",
+            "name": "utcDateTime",
+            "encode": "rfc3339",
+            "wireType": {
+             "$id": "231",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+            "decorators": []
+           },
+           "decorators": []
+          },
+          "crossLanguageDefinitionId": "TypeSpec.Array",
+          "decorators": []
          },
          "location": "Header",
          "isApiVersion": false,
@@ -2261,7 +2429,7 @@
         }
        ],
        "response": {
-        "$id": "212"
+        "$id": "232"
        },
        "isOverride": false,
        "generateConvenient": true,
@@ -2271,12 +2439,12 @@
      ],
      "parameters": [
       {
-       "$id": "213",
+       "$id": "233",
        "name": "endpoint",
        "nameInRequest": "endpoint",
        "doc": "Service host",
        "type": {
-        "$id": "214",
+        "$id": "234",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -2290,9 +2458,9 @@
        "explode": false,
        "kind": "Client",
        "defaultValue": {
-        "$id": "215",
+        "$id": "235",
         "type": {
-         "$id": "216",
+         "$id": "236",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -2305,45 +2473,45 @@
      "crossLanguageDefinitionId": "Encode.Datetime.Header",
      "apiVersions": [],
      "parent": {
-      "$ref": "35"
+      "$ref": "55"
      }
     },
     {
-     "$id": "217",
+     "$id": "237",
      "kind": "client",
      "name": "ResponseHeader",
      "namespace": "Encode.Datetime.ResponseHeader",
      "methods": [
       {
-       "$id": "218",
+       "$id": "238",
        "kind": "basic",
        "name": "default",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "219",
+        "$id": "239",
         "name": "default",
         "resourceName": "ResponseHeader",
         "accessibility": "public",
         "parameters": [],
         "responses": [
          {
-          "$id": "220",
+          "$id": "240",
           "statusCodes": [
            204
           ],
           "headers": [
            {
-            "$id": "221",
+            "$id": "241",
             "name": "value",
             "nameInResponse": "value",
             "type": {
-             "$id": "222",
+             "$id": "242",
              "kind": "utcDateTime",
              "name": "utcDateTime",
              "encode": "rfc7231",
              "wireType": {
-              "$id": "223",
+              "$id": "243",
               "kind": "string",
               "name": "string",
               "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2368,7 +2536,7 @@
        },
        "parameters": [],
        "response": {
-        "$id": "224"
+        "$id": "244"
        },
        "isOverride": false,
        "generateConvenient": true,
@@ -2376,35 +2544,35 @@
        "crossLanguageDefinitionId": "Encode.Datetime.ResponseHeader.default"
       },
       {
-       "$id": "225",
+       "$id": "245",
        "kind": "basic",
        "name": "rfc3339",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "226",
+        "$id": "246",
         "name": "rfc3339",
         "resourceName": "ResponseHeader",
         "accessibility": "public",
         "parameters": [],
         "responses": [
          {
-          "$id": "227",
+          "$id": "247",
           "statusCodes": [
            204
           ],
           "headers": [
            {
-            "$id": "228",
+            "$id": "248",
             "name": "value",
             "nameInResponse": "value",
             "type": {
-             "$id": "229",
+             "$id": "249",
              "kind": "utcDateTime",
              "name": "utcDateTime",
              "encode": "rfc3339",
              "wireType": {
-              "$id": "230",
+              "$id": "250",
               "kind": "string",
               "name": "string",
               "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2429,7 +2597,7 @@
        },
        "parameters": [],
        "response": {
-        "$id": "231"
+        "$id": "251"
        },
        "isOverride": false,
        "generateConvenient": true,
@@ -2437,35 +2605,35 @@
        "crossLanguageDefinitionId": "Encode.Datetime.ResponseHeader.rfc3339"
       },
       {
-       "$id": "232",
+       "$id": "252",
        "kind": "basic",
        "name": "rfc7231",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "233",
+        "$id": "253",
         "name": "rfc7231",
         "resourceName": "ResponseHeader",
         "accessibility": "public",
         "parameters": [],
         "responses": [
          {
-          "$id": "234",
+          "$id": "254",
           "statusCodes": [
            204
           ],
           "headers": [
            {
-            "$id": "235",
+            "$id": "255",
             "name": "value",
             "nameInResponse": "value",
             "type": {
-             "$id": "236",
+             "$id": "256",
              "kind": "utcDateTime",
              "name": "utcDateTime",
              "encode": "rfc7231",
              "wireType": {
-              "$id": "237",
+              "$id": "257",
               "kind": "string",
               "name": "string",
               "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2490,7 +2658,7 @@
        },
        "parameters": [],
        "response": {
-        "$id": "238"
+        "$id": "258"
        },
        "isOverride": false,
        "generateConvenient": true,
@@ -2498,35 +2666,35 @@
        "crossLanguageDefinitionId": "Encode.Datetime.ResponseHeader.rfc7231"
       },
       {
-       "$id": "239",
+       "$id": "259",
        "kind": "basic",
        "name": "unixTimestamp",
        "accessibility": "public",
        "apiVersions": [],
        "operation": {
-        "$id": "240",
+        "$id": "260",
         "name": "unixTimestamp",
         "resourceName": "ResponseHeader",
         "accessibility": "public",
         "parameters": [],
         "responses": [
          {
-          "$id": "241",
+          "$id": "261",
           "statusCodes": [
            204
           ],
           "headers": [
            {
-            "$id": "242",
+            "$id": "262",
             "name": "value",
             "nameInResponse": "value",
             "type": {
-             "$id": "243",
+             "$id": "263",
              "kind": "utcDateTime",
              "name": "utcDateTime",
              "encode": "unixTimestamp",
              "wireType": {
-              "$id": "244",
+              "$id": "264",
               "kind": "int64",
               "name": "int64",
               "crossLanguageDefinitionId": "TypeSpec.int64",
@@ -2551,7 +2719,7 @@
        },
        "parameters": [],
        "response": {
-        "$id": "245"
+        "$id": "265"
        },
        "isOverride": false,
        "generateConvenient": true,
@@ -2561,12 +2729,12 @@
      ],
      "parameters": [
       {
-       "$id": "246",
+       "$id": "266",
        "name": "endpoint",
        "nameInRequest": "endpoint",
        "doc": "Service host",
        "type": {
-        "$id": "247",
+        "$id": "267",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -2580,9 +2748,9 @@
        "explode": false,
        "kind": "Client",
        "defaultValue": {
-        "$id": "248",
+        "$id": "268",
         "type": {
-         "$id": "249",
+         "$id": "269",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -2595,7 +2763,7 @@
      "crossLanguageDefinitionId": "Encode.Datetime.ResponseHeader",
      "apiVersions": [],
      "parent": {
-      "$ref": "35"
+      "$ref": "55"
      }
     }
    ]
