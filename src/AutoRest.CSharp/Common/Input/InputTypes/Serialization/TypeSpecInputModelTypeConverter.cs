@@ -29,7 +29,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public static InputModelType CreateModelType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
-            var isFirstProperty = id == null && name == null;
             var properties = new List<InputModelProperty>();
             var discriminatedSubtypes = new Dictionary<string, InputModelType>();
             string? crossLanguageDefinitionId = null;
@@ -47,7 +46,7 @@ namespace AutoRest.CSharp.Common.Input
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
+                var isKnownProperty = reader.TryReadReferenceId(ref id)
                     || reader.TryReadString("name", ref name)
                     || reader.TryReadString("crossLanguageDefinitionId", ref crossLanguageDefinitionId)
                     || reader.TryReadString("access", ref access)

@@ -10,29 +10,28 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal sealed class TypeSpecInputPagingServiceMetadataConverter : JsonConverter<InputPagingServiceMetadata>
     {
-        private readonly TypeSpecReferenceHandler _referenceHandler;
-
-        public TypeSpecInputPagingServiceMetadataConverter(TypeSpecReferenceHandler referenceHandler)
+        public TypeSpecInputPagingServiceMetadataConverter()
         {
-            _referenceHandler = referenceHandler;
         }
 
         public override InputPagingServiceMetadata? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => reader.ReadReferenceAndResolve<InputPagingServiceMetadata>(_referenceHandler.CurrentResolver) ?? CreateInputPagingServiceMetadata(ref reader, null, options, _referenceHandler.CurrentResolver);
+            => CreateInputPagingServiceMetadata(ref reader, options);
 
         public override void Write(Utf8JsonWriter writer, InputPagingServiceMetadata value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        private static InputPagingServiceMetadata CreateInputPagingServiceMetadata(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver resolver)
+        private static InputPagingServiceMetadata CreateInputPagingServiceMetadata(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
-            var isFirstProperty = id == null;
+            if (reader.TokenType == JsonTokenType.StartObject)
+            {
+                reader.Read();
+            }
             IReadOnlyList<string>? itemPropertySegments = null;
             InputNextLink? nextLink = null;
             InputContinuationToken? continuationToken = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadComplexType("itemPropertySegments", options, ref itemPropertySegments)
+                var isKnownProperty = reader.TryReadComplexType("itemPropertySegments", options, ref itemPropertySegments)
                     || reader.TryReadComplexType("nextLink", options, ref nextLink)
                     || reader.TryReadComplexType("continuationToken", options, ref continuationToken);
                 if (!isKnownProperty)
@@ -42,10 +41,6 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             var result = new InputPagingServiceMetadata(itemPropertySegments ?? [], nextLink, continuationToken);
-            if (id != null)
-            {
-                resolver.AddReference(id, result);
-            }
             return result;
         }
     }
