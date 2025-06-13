@@ -44,7 +44,10 @@ export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
         azureSDKContextOptions
     );
     const csharpEmitterContext = createCSharpEmitterContext(sdkContext, logger);
-    const root = transformCodeModel(csharpEmitterContext, createModel(csharpEmitterContext));
+    const root = transformCodeModel(
+        csharpEmitterContext,
+        createModel(csharpEmitterContext)
+    );
 
     const outputFolder = resolvePath(
         context.emitterOutputDir ?? "./tsp-output"

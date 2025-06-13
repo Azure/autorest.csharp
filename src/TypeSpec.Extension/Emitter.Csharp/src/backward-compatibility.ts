@@ -14,7 +14,10 @@ import { CodeModel, CSharpEmitterContext } from "@typespec/http-client-csharp";
  * @param codeModel - The code model to transform
  * @returns The transformed code model
  */
-export function transformCodeModel(sdkContext: CSharpEmitterContext, codeModel: CodeModel): CodeModel {
+export function transformCodeModel(
+    sdkContext: CSharpEmitterContext,
+    codeModel: CodeModel
+): CodeModel {
     // Transform the code model if needed
     // iterates all the constants appearing in models, and replace its valueType with a created enum type
     for (const model of codeModel.models) {
