@@ -122,16 +122,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<FieldDeclaration> BuildFields()
         {
-            if (Configuration.UseModelReaderWriter)
-            {
-                yield return _jsonSerializerOptionsField;
-
-                if (Configuration.AzureArm)
-                {
-                    yield return _jsonSerializerOptionsUseManagedServiceIdentityV3Field;
-                }
-            }
-
             yield return _jsonDocumentOptionsField;
             yield return _wireOptionsField;
 
