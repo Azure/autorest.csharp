@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly MethodSignatureModifiers _methodModifiers = MethodSignatureModifiers.Public | MethodSignatureModifiers.Static | MethodSignatureModifiers.Extension;
         private readonly TypeFormattersProvider _typeFormattersProvider;
 
-        public ModelSerializationExtensionsProvider() : base(Configuration.HelperNamespace, null)
+        public ModelSerializationExtensionsProvider() : base(Configuration.Namespace, null)
         {
             DeclarationModifiers = TypeSignatureModifiers.Internal | TypeSignatureModifiers.Static;
             _typeFormattersProvider = new TypeFormattersProvider(this);
