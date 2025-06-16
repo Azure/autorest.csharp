@@ -39,8 +39,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new InputModelProperty("Language", "Language", string.Empty, "Required string enum value.", ExtensibleEnumType, null, true, false, false)
                     },
                     null, new List<InputModelType>(), null, null, null, null);
-            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", new List<string>(),
-                new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", [], [], [FixedEnumType, ExtensibleEnumType], [modelType], [], new InputAuth()), default).Build(true);
 
             ValidateGeneratedCodes("RoundTripModel", expectedModelCodes, expectedSerializationCodes, library);
         }
@@ -55,8 +54,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new InputModelProperty("Language", "Language", string.Empty, "Required string enum value.", ExtensibleEnumType, null, true, false, false)
                     },
                     null, new List<InputModelType>(), null, null, null, null);
-            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", new List<string>(),
-                new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", [], [], [FixedEnumType, ExtensibleEnumType], [modelType], [], new InputAuth()), default).Build(true);
 
             ValidateGeneratedCodes("InputModel", expectedModelCodes, expectedSerializationCodes, library);
         }
@@ -71,8 +69,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new InputModelProperty("Language", "Language", string.Empty, "Required string enum value.", ExtensibleEnumType, null, true, false, false)
                     },
                     null, new List<InputModelType>(), null, null, null, null);
-            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", new List<string>(),
-                new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
+            var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", [], [], [FixedEnumType, ExtensibleEnumType], [modelType], new List<InputClient>(), new InputAuth()), default).Build(true);
 
             ValidateGeneratedCodes("OutputModel", expectedModelCodes, expectedSerializationCodes, library);
         }
