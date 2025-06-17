@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Linq;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
@@ -92,6 +93,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var contextWriterInstance = new ModelReaderWriterContextWriter();
             contextWriterInstance.Write(contextWriter);
             project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
+
+            // write JsonSerializerContext class for SystemObjectType models
+            var jsonContextCodeWriter = new CodeWriter();
+            var jsonContextWriter = new JsonSerializerContextWriter();
+            jsonContextWriter.Write(jsonContextCodeWriter, library.Models.Where(m => m is SystemObjectType));
+            project.AddGeneratedFile($"Models/{JsonSerializerContextWriter.Name}.cs", jsonContextCodeWriter.ToString());
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -45,7 +46,7 @@ namespace MgmtExpandResourceTypes
             if (Optional.IsDefined(TargetResource))
             {
                 writer.WritePropertyName("targetResource"u8);
-                JsonSerializer.Serialize(writer, TargetResource);
+                ((IJsonModel<WritableSubResource>)TargetResource).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(ARecords))
             {
@@ -195,7 +196,7 @@ namespace MgmtExpandResourceTypes
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -246,7 +247,7 @@ namespace MgmtExpandResourceTypes
                             {
                                 continue;
                             }
-                            targetResource = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            targetResource = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value.GetRawText(), ModelSerializationExtensions.Options);
                             continue;
                         }
                         if (property0.NameEquals("ARecords"u8))

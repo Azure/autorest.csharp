@@ -244,6 +244,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
             }
 
+            // write JsonSerializerContext class for SystemObjectType models
+            var codeWriter = new CodeWriter();
+            var jsonContextWriter = new JsonSerializerContextWriter();
+            jsonContextWriter.Write(codeWriter, MgmtContext.Library.Models.Where(m => m is SystemObjectType));
+            project.AddGeneratedFile($"Models/{JsonSerializerContextWriter.Name}.cs", codeWriter.ToString());
+
             List<string> modelsToKeepList = [.. Configuration.MgmtConfiguration.KeepOrphanedModels, ModelReaderWriterContextWriter.Name];
             var modelsToKeep = modelsToKeepList.ToImmutableHashSet();
             await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));

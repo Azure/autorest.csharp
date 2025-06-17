@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -17,6 +18,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -75,7 +77,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     typeof(JsonSerializerOptions),
                     new Dictionary<string, ValueExpression>
                     {
-                        { "Converters", new ArrayInitializerExpression([New.Instance(typeof(JsonModelConverter), [new MemberExpression(null, _wireOptionsName), ModelReaderWriterContextExpression.Default])]) }
+                        { "TypeInfoResolver", JsonSerializerContextExpression.Default }
                     })
             };
 
@@ -89,11 +91,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     new Dictionary<string, ValueExpression>
                     {
                         {
-                            "Converters",
-                            new ArrayInitializerExpression([
-                                New.Instance(typeof(JsonModelConverter), [new MemberExpression(null, _wireOptionsName), ModelReaderWriterContextExpression.Default]),
-                                New.Instance(typeof(ManagedServiceIdentityTypeV3Converter))
-                                ])
+                            "Converters", new ArrayInitializerExpression([New.Instance(typeof(ManagedServiceIdentityTypeV3Converter))])
                         }
                     })
             };
@@ -129,14 +127,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 yield return _sentinelBinaryDataField;
             }
-            if (Configuration.UseModelReaderWriter)
-            {
-                yield return _jsonSerializerOptionsField;
 
-                if (Configuration.AzureArm)
-                {
-                    yield return _jsonSerializerOptionsUseManagedServiceIdentityV3Field;
-                }
+            yield return _jsonSerializerOptionsField;
+
+            if (Configuration.AzureArm)
+            {
+                yield return _jsonSerializerOptionsUseManagedServiceIdentityV3Field;
             }
         }
 
@@ -188,11 +184,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             #endregion
 
-            if (Configuration.UseModelReaderWriter)
-            {
-                yield return BuildJsonDeserializeMethod();
-                yield return BuildJsonSerializeMethod();
-            }
+            yield return BuildJsonDeserializeMethod();
+            yield return BuildJsonSerializeMethod();
         }
 
         private const string _isSentinelValueMethodName = "IsSentinelValue";
@@ -507,10 +500,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public static ValueExpression Deserialize(JsonElementExpression element, CSharpType type, bool useManagedServiceIdentityV3 = false)
-            => new InvokeStaticMethodExpression(Instance.Type, _jsonDeserializeMethodName, [element, new MemberExpression(null, useManagedServiceIdentityV3 ? _jsonSerializerOptionsUseManagedServiceIdentityV3Name : _jsonSerializerOptionsName)], TypeArguments: [type]);
+            => new InvokeStaticMethodExpression(Instance.Type, _jsonDeserializeMethodName, [element.Invoke(nameof(JsonElement.GetRawText)), new MemberExpression(Instance.Type, useManagedServiceIdentityV3 ?  _jsonSerializerOptionsUseManagedServiceIdentityV3Name : _jsonSerializerOptionsName)], TypeArguments: [type]);
 
-        public static ValueExpression Serialize(ValueExpression data, CSharpType type, bool useManagedServiceIdentityV3 = false)
-            => new InvokeStaticMethodExpression(Instance.Type, _jsonSerializeMethodName, [data, new MemberExpression(null, useManagedServiceIdentityV3 ? _jsonSerializerOptionsUseManagedServiceIdentityV3Name : _jsonSerializerOptionsName)], TypeArguments: [type]);
+        public static MethodBodyStatement Serialize(Utf8JsonWriterExpression writer, ValueExpression value, bool useManagedServiceIdentityV3 = false)
+            => new InvokeStaticMethodExpression(Instance.Type, _jsonSerializeMethodName, [writer, value, new MemberExpression(Instance.Type, useManagedServiceIdentityV3 ? _jsonSerializerOptionsUseManagedServiceIdentityV3Name : _jsonSerializerOptionsName)]).ToStatement();
 
         public MethodBodyStatement WriteBase64StringValue(Utf8JsonWriterExpression writer, ValueExpression value, string? format)
             => new InvokeStaticMethodStatement(Type, _writeBase64StringValueMethodName, new[] { writer, value, Literal(format) }, CallAsExtension: true);
@@ -757,19 +750,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _t,
                 null,
                 [jsonParameter, optionsParameter],
-                Attributes: Configuration.Flavor == "azure"
-                ? [
-                    new CSharpAttribute(typeof(UnconditionalSuppressMessageAttribute), Literal("Trimming"), Literal("IL2026"), justificationExpression),
-                    new CSharpAttribute(typeof(UnconditionalSuppressMessageAttribute), Literal("Trimming"), Literal("IL3050"), justificationExpression)
-                ]
-                : [],
+                [],
                 GenericArguments: [_t]);
             return new Method(signature, new MethodBodyStatement[]
             {
                 Return(new InvokeStaticMethodExpression(
                     typeof(JsonSerializer),
                     $"{nameof(JsonSerializer.Deserialize)}",
-                    [jsonParameter, optionsParameter],
+                    [jsonParameter, new MemberExpression(optionsParameter, nameof(JsonSerializerOptions.TypeInfoResolver)).Invoke(nameof(IJsonTypeInfoResolver.GetTypeInfo), [TypeOf(_t), optionsParameter]).CastTo(new CSharpType(typeof(JsonTypeInfo<>), _t))],
                     TypeArguments: [_t]
                 ))
             });
@@ -801,8 +789,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 new InvokeStaticMethodExpression(
                     typeof(JsonSerializer),
                     $"{nameof(JsonSerializer.Serialize)}",
-                    [writerParameter, dataParameter, optionsParameter],
-                    TypeArguments: [_t]
+                    [writerParameter, dataParameter, new MemberExpression(optionsParameter, nameof(JsonSerializerOptions.TypeInfoResolver)).Invoke(nameof(IJsonTypeInfoResolver.GetTypeInfo), [TypeOf(_t), optionsParameter])]
                 ).ToStatement()
             });
         }
