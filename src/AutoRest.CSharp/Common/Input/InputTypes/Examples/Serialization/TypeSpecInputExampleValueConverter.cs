@@ -30,13 +30,15 @@ namespace AutoRest.CSharp.Common.Input.Examples
             {
                 reader.Read();
             }
+            string? id = null;
             string? kind = null;
             InputExampleValue? result = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isKind = reader.TryReadString(KindPropertyName, ref kind);
+                var isIdOrKind = reader.TryReadReferenceId(ref id)
+                    || reader.TryReadString(KindPropertyName, ref kind);
 
-                if (isKind)
+                if (isIdOrKind)
                 {
                     continue;
                 }
