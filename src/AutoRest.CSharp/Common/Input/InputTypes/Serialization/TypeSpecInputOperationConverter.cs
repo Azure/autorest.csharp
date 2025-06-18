@@ -20,14 +20,14 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public override InputOperation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => reader.ReadReferenceAndResolve<InputOperation>(_referenceHandler.CurrentResolver) ?? CreateOperation(ref reader, null, null, options, _referenceHandler.CurrentResolver);
+            => reader.ReadReferenceAndResolve<InputOperation>(_referenceHandler.CurrentResolver) ?? CreateOperation(ref reader, null, options, _referenceHandler.CurrentResolver);
 
         public override void Write(Utf8JsonWriter writer, InputOperation value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        public static InputOperation CreateOperation(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
+        private static InputOperation CreateOperation(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver resolver)
         {
-            var isFirstProperty = id == null && name == null;
+            string? name = null;
             string? resourceName = null;
             string? summary = null;
             string? deprecated = null;
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Common.Input
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
+                var isKnownProperty = reader.TryReadReferenceId(ref id)
                     || reader.TryReadString("name", ref name)
                     || reader.TryReadString("resourceName", ref resourceName)
                     || reader.TryReadString("summary", ref summary)
