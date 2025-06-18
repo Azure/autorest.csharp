@@ -80,9 +80,43 @@
    "decorators": []
   }
  ],
- "models": [
+ "constants": [
   {
    "$id": "10",
+   "kind": "constant",
+   "name": "basicActionContentType",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "11",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  },
+  {
+   "$id": "12",
+   "kind": "constant",
+   "name": "basicActionContentType1",
+   "namespace": "",
+   "usage": "None",
+   "valueType": {
+    "$id": "13",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "value": "application/json",
+   "decorators": []
+  }
+ ],
+ "models": [
+  {
+   "$id": "14",
    "kind": "model",
    "name": "ActionRequest",
    "namespace": "_Specs_.Azure.Example.Basic",
@@ -91,12 +125,12 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "11",
+     "$id": "15",
      "kind": "property",
      "name": "stringProperty",
      "serializedName": "stringProperty",
      "type": {
-      "$id": "12",
+      "$id": "16",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -109,20 +143,20 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Example.Basic.ActionRequest.stringProperty",
      "serializationOptions": {
-      "$id": "13",
+      "$id": "17",
       "json": {
-       "$id": "14",
+       "$id": "18",
        "name": "stringProperty"
       }
      }
     },
     {
-     "$id": "15",
+     "$id": "19",
      "kind": "property",
      "name": "modelProperty",
      "serializedName": "modelProperty",
      "type": {
-      "$id": "16",
+      "$id": "20",
       "kind": "model",
       "name": "Model",
       "namespace": "_Specs_.Azure.Example.Basic",
@@ -131,12 +165,12 @@
       "decorators": [],
       "properties": [
        {
-        "$id": "17",
+        "$id": "21",
         "kind": "property",
         "name": "int32Property",
         "serializedName": "int32Property",
         "type": {
-         "$id": "18",
+         "$id": "22",
          "kind": "int32",
          "name": "int32",
          "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -149,20 +183,20 @@
         "decorators": [],
         "crossLanguageDefinitionId": "_Specs_.Azure.Example.Basic.Model.int32Property",
         "serializationOptions": {
-         "$id": "19",
+         "$id": "23",
          "json": {
-          "$id": "20",
+          "$id": "24",
           "name": "int32Property"
          }
         }
        },
        {
-        "$id": "21",
+        "$id": "25",
         "kind": "property",
         "name": "float32Property",
         "serializedName": "float32Property",
         "type": {
-         "$id": "22",
+         "$id": "26",
          "kind": "float32",
          "name": "float32",
          "crossLanguageDefinitionId": "TypeSpec.float32",
@@ -175,15 +209,15 @@
         "decorators": [],
         "crossLanguageDefinitionId": "_Specs_.Azure.Example.Basic.Model.float32Property",
         "serializationOptions": {
-         "$id": "23",
+         "$id": "27",
          "json": {
-          "$id": "24",
+          "$id": "28",
           "name": "float32Property"
          }
         }
        },
        {
-        "$id": "25",
+        "$id": "29",
         "kind": "property",
         "name": "enumProperty",
         "serializedName": "enumProperty",
@@ -197,9 +231,9 @@
         "decorators": [],
         "crossLanguageDefinitionId": "_Specs_.Azure.Example.Basic.Model.enumProperty",
         "serializationOptions": {
-         "$id": "26",
+         "$id": "30",
          "json": {
-          "$id": "27",
+          "$id": "31",
           "name": "enumProperty"
          }
         }
@@ -213,24 +247,24 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Example.Basic.ActionRequest.modelProperty",
      "serializationOptions": {
-      "$id": "28",
+      "$id": "32",
       "json": {
-       "$id": "29",
+       "$id": "33",
        "name": "modelProperty"
       }
      }
     },
     {
-     "$id": "30",
+     "$id": "34",
      "kind": "property",
      "name": "arrayProperty",
      "serializedName": "arrayProperty",
      "type": {
-      "$id": "31",
+      "$id": "35",
       "kind": "array",
       "name": "Array",
       "valueType": {
-       "$id": "32",
+       "$id": "36",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
@@ -246,30 +280,30 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Example.Basic.ActionRequest.arrayProperty",
      "serializationOptions": {
-      "$id": "33",
+      "$id": "37",
       "json": {
-       "$id": "34",
+       "$id": "38",
        "name": "arrayProperty"
       }
      }
     },
     {
-     "$id": "35",
+     "$id": "39",
      "kind": "property",
      "name": "recordProperty",
      "serializedName": "recordProperty",
      "type": {
-      "$id": "36",
+      "$id": "40",
       "kind": "dict",
       "keyType": {
-       "$id": "37",
+       "$id": "41",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
        "decorators": []
       },
       "valueType": {
-       "$id": "38",
+       "$id": "42",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
@@ -284,9 +318,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Example.Basic.ActionRequest.recordProperty",
      "serializationOptions": {
-      "$id": "39",
+      "$id": "43",
       "json": {
-       "$id": "40",
+       "$id": "44",
        "name": "recordProperty"
       }
      }
@@ -294,10 +328,10 @@
    ]
   },
   {
-   "$ref": "16"
+   "$ref": "20"
   },
   {
-   "$id": "41",
+   "$id": "45",
    "kind": "model",
    "name": "ActionResponse",
    "namespace": "_Specs_.Azure.Example.Basic",
@@ -306,12 +340,12 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "42",
+     "$id": "46",
      "kind": "property",
      "name": "stringProperty",
      "serializedName": "stringProperty",
      "type": {
-      "$id": "43",
+      "$id": "47",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -324,20 +358,20 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Example.Basic.ActionResponse.stringProperty",
      "serializationOptions": {
-      "$id": "44",
+      "$id": "48",
       "json": {
-       "$id": "45",
+       "$id": "49",
        "name": "stringProperty"
       }
      }
     },
     {
-     "$id": "46",
+     "$id": "50",
      "kind": "property",
      "name": "modelProperty",
      "serializedName": "modelProperty",
      "type": {
-      "$ref": "16"
+      "$ref": "20"
      },
      "optional": true,
      "readOnly": false,
@@ -346,20 +380,20 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Example.Basic.ActionResponse.modelProperty",
      "serializationOptions": {
-      "$id": "47",
+      "$id": "51",
       "json": {
-       "$id": "48",
+       "$id": "52",
        "name": "modelProperty"
       }
      }
     },
     {
-     "$id": "49",
+     "$id": "53",
      "kind": "property",
      "name": "arrayProperty",
      "serializedName": "arrayProperty",
      "type": {
-      "$ref": "31"
+      "$ref": "35"
      },
      "optional": true,
      "readOnly": false,
@@ -368,20 +402,20 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Example.Basic.ActionResponse.arrayProperty",
      "serializationOptions": {
-      "$id": "50",
+      "$id": "54",
       "json": {
-       "$id": "51",
+       "$id": "55",
        "name": "arrayProperty"
       }
      }
     },
     {
-     "$id": "52",
+     "$id": "56",
      "kind": "property",
      "name": "recordProperty",
      "serializedName": "recordProperty",
      "type": {
-      "$ref": "36"
+      "$ref": "40"
      },
      "optional": true,
      "readOnly": false,
@@ -390,9 +424,9 @@
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Example.Basic.ActionResponse.recordProperty",
      "serializationOptions": {
-      "$id": "53",
+      "$id": "57",
       "json": {
-       "$id": "54",
+       "$id": "58",
        "name": "recordProperty"
       }
      }
@@ -402,13 +436,13 @@
  ],
  "clients": [
   {
-   "$id": "55",
+   "$id": "59",
    "kind": "client",
    "name": "AzureExampleClient",
    "namespace": "AzureExampleBasicClient",
    "methods": [
     {
-     "$id": "56",
+     "$id": "60",
      "kind": "basic",
      "name": "basicAction",
      "accessibility": "public",
@@ -416,18 +450,18 @@
       "2022-12-01-preview"
      ],
      "operation": {
-      "$id": "57",
+      "$id": "61",
       "name": "basicAction",
       "resourceName": "AzureExampleClient",
       "accessibility": "public",
       "parameters": [
        {
-        "$id": "58",
+        "$id": "62",
         "name": "apiVersion",
         "nameInRequest": "api-version",
         "doc": "The API version to use for this operation.",
         "type": {
-         "$id": "59",
+         "$id": "63",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -441,9 +475,9 @@
         "isRequired": true,
         "kind": "Client",
         "defaultValue": {
-         "$id": "60",
+         "$id": "64",
          "type": {
-          "$id": "61",
+          "$id": "65",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string"
@@ -454,11 +488,11 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "62",
+        "$id": "66",
         "name": "queryParam",
         "nameInRequest": "query-param",
         "type": {
-         "$id": "63",
+         "$id": "67",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -475,11 +509,11 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "64",
+        "$id": "68",
         "name": "headerParam",
         "nameInRequest": "header-param",
         "type": {
-         "$id": "65",
+         "$id": "69",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -496,25 +530,12 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "66",
+        "$id": "70",
         "name": "contentType",
         "nameInRequest": "Content-Type",
         "doc": "Body parameter's content type. Known values are application/json",
         "type": {
-         "$id": "67",
-         "kind": "constant",
-         "name": "basicActionContentType",
-         "namespace": "",
-         "usage": "None",
-         "valueType": {
-          "$id": "68",
-          "kind": "string",
-          "name": "string",
-          "crossLanguageDefinitionId": "TypeSpec.string",
-          "decorators": []
-         },
-         "value": "application/json",
-         "decorators": []
+         "$ref": "10"
         },
         "location": "Header",
         "isApiVersion": false,
@@ -527,24 +548,11 @@
         "skipUrlEncoding": false
        },
        {
-        "$id": "69",
+        "$id": "71",
         "name": "accept",
         "nameInRequest": "Accept",
         "type": {
-         "$id": "70",
-         "kind": "constant",
-         "name": "basicActionContentType1",
-         "namespace": "",
-         "usage": "None",
-         "valueType": {
-          "$id": "71",
-          "kind": "string",
-          "name": "string",
-          "crossLanguageDefinitionId": "TypeSpec.string",
-          "decorators": []
-         },
-         "value": "application/json",
-         "decorators": []
+         "$ref": "12"
         },
         "location": "Header",
         "isApiVersion": false,
@@ -561,7 +569,7 @@
         "name": "body",
         "nameInRequest": "body",
         "type": {
-         "$ref": "10"
+         "$ref": "14"
         },
         "location": "Body",
         "isApiVersion": false,
@@ -581,7 +589,7 @@
          200
         ],
         "bodyType": {
-         "$ref": "41"
+         "$ref": "45"
         },
         "headers": [],
         "isErrorResponse": false,
@@ -612,13 +620,13 @@
          {
           "$id": "75",
           "parameter": {
-           "$ref": "58"
+           "$ref": "62"
           },
           "value": {
            "$id": "76",
            "kind": "string",
            "type": {
-            "$ref": "59"
+            "$ref": "63"
            },
            "value": "2022-12-01-preview"
           }
@@ -626,13 +634,13 @@
          {
           "$id": "77",
           "parameter": {
-           "$ref": "62"
+           "$ref": "66"
           },
           "value": {
            "$id": "78",
            "kind": "string",
            "type": {
-            "$ref": "63"
+            "$ref": "67"
            },
            "value": "query"
           }
@@ -640,13 +648,13 @@
          {
           "$id": "79",
           "parameter": {
-           "$ref": "64"
+           "$ref": "68"
           },
           "value": {
            "$id": "80",
            "kind": "string",
            "type": {
-            "$ref": "65"
+            "$ref": "69"
            },
            "value": "header"
           }
@@ -660,7 +668,7 @@
            "$id": "82",
            "kind": "model",
            "type": {
-            "$ref": "10"
+            "$ref": "14"
            },
            "value": {
             "$id": "83",
@@ -668,7 +676,7 @@
              "$id": "84",
              "kind": "string",
              "type": {
-              "$ref": "12"
+              "$ref": "16"
              },
              "value": "text"
             },
@@ -676,7 +684,7 @@
              "$id": "85",
              "kind": "model",
              "type": {
-              "$ref": "16"
+              "$ref": "20"
              },
              "value": {
               "$id": "86",
@@ -684,7 +692,7 @@
                "$id": "87",
                "kind": "number",
                "type": {
-                "$ref": "18"
+                "$ref": "22"
                },
                "value": 1
               },
@@ -692,7 +700,7 @@
                "$id": "88",
                "kind": "number",
                "type": {
-                "$ref": "22"
+                "$ref": "26"
                },
                "value": 1.5
               },
@@ -710,14 +718,14 @@
              "$id": "90",
              "kind": "array",
              "type": {
-              "$ref": "31"
+              "$ref": "35"
              },
              "value": [
               {
                "$id": "91",
                "kind": "string",
                "type": {
-                "$ref": "32"
+                "$ref": "36"
                },
                "value": "item"
               }
@@ -727,7 +735,7 @@
              "$id": "92",
              "kind": "dict",
              "type": {
-              "$ref": "36"
+              "$ref": "40"
              },
              "value": {
               "$id": "93",
@@ -735,7 +743,7 @@
                "$id": "94",
                "kind": "string",
                "type": {
-                "$ref": "38"
+                "$ref": "42"
                },
                "value": "value"
               }
@@ -805,7 +813,7 @@
        "name": "body",
        "nameInRequest": "body",
        "type": {
-        "$ref": "10"
+        "$ref": "14"
        },
        "location": "Body",
        "isApiVersion": false,
@@ -823,7 +831,7 @@
        "nameInRequest": "contentType",
        "doc": "Body parameter's content type. Known values are application/json",
        "type": {
-        "$ref": "67"
+        "$ref": "10"
        },
        "location": "Header",
        "isApiVersion": false,
@@ -840,7 +848,7 @@
        "name": "accept",
        "nameInRequest": "accept",
        "type": {
-        "$ref": "70"
+        "$ref": "12"
        },
        "location": "Header",
        "isApiVersion": false,
@@ -856,7 +864,7 @@
      "response": {
       "$id": "103",
       "type": {
-       "$ref": "41"
+       "$ref": "45"
       }
      },
      "isOverride": false,

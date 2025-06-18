@@ -331,13 +331,12 @@ op addTimeHeader(
 @convenientAPI(true)
 op projectedNameModel(...ModelWithProjectedName): ModelWithProjectedName;
 
-@route("/retunsAnonymousModel")
+@route("/returnsAnonymousModel")
 @doc("return anonymous model")
 @post
 @convenientAPI(true)
 op returnsAnonymousModel(): {@body body:{}};
 
-// TODO: https://github.com/Azure/typespec-azure/issues/509 
 namespace EnumTest {
     @put
     @route("/unknown-value")
