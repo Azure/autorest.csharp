@@ -4484,9 +4484,9 @@
      "nameInRequest": "unbrandedTypeSpecUrl",
      "type": {
       "$id": "402",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
+      "kind": "string",
+      "name": "endpoint",
+      "crossLanguageDefinitionId": "TypeSpec.string"
      },
      "location": "Uri",
      "isApiVersion": false,
@@ -4495,7 +4495,8 @@
      "isEndpoint": true,
      "skipUrlEncoding": false,
      "explode": false,
-     "kind": "Client"
+     "kind": "Client",
+     "serverUrlTemplate": "{unbrandedTypeSpecUrl}"
     }
    ],
    "decorators": [

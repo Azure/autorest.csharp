@@ -2546,9 +2546,9 @@
      "nameInRequest": "Endpoint",
      "type": {
       "$id": "319",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
+      "kind": "string",
+      "name": "endpoint",
+      "crossLanguageDefinitionId": "TypeSpec.string"
      },
      "location": "Uri",
      "isApiVersion": false,
@@ -2557,7 +2557,8 @@
      "isEndpoint": true,
      "skipUrlEncoding": false,
      "explode": false,
-     "kind": "Client"
+     "kind": "Client",
+     "serverUrlTemplate": "{Endpoint}/language"
     }
    ],
    "decorators": [
@@ -4060,9 +4061,9 @@
        "nameInRequest": "Endpoint",
        "type": {
         "$id": "462",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "string",
+        "name": "endpoint",
+        "crossLanguageDefinitionId": "TypeSpec.string"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -4071,7 +4072,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{Endpoint}/language"
       }
      ],
      "decorators": [],
@@ -5323,9 +5325,9 @@
        "nameInRequest": "Endpoint",
        "type": {
         "$id": "576",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "string",
+        "name": "endpoint",
+        "crossLanguageDefinitionId": "TypeSpec.string"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -5334,7 +5336,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{Endpoint}/language"
       }
      ],
      "decorators": [],
@@ -5854,9 +5857,9 @@
        "nameInRequest": "Endpoint",
        "type": {
         "$id": "623",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "string",
+        "name": "endpoint",
+        "crossLanguageDefinitionId": "TypeSpec.string"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -5865,7 +5868,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{Endpoint}/language"
       }
      ],
      "decorators": [],
@@ -6413,9 +6417,9 @@
        "nameInRequest": "Endpoint",
        "type": {
         "$id": "674",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "string",
+        "name": "endpoint",
+        "crossLanguageDefinitionId": "TypeSpec.string"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -6424,7 +6428,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{Endpoint}/language"
       }
      ],
      "decorators": [],

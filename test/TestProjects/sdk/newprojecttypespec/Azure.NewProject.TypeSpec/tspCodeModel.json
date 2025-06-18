@@ -3338,9 +3338,9 @@
      "nameInRequest": "firstTestTypeSpecUrl",
      "type": {
       "$id": "356",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
+      "kind": "string",
+      "name": "endpoint",
+      "crossLanguageDefinitionId": "TypeSpec.string"
      },
      "location": "Uri",
      "isApiVersion": false,
@@ -3349,7 +3349,8 @@
      "isEndpoint": true,
      "skipUrlEncoding": false,
      "explode": false,
-     "kind": "Client"
+     "kind": "Client",
+     "serverUrlTemplate": "{firstTestTypeSpecUrl}"
     }
    ],
    "decorators": [
@@ -3381,9 +3382,9 @@
        "nameInRequest": "firstTestTypeSpecUrl",
        "type": {
         "$id": "362",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "string",
+        "name": "endpoint",
+        "crossLanguageDefinitionId": "TypeSpec.string"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -3392,7 +3393,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{firstTestTypeSpecUrl}"
       }
      ],
      "decorators": [],
@@ -3630,9 +3632,9 @@
          "nameInRequest": "firstTestTypeSpecUrl",
          "type": {
           "$id": "383",
-          "kind": "url",
-          "name": "url",
-          "crossLanguageDefinitionId": "TypeSpec.url"
+          "kind": "string",
+          "name": "endpoint",
+          "crossLanguageDefinitionId": "TypeSpec.string"
          },
          "location": "Uri",
          "isApiVersion": false,
@@ -3641,7 +3643,8 @@
          "isEndpoint": true,
          "skipUrlEncoding": false,
          "explode": false,
-         "kind": "Client"
+         "kind": "Client",
+         "serverUrlTemplate": "{firstTestTypeSpecUrl}"
         }
        ],
        "decorators": [],
@@ -4500,9 +4503,9 @@
          "nameInRequest": "firstTestTypeSpecUrl",
          "type": {
           "$id": "444",
-          "kind": "url",
-          "name": "url",
-          "crossLanguageDefinitionId": "TypeSpec.url"
+          "kind": "string",
+          "name": "endpoint",
+          "crossLanguageDefinitionId": "TypeSpec.string"
          },
          "location": "Uri",
          "isApiVersion": false,
@@ -4511,7 +4514,8 @@
          "isEndpoint": true,
          "skipUrlEncoding": false,
          "explode": false,
-         "kind": "Client"
+         "kind": "Client",
+         "serverUrlTemplate": "{firstTestTypeSpecUrl}"
         }
        ],
        "decorators": [],
@@ -4654,9 +4658,9 @@
        "nameInRequest": "firstTestTypeSpecUrl",
        "type": {
         "$id": "455",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "string",
+        "name": "endpoint",
+        "crossLanguageDefinitionId": "TypeSpec.string"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -4665,7 +4669,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{firstTestTypeSpecUrl}"
       }
      ],
      "decorators": [],
@@ -4891,9 +4896,9 @@
        "nameInRequest": "firstTestTypeSpecUrl",
        "type": {
         "$id": "472",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "string",
+        "name": "endpoint",
+        "crossLanguageDefinitionId": "TypeSpec.string"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -4902,7 +4907,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{firstTestTypeSpecUrl}"
       }
      ],
      "decorators": [],
