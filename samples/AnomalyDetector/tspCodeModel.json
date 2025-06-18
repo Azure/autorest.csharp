@@ -21308,9 +21308,9 @@
        "doc": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "type": {
         "$id": "2919",
-        "kind": "string",
-        "name": "endpoint",
-        "crossLanguageDefinitionId": "TypeSpec.string"
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -27845,9 +27845,9 @@
        "doc": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "type": {
         "$id": "3722",
-        "kind": "string",
-        "name": "endpoint",
-        "crossLanguageDefinitionId": "TypeSpec.string"
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "location": "Uri",
        "isApiVersion": false,
