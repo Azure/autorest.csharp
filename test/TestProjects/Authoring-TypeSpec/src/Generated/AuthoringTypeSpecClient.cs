@@ -30,21 +30,19 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary> Initializes a new instance of AuthoringTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="endpoint"/> is an empty string, and was expected to be non-empty. </exception>
         public AuthoringTypeSpecClient(Uri endpoint) : this(endpoint, new AuthoringTypeSpecClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of AuthoringTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="endpoint"/> is an empty string, and was expected to be non-empty. </exception>
         public AuthoringTypeSpecClient(Uri endpoint, AuthoringTypeSpecClientOptions options)
         {
-            Argument.AssertNotNullOrEmpty(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new AuthoringTypeSpecClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

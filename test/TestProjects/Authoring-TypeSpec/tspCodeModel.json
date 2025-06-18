@@ -2546,9 +2546,9 @@
      "nameInRequest": "Endpoint",
      "type": {
       "$id": "319",
-      "kind": "string",
-      "name": "endpoint",
-      "crossLanguageDefinitionId": "TypeSpec.string"
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "location": "Uri",
      "isApiVersion": false,

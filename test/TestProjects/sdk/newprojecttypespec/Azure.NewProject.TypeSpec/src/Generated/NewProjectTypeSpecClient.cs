@@ -38,32 +38,29 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> Initializes a new instance of NewProjectTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="endpoint"/> is an empty string, and was expected to be non-empty. </exception>
         public NewProjectTypeSpecClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, new NewProjectTypeSpecClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of NewProjectTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="endpoint"/> is an empty string, and was expected to be non-empty. </exception>
         public NewProjectTypeSpecClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new NewProjectTypeSpecClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of NewProjectTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="endpoint"/> is an empty string, and was expected to be non-empty. </exception>
         public NewProjectTypeSpecClient(Uri endpoint, AzureKeyCredential credential, NewProjectTypeSpecClientOptions options)
         {
-            Argument.AssertNotNullOrEmpty(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new NewProjectTypeSpecClientOptions();
 
@@ -74,14 +71,13 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> Initializes a new instance of NewProjectTypeSpecClient. </summary>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="endpoint"/> is an empty string, and was expected to be non-empty. </exception>
         public NewProjectTypeSpecClient(Uri endpoint, TokenCredential credential, NewProjectTypeSpecClientOptions options)
         {
-            Argument.AssertNotNullOrEmpty(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new NewProjectTypeSpecClientOptions();
 

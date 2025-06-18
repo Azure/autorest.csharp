@@ -7939,7 +7939,8 @@
      "isEndpoint": true,
      "skipUrlEncoding": false,
      "explode": false,
-     "kind": "Client"
+     "kind": "Client",
+     "serverUrlTemplate": "{firstTestTypeSpecUrl}"
     }
    ],
    "decorators": [
@@ -7973,9 +7974,9 @@
        "nameInRequest": "firstTestTypeSpecUrl",
        "type": {
         "$id": "816",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "string",
+        "name": "endpoint",
+        "crossLanguageDefinitionId": "TypeSpec.string"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -7984,7 +7985,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{firstTestTypeSpecUrl}"
       }
      ],
      "decorators": [],
@@ -8226,9 +8228,9 @@
          "nameInRequest": "firstTestTypeSpecUrl",
          "type": {
           "$id": "837",
-          "kind": "url",
-          "name": "url",
-          "crossLanguageDefinitionId": "TypeSpec.url"
+          "kind": "string",
+          "name": "endpoint",
+          "crossLanguageDefinitionId": "TypeSpec.string"
          },
          "location": "Uri",
          "isApiVersion": false,
@@ -8237,7 +8239,8 @@
          "isEndpoint": true,
          "skipUrlEncoding": false,
          "explode": false,
-         "kind": "Client"
+         "kind": "Client",
+         "serverUrlTemplate": "{firstTestTypeSpecUrl}"
         }
        ],
        "decorators": [],
@@ -9195,9 +9198,9 @@
          "nameInRequest": "firstTestTypeSpecUrl",
          "type": {
           "$id": "904",
-          "kind": "url",
-          "name": "url",
-          "crossLanguageDefinitionId": "TypeSpec.url"
+          "kind": "string",
+          "name": "endpoint",
+          "crossLanguageDefinitionId": "TypeSpec.string"
          },
          "location": "Uri",
          "isApiVersion": false,
@@ -9206,7 +9209,8 @@
          "isEndpoint": true,
          "skipUrlEncoding": false,
          "explode": false,
-         "kind": "Client"
+         "kind": "Client",
+         "serverUrlTemplate": "{firstTestTypeSpecUrl}"
         }
        ],
        "decorators": [],
@@ -9353,9 +9357,9 @@
        "nameInRequest": "firstTestTypeSpecUrl",
        "type": {
         "$id": "915",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "string",
+        "name": "endpoint",
+        "crossLanguageDefinitionId": "TypeSpec.string"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -9364,7 +9368,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{firstTestTypeSpecUrl}"
       }
      ],
      "decorators": [],
@@ -9596,9 +9601,9 @@
        "nameInRequest": "firstTestTypeSpecUrl",
        "type": {
         "$id": "932",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "string",
+        "name": "endpoint",
+        "crossLanguageDefinitionId": "TypeSpec.string"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -9607,7 +9612,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{firstTestTypeSpecUrl}"
       }
      ],
      "decorators": [],
@@ -9764,9 +9770,9 @@
        "nameInRequest": "firstTestTypeSpecUrl",
        "type": {
         "$id": "945",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "string",
+        "name": "endpoint",
+        "crossLanguageDefinitionId": "TypeSpec.string"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -9775,7 +9781,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{firstTestTypeSpecUrl}"
       }
      ],
      "decorators": [],
@@ -9974,9 +9981,9 @@
        "nameInRequest": "firstTestTypeSpecUrl",
        "type": {
         "$id": "962",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "string",
+        "name": "endpoint",
+        "crossLanguageDefinitionId": "TypeSpec.string"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -9985,7 +9992,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{firstTestTypeSpecUrl}"
       }
      ],
      "decorators": [],
@@ -10000,47 +10008,11 @@
     {
      "$id": "963",
      "kind": "client",
-     "name": "ResourceOperations",
-     "namespace": "FirstTestTypeSpec",
-     "methods": [],
-     "parameters": [
-      {
-       "$id": "964",
-       "name": "firstTestTypeSpecUrl",
-       "nameInRequest": "firstTestTypeSpecUrl",
-       "type": {
-        "$id": "965",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "location": "Uri",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isRequired": true,
-       "isEndpoint": true,
-       "skipUrlEncoding": false,
-       "explode": false,
-       "kind": "Client"
-      }
-     ],
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.ResourceOperations",
-     "apiVersions": [
-      "2022-05-15-preview"
-     ],
-     "parent": {
-      "$ref": "550"
-     }
-    },
-    {
-     "$id": "966",
-     "kind": "client",
      "name": "VersioningOp",
      "namespace": "FirstTestTypeSpec",
      "methods": [
       {
-       "$id": "967",
+       "$id": "964",
        "kind": "lro",
        "name": "export",
        "accessibility": "public",
@@ -10049,19 +10021,19 @@
        ],
        "doc": "Long-running resource action operation template.",
        "operation": {
-        "$id": "968",
+        "$id": "965",
         "name": "export",
         "resourceName": "VersioningOp",
         "doc": "Long-running resource action operation template.",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "969",
+          "$id": "966",
           "name": "apiVersion",
           "nameInRequest": "api-version",
           "doc": "The API version to use for this operation.",
           "type": {
-           "$id": "970",
+           "$id": "967",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10075,9 +10047,9 @@
           "isRequired": true,
           "kind": "Client",
           "defaultValue": {
-           "$id": "971",
+           "$id": "968",
            "type": {
-            "$id": "972",
+            "$id": "969",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string"
@@ -10088,11 +10060,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "973",
+          "$id": "970",
           "name": "name",
           "nameInRequest": "name",
           "type": {
-           "$id": "974",
+           "$id": "971",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10109,11 +10081,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "975",
+          "$id": "972",
           "name": "projectFileVersion",
           "nameInRequest": "projectFileVersion",
           "type": {
-           "$id": "976",
+           "$id": "973",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10130,7 +10102,7 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "977",
+          "$id": "974",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
@@ -10149,7 +10121,7 @@
         ],
         "responses": [
          {
-          "$id": "978",
+          "$id": "975",
           "statusCodes": [
            202
           ],
@@ -10158,17 +10130,17 @@
           },
           "headers": [
            {
-            "$id": "979",
+            "$id": "976",
             "name": "operationLocation",
             "nameInResponse": "Operation-Location",
             "doc": "The location for monitoring the operation state.",
             "type": {
-             "$id": "980",
+             "$id": "977",
              "kind": "url",
              "name": "ResourceLocation",
              "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
              "baseType": {
-              "$id": "981",
+              "$id": "978",
               "kind": "url",
               "name": "url",
               "crossLanguageDefinitionId": "TypeSpec.url",
@@ -10195,11 +10167,11 @@
        },
        "parameters": [
         {
-         "$id": "982",
+         "$id": "979",
          "name": "name",
          "nameInRequest": "name",
          "type": {
-          "$id": "983",
+          "$id": "980",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10216,11 +10188,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "984",
+         "$id": "981",
          "name": "projectFileVersion",
          "nameInRequest": "projectFileVersion",
          "type": {
-          "$id": "985",
+          "$id": "982",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10237,7 +10209,7 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "986",
+         "$id": "983",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
@@ -10255,7 +10227,7 @@
         }
        ],
        "response": {
-        "$id": "987",
+        "$id": "984",
         "type": {
          "$ref": "542"
         },
@@ -10268,10 +10240,10 @@
        "generateProtocol": true,
        "crossLanguageDefinitionId": "FirstTestTypeSpec.VersioningOp.export",
        "lroMetadata": {
-        "$id": "988",
+        "$id": "985",
         "finalStateVia": 3,
         "finalResponse": {
-         "$id": "989",
+         "$id": "986",
          "statusCodes": [
           200
          ],
@@ -10283,7 +10255,7 @@
        }
       },
       {
-       "$id": "990",
+       "$id": "987",
        "kind": "lro",
        "name": "exportW",
        "accessibility": "public",
@@ -10292,19 +10264,19 @@
        ],
        "doc": "Long-running resource action operation template.",
        "operation": {
-        "$id": "991",
+        "$id": "988",
         "name": "exportW",
         "resourceName": "VersioningOp",
         "doc": "Long-running resource action operation template.",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "992",
+          "$id": "989",
           "name": "apiVersion",
           "nameInRequest": "api-version",
           "doc": "The API version to use for this operation.",
           "type": {
-           "$id": "993",
+           "$id": "990",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10318,9 +10290,9 @@
           "isRequired": true,
           "kind": "Client",
           "defaultValue": {
-           "$id": "994",
+           "$id": "991",
            "type": {
-            "$id": "995",
+            "$id": "992",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string"
@@ -10331,11 +10303,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "996",
+          "$id": "993",
           "name": "name",
           "nameInRequest": "name",
           "type": {
-           "$id": "997",
+           "$id": "994",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10352,11 +10324,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "998",
+          "$id": "995",
           "name": "projectFileVersion",
           "nameInRequest": "projectFileVersion",
           "type": {
-           "$id": "999",
+           "$id": "996",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10373,7 +10345,7 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "1000",
+          "$id": "997",
           "name": "accept",
           "nameInRequest": "Accept",
           "type": {
@@ -10392,7 +10364,7 @@
         ],
         "responses": [
          {
-          "$id": "1001",
+          "$id": "998",
           "statusCodes": [
            202
           ],
@@ -10401,17 +10373,17 @@
           },
           "headers": [
            {
-            "$id": "1002",
+            "$id": "999",
             "name": "operationLocation",
             "nameInResponse": "Operation-Location",
             "doc": "The location for monitoring the operation state.",
             "type": {
-             "$id": "1003",
+             "$id": "1000",
              "kind": "url",
              "name": "ResourceLocation",
              "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
              "baseType": {
-              "$id": "1004",
+              "$id": "1001",
               "kind": "url",
               "name": "url",
               "crossLanguageDefinitionId": "TypeSpec.url",
@@ -10438,11 +10410,11 @@
        },
        "parameters": [
         {
-         "$id": "1005",
+         "$id": "1002",
          "name": "name",
          "nameInRequest": "name",
          "type": {
-          "$id": "1006",
+          "$id": "1003",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10459,11 +10431,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "1007",
+         "$id": "1004",
          "name": "projectFileVersion",
          "nameInRequest": "projectFileVersion",
          "type": {
-          "$id": "1008",
+          "$id": "1005",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10480,7 +10452,7 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "1009",
+         "$id": "1006",
          "name": "accept",
          "nameInRequest": "accept",
          "type": {
@@ -10498,7 +10470,7 @@
         }
        ],
        "response": {
-        "$id": "1010",
+        "$id": "1007",
         "type": {
          "$ref": "542"
         },
@@ -10511,10 +10483,10 @@
        "generateProtocol": true,
        "crossLanguageDefinitionId": "FirstTestTypeSpec.VersioningOp.exportW",
        "lroMetadata": {
-        "$id": "1011",
+        "$id": "1008",
         "finalStateVia": 3,
         "finalResponse": {
-         "$id": "1012",
+         "$id": "1009",
          "statusCodes": [
           200
          ],
@@ -10528,14 +10500,14 @@
      ],
      "parameters": [
       {
-       "$id": "1013",
+       "$id": "1010",
        "name": "firstTestTypeSpecUrl",
        "nameInRequest": "firstTestTypeSpecUrl",
        "type": {
-        "$id": "1014",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
+        "$id": "1011",
+        "kind": "string",
+        "name": "endpoint",
+        "crossLanguageDefinitionId": "TypeSpec.string"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -10544,7 +10516,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{firstTestTypeSpecUrl}"
       }
      ],
      "decorators": [],
@@ -10560,15 +10533,15 @@
   }
  ],
  "auth": {
-  "$id": "1015",
+  "$id": "1012",
   "oAuth2": {
-   "$id": "1016",
+   "$id": "1013",
    "scopes": [
     "https://api.example.com/.default"
    ]
   },
   "apiKey": {
-   "$id": "1017",
+   "$id": "1014",
    "name": "x-ms-api-key",
    "in": "header"
   }

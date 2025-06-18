@@ -21,7 +21,7 @@ namespace Versioning.Removed.LatestVersion
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly Versions _version;
+        private readonly string _version;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -36,18 +36,16 @@ namespace Versioning.Removed.LatestVersion
 
         /// <summary> Initializes a new instance of RemovedClient. </summary>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="version"> Need to be set as 'v1', 'v2preview' or 'v2' in client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public RemovedClient(Uri endpoint, Versions version) : this(endpoint, version, new RemovedClientOptions())
+        public RemovedClient(Uri endpoint) : this(endpoint, new RemovedClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of RemovedClient. </summary>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="version"> Need to be set as 'v1', 'v2preview' or 'v2' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public RemovedClient(Uri endpoint, Versions version, RemovedClientOptions options)
+        public RemovedClient(Uri endpoint, RemovedClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new RemovedClientOptions();
@@ -55,7 +53,7 @@ namespace Versioning.Removed.LatestVersion
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-            _version = version;
+            _version = options.Version;
         }
 
         /// <summary> V 2. </summary>
@@ -282,7 +280,7 @@ namespace Versioning.Removed.LatestVersion
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/versioning/removed/api-version:", false);
-            uri.AppendRaw(_version.ToSerialString(), true);
+            uri.AppendRaw(_version, true);
             uri.AppendPath("/v2", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -299,7 +297,7 @@ namespace Versioning.Removed.LatestVersion
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/versioning/removed/api-version:", false);
-            uri.AppendRaw(_version.ToSerialString(), true);
+            uri.AppendRaw(_version, true);
             uri.AppendPath("/v3", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
