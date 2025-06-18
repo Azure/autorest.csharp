@@ -61,7 +61,7 @@ namespace CadlRanchProjects.Tests
         public Task Versioning_Added_v1() => Test(async (host) =>
         {
             ModelV1 modelV1 = new ModelV1("foo", EnumV1.EnumMemberV2, BinaryData.FromObjectAsJson(10));
-            var response = await new AddedClient(host, Versions.V2).V1Async("bar", modelV1);
+            var response = await new AddedClient(host).V1Async("bar", modelV1);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("foo", response.Value.Prop);
             Assert.AreEqual(EnumV1.EnumMemberV2, response.Value.EnumProp);
@@ -72,7 +72,7 @@ namespace CadlRanchProjects.Tests
         public Task Versioning_Added_v2() => Test(async (host) =>
         {
             ModelV2 modelV2 = new ModelV2("foo", EnumV2.EnumMember, BinaryData.FromObjectAsJson("bar"));
-            var response = await new AddedClient(host, Versions.V2).V2Async(modelV2);
+            var response = await new AddedClient(host).V2Async(modelV2);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("foo", response.Value.Prop);
             Assert.AreEqual(EnumV2.EnumMember, response.Value.EnumProp);
@@ -83,7 +83,7 @@ namespace CadlRanchProjects.Tests
         public Task Versioning_Added_InterfaceV2() => Test(async (host) =>
         {
             ModelV2 modelV2 = new ModelV2("foo", EnumV2.EnumMember, BinaryData.FromObjectAsJson("bar"));
-            var response = await new AddedClient(host, Versions.V2).GetInterfaceV2Client().V2InInterfaceAsync(modelV2);
+            var response = await new AddedClient(host).GetInterfaceV2Client().V2InInterfaceAsync(modelV2);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("foo", response.Value.Prop);
             Assert.AreEqual(EnumV2.EnumMember, response.Value.EnumProp);

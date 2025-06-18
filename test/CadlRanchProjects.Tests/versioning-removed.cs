@@ -55,7 +55,7 @@ namespace CadlRanchProjects.Tests
             Assert.IsNull(Type.GetType("Versioning.Removed.InterfaceV1"));
 
             // All 3 versions are defined
-            var enumType = typeof(Versions);
+            var enumType = typeof(RemovedClientOptions.ServiceVersion);
             Assert.AreEqual(new string[] { "V1", "V2preview", "V2" }, enumType.GetEnumNames());
         }
 
@@ -63,7 +63,7 @@ namespace CadlRanchProjects.Tests
         public Task Versioning_Removed_v2() => Test(async (host) =>
         {
             ModelV2 modelV2 = new ModelV2("foo", EnumV2.EnumMemberV2, BinaryData.FromObjectAsJson("bar"));
-            var response = await new RemovedClient(host, Versions.V2).V2Async(modelV2);
+            var response = await new RemovedClient(host).V2Async(modelV2);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("foo", response.Value.Prop);
             Assert.AreEqual(EnumV2.EnumMemberV2, response.Value.EnumProp);
@@ -74,7 +74,7 @@ namespace CadlRanchProjects.Tests
         public Task Versioning_Removed_V3Model() => Test(async (host) =>
         {
             var model = new ModelV3("123", EnumV3.EnumMemberV1);
-            var response = await new RemovedClient(host, Versions.V2).ModelV3Async(model);
+            var response = await new RemovedClient(host).ModelV3Async(model);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("123", response.Value.Id);
             Assert.AreEqual(EnumV3.EnumMemberV1, response.Value.EnumProp);
