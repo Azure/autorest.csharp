@@ -55,7 +55,7 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(IdentityV3))
             {
                 writer.WritePropertyName("identityV3"u8);
-                ((IJsonModel<ManagedServiceIdentity>)IdentityV3).Write(writer, ModelSerializationExtensions.WireOptions);
+                ((IJsonModel<ManagedServiceIdentity>)IdentityV3).Write(writer, new ModelReaderWriterOptions("W|v3"));
             }
             if (Optional.IsCollectionDefined(Zones))
             {

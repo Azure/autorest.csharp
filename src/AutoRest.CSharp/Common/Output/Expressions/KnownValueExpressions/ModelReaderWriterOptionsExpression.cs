@@ -1,7 +1,6 @@
 ﻿// Copyright(c) Microsoft Corporation.All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.ClientModel.Primitives;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Output.Models.Types;
@@ -17,16 +16,12 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public static ValueExpression UsingSystemAssignedUserAssignedV3(ModelReaderWriterOptionsExpression? options)
         {
-            if (options is null || options == ModelReaderWriterOptionsExpression.Wire)
-            {
-                return New.Instance(typeof(ModelReaderWriterOptions), Literal("W|v3"));
-            }
-            if (options == ModelReaderWriterOptionsExpression.Json)
+            if (options == Json)
             {
                 return New.Instance(typeof(ModelReaderWriterOptions), Literal("J|v3"));
             }
 
-            throw new InvalidOperationException("Not supported format.");
+            return New.Instance(typeof(ModelReaderWriterOptions), Literal("W|v3"));
         }
 
         public ValueExpression Format => new MemberExpression(this, nameof(ModelReaderWriterOptions.Format));

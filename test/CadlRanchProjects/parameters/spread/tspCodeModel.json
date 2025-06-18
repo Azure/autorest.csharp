@@ -2119,7 +2119,18 @@
          "nameInRequest": "requiredIntList",
          "doc": "required int",
          "type": {
-          "$ref": "55"
+          "$id": "206",
+          "kind": "array",
+          "name": "Array",
+          "valueType": {
+           "$id": "207",
+           "kind": "int32",
+           "name": "int32",
+           "crossLanguageDefinitionId": "TypeSpec.int32",
+           "decorators": []
+          },
+          "crossLanguageDefinitionId": "TypeSpec.Array",
+          "decorators": []
          },
          "location": "Body",
          "isApiVersion": false,
@@ -2132,12 +2143,23 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "206",
+         "$id": "208",
          "name": "optionalStringList",
          "nameInRequest": "optionalStringList",
          "doc": "optional string",
          "type": {
-          "$ref": "60"
+          "$id": "209",
+          "kind": "array",
+          "name": "Array1",
+          "valueType": {
+           "$id": "210",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "crossLanguageDefinitionId": "TypeSpec.Array",
+          "decorators": []
          },
          "location": "Body",
          "isApiVersion": false,
@@ -2150,7 +2172,7 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "207",
+         "$id": "211",
          "name": "contentType",
          "nameInRequest": "contentType",
          "doc": "Body parameter's content type. Known values are application/json",
@@ -2169,7 +2191,7 @@
         }
        ],
        "response": {
-        "$id": "208"
+        "$id": "212"
        },
        "isOverride": false,
        "generateConvenient": true,
@@ -2177,25 +2199,25 @@
        "crossLanguageDefinitionId": "Parameters.Spread.Alias.spreadWithMultipleParameters"
       },
       {
-       "$id": "209",
+       "$id": "213",
        "kind": "basic",
        "name": "spreadParameterWithInnerAlias",
        "accessibility": "public",
        "apiVersions": [],
        "doc": "spread an alias with contains another alias property as body.",
        "operation": {
-        "$id": "210",
+        "$id": "214",
         "name": "spreadParameterWithInnerAlias",
         "resourceName": "Alias",
         "doc": "spread an alias with contains another alias property as body.",
         "accessibility": "public",
         "parameters": [
          {
-          "$id": "211",
+          "$id": "215",
           "name": "id",
           "nameInRequest": "id",
           "type": {
-           "$id": "212",
+           "$id": "216",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2212,11 +2234,11 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "213",
+          "$id": "217",
           "name": "x-ms-test-header",
           "nameInRequest": "x-ms-test-header",
           "type": {
-           "$id": "214",
+           "$id": "218",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2233,7 +2255,7 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "215",
+          "$id": "219",
           "name": "contentType",
           "nameInRequest": "Content-Type",
           "doc": "Body parameter's content type. Known values are application/json",
@@ -2251,7 +2273,7 @@
           "skipUrlEncoding": false
          },
          {
-          "$id": "216",
+          "$id": "220",
           "name": "spreadParameterWithInnerAliasRequest",
           "nameInRequest": "spreadParameterWithInnerAliasRequest",
           "type": {
@@ -2270,7 +2292,7 @@
         ],
         "responses": [
          {
-          "$id": "217",
+          "$id": "221",
           "statusCodes": [
            204
           ],
@@ -2292,11 +2314,11 @@
        },
        "parameters": [
         {
-         "$id": "218",
+         "$id": "222",
          "name": "id",
          "nameInRequest": "id",
          "type": {
-          "$id": "219",
+          "$id": "223",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2313,12 +2335,12 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "220",
+         "$id": "224",
          "name": "name",
          "nameInRequest": "name",
          "doc": "name of the Thing",
          "type": {
-          "$id": "221",
+          "$id": "225",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2335,12 +2357,12 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "222",
+         "$id": "226",
          "name": "age",
          "nameInRequest": "age",
          "doc": "age of the Thing",
          "type": {
-          "$id": "223",
+          "$id": "227",
           "kind": "int32",
           "name": "int32",
           "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -2357,11 +2379,11 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "224",
+         "$id": "228",
          "name": "x-ms-test-header",
          "nameInRequest": "x-ms-test-header",
          "type": {
-          "$id": "225",
+          "$id": "229",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2378,7 +2400,7 @@
          "skipUrlEncoding": false
         },
         {
-         "$id": "226",
+         "$id": "230",
          "name": "contentType",
          "nameInRequest": "contentType",
          "doc": "Body parameter's content type. Known values are application/json",
@@ -2397,7 +2419,7 @@
         }
        ],
        "response": {
-        "$id": "227"
+        "$id": "231"
        },
        "isOverride": false,
        "generateConvenient": true,
@@ -2407,12 +2429,12 @@
      ],
      "parameters": [
       {
-       "$id": "228",
+       "$id": "232",
        "name": "endpoint",
        "nameInRequest": "endpoint",
        "doc": "Service host",
        "type": {
-        "$id": "229",
+        "$id": "233",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -2426,9 +2448,9 @@
        "explode": false,
        "kind": "Client",
        "defaultValue": {
-        "$id": "230",
+        "$id": "234",
         "type": {
-         "$id": "231",
+         "$id": "235",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"

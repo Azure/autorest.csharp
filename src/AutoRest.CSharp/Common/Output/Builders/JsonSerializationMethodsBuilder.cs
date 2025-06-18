@@ -442,7 +442,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             switch (valueSerialization.Type.Implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
-                    return ModelReaderWriterExpression.Write(value, valueSerialization.Type, utf8JsonWriter, options).ToStatement();
+                    return ModelReaderWriterExpression.Write(value, valueSerialization.Type, utf8JsonWriter, options, valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3).ToStatement();
 
                 case ObjectType:
                     return utf8JsonWriter.WriteObjectValue(value, options: options);
@@ -1122,7 +1122,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             if (serializationType.SerializeAs != null)
             {
-                return new CastExpression(GetFrameworkTypeValueExpression(serializationType, element, serializationFormat), serializationType);
+                return new CastExpression(GetFrameworkTypeValueExpression(serializationType.SerializeAs, element, serializationFormat), serializationType);
             }
 
             if (serializationType.IsFrameworkType)
