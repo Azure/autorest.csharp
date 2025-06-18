@@ -4279,7 +4279,8 @@
      "isEndpoint": true,
      "skipUrlEncoding": false,
      "explode": false,
-     "kind": "Client"
+     "kind": "Client",
+     "serverUrlTemplate": "{Endpoint}/anomalydetector/{ApiVersion}"
     },
     {
      "$id": "555",
@@ -4306,7 +4307,8 @@
        "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "value": "v1.1"
-     }
+     },
+     "serverUrlTemplate": "{Endpoint}/anomalydetector/{ApiVersion}"
     }
    ],
    "decorators": [
@@ -21306,9 +21308,9 @@
        "doc": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "type": {
         "$id": "2919",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "string",
+        "name": "endpoint",
+        "crossLanguageDefinitionId": "TypeSpec.string"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -21317,7 +21319,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{Endpoint}/anomalydetector/{ApiVersion}"
       },
       {
        "$id": "2920",
@@ -21344,7 +21347,8 @@
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "value": "v1.1"
-       }
+       },
+       "serverUrlTemplate": "{Endpoint}/anomalydetector/{ApiVersion}"
       }
      ],
      "decorators": [],
@@ -27841,9 +27845,9 @@
        "doc": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "type": {
         "$id": "3722",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "string",
+        "name": "endpoint",
+        "crossLanguageDefinitionId": "TypeSpec.string"
        },
        "location": "Uri",
        "isApiVersion": false,
@@ -27852,7 +27856,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{Endpoint}/anomalydetector/{ApiVersion}"
       },
       {
        "$id": "3723",
@@ -27879,7 +27884,8 @@
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "value": "v1.1"
-       }
+       },
+       "serverUrlTemplate": "{Endpoint}/anomalydetector/{ApiVersion}"
       }
      ],
      "decorators": [],
