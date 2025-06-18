@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -53,7 +55,7 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(IdentityV3))
             {
                 writer.WritePropertyName("identityV3"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, IdentityV3, ModelSerializationExtensions.OptionsUseManagedServiceIdentityV3);
+                ((IJsonModel<ManagedServiceIdentity>)IdentityV3).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -140,7 +142,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    plan = ModelSerializationExtensions.JsonDeserialize<ArmPlan>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    plan = ModelReaderWriter.Read<ArmPlan>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default);
                     continue;
                 }
                 if (property.NameEquals("resources"u8))
@@ -163,7 +165,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identity = ModelSerializationExtensions.JsonDeserialize<ManagedServiceIdentity>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default);
                     continue;
                 }
                 if (property.NameEquals("identityWithRenamedProperty"u8))
@@ -190,7 +192,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identityWithNoUserIdentity = ModelSerializationExtensions.JsonDeserialize<ManagedServiceIdentity>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    identityWithNoUserIdentity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default);
                     continue;
                 }
                 if (property.NameEquals("identityWithNoSystemIdentity"u8))
@@ -209,7 +211,7 @@ namespace MgmtPropertyChooser
                         continue;
                     }
                     var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
-                    identityV3 = ModelSerializationExtensions.JsonDeserialize<ManagedServiceIdentity>(property.Value.GetRawText(), ModelSerializationExtensions.OptionsUseManagedServiceIdentityV3);
+                    identityV3 = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtPropertyChooserContext.Default);
                     continue;
                 }
                 if (property.NameEquals("zones"u8))
@@ -246,7 +248,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    fakeSubResource = ModelSerializationExtensions.JsonDeserialize<SubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    fakeSubResource = ModelReaderWriter.Read<SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default);
                     continue;
                 }
                 if (property.NameEquals("fakeWritableSubResource"u8))
@@ -255,7 +257,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    fakeWritableSubResource = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    fakeWritableSubResource = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -298,7 +300,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

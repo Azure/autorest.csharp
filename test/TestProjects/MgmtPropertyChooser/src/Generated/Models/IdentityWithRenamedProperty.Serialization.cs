@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -77,7 +79,7 @@ namespace MgmtPropertyChooser.Models
                     Dictionary<string, UserAssignedIdentity> dictionary = new Dictionary<string, UserAssignedIdentity>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, ModelSerializationExtensions.JsonDeserialize<UserAssignedIdentity>(property0.Value.GetRawText(), ModelSerializationExtensions.Options));
+                        dictionary.Add(property0.Name, ModelReaderWriter.Read<UserAssignedIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default));
                     }
                     userAssignedIdentities = dictionary;
                     continue;

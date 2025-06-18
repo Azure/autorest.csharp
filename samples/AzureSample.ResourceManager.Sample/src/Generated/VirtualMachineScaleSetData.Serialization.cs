@@ -213,7 +213,7 @@ namespace AzureSample.ResourceManager.Sample
                     {
                         continue;
                     }
-                    identity = ModelSerializationExtensions.JsonDeserialize<ManagedServiceIdentity>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AzureSampleResourceManagerSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("zones"u8))
@@ -270,7 +270,7 @@ namespace AzureSample.ResourceManager.Sample
                     {
                         continue;
                     }
-                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -370,7 +370,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            proximityPlacementGroup = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value.GetRawText(), ModelSerializationExtensions.Options);
+                            proximityPlacementGroup = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), options, AzureSampleResourceManagerSampleContext.Default);
                             continue;
                         }
                         if (property0.NameEquals("hostGroup"u8))
@@ -379,7 +379,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            hostGroup = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value.GetRawText(), ModelSerializationExtensions.Options);
+                            hostGroup = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), options, AzureSampleResourceManagerSampleContext.Default);
                             continue;
                         }
                         if (property0.NameEquals("additionalCapabilities"u8))

@@ -5,7 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -66,7 +69,7 @@ namespace MgmtMockAndSample
                         continue;
                     }
                     var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
-                    identity = ModelSerializationExtensions.JsonDeserialize<ManagedServiceIdentity>(property.Value.GetRawText(), ModelSerializationExtensions.OptionsUseManagedServiceIdentityV3);
+                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -90,7 +93,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
                     continue;
                 }
             }

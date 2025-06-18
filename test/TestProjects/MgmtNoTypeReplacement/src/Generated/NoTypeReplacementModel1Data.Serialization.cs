@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -45,7 +47,7 @@ namespace MgmtNoTypeReplacement
                     {
                         continue;
                     }
-                    foo = ModelSerializationExtensions.JsonDeserialize<SubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    foo = ModelReaderWriter.Read<SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtNoTypeReplacementContext.Default);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -69,7 +71,7 @@ namespace MgmtNoTypeReplacement
                     {
                         continue;
                     }
-                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtNoTypeReplacementContext.Default);
                     continue;
                 }
             }

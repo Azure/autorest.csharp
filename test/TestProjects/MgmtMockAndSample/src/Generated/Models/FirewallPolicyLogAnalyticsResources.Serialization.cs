@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -66,7 +68,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    defaultWorkspaceId = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    defaultWorkspaceId = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
                     continue;
                 }
             }

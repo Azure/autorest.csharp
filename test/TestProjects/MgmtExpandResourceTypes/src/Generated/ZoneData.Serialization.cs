@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -154,7 +156,7 @@ namespace MgmtExpandResourceTypes
                     {
                         continue;
                     }
-                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExpandResourceTypesContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -252,7 +254,7 @@ namespace MgmtExpandResourceTypes
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item.GetRawText(), ModelSerializationExtensions.Options));
+                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExpandResourceTypesContext.Default));
                             }
                             registrationVirtualNetworks = array;
                             continue;
@@ -266,7 +268,7 @@ namespace MgmtExpandResourceTypes
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item.GetRawText(), ModelSerializationExtensions.Options));
+                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExpandResourceTypesContext.Default));
                             }
                             resolutionVirtualNetworks = array;
                             continue;

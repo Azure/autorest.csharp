@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -23,7 +25,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Identity, ModelSerializationExtensions.OptionsUseManagedServiceIdentityV3);
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -164,7 +166,7 @@ namespace MgmtMockAndSample
                         continue;
                     }
                     var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
-                    identity = ModelSerializationExtensions.JsonDeserialize<ManagedServiceIdentity>(property.Value.GetRawText(), ModelSerializationExtensions.OptionsUseManagedServiceIdentityV3);
+                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -207,7 +209,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -255,7 +257,7 @@ namespace MgmtMockAndSample
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item.GetRawText(), ModelSerializationExtensions.Options));
+                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default));
                             }
                             ruleCollectionGroups = array;
                             continue;
@@ -275,7 +277,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            basePolicy = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property0.Value.GetRawText(), ModelSerializationExtensions.Options);
+                            basePolicy = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
                             continue;
                         }
                         if (property0.NameEquals("firewalls"u8))
@@ -287,7 +289,7 @@ namespace MgmtMockAndSample
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item.GetRawText(), ModelSerializationExtensions.Options));
+                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default));
                             }
                             firewalls = array;
                             continue;
@@ -301,7 +303,7 @@ namespace MgmtMockAndSample
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(item.GetRawText(), ModelSerializationExtensions.Options));
+                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default));
                             }
                             childPolicies = array;
                             continue;

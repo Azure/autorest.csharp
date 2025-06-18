@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -103,7 +105,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    layerOneConflict = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    layerOneConflict = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtSafeFlattenContext.Default);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -146,7 +148,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtSafeFlattenContext.Default);
                     continue;
                 }
             }

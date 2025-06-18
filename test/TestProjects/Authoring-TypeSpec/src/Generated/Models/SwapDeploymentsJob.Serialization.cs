@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -154,7 +155,7 @@ namespace AuthoringTypeSpec.Models
                 }
                 if (property.NameEquals("errors"u8))
                 {
-                    errors = ModelSerializationExtensions.JsonDeserialize<ResponseError>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    errors = ModelReaderWriter.Read<ResponseError>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AuthoringTypeSpecContext.Default);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

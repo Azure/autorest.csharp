@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -113,7 +115,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -131,7 +133,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            privateEndpoint = ModelSerializationExtensions.JsonDeserialize<Azure.ResourceManager.Resources.Models.SubResource>(property0.Value.GetRawText(), ModelSerializationExtensions.Options);
+                            privateEndpoint = ModelReaderWriter.Read<Azure.ResourceManager.Resources.Models.SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnectionState"u8))

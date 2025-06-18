@@ -7,6 +7,7 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -93,7 +94,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    snapshot = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    snapshot = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default);
                     continue;
                 }
                 if (property.NameEquals("managedDisk"u8))
@@ -102,7 +103,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    managedDisk = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    managedDisk = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default);
                     continue;
                 }
                 if (property.NameEquals("blobUri"u8))
@@ -147,7 +148,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    diskEncryptionSet = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    diskEncryptionSet = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default);
                     continue;
                 }
             }

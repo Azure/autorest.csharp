@@ -8,6 +8,7 @@
 using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 
 namespace AzureSample.ResourceManager.Storage.Models
@@ -42,7 +43,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                ModelSerializationExtensions.JsonSerialize(writer, Identity, ModelSerializationExtensions.OptionsUseManagedServiceIdentityV3);
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();

@@ -7,6 +7,7 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -42,7 +43,7 @@ namespace MgmtAcronymMapping.Models
                 }
                 if (property.NameEquals("sourceVault"u8))
                 {
-                    sourceVault = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    sourceVault = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default);
                     continue;
                 }
             }

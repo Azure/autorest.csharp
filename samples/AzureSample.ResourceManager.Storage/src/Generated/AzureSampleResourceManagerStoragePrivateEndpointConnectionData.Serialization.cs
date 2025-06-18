@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -71,7 +73,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    systemData = ModelSerializationExtensions.JsonDeserialize<SystemData>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -89,7 +91,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            privateEndpoint = ModelSerializationExtensions.JsonDeserialize<SubResource>(property0.Value.GetRawText(), ModelSerializationExtensions.Options);
+                            privateEndpoint = ModelReaderWriter.Read<SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnectionState"u8))

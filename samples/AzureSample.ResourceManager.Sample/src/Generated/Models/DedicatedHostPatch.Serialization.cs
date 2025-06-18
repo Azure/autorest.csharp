@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -174,7 +175,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             List<Azure.ResourceManager.Resources.Models.SubResource> array = new List<Azure.ResourceManager.Resources.Models.SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelSerializationExtensions.JsonDeserialize<Azure.ResourceManager.Resources.Models.SubResource>(item.GetRawText(), ModelSerializationExtensions.Options));
+                                array.Add(ModelReaderWriter.Read<Azure.ResourceManager.Resources.Models.SubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), options, AzureSampleResourceManagerSampleContext.Default));
                             }
                             virtualMachines = array;
                             continue;
