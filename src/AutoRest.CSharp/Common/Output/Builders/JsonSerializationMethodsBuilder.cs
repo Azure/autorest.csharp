@@ -1065,9 +1065,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return deserializeDictionaryStatement;
 
                 case JsonValueSerialization { Options: JsonSerializationOptions.UseManagedServiceIdentityV3 } valueSerialization:
-                    var declareSerializeOptions = Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions);
-                    value = GetDeserializeValueExpression(element, valueSerialization.Type, options, valueSerialization.Format, serializeOptions, useManagedServiceIdentityV3: true);
-                    return declareSerializeOptions;
+                    value = GetDeserializeValueExpression(element, valueSerialization.Type, options, valueSerialization.Format, null, useManagedServiceIdentityV3: true);
+                    return EmptyStatement;
 
                 case JsonValueSerialization valueSerialization:
                     value = GetDeserializeValueExpression(element, valueSerialization.Type, options, valueSerialization.Format);
