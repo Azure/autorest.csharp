@@ -2557,7 +2557,8 @@
      "isEndpoint": true,
      "skipUrlEncoding": false,
      "explode": false,
-     "kind": "Client"
+     "kind": "Client",
+     "serverUrlTemplate": "{Endpoint}/language"
     }
    ],
    "decorators": [
@@ -4071,7 +4072,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{Endpoint}/language"
       }
      ],
      "decorators": [],
@@ -5334,7 +5336,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{Endpoint}/language"
       }
      ],
      "decorators": [],
@@ -5865,7 +5868,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{Endpoint}/language"
       }
      ],
      "decorators": [],
@@ -6424,7 +6428,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{Endpoint}/language"
       }
      ],
      "decorators": [],

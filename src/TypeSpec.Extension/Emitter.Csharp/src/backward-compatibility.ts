@@ -7,7 +7,7 @@ import {
     SdkBuiltInKinds,
     UsageFlags
 } from "@azure-tools/typespec-client-generator-core";
-import { CodeModel } from "@typespec/http-client-csharp";
+import { CodeModel, InputClient } from "@typespec/http-client-csharp";
 
 /*
  * This function transforms the code model for backward compatibility to avoid massive code on autorest.csharp's csharp part.
@@ -58,7 +58,30 @@ export function transformCodeModel(codeModel: CodeModel): CodeModel {
             }
         }
     }
+    // fix the endpoint parameter in client to always be a url
+    for (const client of codeModel.clients) {
+        fixEndpointParameter(client);
+    }
     return codeModel;
+
+    function fixEndpointParameter(client: InputClient) {
+        if (client.parameters) {
+            for (const param of client.parameters) {
+                if (param.isEndpoint && param.type.kind === "string") {
+                    param.type = {
+                        kind: "url",
+                        name: "url",
+                        crossLanguageDefinitionId: "TypeSpec.url"
+                    };
+                }
+            }
+        }
+        if (client.children) {
+            for (const child of client.children) {
+                fixEndpointParameter(child);
+            }
+        }
+    }
 }
 
 interface DecoratedType {

@@ -67,7 +67,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(4, v3Methods.Count());
 
             // All 2 versions are defined
-            var enumType = typeof(Versions);
+            var enumType = typeof(RemovedClientOptions.ServiceVersion);
             Assert.AreEqual(new string[] { "V1", "V2preview"}, enumType.GetEnumNames());
         }
 
@@ -75,7 +75,7 @@ namespace CadlRanchProjects.Tests
         public Task Versioning_Removed_BetaVersion_V3Model() => Test(async (host) =>
         {
             var model = new ModelV3("123");
-            var response = await new RemovedClient(host, Versions.V2preview).ModelV3Async(model);
+            var response = await new RemovedClient(host).ModelV3Async(model);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("123", response.Value.Id);
         });

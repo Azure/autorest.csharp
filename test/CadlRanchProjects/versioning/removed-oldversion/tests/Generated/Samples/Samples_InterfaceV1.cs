@@ -23,7 +23,7 @@ namespace Versioning.Removed.OldVersion.Samples
         public void Example_InterfaceV1_V1InInterface_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
-            InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+            InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -44,7 +44,7 @@ namespace Versioning.Removed.OldVersion.Samples
         public async Task Example_InterfaceV1_V1InInterface_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+            InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -65,7 +65,7 @@ namespace Versioning.Removed.OldVersion.Samples
         public void Example_InterfaceV1_V1InInterface_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<endpoint>");
-            InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+            InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
             ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV1> response = client.V1InInterface(body);
@@ -76,7 +76,7 @@ namespace Versioning.Removed.OldVersion.Samples
         public async Task Example_InterfaceV1_V1InInterface_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+            InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
             ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV1> response = await client.V1InInterfaceAsync(body);
@@ -87,7 +87,7 @@ namespace Versioning.Removed.OldVersion.Samples
         public void Example_InterfaceV1_V1InInterface_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
-            InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+            InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -108,7 +108,7 @@ namespace Versioning.Removed.OldVersion.Samples
         public async Task Example_InterfaceV1_V1InInterface_AllParameters_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+            InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -129,7 +129,7 @@ namespace Versioning.Removed.OldVersion.Samples
         public void Example_InterfaceV1_V1InInterface_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<endpoint>");
-            InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+            InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
             ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV1> response = client.V1InInterface(body);
@@ -140,7 +140,7 @@ namespace Versioning.Removed.OldVersion.Samples
         public async Task Example_InterfaceV1_V1InInterface_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+            InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
             ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV1> response = await client.V1InInterfaceAsync(body);
