@@ -4495,7 +4495,8 @@
      "isEndpoint": true,
      "skipUrlEncoding": false,
      "explode": false,
-     "kind": "Client"
+     "kind": "Client",
+     "serverUrlTemplate": "{unbrandedTypeSpecUrl}"
     }
    ],
    "decorators": [

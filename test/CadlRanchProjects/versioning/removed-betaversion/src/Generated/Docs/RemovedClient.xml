@@ -6,7 +6,7 @@
 This sample shows how to call V1Async.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV1> response = await client.V1Async(body);
@@ -14,7 +14,7 @@ Response<ModelV1> response = await client.V1Async(body);
 This sample shows how to call V1Async with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV1> response = await client.V1Async(body);
@@ -25,7 +25,7 @@ Response<ModelV1> response = await client.V1Async(body);
 This sample shows how to call V1.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV1> response = client.V1(body);
@@ -33,7 +33,7 @@ Response<ModelV1> response = client.V1(body);
 This sample shows how to call V1 with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV1> response = client.V1(body);
@@ -44,7 +44,7 @@ Response<ModelV1> response = client.V1(body);
 This sample shows how to call V1Async and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -62,7 +62,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 This sample shows how to call V1Async with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -83,7 +83,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 This sample shows how to call V1 and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -101,7 +101,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 This sample shows how to call V1 with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -122,7 +122,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 This sample shows how to call V2Async.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 ModelV2 body = new ModelV2("<prop>", "<removedProp>", EnumV2.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV2> response = await client.V2Async("<param>", body);
@@ -130,7 +130,7 @@ Response<ModelV2> response = await client.V2Async("<param>", body);
 This sample shows how to call V2Async with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 ModelV2 body = new ModelV2("<prop>", "<removedProp>", EnumV2.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV2> response = await client.V2Async("<param>", body);
@@ -141,7 +141,7 @@ Response<ModelV2> response = await client.V2Async("<param>", body);
 This sample shows how to call V2.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 ModelV2 body = new ModelV2("<prop>", "<removedProp>", EnumV2.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV2> response = client.V2("<param>", body);
@@ -149,7 +149,7 @@ Response<ModelV2> response = client.V2("<param>", body);
 This sample shows how to call V2 with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 ModelV2 body = new ModelV2("<prop>", "<removedProp>", EnumV2.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV2> response = client.V2("<param>", body);
@@ -160,7 +160,7 @@ Response<ModelV2> response = client.V2("<param>", body);
 This sample shows how to call V2Async and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -180,7 +180,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 This sample shows how to call V2Async with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -203,7 +203,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 This sample shows how to call V2 and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -223,7 +223,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 This sample shows how to call V2 with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -246,7 +246,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 This sample shows how to call ModelV3Async.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 ModelV3 body = new ModelV3("<id>");
 Response<ModelV3> response = await client.ModelV3Async(body);
@@ -254,7 +254,7 @@ Response<ModelV3> response = await client.ModelV3Async(body);
 This sample shows how to call ModelV3Async with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 ModelV3 body = new ModelV3("<id>");
 Response<ModelV3> response = await client.ModelV3Async(body);
@@ -265,7 +265,7 @@ Response<ModelV3> response = await client.ModelV3Async(body);
 This sample shows how to call ModelV3.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 ModelV3 body = new ModelV3("<id>");
 Response<ModelV3> response = client.ModelV3(body);
@@ -273,7 +273,7 @@ Response<ModelV3> response = client.ModelV3(body);
 This sample shows how to call ModelV3 with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 ModelV3 body = new ModelV3("<id>");
 Response<ModelV3> response = client.ModelV3(body);
@@ -284,7 +284,7 @@ Response<ModelV3> response = client.ModelV3(body);
 This sample shows how to call ModelV3Async and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -298,7 +298,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 This sample shows how to call ModelV3Async with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -315,7 +315,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 This sample shows how to call ModelV3 and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -329,7 +329,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 This sample shows how to call ModelV3 with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-RemovedClient client = new RemovedClient(endpoint, default);
+RemovedClient client = new RemovedClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {

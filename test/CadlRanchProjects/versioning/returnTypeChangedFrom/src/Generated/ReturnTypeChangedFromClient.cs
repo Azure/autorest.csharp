@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Versioning.ReturnTypeChangedFrom.Models;
 
 namespace Versioning.ReturnTypeChangedFrom
 {
@@ -21,7 +20,7 @@ namespace Versioning.ReturnTypeChangedFrom
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly Versions _version;
+        private readonly string _version;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -36,18 +35,16 @@ namespace Versioning.ReturnTypeChangedFrom
 
         /// <summary> Initializes a new instance of ReturnTypeChangedFromClient. </summary>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public ReturnTypeChangedFromClient(Uri endpoint, Versions version) : this(endpoint, version, new ReturnTypeChangedFromClientOptions())
+        public ReturnTypeChangedFromClient(Uri endpoint) : this(endpoint, new ReturnTypeChangedFromClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ReturnTypeChangedFromClient. </summary>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public ReturnTypeChangedFromClient(Uri endpoint, Versions version, ReturnTypeChangedFromClientOptions options)
+        public ReturnTypeChangedFromClient(Uri endpoint, ReturnTypeChangedFromClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ReturnTypeChangedFromClientOptions();
@@ -55,7 +52,7 @@ namespace Versioning.ReturnTypeChangedFrom
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-            _version = version;
+            _version = options.Version;
         }
 
         /// <summary> Test. </summary>
@@ -176,7 +173,7 @@ namespace Versioning.ReturnTypeChangedFrom
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/versioning/return-type-changed-from/api-version:", false);
-            uri.AppendRaw(_version.ToSerialString(), true);
+            uri.AppendRaw(_version, true);
             uri.AppendPath("/test", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

@@ -6,7 +6,7 @@
 This sample shows how to call V1InInterfaceAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
 ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV1> response = await client.V1InInterfaceAsync(body);
@@ -14,7 +14,7 @@ Response<ModelV1> response = await client.V1InInterfaceAsync(body);
 This sample shows how to call V1InInterfaceAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
 ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV1> response = await client.V1InInterfaceAsync(body);
@@ -25,7 +25,7 @@ Response<ModelV1> response = await client.V1InInterfaceAsync(body);
 This sample shows how to call V1InInterface.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
 ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV1> response = client.V1InInterface(body);
@@ -33,7 +33,7 @@ Response<ModelV1> response = client.V1InInterface(body);
 This sample shows how to call V1InInterface with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
 ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV1> response = client.V1InInterface(body);
@@ -44,7 +44,7 @@ Response<ModelV1> response = client.V1InInterface(body);
 This sample shows how to call V1InInterfaceAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -62,7 +62,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 This sample shows how to call V1InInterfaceAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -83,7 +83,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 This sample shows how to call V1InInterface and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -101,7 +101,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 This sample shows how to call V1InInterface with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
-InterfaceV1 client = new RemovedClient(endpoint, default).GetInterfaceV1Client();
+InterfaceV1 client = new RemovedClient(endpoint).GetInterfaceV1Client();
 
 using RequestContent content = RequestContent.Create(new
 {

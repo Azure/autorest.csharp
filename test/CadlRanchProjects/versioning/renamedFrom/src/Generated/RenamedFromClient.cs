@@ -21,7 +21,7 @@ namespace Versioning.RenamedFrom
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly Versions _version;
+        private readonly string _version;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -36,18 +36,16 @@ namespace Versioning.RenamedFrom
 
         /// <summary> Initializes a new instance of RenamedFromClient. </summary>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public RenamedFromClient(Uri endpoint, Versions version) : this(endpoint, version, new RenamedFromClientOptions())
+        public RenamedFromClient(Uri endpoint) : this(endpoint, new RenamedFromClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of RenamedFromClient. </summary>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public RenamedFromClient(Uri endpoint, Versions version, RenamedFromClientOptions options)
+        public RenamedFromClient(Uri endpoint, RenamedFromClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new RenamedFromClientOptions();
@@ -55,7 +53,7 @@ namespace Versioning.RenamedFrom
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-            _version = version;
+            _version = options.Version;
         }
 
         /// <summary> New op. </summary>
@@ -190,7 +188,7 @@ namespace Versioning.RenamedFrom
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/versioning/renamed-from/api-version:", false);
-            uri.AppendRaw(_version.ToSerialString(), true);
+            uri.AppendRaw(_version, true);
             uri.AppendPath("/test", false);
             uri.AppendQuery("newQuery", newQuery, true);
             request.Uri = uri;

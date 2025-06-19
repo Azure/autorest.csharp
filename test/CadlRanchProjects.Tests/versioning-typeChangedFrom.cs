@@ -15,7 +15,7 @@ namespace CadlRanchProjects.Tests
         public Task Versioning_TypeChangedFrom_test() => Test(async (host) =>
         {
             TestModel body = new TestModel("foo", "bar");
-            var response = await new TypeChangedFromClient(host, Versions.V2).TestAsync("baz", body);
+            var response = await new TypeChangedFromClient(host).TestAsync("baz", body);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("foo", response.Value.Prop);
             Assert.AreEqual("bar", response.Value.ChangedProp);

@@ -462,7 +462,7 @@
      "type": {
       "$id": "61",
       "kind": "url",
-      "name": "url",
+      "name": "endpoint",
       "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "location": "Uri",
@@ -482,7 +482,8 @@
        "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "value": "https://management.azure.com"
-     }
+     },
+     "serverUrlTemplate": "{endpoint}"
     }
    ],
    "decorators": [
@@ -1063,7 +1064,7 @@
        "type": {
         "$id": "114",
         "kind": "url",
-        "name": "url",
+        "name": "endpoint",
         "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "location": "Uri",
@@ -1083,7 +1084,8 @@
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "value": "https://management.azure.com"
-       }
+       },
+       "serverUrlTemplate": "{endpoint}"
       }
      ],
      "decorators": [],

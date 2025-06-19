@@ -2456,7 +2456,6 @@ namespace FirstTestTypeSpec
         private ProtocolAndConvenient _cachedProtocolAndConvenient;
         private Entity _cachedEntity;
         private Glossary _cachedGlossary;
-        private Resource _cachedResource;
         private VersioningOp _cachedVersioningOp;
 
         /// <summary> Initializes a new instance of Hello. </summary>
@@ -2487,12 +2486,6 @@ namespace FirstTestTypeSpec
         public virtual Glossary GetGlossaryClient()
         {
             return Volatile.Read(ref _cachedGlossary) ?? Interlocked.CompareExchange(ref _cachedGlossary, new Glossary(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedGlossary;
-        }
-
-        /// <summary> Initializes a new instance of Resource. </summary>
-        public virtual Resource GetResourceClient()
-        {
-            return Volatile.Read(ref _cachedResource) ?? Interlocked.CompareExchange(ref _cachedResource, new Resource(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedResource;
         }
 
         /// <summary> Initializes a new instance of VersioningOp. </summary>
