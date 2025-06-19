@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
+using FirstTestTypeSpec.Models;
 using NUnit.Framework;
 
 namespace FirstTestTypeSpec.Samples
@@ -48,6 +49,28 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_VersioningOp_Export_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
+
+            Operation<ExportedResource> operation = client.Export(WaitUntil.Completed, "<name>");
+            ExportedResource responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_VersioningOp_Export_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
+
+            Operation<ExportedResource> operation = await client.ExportAsync(WaitUntil.Completed, "<name>");
+            ExportedResource responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_VersioningOp_Export_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
@@ -74,6 +97,28 @@ namespace FirstTestTypeSpec.Samples
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_VersioningOp_Export_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
+
+            Operation<ExportedResource> operation = client.Export(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>");
+            ExportedResource responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_VersioningOp_Export_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
+
+            Operation<ExportedResource> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>");
+            ExportedResource responseData = operation.Value;
         }
 
         [Test]
@@ -108,6 +153,28 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_VersioningOp_ExportW_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
+
+            Operation<ExportedResource> operation = client.ExportW(WaitUntil.Completed, "<name>");
+            ExportedResource responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_VersioningOp_ExportW_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
+
+            Operation<ExportedResource> operation = await client.ExportWAsync(WaitUntil.Completed, "<name>");
+            ExportedResource responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_VersioningOp_ExportW_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
@@ -134,6 +201,28 @@ namespace FirstTestTypeSpec.Samples
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_VersioningOp_ExportW_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
+
+            Operation<ExportedResource> operation = client.ExportW(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>");
+            ExportedResource responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_VersioningOp_ExportW_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient();
+
+            Operation<ExportedResource> operation = await client.ExportWAsync(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>");
+            ExportedResource responseData = operation.Value;
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> The ExportedResource. </summary>
-    internal partial class ExportedResource
+    public partial class ExportedResource
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
