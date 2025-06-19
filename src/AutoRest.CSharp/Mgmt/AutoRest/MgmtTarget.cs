@@ -342,9 +342,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static string GetSampleOutputFolder(string defaultOutputPath)
         {
-            if (!string.IsNullOrEmpty(Configuration.MgmtTestConfiguration?.OutputFolder))
-                return Configuration.MgmtTestConfiguration.OutputFolder;
-
             string folder = FormatPath(Configuration.OutputFolder);
             // if the output folder is not given explicitly, try to figure it out from general output folder if possible according to default folder structure:
             // Azure.ResourceManager.XXX \ src \ Generated <- default sdk source output folder
