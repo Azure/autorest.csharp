@@ -53,8 +53,7 @@
       "Vaults_GetDeleted",
       "Vaults_Update"
     ],
-    "sample": true,
-    "output-folder": "..\\..\\tests\\Generated"
+    "sample": true
   },
   "flavor": "azure",
   "generate-test-project": true,

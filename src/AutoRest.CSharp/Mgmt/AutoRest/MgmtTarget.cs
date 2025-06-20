@@ -251,12 +251,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // write samples if enabled
             if (Configuration.MgmtTestConfiguration?.Sample ?? Configuration.GenerateSampleProject)
             {
-                string sampleOutputFolder = GetSampleOutputFolder(SAMPLE_DEFAULT_OUTPUT_PATH);
-                foreach (var sampleProvider in MgmtContext.Library.SampleProviders.Value)
+                var sampleOutputFolder = GetSampleOutputFolder();
+                if (sampleOutputFolder is not null)
                 {
-                    var sampleWriter = new CodeWriter();
-                    new ExpressionTypeProviderWriter(sampleWriter, sampleProvider).Write();
-                    project.AddGeneratedTestFile(Path.Combine(sampleOutputFolder, $"Samples/{sampleProvider.Type.Name}.cs"), sampleWriter.ToString());
+                    foreach (var sampleProvider in MgmtContext.Library.SampleProviders.Value)
+                    {
+                        var sampleWriter = new CodeWriter();
+                        new ExpressionTypeProviderWriter(sampleWriter, sampleProvider).Write();
+                        project.AddGeneratedTestFile(Path.Combine(sampleOutputFolder, $"Samples/{sampleProvider.Type.Name}.cs"), sampleWriter.ToString());
+                    }
                 }
             }
         }
@@ -336,25 +339,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             AddGeneratedFile(project, serializationFileName, serializerCodeWriter.ToString());
         }
 
-        private const string SOURCE_DEFAULT_OUTPUT_PATH = $"/src/Generated";
-        private const string MOCK_TEST_DEFAULT_OUTPUT_PATH = "/tests/Generated";
-        private const string SAMPLE_DEFAULT_OUTPUT_PATH = "/samples/Generated";
-
-        private static string GetSampleOutputFolder(string defaultOutputPath)
+        private static string? GetSampleOutputFolder()
         {
-            if (!string.IsNullOrEmpty(Configuration.MgmtTestConfiguration?.OutputFolder))
-                return Configuration.MgmtTestConfiguration.OutputFolder;
-
             string folder = FormatPath(Configuration.OutputFolder);
-            // if the output folder is not given explicitly, try to figure it out from general output folder if possible according to default folder structure:
-            // Azure.ResourceManager.XXX \ src \ Generated <- default sdk source output folder
-            //                           \ samples(or tests) \ Generated <- default sample output folder defined in msbuild
-            if (folder.EndsWith(SOURCE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
-                return Path.Combine(folder, $"../../{defaultOutputPath}");
-            else if (folder.EndsWith(SAMPLE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase) || folder.EndsWith(MOCK_TEST_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
-                return folder;
-            else
-                throw new InvalidOperationException("'sample-gen.output-folder' is not configured and can't figure it out from give general output-folder");
+            // we find the `src` part and change it to tests
+            var index = folder.IndexOf("/src/", StringComparison.InvariantCultureIgnoreCase);
+            if (index >= 0)
+            {
+                return folder.Replace("/src/", "/tests/", StringComparison.InvariantCultureIgnoreCase);
+            }
+            // indicates we cannot figure out an output folder for samples, we will not generate samples
+            return null;
         }
 
         private static string FormatPath(string? path)
