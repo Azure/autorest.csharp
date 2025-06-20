@@ -53,6 +53,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
         private const string ModelKind = "model";
         private const string ArrayKind = "array";
         private const string DictionaryKind = "dict";
+        private const string UnionKind = "union";
         private const string UnknownKind = "unknown";
 
         private InputExampleValue CreateDerivedType(ref Utf8JsonReader reader, string? id, string? kind, JsonSerializerOptions options) => kind switch
@@ -60,7 +61,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             null => throw new JsonException($"InputTypeExample (id: '{id}') must have a 'kind' property"),
             ArrayKind => CreateArrayExample(ref reader, id, options, _referenceHandler.CurrentResolver),
             DictionaryKind or ModelKind => CreateObjectExample(ref reader, id, options, _referenceHandler.CurrentResolver),
-            UnknownKind => CreateUnknownExample(ref reader, id, options, _referenceHandler.CurrentResolver),
+            UnionKind or UnknownKind => CreateUnknownExample(ref reader, id, options, _referenceHandler.CurrentResolver),
             _ => CreateOtherExample(ref reader, id, options, _referenceHandler.CurrentResolver),
         };
 
