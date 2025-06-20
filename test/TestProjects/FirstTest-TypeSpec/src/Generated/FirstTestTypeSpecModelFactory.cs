@@ -97,6 +97,15 @@ namespace FirstTestTypeSpec.Models
             return new ThereLevelExtension(extension?.ToList(), serializedAdditionalRawData: null, level);
         }
 
+        /// <summary> Initializes a new instance of <see cref="Models.ExportedResource"/>. </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <returns> A new <see cref="Models.ExportedResource"/> instance for mocking. </returns>
+        public static ExportedResource ExportedResource(string id = null, string name = null)
+        {
+            return new ExportedResource(id, name, serializedAdditionalRawData: null);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Models.RoundTripModel"/>. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>

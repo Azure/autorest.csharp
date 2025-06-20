@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
 {
-    internal partial class ExportedResource : IUtf8JsonSerializable, IJsonModel<ExportedResource>
+    public partial class ExportedResource : IUtf8JsonSerializable, IJsonModel<ExportedResource>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExportedResource>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 

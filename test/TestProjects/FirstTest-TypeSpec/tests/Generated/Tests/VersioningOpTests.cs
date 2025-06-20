@@ -9,6 +9,7 @@ using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
+using FirstTestTypeSpec.Models;
 using NUnit.Framework;
 
 namespace FirstTestTypeSpec.Tests
@@ -33,6 +34,18 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task VersioningOp_Export_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = null;
+            VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient();
+
+            Operation<ExportedResource> operation = await client.ExportAsync(WaitUntil.Completed, "<name>");
+            ExportedResource responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task VersioningOp_Export_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
@@ -41,6 +54,18 @@ namespace FirstTestTypeSpec.Tests
 
             Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);
             BinaryData responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task VersioningOp_Export_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = null;
+            VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient();
+
+            Operation<ExportedResource> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>");
+            ExportedResource responseData = operation.Value;
         }
 
         [Test]
@@ -57,6 +82,18 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task VersioningOp_ExportW_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = null;
+            VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient();
+
+            Operation<ExportedResource> operation = await client.ExportWAsync(WaitUntil.Completed, "<name>");
+            ExportedResource responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task VersioningOp_ExportW_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
@@ -65,6 +102,18 @@ namespace FirstTestTypeSpec.Tests
 
             Operation<BinaryData> operation = await client.ExportWAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);
             BinaryData responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task VersioningOp_ExportW_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = null;
+            VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient();
+
+            Operation<ExportedResource> operation = await client.ExportWAsync(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>");
+            ExportedResource responseData = operation.Value;
         }
     }
 }

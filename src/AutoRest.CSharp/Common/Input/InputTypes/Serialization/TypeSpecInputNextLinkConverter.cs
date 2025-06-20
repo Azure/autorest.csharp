@@ -10,26 +10,22 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal sealed class TypeSpecInputNextLinkConverter : JsonConverter<InputNextLink>
     {
-        private readonly TypeSpecReferenceHandler _referenceHandler;
-
-        public TypeSpecInputNextLinkConverter(TypeSpecReferenceHandler referenceHandler)
+        public TypeSpecInputNextLinkConverter()
         {
-            _referenceHandler = referenceHandler;
         }
 
         public override InputNextLink? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => reader.ReadReferenceAndResolve<InputNextLink>(_referenceHandler.CurrentResolver) ?? CreateNextLink(ref reader, options, _referenceHandler.CurrentResolver);
+            => CreateNextLink(ref reader, options);
 
         public override void Write(Utf8JsonWriter writer, InputNextLink value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        internal static InputNextLink CreateNextLink(ref Utf8JsonReader reader, JsonSerializerOptions options, ReferenceResolver resolver)
+        internal static InputNextLink CreateNextLink(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
-            string? id = null;
-            reader.TryReadReferenceId(ref id);
-
-            id = id ?? throw new JsonException();
-
+            if (reader.TokenType == JsonTokenType.StartObject)
+            {
+                reader.Read();
+            }
             InputOperation? operation = null;
             IReadOnlyList<string>? responseSegments = null;
             InputResponseLocation? responseLocation = null;
@@ -51,7 +47,6 @@ namespace AutoRest.CSharp.Common.Input
                 operation,
                 responseSegments ?? throw new JsonException("NextLink response segments must be defined."),
                 responseLocation ?? throw new JsonException("NextLink response location must be defined."));
-            resolver.AddReference(id, nextLink);
 
             return nextLink;
         }

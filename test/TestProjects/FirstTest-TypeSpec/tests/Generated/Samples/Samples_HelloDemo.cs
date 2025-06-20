@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
+using FirstTestTypeSpec.Models;
 using NUnit.Framework;
 
 namespace FirstTestTypeSpec.Samples
@@ -56,6 +57,26 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Demo_SayHi_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+
+            Response<Thing> response = client.SayHi("<headParameter>", "<queryParameter>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Demo_SayHi_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+
+            Response<Thing> response = await client.SayHiAsync("<headParameter>", "<queryParameter>");
         }
 
         [Test]
@@ -112,6 +133,26 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Demo_SayHi_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+
+            Response<Thing> response = client.SayHi("<headParameter>", "<queryParameter>", optionalQuery: "<optionalQuery>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Demo_SayHi_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+
+            Response<Thing> response = await client.SayHiAsync("<headParameter>", "<queryParameter>", optionalQuery: "<optionalQuery>");
         }
     }
 }

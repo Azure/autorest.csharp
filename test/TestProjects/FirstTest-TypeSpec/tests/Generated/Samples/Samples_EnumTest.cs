@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using FirstTestTypeSpec.Models;
 using NUnit.Framework;
 
 namespace FirstTestTypeSpec.Samples
@@ -44,6 +45,26 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_EnumTest_CreateUnknownValue_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
+
+            Response response = client.CreateUnknownValue(DaysOfWeekExtensibleEnum.Monday);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_EnumTest_CreateUnknownValue_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
+
+            Response response = await client.CreateUnknownValueAsync(DaysOfWeekExtensibleEnum.Monday);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_EnumTest_CreateUnknownValue_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
@@ -66,6 +87,26 @@ namespace FirstTestTypeSpec.Samples
             Response response = await client.CreateUnknownValueAsync(content);
 
             Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_EnumTest_CreateUnknownValue_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
+
+            Response response = client.CreateUnknownValue(DaysOfWeekExtensibleEnum.Monday);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_EnumTest_CreateUnknownValue_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
+
+            Response response = await client.CreateUnknownValueAsync(DaysOfWeekExtensibleEnum.Monday);
         }
     }
 }

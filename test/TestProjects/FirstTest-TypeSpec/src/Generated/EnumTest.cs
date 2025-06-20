@@ -6,10 +6,12 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using FirstTestTypeSpec.Models;
 
 namespace FirstTestTypeSpec
 {
@@ -50,12 +52,41 @@ namespace FirstTestTypeSpec
             _endpoint = endpoint;
         }
 
+        /// <summary> get extensible enum. </summary>
+        /// <param name="input"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/EnumTest.xml" path="doc/members/member[@name='CreateUnknownValueAsync(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
+        public virtual async Task<Response> CreateUnknownValueAsync(DaysOfWeekExtensibleEnum input, CancellationToken cancellationToken = default)
+        {
+            using RequestContent content = RequestContent.Create(BinaryData.FromObjectAsJson(input.ToString()));
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await CreateUnknownValueAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> get extensible enum. </summary>
+        /// <param name="input"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/EnumTest.xml" path="doc/members/member[@name='CreateUnknownValue(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
+        public virtual Response CreateUnknownValue(DaysOfWeekExtensibleEnum input, CancellationToken cancellationToken = default)
+        {
+            using RequestContent content = RequestContent.Create(BinaryData.FromObjectAsJson(input.ToString()));
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = CreateUnknownValue(content, context);
+            return response;
+        }
+
         /// <summary>
         /// [Protocol Method] get extensible enum
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateUnknownValueAsync(DaysOfWeekExtensibleEnum,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -90,6 +121,11 @@ namespace FirstTestTypeSpec
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateUnknownValue(DaysOfWeekExtensibleEnum,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -130,6 +166,17 @@ namespace FirstTestTypeSpec
             request.Headers.Add("Content-Type", "text/plain");
             request.Content = content;
             return message;
+        }
+
+        private static RequestContext DefaultRequestContext = new RequestContext();
+        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
+        {
+            if (!cancellationToken.CanBeCanceled)
+            {
+                return DefaultRequestContext;
+            }
+
+            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier204;

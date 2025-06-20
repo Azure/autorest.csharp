@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
+    <member name="SayHiAsync(string,string,string,CancellationToken)">
+      <example>
+This sample shows how to call SayHiAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+
+Response<Thing> response = await client.SayHiAsync("<headParameter>", "<queryParameter>");
+]]></code>
+This sample shows how to call SayHiAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+
+Response<Thing> response = await client.SayHiAsync("<headParameter>", "<queryParameter>", optionalQuery: "<optionalQuery>");
+]]></code></example>
+    </member>
+    <member name="SayHi(string,string,string,CancellationToken)">
+      <example>
+This sample shows how to call SayHi.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+
+Response<Thing> response = client.SayHi("<headParameter>", "<queryParameter>");
+]]></code>
+This sample shows how to call SayHi with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
+
+Response<Thing> response = client.SayHi("<headParameter>", "<queryParameter>", optionalQuery: "<optionalQuery>");
+]]></code></example>
+    </member>
     <member name="SayHiAsync(string,string,string,RequestContext)">
       <example>
 This sample shows how to call SayHiAsync and parse the result.
