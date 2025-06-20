@@ -27,7 +27,7 @@ namespace CadlRanchProjects.Tests
         public Task Versioning_MadeOptional_test() => Test(async (host) =>
         {
             TestModel body = new TestModel("foo");
-            var response = await new MadeOptionalClient(host, Versions.V2).TestAsync(body);
+            var response = await new MadeOptionalClient(host).TestAsync(body);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("foo", response.Value.Prop);
         });

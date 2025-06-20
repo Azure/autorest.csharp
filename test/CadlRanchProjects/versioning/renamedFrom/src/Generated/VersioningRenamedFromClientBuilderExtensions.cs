@@ -9,7 +9,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Azure.Core.Extensions;
 using Versioning.RenamedFrom;
-using Versioning.RenamedFrom.Models;
 
 namespace Microsoft.Extensions.Azure
 {
@@ -19,11 +18,10 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="RenamedFromClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
-        public static IAzureClientBuilder<RenamedFromClient, RenamedFromClientOptions> AddRenamedFromClient<TBuilder>(this TBuilder builder, Uri endpoint, Versions version)
+        public static IAzureClientBuilder<RenamedFromClient, RenamedFromClientOptions> AddRenamedFromClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<RenamedFromClient, RenamedFromClientOptions>((options) => new RenamedFromClient(endpoint, version, options));
+            return builder.RegisterClientFactory<RenamedFromClient, RenamedFromClientOptions>((options) => new RenamedFromClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="RenamedFromClient"/> instance. </summary>

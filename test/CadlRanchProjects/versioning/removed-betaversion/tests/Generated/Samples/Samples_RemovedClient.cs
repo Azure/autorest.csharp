@@ -23,7 +23,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public void Example_Removed_V1_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -44,7 +44,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public async Task Example_Removed_V1_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -65,7 +65,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public void Example_Removed_V1_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV1> response = client.V1(body);
@@ -76,7 +76,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public async Task Example_Removed_V1_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV1> response = await client.V1Async(body);
@@ -87,7 +87,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public void Example_Removed_V1_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -108,7 +108,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public async Task Example_Removed_V1_AllParameters_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -129,7 +129,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public void Example_Removed_V1_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV1> response = client.V1(body);
@@ -140,7 +140,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public async Task Example_Removed_V1_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV1> response = await client.V1Async(body);
@@ -151,7 +151,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public void Example_Removed_V2_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -174,7 +174,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public async Task Example_Removed_V2_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -197,7 +197,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public void Example_Removed_V2_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             ModelV2 body = new ModelV2("<prop>", "<removedProp>", EnumV2.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV2> response = client.V2("<param>", body);
@@ -208,7 +208,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public async Task Example_Removed_V2_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             ModelV2 body = new ModelV2("<prop>", "<removedProp>", EnumV2.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV2> response = await client.V2Async("<param>", body);
@@ -219,7 +219,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public void Example_Removed_V2_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -242,7 +242,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public async Task Example_Removed_V2_AllParameters_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -265,7 +265,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public void Example_Removed_V2_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             ModelV2 body = new ModelV2("<prop>", "<removedProp>", EnumV2.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV2> response = client.V2("<param>", body);
@@ -276,7 +276,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public async Task Example_Removed_V2_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             ModelV2 body = new ModelV2("<prop>", "<removedProp>", EnumV2.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV2> response = await client.V2Async("<param>", body);
@@ -287,7 +287,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public void Example_Removed_ModelV3_ShortVersion()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -304,7 +304,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public async Task Example_Removed_ModelV3_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -321,7 +321,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public void Example_Removed_ModelV3_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             ModelV3 body = new ModelV3("<id>");
             Response<ModelV3> response = client.ModelV3(body);
@@ -332,7 +332,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public async Task Example_Removed_ModelV3_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             ModelV3 body = new ModelV3("<id>");
             Response<ModelV3> response = await client.ModelV3Async(body);
@@ -343,7 +343,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public void Example_Removed_ModelV3_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -360,7 +360,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public async Task Example_Removed_ModelV3_AllParameters_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -377,7 +377,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public void Example_Removed_ModelV3_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             ModelV3 body = new ModelV3("<id>");
             Response<ModelV3> response = client.ModelV3(body);
@@ -388,7 +388,7 @@ namespace Versioning.Removed.BetaVersion.Samples
         public async Task Example_Removed_ModelV3_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<endpoint>");
-            RemovedClient client = new RemovedClient(endpoint, default);
+            RemovedClient client = new RemovedClient(endpoint);
 
             ModelV3 body = new ModelV3("<id>");
             Response<ModelV3> response = await client.ModelV3Async(body);

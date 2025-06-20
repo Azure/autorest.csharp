@@ -4279,7 +4279,8 @@
      "isEndpoint": true,
      "skipUrlEncoding": false,
      "explode": false,
-     "kind": "Client"
+     "kind": "Client",
+     "serverUrlTemplate": "{Endpoint}/anomalydetector/{ApiVersion}"
     },
     {
      "$id": "555",
@@ -4306,7 +4307,8 @@
        "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "value": "v1.1"
-     }
+     },
+     "serverUrlTemplate": "{Endpoint}/anomalydetector/{ApiVersion}"
     }
    ],
    "decorators": [
@@ -21317,7 +21319,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{Endpoint}/anomalydetector/{ApiVersion}"
       },
       {
        "$id": "2920",
@@ -21344,7 +21347,8 @@
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "value": "v1.1"
-       }
+       },
+       "serverUrlTemplate": "{Endpoint}/anomalydetector/{ApiVersion}"
       }
      ],
      "decorators": [],
@@ -27852,7 +27856,8 @@
        "isEndpoint": true,
        "skipUrlEncoding": false,
        "explode": false,
-       "kind": "Client"
+       "kind": "Client",
+       "serverUrlTemplate": "{Endpoint}/anomalydetector/{ApiVersion}"
       },
       {
        "$id": "3723",
@@ -27879,7 +27884,8 @@
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "value": "v1.1"
-       }
+       },
+       "serverUrlTemplate": "{Endpoint}/anomalydetector/{ApiVersion}"
       }
      ],
      "decorators": [],

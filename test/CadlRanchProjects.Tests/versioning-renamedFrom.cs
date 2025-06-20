@@ -53,7 +53,7 @@ namespace CadlRanchProjects.Tests
         public Task Versioning_RenamedFrom_newOp() => Test(async (host) =>
         {
             NewModel body = new NewModel("foo", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson(10));
-            var response = await new RenamedFromClient(host, Versions.V2).NewOpAsync("bar", body);
+            var response = await new RenamedFromClient(host).NewOpAsync("bar", body);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("foo", response.Value.NewProp);
             Assert.AreEqual(NewEnum.NewEnumMember, response.Value.EnumProp);
@@ -64,7 +64,7 @@ namespace CadlRanchProjects.Tests
         public Task Versioning_RenamedFrom_NewInterface() => Test(async (host) =>
         {
             NewModel body = new NewModel("foo", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson(10));
-            var response = await new RenamedFromClient(host, Versions.V2).GetNewInterfaceClient().NewOpInNewInterfaceAsync(body);
+            var response = await new RenamedFromClient(host).GetNewInterfaceClient().NewOpInNewInterfaceAsync(body);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("foo", response.Value.NewProp);
             Assert.AreEqual(NewEnum.NewEnumMember, response.Value.EnumProp);

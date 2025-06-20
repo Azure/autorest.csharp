@@ -9,7 +9,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Azure.Core.Extensions;
 using Versioning.TypeChangedFrom;
-using Versioning.TypeChangedFrom.Models;
 
 namespace Microsoft.Extensions.Azure
 {
@@ -19,11 +18,10 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="TypeChangedFromClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
-        public static IAzureClientBuilder<TypeChangedFromClient, TypeChangedFromClientOptions> AddTypeChangedFromClient<TBuilder>(this TBuilder builder, Uri endpoint, Versions version)
+        public static IAzureClientBuilder<TypeChangedFromClient, TypeChangedFromClientOptions> AddTypeChangedFromClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<TypeChangedFromClient, TypeChangedFromClientOptions>((options) => new TypeChangedFromClient(endpoint, version, options));
+            return builder.RegisterClientFactory<TypeChangedFromClient, TypeChangedFromClientOptions>((options) => new TypeChangedFromClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="TypeChangedFromClient"/> instance. </summary>

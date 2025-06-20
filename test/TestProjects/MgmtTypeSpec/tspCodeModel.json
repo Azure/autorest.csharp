@@ -3149,7 +3149,7 @@
      "type": {
       "$id": "409",
       "kind": "url",
-      "name": "url",
+      "name": "endpoint",
       "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "location": "Uri",
@@ -3169,7 +3169,8 @@
        "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "value": "https://management.azure.com"
-     }
+     },
+     "serverUrlTemplate": "{endpoint}"
     }
    ],
    "decorators": [
@@ -3343,7 +3344,7 @@
        "type": {
         "$id": "429",
         "kind": "url",
-        "name": "url",
+        "name": "endpoint",
         "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "location": "Uri",
@@ -3363,7 +3364,8 @@
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "value": "https://management.azure.com"
-       }
+       },
+       "serverUrlTemplate": "{endpoint}"
       }
      ],
      "decorators": [],
@@ -3962,7 +3964,7 @@
        "type": {
         "$id": "485",
         "kind": "url",
-        "name": "url",
+        "name": "endpoint",
         "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "location": "Uri",
@@ -3982,7 +3984,8 @@
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "value": "https://management.azure.com"
-       }
+       },
+       "serverUrlTemplate": "{endpoint}"
       }
      ],
      "decorators": [
@@ -5441,7 +5444,7 @@
        "type": {
         "$id": "639",
         "kind": "url",
-        "name": "url",
+        "name": "endpoint",
         "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "location": "Uri",
@@ -5461,7 +5464,8 @@
          "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "value": "https://management.azure.com"
-       }
+       },
+       "serverUrlTemplate": "{endpoint}"
       }
      ],
      "decorators": [
