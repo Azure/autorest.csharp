@@ -3,8 +3,8 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
@@ -113,8 +113,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         {
                             _writer.Line($"return null;");
                         }
-                        _writer.Line($"var lroDetails = {typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Write)}(rehydrationToken, ModelReaderWriterOptions.Json, {ModelReaderWriterContextExpression.Default}).ToObjectFromJson<{typeof(Dictionary<string, string>)}>();");
-                        _writer.Line($"return lroDetails[\"id\"];");
+                        _writer.Line($"var data = {typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Write)}(rehydrationToken, ModelReaderWriterOptions.Json, {ModelReaderWriterContextExpression.Default});");
+                        _writer.Line($"using var document = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(data);");
+                        _writer.Line($"var lroDetails = document.RootElement;");
+                        _writer.Line($"return lroDetails.{nameof(JsonElement.GetProperty)}(\"id\").{nameof(JsonElement.GetString)}();");
                     }
 
                     _writer.WriteXmlDocumentationInheritDoc();

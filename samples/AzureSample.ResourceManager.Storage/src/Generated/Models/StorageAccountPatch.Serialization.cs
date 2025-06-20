@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -35,8 +36,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
-                JsonSerializer.Serialize(writer, Identity, serializeOptions);
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, new ModelReaderWriterOptions("W|v3"));
             }
             if (Optional.IsDefined(Kind))
             {

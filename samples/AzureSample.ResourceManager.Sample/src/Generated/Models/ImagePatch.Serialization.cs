@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -41,7 +42,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(SourceVirtualMachine))
             {
                 writer.WritePropertyName("sourceVirtualMachine"u8);
-                JsonSerializer.Serialize(writer, SourceVirtualMachine);
+                ((IJsonModel<WritableSubResource>)SourceVirtualMachine).Write(writer, options);
             }
             if (Optional.IsDefined(StorageProfile))
             {
@@ -119,7 +120,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            sourceVirtualMachine = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            sourceVirtualMachine = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), options, AzureSampleResourceManagerSampleContext.Default);
                             continue;
                         }
                         if (property0.NameEquals("storageProfile"u8))

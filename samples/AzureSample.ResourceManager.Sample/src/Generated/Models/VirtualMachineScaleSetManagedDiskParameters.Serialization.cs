@@ -45,7 +45,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(DiskEncryptionSet))
             {
                 writer.WritePropertyName("diskEncryptionSet"u8);
-                JsonSerializer.Serialize(writer, DiskEncryptionSet);
+                ((IJsonModel<WritableSubResource>)DiskEncryptionSet).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -105,7 +105,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    diskEncryptionSet = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    diskEncryptionSet = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AzureSampleResourceManagerSampleContext.Default);
                     continue;
                 }
                 if (options.Format != "W")

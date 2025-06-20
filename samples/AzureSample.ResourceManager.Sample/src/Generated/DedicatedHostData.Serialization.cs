@@ -66,7 +66,7 @@ namespace AzureSample.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in VirtualMachines)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<Azure.ResourceManager.Resources.Models.SubResource>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -177,7 +177,7 @@ namespace AzureSample.ResourceManager.Sample
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -221,7 +221,7 @@ namespace AzureSample.ResourceManager.Sample
                             List<Azure.ResourceManager.Resources.Models.SubResource> array = new List<Azure.ResourceManager.Resources.Models.SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(JsonSerializer.Deserialize<Azure.ResourceManager.Resources.Models.SubResource>(item.GetRawText()));
+                                array.Add(ModelReaderWriter.Read<Azure.ResourceManager.Resources.Models.SubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), options, AzureSampleResourceManagerSampleContext.Default));
                             }
                             virtualMachines = array;
                             continue;

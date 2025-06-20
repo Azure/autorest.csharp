@@ -17,7 +17,6 @@ namespace Scm.SpecialWords
         internal static readonly JsonDocumentOptions JsonDocumentOptions = new JsonDocumentOptions { MaxDepth = 256 };
         internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
         internal static readonly BinaryData SentinelValue = BinaryData.FromBytes("\"__EMPTY__\""u8.ToArray());
-        internal static readonly JsonSerializerOptions Options = new JsonSerializerOptions { Converters = { new JsonModelConverter(WireOptions, ScmSpecialWordsContext.Default) } };
 
         public static object GetObject(this JsonElement element)
         {
@@ -257,16 +256,6 @@ namespace Scm.SpecialWords
             ReadOnlySpan<byte> sentinelSpan = SentinelValue.ToMemory().Span;
             ReadOnlySpan<byte> valueSpan = value.ToMemory().Span;
             return sentinelSpan.SequenceEqual(valueSpan);
-        }
-
-        public static T JsonDeserialize<T>(string json, JsonSerializerOptions options)
-        {
-            return JsonSerializer.Deserialize<T>(json, options);
-        }
-
-        public static void JsonSerialize<T>(Utf8JsonWriter writer, T data, JsonSerializerOptions options)
-        {
-            JsonSerializer.Serialize(writer, data, options);
         }
 
         internal static class TypeFormatters
