@@ -7,8 +7,8 @@
     {
       "$id": "1",
       "kind": "enum",
-      "name": "TimeGranularity",
-      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.TimeGranularity",
+      "name": "Versions",
+      "crossLanguageDefinitionId": "AnomalyDetector.Versions",
       "valueType": {
         "$id": "2",
         "kind": "string",
@@ -20,8 +20,8 @@
         {
           "$id": "3",
           "kind": "enumvalue",
-          "name": "Yearly",
-          "value": "yearly",
+          "name": "v1_1",
+          "value": "v1.1",
           "valueType": {
             "$ref": "2"
           },
@@ -29,108 +29,141 @@
             "$ref": "1"
           },
           "decorators": []
-        },
-        {
-          "$id": "4",
-          "kind": "enumvalue",
-          "name": "Monthly",
-          "value": "monthly",
-          "valueType": {
-            "$ref": "2"
-          },
-          "enumType": {
-            "$ref": "1"
-          },
-          "decorators": []
-        },
-        {
-          "$id": "5",
-          "kind": "enumvalue",
-          "name": "Weekly",
-          "value": "weekly",
-          "valueType": {
-            "$ref": "2"
-          },
-          "enumType": {
-            "$ref": "1"
-          },
-          "decorators": []
-        },
+        }
+      ],
+      "namespace": "AnomalyDetector",
+      "isFixed": true,
+      "isFlags": false,
+      "usage": "Input,ApiVersionEnum",
+      "decorators": []
+    },
+    {
+      "$id": "4",
+      "kind": "enum",
+      "name": "TimeGranularity",
+      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.TimeGranularity",
+      "valueType": {
+        "$id": "5",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "values": [
         {
           "$id": "6",
           "kind": "enumvalue",
-          "name": "Daily",
-          "value": "daily",
+          "name": "Yearly",
+          "value": "yearly",
           "valueType": {
-            "$ref": "2"
+            "$ref": "5"
           },
           "enumType": {
-            "$ref": "1"
+            "$ref": "4"
           },
           "decorators": []
         },
         {
           "$id": "7",
           "kind": "enumvalue",
-          "name": "Hourly",
-          "value": "hourly",
+          "name": "Monthly",
+          "value": "monthly",
           "valueType": {
-            "$ref": "2"
+            "$ref": "5"
           },
           "enumType": {
-            "$ref": "1"
+            "$ref": "4"
           },
           "decorators": []
         },
         {
           "$id": "8",
           "kind": "enumvalue",
-          "name": "PerMinute",
-          "value": "minutely",
+          "name": "Weekly",
+          "value": "weekly",
           "valueType": {
-            "$ref": "2"
+            "$ref": "5"
           },
           "enumType": {
-            "$ref": "1"
+            "$ref": "4"
           },
           "decorators": []
         },
         {
           "$id": "9",
           "kind": "enumvalue",
-          "name": "PerSecond",
-          "value": "secondly",
+          "name": "Daily",
+          "value": "daily",
           "valueType": {
-            "$ref": "2"
+            "$ref": "5"
           },
           "enumType": {
-            "$ref": "1"
+            "$ref": "4"
           },
           "decorators": []
         },
         {
           "$id": "10",
           "kind": "enumvalue",
-          "name": "Microsecond",
-          "value": "microsecond",
+          "name": "Hourly",
+          "value": "hourly",
           "valueType": {
-            "$ref": "2"
+            "$ref": "5"
           },
           "enumType": {
-            "$ref": "1"
+            "$ref": "4"
           },
           "decorators": []
         },
         {
           "$id": "11",
           "kind": "enumvalue",
+          "name": "PerMinute",
+          "value": "minutely",
+          "valueType": {
+            "$ref": "5"
+          },
+          "enumType": {
+            "$ref": "4"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "12",
+          "kind": "enumvalue",
+          "name": "PerSecond",
+          "value": "secondly",
+          "valueType": {
+            "$ref": "5"
+          },
+          "enumType": {
+            "$ref": "4"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "13",
+          "kind": "enumvalue",
+          "name": "Microsecond",
+          "value": "microsecond",
+          "valueType": {
+            "$ref": "5"
+          },
+          "enumType": {
+            "$ref": "4"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "14",
+          "kind": "enumvalue",
           "name": "None",
           "value": "none",
           "valueType": {
-            "$ref": "2"
+            "$ref": "5"
           },
           "enumType": {
-            "$ref": "1"
+            "$ref": "4"
           },
           "decorators": []
         }
@@ -143,12 +176,12 @@
       "decorators": []
     },
     {
-      "$id": "12",
+      "$id": "15",
       "kind": "enum",
       "name": "ImputeMode",
       "crossLanguageDefinitionId": "AnomalyDetector.Univariate.ImputeMode",
       "valueType": {
-        "$id": "13",
+        "$id": "16",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -156,80 +189,80 @@
       },
       "values": [
         {
-          "$id": "14",
+          "$id": "17",
           "kind": "enumvalue",
           "name": "Auto",
           "value": "auto",
           "valueType": {
-            "$ref": "13"
+            "$ref": "16"
           },
           "enumType": {
-            "$ref": "12"
-          },
-          "decorators": []
-        },
-        {
-          "$id": "15",
-          "kind": "enumvalue",
-          "name": "Previous",
-          "value": "previous",
-          "valueType": {
-            "$ref": "13"
-          },
-          "enumType": {
-            "$ref": "12"
-          },
-          "decorators": []
-        },
-        {
-          "$id": "16",
-          "kind": "enumvalue",
-          "name": "Linear",
-          "value": "linear",
-          "valueType": {
-            "$ref": "13"
-          },
-          "enumType": {
-            "$ref": "12"
-          },
-          "decorators": []
-        },
-        {
-          "$id": "17",
-          "kind": "enumvalue",
-          "name": "Fixed",
-          "value": "fixed",
-          "valueType": {
-            "$ref": "13"
-          },
-          "enumType": {
-            "$ref": "12"
+            "$ref": "15"
           },
           "decorators": []
         },
         {
           "$id": "18",
           "kind": "enumvalue",
-          "name": "Zero",
-          "value": "zero",
+          "name": "Previous",
+          "value": "previous",
           "valueType": {
-            "$ref": "13"
+            "$ref": "16"
           },
           "enumType": {
-            "$ref": "12"
+            "$ref": "15"
           },
           "decorators": []
         },
         {
           "$id": "19",
           "kind": "enumvalue",
+          "name": "Linear",
+          "value": "linear",
+          "valueType": {
+            "$ref": "16"
+          },
+          "enumType": {
+            "$ref": "15"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "20",
+          "kind": "enumvalue",
+          "name": "Fixed",
+          "value": "fixed",
+          "valueType": {
+            "$ref": "16"
+          },
+          "enumType": {
+            "$ref": "15"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "21",
+          "kind": "enumvalue",
+          "name": "Zero",
+          "value": "zero",
+          "valueType": {
+            "$ref": "16"
+          },
+          "enumType": {
+            "$ref": "15"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "22",
+          "kind": "enumvalue",
           "name": "NotFill",
           "value": "notFill",
           "valueType": {
-            "$ref": "13"
+            "$ref": "16"
           },
           "enumType": {
-            "$ref": "12"
+            "$ref": "15"
           },
           "decorators": []
         }
@@ -242,12 +275,12 @@
       "decorators": []
     },
     {
-      "$id": "20",
+      "$id": "23",
       "kind": "enum",
-      "name": "AnomalyDetectorErrorCodes",
-      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorErrorCodes",
+      "name": "MultivariateBatchDetectionStatus",
+      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionStatus",
       "valueType": {
-        "$id": "21",
+        "$id": "24",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -255,217 +288,54 @@
       },
       "values": [
         {
-          "$id": "22",
-          "kind": "enumvalue",
-          "name": "InvalidCustomInterval",
-          "value": "InvalidCustomInterval",
-          "valueType": {
-            "$ref": "21"
-          },
-          "enumType": {
-            "$ref": "20"
-          },
-          "decorators": []
-        },
-        {
-          "$id": "23",
-          "kind": "enumvalue",
-          "name": "BadArgument",
-          "value": "BadArgument",
-          "valueType": {
-            "$ref": "21"
-          },
-          "enumType": {
-            "$ref": "20"
-          },
-          "decorators": []
-        },
-        {
-          "$id": "24",
-          "kind": "enumvalue",
-          "name": "InvalidGranularity",
-          "value": "InvalidGranularity",
-          "valueType": {
-            "$ref": "21"
-          },
-          "enumType": {
-            "$ref": "20"
-          },
-          "decorators": []
-        },
-        {
           "$id": "25",
           "kind": "enumvalue",
-          "name": "InvalidPeriod",
-          "value": "InvalidPeriod",
+          "name": "Created",
+          "value": "CREATED",
           "valueType": {
-            "$ref": "21"
+            "$ref": "24"
           },
           "enumType": {
-            "$ref": "20"
+            "$ref": "23"
           },
           "decorators": []
         },
         {
           "$id": "26",
           "kind": "enumvalue",
-          "name": "InvalidModelArgument",
-          "value": "InvalidModelArgument",
+          "name": "Running",
+          "value": "RUNNING",
           "valueType": {
-            "$ref": "21"
+            "$ref": "24"
           },
           "enumType": {
-            "$ref": "20"
+            "$ref": "23"
           },
           "decorators": []
         },
         {
           "$id": "27",
           "kind": "enumvalue",
-          "name": "InvalidSeries",
-          "value": "InvalidSeries",
+          "name": "Ready",
+          "value": "READY",
           "valueType": {
-            "$ref": "21"
+            "$ref": "24"
           },
           "enumType": {
-            "$ref": "20"
+            "$ref": "23"
           },
           "decorators": []
         },
         {
           "$id": "28",
           "kind": "enumvalue",
-          "name": "InvalidJsonFormat",
-          "value": "InvalidJsonFormat",
-          "valueType": {
-            "$ref": "21"
-          },
-          "enumType": {
-            "$ref": "20"
-          },
-          "decorators": []
-        },
-        {
-          "$id": "29",
-          "kind": "enumvalue",
-          "name": "RequiredGranularity",
-          "value": "RequiredGranularity",
-          "valueType": {
-            "$ref": "21"
-          },
-          "enumType": {
-            "$ref": "20"
-          },
-          "decorators": []
-        },
-        {
-          "$id": "30",
-          "kind": "enumvalue",
-          "name": "RequiredSeries",
-          "value": "RequiredSeries",
-          "valueType": {
-            "$ref": "21"
-          },
-          "enumType": {
-            "$ref": "20"
-          },
-          "decorators": []
-        },
-        {
-          "$id": "31",
-          "kind": "enumvalue",
-          "name": "InvalidImputeMode",
-          "value": "InvalidImputeMode",
-          "valueType": {
-            "$ref": "21"
-          },
-          "enumType": {
-            "$ref": "20"
-          },
-          "decorators": []
-        },
-        {
-          "$id": "32",
-          "kind": "enumvalue",
-          "name": "InvalidImputeFixedValue",
-          "value": "InvalidImputeFixedValue",
-          "valueType": {
-            "$ref": "21"
-          },
-          "enumType": {
-            "$ref": "20"
-          },
-          "decorators": []
-        }
-      ],
-      "namespace": "AnomalyDetector.Univariate",
-      "isFixed": true,
-      "isFlags": false,
-      "usage": "Json,Exception",
-      "decorators": []
-    },
-    {
-      "$id": "33",
-      "kind": "enum",
-      "name": "MultivariateBatchDetectionStatus",
-      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionStatus",
-      "valueType": {
-        "$id": "34",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "values": [
-        {
-          "$id": "35",
-          "kind": "enumvalue",
-          "name": "Created",
-          "value": "CREATED",
-          "valueType": {
-            "$ref": "34"
-          },
-          "enumType": {
-            "$ref": "33"
-          },
-          "decorators": []
-        },
-        {
-          "$id": "36",
-          "kind": "enumvalue",
-          "name": "Running",
-          "value": "RUNNING",
-          "valueType": {
-            "$ref": "34"
-          },
-          "enumType": {
-            "$ref": "33"
-          },
-          "decorators": []
-        },
-        {
-          "$id": "37",
-          "kind": "enumvalue",
-          "name": "Ready",
-          "value": "READY",
-          "valueType": {
-            "$ref": "34"
-          },
-          "enumType": {
-            "$ref": "33"
-          },
-          "decorators": []
-        },
-        {
-          "$id": "38",
-          "kind": "enumvalue",
           "name": "Failed",
           "value": "FAILED",
           "valueType": {
-            "$ref": "34"
+            "$ref": "24"
           },
           "enumType": {
-            "$ref": "33"
+            "$ref": "23"
           },
           "decorators": []
         }
@@ -478,12 +348,12 @@
       "decorators": []
     },
     {
-      "$id": "39",
+      "$id": "29",
       "kind": "enum",
       "name": "DataSchema",
       "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.DataSchema",
       "valueType": {
-        "$id": "40",
+        "$id": "30",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -491,29 +361,29 @@
       },
       "values": [
         {
-          "$id": "41",
+          "$id": "31",
           "kind": "enumvalue",
           "name": "OneTable",
           "value": "OneTable",
           "valueType": {
-            "$ref": "40"
+            "$ref": "30"
           },
           "enumType": {
-            "$ref": "39"
+            "$ref": "29"
           },
           "doc": "OneTable means that your input data are all in one CSV file, which contains one 'timestamp' column and several variable columns. The default DataSchema is OneTable.",
           "decorators": []
         },
         {
-          "$id": "42",
+          "$id": "32",
           "kind": "enumvalue",
           "name": "MultiTable",
           "value": "MultiTable",
           "valueType": {
-            "$ref": "40"
+            "$ref": "30"
           },
           "enumType": {
-            "$ref": "39"
+            "$ref": "29"
           },
           "doc": "MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable.",
           "decorators": []
@@ -527,12 +397,12 @@
       "decorators": []
     },
     {
-      "$id": "43",
+      "$id": "33",
       "kind": "enum",
       "name": "AlignMode",
       "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignMode",
       "valueType": {
-        "$id": "44",
+        "$id": "34",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -540,28 +410,28 @@
       },
       "values": [
         {
-          "$id": "45",
+          "$id": "35",
           "kind": "enumvalue",
           "name": "Inner",
           "value": "Inner",
           "valueType": {
-            "$ref": "44"
+            "$ref": "34"
           },
           "enumType": {
-            "$ref": "43"
+            "$ref": "33"
           },
           "decorators": []
         },
         {
-          "$id": "46",
+          "$id": "36",
           "kind": "enumvalue",
           "name": "Outer",
           "value": "Outer",
           "valueType": {
-            "$ref": "44"
+            "$ref": "34"
           },
           "enumType": {
-            "$ref": "43"
+            "$ref": "33"
           },
           "decorators": []
         }
@@ -574,12 +444,12 @@
       "decorators": []
     },
     {
-      "$id": "47",
+      "$id": "37",
       "kind": "enum",
       "name": "FillNAMethod",
       "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.FillNAMethod",
       "valueType": {
-        "$id": "48",
+        "$id": "38",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -587,67 +457,67 @@
       },
       "values": [
         {
-          "$id": "49",
+          "$id": "39",
           "kind": "enumvalue",
           "name": "Previous",
           "value": "Previous",
           "valueType": {
-            "$ref": "48"
+            "$ref": "38"
           },
           "enumType": {
-            "$ref": "47"
+            "$ref": "37"
           },
           "decorators": []
         },
         {
-          "$id": "50",
+          "$id": "40",
           "kind": "enumvalue",
           "name": "Subsequent",
           "value": "Subsequent",
           "valueType": {
-            "$ref": "48"
+            "$ref": "38"
           },
           "enumType": {
-            "$ref": "47"
+            "$ref": "37"
           },
           "decorators": []
         },
         {
-          "$id": "51",
+          "$id": "41",
           "kind": "enumvalue",
           "name": "Linear",
           "value": "Linear",
           "valueType": {
-            "$ref": "48"
+            "$ref": "38"
           },
           "enumType": {
-            "$ref": "47"
+            "$ref": "37"
           },
           "decorators": []
         },
         {
-          "$id": "52",
+          "$id": "42",
           "kind": "enumvalue",
           "name": "Zero",
           "value": "Zero",
           "valueType": {
-            "$ref": "48"
+            "$ref": "38"
           },
           "enumType": {
-            "$ref": "47"
+            "$ref": "37"
           },
           "decorators": []
         },
         {
-          "$id": "53",
+          "$id": "43",
           "kind": "enumvalue",
           "name": "Fixed",
           "value": "Fixed",
           "valueType": {
-            "$ref": "48"
+            "$ref": "38"
           },
           "enumType": {
-            "$ref": "47"
+            "$ref": "37"
           },
           "decorators": []
         }
@@ -660,12 +530,12 @@
       "decorators": []
     },
     {
-      "$id": "54",
+      "$id": "44",
       "kind": "enum",
       "name": "ModelStatus",
       "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelStatus",
       "valueType": {
-        "$id": "55",
+        "$id": "45",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -673,54 +543,54 @@
       },
       "values": [
         {
-          "$id": "56",
+          "$id": "46",
           "kind": "enumvalue",
           "name": "Created",
           "value": "CREATED",
           "valueType": {
-            "$ref": "55"
+            "$ref": "45"
           },
           "enumType": {
-            "$ref": "54"
+            "$ref": "44"
           },
           "decorators": []
         },
         {
-          "$id": "57",
+          "$id": "47",
           "kind": "enumvalue",
           "name": "Running",
           "value": "RUNNING",
           "valueType": {
-            "$ref": "55"
+            "$ref": "45"
           },
           "enumType": {
-            "$ref": "54"
+            "$ref": "44"
           },
           "decorators": []
         },
         {
-          "$id": "58",
+          "$id": "48",
           "kind": "enumvalue",
           "name": "Ready",
           "value": "READY",
           "valueType": {
-            "$ref": "55"
+            "$ref": "45"
           },
           "enumType": {
-            "$ref": "54"
+            "$ref": "44"
           },
           "decorators": []
         },
         {
-          "$id": "59",
+          "$id": "49",
           "kind": "enumvalue",
           "name": "Failed",
           "value": "FAILED",
           "valueType": {
-            "$ref": "55"
+            "$ref": "45"
           },
           "enumType": {
-            "$ref": "54"
+            "$ref": "44"
           },
           "decorators": []
         }
@@ -733,12 +603,12 @@
       "decorators": []
     },
     {
-      "$id": "60",
+      "$id": "50",
       "kind": "enum",
-      "name": "Versions",
-      "crossLanguageDefinitionId": "AnomalyDetector.Versions",
+      "name": "AnomalyDetectorErrorCodes",
+      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorErrorCodes",
       "valueType": {
-        "$id": "61",
+        "$id": "51",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -746,23 +616,153 @@
       },
       "values": [
         {
-          "$id": "62",
+          "$id": "52",
           "kind": "enumvalue",
-          "name": "v1_1",
-          "value": "v1.1",
+          "name": "InvalidCustomInterval",
+          "value": "InvalidCustomInterval",
           "valueType": {
-            "$ref": "61"
+            "$ref": "51"
           },
           "enumType": {
-            "$ref": "60"
+            "$ref": "50"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "53",
+          "kind": "enumvalue",
+          "name": "BadArgument",
+          "value": "BadArgument",
+          "valueType": {
+            "$ref": "51"
+          },
+          "enumType": {
+            "$ref": "50"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "54",
+          "kind": "enumvalue",
+          "name": "InvalidGranularity",
+          "value": "InvalidGranularity",
+          "valueType": {
+            "$ref": "51"
+          },
+          "enumType": {
+            "$ref": "50"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "55",
+          "kind": "enumvalue",
+          "name": "InvalidPeriod",
+          "value": "InvalidPeriod",
+          "valueType": {
+            "$ref": "51"
+          },
+          "enumType": {
+            "$ref": "50"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "56",
+          "kind": "enumvalue",
+          "name": "InvalidModelArgument",
+          "value": "InvalidModelArgument",
+          "valueType": {
+            "$ref": "51"
+          },
+          "enumType": {
+            "$ref": "50"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "57",
+          "kind": "enumvalue",
+          "name": "InvalidSeries",
+          "value": "InvalidSeries",
+          "valueType": {
+            "$ref": "51"
+          },
+          "enumType": {
+            "$ref": "50"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "58",
+          "kind": "enumvalue",
+          "name": "InvalidJsonFormat",
+          "value": "InvalidJsonFormat",
+          "valueType": {
+            "$ref": "51"
+          },
+          "enumType": {
+            "$ref": "50"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "59",
+          "kind": "enumvalue",
+          "name": "RequiredGranularity",
+          "value": "RequiredGranularity",
+          "valueType": {
+            "$ref": "51"
+          },
+          "enumType": {
+            "$ref": "50"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "60",
+          "kind": "enumvalue",
+          "name": "RequiredSeries",
+          "value": "RequiredSeries",
+          "valueType": {
+            "$ref": "51"
+          },
+          "enumType": {
+            "$ref": "50"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "61",
+          "kind": "enumvalue",
+          "name": "InvalidImputeMode",
+          "value": "InvalidImputeMode",
+          "valueType": {
+            "$ref": "51"
+          },
+          "enumType": {
+            "$ref": "50"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "62",
+          "kind": "enumvalue",
+          "name": "InvalidImputeFixedValue",
+          "value": "InvalidImputeFixedValue",
+          "valueType": {
+            "$ref": "51"
+          },
+          "enumType": {
+            "$ref": "50"
           },
           "decorators": []
         }
       ],
-      "namespace": "AnomalyDetector",
+      "namespace": "AnomalyDetector.Univariate",
       "isFixed": true,
       "isFlags": false,
-      "usage": "Input,ApiVersionEnum",
+      "usage": "Json,Exception",
       "decorators": []
     }
   ],
@@ -1137,7 +1137,7 @@
           "serializedName": "granularity",
           "doc": "Optional argument, can be one of yearly, monthly, weekly, daily, hourly,\nminutely, secondly, microsecond or none. If granularity is not present, it will\nbe none by default. If granularity is none, the timestamp property in time\nseries point can be absent.",
           "type": {
-            "$ref": "1"
+            "$ref": "4"
           },
           "optional": true,
           "readOnly": false,
@@ -1258,7 +1258,7 @@
           "serializedName": "imputeMode",
           "doc": "Used to specify how to deal with missing values in the input series, it's used\nwhen granularity is not \"none\".",
           "type": {
-            "$ref": "12"
+            "$ref": "15"
           },
           "optional": true,
           "readOnly": false,
@@ -1544,7 +1544,7 @@
           "serializedName": "code",
           "doc": "The error code.",
           "type": {
-            "$ref": "20"
+            "$ref": "50"
           },
           "optional": true,
           "readOnly": false,
@@ -1860,7 +1860,7 @@
           "serializedName": "granularity",
           "doc": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or\nsecondly. Granularity is used for verify whether input series is valid.",
           "type": {
-            "$ref": "1"
+            "$ref": "4"
           },
           "optional": false,
           "readOnly": false,
@@ -2120,7 +2120,7 @@
                 "serializedName": "status",
                 "doc": "Status of detection results. One of CREATED, RUNNING, READY, and FAILED.",
                 "type": {
-                  "$ref": "33"
+                  "$ref": "23"
                 },
                 "optional": false,
                 "readOnly": false,
@@ -2972,7 +2972,7 @@
           "serializedName": "dataSchema",
           "doc": "Data schema of input data source: OneTable or MultiTable. The default\nDataSchema is OneTable.",
           "type": {
-            "$ref": "39"
+            "$ref": "29"
           },
           "optional": true,
           "readOnly": false,
@@ -3125,7 +3125,7 @@
                 "serializedName": "alignMode",
                 "doc": "An optional field, indicating how to align different variables to the same\ntime-range. Either Inner or Outer. ",
                 "type": {
-                  "$ref": "43"
+                  "$ref": "33"
                 },
                 "optional": true,
                 "readOnly": false,
@@ -3146,7 +3146,7 @@
                 "serializedName": "fillNAMethod",
                 "doc": "An optional field, indicating how missing values will be filled. One of\nPrevious, Subsequent, Linear, Zero, Fixed.",
                 "type": {
-                  "$ref": "47"
+                  "$ref": "37"
                 },
                 "optional": true,
                 "readOnly": false,
@@ -3206,7 +3206,7 @@
           "serializedName": "status",
           "doc": "Model status. One of CREATED, RUNNING, READY, and FAILED.",
           "type": {
-            "$ref": "54"
+            "$ref": "44"
           },
           "optional": true,
           "readOnly": false,
@@ -3889,9 +3889,9 @@
           "doc": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
           "type": {
             "$id": "307",
-            "kind": "string",
-            "name": "endpoint",
-            "crossLanguageDefinitionId": "TypeSpec.string"
+            "kind": "url",
+            "name": "url",
+            "crossLanguageDefinitionId": "TypeSpec.url"
           },
           "location": "Uri",
           "isApiVersion": false,
@@ -3909,7 +3909,7 @@
           "nameInRequest": "ApiVersion",
           "doc": "Api Version",
           "type": {
-            "$ref": "60"
+            "$ref": "1"
           },
           "location": "Uri",
           "isApiVersion": true,
@@ -5311,7 +5311,7 @@
                               "$id": "466",
                               "kind": "string",
                               "type": {
-                                "$ref": "1"
+                                "$ref": "4"
                               },
                               "value": "monthly"
                             },
@@ -5319,7 +5319,7 @@
                               "$id": "467",
                               "kind": "string",
                               "type": {
-                                "$ref": "12"
+                                "$ref": "15"
                               },
                               "value": "auto"
                             }
@@ -9540,7 +9540,7 @@
                               "$id": "971",
                               "kind": "string",
                               "type": {
-                                "$ref": "1"
+                                "$ref": "4"
                               },
                               "value": "monthly"
                             },
@@ -9548,7 +9548,7 @@
                               "$id": "972",
                               "kind": "string",
                               "type": {
-                                "$ref": "12"
+                                "$ref": "15"
                               },
                               "value": "fixed"
                             },
@@ -16299,7 +16299,7 @@
                               "$id": "1767",
                               "kind": "string",
                               "type": {
-                                "$ref": "1"
+                                "$ref": "4"
                               },
                               "value": "minutely"
                             },
@@ -20581,9 +20581,9 @@
               "doc": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
               "type": {
                 "$id": "2294",
-                "kind": "string",
-                "name": "endpoint",
-                "crossLanguageDefinitionId": "TypeSpec.string"
+                "kind": "url",
+                "name": "url",
+                "crossLanguageDefinitionId": "TypeSpec.url"
               },
               "location": "Uri",
               "isApiVersion": false,
@@ -20601,7 +20601,7 @@
               "nameInRequest": "ApiVersion",
               "doc": "Api Version",
               "type": {
-                "$ref": "60"
+                "$ref": "1"
               },
               "location": "Uri",
               "isApiVersion": true,
@@ -20790,7 +20790,7 @@
                                   "$id": "2309",
                                   "kind": "string",
                                   "type": {
-                                    "$ref": "33"
+                                    "$ref": "23"
                                   },
                                   "value": "READY"
                                 },
@@ -21506,7 +21506,7 @@
                                   "$id": "2383",
                                   "kind": "string",
                                   "type": {
-                                    "$ref": "43"
+                                    "$ref": "33"
                                   },
                                   "value": "Outer"
                                 },
@@ -21514,7 +21514,7 @@
                                   "$id": "2384",
                                   "kind": "string",
                                   "type": {
-                                    "$ref": "47"
+                                    "$ref": "37"
                                   },
                                   "value": "Linear"
                                 },
@@ -21540,7 +21540,7 @@
                               "$id": "2387",
                               "kind": "string",
                               "type": {
-                                "$ref": "39"
+                                "$ref": "29"
                               },
                               "value": "OneTable"
                             },
@@ -21654,7 +21654,7 @@
                                       "$id": "2398",
                                       "kind": "string",
                                       "type": {
-                                        "$ref": "43"
+                                        "$ref": "33"
                                       },
                                       "value": "Outer"
                                     },
@@ -21662,7 +21662,7 @@
                                       "$id": "2399",
                                       "kind": "string",
                                       "type": {
-                                        "$ref": "47"
+                                        "$ref": "37"
                                       },
                                       "value": "Linear"
                                     },
@@ -21688,7 +21688,7 @@
                                   "$id": "2402",
                                   "kind": "string",
                                   "type": {
-                                    "$ref": "39"
+                                    "$ref": "29"
                                   },
                                   "value": "OneTable"
                                 },
@@ -21720,7 +21720,7 @@
                                   "$id": "2406",
                                   "kind": "string",
                                   "type": {
-                                    "$ref": "54"
+                                    "$ref": "44"
                                   },
                                   "value": "CREATED"
                                 },
@@ -22031,7 +22031,7 @@
                                               "$id": "2430",
                                               "kind": "string",
                                               "type": {
-                                                "$ref": "43"
+                                                "$ref": "33"
                                               },
                                               "value": "Outer"
                                             },
@@ -22039,7 +22039,7 @@
                                               "$id": "2431",
                                               "kind": "string",
                                               "type": {
-                                                "$ref": "47"
+                                                "$ref": "37"
                                               },
                                               "value": "Linear"
                                             },
@@ -22065,7 +22065,7 @@
                                           "$id": "2434",
                                           "kind": "string",
                                           "type": {
-                                            "$ref": "39"
+                                            "$ref": "29"
                                           },
                                           "value": "OneTable"
                                         },
@@ -22097,7 +22097,7 @@
                                           "$id": "2438",
                                           "kind": "string",
                                           "type": {
-                                            "$ref": "54"
+                                            "$ref": "44"
                                           },
                                           "value": "READY"
                                         },
@@ -23392,7 +23392,7 @@
                                       "$id": "2573",
                                       "kind": "string",
                                       "type": {
-                                        "$ref": "43"
+                                        "$ref": "33"
                                       },
                                       "value": "Outer"
                                     },
@@ -23400,7 +23400,7 @@
                                       "$id": "2574",
                                       "kind": "string",
                                       "type": {
-                                        "$ref": "47"
+                                        "$ref": "37"
                                       },
                                       "value": "Linear"
                                     },
@@ -23426,7 +23426,7 @@
                                   "$id": "2577",
                                   "kind": "string",
                                   "type": {
-                                    "$ref": "39"
+                                    "$ref": "29"
                                   },
                                   "value": "OneTable"
                                 },
@@ -23458,7 +23458,7 @@
                                   "$id": "2581",
                                   "kind": "string",
                                   "type": {
-                                    "$ref": "54"
+                                    "$ref": "44"
                                   },
                                   "value": "READY"
                                 },
@@ -24639,7 +24639,7 @@
                                   "$id": "2707",
                                   "kind": "string",
                                   "type": {
-                                    "$ref": "33"
+                                    "$ref": "23"
                                   },
                                   "value": "CREATED"
                                 },
@@ -27095,9 +27095,9 @@
               "doc": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
               "type": {
                 "$id": "2985",
-                "kind": "string",
-                "name": "endpoint",
-                "crossLanguageDefinitionId": "TypeSpec.string"
+                "kind": "url",
+                "name": "url",
+                "crossLanguageDefinitionId": "TypeSpec.url"
               },
               "location": "Uri",
               "isApiVersion": false,
@@ -27115,7 +27115,7 @@
               "nameInRequest": "ApiVersion",
               "doc": "Api Version",
               "type": {
-                "$ref": "60"
+                "$ref": "1"
               },
               "location": "Uri",
               "isApiVersion": true,
