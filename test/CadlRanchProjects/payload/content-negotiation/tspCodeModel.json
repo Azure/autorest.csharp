@@ -1,829 +1,811 @@
 {
- "$id": "1",
- "name": "Payload.ContentNegotiation",
- "apiVersions": [],
- "enums": [
-  {
-   "$id": "2",
-   "kind": "enum",
-   "name": "PngImageAsJsonContentType",
-   "crossLanguageDefinitionId": "",
-   "valueType": {
-    "$id": "3",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "values": [
+  "name": "Payload.ContentNegotiation",
+  "apiVersions": [],
+  "enums": [
     {
-     "$id": "4",
-     "kind": "enumvalue",
-     "name": "application/json",
-     "value": "application/json",
-     "valueType": {
-      "$ref": "3"
-     },
-     "enumType": {
-      "$ref": "2"
-     }
-    }
-   ],
-   "isFixed": false,
-   "isFlags": false,
-   "usage": "Output,Json",
-   "namespace": "Payload.ContentNegotiation.DifferentBody",
-   "decorators": []
-  }
- ],
- "constants": [
-  {
-   "$id": "5",
-   "kind": "constant",
-   "name": "PngImageAsJsonContentType",
-   "namespace": "Payload.ContentNegotiation.DifferentBody",
-   "usage": "Output,Json",
-   "valueType": {
-    "$ref": "2"
-   },
-   "value": "application/json",
-   "decorators": []
-  },
-  {
-   "$id": "6",
-   "kind": "constant",
-   "name": "PngImageContentType",
-   "namespace": "",
-   "usage": "None",
-   "valueType": {
-    "$id": "7",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "value": "image/png",
-   "decorators": []
-  },
-  {
-   "$id": "8",
-   "kind": "constant",
-   "name": "PngImageContentType1",
-   "namespace": "",
-   "usage": "None",
-   "valueType": {
-    "$id": "9",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "value": "image/png",
-   "decorators": []
-  },
-  {
-   "$id": "10",
-   "kind": "constant",
-   "name": "PngImageContentType2",
-   "namespace": "",
-   "usage": "None",
-   "valueType": {
-    "$id": "11",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "value": "image/png",
-   "decorators": []
-  },
-  {
-   "$id": "12",
-   "kind": "constant",
-   "name": "JpegImageContentType",
-   "namespace": "",
-   "usage": "None",
-   "valueType": {
-    "$id": "13",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "value": "image/jpeg",
-   "decorators": []
-  },
-  {
-   "$id": "14",
-   "kind": "constant",
-   "name": "JpegImageContentType1",
-   "namespace": "",
-   "usage": "None",
-   "valueType": {
-    "$id": "15",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "value": "image/jpeg",
-   "decorators": []
-  },
-  {
-   "$id": "16",
-   "kind": "constant",
-   "name": "JpegImageContentType2",
-   "namespace": "",
-   "usage": "None",
-   "valueType": {
-    "$id": "17",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "value": "image/jpeg",
-   "decorators": []
-  },
-  {
-   "$id": "18",
-   "kind": "constant",
-   "name": "PngImageContentType3",
-   "namespace": "",
-   "usage": "None",
-   "valueType": {
-    "$id": "19",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "value": "image/png",
-   "decorators": []
-  },
-  {
-   "$id": "20",
-   "kind": "constant",
-   "name": "PngImageContentType4",
-   "namespace": "",
-   "usage": "None",
-   "valueType": {
-    "$id": "21",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "value": "image/png",
-   "decorators": []
-  },
-  {
-   "$id": "22",
-   "kind": "constant",
-   "name": "PngImageContentType5",
-   "namespace": "",
-   "usage": "None",
-   "valueType": {
-    "$id": "23",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "value": "image/png",
-   "decorators": []
-  },
-  {
-   "$id": "24",
-   "kind": "constant",
-   "name": "PngImageAsJsonContentType1",
-   "namespace": "",
-   "usage": "None",
-   "valueType": {
-    "$id": "25",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "value": "application/json",
-   "decorators": []
-  },
-  {
-   "$id": "26",
-   "kind": "constant",
-   "name": "PngImageAsJsonContentType2",
-   "namespace": "",
-   "usage": "None",
-   "valueType": {
-    "$id": "27",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "value": "application/json",
-   "decorators": []
-  },
-  {
-   "$id": "28",
-   "kind": "constant",
-   "name": "PngImageAsJsonContentType3",
-   "namespace": "",
-   "usage": "None",
-   "valueType": {
-    "$id": "29",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "value": "application/json",
-   "decorators": []
-  }
- ],
- "models": [
-  {
-   "$id": "30",
-   "kind": "model",
-   "name": "PngImageAsJson",
-   "namespace": "Payload.ContentNegotiation.DifferentBody",
-   "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson",
-   "usage": "Output,Json",
-   "decorators": [],
-   "properties": [
-    {
-     "$id": "31",
-     "kind": "header",
-     "name": "contentType",
-     "serializedName": "content-type",
-     "type": {
-      "$ref": "5"
-     },
-     "optional": false,
-     "readOnly": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson.contentType",
-     "correspondingMethodParams": []
-    },
-    {
-     "$id": "32",
-     "kind": "property",
-     "name": "content",
-     "serializedName": "content",
-     "type": {
-      "$id": "33",
-      "kind": "bytes",
-      "name": "bytes",
-      "encode": "base64",
-      "crossLanguageDefinitionId": "TypeSpec.bytes",
+      "$id": "1",
+      "kind": "enum",
+      "name": "PngImageAsJsonContentType1",
+      "crossLanguageDefinitionId": "",
+      "valueType": {
+        "$id": "2",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "values": [
+        {
+          "$id": "3",
+          "kind": "enumvalue",
+          "name": "application/json",
+          "value": "application/json",
+          "valueType": {
+            "$ref": "2"
+          },
+          "enumType": {
+            "$ref": "1"
+          }
+        }
+      ],
+      "isFixed": false,
+      "isFlags": false,
+      "usage": "Output,Json",
+      "namespace": "Payload.ContentNegotiation.DifferentBody",
       "decorators": []
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson.content",
-     "serializationOptions": {
-      "$id": "34",
-      "json": {
-       "$id": "35",
-       "name": "content"
-      }
-     }
     }
-   ]
-  }
- ],
- "clients": [
-  {
-   "$id": "36",
-   "kind": "client",
-   "name": "ContentNegotiationClient",
-   "namespace": "Payload.ContentNegotiation",
-   "doc": "Test describing optionality of the request body.",
-   "methods": [],
-   "parameters": [
+  ],
+  "constants": [
     {
-     "$id": "37",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "doc": "Service host",
-     "type": {
-      "$id": "38",
-      "kind": "url",
-      "name": "endpoint",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "defaultValue": {
-      "$id": "39",
-      "type": {
-       "$id": "40",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string"
-      },
-      "value": "http://localhost:3000"
-     },
-     "serverUrlTemplate": "{endpoint}"
-    }
-   ],
-   "decorators": [],
-   "crossLanguageDefinitionId": "Payload.ContentNegotiation",
-   "apiVersions": [],
-   "children": [
-    {
-     "$id": "41",
-     "kind": "client",
-     "name": "SameBody",
-     "namespace": "Payload.ContentNegotiation.SameBody",
-     "methods": [
-      {
-       "$id": "42",
-       "kind": "basic",
-       "name": "getAvatarAsPng",
-       "accessibility": "public",
-       "apiVersions": [],
-       "operation": {
-        "$id": "43",
-        "name": "getAvatarAsPng",
-        "resourceName": "SameBody",
-        "accessibility": "public",
-        "parameters": [
-         {
-          "$id": "44",
-          "name": "accept",
-          "nameInRequest": "Accept",
-          "type": {
-           "$ref": "6"
-          },
-          "location": "Header",
-          "isApiVersion": false,
-          "isContentType": false,
-          "isEndpoint": false,
-          "explode": false,
-          "isRequired": true,
-          "kind": "Constant",
-          "decorators": [],
-          "skipUrlEncoding": false
-         }
-        ],
-        "responses": [
-         {
-          "$id": "45",
-          "statusCodes": [
-           200
-          ],
-          "bodyType": {
-           "$id": "46",
-           "kind": "bytes",
-           "name": "bytes",
-           "crossLanguageDefinitionId": "TypeSpec.bytes",
-           "decorators": []
-          },
-          "headers": [
-           {
-            "$id": "47",
-            "name": "contentType",
-            "nameInResponse": "content-type",
-            "type": {
-             "$ref": "8"
-            }
-           }
-          ],
-          "isErrorResponse": false,
-          "contentTypes": [
-           "image/png"
-          ]
-         }
-        ],
-        "httpMethod": "GET",
-        "uri": "{endpoint}",
-        "path": "/content-negotiation/same-body",
-        "bufferResponse": true,
-        "generateProtocolMethod": true,
-        "generateConvenienceMethod": true,
-        "crossLanguageDefinitionId": "Payload.ContentNegotiation.SameBody.getAvatarAsPng",
+      "$id": "4",
+      "kind": "constant",
+      "name": "PngImageContentType",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "5",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
-       },
-       "parameters": [
-        {
-         "$id": "48",
-         "name": "accept",
-         "nameInRequest": "accept",
-         "type": {
-          "$ref": "10"
-         },
-         "location": "Header",
-         "isApiVersion": false,
-         "isContentType": false,
-         "isEndpoint": false,
-         "explode": false,
-         "isRequired": true,
-         "kind": "Constant",
-         "decorators": [],
-         "skipUrlEncoding": false
-        }
-       ],
-       "response": {
-        "$id": "49",
-        "type": {
-         "$ref": "46"
-        }
-       },
-       "isOverride": false,
-       "generateConvenient": true,
-       "generateProtocol": true,
-       "crossLanguageDefinitionId": "Payload.ContentNegotiation.SameBody.getAvatarAsPng"
       },
-      {
-       "$id": "50",
-       "kind": "basic",
-       "name": "getAvatarAsJpeg",
-       "accessibility": "public",
-       "apiVersions": [],
-       "operation": {
-        "$id": "51",
-        "name": "getAvatarAsJpeg",
-        "resourceName": "SameBody",
-        "accessibility": "public",
-        "parameters": [
-         {
-          "$id": "52",
-          "name": "accept",
-          "nameInRequest": "Accept",
-          "type": {
-           "$ref": "12"
-          },
-          "location": "Header",
-          "isApiVersion": false,
-          "isContentType": false,
-          "isEndpoint": false,
-          "explode": false,
-          "isRequired": true,
-          "kind": "Constant",
-          "decorators": [],
-          "skipUrlEncoding": false
-         }
-        ],
-        "responses": [
-         {
-          "$id": "53",
-          "statusCodes": [
-           200
-          ],
-          "bodyType": {
-           "$id": "54",
-           "kind": "bytes",
-           "name": "bytes",
-           "crossLanguageDefinitionId": "TypeSpec.bytes",
-           "decorators": []
-          },
-          "headers": [
-           {
-            "$id": "55",
-            "name": "contentType",
-            "nameInResponse": "content-type",
-            "type": {
-             "$ref": "14"
-            }
-           }
-          ],
-          "isErrorResponse": false,
-          "contentTypes": [
-           "image/jpeg"
-          ]
-         }
-        ],
-        "httpMethod": "GET",
-        "uri": "{endpoint}",
-        "path": "/content-negotiation/same-body",
-        "bufferResponse": true,
-        "generateProtocolMethod": true,
-        "generateConvenienceMethod": true,
-        "crossLanguageDefinitionId": "Payload.ContentNegotiation.SameBody.getAvatarAsJpeg",
-        "decorators": []
-       },
-       "parameters": [
-        {
-         "$id": "56",
-         "name": "accept",
-         "nameInRequest": "accept",
-         "type": {
-          "$ref": "16"
-         },
-         "location": "Header",
-         "isApiVersion": false,
-         "isContentType": false,
-         "isEndpoint": false,
-         "explode": false,
-         "isRequired": true,
-         "kind": "Constant",
-         "decorators": [],
-         "skipUrlEncoding": false
-        }
-       ],
-       "response": {
-        "$id": "57",
-        "type": {
-         "$ref": "54"
-        }
-       },
-       "isOverride": false,
-       "generateConvenient": true,
-       "generateProtocol": true,
-       "crossLanguageDefinitionId": "Payload.ContentNegotiation.SameBody.getAvatarAsJpeg"
-      }
-     ],
-     "parameters": [
-      {
-       "$id": "58",
-       "name": "endpoint",
-       "nameInRequest": "endpoint",
-       "doc": "Service host",
-       "type": {
-        "$id": "59",
-        "kind": "url",
-        "name": "endpoint",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "location": "Uri",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isRequired": true,
-       "isEndpoint": true,
-       "skipUrlEncoding": false,
-       "explode": false,
-       "kind": "Client",
-       "defaultValue": {
-        "$id": "60",
-        "type": {
-         "$id": "61",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "value": "http://localhost:3000"
-       },
-       "serverUrlTemplate": "{endpoint}"
-      }
-     ],
-     "decorators": [],
-     "crossLanguageDefinitionId": "Payload.ContentNegotiation.SameBody",
-     "apiVersions": [],
-     "parent": {
-      "$ref": "36"
-     }
+      "value": "image/png",
+      "decorators": []
     },
     {
-     "$id": "62",
-     "kind": "client",
-     "name": "DifferentBody",
-     "namespace": "Payload.ContentNegotiation.DifferentBody",
-     "methods": [
-      {
-       "$id": "63",
-       "kind": "basic",
-       "name": "getAvatarAsPng",
-       "accessibility": "public",
-       "apiVersions": [],
-       "operation": {
-        "$id": "64",
-        "name": "getAvatarAsPng",
-        "resourceName": "DifferentBody",
-        "accessibility": "public",
-        "parameters": [
-         {
-          "$id": "65",
-          "name": "accept",
-          "nameInRequest": "Accept",
-          "type": {
-           "$ref": "18"
-          },
-          "location": "Header",
-          "isApiVersion": false,
-          "isContentType": false,
-          "isEndpoint": false,
-          "explode": false,
-          "isRequired": true,
-          "kind": "Constant",
-          "decorators": [],
-          "skipUrlEncoding": false
-         }
-        ],
-        "responses": [
-         {
-          "$id": "66",
-          "statusCodes": [
-           200
-          ],
-          "bodyType": {
-           "$id": "67",
-           "kind": "bytes",
-           "name": "bytes",
-           "crossLanguageDefinitionId": "TypeSpec.bytes",
-           "decorators": []
-          },
-          "headers": [
-           {
-            "$id": "68",
-            "name": "contentType",
-            "nameInResponse": "content-type",
-            "type": {
-             "$ref": "20"
-            }
-           }
-          ],
-          "isErrorResponse": false,
-          "contentTypes": [
-           "image/png"
-          ]
-         }
-        ],
-        "httpMethod": "GET",
-        "uri": "{endpoint}",
-        "path": "/content-negotiation/different-body",
-        "bufferResponse": true,
-        "generateProtocolMethod": true,
-        "generateConvenienceMethod": true,
-        "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.getAvatarAsPng",
+      "$id": "6",
+      "kind": "constant",
+      "name": "PngImageContentType1",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "7",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
-       },
-       "parameters": [
-        {
-         "$id": "69",
-         "name": "accept",
-         "nameInRequest": "accept",
-         "type": {
-          "$ref": "22"
-         },
-         "location": "Header",
-         "isApiVersion": false,
-         "isContentType": false,
-         "isEndpoint": false,
-         "explode": false,
-         "isRequired": true,
-         "kind": "Constant",
-         "decorators": [],
-         "skipUrlEncoding": false
-        }
-       ],
-       "response": {
-        "$id": "70",
-        "type": {
-         "$ref": "67"
-        }
-       },
-       "isOverride": false,
-       "generateConvenient": true,
-       "generateProtocol": true,
-       "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.getAvatarAsPng"
       },
-      {
-       "$id": "71",
-       "kind": "basic",
-       "name": "getAvatarAsJson",
-       "accessibility": "public",
-       "apiVersions": [],
-       "operation": {
-        "$id": "72",
-        "name": "getAvatarAsJson",
-        "resourceName": "DifferentBody",
-        "accessibility": "public",
-        "parameters": [
-         {
-          "$id": "73",
-          "name": "accept",
-          "nameInRequest": "Accept",
+      "value": "image/png",
+      "decorators": []
+    },
+    {
+      "$id": "8",
+      "kind": "constant",
+      "name": "PngImageContentType2",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "9",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/png",
+      "decorators": []
+    },
+    {
+      "$id": "10",
+      "kind": "constant",
+      "name": "JpegImageContentType",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "11",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/jpeg",
+      "decorators": []
+    },
+    {
+      "$id": "12",
+      "kind": "constant",
+      "name": "JpegImageContentType1",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "13",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/jpeg",
+      "decorators": []
+    },
+    {
+      "$id": "14",
+      "kind": "constant",
+      "name": "JpegImageContentType2",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "15",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/jpeg",
+      "decorators": []
+    },
+    {
+      "$id": "16",
+      "kind": "constant",
+      "name": "PngImageContentType3",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "17",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/png",
+      "decorators": []
+    },
+    {
+      "$id": "18",
+      "kind": "constant",
+      "name": "PngImageContentType4",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "19",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/png",
+      "decorators": []
+    },
+    {
+      "$id": "20",
+      "kind": "constant",
+      "name": "PngImageContentType5",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "21",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/png",
+      "decorators": []
+    },
+    {
+      "$id": "22",
+      "kind": "constant",
+      "name": "PngImageAsJsonContentType",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "23",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "24",
+      "kind": "constant",
+      "name": "PngImageAsJsonContentType1",
+      "namespace": "Payload.ContentNegotiation.DifferentBody",
+      "usage": "Output,Json",
+      "valueType": {
+        "$ref": "1"
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "25",
+      "kind": "constant",
+      "name": "PngImageAsJsonContentType2",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "26",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "27",
+      "kind": "constant",
+      "name": "PngImageAsJsonContentType3",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "28",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    }
+  ],
+  "models": [
+    {
+      "$id": "29",
+      "kind": "model",
+      "name": "PngImageAsJson",
+      "namespace": "Payload.ContentNegotiation.DifferentBody",
+      "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson",
+      "usage": "Output,Json",
+      "decorators": [],
+      "properties": [
+        {
+          "$id": "30",
+          "kind": "header",
+          "name": "contentType",
+          "serializedName": "content-type",
           "type": {
-           "$ref": "24"
+            "$ref": "24"
           },
-          "location": "Header",
+          "optional": false,
+          "readOnly": false,
+          "decorators": [],
+          "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson.contentType",
+          "correspondingMethodParams": []
+        },
+        {
+          "$id": "31",
+          "kind": "property",
+          "name": "content",
+          "serializedName": "content",
+          "type": {
+            "$id": "32",
+            "kind": "bytes",
+            "name": "bytes",
+            "encode": "base64",
+            "crossLanguageDefinitionId": "TypeSpec.bytes",
+            "decorators": []
+          },
+          "optional": false,
+          "readOnly": false,
+          "discriminator": false,
+          "flatten": false,
+          "decorators": [],
+          "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson.content",
+          "serializationOptions": {
+            "json": {
+              "name": "content"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "clients": [
+    {
+      "$id": "33",
+      "kind": "client",
+      "name": "ContentNegotiationClient",
+      "namespace": "Payload.ContentNegotiation",
+      "doc": "Test describing optionality of the request body.",
+      "methods": [],
+      "parameters": [
+        {
+          "$id": "34",
+          "name": "endpoint",
+          "nameInRequest": "endpoint",
+          "doc": "Service host",
+          "type": {
+            "$id": "35",
+            "kind": "url",
+            "name": "endpoint",
+            "crossLanguageDefinitionId": "TypeSpec.url"
+          },
+          "location": "Uri",
           "isApiVersion": false,
           "isContentType": false,
-          "isEndpoint": false,
-          "explode": false,
           "isRequired": true,
-          "kind": "Constant",
-          "decorators": [],
-          "skipUrlEncoding": false
-         }
-        ],
-        "responses": [
-         {
-          "$id": "74",
-          "statusCodes": [
-           200
-          ],
-          "bodyType": {
-           "$ref": "30"
-          },
-          "headers": [
-           {
-            "$id": "75",
-            "name": "contentType",
-            "nameInResponse": "content-type",
+          "isEndpoint": true,
+          "skipUrlEncoding": false,
+          "explode": false,
+          "kind": "Client",
+          "defaultValue": {
             "type": {
-             "$ref": "26"
-            }
-           }
-          ],
-          "isErrorResponse": false,
-          "contentTypes": [
-           "application/json"
-          ]
-         }
-        ],
-        "httpMethod": "GET",
-        "uri": "{endpoint}",
-        "path": "/content-negotiation/different-body",
-        "bufferResponse": true,
-        "generateProtocolMethod": true,
-        "generateConvenienceMethod": true,
-        "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.getAvatarAsJson",
-        "decorators": []
-       },
-       "parameters": [
+              "$id": "36",
+              "kind": "string",
+              "name": "string",
+              "crossLanguageDefinitionId": "TypeSpec.string"
+            },
+            "value": "http://localhost:3000"
+          },
+          "serverUrlTemplate": "{endpoint}"
+        }
+      ],
+      "decorators": [],
+      "crossLanguageDefinitionId": "Payload.ContentNegotiation",
+      "apiVersions": [],
+      "children": [
         {
-         "$id": "76",
-         "name": "accept",
-         "nameInRequest": "accept",
-         "type": {
-          "$ref": "28"
-         },
-         "location": "Header",
-         "isApiVersion": false,
-         "isContentType": false,
-         "isEndpoint": false,
-         "explode": false,
-         "isRequired": true,
-         "kind": "Constant",
-         "decorators": [],
-         "skipUrlEncoding": false
-        }
-       ],
-       "response": {
-        "$id": "77",
-        "type": {
-         "$ref": "30"
-        }
-       },
-       "isOverride": false,
-       "generateConvenient": true,
-       "generateProtocol": true,
-       "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.getAvatarAsJson"
-      }
-     ],
-     "parameters": [
-      {
-       "$id": "78",
-       "name": "endpoint",
-       "nameInRequest": "endpoint",
-       "doc": "Service host",
-       "type": {
-        "$id": "79",
-        "kind": "url",
-        "name": "endpoint",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "location": "Uri",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isRequired": true,
-       "isEndpoint": true,
-       "skipUrlEncoding": false,
-       "explode": false,
-       "kind": "Client",
-       "defaultValue": {
-        "$id": "80",
-        "type": {
-         "$id": "81",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
+          "$id": "37",
+          "kind": "client",
+          "name": "SameBody",
+          "namespace": "Payload.ContentNegotiation.SameBody",
+          "methods": [
+            {
+              "$id": "38",
+              "kind": "basic",
+              "name": "getAvatarAsPng",
+              "accessibility": "public",
+              "apiVersions": [],
+              "operation": {
+                "$id": "39",
+                "name": "getAvatarAsPng",
+                "resourceName": "SameBody",
+                "accessibility": "public",
+                "parameters": [
+                  {
+                    "$id": "40",
+                    "name": "accept",
+                    "nameInRequest": "Accept",
+                    "type": {
+                      "$ref": "4"
+                    },
+                    "location": "Header",
+                    "isApiVersion": false,
+                    "isContentType": false,
+                    "isEndpoint": false,
+                    "explode": false,
+                    "isRequired": true,
+                    "kind": "Constant",
+                    "decorators": [],
+                    "skipUrlEncoding": false
+                  }
+                ],
+                "responses": [
+                  {
+                    "statusCodes": [
+                      200
+                    ],
+                    "bodyType": {
+                      "$id": "41",
+                      "kind": "bytes",
+                      "name": "bytes",
+                      "crossLanguageDefinitionId": "TypeSpec.bytes",
+                      "decorators": []
+                    },
+                    "headers": [
+                      {
+                        "name": "contentType",
+                        "nameInResponse": "content-type",
+                        "type": {
+                          "$ref": "6"
+                        }
+                      }
+                    ],
+                    "isErrorResponse": false,
+                    "contentTypes": [
+                      "image/png"
+                    ]
+                  }
+                ],
+                "httpMethod": "GET",
+                "uri": "{endpoint}",
+                "path": "/content-negotiation/same-body",
+                "bufferResponse": true,
+                "generateProtocolMethod": true,
+                "generateConvenienceMethod": true,
+                "crossLanguageDefinitionId": "Payload.ContentNegotiation.SameBody.getAvatarAsPng",
+                "decorators": []
+              },
+              "parameters": [
+                {
+                  "$id": "42",
+                  "name": "accept",
+                  "nameInRequest": "accept",
+                  "type": {
+                    "$ref": "8"
+                  },
+                  "location": "Header",
+                  "isApiVersion": false,
+                  "isContentType": false,
+                  "isEndpoint": false,
+                  "explode": false,
+                  "isRequired": true,
+                  "kind": "Constant",
+                  "decorators": [],
+                  "skipUrlEncoding": false
+                }
+              ],
+              "response": {
+                "type": {
+                  "$ref": "41"
+                }
+              },
+              "isOverride": false,
+              "generateConvenient": true,
+              "generateProtocol": true,
+              "crossLanguageDefinitionId": "Payload.ContentNegotiation.SameBody.getAvatarAsPng"
+            },
+            {
+              "$id": "43",
+              "kind": "basic",
+              "name": "getAvatarAsJpeg",
+              "accessibility": "public",
+              "apiVersions": [],
+              "operation": {
+                "$id": "44",
+                "name": "getAvatarAsJpeg",
+                "resourceName": "SameBody",
+                "accessibility": "public",
+                "parameters": [
+                  {
+                    "$id": "45",
+                    "name": "accept",
+                    "nameInRequest": "Accept",
+                    "type": {
+                      "$ref": "10"
+                    },
+                    "location": "Header",
+                    "isApiVersion": false,
+                    "isContentType": false,
+                    "isEndpoint": false,
+                    "explode": false,
+                    "isRequired": true,
+                    "kind": "Constant",
+                    "decorators": [],
+                    "skipUrlEncoding": false
+                  }
+                ],
+                "responses": [
+                  {
+                    "statusCodes": [
+                      200
+                    ],
+                    "bodyType": {
+                      "$id": "46",
+                      "kind": "bytes",
+                      "name": "bytes",
+                      "crossLanguageDefinitionId": "TypeSpec.bytes",
+                      "decorators": []
+                    },
+                    "headers": [
+                      {
+                        "name": "contentType",
+                        "nameInResponse": "content-type",
+                        "type": {
+                          "$ref": "12"
+                        }
+                      }
+                    ],
+                    "isErrorResponse": false,
+                    "contentTypes": [
+                      "image/jpeg"
+                    ]
+                  }
+                ],
+                "httpMethod": "GET",
+                "uri": "{endpoint}",
+                "path": "/content-negotiation/same-body",
+                "bufferResponse": true,
+                "generateProtocolMethod": true,
+                "generateConvenienceMethod": true,
+                "crossLanguageDefinitionId": "Payload.ContentNegotiation.SameBody.getAvatarAsJpeg",
+                "decorators": []
+              },
+              "parameters": [
+                {
+                  "$id": "47",
+                  "name": "accept",
+                  "nameInRequest": "accept",
+                  "type": {
+                    "$ref": "14"
+                  },
+                  "location": "Header",
+                  "isApiVersion": false,
+                  "isContentType": false,
+                  "isEndpoint": false,
+                  "explode": false,
+                  "isRequired": true,
+                  "kind": "Constant",
+                  "decorators": [],
+                  "skipUrlEncoding": false
+                }
+              ],
+              "response": {
+                "type": {
+                  "$ref": "46"
+                }
+              },
+              "isOverride": false,
+              "generateConvenient": true,
+              "generateProtocol": true,
+              "crossLanguageDefinitionId": "Payload.ContentNegotiation.SameBody.getAvatarAsJpeg"
+            }
+          ],
+          "parameters": [
+            {
+              "$id": "48",
+              "name": "endpoint",
+              "nameInRequest": "endpoint",
+              "doc": "Service host",
+              "type": {
+                "$id": "49",
+                "kind": "url",
+                "name": "endpoint",
+                "crossLanguageDefinitionId": "TypeSpec.url"
+              },
+              "location": "Uri",
+              "isApiVersion": false,
+              "isContentType": false,
+              "isRequired": true,
+              "isEndpoint": true,
+              "skipUrlEncoding": false,
+              "explode": false,
+              "kind": "Client",
+              "defaultValue": {
+                "type": {
+                  "$id": "50",
+                  "kind": "string",
+                  "name": "string",
+                  "crossLanguageDefinitionId": "TypeSpec.string"
+                },
+                "value": "http://localhost:3000"
+              },
+              "serverUrlTemplate": "{endpoint}"
+            }
+          ],
+          "decorators": [],
+          "crossLanguageDefinitionId": "Payload.ContentNegotiation.SameBody",
+          "apiVersions": [],
+          "parent": {
+            "$ref": "33"
+          }
         },
-        "value": "http://localhost:3000"
-       },
-       "serverUrlTemplate": "{endpoint}"
-      }
-     ],
-     "decorators": [],
-     "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody",
-     "apiVersions": [],
-     "parent": {
-      "$ref": "36"
-     }
+        {
+          "$id": "51",
+          "kind": "client",
+          "name": "DifferentBody",
+          "namespace": "Payload.ContentNegotiation.DifferentBody",
+          "methods": [
+            {
+              "$id": "52",
+              "kind": "basic",
+              "name": "getAvatarAsPng",
+              "accessibility": "public",
+              "apiVersions": [],
+              "operation": {
+                "$id": "53",
+                "name": "getAvatarAsPng",
+                "resourceName": "DifferentBody",
+                "accessibility": "public",
+                "parameters": [
+                  {
+                    "$id": "54",
+                    "name": "accept",
+                    "nameInRequest": "Accept",
+                    "type": {
+                      "$ref": "16"
+                    },
+                    "location": "Header",
+                    "isApiVersion": false,
+                    "isContentType": false,
+                    "isEndpoint": false,
+                    "explode": false,
+                    "isRequired": true,
+                    "kind": "Constant",
+                    "decorators": [],
+                    "skipUrlEncoding": false
+                  }
+                ],
+                "responses": [
+                  {
+                    "statusCodes": [
+                      200
+                    ],
+                    "bodyType": {
+                      "$id": "55",
+                      "kind": "bytes",
+                      "name": "bytes",
+                      "crossLanguageDefinitionId": "TypeSpec.bytes",
+                      "decorators": []
+                    },
+                    "headers": [
+                      {
+                        "name": "contentType",
+                        "nameInResponse": "content-type",
+                        "type": {
+                          "$ref": "18"
+                        }
+                      }
+                    ],
+                    "isErrorResponse": false,
+                    "contentTypes": [
+                      "image/png"
+                    ]
+                  }
+                ],
+                "httpMethod": "GET",
+                "uri": "{endpoint}",
+                "path": "/content-negotiation/different-body",
+                "bufferResponse": true,
+                "generateProtocolMethod": true,
+                "generateConvenienceMethod": true,
+                "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.getAvatarAsPng",
+                "decorators": []
+              },
+              "parameters": [
+                {
+                  "$id": "56",
+                  "name": "accept",
+                  "nameInRequest": "accept",
+                  "type": {
+                    "$ref": "20"
+                  },
+                  "location": "Header",
+                  "isApiVersion": false,
+                  "isContentType": false,
+                  "isEndpoint": false,
+                  "explode": false,
+                  "isRequired": true,
+                  "kind": "Constant",
+                  "decorators": [],
+                  "skipUrlEncoding": false
+                }
+              ],
+              "response": {
+                "type": {
+                  "$ref": "55"
+                }
+              },
+              "isOverride": false,
+              "generateConvenient": true,
+              "generateProtocol": true,
+              "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.getAvatarAsPng"
+            },
+            {
+              "$id": "57",
+              "kind": "basic",
+              "name": "getAvatarAsJson",
+              "accessibility": "public",
+              "apiVersions": [],
+              "operation": {
+                "$id": "58",
+                "name": "getAvatarAsJson",
+                "resourceName": "DifferentBody",
+                "accessibility": "public",
+                "parameters": [
+                  {
+                    "$id": "59",
+                    "name": "accept",
+                    "nameInRequest": "Accept",
+                    "type": {
+                      "$ref": "22"
+                    },
+                    "location": "Header",
+                    "isApiVersion": false,
+                    "isContentType": false,
+                    "isEndpoint": false,
+                    "explode": false,
+                    "isRequired": true,
+                    "kind": "Constant",
+                    "decorators": [],
+                    "skipUrlEncoding": false
+                  }
+                ],
+                "responses": [
+                  {
+                    "statusCodes": [
+                      200
+                    ],
+                    "bodyType": {
+                      "$ref": "29"
+                    },
+                    "headers": [
+                      {
+                        "name": "contentType",
+                        "nameInResponse": "content-type",
+                        "type": {
+                          "$ref": "25"
+                        }
+                      }
+                    ],
+                    "isErrorResponse": false,
+                    "contentTypes": [
+                      "application/json"
+                    ]
+                  }
+                ],
+                "httpMethod": "GET",
+                "uri": "{endpoint}",
+                "path": "/content-negotiation/different-body",
+                "bufferResponse": true,
+                "generateProtocolMethod": true,
+                "generateConvenienceMethod": true,
+                "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.getAvatarAsJson",
+                "decorators": []
+              },
+              "parameters": [
+                {
+                  "$id": "60",
+                  "name": "accept",
+                  "nameInRequest": "accept",
+                  "type": {
+                    "$ref": "27"
+                  },
+                  "location": "Header",
+                  "isApiVersion": false,
+                  "isContentType": false,
+                  "isEndpoint": false,
+                  "explode": false,
+                  "isRequired": true,
+                  "kind": "Constant",
+                  "decorators": [],
+                  "skipUrlEncoding": false
+                }
+              ],
+              "response": {
+                "type": {
+                  "$ref": "29"
+                }
+              },
+              "isOverride": false,
+              "generateConvenient": true,
+              "generateProtocol": true,
+              "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.getAvatarAsJson"
+            }
+          ],
+          "parameters": [
+            {
+              "$id": "61",
+              "name": "endpoint",
+              "nameInRequest": "endpoint",
+              "doc": "Service host",
+              "type": {
+                "$id": "62",
+                "kind": "url",
+                "name": "endpoint",
+                "crossLanguageDefinitionId": "TypeSpec.url"
+              },
+              "location": "Uri",
+              "isApiVersion": false,
+              "isContentType": false,
+              "isRequired": true,
+              "isEndpoint": true,
+              "skipUrlEncoding": false,
+              "explode": false,
+              "kind": "Client",
+              "defaultValue": {
+                "type": {
+                  "$id": "63",
+                  "kind": "string",
+                  "name": "string",
+                  "crossLanguageDefinitionId": "TypeSpec.string"
+                },
+                "value": "http://localhost:3000"
+              },
+              "serverUrlTemplate": "{endpoint}"
+            }
+          ],
+          "decorators": [],
+          "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody",
+          "apiVersions": [],
+          "parent": {
+            "$ref": "33"
+          }
+        }
+      ]
     }
-   ]
-  }
- ]
+  ]
 }
