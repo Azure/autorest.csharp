@@ -165,34 +165,35 @@ extends:
           
       - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
         - stage: Release
-          pool:
-            name: azsdk-pool-mms-ubuntu-2004-general
-            image: azsdk-pool-mms-ubuntu-2004-1espt
-            os: linux
           jobs:
           - deployment: Publish
-            environment: net-release
+            environment: none
             variables:
               Artifacts: $(System.DefaultWorkingDirectory)/_artifacts/packages
+
+            pool:
+              name: azsdk-pool
+              image: windows-2022 # Nuget publish requires .NET framework on windows to handle the auth
+              os: windows
+
+            templateContext:
+              type: releaseJob
+              isProduction: true
+              inputs:
+                - input: pipelineArtifact
+                  artifactName: packages
+                  targetPath: $(Artifacts)
             
             strategy:
               runOnce:
                 deploy:
                   steps:
-                    - task: DownloadPipelineArtifact@2
-                      displayName: Download Packages
-                      inputs:
-                        artifact: packages
-                        path: $(Artifacts)
                     - task: 1ES.PublishNuget@1
                       displayName: 'Publish to DevOps Feed'
                       inputs:
-                        useDotNetTask: false
-                        publishPackageMetadata: true
                         packageParentPath: '$(Artifacts)'
                         packagesToPush: '$(Artifacts)/*.nupkg;!$(Artifacts)/*.symbols.nupkg'
-                        nuGetFeedType: 'internal'
-                        publishVstsFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
+                        publishVstsFeed: 'public/azure-sdk-for-net'
 
         - stage: 'Update_azure_sdk_for_net'
           pool:
