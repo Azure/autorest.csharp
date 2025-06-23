@@ -27,7 +27,7 @@ resources:
 
 pool:
   name: azsdk-pool
-  vmImage: windows-2022
+  demands: ImageOverride -equals windows-2022
 
 variables:
 - template: /eng/pipelines/variables/globals.yml@self
