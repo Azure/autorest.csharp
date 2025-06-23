@@ -1,40 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="CreateUnknownValueAsync(DaysOfWeekExtensibleEnum,CancellationToken)">
-      <example>
-This sample shows how to call CreateUnknownValueAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<endpoint>");
-EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
-
-Response response = await client.CreateUnknownValueAsync(DaysOfWeekExtensibleEnum.Monday);
-]]></code>
-This sample shows how to call CreateUnknownValueAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<endpoint>");
-EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
-
-Response response = await client.CreateUnknownValueAsync(DaysOfWeekExtensibleEnum.Monday);
-]]></code></example>
-    </member>
-    <member name="CreateUnknownValue(DaysOfWeekExtensibleEnum,CancellationToken)">
-      <example>
-This sample shows how to call CreateUnknownValue.
-<code><![CDATA[
-Uri endpoint = new Uri("<endpoint>");
-EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
-
-Response response = client.CreateUnknownValue(DaysOfWeekExtensibleEnum.Monday);
-]]></code>
-This sample shows how to call CreateUnknownValue with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<endpoint>");
-EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
-
-Response response = client.CreateUnknownValue(DaysOfWeekExtensibleEnum.Monday);
-]]></code></example>
-    </member>
     <member name="CreateUnknownValueAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call CreateUnknownValueAsync.

@@ -180,12 +180,57 @@ namespace FirstTestTypeSpec
             }
         }
 
+        /// <summary> Return hi again. </summary>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="p1"> The <see cref="string"/> to use. </param>
+        /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='NoContentTypeAsync(string,string,RoundTripModel,CancellationToken)']/*" />
+        public virtual async Task<Response<RoundTripModel>> NoContentTypeAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(action, nameof(action));
+
+            using RequestContent content = action.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await NoContentTypeAsync(p2, p1, content, context).ConfigureAwait(false);
+            return Response.FromValue(RoundTripModel.FromResponse(response), response);
+        }
+
+        /// <summary> Return hi again. </summary>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="p1"> The <see cref="string"/> to use. </param>
+        /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='NoContentType(string,string,RoundTripModel,CancellationToken)']/*" />
+        public virtual Response<RoundTripModel> NoContentType(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(action, nameof(action));
+
+            using RequestContent content = action.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = NoContentType(p2, p1, content, context);
+            return Response.FromValue(RoundTripModel.FromResponse(response), response);
+        }
+
         /// <summary>
         /// [Protocol Method] Return hi again
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="NoContentTypeAsync(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -225,6 +270,11 @@ namespace FirstTestTypeSpec
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="NoContentType(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

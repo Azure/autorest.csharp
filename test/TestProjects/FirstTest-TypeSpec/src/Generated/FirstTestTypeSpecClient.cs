@@ -187,12 +187,37 @@ namespace FirstTestTypeSpec
             }
         }
 
+        /// <summary> top level method2. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopAction2Async(CancellationToken)']/*" />
+        public virtual async Task<Response<Thing>> TopAction2Async(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await TopAction2Async(context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> top level method2. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopAction2(CancellationToken)']/*" />
+        public virtual Response<Thing> TopAction2(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = TopAction2(context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
         /// <summary>
         /// [Protocol Method] top level method2
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="TopAction2Async(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -223,6 +248,11 @@ namespace FirstTestTypeSpec
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="TopAction2(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -599,7 +629,6 @@ namespace FirstTestTypeSpec
             }
         }
 
-        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Add time header.
         /// <list type="bullet">
@@ -630,7 +659,6 @@ namespace FirstTestTypeSpec
             }
         }
 
-        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Add time header.
         /// <list type="bullet">

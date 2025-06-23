@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
-using FirstTestTypeSpec.Models;
 using NUnit.Framework;
 
 namespace FirstTestTypeSpec.Tests
@@ -35,17 +34,6 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task EnumTest_CreateUnknownValue_ShortVersion_Convenience()
-        {
-            Uri endpoint = new Uri("<endpoint>");
-            AzureKeyCredential credential = null;
-            EnumTest client = CreateFirstTestTypeSpecClient(endpoint, credential).GetEnumTestClient();
-
-            Response response = await client.CreateUnknownValueAsync(DaysOfWeekExtensibleEnum.Monday);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task EnumTest_CreateUnknownValue_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
@@ -54,17 +42,6 @@ namespace FirstTestTypeSpec.Tests
 
             using RequestContent content = RequestContent.Create("Monday");
             Response response = await client.CreateUnknownValueAsync(content);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task EnumTest_CreateUnknownValue_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<endpoint>");
-            AzureKeyCredential credential = null;
-            EnumTest client = CreateFirstTestTypeSpecClient(endpoint, credential).GetEnumTestClient();
-
-            Response response = await client.CreateUnknownValueAsync(DaysOfWeekExtensibleEnum.Monday);
         }
     }
 }
