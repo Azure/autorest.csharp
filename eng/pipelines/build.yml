@@ -164,10 +164,6 @@ extends:
           
       - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
         - stage: Release
-          pool:
-            name: azsdk-pool
-            image: ubuntu-24.04
-            os: linux
           dependsOn:
           - Build_and_Test
           jobs:
