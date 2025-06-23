@@ -32,7 +32,7 @@ stages:
       - job: MockTest
         timeoutInMinutes: 240
         pool:
-          name: azsdk-pool-mms-win-2022-general
+          name: azsdk-pool
           vmImage: windows-2022
         steps:
           - checkout: self
