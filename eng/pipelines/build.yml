@@ -14,7 +14,6 @@ extends:
   template: /eng/pipelines/1es-redirect.yml
   parameters:
     variables:
-      BlobFeedUrl: https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json
       OfficialBuildId: $(Build.BuildNumber)
       nugetMultiFeedWarnLevel: 'none'
 
@@ -169,30 +168,37 @@ extends:
             name: azsdk-pool
             image: ubuntu-24.04
             os: linux
+          dependsOn:
+          - Build_and_Test
           jobs:
           - deployment: Publish
-            environment: net-release
+            environment: none
             variables:
               Artifacts: $(System.DefaultWorkingDirectory)/_artifacts/packages
+
+            pool:
+              name: azsdk-pool
+              image: windows-2022 # Nuget publish requires .NET framework on windows to handle the auth
+              os: windows
+
+            templateContext:
+              type: releaseJob
+              isProduction: true
+              inputs:
+                - input: pipelineArtifact
+                  artifactName: packages
+                  targetPath: $(Artifacts)
             
             strategy:
               runOnce:
                 deploy:
                   steps:
-                    - task: DownloadPipelineArtifact@2
-                      displayName: Download Packages
-                      inputs:
-                        artifact: packages
-                        path: $(Artifacts)
                     - task: 1ES.PublishNuget@1
                       displayName: 'Publish to DevOps Feed'
                       inputs:
-                        useDotNetTask: false
-                        publishPackageMetadata: true
                         packageParentPath: '$(Artifacts)'
                         packagesToPush: '$(Artifacts)/*.nupkg;!$(Artifacts)/*.symbols.nupkg'
-                        nuGetFeedType: 'internal'
-                        publishVstsFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
+                        publishVstsFeed: 'public/azure-sdk-for-net'
 
         - stage: 'Update_azure_sdk_for_net'
           pool:
