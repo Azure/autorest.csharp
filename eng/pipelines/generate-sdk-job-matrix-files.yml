@@ -27,6 +27,11 @@ jobs:
         WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
         Commitish: refs/heads/${{ parameters.BranchName}}
       SkipCheckoutNone: true
+  - task: UseDotNet@2
+    displayName: 'Use .NET Core SDK'
+    inputs:
+      useGlobalJson: true
+      performMultiLevelLookup: true
   - pwsh: ./eng/GenerateSdkForNetCodeGenerationMatrix.ps1 -SdkForNetPath $(Build.SourcesDirectory)/azure-sdk-for-net -GroupCount ${{ parameters.JobCount }} -OutputFolder $(System.DefaultWorkingDirectory)/output
     displayName: "Generate Matrix Files"
     name: generate_job_matrix
