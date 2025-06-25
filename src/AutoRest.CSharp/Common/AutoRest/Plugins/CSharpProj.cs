@@ -69,15 +69,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (Configuration.MgmtTestConfiguration is not null)
             {
                 var testCSProjContent = GetTestCSProj();
-                string testGenProjectFolder;
-                if (Configuration.MgmtTestConfiguration.OutputFolder is { } testGenProjectOutputFolder)
-                {
-                    testGenProjectFolder = Path.Combine(testGenProjectOutputFolder, "../");
-                }
-                else
-                {
-                    testGenProjectFolder = "../";
-                }
+                string testGenProjectFolder = "../";
                 Console.WriteLine(Path.Combine(testGenProjectFolder, $"{Configuration.Namespace}.Tests.csproj"));
                 writeFile(FormatPath(Path.Combine(testGenProjectFolder, $"{Configuration.Namespace}.Tests.csproj")), testCSProjContent);
             }
