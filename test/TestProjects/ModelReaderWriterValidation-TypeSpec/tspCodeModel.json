@@ -378,9 +378,9 @@
     {
       "$id": "30",
       "kind": "constant",
-      "name": "op1ContentType",
-      "namespace": "",
-      "usage": "None",
+      "name": "ModelXKind",
+      "namespace": "ModelReaderWriterValidationTypeSpec",
+      "usage": "Input,Output,Json",
       "valueType": {
         "$id": "31",
         "kind": "string",
@@ -388,15 +388,15 @@
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
       },
-      "value": "application/json",
+      "value": "X",
       "decorators": []
     },
     {
       "$id": "32",
       "kind": "constant",
-      "name": "op1ContentType1",
-      "namespace": "",
-      "usage": "None",
+      "name": "ModelYKind",
+      "namespace": "ModelReaderWriterValidationTypeSpec",
+      "usage": "Input,Output,Json",
       "valueType": {
         "$id": "33",
         "kind": "string",
@@ -404,13 +404,13 @@
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
       },
-      "value": "application/json",
+      "value": "Y",
       "decorators": []
     },
     {
       "$id": "34",
       "kind": "constant",
-      "name": "op2ContentType",
+      "name": "op1ContentType",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -426,7 +426,7 @@
     {
       "$id": "36",
       "kind": "constant",
-      "name": "op2ContentType1",
+      "name": "op1ContentType1",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -442,7 +442,7 @@
     {
       "$id": "38",
       "kind": "constant",
-      "name": "op3ContentType",
+      "name": "op2ContentType",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -458,7 +458,7 @@
     {
       "$id": "40",
       "kind": "constant",
-      "name": "op3ContentType1",
+      "name": "op2ContentType1",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -474,9 +474,9 @@
     {
       "$id": "42",
       "kind": "constant",
-      "name": "ModelXKind",
-      "namespace": "ModelReaderWriterValidationTypeSpec",
-      "usage": "Input,Output,Json",
+      "name": "op3ContentType",
+      "namespace": "",
+      "usage": "None",
       "valueType": {
         "$id": "43",
         "kind": "string",
@@ -484,15 +484,15 @@
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
       },
-      "value": "X",
+      "value": "application/json",
       "decorators": []
     },
     {
       "$id": "44",
       "kind": "constant",
-      "name": "ModelYKind",
-      "namespace": "ModelReaderWriterValidationTypeSpec",
-      "usage": "Input,Output,Json",
+      "name": "op3ContentType1",
+      "namespace": "",
+      "usage": "None",
       "valueType": {
         "$id": "45",
         "kind": "string",
@@ -500,7 +500,7 @@
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
       },
-      "value": "Y",
+      "value": "application/json",
       "decorators": []
     },
     {
@@ -926,7 +926,7 @@
               "name": "kind",
               "serializedName": "kind",
               "type": {
-                "$ref": "42"
+                "$ref": "30"
               },
               "optional": false,
               "readOnly": false,
@@ -1054,7 +1054,7 @@
               "name": "kind",
               "serializedName": "kind",
               "type": {
-                "$ref": "44"
+                "$ref": "32"
               },
               "optional": false,
               "readOnly": false,
@@ -2829,7 +2829,7 @@
                 "nameInRequest": "Content-Type",
                 "doc": "Body parameter's content type. Known values are application/json",
                 "type": {
-                  "$ref": "30"
+                  "$ref": "34"
                 },
                 "location": "Header",
                 "isApiVersion": false,
@@ -2846,7 +2846,7 @@
                 "name": "accept",
                 "nameInRequest": "Accept",
                 "type": {
-                  "$ref": "32"
+                  "$ref": "36"
                 },
                 "location": "Header",
                 "isApiVersion": false,
@@ -2927,7 +2927,7 @@
               "nameInRequest": "contentType",
               "doc": "Body parameter's content type. Known values are application/json",
               "type": {
-                "$ref": "30"
+                "$ref": "34"
               },
               "location": "Header",
               "isApiVersion": false,
@@ -2944,7 +2944,7 @@
               "name": "accept",
               "nameInRequest": "accept",
               "type": {
-                "$ref": "32"
+                "$ref": "36"
               },
               "location": "Header",
               "isApiVersion": false,
@@ -2985,7 +2985,7 @@
                 "nameInRequest": "Content-Type",
                 "doc": "Body parameter's content type. Known values are application/json",
                 "type": {
-                  "$ref": "34"
+                  "$ref": "38"
                 },
                 "location": "Header",
                 "isApiVersion": false,
@@ -3002,7 +3002,7 @@
                 "name": "accept",
                 "nameInRequest": "Accept",
                 "type": {
-                  "$ref": "36"
+                  "$ref": "40"
                 },
                 "location": "Header",
                 "isApiVersion": false,
@@ -3083,7 +3083,7 @@
               "nameInRequest": "contentType",
               "doc": "Body parameter's content type. Known values are application/json",
               "type": {
-                "$ref": "34"
+                "$ref": "38"
               },
               "location": "Header",
               "isApiVersion": false,
@@ -3100,7 +3100,7 @@
               "name": "accept",
               "nameInRequest": "accept",
               "type": {
-                "$ref": "36"
+                "$ref": "40"
               },
               "location": "Header",
               "isApiVersion": false,
@@ -3141,7 +3141,7 @@
                 "nameInRequest": "Content-Type",
                 "doc": "Body parameter's content type. Known values are application/json",
                 "type": {
-                  "$ref": "38"
+                  "$ref": "42"
                 },
                 "location": "Header",
                 "isApiVersion": false,
@@ -3158,7 +3158,7 @@
                 "name": "accept",
                 "nameInRequest": "Accept",
                 "type": {
-                  "$ref": "40"
+                  "$ref": "44"
                 },
                 "location": "Header",
                 "isApiVersion": false,
@@ -3239,7 +3239,7 @@
               "nameInRequest": "contentType",
               "doc": "Body parameter's content type. Known values are application/json",
               "type": {
-                "$ref": "38"
+                "$ref": "42"
               },
               "location": "Header",
               "isApiVersion": false,
@@ -3256,7 +3256,7 @@
               "name": "accept",
               "nameInRequest": "accept",
               "type": {
-                "$ref": "40"
+                "$ref": "44"
               },
               "location": "Header",
               "isApiVersion": false,

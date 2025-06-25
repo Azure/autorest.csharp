@@ -259,8 +259,8 @@
     {
       "$id": "21",
       "kind": "enum",
-      "name": "ExtendedLocationType",
-      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ExtendedLocationType",
+      "name": "ResourceProvisioningState",
+      "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceProvisioningState",
       "valueType": {
         "$id": "22",
         "kind": "string",
@@ -272,90 +272,41 @@
         {
           "$id": "23",
           "kind": "enumvalue",
-          "name": "EdgeZone",
-          "value": "EdgeZone",
-          "valueType": {
-            "$ref": "22"
-          },
-          "enumType": {
-            "$ref": "21"
-          },
-          "doc": "Azure Edge Zones location type",
-          "decorators": []
-        },
-        {
-          "$id": "24",
-          "kind": "enumvalue",
-          "name": "CustomLocation",
-          "value": "CustomLocation",
-          "valueType": {
-            "$ref": "22"
-          },
-          "enumType": {
-            "$ref": "21"
-          },
-          "doc": "Azure Custom Locations type",
-          "decorators": []
-        }
-      ],
-      "namespace": "MgmtTypeSpec",
-      "doc": "The supported ExtendedLocation types.",
-      "isFixed": false,
-      "isFlags": false,
-      "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-      "decorators": []
-    },
-    {
-      "$id": "25",
-      "kind": "enum",
-      "name": "ResourceProvisioningState",
-      "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceProvisioningState",
-      "valueType": {
-        "$id": "26",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "values": [
-        {
-          "$id": "27",
-          "kind": "enumvalue",
           "name": "Succeeded",
           "value": "Succeeded",
           "valueType": {
-            "$ref": "26"
+            "$ref": "22"
           },
           "enumType": {
-            "$ref": "25"
+            "$ref": "21"
           },
           "doc": "Resource has been created.",
           "decorators": []
         },
         {
-          "$id": "28",
+          "$id": "24",
           "kind": "enumvalue",
           "name": "Failed",
           "value": "Failed",
           "valueType": {
-            "$ref": "26"
+            "$ref": "22"
           },
           "enumType": {
-            "$ref": "25"
+            "$ref": "21"
           },
           "doc": "Resource creation failed.",
           "decorators": []
         },
         {
-          "$id": "29",
+          "$id": "25",
           "kind": "enumvalue",
           "name": "Canceled",
           "value": "Canceled",
           "valueType": {
-            "$ref": "26"
+            "$ref": "22"
           },
           "enumType": {
-            "$ref": "25"
+            "$ref": "21"
           },
           "doc": "Resource creation was canceled.",
           "decorators": []
@@ -366,6 +317,55 @@
       "isFixed": false,
       "isFlags": false,
       "usage": "LroPolling",
+      "decorators": []
+    },
+    {
+      "$id": "26",
+      "kind": "enum",
+      "name": "ExtendedLocationType",
+      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ExtendedLocationType",
+      "valueType": {
+        "$id": "27",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "values": [
+        {
+          "$id": "28",
+          "kind": "enumvalue",
+          "name": "EdgeZone",
+          "value": "EdgeZone",
+          "valueType": {
+            "$ref": "27"
+          },
+          "enumType": {
+            "$ref": "26"
+          },
+          "doc": "Azure Edge Zones location type",
+          "decorators": []
+        },
+        {
+          "$id": "29",
+          "kind": "enumvalue",
+          "name": "CustomLocation",
+          "value": "CustomLocation",
+          "valueType": {
+            "$ref": "27"
+          },
+          "enumType": {
+            "$ref": "26"
+          },
+          "doc": "Azure Custom Locations type",
+          "decorators": []
+        }
+      ],
+      "namespace": "MgmtTypeSpec",
+      "doc": "The supported ExtendedLocation types.",
+      "isFixed": false,
+      "isFlags": false,
+      "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
       "decorators": []
     },
     {
@@ -2270,7 +2270,7 @@
           "serializedName": "status",
           "doc": "The operation status",
           "type": {
-            "$ref": "25"
+            "$ref": "21"
           },
           "optional": false,
           "readOnly": false,
@@ -2799,7 +2799,7 @@
                 "serializedName": "type",
                 "doc": "The type of the extended location.",
                 "type": {
-                  "$ref": "21"
+                  "$ref": "26"
                 },
                 "optional": false,
                 "readOnly": false,

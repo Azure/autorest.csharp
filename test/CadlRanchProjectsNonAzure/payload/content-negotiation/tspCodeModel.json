@@ -5,7 +5,7 @@
     {
       "$id": "1",
       "kind": "enum",
-      "name": "PngImageAsJsonContentType1",
+      "name": "PngImageAsJsonContentType",
       "crossLanguageDefinitionId": "",
       "valueType": {
         "$id": "2",
@@ -39,171 +39,171 @@
     {
       "$id": "4",
       "kind": "constant",
-      "name": "PngImageContentType",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "5",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "image/png",
-      "decorators": []
-    },
-    {
-      "$id": "6",
-      "kind": "constant",
-      "name": "PngImageContentType1",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "7",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "image/png",
-      "decorators": []
-    },
-    {
-      "$id": "8",
-      "kind": "constant",
-      "name": "PngImageContentType2",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "9",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "image/png",
-      "decorators": []
-    },
-    {
-      "$id": "10",
-      "kind": "constant",
-      "name": "JpegImageContentType",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "11",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "image/jpeg",
-      "decorators": []
-    },
-    {
-      "$id": "12",
-      "kind": "constant",
-      "name": "JpegImageContentType1",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "13",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "image/jpeg",
-      "decorators": []
-    },
-    {
-      "$id": "14",
-      "kind": "constant",
-      "name": "JpegImageContentType2",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "15",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "image/jpeg",
-      "decorators": []
-    },
-    {
-      "$id": "16",
-      "kind": "constant",
-      "name": "PngImageContentType3",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "17",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "image/png",
-      "decorators": []
-    },
-    {
-      "$id": "18",
-      "kind": "constant",
-      "name": "PngImageContentType4",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "19",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "image/png",
-      "decorators": []
-    },
-    {
-      "$id": "20",
-      "kind": "constant",
-      "name": "PngImageContentType5",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "21",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "image/png",
-      "decorators": []
-    },
-    {
-      "$id": "22",
-      "kind": "constant",
       "name": "PngImageAsJsonContentType",
-      "namespace": "",
-      "usage": "None",
+      "namespace": "Scm.Payload.ContentNegotiation",
+      "usage": "Output,Json",
       "valueType": {
-        "$id": "23",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
+        "$ref": "1"
       },
       "value": "application/json",
       "decorators": []
     },
     {
-      "$id": "24",
+      "$id": "5",
+      "kind": "constant",
+      "name": "PngImageContentType",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "6",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/png",
+      "decorators": []
+    },
+    {
+      "$id": "7",
+      "kind": "constant",
+      "name": "PngImageContentType1",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "8",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/png",
+      "decorators": []
+    },
+    {
+      "$id": "9",
+      "kind": "constant",
+      "name": "PngImageContentType2",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "10",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/png",
+      "decorators": []
+    },
+    {
+      "$id": "11",
+      "kind": "constant",
+      "name": "JpegImageContentType",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "12",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/jpeg",
+      "decorators": []
+    },
+    {
+      "$id": "13",
+      "kind": "constant",
+      "name": "JpegImageContentType1",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "14",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/jpeg",
+      "decorators": []
+    },
+    {
+      "$id": "15",
+      "kind": "constant",
+      "name": "JpegImageContentType2",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "16",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/jpeg",
+      "decorators": []
+    },
+    {
+      "$id": "17",
+      "kind": "constant",
+      "name": "PngImageContentType3",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "18",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/png",
+      "decorators": []
+    },
+    {
+      "$id": "19",
+      "kind": "constant",
+      "name": "PngImageContentType4",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "20",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/png",
+      "decorators": []
+    },
+    {
+      "$id": "21",
+      "kind": "constant",
+      "name": "PngImageContentType5",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "22",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "image/png",
+      "decorators": []
+    },
+    {
+      "$id": "23",
       "kind": "constant",
       "name": "PngImageAsJsonContentType1",
-      "namespace": "Scm.Payload.ContentNegotiation",
-      "usage": "Output,Json",
+      "namespace": "",
+      "usage": "None",
       "valueType": {
-        "$ref": "1"
+        "$id": "24",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
       },
       "value": "application/json",
       "decorators": []
@@ -257,7 +257,7 @@
           "name": "contentType",
           "serializedName": "content-type",
           "type": {
-            "$ref": "24"
+            "$ref": "4"
           },
           "optional": false,
           "readOnly": false,
@@ -360,7 +360,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "4"
+                      "$ref": "5"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -390,7 +390,7 @@
                         "name": "contentType",
                         "nameInResponse": "content-type",
                         "type": {
-                          "$ref": "6"
+                          "$ref": "7"
                         }
                       }
                     ],
@@ -415,7 +415,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "8"
+                    "$ref": "9"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -455,7 +455,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "10"
+                      "$ref": "11"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -485,7 +485,7 @@
                         "name": "contentType",
                         "nameInResponse": "content-type",
                         "type": {
-                          "$ref": "12"
+                          "$ref": "13"
                         }
                       }
                     ],
@@ -510,7 +510,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "14"
+                    "$ref": "15"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -596,7 +596,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "16"
+                      "$ref": "17"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -626,7 +626,7 @@
                         "name": "contentType",
                         "nameInResponse": "content-type",
                         "type": {
-                          "$ref": "18"
+                          "$ref": "19"
                         }
                       }
                     ],
@@ -651,7 +651,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "20"
+                    "$ref": "21"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -691,7 +691,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "22"
+                      "$ref": "23"
                     },
                     "location": "Header",
                     "isApiVersion": false,

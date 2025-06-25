@@ -6,9 +6,9 @@
     {
       "$id": "1",
       "kind": "constant",
-      "name": "noDecoratorInPublicContentType",
-      "namespace": "",
-      "usage": "None",
+      "name": "RealModelKind",
+      "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
+      "usage": "Output,Json",
       "valueType": {
         "$id": "2",
         "kind": "string",
@@ -16,13 +16,13 @@
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
       },
-      "value": "application/json",
+      "value": "real",
       "decorators": []
     },
     {
       "$id": "3",
       "kind": "constant",
-      "name": "publicDecoratorInPublicContentType",
+      "name": "noDecoratorInPublicContentType",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -38,7 +38,7 @@
     {
       "$id": "5",
       "kind": "constant",
-      "name": "noDecoratorInInternalContentType",
+      "name": "publicDecoratorInPublicContentType",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -54,7 +54,7 @@
     {
       "$id": "7",
       "kind": "constant",
-      "name": "internalDecoratorInInternalContentType",
+      "name": "noDecoratorInInternalContentType",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -70,7 +70,7 @@
     {
       "$id": "9",
       "kind": "constant",
-      "name": "publicDecoratorInInternalContentType",
+      "name": "internalDecoratorInInternalContentType",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -86,7 +86,7 @@
     {
       "$id": "11",
       "kind": "constant",
-      "name": "publicContentType",
+      "name": "publicDecoratorInInternalContentType",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -102,7 +102,7 @@
     {
       "$id": "13",
       "kind": "constant",
-      "name": "internalContentType",
+      "name": "publicContentType",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -118,7 +118,7 @@
     {
       "$id": "15",
       "kind": "constant",
-      "name": "operationContentType",
+      "name": "internalContentType",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -134,7 +134,7 @@
     {
       "$id": "17",
       "kind": "constant",
-      "name": "discriminatorContentType",
+      "name": "operationContentType",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -150,9 +150,9 @@
     {
       "$id": "19",
       "kind": "constant",
-      "name": "RealModelKind",
-      "namespace": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation",
-      "usage": "Output,Json",
+      "name": "discriminatorContentType",
+      "namespace": "",
+      "usage": "None",
       "valueType": {
         "$id": "20",
         "kind": "string",
@@ -160,7 +160,7 @@
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
       },
-      "value": "real",
+      "value": "application/json",
       "decorators": []
     }
   ],
@@ -575,7 +575,7 @@
               "name": "kind",
               "serializedName": "kind",
               "type": {
-                "$ref": "19"
+                "$ref": "1"
               },
               "optional": false,
               "readOnly": false,
@@ -685,7 +685,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "1"
+                      "$ref": "3"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -749,7 +749,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "1"
+                    "$ref": "3"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -810,7 +810,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "3"
+                      "$ref": "5"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -874,7 +874,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "3"
+                    "$ref": "5"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -981,7 +981,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "5"
+                      "$ref": "7"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -1045,7 +1045,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "5"
+                    "$ref": "7"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -1106,7 +1106,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "7"
+                      "$ref": "9"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -1170,7 +1170,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "7"
+                    "$ref": "9"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -1231,7 +1231,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "9"
+                      "$ref": "11"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -1295,7 +1295,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "9"
+                    "$ref": "11"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -1402,7 +1402,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "11"
+                      "$ref": "13"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -1466,7 +1466,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "11"
+                    "$ref": "13"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -1527,7 +1527,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "13"
+                      "$ref": "15"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -1591,7 +1591,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "13"
+                    "$ref": "15"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -1700,7 +1700,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "15"
+                      "$ref": "17"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -1764,7 +1764,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "15"
+                    "$ref": "17"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -1827,7 +1827,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "17"
+                      "$ref": "19"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -1891,7 +1891,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "17"
+                    "$ref": "19"
                   },
                   "location": "Header",
                   "isApiVersion": false,

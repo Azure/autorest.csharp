@@ -241,534 +241,6 @@
     {
       "$id": "22",
       "kind": "constant",
-      "name": "getAllContentType",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "23",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "24",
-      "kind": "constant",
-      "name": "getDefaultContentType",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "25",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "26",
-      "kind": "constant",
-      "name": "putAllContentType",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "27",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "28",
-      "kind": "constant",
-      "name": "putDefaultContentType",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "29",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "30",
-      "kind": "constant",
-      "name": "getAllContentType1",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "31",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "32",
-      "kind": "constant",
-      "name": "getDefaultContentType1",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "33",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "34",
-      "kind": "constant",
-      "name": "putAllContentType1",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "35",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "36",
-      "kind": "constant",
-      "name": "putDefaultContentType1",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "37",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "38",
-      "kind": "constant",
-      "name": "getAllContentType2",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "39",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "40",
-      "kind": "constant",
-      "name": "getDefaultContentType2",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "41",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "42",
-      "kind": "constant",
-      "name": "putAllContentType2",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "43",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "44",
-      "kind": "constant",
-      "name": "putDefaultContentType2",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "45",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "46",
-      "kind": "constant",
-      "name": "getAllContentType3",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "47",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "48",
-      "kind": "constant",
-      "name": "getDefaultContentType3",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "49",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "50",
-      "kind": "constant",
-      "name": "putAllContentType3",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "51",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "52",
-      "kind": "constant",
-      "name": "putDefaultContentType3",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "53",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "54",
-      "kind": "constant",
-      "name": "getAllContentType4",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "55",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "56",
-      "kind": "constant",
-      "name": "getDefaultContentType4",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "57",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "58",
-      "kind": "constant",
-      "name": "putAllContentType4",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "59",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "60",
-      "kind": "constant",
-      "name": "putDefaultContentType4",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "61",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "62",
-      "kind": "constant",
-      "name": "getAllContentType5",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "63",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "64",
-      "kind": "constant",
-      "name": "getDefaultContentType5",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "65",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "66",
-      "kind": "constant",
-      "name": "putAllContentType5",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "67",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "68",
-      "kind": "constant",
-      "name": "putDefaultContentType5",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "69",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "70",
-      "kind": "constant",
-      "name": "getAllContentType6",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "71",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "72",
-      "kind": "constant",
-      "name": "getDefaultContentType6",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "73",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "74",
-      "kind": "constant",
-      "name": "putAllContentType6",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "75",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "76",
-      "kind": "constant",
-      "name": "putDefaultContentType6",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "77",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "78",
-      "kind": "constant",
-      "name": "getAllContentType7",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "79",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "80",
-      "kind": "constant",
-      "name": "getDefaultContentType7",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "81",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "82",
-      "kind": "constant",
-      "name": "putAllContentType7",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "83",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "84",
-      "kind": "constant",
-      "name": "putDefaultContentType7",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "85",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "86",
-      "kind": "constant",
-      "name": "getAllContentType8",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "87",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "88",
-      "kind": "constant",
       "name": "StringLiteralPropertyProperty",
       "namespace": "Scm._Type.Property.Optionality",
       "usage": "Input,Output,Json",
@@ -779,9 +251,545 @@
       "decorators": []
     },
     {
+      "$id": "23",
+      "kind": "constant",
+      "name": "IntLiteralPropertyProperty",
+      "namespace": "Scm._Type.Property.Optionality",
+      "usage": "Input,Output,Json",
+      "valueType": {
+        "$ref": "16"
+      },
+      "value": 1,
+      "decorators": []
+    },
+    {
+      "$id": "24",
+      "kind": "constant",
+      "name": "FloatLiteralPropertyProperty",
+      "namespace": "Scm._Type.Property.Optionality",
+      "usage": "Input,Output,Json",
+      "valueType": {
+        "$ref": "19"
+      },
+      "value": 1.25,
+      "decorators": []
+    },
+    {
+      "$id": "25",
+      "kind": "constant",
+      "name": "BooleanLiteralPropertyProperty",
+      "namespace": "Scm._Type.Property.Optionality",
+      "usage": "Input,Output,Json",
+      "valueType": {
+        "$id": "26",
+        "kind": "boolean",
+        "name": "boolean",
+        "crossLanguageDefinitionId": "TypeSpec.boolean",
+        "decorators": []
+      },
+      "value": true,
+      "decorators": []
+    },
+    {
+      "$id": "27",
+      "kind": "constant",
+      "name": "getAllContentType",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "28",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "29",
+      "kind": "constant",
+      "name": "getDefaultContentType",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "30",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "31",
+      "kind": "constant",
+      "name": "putAllContentType",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "32",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "33",
+      "kind": "constant",
+      "name": "putDefaultContentType",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "34",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "35",
+      "kind": "constant",
+      "name": "getAllContentType1",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "36",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "37",
+      "kind": "constant",
+      "name": "getDefaultContentType1",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "38",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "39",
+      "kind": "constant",
+      "name": "putAllContentType1",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "40",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "41",
+      "kind": "constant",
+      "name": "putDefaultContentType1",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "42",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "43",
+      "kind": "constant",
+      "name": "getAllContentType2",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "44",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "45",
+      "kind": "constant",
+      "name": "getDefaultContentType2",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "46",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "47",
+      "kind": "constant",
+      "name": "putAllContentType2",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "48",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "49",
+      "kind": "constant",
+      "name": "putDefaultContentType2",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "50",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "51",
+      "kind": "constant",
+      "name": "getAllContentType3",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "52",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "53",
+      "kind": "constant",
+      "name": "getDefaultContentType3",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "54",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "55",
+      "kind": "constant",
+      "name": "putAllContentType3",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "56",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "57",
+      "kind": "constant",
+      "name": "putDefaultContentType3",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "58",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "59",
+      "kind": "constant",
+      "name": "getAllContentType4",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "60",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "61",
+      "kind": "constant",
+      "name": "getDefaultContentType4",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "62",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "63",
+      "kind": "constant",
+      "name": "putAllContentType4",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "64",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "65",
+      "kind": "constant",
+      "name": "putDefaultContentType4",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "66",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "67",
+      "kind": "constant",
+      "name": "getAllContentType5",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "68",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "69",
+      "kind": "constant",
+      "name": "getDefaultContentType5",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "70",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "71",
+      "kind": "constant",
+      "name": "putAllContentType5",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "72",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "73",
+      "kind": "constant",
+      "name": "putDefaultContentType5",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "74",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "75",
+      "kind": "constant",
+      "name": "getAllContentType6",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "76",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "77",
+      "kind": "constant",
+      "name": "getDefaultContentType6",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "78",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "79",
+      "kind": "constant",
+      "name": "putAllContentType6",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "80",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "81",
+      "kind": "constant",
+      "name": "putDefaultContentType6",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "82",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "83",
+      "kind": "constant",
+      "name": "getAllContentType7",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "84",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "85",
+      "kind": "constant",
+      "name": "getDefaultContentType7",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "86",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "87",
+      "kind": "constant",
+      "name": "putAllContentType7",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "88",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
       "$id": "89",
       "kind": "constant",
-      "name": "getDefaultContentType8",
+      "name": "putDefaultContentType7",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -797,7 +805,7 @@
     {
       "$id": "91",
       "kind": "constant",
-      "name": "putAllContentType8",
+      "name": "getAllContentType8",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -813,7 +821,7 @@
     {
       "$id": "93",
       "kind": "constant",
-      "name": "putDefaultContentType8",
+      "name": "getDefaultContentType8",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -829,7 +837,7 @@
     {
       "$id": "95",
       "kind": "constant",
-      "name": "getAllContentType9",
+      "name": "putAllContentType8",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -845,23 +853,43 @@
     {
       "$id": "97",
       "kind": "constant",
-      "name": "IntLiteralPropertyProperty",
-      "namespace": "Scm._Type.Property.Optionality",
-      "usage": "Input,Output,Json",
+      "name": "putDefaultContentType8",
+      "namespace": "",
+      "usage": "None",
       "valueType": {
-        "$ref": "16"
+        "$id": "98",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
       },
-      "value": 1,
+      "value": "application/json",
       "decorators": []
     },
     {
-      "$id": "98",
+      "$id": "99",
+      "kind": "constant",
+      "name": "getAllContentType9",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "100",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
+    {
+      "$id": "101",
       "kind": "constant",
       "name": "getDefaultContentType9",
       "namespace": "",
       "usage": "None",
       "valueType": {
-        "$id": "99",
+        "$id": "102",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -871,13 +899,13 @@
       "decorators": []
     },
     {
-      "$id": "100",
+      "$id": "103",
       "kind": "constant",
       "name": "putAllContentType9",
       "namespace": "",
       "usage": "None",
       "valueType": {
-        "$id": "101",
+        "$id": "104",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -887,53 +915,25 @@
       "decorators": []
     },
     {
-      "$id": "102",
+      "$id": "105",
       "kind": "constant",
       "name": "putDefaultContentType9",
       "namespace": "",
       "usage": "None",
       "valueType": {
-        "$id": "103",
+        "$id": "106",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
       },
       "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "104",
-      "kind": "constant",
-      "name": "getAllContentType10",
-      "namespace": "",
-      "usage": "None",
-      "valueType": {
-        "$id": "105",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-      },
-      "value": "application/json",
-      "decorators": []
-    },
-    {
-      "$id": "106",
-      "kind": "constant",
-      "name": "FloatLiteralPropertyProperty",
-      "namespace": "Scm._Type.Property.Optionality",
-      "usage": "Input,Output,Json",
-      "valueType": {
-        "$ref": "19"
-      },
-      "value": 1.25,
       "decorators": []
     },
     {
       "$id": "107",
       "kind": "constant",
-      "name": "getDefaultContentType10",
+      "name": "getAllContentType10",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -949,7 +949,7 @@
     {
       "$id": "109",
       "kind": "constant",
-      "name": "putAllContentType10",
+      "name": "getDefaultContentType10",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -965,7 +965,7 @@
     {
       "$id": "111",
       "kind": "constant",
-      "name": "putDefaultContentType10",
+      "name": "putAllContentType10",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -981,7 +981,7 @@
     {
       "$id": "113",
       "kind": "constant",
-      "name": "getAllContentType11",
+      "name": "putDefaultContentType10",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -997,17 +997,17 @@
     {
       "$id": "115",
       "kind": "constant",
-      "name": "BooleanLiteralPropertyProperty",
-      "namespace": "Scm._Type.Property.Optionality",
-      "usage": "Input,Output,Json",
+      "name": "getAllContentType11",
+      "namespace": "",
+      "usage": "None",
       "valueType": {
         "$id": "116",
-        "kind": "boolean",
-        "name": "boolean",
-        "crossLanguageDefinitionId": "TypeSpec.boolean",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
       },
-      "value": true,
+      "value": "application/json",
       "decorators": []
     },
     {
@@ -1657,7 +1657,7 @@
           "serializedName": "property",
           "doc": "Property",
           "type": {
-            "$ref": "88"
+            "$ref": "22"
           },
           "optional": true,
           "readOnly": false,
@@ -1690,7 +1690,7 @@
           "serializedName": "property",
           "doc": "Property",
           "type": {
-            "$ref": "97"
+            "$ref": "23"
           },
           "optional": true,
           "readOnly": false,
@@ -1723,7 +1723,7 @@
           "serializedName": "property",
           "doc": "Property",
           "type": {
-            "$ref": "106"
+            "$ref": "24"
           },
           "optional": true,
           "readOnly": false,
@@ -1756,7 +1756,7 @@
           "serializedName": "property",
           "doc": "Property",
           "type": {
-            "$ref": "115"
+            "$ref": "25"
           },
           "optional": true,
           "readOnly": false,
@@ -2003,7 +2003,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "22"
+                      "$ref": "27"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -2046,7 +2046,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "22"
+                    "$ref": "27"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -2088,7 +2088,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "24"
+                      "$ref": "29"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -2131,7 +2131,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "24"
+                    "$ref": "29"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -2174,7 +2174,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "26"
+                      "$ref": "31"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -2249,7 +2249,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "26"
+                    "$ref": "31"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -2288,7 +2288,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "28"
+                      "$ref": "33"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -2363,7 +2363,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "28"
+                    "$ref": "33"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -2447,7 +2447,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "30"
+                      "$ref": "35"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -2490,7 +2490,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "30"
+                    "$ref": "35"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -2532,7 +2532,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "32"
+                      "$ref": "37"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -2575,7 +2575,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "32"
+                    "$ref": "37"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -2618,7 +2618,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "34"
+                      "$ref": "39"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -2693,7 +2693,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "34"
+                    "$ref": "39"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -2732,7 +2732,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "36"
+                      "$ref": "41"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -2807,7 +2807,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "36"
+                    "$ref": "41"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -2891,7 +2891,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "38"
+                      "$ref": "43"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -2934,7 +2934,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "38"
+                    "$ref": "43"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -2976,7 +2976,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "40"
+                      "$ref": "45"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -3019,7 +3019,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "40"
+                    "$ref": "45"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -3062,7 +3062,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "42"
+                      "$ref": "47"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -3137,7 +3137,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "42"
+                    "$ref": "47"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -3176,7 +3176,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "44"
+                      "$ref": "49"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -3251,7 +3251,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "44"
+                    "$ref": "49"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -3335,7 +3335,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "46"
+                      "$ref": "51"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -3378,7 +3378,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "46"
+                    "$ref": "51"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -3420,7 +3420,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "48"
+                      "$ref": "53"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -3463,7 +3463,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "48"
+                    "$ref": "53"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -3506,7 +3506,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "50"
+                      "$ref": "55"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -3581,7 +3581,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "50"
+                    "$ref": "55"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -3620,7 +3620,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "52"
+                      "$ref": "57"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -3695,7 +3695,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "52"
+                    "$ref": "57"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -3779,7 +3779,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "54"
+                      "$ref": "59"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -3822,7 +3822,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "54"
+                    "$ref": "59"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -3864,7 +3864,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "56"
+                      "$ref": "61"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -3907,7 +3907,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "56"
+                    "$ref": "61"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -3950,7 +3950,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "58"
+                      "$ref": "63"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -4025,7 +4025,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "58"
+                    "$ref": "63"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -4064,7 +4064,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "60"
+                      "$ref": "65"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -4139,7 +4139,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "60"
+                    "$ref": "65"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -4223,7 +4223,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "62"
+                      "$ref": "67"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -4266,7 +4266,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "62"
+                    "$ref": "67"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -4308,7 +4308,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "64"
+                      "$ref": "69"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -4351,7 +4351,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "64"
+                    "$ref": "69"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -4394,7 +4394,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "66"
+                      "$ref": "71"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -4469,7 +4469,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "66"
+                    "$ref": "71"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -4508,7 +4508,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "68"
+                      "$ref": "73"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -4583,7 +4583,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "68"
+                    "$ref": "73"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -4667,7 +4667,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "70"
+                      "$ref": "75"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -4710,7 +4710,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "70"
+                    "$ref": "75"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -4752,7 +4752,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "72"
+                      "$ref": "77"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -4795,7 +4795,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "72"
+                    "$ref": "77"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -4838,7 +4838,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "74"
+                      "$ref": "79"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -4913,7 +4913,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "74"
+                    "$ref": "79"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -4952,7 +4952,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "76"
+                      "$ref": "81"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -5027,7 +5027,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "76"
+                    "$ref": "81"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -5111,7 +5111,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "78"
+                      "$ref": "83"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -5154,7 +5154,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "78"
+                    "$ref": "83"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -5196,7 +5196,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "80"
+                      "$ref": "85"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -5239,7 +5239,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "80"
+                    "$ref": "85"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -5282,7 +5282,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "82"
+                      "$ref": "87"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -5357,7 +5357,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "82"
+                    "$ref": "87"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -5396,7 +5396,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "84"
+                      "$ref": "89"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -5471,7 +5471,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "84"
+                    "$ref": "89"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -5555,7 +5555,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "86"
+                      "$ref": "91"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -5598,7 +5598,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "86"
+                    "$ref": "91"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -5640,7 +5640,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "89"
+                      "$ref": "93"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -5683,7 +5683,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "89"
+                    "$ref": "93"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -5726,7 +5726,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "91"
+                      "$ref": "95"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -5801,7 +5801,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "91"
+                    "$ref": "95"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -5840,7 +5840,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "93"
+                      "$ref": "97"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -5915,7 +5915,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "93"
+                    "$ref": "97"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -5999,7 +5999,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "95"
+                      "$ref": "99"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -6042,7 +6042,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "95"
+                    "$ref": "99"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -6084,7 +6084,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "98"
+                      "$ref": "101"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -6127,7 +6127,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "98"
+                    "$ref": "101"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -6170,7 +6170,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "100"
+                      "$ref": "103"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -6245,7 +6245,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "100"
+                    "$ref": "103"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -6284,7 +6284,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "102"
+                      "$ref": "105"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -6359,7 +6359,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "102"
+                    "$ref": "105"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -6443,7 +6443,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "104"
+                      "$ref": "107"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -6486,7 +6486,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "104"
+                    "$ref": "107"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -6528,7 +6528,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "107"
+                      "$ref": "109"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -6571,7 +6571,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "107"
+                    "$ref": "109"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -6614,7 +6614,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "109"
+                      "$ref": "111"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -6689,7 +6689,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "109"
+                    "$ref": "111"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -6728,7 +6728,7 @@
                     "nameInRequest": "Content-Type",
                     "doc": "Body parameter's content type. Known values are application/json",
                     "type": {
-                      "$ref": "111"
+                      "$ref": "113"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -6803,7 +6803,7 @@
                   "nameInRequest": "contentType",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
-                    "$ref": "111"
+                    "$ref": "113"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -6887,7 +6887,7 @@
                     "name": "accept",
                     "nameInRequest": "Accept",
                     "type": {
-                      "$ref": "113"
+                      "$ref": "115"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -6930,7 +6930,7 @@
                   "name": "accept",
                   "nameInRequest": "accept",
                   "type": {
-                    "$ref": "113"
+                    "$ref": "115"
                   },
                   "location": "Header",
                   "isApiVersion": false,

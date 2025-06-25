@@ -71,23 +71,31 @@
     {
       "$id": "7",
       "kind": "constant",
-      "name": "BasicRequestContentType",
-      "namespace": "",
-      "usage": "None",
+      "name": "FileSpecificContentTypeContentType",
+      "namespace": "Scm.Payload.Multipart",
+      "usage": "Input",
       "valueType": {
-        "$id": "8",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
+        "$ref": "1"
       },
-      "value": "multipart/form-data",
+      "value": "image/jpg",
+      "decorators": []
+    },
+    {
+      "$id": "8",
+      "kind": "constant",
+      "name": "FloatRequestTemperatureContentType",
+      "namespace": "Scm.Payload.Multipart",
+      "usage": "Input",
+      "valueType": {
+        "$ref": "4"
+      },
+      "value": "text/plain",
       "decorators": []
     },
     {
       "$id": "9",
       "kind": "constant",
-      "name": "BasicRequestContentType1",
+      "name": "BasicRequestContentType",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -103,7 +111,7 @@
     {
       "$id": "11",
       "kind": "constant",
-      "name": "BasicRequestContentType2",
+      "name": "BasicRequestContentType1",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -119,7 +127,7 @@
     {
       "$id": "13",
       "kind": "constant",
-      "name": "BasicRequestContentType3",
+      "name": "BasicRequestContentType2",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -135,7 +143,7 @@
     {
       "$id": "15",
       "kind": "constant",
-      "name": "BasicRequestContentType4",
+      "name": "BasicRequestContentType3",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -151,7 +159,7 @@
     {
       "$id": "17",
       "kind": "constant",
-      "name": "BasicRequestContentType5",
+      "name": "BasicRequestContentType4",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -167,7 +175,7 @@
     {
       "$id": "19",
       "kind": "constant",
-      "name": "BasicRequestContentType6",
+      "name": "BasicRequestContentType5",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -183,7 +191,7 @@
     {
       "$id": "21",
       "kind": "constant",
-      "name": "BasicRequestContentType7",
+      "name": "BasicRequestContentType6",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -199,7 +207,7 @@
     {
       "$id": "23",
       "kind": "constant",
-      "name": "BasicRequestContentType8",
+      "name": "BasicRequestContentType7",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -215,7 +223,7 @@
     {
       "$id": "25",
       "kind": "constant",
-      "name": "BasicRequestContentType9",
+      "name": "BasicRequestContentType8",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -231,7 +239,7 @@
     {
       "$id": "27",
       "kind": "constant",
-      "name": "BasicRequestContentType10",
+      "name": "BasicRequestContentType9",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -247,7 +255,7 @@
     {
       "$id": "29",
       "kind": "constant",
-      "name": "BasicRequestContentType11",
+      "name": "BasicRequestContentType10",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -263,7 +271,7 @@
     {
       "$id": "31",
       "kind": "constant",
-      "name": "BasicRequestContentType12",
+      "name": "BasicRequestContentType11",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -279,7 +287,7 @@
     {
       "$id": "33",
       "kind": "constant",
-      "name": "BasicRequestContentType13",
+      "name": "BasicRequestContentType12",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -295,7 +303,7 @@
     {
       "$id": "35",
       "kind": "constant",
-      "name": "BasicRequestContentType14",
+      "name": "BasicRequestContentType13",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -311,7 +319,7 @@
     {
       "$id": "37",
       "kind": "constant",
-      "name": "BasicRequestContentType15",
+      "name": "BasicRequestContentType14",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -327,7 +335,7 @@
     {
       "$id": "39",
       "kind": "constant",
-      "name": "BasicRequestContentType16",
+      "name": "BasicRequestContentType15",
       "namespace": "",
       "usage": "None",
       "valueType": {
@@ -343,23 +351,27 @@
     {
       "$id": "41",
       "kind": "constant",
-      "name": "FileSpecificContentTypeContentType",
-      "namespace": "Scm.Payload.Multipart",
-      "usage": "Input",
+      "name": "BasicRequestContentType16",
+      "namespace": "",
+      "usage": "None",
       "valueType": {
-        "$ref": "1"
+        "$id": "42",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
       },
-      "value": "image/jpg",
+      "value": "multipart/form-data",
       "decorators": []
     },
     {
-      "$id": "42",
+      "$id": "43",
       "kind": "constant",
       "name": "BasicRequestContentType17",
       "namespace": "",
       "usage": "None",
       "valueType": {
-        "$id": "43",
+        "$id": "44",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -369,13 +381,13 @@
       "decorators": []
     },
     {
-      "$id": "44",
+      "$id": "45",
       "kind": "constant",
       "name": "BasicRequestContentType18",
       "namespace": "",
       "usage": "None",
       "valueType": {
-        "$id": "45",
+        "$id": "46",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -385,13 +397,13 @@
       "decorators": []
     },
     {
-      "$id": "46",
+      "$id": "47",
       "kind": "constant",
       "name": "BasicRequestContentType19",
       "namespace": "",
       "usage": "None",
       "valueType": {
-        "$id": "47",
+        "$id": "48",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -401,13 +413,13 @@
       "decorators": []
     },
     {
-      "$id": "48",
+      "$id": "49",
       "kind": "constant",
       "name": "BasicRequestContentType20",
       "namespace": "",
       "usage": "None",
       "valueType": {
-        "$id": "49",
+        "$id": "50",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -417,13 +429,13 @@
       "decorators": []
     },
     {
-      "$id": "50",
+      "$id": "51",
       "kind": "constant",
       "name": "BasicRequestContentType21",
       "namespace": "",
       "usage": "None",
       "valueType": {
-        "$id": "51",
+        "$id": "52",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -433,13 +445,13 @@
       "decorators": []
     },
     {
-      "$id": "52",
+      "$id": "53",
       "kind": "constant",
       "name": "BasicRequestContentType22",
       "namespace": "",
       "usage": "None",
       "valueType": {
-        "$id": "53",
+        "$id": "54",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -449,31 +461,19 @@
       "decorators": []
     },
     {
-      "$id": "54",
+      "$id": "55",
       "kind": "constant",
       "name": "BasicRequestContentType23",
       "namespace": "",
       "usage": "None",
       "valueType": {
-        "$id": "55",
+        "$id": "56",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
       },
       "value": "multipart/form-data",
-      "decorators": []
-    },
-    {
-      "$id": "56",
-      "kind": "constant",
-      "name": "FloatRequestTemperatureContentType",
-      "namespace": "Scm.Payload.Multipart",
-      "usage": "Input",
-      "valueType": {
-        "$ref": "4"
-      },
-      "value": "text/plain",
       "decorators": []
     }
   ],
@@ -1382,7 +1382,7 @@
                 "name": "contentType",
                 "serializedName": "contentType",
                 "type": {
-                  "$ref": "41"
+                  "$ref": "7"
                 },
                 "optional": false,
                 "readOnly": false,
@@ -1763,7 +1763,7 @@
           "name": "contentType",
           "serializedName": "content-type",
           "type": {
-            "$ref": "56"
+            "$ref": "8"
           },
           "optional": false,
           "readOnly": false,
@@ -1843,7 +1843,7 @@
                     "name": "contentType",
                     "nameInRequest": "Content-Type",
                     "type": {
-                      "$ref": "7"
+                      "$ref": "9"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -1900,7 +1900,7 @@
                   "name": "contentType",
                   "nameInRequest": "content-type",
                   "type": {
-                    "$ref": "9"
+                    "$ref": "11"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -1955,7 +1955,7 @@
                     "name": "contentType",
                     "nameInRequest": "Content-Type",
                     "type": {
-                      "$ref": "11"
+                      "$ref": "13"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -2012,7 +2012,7 @@
                   "name": "contentType",
                   "nameInRequest": "content-type",
                   "type": {
-                    "$ref": "13"
+                    "$ref": "15"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -2067,7 +2067,7 @@
                     "name": "contentType",
                     "nameInRequest": "Content-Type",
                     "type": {
-                      "$ref": "15"
+                      "$ref": "17"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -2124,7 +2124,7 @@
                   "name": "contentType",
                   "nameInRequest": "content-type",
                   "type": {
-                    "$ref": "17"
+                    "$ref": "19"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -2179,7 +2179,7 @@
                     "name": "contentType",
                     "nameInRequest": "Content-Type",
                     "type": {
-                      "$ref": "19"
+                      "$ref": "21"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -2236,7 +2236,7 @@
                   "name": "contentType",
                   "nameInRequest": "content-type",
                   "type": {
-                    "$ref": "21"
+                    "$ref": "23"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -2291,7 +2291,7 @@
                     "name": "contentType",
                     "nameInRequest": "Content-Type",
                     "type": {
-                      "$ref": "23"
+                      "$ref": "25"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -2348,7 +2348,7 @@
                   "name": "contentType",
                   "nameInRequest": "content-type",
                   "type": {
-                    "$ref": "25"
+                    "$ref": "27"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -2403,7 +2403,7 @@
                     "name": "contentType",
                     "nameInRequest": "Content-Type",
                     "type": {
-                      "$ref": "27"
+                      "$ref": "29"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -2460,7 +2460,7 @@
                   "name": "contentType",
                   "nameInRequest": "content-type",
                   "type": {
-                    "$ref": "29"
+                    "$ref": "31"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -2515,7 +2515,7 @@
                     "name": "contentType",
                     "nameInRequest": "Content-Type",
                     "type": {
-                      "$ref": "31"
+                      "$ref": "33"
                     },
                     "location": "Header",
                     "isApiVersion": false,
@@ -2572,7 +2572,7 @@
                   "name": "contentType",
                   "nameInRequest": "content-type",
                   "type": {
-                    "$ref": "33"
+                    "$ref": "35"
                   },
                   "location": "Header",
                   "isApiVersion": false,
@@ -2673,7 +2673,7 @@
                         "name": "contentType",
                         "nameInRequest": "Content-Type",
                         "type": {
-                          "$ref": "35"
+                          "$ref": "37"
                         },
                         "location": "Header",
                         "isApiVersion": false,
@@ -2730,7 +2730,7 @@
                       "name": "contentType",
                       "nameInRequest": "content-type",
                       "type": {
-                        "$ref": "37"
+                        "$ref": "39"
                       },
                       "location": "Header",
                       "isApiVersion": false,
@@ -2831,7 +2831,7 @@
                             "name": "contentType",
                             "nameInRequest": "Content-Type",
                             "type": {
-                              "$ref": "39"
+                              "$ref": "41"
                             },
                             "location": "Header",
                             "isApiVersion": false,
@@ -2888,7 +2888,7 @@
                           "name": "contentType",
                           "nameInRequest": "content-type",
                           "type": {
-                            "$ref": "42"
+                            "$ref": "43"
                           },
                           "location": "Header",
                           "isApiVersion": false,
@@ -2943,7 +2943,7 @@
                             "name": "contentType",
                             "nameInRequest": "Content-Type",
                             "type": {
-                              "$ref": "44"
+                              "$ref": "45"
                             },
                             "location": "Header",
                             "isApiVersion": false,
@@ -3000,7 +3000,7 @@
                           "name": "contentType",
                           "nameInRequest": "content-type",
                           "type": {
-                            "$ref": "46"
+                            "$ref": "47"
                           },
                           "location": "Header",
                           "isApiVersion": false,
@@ -3055,7 +3055,7 @@
                             "name": "contentType",
                             "nameInRequest": "Content-Type",
                             "type": {
-                              "$ref": "48"
+                              "$ref": "49"
                             },
                             "location": "Header",
                             "isApiVersion": false,
@@ -3112,7 +3112,7 @@
                           "name": "contentType",
                           "nameInRequest": "content-type",
                           "type": {
-                            "$ref": "50"
+                            "$ref": "51"
                           },
                           "location": "Header",
                           "isApiVersion": false,
@@ -3213,7 +3213,7 @@
                             "name": "contentType",
                             "nameInRequest": "Content-Type",
                             "type": {
-                              "$ref": "52"
+                              "$ref": "53"
                             },
                             "location": "Header",
                             "isApiVersion": false,
@@ -3270,7 +3270,7 @@
                           "name": "contentType",
                           "nameInRequest": "content-type",
                           "type": {
-                            "$ref": "54"
+                            "$ref": "55"
                           },
                           "location": "Header",
                           "isApiVersion": false,
