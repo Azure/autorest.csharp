@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
@@ -17,7 +16,6 @@ namespace AutoRest.CSharp.Input
         private const string TestGenOptionsFormat = $"{TestGenOptionsRoot}.{{0}}";
 
         public string? SourceCodePath { get; }
-        public string? OutputFolder { get; }
         public bool Sample { get; }
         public IReadOnlyList<string> SkippedOperations { get; }
         public bool ClearOutputFolder { get; }
@@ -26,13 +24,11 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> skippedOperations,
             JsonElement? sourceCodePath = default,
             JsonElement? sample = default,
-            JsonElement? outputFolder = default,
             JsonElement? clearOutputFolder = default)
         {
             SkippedOperations = skippedOperations;
             SourceCodePath = !Configuration.IsValidJsonElement(sourceCodePath) ? null : sourceCodePath.ToString();
             Sample = Configuration.DeserializeBoolean(sample, true);
-            OutputFolder = !Configuration.IsValidJsonElement(outputFolder) ? null : Configuration.TrimFileSuffix(outputFolder.ToString() ?? "");
             ClearOutputFolder = Configuration.DeserializeBoolean(clearOutputFolder, false);
         }
 
@@ -46,7 +42,6 @@ namespace AutoRest.CSharp.Input
             testGenRoot.TryGetProperty(Options.SkippedOperations, out var skippedOperationsElement);
             testGenRoot.TryGetProperty(Options.SourcePath, out var sourceCodePath);
             testGenRoot.TryGetProperty(Options.Sample, out var sample);
-            testGenRoot.TryGetProperty(Options.OutputFolder, out var testGenOutputFolder);
             testGenRoot.TryGetProperty(Options.ClearOutputFolder, out var testGenClearOutputFolder);
 
             var skippedOperations = Configuration.DeserializeArray(skippedOperationsElement);
@@ -55,7 +50,6 @@ namespace AutoRest.CSharp.Input
                 skippedOperations,
                 sourceCodePath: sourceCodePath,
                 sample: sample,
-                outputFolder: testGenOutputFolder,
                 clearOutputFolder: testGenClearOutputFolder);
         }
 
@@ -68,7 +62,6 @@ namespace AutoRest.CSharp.Input
                 skippedOperations: autoRest.GetValue<string[]?>(string.Format(TestGenOptionsFormat, "skipped-operations")).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 sourceCodePath: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "source-path")).GetAwaiter().GetResult(),
                 sample: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "sample")).GetAwaiter().GetResult(),
-                outputFolder: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "output-folder")).GetAwaiter().GetResult(),
                 clearOutputFolder: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "clear-output-folder")).GetAwaiter().GetResult());
         }
 
@@ -79,8 +72,6 @@ namespace AutoRest.CSharp.Input
             internal const string SourcePath = "source-path";
 
             internal const string Sample = "sample";
-
-            internal const string OutputFolder = "output-folder";
 
             internal const string ClearOutputFolder = "clear-output-folder";
         }
@@ -96,9 +87,6 @@ namespace AutoRest.CSharp.Input
 
             if (Sample)
                 writer.WriteBoolean(Options.Sample, Sample);
-
-            if (OutputFolder is not null)
-                writer.WriteString(Options.OutputFolder, Path.GetRelativePath(Configuration.OutputFolder, OutputFolder));
 
             if (!ClearOutputFolder)
                 writer.WriteBoolean(Options.ClearOutputFolder, ClearOutputFolder);
