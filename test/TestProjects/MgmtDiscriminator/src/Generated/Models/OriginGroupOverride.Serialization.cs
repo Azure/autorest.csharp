@@ -40,7 +40,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(OriginGroup))
             {
                 writer.WritePropertyName("originGroup"u8);
-                JsonSerializer.Serialize(writer, OriginGroup);
+                ((IJsonModel<WritableSubResource>)OriginGroup).Write(writer, options);
             }
             if (Optional.IsDefined(ForwardingProtocol))
             {
@@ -96,7 +96,7 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    originGroup = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    originGroup = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, MgmtDiscriminatorContext.Default);
                     continue;
                 }
                 if (property.NameEquals("forwardingProtocol"u8))

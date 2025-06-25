@@ -6,8 +6,10 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Net;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
@@ -64,82 +66,82 @@ namespace MgmtExactMatchInheritance
             if (Optional.IsDefined(Type5))
             {
                 writer.WritePropertyName("type5"u8);
-                JsonSerializer.Serialize(writer, Type5);
+                ((IJsonModel<DataFactoryElement<string>>)Type5).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type6))
             {
                 writer.WritePropertyName("type6"u8);
-                JsonSerializer.Serialize(writer, Type6);
+                ((IJsonModel<DataFactoryElement<double>>)Type6).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type7))
             {
                 writer.WritePropertyName("type7"u8);
-                JsonSerializer.Serialize(writer, Type7);
+                ((IJsonModel<DataFactoryElement<bool>>)Type7).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type8))
             {
                 writer.WritePropertyName("type8"u8);
-                JsonSerializer.Serialize(writer, Type8);
+                ((IJsonModel<DataFactoryElement<int>>)Type8).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type9))
             {
                 writer.WritePropertyName("type9"u8);
-                JsonSerializer.Serialize(writer, Type9);
+                ((IJsonModel<DataFactoryElement<BinaryData>>)Type9).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type10))
             {
                 writer.WritePropertyName("type10"u8);
-                JsonSerializer.Serialize(writer, Type10);
+                ((IJsonModel<DataFactoryElement<IList<SeparateClass>>>)Type10).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type11))
             {
                 writer.WritePropertyName("type11"u8);
-                JsonSerializer.Serialize(writer, Type11);
+                ((IJsonModel<DataFactoryElement<IList<string>>>)Type11).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type12))
             {
                 writer.WritePropertyName("type12"u8);
-                JsonSerializer.Serialize(writer, Type12);
+                ((IJsonModel<DataFactoryElement<IDictionary<string, string>>>)Type12).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type13))
             {
                 writer.WritePropertyName("type13"u8);
-                JsonSerializer.Serialize(writer, Type13);
+                ((IJsonModel<DataFactoryElement<IList<SeparateClass>>>)Type13).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type14))
             {
                 writer.WritePropertyName("type14"u8);
-                JsonSerializer.Serialize(writer, Type14);
+                ((IJsonModel<DataFactoryElement<DateTimeOffset>>)Type14).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type15))
             {
                 writer.WritePropertyName("type15"u8);
-                JsonSerializer.Serialize(writer, Type15);
+                ((IJsonModel<DataFactoryElement<TimeSpan>>)Type15).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type16))
             {
                 writer.WritePropertyName("type16"u8);
-                JsonSerializer.Serialize(writer, Type16);
+                ((IJsonModel<DataFactoryElement<Uri>>)Type16).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type17))
             {
                 writer.WritePropertyName("type17"u8);
-                JsonSerializer.Serialize(writer, Type17);
+                ((IJsonModel<DataFactoryLinkedServiceReference>)Type17).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type18))
             {
                 writer.WritePropertyName("type18"u8);
-                JsonSerializer.Serialize(writer, Type18);
+                ((IJsonModel<DataFactorySecretString>)Type18).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type19))
             {
                 writer.WritePropertyName("type19"u8);
-                JsonSerializer.Serialize(writer, Type19);
+                ((IJsonModel<DataFactoryKeyVaultSecret>)Type19).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Type20))
             {
                 writer.WritePropertyName("type20"u8);
-                JsonSerializer.Serialize(writer, Type20);
+                ((IJsonModel<DataFactoryElement<IDictionary<string, BinaryData>>>)Type20).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -354,7 +356,7 @@ namespace MgmtExactMatchInheritance
                     {
                         continue;
                     }
-                    type17 = JsonSerializer.Deserialize<DataFactoryLinkedServiceReference>(property.Value.GetRawText());
+                    type17 = ModelReaderWriter.Read<DataFactoryLinkedServiceReference>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExactMatchInheritanceContext.Default);
                     continue;
                 }
                 if (property.NameEquals("type18"u8))
@@ -363,7 +365,7 @@ namespace MgmtExactMatchInheritance
                     {
                         continue;
                     }
-                    type18 = JsonSerializer.Deserialize<DataFactorySecretString>(property.Value.GetRawText());
+                    type18 = ModelReaderWriter.Read<DataFactorySecretString>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExactMatchInheritanceContext.Default);
                     continue;
                 }
                 if (property.NameEquals("type19"u8))
@@ -372,7 +374,7 @@ namespace MgmtExactMatchInheritance
                     {
                         continue;
                     }
-                    type19 = JsonSerializer.Deserialize<DataFactoryKeyVaultSecret>(property.Value.GetRawText());
+                    type19 = ModelReaderWriter.Read<DataFactoryKeyVaultSecret>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExactMatchInheritanceContext.Default);
                     continue;
                 }
                 if (property.NameEquals("type20"u8))
@@ -405,7 +407,7 @@ namespace MgmtExactMatchInheritance
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExactMatchInheritanceContext.Default);
                     continue;
                 }
             }
