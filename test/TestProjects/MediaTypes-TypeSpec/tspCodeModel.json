@@ -1,613 +1,578 @@
 {
- "$id": "1",
- "name": "MultipleMediaTypes",
- "apiVersions": [],
- "enums": [
-  {
-   "$id": "2",
-   "kind": "enum",
-   "name": "OneBinaryBodyTwoContentTypesRequestContentType",
-   "crossLanguageDefinitionId": "MultipleMediaTypes.oneBinaryBodyTwoContentTypes.RequestContentType.anonymous",
-   "valueType": {
-    "$id": "3",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "values": [
+  "name": "MultipleMediaTypes",
+  "apiVersions": [],
+  "enums": [
     {
-     "$id": "4",
-     "kind": "enumvalue",
-     "name": "application/json; serialization=Avro",
-     "value": "application/json; serialization=Avro",
-     "valueType": {
-      "$id": "5",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "enumType": {
-      "$ref": "2"
-     },
-     "decorators": []
-    },
-    {
-     "$id": "6",
-     "kind": "enumvalue",
-     "name": "application/octet-stream",
-     "value": "application/octet-stream",
-     "valueType": {
-      "$id": "7",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "enumType": {
-      "$ref": "2"
-     },
-     "decorators": []
-    }
-   ],
-   "namespace": "",
-   "isFixed": true,
-   "isFlags": false,
-   "usage": "Input",
-   "decorators": []
-  },
-  {
-   "$id": "8",
-   "kind": "enum",
-   "name": "OneStringBodyThreeContentTypesRequestContentType",
-   "crossLanguageDefinitionId": "MultipleMediaTypes.oneStringBodyThreeContentTypes.RequestContentType.anonymous",
-   "valueType": {
-    "$id": "9",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "values": [
-    {
-     "$id": "10",
-     "kind": "enumvalue",
-     "name": "application/json",
-     "value": "application/json",
-     "valueType": {
-      "$id": "11",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "enumType": {
-      "$ref": "8"
-     },
-     "decorators": []
-    },
-    {
-     "$id": "12",
-     "kind": "enumvalue",
-     "name": "application/octet-stream",
-     "value": "application/octet-stream",
-     "valueType": {
-      "$id": "13",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "enumType": {
-      "$ref": "8"
-     },
-     "decorators": []
-    },
-    {
-     "$id": "14",
-     "kind": "enumvalue",
-     "name": "text/plain",
-     "value": "text/plain",
-     "valueType": {
-      "$id": "15",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "enumType": {
-      "$ref": "8"
-     },
-     "decorators": []
-    }
-   ],
-   "namespace": "",
-   "isFixed": true,
-   "isFlags": false,
-   "usage": "Input",
-   "decorators": []
-  }
- ],
- "constants": [
-  {
-   "$id": "16",
-   "kind": "constant",
-   "name": "OneStringBodyThreeContentTypesRequestContentType1",
-   "namespace": "",
-   "usage": "None",
-   "valueType": {
-    "$id": "17",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "value": "application/json",
-   "decorators": []
-  },
-  {
-   "$id": "18",
-   "kind": "constant",
-   "name": "OneStringBodyThreeContentTypesRequestContentType11",
-   "namespace": "",
-   "usage": "None",
-   "valueType": {
-    "$id": "19",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "value": "application/json",
-   "decorators": []
-  }
- ],
- "models": [
-  {
-   "$id": "20",
-   "kind": "model",
-   "name": "Body",
-   "namespace": "MultipleMediaTypes",
-   "crossLanguageDefinitionId": "MultipleMediaTypes.Body",
-   "usage": "Input,Json",
-   "decorators": [],
-   "properties": [
-    {
-     "$id": "21",
-     "kind": "property",
-     "name": "id",
-     "serializedName": "id",
-     "type": {
-      "$id": "22",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "MultipleMediaTypes.Body.id",
-     "serializationOptions": {
-      "$id": "23",
-      "json": {
-       "$id": "24",
-       "name": "id"
-      }
-     }
-    }
-   ]
-  }
- ],
- "clients": [
-  {
-   "$id": "25",
-   "kind": "client",
-   "name": "MultipleMediaTypesClient",
-   "namespace": "MultipleMediaTypes",
-   "doc": "Play with produces/consumes and media-types in general.",
-   "methods": [
-    {
-     "$id": "26",
-     "kind": "basic",
-     "name": "oneBinaryBodyTwoContentTypes",
-     "accessibility": "public",
-     "apiVersions": [],
-     "operation": {
-      "$id": "27",
-      "name": "oneBinaryBodyTwoContentTypes",
-      "resourceName": "MultipleMediaTypes",
-      "accessibility": "public",
-      "parameters": [
-       {
-        "$id": "28",
-        "name": "contentType",
-        "nameInRequest": "Content-Type",
-        "type": {
-         "$ref": "2"
-        },
-        "location": "Header",
-        "isApiVersion": false,
-        "isContentType": true,
-        "isEndpoint": false,
-        "explode": false,
-        "isRequired": true,
-        "kind": "Method",
-        "decorators": [],
-        "skipUrlEncoding": false
-       },
-       {
-        "$id": "29",
-        "name": "body",
-        "nameInRequest": "body",
-        "type": {
-         "$id": "30",
-         "kind": "bytes",
-         "name": "bytes",
-         "encode": "base64",
-         "crossLanguageDefinitionId": "TypeSpec.bytes",
-         "decorators": []
-        },
-        "location": "Body",
-        "isApiVersion": false,
-        "isContentType": false,
-        "isEndpoint": false,
-        "explode": false,
-        "isRequired": true,
-        "kind": "Method",
-        "decorators": [],
-        "skipUrlEncoding": false
-       }
-      ],
-      "responses": [
-       {
-        "$id": "31",
-        "statusCodes": [
-         204
-        ],
-        "headers": [],
-        "isErrorResponse": false
-       }
-      ],
-      "httpMethod": "POST",
-      "uri": "{endpoint}",
-      "path": "/oneBinaryBodyTwoContentTypes",
-      "requestMediaTypes": [
-       "application/json; serialization=Avro",
-       "application/octet-stream"
-      ],
-      "bufferResponse": true,
-      "generateProtocolMethod": true,
-      "generateConvenienceMethod": true,
-      "crossLanguageDefinitionId": "MultipleMediaTypes.oneBinaryBodyTwoContentTypes",
-      "decorators": []
-     },
-     "parameters": [
-      {
-       "$id": "32",
-       "name": "body",
-       "nameInRequest": "body",
-       "type": {
-        "$id": "33",
-        "kind": "bytes",
-        "name": "bytes",
-        "encode": "base64",
-        "crossLanguageDefinitionId": "TypeSpec.bytes",
-        "decorators": []
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      },
-      {
-       "$id": "34",
-       "name": "contentType",
-       "nameInRequest": "content-type",
-       "type": {
-        "$ref": "2"
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "response": {
-      "$id": "35"
-     },
-     "isOverride": false,
-     "generateConvenient": true,
-     "generateProtocol": true,
-     "crossLanguageDefinitionId": "MultipleMediaTypes.oneBinaryBodyTwoContentTypes"
-    },
-    {
-     "$id": "36",
-     "kind": "basic",
-     "name": "oneStringBodyThreeContentTypes",
-     "accessibility": "public",
-     "apiVersions": [],
-     "operation": {
-      "$id": "37",
-      "name": "oneStringBodyThreeContentTypes",
-      "resourceName": "MultipleMediaTypes",
-      "accessibility": "public",
-      "parameters": [
-       {
-        "$id": "38",
-        "name": "contentType",
-        "nameInRequest": "Content-Type",
-        "type": {
-         "$ref": "8"
-        },
-        "location": "Header",
-        "isApiVersion": false,
-        "isContentType": true,
-        "isEndpoint": false,
-        "explode": false,
-        "isRequired": true,
-        "kind": "Method",
-        "decorators": [],
-        "skipUrlEncoding": false
-       },
-       {
-        "$id": "39",
-        "name": "body",
-        "nameInRequest": "body",
-        "type": {
-         "$id": "40",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "location": "Body",
-        "isApiVersion": false,
-        "isContentType": false,
-        "isEndpoint": false,
-        "explode": false,
-        "isRequired": true,
-        "kind": "Method",
-        "decorators": [],
-        "skipUrlEncoding": false
-       }
-      ],
-      "responses": [
-       {
-        "$id": "41",
-        "statusCodes": [
-         204
-        ],
-        "headers": [],
-        "isErrorResponse": false
-       }
-      ],
-      "httpMethod": "POST",
-      "uri": "{endpoint}",
-      "path": "/oneStringBodyThreeContentTypes",
-      "requestMediaTypes": [
-       "application/json",
-       "application/octet-stream",
-       "text/plain"
-      ],
-      "bufferResponse": true,
-      "generateProtocolMethod": true,
-      "generateConvenienceMethod": true,
-      "crossLanguageDefinitionId": "MultipleMediaTypes.oneStringBodyThreeContentTypes",
-      "decorators": []
-     },
-     "parameters": [
-      {
-       "$id": "42",
-       "name": "body",
-       "nameInRequest": "body",
-       "type": {
-        "$id": "43",
+      "$id": "1",
+      "kind": "enum",
+      "name": "OneBinaryBodyTwoContentTypesRequestContentType",
+      "crossLanguageDefinitionId": "MultipleMediaTypes.oneBinaryBodyTwoContentTypes.RequestContentType.anonymous",
+      "valueType": {
+        "$id": "2",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
       },
-      {
-       "$id": "44",
-       "name": "contentType",
-       "nameInRequest": "content-type",
-       "type": {
-        "$ref": "8"
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "response": {
-      "$id": "45"
-     },
-     "isOverride": false,
-     "generateConvenient": true,
-     "generateProtocol": true,
-     "crossLanguageDefinitionId": "MultipleMediaTypes.oneStringBodyThreeContentTypes"
+      "values": [
+        {
+          "$id": "3",
+          "kind": "enumvalue",
+          "name": "application/json; serialization=Avro",
+          "value": "application/json; serialization=Avro",
+          "valueType": {
+            "$ref": "2"
+          },
+          "enumType": {
+            "$ref": "1"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "4",
+          "kind": "enumvalue",
+          "name": "application/octet-stream",
+          "value": "application/octet-stream",
+          "valueType": {
+            "$ref": "2"
+          },
+          "enumType": {
+            "$ref": "1"
+          },
+          "decorators": []
+        }
+      ],
+      "namespace": "",
+      "isFixed": true,
+      "isFlags": false,
+      "usage": "Input",
+      "decorators": []
     },
     {
-     "$id": "46",
-     "kind": "basic",
-     "name": "oneModelBodyOneContentType",
-     "accessibility": "public",
-     "apiVersions": [],
-     "operation": {
-      "$id": "47",
-      "name": "oneModelBodyOneContentType",
-      "resourceName": "MultipleMediaTypes",
-      "accessibility": "public",
-      "parameters": [
-       {
-        "$id": "48",
-        "name": "contentType",
-        "nameInRequest": "Content-Type",
-        "type": {
-         "$ref": "16"
-        },
-        "location": "Header",
-        "isApiVersion": false,
-        "isContentType": true,
-        "isEndpoint": false,
-        "explode": false,
-        "isRequired": true,
-        "kind": "Constant",
-        "decorators": [],
-        "skipUrlEncoding": false
-       },
-       {
-        "$id": "49",
-        "name": "body",
-        "nameInRequest": "body",
-        "type": {
-         "$ref": "20"
-        },
-        "location": "Body",
-        "isApiVersion": false,
-        "isContentType": false,
-        "isEndpoint": false,
-        "explode": false,
-        "isRequired": true,
-        "kind": "Method",
-        "decorators": [],
-        "skipUrlEncoding": false
-       }
-      ],
-      "responses": [
-       {
-        "$id": "50",
-        "statusCodes": [
-         204
-        ],
-        "headers": [],
-        "isErrorResponse": false
-       }
-      ],
-      "httpMethod": "POST",
-      "uri": "{endpoint}",
-      "path": "/oneModelBodyOneContentType",
-      "requestMediaTypes": [
-       "application/json"
-      ],
-      "bufferResponse": true,
-      "generateProtocolMethod": true,
-      "generateConvenienceMethod": true,
-      "crossLanguageDefinitionId": "MultipleMediaTypes.oneModelBodyOneContentType",
-      "decorators": []
-     },
-     "parameters": [
-      {
-       "$id": "51",
-       "name": "body",
-       "nameInRequest": "body",
-       "type": {
-        "$ref": "20"
-       },
-       "location": "Body",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Method",
-       "decorators": [],
-       "skipUrlEncoding": false
+      "$id": "5",
+      "kind": "enum",
+      "name": "OneStringBodyThreeContentTypesRequestContentType",
+      "crossLanguageDefinitionId": "MultipleMediaTypes.oneStringBodyThreeContentTypes.RequestContentType.anonymous",
+      "valueType": {
+        "$id": "6",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
       },
-      {
-       "$id": "52",
-       "name": "contentType",
-       "nameInRequest": "content-type",
-       "type": {
-        "$ref": "18"
-       },
-       "location": "Header",
-       "isApiVersion": false,
-       "isContentType": false,
-       "isEndpoint": false,
-       "explode": false,
-       "isRequired": true,
-       "kind": "Constant",
-       "decorators": [],
-       "skipUrlEncoding": false
-      }
-     ],
-     "response": {
-      "$id": "53"
-     },
-     "isOverride": false,
-     "generateConvenient": true,
-     "generateProtocol": true,
-     "crossLanguageDefinitionId": "MultipleMediaTypes.oneModelBodyOneContentType"
+      "values": [
+        {
+          "$id": "7",
+          "kind": "enumvalue",
+          "name": "application/json",
+          "value": "application/json",
+          "valueType": {
+            "$ref": "6"
+          },
+          "enumType": {
+            "$ref": "5"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "8",
+          "kind": "enumvalue",
+          "name": "application/octet-stream",
+          "value": "application/octet-stream",
+          "valueType": {
+            "$ref": "6"
+          },
+          "enumType": {
+            "$ref": "5"
+          },
+          "decorators": []
+        },
+        {
+          "$id": "9",
+          "kind": "enumvalue",
+          "name": "text/plain",
+          "value": "text/plain",
+          "valueType": {
+            "$ref": "6"
+          },
+          "enumType": {
+            "$ref": "5"
+          },
+          "decorators": []
+        }
+      ],
+      "namespace": "",
+      "isFixed": true,
+      "isFlags": false,
+      "usage": "Input",
+      "decorators": []
     }
-   ],
-   "parameters": [
+  ],
+  "constants": [
     {
-     "$id": "54",
-     "name": "endpoint",
-     "nameInRequest": "endpoint",
-     "type": {
-      "$id": "55",
-      "kind": "url",
-      "name": "url",
-      "crossLanguageDefinitionId": "TypeSpec.url"
-     },
-     "location": "Uri",
-     "isApiVersion": false,
-     "isContentType": false,
-     "isRequired": true,
-     "isEndpoint": true,
-     "skipUrlEncoding": false,
-     "explode": false,
-     "kind": "Client",
-     "serverUrlTemplate": "{endpoint}"
-    }
-   ],
-   "decorators": [
+      "$id": "10",
+      "kind": "constant",
+      "name": "OneStringBodyThreeContentTypesRequestContentType1",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "11",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
+    },
     {
-     "$id": "56",
-     "name": "TypeSpec.@service",
-     "arguments": {
-      "$id": "57",
-      "options": {
-       "$id": "58",
-       "title": "Media Types Service"
-      }
-     }
+      "$id": "12",
+      "kind": "constant",
+      "name": "OneStringBodyThreeContentTypesRequestContentType11",
+      "namespace": "",
+      "usage": "None",
+      "valueType": {
+        "$id": "13",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+      },
+      "value": "application/json",
+      "decorators": []
     }
-   ],
-   "crossLanguageDefinitionId": "MultipleMediaTypes",
-   "apiVersions": []
-  }
- ]
+  ],
+  "models": [
+    {
+      "$id": "14",
+      "kind": "model",
+      "name": "Body",
+      "namespace": "MultipleMediaTypes",
+      "crossLanguageDefinitionId": "MultipleMediaTypes.Body",
+      "usage": "Input,Json",
+      "decorators": [],
+      "properties": [
+        {
+          "$id": "15",
+          "kind": "property",
+          "name": "id",
+          "serializedName": "id",
+          "type": {
+            "$id": "16",
+            "kind": "string",
+            "name": "string",
+            "crossLanguageDefinitionId": "TypeSpec.string",
+            "decorators": []
+          },
+          "optional": false,
+          "readOnly": false,
+          "discriminator": false,
+          "flatten": false,
+          "decorators": [],
+          "crossLanguageDefinitionId": "MultipleMediaTypes.Body.id",
+          "serializationOptions": {
+            "json": {
+              "name": "id"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "clients": [
+    {
+      "$id": "17",
+      "kind": "client",
+      "name": "MultipleMediaTypesClient",
+      "namespace": "MultipleMediaTypes",
+      "doc": "Play with produces/consumes and media-types in general.",
+      "methods": [
+        {
+          "$id": "18",
+          "kind": "basic",
+          "name": "oneBinaryBodyTwoContentTypes",
+          "accessibility": "public",
+          "apiVersions": [],
+          "operation": {
+            "$id": "19",
+            "name": "oneBinaryBodyTwoContentTypes",
+            "resourceName": "MultipleMediaTypes",
+            "accessibility": "public",
+            "parameters": [
+              {
+                "$id": "20",
+                "name": "contentType",
+                "nameInRequest": "Content-Type",
+                "type": {
+                  "$ref": "1"
+                },
+                "location": "Header",
+                "isApiVersion": false,
+                "isContentType": true,
+                "isEndpoint": false,
+                "explode": false,
+                "isRequired": true,
+                "kind": "Method",
+                "decorators": [],
+                "skipUrlEncoding": false
+              },
+              {
+                "$id": "21",
+                "name": "body",
+                "nameInRequest": "body",
+                "type": {
+                  "$id": "22",
+                  "kind": "bytes",
+                  "name": "bytes",
+                  "encode": "base64",
+                  "crossLanguageDefinitionId": "TypeSpec.bytes",
+                  "decorators": []
+                },
+                "location": "Body",
+                "isApiVersion": false,
+                "isContentType": false,
+                "isEndpoint": false,
+                "explode": false,
+                "isRequired": true,
+                "kind": "Method",
+                "decorators": [],
+                "skipUrlEncoding": false
+              }
+            ],
+            "responses": [
+              {
+                "statusCodes": [
+                  204
+                ],
+                "headers": [],
+                "isErrorResponse": false
+              }
+            ],
+            "httpMethod": "POST",
+            "uri": "{endpoint}",
+            "path": "/oneBinaryBodyTwoContentTypes",
+            "requestMediaTypes": [
+              "application/json; serialization=Avro",
+              "application/octet-stream"
+            ],
+            "bufferResponse": true,
+            "generateProtocolMethod": true,
+            "generateConvenienceMethod": true,
+            "crossLanguageDefinitionId": "MultipleMediaTypes.oneBinaryBodyTwoContentTypes",
+            "decorators": []
+          },
+          "parameters": [
+            {
+              "$id": "23",
+              "name": "body",
+              "nameInRequest": "body",
+              "type": {
+                "$id": "24",
+                "kind": "bytes",
+                "name": "bytes",
+                "encode": "base64",
+                "crossLanguageDefinitionId": "TypeSpec.bytes",
+                "decorators": []
+              },
+              "location": "Body",
+              "isApiVersion": false,
+              "isContentType": false,
+              "isEndpoint": false,
+              "explode": false,
+              "isRequired": true,
+              "kind": "Method",
+              "decorators": [],
+              "skipUrlEncoding": false
+            },
+            {
+              "$id": "25",
+              "name": "contentType",
+              "nameInRequest": "content-type",
+              "type": {
+                "$ref": "1"
+              },
+              "location": "Header",
+              "isApiVersion": false,
+              "isContentType": false,
+              "isEndpoint": false,
+              "explode": false,
+              "isRequired": true,
+              "kind": "Method",
+              "decorators": [],
+              "skipUrlEncoding": false
+            }
+          ],
+          "response": {},
+          "isOverride": false,
+          "generateConvenient": true,
+          "generateProtocol": true,
+          "crossLanguageDefinitionId": "MultipleMediaTypes.oneBinaryBodyTwoContentTypes"
+        },
+        {
+          "$id": "26",
+          "kind": "basic",
+          "name": "oneStringBodyThreeContentTypes",
+          "accessibility": "public",
+          "apiVersions": [],
+          "operation": {
+            "$id": "27",
+            "name": "oneStringBodyThreeContentTypes",
+            "resourceName": "MultipleMediaTypes",
+            "accessibility": "public",
+            "parameters": [
+              {
+                "$id": "28",
+                "name": "contentType",
+                "nameInRequest": "Content-Type",
+                "type": {
+                  "$ref": "5"
+                },
+                "location": "Header",
+                "isApiVersion": false,
+                "isContentType": true,
+                "isEndpoint": false,
+                "explode": false,
+                "isRequired": true,
+                "kind": "Method",
+                "decorators": [],
+                "skipUrlEncoding": false
+              },
+              {
+                "$id": "29",
+                "name": "body",
+                "nameInRequest": "body",
+                "type": {
+                  "$id": "30",
+                  "kind": "string",
+                  "name": "string",
+                  "crossLanguageDefinitionId": "TypeSpec.string",
+                  "decorators": []
+                },
+                "location": "Body",
+                "isApiVersion": false,
+                "isContentType": false,
+                "isEndpoint": false,
+                "explode": false,
+                "isRequired": true,
+                "kind": "Method",
+                "decorators": [],
+                "skipUrlEncoding": false
+              }
+            ],
+            "responses": [
+              {
+                "statusCodes": [
+                  204
+                ],
+                "headers": [],
+                "isErrorResponse": false
+              }
+            ],
+            "httpMethod": "POST",
+            "uri": "{endpoint}",
+            "path": "/oneStringBodyThreeContentTypes",
+            "requestMediaTypes": [
+              "application/json",
+              "application/octet-stream",
+              "text/plain"
+            ],
+            "bufferResponse": true,
+            "generateProtocolMethod": true,
+            "generateConvenienceMethod": true,
+            "crossLanguageDefinitionId": "MultipleMediaTypes.oneStringBodyThreeContentTypes",
+            "decorators": []
+          },
+          "parameters": [
+            {
+              "$id": "31",
+              "name": "body",
+              "nameInRequest": "body",
+              "type": {
+                "$id": "32",
+                "kind": "string",
+                "name": "string",
+                "crossLanguageDefinitionId": "TypeSpec.string",
+                "decorators": []
+              },
+              "location": "Body",
+              "isApiVersion": false,
+              "isContentType": false,
+              "isEndpoint": false,
+              "explode": false,
+              "isRequired": true,
+              "kind": "Method",
+              "decorators": [],
+              "skipUrlEncoding": false
+            },
+            {
+              "$id": "33",
+              "name": "contentType",
+              "nameInRequest": "content-type",
+              "type": {
+                "$ref": "5"
+              },
+              "location": "Header",
+              "isApiVersion": false,
+              "isContentType": false,
+              "isEndpoint": false,
+              "explode": false,
+              "isRequired": true,
+              "kind": "Method",
+              "decorators": [],
+              "skipUrlEncoding": false
+            }
+          ],
+          "response": {},
+          "isOverride": false,
+          "generateConvenient": true,
+          "generateProtocol": true,
+          "crossLanguageDefinitionId": "MultipleMediaTypes.oneStringBodyThreeContentTypes"
+        },
+        {
+          "$id": "34",
+          "kind": "basic",
+          "name": "oneModelBodyOneContentType",
+          "accessibility": "public",
+          "apiVersions": [],
+          "operation": {
+            "$id": "35",
+            "name": "oneModelBodyOneContentType",
+            "resourceName": "MultipleMediaTypes",
+            "accessibility": "public",
+            "parameters": [
+              {
+                "$id": "36",
+                "name": "contentType",
+                "nameInRequest": "Content-Type",
+                "type": {
+                  "$ref": "10"
+                },
+                "location": "Header",
+                "isApiVersion": false,
+                "isContentType": true,
+                "isEndpoint": false,
+                "explode": false,
+                "isRequired": true,
+                "kind": "Constant",
+                "decorators": [],
+                "skipUrlEncoding": false
+              },
+              {
+                "$id": "37",
+                "name": "body",
+                "nameInRequest": "body",
+                "type": {
+                  "$ref": "14"
+                },
+                "location": "Body",
+                "isApiVersion": false,
+                "isContentType": false,
+                "isEndpoint": false,
+                "explode": false,
+                "isRequired": true,
+                "kind": "Method",
+                "decorators": [],
+                "skipUrlEncoding": false
+              }
+            ],
+            "responses": [
+              {
+                "statusCodes": [
+                  204
+                ],
+                "headers": [],
+                "isErrorResponse": false
+              }
+            ],
+            "httpMethod": "POST",
+            "uri": "{endpoint}",
+            "path": "/oneModelBodyOneContentType",
+            "requestMediaTypes": [
+              "application/json"
+            ],
+            "bufferResponse": true,
+            "generateProtocolMethod": true,
+            "generateConvenienceMethod": true,
+            "crossLanguageDefinitionId": "MultipleMediaTypes.oneModelBodyOneContentType",
+            "decorators": []
+          },
+          "parameters": [
+            {
+              "$id": "38",
+              "name": "body",
+              "nameInRequest": "body",
+              "type": {
+                "$ref": "14"
+              },
+              "location": "Body",
+              "isApiVersion": false,
+              "isContentType": false,
+              "isEndpoint": false,
+              "explode": false,
+              "isRequired": true,
+              "kind": "Method",
+              "decorators": [],
+              "skipUrlEncoding": false
+            },
+            {
+              "$id": "39",
+              "name": "contentType",
+              "nameInRequest": "content-type",
+              "type": {
+                "$ref": "12"
+              },
+              "location": "Header",
+              "isApiVersion": false,
+              "isContentType": false,
+              "isEndpoint": false,
+              "explode": false,
+              "isRequired": true,
+              "kind": "Constant",
+              "decorators": [],
+              "skipUrlEncoding": false
+            }
+          ],
+          "response": {},
+          "isOverride": false,
+          "generateConvenient": true,
+          "generateProtocol": true,
+          "crossLanguageDefinitionId": "MultipleMediaTypes.oneModelBodyOneContentType"
+        }
+      ],
+      "parameters": [
+        {
+          "$id": "40",
+          "name": "endpoint",
+          "nameInRequest": "endpoint",
+          "type": {
+            "$id": "41",
+            "kind": "url",
+            "name": "url",
+            "crossLanguageDefinitionId": "TypeSpec.url"
+          },
+          "location": "Uri",
+          "isApiVersion": false,
+          "isContentType": false,
+          "isRequired": true,
+          "isEndpoint": true,
+          "skipUrlEncoding": false,
+          "explode": false,
+          "kind": "Client",
+          "serverUrlTemplate": "{endpoint}"
+        }
+      ],
+      "decorators": [
+        {
+          "name": "TypeSpec.@service",
+          "arguments": {
+            "options": {
+              "title": "Media Types Service"
+            }
+          }
+        }
+      ],
+      "crossLanguageDefinitionId": "MultipleMediaTypes",
+      "apiVersions": []
+    }
+  ]
 }

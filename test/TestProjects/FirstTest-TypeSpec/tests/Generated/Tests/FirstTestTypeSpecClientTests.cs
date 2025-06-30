@@ -79,6 +79,17 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_TopAction2_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.TopAction2Async();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task FirstTestTypeSpec_TopAction2_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
@@ -86,6 +97,17 @@ namespace FirstTestTypeSpec.Tests
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.TopAction2Async(null);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_TopAction2_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.TopAction2Async();
         }
 
         [Test]

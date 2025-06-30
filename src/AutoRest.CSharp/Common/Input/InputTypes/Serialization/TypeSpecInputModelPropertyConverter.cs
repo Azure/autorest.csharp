@@ -25,7 +25,6 @@ namespace AutoRest.CSharp.Common.Input
 
         private static InputModelProperty ReadInputModelProperty(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
-            var isFirstProperty = true;
             string? serializedName = null;
             string? kind = null;
             string? summary = null;
@@ -40,7 +39,7 @@ namespace AutoRest.CSharp.Common.Input
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
+                var isKnownProperty = reader.TryReadReferenceId(ref id)
                     || reader.TryReadString("name", ref name)
                     || reader.TryReadString("kind", ref kind)
                     || reader.TryReadString("serializedName", ref serializedName)

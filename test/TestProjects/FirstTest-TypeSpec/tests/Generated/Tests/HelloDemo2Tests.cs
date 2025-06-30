@@ -315,6 +315,36 @@ BinaryData.FromObjectAsJson("<unionList>")
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_NoContentType_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = null;
+            HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+
+            RoundTripModel action = new RoundTripModel(
+                "<requiredString>",
+                1234,
+                new StringFixedEnum[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum>
+                {
+                    ["key"] = StringExtensibleEnum.One
+                },
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default),
+                BinaryData.FromObjectAsJson(new object()),
+                new Dictionary<string, BinaryData>
+                {
+                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                },
+                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
+                new BinaryData[]
+            {
+BinaryData.FromObjectAsJson("<unionList>")
+            });
+            Response<RoundTripModel> response = await client.NoContentTypeAsync("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_NoContentType_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
@@ -405,6 +435,65 @@ BinaryData.FromObjectAsJson("<unionList>")
                 },
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_NoContentType_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = null;
+            HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
+
+            RoundTripModel action = new RoundTripModel(
+                "<requiredString>",
+                1234,
+                new StringFixedEnum[] { StringFixedEnum.One },
+                new Dictionary<string, StringExtensibleEnum>
+                {
+                    ["key"] = StringExtensibleEnum.One
+                },
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
+                {
+                    OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                    OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                    OptionalLiteralBool = true,
+                    OptionalNullableList = { 1234 },
+                    OptionalFloatProperty = (double)default,
+                    OptionalResourceId = new ResourceIdentifier("<optionalResourceId>"),
+                },
+                BinaryData.FromObjectAsJson(new object()),
+                new Dictionary<string, BinaryData>
+                {
+                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                },
+                new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
+                new BinaryData[]
+            {
+BinaryData.FromObjectAsJson("<unionList>")
+            })
+            {
+                IntExtensibleEnum = IntExtensibleEnum.One,
+                IntExtensibleEnumCollection = { IntExtensibleEnum.One },
+                FloatExtensibleEnum = FloatExtensibleEnum.One,
+                FloatExtensibleEnumCollection = { FloatExtensibleEnum.One },
+                FloatFixedEnum = FloatFixedEnum.One,
+                FloatFixedEnumCollection = { FloatFixedEnum.One },
+                IntFixedEnum = IntFixedEnum.One,
+                IntFixedEnumCollection = { IntFixedEnum.One },
+                StringFixedEnum = StringFixedEnum.One,
+                OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+                OptionalRecordUnknown =
+{
+["key"] = BinaryData.FromObjectAsJson(new object())
+},
+                BinaryDataRecord = BinaryData.FromObjectAsJson(new
+                {
+                    key = new object(),
+                }),
+            };
+            Response<RoundTripModel> response = await client.NoContentTypeAsync("<p2>", "<p1>", action);
         }
 
         [Test]

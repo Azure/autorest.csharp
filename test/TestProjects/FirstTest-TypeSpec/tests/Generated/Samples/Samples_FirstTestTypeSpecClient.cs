@@ -201,6 +201,26 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_TopAction2_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = client.TopAction2();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_TopAction2_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = await client.TopAction2Async();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_FirstTestTypeSpec_TopAction2_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
@@ -253,6 +273,26 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalFloatProperty").ToString());
             Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_TopAction2_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = client.TopAction2();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_TopAction2_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = await client.TopAction2Async();
         }
 
         [Test]

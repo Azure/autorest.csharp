@@ -283,7 +283,6 @@ namespace Hello.Demo2 {
     @route("/againHi")
     @doc("Return hi again")
     @get
-    @convenientAPI(true)
     op helloAgain(
         @header p1: string,
         @body action: RoundTripModel,
@@ -294,7 +293,6 @@ namespace Hello.Demo2 {
     @route("/noContentType")
     @doc("Return hi again")
     @get
-    @convenientAPI(false)
     op noContentType(
         @header p1: string,
         @body action: RoundTripModel,
@@ -304,19 +302,16 @@ namespace Hello.Demo2 {
     @route("/demoHi")
     @doc("Return hi in demo2")
     @get
-    @convenientAPI(true)
     op helloDemoAgain(): Thing;
 
     @route("/literal")
     @doc("Create with literal value")
     @post
-    @convenientAPI(true)
     op createLiteral(@body body: Thing): Thing;
 
     @route("/helloLiteral")
     @doc("Send literal parameters")
     @get
-    @convenientAPI(true)
     op helloLiteral(@header p1: "test", @path p2: 123, @query p3: true): Thing;
 }
 
@@ -328,33 +323,29 @@ model ListBody {
 @route("/top")
 @doc("top level method")
 @get
-@convenientAPI(true)
 op topAction(@path action: utcDateTime): Thing;
 
 @route("/top2")
 @doc("top level method2")
 @get
-@convenientAPI(false)
 op topAction2(): Thing;
 
 @route("/patch")
 @doc("top level patch")
 @patch
-@convenientAPI(true)
 op patchAction(@body body: Thing): Thing;
 
 @route("/anonymousBody")
 @doc("body parameter without body decorator")
 @post
-@convenientAPI(true)
 op anonymousBody(...Thing): Thing;
 
 @route("/friendlyName")
 @doc("Model can have its friendly name")
 @post
-@convenientAPI(true)
 op friendlyModel(...NotFriend): NotFriend;
 
+@convenientAPI(false)
 op addTimeHeader(
     @header("Repeatability-First-Sent") repeatabilityFirstSent?: utcDateTime
 ): void;
@@ -362,27 +353,23 @@ op addTimeHeader(
 @route("/stringFormat")
 @doc("paramete has string format.")
 @post
-@convenientAPI(true)
 op stringFormat(@path subscriptionId: uuid, @body body: ModelWithFormat): void;
 
 
 @route("/projectedName")
 @doc("Model can have its projected name")
 @post
-@convenientAPI(true)
 op projectedNameModel(...ModelWithProjectedName): ModelWithProjectedName;
 
 @route("/retunsAnonymousModel")
 @doc("return anonymous model")
 @post
-@convenientAPI(true)
 op returnsAnonymousModel(): {@body body: {}};
 
 @summary("This is a list operation with an optional body.")
 @doc("List the metric values for a load test run.")
 @route("/listWithOptionalBody")
 @post
-@convenientAPI(true)
 op listWithOptionalBody is Azure.Core.Foundations.Operation<
   {
     @doc("Metric dimension filter ")
@@ -397,6 +384,7 @@ namespace EnumTest {
     @put
     @route("/unknown-value")
     @doc("get extensible enum")
+    @convenientAPI(false)
     op createUnknownValue(@body input: DaysOfWeekExtensibleEnum): void;
 }
 
@@ -419,40 +407,34 @@ namespace ProtocolAndConvenient {
 @route("/headAsBoolean")
 @doc("head as boolean.")
 @head
-@convenientAPI(true)
 op headAsBoolean(@path id: string): void;
 
 
 @route("/stringBody")
 @doc("The body parameter type is string.")
 @put
-@convenientAPI(true)
 op stringBody(@body body: string): void;
 
 
 @route("/boolBody")
 @doc("The body parameter type is bool.")
 @put
-@convenientAPI(true)
 op boolBody(@body body: boolean): void;
 
 
 @route("/dateTimeBody")
 @doc("The body parameter type is datetime.")
 @put
-@convenientAPI(true)
 op dateTimeBody(@body body: utcDateTime): void;
 
 
 @route("/returnString")
 @doc("The return type is datetime.")
 @put
-@convenientAPI(true)
 op returnString(): string;
 
 @route("/returnUnknown")
 @put
-@convenientAPI(true)
 op returnUnknown(
 ): {
   @statusCode statusCode: 200;
@@ -464,7 +446,6 @@ interface Entity {
     @route("/entity/doSomething")
     @doc("doSomething for entity")
     @get
-    @convenientAPI(true)
     op doSomething(@path p2: string): Thing;
 }
 
@@ -472,7 +453,6 @@ interface Glossary {
     @route("/glossary/doSomething")
     @doc("doSomething for glossary")
     @get
-    @convenientAPI(true)
     op doSomething(@path id: string, @header h1: string): Thing;
 }
 
@@ -489,7 +469,6 @@ model Element {
 @route("/recursiveExtension")
 @doc("test parent reference child")
 @put
-@convenientAPI(true)
 op recursiveExtension(@body input: Extension): void;
 
 @doc("extension")
@@ -510,7 +489,6 @@ model Extendible {
 @route("/threeLevelRecursive")
 @doc("test three level recursive extension")
 @put
-@convenientAPI(true)
 op threeLevelRecursive(@body input: Extendible): void;
 
 @doc("parentModel")
@@ -526,7 +504,6 @@ model ChildModel extends BaseModel {
 @route("/recursiveModels")
 @doc("test child reference parent")
 @put
-@convenientAPI(true)
 op recursiveModels(@body input: ChildModel): void;
 
 
@@ -538,7 +515,6 @@ model ContainSelf{
 @route("/containSelfModels")
 @doc("test contain self models")
 @put
-@convenientAPI(true)
 op ContainSelfModels(@body input: ContainSelf): void;
 
 
@@ -553,7 +529,6 @@ enum ProjectedEnum {
 @route("/enumParameter")
 @doc("test enum parameter.")
 @get
-@convenientAPI(true)
 op enumParameter(@path p1: ProjectedEnum ): void;
 
 
@@ -574,13 +549,11 @@ model ModelWithProjectedEnum {
 @route("/bodyIsModelWithProjectedEnum")
 @doc("test enum parameter.")
 @put
-@convenientAPI(true)
 op bodyIsModelWithProjectedEnum(@body body: ModelWithProjectedEnum ): void;
 
 @route("/optionalDictionary")
 @doc("test optional dictionary.")
 @put
-@convenientAPI(true)
 op optionalDictionary(@body body?: Record<int32>): void;
 
 model AzureLocationModel
@@ -590,7 +563,6 @@ model AzureLocationModel
 @route("/azureLocation")
 @doc("test optional dictionary.")
 @put
-@convenientAPI(true)
 op azureLocationOp(@query location: azureLocation, @header regenLocation: azureLocation, @body body?: AzureLocationModel): void;
 
 // TODO: remove below after duplicated polling operation case is added into cadl-ranch
