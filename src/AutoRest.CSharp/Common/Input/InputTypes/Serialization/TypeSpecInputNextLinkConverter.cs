@@ -10,10 +10,6 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal sealed class TypeSpecInputNextLinkConverter : JsonConverter<InputNextLink>
     {
-        public TypeSpecInputNextLinkConverter()
-        {
-        }
-
         public override InputNextLink? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => CreateNextLink(ref reader, options);
 

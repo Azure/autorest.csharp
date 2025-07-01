@@ -10,10 +10,6 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class TypeSpecInputOAuth2AuthConverter : JsonConverter<InputOAuth2Auth>
     {
-        public TypeSpecInputOAuth2AuthConverter()
-        {
-        }
-
         public override InputOAuth2Auth? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => CreateInputOAuth2Auth(ref reader, options);
 

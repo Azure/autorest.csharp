@@ -14,10 +14,6 @@ namespace AutoRest.CSharp.Common.Input.Examples
         private const string TypePropertyName = "type";
         private const string ValuePropertyName = "value";
 
-        public TypeSpecInputExampleValueConverter()
-        {
-        }
-
         public override InputExampleValue? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => CreateExampleValue(ref reader, options);
 

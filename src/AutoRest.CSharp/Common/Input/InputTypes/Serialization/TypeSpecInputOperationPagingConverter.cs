@@ -10,10 +10,6 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class TypeSpecInputOperationPagingConverter : JsonConverter<InputOperationPaging>
     {
-        public TypeSpecInputOperationPagingConverter()
-        {
-        }
-
         public override InputOperationPaging? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => CreateInputOperationPaging(ref reader, options);
 

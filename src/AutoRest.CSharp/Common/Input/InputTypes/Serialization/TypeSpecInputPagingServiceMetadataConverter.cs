@@ -10,10 +10,6 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal sealed class TypeSpecInputPagingServiceMetadataConverter : JsonConverter<InputPagingServiceMetadata>
     {
-        public TypeSpecInputPagingServiceMetadataConverter()
-        {
-        }
-
         public override InputPagingServiceMetadata? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => CreateInputPagingServiceMetadata(ref reader, options);
 

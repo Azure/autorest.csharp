@@ -11,10 +11,6 @@ namespace AutoRest.CSharp.Common.Input
 
     internal sealed class TypeSpecInputContinuationTokenConverter : JsonConverter<InputContinuationToken>
     {
-        public TypeSpecInputContinuationTokenConverter()
-        {
-        }
-
         public override InputContinuationToken? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => CreateContinuationToken(ref reader, options);
 

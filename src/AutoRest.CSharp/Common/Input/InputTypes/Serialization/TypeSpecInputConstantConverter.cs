@@ -9,10 +9,6 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class TypeSpecInputConstantConverter : JsonConverter<InputConstant>
     {
-        public TypeSpecInputConstantConverter()
-        {
-        }
-
         public override InputConstant Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => CreateInputConstant(ref reader, options);
 

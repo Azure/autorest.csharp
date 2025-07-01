@@ -9,10 +9,6 @@ namespace AutoRest.CSharp.Common.Input.Examples
 {
     internal sealed class TypeSpecInputParameterExampleConverter : JsonConverter<InputParameterExample>
     {
-        public TypeSpecInputParameterExampleConverter()
-        {
-        }
-
         public override InputParameterExample? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => CreateInputParameterExample(ref reader, options);
 

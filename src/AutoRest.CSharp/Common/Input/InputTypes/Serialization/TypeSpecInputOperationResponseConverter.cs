@@ -10,10 +10,6 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal sealed class TypeSpecInputOperationResponseConverter : JsonConverter<InputOperationResponse>
     {
-        public TypeSpecInputOperationResponseConverter(TypeSpecReferenceHandler referenceHandler)
-        {
-        }
-
         public override InputOperationResponse? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => CreateOperationResponse(ref reader, options);
 
