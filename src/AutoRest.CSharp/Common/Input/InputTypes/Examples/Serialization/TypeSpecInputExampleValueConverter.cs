@@ -14,37 +14,31 @@ namespace AutoRest.CSharp.Common.Input.Examples
         private const string TypePropertyName = "type";
         private const string ValuePropertyName = "value";
 
-        private readonly TypeSpecReferenceHandler _referenceHandler;
-
-        public TypeSpecInputExampleValueConverter(TypeSpecReferenceHandler referenceHandler)
-        {
-            _referenceHandler = referenceHandler;
-        }
-
         public override InputExampleValue? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            return reader.ReadReferenceAndResolve<InputExampleValue>(_referenceHandler.CurrentResolver) ?? CreateObject(ref reader, options);
-        }
+            => CreateExampleValue(ref reader, options);
 
         public override void Write(Utf8JsonWriter writer, InputExampleValue value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        private InputExampleValue CreateObject(ref Utf8JsonReader reader, JsonSerializerOptions options)
+        private InputExampleValue CreateExampleValue(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
+            if (reader.TokenType == JsonTokenType.StartObject)
+            {
+                reader.Read();
+            }
             string? id = null;
             string? kind = null;
             InputExampleValue? result = null;
-            var isFirstProperty = true;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isIdOrKind = reader.TryReadReferenceId(ref isFirstProperty, ref id)
+                var isIdOrKind = reader.TryReadReferenceId(ref id)
                     || reader.TryReadString(KindPropertyName, ref kind);
 
                 if (isIdOrKind)
                 {
                     continue;
                 }
-                result = CreateDerivedType(ref reader, id, kind, options);
+                result = CreateDerivedExampleValue(ref reader, kind, options);
             }
 
             return result ?? throw new JsonException();
@@ -56,24 +50,22 @@ namespace AutoRest.CSharp.Common.Input.Examples
         private const string UnionKind = "union";
         private const string UnknownKind = "unknown";
 
-        private InputExampleValue CreateDerivedType(ref Utf8JsonReader reader, string? id, string? kind, JsonSerializerOptions options) => kind switch
+        private InputExampleValue CreateDerivedExampleValue(ref Utf8JsonReader reader, string? kind, JsonSerializerOptions options) => kind switch
         {
-            null => throw new JsonException($"InputTypeExample (id: '{id}') must have a 'kind' property"),
-            ArrayKind => CreateArrayExample(ref reader, id, options, _referenceHandler.CurrentResolver),
-            DictionaryKind or ModelKind => CreateObjectExample(ref reader, id, options, _referenceHandler.CurrentResolver),
-            UnionKind or UnknownKind => CreateUnknownExample(ref reader, id, options, _referenceHandler.CurrentResolver),
-            _ => CreateOtherExample(ref reader, id, options, _referenceHandler.CurrentResolver),
+            null => throw new JsonException($"InputTypeExample must have a 'kind' property"),
+            ArrayKind => CreateArrayExample(ref reader, options),
+            DictionaryKind or ModelKind => CreateObjectExample(ref reader, options),
+            UnionKind or UnknownKind => CreateUnknownExample(ref reader, options),
+            _ => CreateOtherExample(ref reader, options),
         };
 
-        private InputExampleValue CreateArrayExample(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver referenceResolver)
+        private InputExampleValue CreateArrayExample(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
-            bool isFirstProperty = id == null;
             InputType? type = null;
             IReadOnlyList<InputExampleValue>? value = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadComplexType(TypePropertyName, options, ref type)
+                var isKnownProperty = reader.TryReadComplexType(TypePropertyName, options, ref type)
                     || reader.TryReadComplexType(ValuePropertyName, options, ref value);
 
                 if (!isKnownProperty)
@@ -84,23 +76,16 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
             var result = new InputExampleListValue(type ?? throw new JsonException(), value ?? throw new JsonException());
 
-            if (id != null)
-            {
-                referenceResolver.AddReference(id, result);
-            }
-
             return result;
         }
 
-        private InputExampleValue CreateObjectExample(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver referenceResolver)
+        private InputExampleValue CreateObjectExample(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
-            bool isFirstProperty = id == null;
             InputType? type = null;
             IReadOnlyDictionary<string, InputExampleValue>? value = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadComplexType(TypePropertyName, options, ref type)
+                var isKnownProperty = reader.TryReadComplexType(TypePropertyName, options, ref type)
                     || reader.TryReadComplexType(ValuePropertyName, options, ref value);
 
                 if (!isKnownProperty)
@@ -111,23 +96,16 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
             var result = new InputExampleObjectValue(type ?? throw new JsonException(), value ?? throw new JsonException());
 
-            if (id != null)
-            {
-                referenceResolver.AddReference(id, result);
-            }
-
             return result;
         }
 
-        private InputExampleValue CreateUnknownExample(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver referenceResolver)
+        private InputExampleValue CreateUnknownExample(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
-            bool isFirstProperty = id == null;
             InputType? type = null;
             JsonElement? rawValue = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadComplexType(TypePropertyName, options, ref type)
+                var isKnownProperty = reader.TryReadComplexType(TypePropertyName, options, ref type)
                     || reader.TryReadComplexType(ValuePropertyName, options, ref rawValue);
 
                 if (!isKnownProperty)
@@ -137,11 +115,6 @@ namespace AutoRest.CSharp.Common.Input.Examples
             }
 
             var result = ParseUnknownValue(type ?? throw new JsonException(), rawValue);
-
-            if (id != null)
-            {
-                referenceResolver.AddReference(id, result);
-            }
 
             return result;
 
@@ -190,15 +163,13 @@ namespace AutoRest.CSharp.Common.Input.Examples
             }
         }
 
-        private InputExampleValue CreateOtherExample(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver referenceResolver)
+        private InputExampleValue CreateOtherExample(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
-            bool isFirstProperty = id == null;
             InputType? type = null;
             JsonElement? rawValue = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadComplexType(TypePropertyName, options, ref type)
+                var isKnownProperty = reader.TryReadComplexType(TypePropertyName, options, ref type)
                     || reader.TryReadComplexType(ValuePropertyName, options, ref rawValue);
 
                 if (!isKnownProperty)
@@ -235,11 +206,6 @@ namespace AutoRest.CSharp.Common.Input.Examples
             };
 
             var result = new InputExampleRawValue(type ?? throw new JsonException(), value);
-
-            if (id != null)
-            {
-                referenceResolver.AddReference(id, result);
-            }
 
             return result;
         }

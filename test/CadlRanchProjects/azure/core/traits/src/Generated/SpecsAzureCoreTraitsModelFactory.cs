@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure;
+
 namespace _Specs_.Azure.Core.Traits.Models
 {
     /// <summary> Model factory for models. </summary>

@@ -9,25 +9,20 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class TypeSpecInputConstantConverter : JsonConverter<InputConstant>
     {
-        private readonly TypeSpecReferenceHandler _referenceHandler;
-
-        public TypeSpecInputConstantConverter(TypeSpecReferenceHandler referenceHandler)
-        {
-            _referenceHandler = referenceHandler;
-        }
-
         public override InputConstant Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => reader.ReadReferenceAndResolve<InputConstant>(_referenceHandler.CurrentResolver) ?? CreateInputConstant(ref reader, null, null, options, _referenceHandler.CurrentResolver);
+            => CreateInputConstant(ref reader, options);
 
         public override void Write(Utf8JsonWriter writer, InputConstant value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        public static InputConstant CreateInputConstant(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
+        public static InputConstant CreateInputConstant(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
-            var isFirstProperty = id == null;
+            if (reader.TokenType == JsonTokenType.StartObject)
+            {
+                reader.Read();
+            }
             InputType? type = null;
 
-            reader.TryReadReferenceId(ref isFirstProperty, ref id);
             if (!reader.TryReadComplexType("type", options, ref type))
             {
                 throw new JsonException("Must provide type ahead of value.");
@@ -39,10 +34,6 @@ namespace AutoRest.CSharp.Common.Input
             value = value ?? throw new JsonException("InputConstant must have value");
 
             var constant = new InputConstant(value, type);
-            if (id != null)
-            {
-                resolver.AddReference(id, constant);
-            }
             return constant;
         }
 
@@ -64,7 +55,8 @@ namespace AutoRest.CSharp.Common.Input
 
             reader.Read();
             object? value;
-            switch (type) {
+            switch (type)
+            {
                 case InputPrimitiveType primitype:
                     switch (primitype.Kind)
                     {

@@ -9,6 +9,7 @@ using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
+using FirstTestTypeSpec.Models;
 using NUnit.Framework;
 
 namespace FirstTestTypeSpec.Tests
@@ -32,6 +33,17 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo_SayHi_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = null;
+            HelloDemo client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
+
+            Response<Thing> response = await client.SayHiAsync("<headParameter>", "<queryParameter>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo_SayHi_AllParameters()
         {
             Uri endpoint = new Uri("<endpoint>");
@@ -39,6 +51,17 @@ namespace FirstTestTypeSpec.Tests
             HelloDemo client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo_SayHi_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<endpoint>");
+            AzureKeyCredential credential = null;
+            HelloDemo client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
+
+            Response<Thing> response = await client.SayHiAsync("<headParameter>", "<queryParameter>", optionalQuery: "<optionalQuery>");
         }
     }
 }

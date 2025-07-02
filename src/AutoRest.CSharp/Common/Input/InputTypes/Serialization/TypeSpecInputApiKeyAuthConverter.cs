@@ -9,29 +9,25 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class TypeSpecInputApiKeyAuthConverter : JsonConverter<InputApiKeyAuth>
     {
-        private readonly TypeSpecReferenceHandler _referenceHandler;
-
-        public TypeSpecInputApiKeyAuthConverter(TypeSpecReferenceHandler referenceHandler)
-        {
-            _referenceHandler = referenceHandler;
-        }
-
         public override InputApiKeyAuth? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => reader.ReadReferenceAndResolve<InputApiKeyAuth>(_referenceHandler.CurrentResolver) ?? CreateInputApiKeyAuth(ref reader, null, options, _referenceHandler.CurrentResolver);
+            => CreateInputApiKeyAuth(ref reader, options);
 
         public override void Write(Utf8JsonWriter writer, InputApiKeyAuth value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        private static InputApiKeyAuth CreateInputApiKeyAuth(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver resolver)
+        private static InputApiKeyAuth CreateInputApiKeyAuth(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
-            var isFirstProperty = id == null;
+            if (reader.TokenType == JsonTokenType.StartObject)
+            {
+                reader.Read();
+            }
+
             string? name = null;
             string? @in = null;
             string? prefix = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString("name", ref name)
+                var isKnownProperty = reader.TryReadString("name", ref name)
                     || reader.TryReadString("in", ref @in)
                     || reader.TryReadString("prefix", ref prefix);
                 if (!isKnownProperty)
@@ -43,10 +39,6 @@ namespace AutoRest.CSharp.Common.Input
             name = name ?? throw new JsonException("ApiKeyAuth must have Name");
 
             var result = new InputApiKeyAuth(name, prefix);
-            if (id != null)
-            {
-                resolver.AddReference(id, result);
-            }
             return result;
         }
     }
