@@ -26,57 +26,57 @@ namespace Inheritance.Models
             if (Optional.IsDefined(DfeString))
             {
                 writer.WritePropertyName("DfeString"u8);
-                JsonSerializer.Serialize(writer, DfeString);
+                ModelSerializationExtensions.JsonSerialize(writer, DfeString, ModelSerializationExtensions.Options);
             }
             if (Optional.IsDefined(DfeDouble))
             {
                 writer.WritePropertyName("DfeDouble"u8);
-                JsonSerializer.Serialize(writer, DfeDouble);
+                ModelSerializationExtensions.JsonSerialize(writer, DfeDouble, ModelSerializationExtensions.Options);
             }
             if (Optional.IsDefined(DfeBool))
             {
                 writer.WritePropertyName("DfeBool"u8);
-                JsonSerializer.Serialize(writer, DfeBool);
+                ModelSerializationExtensions.JsonSerialize(writer, DfeBool, ModelSerializationExtensions.Options);
             }
             if (Optional.IsDefined(DfeInt))
             {
                 writer.WritePropertyName("DfeInt"u8);
-                JsonSerializer.Serialize(writer, DfeInt);
+                ModelSerializationExtensions.JsonSerialize(writer, DfeInt, ModelSerializationExtensions.Options);
             }
             if (Optional.IsDefined(DfeObject))
             {
                 writer.WritePropertyName("DfeObject"u8);
-                JsonSerializer.Serialize(writer, DfeObject);
+                ModelSerializationExtensions.JsonSerialize(writer, DfeObject, ModelSerializationExtensions.Options);
             }
             if (Optional.IsDefined(DfeListOfT))
             {
                 writer.WritePropertyName("DfeListOfT"u8);
-                JsonSerializer.Serialize(writer, DfeListOfT);
+                ModelSerializationExtensions.JsonSerialize(writer, DfeListOfT, ModelSerializationExtensions.Options);
             }
             if (Optional.IsDefined(DfeListOfString))
             {
                 writer.WritePropertyName("DfeListOfString"u8);
-                JsonSerializer.Serialize(writer, DfeListOfString);
+                ModelSerializationExtensions.JsonSerialize(writer, DfeListOfString, ModelSerializationExtensions.Options);
             }
             if (Optional.IsDefined(DfeKeyValuePairs))
             {
                 writer.WritePropertyName("DfeKeyValuePairs"u8);
-                JsonSerializer.Serialize(writer, DfeKeyValuePairs);
+                ModelSerializationExtensions.JsonSerialize(writer, DfeKeyValuePairs, ModelSerializationExtensions.Options);
             }
             if (Optional.IsDefined(DfeDateTime))
             {
                 writer.WritePropertyName("DfeDateTime"u8);
-                JsonSerializer.Serialize(writer, DfeDateTime);
+                ModelSerializationExtensions.JsonSerialize(writer, DfeDateTime, ModelSerializationExtensions.Options);
             }
             if (Optional.IsDefined(DfeDuration))
             {
                 writer.WritePropertyName("DfeDuration"u8);
-                JsonSerializer.Serialize(writer, DfeDuration);
+                ModelSerializationExtensions.JsonSerialize(writer, DfeDuration, ModelSerializationExtensions.Options);
             }
             if (Optional.IsDefined(DfeUri))
             {
                 writer.WritePropertyName("DfeUri"u8);
-                JsonSerializer.Serialize(writer, DfeUri);
+                ModelSerializationExtensions.JsonSerialize(writer, DfeUri, ModelSerializationExtensions.Options);
             }
             writer.WriteEndObject();
         }

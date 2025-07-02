@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -24,7 +25,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(WorkspaceId))
             {
                 writer.WritePropertyName("workspaceId"u8);
-                JsonSerializer.Serialize(writer, WorkspaceId);
+                ((IJsonModel<WritableSubResource>)WorkspaceId).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WriteEndObject();
         }
@@ -50,7 +51,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    workspaceId = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    workspaceId = ModelSerializationExtensions.JsonDeserialize<WritableSubResource>(property.Value.GetRawText(), ModelSerializationExtensions.Options);
                     continue;
                 }
             }

@@ -32,6 +32,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Resources.Models;
 using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -440,16 +441,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
             switch (valueSerialization.Type.Implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
-                    if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
-                    {
-                        return new[]
-                        {
-                            Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions),
-                            JsonSerializerExpression.Serialize(utf8JsonWriter, value, serializeOptions).ToStatement()
-                        };
-                    }
-
-                    return JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
+                    // TODO: remove this check once ResponseError and DataFactoryElement implements IJsonModel<T>
+                    // SystemObjectType from Azure.ResourceManager has implemented IJsonModel<T>
+                    var useIJsonModel = systemObjectType.Declaration.Namespace.StartsWith("Azure.ResourceManager");
+                    return useIJsonModel
+                        ? JsonSerializerExpression.SerializeIJsonModel(valueSerialization.Type.WithNullable(false), utf8JsonWriter, value, options, valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
+                        : ModelSerializationExtensionsProvider.Serialize(utf8JsonWriter, value);
 
                 case ObjectType:
                     return utf8JsonWriter.WriteObjectValue(value, options: options);
@@ -567,7 +564,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (IsCustomJsonConverterAdded(valueType))
             {
-                return JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
+                // TODO: remove this check once ResponseError and DataFactoryElement implements IJsonModel<T>
+                var useIJsonModel = valueType != typeof(ResponseError) && valueType != typeof(DataFactoryElement<>);
+
+                return useIJsonModel
+                    ? JsonSerializerExpression.SerializeIJsonModel(valueType, utf8JsonWriter, new TypedValueExpression(valueType, value), options)
+                    : ModelSerializationExtensionsProvider.Serialize(utf8JsonWriter, value);
             }
 
             throw new NotSupportedException($"Framework type {valueType} serialization not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
@@ -1071,7 +1073,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 case JsonValueSerialization { Options: JsonSerializationOptions.UseManagedServiceIdentityV3 } valueSerialization:
                     var declareSerializeOptions = Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions);
-                    value = GetDeserializeValueExpression(element, valueSerialization.Type, options, valueSerialization.Format, serializeOptions);
+                    value = GetDeserializeValueExpression(element, valueSerialization.Type, options, valueSerialization.Format, serializeOptions, useManagedServiceIdentityV3: true);
                     return declareSerializeOptions;
 
                 case JsonValueSerialization valueSerialization:
@@ -1123,7 +1125,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return deserializeValueBlock;
         }
 
-        public static ValueExpression GetDeserializeValueExpression(JsonElementExpression element, CSharpType serializationType, ModelReaderWriterOptionsExpression? options, SerializationFormat serializationFormat = SerializationFormat.Default, ValueExpression? serializerOptions = null)
+        public static ValueExpression GetDeserializeValueExpression(JsonElementExpression element, CSharpType serializationType, ModelReaderWriterOptionsExpression? options, SerializationFormat serializationFormat = SerializationFormat.Default, ValueExpression? serializerOptions = null, bool useManagedServiceIdentityV3 = false)
         {
             if (serializationType.SerializeAs != null)
             {
@@ -1141,21 +1143,21 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return GetFrameworkTypeValueExpression(frameworkType, element, serializationFormat, serializationType);
             }
 
-            return GetDeserializeImplementation(serializationType.Implementation, element, options, serializerOptions);
+            return GetDeserializeImplementation(serializationType.Implementation, element, options, serializerOptions, useManagedServiceIdentityV3);
         }
 
-        private static ValueExpression GetDeserializeImplementation(TypeProvider implementation, JsonElementExpression element, ModelReaderWriterOptionsExpression? options, ValueExpression? serializerOptions)
+        private static ValueExpression GetDeserializeImplementation(TypeProvider implementation, JsonElementExpression element, ModelReaderWriterOptionsExpression? options, ValueExpression? serializerOptions, bool useManagedServiceIdentityV3 = false)
         {
             switch (implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
-                    return JsonSerializerExpression.Deserialize(element, implementation.Type, serializerOptions);
+                    return ModelSerializationExtensionsProvider.Deserialize(element, implementation.Type, useManagedServiceIdentityV3);
 
                 case Resource { ResourceData: SerializableObjectType resourceDataType } resource:
                     return New.Instance(resource.Type, new MemberExpression(null, "Client"), SerializableObjectTypeExpression.Deserialize(resourceDataType, element));
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.InputModel):
-                    return JsonSerializerExpression.Deserialize(element, implementation.Type);
+                    return ModelSerializationExtensionsProvider.Deserialize(element, implementation.Type, useManagedServiceIdentityV3);
 
                 case SerializableObjectType type:
                     return SerializableObjectTypeExpression.Deserialize(type, element, options);
@@ -1218,7 +1220,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (IsCustomJsonConverterAdded(frameworkType) && serializationType is not null)
             {
-                return JsonSerializerExpression.Deserialize(element, serializationType);
+                return ModelSerializationExtensionsProvider.Deserialize(element, serializationType);
             }
 
             if (frameworkType == typeof(JsonElement))
