@@ -5,7 +5,11 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -32,7 +36,7 @@ namespace MgmtAcronymMapping
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                JsonSerializer.Serialize(writer, Identity);
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -117,12 +121,12 @@ namespace MgmtAcronymMapping
             if (Optional.IsDefined(ProximityPlacementGroup))
             {
                 writer.WritePropertyName("proximityPlacementGroup"u8);
-                JsonSerializer.Serialize(writer, ProximityPlacementGroup);
+                ((IJsonModel<WritableSubResource>)ProximityPlacementGroup).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(HostGroup))
             {
                 writer.WritePropertyName("hostGroup"u8);
-                JsonSerializer.Serialize(writer, HostGroup);
+                ((IJsonModel<WritableSubResource>)HostGroup).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(AdditionalCapabilities))
             {
@@ -197,7 +201,13 @@ namespace MgmtAcronymMapping
                     {
                         continue;
                     }
-                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
+                    identity =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.ManagedServiceIdentity>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtAcronymMapping.ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default)
+#else
+                ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default)
+#endif
+;
                     continue;
                 }
                 if (property.NameEquals("zones"u8))
@@ -254,7 +264,13 @@ namespace MgmtAcronymMapping
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.SystemData>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtAcronymMapping.ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default)
+#else
+                ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default)
+#endif
+;
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -369,7 +385,13 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            proximityPlacementGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            proximityPlacementGroup =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.WritableSubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property0.Value).ToArray()), global::MgmtAcronymMapping.ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default)
+#else
+                ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default)
+#endif
+;
                             continue;
                         }
                         if (property0.NameEquals("hostGroup"u8))
@@ -378,7 +400,13 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            hostGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            hostGroup =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.WritableSubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property0.Value).ToArray()), global::MgmtAcronymMapping.ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default)
+#else
+                ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default)
+#endif
+;
                             continue;
                         }
                         if (property0.NameEquals("additionalCapabilities"u8))

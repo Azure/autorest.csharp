@@ -5,7 +5,11 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -43,7 +47,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualNetworkRules)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<WritableSubResource>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -103,7 +107,13 @@ namespace MgmtMockAndSample.Models
                     List<WritableSubResource> array = new List<WritableSubResource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
+                        array.Add(
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.WritableSubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(item).ToArray()), global::MgmtMockAndSample.ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
+#else
+                ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
+#endif
+);
                     }
                     virtualNetworkRules = array;
                     continue;

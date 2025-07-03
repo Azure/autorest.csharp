@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -40,7 +41,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(OriginGroup))
             {
                 writer.WritePropertyName("originGroup"u8);
-                JsonSerializer.Serialize(writer, OriginGroup);
+                ((IJsonModel<WritableSubResource>)OriginGroup).Write(writer, options);
             }
             if (Optional.IsDefined(ForwardingProtocol))
             {
@@ -96,7 +97,13 @@ namespace MgmtDiscriminator.Models
                     {
                         continue;
                     }
-                    originGroup = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    originGroup =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.WritableSubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), options, MgmtDiscriminatorContext.Default)
+#else
+                ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, MgmtDiscriminatorContext.Default)
+#endif
+;
                     continue;
                 }
                 if (property.NameEquals("forwardingProtocol"u8))

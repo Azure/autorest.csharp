@@ -5,7 +5,11 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -45,7 +49,7 @@ namespace MgmtExpandResourceTypes
             if (Optional.IsDefined(TargetResource))
             {
                 writer.WritePropertyName("targetResource"u8);
-                JsonSerializer.Serialize(writer, TargetResource);
+                ((IJsonModel<WritableSubResource>)TargetResource).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(ARecords))
             {
@@ -195,7 +199,13 @@ namespace MgmtExpandResourceTypes
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.SystemData>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtExpandResourceTypes.ModelSerializationExtensions.WireOptions, MgmtExpandResourceTypesContext.Default)
+#else
+                ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExpandResourceTypesContext.Default)
+#endif
+;
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -246,7 +256,13 @@ namespace MgmtExpandResourceTypes
                             {
                                 continue;
                             }
-                            targetResource = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            targetResource =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.WritableSubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property0.Value).ToArray()), global::MgmtExpandResourceTypes.ModelSerializationExtensions.WireOptions, MgmtExpandResourceTypesContext.Default)
+#else
+                ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExpandResourceTypesContext.Default)
+#endif
+;
                             continue;
                         }
                         if (property0.NameEquals("ARecords"u8))

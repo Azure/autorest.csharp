@@ -5,7 +5,11 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -22,12 +26,12 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                JsonSerializer.Serialize(writer, Plan);
+                ((IJsonModel<ArmPlan>)Plan).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                JsonSerializer.Serialize(writer, Identity);
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(IdentityWithRenamedProperty))
             {
@@ -42,7 +46,7 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(IdentityWithNoUserIdentity))
             {
                 writer.WritePropertyName("identityWithNoUserIdentity"u8);
-                JsonSerializer.Serialize(writer, IdentityWithNoUserIdentity);
+                ((IJsonModel<ManagedServiceIdentity>)IdentityWithNoUserIdentity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(IdentityWithNoSystemIdentity))
             {
@@ -52,8 +56,7 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(IdentityV3))
             {
                 writer.WritePropertyName("identityV3"u8);
-                var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
-                JsonSerializer.Serialize(writer, IdentityV3, serializeOptions);
+                ((IJsonModel<ManagedServiceIdentity>)IdentityV3).Write(writer, new ModelReaderWriterOptions("W|v3"));
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -68,12 +71,12 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(FakeSubResource))
             {
                 writer.WritePropertyName("fakeSubResource"u8);
-                JsonSerializer.Serialize(writer, FakeSubResource);
+                ((IJsonModel<SubResource>)FakeSubResource).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(FakeWritableSubResource))
             {
                 writer.WritePropertyName("fakeWritableSubResource"u8);
-                JsonSerializer.Serialize(writer, FakeWritableSubResource);
+                ((IJsonModel<WritableSubResource>)FakeWritableSubResource).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -140,7 +143,13 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    plan = JsonSerializer.Deserialize<ArmPlan>(property.Value.GetRawText());
+                    plan =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.ArmPlan>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtPropertyChooser.ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default)
+#else
+                ModelReaderWriter.Read<ArmPlan>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default)
+#endif
+;
                     continue;
                 }
                 if (property.NameEquals("resources"u8))
@@ -163,7 +172,13 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
+                    identity =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.ManagedServiceIdentity>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtPropertyChooser.ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default)
+#else
+                ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default)
+#endif
+;
                     continue;
                 }
                 if (property.NameEquals("identityWithRenamedProperty"u8))
@@ -190,7 +205,13 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identityWithNoUserIdentity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
+                    identityWithNoUserIdentity =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.ManagedServiceIdentity>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtPropertyChooser.ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default)
+#else
+                ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default)
+#endif
+;
                     continue;
                 }
                 if (property.NameEquals("identityWithNoSystemIdentity"u8))
@@ -208,8 +229,13 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
-                    identityV3 = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText(), serializeOptions);
+                    identityV3 =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.ManagedServiceIdentity>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), new global::System.ClientModel.Primitives.ModelReaderWriterOptions("W|v3"), MgmtPropertyChooserContext.Default)
+#else
+                ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtPropertyChooserContext.Default)
+#endif
+;
                     continue;
                 }
                 if (property.NameEquals("zones"u8))
@@ -246,7 +272,13 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    fakeSubResource = JsonSerializer.Deserialize<SubResource>(property.Value.GetRawText());
+                    fakeSubResource =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.SubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtPropertyChooser.ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default)
+#else
+                ModelReaderWriter.Read<SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default)
+#endif
+;
                     continue;
                 }
                 if (property.NameEquals("fakeWritableSubResource"u8))
@@ -255,7 +287,13 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    fakeWritableSubResource = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    fakeWritableSubResource =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.WritableSubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtPropertyChooser.ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default)
+#else
+                ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default)
+#endif
+;
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -298,7 +336,13 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.SystemData>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtPropertyChooser.ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default)
+#else
+                ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default)
+#endif
+;
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

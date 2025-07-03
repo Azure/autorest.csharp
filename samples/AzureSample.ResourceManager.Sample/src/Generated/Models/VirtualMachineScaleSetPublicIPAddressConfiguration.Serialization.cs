@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -65,7 +66,7 @@ namespace AzureSample.ResourceManager.Sample.Models
             if (Optional.IsDefined(PublicIPPrefix))
             {
                 writer.WritePropertyName("publicIPPrefix"u8);
-                JsonSerializer.Serialize(writer, PublicIPPrefix);
+                ((IJsonModel<WritableSubResource>)PublicIPPrefix).Write(writer, options);
             }
             if (Optional.IsDefined(PublicIPAddressVersion))
             {
@@ -172,7 +173,13 @@ namespace AzureSample.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            publicIPPrefix = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            publicIPPrefix =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.WritableSubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property0.Value).ToArray()), options, AzureSampleResourceManagerSampleContext.Default)
+#else
+                ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), options, AzureSampleResourceManagerSampleContext.Default)
+#endif
+;
                             continue;
                         }
                         if (property0.NameEquals("publicIPAddressVersion"u8))

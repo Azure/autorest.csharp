@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -40,7 +41,7 @@ namespace MgmtDiscriminator.Models
             writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("originGroup"u8);
-            JsonSerializer.Serialize(writer, OriginGroup);
+            ((IJsonModel<WritableSubResource>)OriginGroup).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -91,7 +92,13 @@ namespace MgmtDiscriminator.Models
                 }
                 if (property.NameEquals("originGroup"u8))
                 {
-                    originGroup = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    originGroup =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.WritableSubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), options, MgmtDiscriminatorContext.Default)
+#else
+                ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, MgmtDiscriminatorContext.Default)
+#endif
+;
                     continue;
                 }
                 if (options.Format != "W")
