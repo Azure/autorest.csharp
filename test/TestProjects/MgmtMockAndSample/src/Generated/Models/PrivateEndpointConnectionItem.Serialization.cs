@@ -7,6 +7,7 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 using Azure.ResourceManager.Resources.Models;
@@ -53,7 +54,13 @@ namespace MgmtMockAndSample.Models
                             {
                                 continue;
                             }
-                            privateEndpoint = ModelReaderWriter.Read<Azure.ResourceManager.Resources.Models.SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
+                            privateEndpoint =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.SubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property0.Value).ToArray()), global::MgmtMockAndSample.ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
+#else
+                ModelReaderWriter.Read<Azure.ResourceManager.Resources.Models.SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
+#endif
+;
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnectionState"u8))

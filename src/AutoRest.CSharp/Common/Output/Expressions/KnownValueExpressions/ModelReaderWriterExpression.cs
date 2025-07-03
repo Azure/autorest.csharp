@@ -3,7 +3,10 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.Json;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using Azure.Core.Expressions.DataFactory;
@@ -22,15 +25,27 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
                 return JsonSerializerExpression.Deserialize(element, type, options);
             }
 
-            return new InvokeStaticMethodExpression(
-                typeof(ModelReaderWriter),
-                nameof(ModelReaderWriter.Read),
-                [
-                    New.Instance(typeof(BinaryData), [new MemberExpression(typeof(Encoding), nameof(Encoding.UTF8)).Invoke(nameof(UTF8Encoding.GetBytes), [element.GetRawText()])]),
-                    useManagedServiceIdentityV3 ? ModelReaderWriterOptionsExpression.UsingSystemAssignedUserAssignedV3(options) : options ?? ModelReaderWriterOptionsExpression.Wire,
-                    ModelReaderWriterContextExpression.Default
-                ],
-                TypeArguments: [type]);
+            return
+                new IfElsePreprocessorExpression(
+                    "NET9_0_OR_GREATER",
+                    new InvokeStaticMethodExpression(
+                        typeof(ModelReaderWriter),
+                        nameof(ModelReaderWriter.Read),
+                        [
+                                New.Instance(typeof(BinaryData), [new InvokeStaticMethodExpression(typeof(JsonMarshal), nameof(JsonMarshal.GetRawUtf8Value), [element]).Invoke("ToArray")]),
+                            useManagedServiceIdentityV3 ? ModelReaderWriterOptionsExpression.UsingSystemAssignedUserAssignedV3(options) : options ?? ModelReaderWriterOptionsExpression.Wire,
+                            ModelReaderWriterContextExpression.Default
+                        ],
+                    TypeArguments: [type]),
+                    new InvokeStaticMethodExpression(
+                        typeof(ModelReaderWriter),
+                        nameof(ModelReaderWriter.Read),
+                        [
+                            New.Instance(typeof(BinaryData), [new MemberExpression(typeof(Encoding), nameof(Encoding.UTF8)).Invoke(nameof(UTF8Encoding.GetBytes), [element.GetRawText()])]),
+                            useManagedServiceIdentityV3 ? ModelReaderWriterOptionsExpression.UsingSystemAssignedUserAssignedV3(options) : options ?? ModelReaderWriterOptionsExpression.Wire,
+                            ModelReaderWriterContextExpression.Default
+                        ],
+                        TypeArguments: [type]));
         }
 
         public static InvokeInstanceMethodExpression Write(ValueExpression value, CSharpType type, Utf8JsonWriterExpression writer, ModelReaderWriterOptionsExpression? options = null, bool useManagedServiceIdentityV3 = false)
