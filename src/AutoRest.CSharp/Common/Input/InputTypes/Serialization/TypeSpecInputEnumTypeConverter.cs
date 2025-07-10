@@ -26,12 +26,11 @@ namespace AutoRest.CSharp.Common.Input
 
         public static InputEnumType CreateEnumType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
-            var isFirstProperty = id == null && name == null;
             if (id == null)
             {
-                reader.TryReadReferenceId(ref isFirstProperty, ref id);
+                reader.TryReadReferenceId(ref id);
             }
-            id = id ?? throw new JsonException("Enum must have an id");
+            id = id ?? throw new JsonException();
 
             var enumType = new InputEnumType(null!, null!, null, null, null, null, InputModelTypeUsage.None, null!, null!, false);
 

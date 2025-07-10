@@ -7,6 +7,7 @@
 
 using System;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -55,12 +56,51 @@ namespace FirstTestTypeSpec
             _apiVersion = apiVersion;
         }
 
+        /// <summary> Long-running resource action operation template. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="projectFileVersion"> The <see cref="string"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='ExportAsync(WaitUntil,string,string,CancellationToken)']/*" />
+        public virtual async Task<Operation<ExportedResource>> ExportAsync(WaitUntil waitUntil, string name, string projectFileVersion = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Operation<BinaryData> response = await ExportAsync(waitUntil, name, projectFileVersion, context).ConfigureAwait(false);
+            return ProtocolOperationHelpers.Convert(response, FetchExportedResourceFromResourceOperationStatusResourceExportedResourceError, ClientDiagnostics, "VersioningOp.Export");
+        }
+
+        /// <summary> Long-running resource action operation template. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="projectFileVersion"> The <see cref="string"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='Export(WaitUntil,string,string,CancellationToken)']/*" />
+        public virtual Operation<ExportedResource> Export(WaitUntil waitUntil, string name, string projectFileVersion = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Operation<BinaryData> response = Export(waitUntil, name, projectFileVersion, context);
+            return ProtocolOperationHelpers.Convert(response, FetchExportedResourceFromResourceOperationStatusResourceExportedResourceError, ClientDiagnostics, "VersioningOp.Export");
+        }
+
         /// <summary>
         /// [Protocol Method] Long-running resource action operation template.
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ExportAsync(WaitUntil,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -100,6 +140,11 @@ namespace FirstTestTypeSpec
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Export(WaitUntil,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -129,12 +174,51 @@ namespace FirstTestTypeSpec
             }
         }
 
+        /// <summary> Long-running resource action operation template. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="projectFileVersion"> The <see cref="string"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='ExportWAsync(WaitUntil,string,string,CancellationToken)']/*" />
+        public virtual async Task<Operation<ExportedResource>> ExportWAsync(WaitUntil waitUntil, string name, string projectFileVersion = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Operation<BinaryData> response = await ExportWAsync(waitUntil, name, projectFileVersion, context).ConfigureAwait(false);
+            return ProtocolOperationHelpers.Convert(response, FetchExportedResourceFromResourceOperationStatusResourceExportedResourceError, ClientDiagnostics, "VersioningOp.ExportW");
+        }
+
+        /// <summary> Long-running resource action operation template. </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="projectFileVersion"> The <see cref="string"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/VersioningOp.xml" path="doc/members/member[@name='ExportW(WaitUntil,string,string,CancellationToken)']/*" />
+        public virtual Operation<ExportedResource> ExportW(WaitUntil waitUntil, string name, string projectFileVersion = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Operation<BinaryData> response = ExportW(waitUntil, name, projectFileVersion, context);
+            return ProtocolOperationHelpers.Convert(response, FetchExportedResourceFromResourceOperationStatusResourceExportedResourceError, ClientDiagnostics, "VersioningOp.ExportW");
+        }
+
         /// <summary>
         /// [Protocol Method] Long-running resource action operation template.
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ExportWAsync(WaitUntil,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -172,6 +256,11 @@ namespace FirstTestTypeSpec
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ExportW(WaitUntil,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -241,6 +330,17 @@ namespace FirstTestTypeSpec
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        private static RequestContext DefaultRequestContext = new RequestContext();
+        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
+        {
+            if (!cancellationToken.CanBeCanceled)
+            {
+                return DefaultRequestContext;
+            }
+
+            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier202;

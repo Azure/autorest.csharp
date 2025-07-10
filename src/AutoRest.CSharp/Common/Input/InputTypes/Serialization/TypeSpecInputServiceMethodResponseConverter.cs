@@ -10,38 +10,24 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal sealed class TypeSpecInputServiceMethodResponseConverter : JsonConverter<InputServiceMethodResponse>
     {
-        private readonly TypeSpecReferenceHandler _referenceHandler;
-
-        public TypeSpecInputServiceMethodResponseConverter (TypeSpecReferenceHandler referenceHandler)
-        {
-            _referenceHandler = referenceHandler;
-        }
-
         public override InputServiceMethodResponse Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => reader.ReadReferenceAndResolve<InputServiceMethodResponse>(_referenceHandler.CurrentResolver) ?? ReadInputServiceMethodResponse(ref reader, null, options, _referenceHandler.CurrentResolver);
+            => ReadInputServiceMethodResponse(ref reader, options);
 
         public override void Write(Utf8JsonWriter writer, InputServiceMethodResponse value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        private static InputServiceMethodResponse ReadInputServiceMethodResponse(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver resolver)
+        private static InputServiceMethodResponse ReadInputServiceMethodResponse(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
-            if (id == null)
+            if (reader.TokenType == JsonTokenType.StartObject)
             {
-                reader.TryReadReferenceId(ref id);
+                reader.Read();
             }
-
-            id = id ?? throw new JsonException();
-            var response = new InputServiceMethodResponse();
-            resolver.AddReference(id, response);
-
-            var isFirstProperty = true;
             InputType? type = null;
             IReadOnlyList<string>? resultSegments = null;
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadComplexType("type", options, ref type)
+                var isKnownProperty = reader.TryReadComplexType("type", options, ref type)
                     || reader.TryReadComplexType("resultSegments", options, ref resultSegments);
 
                 if (!isKnownProperty)
@@ -50,8 +36,7 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            response.Type = type;
-            response.ResultSegments = resultSegments;
+            var response = new InputServiceMethodResponse(type, resultSegments ?? []);
 
             return response;
         }

@@ -26,7 +26,6 @@ modelerfour:
 include-x-ms-examples-original-file: false
 sample-gen:
   sample: true
-  output-folder: $(this-folder)../tests/Generated
   clear-output-folder: true
   skipped-operations: # only to test if the configuration works
   - Vaults_GetDeleted

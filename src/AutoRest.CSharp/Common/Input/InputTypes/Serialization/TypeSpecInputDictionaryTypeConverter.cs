@@ -25,14 +25,13 @@ namespace AutoRest.CSharp.Common.Input
 
         public static InputDictionaryType CreateDictionaryType(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver resolver)
         {
-            var isFirstProperty = id == null;
             InputType? keyType = null;
             InputType? valueType = null;
             IReadOnlyList<InputDecoratorInfo>? decorators = null;
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
+                var isKnownProperty = reader.TryReadReferenceId(ref id)
                     || reader.TryReadComplexType("keyType", options, ref keyType)
                     || reader.TryReadComplexType("valueType", options, ref valueType)
                     || reader.TryReadComplexType("decorators", options, ref decorators);
