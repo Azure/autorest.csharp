@@ -442,7 +442,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             switch (valueSerialization.Type.Implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
-                    return ModelReaderWriterExpression.Write(value, valueSerialization.Type, utf8JsonWriter, options, valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3).ToStatement();
+                    return ModelReaderWriterExpression.Write(value, valueSerialization.Type, utf8JsonWriter, options, valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3);
 
                 case ObjectType:
                     return utf8JsonWriter.WriteObjectValue(value, options: options);
@@ -562,7 +562,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (IsCustomJsonConverterAdded(frameworkType))
             {
-                return ModelReaderWriterExpression.Write(value, valueType, utf8JsonWriter, options).ToStatement();
+                return ModelReaderWriterExpression.Write(value, valueType, utf8JsonWriter, options);
             }
 
             throw new NotSupportedException($"Framework type {valueType} serialization not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");

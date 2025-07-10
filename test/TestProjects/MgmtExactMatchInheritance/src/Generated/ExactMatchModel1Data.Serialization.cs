@@ -67,62 +67,62 @@ namespace MgmtExactMatchInheritance
             if (Optional.IsDefined(Type5))
             {
                 writer.WritePropertyName("type5"u8);
-                ((IJsonModel<DataFactoryElement<string>>)Type5).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type5);
             }
             if (Optional.IsDefined(Type6))
             {
                 writer.WritePropertyName("type6"u8);
-                ((IJsonModel<DataFactoryElement<double>>)Type6).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type6);
             }
             if (Optional.IsDefined(Type7))
             {
                 writer.WritePropertyName("type7"u8);
-                ((IJsonModel<DataFactoryElement<bool>>)Type7).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type7);
             }
             if (Optional.IsDefined(Type8))
             {
                 writer.WritePropertyName("type8"u8);
-                ((IJsonModel<DataFactoryElement<int>>)Type8).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type8);
             }
             if (Optional.IsDefined(Type9))
             {
                 writer.WritePropertyName("type9"u8);
-                ((IJsonModel<DataFactoryElement<BinaryData>>)Type9).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type9);
             }
             if (Optional.IsDefined(Type10))
             {
                 writer.WritePropertyName("type10"u8);
-                ((IJsonModel<DataFactoryElement<IList<SeparateClass>>>)Type10).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type10);
             }
             if (Optional.IsDefined(Type11))
             {
                 writer.WritePropertyName("type11"u8);
-                ((IJsonModel<DataFactoryElement<IList<string>>>)Type11).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type11);
             }
             if (Optional.IsDefined(Type12))
             {
                 writer.WritePropertyName("type12"u8);
-                ((IJsonModel<DataFactoryElement<IDictionary<string, string>>>)Type12).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type12);
             }
             if (Optional.IsDefined(Type13))
             {
                 writer.WritePropertyName("type13"u8);
-                ((IJsonModel<DataFactoryElement<IList<SeparateClass>>>)Type13).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type13);
             }
             if (Optional.IsDefined(Type14))
             {
                 writer.WritePropertyName("type14"u8);
-                ((IJsonModel<DataFactoryElement<DateTimeOffset>>)Type14).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type14);
             }
             if (Optional.IsDefined(Type15))
             {
                 writer.WritePropertyName("type15"u8);
-                ((IJsonModel<DataFactoryElement<TimeSpan>>)Type15).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type15);
             }
             if (Optional.IsDefined(Type16))
             {
                 writer.WritePropertyName("type16"u8);
-                ((IJsonModel<DataFactoryElement<Uri>>)Type16).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type16);
             }
             if (Optional.IsDefined(Type17))
             {
@@ -142,7 +142,7 @@ namespace MgmtExactMatchInheritance
             if (Optional.IsDefined(Type20))
             {
                 writer.WritePropertyName("type20"u8);
-                ((IJsonModel<DataFactoryElement<IDictionary<string, BinaryData>>>)Type20).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type20);
             }
             writer.WriteEndObject();
         }

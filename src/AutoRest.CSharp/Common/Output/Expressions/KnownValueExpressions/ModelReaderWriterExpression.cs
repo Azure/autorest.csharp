@@ -3,6 +3,7 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
@@ -17,9 +18,17 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
     internal class ModelReaderWriterExpression
     {
+        private static readonly HashSet<Type> _dataFactoryTypesNotImplementingIJsonModel = new()
+        {
+            typeof(DataFactoryLinkedServiceReference),
+            typeof(DataFactoryKeyVaultSecret),
+            typeof(DataFactorySecret),
+            typeof(DataFactorySecretString)
+        };
+
         public static ValueExpression Read(CSharpType type, JsonElementExpression element, ModelReaderWriterOptionsExpression? options = null, bool useManagedServiceIdentityV3 = false)
         {
-            if (type.IsGenericType && type.GetGenericTypeDefinition().FrameworkType.Equals(typeof(DataFactoryElement<>)))
+            if (IsDataFactoryType(type))
             {
                 // MRW can't handle DataFactoryElement<> for now, so we use JsonSerializerExpression directly
                 return JsonSerializerExpression.Deserialize(element, type, options);
@@ -48,14 +57,26 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
                         TypeArguments: [type]));
         }
 
-        public static InvokeInstanceMethodExpression Write(ValueExpression value, CSharpType type, Utf8JsonWriterExpression writer, ModelReaderWriterOptionsExpression? options = null, bool useManagedServiceIdentityV3 = false)
+        // TODO: remove this when we have AOT-safe ready for DataFactoryElement related types
+        private static bool IsDataFactoryType(CSharpType type)
         {
+            return (type.IsGenericType && type.GetGenericTypeDefinition().FrameworkType.Equals(typeof(DataFactoryElement<>)))
+                            || (type.IsFrameworkType && _dataFactoryTypesNotImplementingIJsonModel.Contains(type.FrameworkType));
+        }
+
+        public static MethodBodyStatement Write(ValueExpression value, CSharpType type, Utf8JsonWriterExpression writer, ModelReaderWriterOptionsExpression? options = null, bool useManagedServiceIdentityV3 = false)
+        {
+            if (IsDataFactoryType(type))
+            {
+                return JsonSerializerExpression.Serialize(writer, value).ToStatement();
+            }
+
             return value.CastTo(new CSharpType(typeof(IJsonModel<>), type)).Invoke(
                 nameof(IJsonModel<object>.Write),
                 [
                     writer,
                     useManagedServiceIdentityV3 ? ModelReaderWriterOptionsExpression.UsingSystemAssignedUserAssignedV3(options) : options ?? ModelReaderWriterOptionsExpression.Wire
-                ]);
+                ]).ToStatement();
         }
     }
 }

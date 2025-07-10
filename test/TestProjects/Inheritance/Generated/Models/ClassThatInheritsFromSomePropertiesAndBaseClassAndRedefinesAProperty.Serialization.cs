@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -28,57 +27,57 @@ namespace Inheritance.Models
             if (Optional.IsDefined(DfeString))
             {
                 writer.WritePropertyName("DfeString"u8);
-                ((IJsonModel<DataFactoryElement<string>>)DfeString).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, DfeString);
             }
             if (Optional.IsDefined(DfeDouble))
             {
                 writer.WritePropertyName("DfeDouble"u8);
-                ((IJsonModel<DataFactoryElement<double>>)DfeDouble).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, DfeDouble);
             }
             if (Optional.IsDefined(DfeBool))
             {
                 writer.WritePropertyName("DfeBool"u8);
-                ((IJsonModel<DataFactoryElement<bool>>)DfeBool).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, DfeBool);
             }
             if (Optional.IsDefined(DfeInt))
             {
                 writer.WritePropertyName("DfeInt"u8);
-                ((IJsonModel<DataFactoryElement<int>>)DfeInt).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, DfeInt);
             }
             if (Optional.IsDefined(DfeObject))
             {
                 writer.WritePropertyName("DfeObject"u8);
-                ((IJsonModel<DataFactoryElement<BinaryData>>)DfeObject).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, DfeObject);
             }
             if (Optional.IsDefined(DfeListOfT))
             {
                 writer.WritePropertyName("DfeListOfT"u8);
-                ((IJsonModel<DataFactoryElement<IList<SeparateClass>>>)DfeListOfT).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, DfeListOfT);
             }
             if (Optional.IsDefined(DfeListOfString))
             {
                 writer.WritePropertyName("DfeListOfString"u8);
-                ((IJsonModel<DataFactoryElement<IList<string>>>)DfeListOfString).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, DfeListOfString);
             }
             if (Optional.IsDefined(DfeKeyValuePairs))
             {
                 writer.WritePropertyName("DfeKeyValuePairs"u8);
-                ((IJsonModel<DataFactoryElement<IDictionary<string, string>>>)DfeKeyValuePairs).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, DfeKeyValuePairs);
             }
             if (Optional.IsDefined(DfeDateTime))
             {
                 writer.WritePropertyName("DfeDateTime"u8);
-                ((IJsonModel<DataFactoryElement<DateTimeOffset>>)DfeDateTime).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, DfeDateTime);
             }
             if (Optional.IsDefined(DfeDuration))
             {
                 writer.WritePropertyName("DfeDuration"u8);
-                ((IJsonModel<DataFactoryElement<TimeSpan>>)DfeDuration).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, DfeDuration);
             }
             if (Optional.IsDefined(DfeUri))
             {
                 writer.WritePropertyName("DfeUri"u8);
-                ((IJsonModel<DataFactoryElement<Uri>>)DfeUri).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, DfeUri);
             }
             if (Optional.IsDefined(SomeProperty))
             {
