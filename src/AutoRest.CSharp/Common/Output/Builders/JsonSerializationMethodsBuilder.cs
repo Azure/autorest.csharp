@@ -440,16 +440,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             switch (valueSerialization.Type.Implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
-                    if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
-                    {
-                        return new[]
-                        {
-                            Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions),
-                            JsonSerializerExpression.Serialize(utf8JsonWriter, value, serializeOptions).ToStatement()
-                        };
-                    }
-
-                    return JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
+                    var jsonModelInterface = new CSharpType(typeof(IJsonModel<>), systemObjectType.Type);
+                    var cast = value.CastTo(jsonModelInterface);
+                    // ((IJsonModel<T>)Value).Write(writer, options)
+                    options ??= ModelReaderWriterOptionsExpression.Wire;
+                    return cast.Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriter, options).ToStatement();
 
                 case ObjectType:
                     return utf8JsonWriter.WriteObjectValue(value, options: options);
@@ -567,7 +562,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (IsCustomJsonConverterAdded(valueType))
             {
-                return JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
+                var jsonModelInterface = new CSharpType(typeof(IJsonModel<>), valueType);
+                var cast = value.CastTo(jsonModelInterface);
+                // ((IJsonModel<T>)Value).Write(writer)
+                options ??= ModelReaderWriterOptionsExpression.Wire;
+                return cast.Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriter, options).ToStatement();
             }
 
             throw new NotSupportedException($"Framework type {valueType} serialization not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
