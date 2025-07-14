@@ -6,12 +6,10 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.Json;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using Azure.Core.Expressions.DataFactory;
-using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
@@ -30,7 +28,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         {
             if (IsDataFactoryType(type))
             {
-                // MRW can't handle DataFactoryElement<> for now, so we use JsonSerializerExpression directly
                 return JsonSerializerExpression.Deserialize(element, type, options);
             }
 
@@ -57,6 +54,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
                         TypeArguments: [type]));
         }
 
+        // MRW can't handle DataFactoryElement<> for now, so we use JsonSerializerExpression directly
         // TODO: remove this when we have AOT-safe ready for DataFactoryElement related types
         private static bool IsDataFactoryType(CSharpType type)
         {
