@@ -36,7 +36,7 @@ extends:
   template: eng/pipelines/templates/stages/archetype-autorest-preview.yml@azure-sdk-tools
   parameters:
     NodeVersion: $(NODE_VERSION)
-    RegenerationJobCount: 8
+    RegenerationJobCount: 7
     BuildPrereleaseVersion: true
     ${{ if eq(variables['Build.Reason'], 'Schedule') }}:
       # In scheduled builds, we always use the "next" version of TypeSpec
