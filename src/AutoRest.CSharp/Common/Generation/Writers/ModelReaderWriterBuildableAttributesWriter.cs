@@ -94,18 +94,30 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     ProcessPropertyType(argument);
                 }
+                // Also process the generic type itself if it's in our namespace
+                if (actualType.Namespace == Configuration.Namespace)
+                {
+                    ProcessSingleType(actualType);
+                }
             }
+            else
+            {
+                ProcessSingleType(actualType);
+            }
+        }
 
+        private void ProcessSingleType(CSharpType type)
+        {
             // Skip if already processed
-            if (_processedTypes.Contains(actualType))
+            if (_processedTypes.Contains(type))
                 return;
 
-            _processedTypes.Add(actualType);
+            _processedTypes.Add(type);
 
             // Check if this type implements IPersistableModel
-            if (ImplementsIPersistableModel(actualType))
+            if (ImplementsIPersistableModel(type))
             {
-                _buildableTypes.Add(actualType);
+                _buildableTypes.Add(type);
             }
         }
 
@@ -117,7 +129,8 @@ namespace AutoRest.CSharp.Generation.Writers
             // Check if any interface is IPersistableModel<T>
             return model.Serialization.Interfaces.Any(i => 
                 i.IsGenericType && 
-                i.Name.StartsWith("IPersistableModel"));
+                (i.Name.StartsWith("IPersistableModel") || 
+                 i.ToString().Contains("IPersistableModel")));
         }
 
         private bool ImplementsIPersistableModel(CSharpType type)
