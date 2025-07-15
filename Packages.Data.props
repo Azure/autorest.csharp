@@ -37,7 +37,7 @@
 
   <!-- All csproj dependencies. -->
   <ItemGroup>
-    <PackageReference Update="Azure.Core" Version="1.46.1" />
+    <PackageReference Update="Azure.Core" Version="1.47.1" />
     <PackageReference Update="Azure.Core.Experimental" Version="0.1.0-preview.18" />
     <PackageReference Update="Azure.Core.Expressions.DataFactory" Version="1.0.0" />
     <PackageReference Update="Azure.ResourceManager" Version="1.13.0" />
@@ -49,7 +49,7 @@
     <PackageReference Update="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.1.0" />
     <PackageReference Update="NuGet.Configuration" Version="6.8.0" />
     <PackageReference Update="NUnit" Version="3.13.2" />
-    <PackageReference Update="System.ClientModel" Version="1.4.1" />
+    <PackageReference Update="System.ClientModel" Version="1.5.1" />
     <PackageReference Update="System.Diagnostics.DiagnosticSource" Version="8.0.0" />
     <PackageReference Update="System.Memory" Version="4.5.4" />
     <PackageReference Update="System.Text.Json" Version="8.0.5" />

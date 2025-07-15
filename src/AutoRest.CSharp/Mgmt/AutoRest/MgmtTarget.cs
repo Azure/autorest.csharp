@@ -244,6 +244,21 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
             }
 
+            // Generate ModelReaderWriterBuildableAttributes if using ModelReaderWriter
+            if (Configuration.UseModelReaderWriter)
+            {
+                var buildableAttributesWriter = new ModelReaderWriterBuildableAttributesWriter();
+                var allModels = MgmtContext.Library.Models.Concat(MgmtContext.Library.PropertyBagModels);
+                var buildableTypes = buildableAttributesWriter.CollectBuildableTypes(allModels);
+                
+                if (buildableTypes.Any())
+                {
+                    var attributesWriter = new CodeWriter();
+                    buildableAttributesWriter.WriteModelReaderWriterBuildableAttributes(attributesWriter, buildableTypes);
+                    AddGeneratedFile(project, "ModelReaderWriterBuildableAttributes.cs", attributesWriter.ToString());
+                }
+            }
+
             List<string> modelsToKeepList = [.. Configuration.MgmtConfiguration.KeepOrphanedModels, ModelReaderWriterContextWriter.Name];
             var modelsToKeep = modelsToKeepList.ToImmutableHashSet();
             await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));

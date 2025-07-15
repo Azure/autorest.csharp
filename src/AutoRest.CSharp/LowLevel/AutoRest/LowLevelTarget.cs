@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
@@ -110,6 +111,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var contextWriterInstance = new ModelReaderWriterContextWriter();
             contextWriterInstance.Write(contextWriter);
             project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
+
+            // Generate ModelReaderWriterBuildableAttributes if using ModelReaderWriter
+            if (Configuration.UseModelReaderWriter)
+            {
+                var buildableAttributesWriter = new ModelReaderWriterBuildableAttributesWriter();
+                var buildableTypes = buildableAttributesWriter.CollectBuildableTypes(library.AllModels);
+                
+                if (buildableTypes.Any())
+                {
+                    var attributesWriter = new CodeWriter();
+                    buildableAttributesWriter.WriteModelReaderWriterBuildableAttributes(attributesWriter, buildableTypes);
+                    project.AddGeneratedFile("ModelReaderWriterBuildableAttributes.cs", attributesWriter.ToString());
+                }
+            }
 
             IEnumerable<string> modelsToKeep = [.. library.AccessOverriddenModels, ModelReaderWriterContextWriter.Name];
             await project.PostProcessAsync(new PostProcessor(

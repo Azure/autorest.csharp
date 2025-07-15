@@ -7,6 +7,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
+using System.Linq;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -92,6 +93,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var contextWriterInstance = new ModelReaderWriterContextWriter();
             contextWriterInstance.Write(contextWriter);
             project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
+
+            // Generate ModelReaderWriterBuildableAttributes if using ModelReaderWriter
+            if (Configuration.UseModelReaderWriter)
+            {
+                var buildableAttributesWriter = new ModelReaderWriterBuildableAttributesWriter();
+                var buildableTypes = buildableAttributesWriter.CollectBuildableTypes(library.Models);
+                
+                if (buildableTypes.Any())
+                {
+                    var attributesWriter = new CodeWriter();
+                    buildableAttributesWriter.WriteModelReaderWriterBuildableAttributes(attributesWriter, buildableTypes);
+                    project.AddGeneratedFile("ModelReaderWriterBuildableAttributes.cs", attributesWriter.ToString());
+                }
+            }
         }
     }
 }
