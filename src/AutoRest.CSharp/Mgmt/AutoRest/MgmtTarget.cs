@@ -240,17 +240,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var contextWriter = new CodeWriter();
                 var contextWriterInstance = new ModelReaderWriterContextWriter();
-                
-                // Collect buildable types if using ModelReaderWriter
-                IReadOnlyList<CSharpType> buildableTypes = null;
-                if (Configuration.UseModelReaderWriter)
-                {
-                    var buildableAttributesWriter = new ModelReaderWriterBuildableAttributesWriter();
-                    var allModels = MgmtContext.Library.Models.Concat(MgmtContext.Library.PropertyBagModels);
-                    buildableTypes = buildableAttributesWriter.CollectBuildableTypes(allModels);
-                }
-                
-                contextWriterInstance.Write(contextWriter, buildableTypes);
+                var allModels = MgmtContext.Library.Models.Concat(MgmtContext.Library.PropertyBagModels);
+                contextWriterInstance.Write(contextWriter, allModels);
                 project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
             }
 
