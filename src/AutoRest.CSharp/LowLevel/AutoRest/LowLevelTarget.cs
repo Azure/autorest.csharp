@@ -109,22 +109,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var contextWriter = new CodeWriter();
             var contextWriterInstance = new ModelReaderWriterContextWriter();
-            contextWriterInstance.Write(contextWriter);
-            project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
-
-            // Generate ModelReaderWriterBuildableAttributes if using ModelReaderWriter
+            
+            // Collect buildable types if using ModelReaderWriter
+            IReadOnlyList<CSharpType> buildableTypes = null;
             if (Configuration.UseModelReaderWriter)
             {
                 var buildableAttributesWriter = new ModelReaderWriterBuildableAttributesWriter();
-                var buildableTypes = buildableAttributesWriter.CollectBuildableTypes(library.AllModels);
-                
-                if (buildableTypes.Any())
-                {
-                    var attributesWriter = new CodeWriter();
-                    buildableAttributesWriter.WriteModelReaderWriterBuildableAttributes(attributesWriter, buildableTypes);
-                    project.AddGeneratedFile("ModelReaderWriterBuildableAttributes.cs", attributesWriter.ToString());
-                }
+                buildableTypes = buildableAttributesWriter.CollectBuildableTypes(library.AllModels);
             }
+            
+            contextWriterInstance.Write(contextWriter, buildableTypes);
+            project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
 
             IEnumerable<string> modelsToKeep = [.. library.AccessOverriddenModels, ModelReaderWriterContextWriter.Name];
             await project.PostProcessAsync(new PostProcessor(

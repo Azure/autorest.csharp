@@ -240,23 +240,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var contextWriter = new CodeWriter();
                 var contextWriterInstance = new ModelReaderWriterContextWriter();
-                contextWriterInstance.Write(contextWriter);
-                project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
-            }
-
-            // Generate ModelReaderWriterBuildableAttributes if using ModelReaderWriter
-            if (Configuration.UseModelReaderWriter)
-            {
-                var buildableAttributesWriter = new ModelReaderWriterBuildableAttributesWriter();
-                var allModels = MgmtContext.Library.Models.Concat(MgmtContext.Library.PropertyBagModels);
-                var buildableTypes = buildableAttributesWriter.CollectBuildableTypes(allModels);
                 
-                if (buildableTypes.Any())
+                // Collect buildable types if using ModelReaderWriter
+                IReadOnlyList<CSharpType> buildableTypes = null;
+                if (Configuration.UseModelReaderWriter)
                 {
-                    var attributesWriter = new CodeWriter();
-                    buildableAttributesWriter.WriteModelReaderWriterBuildableAttributes(attributesWriter, buildableTypes);
-                    AddGeneratedFile(project, "ModelReaderWriterBuildableAttributes.cs", attributesWriter.ToString());
+                    var buildableAttributesWriter = new ModelReaderWriterBuildableAttributesWriter();
+                    var allModels = MgmtContext.Library.Models.Concat(MgmtContext.Library.PropertyBagModels);
+                    buildableTypes = buildableAttributesWriter.CollectBuildableTypes(allModels);
                 }
+                
+                contextWriterInstance.Write(contextWriter, buildableTypes);
+                project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
             }
 
             List<string> modelsToKeepList = [.. Configuration.MgmtConfiguration.KeepOrphanedModels, ModelReaderWriterContextWriter.Name];
