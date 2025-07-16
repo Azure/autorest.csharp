@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -24,7 +28,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DiskEncryptionSet))
             {
                 writer.WritePropertyName("diskEncryptionSet"u8);
-                JsonSerializer.Serialize(writer, DiskEncryptionSet);
+                ((IJsonModel<WritableSubResource>)DiskEncryptionSet).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Id))
             {
@@ -60,7 +64,13 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    diskEncryptionSet = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    diskEncryptionSet =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.WritableSubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtAcronymMapping.ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default)
+#else
+                ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default)
+#endif
+;
                     continue;
                 }
                 if (property.NameEquals("id"u8))

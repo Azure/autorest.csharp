@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -18,7 +20,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(HealthProbe))
             {
                 writer.WritePropertyName("healthProbe"u8);
-                JsonSerializer.Serialize(writer, HealthProbe);
+                ((IJsonModel<WritableSubResource>)HealthProbe).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(NetworkInterfaceConfigurations))
             {

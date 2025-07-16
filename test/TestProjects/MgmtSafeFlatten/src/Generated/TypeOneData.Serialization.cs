@@ -5,7 +5,11 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -37,7 +41,7 @@ namespace MgmtSafeFlatten
             if (Optional.IsDefined(LayerOneConflict))
             {
                 writer.WritePropertyName("layerOneConflict"u8);
-                JsonSerializer.Serialize(writer, LayerOneConflict);
+                ((IJsonModel<WritableSubResource>)LayerOneConflict).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -102,7 +106,13 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    layerOneConflict = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    layerOneConflict =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.WritableSubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtSafeFlatten.ModelSerializationExtensions.WireOptions, MgmtSafeFlattenContext.Default)
+#else
+                ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtSafeFlattenContext.Default)
+#endif
+;
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -145,7 +155,13 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.SystemData>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtSafeFlatten.ModelSerializationExtensions.WireOptions, MgmtSafeFlattenContext.Default)
+#else
+                ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtSafeFlattenContext.Default)
+#endif
+;
                     continue;
                 }
             }

@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 foreach (var property in m.Properties)
                 {
-                    if (property is { SerializedName: "type", Type: InputEnumType choice } && choice.Values.Any(c => c.Value.ToString() == ManagedServiceIdentityTypeV3Converter.SystemAssignedUserAssignedV3Value))
+                    if (property is { SerializedName: "type", Type: InputEnumType choice } && choice.Values.Any(c => c.Value.ToString() == "SystemAssigned,UserAssigned"))
                     {
                         return true;
                     }
