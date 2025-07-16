@@ -94,8 +94,7 @@ CopyAll $files $sourcePath $destinationPath
 
 #Download management Shared
 $files = @(
-    'SharedExtensions.cs',
-    'ManagedServiceIdentityTypeV3Converter.cs'
+    'SharedExtensions.cs'
 )
 
 $sourcePath = "$clonedPath/sdk/resourcemanager/Azure.ResourceManager/src/Shared"

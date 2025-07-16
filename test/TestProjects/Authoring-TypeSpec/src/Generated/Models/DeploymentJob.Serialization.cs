@@ -8,6 +8,8 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -62,7 +64,7 @@ namespace AuthoringTypeSpec.Models
             }
             writer.WriteEndArray();
             writer.WritePropertyName("errors"u8);
-            JsonSerializer.Serialize(writer, Errors);
+            ((IJsonModel<ResponseError>)Errors).Write(writer, options);
             if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
@@ -154,7 +156,13 @@ namespace AuthoringTypeSpec.Models
                 }
                 if (property.NameEquals("errors"u8))
                 {
-                    errors = JsonSerializer.Deserialize<ResponseError>(property.Value.GetRawText());
+                    errors =
+#if NET9_0_OR_GREATER
+				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResponseError>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), options, AuthoringTypeSpecContext.Default)
+#else
+                ModelReaderWriter.Read<ResponseError>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AuthoringTypeSpecContext.Default)
+#endif
+;
                     continue;
                 }
                 if (property.NameEquals("id"u8))
