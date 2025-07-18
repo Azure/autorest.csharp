@@ -8,7 +8,6 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -192,13 +191,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    identity =
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.ManagedServiceIdentity>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), new global::System.ClientModel.Primitives.ModelReaderWriterOptions("W|v3"), AzureSampleResourceManagerStorageContext.Default)
-#else
-                ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), AzureSampleResourceManagerStorageContext.Default)
-#endif
-;
+                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), AzureSampleResourceManagerStorageContext.Default);
                     continue;
                 }
                 if (property.NameEquals("extendedLocation"u8))
@@ -207,13 +200,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    extendedLocation =
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.ExtendedLocation>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::AzureSample.ResourceManager.Storage.ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default)
-#else
-                ModelReaderWriter.Read<ExtendedLocation>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default)
-#endif
-;
+                    extendedLocation = ModelReaderWriter.Read<ExtendedLocation>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -256,13 +243,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    systemData =
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.SystemData>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::AzureSample.ResourceManager.Storage.ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default)
-#else
-                ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default)
-#endif
-;
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

@@ -8195,14 +8195,8 @@
   ],
   "auth": {
     "oAuth2": {
-      "flows": [
-        {
-          "scopes": [
-            "https://api.example.com/.default"
-          ],
-          "refreshUrl": "https://api.example.com/oauth2/refresh",
-          "tokenUrl": "https://api.example.com/oauth2/token"
-        }
+      "scopes": [
+        "https://api.example.com/.default"
       ]
     },
     "apiKey": {

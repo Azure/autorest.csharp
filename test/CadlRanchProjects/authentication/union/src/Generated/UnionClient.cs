@@ -19,7 +19,7 @@ namespace Authentication.Union
     {
         private const string AuthorizationHeader = "x-ms-api-key";
         private readonly AzureKeyCredential _keyCredential;
-        private static readonly string[] AuthorizationScopes = new string[] { "https://security.microsoft.com/.default" };
+        private static readonly string[] AuthorizationScopes = Array.Empty<string>();
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;

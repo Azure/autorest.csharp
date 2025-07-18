@@ -8,7 +8,6 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -84,13 +83,7 @@ namespace MgmtPropertyChooser.Models
                     Dictionary<string, UserAssignedIdentity> dictionary = new Dictionary<string, UserAssignedIdentity>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name,
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.UserAssignedIdentity>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property0.Value).ToArray()), global::MgmtPropertyChooser.ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default)
-#else
-                ModelReaderWriter.Read<UserAssignedIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default)
-#endif
-);
+                        dictionary.Add(property0.Name, ModelReaderWriter.Read<UserAssignedIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default));
                     }
                     userAssignedIdentities = dictionary;
                     continue;

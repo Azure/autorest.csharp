@@ -8,7 +8,6 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -87,13 +86,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    identity =
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.ManagedServiceIdentity>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), new global::System.ClientModel.Primitives.ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default)
-#else
-                ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default)
-#endif
-;
+                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("location"u8))
@@ -140,13 +133,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData =
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.SystemData>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtMockAndSample.ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
-#else
-                ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
-#endif
-;
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

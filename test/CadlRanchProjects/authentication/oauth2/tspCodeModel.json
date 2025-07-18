@@ -219,13 +219,8 @@
   ],
   "auth": {
     "oAuth2": {
-      "flows": [
-        {
-          "scopes": [
-            "https://security.microsoft.com/.default"
-          ],
-          "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize"
-        }
+      "scopes": [
+        "https://security.microsoft.com/.default"
       ]
     }
   }
