@@ -85,7 +85,7 @@ Get-ChildItem $destinationPath -Filter *.cs | Remove-Item;
 CopyAll $files $sourcePath $destinationPath
 
 #Download management Shared
-$files = 'SharedExtensions.cs', 'ManagedServiceIdentityTypeV3Converter.cs'
+$files = 'SharedExtensions.cs'
 $sourcePath = "$clonedPath/sdk/resourcemanager/Azure.ResourceManager/src/Shared"
 $destinationPath = "$repoRoot/src/assets/Management.Shared"
 

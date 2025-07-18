@@ -22,17 +22,42 @@ namespace AutoRest.CSharp.Common.Input
             {
                 reader.Read();
             }
-            IReadOnlyList<string>? scopes = null;
+            IReadOnlyList<InputOAuth2Flow>? flows = null;
+
             while (reader.TokenType != JsonTokenType.EndObject)
             {
-                var isKnownProperty = reader.TryReadComplexType("scopes", options, ref scopes);
+                var isKnownProperty = reader.TryReadComplexType("flows", options, ref flows);
+
                 if (!isKnownProperty)
                 {
                     reader.SkipProperty();
                 }
             }
-            var result = new InputOAuth2Auth(scopes ?? []);
+
+            var result = new InputOAuth2Auth(AggregateScopesFromFlows(flows));
             return result;
+        }
+
+        private static IReadOnlyList<string> AggregateScopesFromFlows(IReadOnlyList<InputOAuth2Flow>? flows)
+        {
+            if (flows == null)
+            {
+                return [];
+            }
+
+            var scopes = new HashSet<string>();
+            foreach (var flow in flows)
+            {
+                if (flow.Scopes != null)
+                {
+                    foreach (var scope in flow.Scopes)
+                    {
+                        scopes.Add(scope);
+                    }
+                }
+            }
+
+            return [.. scopes];
         }
     }
 }

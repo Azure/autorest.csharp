@@ -17,12 +17,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
             return new InvokeStaticMethodExpression(typeof(JsonSerializer), nameof(JsonSerializer.Serialize), arguments);
         }
 
-        public static InvokeStaticMethodExpression Deserialize(JsonElementExpression element, CSharpType serializationType, ValueExpression? options = null)
-        {
-            var arguments = options is null
-                ? new[] { element.GetRawText() }
-                : new[] { element.GetRawText(), options };
-            return new InvokeStaticMethodExpression(typeof(JsonSerializer), nameof(JsonSerializer.Deserialize), arguments, new[] { serializationType });
-        }
+        public static InvokeStaticMethodExpression Deserialize(JsonElementExpression element, CSharpType serializationType)
+            => new InvokeStaticMethodExpression(typeof(JsonSerializer), nameof(JsonSerializer.Deserialize), [element.GetRawText()], [serializationType]);
     }
 }

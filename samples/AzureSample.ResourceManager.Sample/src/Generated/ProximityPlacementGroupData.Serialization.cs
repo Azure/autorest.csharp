@@ -44,7 +44,7 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(ExtendedLocation))
             {
                 writer.WritePropertyName("extendedLocation"u8);
-                JsonSerializer.Serialize(writer, ExtendedLocation);
+                ((IJsonModel<ExtendedLocation>)ExtendedLocation).Write(writer, options);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -133,7 +133,7 @@ namespace AzureSample.ResourceManager.Sample
                     {
                         continue;
                     }
-                    extendedLocation = JsonSerializer.Deserialize<ExtendedLocation>(property.Value.GetRawText());
+                    extendedLocation = ModelReaderWriter.Read<ExtendedLocation>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AzureSampleResourceManagerSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -176,7 +176,7 @@ namespace AzureSample.ResourceManager.Sample
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

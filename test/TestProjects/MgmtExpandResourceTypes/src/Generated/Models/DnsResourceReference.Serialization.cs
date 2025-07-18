@@ -5,7 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.ResourceManager.Resources.Models;
 
@@ -32,7 +35,7 @@ namespace MgmtExpandResourceTypes.Models
                     List<WritableSubResource> array = new List<WritableSubResource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
+                        array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExpandResourceTypesContext.Default));
                     }
                     dnsResources = array;
                     continue;
@@ -43,7 +46,7 @@ namespace MgmtExpandResourceTypes.Models
                     {
                         continue;
                     }
-                    targetResource = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    targetResource = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExpandResourceTypesContext.Default);
                     continue;
                 }
             }

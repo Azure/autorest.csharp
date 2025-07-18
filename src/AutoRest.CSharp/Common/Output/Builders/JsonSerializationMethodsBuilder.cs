@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Input;
@@ -32,6 +33,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -434,22 +436,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (valueSerialization.Type.IsFrameworkType)
             {
-                return SerializeFrameworkTypeValue(utf8JsonWriter, valueSerialization, value, valueSerialization.Type.FrameworkType, options);
+                return SerializeFrameworkTypeValue(utf8JsonWriter, valueSerialization, value, valueSerialization.Type, options);
             }
 
             switch (valueSerialization.Type.Implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
-                    if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
-                    {
-                        return new[]
-                        {
-                            Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions),
-                            JsonSerializerExpression.Serialize(utf8JsonWriter, value, serializeOptions).ToStatement()
-                        };
-                    }
-
-                    return JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
+                    return ModelReaderWriterExpression.Write(value, valueSerialization.Type, utf8JsonWriter, options, valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3);
 
                 case ObjectType:
                     return utf8JsonWriter.WriteObjectValue(value, options: options);
@@ -468,55 +461,56 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static MethodBodyStatement SerializeFrameworkTypeValue(Utf8JsonWriterExpression utf8JsonWriter, JsonValueSerialization valueSerialization, ValueExpression value, Type valueType, ModelReaderWriterOptionsExpression? options)
+        private static MethodBodyStatement SerializeFrameworkTypeValue(Utf8JsonWriterExpression utf8JsonWriter, JsonValueSerialization valueSerialization, ValueExpression value, CSharpType valueType, ModelReaderWriterOptionsExpression? options)
         {
-            if (valueType == typeof(JsonElement))
+            var frameworkType = valueType.FrameworkType;
+            if (frameworkType == typeof(JsonElement))
             {
                 return new JsonElementExpression(value).WriteTo(utf8JsonWriter);
             }
 
-            if (valueType == typeof(Nullable<>))
+            if (frameworkType == typeof(Nullable<>))
             {
-                valueType = valueSerialization.Type.Arguments[0].FrameworkType;
+                frameworkType = valueSerialization.Type.Arguments[0].FrameworkType;
             }
 
             value = value.NullableStructValue(valueSerialization.Type);
 
-            if (valueType == typeof(decimal) ||
-                valueType == typeof(double) ||
-                valueType == typeof(float) ||
-                IsIntType(valueType))
+            if (frameworkType == typeof(decimal) ||
+                frameworkType == typeof(double) ||
+                frameworkType == typeof(float) ||
+                IsIntType(frameworkType))
             {
                 if (valueSerialization.Format is SerializationFormat.Int_String &&
-                    IsIntType(valueType))
+                    IsIntType(frameworkType))
                 {
                     return utf8JsonWriter.WriteStringValue(value.InvokeToString());
                 }
                 return utf8JsonWriter.WriteNumberValue(value);
             }
 
-            if (valueType == typeof(object))
+            if (frameworkType == typeof(object))
             {
                 return utf8JsonWriter.WriteObjectValue(new TypedValueExpression(valueType, value), options);
             }
 
             // These are string-like types that could implicitly convert to string type
-            if (valueType == typeof(string) || valueType == typeof(char) || valueType == typeof(Guid) || valueType == typeof(ResourceIdentifier) || valueType == typeof(ResourceType) || valueType == typeof(AzureLocation))
+            if (frameworkType == typeof(string) || frameworkType == typeof(char) || frameworkType == typeof(Guid) || frameworkType == typeof(ResourceIdentifier) || frameworkType == typeof(ResourceType) || frameworkType == typeof(AzureLocation))
             {
                 return utf8JsonWriter.WriteStringValue(value);
             }
 
-            if (valueType == typeof(bool))
+            if (frameworkType == typeof(bool))
             {
                 return utf8JsonWriter.WriteBooleanValue(value);
             }
 
-            if (valueType == typeof(byte[]))
+            if (frameworkType == typeof(byte[]))
             {
                 return utf8JsonWriter.WriteBase64StringValue(value, valueSerialization.Format.ToFormatSpecifier());
             }
 
-            if (valueType == typeof(DateTimeOffset) || valueType == typeof(DateTime) || valueType == typeof(TimeSpan))
+            if (frameworkType == typeof(DateTimeOffset) || frameworkType == typeof(DateTime) || frameworkType == typeof(TimeSpan))
             {
                 var format = valueSerialization.Format.ToFormatSpecifier();
 
@@ -540,17 +534,17 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             // These are string-like types that cannot implicitly convert to string type, therefore we need to call ToString on them
-            if (valueType == typeof(ETag) || valueType == typeof(ContentType) || valueType == typeof(IPAddress) || valueType == typeof(RequestMethod) || valueType == typeof(ExtendedLocationType))
+            if (frameworkType == typeof(ETag) || frameworkType == typeof(ContentType) || frameworkType == typeof(IPAddress) || frameworkType == typeof(RequestMethod) || frameworkType == typeof(ExtendedLocationType))
             {
                 return utf8JsonWriter.WriteStringValue(value.InvokeToString());
             }
 
-            if (valueType == typeof(Uri))
+            if (frameworkType == typeof(Uri))
             {
                 return utf8JsonWriter.WriteStringValue(new MemberExpression(value, nameof(Uri.AbsoluteUri)));
             }
 
-            if (valueType == typeof(BinaryData))
+            if (frameworkType == typeof(BinaryData))
             {
                 var binaryDataValue = new BinaryDataExpression(value);
                 if (valueSerialization.Format is SerializationFormat.Bytes_Base64 or SerializationFormat.Bytes_Base64Url)
@@ -560,14 +554,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 return utf8JsonWriter.WriteBinaryData(binaryDataValue);
             }
-            if (valueType == typeof(Stream))
+
+            if (frameworkType == typeof(Stream))
             {
                 return utf8JsonWriter.WriteBinaryData(BinaryDataExpression.FromStream(value, false));
             }
 
-            if (IsCustomJsonConverterAdded(valueType))
+            if (IsCustomJsonConverterAdded(frameworkType))
             {
-                return JsonSerializerExpression.Serialize(utf8JsonWriter, value).ToStatement();
+                return ModelReaderWriterExpression.Write(value, valueType, utf8JsonWriter, options);
             }
 
             throw new NotSupportedException($"Framework type {valueType} serialization not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
@@ -1070,9 +1065,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return deserializeDictionaryStatement;
 
                 case JsonValueSerialization { Options: JsonSerializationOptions.UseManagedServiceIdentityV3 } valueSerialization:
-                    var declareSerializeOptions = Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions);
-                    value = GetDeserializeValueExpression(element, valueSerialization.Type, options, valueSerialization.Format, serializeOptions);
-                    return declareSerializeOptions;
+                    value = GetDeserializeValueExpression(element, valueSerialization.Type, options, valueSerialization.Format, null, useManagedServiceIdentityV3: true);
+                    return EmptyStatement;
 
                 case JsonValueSerialization valueSerialization:
                     value = GetDeserializeValueExpression(element, valueSerialization.Type, options, valueSerialization.Format);
@@ -1123,11 +1117,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return deserializeValueBlock;
         }
 
-        public static ValueExpression GetDeserializeValueExpression(JsonElementExpression element, CSharpType serializationType, ModelReaderWriterOptionsExpression? options, SerializationFormat serializationFormat = SerializationFormat.Default, ValueExpression? serializerOptions = null)
+        public static ValueExpression GetDeserializeValueExpression(JsonElementExpression element, CSharpType serializationType, ModelReaderWriterOptionsExpression? options, SerializationFormat serializationFormat = SerializationFormat.Default, ValueExpression? serializerOptions = null, bool useManagedServiceIdentityV3 = false)
         {
             if (serializationType.SerializeAs != null)
             {
-                return new CastExpression(GetFrameworkTypeValueExpression(serializationType.SerializeAs, element, serializationFormat, serializationType), serializationType);
+                return new CastExpression(GetFrameworkTypeValueExpression(serializationType.SerializeAs, element, serializationFormat), serializationType);
             }
 
             if (serializationType.IsFrameworkType)
@@ -1138,30 +1132,29 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     frameworkType = serializationType.Arguments[0].FrameworkType;
                 }
 
-                return GetFrameworkTypeValueExpression(frameworkType, element, serializationFormat, serializationType);
+                return GetFrameworkTypeValueExpression(serializationType, element, serializationFormat);
             }
 
-            return GetDeserializeImplementation(serializationType.Implementation, element, options, serializerOptions);
+            return GetDeserializeImplementation(serializationType.Implementation, element, options, serializerOptions, useManagedServiceIdentityV3);
         }
 
-        private static ValueExpression GetDeserializeImplementation(TypeProvider implementation, JsonElementExpression element, ModelReaderWriterOptionsExpression? options, ValueExpression? serializerOptions)
+        private static ValueExpression GetDeserializeImplementation(TypeProvider implementation, JsonElementExpression element, ModelReaderWriterOptionsExpression? options, ValueExpression? serializerOptions, bool useManagedServiceIdentityV3 = false)
         {
+            var implementationType = implementation.Type;
             switch (implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
-                    return JsonSerializerExpression.Deserialize(element, implementation.Type, serializerOptions);
+                case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.InputModel):
+                    return ModelReaderWriterExpression.Read(implementationType, element, options, useManagedServiceIdentityV3);
 
                 case Resource { ResourceData: SerializableObjectType resourceDataType } resource:
                     return New.Instance(resource.Type, new MemberExpression(null, "Client"), SerializableObjectTypeExpression.Deserialize(resourceDataType, element));
-
-                case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.InputModel):
-                    return JsonSerializerExpression.Deserialize(element, implementation.Type);
 
                 case SerializableObjectType type:
                     return SerializableObjectTypeExpression.Deserialize(type, element, options);
 
                 case EnumType clientEnum:
-                    var value = GetFrameworkTypeValueExpression(clientEnum.ValueType.FrameworkType, element, SerializationFormat.Default, null);
+                    var value = GetFrameworkTypeValueExpression(clientEnum.ValueType, element, SerializationFormat.Default, false);
                     return EnumExpression.ToEnum(clientEnum, value);
 
                 default:
@@ -1184,76 +1177,76 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return variable;
         }
 
-        public static ValueExpression GetFrameworkTypeValueExpression(Type frameworkType, JsonElementExpression element, SerializationFormat format, CSharpType? serializationType)
+        public static ValueExpression GetFrameworkTypeValueExpression(CSharpType serializationType, JsonElementExpression element, SerializationFormat format, bool shouldDeserialize = true)
         {
-            if (frameworkType == typeof(ETag) ||
-                frameworkType == typeof(Uri) ||
-                frameworkType == typeof(ResourceIdentifier) ||
-                frameworkType == typeof(ResourceType) ||
-                frameworkType == typeof(ContentType) ||
-                frameworkType == typeof(RequestMethod) ||
-                frameworkType == typeof(AzureLocation) ||
-                frameworkType == typeof(ExtendedLocationType))
+            if (serializationType.Equals(typeof(ETag)) ||
+                serializationType.Equals(typeof(Uri)) ||
+                serializationType.Equals(typeof(ResourceIdentifier)) ||
+                serializationType.Equals(typeof(ResourceType)) ||
+                serializationType.Equals(typeof(ContentType)) ||
+                serializationType.Equals(typeof(RequestMethod)) ||
+                serializationType.Equals(typeof(AzureLocation)) ||
+                serializationType.Equals(typeof(ExtendedLocationType)))
             {
-                return New.Instance(frameworkType, element.GetString());
+                return New.Instance(serializationType.WithNullable(false), element.GetString());
             }
 
-            if (frameworkType == typeof(IPAddress))
+            if (serializationType.Equals(typeof(IPAddress)))
             {
                 return new InvokeStaticMethodExpression(typeof(IPAddress), nameof(IPAddress.Parse), new[] { element.GetString() });
             }
 
-            if (frameworkType == typeof(BinaryData))
+            if (serializationType.Equals(typeof(BinaryData)))
             {
                 return format is SerializationFormat.Bytes_Base64 or SerializationFormat.Bytes_Base64Url
                     ? BinaryDataExpression.FromBytes(element.GetBytesFromBase64(format.ToFormatSpecifier()))
                     : BinaryDataExpression.FromString(element.GetRawText());
             }
 
-            if (frameworkType == typeof(Stream))
+            if (serializationType.Equals(typeof(Stream)))
             {
                 /* BinaryData.FromString(property.Value).ToStream() */
                 return new BinaryDataExpression(BinaryDataExpression.FromString(element.GetRawText())).ToStream();
             }
 
-            if (IsCustomJsonConverterAdded(frameworkType) && serializationType is not null)
+            if (IsCustomJsonConverterAdded(serializationType.FrameworkType) && serializationType is not null)
             {
-                return JsonSerializerExpression.Deserialize(element, serializationType);
+                return ModelReaderWriterExpression.Read(serializationType, element);
             }
 
-            if (frameworkType == typeof(JsonElement))
+            if (serializationType!.Equals(typeof(JsonElement)))
                 return element.InvokeClone();
-            if (frameworkType == typeof(object))
-                return element.GetObject();
-            if (frameworkType == typeof(bool))
+            if (serializationType.Equals(typeof(object)))
+                return element.GetObject(); // modified from == to Equals
+            if (serializationType.Equals(typeof(bool))) // modified from == to Equals
                 return element.GetBoolean();
-            if (frameworkType == typeof(char))
+            if (serializationType.Equals(typeof(char))) // modified from == to Equals
                 return element.GetChar();
-            if (IsIntType(frameworkType))
-                return GetIntTypeDeserializationValueExpression(element, frameworkType, format);
-            if (frameworkType == typeof(float))
+            if (IsIntType(serializationType))
+                return GetIntTypeDeserializationValueExpression(element, serializationType, format);
+            if (serializationType.Equals(typeof(float))) // modified from == to Equals
                 return element.GetSingle();
-            if (frameworkType == typeof(double))
+            if (serializationType.Equals(typeof(double))) // modified from == to Equals
                 return element.GetDouble();
-            if (frameworkType == typeof(decimal))
+            if (serializationType.Equals(typeof(decimal))) // modified from == to Equals
                 return element.GetDecimal();
-            if (frameworkType == typeof(string))
+            if (serializationType.Equals(typeof(string))) // modified from == to Equals
                 return element.GetString();
-            if (frameworkType == typeof(Guid))
+            if (serializationType.Equals(typeof(Guid))) // modified from == to Equals
                 return element.GetGuid();
-            if (frameworkType == typeof(byte[]))
+            if (serializationType.Equals(typeof(byte[]))) // modified from == to Equals
                 return element.GetBytesFromBase64(format.ToFormatSpecifier());
 
-            if (frameworkType == typeof(DateTimeOffset))
+            if (serializationType.Equals(typeof(DateTimeOffset)))
             {
                 return format == SerializationFormat.DateTime_Unix
                     ? DateTimeOffsetExpression.FromUnixTimeSeconds(element.GetInt64())
                     : element.GetDateTimeOffset(format.ToFormatSpecifier());
             }
 
-            if (frameworkType == typeof(DateTime))
+            if (serializationType.Equals(typeof(DateTime)))
                 return element.GetDateTime();
-            if (frameworkType == typeof(TimeSpan))
+            if (serializationType.Equals(typeof(TimeSpan)))
             {
                 if (format is SerializationFormat.Duration_Seconds)
                 {
@@ -1268,29 +1261,29 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return element.GetTimeSpan(format.ToFormatSpecifier());
             }
 
-            throw new NotSupportedException($"Framework type {frameworkType} is not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
+            throw new NotSupportedException($"Framework type {serializationType} is not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
         }
 
-        private static ValueExpression GetIntTypeDeserializationValueExpression(JsonElementExpression element, Type type, SerializationFormat format) => format switch
+        private static ValueExpression GetIntTypeDeserializationValueExpression(JsonElementExpression element, CSharpType type, SerializationFormat format) => format switch
         {
             SerializationFormat.Int_String => new TypeReference(type).Invoke(nameof(int.Parse), new List<ValueExpression> { element.GetString() }),
             _ => type switch
             {
-                Type t when t == typeof(sbyte) => element.GetSByte(),
-                Type t when t == typeof(byte) => element.GetByte(),
-                Type t when t == typeof(short) => element.GetInt16(),
-                Type t when t == typeof(int) => element.GetInt32(),
-                Type t when t == typeof(long) => element.GetInt64(),
+                CSharpType t when t.Equals(typeof(sbyte)) => element.GetSByte(),
+                CSharpType t when t.Equals(typeof(byte)) => element.GetByte(),
+                CSharpType t when t.Equals(typeof(short)) => element.GetInt16(),
+                CSharpType t when t.Equals(typeof(int)) => element.GetInt32(),
+                CSharpType t when t.Equals(typeof(long)) => element.GetInt64(),
                 _ => throw new NotSupportedException($"Framework type {type} is not int.")
             }
         };
 
-        private static bool IsIntType(Type frameworkType) =>
-            frameworkType == typeof(sbyte) ||
-            frameworkType == typeof(byte) ||
-            frameworkType == typeof(short) ||
-            frameworkType == typeof(int) ||
-            frameworkType == typeof(long);
+        private static bool IsIntType(CSharpType frameworkType) =>
+            frameworkType.Equals(typeof(sbyte)) ||
+            frameworkType.Equals(typeof(byte)) ||
+            frameworkType.Equals(typeof(short)) ||
+            frameworkType.Equals(typeof(int)) ||
+            frameworkType.Equals(typeof(long));
 
         private static MethodBodyStatement InvokeListAdd(ValueExpression list, ValueExpression value)
             => new InvokeInstanceMethodStatement(list, nameof(List<object>.Add), value);

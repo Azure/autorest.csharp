@@ -136,7 +136,7 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(AvailabilitySet))
             {
                 writer.WritePropertyName("availabilitySet"u8);
-                JsonSerializer.Serialize(writer, AvailabilitySet);
+                ((IJsonModel<WritableSubResource>)AvailabilitySet).Write(writer, options);
             }
             if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
@@ -303,7 +303,7 @@ namespace AzureSample.ResourceManager.Sample
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -416,7 +416,7 @@ namespace AzureSample.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            availabilitySet = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            availabilitySet = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), options, AzureSampleResourceManagerSampleContext.Default);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

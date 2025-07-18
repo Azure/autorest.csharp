@@ -93,7 +93,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    snapshot = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    snapshot = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AzureSampleResourceManagerSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("managedDisk"u8))
@@ -102,7 +102,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    managedDisk = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    managedDisk = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AzureSampleResourceManagerSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("blobUri"u8))
@@ -147,7 +147,7 @@ namespace AzureSample.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    diskEncryptionSet = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    diskEncryptionSet = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AzureSampleResourceManagerSampleContext.Default);
                     continue;
                 }
                 if (options.Format != "W")

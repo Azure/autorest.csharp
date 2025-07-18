@@ -60,6 +60,7 @@ namespace AutoRest.CSharp.Common.Input
                     new TypeSpecInputLongRunningServiceMethodConverter(referenceHandler),
                     new TypeSpecInputLongRunningServiceMetadataConverter(),
                     new TypeSpecInputLongRunningPagingServiceMethodConverter(referenceHandler),
+                    new TypeSpecInputOAuth2FlowConverter(),
                 }
             };
 

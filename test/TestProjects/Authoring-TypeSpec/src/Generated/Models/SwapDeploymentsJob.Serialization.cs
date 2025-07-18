@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -62,7 +63,7 @@ namespace AuthoringTypeSpec.Models
             }
             writer.WriteEndArray();
             writer.WritePropertyName("errors"u8);
-            JsonSerializer.Serialize(writer, Errors);
+            ((IJsonModel<ResponseError>)Errors).Write(writer, options);
             if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
@@ -154,7 +155,7 @@ namespace AuthoringTypeSpec.Models
                 }
                 if (property.NameEquals("errors"u8))
                 {
-                    errors = JsonSerializer.Deserialize<ResponseError>(property.Value.GetRawText());
+                    errors = ModelReaderWriter.Read<ResponseError>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AuthoringTypeSpecContext.Default);
                     continue;
                 }
                 if (property.NameEquals("id"u8))

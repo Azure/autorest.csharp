@@ -5,7 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -45,7 +48,7 @@ namespace MgmtExpandResourceTypes
             if (Optional.IsDefined(TargetResource))
             {
                 writer.WritePropertyName("targetResource"u8);
-                JsonSerializer.Serialize(writer, TargetResource);
+                ((IJsonModel<WritableSubResource>)TargetResource).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsCollectionDefined(ARecords))
             {
@@ -195,7 +198,7 @@ namespace MgmtExpandResourceTypes
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExpandResourceTypesContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -246,7 +249,7 @@ namespace MgmtExpandResourceTypes
                             {
                                 continue;
                             }
-                            targetResource = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
+                            targetResource = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExpandResourceTypesContext.Default);
                             continue;
                         }
                         if (property0.NameEquals("ARecords"u8))

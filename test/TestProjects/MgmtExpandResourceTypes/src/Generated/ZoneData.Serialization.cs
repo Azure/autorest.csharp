@@ -5,7 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -65,7 +68,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in RegistrationVirtualNetworks)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<WritableSubResource>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -75,7 +78,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in ResolutionVirtualNetworks)
                 {
-                    JsonSerializer.Serialize(writer, item);
+                    ((IJsonModel<WritableSubResource>)item).Write(writer, ModelSerializationExtensions.WireOptions);
                 }
                 writer.WriteEndArray();
             }
@@ -153,7 +156,7 @@ namespace MgmtExpandResourceTypes
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExpandResourceTypesContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -251,7 +254,7 @@ namespace MgmtExpandResourceTypes
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
+                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExpandResourceTypesContext.Default));
                             }
                             registrationVirtualNetworks = array;
                             continue;
@@ -265,7 +268,7 @@ namespace MgmtExpandResourceTypes
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
+                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExpandResourceTypesContext.Default));
                             }
                             resolutionVirtualNetworks = array;
                             continue;

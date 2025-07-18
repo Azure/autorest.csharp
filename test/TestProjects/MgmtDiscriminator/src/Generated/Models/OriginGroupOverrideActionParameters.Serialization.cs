@@ -40,7 +40,7 @@ namespace MgmtDiscriminator.Models
             writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("originGroup"u8);
-            JsonSerializer.Serialize(writer, OriginGroup);
+            ((IJsonModel<WritableSubResource>)OriginGroup).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -91,7 +91,7 @@ namespace MgmtDiscriminator.Models
                 }
                 if (property.NameEquals("originGroup"u8))
                 {
-                    originGroup = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    originGroup = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, MgmtDiscriminatorContext.Default);
                     continue;
                 }
                 if (options.Format != "W")
