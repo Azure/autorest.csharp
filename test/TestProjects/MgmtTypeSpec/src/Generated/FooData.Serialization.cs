@@ -9,7 +9,6 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -101,13 +100,7 @@ namespace MgmtTypeSpec
                     {
                         continue;
                     }
-                    extendedLocation =
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.ExtendedLocation>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), options, MgmtTypeSpecContext.Default)
-#else
-                ModelReaderWriter.Read<ExtendedLocation>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, MgmtTypeSpecContext.Default)
-#endif
-;
+                    extendedLocation = ModelReaderWriter.Read<ExtendedLocation>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, MgmtTypeSpecContext.Default);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -150,13 +143,7 @@ namespace MgmtTypeSpec
                     {
                         continue;
                     }
-                    systemData =
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.SystemData>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtTypeSpec.ModelSerializationExtensions.WireOptions, MgmtTypeSpecContext.Default)
-#else
-                ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtTypeSpecContext.Default)
-#endif
-;
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtTypeSpecContext.Default);
                     continue;
                 }
                 if (options.Format != "W")

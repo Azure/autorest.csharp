@@ -4,11 +4,11 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Text;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core.Expressions.DataFactory;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -16,12 +16,12 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
     internal class ModelReaderWriterExpression
     {
-        private static readonly HashSet<Type> _dataFactoryTypesNotImplementingIJsonModel = new()
+        private static readonly HashSet<string> _dataFactoryTypesNotImplementingIJsonModel = new()
         {
-            typeof(DataFactoryLinkedServiceReference),
-            typeof(DataFactoryKeyVaultSecret),
-            typeof(DataFactorySecret),
-            typeof(DataFactorySecretString)
+            $"Azure.Core.Expressions.DataFactory.{nameof(DataFactoryLinkedServiceReference)}",
+            $"Azure.Core.Expressions.DataFactory.{nameof(DataFactoryKeyVaultSecret)}",
+            $"Azure.Core.Expressions.DataFactory.{nameof(DataFactorySecret)}",
+            $"Azure.Core.Expressions.DataFactory.{nameof(DataFactorySecretString)}"
         };
 
         public static ValueExpression Read(CSharpType type, JsonElementExpression element, ModelReaderWriterOptionsExpression? options = null, bool useManagedServiceIdentityV3 = false)
@@ -31,19 +31,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
                 return JsonSerializerExpression.Deserialize(element, type, options);
             }
 
-            return
-                new IfElsePreprocessorExpression(
-                    "NET9_0_OR_GREATER",
-                    new InvokeStaticMethodExpression(
-                        typeof(ModelReaderWriter),
-                        nameof(ModelReaderWriter.Read),
-                        [
-                                New.Instance(typeof(BinaryData), [new InvokeStaticMethodExpression(typeof(JsonMarshal), nameof(JsonMarshal.GetRawUtf8Value), [element]).Invoke("ToArray")]),
-                            useManagedServiceIdentityV3 ? ModelReaderWriterOptionsExpression.UsingSystemAssignedUserAssignedV3(options) : options ?? ModelReaderWriterOptionsExpression.Wire,
-                            ModelReaderWriterContextExpression.Default
-                        ],
-                    TypeArguments: [type]),
-                    new InvokeStaticMethodExpression(
+            return new InvokeStaticMethodExpression(
                         typeof(ModelReaderWriter),
                         nameof(ModelReaderWriter.Read),
                         [
@@ -51,7 +39,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
                             useManagedServiceIdentityV3 ? ModelReaderWriterOptionsExpression.UsingSystemAssignedUserAssignedV3(options) : options ?? ModelReaderWriterOptionsExpression.Wire,
                             ModelReaderWriterContextExpression.Default
                         ],
-                        TypeArguments: [type]));
+                        TypeArguments: [type]);
         }
 
         // MRW can't handle DataFactoryElement<> for now, so we use JsonSerializerExpression directly
@@ -59,7 +47,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         private static bool IsDataFactoryType(CSharpType type)
         {
             return (type.IsGenericType && type.GetGenericTypeDefinition().FrameworkType.Equals(typeof(DataFactoryElement<>)))
-                            || (type.IsFrameworkType && _dataFactoryTypesNotImplementingIJsonModel.Contains(type.FrameworkType));
+                            || (!type.IsFrameworkType && type.Implementation is SystemObjectType && _dataFactoryTypesNotImplementingIJsonModel.Contains($"{type.Namespace}.{type.Name}"));
         }
 
         public static MethodBodyStatement Write(ValueExpression value, CSharpType type, Utf8JsonWriterExpression writer, ModelReaderWriterOptionsExpression? options = null, bool useManagedServiceIdentityV3 = false)

@@ -8,7 +8,6 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -166,13 +165,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    identity =
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.ManagedServiceIdentity>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), new global::System.ClientModel.Primitives.ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default)
-#else
-                ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default)
-#endif
-;
+                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -215,13 +208,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData =
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.SystemData>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtMockAndSample.ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
-#else
-                ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
-#endif
-;
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -269,13 +256,7 @@ namespace MgmtMockAndSample
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.WritableSubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(item).ToArray()), global::MgmtMockAndSample.ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
-#else
-                ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
-#endif
-);
+                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default));
                             }
                             ruleCollectionGroups = array;
                             continue;
@@ -295,13 +276,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            basePolicy =
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.WritableSubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property0.Value).ToArray()), global::MgmtMockAndSample.ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
-#else
-                ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
-#endif
-;
+                            basePolicy = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
                             continue;
                         }
                         if (property0.NameEquals("firewalls"u8))
@@ -313,13 +288,7 @@ namespace MgmtMockAndSample
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.WritableSubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(item).ToArray()), global::MgmtMockAndSample.ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
-#else
-                ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
-#endif
-);
+                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default));
                             }
                             firewalls = array;
                             continue;
@@ -333,13 +302,7 @@ namespace MgmtMockAndSample
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Resources.Models.WritableSubResource>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(item).ToArray()), global::MgmtMockAndSample.ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
-#else
-                ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default)
-#endif
-);
+                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default));
                             }
                             childPolicies = array;
                             continue;

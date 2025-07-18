@@ -8,7 +8,6 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -126,13 +125,7 @@ namespace _Azure.ResourceManager.CommonProperties
                     {
                         continue;
                     }
-                    systemData =
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.SystemData>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::_Azure.ResourceManager.CommonProperties.ModelSerializationExtensions.WireOptions, _AzureResourceManagerCommonPropertiesContext.Default)
-#else
-                ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, _AzureResourceManagerCommonPropertiesContext.Default)
-#endif
-;
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, _AzureResourceManagerCommonPropertiesContext.Default);
                     continue;
                 }
                 if (options.Format != "W")

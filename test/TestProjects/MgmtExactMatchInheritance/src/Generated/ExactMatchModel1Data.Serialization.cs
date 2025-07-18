@@ -9,7 +9,6 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Net;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -127,17 +126,17 @@ namespace MgmtExactMatchInheritance
             if (Optional.IsDefined(Type17))
             {
                 writer.WritePropertyName("type17"u8);
-                ((IJsonModel<DataFactoryLinkedServiceReference>)Type17).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type17);
             }
             if (Optional.IsDefined(Type18))
             {
                 writer.WritePropertyName("type18"u8);
-                ((IJsonModel<DataFactorySecretString>)Type18).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type18);
             }
             if (Optional.IsDefined(Type19))
             {
                 writer.WritePropertyName("type19"u8);
-                ((IJsonModel<DataFactoryKeyVaultSecret>)Type19).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Type19);
             }
             if (Optional.IsDefined(Type20))
             {
@@ -357,13 +356,7 @@ namespace MgmtExactMatchInheritance
                     {
                         continue;
                     }
-                    type17 =
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.Core.Expressions.DataFactory.DataFactoryLinkedServiceReference>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtExactMatchInheritance.ModelSerializationExtensions.WireOptions, MgmtExactMatchInheritanceContext.Default)
-#else
-                ModelReaderWriter.Read<DataFactoryLinkedServiceReference>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExactMatchInheritanceContext.Default)
-#endif
-;
+                    type17 = JsonSerializer.Deserialize<DataFactoryLinkedServiceReference>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type18"u8))
@@ -372,13 +365,7 @@ namespace MgmtExactMatchInheritance
                     {
                         continue;
                     }
-                    type18 =
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.Core.Expressions.DataFactory.DataFactorySecretString>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtExactMatchInheritance.ModelSerializationExtensions.WireOptions, MgmtExactMatchInheritanceContext.Default)
-#else
-                ModelReaderWriter.Read<DataFactorySecretString>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExactMatchInheritanceContext.Default)
-#endif
-;
+                    type18 = JsonSerializer.Deserialize<DataFactorySecretString>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type19"u8))
@@ -387,13 +374,7 @@ namespace MgmtExactMatchInheritance
                     {
                         continue;
                     }
-                    type19 =
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.Core.Expressions.DataFactory.DataFactoryKeyVaultSecret>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtExactMatchInheritance.ModelSerializationExtensions.WireOptions, MgmtExactMatchInheritanceContext.Default)
-#else
-                ModelReaderWriter.Read<DataFactoryKeyVaultSecret>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExactMatchInheritanceContext.Default)
-#endif
-;
+                    type19 = JsonSerializer.Deserialize<DataFactoryKeyVaultSecret>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("type20"u8))
@@ -426,13 +407,7 @@ namespace MgmtExactMatchInheritance
                     {
                         continue;
                     }
-                    systemData =
-#if NET9_0_OR_GREATER
-				global::System.ClientModel.Primitives.ModelReaderWriter.Read<global::Azure.ResourceManager.Models.SystemData>(new global::System.BinaryData(global::System.Runtime.InteropServices.JsonMarshal.GetRawUtf8Value(property.Value).ToArray()), global::MgmtExactMatchInheritance.ModelSerializationExtensions.WireOptions, MgmtExactMatchInheritanceContext.Default)
-#else
-                ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExactMatchInheritanceContext.Default)
-#endif
-;
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExactMatchInheritanceContext.Default);
                     continue;
                 }
             }
