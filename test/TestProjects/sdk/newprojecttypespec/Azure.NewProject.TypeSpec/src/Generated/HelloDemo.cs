@@ -18,7 +18,7 @@ namespace Azure.NewProject.TypeSpec
     {
         private const string AuthorizationHeader = "x-ms-api-key";
         private readonly AzureKeyCredential _keyCredential;
-        private static readonly string[] AuthorizationScopes = Array.Empty<string>();
+        private static readonly string[] AuthorizationScopes = new string[] { "https://api.example.com/.default" };
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;

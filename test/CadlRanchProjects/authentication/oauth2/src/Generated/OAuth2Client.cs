@@ -17,7 +17,7 @@ namespace Authentication.OAuth2
     /// <summary> Illustrates clients generated with OAuth2 authentication. </summary>
     public partial class OAuth2Client
     {
-        private static readonly string[] AuthorizationScopes = Array.Empty<string>();
+        private static readonly string[] AuthorizationScopes = new string[] { "https://security.microsoft.com/.default" };
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
