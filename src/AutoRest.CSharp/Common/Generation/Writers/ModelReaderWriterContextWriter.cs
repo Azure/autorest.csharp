@@ -6,6 +6,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Types;
@@ -19,10 +20,10 @@ namespace AutoRest.CSharp.Common.Generation.Writers
         private readonly HashSet<CSharpType> _processedTypes = new();
         private readonly List<CSharpType> _buildableTypes = new();
 
-        public void Write(CodeWriter writer, IEnumerable<TypeProvider> models = null)
+        public void Write(CodeWriter writer, IEnumerable<TypeProvider>? models = null)
         {
-            IReadOnlyList<CSharpType> buildableTypes = null;
-            
+            IReadOnlyList<CSharpType>? buildableTypes = null;
+
             // Collect buildable types if using ModelReaderWriter and models are provided
             if (Configuration.UseModelReaderWriter && models != null)
             {
@@ -32,7 +33,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             // Write using statements if buildable types are provided
             if (buildableTypes != null && buildableTypes.Any())
             {
-                writer.Line("using System.ClientModel.Primitives;");
+                writer.Line($"using System.ClientModel.Primitives;");
                 writer.Line();
             }
 
@@ -42,7 +43,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
                 writer.Line($"/// Context class which will be filled in by the System.ClientModel.SourceGeneration.");
                 writer.Line($"/// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'");
                 writer.Line($"/// </summary>");
-                
+
                 // Write class-level attributes if buildable types are provided
                 if (buildableTypes != null && buildableTypes.Any())
                 {
@@ -51,7 +52,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
                         writer.Line($"[ModelReaderWriterBuildableAttribute(typeof({type}))]");
                     }
                 }
-                
+
                 using (writer.Scope($"public partial class {Name} : {typeof(ModelReaderWriterContext)}"))
                 {
                 }
@@ -59,7 +60,8 @@ namespace AutoRest.CSharp.Common.Generation.Writers
         }
 
         /// <summary>
-        /// Collects all IPersistableModel types and their properties recursively
+        /// Collects all IPersistableModel types and their properties recursively.
+        /// Algorithm similar to ModelReaderWriterContextDefinition.CollectBuildableTypes from TypeSpec.
         /// </summary>
         /// <param name="models">All models in the library</param>
         /// <returns>List of types that need ModelReaderWriterBuildableAttribute</returns>
@@ -68,21 +70,18 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             _processedTypes.Clear();
             _buildableTypes.Clear();
 
-            foreach (var model in models)
+            foreach (var model in models.OfType<SerializableObjectType>())
             {
                 ProcessModel(model);
             }
 
-            return _buildableTypes;
+            return _buildableTypes.Distinct().OrderBy(t => t.Name).ToList();
         }
 
-        private void ProcessModel(TypeProvider model)
+        private void ProcessModel(SerializableObjectType model)
         {
-            if (model is not SerializableObjectType serializableModel)
-                return;
+            var modelType = model.Type;
 
-            var modelType = serializableModel.Type;
-            
             // Skip if already processed
             if (_processedTypes.Contains(modelType))
                 return;
@@ -90,13 +89,13 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             _processedTypes.Add(modelType);
 
             // Check if this model implements IPersistableModel
-            if (HasIPersistableModel(serializableModel))
+            if (HasIPersistableModel(model))
             {
                 _buildableTypes.Add(modelType);
             }
 
-            // Process properties recursively
-            foreach (var property in serializableModel.Properties)
+            // Process properties recursively to find their types
+            foreach (var property in model.Properties)
             {
                 ProcessPropertyType(property.Declaration.Type);
             }
@@ -104,23 +103,21 @@ namespace AutoRest.CSharp.Common.Generation.Writers
 
         private void ProcessPropertyType(CSharpType propertyType)
         {
-            // Handle nullable types
+            // Handle nullable types - get the underlying type
             var actualType = propertyType.IsNullable && propertyType.IsValueType ? propertyType.Arguments[0] : propertyType;
-            
-            // Handle generic types (collections, etc.)
+
+            // Handle generic types (collections, lists, dictionaries, etc.)
             if (actualType.IsGenericType)
             {
+                // Process all generic type arguments recursively
                 foreach (var argument in actualType.Arguments)
                 {
                     ProcessPropertyType(argument);
                 }
-                // Also process the generic type itself if it's in our namespace
-                if (actualType.Namespace == Configuration.Namespace)
-                {
-                    ProcessSingleType(actualType);
-                }
             }
-            else
+
+            // Process the type itself if it's in our namespace (could be a generated model)
+            if (IsGeneratedType(actualType))
             {
                 ProcessSingleType(actualType);
             }
@@ -134,7 +131,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
 
             _processedTypes.Add(type);
 
-            // Check if this type implements IPersistableModel
+            // For generated types that support IPersistableModel
             if (ImplementsIPersistableModel(type))
             {
                 _buildableTypes.Add(type);
@@ -143,28 +140,32 @@ namespace AutoRest.CSharp.Common.Generation.Writers
 
         private bool HasIPersistableModel(SerializableObjectType model)
         {
-            if (model.Serialization?.Interfaces == null)
+            var interfaces = model.Serialization?.Interfaces;
+            if (interfaces == null)
                 return false;
 
-            // Check if any interface is IPersistableModel<T>
-            return model.Serialization.Interfaces.Any(i => 
-                i.IsGenericType && 
-                (i.Name.StartsWith("IPersistableModel") || 
-                 i.ToString().Contains("IPersistableModel")));
+            // Check if the model has IPersistableModel<T> or IPersistableModel<object> interfaces
+            return interfaces.IPersistableModelTInterface != null || interfaces.IPersistableModelObjectInterface != null;
+        }
+
+        private bool IsGeneratedType(CSharpType type)
+        {
+            // Types in our namespace are typically generated models
+            return type.Namespace == Configuration.Namespace;
         }
 
         private bool ImplementsIPersistableModel(CSharpType type)
         {
-            // Skip built-in types
+            // Skip built-in types and system types
             if (type.Namespace == "System" || type.Namespace?.StartsWith("System.") == true)
                 return false;
 
-            // Skip if not in our namespace
+            // Skip types not in our namespace (they're not our generated models)
             if (type.Namespace != Configuration.Namespace)
                 return false;
 
-            // For generated types, we assume they implement IPersistableModel if UseModelReaderWriter is enabled
-            // This is a heuristic - ideally we'd have more type information
+            // For types in our namespace, if UseModelReaderWriter is enabled,
+            // they likely implement IPersistableModel (this is a reasonable heuristic)
             return Configuration.UseModelReaderWriter;
         }
 
