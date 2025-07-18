@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         {
             if (IsDataFactoryType(type))
             {
-                return JsonSerializerExpression.Deserialize(element, type, options);
+                return JsonSerializerExpression.Deserialize(element, type);
             }
 
             return new InvokeStaticMethodExpression(
