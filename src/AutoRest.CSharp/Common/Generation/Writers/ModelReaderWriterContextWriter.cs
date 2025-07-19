@@ -10,31 +10,20 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Common.Generation.Writers
 {
     internal class ModelReaderWriterContextWriter
     {
-        private readonly HashSet<CSharpType> _processedTypes = new();
-        private readonly List<CSharpType> _buildableTypes = new();
-
         public void Write(CodeWriter writer, IEnumerable<TypeProvider>? models = null)
         {
-            IReadOnlyList<CSharpType>? buildableTypes = null;
+            IEnumerable<CSharpType>? buildableTypes = null;
 
             // Collect buildable types if using ModelReaderWriter and models are provided
             if (Configuration.UseModelReaderWriter && models != null)
             {
                 buildableTypes = CollectBuildableTypes(models);
-            }
-
-            // Write using statements if buildable types are provided
-            if (buildableTypes != null && buildableTypes.Any())
-            {
-                writer.Line($"using System.ClientModel.Primitives;");
-                writer.Line();
             }
 
             using (writer.Namespace($"{Configuration.Namespace}"))
@@ -45,11 +34,11 @@ namespace AutoRest.CSharp.Common.Generation.Writers
                 writer.Line($"/// </summary>");
 
                 // Write class-level attributes if buildable types are provided
-                if (buildableTypes != null && buildableTypes.Any())
+                if (buildableTypes != null)
                 {
-                    foreach (var type in buildableTypes.OrderBy(t => t.Name))
+                    foreach (var type in buildableTypes)
                     {
-                        writer.Line($"[ModelReaderWriterBuildableAttribute(typeof({type}))]");
+                        writer.Line($"[{typeof(ModelReaderWriterBuildableAttribute)}(typeof({type}))]");
                     }
                 }
 
@@ -65,110 +54,93 @@ namespace AutoRest.CSharp.Common.Generation.Writers
         /// </summary>
         /// <param name="models">All models in the library</param>
         /// <returns>List of types that need ModelReaderWriterBuildableAttribute</returns>
-        private IReadOnlyList<CSharpType> CollectBuildableTypes(IEnumerable<TypeProvider> models)
+        private IEnumerable<CSharpType> CollectBuildableTypes(IEnumerable<TypeProvider> models)
         {
-            _processedTypes.Clear();
-            _buildableTypes.Clear();
+            var buildableTypes = new HashSet<CSharpType>(new CSharpTypeNameComparer());
+            var visitedTypes = new HashSet<CSharpType>(new CSharpTypeNameComparer());
 
-            foreach (var model in models.OfType<SerializableObjectType>())
+            var modelDictionary = models.OfType<SerializableObjectType>().ToDictionary(m => m.Type, m => m, new CSharpTypeNameComparer());
+
+            foreach (var model in modelDictionary.Values)
             {
-                ProcessModel(model);
+                ProcessModel(model.Type, visitedTypes, buildableTypes, modelDictionary);
             }
 
-            return _buildableTypes.Distinct().OrderBy(t => t.Name).ToList();
+            return buildableTypes.OrderBy(m => m.Name);
         }
 
-        private void ProcessModel(SerializableObjectType model)
+        private void ProcessModel(CSharpType type, HashSet<CSharpType> visitedTypes, HashSet<CSharpType> buildableTypes, Dictionary<CSharpType, SerializableObjectType> modelDictionary)
         {
-            var modelType = model.Type;
-
             // Skip if already processed
-            if (_processedTypes.Contains(modelType))
+            if (visitedTypes.Contains(type))
                 return;
 
-            _processedTypes.Add(modelType);
+            visitedTypes.Add(type);
 
             // Check if this model implements IPersistableModel
-            if (HasIPersistableModel(model))
+            if (ImplementsIPersistableModel(type, modelDictionary, out var model))
             {
-                _buildableTypes.Add(modelType);
-            }
+                buildableTypes.Add(type);
 
-            // Process properties recursively to find their types
-            foreach (var property in model.Properties)
-            {
-                ProcessPropertyType(property.Declaration.Type);
-            }
-        }
-
-        private void ProcessPropertyType(CSharpType propertyType)
-        {
-            // Handle nullable types - get the underlying type
-            var actualType = propertyType.IsNullable && propertyType.IsValueType ? propertyType.Arguments[0] : propertyType;
-
-            // Handle generic types (collections, lists, dictionaries, etc.)
-            if (actualType.IsGenericType)
-            {
-                // Process all generic type arguments recursively
-                foreach (var argument in actualType.Arguments)
+                if (model is not null)
                 {
-                    ProcessPropertyType(argument);
+                    // Process properties recursively to find their types
+                    foreach (var property in model.Properties)
+                    {
+                        var propertyType = property.Declaration.Type.IsCollection ? GetInnerMostElement(property.Declaration.Type) : property.Declaration.Type;
+                        ProcessModel(propertyType, visitedTypes, buildableTypes, modelDictionary);
+                    }
                 }
             }
+        }
 
-            // Process the type itself if it's in our namespace (could be a generated model)
-            if (IsGeneratedType(actualType))
+        private CSharpType GetInnerMostElement(CSharpType type)
+        {
+            var result = type.ElementType;
+            while (result.IsCollection)
             {
-                ProcessSingleType(actualType);
+                result = result.ElementType;
             }
+            return result;
         }
 
-        private void ProcessSingleType(CSharpType type)
+        private bool ImplementsIPersistableModel(CSharpType type, Dictionary<CSharpType, SerializableObjectType> modelDictionary, out SerializableObjectType? model)
         {
-            // Skip if already processed
-            if (_processedTypes.Contains(type))
-                return;
-
-            _processedTypes.Add(type);
-
-            // For generated types that support IPersistableModel
-            if (ImplementsIPersistableModel(type))
+            if (modelDictionary.TryGetValue(type, out model))
             {
-                _buildableTypes.Add(type);
+                return true;
             }
-        }
 
-        private bool HasIPersistableModel(SerializableObjectType model)
-        {
-            var interfaces = model.Serialization?.Interfaces;
-            if (interfaces == null)
+            if (!type.IsFrameworkType || type.IsEnum || type.IsLiteral)
                 return false;
 
-            // Check if the model has IPersistableModel<T> or IPersistableModel<object> interfaces
-            return interfaces.IPersistableModelTInterface != null || interfaces.IPersistableModelObjectInterface != null;
-        }
-
-        private bool IsGeneratedType(CSharpType type)
-        {
-            // Types in our namespace are typically generated models
-            return type.Namespace == Configuration.Namespace;
-        }
-
-        private bool ImplementsIPersistableModel(CSharpType type)
-        {
-            // Skip built-in types and system types
-            if (type.Namespace == "System" || type.Namespace?.StartsWith("System.") == true)
-                return false;
-
-            // Skip types not in our namespace (they're not our generated models)
-            if (type.Namespace != Configuration.Namespace)
-                return false;
-
-            // For types in our namespace, if UseModelReaderWriter is enabled,
-            // they likely implement IPersistableModel (this is a reasonable heuristic)
-            return Configuration.UseModelReaderWriter;
+            return type.FrameworkType.GetInterfaces().Any(i => i.Name == "IPersistableModel`1" || i.Name == "IJsonModel`1");
         }
 
         public static string Name => $"{Configuration.Namespace.RemovePeriods()}Context";
+
+        private class CSharpTypeNameComparer : IEqualityComparer<CSharpType>
+        {
+            public bool Equals(CSharpType? x, CSharpType? y)
+            {
+                if (x is null && y is null)
+                {
+                    return true;
+                }
+                if (x is null || y is null)
+                {
+                    return false;
+                }
+                return x.Namespace == y.Namespace && x.Name == y.Name;
+            }
+
+            public int GetHashCode(CSharpType obj)
+            {
+                HashCode hashCode = new HashCode();
+                hashCode.Add(obj.Namespace);
+                hashCode.Add(obj.Name);
+                return hashCode.ToHashCode();
+            }
+        }
     }
 }
