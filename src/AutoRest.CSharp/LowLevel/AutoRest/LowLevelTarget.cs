@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
@@ -108,7 +109,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var contextWriter = new CodeWriter();
             var contextWriterInstance = new ModelReaderWriterContextWriter();
-            contextWriterInstance.Write(contextWriter);
+            contextWriterInstance.Write(contextWriter, library.AllModels);
             project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
 
             IEnumerable<string> modelsToKeep = [.. library.AccessOverriddenModels, ModelReaderWriterContextWriter.Name];

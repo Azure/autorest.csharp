@@ -7,6 +7,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
+using System.Linq;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -90,7 +91,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var contextWriter = new CodeWriter();
             var contextWriterInstance = new ModelReaderWriterContextWriter();
-            contextWriterInstance.Write(contextWriter);
+            contextWriterInstance.Write(contextWriter, library.Models);
             project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
         }
     }
