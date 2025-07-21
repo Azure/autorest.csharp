@@ -60,7 +60,7 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
                 PublicNetworkAccess = "Enabled",
             })
             {
-                Identity = new Azure.ResourceManager.Models.ManagedServiceIdentity("SystemAssigned"),
+                Identity = new ManagedServiceIdentity("SystemAssigned"),
             };
             ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
             VaultResource result = lro.Value;
@@ -159,7 +159,7 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
                 PublicNetworkAccess = "Enabled",
             })
             {
-                Identity = new Azure.ResourceManager.Models.ManagedServiceIdentity("SystemAssigned"),
+                Identity = new ManagedServiceIdentity("SystemAssigned"),
             };
             ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
             VaultResource result = lro.Value;

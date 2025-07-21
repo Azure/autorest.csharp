@@ -60,7 +60,7 @@ namespace MgmtOperations
             {
                 return null;
             }
-            var data = ((IJsonModel<RehydrationToken>)rehydrationToken).Write(ModelReaderWriterOptions.Json);
+            var data = ModelReaderWriter.Write(rehydrationToken, ModelReaderWriterOptions.Json, MgmtOperationsContext.Default);
             using var document = JsonDocument.Parse(data);
             var lroDetails = document.RootElement;
             return lroDetails.GetProperty("id").GetString();

@@ -14,17 +14,10 @@ namespace _Specs_.Azure.Core.Page
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(ErrorResponse))]
     [ModelReaderWriterBuildable(typeof(FirstItem))]
-    [ModelReaderWriterBuildable(typeof(InnerError))]
     [ModelReaderWriterBuildable(typeof(ListItemInputBody))]
-    [ModelReaderWriterBuildable(typeof(PagedFirstItem))]
-    [ModelReaderWriterBuildable(typeof(PagedSecondItem))]
-    [ModelReaderWriterBuildable(typeof(PagedUser))]
-    [ModelReaderWriterBuildable(typeof(ParameterizedNextLinkPagingResult))]
     [ModelReaderWriterBuildable(typeof(SecondItem))]
     [ModelReaderWriterBuildable(typeof(User))]
-    [ModelReaderWriterBuildable(typeof(UserListResults))]
     [ModelReaderWriterBuildable(typeof(UserOrder))]
     public partial class _Specs_AzureCorePageContext : ModelReaderWriterContext
     {

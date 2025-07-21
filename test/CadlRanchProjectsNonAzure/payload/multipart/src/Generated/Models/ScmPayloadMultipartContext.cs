@@ -24,7 +24,6 @@ namespace Scm.Payload.Multipart
     [ModelReaderWriterBuildable(typeof(FileWithHttpPartRequiredContentTypeRequest))]
     [ModelReaderWriterBuildable(typeof(FileWithHttpPartSpecificContentTypeRequest))]
     [ModelReaderWriterBuildable(typeof(FloatRequest))]
-    [ModelReaderWriterBuildable(typeof(FloatRequestTemperature))]
     [ModelReaderWriterBuildable(typeof(JsonPartRequest))]
     [ModelReaderWriterBuildable(typeof(MultiBinaryPartsRequest))]
     [ModelReaderWriterBuildable(typeof(MultiPartRequest))]

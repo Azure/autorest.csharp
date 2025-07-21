@@ -15,12 +15,6 @@ namespace Parameters.Spread
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
     [ModelReaderWriterBuildable(typeof(BodyParameter))]
-    [ModelReaderWriterBuildable(typeof(SpreadAsRequestBodyRequest))]
-    [ModelReaderWriterBuildable(typeof(SpreadAsRequestParameterRequest))]
-    [ModelReaderWriterBuildable(typeof(SpreadCompositeRequestMixRequest))]
-    [ModelReaderWriterBuildable(typeof(SpreadParameterWithInnerAliasRequest))]
-    [ModelReaderWriterBuildable(typeof(SpreadParameterWithInnerModelRequest))]
-    [ModelReaderWriterBuildable(typeof(SpreadWithMultipleParametersRequest))]
     public partial class ParametersSpreadContext : ModelReaderWriterContext
     {
     }

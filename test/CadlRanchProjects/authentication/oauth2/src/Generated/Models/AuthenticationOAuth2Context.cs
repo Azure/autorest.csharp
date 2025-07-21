@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
-using Authentication.OAuth2.Models;
 
 namespace Authentication.OAuth2
 {

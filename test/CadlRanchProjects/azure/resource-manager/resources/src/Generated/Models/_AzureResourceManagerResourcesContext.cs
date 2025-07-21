@@ -14,25 +14,17 @@ namespace _Azure.ResourceManager.Resources
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(ArmOperationStatusResourceProvisioningState))]
-    [ModelReaderWriterBuildable(typeof(AzureResourceManagerResourcesResourceData))]
-    [ModelReaderWriterBuildable(typeof(ErrorAdditionalInfo))]
-    [ModelReaderWriterBuildable(typeof(ErrorResponse))]
-    [ModelReaderWriterBuildable(typeof(ExtensionResource))]
-    [ModelReaderWriterBuildable(typeof(ExtensionsResourceListResult))]
+    [ModelReaderWriterBuildable(typeof(ExtensionsResource))]
     [ModelReaderWriterBuildable(typeof(ExtensionsResourceProperties))]
-    [ModelReaderWriterBuildable(typeof(LocationResourceListResult))]
+    [ModelReaderWriterBuildable(typeof(LocationResource))]
     [ModelReaderWriterBuildable(typeof(LocationResourceProperties))]
-    [ModelReaderWriterBuildable(typeof(NestedProxyResourceListResult))]
+    [ModelReaderWriterBuildable(typeof(NestedProxyResource))]
     [ModelReaderWriterBuildable(typeof(NestedProxyResourceProperties))]
     [ModelReaderWriterBuildable(typeof(NotificationDetails))]
-    [ModelReaderWriterBuildable(typeof(ProxyResource))]
-    [ModelReaderWriterBuildable(typeof(SingletonTrackedResourceListResult))]
+    [ModelReaderWriterBuildable(typeof(SingletonTrackedResource))]
     [ModelReaderWriterBuildable(typeof(SingletonTrackedResourceProperties))]
-    [ModelReaderWriterBuildable(typeof(SystemData))]
-    [ModelReaderWriterBuildable(typeof(TopLevelTrackedResourceListResult))]
+    [ModelReaderWriterBuildable(typeof(TopLevelTrackedResource))]
     [ModelReaderWriterBuildable(typeof(TopLevelTrackedResourceProperties))]
-    [ModelReaderWriterBuildable(typeof(TrackedResource))]
     public partial class _AzureResourceManagerResourcesContext : ModelReaderWriterContext
     {
     }

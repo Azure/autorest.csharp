@@ -26,7 +26,7 @@ namespace _Azure.ResourceManager.Resources.Models
         /// <param name="location"> The location. </param>
         /// <param name="properties"> The resource-specific properties for this resource. </param>
         /// <returns> A new <see cref="Resources.TopLevelTrackedResourceData"/> instance for mocking. </returns>
-        public static TopLevelTrackedResourceData TopLevelTrackedResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, Azure.ResourceManager.Models.SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, TopLevelTrackedResourceProperties properties = null)
+        public static TopLevelTrackedResourceData TopLevelTrackedResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, TopLevelTrackedResourceProperties properties = null)
         {
             tags ??= new Dictionary<string, string>();
 
@@ -57,7 +57,7 @@ namespace _Azure.ResourceManager.Resources.Models
         /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> The resource-specific properties for this resource. </param>
         /// <returns> A new <see cref="Resources.NestedProxyResourceData"/> instance for mocking. </returns>
-        public static NestedProxyResourceData NestedProxyResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, Azure.ResourceManager.Models.SystemData systemData = null, NestedProxyResourceProperties properties = null)
+        public static NestedProxyResourceData NestedProxyResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, NestedProxyResourceProperties properties = null)
         {
             return new NestedProxyResourceData(
                 id,
@@ -86,7 +86,7 @@ namespace _Azure.ResourceManager.Resources.Models
         /// <param name="location"> The location. </param>
         /// <param name="properties"> The resource-specific properties for this resource. </param>
         /// <returns> A new <see cref="Resources.SingletonTrackedResourceData"/> instance for mocking. </returns>
-        public static SingletonTrackedResourceData SingletonTrackedResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, Azure.ResourceManager.Models.SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, SingletonTrackedResourceProperties properties = null)
+        public static SingletonTrackedResourceData SingletonTrackedResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, SingletonTrackedResourceProperties properties = null)
         {
             tags ??= new Dictionary<string, string>();
 
@@ -117,7 +117,7 @@ namespace _Azure.ResourceManager.Resources.Models
         /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> The resource-specific properties for this resource. </param>
         /// <returns> A new <see cref="Resources.ExtensionsResourceData"/> instance for mocking. </returns>
-        public static ExtensionsResourceData ExtensionsResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, Azure.ResourceManager.Models.SystemData systemData = null, ExtensionsResourceProperties properties = null)
+        public static ExtensionsResourceData ExtensionsResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, ExtensionsResourceProperties properties = null)
         {
             return new ExtensionsResourceData(
                 id,
@@ -144,7 +144,7 @@ namespace _Azure.ResourceManager.Resources.Models
         /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> The resource-specific properties for this resource. </param>
         /// <returns> A new <see cref="Resources.LocationResourceData"/> instance for mocking. </returns>
-        public static LocationResourceData LocationResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, Azure.ResourceManager.Models.SystemData systemData = null, LocationResourceProperties properties = null)
+        public static LocationResourceData LocationResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, LocationResourceProperties properties = null)
         {
             return new LocationResourceData(
                 id,
