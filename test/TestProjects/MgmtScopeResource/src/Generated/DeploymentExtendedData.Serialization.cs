@@ -16,67 +16,10 @@ using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    public partial class DeploymentExtendedData : IUtf8JsonSerializable, IJsonModel<DeploymentExtendedData>
+    public partial class DeploymentExtendedData
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentExtendedData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<DeploymentExtendedData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static DeploymentExtendedData DeserializeDeploymentExtendedData(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<DeploymentExtendedData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(DeploymentExtendedData)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
-            if (Optional.IsDefined(Location))
-            {
-                writer.WritePropertyName("location"u8);
-                writer.WriteStringValue(Location);
-            }
-            if (Optional.IsDefined(Properties))
-            {
-                writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties, options);
-            }
-            if (Optional.IsCollectionDefined(Tags))
-            {
-                writer.WritePropertyName("tags"u8);
-                writer.WriteStartObject();
-                foreach (var item in Tags)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
-                writer.WriteEndObject();
-            }
-        }
-
-        DeploymentExtendedData IJsonModel<DeploymentExtendedData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<DeploymentExtendedData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(DeploymentExtendedData)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeDeploymentExtendedData(document.RootElement, options);
-        }
-
-        internal static DeploymentExtendedData DeserializeDeploymentExtendedData(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -88,8 +31,6 @@ namespace MgmtScopeResource
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"u8))
@@ -103,7 +44,7 @@ namespace MgmtScopeResource
                     {
                         continue;
                     }
-                    properties = DeploymentPropertiesExtended.DeserializeDeploymentPropertiesExtended(property.Value, options);
+                    properties = DeploymentPropertiesExtended.DeserializeDeploymentPropertiesExtended(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -141,15 +82,10 @@ namespace MgmtScopeResource
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtScopeResourceContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new DeploymentExtendedData(
                 id,
                 name,
@@ -157,39 +93,7 @@ namespace MgmtScopeResource
                 systemData,
                 location,
                 properties,
-                tags ?? new ChangeTrackingDictionary<string, string>(),
-                serializedAdditionalRawData);
+                tags ?? new ChangeTrackingDictionary<string, string>());
         }
-
-        BinaryData IPersistableModel<DeploymentExtendedData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<DeploymentExtendedData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtScopeResourceContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(DeploymentExtendedData)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        DeploymentExtendedData IPersistableModel<DeploymentExtendedData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<DeploymentExtendedData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeDeploymentExtendedData(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(DeploymentExtendedData)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<DeploymentExtendedData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

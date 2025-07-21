@@ -10,7 +10,6 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "use-model-reader-writer": true,
   "RawAcronymMapping": {
     "Os": "OS",
     "Ip": "IP",

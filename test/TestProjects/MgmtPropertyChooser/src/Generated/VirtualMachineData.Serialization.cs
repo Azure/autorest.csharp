@@ -17,67 +17,40 @@ using MgmtPropertyChooser.Models;
 
 namespace MgmtPropertyChooser
 {
-    public partial class VirtualMachineData : IUtf8JsonSerializable, IJsonModel<VirtualMachineData>
+    public partial class VirtualMachineData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<VirtualMachineData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(VirtualMachineData)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                ((IJsonModel<ArmPlan>)Plan).Write(writer, options);
-            }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Resources))
-            {
-                writer.WritePropertyName("resources"u8);
-                writer.WriteStartArray();
-                foreach (var item in Resources)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
+                ((IJsonModel<ArmPlan>)Plan).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, options);
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(IdentityWithRenamedProperty))
             {
                 writer.WritePropertyName("identityWithRenamedProperty"u8);
-                writer.WriteObjectValue(IdentityWithRenamedProperty, options);
+                writer.WriteObjectValue(IdentityWithRenamedProperty);
             }
             if (Optional.IsDefined(IdentityWithDifferentPropertyType))
             {
                 writer.WritePropertyName("identityWithDifferentPropertyType"u8);
-                writer.WriteObjectValue(IdentityWithDifferentPropertyType, options);
+                writer.WriteObjectValue(IdentityWithDifferentPropertyType);
             }
             if (Optional.IsDefined(IdentityWithNoUserIdentity))
             {
                 writer.WritePropertyName("identityWithNoUserIdentity"u8);
-                ((IJsonModel<ManagedServiceIdentity>)IdentityWithNoUserIdentity).Write(writer, options);
+                ((IJsonModel<ManagedServiceIdentity>)IdentityWithNoUserIdentity).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(IdentityWithNoSystemIdentity))
             {
                 writer.WritePropertyName("identityWithNoSystemIdentity"u8);
-                writer.WriteObjectValue(IdentityWithNoSystemIdentity, options);
+                writer.WriteObjectValue(IdentityWithNoSystemIdentity);
             }
             if (Optional.IsDefined(IdentityV3))
             {
@@ -94,42 +67,35 @@ namespace MgmtPropertyChooser
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(FakeResources))
-            {
-                writer.WritePropertyName("fakeResources"u8);
-                writer.WriteStartArray();
-                foreach (var item in FakeResources)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
             if (Optional.IsDefined(FakeSubResource))
             {
                 writer.WritePropertyName("fakeSubResource"u8);
-                ((IJsonModel<SubResource>)FakeSubResource).Write(writer, options);
+                ((IJsonModel<SubResource>)FakeSubResource).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(FakeWritableSubResource))
             {
                 writer.WritePropertyName("fakeWritableSubResource"u8);
-                ((IJsonModel<WritableSubResource>)FakeWritableSubResource).Write(writer, options);
+                ((IJsonModel<WritableSubResource>)FakeWritableSubResource).Write(writer, ModelSerializationExtensions.WireOptions);
             }
+            if (Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WritePropertyName("location"u8);
+            writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState"u8);
-                writer.WriteStringValue(ProvisioningState);
-            }
             if (Optional.IsDefined(LicenseType))
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
-            }
-            if (options.Format != "W" && Optional.IsDefined(VmId))
-            {
-                writer.WritePropertyName("vmId"u8);
-                writer.WriteStringValue(VmId);
             }
             if (Optional.IsDefined(ExtensionsTimeBudget))
             {
@@ -137,24 +103,11 @@ namespace MgmtPropertyChooser
                 writer.WriteStringValue(ExtensionsTimeBudget);
             }
             writer.WriteEndObject();
+            writer.WriteEndObject();
         }
 
-        VirtualMachineData IJsonModel<VirtualMachineData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(VirtualMachineData)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineData(document.RootElement, options);
-        }
-
-        internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -181,8 +134,6 @@ namespace MgmtPropertyChooser
             string licenseType = default;
             string vmId = default;
             string extensionsTimeBudget = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("plan"u8))
@@ -191,7 +142,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    plan = ModelReaderWriter.Read<ArmPlan>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, MgmtPropertyChooserContext.Default);
+                    plan = ModelReaderWriter.Read<ArmPlan>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("resources"u8))
@@ -203,7 +154,7 @@ namespace MgmtPropertyChooser
                     List<VirtualMachineExtension> array = new List<VirtualMachineExtension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineExtension.DeserializeVirtualMachineExtension(item, options));
+                        array.Add(VirtualMachineExtension.DeserializeVirtualMachineExtension(item));
                     }
                     resources = array;
                     continue;
@@ -214,7 +165,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, MgmtPropertyChooserContext.Default);
+                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("identityWithRenamedProperty"u8))
@@ -223,7 +174,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identityWithRenamedProperty = IdentityWithRenamedProperty.DeserializeIdentityWithRenamedProperty(property.Value, options);
+                    identityWithRenamedProperty = IdentityWithRenamedProperty.DeserializeIdentityWithRenamedProperty(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identityWithDifferentPropertyType"u8))
@@ -232,7 +183,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identityWithDifferentPropertyType = IdentityWithDifferentPropertyType.DeserializeIdentityWithDifferentPropertyType(property.Value, options);
+                    identityWithDifferentPropertyType = IdentityWithDifferentPropertyType.DeserializeIdentityWithDifferentPropertyType(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identityWithNoUserIdentity"u8))
@@ -241,7 +192,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identityWithNoUserIdentity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, MgmtPropertyChooserContext.Default);
+                    identityWithNoUserIdentity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("identityWithNoSystemIdentity"u8))
@@ -250,7 +201,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identityWithNoSystemIdentity = IdentityWithNoSystemIdentity.DeserializeIdentityWithNoSystemIdentity(property.Value, options);
+                    identityWithNoSystemIdentity = IdentityWithNoSystemIdentity.DeserializeIdentityWithNoSystemIdentity(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identityV3"u8))
@@ -259,7 +210,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    identityV3 = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtPropertyChooserContext.Default);
+                    identityV3 = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"));
                     continue;
                 }
                 if (property.NameEquals("zones"u8))
@@ -285,7 +236,7 @@ namespace MgmtPropertyChooser
                     List<MgmtPropertyChooserResourceData> array = new List<MgmtPropertyChooserResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MgmtPropertyChooserResourceData.DeserializeMgmtPropertyChooserResourceData(item, options));
+                        array.Add(MgmtPropertyChooserResourceData.DeserializeMgmtPropertyChooserResourceData(item));
                     }
                     fakeResources = array;
                     continue;
@@ -296,7 +247,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    fakeSubResource = ModelReaderWriter.Read<SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, MgmtPropertyChooserContext.Default);
+                    fakeSubResource = ModelReaderWriter.Read<SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("fakeWritableSubResource"u8))
@@ -305,7 +256,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    fakeWritableSubResource = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, MgmtPropertyChooserContext.Default);
+                    fakeWritableSubResource = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -348,7 +299,7 @@ namespace MgmtPropertyChooser
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtPropertyChooserContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -383,12 +334,7 @@ namespace MgmtPropertyChooser
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new VirtualMachineData(
                 id,
                 name,
@@ -411,39 +357,7 @@ namespace MgmtPropertyChooser
                 provisioningState,
                 licenseType,
                 vmId,
-                extensionsTimeBudget,
-                serializedAdditionalRawData);
+                extensionsTimeBudget);
         }
-
-        BinaryData IPersistableModel<VirtualMachineData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtPropertyChooserContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(VirtualMachineData)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        VirtualMachineData IPersistableModel<VirtualMachineData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeVirtualMachineData(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(VirtualMachineData)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<VirtualMachineData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

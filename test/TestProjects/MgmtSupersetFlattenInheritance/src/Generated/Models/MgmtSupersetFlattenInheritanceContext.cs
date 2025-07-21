@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
-using MgmtSupersetFlattenInheritance.Models;
 
 namespace MgmtSupersetFlattenInheritance
 {
@@ -14,17 +13,6 @@ namespace MgmtSupersetFlattenInheritance
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(CustomModel1))]
-    [ModelReaderWriterBuildable(typeof(CustomModel2))]
-    [ModelReaderWriterBuildable(typeof(NonResourceModel1))]
-    [ModelReaderWriterBuildable(typeof(ResourceModel1Resource))]
-    [ModelReaderWriterBuildable(typeof(ResourceModel2))]
-    [ModelReaderWriterBuildable(typeof(SubResourceModel1))]
-    [ModelReaderWriterBuildable(typeof(SubResourceModel2))]
-    [ModelReaderWriterBuildable(typeof(TrackedResourceModel1Resource))]
-    [ModelReaderWriterBuildable(typeof(TrackedResourceModel2))]
-    [ModelReaderWriterBuildable(typeof(WritableSubResourceModel1))]
-    [ModelReaderWriterBuildable(typeof(WritableSubResourceModel2))]
     public partial class MgmtSupersetFlattenInheritanceContext : ModelReaderWriterContext
     {
     }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
-using MgmtResourceName.Models;
 
 namespace MgmtResourceName
 {
@@ -14,15 +13,6 @@ namespace MgmtResourceName
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(Disk))]
-    [ModelReaderWriterBuildable(typeof(DisplayResource))]
-    [ModelReaderWriterBuildable(typeof(MachineResource))]
-    [ModelReaderWriterBuildable(typeof(Memory))]
-    [ModelReaderWriterBuildable(typeof(NetworkResource))]
-    [ModelReaderWriterBuildable(typeof(ProviderOperationResource))]
-    [ModelReaderWriterBuildable(typeof(ProviderOperationsMetadataListResult))]
-    [ModelReaderWriterBuildable(typeof(ResourceOperation))]
-    [ModelReaderWriterBuildable(typeof(ResourceType))]
     public partial class MgmtResourceNameContext : ModelReaderWriterContext
     {
     }

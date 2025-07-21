@@ -5,88 +5,21 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
-    internal partial class ResourceLinkResult : IUtf8JsonSerializable, IJsonModel<ResourceLinkResult>
+    internal partial class ResourceLinkResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceLinkResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<ResourceLinkResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static ResourceLinkResult DeserializeResourceLinkResult(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceLinkResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ResourceLinkResult)} does not support writing '{format}' format.");
-            }
-
-            writer.WritePropertyName("value"u8);
-            writer.WriteStartArray();
-            foreach (var item in Value)
-            {
-                writer.WriteObjectValue(item, options);
-            }
-            writer.WriteEndArray();
-            if (options.Format != "W" && Optional.IsDefined(NextLink))
-            {
-                writer.WritePropertyName("nextLink"u8);
-                writer.WriteStringValue(NextLink);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        ResourceLinkResult IJsonModel<ResourceLinkResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceLinkResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ResourceLinkResult)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeResourceLinkResult(document.RootElement, options);
-        }
-
-        internal static ResourceLinkResult DeserializeResourceLinkResult(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             IReadOnlyList<ResourceLinkData> value = default;
             string nextLink = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -94,7 +27,7 @@ namespace MgmtScopeResource.Models
                     List<ResourceLinkData> array = new List<ResourceLinkData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ResourceLinkData.DeserializeResourceLinkData(item, options));
+                        array.Add(ResourceLinkData.DeserializeResourceLinkData(item));
                     }
                     value = array;
                     continue;
@@ -104,44 +37,8 @@ namespace MgmtScopeResource.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new ResourceLinkResult(value, nextLink, serializedAdditionalRawData);
+            return new ResourceLinkResult(value, nextLink);
         }
-
-        BinaryData IPersistableModel<ResourceLinkResult>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceLinkResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtScopeResourceContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(ResourceLinkResult)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        ResourceLinkResult IPersistableModel<ResourceLinkResult>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceLinkResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeResourceLinkResult(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(ResourceLinkResult)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ResourceLinkResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

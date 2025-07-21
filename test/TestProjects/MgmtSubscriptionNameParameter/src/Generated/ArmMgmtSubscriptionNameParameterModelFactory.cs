@@ -61,8 +61,7 @@ namespace MgmtSubscriptionNameParameter.Models
                 forwardTo,
                 forwardDeadLetteredMessagesTo,
                 isClientAffine,
-                clientAffineProperties,
-                serializedAdditionalRawData: null);
+                clientAffineProperties);
         }
     }
 }

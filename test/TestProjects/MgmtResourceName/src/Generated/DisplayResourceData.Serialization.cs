@@ -7,7 +7,6 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -15,51 +14,21 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtResourceName
 {
-    public partial class DisplayResourceData : IUtf8JsonSerializable, IJsonModel<DisplayResourceData>
+    public partial class DisplayResourceData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DisplayResourceData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<DisplayResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<DisplayResourceData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(DisplayResourceData)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(New))
             {
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
+            writer.WriteEndObject();
         }
 
-        DisplayResourceData IJsonModel<DisplayResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static DisplayResourceData DeserializeDisplayResourceData(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<DisplayResourceData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(DisplayResourceData)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeDisplayResourceData(document.RootElement, options);
-        }
-
-        internal static DisplayResourceData DeserializeDisplayResourceData(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -69,8 +38,6 @@ namespace MgmtResourceName
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"u8))
@@ -99,53 +66,11 @@ namespace MgmtResourceName
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtResourceNameContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new DisplayResourceData(
-                id,
-                name,
-                type,
-                systemData,
-                @new,
-                serializedAdditionalRawData);
+            return new DisplayResourceData(id, name, type, systemData, @new);
         }
-
-        BinaryData IPersistableModel<DisplayResourceData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<DisplayResourceData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtResourceNameContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(DisplayResourceData)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        DisplayResourceData IPersistableModel<DisplayResourceData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<DisplayResourceData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeDisplayResourceData(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(DisplayResourceData)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<DisplayResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

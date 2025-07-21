@@ -7,7 +7,6 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -15,51 +14,21 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtSingletonResource
 {
-    public partial class CarData : IUtf8JsonSerializable, IJsonModel<CarData>
+    public partial class CarData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CarData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<CarData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<CarData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(CarData)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Horsepower))
             {
                 writer.WritePropertyName("horsepower"u8);
                 writer.WriteStringValue(Horsepower);
             }
+            writer.WriteEndObject();
         }
 
-        CarData IJsonModel<CarData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static CarData DeserializeCarData(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CarData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(CarData)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeCarData(document.RootElement, options);
-        }
-
-        internal static CarData DeserializeCarData(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -69,8 +38,6 @@ namespace MgmtSingletonResource
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("horsepower"u8))
@@ -99,53 +66,11 @@ namespace MgmtSingletonResource
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtSingletonResourceContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new CarData(
-                id,
-                name,
-                type,
-                systemData,
-                horsepower,
-                serializedAdditionalRawData);
+            return new CarData(id, name, type, systemData, horsepower);
         }
-
-        BinaryData IPersistableModel<CarData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<CarData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtSingletonResourceContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(CarData)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        CarData IPersistableModel<CarData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<CarData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeCarData(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(CarData)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<CarData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

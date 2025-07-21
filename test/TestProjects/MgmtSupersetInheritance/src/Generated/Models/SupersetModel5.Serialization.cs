@@ -15,28 +15,11 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtSupersetInheritance.Models
 {
-    public partial class SupersetModel5 : IUtf8JsonSerializable, IJsonModel<SupersetModel5>
+    public partial class SupersetModel5 : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SupersetModel5>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<SupersetModel5>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SupersetModel5>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(SupersetModel5)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
@@ -47,24 +30,24 @@ namespace MgmtSupersetInheritance.Models
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
-        }
-
-        SupersetModel5 IJsonModel<SupersetModel5>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SupersetModel5>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            if (Optional.IsCollectionDefined(Tags))
             {
-                throw new FormatException($"The model {nameof(SupersetModel5)} does not support reading '{format}' format.");
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeSupersetModel5(document.RootElement, options);
+            writer.WritePropertyName("location"u8);
+            writer.WriteStringValue(Location);
+            writer.WriteEndObject();
         }
 
-        internal static SupersetModel5 DeserializeSupersetModel5(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static SupersetModel5 DeserializeSupersetModel5(JsonElement element)
         {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -77,8 +60,6 @@ namespace MgmtSupersetInheritance.Models
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"u8))
@@ -131,15 +112,10 @@ namespace MgmtSupersetInheritance.Models
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtSupersetInheritanceContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new SupersetModel5(
                 id,
                 name,
@@ -148,39 +124,7 @@ namespace MgmtSupersetInheritance.Models
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
                 foo,
-                @new,
-                serializedAdditionalRawData);
+                @new);
         }
-
-        BinaryData IPersistableModel<SupersetModel5>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SupersetModel5>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtSupersetInheritanceContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(SupersetModel5)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        SupersetModel5 IPersistableModel<SupersetModel5>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SupersetModel5>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeSupersetModel5(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(SupersetModel5)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<SupersetModel5>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
-using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
@@ -14,46 +13,6 @@ namespace MgmtScopeResource
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(ApiProfile))]
-    [ModelReaderWriterBuildable(typeof(CloudError))]
-    [ModelReaderWriterBuildable(typeof(DataContainer))]
-    [ModelReaderWriterBuildable(typeof(Deployment))]
-    [ModelReaderWriterBuildable(typeof(DeploymentExportResult))]
-    [ModelReaderWriterBuildable(typeof(DeploymentExtendedFilter))]
-    [ModelReaderWriterBuildable(typeof(DeploymentExtendedResource))]
-    [ModelReaderWriterBuildable(typeof(DeploymentListResult))]
-    [ModelReaderWriterBuildable(typeof(DeploymentOperation))]
-    [ModelReaderWriterBuildable(typeof(DeploymentOperationProperties))]
-    [ModelReaderWriterBuildable(typeof(DeploymentOperationsListResult))]
-    [ModelReaderWriterBuildable(typeof(DeploymentProperties))]
-    [ModelReaderWriterBuildable(typeof(DeploymentPropertiesExtended))]
-    [ModelReaderWriterBuildable(typeof(DeploymentValidateResult))]
-    [ModelReaderWriterBuildable(typeof(DeploymentWhatIf))]
-    [ModelReaderWriterBuildable(typeof(DeploymentWhatIfProperties))]
-    [ModelReaderWriterBuildable(typeof(Error))]
-    [ModelReaderWriterBuildable(typeof(FakePolicyAssignmentListResult))]
-    [ModelReaderWriterBuildable(typeof(FakePolicyAssignmentResource))]
-    [ModelReaderWriterBuildable(typeof(GuestConfigurationAssignmentList))]
-    [ModelReaderWriterBuildable(typeof(GuestConfigurationAssignmentProperties))]
-    [ModelReaderWriterBuildable(typeof(GuestConfigurationAssignmentResource))]
-    [ModelReaderWriterBuildable(typeof(GuestConfigurationBaseResource))]
-    [ModelReaderWriterBuildable(typeof(Marketplace))]
-    [ModelReaderWriterBuildable(typeof(MarketplacesListResult))]
-    [ModelReaderWriterBuildable(typeof(NonComplianceMessage))]
-    [ModelReaderWriterBuildable(typeof(ParameterValuesValue))]
-    [ModelReaderWriterBuildable(typeof(ResourceLinkFilter))]
-    [ModelReaderWriterBuildable(typeof(ResourceLinkProperties))]
-    [ModelReaderWriterBuildable(typeof(ResourceLinkResource))]
-    [ModelReaderWriterBuildable(typeof(ResourceLinkResult))]
-    [ModelReaderWriterBuildable(typeof(ResponseWithError))]
-    [ModelReaderWriterBuildable(typeof(ScopedDeployment))]
-    [ModelReaderWriterBuildable(typeof(ScopedDeploymentWhatIf))]
-    [ModelReaderWriterBuildable(typeof(StatusMessage))]
-    [ModelReaderWriterBuildable(typeof(TemplateHashResult))]
-    [ModelReaderWriterBuildable(typeof(VMInsightsOnboardingStatusResource))]
-    [ModelReaderWriterBuildable(typeof(WhatIfChange))]
-    [ModelReaderWriterBuildable(typeof(WhatIfOperationResult))]
-    [ModelReaderWriterBuildable(typeof(WorkspaceInfo))]
     public partial class MgmtScopeResourceContext : ModelReaderWriterContext
     {
     }

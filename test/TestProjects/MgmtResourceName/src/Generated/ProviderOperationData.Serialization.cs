@@ -16,71 +16,10 @@ using MgmtResourceName.Models;
 
 namespace MgmtResourceName
 {
-    public partial class ProviderOperationData : IUtf8JsonSerializable, IJsonModel<ProviderOperationData>
+    public partial class ProviderOperationData
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProviderOperationData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<ProviderOperationData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static ProviderOperationData DeserializeProviderOperationData(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ProviderOperationData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ProviderOperationData)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
-            if (Optional.IsDefined(DisplayName))
-            {
-                writer.WritePropertyName("displayName"u8);
-                writer.WriteStringValue(DisplayName);
-            }
-            if (Optional.IsCollectionDefined(ResourceTypes))
-            {
-                writer.WritePropertyName("resourceTypes"u8);
-                writer.WriteStartArray();
-                foreach (var item in ResourceTypes)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(Operations))
-            {
-                writer.WritePropertyName("operations"u8);
-                writer.WriteStartArray();
-                foreach (var item in Operations)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-        }
-
-        ProviderOperationData IJsonModel<ProviderOperationData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ProviderOperationData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ProviderOperationData)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeProviderOperationData(document.RootElement, options);
-        }
-
-        internal static ProviderOperationData DeserializeProviderOperationData(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -92,8 +31,6 @@ namespace MgmtResourceName
             string name = default;
             Azure.Core.ResourceType type = default;
             SystemData systemData = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("displayName"u8))
@@ -110,7 +47,7 @@ namespace MgmtResourceName
                     List<Models.ResourceType> array = new List<Models.ResourceType>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Models.ResourceType.DeserializeResourceType(item, options));
+                        array.Add(Models.ResourceType.DeserializeResourceType(item));
                     }
                     resourceTypes = array;
                     continue;
@@ -124,7 +61,7 @@ namespace MgmtResourceName
                     List<ResourceOperation> array = new List<ResourceOperation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ResourceOperation.DeserializeResourceOperation(item, options));
+                        array.Add(ResourceOperation.DeserializeResourceOperation(item));
                     }
                     operations = array;
                     continue;
@@ -150,15 +87,10 @@ namespace MgmtResourceName
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtResourceNameContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new ProviderOperationData(
                 id,
                 name,
@@ -166,39 +98,7 @@ namespace MgmtResourceName
                 systemData,
                 displayName,
                 resourceTypes ?? new ChangeTrackingList<Models.ResourceType>(),
-                operations ?? new ChangeTrackingList<ResourceOperation>(),
-                serializedAdditionalRawData);
+                operations ?? new ChangeTrackingList<ResourceOperation>());
         }
-
-        BinaryData IPersistableModel<ProviderOperationData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ProviderOperationData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtResourceNameContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(ProviderOperationData)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        ProviderOperationData IPersistableModel<ProviderOperationData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ProviderOperationData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeProviderOperationData(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(ProviderOperationData)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ProviderOperationData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

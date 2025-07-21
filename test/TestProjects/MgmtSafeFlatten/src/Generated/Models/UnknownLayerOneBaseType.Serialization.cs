@@ -5,61 +5,28 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtSafeFlatten.Models
 {
-    internal partial class UnknownLayerOneBaseType : IUtf8JsonSerializable, IJsonModel<LayerOneBaseType>
+    internal partial class UnknownLayerOneBaseType : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LayerOneBaseType>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<LayerOneBaseType>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name.ToString());
             writer.WriteEndObject();
         }
 
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static UnknownLayerOneBaseType DeserializeUnknownLayerOneBaseType(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<LayerOneBaseType>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(LayerOneBaseType)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
-        }
-
-        LayerOneBaseType IJsonModel<LayerOneBaseType>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<LayerOneBaseType>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(LayerOneBaseType)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeLayerOneBaseType(document.RootElement, options);
-        }
-
-        internal static UnknownLayerOneBaseType DeserializeUnknownLayerOneBaseType(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             LayerOneTypeName name = "Unknown";
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -67,44 +34,8 @@ namespace MgmtSafeFlatten.Models
                     name = new LayerOneTypeName(property.Value.GetString());
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new UnknownLayerOneBaseType(name, serializedAdditionalRawData);
+            return new UnknownLayerOneBaseType(name);
         }
-
-        BinaryData IPersistableModel<LayerOneBaseType>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<LayerOneBaseType>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtSafeFlattenContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(LayerOneBaseType)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        LayerOneBaseType IPersistableModel<LayerOneBaseType>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<LayerOneBaseType>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeLayerOneBaseType(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(LayerOneBaseType)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<LayerOneBaseType>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

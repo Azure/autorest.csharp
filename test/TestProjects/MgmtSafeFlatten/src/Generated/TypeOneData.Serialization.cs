@@ -17,28 +17,11 @@ using MgmtSafeFlatten.Models;
 
 namespace MgmtSafeFlatten
 {
-    public partial class TypeOneData : IUtf8JsonSerializable, IJsonModel<TypeOneData>
+    public partial class TypeOneData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TypeOneData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<TypeOneData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<TypeOneData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(TypeOneData)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(MyType))
             {
                 writer.WritePropertyName("MyType"u8);
@@ -47,36 +30,36 @@ namespace MgmtSafeFlatten
             if (Optional.IsDefined(LayerOne))
             {
                 writer.WritePropertyName("layerOne"u8);
-                writer.WriteObjectValue(LayerOne, options);
+                writer.WriteObjectValue(LayerOne);
             }
             if (Optional.IsDefined(LayerOneType))
             {
                 writer.WritePropertyName("layerOneType"u8);
-                writer.WriteObjectValue(LayerOneType, options);
+                writer.WriteObjectValue(LayerOneType);
             }
             if (Optional.IsDefined(LayerOneConflict))
             {
                 writer.WritePropertyName("layerOneConflict"u8);
-                ((IJsonModel<WritableSubResource>)LayerOneConflict).Write(writer, options);
+                ((IJsonModel<WritableSubResource>)LayerOneConflict).Write(writer, ModelSerializationExtensions.WireOptions);
             }
-        }
-
-        TypeOneData IJsonModel<TypeOneData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<TypeOneData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            if (Optional.IsCollectionDefined(Tags))
             {
-                throw new FormatException($"The model {nameof(TypeOneData)} does not support reading '{format}' format.");
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeTypeOneData(document.RootElement, options);
+            writer.WritePropertyName("location"u8);
+            writer.WriteStringValue(Location);
+            writer.WriteEndObject();
         }
 
-        internal static TypeOneData DeserializeTypeOneData(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static TypeOneData DeserializeTypeOneData(JsonElement element)
         {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -91,8 +74,6 @@ namespace MgmtSafeFlatten
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("MyType"u8))
@@ -106,7 +87,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    layerOne = LayerOneSingle.DeserializeLayerOneSingle(property.Value, options);
+                    layerOne = LayerOneSingle.DeserializeLayerOneSingle(property.Value);
                     continue;
                 }
                 if (property.NameEquals("layerOneType"u8))
@@ -115,7 +96,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    layerOneType = LayerOneBaseType.DeserializeLayerOneBaseType(property.Value, options);
+                    layerOneType = LayerOneBaseType.DeserializeLayerOneBaseType(property.Value);
                     continue;
                 }
                 if (property.NameEquals("layerOneConflict"u8))
@@ -124,7 +105,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    layerOneConflict = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, MgmtSafeFlattenContext.Default);
+                    layerOneConflict = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -167,15 +148,10 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtSafeFlattenContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new TypeOneData(
                 id,
                 name,
@@ -186,39 +162,7 @@ namespace MgmtSafeFlatten
                 myType,
                 layerOne,
                 layerOneType,
-                layerOneConflict,
-                serializedAdditionalRawData);
+                layerOneConflict);
         }
-
-        BinaryData IPersistableModel<TypeOneData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<TypeOneData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtSafeFlattenContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(TypeOneData)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        TypeOneData IPersistableModel<TypeOneData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<TypeOneData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeTypeOneData(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(TypeOneData)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<TypeOneData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

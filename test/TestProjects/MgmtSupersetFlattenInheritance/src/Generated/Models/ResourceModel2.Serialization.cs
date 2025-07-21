@@ -7,7 +7,6 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -15,28 +14,11 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtSupersetFlattenInheritance.Models
 {
-    public partial class ResourceModel2 : IUtf8JsonSerializable, IJsonModel<ResourceModel2>
+    public partial class ResourceModel2 : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceModel2>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<ResourceModel2>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceModel2>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ResourceModel2)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(Foo))
@@ -45,24 +27,11 @@ namespace MgmtSupersetFlattenInheritance.Models
                 writer.WriteStringValue(Foo);
             }
             writer.WriteEndObject();
+            writer.WriteEndObject();
         }
 
-        ResourceModel2 IJsonModel<ResourceModel2>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static ResourceModel2 DeserializeResourceModel2(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceModel2>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ResourceModel2)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeResourceModel2(document.RootElement, options);
-        }
-
-        internal static ResourceModel2 DeserializeResourceModel2(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -72,8 +41,6 @@ namespace MgmtSupersetFlattenInheritance.Models
             ResourceType type = default;
             SystemData systemData = default;
             string foo = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -97,7 +64,7 @@ namespace MgmtSupersetFlattenInheritance.Models
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtSupersetFlattenInheritanceContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -117,50 +84,8 @@ namespace MgmtSupersetFlattenInheritance.Models
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new ResourceModel2(
-                id,
-                name,
-                type,
-                systemData,
-                foo,
-                serializedAdditionalRawData);
+            return new ResourceModel2(id, name, type, systemData, foo);
         }
-
-        BinaryData IPersistableModel<ResourceModel2>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceModel2>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtSupersetFlattenInheritanceContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(ResourceModel2)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        ResourceModel2 IPersistableModel<ResourceModel2>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceModel2>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeResourceModel2(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(ResourceModel2)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ResourceModel2>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
-using MgmtParent.Models;
 
 namespace MgmtParent
 {
@@ -14,17 +13,6 @@ namespace MgmtParent
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(AvailabilitySetListResult))]
-    [ModelReaderWriterBuildable(typeof(AvailabilitySetPatch))]
-    [ModelReaderWriterBuildable(typeof(AvailabilitySetResource))]
-    [ModelReaderWriterBuildable(typeof(DedicatedHostGroupListResult))]
-    [ModelReaderWriterBuildable(typeof(DedicatedHostGroupPatch))]
-    [ModelReaderWriterBuildable(typeof(DedicatedHostGroupResource))]
-    [ModelReaderWriterBuildable(typeof(DedicatedHostListResult))]
-    [ModelReaderWriterBuildable(typeof(DedicatedHostPatch))]
-    [ModelReaderWriterBuildable(typeof(DedicatedHostResource))]
-    [ModelReaderWriterBuildable(typeof(UpdateResource))]
-    [ModelReaderWriterBuildable(typeof(VirtualMachineExtensionImageResource))]
     public partial class MgmtParentContext : ModelReaderWriterContext
     {
     }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
-using MgmtPropertyChooser.Models;
 
 namespace MgmtPropertyChooser
 {
@@ -14,16 +13,6 @@ namespace MgmtPropertyChooser
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(CloudError))]
-    [ModelReaderWriterBuildable(typeof(ErrorAdditionalInfo))]
-    [ModelReaderWriterBuildable(typeof(IdentityWithDifferentPropertyType))]
-    [ModelReaderWriterBuildable(typeof(IdentityWithNoSystemIdentity))]
-    [ModelReaderWriterBuildable(typeof(IdentityWithRenamedProperty))]
-    [ModelReaderWriterBuildable(typeof(MgmtPropertyChooserResourceData))]
-    [ModelReaderWriterBuildable(typeof(UpdateResource))]
-    [ModelReaderWriterBuildable(typeof(VirtualMachineExtension))]
-    [ModelReaderWriterBuildable(typeof(VirtualMachinePatch))]
-    [ModelReaderWriterBuildable(typeof(VirtualMachineResource))]
     public partial class MgmtPropertyChooserContext : ModelReaderWriterContext
     {
     }
