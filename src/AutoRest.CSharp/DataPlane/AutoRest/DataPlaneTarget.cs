@@ -7,7 +7,6 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
-using System.Linq;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {

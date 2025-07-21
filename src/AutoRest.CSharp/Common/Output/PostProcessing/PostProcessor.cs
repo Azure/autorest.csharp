@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -10,6 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -50,7 +50,7 @@ internal class PostProcessor
         var result = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         var declarationCache = new Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>>(SymbolEqualityComparer.Default);
         var documentCache = new Dictionary<Document, HashSet<INamedTypeSymbol>>();
-        _mrwContextTypeSymbol = compilation.GetTypeByMetadataName($"{Configuration.Namespace}.{Configuration.Namespace.RemovePeriods()}Context");
+        _mrwContextTypeSymbol = compilation.GetTypeByMetadataName($"{Configuration.Namespace}.{ModelReaderWriterContextWriter.Name}");
 
         INamedTypeSymbol? modelFactorySymbol = null;
         if (_modelFactoryFullName != null)
