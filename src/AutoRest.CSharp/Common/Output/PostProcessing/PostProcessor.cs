@@ -310,6 +310,9 @@ internal class PostProcessor
             project = await RemoveModelsFromDocumentAsync(project, models);
         }
 
+        // remove what are now invalid references due to the models being removed
+        project = await RemoveInvalidRefs(project);
+
         return project;
     }
 
@@ -336,6 +339,78 @@ internal class PostProcessor
         root = root.RemoveNodes(models, SyntaxRemoveOptions.KeepNoTrivia);
         document = document.WithSyntaxRoot(root!);
         return document.Project;
+    }
+
+    private async Task<Project> RemoveInvalidRefs(Project project)
+    {
+        var solution = project.Solution;
+
+        // Process each document for invalid usings
+        foreach (var documentId in project.DocumentIds)
+        {
+            solution = await RemoveInvalidUsings(solution, documentId);
+        }
+
+        // Process each document for invalid attributes (with fresh semantic models)
+        foreach (var documentId in project.DocumentIds)
+        {
+            solution = await RemoveInvalidAttributes(solution, documentId);
+        }
+
+        return solution.GetProject(project.Id)!;
+    }
+
+    private async Task<Solution> RemoveInvalidUsings(Solution solution, DocumentId documentId)
+    {
+        var document = solution.GetDocument(documentId)!;
+        var root = await document.GetSyntaxRootAsync();
+        var model = await document.GetSemanticModelAsync();
+
+        if (root is not CompilationUnitSyntax cu || model == null)
+            return solution;
+
+        var invalidUsings = cu.Usings
+            .Where(u =>
+            {
+                var info = model.GetSymbolInfo(u.Name!);
+                var sym = info.Symbol;
+                return sym is null || sym.Kind != SymbolKind.Namespace;
+            })
+            .ToList();
+
+        if (invalidUsings.Count > 0)
+        {
+            cu = cu.RemoveNodes(invalidUsings, SyntaxRemoveOptions.KeepNoTrivia)!;
+            solution = solution.WithDocumentSyntaxRoot(documentId, cu);
+        }
+
+        return solution;
+    }
+
+    private async Task<Solution> RemoveInvalidAttributes(Solution solution, DocumentId documentId)
+    {
+        var document = solution.GetDocument(documentId)!;
+        var root = await document.GetSyntaxRootAsync();
+        var model = await document.GetSemanticModelAsync();
+
+        if (root is not CompilationUnitSyntax cu || model == null)
+            return solution;
+
+        var invalidAttributes = cu.DescendantNodes()
+            .OfType<AttributeListSyntax>()
+            .Where(attr => attr.Attributes.Any(attribute =>
+                attribute.ArgumentList?.Arguments.Any(arg =>
+                    arg.Expression is TypeOfExpressionSyntax typeOfExpr &&
+                    model.GetTypeInfo(typeOfExpr.Type).Type?.TypeKind == TypeKind.Error) == true))
+            .ToList();
+
+        if (invalidAttributes.Count > 0)
+        {
+            cu = cu.RemoveNodes(invalidAttributes, SyntaxRemoveOptions.KeepNoTrivia)!;
+            solution = solution.WithDocumentSyntaxRoot(documentId, cu);
+        }
+
+        return solution;
     }
 
     protected HashSet<INamedTypeSymbol> GetRootSymbols(Project project, TypeSymbols modelSymbols)
