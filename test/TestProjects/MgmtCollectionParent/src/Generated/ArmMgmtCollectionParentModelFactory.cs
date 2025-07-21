@@ -25,7 +25,7 @@ namespace MgmtCollectionParent.Models
         /// <param name="currentStage"> Order current status. </param>
         /// <param name="orderStageHistory"> Order status history. </param>
         /// <returns> A new <see cref="MgmtCollectionParent.OrderResourceData"/> instance for mocking. </returns>
-        public static OrderResourceData OrderResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, Azure.ResourceManager.Models.SystemData systemData = null, IEnumerable<string> orderItemIds = null, StageDetails currentStage = null, IEnumerable<StageDetails> orderStageHistory = null)
+        public static OrderResourceData OrderResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IEnumerable<string> orderItemIds = null, StageDetails currentStage = null, IEnumerable<StageDetails> orderStageHistory = null)
         {
             orderItemIds ??= new List<string>();
             orderStageHistory ??= new List<StageDetails>();

@@ -106,7 +106,7 @@ namespace MgmtMockAndSample
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Azure.ResourceManager.Models.SystemData systemData = default;
+            SystemData systemData = default;
             Azure.ResourceManager.Resources.Models.SubResource privateEndpoint = default;
             MgmtMockAndSamplePrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
             MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState = default;
@@ -163,7 +163,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<Azure.ResourceManager.Models.SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

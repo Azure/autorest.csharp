@@ -25,7 +25,7 @@ namespace MgmtParamOrdering.Models
         /// <param name="location"> The location. </param>
         /// <param name="bar"> specifies the bar. </param>
         /// <returns> A new <see cref="MgmtParamOrdering.AvailabilitySetData"/> instance for mocking. </returns>
-        public static AvailabilitySetData AvailabilitySetData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, Azure.ResourceManager.Models.SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string bar = null)
+        public static AvailabilitySetData AvailabilitySetData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string bar = null)
         {
             tags ??= new Dictionary<string, string>();
 
@@ -49,7 +49,7 @@ namespace MgmtParamOrdering.Models
         /// <param name="location"> The location. </param>
         /// <param name="foo"> specifies the foo. </param>
         /// <returns> A new <see cref="MgmtParamOrdering.DedicatedHostGroupData"/> instance for mocking. </returns>
-        public static DedicatedHostGroupData DedicatedHostGroupData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, Azure.ResourceManager.Models.SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string foo = null)
+        public static DedicatedHostGroupData DedicatedHostGroupData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string foo = null)
         {
             tags ??= new Dictionary<string, string>();
 
@@ -73,7 +73,7 @@ namespace MgmtParamOrdering.Models
         /// <param name="location"> The location. </param>
         /// <param name="foo"> specifies the foo. </param>
         /// <returns> A new <see cref="MgmtParamOrdering.DedicatedHostData"/> instance for mocking. </returns>
-        public static DedicatedHostData DedicatedHostData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, Azure.ResourceManager.Models.SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string foo = null)
+        public static DedicatedHostData DedicatedHostData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string foo = null)
         {
             tags ??= new Dictionary<string, string>();
 
@@ -119,7 +119,7 @@ namespace MgmtParamOrdering.Models
         /// <param name="location"> The location. </param>
         /// <param name="bar"> specifies the bar. </param>
         /// <returns> A new <see cref="MgmtParamOrdering.VirtualMachineExtensionImageData"/> instance for mocking. </returns>
-        public static VirtualMachineExtensionImageData VirtualMachineExtensionImageData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, Azure.ResourceManager.Models.SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string bar = null)
+        public static VirtualMachineExtensionImageData VirtualMachineExtensionImageData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string bar = null)
         {
             tags ??= new Dictionary<string, string>();
 
@@ -143,7 +143,7 @@ namespace MgmtParamOrdering.Models
         /// <param name="location"> The location. </param>
         /// <param name="properties"> Additional attributes of the entity. </param>
         /// <returns> A new <see cref="MgmtParamOrdering.EnvironmentContainerResourceData"/> instance for mocking. </returns>
-        public static EnvironmentContainerResourceData EnvironmentContainerResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, Azure.ResourceManager.Models.SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, EnvironmentContainer properties = null)
+        public static EnvironmentContainerResourceData EnvironmentContainerResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, EnvironmentContainer properties = null)
         {
             tags ??= new Dictionary<string, string>();
 
@@ -182,7 +182,7 @@ namespace MgmtParamOrdering.Models
         /// <param name="primaryUserAssignedIdentity"> The user assigned identity resource id that represents the workspace identity. </param>
         /// <param name="tenantId"> The tenant id associated with this workspace. </param>
         /// <returns> A new <see cref="MgmtParamOrdering.WorkspaceData"/> instance for mocking. </returns>
-        public static WorkspaceData WorkspaceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, Azure.ResourceManager.Models.SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string workspaceId = null, string description = null, string friendlyName = null, string keyVault = null, string applicationInsights = null, string containerRegistry = null, string storageAccount = null, Uri discoveryUri = null, ProvisioningState? provisioningState = null, bool? hbiWorkspace = null, string serviceProvisionedResourceGroup = null, int? privateLinkCount = null, string imageBuildCompute = null, bool? allowPublicAccessWhenBehindVnet = null, string primaryUserAssignedIdentity = null, Guid? tenantId = null)
+        public static WorkspaceData WorkspaceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string workspaceId = null, string description = null, string friendlyName = null, string keyVault = null, string applicationInsights = null, string containerRegistry = null, string storageAccount = null, Uri discoveryUri = null, ProvisioningState? provisioningState = null, bool? hbiWorkspace = null, string serviceProvisionedResourceGroup = null, int? privateLinkCount = null, string imageBuildCompute = null, bool? allowPublicAccessWhenBehindVnet = null, string primaryUserAssignedIdentity = null, Guid? tenantId = null)
         {
             tags ??= new Dictionary<string, string>();
 
@@ -221,7 +221,7 @@ namespace MgmtParamOrdering.Models
         /// <param name="location"> The location. </param>
         /// <param name="zones"> The virtual machine scale set zones. NOTE: Availability zones can only be set when you create the scale set. </param>
         /// <returns> A new <see cref="MgmtParamOrdering.VirtualMachineScaleSetData"/> instance for mocking. </returns>
-        public static VirtualMachineScaleSetData VirtualMachineScaleSetData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, Azure.ResourceManager.Models.SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, IEnumerable<string> zones = null)
+        public static VirtualMachineScaleSetData VirtualMachineScaleSetData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, IEnumerable<string> zones = null)
         {
             tags ??= new Dictionary<string, string>();
             zones ??= new List<string>();

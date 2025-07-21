@@ -67,7 +67,7 @@ namespace MgmtCollectionParent
         /// <param name="currentStage"> Order current status. </param>
         /// <param name="orderStageHistory"> Order status history. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal OrderResourceData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, IReadOnlyList<string> orderItemIds, StageDetails currentStage, IReadOnlyList<StageDetails> orderStageHistory, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal OrderResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IReadOnlyList<string> orderItemIds, StageDetails currentStage, IReadOnlyList<StageDetails> orderStageHistory, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             OrderItemIds = orderItemIds;
             CurrentStage = currentStage;

@@ -16,10 +16,12 @@ namespace MgmtPartialResource
     /// </summary>
     [ModelReaderWriterBuildable(typeof(ConfigurationProfileAssignmentList))]
     [ModelReaderWriterBuildable(typeof(ConfigurationProfileAssignmentProperties))]
-    [ModelReaderWriterBuildable(typeof(MgmtPartialResourceResourceData))]
+    [ModelReaderWriterBuildable(typeof(ConfigurationProfileAssignmentResource))]
+    [ModelReaderWriterBuildable(typeof(PartialVmssResource))]
     [ModelReaderWriterBuildable(typeof(PublicIPAddressListResult))]
+    [ModelReaderWriterBuildable(typeof(PublicIPAddressResource))]
     [ModelReaderWriterBuildable(typeof(PublicIPAddressSku))]
-    [ModelReaderWriterBuildable(typeof(TrackedResource))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineMgmtPartialResource))]
     public partial class MgmtPartialResourceContext : ModelReaderWriterContext
     {
     }

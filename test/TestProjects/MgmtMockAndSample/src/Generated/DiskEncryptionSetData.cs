@@ -75,7 +75,7 @@ namespace MgmtMockAndSample
         /// <param name="location"> Azure location of the key vault resource. </param>
         /// <param name="tags"> Tags assigned to the key vault resource. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal DiskEncryptionSetData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, Azure.ResourceManager.Models.ManagedServiceIdentity identity, DiskEncryptionSetType? encryptionType, KeyForDiskEncryptionSet activeKey, IReadOnlyList<KeyForDiskEncryptionSet> previousKeys, string provisioningState, bool? rotationToLatestKeyVersionEnabled, DateTimeOffset? lastKeyRotationTimestamp, string federatedClientId, MinimumTlsVersion? minimumTlsVersion, AzureLocation? location, IReadOnlyDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal DiskEncryptionSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, ManagedServiceIdentity identity, DiskEncryptionSetType? encryptionType, KeyForDiskEncryptionSet activeKey, IReadOnlyList<KeyForDiskEncryptionSet> previousKeys, string provisioningState, bool? rotationToLatestKeyVersionEnabled, DateTimeOffset? lastKeyRotationTimestamp, string federatedClientId, MinimumTlsVersion? minimumTlsVersion, AzureLocation? location, IReadOnlyDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Identity = identity;
             EncryptionType = encryptionType;
@@ -92,7 +92,7 @@ namespace MgmtMockAndSample
         }
 
         /// <summary> Identity for the virtual machine. </summary>
-        public Azure.ResourceManager.Models.ManagedServiceIdentity Identity { get; set; }
+        public ManagedServiceIdentity Identity { get; set; }
         /// <summary> The type of key used to encrypt the data of the disk. </summary>
         public DiskEncryptionSetType? EncryptionType { get; set; }
         /// <summary> The key vault key which is currently used by this disk encryption set. </summary>

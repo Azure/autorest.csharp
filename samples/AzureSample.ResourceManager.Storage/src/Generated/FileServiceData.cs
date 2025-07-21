@@ -66,7 +66,7 @@ namespace AzureSample.ResourceManager.Storage
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="protocolSettings"> Protocol settings for file service. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal FileServiceData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, AzureSampleResourceManagerStorageSku sku, CorsRules cors, DeleteRetentionPolicy shareDeleteRetentionPolicy, ProtocolSettings protocolSettings, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal FileServiceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, AzureSampleResourceManagerStorageSku sku, CorsRules cors, DeleteRetentionPolicy shareDeleteRetentionPolicy, ProtocolSettings protocolSettings, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Sku = sku;
             Cors = cors;

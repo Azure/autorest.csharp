@@ -60,7 +60,7 @@ namespace AzureSample.ResourceManager.Storage
             {
                 return null;
             }
-            var data = ModelReaderWriter.Write(rehydrationToken, ModelReaderWriterOptions.Json, AzureSampleResourceManagerStorageContext.Default);
+            var data = ((IJsonModel<RehydrationToken>)rehydrationToken).Write(ModelReaderWriterOptions.Json);
             using var document = JsonDocument.Parse(data);
             var lroDetails = document.RootElement;
             return lroDetails.GetProperty("id").GetString();

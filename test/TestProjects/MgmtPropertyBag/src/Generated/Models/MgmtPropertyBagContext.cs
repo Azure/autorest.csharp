@@ -19,6 +19,7 @@ namespace MgmtPropertyBag
     [ModelReaderWriterBuildable(typeof(BarCollectionGetIfExistsOptions))]
     [ModelReaderWriterBuildable(typeof(BarCollectionGetOptions))]
     [ModelReaderWriterBuildable(typeof(BarListResult))]
+    [ModelReaderWriterBuildable(typeof(BarResource))]
     [ModelReaderWriterBuildable(typeof(ErrorAdditionalInfo))]
     [ModelReaderWriterBuildable(typeof(ErrorResponse))]
     [ModelReaderWriterBuildable(typeof(FooCollectionExistsOptions))]
@@ -26,9 +27,8 @@ namespace MgmtPropertyBag
     [ModelReaderWriterBuildable(typeof(FooCollectionGetIfExistsOptions))]
     [ModelReaderWriterBuildable(typeof(FooCollectionGetOptions))]
     [ModelReaderWriterBuildable(typeof(FooPatch))]
-    [ModelReaderWriterBuildable(typeof(FooReconnectContent))]
     [ModelReaderWriterBuildable(typeof(FooReconnectTestOptions))]
-    [ModelReaderWriterBuildable(typeof(MgmtPropertyBagResourceData))]
+    [ModelReaderWriterBuildable(typeof(FooResource))]
     public partial class MgmtPropertyBagContext : ModelReaderWriterContext
     {
     }

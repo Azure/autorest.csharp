@@ -72,7 +72,7 @@ namespace MgmtMockAndSample
         /// <param name="properties"> Properties of the vault. </param>
         /// <param name="identity"> Identity of the vault. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal VaultData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, AzureLocation? location, IReadOnlyDictionary<string, string> tags, VaultProperties properties, Azure.ResourceManager.Models.ManagedServiceIdentity identity, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal VaultData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, AzureLocation? location, IReadOnlyDictionary<string, string> tags, VaultProperties properties, ManagedServiceIdentity identity, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Tags = tags;
@@ -93,6 +93,6 @@ namespace MgmtMockAndSample
         /// <summary> Properties of the vault. </summary>
         public VaultProperties Properties { get; }
         /// <summary> Identity of the vault. </summary>
-        public Azure.ResourceManager.Models.ManagedServiceIdentity Identity { get; }
+        public ManagedServiceIdentity Identity { get; }
     }
 }

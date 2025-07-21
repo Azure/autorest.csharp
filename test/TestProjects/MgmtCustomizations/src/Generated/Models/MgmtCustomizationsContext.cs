@@ -19,8 +19,8 @@ namespace MgmtCustomizations
     [ModelReaderWriterBuildable(typeof(ErrorAdditionalInfo))]
     [ModelReaderWriterBuildable(typeof(ErrorResponse))]
     [ModelReaderWriterBuildable(typeof(Pet))]
-    [ModelReaderWriterBuildable(typeof(PetStoreListResult))]
     [ModelReaderWriterBuildable(typeof(PetStoreProperties))]
+    [ModelReaderWriterBuildable(typeof(PetStoreResource))]
     [ModelReaderWriterBuildable(typeof(UnknownPet))]
     public partial class MgmtCustomizationsContext : ModelReaderWriterContext
     {

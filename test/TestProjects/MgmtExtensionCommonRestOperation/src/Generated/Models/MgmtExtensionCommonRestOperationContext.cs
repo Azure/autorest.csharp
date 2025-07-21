@@ -16,9 +16,8 @@ namespace MgmtExtensionCommonRestOperation
     /// </summary>
     [ModelReaderWriterBuildable(typeof(CloudError))]
     [ModelReaderWriterBuildable(typeof(ErrorResponse))]
-    [ModelReaderWriterBuildable(typeof(MgmtExtensionCommonRestOperationResourceData))]
-    [ModelReaderWriterBuildable(typeof(TypeOneListResult))]
-    [ModelReaderWriterBuildable(typeof(TypeTwoListResult))]
+    [ModelReaderWriterBuildable(typeof(TypeOneResource))]
+    [ModelReaderWriterBuildable(typeof(TypeTwoResource))]
     public partial class MgmtExtensionCommonRestOperationContext : ModelReaderWriterContext
     {
     }

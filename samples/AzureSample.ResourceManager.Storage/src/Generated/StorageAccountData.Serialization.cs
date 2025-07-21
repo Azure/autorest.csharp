@@ -57,7 +57,7 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(ExtendedLocation))
             {
                 writer.WritePropertyName("extendedLocation"u8);
-                ((IJsonModel<Azure.ResourceManager.Resources.Models.ExtendedLocation>)ExtendedLocation).Write(writer, options);
+                ((IJsonModel<ExtendedLocation>)ExtendedLocation).Write(writer, options);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -257,13 +257,13 @@ namespace AzureSample.ResourceManager.Storage
             AzureSampleResourceManagerStorageSku sku = default;
             AzureSampleResourceManagerStorageKind? kind = default;
             ManagedServiceIdentity identity = default;
-            Azure.ResourceManager.Resources.Models.ExtendedLocation extendedLocation = default;
+            ExtendedLocation extendedLocation = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Azure.ResourceManager.Models.SystemData systemData = default;
+            SystemData systemData = default;
             ProvisioningState? provisioningState = default;
             Endpoints primaryEndpoints = default;
             string primaryLocation = default;
@@ -334,7 +334,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    extendedLocation = ModelReaderWriter.Read<Azure.ResourceManager.Resources.Models.ExtendedLocation>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AzureSampleResourceManagerStorageContext.Default);
+                    extendedLocation = ModelReaderWriter.Read<ExtendedLocation>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AzureSampleResourceManagerStorageContext.Default);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -377,7 +377,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<Azure.ResourceManager.Models.SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

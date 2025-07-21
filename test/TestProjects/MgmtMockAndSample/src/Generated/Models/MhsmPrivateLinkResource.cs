@@ -67,7 +67,7 @@ namespace MgmtMockAndSample.Models
         /// <param name="requiredZoneNames"> Required DNS zone names of the the private link resource. </param>
         /// <param name="sku"> SKU details. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal MhsmPrivateLinkResource(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames, ManagedHsmSku sku, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
+        internal MhsmPrivateLinkResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames, ManagedHsmSku sku, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             GroupId = groupId;
             RequiredMembers = requiredMembers;

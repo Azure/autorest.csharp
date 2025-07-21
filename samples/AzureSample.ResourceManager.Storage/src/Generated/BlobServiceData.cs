@@ -72,7 +72,7 @@ namespace AzureSample.ResourceManager.Storage
         /// <param name="containerDeleteRetentionPolicy"> The blob service properties for container soft delete. </param>
         /// <param name="lastAccessTimeTrackingPolicy"> The blob service property to configure last access time based tracking policy. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal BlobServiceData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, AzureSampleResourceManagerStorageSku sku, CorsRules cors, string defaultServiceVersion, DeleteRetentionPolicy deleteRetentionPolicy, bool? isVersioningEnabled, bool? automaticSnapshotPolicyEnabled, ChangeFeed changeFeed, RestorePolicyProperties restorePolicy, DeleteRetentionPolicy containerDeleteRetentionPolicy, LastAccessTimeTrackingPolicy lastAccessTimeTrackingPolicy, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal BlobServiceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, AzureSampleResourceManagerStorageSku sku, CorsRules cors, string defaultServiceVersion, DeleteRetentionPolicy deleteRetentionPolicy, bool? isVersioningEnabled, bool? automaticSnapshotPolicyEnabled, ChangeFeed changeFeed, RestorePolicyProperties restorePolicy, DeleteRetentionPolicy containerDeleteRetentionPolicy, LastAccessTimeTrackingPolicy lastAccessTimeTrackingPolicy, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Sku = sku;
             Cors = cors;

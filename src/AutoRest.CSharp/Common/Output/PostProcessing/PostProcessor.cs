@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -9,6 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
@@ -24,6 +26,7 @@ internal class PostProcessor
     private readonly string? _modelFactoryFullName;
     private readonly string? _aspExtensionClassName;
     private readonly ImmutableHashSet<string> _modelsToKeep;
+    private INamedTypeSymbol? _mrwContextTypeSymbol;
 
     public PostProcessor(ImmutableHashSet<string> modelsToKeep, string? modelFactoryFullName = null, string? aspExtensionClassName = null)
     {
@@ -47,6 +50,7 @@ internal class PostProcessor
         var result = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         var declarationCache = new Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>>(SymbolEqualityComparer.Default);
         var documentCache = new Dictionary<Document, HashSet<INamedTypeSymbol>>();
+        _mrwContextTypeSymbol = compilation.GetTypeByMetadataName($"{Configuration.Namespace}.{Configuration.Namespace.RemovePeriods()}Context");
 
         INamedTypeSymbol? modelFactorySymbol = null;
         if (_modelFactoryFullName != null)
@@ -137,8 +141,71 @@ internal class PostProcessor
 
         var modelNamesToRemove = nodesToInternalize.Keys.Select(item => item.Identifier.Text).Concat(suppressedTypeNames);
         project = await RemoveMethodsFromModelFactoryAsync(project, definitions, modelNamesToRemove.ToHashSet());
+        project = await RemoveAttributesFromModelRreaderWrtierContext(project, modelNamesToRemove.ToHashSet());
 
         return project;
+    }
+
+    private async Task<Project> RemoveAttributesFromModelRreaderWrtierContext(Project project, HashSet<string> namesToRemove)
+    {
+        if (_mrwContextTypeSymbol is null)
+        {
+            return project;
+        }
+
+        var updatedAttributeLists = new List<AttributeListSyntax>();
+        var mrwContextClassNode = _mrwContextTypeSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as ClassDeclarationSyntax;
+        if (mrwContextClassNode is null)
+        {
+            return project;
+        }
+
+        var root = await mrwContextClassNode.SyntaxTree.GetRootAsync();
+        var updated = false;
+        foreach (var attributeList in mrwContextClassNode!.AttributeLists)
+        {
+            var updatedAttributes = new List<AttributeSyntax>();
+            foreach (var attribute in attributeList.Attributes)
+            {
+                if (!ShouldRemoveAttribute(attribute))
+                {
+                    updatedAttributes.Add(attribute);
+                }
+            }
+
+            if (updatedAttributes.Count != attributeList.Attributes.Count)
+            {
+                updated = true;
+                if (updatedAttributes.Count == 0)
+                {
+                    continue; // skip empty attribute lists
+                }
+                updatedAttributeLists.Add(SyntaxFactory.AttributeList(SyntaxFactory.SeparatedList(updatedAttributes)));
+            }
+            else
+            {
+                updatedAttributeLists.Add(attributeList);
+            }
+        }
+
+        if (updated)
+        {
+            var leadingTrivia = mrwContextClassNode.GetLeadingTrivia();
+            var newClassNode = mrwContextClassNode.WithAttributeLists(SyntaxFactory.List(updatedAttributeLists)).WithLeadingTrivia(leadingTrivia);
+            var newRoot = root.ReplaceNode(mrwContextClassNode, newClassNode);
+
+            var mrwContextDocument = project.GetDocument(mrwContextClassNode.SyntaxTree)!;
+            mrwContextDocument = mrwContextDocument.WithSyntaxRoot(newRoot);
+            return mrwContextDocument.Project;
+        }
+
+        return project;
+
+        bool ShouldRemoveAttribute(AttributeSyntax attr)
+        {
+            var attributeArgmentNames = attr.ArgumentList?.Arguments.Select(x => ((x.Expression as TypeOfExpressionSyntax)?.Type as QualifiedNameSyntax)?.Right.Identifier.Text);
+            return attributeArgmentNames != null && attributeArgmentNames.Any(name => name is not null && namesToRemove.Contains(name));
+        }
     }
 
     private async Task<Project> RemoveMethodsFromModelFactoryAsync(Project project, TypeSymbols definitions, HashSet<string> namesToRemove)
@@ -295,6 +362,7 @@ internal class PostProcessor
     {
         // accumulate the definitions from the same document together
         var documents = new Dictionary<Document, HashSet<BaseTypeDeclarationSyntax>>();
+
         foreach (var model in unusedModels)
         {
             var document = project.GetDocument(model.SyntaxTree);
@@ -351,7 +419,40 @@ internal class PostProcessor
             solution = await RemoveInvalidAttributes(solution, documentId);
         }
 
+        // Process each document for invalid usings
+        foreach (var documentId in project.DocumentIds)
+        {
+            solution = await RemoveInvalidUsings(solution, documentId);
+        }
+
         return solution.GetProject(project.Id)!;
+    }
+
+    private async Task<Solution> RemoveInvalidUsings(Solution solution, DocumentId documentId)
+    {
+        var document = solution.GetDocument(documentId)!;
+        var root = await document.GetSyntaxRootAsync();
+        var model = await document.GetSemanticModelAsync();
+
+        if (root is not CompilationUnitSyntax cu || model == null)
+            return solution;
+
+        var invalidUsings = cu.Usings
+            .Where(u =>
+            {
+                var info = model.GetSymbolInfo(u.Name!);
+                var sym = info.Symbol as INamespaceSymbol;
+                return sym is null || !sym.GetMembers().Any();
+            })
+            .ToList();
+
+        if (invalidUsings.Count > 0)
+        {
+            cu = cu.RemoveNodes(invalidUsings, SyntaxRemoveOptions.KeepNoTrivia)!;
+            solution = solution.WithDocumentSyntaxRoot(documentId, cu);
+        }
+
+        return solution;
     }
 
     private async Task<Solution> RemoveInvalidAttributes(Solution solution, DocumentId documentId)

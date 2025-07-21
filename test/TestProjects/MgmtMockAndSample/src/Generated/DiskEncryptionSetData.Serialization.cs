@@ -41,7 +41,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                ((IJsonModel<Azure.ResourceManager.Models.ManagedServiceIdentity>)Identity).Write(writer, new ModelReaderWriterOptions("W|v3"));
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, new ModelReaderWriterOptions("W|v3"));
             }
             if (options.Format != "W" && Optional.IsDefined(Location))
             {
@@ -129,13 +129,13 @@ namespace MgmtMockAndSample
             {
                 return null;
             }
-            Azure.ResourceManager.Models.ManagedServiceIdentity identity = default;
+            ManagedServiceIdentity identity = default;
             AzureLocation? location = default;
             IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Azure.ResourceManager.Models.SystemData systemData = default;
+            SystemData systemData = default;
             DiskEncryptionSetType? encryptionType = default;
             KeyForDiskEncryptionSet activeKey = default;
             IReadOnlyList<KeyForDiskEncryptionSet> previousKeys = default;
@@ -154,7 +154,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    identity = ModelReaderWriter.Read<Azure.ResourceManager.Models.ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default);
+                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("location"u8))
@@ -201,7 +201,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<Azure.ResourceManager.Models.SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

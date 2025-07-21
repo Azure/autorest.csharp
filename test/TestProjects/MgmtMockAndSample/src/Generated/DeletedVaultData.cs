@@ -63,7 +63,7 @@ namespace MgmtMockAndSample
         /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> Properties of the vault. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeletedVaultData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, DeletedVaultProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal DeletedVaultData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DeletedVaultProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Properties = properties;
             _serializedAdditionalRawData = serializedAdditionalRawData;

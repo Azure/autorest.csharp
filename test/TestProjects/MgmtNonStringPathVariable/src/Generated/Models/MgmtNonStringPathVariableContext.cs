@@ -15,11 +15,10 @@ namespace MgmtNonStringPathVariable
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
     [ModelReaderWriterBuildable(typeof(BarPatch))]
-    [ModelReaderWriterBuildable(typeof(BarProperties))]
-    [ModelReaderWriterBuildable(typeof(FakeListResult))]
+    [ModelReaderWriterBuildable(typeof(BarResource))]
     [ModelReaderWriterBuildable(typeof(FakePatch))]
     [ModelReaderWriterBuildable(typeof(FakeProperties))]
-    [ModelReaderWriterBuildable(typeof(MgmtNonStringPathVariableResourceData))]
+    [ModelReaderWriterBuildable(typeof(FakeResource))]
     [ModelReaderWriterBuildable(typeof(UpdateResource))]
     public partial class MgmtNonStringPathVariableContext : ModelReaderWriterContext
     {

@@ -54,7 +54,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                ((IJsonModel<Azure.ResourceManager.Models.ManagedServiceIdentity>)Identity).Write(writer, new ModelReaderWriterOptions("W|v3"));
+                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, new ModelReaderWriterOptions("W|v3"));
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -96,7 +96,7 @@ namespace MgmtMockAndSample.Models
             AzureLocation location = default;
             IDictionary<string, string> tags = default;
             VaultProperties properties = default;
-            Azure.ResourceManager.Models.ManagedServiceIdentity identity = default;
+            ManagedServiceIdentity identity = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -131,7 +131,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    identity = ModelReaderWriter.Read<Azure.ResourceManager.Models.ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default);
+                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (options.Format != "W")

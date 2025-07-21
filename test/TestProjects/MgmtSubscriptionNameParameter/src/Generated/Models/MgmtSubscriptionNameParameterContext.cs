@@ -17,11 +17,9 @@ namespace MgmtSubscriptionNameParameter
     [ModelReaderWriterBuildable(typeof(ErrorAdditionalInfo))]
     [ModelReaderWriterBuildable(typeof(ErrorResponse))]
     [ModelReaderWriterBuildable(typeof(ErrorResponseError))]
-    [ModelReaderWriterBuildable(typeof(MgmtSubscriptionNameParameterResourceData))]
     [ModelReaderWriterBuildable(typeof(SBClientAffineProperties))]
     [ModelReaderWriterBuildable(typeof(SBSubscriptionListResult))]
-    [ModelReaderWriterBuildable(typeof(SystemData))]
-    [ModelReaderWriterBuildable(typeof(TrackedResource))]
+    [ModelReaderWriterBuildable(typeof(SBSubscriptionResource))]
     public partial class MgmtSubscriptionNameParameterContext : ModelReaderWriterContext
     {
     }

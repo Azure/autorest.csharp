@@ -64,7 +64,7 @@ namespace MgmtParamOrdering.Models
         /// <param name="instanceId"> remove some properties to simplify; The virtual machine instance ID. </param>
         /// <param name="zones"> The virtual machine zones. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetVM(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, IReadOnlyList<string> zones, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
+        internal VirtualMachineScaleSetVM(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, IReadOnlyList<string> zones, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             InstanceId = instanceId;
             Zones = zones;

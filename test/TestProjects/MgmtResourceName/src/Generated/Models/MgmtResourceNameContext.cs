@@ -14,12 +14,12 @@ namespace MgmtResourceName
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(DiskListResult))]
-    [ModelReaderWriterBuildable(typeof(DisplayResourceListResult))]
-    [ModelReaderWriterBuildable(typeof(MachineListResult))]
-    [ModelReaderWriterBuildable(typeof(MemoryResourceListResult))]
-    [ModelReaderWriterBuildable(typeof(MgmtResourceNameResourceData))]
-    [ModelReaderWriterBuildable(typeof(NetworkResourceListResult))]
+    [ModelReaderWriterBuildable(typeof(Disk))]
+    [ModelReaderWriterBuildable(typeof(DisplayResource))]
+    [ModelReaderWriterBuildable(typeof(MachineResource))]
+    [ModelReaderWriterBuildable(typeof(Memory))]
+    [ModelReaderWriterBuildable(typeof(NetworkResource))]
+    [ModelReaderWriterBuildable(typeof(ProviderOperationResource))]
     [ModelReaderWriterBuildable(typeof(ProviderOperationsMetadataListResult))]
     [ModelReaderWriterBuildable(typeof(ResourceOperation))]
     [ModelReaderWriterBuildable(typeof(ResourceType))]

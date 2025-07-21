@@ -14,15 +14,12 @@ namespace MgmtLRO
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(BarListResult))]
     [ModelReaderWriterBuildable(typeof(BarPatch))]
-    [ModelReaderWriterBuildable(typeof(BarProperties))]
-    [ModelReaderWriterBuildable(typeof(FakeListResult))]
+    [ModelReaderWriterBuildable(typeof(BarResource))]
     [ModelReaderWriterBuildable(typeof(FakePatch))]
     [ModelReaderWriterBuildable(typeof(FakePostResult))]
-    [ModelReaderWriterBuildable(typeof(FakePostResultProperties))]
     [ModelReaderWriterBuildable(typeof(FakeProperties))]
-    [ModelReaderWriterBuildable(typeof(MgmtLROResourceData))]
+    [ModelReaderWriterBuildable(typeof(FakeResource))]
     [ModelReaderWriterBuildable(typeof(UpdateResource))]
     public partial class MgmtLROContext : ModelReaderWriterContext
     {

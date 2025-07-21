@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 
@@ -59,6 +60,12 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             var buildableTypes = new HashSet<CSharpType>(new CSharpTypeNameComparer());
             var visitedTypes = new HashSet<CSharpType>(new CSharpTypeNameComparer());
 
+            // for all Resource types, just add them directly to buildableTypes
+            foreach (var resource in models.OfType<Resource>())
+            {
+                buildableTypes.Add(resource.Type);
+            }
+
             var modelDictionary = models.OfType<SerializableObjectType>().ToDictionary(m => m.Type, m => m, new CSharpTypeNameComparer());
 
             foreach (var model in modelDictionary.Values)
@@ -77,7 +84,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
 
             visitedTypes.Add(type);
 
-            // Check if this model implements IPersistableModel
+            // Check if this model implements IJsonmodel or IPersistableModel
             if (ImplementsIPersistableModel(type, modelDictionary, out var model))
             {
                 buildableTypes.Add(type);

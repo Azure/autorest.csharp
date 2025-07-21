@@ -71,7 +71,7 @@ namespace MgmtMockAndSample
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
         /// <param name="sku"> SKU details. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal MhsmPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string etag, Azure.ResourceManager.Resources.Models.SubResource privateEndpoint, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState, ManagedHsmSku sku, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
+        internal MhsmPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string etag, Azure.ResourceManager.Resources.Models.SubResource privateEndpoint, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState, ManagedHsmSku sku, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Etag = etag;
             PrivateEndpoint = privateEndpoint;

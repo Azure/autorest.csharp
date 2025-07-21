@@ -46,7 +46,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(ExtendedLocation))
             {
                 writer.WritePropertyName("extendedLocation"u8);
-                ((IJsonModel<Azure.ResourceManager.Resources.Models.ExtendedLocation>)ExtendedLocation).Write(writer, options);
+                ((IJsonModel<ExtendedLocation>)ExtendedLocation).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -202,7 +202,7 @@ namespace AzureSample.ResourceManager.Storage.Models
             AzureSampleResourceManagerStorageSku sku = default;
             AzureSampleResourceManagerStorageKind kind = default;
             AzureLocation location = default;
-            Azure.ResourceManager.Resources.Models.ExtendedLocation extendedLocation = default;
+            ExtendedLocation extendedLocation = default;
             IDictionary<string, string> tags = default;
             ManagedServiceIdentity identity = default;
             PublicNetworkAccess? publicNetworkAccess = default;
@@ -249,7 +249,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    extendedLocation = ModelReaderWriter.Read<Azure.ResourceManager.Resources.Models.ExtendedLocation>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AzureSampleResourceManagerStorageContext.Default);
+                    extendedLocation = ModelReaderWriter.Read<ExtendedLocation>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AzureSampleResourceManagerStorageContext.Default);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

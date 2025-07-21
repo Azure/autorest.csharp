@@ -44,7 +44,7 @@ namespace AzureSample.ResourceManager.Sample
             if (Optional.IsDefined(ExtendedLocation))
             {
                 writer.WritePropertyName("extendedLocation"u8);
-                ((IJsonModel<Azure.ResourceManager.Resources.Models.ExtendedLocation>)ExtendedLocation).Write(writer, options);
+                ((IJsonModel<ExtendedLocation>)ExtendedLocation).Write(writer, options);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -111,7 +111,7 @@ namespace AzureSample.ResourceManager.Sample
             {
                 return null;
             }
-            Azure.ResourceManager.Resources.Models.ExtendedLocation extendedLocation = default;
+            ExtendedLocation extendedLocation = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
@@ -133,7 +133,7 @@ namespace AzureSample.ResourceManager.Sample
                     {
                         continue;
                     }
-                    extendedLocation = ModelReaderWriter.Read<Azure.ResourceManager.Resources.Models.ExtendedLocation>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AzureSampleResourceManagerSampleContext.Default);
+                    extendedLocation = ModelReaderWriter.Read<ExtendedLocation>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AzureSampleResourceManagerSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

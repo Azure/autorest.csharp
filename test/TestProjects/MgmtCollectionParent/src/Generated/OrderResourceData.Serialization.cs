@@ -91,7 +91,7 @@ namespace MgmtCollectionParent
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Azure.ResourceManager.Models.SystemData systemData = default;
+            SystemData systemData = default;
             IReadOnlyList<string> orderItemIds = default;
             StageDetails currentStage = default;
             IReadOnlyList<StageDetails> orderStageHistory = default;
@@ -120,7 +120,7 @@ namespace MgmtCollectionParent
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<Azure.ResourceManager.Models.SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtCollectionParentContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtCollectionParentContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

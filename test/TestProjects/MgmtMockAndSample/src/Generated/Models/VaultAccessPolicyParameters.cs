@@ -65,7 +65,7 @@ namespace MgmtMockAndSample.Models
         /// <param name="location"> The resource type of the access policy. </param>
         /// <param name="properties"> Properties of the access policy. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal VaultAccessPolicyParameters(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, AzureLocation? location, VaultAccessPolicyProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal VaultAccessPolicyParameters(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, AzureLocation? location, VaultAccessPolicyProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Properties = properties;

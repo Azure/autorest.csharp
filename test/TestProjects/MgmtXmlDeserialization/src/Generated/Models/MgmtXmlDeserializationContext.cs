@@ -15,8 +15,8 @@ namespace MgmtXmlDeserialization
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
     [ModelReaderWriterBuildable(typeof(ErrorResponse))]
-    [ModelReaderWriterBuildable(typeof(MgmtXmlDeserializationResourceData))]
     [ModelReaderWriterBuildable(typeof(XmlCollection))]
+    [ModelReaderWriterBuildable(typeof(XmlInstanceResource))]
     public partial class MgmtXmlDeserializationContext : ModelReaderWriterContext
     {
     }

@@ -26,7 +26,7 @@ namespace MgmtTypeSpec.Models
         /// <param name="properties"> The resource-specific properties for this resource. </param>
         /// <param name="identity"> The managed service identities assigned to this resource. </param>
         /// <returns> A new <see cref="Models.MgmtTypeSpecPrivateLinkResourceData"/> instance for mocking. </returns>
-        public static MgmtTypeSpecPrivateLinkResourceData MgmtTypeSpecPrivateLinkResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, Azure.ResourceManager.Models.SystemData systemData = null, MgmtTypeSpecPrivateLinkResourceProperties properties = null, Azure.ResourceManager.Models.ManagedServiceIdentity identity = null)
+        public static MgmtTypeSpecPrivateLinkResourceData MgmtTypeSpecPrivateLinkResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, MgmtTypeSpecPrivateLinkResourceProperties properties = null, ManagedServiceIdentity identity = null)
         {
             return new MgmtTypeSpecPrivateLinkResourceData(
                 id,
@@ -89,7 +89,7 @@ namespace MgmtTypeSpec.Models
         /// <param name="properties"> The resource-specific properties for this resource. </param>
         /// <param name="extendedLocation"></param>
         /// <returns> A new <see cref="MgmtTypeSpec.FooData"/> instance for mocking. </returns>
-        public static FooData FooData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, Azure.ResourceManager.Models.SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, FooProperties properties = null, Azure.ResourceManager.Resources.Models.ExtendedLocation extendedLocation = null)
+        public static FooData FooData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, FooProperties properties = null, ExtendedLocation extendedLocation = null)
         {
             tags ??= new Dictionary<string, string>();
 

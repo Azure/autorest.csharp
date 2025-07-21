@@ -66,7 +66,7 @@ namespace AzureSample.ResourceManager.Storage
         /// <param name="connectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="provisioningState"> The provisioning state of the private endpoint connection resource. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal AzureSampleResourceManagerStoragePrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, SubResource privateEndpoint, AzureSampleResourceManagerStoragePrivateLinkServiceConnectionState connectionState, AzureSampleResourceManagerStoragePrivateEndpointConnectionProvisioningState? provisioningState, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal AzureSampleResourceManagerStoragePrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, SubResource privateEndpoint, AzureSampleResourceManagerStoragePrivateLinkServiceConnectionState connectionState, AzureSampleResourceManagerStoragePrivateEndpointConnectionProvisioningState? provisioningState, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             PrivateEndpoint = privateEndpoint;
             ConnectionState = connectionState;

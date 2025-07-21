@@ -17,7 +17,6 @@ namespace MgmtHierarchicalNonResource
     [ModelReaderWriterBuildable(typeof(ApiError))]
     [ModelReaderWriterBuildable(typeof(ApiErrorBase))]
     [ModelReaderWriterBuildable(typeof(CloudError))]
-    [ModelReaderWriterBuildable(typeof(Disallowed))]
     [ModelReaderWriterBuildable(typeof(GalleryImageFeature))]
     [ModelReaderWriterBuildable(typeof(GalleryImageIdentifier))]
     [ModelReaderWriterBuildable(typeof(ImagePurchasePlan))]
@@ -31,6 +30,7 @@ namespace MgmtHierarchicalNonResource
     [ModelReaderWriterBuildable(typeof(SharedGalleryImageVersion))]
     [ModelReaderWriterBuildable(typeof(SharedGalleryImageVersionList))]
     [ModelReaderWriterBuildable(typeof(SharedGalleryList))]
+    [ModelReaderWriterBuildable(typeof(SharedGalleryResource))]
     public partial class MgmtHierarchicalNonResourceContext : ModelReaderWriterContext
     {
     }

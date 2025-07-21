@@ -14,14 +14,13 @@ namespace MgmtSupersetInheritance
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(SupersetModel1ListResult))]
+    [ModelReaderWriterBuildable(typeof(SupersetModel1Resource))]
     [ModelReaderWriterBuildable(typeof(SupersetModel2))]
     [ModelReaderWriterBuildable(typeof(SupersetModel3))]
-    [ModelReaderWriterBuildable(typeof(SupersetModel4ListResult))]
+    [ModelReaderWriterBuildable(typeof(SupersetModel4Resource))]
     [ModelReaderWriterBuildable(typeof(SupersetModel5))]
-    [ModelReaderWriterBuildable(typeof(SupersetModel6ListResult))]
-    [ModelReaderWriterBuildable(typeof(SupersetModel6SystemData))]
-    [ModelReaderWriterBuildable(typeof(SupersetModel7ListResult))]
+    [ModelReaderWriterBuildable(typeof(SupersetModel6Resource))]
+    [ModelReaderWriterBuildable(typeof(SupersetModel7Resource))]
     [ModelReaderWriterBuildable(typeof(SupersetModel7SystemData))]
     public partial class MgmtSupersetInheritanceContext : ModelReaderWriterContext
     {

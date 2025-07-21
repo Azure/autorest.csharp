@@ -151,7 +151,7 @@ namespace MgmtSubscriptionNameParameter
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Azure.ResourceManager.Models.SystemData systemData = default;
+            SystemData systemData = default;
             long? messageCount = default;
             DateTimeOffset? createdAt = default;
             DateTimeOffset? accessedAt = default;
@@ -194,7 +194,7 @@ namespace MgmtSubscriptionNameParameter
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<Azure.ResourceManager.Models.SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtSubscriptionNameParameterContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtSubscriptionNameParameterContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

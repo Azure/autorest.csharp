@@ -16,12 +16,15 @@ namespace MgmtParent
     /// </summary>
     [ModelReaderWriterBuildable(typeof(AvailabilitySetListResult))]
     [ModelReaderWriterBuildable(typeof(AvailabilitySetPatch))]
+    [ModelReaderWriterBuildable(typeof(AvailabilitySetResource))]
     [ModelReaderWriterBuildable(typeof(DedicatedHostGroupListResult))]
     [ModelReaderWriterBuildable(typeof(DedicatedHostGroupPatch))]
+    [ModelReaderWriterBuildable(typeof(DedicatedHostGroupResource))]
     [ModelReaderWriterBuildable(typeof(DedicatedHostListResult))]
     [ModelReaderWriterBuildable(typeof(DedicatedHostPatch))]
-    [ModelReaderWriterBuildable(typeof(MgmtParentResourceData))]
+    [ModelReaderWriterBuildable(typeof(DedicatedHostResource))]
     [ModelReaderWriterBuildable(typeof(UpdateResource))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineExtensionImageResource))]
     public partial class MgmtParentContext : ModelReaderWriterContext
     {
     }

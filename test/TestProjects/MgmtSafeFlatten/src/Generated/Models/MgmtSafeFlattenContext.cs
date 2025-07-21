@@ -18,14 +18,10 @@ namespace MgmtSafeFlatten
     [ModelReaderWriterBuildable(typeof(LayerOneBaseType))]
     [ModelReaderWriterBuildable(typeof(LayerOneFooType))]
     [ModelReaderWriterBuildable(typeof(LayerOneProperties))]
-    [ModelReaderWriterBuildable(typeof(LayerOneSingle))]
-    [ModelReaderWriterBuildable(typeof(LayerOneSingleConflict))]
-    [ModelReaderWriterBuildable(typeof(LayerTwoSingle))]
-    [ModelReaderWriterBuildable(typeof(MgmtSafeFlattenResourceData))]
     [ModelReaderWriterBuildable(typeof(TypeFour))]
-    [ModelReaderWriterBuildable(typeof(TypeOneListResult))]
+    [ModelReaderWriterBuildable(typeof(TypeOneResource))]
     [ModelReaderWriterBuildable(typeof(TypeThree))]
-    [ModelReaderWriterBuildable(typeof(TypeTwoListResult))]
+    [ModelReaderWriterBuildable(typeof(TypeTwoResource))]
     [ModelReaderWriterBuildable(typeof(UnknownLayerOneBaseType))]
     public partial class MgmtSafeFlattenContext : ModelReaderWriterContext
     {

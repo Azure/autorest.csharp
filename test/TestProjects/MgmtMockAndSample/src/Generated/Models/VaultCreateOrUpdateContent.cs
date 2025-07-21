@@ -66,7 +66,7 @@ namespace MgmtMockAndSample.Models
         /// <param name="properties"> Properties of the vault. </param>
         /// <param name="identity"> Identity for the virtual machine. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal VaultCreateOrUpdateContent(AzureLocation location, IDictionary<string, string> tags, VaultProperties properties, Azure.ResourceManager.Models.ManagedServiceIdentity identity, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal VaultCreateOrUpdateContent(AzureLocation location, IDictionary<string, string> tags, VaultProperties properties, ManagedServiceIdentity identity, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Location = location;
             Tags = tags;
@@ -87,6 +87,6 @@ namespace MgmtMockAndSample.Models
         /// <summary> Properties of the vault. </summary>
         public VaultProperties Properties { get; }
         /// <summary> Identity for the virtual machine. </summary>
-        public Azure.ResourceManager.Models.ManagedServiceIdentity Identity { get; set; }
+        public ManagedServiceIdentity Identity { get; set; }
     }
 }

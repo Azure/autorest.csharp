@@ -68,7 +68,7 @@ namespace AzureSample.ResourceManager.Storage
         /// <param name="keyVaultProperties"> The key vault properties for the encryption scope. This is a required field if encryption scope 'source' attribute is set to 'Microsoft.KeyVault'. </param>
         /// <param name="requireInfrastructureEncryption"> A boolean indicating whether or not the service applies a secondary layer of encryption with platform managed keys for data at rest. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal EncryptionScopeData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, EncryptionScopeSource? source, EncryptionScopeState? state, DateTimeOffset? createdOn, DateTimeOffset? lastModifiedOn, EncryptionScopeKeyVaultProperties keyVaultProperties, bool? requireInfrastructureEncryption, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal EncryptionScopeData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, EncryptionScopeSource? source, EncryptionScopeState? state, DateTimeOffset? createdOn, DateTimeOffset? lastModifiedOn, EncryptionScopeKeyVaultProperties keyVaultProperties, bool? requireInfrastructureEncryption, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Source = source;
             State = state;

@@ -64,7 +64,7 @@ namespace AzureSample.ResourceManager.Storage
         /// <param name="lastModifiedOn"> Returns the date and time the ManagementPolicies was last modified. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ManagementPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, DateTimeOffset? lastModifiedOn, ManagementPolicySchema policy, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal ManagementPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DateTimeOffset? lastModifiedOn, ManagementPolicySchema policy, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             LastModifiedOn = lastModifiedOn;
             Policy = policy;

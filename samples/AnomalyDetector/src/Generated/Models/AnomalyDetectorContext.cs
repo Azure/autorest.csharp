@@ -16,7 +16,6 @@ namespace AnomalyDetector
     /// </summary>
     [ModelReaderWriterBuildable(typeof(AlignPolicy))]
     [ModelReaderWriterBuildable(typeof(AnomalyDetectionModel))]
-    [ModelReaderWriterBuildable(typeof(AnomalyDetectorError))]
     [ModelReaderWriterBuildable(typeof(AnomalyInterpretation))]
     [ModelReaderWriterBuildable(typeof(AnomalyState))]
     [ModelReaderWriterBuildable(typeof(AnomalyValue))]
@@ -24,7 +23,6 @@ namespace AnomalyDetector
     [ModelReaderWriterBuildable(typeof(DiagnosticsInfo))]
     [ModelReaderWriterBuildable(typeof(ErrorResponse))]
     [ModelReaderWriterBuildable(typeof(ModelInfo))]
-    [ModelReaderWriterBuildable(typeof(ModelList))]
     [ModelReaderWriterBuildable(typeof(ModelState))]
     [ModelReaderWriterBuildable(typeof(MultivariateBatchDetectionOptions))]
     [ModelReaderWriterBuildable(typeof(MultivariateBatchDetectionResultSummary))]

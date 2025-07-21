@@ -15,24 +15,16 @@ namespace MgmtSupersetFlattenInheritance
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
     [ModelReaderWriterBuildable(typeof(CustomModel1))]
-    [ModelReaderWriterBuildable(typeof(CustomModel1ListResult))]
     [ModelReaderWriterBuildable(typeof(CustomModel2))]
-    [ModelReaderWriterBuildable(typeof(CustomModel2ListResult))]
     [ModelReaderWriterBuildable(typeof(NonResourceModel1))]
-    [ModelReaderWriterBuildable(typeof(ResourceModel1ListResult))]
+    [ModelReaderWriterBuildable(typeof(ResourceModel1Resource))]
     [ModelReaderWriterBuildable(typeof(ResourceModel2))]
-    [ModelReaderWriterBuildable(typeof(ResourceModel2ListResult))]
     [ModelReaderWriterBuildable(typeof(SubResourceModel1))]
-    [ModelReaderWriterBuildable(typeof(SubResourceModel1ListResult))]
     [ModelReaderWriterBuildable(typeof(SubResourceModel2))]
-    [ModelReaderWriterBuildable(typeof(SubResourceModel2ListResult))]
-    [ModelReaderWriterBuildable(typeof(TrackedResourceModel1ListResult))]
+    [ModelReaderWriterBuildable(typeof(TrackedResourceModel1Resource))]
     [ModelReaderWriterBuildable(typeof(TrackedResourceModel2))]
-    [ModelReaderWriterBuildable(typeof(TrackedResourceModel2ListResult))]
     [ModelReaderWriterBuildable(typeof(WritableSubResourceModel1))]
-    [ModelReaderWriterBuildable(typeof(WritableSubResourceModel1ListResult))]
     [ModelReaderWriterBuildable(typeof(WritableSubResourceModel2))]
-    [ModelReaderWriterBuildable(typeof(WritableSubResourceModel2ListResult))]
     public partial class MgmtSupersetFlattenInheritanceContext : ModelReaderWriterContext
     {
     }

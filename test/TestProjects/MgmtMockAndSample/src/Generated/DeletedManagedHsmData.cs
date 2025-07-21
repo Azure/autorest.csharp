@@ -60,7 +60,7 @@ namespace MgmtMockAndSample
         /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> Properties of the deleted managed HSM. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeletedManagedHsmData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, DeletedManagedHsmProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal DeletedManagedHsmData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DeletedManagedHsmProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Properties = properties;
             _serializedAdditionalRawData = serializedAdditionalRawData;

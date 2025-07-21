@@ -14,19 +14,14 @@ namespace MgmtExactMatchFlattenInheritance
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel1ListResult))]
+    [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel1Resource))]
     [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel2))]
-    [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel2ListResult))]
     [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel3))]
-    [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel3ListResult))]
     [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel4))]
-    [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel4ListResult))]
     [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel5))]
-    [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel5ListResult))]
-    [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel6))]
     [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel7))]
-    [ModelReaderWriterBuildable(typeof(CustomModel2ListResult))]
-    [ModelReaderWriterBuildable(typeof(CustomModel3ListResult))]
+    [ModelReaderWriterBuildable(typeof(CustomModel2Resource))]
+    [ModelReaderWriterBuildable(typeof(CustomModel3Resource))]
     [ModelReaderWriterBuildable(typeof(SubResourceModel))]
     [ModelReaderWriterBuildable(typeof(TrackedResourceModel))]
     public partial class MgmtExactMatchFlattenInheritanceContext : ModelReaderWriterContext

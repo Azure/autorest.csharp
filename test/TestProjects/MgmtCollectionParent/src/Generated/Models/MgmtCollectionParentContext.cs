@@ -16,11 +16,9 @@ namespace MgmtCollectionParent
     /// </summary>
     [ModelReaderWriterBuildable(typeof(ErrorAdditionalInfo))]
     [ModelReaderWriterBuildable(typeof(ErrorResponse))]
-    [ModelReaderWriterBuildable(typeof(MgmtCollectionParentResourceData))]
+    [ModelReaderWriterBuildable(typeof(OrderResource))]
     [ModelReaderWriterBuildable(typeof(OrderResourceList))]
-    [ModelReaderWriterBuildable(typeof(ProxyResource))]
     [ModelReaderWriterBuildable(typeof(StageDetails))]
-    [ModelReaderWriterBuildable(typeof(SystemData))]
     public partial class MgmtCollectionParentContext : ModelReaderWriterContext
     {
     }

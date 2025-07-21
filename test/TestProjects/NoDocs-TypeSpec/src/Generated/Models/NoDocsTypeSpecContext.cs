@@ -22,7 +22,6 @@ namespace NoDocsTypeSpec
     [ModelReaderWriterBuildable(typeof(Extendible))]
     [ModelReaderWriterBuildable(typeof(Extension))]
     [ModelReaderWriterBuildable(typeof(Friend))]
-    [ModelReaderWriterBuildable(typeof(ModelForUnion))]
     [ModelReaderWriterBuildable(typeof(ModelWithProjectedEnum))]
     [ModelReaderWriterBuildable(typeof(ModelWithRequiredNullableProperties))]
     [ModelReaderWriterBuildable(typeof(ProjectedModel))]
