@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtExactMatchInheritance.Models;
 
 namespace MgmtExactMatchInheritance
 {
@@ -13,6 +14,24 @@ namespace MgmtExactMatchInheritance
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ExactMatchModel10))]
+    [ModelReaderWriterBuildable(typeof(ExactMatchModel11))]
+    [ModelReaderWriterBuildable(typeof(ExactMatchModel1ListResult))]
+    [ModelReaderWriterBuildable(typeof(ExactMatchModel1Type18))]
+    [ModelReaderWriterBuildable(typeof(ExactMatchModel1Type19))]
+    [ModelReaderWriterBuildable(typeof(ExactMatchModel2))]
+    [ModelReaderWriterBuildable(typeof(ExactMatchModel3))]
+    [ModelReaderWriterBuildable(typeof(ExactMatchModel3ListResult))]
+    [ModelReaderWriterBuildable(typeof(ExactMatchModel4))]
+    [ModelReaderWriterBuildable(typeof(ExactMatchModel5ListResult))]
+    [ModelReaderWriterBuildable(typeof(ExactMatchModel6))]
+    [ModelReaderWriterBuildable(typeof(ExactMatchModel7))]
+    [ModelReaderWriterBuildable(typeof(ExactMatchModel8))]
+    [ModelReaderWriterBuildable(typeof(ExactMatchModel9))]
+    [ModelReaderWriterBuildable(typeof(LinkedServiceReference))]
+    [ModelReaderWriterBuildable(typeof(SecretBase))]
+    [ModelReaderWriterBuildable(typeof(SeparateClass))]
+    [ModelReaderWriterBuildable(typeof(UnknownSecretBase))]
     public partial class MgmtExactMatchInheritanceContext : ModelReaderWriterContext
     {
     }

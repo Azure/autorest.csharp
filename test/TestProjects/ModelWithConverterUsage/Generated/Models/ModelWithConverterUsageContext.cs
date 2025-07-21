@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using ModelWithConverterUsage.Models;
 
 namespace ModelWithConverterUsage
 {
@@ -13,6 +14,11 @@ namespace ModelWithConverterUsage
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(InputModel))]
+    [ModelReaderWriterBuildable(typeof(ModelClass))]
+    [ModelReaderWriterBuildable(typeof(ModelStruct))]
+    [ModelReaderWriterBuildable(typeof(OutputModel))]
+    [ModelReaderWriterBuildable(typeof(Product))]
     public partial class ModelWithConverterUsageContext : ModelReaderWriterContext
     {
     }

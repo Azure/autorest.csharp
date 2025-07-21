@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtExactMatchInheritance.Models
@@ -21,8 +23,9 @@ namespace MgmtExactMatchInheritance.Models
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="bar"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="new"></param>
-        internal ExactMatchModel3(ResourceIdentifier id, string name, string bar, string @new) : base(id, name, bar)
+        internal ExactMatchModel3(ResourceIdentifier id, string name, string bar, IDictionary<string, BinaryData> serializedAdditionalRawData, string @new) : base(id, name, bar, serializedAdditionalRawData)
         {
             New = @new;
         }

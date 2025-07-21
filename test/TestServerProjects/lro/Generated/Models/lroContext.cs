@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using lro.Models;
 
 namespace lro
 {
@@ -13,6 +14,14 @@ namespace lro
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(CloudError))]
+    [ModelReaderWriterBuildable(typeof(Models.OperationResult))]
+    [ModelReaderWriterBuildable(typeof(OperationResultError))]
+    [ModelReaderWriterBuildable(typeof(Product))]
+    [ModelReaderWriterBuildable(typeof(Resource))]
+    [ModelReaderWriterBuildable(typeof(Sku))]
+    [ModelReaderWriterBuildable(typeof(SubProduct))]
+    [ModelReaderWriterBuildable(typeof(SubResource))]
     public partial class lroContext : ModelReaderWriterContext
     {
     }

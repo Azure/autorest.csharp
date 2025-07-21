@@ -5,15 +5,173 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class EffectiveNetworkSecurityRule
+    public partial class EffectiveNetworkSecurityRule : IUtf8JsonSerializable, IJsonModel<EffectiveNetworkSecurityRule>
     {
-        internal static EffectiveNetworkSecurityRule DeserializeEffectiveNetworkSecurityRule(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EffectiveNetworkSecurityRule>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<EffectiveNetworkSecurityRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<EffectiveNetworkSecurityRule>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(EffectiveNetworkSecurityRule)} does not support writing '{format}' format.");
+            }
+
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(Protocol))
+            {
+                writer.WritePropertyName("protocol"u8);
+                writer.WriteStringValue(Protocol.Value.ToString());
+            }
+            if (Optional.IsDefined(SourcePortRange))
+            {
+                writer.WritePropertyName("sourcePortRange"u8);
+                writer.WriteStringValue(SourcePortRange);
+            }
+            if (Optional.IsDefined(DestinationPortRange))
+            {
+                writer.WritePropertyName("destinationPortRange"u8);
+                writer.WriteStringValue(DestinationPortRange);
+            }
+            if (Optional.IsCollectionDefined(SourcePortRanges))
+            {
+                writer.WritePropertyName("sourcePortRanges"u8);
+                writer.WriteStartArray();
+                foreach (var item in SourcePortRanges)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(DestinationPortRanges))
+            {
+                writer.WritePropertyName("destinationPortRanges"u8);
+                writer.WriteStartArray();
+                foreach (var item in DestinationPortRanges)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(SourceAddressPrefix))
+            {
+                writer.WritePropertyName("sourceAddressPrefix"u8);
+                writer.WriteStringValue(SourceAddressPrefix);
+            }
+            if (Optional.IsDefined(DestinationAddressPrefix))
+            {
+                writer.WritePropertyName("destinationAddressPrefix"u8);
+                writer.WriteStringValue(DestinationAddressPrefix);
+            }
+            if (Optional.IsCollectionDefined(SourceAddressPrefixes))
+            {
+                writer.WritePropertyName("sourceAddressPrefixes"u8);
+                writer.WriteStartArray();
+                foreach (var item in SourceAddressPrefixes)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(DestinationAddressPrefixes))
+            {
+                writer.WritePropertyName("destinationAddressPrefixes"u8);
+                writer.WriteStartArray();
+                foreach (var item in DestinationAddressPrefixes)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(ExpandedSourceAddressPrefix))
+            {
+                writer.WritePropertyName("expandedSourceAddressPrefix"u8);
+                writer.WriteStartArray();
+                foreach (var item in ExpandedSourceAddressPrefix)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(ExpandedDestinationAddressPrefix))
+            {
+                writer.WritePropertyName("expandedDestinationAddressPrefix"u8);
+                writer.WriteStartArray();
+                foreach (var item in ExpandedDestinationAddressPrefix)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(Access))
+            {
+                writer.WritePropertyName("access"u8);
+                writer.WriteStringValue(Access.Value.ToString());
+            }
+            if (Optional.IsDefined(Priority))
+            {
+                writer.WritePropertyName("priority"u8);
+                writer.WriteNumberValue(Priority.Value);
+            }
+            if (Optional.IsDefined(Direction))
+            {
+                writer.WritePropertyName("direction"u8);
+                writer.WriteStringValue(Direction.Value.ToString());
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+        }
+
+        EffectiveNetworkSecurityRule IJsonModel<EffectiveNetworkSecurityRule>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<EffectiveNetworkSecurityRule>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(EffectiveNetworkSecurityRule)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeEffectiveNetworkSecurityRule(document.RootElement, options);
+        }
+
+        internal static EffectiveNetworkSecurityRule DeserializeEffectiveNetworkSecurityRule(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -33,6 +191,8 @@ namespace Azure.Network.Management.Interface.Models
             SecurityRuleAccess? access = default;
             int? priority = default;
             SecurityRuleDirection? direction = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -180,7 +340,12 @@ namespace Azure.Network.Management.Interface.Models
                     direction = new SecurityRuleDirection(property.Value.GetString());
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new EffectiveNetworkSecurityRule(
                 name,
                 protocol,
@@ -196,8 +361,40 @@ namespace Azure.Network.Management.Interface.Models
                 expandedDestinationAddressPrefix ?? new ChangeTrackingList<string>(),
                 access,
                 priority,
-                direction);
+                direction,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<EffectiveNetworkSecurityRule>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<EffectiveNetworkSecurityRule>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, AzureNetworkManagementInterfaceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(EffectiveNetworkSecurityRule)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        EffectiveNetworkSecurityRule IPersistableModel<EffectiveNetworkSecurityRule>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<EffectiveNetworkSecurityRule>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeEffectiveNetworkSecurityRule(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(EffectiveNetworkSecurityRule)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<EffectiveNetworkSecurityRule>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -205,6 +402,14 @@ namespace Azure.Network.Management.Interface.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeEffectiveNetworkSecurityRule(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            return content;
         }
     }
 }

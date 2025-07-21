@@ -5,16 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace FlattenedParameters.Models
 {
-    internal partial class Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable
+    internal partial class Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable, IJsonModel<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema)} does not support writing '{format}' format.");
+            }
+
             writer.WritePropertyName("flattened"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(Required))
@@ -28,14 +48,124 @@ namespace FlattenedParameters.Models
                 writer.WriteStringValue(NonRequired);
             }
             writer.WriteEndObject();
-            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+        }
+
+        Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema IJsonModel<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePaths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(document.RootElement, options);
+        }
+
+        internal static Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema DeserializePaths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string required = default;
+            string nonRequired = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("flattened"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("required"u8))
+                        {
+                            required = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("non_required"u8))
+                        {
+                            nonRequired = property0.Value.GetString();
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
+            }
+            serializedAdditionalRawData = rawDataDictionary;
+            return new Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(required, nonRequired, serializedAdditionalRawData);
+        }
+
+        BinaryData IPersistableModel<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, FlattenedParametersContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema IPersistableModel<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializePaths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
+            return DeserializePaths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

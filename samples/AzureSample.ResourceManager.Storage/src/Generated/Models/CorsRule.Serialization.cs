@@ -5,17 +5,35 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace AzureSample.ResourceManager.Storage.Models
 {
-    public partial class CorsRule : IUtf8JsonSerializable
+    public partial class CorsRule : IUtf8JsonSerializable, IJsonModel<CorsRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CorsRule>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<CorsRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CorsRule>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(CorsRule)} does not support writing '{format}' format.");
+            }
+
             writer.WritePropertyName("allowedOrigins"u8);
             writer.WriteStartArray();
             foreach (var item in AllowedOrigins)
@@ -46,11 +64,39 @@ namespace AzureSample.ResourceManager.Storage.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
         }
 
-        internal static CorsRule DeserializeCorsRule(JsonElement element)
+        CorsRule IJsonModel<CorsRule>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<CorsRule>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(CorsRule)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCorsRule(document.RootElement, options);
+        }
+
+        internal static CorsRule DeserializeCorsRule(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -60,6 +106,8 @@ namespace AzureSample.ResourceManager.Storage.Models
             int maxAgeInSeconds = default;
             IList<string> exposedHeaders = default;
             IList<string> allowedHeaders = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("allowedOrigins"u8))
@@ -107,8 +155,50 @@ namespace AzureSample.ResourceManager.Storage.Models
                     allowedHeaders = array;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new CorsRule(allowedOrigins, allowedMethods, maxAgeInSeconds, exposedHeaders, allowedHeaders);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new CorsRule(
+                allowedOrigins,
+                allowedMethods,
+                maxAgeInSeconds,
+                exposedHeaders,
+                allowedHeaders,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<CorsRule>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CorsRule>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerStorageContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(CorsRule)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        CorsRule IPersistableModel<CorsRule>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CorsRule>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeCorsRule(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(CorsRule)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<CorsRule>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

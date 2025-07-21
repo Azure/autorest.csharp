@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtDiscriminator.Models;
 
 namespace MgmtDiscriminator
 {
@@ -13,6 +14,55 @@ namespace MgmtDiscriminator
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ArtifactList))]
+    [ModelReaderWriterBuildable(typeof(AzureResourceBase))]
+    [ModelReaderWriterBuildable(typeof(BaseModel))]
+    [ModelReaderWriterBuildable(typeof(CacheExpirationActionParameters))]
+    [ModelReaderWriterBuildable(typeof(CacheKeyQueryStringActionParameters))]
+    [ModelReaderWriterBuildable(typeof(Cat))]
+    [ModelReaderWriterBuildable(typeof(DeliveryRuleAction))]
+    [ModelReaderWriterBuildable(typeof(DeliveryRuleCacheExpirationAction))]
+    [ModelReaderWriterBuildable(typeof(DeliveryRuleCacheKeyQueryStringAction))]
+    [ModelReaderWriterBuildable(typeof(DeliveryRuleCondition))]
+    [ModelReaderWriterBuildable(typeof(DeliveryRuleListResult))]
+    [ModelReaderWriterBuildable(typeof(DeliveryRuleProperties))]
+    [ModelReaderWriterBuildable(typeof(DeliveryRuleQueryStringCondition))]
+    [ModelReaderWriterBuildable(typeof(DeliveryRuleRemoteAddressCondition))]
+    [ModelReaderWriterBuildable(typeof(DeliveryRuleRequestHeaderAction))]
+    [ModelReaderWriterBuildable(typeof(DeliveryRuleRequestMethodCondition))]
+    [ModelReaderWriterBuildable(typeof(DeliveryRuleResponseHeaderAction))]
+    [ModelReaderWriterBuildable(typeof(DeliveryRuleRouteConfigurationOverrideAction))]
+    [ModelReaderWriterBuildable(typeof(DerivedModel))]
+    [ModelReaderWriterBuildable(typeof(Dog))]
+    [ModelReaderWriterBuildable(typeof(ErrorAdditionalInfo))]
+    [ModelReaderWriterBuildable(typeof(ErrorResponse))]
+    [ModelReaderWriterBuildable(typeof(HeaderActionParameters))]
+    [ModelReaderWriterBuildable(typeof(OriginGroupOverride))]
+    [ModelReaderWriterBuildable(typeof(OriginGroupOverrideAction))]
+    [ModelReaderWriterBuildable(typeof(OriginGroupOverrideActionParameters))]
+    [ModelReaderWriterBuildable(typeof(Pet))]
+    [ModelReaderWriterBuildable(typeof(QueryStringMatchConditionParameters))]
+    [ModelReaderWriterBuildable(typeof(RemoteAddressMatchConditionParameters))]
+    [ModelReaderWriterBuildable(typeof(RequestMethodMatchConditionParameters))]
+    [ModelReaderWriterBuildable(typeof(ResourceReference))]
+    [ModelReaderWriterBuildable(typeof(RoleAssignmentArtifact))]
+    [ModelReaderWriterBuildable(typeof(RouteConfigurationOverrideActionParameters))]
+    [ModelReaderWriterBuildable(typeof(Shell))]
+    [ModelReaderWriterBuildable(typeof(Sku1))]
+    [ModelReaderWriterBuildable(typeof(Sku2))]
+    [ModelReaderWriterBuildable(typeof(TemplateArtifact))]
+    [ModelReaderWriterBuildable(typeof(Unflattened))]
+    [ModelReaderWriterBuildable(typeof(UnknownArtifact))]
+    [ModelReaderWriterBuildable(typeof(UnknownDeliveryRuleAction))]
+    [ModelReaderWriterBuildable(typeof(UnknownDeliveryRuleCondition))]
+    [ModelReaderWriterBuildable(typeof(UnknownPet))]
+    [ModelReaderWriterBuildable(typeof(UrlRedirectAction))]
+    [ModelReaderWriterBuildable(typeof(UrlRedirectActionParameters))]
+    [ModelReaderWriterBuildable(typeof(UrlRewriteAction))]
+    [ModelReaderWriterBuildable(typeof(UrlRewriteActionParameters))]
+    [ModelReaderWriterBuildable(typeof(UrlSigningAction))]
+    [ModelReaderWriterBuildable(typeof(UrlSigningActionParameters))]
+    [ModelReaderWriterBuildable(typeof(UrlSigningParamIdentifier))]
     public partial class MgmtDiscriminatorContext : ModelReaderWriterContext
     {
     }

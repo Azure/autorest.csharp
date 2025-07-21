@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtSingletonResource.Models;
 
 namespace MgmtSingletonResource
 {
@@ -13,6 +14,10 @@ namespace MgmtSingletonResource
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(CarListResult))]
+    [ModelReaderWriterBuildable(typeof(MgmtSingletonResourceResourceData))]
+    [ModelReaderWriterBuildable(typeof(ParentResourceListResult))]
+    [ModelReaderWriterBuildable(typeof(TrackedResource))]
     public partial class MgmtSingletonResourceContext : ModelReaderWriterContext
     {
     }

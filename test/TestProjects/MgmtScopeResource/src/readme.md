@@ -16,6 +16,7 @@ input-file:
   - $(this-folder)/../guestconfiguration.json
   - $(this-folder)/../consumption.json
 namespace: MgmtScopeResource
+use-model-reader-writer: true
 
 parameterized-scopes:
 - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}

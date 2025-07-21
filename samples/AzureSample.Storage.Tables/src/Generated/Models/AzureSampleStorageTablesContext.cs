@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using AzureSample.Storage.Tables.Models;
 
 namespace AzureSample.Storage.Tables
 {
@@ -13,6 +14,22 @@ namespace AzureSample.Storage.Tables
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(AccessPolicy))]
+    [ModelReaderWriterBuildable(typeof(CorsRule))]
+    [ModelReaderWriterBuildable(typeof(GeoReplication))]
+    [ModelReaderWriterBuildable(typeof(Logging))]
+    [ModelReaderWriterBuildable(typeof(Metrics))]
+    [ModelReaderWriterBuildable(typeof(QueryOptions))]
+    [ModelReaderWriterBuildable(typeof(RetentionPolicy))]
+    [ModelReaderWriterBuildable(typeof(SignedIdentifier))]
+    [ModelReaderWriterBuildable(typeof(StorageError))]
+    [ModelReaderWriterBuildable(typeof(StorageServiceProperties))]
+    [ModelReaderWriterBuildable(typeof(StorageServiceStats))]
+    [ModelReaderWriterBuildable(typeof(TableEntityQueryResult))]
+    [ModelReaderWriterBuildable(typeof(TableProperties))]
+    [ModelReaderWriterBuildable(typeof(TableQueryResult))]
+    [ModelReaderWriterBuildable(typeof(TableResponseProperties))]
+    [ModelReaderWriterBuildable(typeof(TableResult))]
     public partial class AzureSampleStorageTablesContext : ModelReaderWriterContext
     {
     }

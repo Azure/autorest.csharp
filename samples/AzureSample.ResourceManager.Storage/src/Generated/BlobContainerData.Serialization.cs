@@ -17,13 +17,55 @@ using AzureSample.ResourceManager.Storage.Models;
 
 namespace AzureSample.ResourceManager.Storage
 {
-    public partial class BlobContainerData : IUtf8JsonSerializable
+    public partial class BlobContainerData : IUtf8JsonSerializable, IJsonModel<BlobContainerData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BlobContainerData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<BlobContainerData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<BlobContainerData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(BlobContainerData)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
+            if (options.Format != "W" && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag.Value.ToString());
+            }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
+            if (options.Format != "W" && Optional.IsDefined(Version))
+            {
+                writer.WritePropertyName("version"u8);
+                writer.WriteStringValue(Version);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Deleted))
+            {
+                writer.WritePropertyName("deleted"u8);
+                writer.WriteBooleanValue(Deleted.Value);
+            }
+            if (options.Format != "W" && Optional.IsDefined(DeletedOn))
+            {
+                writer.WritePropertyName("deletedTime"u8);
+                writer.WriteStringValue(DeletedOn.Value, "O");
+            }
+            if (options.Format != "W" && Optional.IsDefined(RemainingRetentionDays))
+            {
+                writer.WritePropertyName("remainingRetentionDays"u8);
+                writer.WriteNumberValue(RemainingRetentionDays.Value);
+            }
             if (Optional.IsDefined(DefaultEncryptionScope))
             {
                 writer.WritePropertyName("defaultEncryptionScope"u8);
@@ -39,6 +81,26 @@ namespace AzureSample.ResourceManager.Storage
                 writer.WritePropertyName("publicAccess"u8);
                 writer.WriteStringValue(PublicAccess.Value.ToSerialString());
             }
+            if (options.Format != "W" && Optional.IsDefined(LastModifiedOn))
+            {
+                writer.WritePropertyName("lastModifiedTime"u8);
+                writer.WriteStringValue(LastModifiedOn.Value, "O");
+            }
+            if (options.Format != "W" && Optional.IsDefined(LeaseStatus))
+            {
+                writer.WritePropertyName("leaseStatus"u8);
+                writer.WriteStringValue(LeaseStatus.Value.ToString());
+            }
+            if (options.Format != "W" && Optional.IsDefined(LeaseState))
+            {
+                writer.WritePropertyName("leaseState"u8);
+                writer.WriteStringValue(LeaseState.Value.ToString());
+            }
+            if (options.Format != "W" && Optional.IsDefined(LeaseDuration))
+            {
+                writer.WritePropertyName("leaseDuration"u8);
+                writer.WriteStringValue(LeaseDuration.Value.ToString());
+            }
             if (Optional.IsCollectionDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
@@ -50,10 +112,30 @@ namespace AzureSample.ResourceManager.Storage
                 }
                 writer.WriteEndObject();
             }
+            if (options.Format != "W" && Optional.IsDefined(ImmutabilityPolicy))
+            {
+                writer.WritePropertyName("immutabilityPolicy"u8);
+                writer.WriteObjectValue(ImmutabilityPolicy, options);
+            }
+            if (options.Format != "W" && Optional.IsDefined(LegalHold))
+            {
+                writer.WritePropertyName("legalHold"u8);
+                writer.WriteObjectValue(LegalHold, options);
+            }
+            if (options.Format != "W" && Optional.IsDefined(HasLegalHold))
+            {
+                writer.WritePropertyName("hasLegalHold"u8);
+                writer.WriteBooleanValue(HasLegalHold.Value);
+            }
+            if (options.Format != "W" && Optional.IsDefined(HasImmutabilityPolicy))
+            {
+                writer.WritePropertyName("hasImmutabilityPolicy"u8);
+                writer.WriteBooleanValue(HasImmutabilityPolicy.Value);
+            }
             if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
-                writer.WriteObjectValue(ImmutableStorageWithVersioning);
+                writer.WriteObjectValue(ImmutableStorageWithVersioning, options);
             }
             if (Optional.IsDefined(EnableNfsV3RootSquash))
             {
@@ -66,11 +148,24 @@ namespace AzureSample.ResourceManager.Storage
                 writer.WriteBooleanValue(EnableNfsV3AllSquash.Value);
             }
             writer.WriteEndObject();
-            writer.WriteEndObject();
         }
 
-        internal static BlobContainerData DeserializeBlobContainerData(JsonElement element)
+        BlobContainerData IJsonModel<BlobContainerData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<BlobContainerData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(BlobContainerData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeBlobContainerData(document.RootElement, options);
+        }
+
+        internal static BlobContainerData DeserializeBlobContainerData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -79,7 +174,7 @@ namespace AzureSample.ResourceManager.Storage
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Azure.ResourceManager.Models.SystemData systemData = default;
             string version = default;
             bool? deleted = default;
             DateTimeOffset? deletedTime = default;
@@ -99,6 +194,8 @@ namespace AzureSample.ResourceManager.Storage
             ImmutableStorageWithVersioning immutableStorageWithVersioning = default;
             bool? enableNfsV3RootSquash = default;
             bool? enableNfsV3AllSquash = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -131,7 +228,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
+                    systemData = ModelReaderWriter.Read<Azure.ResourceManager.Models.SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -254,7 +351,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            immutabilityPolicy = ImmutabilityPolicyProperties.DeserializeImmutabilityPolicyProperties(property0.Value);
+                            immutabilityPolicy = ImmutabilityPolicyProperties.DeserializeImmutabilityPolicyProperties(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("legalHold"u8))
@@ -263,7 +360,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            legalHold = LegalHoldProperties.DeserializeLegalHoldProperties(property0.Value);
+                            legalHold = LegalHoldProperties.DeserializeLegalHoldProperties(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("hasLegalHold"u8))
@@ -290,7 +387,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            immutableStorageWithVersioning = ImmutableStorageWithVersioning.DeserializeImmutableStorageWithVersioning(property0.Value);
+                            immutableStorageWithVersioning = ImmutableStorageWithVersioning.DeserializeImmutableStorageWithVersioning(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("enableNfsV3RootSquash"u8))
@@ -314,7 +411,12 @@ namespace AzureSample.ResourceManager.Storage
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new BlobContainerData(
                 id,
                 name,
@@ -339,7 +441,39 @@ namespace AzureSample.ResourceManager.Storage
                 immutableStorageWithVersioning,
                 enableNfsV3RootSquash,
                 enableNfsV3AllSquash,
-                etag);
+                etag,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<BlobContainerData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<BlobContainerData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerStorageContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(BlobContainerData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        BlobContainerData IPersistableModel<BlobContainerData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<BlobContainerData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeBlobContainerData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(BlobContainerData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<BlobContainerData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

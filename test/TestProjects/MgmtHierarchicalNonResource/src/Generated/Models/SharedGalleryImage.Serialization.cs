@@ -6,15 +6,106 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    public partial class SharedGalleryImage
+    public partial class SharedGalleryImage : IUtf8JsonSerializable, IJsonModel<SharedGalleryImage>
     {
-        internal static SharedGalleryImage DeserializeSharedGalleryImage(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SharedGalleryImage>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<SharedGalleryImage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SharedGalleryImage>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(SharedGalleryImage)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(OSType))
+            {
+                writer.WritePropertyName("osType"u8);
+                writer.WriteStringValue(OSType.Value.ToSerialString());
+            }
+            if (Optional.IsDefined(OSState))
+            {
+                writer.WritePropertyName("osState"u8);
+                writer.WriteStringValue(OSState.Value.ToSerialString());
+            }
+            if (Optional.IsDefined(EndOfLifeOn))
+            {
+                writer.WritePropertyName("endOfLifeDate"u8);
+                writer.WriteStringValue(EndOfLifeOn.Value, "O");
+            }
+            if (Optional.IsDefined(Identifier))
+            {
+                writer.WritePropertyName("identifier"u8);
+                writer.WriteObjectValue(Identifier, options);
+            }
+            if (Optional.IsDefined(Recommended))
+            {
+                writer.WritePropertyName("recommended"u8);
+                writer.WriteObjectValue(Recommended, options);
+            }
+            if (Optional.IsDefined(Disallowed))
+            {
+                writer.WritePropertyName("disallowed"u8);
+                writer.WriteObjectValue(Disallowed, options);
+            }
+            if (Optional.IsDefined(HyperVGeneration))
+            {
+                writer.WritePropertyName("hyperVGeneration"u8);
+                writer.WriteStringValue(HyperVGeneration.Value.ToString());
+            }
+            if (Optional.IsCollectionDefined(Features))
+            {
+                writer.WritePropertyName("features"u8);
+                writer.WriteStartArray();
+                foreach (var item in Features)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(PurchasePlan))
+            {
+                writer.WritePropertyName("purchasePlan"u8);
+                writer.WriteObjectValue(PurchasePlan, options);
+            }
+            writer.WriteEndObject();
+        }
+
+        SharedGalleryImage IJsonModel<SharedGalleryImage>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SharedGalleryImage>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(SharedGalleryImage)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSharedGalleryImage(document.RootElement, options);
+        }
+
+        internal static SharedGalleryImage DeserializeSharedGalleryImage(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -31,6 +122,8 @@ namespace MgmtHierarchicalNonResource.Models
             IReadOnlyList<GalleryImageFeature> features = default;
             ImagePurchasePlan purchasePlan = default;
             string uniqueId = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -85,7 +178,7 @@ namespace MgmtHierarchicalNonResource.Models
                             {
                                 continue;
                             }
-                            identifier = GalleryImageIdentifier.DeserializeGalleryImageIdentifier(property0.Value);
+                            identifier = GalleryImageIdentifier.DeserializeGalleryImageIdentifier(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("recommended"u8))
@@ -94,7 +187,7 @@ namespace MgmtHierarchicalNonResource.Models
                             {
                                 continue;
                             }
-                            recommended = RecommendedMachineConfiguration.DeserializeRecommendedMachineConfiguration(property0.Value);
+                            recommended = RecommendedMachineConfiguration.DeserializeRecommendedMachineConfiguration(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("disallowed"u8))
@@ -103,7 +196,7 @@ namespace MgmtHierarchicalNonResource.Models
                             {
                                 continue;
                             }
-                            disallowed = Disallowed.DeserializeDisallowed(property0.Value);
+                            disallowed = Disallowed.DeserializeDisallowed(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("hyperVGeneration"u8))
@@ -124,7 +217,7 @@ namespace MgmtHierarchicalNonResource.Models
                             List<GalleryImageFeature> array = new List<GalleryImageFeature>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(GalleryImageFeature.DeserializeGalleryImageFeature(item));
+                                array.Add(GalleryImageFeature.DeserializeGalleryImageFeature(item, options));
                             }
                             features = array;
                             continue;
@@ -135,7 +228,7 @@ namespace MgmtHierarchicalNonResource.Models
                             {
                                 continue;
                             }
-                            purchasePlan = ImagePurchasePlan.DeserializeImagePurchasePlan(property0.Value);
+                            purchasePlan = ImagePurchasePlan.DeserializeImagePurchasePlan(property0.Value, options);
                             continue;
                         }
                     }
@@ -158,10 +251,16 @@ namespace MgmtHierarchicalNonResource.Models
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new SharedGalleryImage(
                 name,
                 location,
+                serializedAdditionalRawData,
                 uniqueId,
                 osType,
                 osState,
@@ -173,5 +272,36 @@ namespace MgmtHierarchicalNonResource.Models
                 features ?? new ChangeTrackingList<GalleryImageFeature>(),
                 purchasePlan);
         }
+
+        BinaryData IPersistableModel<SharedGalleryImage>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SharedGalleryImage>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtHierarchicalNonResourceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(SharedGalleryImage)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        SharedGalleryImage IPersistableModel<SharedGalleryImage>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SharedGalleryImage>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeSharedGalleryImage(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(SharedGalleryImage)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<SharedGalleryImage>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

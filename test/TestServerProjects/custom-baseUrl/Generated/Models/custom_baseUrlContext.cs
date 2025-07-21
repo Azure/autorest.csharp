@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using custom_baseUrl.Models;
 
 namespace custom_baseUrl
 {
@@ -13,6 +14,7 @@ namespace custom_baseUrl
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Error))]
     public partial class custom_baseUrlContext : ModelReaderWriterContext
     {
     }

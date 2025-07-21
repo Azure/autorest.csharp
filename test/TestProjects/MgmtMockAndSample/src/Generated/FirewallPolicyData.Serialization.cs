@@ -17,85 +17,129 @@ using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    public partial class FirewallPolicyData : IUtf8JsonSerializable
+    public partial class FirewallPolicyData : IUtf8JsonSerializable, IJsonModel<FirewallPolicyData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<FirewallPolicyData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(FirewallPolicyData)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
+            if (options.Format != "W" && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, new ModelReaderWriterOptions("W|v3"));
+                ((IJsonModel<Azure.ResourceManager.Models.ManagedServiceIdentity>)Identity).Write(writer, new ModelReaderWriterOptions("W|v3"));
             }
-            if (Optional.IsCollectionDefined(Tags))
-            {
-                writer.WritePropertyName("tags"u8);
-                writer.WriteStartObject();
-                foreach (var item in Tags)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
-                writer.WriteEndObject();
-            }
-            writer.WritePropertyName("location"u8);
-            writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(StartupProbe))
             {
                 writer.WritePropertyName("startupProbe"u8);
-                writer.WriteObjectValue(StartupProbe);
+                writer.WriteObjectValue(StartupProbe, options);
             }
             if (Optional.IsDefined(ReadinessProbe))
             {
                 writer.WritePropertyName("readinessProbe"u8);
-                writer.WriteObjectValue(ReadinessProbe);
+                writer.WriteObjectValue(ReadinessProbe, options);
             }
             if (Optional.IsDefined(DesiredStatusCode))
             {
                 writer.WritePropertyName("desiredStatusCode"u8);
                 writer.WriteNumberValue(DesiredStatusCode.Value.ToSerialInt32());
             }
+            if (options.Format != "W" && Optional.IsCollectionDefined(RuleCollectionGroups))
+            {
+                writer.WritePropertyName("ruleCollectionGroups"u8);
+                writer.WriteStartArray();
+                foreach (var item in RuleCollectionGroups)
+                {
+                    ((IJsonModel<WritableSubResource>)item).Write(writer, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            {
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
+            }
             if (Optional.IsDefined(BasePolicy))
             {
                 writer.WritePropertyName("basePolicy"u8);
-                ((IJsonModel<WritableSubResource>)BasePolicy).Write(writer, ModelSerializationExtensions.WireOptions);
+                ((IJsonModel<WritableSubResource>)BasePolicy).Write(writer, options);
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(Firewalls))
+            {
+                writer.WritePropertyName("firewalls"u8);
+                writer.WriteStartArray();
+                foreach (var item in Firewalls)
+                {
+                    ((IJsonModel<WritableSubResource>)item).Write(writer, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(ChildPolicies))
+            {
+                writer.WritePropertyName("childPolicies"u8);
+                writer.WriteStartArray();
+                foreach (var item in ChildPolicies)
+                {
+                    ((IJsonModel<WritableSubResource>)item).Write(writer, options);
+                }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(ThreatIntelWhitelist))
             {
                 writer.WritePropertyName("threatIntelWhitelist"u8);
-                writer.WriteObjectValue(ThreatIntelWhitelist);
+                writer.WriteObjectValue(ThreatIntelWhitelist, options);
             }
             if (Optional.IsDefined(Insights))
             {
                 writer.WritePropertyName("insights"u8);
-                writer.WriteObjectValue(Insights);
+                writer.WriteObjectValue(Insights, options);
             }
             if (Optional.IsDefined(Snat))
             {
                 writer.WritePropertyName("snat"u8);
-                writer.WriteObjectValue(Snat);
+                writer.WriteObjectValue(Snat, options);
             }
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
+                writer.WriteObjectValue(DnsSettings, options);
             }
             if (Optional.IsDefined(IntrusionDetection))
             {
                 writer.WritePropertyName("intrusionDetection"u8);
-                writer.WriteObjectValue(IntrusionDetection);
+                writer.WriteObjectValue(IntrusionDetection, options);
             }
             if (Optional.IsDefined(TransportSecurity))
             {
                 writer.WritePropertyName("transportSecurity"u8);
-                writer.WriteObjectValue(TransportSecurity);
+                writer.WriteObjectValue(TransportSecurity, options);
             }
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                writer.WriteObjectValue(Sku, options);
             }
             if (Optional.IsCollectionDefined(NetworkConfigurations))
             {
@@ -119,23 +163,36 @@ namespace MgmtMockAndSample
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            writer.WriteEndObject();
         }
 
-        internal static FirewallPolicyData DeserializeFirewallPolicyData(JsonElement element)
+        FirewallPolicyData IJsonModel<FirewallPolicyData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(FirewallPolicyData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFirewallPolicyData(document.RootElement, options);
+        }
+
+        internal static FirewallPolicyData DeserializeFirewallPolicyData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string etag = default;
-            ManagedServiceIdentity identity = default;
+            Azure.ResourceManager.Models.ManagedServiceIdentity identity = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Azure.ResourceManager.Models.SystemData systemData = default;
             Probe startupProbe = default;
             Probe readinessProbe = default;
             DesiredStatusCode? desiredStatusCode = default;
@@ -152,6 +209,8 @@ namespace MgmtMockAndSample
             FirewallPolicyTransportSecurity transportSecurity = default;
             FirewallPolicySku sku = default;
             IList<IDictionary<string, string>> networkConfigurations = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -165,7 +224,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default);
+                    identity = ModelReaderWriter.Read<Azure.ResourceManager.Models.ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -208,7 +267,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
+                    systemData = ModelReaderWriter.Read<Azure.ResourceManager.Models.SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -226,7 +285,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            startupProbe = Probe.DeserializeProbe(property0.Value);
+                            startupProbe = Probe.DeserializeProbe(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("readinessProbe"u8))
@@ -235,7 +294,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            readinessProbe = Probe.DeserializeProbe(property0.Value);
+                            readinessProbe = Probe.DeserializeProbe(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("desiredStatusCode"u8))
@@ -256,7 +315,7 @@ namespace MgmtMockAndSample
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default));
+                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), options, MgmtMockAndSampleContext.Default));
                             }
                             ruleCollectionGroups = array;
                             continue;
@@ -276,7 +335,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            basePolicy = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
+                            basePolicy = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), options, MgmtMockAndSampleContext.Default);
                             continue;
                         }
                         if (property0.NameEquals("firewalls"u8))
@@ -288,7 +347,7 @@ namespace MgmtMockAndSample
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default));
+                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), options, MgmtMockAndSampleContext.Default));
                             }
                             firewalls = array;
                             continue;
@@ -302,7 +361,7 @@ namespace MgmtMockAndSample
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default));
+                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), options, MgmtMockAndSampleContext.Default));
                             }
                             childPolicies = array;
                             continue;
@@ -313,7 +372,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            threatIntelWhitelist = FirewallPolicyThreatIntelWhitelist.DeserializeFirewallPolicyThreatIntelWhitelist(property0.Value);
+                            threatIntelWhitelist = FirewallPolicyThreatIntelWhitelist.DeserializeFirewallPolicyThreatIntelWhitelist(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("insights"u8))
@@ -322,7 +381,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            insights = FirewallPolicyInsights.DeserializeFirewallPolicyInsights(property0.Value);
+                            insights = FirewallPolicyInsights.DeserializeFirewallPolicyInsights(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("snat"u8))
@@ -331,7 +390,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            snat = FirewallPolicySnat.DeserializeFirewallPolicySnat(property0.Value);
+                            snat = FirewallPolicySnat.DeserializeFirewallPolicySnat(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("dnsSettings"u8))
@@ -340,7 +399,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            dnsSettings = DnsSettings.DeserializeDnsSettings(property0.Value);
+                            dnsSettings = DnsSettings.DeserializeDnsSettings(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("intrusionDetection"u8))
@@ -349,7 +408,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            intrusionDetection = FirewallPolicyIntrusionDetection.DeserializeFirewallPolicyIntrusionDetection(property0.Value);
+                            intrusionDetection = FirewallPolicyIntrusionDetection.DeserializeFirewallPolicyIntrusionDetection(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("transportSecurity"u8))
@@ -358,7 +417,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            transportSecurity = FirewallPolicyTransportSecurity.DeserializeFirewallPolicyTransportSecurity(property0.Value);
+                            transportSecurity = FirewallPolicyTransportSecurity.DeserializeFirewallPolicyTransportSecurity(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("sku"u8))
@@ -367,7 +426,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            sku = FirewallPolicySku.DeserializeFirewallPolicySku(property0.Value);
+                            sku = FirewallPolicySku.DeserializeFirewallPolicySku(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("networkConfigurations"u8))
@@ -399,7 +458,12 @@ namespace MgmtMockAndSample
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new FirewallPolicyData(
                 id,
                 name,
@@ -424,7 +488,39 @@ namespace MgmtMockAndSample
                 intrusionDetection,
                 transportSecurity,
                 sku,
-                networkConfigurations ?? new ChangeTrackingList<IDictionary<string, string>>());
+                networkConfigurations ?? new ChangeTrackingList<IDictionary<string, string>>(),
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<FirewallPolicyData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(FirewallPolicyData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        FirewallPolicyData IPersistableModel<FirewallPolicyData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeFirewallPolicyData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(FirewallPolicyData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<FirewallPolicyData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

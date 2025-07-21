@@ -118,7 +118,7 @@ namespace Azure.Network.Management.Interface
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateListRequest(resourceGroupName, networkInterfaceName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateListNextPageRequest(nextLink, resourceGroupName, networkInterfaceName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration, _clientDiagnostics, _pipeline, "NetworkInterfaceIPConfigurationsClient.List", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(e), _clientDiagnostics, _pipeline, "NetworkInterfaceIPConfigurationsClient.List", "value", "nextLink", cancellationToken);
         }
 
         /// <summary> Get all ip configurations in a network interface. </summary>
@@ -133,7 +133,7 @@ namespace Azure.Network.Management.Interface
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateListRequest(resourceGroupName, networkInterfaceName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateListNextPageRequest(nextLink, resourceGroupName, networkInterfaceName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration, _clientDiagnostics, _pipeline, "NetworkInterfaceIPConfigurationsClient.List", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(e), _clientDiagnostics, _pipeline, "NetworkInterfaceIPConfigurationsClient.List", "value", "nextLink", cancellationToken);
         }
     }
 }

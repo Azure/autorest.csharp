@@ -7,16 +7,86 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
+using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class MhsmPrivateEndpointConnectionItem
+    public partial class MhsmPrivateEndpointConnectionItem : IUtf8JsonSerializable, IJsonModel<MhsmPrivateEndpointConnectionItem>
     {
-        internal static MhsmPrivateEndpointConnectionItem DeserializeMhsmPrivateEndpointConnectionItem(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MhsmPrivateEndpointConnectionItem>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<MhsmPrivateEndpointConnectionItem>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<MhsmPrivateEndpointConnectionItem>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(MhsmPrivateEndpointConnectionItem)} does not support writing '{format}' format.");
+            }
+
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PrivateEndpoint))
+            {
+                writer.WritePropertyName("privateEndpoint"u8);
+                ((IJsonModel<Azure.ResourceManager.Resources.Models.SubResource>)PrivateEndpoint).Write(writer, options);
+            }
+            if (Optional.IsDefined(PrivateLinkServiceConnectionState))
+            {
+                writer.WritePropertyName("privateLinkServiceConnectionState"u8);
+                writer.WriteObjectValue(PrivateLinkServiceConnectionState, options);
+            }
+            if (Optional.IsDefined(ProvisioningState))
+            {
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
+            }
+            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+        }
+
+        MhsmPrivateEndpointConnectionItem IJsonModel<MhsmPrivateEndpointConnectionItem>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<MhsmPrivateEndpointConnectionItem>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(MhsmPrivateEndpointConnectionItem)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMhsmPrivateEndpointConnectionItem(document.RootElement, options);
+        }
+
+        internal static MhsmPrivateEndpointConnectionItem DeserializeMhsmPrivateEndpointConnectionItem(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -24,6 +94,8 @@ namespace MgmtMockAndSample.Models
             Azure.ResourceManager.Resources.Models.SubResource privateEndpoint = default;
             MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
             MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -41,7 +113,7 @@ namespace MgmtMockAndSample.Models
                             {
                                 continue;
                             }
-                            privateEndpoint = ModelReaderWriter.Read<Azure.ResourceManager.Resources.Models.SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
+                            privateEndpoint = ModelReaderWriter.Read<Azure.ResourceManager.Resources.Models.SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), options, MgmtMockAndSampleContext.Default);
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnectionState"u8))
@@ -50,7 +122,7 @@ namespace MgmtMockAndSample.Models
                             {
                                 continue;
                             }
-                            privateLinkServiceConnectionState = MhsmPrivateLinkServiceConnectionState.DeserializeMhsmPrivateLinkServiceConnectionState(property0.Value);
+                            privateLinkServiceConnectionState = MhsmPrivateLinkServiceConnectionState.DeserializeMhsmPrivateLinkServiceConnectionState(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))
@@ -65,8 +137,44 @@ namespace MgmtMockAndSample.Models
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new MhsmPrivateEndpointConnectionItem(privateEndpoint, privateLinkServiceConnectionState, provisioningState);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new MhsmPrivateEndpointConnectionItem(privateEndpoint, privateLinkServiceConnectionState, provisioningState, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<MhsmPrivateEndpointConnectionItem>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<MhsmPrivateEndpointConnectionItem>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(MhsmPrivateEndpointConnectionItem)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        MhsmPrivateEndpointConnectionItem IPersistableModel<MhsmPrivateEndpointConnectionItem>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<MhsmPrivateEndpointConnectionItem>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeMhsmPrivateEndpointConnectionItem(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(MhsmPrivateEndpointConnectionItem)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<MhsmPrivateEndpointConnectionItem>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

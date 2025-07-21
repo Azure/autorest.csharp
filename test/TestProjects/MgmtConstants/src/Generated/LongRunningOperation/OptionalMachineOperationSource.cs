@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.Text.Json;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,16 +25,14 @@ namespace MgmtConstants
 
         OptionalMachineResource IOperationSource<OptionalMachineResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
-            var data = OptionalMachineData.DeserializeOptionalMachineData(document.RootElement);
+            var data = ModelReaderWriter.Read<OptionalMachineData>(response.Content, ModelReaderWriterOptions.Json, MgmtConstantsContext.Default);
             return new OptionalMachineResource(_client, data);
         }
 
         async ValueTask<OptionalMachineResource> IOperationSource<OptionalMachineResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
-            var data = OptionalMachineData.DeserializeOptionalMachineData(document.RootElement);
-            return new OptionalMachineResource(_client, data);
+            var data = ModelReaderWriter.Read<OptionalMachineData>(response.Content, ModelReaderWriterOptions.Json, MgmtConstantsContext.Default);
+            return await Task.FromResult(new OptionalMachineResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

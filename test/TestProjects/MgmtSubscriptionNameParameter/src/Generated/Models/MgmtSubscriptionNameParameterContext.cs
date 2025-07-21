@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtSubscriptionNameParameter.Models;
 
 namespace MgmtSubscriptionNameParameter
 {
@@ -13,6 +14,14 @@ namespace MgmtSubscriptionNameParameter
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ErrorAdditionalInfo))]
+    [ModelReaderWriterBuildable(typeof(ErrorResponse))]
+    [ModelReaderWriterBuildable(typeof(ErrorResponseError))]
+    [ModelReaderWriterBuildable(typeof(MgmtSubscriptionNameParameterResourceData))]
+    [ModelReaderWriterBuildable(typeof(SBClientAffineProperties))]
+    [ModelReaderWriterBuildable(typeof(SBSubscriptionListResult))]
+    [ModelReaderWriterBuildable(typeof(SystemData))]
+    [ModelReaderWriterBuildable(typeof(TrackedResource))]
     public partial class MgmtSubscriptionNameParameterContext : ModelReaderWriterContext
     {
     }

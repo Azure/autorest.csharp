@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtPartialResource.Models;
 
 namespace MgmtPartialResource
 {
@@ -13,6 +14,12 @@ namespace MgmtPartialResource
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ConfigurationProfileAssignmentList))]
+    [ModelReaderWriterBuildable(typeof(ConfigurationProfileAssignmentProperties))]
+    [ModelReaderWriterBuildable(typeof(MgmtPartialResourceResourceData))]
+    [ModelReaderWriterBuildable(typeof(PublicIPAddressListResult))]
+    [ModelReaderWriterBuildable(typeof(PublicIPAddressSku))]
+    [ModelReaderWriterBuildable(typeof(TrackedResource))]
     public partial class MgmtPartialResourceContext : ModelReaderWriterContext
     {
     }

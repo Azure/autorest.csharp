@@ -5,4 +5,5 @@
 ``` yaml
 require: $(this-folder)/../../../../readme.md
 input-file: $(this-folder)/SecurityDefinition-LowLevel.json
+use-model-reader-writer: true
 ```

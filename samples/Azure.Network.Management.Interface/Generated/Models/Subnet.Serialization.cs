@@ -5,26 +5,45 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class Subnet : IUtf8JsonSerializable
+    public partial class Subnet : IUtf8JsonSerializable, IJsonModel<Subnet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Subnet>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<Subnet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Subnet>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Subnet)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (options.Format != "W" && Optional.IsDefined(Etag))
             {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -46,17 +65,17 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
-                writer.WriteObjectValue(NetworkSecurityGroup);
+                writer.WriteObjectValue(NetworkSecurityGroup, options);
             }
             if (Optional.IsDefined(RouteTable))
             {
                 writer.WritePropertyName("routeTable"u8);
-                writer.WriteObjectValue(RouteTable);
+                writer.WriteObjectValue(RouteTable, options);
             }
             if (Optional.IsDefined(NatGateway))
             {
                 writer.WritePropertyName("natGateway"u8);
-                writer.WriteObjectValue(NatGateway);
+                writer.WriteObjectValue(NatGateway, options);
             }
             if (Optional.IsCollectionDefined(ServiceEndpoints))
             {
@@ -64,7 +83,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ServiceEndpoints)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -74,7 +93,57 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ServiceEndpointPolicies)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(PrivateEndpoints))
+            {
+                writer.WritePropertyName("privateEndpoints"u8);
+                writer.WriteStartArray();
+                foreach (var item in PrivateEndpoints)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(IpConfigurations))
+            {
+                writer.WritePropertyName("ipConfigurations"u8);
+                writer.WriteStartArray();
+                foreach (var item in IpConfigurations)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(IpConfigurationProfiles))
+            {
+                writer.WritePropertyName("ipConfigurationProfiles"u8);
+                writer.WriteStartArray();
+                foreach (var item in IpConfigurationProfiles)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(ResourceNavigationLinks))
+            {
+                writer.WritePropertyName("resourceNavigationLinks"u8);
+                writer.WriteStartArray();
+                foreach (var item in ResourceNavigationLinks)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(ServiceAssociationLinks))
+            {
+                writer.WritePropertyName("serviceAssociationLinks"u8);
+                writer.WriteStartArray();
+                foreach (var item in ServiceAssociationLinks)
+                {
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -84,9 +153,19 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Delegations)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsDefined(Purpose))
+            {
+                writer.WritePropertyName("purpose"u8);
+                writer.WriteStringValue(Purpose);
+            }
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            {
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             if (Optional.IsDefined(PrivateEndpointNetworkPolicies))
             {
@@ -99,11 +178,24 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStringValue(PrivateLinkServiceNetworkPolicies);
             }
             writer.WriteEndObject();
-            writer.WriteEndObject();
         }
 
-        internal static Subnet DeserializeSubnet(JsonElement element)
+        Subnet IJsonModel<Subnet>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Subnet>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Subnet)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSubnet(document.RootElement, options);
+        }
+
+        internal static Subnet DeserializeSubnet(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -128,6 +220,8 @@ namespace Azure.Network.Management.Interface.Models
             ProvisioningState? provisioningState = default;
             string privateEndpointNetworkPolicies = default;
             string privateLinkServiceNetworkPolicies = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -179,7 +273,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            networkSecurityGroup = NetworkSecurityGroup.DeserializeNetworkSecurityGroup(property0.Value);
+                            networkSecurityGroup = NetworkSecurityGroup.DeserializeNetworkSecurityGroup(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("routeTable"u8))
@@ -188,7 +282,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            routeTable = RouteTable.DeserializeRouteTable(property0.Value);
+                            routeTable = RouteTable.DeserializeRouteTable(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("natGateway"u8))
@@ -197,7 +291,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            natGateway = DeserializeSubResource(property0.Value);
+                            natGateway = DeserializeSubResource(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("serviceEndpoints"u8))
@@ -209,7 +303,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<ServiceEndpointPropertiesFormat> array = new List<ServiceEndpointPropertiesFormat>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ServiceEndpointPropertiesFormat.DeserializeServiceEndpointPropertiesFormat(item));
+                                array.Add(ServiceEndpointPropertiesFormat.DeserializeServiceEndpointPropertiesFormat(item, options));
                             }
                             serviceEndpoints = array;
                             continue;
@@ -223,7 +317,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<ServiceEndpointPolicy> array = new List<ServiceEndpointPolicy>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ServiceEndpointPolicy.DeserializeServiceEndpointPolicy(item));
+                                array.Add(ServiceEndpointPolicy.DeserializeServiceEndpointPolicy(item, options));
                             }
                             serviceEndpointPolicies = array;
                             continue;
@@ -237,7 +331,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<PrivateEndpoint> array = new List<PrivateEndpoint>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(PrivateEndpoint.DeserializePrivateEndpoint(item));
+                                array.Add(PrivateEndpoint.DeserializePrivateEndpoint(item, options));
                             }
                             privateEndpoints = array;
                             continue;
@@ -251,7 +345,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<IPConfiguration> array = new List<IPConfiguration>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(IPConfiguration.DeserializeIPConfiguration(item));
+                                array.Add(IPConfiguration.DeserializeIPConfiguration(item, options));
                             }
                             ipConfigurations = array;
                             continue;
@@ -265,7 +359,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<IPConfigurationProfile> array = new List<IPConfigurationProfile>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(IPConfigurationProfile.DeserializeIPConfigurationProfile(item));
+                                array.Add(IPConfigurationProfile.DeserializeIPConfigurationProfile(item, options));
                             }
                             ipConfigurationProfiles = array;
                             continue;
@@ -279,7 +373,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<ResourceNavigationLink> array = new List<ResourceNavigationLink>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ResourceNavigationLink.DeserializeResourceNavigationLink(item));
+                                array.Add(ResourceNavigationLink.DeserializeResourceNavigationLink(item, options));
                             }
                             resourceNavigationLinks = array;
                             continue;
@@ -293,7 +387,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<ServiceAssociationLink> array = new List<ServiceAssociationLink>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ServiceAssociationLink.DeserializeServiceAssociationLink(item));
+                                array.Add(ServiceAssociationLink.DeserializeServiceAssociationLink(item, options));
                             }
                             serviceAssociationLinks = array;
                             continue;
@@ -307,7 +401,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<Delegation> array = new List<Delegation>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(Delegation.DeserializeDelegation(item));
+                                array.Add(Delegation.DeserializeDelegation(item, options));
                             }
                             delegations = array;
                             continue;
@@ -339,9 +433,15 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new Subnet(
                 id,
+                serializedAdditionalRawData,
                 name,
                 etag,
                 addressPrefix,
@@ -363,6 +463,37 @@ namespace Azure.Network.Management.Interface.Models
                 privateLinkServiceNetworkPolicies);
         }
 
+        BinaryData IPersistableModel<Subnet>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Subnet>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, AzureNetworkManagementInterfaceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(Subnet)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        Subnet IPersistableModel<Subnet>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Subnet>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeSubnet(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(Subnet)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Subnet>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Subnet FromResponse(Response response)
@@ -375,7 +506,7 @@ namespace Azure.Network.Management.Interface.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

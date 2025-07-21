@@ -22,6 +22,11 @@ namespace MgmtMockAndSample.Models
             Template = template;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TenantResourceCalculateTemplateHashDeploymentOptions"/> for deserialization. </summary>
+        internal TenantResourceCalculateTemplateHashDeploymentOptions()
+        {
+        }
+
         /// <summary>
         /// The template provided to calculate hash.
         /// <para>

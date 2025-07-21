@@ -60,7 +60,7 @@ namespace MgmtTypeSpec.Models
         /// <param name="properties"> The resource-specific properties for this resource. </param>
         /// <param name="identity"> The managed service identities assigned to this resource. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal MgmtTypeSpecPrivateLinkResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, MgmtTypeSpecPrivateLinkResourceProperties properties, ManagedServiceIdentity identity, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal MgmtTypeSpecPrivateLinkResourceData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, MgmtTypeSpecPrivateLinkResourceProperties properties, Azure.ResourceManager.Models.ManagedServiceIdentity identity, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Properties = properties;
             Identity = identity;
@@ -72,6 +72,6 @@ namespace MgmtTypeSpec.Models
         public MgmtTypeSpecPrivateLinkResourceProperties Properties { get; }
         /// <summary> The managed service identities assigned to this resource. </summary>
         [WirePath("identity")]
-        public ManagedServiceIdentity Identity { get; }
+        public Azure.ResourceManager.Models.ManagedServiceIdentity Identity { get; }
     }
 }

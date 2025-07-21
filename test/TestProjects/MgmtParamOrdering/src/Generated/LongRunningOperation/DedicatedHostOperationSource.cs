@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.Text.Json;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,16 +25,14 @@ namespace MgmtParamOrdering
 
         DedicatedHostResource IOperationSource<DedicatedHostResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
-            var data = DedicatedHostData.DeserializeDedicatedHostData(document.RootElement);
+            var data = ModelReaderWriter.Read<DedicatedHostData>(response.Content, ModelReaderWriterOptions.Json, MgmtParamOrderingContext.Default);
             return new DedicatedHostResource(_client, data);
         }
 
         async ValueTask<DedicatedHostResource> IOperationSource<DedicatedHostResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
-            var data = DedicatedHostData.DeserializeDedicatedHostData(document.RootElement);
-            return new DedicatedHostResource(_client, data);
+            var data = ModelReaderWriter.Read<DedicatedHostData>(response.Content, ModelReaderWriterOptions.Json, MgmtParamOrderingContext.Default);
+            return await Task.FromResult(new DedicatedHostResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

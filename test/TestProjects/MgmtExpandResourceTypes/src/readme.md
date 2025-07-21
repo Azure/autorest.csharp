@@ -9,6 +9,7 @@ azure-arm: true
 require: $(this-folder)/../../../../readme.md
 input-file: $(this-folder)/../MgmtExpandResourceTypes.json
 namespace: MgmtExpandResourceTypes
+use-model-reader-writer: true
 
 ## temporary
 list-exception:

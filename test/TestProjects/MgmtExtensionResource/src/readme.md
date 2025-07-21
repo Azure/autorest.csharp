@@ -9,6 +9,7 @@ azure-arm: true
 require: $(this-folder)/../../../../readme.md
 input-file: $(this-folder)/../MgmtExtensionResource.json
 namespace: MgmtExtensionResource
+use-model-reader-writer: true
 request-path-to-resource-name:
   /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}: BuiltInPolicyDefinition
 ```

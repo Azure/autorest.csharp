@@ -20,7 +20,7 @@ namespace MgmtExtensionResource.Models
         /// <returns> A new <see cref="Models.DnsNameAvailabilityResult"/> instance for mocking. </returns>
         public static DnsNameAvailabilityResult DnsNameAvailabilityResult(bool? available = null)
         {
-            return new DnsNameAvailabilityResult(available);
+            return new DnsNameAvailabilityResult(available, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtExtensionResource.SubSingletonData"/>. </summary>
@@ -32,7 +32,13 @@ namespace MgmtExtensionResource.Models
         /// <returns> A new <see cref="MgmtExtensionResource.SubSingletonData"/> instance for mocking. </returns>
         public static SubSingletonData SubSingletonData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string something = null)
         {
-            return new SubSingletonData(id, name, resourceType, systemData, something);
+            return new SubSingletonData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                something,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtExtensionResource.PolicyDefinitionData"/>. </summary>
@@ -63,7 +69,8 @@ namespace MgmtExtensionResource.Models
                 description,
                 policyRule,
                 metadata,
-                parameters);
+                parameters,
+                serializedAdditionalRawData: null);
         }
     }
 }

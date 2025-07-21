@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.Text.Json;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,16 +25,14 @@ namespace MgmtAcronymMapping
 
         VirtualMachineScaleSetResource IOperationSource<VirtualMachineScaleSetResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
-            var data = VirtualMachineScaleSetData.DeserializeVirtualMachineScaleSetData(document.RootElement);
+            var data = ModelReaderWriter.Read<VirtualMachineScaleSetData>(response.Content, ModelReaderWriterOptions.Json, MgmtAcronymMappingContext.Default);
             return new VirtualMachineScaleSetResource(_client, data);
         }
 
         async ValueTask<VirtualMachineScaleSetResource> IOperationSource<VirtualMachineScaleSetResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
-            var data = VirtualMachineScaleSetData.DeserializeVirtualMachineScaleSetData(document.RootElement);
-            return new VirtualMachineScaleSetResource(_client, data);
+            var data = ModelReaderWriter.Read<VirtualMachineScaleSetData>(response.Content, ModelReaderWriterOptions.Json, MgmtAcronymMappingContext.Default);
+            return await Task.FromResult(new VirtualMachineScaleSetResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

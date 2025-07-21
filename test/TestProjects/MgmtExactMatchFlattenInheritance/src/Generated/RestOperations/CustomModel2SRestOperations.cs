@@ -159,7 +159,7 @@ namespace MgmtExactMatchFlattenInheritance
                 Foo = foo
             };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(model, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             _userAgent.Apply(message);
             return message;

@@ -5,17 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class NatRule : IUtf8JsonSerializable
+    public partial class NatRule : IUtf8JsonSerializable, IJsonModel<NatRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NatRule>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<NatRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<NatRule>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(NatRule)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
             if (Optional.IsCollectionDefined(IpProtocols))
             {
                 writer.WritePropertyName("ipProtocols"u8);
@@ -81,46 +100,24 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("translatedFqdn"u8);
                 writer.WriteStringValue(TranslatedFqdn);
             }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(Description))
-            {
-                writer.WritePropertyName("description"u8);
-                writer.WriteStringValue(Description);
-            }
-            writer.WritePropertyName("ruleType"u8);
-            writer.WriteStringValue(RuleType.ToString());
-            if (Optional.IsDefined(NewStringSerializeProperty))
-            {
-                writer.WritePropertyName("newStringSerializeProperty"u8);
-                writer.WriteStringValue(NewStringSerializeProperty);
-            }
-            if (Optional.IsCollectionDefined(NewArraySerializedProperty))
-            {
-                writer.WritePropertyName("newArraySerializedProperty"u8);
-                writer.WriteStartArray();
-                foreach (var item in NewArraySerializedProperty)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            writer.WritePropertyName("fakeParent"u8);
-            writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(NewDictionarySerializedProperty))
-            {
-                writer.WritePropertyName("newDictionarySerializedProperty"u8);
-                SerializeNameValue(writer);
-            }
-            writer.WriteEndObject();
-            writer.WriteEndObject();
         }
 
-        internal static NatRule DeserializeNatRule(JsonElement element)
+        NatRule IJsonModel<NatRule>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<NatRule>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(NatRule)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNatRule(document.RootElement, options);
+        }
+
+        internal static NatRule DeserializeNatRule(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -139,6 +136,8 @@ namespace MgmtMockAndSample.Models
             string newStringSerializeProperty = default;
             IList<string> newArraySerializedProperty = default;
             IDictionary<string, string> newDictionarySerializedProperty = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ipProtocols"u8))
@@ -277,7 +276,12 @@ namespace MgmtMockAndSample.Models
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new NatRule(
                 name,
                 description,
@@ -285,6 +289,7 @@ namespace MgmtMockAndSample.Models
                 newStringSerializeProperty,
                 newArraySerializedProperty ?? new ChangeTrackingList<string>(),
                 newDictionarySerializedProperty ?? new ChangeTrackingDictionary<string, string>(),
+                serializedAdditionalRawData,
                 ipProtocols ?? new ChangeTrackingList<FirewallPolicyRuleNetworkProtocol>(),
                 sourceAddresses ?? new ChangeTrackingList<string>(),
                 destinationAddresses ?? new ChangeTrackingList<string>(),
@@ -294,5 +299,36 @@ namespace MgmtMockAndSample.Models
                 sourceIPGroups ?? new ChangeTrackingList<string>(),
                 translatedFqdn);
         }
+
+        BinaryData IPersistableModel<NatRule>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<NatRule>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(NatRule)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        NatRule IPersistableModel<NatRule>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<NatRule>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeNatRule(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(NatRule)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<NatRule>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

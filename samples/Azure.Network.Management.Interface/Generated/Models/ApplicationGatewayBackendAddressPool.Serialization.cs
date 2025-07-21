@@ -5,45 +5,97 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class ApplicationGatewayBackendAddressPool : IUtf8JsonSerializable
+    public partial class ApplicationGatewayBackendAddressPool : IUtf8JsonSerializable, IJsonModel<ApplicationGatewayBackendAddressPool>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ApplicationGatewayBackendAddressPool>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<ApplicationGatewayBackendAddressPool>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ApplicationGatewayBackendAddressPool>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(ApplicationGatewayBackendAddressPool)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (options.Format != "W" && Optional.IsDefined(Etag))
             {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Type))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(Type);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
+            if (options.Format != "W" && Optional.IsCollectionDefined(BackendIPConfigurations))
+            {
+                writer.WritePropertyName("backendIPConfigurations"u8);
+                writer.WriteStartArray();
+                foreach (var item in BackendIPConfigurations)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
             if (Optional.IsCollectionDefined(BackendAddresses))
             {
                 writer.WritePropertyName("backendAddresses"u8);
                 writer.WriteStartArray();
                 foreach (var item in BackendAddresses)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            {
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
+            }
             writer.WriteEndObject();
         }
 
-        internal static ApplicationGatewayBackendAddressPool DeserializeApplicationGatewayBackendAddressPool(JsonElement element)
+        ApplicationGatewayBackendAddressPool IJsonModel<ApplicationGatewayBackendAddressPool>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<ApplicationGatewayBackendAddressPool>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(ApplicationGatewayBackendAddressPool)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeApplicationGatewayBackendAddressPool(document.RootElement, options);
+        }
+
+        internal static ApplicationGatewayBackendAddressPool DeserializeApplicationGatewayBackendAddressPool(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -55,6 +107,8 @@ namespace Azure.Network.Management.Interface.Models
             IReadOnlyList<NetworkInterfaceIPConfiguration> backendIPConfigurations = default;
             IList<ApplicationGatewayBackendAddress> backendAddresses = default;
             ProvisioningState? provisioningState = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -95,7 +149,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<NetworkInterfaceIPConfiguration> array = new List<NetworkInterfaceIPConfiguration>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
+                                array.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item, options));
                             }
                             backendIPConfigurations = array;
                             continue;
@@ -109,7 +163,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<ApplicationGatewayBackendAddress> array = new List<ApplicationGatewayBackendAddress>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ApplicationGatewayBackendAddress.DeserializeApplicationGatewayBackendAddress(item));
+                                array.Add(ApplicationGatewayBackendAddress.DeserializeApplicationGatewayBackendAddress(item, options));
                             }
                             backendAddresses = array;
                             continue;
@@ -126,9 +180,15 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new ApplicationGatewayBackendAddressPool(
                 id,
+                serializedAdditionalRawData,
                 name,
                 etag,
                 type,
@@ -136,6 +196,37 @@ namespace Azure.Network.Management.Interface.Models
                 backendAddresses ?? new ChangeTrackingList<ApplicationGatewayBackendAddress>(),
                 provisioningState);
         }
+
+        BinaryData IPersistableModel<ApplicationGatewayBackendAddressPool>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ApplicationGatewayBackendAddressPool>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, AzureNetworkManagementInterfaceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(ApplicationGatewayBackendAddressPool)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        ApplicationGatewayBackendAddressPool IPersistableModel<ApplicationGatewayBackendAddressPool>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ApplicationGatewayBackendAddressPool>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeApplicationGatewayBackendAddressPool(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(ApplicationGatewayBackendAddressPool)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<ApplicationGatewayBackendAddressPool>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -149,7 +240,7 @@ namespace Azure.Network.Management.Interface.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

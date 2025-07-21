@@ -20,6 +20,7 @@ input-file:
 - $(this-folder)/../specification/mockSwagger/guestconfiguration.json
 clear-output-folder: true
 namespace: MgmtMockAndSample
+use-model-reader-writer: true
 modelerfour:
   lenient-model-deduplication: true
 

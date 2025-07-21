@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
@@ -13,6 +14,20 @@ namespace MgmtMultipleParentResource
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(AnotherParentPatch))]
+    [ModelReaderWriterBuildable(typeof(AnotherParentsListResult))]
+    [ModelReaderWriterBuildable(typeof(ApiError))]
+    [ModelReaderWriterBuildable(typeof(ApiErrorBase))]
+    [ModelReaderWriterBuildable(typeof(ChildBodiesListResult))]
+    [ModelReaderWriterBuildable(typeof(ChildBodyUpdate))]
+    [ModelReaderWriterBuildable(typeof(CloudError))]
+    [ModelReaderWriterBuildable(typeof(InnerError))]
+    [ModelReaderWriterBuildable(typeof(MgmtMultipleParentResourceResourceData))]
+    [ModelReaderWriterBuildable(typeof(SubParentPatch))]
+    [ModelReaderWriterBuildable(typeof(SubParentsListResult))]
+    [ModelReaderWriterBuildable(typeof(TheParentPatch))]
+    [ModelReaderWriterBuildable(typeof(TheParentsListResult))]
+    [ModelReaderWriterBuildable(typeof(UpdateResource))]
     public partial class MgmtMultipleParentResourceContext : ModelReaderWriterContext
     {
     }

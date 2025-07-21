@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using ProtocolMethodsInRestClient.Models;
 
 namespace ProtocolMethodsInRestClient
 {
@@ -13,6 +14,8 @@ namespace ProtocolMethodsInRestClient
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Grouped))]
+    [ModelReaderWriterBuildable(typeof(Resource))]
     public partial class ProtocolMethodsInRestClientContext : ModelReaderWriterContext
     {
     }

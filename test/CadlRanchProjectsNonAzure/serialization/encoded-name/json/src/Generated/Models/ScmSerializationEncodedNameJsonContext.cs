@@ -3,6 +3,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Scm.Serialization.EncodedName.Json.Models;
 
 namespace Scm.Serialization.EncodedName.Json
 {
@@ -10,6 +11,7 @@ namespace Scm.Serialization.EncodedName.Json
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(JsonEncodedNameModel))]
     public partial class ScmSerializationEncodedNameJsonContext : ModelReaderWriterContext
     {
     }

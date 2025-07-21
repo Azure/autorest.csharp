@@ -5,16 +5,85 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class SearchResult
+    public partial class SearchResult : IUtf8JsonSerializable, IJsonModel<SearchResult>
     {
-        internal static SearchResult DeserializeSearchResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SearchResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<SearchResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SearchResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(SearchResult)} does not support writing '{format}' format.");
+            }
+
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("@search.score"u8);
+                writer.WriteNumberValue(Score);
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(Highlights))
+            {
+                writer.WritePropertyName("@search.highlights"u8);
+                writer.WriteStartObject();
+                foreach (var item in Highlights)
+                {
+                    writer.WritePropertyName(item.Key);
+                    if (item.Value == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteStartArray();
+                    foreach (var item0 in item.Value)
+                    {
+                        writer.WriteStringValue(item0);
+                    }
+                    writer.WriteEndArray();
+                }
+                writer.WriteEndObject();
+            }
+            foreach (var item in AdditionalProperties)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteObjectValue<object>(item.Value, options);
+            }
+        }
+
+        SearchResult IJsonModel<SearchResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SearchResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(SearchResult)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSearchResult(document.RootElement, options);
+        }
+
+        internal static SearchResult DeserializeSearchResult(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -62,12 +131,51 @@ namespace CognitiveSearch.Models
             return new SearchResult(searchScore, searchHighlights ?? new ChangeTrackingDictionary<string, IList<string>>(), additionalProperties);
         }
 
+        BinaryData IPersistableModel<SearchResult>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SearchResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(SearchResult)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        SearchResult IPersistableModel<SearchResult>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SearchResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeSearchResult(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(SearchResult)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<SearchResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static SearchResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeSearchResult(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            return content;
         }
     }
 }

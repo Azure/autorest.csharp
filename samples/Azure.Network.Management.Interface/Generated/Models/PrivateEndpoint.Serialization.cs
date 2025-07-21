@@ -5,44 +5,62 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class PrivateEndpoint : IUtf8JsonSerializable
+    public partial class PrivateEndpoint : IUtf8JsonSerializable, IJsonModel<PrivateEndpoint>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PrivateEndpoint>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<PrivateEndpoint>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PrivateEndpoint>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
+                throw new FormatException($"The model {nameof(PrivateEndpoint)} does not support writing '{format}' format.");
             }
-            if (Optional.IsDefined(Location))
+
+            base.JsonModelWriteCore(writer, options);
+            if (options.Format != "W" && Optional.IsDefined(Etag))
             {
-                writer.WritePropertyName("location"u8);
-                writer.WriteStringValue(Location);
-            }
-            if (Optional.IsCollectionDefined(Tags))
-            {
-                writer.WritePropertyName("tags"u8);
-                writer.WriteStartObject();
-                foreach (var item in Tags)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
-                writer.WriteEndObject();
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                writer.WriteObjectValue(Subnet);
+                writer.WriteObjectValue(Subnet, options);
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(NetworkInterfaces))
+            {
+                writer.WritePropertyName("networkInterfaces"u8);
+                writer.WriteStartArray();
+                foreach (var item in NetworkInterfaces)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            {
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             if (Optional.IsCollectionDefined(PrivateLinkServiceConnections))
             {
@@ -50,7 +68,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in PrivateLinkServiceConnections)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -60,16 +78,29 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ManualPrivateLinkServiceConnections)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            writer.WriteEndObject();
         }
 
-        internal static PrivateEndpoint DeserializePrivateEndpoint(JsonElement element)
+        PrivateEndpoint IJsonModel<PrivateEndpoint>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<PrivateEndpoint>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(PrivateEndpoint)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePrivateEndpoint(document.RootElement, options);
+        }
+
+        internal static PrivateEndpoint DeserializePrivateEndpoint(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -85,6 +116,8 @@ namespace Azure.Network.Management.Interface.Models
             ProvisioningState? provisioningState = default;
             IList<PrivateLinkServiceConnection> privateLinkServiceConnections = default;
             IList<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -141,7 +174,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            subnet = Subnet.DeserializeSubnet(property0.Value);
+                            subnet = Subnet.DeserializeSubnet(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("networkInterfaces"u8))
@@ -153,7 +186,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<NetworkInterface> array = new List<NetworkInterface>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(NetworkInterface.DeserializeNetworkInterface(item));
+                                array.Add(NetworkInterface.DeserializeNetworkInterface(item, options));
                             }
                             networkInterfaces = array;
                             continue;
@@ -176,7 +209,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<PrivateLinkServiceConnection> array = new List<PrivateLinkServiceConnection>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item));
+                                array.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item, options));
                             }
                             privateLinkServiceConnections = array;
                             continue;
@@ -190,7 +223,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<PrivateLinkServiceConnection> array = new List<PrivateLinkServiceConnection>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item));
+                                array.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item, options));
                             }
                             manualPrivateLinkServiceConnections = array;
                             continue;
@@ -198,13 +231,19 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new PrivateEndpoint(
                 id,
                 name,
                 type,
                 location,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
+                serializedAdditionalRawData,
                 etag,
                 subnet,
                 networkInterfaces ?? new ChangeTrackingList<NetworkInterface>(),
@@ -212,6 +251,37 @@ namespace Azure.Network.Management.Interface.Models
                 privateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>(),
                 manualPrivateLinkServiceConnections ?? new ChangeTrackingList<PrivateLinkServiceConnection>());
         }
+
+        BinaryData IPersistableModel<PrivateEndpoint>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PrivateEndpoint>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, AzureNetworkManagementInterfaceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(PrivateEndpoint)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        PrivateEndpoint IPersistableModel<PrivateEndpoint>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PrivateEndpoint>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializePrivateEndpoint(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(PrivateEndpoint)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<PrivateEndpoint>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -225,7 +295,7 @@ namespace Azure.Network.Management.Interface.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

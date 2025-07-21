@@ -46,7 +46,7 @@ namespace MgmtMockAndSample.Samples
             string diskEncryptionSetName = "myDiskEncryptionSet";
             DiskEncryptionSetData data = new DiskEncryptionSetData
             {
-                Identity = new ManagedServiceIdentity("SystemAssigned"),
+                Identity = new Azure.ResourceManager.Models.ManagedServiceIdentity("SystemAssigned"),
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
                 ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/{key}")),
                 MinimumTlsVersion = MinimumTlsVersion.Tls1_1,
@@ -87,7 +87,7 @@ namespace MgmtMockAndSample.Samples
             string diskEncryptionSetName = "myDiskEncryptionSet";
             DiskEncryptionSetData data = new DiskEncryptionSetData
             {
-                Identity = new ManagedServiceIdentity("UserAssigned")
+                Identity = new Azure.ResourceManager.Models.ManagedServiceIdentity("UserAssigned")
                 {
                     UserAssignedIdentities =
 {
@@ -134,7 +134,7 @@ namespace MgmtMockAndSample.Samples
             string diskEncryptionSetName = "myDiskEncryptionSet";
             DiskEncryptionSetData data = new DiskEncryptionSetData
             {
-                Identity = new ManagedServiceIdentity("SystemAssigned"),
+                Identity = new Azure.ResourceManager.Models.ManagedServiceIdentity("SystemAssigned"),
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
                 ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvmvault.vault-int.azure-int.net/keys/{key}"))
                 {

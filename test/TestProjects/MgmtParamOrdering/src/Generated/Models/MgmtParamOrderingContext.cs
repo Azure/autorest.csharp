@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtParamOrdering.Models;
 
 namespace MgmtParamOrdering
 {
@@ -13,6 +14,30 @@ namespace MgmtParamOrdering
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(AvailabilitySetListResult))]
+    [ModelReaderWriterBuildable(typeof(AvailabilitySetPatch))]
+    [ModelReaderWriterBuildable(typeof(DedicatedHostGroupListResult))]
+    [ModelReaderWriterBuildable(typeof(DedicatedHostGroupPatch))]
+    [ModelReaderWriterBuildable(typeof(DedicatedHostListResult))]
+    [ModelReaderWriterBuildable(typeof(DedicatedHostPatch))]
+    [ModelReaderWriterBuildable(typeof(EnvironmentContainer))]
+    [ModelReaderWriterBuildable(typeof(EnvironmentContainerResourceListResult))]
+    [ModelReaderWriterBuildable(typeof(ErrorAdditionalInfo))]
+    [ModelReaderWriterBuildable(typeof(ErrorResponse))]
+    [ModelReaderWriterBuildable(typeof(LocationFormatObject))]
+    [ModelReaderWriterBuildable(typeof(MgmtParamOrderingResourceData))]
+    [ModelReaderWriterBuildable(typeof(MgmtParamOrderingSku))]
+    [ModelReaderWriterBuildable(typeof(SystemData))]
+    [ModelReaderWriterBuildable(typeof(UpdateResource))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetInstanceView))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetListResult))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetPatch))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetVM))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetVMInstanceIDs))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetVMInstanceRequiredIDs))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetVMListResult))]
+    [ModelReaderWriterBuildable(typeof(WorkspaceListResult))]
+    [ModelReaderWriterBuildable(typeof(WorkspacePatch))]
     public partial class MgmtParamOrderingContext : ModelReaderWriterContext
     {
     }

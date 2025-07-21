@@ -5,26 +5,45 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class NetworkInterfaceIPConfiguration : IUtf8JsonSerializable
+    public partial class NetworkInterfaceIPConfiguration : IUtf8JsonSerializable, IJsonModel<NetworkInterfaceIPConfiguration>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkInterfaceIPConfiguration>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<NetworkInterfaceIPConfiguration>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceIPConfiguration>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(NetworkInterfaceIPConfiguration)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
+            if (options.Format != "W" && Optional.IsDefined(Etag))
             {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -34,7 +53,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualNetworkTaps)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -44,7 +63,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ApplicationGatewayBackendAddressPools)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -54,7 +73,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancerBackendAddressPools)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -64,7 +83,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancerInboundNatRules)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -86,7 +105,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                writer.WriteObjectValue(Subnet);
+                writer.WriteObjectValue(Subnet, options);
             }
             if (Optional.IsDefined(Primary))
             {
@@ -96,7 +115,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(PublicIPAddress))
             {
                 writer.WritePropertyName("publicIPAddress"u8);
-                writer.WriteObjectValue(PublicIPAddress);
+                writer.WriteObjectValue(PublicIPAddress, options);
             }
             if (Optional.IsCollectionDefined(ApplicationSecurityGroups))
             {
@@ -104,16 +123,39 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ApplicationSecurityGroups)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            {
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
+            }
+            if (options.Format != "W" && Optional.IsDefined(PrivateLinkConnectionProperties))
+            {
+                writer.WritePropertyName("privateLinkConnectionProperties"u8);
+                writer.WriteObjectValue(PrivateLinkConnectionProperties, options);
+            }
             writer.WriteEndObject();
         }
 
-        internal static NetworkInterfaceIPConfiguration DeserializeNetworkInterfaceIPConfiguration(JsonElement element)
+        NetworkInterfaceIPConfiguration IJsonModel<NetworkInterfaceIPConfiguration>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceIPConfiguration>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(NetworkInterfaceIPConfiguration)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNetworkInterfaceIPConfiguration(document.RootElement, options);
+        }
+
+        internal static NetworkInterfaceIPConfiguration DeserializeNetworkInterfaceIPConfiguration(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -134,6 +176,8 @@ namespace Azure.Network.Management.Interface.Models
             IList<ApplicationSecurityGroup> applicationSecurityGroups = default;
             ProvisioningState? provisioningState = default;
             NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties privateLinkConnectionProperties = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -169,7 +213,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<VirtualNetworkTap> array = new List<VirtualNetworkTap>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(VirtualNetworkTap.DeserializeVirtualNetworkTap(item));
+                                array.Add(VirtualNetworkTap.DeserializeVirtualNetworkTap(item, options));
                             }
                             virtualNetworkTaps = array;
                             continue;
@@ -183,7 +227,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<ApplicationGatewayBackendAddressPool> array = new List<ApplicationGatewayBackendAddressPool>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ApplicationGatewayBackendAddressPool.DeserializeApplicationGatewayBackendAddressPool(item));
+                                array.Add(ApplicationGatewayBackendAddressPool.DeserializeApplicationGatewayBackendAddressPool(item, options));
                             }
                             applicationGatewayBackendAddressPools = array;
                             continue;
@@ -197,7 +241,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<BackendAddressPool> array = new List<BackendAddressPool>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(BackendAddressPool.DeserializeBackendAddressPool(item));
+                                array.Add(BackendAddressPool.DeserializeBackendAddressPool(item, options));
                             }
                             loadBalancerBackendAddressPools = array;
                             continue;
@@ -211,7 +255,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<InboundNatRule> array = new List<InboundNatRule>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(InboundNatRule.DeserializeInboundNatRule(item));
+                                array.Add(InboundNatRule.DeserializeInboundNatRule(item, options));
                             }
                             loadBalancerInboundNatRules = array;
                             continue;
@@ -245,7 +289,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            subnet = Subnet.DeserializeSubnet(property0.Value);
+                            subnet = Subnet.DeserializeSubnet(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("primary"u8))
@@ -263,7 +307,7 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            publicIPAddress = PublicIPAddress.DeserializePublicIPAddress(property0.Value);
+                            publicIPAddress = PublicIPAddress.DeserializePublicIPAddress(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("applicationSecurityGroups"u8))
@@ -275,7 +319,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<ApplicationSecurityGroup> array = new List<ApplicationSecurityGroup>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
+                                array.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item, options));
                             }
                             applicationSecurityGroups = array;
                             continue;
@@ -295,15 +339,21 @@ namespace Azure.Network.Management.Interface.Models
                             {
                                 continue;
                             }
-                            privateLinkConnectionProperties = NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties.DeserializeNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(property0.Value);
+                            privateLinkConnectionProperties = NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties.DeserializeNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(property0.Value, options);
                             continue;
                         }
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new NetworkInterfaceIPConfiguration(
                 id,
+                serializedAdditionalRawData,
                 name,
                 etag,
                 virtualNetworkTaps ?? new ChangeTrackingList<VirtualNetworkTap>(),
@@ -321,6 +371,37 @@ namespace Azure.Network.Management.Interface.Models
                 privateLinkConnectionProperties);
         }
 
+        BinaryData IPersistableModel<NetworkInterfaceIPConfiguration>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceIPConfiguration>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, AzureNetworkManagementInterfaceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(NetworkInterfaceIPConfiguration)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        NetworkInterfaceIPConfiguration IPersistableModel<NetworkInterfaceIPConfiguration>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceIPConfiguration>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeNetworkInterfaceIPConfiguration(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(NetworkInterfaceIPConfiguration)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<NetworkInterfaceIPConfiguration>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new NetworkInterfaceIPConfiguration FromResponse(Response response)
@@ -333,7 +414,7 @@ namespace Azure.Network.Management.Interface.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

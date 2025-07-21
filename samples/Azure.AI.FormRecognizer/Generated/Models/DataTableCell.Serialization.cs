@@ -5,15 +5,113 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class DataTableCell
+    public partial class DataTableCell : IUtf8JsonSerializable, IJsonModel<DataTableCell>
     {
-        internal static DataTableCell DeserializeDataTableCell(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataTableCell>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<DataTableCell>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DataTableCell>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(DataTableCell)} does not support writing '{format}' format.");
+            }
+
+            writer.WritePropertyName("rowIndex"u8);
+            writer.WriteNumberValue(RowIndex);
+            writer.WritePropertyName("columnIndex"u8);
+            writer.WriteNumberValue(ColumnIndex);
+            if (Optional.IsDefined(RowSpan))
+            {
+                writer.WritePropertyName("rowSpan"u8);
+                writer.WriteNumberValue(RowSpan.Value);
+            }
+            if (Optional.IsDefined(ColumnSpan))
+            {
+                writer.WritePropertyName("columnSpan"u8);
+                writer.WriteNumberValue(ColumnSpan.Value);
+            }
+            writer.WritePropertyName("text"u8);
+            writer.WriteStringValue(Text);
+            writer.WritePropertyName("boundingBox"u8);
+            writer.WriteStartArray();
+            foreach (var item in BoundingBox)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("confidence"u8);
+            writer.WriteNumberValue(Confidence);
+            if (Optional.IsCollectionDefined(Elements))
+            {
+                writer.WritePropertyName("elements"u8);
+                writer.WriteStartArray();
+                foreach (var item in Elements)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(IsHeader))
+            {
+                writer.WritePropertyName("isHeader"u8);
+                writer.WriteBooleanValue(IsHeader.Value);
+            }
+            if (Optional.IsDefined(IsFooter))
+            {
+                writer.WritePropertyName("isFooter"u8);
+                writer.WriteBooleanValue(IsFooter.Value);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+        }
+
+        DataTableCell IJsonModel<DataTableCell>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DataTableCell>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(DataTableCell)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDataTableCell(document.RootElement, options);
+        }
+
+        internal static DataTableCell DeserializeDataTableCell(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -28,6 +126,8 @@ namespace Azure.AI.FormRecognizer.Models
             IReadOnlyList<string> elements = default;
             bool? isHeader = default;
             bool? isFooter = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("rowIndex"u8))
@@ -110,7 +210,12 @@ namespace Azure.AI.FormRecognizer.Models
                     isFooter = property.Value.GetBoolean();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new DataTableCell(
                 rowIndex,
                 columnIndex,
@@ -121,8 +226,40 @@ namespace Azure.AI.FormRecognizer.Models
                 confidence,
                 elements ?? new ChangeTrackingList<string>(),
                 isHeader,
-                isFooter);
+                isFooter,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<DataTableCell>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DataTableCell>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, AzureAIFormRecognizerContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(DataTableCell)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        DataTableCell IPersistableModel<DataTableCell>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DataTableCell>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeDataTableCell(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(DataTableCell)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<DataTableCell>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -130,6 +267,14 @@ namespace Azure.AI.FormRecognizer.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeDataTableCell(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            return content;
         }
     }
 }

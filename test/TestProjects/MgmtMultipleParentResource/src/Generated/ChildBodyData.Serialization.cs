@@ -15,24 +15,28 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtMultipleParentResource
 {
-    public partial class ChildBodyData : IUtf8JsonSerializable
+    public partial class ChildBodyData : IUtf8JsonSerializable, IJsonModel<ChildBodyData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ChildBodyData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<ChildBodyData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Tags))
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ChildBodyData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                writer.WritePropertyName("tags"u8);
-                writer.WriteStartObject();
-                foreach (var item in Tags)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
-                writer.WriteEndObject();
+                throw new FormatException($"The model {nameof(ChildBodyData)} does not support writing '{format}' format.");
             }
-            writer.WritePropertyName("location"u8);
-            writer.WriteStringValue(Location);
+
+            base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(AsyncExecution))
@@ -65,12 +69,30 @@ namespace MgmtMultipleParentResource
                 writer.WritePropertyName("errorBlobUri"u8);
                 writer.WriteStringValue(ErrorBlobUri.AbsoluteUri);
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            {
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState);
+            }
             writer.WriteEndObject();
         }
 
-        internal static ChildBodyData DeserializeChildBodyData(JsonElement element)
+        ChildBodyData IJsonModel<ChildBodyData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<ChildBodyData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(ChildBodyData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeChildBodyData(document.RootElement, options);
+        }
+
+        internal static ChildBodyData DeserializeChildBodyData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -88,6 +110,8 @@ namespace MgmtMultipleParentResource
             Uri outputBlobUri = default;
             Uri errorBlobUri = default;
             string provisioningState = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"u8))
@@ -196,7 +220,12 @@ namespace MgmtMultipleParentResource
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new ChildBodyData(
                 id,
                 name,
@@ -210,7 +239,39 @@ namespace MgmtMultipleParentResource
                 timeoutInSeconds,
                 outputBlobUri,
                 errorBlobUri,
-                provisioningState);
+                provisioningState,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<ChildBodyData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ChildBodyData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtMultipleParentResourceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(ChildBodyData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        ChildBodyData IPersistableModel<ChildBodyData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ChildBodyData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeChildBodyData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(ChildBodyData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<ChildBodyData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

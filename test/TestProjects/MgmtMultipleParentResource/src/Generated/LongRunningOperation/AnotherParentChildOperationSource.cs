@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.Text.Json;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,16 +25,14 @@ namespace MgmtMultipleParentResource
 
         AnotherParentChildResource IOperationSource<AnotherParentChildResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
-            var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
+            var data = ModelReaderWriter.Read<ChildBodyData>(response.Content, ModelReaderWriterOptions.Json, MgmtMultipleParentResourceContext.Default);
             return new AnotherParentChildResource(_client, data);
         }
 
         async ValueTask<AnotherParentChildResource> IOperationSource<AnotherParentChildResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
-            var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
-            return new AnotherParentChildResource(_client, data);
+            var data = ModelReaderWriter.Read<ChildBodyData>(response.Content, ModelReaderWriterOptions.Json, MgmtMultipleParentResourceContext.Default);
+            return await Task.FromResult(new AnotherParentChildResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

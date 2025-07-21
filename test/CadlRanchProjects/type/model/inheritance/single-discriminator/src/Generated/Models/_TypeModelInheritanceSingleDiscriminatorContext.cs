@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using _Type.Model.Inheritance.SingleDiscriminator.Models;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator
 {
@@ -13,6 +14,15 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Bird))]
+    [ModelReaderWriterBuildable(typeof(Dinosaur))]
+    [ModelReaderWriterBuildable(typeof(Eagle))]
+    [ModelReaderWriterBuildable(typeof(Goose))]
+    [ModelReaderWriterBuildable(typeof(SeaGull))]
+    [ModelReaderWriterBuildable(typeof(Sparrow))]
+    [ModelReaderWriterBuildable(typeof(TRex))]
+    [ModelReaderWriterBuildable(typeof(UnknownBird))]
+    [ModelReaderWriterBuildable(typeof(UnknownDinosaur))]
     public partial class _TypeModelInheritanceSingleDiscriminatorContext : ModelReaderWriterContext
     {
     }

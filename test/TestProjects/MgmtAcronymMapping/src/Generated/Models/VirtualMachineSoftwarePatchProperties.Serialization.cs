@@ -6,15 +6,122 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VirtualMachineSoftwarePatchProperties
+    public partial class VirtualMachineSoftwarePatchProperties : IUtf8JsonSerializable, IJsonModel<VirtualMachineSoftwarePatchProperties>
     {
-        internal static VirtualMachineSoftwarePatchProperties DeserializeVirtualMachineSoftwarePatchProperties(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineSoftwarePatchProperties>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<VirtualMachineSoftwarePatchProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineSoftwarePatchProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(VirtualMachineSoftwarePatchProperties)} does not support writing '{format}' format.");
+            }
+
+            if (options.Format != "W" && Optional.IsDefined(PatchId))
+            {
+                writer.WritePropertyName("patchId"u8);
+                writer.WriteStringValue(PatchId);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Version))
+            {
+                writer.WritePropertyName("version"u8);
+                writer.WriteStringValue(Version);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Kbid))
+            {
+                writer.WritePropertyName("kbid"u8);
+                writer.WriteStringValue(Kbid);
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(Classifications))
+            {
+                writer.WritePropertyName("classifications"u8);
+                writer.WriteStartArray();
+                foreach (var item in Classifications)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsDefined(RebootBehavior))
+            {
+                writer.WritePropertyName("rebootBehavior"u8);
+                writer.WriteStringValue(RebootBehavior.Value.ToString());
+            }
+            if (options.Format != "W" && Optional.IsDefined(ActivityId))
+            {
+                writer.WritePropertyName("activityId"u8);
+                writer.WriteStringValue(ActivityId);
+            }
+            if (options.Format != "W" && Optional.IsDefined(PublishedOn))
+            {
+                writer.WritePropertyName("publishedDate"u8);
+                writer.WriteStringValue(PublishedOn.Value, "O");
+            }
+            if (options.Format != "W" && Optional.IsDefined(LastModifiedOn))
+            {
+                writer.WritePropertyName("lastModifiedDateTime"u8);
+                writer.WriteStringValue(LastModifiedOn.Value, "O");
+            }
+            if (options.Format != "W" && Optional.IsDefined(AssessmentState))
+            {
+                writer.WritePropertyName("assessmentState"u8);
+                writer.WriteStringValue(AssessmentState.Value.ToString());
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+        }
+
+        VirtualMachineSoftwarePatchProperties IJsonModel<VirtualMachineSoftwarePatchProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineSoftwarePatchProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(VirtualMachineSoftwarePatchProperties)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineSoftwarePatchProperties(document.RootElement, options);
+        }
+
+        internal static VirtualMachineSoftwarePatchProperties DeserializeVirtualMachineSoftwarePatchProperties(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -29,6 +136,8 @@ namespace MgmtAcronymMapping.Models
             DateTimeOffset? publishedDate = default;
             DateTimeOffset? lastModifiedDateTime = default;
             PatchAssessmentState? assessmentState = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("patchId"u8))
@@ -106,7 +215,12 @@ namespace MgmtAcronymMapping.Models
                     assessmentState = new PatchAssessmentState(property.Value.GetString());
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new VirtualMachineSoftwarePatchProperties(
                 patchId,
                 name,
@@ -117,7 +231,39 @@ namespace MgmtAcronymMapping.Models
                 activityId,
                 publishedDate,
                 lastModifiedDateTime,
-                assessmentState);
+                assessmentState,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<VirtualMachineSoftwarePatchProperties>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineSoftwarePatchProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtAcronymMappingContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(VirtualMachineSoftwarePatchProperties)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        VirtualMachineSoftwarePatchProperties IPersistableModel<VirtualMachineSoftwarePatchProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineSoftwarePatchProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeVirtualMachineSoftwarePatchProperties(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(VirtualMachineSoftwarePatchProperties)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<VirtualMachineSoftwarePatchProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

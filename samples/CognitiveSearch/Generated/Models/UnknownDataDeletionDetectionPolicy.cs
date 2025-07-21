@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Unknown version of DataDeletionDetectionPolicy. </summary>
@@ -12,9 +15,15 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of <see cref="UnknownDataDeletionDetectionPolicy"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the data deletion detection policy. </param>
-        internal UnknownDataDeletionDetectionPolicy(string odataType) : base(odataType)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownDataDeletionDetectionPolicy(string odataType, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, serializedAdditionalRawData)
         {
             OdataType = odataType ?? "Unknown";
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownDataDeletionDetectionPolicy"/> for deserialization. </summary>
+        internal UnknownDataDeletionDetectionPolicy()
+        {
         }
     }
 }

@@ -7,6 +7,7 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -15,10 +16,51 @@ using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    public partial class DeletedManagedHsmData
+    public partial class DeletedManagedHsmData : IUtf8JsonSerializable, IJsonModel<DeletedManagedHsmData>
     {
-        internal static DeletedManagedHsmData DeserializeDeletedManagedHsmData(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeletedManagedHsmData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<DeletedManagedHsmData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DeletedManagedHsmData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(DeletedManagedHsmData)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
+            if (Optional.IsDefined(Properties))
+            {
+                writer.WritePropertyName("properties"u8);
+                writer.WriteObjectValue(Properties, options);
+            }
+        }
+
+        DeletedManagedHsmData IJsonModel<DeletedManagedHsmData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DeletedManagedHsmData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(DeletedManagedHsmData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeletedManagedHsmData(document.RootElement, options);
+        }
+
+        internal static DeletedManagedHsmData DeserializeDeletedManagedHsmData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -27,7 +69,9 @@ namespace MgmtMockAndSample
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Azure.ResourceManager.Models.SystemData systemData = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -36,7 +80,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    properties = DeletedManagedHsmProperties.DeserializeDeletedManagedHsmProperties(property.Value);
+                    properties = DeletedManagedHsmProperties.DeserializeDeletedManagedHsmProperties(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -60,11 +104,53 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
+                    systemData = ModelReaderWriter.Read<Azure.ResourceManager.Models.SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new DeletedManagedHsmData(id, name, type, systemData, properties);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new DeletedManagedHsmData(
+                id,
+                name,
+                type,
+                systemData,
+                properties,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<DeletedManagedHsmData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DeletedManagedHsmData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(DeletedManagedHsmData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        DeletedManagedHsmData IPersistableModel<DeletedManagedHsmData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DeletedManagedHsmData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeDeletedManagedHsmData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(DeletedManagedHsmData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<DeletedManagedHsmData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

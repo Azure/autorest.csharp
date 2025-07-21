@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -12,18 +14,34 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class Index : IUtf8JsonSerializable
+    public partial class Index : IUtf8JsonSerializable, IJsonModel<Index>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Index>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<Index>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Index>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Index)} does not support writing '{format}' format.");
+            }
+
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             writer.WritePropertyName("fields"u8);
             writer.WriteStartArray();
             foreach (var item in Fields)
             {
-                writer.WriteObjectValue(item);
+                writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
             if (Optional.IsCollectionDefined(ScoringProfiles))
@@ -32,7 +50,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in ScoringProfiles)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -44,7 +62,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(CorsOptions))
             {
                 writer.WritePropertyName("corsOptions"u8);
-                writer.WriteObjectValue(CorsOptions);
+                writer.WriteObjectValue(CorsOptions, options);
             }
             if (Optional.IsCollectionDefined(Suggesters))
             {
@@ -52,7 +70,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Suggesters)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -62,7 +80,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Analyzers)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -72,7 +90,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Tokenizers)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -82,7 +100,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in TokenFilters)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -92,30 +110,58 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in CharFilters)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(EncryptionKey))
             {
                 writer.WritePropertyName("encryptionKey"u8);
-                writer.WriteObjectValue(EncryptionKey);
+                writer.WriteObjectValue(EncryptionKey, options);
             }
             if (Optional.IsDefined(Similarity))
             {
                 writer.WritePropertyName("similarity"u8);
-                writer.WriteObjectValue(Similarity);
+                writer.WriteObjectValue(Similarity, options);
             }
             if (Optional.IsDefined(ETag))
             {
                 writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
         }
 
-        internal static Index DeserializeIndex(JsonElement element)
+        Index IJsonModel<Index>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Index>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Index)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeIndex(document.RootElement, options);
+        }
+
+        internal static Index DeserializeIndex(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -133,6 +179,8 @@ namespace CognitiveSearch.Models
             EncryptionKey encryptionKey = default;
             Similarity similarity = default;
             string odataEtag = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -145,7 +193,7 @@ namespace CognitiveSearch.Models
                     List<Field> array = new List<Field>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Field.DeserializeField(item));
+                        array.Add(Field.DeserializeField(item, options));
                     }
                     fields = array;
                     continue;
@@ -159,7 +207,7 @@ namespace CognitiveSearch.Models
                     List<ScoringProfile> array = new List<ScoringProfile>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ScoringProfile.DeserializeScoringProfile(item));
+                        array.Add(ScoringProfile.DeserializeScoringProfile(item, options));
                     }
                     scoringProfiles = array;
                     continue;
@@ -175,7 +223,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    corsOptions = CorsOptions.DeserializeCorsOptions(property.Value);
+                    corsOptions = CorsOptions.DeserializeCorsOptions(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("suggesters"u8))
@@ -187,7 +235,7 @@ namespace CognitiveSearch.Models
                     List<Suggester> array = new List<Suggester>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Suggester.DeserializeSuggester(item));
+                        array.Add(Suggester.DeserializeSuggester(item, options));
                     }
                     suggesters = array;
                     continue;
@@ -201,7 +249,7 @@ namespace CognitiveSearch.Models
                     List<Analyzer> array = new List<Analyzer>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Analyzer.DeserializeAnalyzer(item));
+                        array.Add(Analyzer.DeserializeAnalyzer(item, options));
                     }
                     analyzers = array;
                     continue;
@@ -215,7 +263,7 @@ namespace CognitiveSearch.Models
                     List<Tokenizer> array = new List<Tokenizer>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Tokenizer.DeserializeTokenizer(item));
+                        array.Add(Tokenizer.DeserializeTokenizer(item, options));
                     }
                     tokenizers = array;
                     continue;
@@ -229,7 +277,7 @@ namespace CognitiveSearch.Models
                     List<TokenFilter> array = new List<TokenFilter>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TokenFilter.DeserializeTokenFilter(item));
+                        array.Add(TokenFilter.DeserializeTokenFilter(item, options));
                     }
                     tokenFilters = array;
                     continue;
@@ -243,7 +291,7 @@ namespace CognitiveSearch.Models
                     List<CharFilter> array = new List<CharFilter>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CharFilter.DeserializeCharFilter(item));
+                        array.Add(CharFilter.DeserializeCharFilter(item, options));
                     }
                     charFilters = array;
                     continue;
@@ -254,7 +302,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
+                    encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("similarity"u8))
@@ -263,7 +311,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    similarity = Similarity.DeserializeSimilarity(property.Value);
+                    similarity = Similarity.DeserializeSimilarity(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"u8))
@@ -271,7 +319,12 @@ namespace CognitiveSearch.Models
                     odataEtag = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new Index(
                 name,
                 fields,
@@ -285,8 +338,40 @@ namespace CognitiveSearch.Models
                 charFilters ?? new ChangeTrackingList<CharFilter>(),
                 encryptionKey,
                 similarity,
-                odataEtag);
+                odataEtag,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<Index>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Index>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(Index)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        Index IPersistableModel<Index>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Index>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeIndex(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(Index)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Index>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -300,7 +385,7 @@ namespace CognitiveSearch.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtTypeSpec.Models;
 
 namespace MgmtTypeSpec
 {
@@ -13,6 +14,27 @@ namespace MgmtTypeSpec
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ArmOperationStatusResourceProvisioningState))]
+    [ModelReaderWriterBuildable(typeof(ErrorAdditionalInfo))]
+    [ModelReaderWriterBuildable(typeof(ErrorResponse))]
+    [ModelReaderWriterBuildable(typeof(ExtendedLocation))]
+    [ModelReaderWriterBuildable(typeof(FooListResult))]
+    [ModelReaderWriterBuildable(typeof(FooProperties))]
+    [ModelReaderWriterBuildable(typeof(ManagedServiceIdentity))]
+    [ModelReaderWriterBuildable(typeof(MgmtTypeSpecPrivateLinkResourceData))]
+    [ModelReaderWriterBuildable(typeof(MgmtTypeSpecPrivateLinkResourceListResult))]
+    [ModelReaderWriterBuildable(typeof(MgmtTypeSpecPrivateLinkResourceProperties))]
+    [ModelReaderWriterBuildable(typeof(MgmtTypeSpecResourceData))]
+    [ModelReaderWriterBuildable(typeof(Operation))]
+    [ModelReaderWriterBuildable(typeof(OperationDisplay))]
+    [ModelReaderWriterBuildable(typeof(OperationListResult))]
+    [ModelReaderWriterBuildable(typeof(OperationStatusResult))]
+    [ModelReaderWriterBuildable(typeof(ProxyResource))]
+    [ModelReaderWriterBuildable(typeof(StartContent))]
+    [ModelReaderWriterBuildable(typeof(StartParameterBody))]
+    [ModelReaderWriterBuildable(typeof(SystemData))]
+    [ModelReaderWriterBuildable(typeof(TrackedResource))]
+    [ModelReaderWriterBuildable(typeof(UserAssignedIdentity))]
     public partial class MgmtTypeSpecContext : ModelReaderWriterContext
     {
     }

@@ -5,16 +5,35 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class OSDisk : IUtf8JsonSerializable
+    public partial class OSDisk : IUtf8JsonSerializable, IJsonModel<OSDisk>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OSDisk>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<OSDisk>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OSDisk>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(OSDisk)} does not support writing '{format}' format.");
+            }
+
             if (Optional.IsDefined(OSType))
             {
                 writer.WritePropertyName("osType"u8);
@@ -23,7 +42,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(EncryptionSettings))
             {
                 writer.WritePropertyName("encryptionSettings"u8);
-                writer.WriteObjectValue(EncryptionSettings);
+                writer.WriteObjectValue(EncryptionSettings, options);
             }
             if (Optional.IsDefined(Name))
             {
@@ -33,12 +52,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
-                writer.WriteObjectValue(Vhd);
+                writer.WriteObjectValue(Vhd, options);
             }
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue(Image);
+                writer.WriteObjectValue(Image, options);
             }
             if (Optional.IsDefined(Caching))
             {
@@ -53,7 +72,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
-                writer.WriteObjectValue(DiffDiskSettings);
+                writer.WriteObjectValue(DiffDiskSettings, options);
             }
             writer.WritePropertyName("createOption"u8);
             writer.WriteStringValue(CreateOption.ToString());
@@ -65,13 +84,41 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue(ManagedDisk);
+                writer.WriteObjectValue(ManagedDisk, options);
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
         }
 
-        internal static OSDisk DeserializeOSDisk(JsonElement element)
+        OSDisk IJsonModel<OSDisk>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<OSDisk>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(OSDisk)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOSDisk(document.RootElement, options);
+        }
+
+        internal static OSDisk DeserializeOSDisk(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -87,6 +134,8 @@ namespace MgmtAcronymMapping.Models
             DiskCreateOptionType createOption = default;
             int? diskSizeGB = default;
             ManagedDiskParameters managedDisk = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("osType"u8))
@@ -104,7 +153,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    encryptionSettings = DiskEncryptionSettings.DeserializeDiskEncryptionSettings(property.Value);
+                    encryptionSettings = DiskEncryptionSettings.DeserializeDiskEncryptionSettings(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("name"u8))
@@ -118,7 +167,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    vhd = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value);
+                    vhd = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("image"u8))
@@ -127,7 +176,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    image = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value);
+                    image = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("caching"u8))
@@ -154,7 +203,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    diffDiskSettings = DiffDiskSettings.DeserializeDiffDiskSettings(property.Value);
+                    diffDiskSettings = DiffDiskSettings.DeserializeDiffDiskSettings(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("createOption"u8))
@@ -177,10 +226,15 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    managedDisk = ManagedDiskParameters.DeserializeManagedDiskParameters(property.Value);
+                    managedDisk = ManagedDiskParameters.DeserializeManagedDiskParameters(property.Value, options);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new OSDisk(
                 osType,
                 encryptionSettings,
@@ -192,7 +246,39 @@ namespace MgmtAcronymMapping.Models
                 diffDiskSettings,
                 createOption,
                 diskSizeGB,
-                managedDisk);
+                managedDisk,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<OSDisk>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OSDisk>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtAcronymMappingContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(OSDisk)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        OSDisk IPersistableModel<OSDisk>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OSDisk>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeOSDisk(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(OSDisk)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<OSDisk>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

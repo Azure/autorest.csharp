@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtSafeFlatten.Models;
 
 namespace MgmtSafeFlatten
 {
@@ -13,6 +14,19 @@ namespace MgmtSafeFlatten
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(LayerOneBarType))]
+    [ModelReaderWriterBuildable(typeof(LayerOneBaseType))]
+    [ModelReaderWriterBuildable(typeof(LayerOneFooType))]
+    [ModelReaderWriterBuildable(typeof(LayerOneProperties))]
+    [ModelReaderWriterBuildable(typeof(LayerOneSingle))]
+    [ModelReaderWriterBuildable(typeof(LayerOneSingleConflict))]
+    [ModelReaderWriterBuildable(typeof(LayerTwoSingle))]
+    [ModelReaderWriterBuildable(typeof(MgmtSafeFlattenResourceData))]
+    [ModelReaderWriterBuildable(typeof(TypeFour))]
+    [ModelReaderWriterBuildable(typeof(TypeOneListResult))]
+    [ModelReaderWriterBuildable(typeof(TypeThree))]
+    [ModelReaderWriterBuildable(typeof(TypeTwoListResult))]
+    [ModelReaderWriterBuildable(typeof(UnknownLayerOneBaseType))]
     public partial class MgmtSafeFlattenContext : ModelReaderWriterContext
     {
     }

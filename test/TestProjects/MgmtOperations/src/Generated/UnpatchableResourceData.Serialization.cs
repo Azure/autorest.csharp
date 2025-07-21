@@ -15,34 +15,51 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtOperations
 {
-    public partial class UnpatchableResourceData : IUtf8JsonSerializable
+    public partial class UnpatchableResourceData : IUtf8JsonSerializable, IJsonModel<UnpatchableResourceData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnpatchableResourceData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<UnpatchableResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<UnpatchableResourceData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(UnpatchableResourceData)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
             }
-            if (Optional.IsCollectionDefined(Tags))
-            {
-                writer.WritePropertyName("tags"u8);
-                writer.WriteStartObject();
-                foreach (var item in Tags)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
-                writer.WriteEndObject();
-            }
-            writer.WritePropertyName("location"u8);
-            writer.WriteStringValue(Location);
-            writer.WriteEndObject();
         }
 
-        internal static UnpatchableResourceData DeserializeUnpatchableResourceData(JsonElement element)
+        UnpatchableResourceData IJsonModel<UnpatchableResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<UnpatchableResourceData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(UnpatchableResourceData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnpatchableResourceData(document.RootElement, options);
+        }
+
+        internal static UnpatchableResourceData DeserializeUnpatchableResourceData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -54,6 +71,8 @@ namespace MgmtOperations
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"u8))
@@ -104,7 +123,12 @@ namespace MgmtOperations
                     systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtOperationsContext.Default);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new UnpatchableResourceData(
                 id,
                 name,
@@ -112,7 +136,39 @@ namespace MgmtOperations
                 systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                foo);
+                foo,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<UnpatchableResourceData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<UnpatchableResourceData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtOperationsContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(UnpatchableResourceData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        UnpatchableResourceData IPersistableModel<UnpatchableResourceData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<UnpatchableResourceData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeUnpatchableResourceData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(UnpatchableResourceData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<UnpatchableResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

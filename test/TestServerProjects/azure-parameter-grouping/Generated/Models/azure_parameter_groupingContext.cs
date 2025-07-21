@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using azure_parameter_grouping.Models;
 
 namespace azure_parameter_grouping
 {
@@ -13,6 +14,13 @@ namespace azure_parameter_grouping
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Error))]
+    [ModelReaderWriterBuildable(typeof(FirstParameterGroup))]
+    [ModelReaderWriterBuildable(typeof(Grouper))]
+    [ModelReaderWriterBuildable(typeof(ParameterGroupingPostMultiParamGroupsSecondParamGroup))]
+    [ModelReaderWriterBuildable(typeof(ParameterGroupingPostOptionalParameters))]
+    [ModelReaderWriterBuildable(typeof(ParameterGroupingPostRequiredParameters))]
+    [ModelReaderWriterBuildable(typeof(ParameterGroupingPostReservedWordsParameters))]
     public partial class azure_parameter_groupingContext : ModelReaderWriterContext
     {
     }

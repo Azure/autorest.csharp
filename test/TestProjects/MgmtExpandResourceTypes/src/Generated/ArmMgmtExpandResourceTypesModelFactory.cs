@@ -68,9 +68,10 @@ namespace MgmtExpandResourceTypes.Models
                 ptrRecords?.ToList(),
                 srvRecords?.ToList(),
                 txtRecords?.ToList(),
-                cname != null ? new CnameRecord(cname) : null,
+                cname != null ? new CnameRecord(cname, serializedAdditionalRawData: null) : null,
                 soaRecord,
-                caaRecords?.ToList());
+                caaRecords?.ToList(),
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtExpandResourceTypes.ZoneData"/>. </summary>
@@ -116,7 +117,8 @@ namespace MgmtExpandResourceTypes.Models
                 storageType,
                 memoryType,
                 registrationVirtualNetworks?.ToList(),
-                resolutionVirtualNetworks?.ToList());
+                resolutionVirtualNetworks?.ToList(),
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DnsResourceReferenceResult"/>. </summary>
@@ -126,7 +128,7 @@ namespace MgmtExpandResourceTypes.Models
         {
             dnsResourceReferences ??= new List<DnsResourceReference>();
 
-            return new DnsResourceReferenceResult(dnsResourceReferences?.ToList());
+            return new DnsResourceReferenceResult(dnsResourceReferences?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DnsResourceReference"/>. </summary>
@@ -137,7 +139,7 @@ namespace MgmtExpandResourceTypes.Models
         {
             dnsResources ??= new List<WritableSubResource>();
 
-            return new DnsResourceReference(dnsResources?.ToList(), targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null);
+            return new DnsResourceReference(dnsResources?.ToList(), targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null, serializedAdditionalRawData: null);
         }
     }
 }

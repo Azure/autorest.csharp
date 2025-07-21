@@ -16,11 +16,28 @@ using MgmtExtensionResource.Models;
 
 namespace MgmtExtensionResource
 {
-    public partial class PolicyDefinitionData : IUtf8JsonSerializable
+    public partial class PolicyDefinitionData : IUtf8JsonSerializable, IJsonModel<PolicyDefinitionData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PolicyDefinitionData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<PolicyDefinitionData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PolicyDefinitionData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(PolicyDefinitionData)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(PolicyType))
@@ -74,16 +91,29 @@ namespace MgmtExtensionResource
                 foreach (var item in Parameters)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    writer.WriteObjectValue(item.Value, options);
                 }
                 writer.WriteEndObject();
             }
             writer.WriteEndObject();
-            writer.WriteEndObject();
         }
 
-        internal static PolicyDefinitionData DeserializePolicyDefinitionData(JsonElement element)
+        PolicyDefinitionData IJsonModel<PolicyDefinitionData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<PolicyDefinitionData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(PolicyDefinitionData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePolicyDefinitionData(document.RootElement, options);
+        }
+
+        internal static PolicyDefinitionData DeserializePolicyDefinitionData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -99,6 +129,8 @@ namespace MgmtExtensionResource
             BinaryData policyRule = default;
             BinaryData metadata = default;
             IDictionary<string, ParameterDefinitionsValue> parameters = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -185,7 +217,7 @@ namespace MgmtExtensionResource
                             Dictionary<string, ParameterDefinitionsValue> dictionary = new Dictionary<string, ParameterDefinitionsValue>();
                             foreach (var property1 in property0.Value.EnumerateObject())
                             {
-                                dictionary.Add(property1.Name, ParameterDefinitionsValue.DeserializeParameterDefinitionsValue(property1.Value));
+                                dictionary.Add(property1.Name, ParameterDefinitionsValue.DeserializeParameterDefinitionsValue(property1.Value, options));
                             }
                             parameters = dictionary;
                             continue;
@@ -193,7 +225,12 @@ namespace MgmtExtensionResource
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new PolicyDefinitionData(
                 id,
                 name,
@@ -205,7 +242,39 @@ namespace MgmtExtensionResource
                 description,
                 policyRule,
                 metadata,
-                parameters ?? new ChangeTrackingDictionary<string, ParameterDefinitionsValue>());
+                parameters ?? new ChangeTrackingDictionary<string, ParameterDefinitionsValue>(),
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<PolicyDefinitionData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PolicyDefinitionData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtExtensionResourceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(PolicyDefinitionData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        PolicyDefinitionData IPersistableModel<PolicyDefinitionData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PolicyDefinitionData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializePolicyDefinitionData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(PolicyDefinitionData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<PolicyDefinitionData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

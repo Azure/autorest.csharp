@@ -6,16 +6,34 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class AccessPolicyEntry : IUtf8JsonSerializable
+    public partial class AccessPolicyEntry : IUtf8JsonSerializable, IJsonModel<AccessPolicyEntry>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AccessPolicyEntry>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<AccessPolicyEntry>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AccessPolicyEntry>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(AccessPolicyEntry)} does not support writing '{format}' format.");
+            }
+
             writer.WritePropertyName("tenantId"u8);
             writer.WriteStringValue(TenantId);
             writer.WritePropertyName("objectId"u8);
@@ -26,12 +44,40 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStringValue(ApplicationId.Value);
             }
             writer.WritePropertyName("permissions"u8);
-            writer.WriteObjectValue(Permissions);
-            writer.WriteEndObject();
+            writer.WriteObjectValue(Permissions, options);
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
         }
 
-        internal static AccessPolicyEntry DeserializeAccessPolicyEntry(JsonElement element)
+        AccessPolicyEntry IJsonModel<AccessPolicyEntry>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<AccessPolicyEntry>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(AccessPolicyEntry)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAccessPolicyEntry(document.RootElement, options);
+        }
+
+        internal static AccessPolicyEntry DeserializeAccessPolicyEntry(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -40,6 +86,8 @@ namespace MgmtMockAndSample.Models
             string objectId = default;
             Guid? applicationId = default;
             Permissions permissions = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tenantId"u8))
@@ -63,11 +111,47 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("permissions"u8))
                 {
-                    permissions = Permissions.DeserializePermissions(property.Value);
+                    permissions = Permissions.DeserializePermissions(property.Value, options);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new AccessPolicyEntry(tenantId, objectId, applicationId, permissions);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new AccessPolicyEntry(tenantId, objectId, applicationId, permissions, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<AccessPolicyEntry>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AccessPolicyEntry>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(AccessPolicyEntry)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        AccessPolicyEntry IPersistableModel<AccessPolicyEntry>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AccessPolicyEntry>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeAccessPolicyEntry(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(AccessPolicyEntry)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<AccessPolicyEntry>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

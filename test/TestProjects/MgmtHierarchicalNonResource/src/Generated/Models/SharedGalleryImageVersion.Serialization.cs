@@ -6,14 +6,66 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    public partial class SharedGalleryImageVersion
+    public partial class SharedGalleryImageVersion : IUtf8JsonSerializable, IJsonModel<SharedGalleryImageVersion>
     {
-        internal static SharedGalleryImageVersion DeserializeSharedGalleryImageVersion(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SharedGalleryImageVersion>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<SharedGalleryImageVersion>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SharedGalleryImageVersion>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(SharedGalleryImageVersion)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PublishedOn))
+            {
+                writer.WritePropertyName("publishedDate"u8);
+                writer.WriteStringValue(PublishedOn.Value, "O");
+            }
+            if (Optional.IsDefined(EndOfLifeOn))
+            {
+                writer.WritePropertyName("endOfLifeDate"u8);
+                writer.WriteStringValue(EndOfLifeOn.Value, "O");
+            }
+            writer.WriteEndObject();
+        }
+
+        SharedGalleryImageVersion IJsonModel<SharedGalleryImageVersion>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SharedGalleryImageVersion>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(SharedGalleryImageVersion)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSharedGalleryImageVersion(document.RootElement, options);
+        }
+
+        internal static SharedGalleryImageVersion DeserializeSharedGalleryImageVersion(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -23,6 +75,8 @@ namespace MgmtHierarchicalNonResource.Models
             DateTimeOffset? publishedDate = default;
             DateTimeOffset? endOfLifeDate = default;
             string uniqueId = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -82,8 +136,50 @@ namespace MgmtHierarchicalNonResource.Models
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new SharedGalleryImageVersion(name, location, uniqueId, publishedDate, endOfLifeDate);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new SharedGalleryImageVersion(
+                name,
+                location,
+                serializedAdditionalRawData,
+                uniqueId,
+                publishedDate,
+                endOfLifeDate);
         }
+
+        BinaryData IPersistableModel<SharedGalleryImageVersion>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SharedGalleryImageVersion>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtHierarchicalNonResourceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(SharedGalleryImageVersion)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        SharedGalleryImageVersion IPersistableModel<SharedGalleryImageVersion>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SharedGalleryImageVersion>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeSharedGalleryImageVersion(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(SharedGalleryImageVersion)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<SharedGalleryImageVersion>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

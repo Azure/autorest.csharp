@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtCollectionParent.Models;
 
 namespace MgmtCollectionParent
 {
@@ -13,6 +14,13 @@ namespace MgmtCollectionParent
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ErrorAdditionalInfo))]
+    [ModelReaderWriterBuildable(typeof(ErrorResponse))]
+    [ModelReaderWriterBuildable(typeof(MgmtCollectionParentResourceData))]
+    [ModelReaderWriterBuildable(typeof(OrderResourceList))]
+    [ModelReaderWriterBuildable(typeof(ProxyResource))]
+    [ModelReaderWriterBuildable(typeof(StageDetails))]
+    [ModelReaderWriterBuildable(typeof(SystemData))]
     public partial class MgmtCollectionParentContext : ModelReaderWriterContext
     {
     }

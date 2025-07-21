@@ -17,27 +17,60 @@ using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    public partial class MgmtMockAndSamplePrivateEndpointConnectionData : IUtf8JsonSerializable
+    public partial class MgmtMockAndSamplePrivateEndpointConnectionData : IUtf8JsonSerializable, IJsonModel<MgmtMockAndSamplePrivateEndpointConnectionData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtMockAndSamplePrivateEndpointConnectionData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<MgmtMockAndSamplePrivateEndpointConnectionData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<MgmtMockAndSamplePrivateEndpointConnectionData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(MgmtMockAndSamplePrivateEndpointConnectionData)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Etag))
             {
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Location))
+            {
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location.Value);
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(PrivateEndpoint))
             {
                 writer.WritePropertyName("privateEndpoint"u8);
-                ((IJsonModel<Azure.ResourceManager.Resources.Models.SubResource>)PrivateEndpoint).Write(writer, ModelSerializationExtensions.WireOptions);
+                ((IJsonModel<Azure.ResourceManager.Resources.Models.SubResource>)PrivateEndpoint).Write(writer, options);
             }
             if (Optional.IsDefined(ConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                writer.WriteObjectValue(ConnectionState);
+                writer.WriteObjectValue(ConnectionState, options);
             }
             if (Optional.IsDefined(ProvisioningState))
             {
@@ -45,11 +78,24 @@ namespace MgmtMockAndSample
                 writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             writer.WriteEndObject();
-            writer.WriteEndObject();
         }
 
-        internal static MgmtMockAndSamplePrivateEndpointConnectionData DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(JsonElement element)
+        MgmtMockAndSamplePrivateEndpointConnectionData IJsonModel<MgmtMockAndSamplePrivateEndpointConnectionData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<MgmtMockAndSamplePrivateEndpointConnectionData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(MgmtMockAndSamplePrivateEndpointConnectionData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(document.RootElement, options);
+        }
+
+        internal static MgmtMockAndSamplePrivateEndpointConnectionData DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -60,10 +106,12 @@ namespace MgmtMockAndSample
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Azure.ResourceManager.Models.SystemData systemData = default;
             Azure.ResourceManager.Resources.Models.SubResource privateEndpoint = default;
             MgmtMockAndSamplePrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
             MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -115,7 +163,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
+                    systemData = ModelReaderWriter.Read<Azure.ResourceManager.Models.SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -133,7 +181,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            privateEndpoint = ModelReaderWriter.Read<Azure.ResourceManager.Resources.Models.SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
+                            privateEndpoint = ModelReaderWriter.Read<Azure.ResourceManager.Resources.Models.SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), options, MgmtMockAndSampleContext.Default);
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnectionState"u8))
@@ -142,7 +190,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            privateLinkServiceConnectionState = MgmtMockAndSamplePrivateLinkServiceConnectionState.DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(property0.Value);
+                            privateLinkServiceConnectionState = MgmtMockAndSamplePrivateLinkServiceConnectionState.DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))
@@ -157,7 +205,12 @@ namespace MgmtMockAndSample
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new MgmtMockAndSamplePrivateEndpointConnectionData(
                 id,
                 name,
@@ -168,7 +221,39 @@ namespace MgmtMockAndSample
                 privateLinkServiceConnectionState,
                 provisioningState,
                 location,
-                tags ?? new ChangeTrackingDictionary<string, string>());
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<MgmtMockAndSamplePrivateEndpointConnectionData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<MgmtMockAndSamplePrivateEndpointConnectionData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(MgmtMockAndSamplePrivateEndpointConnectionData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        MgmtMockAndSamplePrivateEndpointConnectionData IPersistableModel<MgmtMockAndSamplePrivateEndpointConnectionData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<MgmtMockAndSamplePrivateEndpointConnectionData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(MgmtMockAndSamplePrivateEndpointConnectionData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<MgmtMockAndSamplePrivateEndpointConnectionData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -15,15 +15,31 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VaultSecretGroup : IUtf8JsonSerializable
+    public partial class VaultSecretGroup : IUtf8JsonSerializable, IJsonModel<VaultSecretGroup>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VaultSecretGroup>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<VaultSecretGroup>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultSecretGroup>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(VaultSecretGroup)} does not support writing '{format}' format.");
+            }
+
             if (Optional.IsDefined(SourceVault))
             {
                 writer.WritePropertyName("sourceVault"u8);
-                ((IJsonModel<WritableSubResource>)SourceVault).Write(writer, ModelSerializationExtensions.WireOptions);
+                ((IJsonModel<WritableSubResource>)SourceVault).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(VaultCertificates))
             {
@@ -31,21 +47,51 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in VaultCertificates)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
         }
 
-        internal static VaultSecretGroup DeserializeVaultSecretGroup(JsonElement element)
+        VaultSecretGroup IJsonModel<VaultSecretGroup>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultSecretGroup>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(VaultSecretGroup)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVaultSecretGroup(document.RootElement, options);
+        }
+
+        internal static VaultSecretGroup DeserializeVaultSecretGroup(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             WritableSubResource sourceVault = default;
             IList<VaultCertificate> vaultCertificates = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sourceVault"u8))
@@ -54,7 +100,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    sourceVault = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default);
+                    sourceVault = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, MgmtAcronymMappingContext.Default);
                     continue;
                 }
                 if (property.NameEquals("vaultCertificates"u8))
@@ -66,13 +112,49 @@ namespace MgmtAcronymMapping.Models
                     List<VaultCertificate> array = new List<VaultCertificate>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VaultCertificate.DeserializeVaultCertificate(item));
+                        array.Add(VaultCertificate.DeserializeVaultCertificate(item, options));
                     }
                     vaultCertificates = array;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new VaultSecretGroup(sourceVault, vaultCertificates ?? new ChangeTrackingList<VaultCertificate>());
+            serializedAdditionalRawData = rawDataDictionary;
+            return new VaultSecretGroup(sourceVault, vaultCertificates ?? new ChangeTrackingList<VaultCertificate>(), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<VaultSecretGroup>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultSecretGroup>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtAcronymMappingContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(VaultSecretGroup)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        VaultSecretGroup IPersistableModel<VaultSecretGroup>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultSecretGroup>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeVaultSecretGroup(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(VaultSecretGroup)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<VaultSecretGroup>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

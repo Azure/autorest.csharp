@@ -5,20 +5,39 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class DdosSettings : IUtf8JsonSerializable
+    public partial class DdosSettings : IUtf8JsonSerializable, IJsonModel<DdosSettings>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DdosSettings>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<DdosSettings>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DdosSettings>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(DdosSettings)} does not support writing '{format}' format.");
+            }
+
             if (Optional.IsDefined(DdosCustomPolicy))
             {
                 writer.WritePropertyName("ddosCustomPolicy"u8);
-                writer.WriteObjectValue(DdosCustomPolicy);
+                writer.WriteObjectValue(DdosCustomPolicy, options);
             }
             if (Optional.IsDefined(ProtectionCoverage))
             {
@@ -30,11 +49,39 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("protectedIP"u8);
                 writer.WriteBooleanValue(ProtectedIP.Value);
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
         }
 
-        internal static DdosSettings DeserializeDdosSettings(JsonElement element)
+        DdosSettings IJsonModel<DdosSettings>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<DdosSettings>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(DdosSettings)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDdosSettings(document.RootElement, options);
+        }
+
+        internal static DdosSettings DeserializeDdosSettings(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -42,6 +89,8 @@ namespace Azure.Network.Management.Interface.Models
             SubResource ddosCustomPolicy = default;
             DdosSettingsProtectionCoverage? protectionCoverage = default;
             bool? protectedIP = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ddosCustomPolicy"u8))
@@ -50,7 +99,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    ddosCustomPolicy = SubResource.DeserializeSubResource(property.Value);
+                    ddosCustomPolicy = SubResource.DeserializeSubResource(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("protectionCoverage"u8))
@@ -71,9 +120,45 @@ namespace Azure.Network.Management.Interface.Models
                     protectedIP = property.Value.GetBoolean();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new DdosSettings(ddosCustomPolicy, protectionCoverage, protectedIP);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new DdosSettings(ddosCustomPolicy, protectionCoverage, protectedIP, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<DdosSettings>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DdosSettings>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, AzureNetworkManagementInterfaceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(DdosSettings)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        DdosSettings IPersistableModel<DdosSettings>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DdosSettings>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeDdosSettings(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(DdosSettings)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<DdosSettings>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -87,7 +172,7 @@ namespace Azure.Network.Management.Interface.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.Text.Json;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,16 +25,14 @@ namespace MgmtScopeResource
 
         DeploymentExtendedResource IOperationSource<DeploymentExtendedResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
-            var data = DeploymentExtendedData.DeserializeDeploymentExtendedData(document.RootElement);
+            var data = ModelReaderWriter.Read<DeploymentExtendedData>(response.Content, ModelReaderWriterOptions.Json, MgmtScopeResourceContext.Default);
             return new DeploymentExtendedResource(_client, data);
         }
 
         async ValueTask<DeploymentExtendedResource> IOperationSource<DeploymentExtendedResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
-            var data = DeploymentExtendedData.DeserializeDeploymentExtendedData(document.RootElement);
-            return new DeploymentExtendedResource(_client, data);
+            var data = ModelReaderWriter.Read<DeploymentExtendedData>(response.Content, ModelReaderWriterOptions.Json, MgmtScopeResourceContext.Default);
+            return await Task.FromResult(new DeploymentExtendedResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

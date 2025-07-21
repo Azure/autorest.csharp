@@ -15,34 +15,51 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtExtensionCommonRestOperation
 {
-    public partial class TypeOneData : IUtf8JsonSerializable
+    public partial class TypeOneData : IUtf8JsonSerializable, IJsonModel<TypeOneData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TypeOneData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<TypeOneData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<TypeOneData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(TypeOneData)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(MyType))
             {
                 writer.WritePropertyName("MyType"u8);
                 writer.WriteStringValue(MyType);
             }
-            if (Optional.IsCollectionDefined(Tags))
-            {
-                writer.WritePropertyName("tags"u8);
-                writer.WriteStartObject();
-                foreach (var item in Tags)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
-                writer.WriteEndObject();
-            }
-            writer.WritePropertyName("location"u8);
-            writer.WriteStringValue(Location);
-            writer.WriteEndObject();
         }
 
-        internal static TypeOneData DeserializeTypeOneData(JsonElement element)
+        TypeOneData IJsonModel<TypeOneData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<TypeOneData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(TypeOneData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeTypeOneData(document.RootElement, options);
+        }
+
+        internal static TypeOneData DeserializeTypeOneData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -54,6 +71,8 @@ namespace MgmtExtensionCommonRestOperation
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("MyType"u8))
@@ -104,7 +123,12 @@ namespace MgmtExtensionCommonRestOperation
                     systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExtensionCommonRestOperationContext.Default);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new TypeOneData(
                 id,
                 name,
@@ -112,7 +136,39 @@ namespace MgmtExtensionCommonRestOperation
                 systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                myType);
+                myType,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<TypeOneData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<TypeOneData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtExtensionCommonRestOperationContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(TypeOneData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        TypeOneData IPersistableModel<TypeOneData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<TypeOneData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeTypeOneData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(TypeOneData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<TypeOneData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

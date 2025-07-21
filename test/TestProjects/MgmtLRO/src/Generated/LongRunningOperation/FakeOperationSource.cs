@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.Text.Json;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,16 +25,14 @@ namespace MgmtLRO
 
         FakeResource IOperationSource<FakeResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
-            var data = FakeData.DeserializeFakeData(document.RootElement);
+            var data = ModelReaderWriter.Read<FakeData>(response.Content, ModelReaderWriterOptions.Json, MgmtLROContext.Default);
             return new FakeResource(_client, data);
         }
 
         async ValueTask<FakeResource> IOperationSource<FakeResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
-            var data = FakeData.DeserializeFakeData(document.RootElement);
-            return new FakeResource(_client, data);
+            var data = ModelReaderWriter.Read<FakeData>(response.Content, ModelReaderWriterOptions.Json, MgmtLROContext.Default);
+            return await Task.FromResult(new FakeResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

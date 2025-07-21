@@ -3,6 +3,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Scm.Payload.Multipart.Models;
 
 namespace Scm.Payload.Multipart
 {
@@ -10,6 +11,23 @@ namespace Scm.Payload.Multipart
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Address))]
+    [ModelReaderWriterBuildable(typeof(AnonymousModelRequest))]
+    [ModelReaderWriterBuildable(typeof(BinaryArrayPartsRequest))]
+    [ModelReaderWriterBuildable(typeof(ComplexHttpPartsModelRequest))]
+    [ModelReaderWriterBuildable(typeof(ComplexPartsRequest))]
+    [ModelReaderWriterBuildable(typeof(File))]
+    [ModelReaderWriterBuildable(typeof(FileOptionalContentType))]
+    [ModelReaderWriterBuildable(typeof(FileRequiredMetaData))]
+    [ModelReaderWriterBuildable(typeof(FileSpecificContentType))]
+    [ModelReaderWriterBuildable(typeof(FileWithHttpPartOptionalContentTypeRequest))]
+    [ModelReaderWriterBuildable(typeof(FileWithHttpPartRequiredContentTypeRequest))]
+    [ModelReaderWriterBuildable(typeof(FileWithHttpPartSpecificContentTypeRequest))]
+    [ModelReaderWriterBuildable(typeof(FloatRequest))]
+    [ModelReaderWriterBuildable(typeof(FloatRequestTemperature))]
+    [ModelReaderWriterBuildable(typeof(JsonPartRequest))]
+    [ModelReaderWriterBuildable(typeof(MultiBinaryPartsRequest))]
+    [ModelReaderWriterBuildable(typeof(MultiPartRequest))]
     public partial class ScmPayloadMultipartContext : ModelReaderWriterContext
     {
     }

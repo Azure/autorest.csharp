@@ -6,14 +6,100 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class WhatIfChange
+    public partial class WhatIfChange : IUtf8JsonSerializable, IJsonModel<WhatIfChange>
     {
-        internal static WhatIfChange DeserializeWhatIfChange(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WhatIfChange>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<WhatIfChange>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<WhatIfChange>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(WhatIfChange)} does not support writing '{format}' format.");
+            }
+
+            writer.WritePropertyName("resourceId"u8);
+            writer.WriteStringValue(ResourceId);
+            writer.WritePropertyName("changeType"u8);
+            writer.WriteStringValue(ChangeType.ToSerialString());
+            if (Optional.IsDefined(UnsupportedReason))
+            {
+                writer.WritePropertyName("unsupportedReason"u8);
+                writer.WriteStringValue(UnsupportedReason);
+            }
+            if (Optional.IsDefined(Before))
+            {
+                writer.WritePropertyName("before"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Before);
+#else
+                using (JsonDocument document = JsonDocument.Parse(Before, ModelSerializationExtensions.JsonDocumentOptions))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
+            }
+            if (Optional.IsDefined(After))
+            {
+                writer.WritePropertyName("after"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(After);
+#else
+                using (JsonDocument document = JsonDocument.Parse(After, ModelSerializationExtensions.JsonDocumentOptions))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+        }
+
+        WhatIfChange IJsonModel<WhatIfChange>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<WhatIfChange>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(WhatIfChange)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeWhatIfChange(document.RootElement, options);
+        }
+
+        internal static WhatIfChange DeserializeWhatIfChange(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -23,6 +109,8 @@ namespace MgmtScopeResource.Models
             string unsupportedReason = default;
             BinaryData before = default;
             BinaryData after = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("resourceId"u8))
@@ -58,8 +146,50 @@ namespace MgmtScopeResource.Models
                     after = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new WhatIfChange(resourceId, changeType, unsupportedReason, before, after);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new WhatIfChange(
+                resourceId,
+                changeType,
+                unsupportedReason,
+                before,
+                after,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<WhatIfChange>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<WhatIfChange>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtScopeResourceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(WhatIfChange)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        WhatIfChange IPersistableModel<WhatIfChange>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<WhatIfChange>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeWhatIfChange(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(WhatIfChange)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<WhatIfChange>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

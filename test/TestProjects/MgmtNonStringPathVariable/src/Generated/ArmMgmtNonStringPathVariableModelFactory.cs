@@ -36,7 +36,8 @@ namespace MgmtNonStringPathVariable.Models
                 systemData,
                 tags,
                 location,
-                properties);
+                properties,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtNonStringPathVariable.BarData"/>. </summary>
@@ -59,7 +60,8 @@ namespace MgmtNonStringPathVariable.Models
                 systemData,
                 tags,
                 location,
-                barBuzz != null ? new BarProperties(barBuzz) : null);
+                barBuzz != null ? new BarProperties(barBuzz, serializedAdditionalRawData: null) : null,
+                serializedAdditionalRawData: null);
         }
     }
 }

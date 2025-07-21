@@ -5,27 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtMultipleParentResource.Models
 {
-    public partial class SubParentPatch : IUtf8JsonSerializable
+    public partial class SubParentPatch : IUtf8JsonSerializable, IJsonModel<SubParentPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubParentPatch>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<SubParentPatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Tags))
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SubParentPatch>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                writer.WritePropertyName("tags"u8);
-                writer.WriteStartObject();
-                foreach (var item in Tags)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
-                writer.WriteEndObject();
+                throw new FormatException($"The model {nameof(SubParentPatch)} does not support writing '{format}' format.");
             }
+
+            base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(AsyncExecution))
@@ -58,8 +67,170 @@ namespace MgmtMultipleParentResource.Models
                 writer.WritePropertyName("errorBlobUri"u8);
                 writer.WriteStringValue(ErrorBlobUri.AbsoluteUri);
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            {
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState);
+            }
             writer.WriteEndObject();
         }
+
+        SubParentPatch IJsonModel<SubParentPatch>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SubParentPatch>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(SubParentPatch)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSubParentPatch(document.RootElement, options);
+        }
+
+        internal static SubParentPatch DeserializeSubParentPatch(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            IDictionary<string, string> tags = default;
+            bool? asyncExecution = default;
+            string runAsUser = default;
+            string runAsPassword = default;
+            int? timeoutInSeconds = default;
+            Uri outputBlobUri = default;
+            Uri errorBlobUri = default;
+            string provisioningState = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("tags"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("properties"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("asyncExecution"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            asyncExecution = property0.Value.GetBoolean();
+                            continue;
+                        }
+                        if (property0.NameEquals("runAsUser"u8))
+                        {
+                            runAsUser = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("runAsPassword"u8))
+                        {
+                            runAsPassword = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("timeoutInSeconds"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            timeoutInSeconds = property0.Value.GetInt32();
+                            continue;
+                        }
+                        if (property0.NameEquals("outputBlobUri"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            outputBlobUri = new Uri(property0.Value.GetString());
+                            continue;
+                        }
+                        if (property0.NameEquals("errorBlobUri"u8))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            errorBlobUri = new Uri(property0.Value.GetString());
+                            continue;
+                        }
+                        if (property0.NameEquals("provisioningState"u8))
+                        {
+                            provisioningState = property0.Value.GetString();
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
+            }
+            serializedAdditionalRawData = rawDataDictionary;
+            return new SubParentPatch(
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                serializedAdditionalRawData,
+                asyncExecution,
+                runAsUser,
+                runAsPassword,
+                timeoutInSeconds,
+                outputBlobUri,
+                errorBlobUri,
+                provisioningState);
+        }
+
+        BinaryData IPersistableModel<SubParentPatch>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SubParentPatch>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtMultipleParentResourceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(SubParentPatch)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        SubParentPatch IPersistableModel<SubParentPatch>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SubParentPatch>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeSubParentPatch(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(SubParentPatch)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<SubParentPatch>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

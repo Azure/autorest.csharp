@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure.Network.Management.Interface.Models;
 
 namespace Azure.Network.Management.Interface
 {
@@ -13,6 +14,60 @@ namespace Azure.Network.Management.Interface
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ApplicationGatewayBackendAddress))]
+    [ModelReaderWriterBuildable(typeof(ApplicationGatewayBackendAddressPool))]
+    [ModelReaderWriterBuildable(typeof(ApplicationSecurityGroup))]
+    [ModelReaderWriterBuildable(typeof(BackendAddressPool))]
+    [ModelReaderWriterBuildable(typeof(CloudError))]
+    [ModelReaderWriterBuildable(typeof(CloudErrorBody))]
+    [ModelReaderWriterBuildable(typeof(DdosSettings))]
+    [ModelReaderWriterBuildable(typeof(Delegation))]
+    [ModelReaderWriterBuildable(typeof(EffectiveNetworkSecurityGroup))]
+    [ModelReaderWriterBuildable(typeof(EffectiveNetworkSecurityGroupAssociation))]
+    [ModelReaderWriterBuildable(typeof(EffectiveNetworkSecurityGroupListResult))]
+    [ModelReaderWriterBuildable(typeof(EffectiveNetworkSecurityRule))]
+    [ModelReaderWriterBuildable(typeof(EffectiveRoute))]
+    [ModelReaderWriterBuildable(typeof(EffectiveRouteListResult))]
+    [ModelReaderWriterBuildable(typeof(FrontendIPConfiguration))]
+    [ModelReaderWriterBuildable(typeof(InboundNatPool))]
+    [ModelReaderWriterBuildable(typeof(InboundNatRule))]
+    [ModelReaderWriterBuildable(typeof(IPConfiguration))]
+    [ModelReaderWriterBuildable(typeof(IPConfigurationProfile))]
+    [ModelReaderWriterBuildable(typeof(IpTag))]
+    [ModelReaderWriterBuildable(typeof(LoadBalancer))]
+    [ModelReaderWriterBuildable(typeof(LoadBalancerSku))]
+    [ModelReaderWriterBuildable(typeof(LoadBalancingRule))]
+    [ModelReaderWriterBuildable(typeof(NetworkInterface))]
+    [ModelReaderWriterBuildable(typeof(NetworkInterfaceDnsSettings))]
+    [ModelReaderWriterBuildable(typeof(NetworkInterfaceIPConfiguration))]
+    [ModelReaderWriterBuildable(typeof(NetworkInterfaceIPConfigurationListResult))]
+    [ModelReaderWriterBuildable(typeof(NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties))]
+    [ModelReaderWriterBuildable(typeof(NetworkInterfaceListResult))]
+    [ModelReaderWriterBuildable(typeof(NetworkInterfaceLoadBalancerListResult))]
+    [ModelReaderWriterBuildable(typeof(NetworkInterfaceTapConfiguration))]
+    [ModelReaderWriterBuildable(typeof(NetworkInterfaceTapConfigurationListResult))]
+    [ModelReaderWriterBuildable(typeof(NetworkSecurityGroup))]
+    [ModelReaderWriterBuildable(typeof(OutboundRule))]
+    [ModelReaderWriterBuildable(typeof(PrivateEndpoint))]
+    [ModelReaderWriterBuildable(typeof(PrivateLinkServiceConnection))]
+    [ModelReaderWriterBuildable(typeof(PrivateLinkServiceConnectionState))]
+    [ModelReaderWriterBuildable(typeof(Probe))]
+    [ModelReaderWriterBuildable(typeof(PublicIPAddress))]
+    [ModelReaderWriterBuildable(typeof(PublicIPAddressDnsSettings))]
+    [ModelReaderWriterBuildable(typeof(PublicIPAddressSku))]
+    [ModelReaderWriterBuildable(typeof(Resource))]
+    [ModelReaderWriterBuildable(typeof(ResourceNavigationLink))]
+    [ModelReaderWriterBuildable(typeof(Route))]
+    [ModelReaderWriterBuildable(typeof(RouteTable))]
+    [ModelReaderWriterBuildable(typeof(SecurityRule))]
+    [ModelReaderWriterBuildable(typeof(ServiceAssociationLink))]
+    [ModelReaderWriterBuildable(typeof(ServiceEndpointPolicy))]
+    [ModelReaderWriterBuildable(typeof(ServiceEndpointPolicyDefinition))]
+    [ModelReaderWriterBuildable(typeof(ServiceEndpointPropertiesFormat))]
+    [ModelReaderWriterBuildable(typeof(Subnet))]
+    [ModelReaderWriterBuildable(typeof(SubResource))]
+    [ModelReaderWriterBuildable(typeof(TagsObject))]
+    [ModelReaderWriterBuildable(typeof(VirtualNetworkTap))]
     public partial class AzureNetworkManagementInterfaceContext : ModelReaderWriterContext
     {
     }

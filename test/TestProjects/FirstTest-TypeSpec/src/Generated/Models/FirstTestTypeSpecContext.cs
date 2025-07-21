@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using FirstTestTypeSpec.Models;
 
 namespace FirstTestTypeSpec
 {
@@ -13,6 +14,30 @@ namespace FirstTestTypeSpec
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(AzureLocationModel))]
+    [ModelReaderWriterBuildable(typeof(BaseModel))]
+    [ModelReaderWriterBuildable(typeof(ChildModel))]
+    [ModelReaderWriterBuildable(typeof(ContainSelf))]
+    [ModelReaderWriterBuildable(typeof(Element))]
+    [ModelReaderWriterBuildable(typeof(ErrorResponse))]
+    [ModelReaderWriterBuildable(typeof(ExportedResource))]
+    [ModelReaderWriterBuildable(typeof(Extendible))]
+    [ModelReaderWriterBuildable(typeof(Extension))]
+    [ModelReaderWriterBuildable(typeof(Friend))]
+    [ModelReaderWriterBuildable(typeof(InnerError))]
+    [ModelReaderWriterBuildable(typeof(ListBody))]
+    [ModelReaderWriterBuildable(typeof(ModelForUnion))]
+    [ModelReaderWriterBuildable(typeof(ModelWithFormat))]
+    [ModelReaderWriterBuildable(typeof(ModelWithProjectedEnum))]
+    [ModelReaderWriterBuildable(typeof(ModelWithRequiredNullableProperties))]
+    [ModelReaderWriterBuildable(typeof(PagedThing))]
+    [ModelReaderWriterBuildable(typeof(ProjectedModel))]
+    [ModelReaderWriterBuildable(typeof(ResourceOperationStatusResourceExportedResourceError))]
+    [ModelReaderWriterBuildable(typeof(ReturnsAnonymousModelResponse))]
+    [ModelReaderWriterBuildable(typeof(RoundTripModel))]
+    [ModelReaderWriterBuildable(typeof(ThereLevelElement))]
+    [ModelReaderWriterBuildable(typeof(ThereLevelExtension))]
+    [ModelReaderWriterBuildable(typeof(Thing))]
     public partial class FirstTestTypeSpecContext : ModelReaderWriterContext
     {
     }

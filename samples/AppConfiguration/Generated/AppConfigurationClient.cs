@@ -482,7 +482,7 @@ namespace AppConfiguration
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetKeysRequest(name, after, acceptDatetime);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Key.DeserializeKey, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeys", "items", "@nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => Key.DeserializeKey(e), _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeys", "items", "@nextLink", cancellationToken);
         }
 
         /// <summary> Gets a list of keys. </summary>
@@ -494,7 +494,7 @@ namespace AppConfiguration
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetKeysRequest(name, after, acceptDatetime);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Key.DeserializeKey, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeys", "items", "@nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => Key.DeserializeKey(e), _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeys", "items", "@nextLink", cancellationToken);
         }
 
         /// <summary> Gets a list of key-values. </summary>
@@ -508,7 +508,7 @@ namespace AppConfiguration
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeyValues", "items", "@nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => KeyValue.DeserializeKeyValue(e), _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeyValues", "items", "@nextLink", cancellationToken);
         }
 
         /// <summary> Gets a list of key-values. </summary>
@@ -522,7 +522,7 @@ namespace AppConfiguration
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeyValues", "items", "@nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => KeyValue.DeserializeKeyValue(e), _clientDiagnostics, _pipeline, "AppConfigurationClient.GetKeyValues", "items", "@nextLink", cancellationToken);
         }
 
         /// <summary> Gets a list of labels. </summary>
@@ -535,7 +535,7 @@ namespace AppConfiguration
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetLabelsRequest(name, after, acceptDatetime, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Label.DeserializeLabel, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetLabels", "items", "@nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => Label.DeserializeLabel(e), _clientDiagnostics, _pipeline, "AppConfigurationClient.GetLabels", "items", "@nextLink", cancellationToken);
         }
 
         /// <summary> Gets a list of labels. </summary>
@@ -548,7 +548,7 @@ namespace AppConfiguration
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetLabelsRequest(name, after, acceptDatetime, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Label.DeserializeLabel, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetLabels", "items", "@nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => Label.DeserializeLabel(e), _clientDiagnostics, _pipeline, "AppConfigurationClient.GetLabels", "items", "@nextLink", cancellationToken);
         }
 
         /// <summary> Gets a list of key-value revisions. </summary>
@@ -562,7 +562,7 @@ namespace AppConfiguration
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetRevisions", "items", "@nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => KeyValue.DeserializeKeyValue(e), _clientDiagnostics, _pipeline, "AppConfigurationClient.GetRevisions", "items", "@nextLink", cancellationToken);
         }
 
         /// <summary> Gets a list of key-value revisions. </summary>
@@ -576,7 +576,7 @@ namespace AppConfiguration
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, KeyValue.DeserializeKeyValue, _clientDiagnostics, _pipeline, "AppConfigurationClient.GetRevisions", "items", "@nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => KeyValue.DeserializeKeyValue(e), _clientDiagnostics, _pipeline, "AppConfigurationClient.GetRevisions", "items", "@nextLink", cancellationToken);
         }
     }
 }

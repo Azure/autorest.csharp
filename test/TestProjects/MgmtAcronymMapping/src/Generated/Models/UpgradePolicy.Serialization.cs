@@ -5,16 +5,35 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class UpgradePolicy : IUtf8JsonSerializable
+    public partial class UpgradePolicy : IUtf8JsonSerializable, IJsonModel<UpgradePolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UpgradePolicy>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<UpgradePolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<UpgradePolicy>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(UpgradePolicy)} does not support writing '{format}' format.");
+            }
+
             if (Optional.IsDefined(Mode))
             {
                 writer.WritePropertyName("mode"u8);
@@ -23,18 +42,46 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(RollingUpgradePolicy))
             {
                 writer.WritePropertyName("rollingUpgradePolicy"u8);
-                writer.WriteObjectValue(RollingUpgradePolicy);
+                writer.WriteObjectValue(RollingUpgradePolicy, options);
             }
             if (Optional.IsDefined(AutomaticOSUpgradePolicy))
             {
                 writer.WritePropertyName("automaticOSUpgradePolicy"u8);
-                writer.WriteObjectValue(AutomaticOSUpgradePolicy);
+                writer.WriteObjectValue(AutomaticOSUpgradePolicy, options);
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
         }
 
-        internal static UpgradePolicy DeserializeUpgradePolicy(JsonElement element)
+        UpgradePolicy IJsonModel<UpgradePolicy>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<UpgradePolicy>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(UpgradePolicy)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUpgradePolicy(document.RootElement, options);
+        }
+
+        internal static UpgradePolicy DeserializeUpgradePolicy(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -42,6 +89,8 @@ namespace MgmtAcronymMapping.Models
             UpgradeMode? mode = default;
             RollingUpgradePolicy rollingUpgradePolicy = default;
             AutomaticOSUpgradePolicy automaticOSUpgradePolicy = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("mode"u8))
@@ -59,7 +108,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    rollingUpgradePolicy = RollingUpgradePolicy.DeserializeRollingUpgradePolicy(property.Value);
+                    rollingUpgradePolicy = RollingUpgradePolicy.DeserializeRollingUpgradePolicy(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("automaticOSUpgradePolicy"u8))
@@ -68,11 +117,47 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    automaticOSUpgradePolicy = AutomaticOSUpgradePolicy.DeserializeAutomaticOSUpgradePolicy(property.Value);
+                    automaticOSUpgradePolicy = AutomaticOSUpgradePolicy.DeserializeAutomaticOSUpgradePolicy(property.Value, options);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new UpgradePolicy(mode, rollingUpgradePolicy, automaticOSUpgradePolicy);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new UpgradePolicy(mode, rollingUpgradePolicy, automaticOSUpgradePolicy, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<UpgradePolicy>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<UpgradePolicy>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtAcronymMappingContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(UpgradePolicy)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        UpgradePolicy IPersistableModel<UpgradePolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<UpgradePolicy>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeUpgradePolicy(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(UpgradePolicy)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<UpgradePolicy>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

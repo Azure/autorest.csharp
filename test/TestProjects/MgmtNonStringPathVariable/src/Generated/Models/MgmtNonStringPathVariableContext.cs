@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtNonStringPathVariable.Models;
 
 namespace MgmtNonStringPathVariable
 {
@@ -13,6 +14,13 @@ namespace MgmtNonStringPathVariable
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(BarPatch))]
+    [ModelReaderWriterBuildable(typeof(BarProperties))]
+    [ModelReaderWriterBuildable(typeof(FakeListResult))]
+    [ModelReaderWriterBuildable(typeof(FakePatch))]
+    [ModelReaderWriterBuildable(typeof(FakeProperties))]
+    [ModelReaderWriterBuildable(typeof(MgmtNonStringPathVariableResourceData))]
+    [ModelReaderWriterBuildable(typeof(UpdateResource))]
     public partial class MgmtNonStringPathVariableContext : ModelReaderWriterContext
     {
     }

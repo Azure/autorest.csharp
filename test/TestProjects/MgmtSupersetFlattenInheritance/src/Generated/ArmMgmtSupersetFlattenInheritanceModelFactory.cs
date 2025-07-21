@@ -21,7 +21,7 @@ namespace MgmtSupersetFlattenInheritance.Models
         /// <returns> A new <see cref="Models.SubResourceModel1"/> instance for mocking. </returns>
         public static SubResourceModel1 SubResourceModel1(string id = null, string foo = null)
         {
-            return new SubResourceModel1(id, foo);
+            return new SubResourceModel1(id, foo, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SubResourceModel2"/>. </summary>
@@ -31,7 +31,7 @@ namespace MgmtSupersetFlattenInheritance.Models
         /// <returns> A new <see cref="Models.SubResourceModel2"/> instance for mocking. </returns>
         public static SubResourceModel2 SubResourceModel2(string id = null, string idPropertiesId = null, string foo = null)
         {
-            return new SubResourceModel2(id, idPropertiesId, foo);
+            return new SubResourceModel2(id, idPropertiesId, foo, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtSupersetFlattenInheritance.ResourceModel1Data"/>. </summary>
@@ -43,7 +43,13 @@ namespace MgmtSupersetFlattenInheritance.Models
         /// <returns> A new <see cref="MgmtSupersetFlattenInheritance.ResourceModel1Data"/> instance for mocking. </returns>
         public static ResourceModel1Data ResourceModel1Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string foo = null)
         {
-            return new ResourceModel1Data(id, name, resourceType, systemData, foo);
+            return new ResourceModel1Data(
+                id,
+                name,
+                resourceType,
+                systemData,
+                foo,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceModel2"/>. </summary>
@@ -55,7 +61,13 @@ namespace MgmtSupersetFlattenInheritance.Models
         /// <returns> A new <see cref="Models.ResourceModel2"/> instance for mocking. </returns>
         public static ResourceModel2 ResourceModel2(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string foo = null)
         {
-            return new ResourceModel2(id, name, resourceType, systemData, foo);
+            return new ResourceModel2(
+                id,
+                name,
+                resourceType,
+                systemData,
+                foo,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtSupersetFlattenInheritance.TrackedResourceModel1Data"/>. </summary>
@@ -78,7 +90,8 @@ namespace MgmtSupersetFlattenInheritance.Models
                 systemData,
                 tags,
                 location,
-                foo);
+                foo,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TrackedResourceModel2"/>. </summary>
@@ -105,7 +118,8 @@ namespace MgmtSupersetFlattenInheritance.Models
                 location,
                 foo,
                 bar,
-                fooPropertiesFoo);
+                fooPropertiesFoo,
+                serializedAdditionalRawData: null);
         }
     }
 }

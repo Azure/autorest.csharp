@@ -6,17 +6,34 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class VaultProperties : IUtf8JsonSerializable
+    public partial class VaultProperties : IUtf8JsonSerializable, IJsonModel<VaultProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VaultProperties>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<VaultProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(VaultProperties)} does not support writing '{format}' format.");
+            }
+
             if (Optional.IsDefined(Duration))
             {
                 writer.WritePropertyName("duration"u8);
@@ -30,14 +47,14 @@ namespace MgmtMockAndSample.Models
             writer.WritePropertyName("tenantId"u8);
             writer.WriteStringValue(TenantId);
             writer.WritePropertyName("sku"u8);
-            writer.WriteObjectValue(Sku);
+            writer.WriteObjectValue(Sku, options);
             if (Optional.IsCollectionDefined(AccessPolicies))
             {
                 writer.WritePropertyName("accessPolicies"u8);
                 writer.WriteStartArray();
                 foreach (var item in AccessPolicies)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -45,6 +62,11 @@ namespace MgmtMockAndSample.Models
             {
                 writer.WritePropertyName("vaultUri"u8);
                 writer.WriteStringValue(VaultUri.AbsoluteUri);
+            }
+            if (options.Format != "W" && Optional.IsDefined(HsmPoolResourceId))
+            {
+                writer.WritePropertyName("hsmPoolResourceId"u8);
+                writer.WriteStringValue(HsmPoolResourceId);
             }
             if (Optional.IsCollectionDefined(Deployments))
             {
@@ -94,12 +116,22 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
-                writer.WriteObjectValue(NetworkAcls);
+                writer.WriteObjectValue(NetworkAcls, options);
             }
             if (Optional.IsDefined(ProvisioningState))
             {
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState.Value.ToString());
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(PrivateEndpointConnections))
+            {
+                writer.WritePropertyName("privateEndpointConnections"u8);
+                writer.WriteStartArray();
+                foreach (var item in PrivateEndpointConnections)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(PublicNetworkAccess))
             {
@@ -109,23 +141,51 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(ReadWriteSingleStringProperty))
             {
                 writer.WritePropertyName("readWriteSingleStringProperty"u8);
-                writer.WriteObjectValue(ReadWriteSingleStringProperty);
+                writer.WriteObjectValue(ReadWriteSingleStringProperty, options);
             }
             if (Optional.IsDefined(ReadOnlySingleStringProperty))
             {
                 writer.WritePropertyName("readOnlySingleStringProperty"u8);
-                writer.WriteObjectValue(ReadOnlySingleStringProperty);
+                writer.WriteObjectValue(ReadOnlySingleStringProperty, options);
             }
             if (Optional.IsDefined(ExtremelyDeepStringProperty))
             {
                 writer.WritePropertyName("extremelyDeepStringProperty"u8);
-                writer.WriteObjectValue(ExtremelyDeepStringProperty);
+                writer.WriteObjectValue(ExtremelyDeepStringProperty, options);
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
         }
 
-        internal static VaultProperties DeserializeVaultProperties(JsonElement element)
+        VaultProperties IJsonModel<VaultProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(VaultProperties)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVaultProperties(document.RootElement, options);
+        }
+
+        internal static VaultProperties DeserializeVaultProperties(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -152,6 +212,8 @@ namespace MgmtMockAndSample.Models
             SinglePropertyModel readWriteSingleStringProperty = default;
             ReadOnlySinglePropertyModel readOnlySingleStringProperty = default;
             ExtremelyDeepSinglePropertyModel extremelyDeepStringProperty = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("duration"u8))
@@ -179,7 +241,7 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("sku"u8))
                 {
-                    sku = MgmtMockAndSampleSku.DeserializeMgmtMockAndSampleSku(property.Value);
+                    sku = MgmtMockAndSampleSku.DeserializeMgmtMockAndSampleSku(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("accessPolicies"u8))
@@ -191,7 +253,7 @@ namespace MgmtMockAndSample.Models
                     List<AccessPolicyEntry> array = new List<AccessPolicyEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AccessPolicyEntry.DeserializeAccessPolicyEntry(item));
+                        array.Add(AccessPolicyEntry.DeserializeAccessPolicyEntry(item, options));
                     }
                     accessPolicies = array;
                     continue;
@@ -293,7 +355,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    networkAcls = NetworkRuleSet.DeserializeNetworkRuleSet(property.Value);
+                    networkAcls = NetworkRuleSet.DeserializeNetworkRuleSet(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("provisioningState"u8))
@@ -314,7 +376,7 @@ namespace MgmtMockAndSample.Models
                     List<PrivateEndpointConnectionItem> array = new List<PrivateEndpointConnectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PrivateEndpointConnectionItem.DeserializePrivateEndpointConnectionItem(item));
+                        array.Add(PrivateEndpointConnectionItem.DeserializePrivateEndpointConnectionItem(item, options));
                     }
                     privateEndpointConnections = array;
                     continue;
@@ -330,7 +392,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    readWriteSingleStringProperty = SinglePropertyModel.DeserializeSinglePropertyModel(property.Value);
+                    readWriteSingleStringProperty = SinglePropertyModel.DeserializeSinglePropertyModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("readOnlySingleStringProperty"u8))
@@ -339,7 +401,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    readOnlySingleStringProperty = ReadOnlySinglePropertyModel.DeserializeReadOnlySinglePropertyModel(property.Value);
+                    readOnlySingleStringProperty = ReadOnlySinglePropertyModel.DeserializeReadOnlySinglePropertyModel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("extremelyDeepStringProperty"u8))
@@ -348,10 +410,15 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    extremelyDeepStringProperty = ExtremelyDeepSinglePropertyModel.DeserializeExtremelyDeepSinglePropertyModel(property.Value);
+                    extremelyDeepStringProperty = ExtremelyDeepSinglePropertyModel.DeserializeExtremelyDeepSinglePropertyModel(property.Value, options);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new VaultProperties(
                 duration,
                 createOn,
@@ -374,7 +441,39 @@ namespace MgmtMockAndSample.Models
                 publicNetworkAccess,
                 readWriteSingleStringProperty,
                 readOnlySingleStringProperty,
-                extremelyDeepStringProperty);
+                extremelyDeepStringProperty,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<VaultProperties>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(VaultProperties)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        VaultProperties IPersistableModel<VaultProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeVaultProperties(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(VaultProperties)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<VaultProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

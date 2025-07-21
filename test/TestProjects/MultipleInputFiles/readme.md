@@ -4,6 +4,7 @@
 
 ``` yaml
 title: MultipleInputFiles
+use-model-reader-writer: true
 generation1-convenience-client: true
 sync-methods: None
 require: $(this-folder)/../../../readme.md

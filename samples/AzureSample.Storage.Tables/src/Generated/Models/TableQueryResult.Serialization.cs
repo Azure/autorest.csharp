@@ -5,22 +5,92 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
+using Azure.Core;
 
 namespace AzureSample.Storage.Tables.Models
 {
-    public partial class TableQueryResult
+    public partial class TableQueryResult : IUtf8JsonSerializable, IJsonModel<TableQueryResult>
     {
-        internal static TableQueryResult DeserializeTableQueryResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TableQueryResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<TableQueryResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<TableQueryResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(TableQueryResult)} does not support writing '{format}' format.");
+            }
+
+            if (Optional.IsDefined(OdataMetadata))
+            {
+                writer.WritePropertyName("odata.metadata"u8);
+                writer.WriteStringValue(OdataMetadata);
+            }
+            if (Optional.IsCollectionDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Value)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+        }
+
+        TableQueryResult IJsonModel<TableQueryResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<TableQueryResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(TableQueryResult)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeTableQueryResult(document.RootElement, options);
+        }
+
+        internal static TableQueryResult DeserializeTableQueryResult(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string odataMetadata = default;
             IReadOnlyList<TableResponseProperties> value = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("odata.metadata"u8))
@@ -37,14 +107,50 @@ namespace AzureSample.Storage.Tables.Models
                     List<TableResponseProperties> array = new List<TableResponseProperties>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TableResponseProperties.DeserializeTableResponseProperties(item));
+                        array.Add(TableResponseProperties.DeserializeTableResponseProperties(item, options));
                     }
                     value = array;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new TableQueryResult(odataMetadata, value ?? new ChangeTrackingList<TableResponseProperties>());
+            serializedAdditionalRawData = rawDataDictionary;
+            return new TableQueryResult(odataMetadata, value ?? new ChangeTrackingList<TableResponseProperties>(), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<TableQueryResult>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<TableQueryResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, AzureSampleStorageTablesContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(TableQueryResult)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        TableQueryResult IPersistableModel<TableQueryResult>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<TableQueryResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeTableQueryResult(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(TableQueryResult)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<TableQueryResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -52,6 +158,14 @@ namespace AzureSample.Storage.Tables.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeTableQueryResult(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            return content;
         }
     }
 }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -12,11 +14,27 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class Indexer : IUtf8JsonSerializable
+    public partial class Indexer : IUtf8JsonSerializable, IJsonModel<Indexer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Indexer>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<Indexer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Indexer>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Indexer)} does not support writing '{format}' format.");
+            }
+
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             if (Optional.IsDefined(Description))
@@ -36,12 +54,12 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(Schedule))
             {
                 writer.WritePropertyName("schedule"u8);
-                writer.WriteObjectValue(Schedule);
+                writer.WriteObjectValue(Schedule, options);
             }
             if (Optional.IsDefined(Parameters))
             {
                 writer.WritePropertyName("parameters"u8);
-                writer.WriteObjectValue(Parameters);
+                writer.WriteObjectValue(Parameters, options);
             }
             if (Optional.IsCollectionDefined(FieldMappings))
             {
@@ -49,7 +67,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in FieldMappings)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -59,7 +77,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in OutputFieldMappings)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -73,11 +91,39 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
         }
 
-        internal static Indexer DeserializeIndexer(JsonElement element)
+        Indexer IJsonModel<Indexer>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Indexer>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Indexer)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeIndexer(document.RootElement, options);
+        }
+
+        internal static Indexer DeserializeIndexer(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -93,6 +139,8 @@ namespace CognitiveSearch.Models
             IList<FieldMapping> outputFieldMappings = default;
             bool? disabled = default;
             string odataEtag = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -126,7 +174,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    schedule = IndexingSchedule.DeserializeIndexingSchedule(property.Value);
+                    schedule = IndexingSchedule.DeserializeIndexingSchedule(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("parameters"u8))
@@ -135,7 +183,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    parameters = IndexingParameters.DeserializeIndexingParameters(property.Value);
+                    parameters = IndexingParameters.DeserializeIndexingParameters(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("fieldMappings"u8))
@@ -147,7 +195,7 @@ namespace CognitiveSearch.Models
                     List<FieldMapping> array = new List<FieldMapping>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FieldMapping.DeserializeFieldMapping(item));
+                        array.Add(FieldMapping.DeserializeFieldMapping(item, options));
                     }
                     fieldMappings = array;
                     continue;
@@ -161,7 +209,7 @@ namespace CognitiveSearch.Models
                     List<FieldMapping> array = new List<FieldMapping>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FieldMapping.DeserializeFieldMapping(item));
+                        array.Add(FieldMapping.DeserializeFieldMapping(item, options));
                     }
                     outputFieldMappings = array;
                     continue;
@@ -180,7 +228,12 @@ namespace CognitiveSearch.Models
                     odataEtag = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new Indexer(
                 name,
                 description,
@@ -192,8 +245,40 @@ namespace CognitiveSearch.Models
                 fieldMappings ?? new ChangeTrackingList<FieldMapping>(),
                 outputFieldMappings ?? new ChangeTrackingList<FieldMapping>(),
                 disabled,
-                odataEtag);
+                odataEtag,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<Indexer>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Indexer>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(Indexer)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        Indexer IPersistableModel<Indexer>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Indexer>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeIndexer(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(Indexer)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Indexer>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -207,7 +292,7 @@ namespace CognitiveSearch.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

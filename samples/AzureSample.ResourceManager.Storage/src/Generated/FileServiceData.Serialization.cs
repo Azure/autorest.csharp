@@ -7,6 +7,7 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -15,34 +16,69 @@ using AzureSample.ResourceManager.Storage.Models;
 
 namespace AzureSample.ResourceManager.Storage
 {
-    public partial class FileServiceData : IUtf8JsonSerializable
+    public partial class FileServiceData : IUtf8JsonSerializable, IJsonModel<FileServiceData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FileServiceData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<FileServiceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<FileServiceData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(FileServiceData)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
+            if (options.Format != "W" && Optional.IsDefined(Sku))
+            {
+                writer.WritePropertyName("sku"u8);
+                writer.WriteObjectValue(Sku, options);
+            }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(Cors))
             {
                 writer.WritePropertyName("cors"u8);
-                writer.WriteObjectValue(Cors);
+                writer.WriteObjectValue(Cors, options);
             }
             if (Optional.IsDefined(ShareDeleteRetentionPolicy))
             {
                 writer.WritePropertyName("shareDeleteRetentionPolicy"u8);
-                writer.WriteObjectValue(ShareDeleteRetentionPolicy);
+                writer.WriteObjectValue(ShareDeleteRetentionPolicy, options);
             }
             if (Optional.IsDefined(ProtocolSettings))
             {
                 writer.WritePropertyName("protocolSettings"u8);
-                writer.WriteObjectValue(ProtocolSettings);
+                writer.WriteObjectValue(ProtocolSettings, options);
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        internal static FileServiceData DeserializeFileServiceData(JsonElement element)
+        FileServiceData IJsonModel<FileServiceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<FileServiceData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(FileServiceData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFileServiceData(document.RootElement, options);
+        }
+
+        internal static FileServiceData DeserializeFileServiceData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -51,10 +87,12 @@ namespace AzureSample.ResourceManager.Storage
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Azure.ResourceManager.Models.SystemData systemData = default;
             CorsRules cors = default;
             DeleteRetentionPolicy shareDeleteRetentionPolicy = default;
             ProtocolSettings protocolSettings = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -63,7 +101,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    sku = AzureSampleResourceManagerStorageSku.DeserializeAzureSampleResourceManagerStorageSku(property.Value);
+                    sku = AzureSampleResourceManagerStorageSku.DeserializeAzureSampleResourceManagerStorageSku(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -87,7 +125,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
+                    systemData = ModelReaderWriter.Read<Azure.ResourceManager.Models.SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -105,7 +143,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            cors = CorsRules.DeserializeCorsRules(property0.Value);
+                            cors = CorsRules.DeserializeCorsRules(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("shareDeleteRetentionPolicy"u8))
@@ -114,7 +152,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            shareDeleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
+                            shareDeleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("protocolSettings"u8))
@@ -123,13 +161,18 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            protocolSettings = ProtocolSettings.DeserializeProtocolSettings(property0.Value);
+                            protocolSettings = ProtocolSettings.DeserializeProtocolSettings(property0.Value, options);
                             continue;
                         }
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new FileServiceData(
                 id,
                 name,
@@ -138,7 +181,39 @@ namespace AzureSample.ResourceManager.Storage
                 sku,
                 cors,
                 shareDeleteRetentionPolicy,
-                protocolSettings);
+                protocolSettings,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<FileServiceData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<FileServiceData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerStorageContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(FileServiceData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        FileServiceData IPersistableModel<FileServiceData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<FileServiceData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeFileServiceData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(FileServiceData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<FileServiceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

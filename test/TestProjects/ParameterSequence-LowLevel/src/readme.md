@@ -8,6 +8,7 @@
 require: $(this-folder)/../../../../readme.md
 input-file: $(this-folder)/ParameterSequence-LowLevel.json
 namespace: ParameterSequenceLowLevel
+use-model-reader-writer: true
 security: AzureKey
 security-header-name: Fake-Subscription-Key
 ```

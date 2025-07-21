@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using ModelReaderWriterValidationTypeSpec.Models;
 
 namespace ModelReaderWriterValidationTypeSpec
 {
@@ -13,6 +14,29 @@ namespace ModelReaderWriterValidationTypeSpec
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ApiProfile))]
+    [ModelReaderWriterBuildable(typeof(AvailabilitySetData))]
+    [ModelReaderWriterBuildable(typeof(AvailabilitySetProperties))]
+    [ModelReaderWriterBuildable(typeof(BaseModel))]
+    [ModelReaderWriterBuildable(typeof(ComputeSku))]
+    [ModelReaderWriterBuildable(typeof(ModelAsStruct))]
+    [ModelReaderWriterBuildable(typeof(ModelWithArrayAdditionalProperties))]
+    [ModelReaderWriterBuildable(typeof(ModelWithPersistableOnly))]
+    [ModelReaderWriterBuildable(typeof(ModelWithStringAdditionalProperties))]
+    [ModelReaderWriterBuildable(typeof(ModelWithUnknownAdditionalProperties))]
+    [ModelReaderWriterBuildable(typeof(ModelX))]
+    [ModelReaderWriterBuildable(typeof(ModelY))]
+    [ModelReaderWriterBuildable(typeof(ProviderExtendedLocation))]
+    [ModelReaderWriterBuildable(typeof(ProviderResourceType))]
+    [ModelReaderWriterBuildable(typeof(ResourceProviderData))]
+    [ModelReaderWriterBuildable(typeof(ResourceTypeAlias))]
+    [ModelReaderWriterBuildable(typeof(ResourceTypeAliasPath))]
+    [ModelReaderWriterBuildable(typeof(ResourceTypeAliasPathMetadata))]
+    [ModelReaderWriterBuildable(typeof(ResourceTypeAliasPattern))]
+    [ModelReaderWriterBuildable(typeof(TrackedResourceData))]
+    [ModelReaderWriterBuildable(typeof(UnknownBaseModel))]
+    [ModelReaderWriterBuildable(typeof(WritableSubResource))]
+    [ModelReaderWriterBuildable(typeof(ZoneMapping))]
     public partial class ModelReaderWriterValidationTypeSpecContext : ModelReaderWriterContext
     {
     }

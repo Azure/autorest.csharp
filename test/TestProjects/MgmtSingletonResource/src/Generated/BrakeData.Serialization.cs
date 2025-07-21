@@ -7,6 +7,7 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -14,10 +15,51 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtSingletonResource
 {
-    public partial class BrakeData
+    public partial class BrakeData : IUtf8JsonSerializable, IJsonModel<BrakeData>
     {
-        internal static BrakeData DeserializeBrakeData(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BrakeData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<BrakeData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<BrakeData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(BrakeData)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
+            if (Optional.IsDefined(HitBrake))
+            {
+                writer.WritePropertyName("hitBrake"u8);
+                writer.WriteBooleanValue(HitBrake.Value);
+            }
+        }
+
+        BrakeData IJsonModel<BrakeData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<BrakeData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(BrakeData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeBrakeData(document.RootElement, options);
+        }
+
+        internal static BrakeData DeserializeBrakeData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -27,6 +69,8 @@ namespace MgmtSingletonResource
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("hitBrake"u8))
@@ -62,8 +106,50 @@ namespace MgmtSingletonResource
                     systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtSingletonResourceContext.Default);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new BrakeData(id, name, type, systemData, hitBrake);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new BrakeData(
+                id,
+                name,
+                type,
+                systemData,
+                hitBrake,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<BrakeData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<BrakeData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtSingletonResourceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(BrakeData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        BrakeData IPersistableModel<BrakeData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<BrakeData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeBrakeData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(BrakeData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<BrakeData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

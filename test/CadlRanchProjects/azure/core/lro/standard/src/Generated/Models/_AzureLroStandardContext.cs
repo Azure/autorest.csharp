@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using _Azure.Lro.Standard.Models;
 
 namespace _Azure.Lro.Standard
 {
@@ -13,6 +14,13 @@ namespace _Azure.Lro.Standard
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ErrorResponse))]
+    [ModelReaderWriterBuildable(typeof(ExportedUser))]
+    [ModelReaderWriterBuildable(typeof(InnerError))]
+    [ModelReaderWriterBuildable(typeof(OperationStatusError))]
+    [ModelReaderWriterBuildable(typeof(OperationStatusExportedUserError))]
+    [ModelReaderWriterBuildable(typeof(ResourceOperationStatusUserExportedUserError))]
+    [ModelReaderWriterBuildable(typeof(User))]
     public partial class _AzureLroStandardContext : ModelReaderWriterContext
     {
     }

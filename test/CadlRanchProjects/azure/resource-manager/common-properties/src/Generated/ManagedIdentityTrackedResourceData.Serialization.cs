@@ -46,7 +46,7 @@ namespace _Azure.ResourceManager.CommonProperties
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, new ModelReaderWriterOptions("W|v3"));
+                ((IJsonModel<Azure.ResourceManager.Models.ManagedServiceIdentity>)Identity).Write(writer, new ModelReaderWriterOptions("W|v3"));
             }
         }
 
@@ -71,13 +71,13 @@ namespace _Azure.ResourceManager.CommonProperties
                 return null;
             }
             ManagedIdentityTrackedResourceProperties properties = default;
-            ManagedServiceIdentity identity = default;
+            Azure.ResourceManager.Models.ManagedServiceIdentity identity = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Azure.ResourceManager.Models.SystemData systemData = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -97,7 +97,7 @@ namespace _Azure.ResourceManager.CommonProperties
                     {
                         continue;
                     }
-                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), _AzureResourceManagerCommonPropertiesContext.Default);
+                    identity = ModelReaderWriter.Read<Azure.ResourceManager.Models.ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), _AzureResourceManagerCommonPropertiesContext.Default);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -140,7 +140,7 @@ namespace _Azure.ResourceManager.CommonProperties
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, _AzureResourceManagerCommonPropertiesContext.Default);
+                    systemData = ModelReaderWriter.Read<Azure.ResourceManager.Models.SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, _AzureResourceManagerCommonPropertiesContext.Default);
                     continue;
                 }
                 if (options.Format != "W")

@@ -43,9 +43,10 @@ namespace MgmtSafeFlatten.Models
                 tags,
                 location,
                 myType,
-                layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp)) : null,
+                layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp, serializedAdditionalRawData: null), serializedAdditionalRawData: null) : null,
                 layerOneType,
-                layerOneConflictId != null ? ResourceManagerModelFactory.WritableSubResource(layerOneConflictId) : null);
+                layerOneConflictId != null ? ResourceManagerModelFactory.WritableSubResource(layerOneConflictId) : null,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtSafeFlatten.TypeTwoData"/>. </summary>
@@ -70,7 +71,8 @@ namespace MgmtSafeFlatten.Models
                 tags,
                 location,
                 myType,
-                layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp)) : null);
+                layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp, serializedAdditionalRawData: null), serializedAdditionalRawData: null) : null,
+                serializedAdditionalRawData: null);
         }
     }
 }

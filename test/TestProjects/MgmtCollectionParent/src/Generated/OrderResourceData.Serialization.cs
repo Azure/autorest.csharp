@@ -16,10 +16,74 @@ using MgmtCollectionParent.Models;
 
 namespace MgmtCollectionParent
 {
-    public partial class OrderResourceData
+    public partial class OrderResourceData : IUtf8JsonSerializable, IJsonModel<OrderResourceData>
     {
-        internal static OrderResourceData DeserializeOrderResourceData(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OrderResourceData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<OrderResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OrderResourceData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(OrderResourceData)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (options.Format != "W" && Optional.IsCollectionDefined(OrderItemIds))
+            {
+                writer.WritePropertyName("orderItemIds"u8);
+                writer.WriteStartArray();
+                foreach (var item in OrderItemIds)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsDefined(CurrentStage))
+            {
+                writer.WritePropertyName("currentStage"u8);
+                writer.WriteObjectValue(CurrentStage, options);
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(OrderStageHistory))
+            {
+                writer.WritePropertyName("orderStageHistory"u8);
+                writer.WriteStartArray();
+                foreach (var item in OrderStageHistory)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        OrderResourceData IJsonModel<OrderResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OrderResourceData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(OrderResourceData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOrderResourceData(document.RootElement, options);
+        }
+
+        internal static OrderResourceData DeserializeOrderResourceData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -27,10 +91,12 @@ namespace MgmtCollectionParent
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Azure.ResourceManager.Models.SystemData systemData = default;
             IReadOnlyList<string> orderItemIds = default;
             StageDetails currentStage = default;
             IReadOnlyList<StageDetails> orderStageHistory = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -54,7 +120,7 @@ namespace MgmtCollectionParent
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtCollectionParentContext.Default);
+                    systemData = ModelReaderWriter.Read<Azure.ResourceManager.Models.SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtCollectionParentContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -86,7 +152,7 @@ namespace MgmtCollectionParent
                             {
                                 continue;
                             }
-                            currentStage = StageDetails.DeserializeStageDetails(property0.Value);
+                            currentStage = StageDetails.DeserializeStageDetails(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("orderStageHistory"u8))
@@ -98,7 +164,7 @@ namespace MgmtCollectionParent
                             List<StageDetails> array = new List<StageDetails>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(StageDetails.DeserializeStageDetails(item));
+                                array.Add(StageDetails.DeserializeStageDetails(item, options));
                             }
                             orderStageHistory = array;
                             continue;
@@ -106,7 +172,12 @@ namespace MgmtCollectionParent
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new OrderResourceData(
                 id,
                 name,
@@ -114,7 +185,39 @@ namespace MgmtCollectionParent
                 systemData,
                 orderItemIds ?? new ChangeTrackingList<string>(),
                 currentStage,
-                orderStageHistory ?? new ChangeTrackingList<StageDetails>());
+                orderStageHistory ?? new ChangeTrackingList<StageDetails>(),
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<OrderResourceData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OrderResourceData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtCollectionParentContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(OrderResourceData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        OrderResourceData IPersistableModel<OrderResourceData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OrderResourceData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeOrderResourceData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(OrderResourceData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<OrderResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

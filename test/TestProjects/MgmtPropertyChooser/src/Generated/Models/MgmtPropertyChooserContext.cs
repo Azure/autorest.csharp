@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtPropertyChooser.Models;
 
 namespace MgmtPropertyChooser
 {
@@ -13,6 +14,27 @@ namespace MgmtPropertyChooser
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(CloudError))]
+    [ModelReaderWriterBuildable(typeof(Components135Hp51SchemasIdentitywithrenamedpropertyPropertiesUserassignedidentitiesAdditionalproperties))]
+    [ModelReaderWriterBuildable(typeof(Components1H8M3EpSchemasVirtualmachineidentityPropertiesUserassignedidentitiesAdditionalproperties))]
+    [ModelReaderWriterBuildable(typeof(Components1Jz5XdsSchemasIdentityv3PropertiesUserassignedidentitiesAdditionalproperties))]
+    [ModelReaderWriterBuildable(typeof(ComponentsTq4QocSchemasIdentitywithdifferentpropertytypePropertiesUserassignedidentitiesAdditionalproperties))]
+    [ModelReaderWriterBuildable(typeof(ComponentsX9YfnoSchemasIdentitywithnosystemidentityPropertiesUserassignedidentitiesAdditionalproperties))]
+    [ModelReaderWriterBuildable(typeof(ErrorAdditionalInfo))]
+    [ModelReaderWriterBuildable(typeof(FakeSubResource))]
+    [ModelReaderWriterBuildable(typeof(FakeWritableSubResource))]
+    [ModelReaderWriterBuildable(typeof(IdentityV3))]
+    [ModelReaderWriterBuildable(typeof(IdentityWithDifferentPropertyType))]
+    [ModelReaderWriterBuildable(typeof(IdentityWithNoSystemIdentity))]
+    [ModelReaderWriterBuildable(typeof(IdentityWithNoUserIdentity))]
+    [ModelReaderWriterBuildable(typeof(IdentityWithRenamedProperty))]
+    [ModelReaderWriterBuildable(typeof(MgmtPropertyChooserPlan))]
+    [ModelReaderWriterBuildable(typeof(MgmtPropertyChooserResourceData))]
+    [ModelReaderWriterBuildable(typeof(UpdateResource))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineExtension))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineIdentity))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineListResult))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachinePatch))]
     public partial class MgmtPropertyChooserContext : ModelReaderWriterContext
     {
     }

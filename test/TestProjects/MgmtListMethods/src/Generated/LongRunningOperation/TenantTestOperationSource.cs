@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.Text.Json;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,16 +25,14 @@ namespace MgmtListMethods
 
         TenantTestResource IOperationSource<TenantTestResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
-            var data = TenantTestData.DeserializeTenantTestData(document.RootElement);
+            var data = ModelReaderWriter.Read<TenantTestData>(response.Content, ModelReaderWriterOptions.Json, MgmtListMethodsContext.Default);
             return new TenantTestResource(_client, data);
         }
 
         async ValueTask<TenantTestResource> IOperationSource<TenantTestResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
-            var data = TenantTestData.DeserializeTenantTestData(document.RootElement);
-            return new TenantTestResource(_client, data);
+            var data = ModelReaderWriter.Read<TenantTestData>(response.Content, ModelReaderWriterOptions.Json, MgmtListMethodsContext.Default);
+            return await Task.FromResult(new TenantTestResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

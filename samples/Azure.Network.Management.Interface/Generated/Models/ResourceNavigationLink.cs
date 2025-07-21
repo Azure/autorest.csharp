@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> ResourceNavigationLink resource. </summary>
@@ -17,13 +20,14 @@ namespace Azure.Network.Management.Interface.Models
 
         /// <summary> Initializes a new instance of <see cref="ResourceNavigationLink"/>. </summary>
         /// <param name="id"> Resource ID. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Resource type. </param>
         /// <param name="linkedResourceType"> Resource type of the linked resource. </param>
         /// <param name="link"> Link to the external resource. </param>
         /// <param name="provisioningState"> The provisioning state of the resource navigation link resource. </param>
-        internal ResourceNavigationLink(string id, string name, string etag, string type, string linkedResourceType, string link, ProvisioningState? provisioningState) : base(id)
+        internal ResourceNavigationLink(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, string etag, string type, string linkedResourceType, string link, ProvisioningState? provisioningState) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

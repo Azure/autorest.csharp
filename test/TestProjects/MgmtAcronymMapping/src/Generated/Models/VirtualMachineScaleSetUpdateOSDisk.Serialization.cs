@@ -5,16 +5,35 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VirtualMachineScaleSetUpdateOSDisk : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetUpdateOSDisk : IUtf8JsonSerializable, IJsonModel<VirtualMachineScaleSetUpdateOSDisk>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetUpdateOSDisk>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<VirtualMachineScaleSetUpdateOSDisk>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetUpdateOSDisk>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(VirtualMachineScaleSetUpdateOSDisk)} does not support writing '{format}' format.");
+            }
+
             if (Optional.IsDefined(Caching))
             {
                 writer.WritePropertyName("caching"u8);
@@ -33,7 +52,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue(Image);
+                writer.WriteObjectValue(Image, options);
             }
             if (Optional.IsCollectionDefined(VhdContainers))
             {
@@ -48,9 +67,159 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue(ManagedDisk);
+                writer.WriteObjectValue(ManagedDisk, options);
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
         }
+
+        VirtualMachineScaleSetUpdateOSDisk IJsonModel<VirtualMachineScaleSetUpdateOSDisk>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetUpdateOSDisk>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(VirtualMachineScaleSetUpdateOSDisk)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetUpdateOSDisk(document.RootElement, options);
+        }
+
+        internal static VirtualMachineScaleSetUpdateOSDisk DeserializeVirtualMachineScaleSetUpdateOSDisk(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            CachingType? caching = default;
+            bool? writeAcceleratorEnabled = default;
+            int? diskSizeGB = default;
+            VirtualHardDisk image = default;
+            IList<string> vhdContainers = default;
+            VirtualMachineScaleSetManagedDiskParameters managedDisk = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("caching"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    caching = property.Value.GetString().ToCachingType();
+                    continue;
+                }
+                if (property.NameEquals("writeAcceleratorEnabled"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    writeAcceleratorEnabled = property.Value.GetBoolean();
+                    continue;
+                }
+                if (property.NameEquals("diskSizeGB"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    diskSizeGB = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("image"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    image = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value, options);
+                    continue;
+                }
+                if (property.NameEquals("vhdContainers"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    vhdContainers = array;
+                    continue;
+                }
+                if (property.NameEquals("managedDisk"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    managedDisk = VirtualMachineScaleSetManagedDiskParameters.DeserializeVirtualMachineScaleSetManagedDiskParameters(property.Value, options);
+                    continue;
+                }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
+            }
+            serializedAdditionalRawData = rawDataDictionary;
+            return new VirtualMachineScaleSetUpdateOSDisk(
+                caching,
+                writeAcceleratorEnabled,
+                diskSizeGB,
+                image,
+                vhdContainers ?? new ChangeTrackingList<string>(),
+                managedDisk,
+                serializedAdditionalRawData);
+        }
+
+        BinaryData IPersistableModel<VirtualMachineScaleSetUpdateOSDisk>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetUpdateOSDisk>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtAcronymMappingContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetUpdateOSDisk)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        VirtualMachineScaleSetUpdateOSDisk IPersistableModel<VirtualMachineScaleSetUpdateOSDisk>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetUpdateOSDisk>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeVirtualMachineScaleSetUpdateOSDisk(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(VirtualMachineScaleSetUpdateOSDisk)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<VirtualMachineScaleSetUpdateOSDisk>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

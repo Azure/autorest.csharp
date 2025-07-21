@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using AuthoringTypeSpec.Models;
 
 namespace AuthoringTypeSpec
 {
@@ -13,6 +14,23 @@ namespace AuthoringTypeSpec
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Deployment))]
+    [ModelReaderWriterBuildable(typeof(DeploymentJob))]
+    [ModelReaderWriterBuildable(typeof(ErrorResponse))]
+    [ModelReaderWriterBuildable(typeof(InnerError))]
+    [ModelReaderWriterBuildable(typeof(JobWarning))]
+    [ModelReaderWriterBuildable(typeof(OperationStatusError))]
+    [ModelReaderWriterBuildable(typeof(PagedDeployment))]
+    [ModelReaderWriterBuildable(typeof(PagedProject))]
+    [ModelReaderWriterBuildable(typeof(Project))]
+    [ModelReaderWriterBuildable(typeof(ProjectSettings))]
+    [ModelReaderWriterBuildable(typeof(SupportedLanguage))]
+    [ModelReaderWriterBuildable(typeof(SupportedLanguages))]
+    [ModelReaderWriterBuildable(typeof(SwapDeploymentsJob))]
+    [ModelReaderWriterBuildable(typeof(SwapDeploymentsOptions))]
+    [ModelReaderWriterBuildable(typeof(TrainingConfigVersion))]
+    [ModelReaderWriterBuildable(typeof(TrainingConfigVersions))]
+    [ModelReaderWriterBuildable(typeof(TrainingJobOptions))]
     public partial class AuthoringTypeSpecContext : ModelReaderWriterContext
     {
     }

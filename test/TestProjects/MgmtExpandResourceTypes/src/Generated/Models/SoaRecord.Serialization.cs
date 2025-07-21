@@ -5,16 +5,35 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtExpandResourceTypes.Models
 {
-    public partial class SoaRecord : IUtf8JsonSerializable
+    public partial class SoaRecord : IUtf8JsonSerializable, IJsonModel<SoaRecord>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SoaRecord>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<SoaRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SoaRecord>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(SoaRecord)} does not support writing '{format}' format.");
+            }
+
             if (Optional.IsDefined(Host))
             {
                 writer.WritePropertyName("host"u8);
@@ -50,11 +69,39 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WritePropertyName("minimumTTL"u8);
                 writer.WriteNumberValue(MinimumTtl.Value);
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
         }
 
-        internal static SoaRecord DeserializeSoaRecord(JsonElement element)
+        SoaRecord IJsonModel<SoaRecord>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<SoaRecord>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(SoaRecord)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSoaRecord(document.RootElement, options);
+        }
+
+        internal static SoaRecord DeserializeSoaRecord(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -66,6 +113,8 @@ namespace MgmtExpandResourceTypes.Models
             long? retryTime = default;
             long? expireTime = default;
             long? minimumTTL = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("host"u8))
@@ -123,7 +172,12 @@ namespace MgmtExpandResourceTypes.Models
                     minimumTTL = property.Value.GetInt64();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new SoaRecord(
                 host,
                 email,
@@ -131,7 +185,39 @@ namespace MgmtExpandResourceTypes.Models
                 refreshTime,
                 retryTime,
                 expireTime,
-                minimumTTL);
+                minimumTTL,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<SoaRecord>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SoaRecord>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtExpandResourceTypesContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(SoaRecord)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        SoaRecord IPersistableModel<SoaRecord>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SoaRecord>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeSoaRecord(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(SoaRecord)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<SoaRecord>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

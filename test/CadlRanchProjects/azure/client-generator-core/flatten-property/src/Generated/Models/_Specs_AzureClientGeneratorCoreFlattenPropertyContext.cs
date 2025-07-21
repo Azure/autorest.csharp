@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using _Specs_.Azure.ClientGenerator.Core.FlattenProperty.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.FlattenProperty
 {
@@ -13,6 +14,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.FlattenProperty
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ChildFlattenModel))]
+    [ModelReaderWriterBuildable(typeof(ChildModel))]
+    [ModelReaderWriterBuildable(typeof(FlattenModel))]
+    [ModelReaderWriterBuildable(typeof(NestedFlattenModel))]
     public partial class _Specs_AzureClientGeneratorCoreFlattenPropertyContext : ModelReaderWriterContext
     {
     }

@@ -11,4 +11,5 @@ security: AADToken
 security-header-name: Your-Subscription-Key
 security-scopes: https://test.azure.com/.default
 library-name: AccessibilityTokenAuth
+use-model-reader-writer: true
 ```

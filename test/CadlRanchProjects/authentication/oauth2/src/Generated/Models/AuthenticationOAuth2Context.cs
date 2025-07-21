@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Authentication.OAuth2.Models;
 
 namespace Authentication.OAuth2
 {
@@ -13,6 +14,7 @@ namespace Authentication.OAuth2
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(InvalidAuth))]
     public partial class AuthenticationOAuth2Context : ModelReaderWriterContext
     {
     }

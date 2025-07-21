@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -19,6 +20,38 @@ namespace MgmtPropertyChooser
     /// </summary>
     public partial class VirtualMachineData : TrackedResourceData
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="VirtualMachineData"/>. </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineData(AzureLocation location) : base(location)
@@ -51,7 +84,8 @@ namespace MgmtPropertyChooser
         /// <param name="licenseType"> Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; Windows_Client &lt;br&gt;&lt;br&gt; Windows_Server &lt;br&gt;&lt;br&gt; If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. &lt;br&gt;&lt;br&gt; For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Minimum api-version: 2015-06-15. </param>
         /// <param name="vmId"> Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands. </param>
         /// <param name="extensionsTimeBudget"> Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). &lt;br&gt;&lt;br&gt; Minimum api-version: 2020-06-01. </param>
-        internal VirtualMachineData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ArmPlan plan, IReadOnlyList<VirtualMachineExtension> resources, ManagedServiceIdentity identity, IdentityWithRenamedProperty identityWithRenamedProperty, IdentityWithDifferentPropertyType identityWithDifferentPropertyType, ManagedServiceIdentity identityWithNoUserIdentity, IdentityWithNoSystemIdentity identityWithNoSystemIdentity, ManagedServiceIdentity identityV3, IList<string> zones, IReadOnlyList<MgmtPropertyChooserResourceData> fakeResources, SubResource fakeSubResource, WritableSubResource fakeWritableSubResource, string provisioningState, string licenseType, string vmId, string extensionsTimeBudget) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ArmPlan plan, IReadOnlyList<VirtualMachineExtension> resources, ManagedServiceIdentity identity, IdentityWithRenamedProperty identityWithRenamedProperty, IdentityWithDifferentPropertyType identityWithDifferentPropertyType, ManagedServiceIdentity identityWithNoUserIdentity, IdentityWithNoSystemIdentity identityWithNoSystemIdentity, ManagedServiceIdentity identityV3, IList<string> zones, IReadOnlyList<MgmtPropertyChooserResourceData> fakeResources, SubResource fakeSubResource, WritableSubResource fakeWritableSubResource, string provisioningState, string licenseType, string vmId, string extensionsTimeBudget, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Plan = plan;
             Resources = resources;
@@ -69,6 +103,12 @@ namespace MgmtPropertyChooser
             LicenseType = licenseType;
             VmId = vmId;
             ExtensionsTimeBudget = extensionsTimeBudget;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineData"/> for deserialization. </summary>
+        internal VirtualMachineData()
+        {
         }
 
         /// <summary> Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**. </summary>

@@ -5,16 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace AzureSample.Storage.Tables.Models
 {
-    public partial class StorageServiceProperties : IXmlSerializable
+    public partial class StorageServiceProperties : IXmlSerializable, IPersistableModel<StorageServiceProperties>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "StorageServiceProperties");
             if (Optional.IsDefined(Logging))
@@ -41,8 +44,12 @@ namespace AzureSample.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, ModelSerializationExtensions.WireOptions);
+
+        internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             Logging logging = default;
             Metrics hourMetrics = default;
             Metrics minuteMetrics = default;
@@ -68,7 +75,41 @@ namespace AzureSample.Storage.Tables.Models
                 }
                 cors = array;
             }
-            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors);
+            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors, serializedAdditionalRawData: null);
         }
+
+        BinaryData IPersistableModel<StorageServiceProperties>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<StorageServiceProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        WriteInternal(writer, null, options);
+                        writer.Flush();
+                        return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(StorageServiceProperties)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        StorageServiceProperties IPersistableModel<StorageServiceProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<StorageServiceProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    return DeserializeStorageServiceProperties(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new FormatException($"The model {nameof(StorageServiceProperties)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<StorageServiceProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

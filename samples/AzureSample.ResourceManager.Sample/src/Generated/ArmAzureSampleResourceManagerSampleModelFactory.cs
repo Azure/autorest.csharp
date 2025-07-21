@@ -188,7 +188,7 @@ namespace AzureSample.ResourceManager.Sample.Models
         /// Serialized Name: ProximityPlacementGroup.properties.colocationStatus
         /// </param>
         /// <returns> A new <see cref="Sample.ProximityPlacementGroupData"/> instance for mocking. </returns>
-        public static ProximityPlacementGroupData ProximityPlacementGroupData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, ExtendedLocation extendedLocation = null, ProximityPlacementGroupType? proximityPlacementGroupType = null, IEnumerable<SubResourceWithColocationStatus> virtualMachines = null, IEnumerable<SubResourceWithColocationStatus> virtualMachineScaleSets = null, IEnumerable<SubResourceWithColocationStatus> availabilitySets = null, InstanceViewStatus colocationStatus = null)
+        public static ProximityPlacementGroupData ProximityPlacementGroupData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, Azure.ResourceManager.Resources.Models.ExtendedLocation extendedLocation = null, ProximityPlacementGroupType? proximityPlacementGroupType = null, IEnumerable<SubResourceWithColocationStatus> virtualMachines = null, IEnumerable<SubResourceWithColocationStatus> virtualMachineScaleSets = null, IEnumerable<SubResourceWithColocationStatus> availabilitySets = null, InstanceViewStatus colocationStatus = null)
         {
             tags ??= new Dictionary<string, string>();
             virtualMachines ??= new List<SubResourceWithColocationStatus>();

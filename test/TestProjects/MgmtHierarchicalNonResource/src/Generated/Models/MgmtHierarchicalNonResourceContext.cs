@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtHierarchicalNonResource.Models;
 
 namespace MgmtHierarchicalNonResource
 {
@@ -13,6 +14,23 @@ namespace MgmtHierarchicalNonResource
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ApiError))]
+    [ModelReaderWriterBuildable(typeof(ApiErrorBase))]
+    [ModelReaderWriterBuildable(typeof(CloudError))]
+    [ModelReaderWriterBuildable(typeof(Disallowed))]
+    [ModelReaderWriterBuildable(typeof(GalleryImageFeature))]
+    [ModelReaderWriterBuildable(typeof(GalleryImageIdentifier))]
+    [ModelReaderWriterBuildable(typeof(ImagePurchasePlan))]
+    [ModelReaderWriterBuildable(typeof(InnerError))]
+    [ModelReaderWriterBuildable(typeof(PirResource))]
+    [ModelReaderWriterBuildable(typeof(PirSharedGalleryResource))]
+    [ModelReaderWriterBuildable(typeof(RecommendedMachineConfiguration))]
+    [ModelReaderWriterBuildable(typeof(ResourceRange))]
+    [ModelReaderWriterBuildable(typeof(SharedGalleryImage))]
+    [ModelReaderWriterBuildable(typeof(SharedGalleryImageList))]
+    [ModelReaderWriterBuildable(typeof(SharedGalleryImageVersion))]
+    [ModelReaderWriterBuildable(typeof(SharedGalleryImageVersionList))]
+    [ModelReaderWriterBuildable(typeof(SharedGalleryList))]
     public partial class MgmtHierarchicalNonResourceContext : ModelReaderWriterContext
     {
     }

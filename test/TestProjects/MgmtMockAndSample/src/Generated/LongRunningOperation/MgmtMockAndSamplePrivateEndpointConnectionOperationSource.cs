@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.Text.Json;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,16 +25,14 @@ namespace MgmtMockAndSample
 
         MgmtMockAndSamplePrivateEndpointConnectionResource IOperationSource<MgmtMockAndSamplePrivateEndpointConnectionResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
-            var data = MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(document.RootElement);
+            var data = ModelReaderWriter.Read<MgmtMockAndSamplePrivateEndpointConnectionData>(response.Content, ModelReaderWriterOptions.Json, MgmtMockAndSampleContext.Default);
             return new MgmtMockAndSamplePrivateEndpointConnectionResource(_client, data);
         }
 
         async ValueTask<MgmtMockAndSamplePrivateEndpointConnectionResource> IOperationSource<MgmtMockAndSamplePrivateEndpointConnectionResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
-            var data = MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(document.RootElement);
-            return new MgmtMockAndSamplePrivateEndpointConnectionResource(_client, data);
+            var data = ModelReaderWriter.Read<MgmtMockAndSamplePrivateEndpointConnectionData>(response.Content, ModelReaderWriterOptions.Json, MgmtMockAndSampleContext.Default);
+            return await Task.FromResult(new MgmtMockAndSamplePrivateEndpointConnectionResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

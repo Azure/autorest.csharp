@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using AppConfiguration.Models;
 
 namespace AppConfiguration
 {
@@ -13,6 +14,13 @@ namespace AppConfiguration
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Error))]
+    [ModelReaderWriterBuildable(typeof(Key))]
+    [ModelReaderWriterBuildable(typeof(KeyListResult))]
+    [ModelReaderWriterBuildable(typeof(KeyValue))]
+    [ModelReaderWriterBuildable(typeof(KeyValueListResult))]
+    [ModelReaderWriterBuildable(typeof(Label))]
+    [ModelReaderWriterBuildable(typeof(LabelListResult))]
     public partial class AppConfigurationContext : ModelReaderWriterContext
     {
     }

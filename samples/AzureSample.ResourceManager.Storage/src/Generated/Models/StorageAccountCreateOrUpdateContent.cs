@@ -16,6 +16,38 @@ namespace AzureSample.ResourceManager.Storage.Models
     /// <summary> The parameters used when creating a storage account. </summary>
     public partial class StorageAccountCreateOrUpdateContent
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="StorageAccountCreateOrUpdateContent"/>. </summary>
         /// <param name="sku"> Required. Gets or sets the SKU name. </param>
         /// <param name="kind"> Required. Indicates the type of storage account. </param>
@@ -57,7 +89,8 @@ namespace AzureSample.ResourceManager.Storage.Models
         /// <param name="allowCrossTenantReplication"> Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property. </param>
         /// <param name="defaultToOAuthAuthentication"> A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property. </param>
         /// <param name="immutableStorageWithVersioning"> The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the new containers in the account by default. </param>
-        internal StorageAccountCreateOrUpdateContent(AzureSampleResourceManagerStorageSku sku, AzureSampleResourceManagerStorageKind kind, AzureLocation location, ExtendedLocation extendedLocation, IDictionary<string, string> tags, ManagedServiceIdentity identity, PublicNetworkAccess? publicNetworkAccess, SasPolicy sasPolicy, KeyPolicy keyPolicy, CustomDomain customDomain, Encryption encryption, NetworkRuleSet networkRuleSet, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, bool? isHnsEnabled, LargeFileSharesState? largeFileSharesState, RoutingPreference routingPreference, bool? allowBlobPublicAccess, MinimumTlsVersion? minimumTlsVersion, bool? allowSharedKeyAccess, bool? enableNfsV3, bool? allowCrossTenantReplication, bool? defaultToOAuthAuthentication, ImmutableStorageAccount immutableStorageWithVersioning)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageAccountCreateOrUpdateContent(AzureSampleResourceManagerStorageSku sku, AzureSampleResourceManagerStorageKind kind, AzureLocation location, Azure.ResourceManager.Resources.Models.ExtendedLocation extendedLocation, IDictionary<string, string> tags, ManagedServiceIdentity identity, PublicNetworkAccess? publicNetworkAccess, SasPolicy sasPolicy, KeyPolicy keyPolicy, CustomDomain customDomain, Encryption encryption, NetworkRuleSet networkRuleSet, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, bool? isHnsEnabled, LargeFileSharesState? largeFileSharesState, RoutingPreference routingPreference, bool? allowBlobPublicAccess, MinimumTlsVersion? minimumTlsVersion, bool? allowSharedKeyAccess, bool? enableNfsV3, bool? allowCrossTenantReplication, bool? defaultToOAuthAuthentication, ImmutableStorageAccount immutableStorageWithVersioning, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Sku = sku;
             Kind = kind;
@@ -84,6 +117,12 @@ namespace AzureSample.ResourceManager.Storage.Models
             AllowCrossTenantReplication = allowCrossTenantReplication;
             DefaultToOAuthAuthentication = defaultToOAuthAuthentication;
             ImmutableStorageWithVersioning = immutableStorageWithVersioning;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="StorageAccountCreateOrUpdateContent"/> for deserialization. </summary>
+        internal StorageAccountCreateOrUpdateContent()
+        {
         }
 
         /// <summary> Required. Gets or sets the SKU name. </summary>
@@ -93,7 +132,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         /// <summary> Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed. </summary>
         public AzureLocation Location { get; }
         /// <summary> Optional. Set the extended location of the resource. If not set, the storage account will be created in Azure main region. Otherwise it will be created in the specified extended location. </summary>
-        public ExtendedLocation ExtendedLocation { get; set; }
+        public Azure.ResourceManager.Resources.Models.ExtendedLocation ExtendedLocation { get; set; }
         /// <summary> Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters. </summary>
         public IDictionary<string, string> Tags { get; }
         /// <summary> The identity of the resource. </summary>

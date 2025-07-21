@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtNoTypeReplacement.Models;
 
 namespace MgmtNoTypeReplacement
 {
@@ -13,6 +14,14 @@ namespace MgmtNoTypeReplacement
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(MgmtNoTypeReplacementResourceData))]
+    [ModelReaderWriterBuildable(typeof(MiddleResourceModel))]
+    [ModelReaderWriterBuildable(typeof(NoSubResourceModel))]
+    [ModelReaderWriterBuildable(typeof(NoSubResourceModel2))]
+    [ModelReaderWriterBuildable(typeof(NoTypeReplacementModel1ListResult))]
+    [ModelReaderWriterBuildable(typeof(NoTypeReplacementModel2ListResult))]
+    [ModelReaderWriterBuildable(typeof(NoTypeReplacementModel3ListResult))]
+    [ModelReaderWriterBuildable(typeof(SubResourceModel))]
     public partial class MgmtNoTypeReplacementContext : ModelReaderWriterContext
     {
     }

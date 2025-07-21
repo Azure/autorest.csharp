@@ -5,16 +5,115 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace AzureSample.ResourceManager.Storage.Models
 {
-    public partial class AzureSampleResourceManagerStorageSkuInformation
+    public partial class AzureSampleResourceManagerStorageSkuInformation : IUtf8JsonSerializable, IJsonModel<AzureSampleResourceManagerStorageSkuInformation>
     {
-        internal static AzureSampleResourceManagerStorageSkuInformation DeserializeAzureSampleResourceManagerStorageSkuInformation(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AzureSampleResourceManagerStorageSkuInformation>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<AzureSampleResourceManagerStorageSkuInformation>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AzureSampleResourceManagerStorageSkuInformation>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(AzureSampleResourceManagerStorageSkuInformation)} does not support writing '{format}' format.");
+            }
+
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name.ToString());
+            if (options.Format != "W" && Optional.IsDefined(Tier))
+            {
+                writer.WritePropertyName("tier"u8);
+                writer.WriteStringValue(Tier.Value.ToSerialString());
+            }
+            if (options.Format != "W" && Optional.IsDefined(ResourceType))
+            {
+                writer.WritePropertyName("resourceType"u8);
+                writer.WriteStringValue(ResourceType.Value);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Kind))
+            {
+                writer.WritePropertyName("kind"u8);
+                writer.WriteStringValue(Kind.Value.ToString());
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(Locations))
+            {
+                writer.WritePropertyName("locations"u8);
+                writer.WriteStartArray();
+                foreach (var item in Locations)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(Capabilities))
+            {
+                writer.WritePropertyName("capabilities"u8);
+                writer.WriteStartArray();
+                foreach (var item in Capabilities)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(Restrictions))
+            {
+                writer.WritePropertyName("restrictions"u8);
+                writer.WriteStartArray();
+                foreach (var item in Restrictions)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+        }
+
+        AzureSampleResourceManagerStorageSkuInformation IJsonModel<AzureSampleResourceManagerStorageSkuInformation>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AzureSampleResourceManagerStorageSkuInformation>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(AzureSampleResourceManagerStorageSkuInformation)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAzureSampleResourceManagerStorageSkuInformation(document.RootElement, options);
+        }
+
+        internal static AzureSampleResourceManagerStorageSkuInformation DeserializeAzureSampleResourceManagerStorageSkuInformation(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -26,6 +125,8 @@ namespace AzureSample.ResourceManager.Storage.Models
             IReadOnlyList<string> locations = default;
             IReadOnlyList<SKUCapability> capabilities = default;
             IReadOnlyList<Restriction> restrictions = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -83,7 +184,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     List<SKUCapability> array = new List<SKUCapability>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SKUCapability.DeserializeSKUCapability(item));
+                        array.Add(SKUCapability.DeserializeSKUCapability(item, options));
                     }
                     capabilities = array;
                     continue;
@@ -97,12 +198,17 @@ namespace AzureSample.ResourceManager.Storage.Models
                     List<Restriction> array = new List<Restriction>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Restriction.DeserializeRestriction(item));
+                        array.Add(Restriction.DeserializeRestriction(item, options));
                     }
                     restrictions = array;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new AzureSampleResourceManagerStorageSkuInformation(
                 name,
                 tier,
@@ -110,7 +216,39 @@ namespace AzureSample.ResourceManager.Storage.Models
                 kind,
                 locations ?? new ChangeTrackingList<string>(),
                 capabilities ?? new ChangeTrackingList<SKUCapability>(),
-                restrictions ?? new ChangeTrackingList<Restriction>());
+                restrictions ?? new ChangeTrackingList<Restriction>(),
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<AzureSampleResourceManagerStorageSkuInformation>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AzureSampleResourceManagerStorageSkuInformation>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerStorageContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(AzureSampleResourceManagerStorageSkuInformation)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        AzureSampleResourceManagerStorageSkuInformation IPersistableModel<AzureSampleResourceManagerStorageSkuInformation>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AzureSampleResourceManagerStorageSkuInformation>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeAzureSampleResourceManagerStorageSkuInformation(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(AzureSampleResourceManagerStorageSkuInformation)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<AzureSampleResourceManagerStorageSkuInformation>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

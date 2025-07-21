@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,6 +13,16 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> Model factory for models. </summary>
     public static partial class CognitiveServicesTextAnalyticsModelFactory
     {
+        /// <summary> Initializes a new instance of <see cref="Models.MultiLanguageInput"/>. </summary>
+        /// <param name="id"> A unique, non-empty document identifier. </param>
+        /// <param name="text"> The input text to process. </param>
+        /// <param name="language"> (Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use "en" for English; "es" for Spanish etc. If not set, use "en" for English as default. </param>
+        /// <returns> A new <see cref="Models.MultiLanguageInput"/> instance for mocking. </returns>
+        public static MultiLanguageInput MultiLanguageInput(string id = null, string text = null, string language = null)
+        {
+            return new MultiLanguageInput(id, text, language, serializedAdditionalRawData: null);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Models.EntitiesResult"/>. </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
@@ -25,7 +34,7 @@ namespace CognitiveServices.TextAnalytics.Models
             documents ??= new List<DocumentEntities>();
             errors ??= new List<DocumentError>();
 
-            return new EntitiesResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
+            return new EntitiesResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DocumentEntities"/>. </summary>
@@ -39,7 +48,7 @@ namespace CognitiveServices.TextAnalytics.Models
             entities ??= new List<Entity>();
             warnings ??= new List<TextAnalyticsWarning>();
 
-            return new DocumentEntities(id, entities?.ToList(), warnings?.ToList(), statistics);
+            return new DocumentEntities(id, entities?.ToList(), warnings?.ToList(), statistics, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Entity"/>. </summary>
@@ -58,7 +67,8 @@ namespace CognitiveServices.TextAnalytics.Models
                 subcategory,
                 offset,
                 length,
-                confidenceScore);
+                confidenceScore,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TextAnalyticsWarning"/>. </summary>
@@ -68,7 +78,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <returns> A new <see cref="Models.TextAnalyticsWarning"/> instance for mocking. </returns>
         public static TextAnalyticsWarning TextAnalyticsWarning(WarningCodeValue code = default, string message = null, string targetRef = null)
         {
-            return new TextAnalyticsWarning(code, message, targetRef);
+            return new TextAnalyticsWarning(code, message, targetRef, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DocumentStatistics"/>. </summary>
@@ -77,26 +87,16 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <returns> A new <see cref="Models.DocumentStatistics"/> instance for mocking. </returns>
         public static DocumentStatistics DocumentStatistics(int charactersCount = default, int transactionsCount = default)
         {
-            return new DocumentStatistics(charactersCount, transactionsCount);
+            return new DocumentStatistics(charactersCount, transactionsCount, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DocumentError"/>. </summary>
         /// <param name="id"> Document Id. </param>
         /// <param name="error"> Document Error. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="error"/> is null. </exception>
         /// <returns> A new <see cref="Models.DocumentError"/> instance for mocking. </returns>
         public static DocumentError DocumentError(string id = null, TextAnalyticsError error = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-            if (error == null)
-            {
-                throw new ArgumentNullException(nameof(error));
-            }
-
-            return new DocumentError(id, error);
+            return new DocumentError(id, error, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TextAnalyticsError"/>. </summary>
@@ -110,7 +110,13 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             details ??= new List<TextAnalyticsError>();
 
-            return new TextAnalyticsError(code, message, target, innererror, details?.ToList());
+            return new TextAnalyticsError(
+                code,
+                message,
+                target,
+                innererror,
+                details?.ToList(),
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.InnerError"/>. </summary>
@@ -124,7 +130,13 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             details ??= new Dictionary<string, string>();
 
-            return new InnerError(code, message, details, target, innererror);
+            return new InnerError(
+                code,
+                message,
+                details,
+                target,
+                innererror,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RequestStatistics"/>. </summary>
@@ -135,7 +147,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <returns> A new <see cref="Models.RequestStatistics"/> instance for mocking. </returns>
         public static RequestStatistics RequestStatistics(int documentsCount = default, int validDocumentsCount = default, int erroneousDocumentsCount = default, long transactionsCount = default)
         {
-            return new RequestStatistics(documentsCount, validDocumentsCount, erroneousDocumentsCount, transactionsCount);
+            return new RequestStatistics(documentsCount, validDocumentsCount, erroneousDocumentsCount, transactionsCount, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.EntityLinkingResult"/>. </summary>
@@ -149,7 +161,7 @@ namespace CognitiveServices.TextAnalytics.Models
             documents ??= new List<DocumentLinkedEntities>();
             errors ??= new List<DocumentError>();
 
-            return new EntityLinkingResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
+            return new EntityLinkingResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DocumentLinkedEntities"/>. </summary>
@@ -163,7 +175,7 @@ namespace CognitiveServices.TextAnalytics.Models
             entities ??= new List<LinkedEntity>();
             warnings ??= new List<TextAnalyticsWarning>();
 
-            return new DocumentLinkedEntities(id, entities?.ToList(), warnings?.ToList(), statistics);
+            return new DocumentLinkedEntities(id, entities?.ToList(), warnings?.ToList(), statistics, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.LinkedEntity"/>. </summary>
@@ -184,7 +196,8 @@ namespace CognitiveServices.TextAnalytics.Models
                 language,
                 id,
                 url,
-                dataSource);
+                dataSource,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Match"/>. </summary>
@@ -192,16 +205,10 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="text"> Entity text as appears in the request. </param>
         /// <param name="offset"> Start position (in Unicode characters) for the entity match text. </param>
         /// <param name="length"> Length (in Unicode characters) for the entity match text. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         /// <returns> A new <see cref="Models.Match"/> instance for mocking. </returns>
         public static Match Match(double confidenceScore = default, string text = null, int offset = default, int length = default)
         {
-            if (text == null)
-            {
-                throw new ArgumentNullException(nameof(text));
-            }
-
-            return new Match(confidenceScore, text, offset, length);
+            return new Match(confidenceScore, text, offset, length, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.KeyPhraseResult"/>. </summary>
@@ -215,7 +222,7 @@ namespace CognitiveServices.TextAnalytics.Models
             documents ??= new List<DocumentKeyPhrases>();
             errors ??= new List<DocumentError>();
 
-            return new KeyPhraseResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
+            return new KeyPhraseResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DocumentKeyPhrases"/>. </summary>
@@ -229,7 +236,17 @@ namespace CognitiveServices.TextAnalytics.Models
             keyPhrases ??= new List<string>();
             warnings ??= new List<TextAnalyticsWarning>();
 
-            return new DocumentKeyPhrases(id, keyPhrases?.ToList(), warnings?.ToList(), statistics);
+            return new DocumentKeyPhrases(id, keyPhrases?.ToList(), warnings?.ToList(), statistics, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.LanguageInput"/>. </summary>
+        /// <param name="id"> Unique, non-empty document identifier. </param>
+        /// <param name="text"></param>
+        /// <param name="countryHint"></param>
+        /// <returns> A new <see cref="Models.LanguageInput"/> instance for mocking. </returns>
+        public static LanguageInput LanguageInput(string id = null, string text = null, string countryHint = null)
+        {
+            return new LanguageInput(id, text, countryHint, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.LanguageResult"/>. </summary>
@@ -243,7 +260,7 @@ namespace CognitiveServices.TextAnalytics.Models
             documents ??= new List<DocumentLanguage>();
             errors ??= new List<DocumentError>();
 
-            return new LanguageResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
+            return new LanguageResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DocumentLanguage"/>. </summary>
@@ -256,27 +273,17 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             warnings ??= new List<TextAnalyticsWarning>();
 
-            return new DocumentLanguage(id, detectedLanguage, warnings?.ToList(), statistics);
+            return new DocumentLanguage(id, detectedLanguage, warnings?.ToList(), statistics, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DetectedLanguage"/>. </summary>
         /// <param name="name"> Long name of a detected language (e.g. English, French). </param>
         /// <param name="iso6391Name"> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </param>
         /// <param name="confidenceScore"> A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="iso6391Name"/> is null. </exception>
         /// <returns> A new <see cref="Models.DetectedLanguage"/> instance for mocking. </returns>
         public static DetectedLanguage DetectedLanguage(string name = null, string iso6391Name = null, double confidenceScore = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (iso6391Name == null)
-            {
-                throw new ArgumentNullException(nameof(iso6391Name));
-            }
-
-            return new DetectedLanguage(name, iso6391Name, confidenceScore);
+            return new DetectedLanguage(name, iso6391Name, confidenceScore, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SentimentResponse"/>. </summary>
@@ -290,7 +297,7 @@ namespace CognitiveServices.TextAnalytics.Models
             documents ??= new List<DocumentSentiment>();
             errors ??= new List<DocumentError>();
 
-            return new SentimentResponse(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
+            return new SentimentResponse(documents?.ToList(), errors?.ToList(), statistics, modelVersion, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DocumentSentiment"/>. </summary>
@@ -312,7 +319,8 @@ namespace CognitiveServices.TextAnalytics.Models
                 statistics,
                 confidenceScores,
                 sentences?.ToList(),
-                warnings?.ToList());
+                warnings?.ToList(),
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SentimentConfidenceScorePerLabel"/>. </summary>
@@ -322,7 +330,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <returns> A new <see cref="Models.SentimentConfidenceScorePerLabel"/> instance for mocking. </returns>
         public static SentimentConfidenceScorePerLabel SentimentConfidenceScorePerLabel(double positive = default, double neutral = default, double negative = default)
         {
-            return new SentimentConfidenceScorePerLabel(positive, neutral, negative);
+            return new SentimentConfidenceScorePerLabel(positive, neutral, negative, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SentenceSentiment"/>. </summary>
@@ -331,20 +339,16 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="confidenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>
         /// <param name="offset"> The sentence offset from the start of the document. </param>
         /// <param name="length"> The length of the sentence by Unicode standard. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="text"/> or <paramref name="confidenceScores"/> is null. </exception>
         /// <returns> A new <see cref="Models.SentenceSentiment"/> instance for mocking. </returns>
         public static SentenceSentiment SentenceSentiment(string text = null, SentenceSentimentValue sentiment = default, SentimentConfidenceScorePerLabel confidenceScores = null, int offset = default, int length = default)
         {
-            if (text == null)
-            {
-                throw new ArgumentNullException(nameof(text));
-            }
-            if (confidenceScores == null)
-            {
-                throw new ArgumentNullException(nameof(confidenceScores));
-            }
-
-            return new SentenceSentiment(text, sentiment, confidenceScores, offset, length);
+            return new SentenceSentiment(
+                text,
+                sentiment,
+                confidenceScores,
+                offset,
+                length,
+                serializedAdditionalRawData: null);
         }
     }
 }

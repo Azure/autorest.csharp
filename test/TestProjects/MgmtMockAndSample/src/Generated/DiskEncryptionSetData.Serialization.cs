@@ -16,15 +16,48 @@ using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    public partial class DiskEncryptionSetData : IUtf8JsonSerializable
+    public partial class DiskEncryptionSetData : IUtf8JsonSerializable, IJsonModel<DiskEncryptionSetData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DiskEncryptionSetData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<DiskEncryptionSetData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DiskEncryptionSetData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(DiskEncryptionSetData)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, new ModelReaderWriterOptions("W|v3"));
+                ((IJsonModel<Azure.ResourceManager.Models.ManagedServiceIdentity>)Identity).Write(writer, new ModelReaderWriterOptions("W|v3"));
+            }
+            if (options.Format != "W" && Optional.IsDefined(Location))
+            {
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location.Value);
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -36,12 +69,32 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(ActiveKey))
             {
                 writer.WritePropertyName("activeKey"u8);
-                writer.WriteObjectValue(ActiveKey);
+                writer.WriteObjectValue(ActiveKey, options);
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(PreviousKeys))
+            {
+                writer.WritePropertyName("previousKeys"u8);
+                writer.WriteStartArray();
+                foreach (var item in PreviousKeys)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            {
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState);
             }
             if (Optional.IsDefined(RotationToLatestKeyVersionEnabled))
             {
                 writer.WritePropertyName("rotationToLatestKeyVersionEnabled"u8);
                 writer.WriteBooleanValue(RotationToLatestKeyVersionEnabled.Value);
+            }
+            if (options.Format != "W" && Optional.IsDefined(LastKeyRotationTimestamp))
+            {
+                writer.WritePropertyName("lastKeyRotationTimestamp"u8);
+                writer.WriteStringValue(LastKeyRotationTimestamp.Value, "O");
             }
             if (Optional.IsDefined(FederatedClientId))
             {
@@ -54,22 +107,35 @@ namespace MgmtMockAndSample
                 writer.WriteStringValue(MinimumTlsVersion.Value.ToString());
             }
             writer.WriteEndObject();
-            writer.WriteEndObject();
         }
 
-        internal static DiskEncryptionSetData DeserializeDiskEncryptionSetData(JsonElement element)
+        DiskEncryptionSetData IJsonModel<DiskEncryptionSetData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<DiskEncryptionSetData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(DiskEncryptionSetData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDiskEncryptionSetData(document.RootElement, options);
+        }
+
+        internal static DiskEncryptionSetData DeserializeDiskEncryptionSetData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            ManagedServiceIdentity identity = default;
+            Azure.ResourceManager.Models.ManagedServiceIdentity identity = default;
             AzureLocation? location = default;
             IReadOnlyDictionary<string, string> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Azure.ResourceManager.Models.SystemData systemData = default;
             DiskEncryptionSetType? encryptionType = default;
             KeyForDiskEncryptionSet activeKey = default;
             IReadOnlyList<KeyForDiskEncryptionSet> previousKeys = default;
@@ -78,6 +144,8 @@ namespace MgmtMockAndSample
             DateTimeOffset? lastKeyRotationTimestamp = default;
             string federatedClientId = default;
             MinimumTlsVersion? minimumTlsVersion = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("identity"u8))
@@ -86,7 +154,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default);
+                    identity = ModelReaderWriter.Read<Azure.ResourceManager.Models.ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("location"u8))
@@ -133,7 +201,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
+                    systemData = ModelReaderWriter.Read<Azure.ResourceManager.Models.SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtMockAndSampleContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -160,7 +228,7 @@ namespace MgmtMockAndSample
                             {
                                 continue;
                             }
-                            activeKey = KeyForDiskEncryptionSet.DeserializeKeyForDiskEncryptionSet(property0.Value);
+                            activeKey = KeyForDiskEncryptionSet.DeserializeKeyForDiskEncryptionSet(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("previousKeys"u8))
@@ -172,7 +240,7 @@ namespace MgmtMockAndSample
                             List<KeyForDiskEncryptionSet> array = new List<KeyForDiskEncryptionSet>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(KeyForDiskEncryptionSet.DeserializeKeyForDiskEncryptionSet(item));
+                                array.Add(KeyForDiskEncryptionSet.DeserializeKeyForDiskEncryptionSet(item, options));
                             }
                             previousKeys = array;
                             continue;
@@ -217,7 +285,12 @@ namespace MgmtMockAndSample
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new DiskEncryptionSetData(
                 id,
                 name,
@@ -233,7 +306,39 @@ namespace MgmtMockAndSample
                 federatedClientId,
                 minimumTlsVersion,
                 location,
-                tags ?? new ChangeTrackingDictionary<string, string>());
+                tags ?? new ChangeTrackingDictionary<string, string>(),
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<DiskEncryptionSetData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DiskEncryptionSetData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(DiskEncryptionSetData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        DiskEncryptionSetData IPersistableModel<DiskEncryptionSetData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DiskEncryptionSetData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeDiskEncryptionSetData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(DiskEncryptionSetData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<DiskEncryptionSetData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

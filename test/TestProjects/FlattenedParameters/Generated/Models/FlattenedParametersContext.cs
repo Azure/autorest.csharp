@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using FlattenedParameters.Models;
 
 namespace FlattenedParameters
 {
@@ -13,6 +14,10 @@ namespace FlattenedParameters
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema))]
+    [ModelReaderWriterBuildable(typeof(Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema))]
+    [ModelReaderWriterBuildable(typeof(PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema))]
+    [ModelReaderWriterBuildable(typeof(PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema))]
     public partial class FlattenedParametersContext : ModelReaderWriterContext
     {
     }

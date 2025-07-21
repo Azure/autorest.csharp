@@ -10,4 +10,5 @@ Project for testing pagination params for low-level SDK.
 require: $(this-folder)/../../../../readme.md
 input-file: $(this-folder)/PaginationParams.json
 namespace: PaginationParams
+use-model-reader-writer: true
 ```

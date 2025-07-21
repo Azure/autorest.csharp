@@ -17,11 +17,28 @@ using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
-    public partial class RecordSetData : IUtf8JsonSerializable
+    public partial class RecordSetData : IUtf8JsonSerializable, IJsonModel<RecordSetData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RecordSetData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<RecordSetData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RecordSetData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(RecordSetData)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Etag))
             {
                 writer.WritePropertyName("etag"u8);
@@ -45,10 +62,20 @@ namespace MgmtExpandResourceTypes
                 writer.WritePropertyName("TTL"u8);
                 writer.WriteNumberValue(TTL.Value);
             }
+            if (options.Format != "W" && Optional.IsDefined(Fqdn))
+            {
+                writer.WritePropertyName("fqdn"u8);
+                writer.WriteStringValue(Fqdn);
+            }
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            {
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState);
+            }
             if (Optional.IsDefined(TargetResource))
             {
                 writer.WritePropertyName("targetResource"u8);
-                ((IJsonModel<WritableSubResource>)TargetResource).Write(writer, ModelSerializationExtensions.WireOptions);
+                ((IJsonModel<WritableSubResource>)TargetResource).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(ARecords))
             {
@@ -56,7 +83,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in ARecords)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -66,7 +93,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in AaaaRecords)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -76,7 +103,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in MxRecords)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -86,7 +113,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in NsRecords)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -96,7 +123,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in PtrRecords)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -106,7 +133,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in SrvRecords)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
@@ -116,19 +143,19 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in TxtRecords)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(CnameRecord))
             {
                 writer.WritePropertyName("CNAMERecord"u8);
-                writer.WriteObjectValue(CnameRecord);
+                writer.WriteObjectValue(CnameRecord, options);
             }
             if (Optional.IsDefined(SoaRecord))
             {
                 writer.WritePropertyName("SOARecord"u8);
-                writer.WriteObjectValue(SoaRecord);
+                writer.WriteObjectValue(SoaRecord, options);
             }
             if (Optional.IsCollectionDefined(CaaRecords))
             {
@@ -136,16 +163,29 @@ namespace MgmtExpandResourceTypes
                 writer.WriteStartArray();
                 foreach (var item in CaaRecords)
                 {
-                    writer.WriteObjectValue(item);
+                    writer.WriteObjectValue(item, options);
                 }
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            writer.WriteEndObject();
         }
 
-        internal static RecordSetData DeserializeRecordSetData(JsonElement element)
+        RecordSetData IJsonModel<RecordSetData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<RecordSetData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(RecordSetData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRecordSetData(document.RootElement, options);
+        }
+
+        internal static RecordSetData DeserializeRecordSetData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -170,6 +210,8 @@ namespace MgmtExpandResourceTypes
             CnameRecord cnameRecord = default;
             SoaRecord soaRecord = default;
             IList<CaaRecord> caaRecords = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -249,7 +291,7 @@ namespace MgmtExpandResourceTypes
                             {
                                 continue;
                             }
-                            targetResource = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtExpandResourceTypesContext.Default);
+                            targetResource = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), options, MgmtExpandResourceTypesContext.Default);
                             continue;
                         }
                         if (property0.NameEquals("ARecords"u8))
@@ -261,7 +303,7 @@ namespace MgmtExpandResourceTypes
                             List<ARecord> array = new List<ARecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ARecord.DeserializeARecord(item));
+                                array.Add(ARecord.DeserializeARecord(item, options));
                             }
                             aRecords = array;
                             continue;
@@ -275,7 +317,7 @@ namespace MgmtExpandResourceTypes
                             List<AaaaRecord> array = new List<AaaaRecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(AaaaRecord.DeserializeAaaaRecord(item));
+                                array.Add(AaaaRecord.DeserializeAaaaRecord(item, options));
                             }
                             aaaaRecords = array;
                             continue;
@@ -289,7 +331,7 @@ namespace MgmtExpandResourceTypes
                             List<MxRecord> array = new List<MxRecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(MxRecord.DeserializeMxRecord(item));
+                                array.Add(MxRecord.DeserializeMxRecord(item, options));
                             }
                             mxRecords = array;
                             continue;
@@ -303,7 +345,7 @@ namespace MgmtExpandResourceTypes
                             List<NsRecord> array = new List<NsRecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(NsRecord.DeserializeNsRecord(item));
+                                array.Add(NsRecord.DeserializeNsRecord(item, options));
                             }
                             nsRecords = array;
                             continue;
@@ -317,7 +359,7 @@ namespace MgmtExpandResourceTypes
                             List<PtrRecord> array = new List<PtrRecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(PtrRecord.DeserializePtrRecord(item));
+                                array.Add(PtrRecord.DeserializePtrRecord(item, options));
                             }
                             ptrRecords = array;
                             continue;
@@ -331,7 +373,7 @@ namespace MgmtExpandResourceTypes
                             List<SrvRecord> array = new List<SrvRecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(SrvRecord.DeserializeSrvRecord(item));
+                                array.Add(SrvRecord.DeserializeSrvRecord(item, options));
                             }
                             srvRecords = array;
                             continue;
@@ -345,7 +387,7 @@ namespace MgmtExpandResourceTypes
                             List<TxtRecord> array = new List<TxtRecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(TxtRecord.DeserializeTxtRecord(item));
+                                array.Add(TxtRecord.DeserializeTxtRecord(item, options));
                             }
                             txtRecords = array;
                             continue;
@@ -356,7 +398,7 @@ namespace MgmtExpandResourceTypes
                             {
                                 continue;
                             }
-                            cnameRecord = CnameRecord.DeserializeCnameRecord(property0.Value);
+                            cnameRecord = CnameRecord.DeserializeCnameRecord(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("SOARecord"u8))
@@ -365,7 +407,7 @@ namespace MgmtExpandResourceTypes
                             {
                                 continue;
                             }
-                            soaRecord = SoaRecord.DeserializeSoaRecord(property0.Value);
+                            soaRecord = SoaRecord.DeserializeSoaRecord(property0.Value, options);
                             continue;
                         }
                         if (property0.NameEquals("caaRecords"u8))
@@ -377,7 +419,7 @@ namespace MgmtExpandResourceTypes
                             List<CaaRecord> array = new List<CaaRecord>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(CaaRecord.DeserializeCaaRecord(item));
+                                array.Add(CaaRecord.DeserializeCaaRecord(item, options));
                             }
                             caaRecords = array;
                             continue;
@@ -385,7 +427,12 @@ namespace MgmtExpandResourceTypes
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new RecordSetData(
                 id,
                 name,
@@ -406,7 +453,39 @@ namespace MgmtExpandResourceTypes
                 txtRecords ?? new ChangeTrackingList<TxtRecord>(),
                 cnameRecord,
                 soaRecord,
-                caaRecords ?? new ChangeTrackingList<CaaRecord>());
+                caaRecords ?? new ChangeTrackingList<CaaRecord>(),
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<RecordSetData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RecordSetData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtExpandResourceTypesContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(RecordSetData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        RecordSetData IPersistableModel<RecordSetData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RecordSetData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeRecordSetData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(RecordSetData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<RecordSetData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

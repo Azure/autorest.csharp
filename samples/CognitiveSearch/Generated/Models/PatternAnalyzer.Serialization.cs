@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -12,11 +14,28 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class PatternAnalyzer : IUtf8JsonSerializable
+    public partial class PatternAnalyzer : IUtf8JsonSerializable, IJsonModel<PatternAnalyzer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PatternAnalyzer>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<PatternAnalyzer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PatternAnalyzer>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(PatternAnalyzer)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(LowerCaseTerms))
             {
                 writer.WritePropertyName("lowercase"u8);
@@ -42,15 +61,24 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            writer.WritePropertyName("@odata.type"u8);
-            writer.WriteStringValue(OdataType);
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
-            writer.WriteEndObject();
         }
 
-        internal static PatternAnalyzer DeserializePatternAnalyzer(JsonElement element)
+        PatternAnalyzer IJsonModel<PatternAnalyzer>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<PatternAnalyzer>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(PatternAnalyzer)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePatternAnalyzer(document.RootElement, options);
+        }
+
+        internal static PatternAnalyzer DeserializePatternAnalyzer(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -61,6 +89,8 @@ namespace CognitiveSearch.Models
             IList<string> stopwords = default;
             string odataType = default;
             string name = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("lowercase"u8))
@@ -110,15 +140,52 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new PatternAnalyzer(
                 odataType,
                 name,
+                serializedAdditionalRawData,
                 lowercase,
                 pattern,
                 flags,
                 stopwords ?? new ChangeTrackingList<string>());
         }
+
+        BinaryData IPersistableModel<PatternAnalyzer>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PatternAnalyzer>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(PatternAnalyzer)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        PatternAnalyzer IPersistableModel<PatternAnalyzer>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PatternAnalyzer>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializePatternAnalyzer(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(PatternAnalyzer)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<PatternAnalyzer>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -132,7 +199,7 @@ namespace CognitiveSearch.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using xms_error_responses.Models;
 
 namespace xms_error_responses
 {
@@ -13,6 +14,18 @@ namespace xms_error_responses
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Animal))]
+    [ModelReaderWriterBuildable(typeof(AnimalNotFound))]
+    [ModelReaderWriterBuildable(typeof(BaseError))]
+    [ModelReaderWriterBuildable(typeof(LinkNotFound))]
+    [ModelReaderWriterBuildable(typeof(NotFoundErrorBase))]
+    [ModelReaderWriterBuildable(typeof(Pet))]
+    [ModelReaderWriterBuildable(typeof(PetAction))]
+    [ModelReaderWriterBuildable(typeof(PetActionError))]
+    [ModelReaderWriterBuildable(typeof(PetHungryOrThirstyError))]
+    [ModelReaderWriterBuildable(typeof(PetSadError))]
+    [ModelReaderWriterBuildable(typeof(UnknownNotFoundErrorBase))]
+    [ModelReaderWriterBuildable(typeof(UnknownPetActionError))]
     public partial class xms_error_responsesContext : ModelReaderWriterContext
     {
     }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtConstants.Models;
 
 namespace MgmtConstants
 {
@@ -13,6 +14,12 @@ namespace MgmtConstants
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(MgmtConstantsResourceData))]
+    [ModelReaderWriterBuildable(typeof(ModelWithOptionalConstant))]
+    [ModelReaderWriterBuildable(typeof(ModelWithRequiredConstant))]
+    [ModelReaderWriterBuildable(typeof(OptionalMachineListResult))]
+    [ModelReaderWriterBuildable(typeof(OptionalMachinePatch))]
+    [ModelReaderWriterBuildable(typeof(UpdateResource))]
     public partial class MgmtConstantsContext : ModelReaderWriterContext
     {
     }

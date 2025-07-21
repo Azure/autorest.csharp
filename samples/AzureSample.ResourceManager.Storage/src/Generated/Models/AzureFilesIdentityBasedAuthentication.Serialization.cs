@@ -5,33 +5,80 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace AzureSample.ResourceManager.Storage.Models
 {
-    public partial class AzureFilesIdentityBasedAuthentication : IUtf8JsonSerializable
+    public partial class AzureFilesIdentityBasedAuthentication : IUtf8JsonSerializable, IJsonModel<AzureFilesIdentityBasedAuthentication>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AzureFilesIdentityBasedAuthentication>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<AzureFilesIdentityBasedAuthentication>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AzureFilesIdentityBasedAuthentication>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(AzureFilesIdentityBasedAuthentication)} does not support writing '{format}' format.");
+            }
+
             writer.WritePropertyName("directoryServiceOptions"u8);
             writer.WriteStringValue(DirectoryServiceOptions.ToString());
             if (Optional.IsDefined(ActiveDirectoryProperties))
             {
                 writer.WritePropertyName("activeDirectoryProperties"u8);
-                writer.WriteObjectValue(ActiveDirectoryProperties);
+                writer.WriteObjectValue(ActiveDirectoryProperties, options);
             }
             if (Optional.IsDefined(DefaultSharePermission))
             {
                 writer.WritePropertyName("defaultSharePermission"u8);
                 writer.WriteStringValue(DefaultSharePermission.Value.ToString());
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
         }
 
-        internal static AzureFilesIdentityBasedAuthentication DeserializeAzureFilesIdentityBasedAuthentication(JsonElement element)
+        AzureFilesIdentityBasedAuthentication IJsonModel<AzureFilesIdentityBasedAuthentication>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<AzureFilesIdentityBasedAuthentication>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(AzureFilesIdentityBasedAuthentication)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAzureFilesIdentityBasedAuthentication(document.RootElement, options);
+        }
+
+        internal static AzureFilesIdentityBasedAuthentication DeserializeAzureFilesIdentityBasedAuthentication(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -39,6 +86,8 @@ namespace AzureSample.ResourceManager.Storage.Models
             DirectoryServiceOption directoryServiceOptions = default;
             ActiveDirectoryProperties activeDirectoryProperties = default;
             DefaultSharePermission? defaultSharePermission = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("directoryServiceOptions"u8))
@@ -52,7 +101,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    activeDirectoryProperties = ActiveDirectoryProperties.DeserializeActiveDirectoryProperties(property.Value);
+                    activeDirectoryProperties = ActiveDirectoryProperties.DeserializeActiveDirectoryProperties(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("defaultSharePermission"u8))
@@ -64,8 +113,44 @@ namespace AzureSample.ResourceManager.Storage.Models
                     defaultSharePermission = new DefaultSharePermission(property.Value.GetString());
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new AzureFilesIdentityBasedAuthentication(directoryServiceOptions, activeDirectoryProperties, defaultSharePermission);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new AzureFilesIdentityBasedAuthentication(directoryServiceOptions, activeDirectoryProperties, defaultSharePermission, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<AzureFilesIdentityBasedAuthentication>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AzureFilesIdentityBasedAuthentication>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerStorageContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(AzureFilesIdentityBasedAuthentication)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        AzureFilesIdentityBasedAuthentication IPersistableModel<AzureFilesIdentityBasedAuthentication>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AzureFilesIdentityBasedAuthentication>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeAzureFilesIdentityBasedAuthentication(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(AzureFilesIdentityBasedAuthentication)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<AzureFilesIdentityBasedAuthentication>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

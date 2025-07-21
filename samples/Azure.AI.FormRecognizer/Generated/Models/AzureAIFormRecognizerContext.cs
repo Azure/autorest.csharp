@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure.AI.FormRecognizer.Models;
 
 namespace Azure.AI.FormRecognizer
 {
@@ -13,6 +14,35 @@ namespace Azure.AI.FormRecognizer
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(AnalyzeOperationResult))]
+    [ModelReaderWriterBuildable(typeof(AnalyzeResult))]
+    [ModelReaderWriterBuildable(typeof(CopyAuthorizationResult))]
+    [ModelReaderWriterBuildable(typeof(CopyContent))]
+    [ModelReaderWriterBuildable(typeof(CopyOperationResult))]
+    [ModelReaderWriterBuildable(typeof(CopyResult))]
+    [ModelReaderWriterBuildable(typeof(DataTable))]
+    [ModelReaderWriterBuildable(typeof(DataTableCell))]
+    [ModelReaderWriterBuildable(typeof(DocumentResult))]
+    [ModelReaderWriterBuildable(typeof(ErrorInformation))]
+    [ModelReaderWriterBuildable(typeof(ErrorResponse))]
+    [ModelReaderWriterBuildable(typeof(FieldValue))]
+    [ModelReaderWriterBuildable(typeof(FormFieldsReport))]
+    [ModelReaderWriterBuildable(typeof(KeysResult))]
+    [ModelReaderWriterBuildable(typeof(KeyValueElement))]
+    [ModelReaderWriterBuildable(typeof(KeyValuePair))]
+    [ModelReaderWriterBuildable(typeof(Model))]
+    [ModelReaderWriterBuildable(typeof(ModelInfo))]
+    [ModelReaderWriterBuildable(typeof(Models.Models))]
+    [ModelReaderWriterBuildable(typeof(ModelsSummary))]
+    [ModelReaderWriterBuildable(typeof(PageResult))]
+    [ModelReaderWriterBuildable(typeof(ReadResult))]
+    [ModelReaderWriterBuildable(typeof(SourcePath))]
+    [ModelReaderWriterBuildable(typeof(TextLine))]
+    [ModelReaderWriterBuildable(typeof(TextWord))]
+    [ModelReaderWriterBuildable(typeof(TrainContent))]
+    [ModelReaderWriterBuildable(typeof(TrainingDocumentInfo))]
+    [ModelReaderWriterBuildable(typeof(TrainResult))]
+    [ModelReaderWriterBuildable(typeof(TrainSourceFilter))]
     public partial class AzureAIFormRecognizerContext : ModelReaderWriterContext
     {
     }

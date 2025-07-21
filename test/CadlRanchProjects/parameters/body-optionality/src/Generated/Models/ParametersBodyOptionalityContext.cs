@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Parameters.BodyOptionality.Models;
 
 namespace Parameters.BodyOptionality
 {
@@ -13,6 +14,7 @@ namespace Parameters.BodyOptionality
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(BodyModel))]
     public partial class ParametersBodyOptionalityContext : ModelReaderWriterContext
     {
     }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using _Type.Model.Empty.Models;
 
 namespace _Type.Model.Empty
 {
@@ -13,6 +14,9 @@ namespace _Type.Model.Empty
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(EmptyInput))]
+    [ModelReaderWriterBuildable(typeof(EmptyInputOutput))]
+    [ModelReaderWriterBuildable(typeof(EmptyOutput))]
     public partial class _TypeModelEmptyContext : ModelReaderWriterContext
     {
     }

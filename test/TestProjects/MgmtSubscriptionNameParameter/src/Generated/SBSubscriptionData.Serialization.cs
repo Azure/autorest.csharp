@@ -7,6 +7,7 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -15,13 +16,50 @@ using MgmtSubscriptionNameParameter.Models;
 
 namespace MgmtSubscriptionNameParameter
 {
-    public partial class SBSubscriptionData : IUtf8JsonSerializable
+    public partial class SBSubscriptionData : IUtf8JsonSerializable, IJsonModel<SBSubscriptionData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SBSubscriptionData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<SBSubscriptionData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SBSubscriptionData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(SBSubscriptionData)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
+            if (options.Format != "W" && Optional.IsDefined(MessageCount))
+            {
+                writer.WritePropertyName("messageCount"u8);
+                writer.WriteNumberValue(MessageCount.Value);
+            }
+            if (options.Format != "W" && Optional.IsDefined(CreatedOn))
+            {
+                writer.WritePropertyName("createdAt"u8);
+                writer.WriteStringValue(CreatedOn.Value, "O");
+            }
+            if (options.Format != "W" && Optional.IsDefined(AccessedOn))
+            {
+                writer.WritePropertyName("accessedAt"u8);
+                writer.WriteStringValue(AccessedOn.Value, "O");
+            }
+            if (options.Format != "W" && Optional.IsDefined(UpdatedOn))
+            {
+                writer.WritePropertyName("updatedAt"u8);
+                writer.WriteStringValue(UpdatedOn.Value, "O");
+            }
             if (Optional.IsDefined(LockDuration))
             {
                 writer.WritePropertyName("lockDuration"u8);
@@ -85,14 +123,27 @@ namespace MgmtSubscriptionNameParameter
             if (Optional.IsDefined(ClientAffineProperties))
             {
                 writer.WritePropertyName("clientAffineProperties"u8);
-                writer.WriteObjectValue(ClientAffineProperties);
+                writer.WriteObjectValue(ClientAffineProperties, options);
             }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        internal static SBSubscriptionData DeserializeSBSubscriptionData(JsonElement element)
+        SBSubscriptionData IJsonModel<SBSubscriptionData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<SBSubscriptionData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(SBSubscriptionData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSBSubscriptionData(document.RootElement, options);
+        }
+
+        internal static SBSubscriptionData DeserializeSBSubscriptionData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -100,7 +151,7 @@ namespace MgmtSubscriptionNameParameter
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Azure.ResourceManager.Models.SystemData systemData = default;
             long? messageCount = default;
             DateTimeOffset? createdAt = default;
             DateTimeOffset? accessedAt = default;
@@ -118,6 +169,8 @@ namespace MgmtSubscriptionNameParameter
             string forwardDeadLetteredMessagesTo = default;
             bool? isClientAffine = default;
             SBClientAffineProperties clientAffineProperties = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -141,7 +194,7 @@ namespace MgmtSubscriptionNameParameter
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtSubscriptionNameParameterContext.Default);
+                    systemData = ModelReaderWriter.Read<Azure.ResourceManager.Models.SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtSubscriptionNameParameterContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -295,13 +348,18 @@ namespace MgmtSubscriptionNameParameter
                             {
                                 continue;
                             }
-                            clientAffineProperties = SBClientAffineProperties.DeserializeSBClientAffineProperties(property0.Value);
+                            clientAffineProperties = SBClientAffineProperties.DeserializeSBClientAffineProperties(property0.Value, options);
                             continue;
                         }
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new SBSubscriptionData(
                 id,
                 name,
@@ -323,7 +381,39 @@ namespace MgmtSubscriptionNameParameter
                 forwardTo,
                 forwardDeadLetteredMessagesTo,
                 isClientAffine,
-                clientAffineProperties);
+                clientAffineProperties,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<SBSubscriptionData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SBSubscriptionData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtSubscriptionNameParameterContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(SBSubscriptionData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        SBSubscriptionData IPersistableModel<SBSubscriptionData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SBSubscriptionData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeSBSubscriptionData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(SBSubscriptionData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<SBSubscriptionData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -145,7 +145,7 @@ namespace AzureSample.ResourceManager.Storage.Mocking
         public virtual AsyncPageable<AzureSampleResourceManagerStorageSkuInformation> GetSkusAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => SkusRestClient.CreateListRequest(Id.SubscriptionId);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, AzureSampleResourceManagerStorageSkuInformation.DeserializeAzureSampleResourceManagerStorageSkuInformation, SkusClientDiagnostics, Pipeline, "MockableAzureSampleResourceManagerStorageSubscriptionResource.GetSkus", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => AzureSampleResourceManagerStorageSkuInformation.DeserializeAzureSampleResourceManagerStorageSkuInformation(e), SkusClientDiagnostics, Pipeline, "MockableAzureSampleResourceManagerStorageSubscriptionResource.GetSkus", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace AzureSample.ResourceManager.Storage.Mocking
         public virtual Pageable<AzureSampleResourceManagerStorageSkuInformation> GetSkus(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => SkusRestClient.CreateListRequest(Id.SubscriptionId);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, AzureSampleResourceManagerStorageSkuInformation.DeserializeAzureSampleResourceManagerStorageSkuInformation, SkusClientDiagnostics, Pipeline, "MockableAzureSampleResourceManagerStorageSubscriptionResource.GetSkus", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => AzureSampleResourceManagerStorageSkuInformation.DeserializeAzureSampleResourceManagerStorageSkuInformation(e), SkusClientDiagnostics, Pipeline, "MockableAzureSampleResourceManagerStorageSubscriptionResource.GetSkus", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -256,7 +256,7 @@ namespace AzureSample.ResourceManager.Storage.Mocking
         public virtual AsyncPageable<AzureSampleResourceManagerStorageUsage> GetUsagesByLocationAsync(AzureLocation location, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => UsagesRestClient.CreateListByLocationRequest(Id.SubscriptionId, location);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, AzureSampleResourceManagerStorageUsage.DeserializeAzureSampleResourceManagerStorageUsage, UsagesClientDiagnostics, Pipeline, "MockableAzureSampleResourceManagerStorageSubscriptionResource.GetUsagesByLocation", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => AzureSampleResourceManagerStorageUsage.DeserializeAzureSampleResourceManagerStorageUsage(e), UsagesClientDiagnostics, Pipeline, "MockableAzureSampleResourceManagerStorageSubscriptionResource.GetUsagesByLocation", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -282,7 +282,7 @@ namespace AzureSample.ResourceManager.Storage.Mocking
         public virtual Pageable<AzureSampleResourceManagerStorageUsage> GetUsagesByLocation(AzureLocation location, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => UsagesRestClient.CreateListByLocationRequest(Id.SubscriptionId, location);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, AzureSampleResourceManagerStorageUsage.DeserializeAzureSampleResourceManagerStorageUsage, UsagesClientDiagnostics, Pipeline, "MockableAzureSampleResourceManagerStorageSubscriptionResource.GetUsagesByLocation", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => AzureSampleResourceManagerStorageUsage.DeserializeAzureSampleResourceManagerStorageUsage(e), UsagesClientDiagnostics, Pipeline, "MockableAzureSampleResourceManagerStorageSubscriptionResource.GetUsagesByLocation", "value", null, cancellationToken);
         }
     }
 }

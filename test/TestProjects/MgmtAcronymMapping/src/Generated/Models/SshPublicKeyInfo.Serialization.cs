@@ -5,16 +5,35 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class SshPublicKeyInfo : IUtf8JsonSerializable
+    public partial class SshPublicKeyInfo : IUtf8JsonSerializable, IJsonModel<SshPublicKeyInfo>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SshPublicKeyInfo>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<SshPublicKeyInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SshPublicKeyInfo>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(SshPublicKeyInfo)} does not support writing '{format}' format.");
+            }
+
             if (Optional.IsDefined(Path))
             {
                 writer.WritePropertyName("path"u8);
@@ -25,17 +44,47 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("keyData"u8);
                 writer.WriteStringValue(KeyData);
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
         }
 
-        internal static SshPublicKeyInfo DeserializeSshPublicKeyInfo(JsonElement element)
+        SshPublicKeyInfo IJsonModel<SshPublicKeyInfo>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<SshPublicKeyInfo>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(SshPublicKeyInfo)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSshPublicKeyInfo(document.RootElement, options);
+        }
+
+        internal static SshPublicKeyInfo DeserializeSshPublicKeyInfo(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string path = default;
             string keyData = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("path"u8))
@@ -48,8 +97,44 @@ namespace MgmtAcronymMapping.Models
                     keyData = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new SshPublicKeyInfo(path, keyData);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new SshPublicKeyInfo(path, keyData, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<SshPublicKeyInfo>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SshPublicKeyInfo>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtAcronymMappingContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(SshPublicKeyInfo)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        SshPublicKeyInfo IPersistableModel<SshPublicKeyInfo>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SshPublicKeyInfo>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeSshPublicKeyInfo(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(SshPublicKeyInfo)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<SshPublicKeyInfo>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

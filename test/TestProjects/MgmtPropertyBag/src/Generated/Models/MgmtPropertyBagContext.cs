@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtPropertyBag.Models;
 
 namespace MgmtPropertyBag
 {
@@ -13,6 +14,21 @@ namespace MgmtPropertyBag
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(BarCollectionExistsOptions))]
+    [ModelReaderWriterBuildable(typeof(BarCollectionGetAllOptions))]
+    [ModelReaderWriterBuildable(typeof(BarCollectionGetIfExistsOptions))]
+    [ModelReaderWriterBuildable(typeof(BarCollectionGetOptions))]
+    [ModelReaderWriterBuildable(typeof(BarListResult))]
+    [ModelReaderWriterBuildable(typeof(ErrorAdditionalInfo))]
+    [ModelReaderWriterBuildable(typeof(ErrorResponse))]
+    [ModelReaderWriterBuildable(typeof(FooCollectionExistsOptions))]
+    [ModelReaderWriterBuildable(typeof(FooCollectionGetAllOptions))]
+    [ModelReaderWriterBuildable(typeof(FooCollectionGetIfExistsOptions))]
+    [ModelReaderWriterBuildable(typeof(FooCollectionGetOptions))]
+    [ModelReaderWriterBuildable(typeof(FooPatch))]
+    [ModelReaderWriterBuildable(typeof(FooReconnectContent))]
+    [ModelReaderWriterBuildable(typeof(FooReconnectTestOptions))]
+    [ModelReaderWriterBuildable(typeof(MgmtPropertyBagResourceData))]
     public partial class MgmtPropertyBagContext : ModelReaderWriterContext
     {
     }

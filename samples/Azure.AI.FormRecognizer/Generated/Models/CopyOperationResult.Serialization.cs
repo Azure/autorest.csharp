@@ -6,14 +6,78 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class CopyOperationResult
+    public partial class CopyOperationResult : IUtf8JsonSerializable, IJsonModel<CopyOperationResult>
     {
-        internal static CopyOperationResult DeserializeCopyOperationResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CopyOperationResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<CopyOperationResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CopyOperationResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(CopyOperationResult)} does not support writing '{format}' format.");
+            }
+
+            writer.WritePropertyName("status"u8);
+            writer.WriteStringValue(Status.ToSerialString());
+            writer.WritePropertyName("createdDateTime"u8);
+            writer.WriteStringValue(CreatedDateTime, "O");
+            writer.WritePropertyName("lastUpdatedDateTime"u8);
+            writer.WriteStringValue(LastUpdatedDateTime, "O");
+            if (Optional.IsDefined(CopyResult))
+            {
+                writer.WritePropertyName("copyResult"u8);
+                writer.WriteObjectValue(CopyResult, options);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+        }
+
+        CopyOperationResult IJsonModel<CopyOperationResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CopyOperationResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(CopyOperationResult)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCopyOperationResult(document.RootElement, options);
+        }
+
+        internal static CopyOperationResult DeserializeCopyOperationResult(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -22,6 +86,8 @@ namespace Azure.AI.FormRecognizer.Models
             DateTimeOffset createdDateTime = default;
             DateTimeOffset lastUpdatedDateTime = default;
             CopyResult copyResult = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"u8))
@@ -45,12 +111,48 @@ namespace Azure.AI.FormRecognizer.Models
                     {
                         continue;
                     }
-                    copyResult = CopyResult.DeserializeCopyResult(property.Value);
+                    copyResult = CopyResult.DeserializeCopyResult(property.Value, options);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new CopyOperationResult(status, createdDateTime, lastUpdatedDateTime, copyResult);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new CopyOperationResult(status, createdDateTime, lastUpdatedDateTime, copyResult, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<CopyOperationResult>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CopyOperationResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, AzureAIFormRecognizerContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(CopyOperationResult)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        CopyOperationResult IPersistableModel<CopyOperationResult>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CopyOperationResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeCopyOperationResult(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(CopyOperationResult)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<CopyOperationResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -58,6 +160,14 @@ namespace Azure.AI.FormRecognizer.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeCopyOperationResult(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            return content;
         }
     }
 }

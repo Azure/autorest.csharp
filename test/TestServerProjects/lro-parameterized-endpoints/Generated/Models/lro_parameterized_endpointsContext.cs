@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using lro_parameterized_endpoints.Models;
 
 namespace lro_parameterized_endpoints
 {
@@ -13,6 +14,7 @@ namespace lro_parameterized_endpoints
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Error))]
     public partial class lro_parameterized_endpointsContext : ModelReaderWriterContext
     {
     }

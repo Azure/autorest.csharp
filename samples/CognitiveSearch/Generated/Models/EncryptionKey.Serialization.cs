@@ -5,17 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class EncryptionKey : IUtf8JsonSerializable
+    public partial class EncryptionKey : IUtf8JsonSerializable, IJsonModel<EncryptionKey>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EncryptionKey>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<EncryptionKey>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<EncryptionKey>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(EncryptionKey)} does not support writing '{format}' format.");
+            }
+
             writer.WritePropertyName("keyVaultKeyName"u8);
             writer.WriteStringValue(KeyVaultKeyName);
             writer.WritePropertyName("keyVaultKeyVersion"u8);
@@ -25,13 +44,41 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(AccessCredentials))
             {
                 writer.WritePropertyName("accessCredentials"u8);
-                writer.WriteObjectValue(AccessCredentials);
+                writer.WriteObjectValue(AccessCredentials, options);
             }
-            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
         }
 
-        internal static EncryptionKey DeserializeEncryptionKey(JsonElement element)
+        EncryptionKey IJsonModel<EncryptionKey>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<EncryptionKey>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(EncryptionKey)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeEncryptionKey(document.RootElement, options);
+        }
+
+        internal static EncryptionKey DeserializeEncryptionKey(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -40,6 +87,8 @@ namespace CognitiveSearch.Models
             string keyVaultKeyVersion = default;
             string keyVaultUri = default;
             AzureActiveDirectoryApplicationCredentials accessCredentials = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("keyVaultKeyName"u8))
@@ -63,12 +112,48 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    accessCredentials = AzureActiveDirectoryApplicationCredentials.DeserializeAzureActiveDirectoryApplicationCredentials(property.Value);
+                    accessCredentials = AzureActiveDirectoryApplicationCredentials.DeserializeAzureActiveDirectoryApplicationCredentials(property.Value, options);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new EncryptionKey(keyVaultKeyName, keyVaultKeyVersion, keyVaultUri, accessCredentials);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new EncryptionKey(keyVaultKeyName, keyVaultKeyVersion, keyVaultUri, accessCredentials, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<EncryptionKey>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<EncryptionKey>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(EncryptionKey)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        EncryptionKey IPersistableModel<EncryptionKey>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<EncryptionKey>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeEncryptionKey(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(EncryptionKey)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<EncryptionKey>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -82,7 +167,7 @@ namespace CognitiveSearch.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
             return content;
         }
     }

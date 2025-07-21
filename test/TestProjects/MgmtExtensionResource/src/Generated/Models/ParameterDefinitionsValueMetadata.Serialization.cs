@@ -6,17 +6,34 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtExtensionResource.Models
 {
-    public partial class ParameterDefinitionsValueMetadata : IUtf8JsonSerializable
+    public partial class ParameterDefinitionsValueMetadata : IUtf8JsonSerializable, IJsonModel<ParameterDefinitionsValueMetadata>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ParameterDefinitionsValueMetadata>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<ParameterDefinitionsValueMetadata>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ParameterDefinitionsValueMetadata>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(ParameterDefinitionsValueMetadata)} does not support writing '{format}' format.");
+            }
+
             if (Optional.IsDefined(DisplayName))
             {
                 writer.WritePropertyName("displayName"u8);
@@ -49,11 +66,24 @@ namespace MgmtExtensionResource.Models
                 }
 #endif
             }
-            writer.WriteEndObject();
         }
 
-        internal static ParameterDefinitionsValueMetadata DeserializeParameterDefinitionsValueMetadata(JsonElement element)
+        ParameterDefinitionsValueMetadata IJsonModel<ParameterDefinitionsValueMetadata>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<ParameterDefinitionsValueMetadata>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(ParameterDefinitionsValueMetadata)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeParameterDefinitionsValueMetadata(document.RootElement, options);
+        }
+
+        internal static ParameterDefinitionsValueMetadata DeserializeParameterDefinitionsValueMetadata(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -95,5 +125,36 @@ namespace MgmtExtensionResource.Models
             additionalProperties = additionalPropertiesDictionary;
             return new ParameterDefinitionsValueMetadata(displayName, description, strongType, assignPermissions, additionalProperties);
         }
+
+        BinaryData IPersistableModel<ParameterDefinitionsValueMetadata>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ParameterDefinitionsValueMetadata>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtExtensionResourceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(ParameterDefinitionsValueMetadata)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        ParameterDefinitionsValueMetadata IPersistableModel<ParameterDefinitionsValueMetadata>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ParameterDefinitionsValueMetadata>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeParameterDefinitionsValueMetadata(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(ParameterDefinitionsValueMetadata)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<ParameterDefinitionsValueMetadata>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

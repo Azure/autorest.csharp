@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtHierarchicalNonResource.Models
 {
@@ -20,10 +21,11 @@ namespace MgmtHierarchicalNonResource.Models
         /// <summary> Initializes a new instance of <see cref="SharedGalleryImageVersion"/>. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
         /// <param name="publishedOn"> The published date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable. </param>
         /// <param name="endOfLifeOn"> The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable. </param>
-        internal SharedGalleryImageVersion(string name, string location, string uniqueId, DateTimeOffset? publishedOn, DateTimeOffset? endOfLifeOn) : base(name, location, uniqueId)
+        internal SharedGalleryImageVersion(string name, string location, IDictionary<string, BinaryData> serializedAdditionalRawData, string uniqueId, DateTimeOffset? publishedOn, DateTimeOffset? endOfLifeOn) : base(name, location, serializedAdditionalRawData, uniqueId)
         {
             PublishedOn = publishedOn;
             EndOfLifeOn = endOfLifeOn;

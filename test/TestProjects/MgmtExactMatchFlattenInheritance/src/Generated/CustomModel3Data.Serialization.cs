@@ -5,41 +5,59 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtExactMatchFlattenInheritance
 {
-    public partial class CustomModel3Data : IUtf8JsonSerializable
+    public partial class CustomModel3Data : IUtf8JsonSerializable, IJsonModel<CustomModel3Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CustomModel3Data>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<CustomModel3Data>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CustomModel3Data>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(CustomModel3Data)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
             }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(ResourceType))
-            {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(ResourceType);
-            }
-            writer.WriteEndObject();
         }
 
-        internal static CustomModel3Data DeserializeCustomModel3Data(JsonElement element)
+        CustomModel3Data IJsonModel<CustomModel3Data>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<CustomModel3Data>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(CustomModel3Data)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCustomModel3Data(document.RootElement, options);
+        }
+
+        internal static CustomModel3Data DeserializeCustomModel3Data(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -48,6 +66,8 @@ namespace MgmtExactMatchFlattenInheritance
             string id = default;
             string name = default;
             string type = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"u8))
@@ -70,8 +90,44 @@ namespace MgmtExactMatchFlattenInheritance
                     type = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new CustomModel3Data(id, name, type, foo);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new CustomModel3Data(id, name, type, serializedAdditionalRawData, foo);
         }
+
+        BinaryData IPersistableModel<CustomModel3Data>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CustomModel3Data>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtExactMatchFlattenInheritanceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(CustomModel3Data)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        CustomModel3Data IPersistableModel<CustomModel3Data>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CustomModel3Data>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeCustomModel3Data(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(CustomModel3Data)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<CustomModel3Data>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

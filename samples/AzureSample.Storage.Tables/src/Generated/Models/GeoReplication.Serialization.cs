@@ -6,15 +6,34 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
+using System.IO;
+using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace AzureSample.Storage.Tables.Models
 {
-    public partial class GeoReplication
+    public partial class GeoReplication : IXmlSerializable, IPersistableModel<GeoReplication>
     {
-        internal static GeoReplication DeserializeGeoReplication(XElement element)
+        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
+            writer.WriteStartElement(nameHint ?? "GeoReplication");
+            writer.WriteStartElement("Status");
+            writer.WriteValue(Status.ToString());
+            writer.WriteEndElement();
+            writer.WriteStartElement("LastSyncTime");
+            writer.WriteValue(LastSyncTime, "R");
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+        }
+
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, ModelSerializationExtensions.WireOptions);
+
+        internal static GeoReplication DeserializeGeoReplication(XElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             GeoReplicationStatusType status = default;
             DateTimeOffset lastSyncTime = default;
             if (element.Element("Status") is XElement statusElement)
@@ -25,7 +44,41 @@ namespace AzureSample.Storage.Tables.Models
             {
                 lastSyncTime = lastSyncTimeElement.GetDateTimeOffsetValue("R");
             }
-            return new GeoReplication(status, lastSyncTime);
+            return new GeoReplication(status, lastSyncTime, serializedAdditionalRawData: null);
         }
+
+        BinaryData IPersistableModel<GeoReplication>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<GeoReplication>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        WriteInternal(writer, null, options);
+                        writer.Flush();
+                        return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(GeoReplication)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        GeoReplication IPersistableModel<GeoReplication>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<GeoReplication>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    return DeserializeGeoReplication(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new FormatException($"The model {nameof(GeoReplication)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<GeoReplication>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

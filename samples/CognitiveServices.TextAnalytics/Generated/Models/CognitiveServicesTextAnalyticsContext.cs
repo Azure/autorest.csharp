@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using CognitiveServices.TextAnalytics.Models;
 
 namespace CognitiveServices.TextAnalytics
 {
@@ -13,6 +14,33 @@ namespace CognitiveServices.TextAnalytics
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(DetectedLanguage))]
+    [ModelReaderWriterBuildable(typeof(DocumentEntities))]
+    [ModelReaderWriterBuildable(typeof(DocumentError))]
+    [ModelReaderWriterBuildable(typeof(DocumentKeyPhrases))]
+    [ModelReaderWriterBuildable(typeof(DocumentLanguage))]
+    [ModelReaderWriterBuildable(typeof(DocumentLinkedEntities))]
+    [ModelReaderWriterBuildable(typeof(DocumentSentiment))]
+    [ModelReaderWriterBuildable(typeof(DocumentStatistics))]
+    [ModelReaderWriterBuildable(typeof(EntitiesResult))]
+    [ModelReaderWriterBuildable(typeof(Entity))]
+    [ModelReaderWriterBuildable(typeof(EntityLinkingResult))]
+    [ModelReaderWriterBuildable(typeof(ErrorResponse))]
+    [ModelReaderWriterBuildable(typeof(InnerError))]
+    [ModelReaderWriterBuildable(typeof(KeyPhraseResult))]
+    [ModelReaderWriterBuildable(typeof(LanguageBatchInput))]
+    [ModelReaderWriterBuildable(typeof(LanguageInput))]
+    [ModelReaderWriterBuildable(typeof(LanguageResult))]
+    [ModelReaderWriterBuildable(typeof(LinkedEntity))]
+    [ModelReaderWriterBuildable(typeof(Match))]
+    [ModelReaderWriterBuildable(typeof(MultiLanguageBatchInput))]
+    [ModelReaderWriterBuildable(typeof(MultiLanguageInput))]
+    [ModelReaderWriterBuildable(typeof(RequestStatistics))]
+    [ModelReaderWriterBuildable(typeof(SentenceSentiment))]
+    [ModelReaderWriterBuildable(typeof(SentimentConfidenceScorePerLabel))]
+    [ModelReaderWriterBuildable(typeof(SentimentResponse))]
+    [ModelReaderWriterBuildable(typeof(TextAnalyticsError))]
+    [ModelReaderWriterBuildable(typeof(TextAnalyticsWarning))]
     public partial class CognitiveServicesTextAnalyticsContext : ModelReaderWriterContext
     {
     }

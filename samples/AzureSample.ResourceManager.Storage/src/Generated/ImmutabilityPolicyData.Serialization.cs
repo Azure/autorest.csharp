@@ -7,6 +7,7 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure;
@@ -16,17 +17,44 @@ using AzureSample.ResourceManager.Storage.Models;
 
 namespace AzureSample.ResourceManager.Storage
 {
-    public partial class ImmutabilityPolicyData : IUtf8JsonSerializable
+    public partial class ImmutabilityPolicyData : IUtf8JsonSerializable, IJsonModel<ImmutabilityPolicyData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImmutabilityPolicyData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<ImmutabilityPolicyData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ImmutabilityPolicyData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(ImmutabilityPolicyData)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
+            if (options.Format != "W" && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag.Value.ToString());
+            }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(ImmutabilityPeriodSinceCreationInDays))
             {
                 writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
                 writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
+            }
+            if (options.Format != "W" && Optional.IsDefined(State))
+            {
+                writer.WritePropertyName("state"u8);
+                writer.WriteStringValue(State.Value.ToString());
             }
             if (Optional.IsDefined(AllowProtectedAppendWrites))
             {
@@ -39,11 +67,24 @@ namespace AzureSample.ResourceManager.Storage
                 writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
             }
             writer.WriteEndObject();
-            writer.WriteEndObject();
         }
 
-        internal static ImmutabilityPolicyData DeserializeImmutabilityPolicyData(JsonElement element)
+        ImmutabilityPolicyData IJsonModel<ImmutabilityPolicyData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<ImmutabilityPolicyData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(ImmutabilityPolicyData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeImmutabilityPolicyData(document.RootElement, options);
+        }
+
+        internal static ImmutabilityPolicyData DeserializeImmutabilityPolicyData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -52,11 +93,13 @@ namespace AzureSample.ResourceManager.Storage
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Azure.ResourceManager.Models.SystemData systemData = default;
             int? immutabilityPeriodSinceCreationInDays = default;
             ImmutabilityPolicyState? state = default;
             bool? allowProtectedAppendWrites = default;
             bool? allowProtectedAppendWritesAll = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -89,7 +132,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
+                    systemData = ModelReaderWriter.Read<Azure.ResourceManager.Models.SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -140,7 +183,12 @@ namespace AzureSample.ResourceManager.Storage
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new ImmutabilityPolicyData(
                 id,
                 name,
@@ -150,7 +198,39 @@ namespace AzureSample.ResourceManager.Storage
                 state,
                 allowProtectedAppendWrites,
                 allowProtectedAppendWritesAll,
-                etag);
+                etag,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<ImmutabilityPolicyData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ImmutabilityPolicyData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerStorageContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(ImmutabilityPolicyData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        ImmutabilityPolicyData IPersistableModel<ImmutabilityPolicyData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ImmutabilityPolicyData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeImmutabilityPolicyData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(ImmutabilityPolicyData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<ImmutabilityPolicyData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

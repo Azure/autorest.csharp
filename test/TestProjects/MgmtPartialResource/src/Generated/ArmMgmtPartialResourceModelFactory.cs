@@ -53,7 +53,8 @@ namespace MgmtPartialResource.Models
                 servicePublicIPAddress,
                 migrationPhase,
                 linkedPublicIPAddress,
-                deleteOption);
+                deleteOption,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtPartialResource.ConfigurationProfileAssignmentData"/>. </summary>
@@ -76,7 +77,8 @@ namespace MgmtPartialResource.Models
                 systemData,
                 tags,
                 location,
-                properties);
+                properties,
+                serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ConfigurationProfileAssignmentProperties"/>. </summary>
@@ -86,7 +88,7 @@ namespace MgmtPartialResource.Models
         /// <returns> A new <see cref="Models.ConfigurationProfileAssignmentProperties"/> instance for mocking. </returns>
         public static ConfigurationProfileAssignmentProperties ConfigurationProfileAssignmentProperties(string configurationProfile = null, string targetId = null, string status = null)
         {
-            return new ConfigurationProfileAssignmentProperties(configurationProfile, targetId, status);
+            return new ConfigurationProfileAssignmentProperties(configurationProfile, targetId, status, serializedAdditionalRawData: null);
         }
     }
 }

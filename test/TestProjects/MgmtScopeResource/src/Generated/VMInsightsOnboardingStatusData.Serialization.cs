@@ -16,10 +16,74 @@ using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    public partial class VMInsightsOnboardingStatusData
+    public partial class VMInsightsOnboardingStatusData : IUtf8JsonSerializable, IJsonModel<VMInsightsOnboardingStatusData>
     {
-        internal static VMInsightsOnboardingStatusData DeserializeVMInsightsOnboardingStatusData(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VMInsightsOnboardingStatusData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<VMInsightsOnboardingStatusData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VMInsightsOnboardingStatusData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(VMInsightsOnboardingStatusData)} does not support writing '{format}' format.");
+            }
+
+            base.JsonModelWriteCore(writer, options);
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(ResourceId))
+            {
+                writer.WritePropertyName("resourceId"u8);
+                writer.WriteStringValue(ResourceId);
+            }
+            if (Optional.IsDefined(OnboardingStatus))
+            {
+                writer.WritePropertyName("onboardingStatus"u8);
+                writer.WriteStringValue(OnboardingStatus.Value.ToString());
+            }
+            if (Optional.IsDefined(DataStatus))
+            {
+                writer.WritePropertyName("dataStatus"u8);
+                writer.WriteStringValue(DataStatus.Value.ToString());
+            }
+            if (Optional.IsCollectionDefined(Data))
+            {
+                writer.WritePropertyName("data"u8);
+                writer.WriteStartArray();
+                foreach (var item in Data)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        VMInsightsOnboardingStatusData IJsonModel<VMInsightsOnboardingStatusData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VMInsightsOnboardingStatusData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(VMInsightsOnboardingStatusData)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVMInsightsOnboardingStatusData(document.RootElement, options);
+        }
+
+        internal static VMInsightsOnboardingStatusData DeserializeVMInsightsOnboardingStatusData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -32,6 +96,8 @@ namespace MgmtScopeResource
             OnboardingStatus? onboardingStatus = default;
             DataStatus? dataStatus = default;
             IReadOnlyList<DataContainer> data = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -99,7 +165,7 @@ namespace MgmtScopeResource
                             List<DataContainer> array = new List<DataContainer>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(DataContainer.DeserializeDataContainer(item));
+                                array.Add(DataContainer.DeserializeDataContainer(item, options));
                             }
                             data = array;
                             continue;
@@ -107,7 +173,12 @@ namespace MgmtScopeResource
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new VMInsightsOnboardingStatusData(
                 id,
                 name,
@@ -116,7 +187,39 @@ namespace MgmtScopeResource
                 resourceId,
                 onboardingStatus,
                 dataStatus,
-                data ?? new ChangeTrackingList<DataContainer>());
+                data ?? new ChangeTrackingList<DataContainer>(),
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<VMInsightsOnboardingStatusData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VMInsightsOnboardingStatusData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtScopeResourceContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(VMInsightsOnboardingStatusData)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        VMInsightsOnboardingStatusData IPersistableModel<VMInsightsOnboardingStatusData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VMInsightsOnboardingStatusData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeVMInsightsOnboardingStatusData(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(VMInsightsOnboardingStatusData)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<VMInsightsOnboardingStatusData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

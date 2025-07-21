@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.Text.Json;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,16 +25,14 @@ namespace MgmtMockAndSample
 
         FirewallPolicyResource IOperationSource<FirewallPolicyResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
-            var data = FirewallPolicyData.DeserializeFirewallPolicyData(document.RootElement);
+            var data = ModelReaderWriter.Read<FirewallPolicyData>(response.Content, ModelReaderWriterOptions.Json, MgmtMockAndSampleContext.Default);
             return new FirewallPolicyResource(_client, data);
         }
 
         async ValueTask<FirewallPolicyResource> IOperationSource<FirewallPolicyResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
-            var data = FirewallPolicyData.DeserializeFirewallPolicyData(document.RootElement);
-            return new FirewallPolicyResource(_client, data);
+            var data = ModelReaderWriter.Read<FirewallPolicyData>(response.Content, ModelReaderWriterOptions.Json, MgmtMockAndSampleContext.Default);
+            return await Task.FromResult(new FirewallPolicyResource(_client, data)).ConfigureAwait(false);
         }
     }
 }

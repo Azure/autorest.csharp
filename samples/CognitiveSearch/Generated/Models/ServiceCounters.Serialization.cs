@@ -5,15 +5,83 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ServiceCounters
+    public partial class ServiceCounters : IUtf8JsonSerializable, IJsonModel<ServiceCounters>
     {
-        internal static ServiceCounters DeserializeServiceCounters(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ServiceCounters>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<ServiceCounters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ServiceCounters>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(ServiceCounters)} does not support writing '{format}' format.");
+            }
+
+            writer.WritePropertyName("documentCount"u8);
+            writer.WriteObjectValue(DocumentCounter, options);
+            writer.WritePropertyName("indexesCount"u8);
+            writer.WriteObjectValue(IndexCounter, options);
+            writer.WritePropertyName("indexersCount"u8);
+            writer.WriteObjectValue(IndexerCounter, options);
+            writer.WritePropertyName("dataSourcesCount"u8);
+            writer.WriteObjectValue(DataSourceCounter, options);
+            writer.WritePropertyName("storageSize"u8);
+            writer.WriteObjectValue(StorageSizeCounter, options);
+            writer.WritePropertyName("synonymMaps"u8);
+            writer.WriteObjectValue(SynonymMapCounter, options);
+            writer.WritePropertyName("skillsetCount"u8);
+            writer.WriteObjectValue(SkillsetCounter, options);
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+        }
+
+        ServiceCounters IJsonModel<ServiceCounters>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ServiceCounters>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(ServiceCounters)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeServiceCounters(document.RootElement, options);
+        }
+
+        internal static ServiceCounters DeserializeServiceCounters(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -25,44 +93,51 @@ namespace CognitiveSearch.Models
             ResourceCounter storageSize = default;
             ResourceCounter synonymMaps = default;
             ResourceCounter skillsetCount = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("documentCount"u8))
                 {
-                    documentCount = ResourceCounter.DeserializeResourceCounter(property.Value);
+                    documentCount = ResourceCounter.DeserializeResourceCounter(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("indexesCount"u8))
                 {
-                    indexesCount = ResourceCounter.DeserializeResourceCounter(property.Value);
+                    indexesCount = ResourceCounter.DeserializeResourceCounter(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("indexersCount"u8))
                 {
-                    indexersCount = ResourceCounter.DeserializeResourceCounter(property.Value);
+                    indexersCount = ResourceCounter.DeserializeResourceCounter(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("dataSourcesCount"u8))
                 {
-                    dataSourcesCount = ResourceCounter.DeserializeResourceCounter(property.Value);
+                    dataSourcesCount = ResourceCounter.DeserializeResourceCounter(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("storageSize"u8))
                 {
-                    storageSize = ResourceCounter.DeserializeResourceCounter(property.Value);
+                    storageSize = ResourceCounter.DeserializeResourceCounter(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("synonymMaps"u8))
                 {
-                    synonymMaps = ResourceCounter.DeserializeResourceCounter(property.Value);
+                    synonymMaps = ResourceCounter.DeserializeResourceCounter(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("skillsetCount"u8))
                 {
-                    skillsetCount = ResourceCounter.DeserializeResourceCounter(property.Value);
+                    skillsetCount = ResourceCounter.DeserializeResourceCounter(property.Value, options);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new ServiceCounters(
                 documentCount,
                 indexesCount,
@@ -70,8 +145,40 @@ namespace CognitiveSearch.Models
                 dataSourcesCount,
                 storageSize,
                 synonymMaps,
-                skillsetCount);
+                skillsetCount,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<ServiceCounters>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ServiceCounters>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(ServiceCounters)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        ServiceCounters IPersistableModel<ServiceCounters>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ServiceCounters>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeServiceCounters(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(ServiceCounters)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<ServiceCounters>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -79,6 +186,14 @@ namespace CognitiveSearch.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeServiceCounters(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            return content;
         }
     }
 }

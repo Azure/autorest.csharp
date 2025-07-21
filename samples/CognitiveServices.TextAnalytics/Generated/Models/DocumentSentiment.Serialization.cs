@@ -5,16 +5,94 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
+using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class DocumentSentiment
+    public partial class DocumentSentiment : IUtf8JsonSerializable, IJsonModel<DocumentSentiment>
     {
-        internal static DocumentSentiment DeserializeDocumentSentiment(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DocumentSentiment>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<DocumentSentiment>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DocumentSentiment>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(DocumentSentiment)} does not support writing '{format}' format.");
+            }
+
+            writer.WritePropertyName("id"u8);
+            writer.WriteStringValue(Id);
+            writer.WritePropertyName("sentiment"u8);
+            writer.WriteStringValue(Sentiment.ToSerialString());
+            if (Optional.IsDefined(Statistics))
+            {
+                writer.WritePropertyName("statistics"u8);
+                writer.WriteObjectValue(Statistics, options);
+            }
+            writer.WritePropertyName("confidenceScores"u8);
+            writer.WriteObjectValue(ConfidenceScores, options);
+            writer.WritePropertyName("sentences"u8);
+            writer.WriteStartArray();
+            foreach (var item in Sentences)
+            {
+                writer.WriteObjectValue(item, options);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("warnings"u8);
+            writer.WriteStartArray();
+            foreach (var item in Warnings)
+            {
+                writer.WriteObjectValue(item, options);
+            }
+            writer.WriteEndArray();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+        }
+
+        DocumentSentiment IJsonModel<DocumentSentiment>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DocumentSentiment>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(DocumentSentiment)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDocumentSentiment(document.RootElement, options);
+        }
+
+        internal static DocumentSentiment DeserializeDocumentSentiment(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -25,6 +103,8 @@ namespace CognitiveServices.TextAnalytics.Models
             SentimentConfidenceScorePerLabel confidenceScores = default;
             IReadOnlyList<SentenceSentiment> sentences = default;
             IReadOnlyList<TextAnalyticsWarning> warnings = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -43,12 +123,12 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
+                    statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("confidenceScores"u8))
                 {
-                    confidenceScores = SentimentConfidenceScorePerLabel.DeserializeSentimentConfidenceScorePerLabel(property.Value);
+                    confidenceScores = SentimentConfidenceScorePerLabel.DeserializeSentimentConfidenceScorePerLabel(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("sentences"u8))
@@ -56,7 +136,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<SentenceSentiment> array = new List<SentenceSentiment>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SentenceSentiment.DeserializeSentenceSentiment(item));
+                        array.Add(SentenceSentiment.DeserializeSentenceSentiment(item, options));
                     }
                     sentences = array;
                     continue;
@@ -66,20 +146,57 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<TextAnalyticsWarning> array = new List<TextAnalyticsWarning>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TextAnalyticsWarning.DeserializeTextAnalyticsWarning(item));
+                        array.Add(TextAnalyticsWarning.DeserializeTextAnalyticsWarning(item, options));
                     }
                     warnings = array;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
+            serializedAdditionalRawData = rawDataDictionary;
             return new DocumentSentiment(
                 id,
                 sentiment,
                 statistics,
                 confidenceScores,
                 sentences,
-                warnings);
+                warnings,
+                serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<DocumentSentiment>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DocumentSentiment>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, CognitiveServicesTextAnalyticsContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(DocumentSentiment)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        DocumentSentiment IPersistableModel<DocumentSentiment>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DocumentSentiment>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeDocumentSentiment(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(DocumentSentiment)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<DocumentSentiment>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -87,6 +204,14 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeDocumentSentiment(document.RootElement);
+        }
+
+        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            return content;
         }
     }
 }

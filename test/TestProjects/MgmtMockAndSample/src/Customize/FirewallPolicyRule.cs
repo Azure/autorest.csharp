@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -32,8 +33,9 @@ namespace MgmtMockAndSample.Models
         /// Serialize the value of NewStringSerializeProperty.
         /// </summary>
         /// <param name="writer"></param>
+        /// <param name="options"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void SerializeNameValue(Utf8JsonWriter writer)
+        internal void SerializeNameValue(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             throw new System.NotImplementedException();
         }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtPagination.Models;
 
 namespace MgmtPagination
 {
@@ -13,6 +14,14 @@ namespace MgmtPagination
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(PageSizeDecimalModelListResult))]
+    [ModelReaderWriterBuildable(typeof(PageSizeDoubleModelListResult))]
+    [ModelReaderWriterBuildable(typeof(PageSizeFloatModelListResult))]
+    [ModelReaderWriterBuildable(typeof(PageSizeInt32ModelListResult))]
+    [ModelReaderWriterBuildable(typeof(PageSizeInt64ModelListResult))]
+    [ModelReaderWriterBuildable(typeof(PageSizeIntegerModelListResult))]
+    [ModelReaderWriterBuildable(typeof(PageSizeNumericModelListResult))]
+    [ModelReaderWriterBuildable(typeof(PageSizeStringModelListResult))]
     public partial class MgmtPaginationContext : ModelReaderWriterContext
     {
     }

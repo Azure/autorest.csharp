@@ -49,7 +49,7 @@ namespace Azure.AI.FormRecognizer
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(trainContent);
+            content.JsonWriter.WriteObjectValue(trainContent, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -304,7 +304,7 @@ namespace Azure.AI.FormRecognizer
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(fileStream);
+                content.JsonWriter.WriteObjectValue(fileStream, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -428,7 +428,7 @@ namespace Azure.AI.FormRecognizer
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(copyContent);
+            content.JsonWriter.WriteObjectValue(copyContent, ModelSerializationExtensions.WireOptions);
             request.Content = content;
             return message;
         }
@@ -686,7 +686,7 @@ namespace Azure.AI.FormRecognizer
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(fileStream);
+                content.JsonWriter.WriteObjectValue(fileStream, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;
@@ -861,7 +861,7 @@ namespace Azure.AI.FormRecognizer
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(fileStream);
+                content.JsonWriter.WriteObjectValue(fileStream, ModelSerializationExtensions.WireOptions);
                 request.Content = content;
             }
             return message;

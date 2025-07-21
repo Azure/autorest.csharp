@@ -514,7 +514,7 @@ namespace MgmtListMethods.Mocking
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorWithNonResChWithLocRestClient.CreateListTestByLocationsRequest(Id.SubscriptionId, location);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, FakeParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, "MockableMgmtListMethodsSubscriptionResource.GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => NonResourceChild.DeserializeNonResourceChild(e), FakeParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, "MockableMgmtListMethodsSubscriptionResource.GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -548,7 +548,7 @@ namespace MgmtListMethods.Mocking
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorWithNonResChWithLocRestClient.CreateListTestByLocationsRequest(Id.SubscriptionId, location);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, FakeParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, "MockableMgmtListMethodsSubscriptionResource.GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => NonResourceChild.DeserializeNonResourceChild(e), FakeParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, "MockableMgmtListMethodsSubscriptionResource.GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -1142,7 +1142,7 @@ namespace MgmtListMethods.Mocking
             Argument.AssertNotNull(content, nameof(content));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => QuotasRestClient.CreateUpdateRequest(Id.SubscriptionId, location, content);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, UpdateWorkspaceQuotas.DeserializeUpdateWorkspaceQuotas, QuotasClientDiagnostics, Pipeline, "MockableMgmtListMethodsSubscriptionResource.UpdateAllQuota", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => UpdateWorkspaceQuotas.DeserializeUpdateWorkspaceQuotas(e), QuotasClientDiagnostics, Pipeline, "MockableMgmtListMethodsSubscriptionResource.UpdateAllQuota", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -1174,7 +1174,7 @@ namespace MgmtListMethods.Mocking
             Argument.AssertNotNull(content, nameof(content));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => QuotasRestClient.CreateUpdateRequest(Id.SubscriptionId, location, content);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, UpdateWorkspaceQuotas.DeserializeUpdateWorkspaceQuotas, QuotasClientDiagnostics, Pipeline, "MockableMgmtListMethodsSubscriptionResource.UpdateAllQuota", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => UpdateWorkspaceQuotas.DeserializeUpdateWorkspaceQuotas(e), QuotasClientDiagnostics, Pipeline, "MockableMgmtListMethodsSubscriptionResource.UpdateAllQuota", "value", null, cancellationToken);
         }
     }
 }

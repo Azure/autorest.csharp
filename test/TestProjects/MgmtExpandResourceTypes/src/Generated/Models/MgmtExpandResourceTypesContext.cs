@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
@@ -13,6 +14,26 @@ namespace MgmtExpandResourceTypes
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(AaaaRecord))]
+    [ModelReaderWriterBuildable(typeof(ARecord))]
+    [ModelReaderWriterBuildable(typeof(CaaRecord))]
+    [ModelReaderWriterBuildable(typeof(CloudError))]
+    [ModelReaderWriterBuildable(typeof(CnameRecord))]
+    [ModelReaderWriterBuildable(typeof(DnsResourceReference))]
+    [ModelReaderWriterBuildable(typeof(DnsResourceReferenceContent))]
+    [ModelReaderWriterBuildable(typeof(DnsResourceReferenceResult))]
+    [ModelReaderWriterBuildable(typeof(MgmtExpandResourceTypesResourceData))]
+    [ModelReaderWriterBuildable(typeof(MxRecord))]
+    [ModelReaderWriterBuildable(typeof(NsRecord))]
+    [ModelReaderWriterBuildable(typeof(PtrRecord))]
+    [ModelReaderWriterBuildable(typeof(RecordSetListResult))]
+    [ModelReaderWriterBuildable(typeof(RecordSetUpdateParameters))]
+    [ModelReaderWriterBuildable(typeof(SoaRecord))]
+    [ModelReaderWriterBuildable(typeof(SrvRecord))]
+    [ModelReaderWriterBuildable(typeof(SubResource))]
+    [ModelReaderWriterBuildable(typeof(TxtRecord))]
+    [ModelReaderWriterBuildable(typeof(ZoneListResult))]
+    [ModelReaderWriterBuildable(typeof(ZonePatch))]
     public partial class MgmtExpandResourceTypesContext : ModelReaderWriterContext
     {
     }

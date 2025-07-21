@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using validation.Models;
 
 namespace validation
 {
@@ -13,6 +14,10 @@ namespace validation
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ChildProduct))]
+    [ModelReaderWriterBuildable(typeof(ConstantProduct))]
+    [ModelReaderWriterBuildable(typeof(Error))]
+    [ModelReaderWriterBuildable(typeof(Product))]
     public partial class validationContext : ModelReaderWriterContext
     {
     }

@@ -5,21 +5,91 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace MgmtOmitOperationGroups.Models
 {
-    internal partial class Model2ListResult
+    internal partial class Model2ListResult : IUtf8JsonSerializable, IJsonModel<Model2ListResult>
     {
-        internal static Model2ListResult DeserializeModel2ListResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Model2ListResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<Model2ListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Model2ListResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Model2ListResult)} does not support writing '{format}' format.");
+            }
+
+            if (options.Format != "W" && Optional.IsCollectionDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Value)
+                {
+                    writer.WriteObjectValue(item, options);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsDefined(NextLink))
+            {
+                writer.WritePropertyName("nextLink"u8);
+                writer.WriteStringValue(NextLink);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+        }
+
+        Model2ListResult IJsonModel<Model2ListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Model2ListResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(Model2ListResult)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModel2ListResult(document.RootElement, options);
+        }
+
+        internal static Model2ListResult DeserializeModel2ListResult(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             IReadOnlyList<Model2Data> value = default;
             string nextLink = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -31,7 +101,7 @@ namespace MgmtOmitOperationGroups.Models
                     List<Model2Data> array = new List<Model2Data>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Model2Data.DeserializeModel2Data(item));
+                        array.Add(Model2Data.DeserializeModel2Data(item, options));
                     }
                     value = array;
                     continue;
@@ -41,8 +111,44 @@ namespace MgmtOmitOperationGroups.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new Model2ListResult(value ?? new ChangeTrackingList<Model2Data>(), nextLink);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new Model2ListResult(value ?? new ChangeTrackingList<Model2Data>(), nextLink, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<Model2ListResult>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Model2ListResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtOmitOperationGroupsContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(Model2ListResult)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        Model2ListResult IPersistableModel<Model2ListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Model2ListResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeModel2ListResult(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(Model2ListResult)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Model2ListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

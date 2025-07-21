@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using azure_special_properties.Models;
 
 namespace azure_special_properties
 {
@@ -13,6 +14,9 @@ namespace azure_special_properties
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Error))]
+    [ModelReaderWriterBuildable(typeof(HeaderCustomNamedRequestIdParamGroupingParameters))]
+    [ModelReaderWriterBuildable(typeof(OdataFilter))]
     public partial class azure_special_propertiesContext : ModelReaderWriterContext
     {
     }

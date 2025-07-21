@@ -3,6 +3,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Scm._Type._Dictionary.Models;
 
 namespace Scm._Type._Dictionary
 {
@@ -10,6 +11,7 @@ namespace Scm._Type._Dictionary
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(InnerModel))]
     public partial class Scm_Type_DictionaryContext : ModelReaderWriterContext
     {
     }

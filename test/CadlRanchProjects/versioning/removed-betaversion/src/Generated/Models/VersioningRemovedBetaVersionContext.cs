@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Versioning.Removed.BetaVersion.Models;
 
 namespace Versioning.Removed.BetaVersion
 {
@@ -13,6 +14,9 @@ namespace Versioning.Removed.BetaVersion
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ModelV1))]
+    [ModelReaderWriterBuildable(typeof(ModelV2))]
+    [ModelReaderWriterBuildable(typeof(ModelV3))]
     public partial class VersioningRemovedBetaVersionContext : ModelReaderWriterContext
     {
     }

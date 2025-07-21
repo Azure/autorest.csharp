@@ -9,4 +9,5 @@ require: $(this-folder)/../../../../readme.md
 input-file: $(this-folder)\..\Accessibility-LowLevel.json
 security: AzureKey
 security-header-name: Fake-Subscription-Key
+use-model-reader-writer: true
 ```

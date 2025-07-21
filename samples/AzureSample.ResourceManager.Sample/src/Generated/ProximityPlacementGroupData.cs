@@ -94,7 +94,7 @@ namespace AzureSample.ResourceManager.Sample
         /// Serialized Name: ProximityPlacementGroup.properties.colocationStatus
         /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ProximityPlacementGroupData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ExtendedLocation extendedLocation, ProximityPlacementGroupType? proximityPlacementGroupType, IReadOnlyList<SubResourceWithColocationStatus> virtualMachines, IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets, IReadOnlyList<SubResourceWithColocationStatus> availabilitySets, InstanceViewStatus colocationStatus, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
+        internal ProximityPlacementGroupData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, Azure.ResourceManager.Resources.Models.ExtendedLocation extendedLocation, ProximityPlacementGroupType? proximityPlacementGroupType, IReadOnlyList<SubResourceWithColocationStatus> virtualMachines, IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets, IReadOnlyList<SubResourceWithColocationStatus> availabilitySets, InstanceViewStatus colocationStatus, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             ExtendedLocation = extendedLocation;
             ProximityPlacementGroupType = proximityPlacementGroupType;
@@ -115,7 +115,7 @@ namespace AzureSample.ResourceManager.Sample
         /// Serialized Name: ProximityPlacementGroup.extendedLocation
         /// </summary>
         [WirePath("extendedLocation")]
-        public ExtendedLocation ExtendedLocation { get; set; }
+        public Azure.ResourceManager.Resources.Models.ExtendedLocation ExtendedLocation { get; set; }
         /// <summary>
         /// Specifies the type of the proximity placement group. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Standard** : Co-locate resources within an Azure region or Availability Zone. &lt;br&gt;&lt;br&gt; **Ultra** : For future use.
         /// Serialized Name: ProximityPlacementGroup.properties.proximityPlacementGroupType

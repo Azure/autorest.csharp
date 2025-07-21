@@ -6,14 +6,87 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace MgmtCollectionParent.Models
 {
-    public partial class StageDetails
+    public partial class StageDetails : IUtf8JsonSerializable, IJsonModel<StageDetails>
     {
-        internal static StageDetails DeserializeStageDetails(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StageDetails>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+
+        void IJsonModel<StageDetails>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<StageDetails>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(StageDetails)} does not support writing '{format}' format.");
+            }
+
+            if (options.Format != "W" && Optional.IsDefined(StageStatus))
+            {
+                writer.WritePropertyName("stageStatus"u8);
+                writer.WriteStringValue(StageStatus.Value.ToString());
+            }
+            if (options.Format != "W" && Optional.IsDefined(StageName))
+            {
+                writer.WritePropertyName("stageName"u8);
+                writer.WriteStringValue(StageName.Value.ToString());
+            }
+            if (options.Format != "W" && Optional.IsDefined(DisplayName))
+            {
+                writer.WritePropertyName("displayName"u8);
+                writer.WriteStringValue(DisplayName);
+            }
+            if (options.Format != "W" && Optional.IsDefined(StartOn))
+            {
+                writer.WritePropertyName("startTime"u8);
+                writer.WriteStringValue(StartOn.Value, "O");
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+        }
+
+        StageDetails IJsonModel<StageDetails>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<StageDetails>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(StageDetails)} does not support reading '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeStageDetails(document.RootElement, options);
+        }
+
+        internal static StageDetails DeserializeStageDetails(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= ModelSerializationExtensions.WireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -22,6 +95,8 @@ namespace MgmtCollectionParent.Models
             StageName? stageName = default;
             string displayName = default;
             DateTimeOffset? startTime = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("stageStatus"u8))
@@ -56,8 +131,44 @@ namespace MgmtCollectionParent.Models
                     startTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new StageDetails(stageStatus, stageName, displayName, startTime);
+            serializedAdditionalRawData = rawDataDictionary;
+            return new StageDetails(stageStatus, stageName, displayName, startTime, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<StageDetails>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<StageDetails>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options, MgmtCollectionParentContext.Default);
+                default:
+                    throw new FormatException($"The model {nameof(StageDetails)} does not support writing '{options.Format}' format.");
+            }
+        }
+
+        StageDetails IPersistableModel<StageDetails>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<StageDetails>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
+                        return DeserializeStageDetails(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(StageDetails)} does not support reading '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<StageDetails>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }
