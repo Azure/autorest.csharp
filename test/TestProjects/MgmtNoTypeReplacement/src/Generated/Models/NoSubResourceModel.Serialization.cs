@@ -5,80 +5,26 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtNoTypeReplacement.Models
 {
-    internal partial class NoSubResourceModel : IUtf8JsonSerializable, IJsonModel<NoSubResourceModel>
+    internal partial class NoSubResourceModel : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NoSubResourceModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<NoSubResourceModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
             writer.WriteEndObject();
         }
 
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static NoSubResourceModel DeserializeNoSubResourceModel(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<NoSubResourceModel>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(NoSubResourceModel)} does not support writing '{format}' format.");
-            }
-
-            if (options.Format != "W" && Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        NoSubResourceModel IJsonModel<NoSubResourceModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NoSubResourceModel>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(NoSubResourceModel)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeNoSubResourceModel(document.RootElement, options);
-        }
-
-        internal static NoSubResourceModel DeserializeNoSubResourceModel(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string id = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -86,44 +32,8 @@ namespace MgmtNoTypeReplacement.Models
                     id = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new NoSubResourceModel(id, serializedAdditionalRawData);
+            return new NoSubResourceModel(id);
         }
-
-        BinaryData IPersistableModel<NoSubResourceModel>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NoSubResourceModel>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtNoTypeReplacementContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(NoSubResourceModel)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        NoSubResourceModel IPersistableModel<NoSubResourceModel>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NoSubResourceModel>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeNoSubResourceModel(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(NoSubResourceModel)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<NoSubResourceModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

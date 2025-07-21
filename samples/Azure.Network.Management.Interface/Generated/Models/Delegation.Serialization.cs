@@ -5,45 +5,26 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class Delegation : IUtf8JsonSerializable, IJsonModel<Delegation>
+    public partial class Delegation : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Delegation>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<Delegation>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Delegation>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(Delegation)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W" && Optional.IsDefined(Etag))
+            if (Optional.IsDefined(Id))
             {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -52,40 +33,12 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("serviceName"u8);
                 writer.WriteStringValue(ServiceName);
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Actions))
-            {
-                writer.WritePropertyName("actions"u8);
-                writer.WriteStartArray();
-                foreach (var item in Actions)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState"u8);
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
-            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        Delegation IJsonModel<Delegation>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static Delegation DeserializeDelegation(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Delegation>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(Delegation)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeDelegation(document.RootElement, options);
-        }
-
-        internal static Delegation DeserializeDelegation(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -96,8 +49,6 @@ namespace Azure.Network.Management.Interface.Models
             string serviceName = default;
             IReadOnlyList<string> actions = default;
             ProvisioningState? provisioningState = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -155,52 +106,15 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new Delegation(
                 id,
-                serializedAdditionalRawData,
                 name,
                 etag,
                 serviceName,
                 actions ?? new ChangeTrackingList<string>(),
                 provisioningState);
         }
-
-        BinaryData IPersistableModel<Delegation>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Delegation>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureNetworkManagementInterfaceContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(Delegation)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        Delegation IPersistableModel<Delegation>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Delegation>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeDelegation(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(Delegation)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<Delegation>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -214,7 +128,7 @@ namespace Azure.Network.Management.Interface.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

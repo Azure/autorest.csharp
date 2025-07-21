@@ -14,23 +14,23 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AIFormRecognizerModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.TrainContent"/>. </summary>
-        /// <param name="source"> Source path containing the training documents. </param>
-        /// <param name="sourceFilter"> Filter to apply to the documents in the source path for training. </param>
-        /// <param name="useLabelFile"> Use label file for training a model. </param>
-        /// <returns> A new <see cref="FormRecognizer.Models.TrainContent"/> instance for mocking. </returns>
-        public static TrainContent TrainContent(string source = null, TrainSourceFilter sourceFilter = null, bool? useLabelFile = null)
-        {
-            return new TrainContent(source, sourceFilter, useLabelFile, serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.ErrorInformation"/>. </summary>
         /// <param name="code"></param>
         /// <param name="message"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="code"/> or <paramref name="message"/> is null. </exception>
         /// <returns> A new <see cref="FormRecognizer.Models.ErrorInformation"/> instance for mocking. </returns>
         public static ErrorInformation ErrorInformation(string code = null, string message = null)
         {
-            return new ErrorInformation(code, message, serializedAdditionalRawData: null);
+            if (code == null)
+            {
+                throw new ArgumentNullException(nameof(code));
+            }
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            return new ErrorInformation(code, message);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.Model"/>. </summary>
@@ -40,7 +40,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <returns> A new <see cref="FormRecognizer.Models.Model"/> instance for mocking. </returns>
         public static Model Model(ModelInfo modelInfo = null, KeysResult keys = null, TrainResult trainResult = null)
         {
-            return new Model(modelInfo, keys, trainResult, serializedAdditionalRawData: null);
+            return new Model(modelInfo, keys, trainResult);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.ModelInfo"/>. </summary>
@@ -51,17 +51,18 @@ namespace Azure.AI.FormRecognizer.Models
         /// <returns> A new <see cref="FormRecognizer.Models.ModelInfo"/> instance for mocking. </returns>
         public static ModelInfo ModelInfo(Guid modelId = default, ModelStatus status = default, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default)
         {
-            return new ModelInfo(modelId, status, createdDateTime, lastUpdatedDateTime, serializedAdditionalRawData: null);
+            return new ModelInfo(modelId, status, createdDateTime, lastUpdatedDateTime);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.KeysResult"/>. </summary>
         /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clusters"/> is null. </exception>
         /// <returns> A new <see cref="FormRecognizer.Models.KeysResult"/> instance for mocking. </returns>
         public static KeysResult KeysResult(IReadOnlyDictionary<string, IList<string>> clusters = null)
         {
             clusters ??= new Dictionary<string, IList<string>>();
 
-            return new KeysResult(clusters, serializedAdditionalRawData: null);
+            return new KeysResult(clusters);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.TrainResult"/>. </summary>
@@ -76,7 +77,7 @@ namespace Azure.AI.FormRecognizer.Models
             fields ??= new List<FormFieldsReport>();
             errors ??= new List<ErrorInformation>();
 
-            return new TrainResult(trainingDocuments?.ToList(), fields?.ToList(), averageModelAccuracy, errors?.ToList(), serializedAdditionalRawData: null);
+            return new TrainResult(trainingDocuments?.ToList(), fields?.ToList(), averageModelAccuracy, errors?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.TrainingDocumentInfo"/>. </summary>
@@ -89,16 +90,22 @@ namespace Azure.AI.FormRecognizer.Models
         {
             errors ??= new List<ErrorInformation>();
 
-            return new TrainingDocumentInfo(documentName, pages, errors?.ToList(), status, serializedAdditionalRawData: null);
+            return new TrainingDocumentInfo(documentName, pages, errors?.ToList(), status);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.FormFieldsReport"/>. </summary>
         /// <param name="fieldName"> Training field name. </param>
         /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fieldName"/> is null. </exception>
         /// <returns> A new <see cref="FormRecognizer.Models.FormFieldsReport"/> instance for mocking. </returns>
         public static FormFieldsReport FormFieldsReport(string fieldName = null, float accuracy = default)
         {
-            return new FormFieldsReport(fieldName, accuracy, serializedAdditionalRawData: null);
+            if (fieldName == null)
+            {
+                throw new ArgumentNullException(nameof(fieldName));
+            }
+
+            return new FormFieldsReport(fieldName, accuracy);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.AnalyzeOperationResult"/>. </summary>
@@ -109,7 +116,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <returns> A new <see cref="FormRecognizer.Models.AnalyzeOperationResult"/> instance for mocking. </returns>
         public static AnalyzeOperationResult AnalyzeOperationResult(OperationStatus status = default, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, AnalyzeResult analyzeResult = null)
         {
-            return new AnalyzeOperationResult(status, createdDateTime, lastUpdatedDateTime, analyzeResult, serializedAdditionalRawData: null);
+            return new AnalyzeOperationResult(status, createdDateTime, lastUpdatedDateTime, analyzeResult);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.AnalyzeResult"/>. </summary>
@@ -126,13 +133,7 @@ namespace Azure.AI.FormRecognizer.Models
             documentResults ??= new List<DocumentResult>();
             errors ??= new List<ErrorInformation>();
 
-            return new AnalyzeResult(
-                version,
-                readResults?.ToList(),
-                pageResults?.ToList(),
-                documentResults?.ToList(),
-                errors?.ToList(),
-                serializedAdditionalRawData: null);
+            return new AnalyzeResult(version, readResults?.ToList(), pageResults?.ToList(), documentResults?.ToList(), errors?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.ReadResult"/>. </summary>
@@ -155,8 +156,7 @@ namespace Azure.AI.FormRecognizer.Models
                 height,
                 unit,
                 language,
-                lines?.ToList(),
-                serializedAdditionalRawData: null);
+                lines?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.TextLine"/>. </summary>
@@ -170,7 +170,7 @@ namespace Azure.AI.FormRecognizer.Models
             boundingBox ??= new List<float>();
             words ??= new List<TextWord>();
 
-            return new TextLine(text, boundingBox?.ToList(), language, words?.ToList(), serializedAdditionalRawData: null);
+            return new TextLine(text, boundingBox?.ToList(), language, words?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.TextWord"/>. </summary>
@@ -182,7 +182,7 @@ namespace Azure.AI.FormRecognizer.Models
         {
             boundingBox ??= new List<float>();
 
-            return new TextWord(text, boundingBox?.ToList(), confidence, serializedAdditionalRawData: null);
+            return new TextWord(text, boundingBox?.ToList(), confidence);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.PageResult"/>. </summary>
@@ -196,7 +196,7 @@ namespace Azure.AI.FormRecognizer.Models
             keyValuePairs ??= new List<KeyValuePair>();
             tables ??= new List<DataTable>();
 
-            return new PageResult(page, clusterId, keyValuePairs?.ToList(), tables?.ToList(), serializedAdditionalRawData: null);
+            return new PageResult(page, clusterId, keyValuePairs?.ToList(), tables?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.KeyValuePair"/>. </summary>
@@ -207,7 +207,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <returns> A new <see cref="FormRecognizer.Models.KeyValuePair"/> instance for mocking. </returns>
         public static KeyValuePair KeyValuePair(string label = null, KeyValueElement key = null, KeyValueElement value = null, float confidence = default)
         {
-            return new KeyValuePair(label, key, value, confidence, serializedAdditionalRawData: null);
+            return new KeyValuePair(label, key, value, confidence);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.KeyValueElement"/>. </summary>
@@ -220,7 +220,7 @@ namespace Azure.AI.FormRecognizer.Models
             boundingBox ??= new List<float>();
             elements ??= new List<string>();
 
-            return new KeyValueElement(text, boundingBox?.ToList(), elements?.ToList(), serializedAdditionalRawData: null);
+            return new KeyValueElement(text, boundingBox?.ToList(), elements?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.DataTable"/>. </summary>
@@ -232,7 +232,7 @@ namespace Azure.AI.FormRecognizer.Models
         {
             cells ??= new List<DataTableCell>();
 
-            return new DataTable(rows, columns, cells?.ToList(), serializedAdditionalRawData: null);
+            return new DataTable(rows, columns, cells?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.DataTableCell"/>. </summary>
@@ -262,8 +262,7 @@ namespace Azure.AI.FormRecognizer.Models
                 confidence,
                 elements?.ToList(),
                 isHeader,
-                isFooter,
-                serializedAdditionalRawData: null);
+                isFooter);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.DocumentResult"/>. </summary>
@@ -276,7 +275,7 @@ namespace Azure.AI.FormRecognizer.Models
             pageRange ??= new List<int>();
             fields ??= new Dictionary<string, FieldValue>();
 
-            return new DocumentResult(docType, pageRange?.ToList(), fields, serializedAdditionalRawData: null);
+            return new DocumentResult(docType, pageRange?.ToList(), fields);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.FieldValue"/>. </summary>
@@ -316,8 +315,7 @@ namespace Azure.AI.FormRecognizer.Models
                 boundingBox?.ToList(),
                 confidence,
                 elements?.ToList(),
-                page,
-                serializedAdditionalRawData: null);
+                page);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.CopyOperationResult"/>. </summary>
@@ -328,7 +326,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <returns> A new <see cref="FormRecognizer.Models.CopyOperationResult"/> instance for mocking. </returns>
         public static CopyOperationResult CopyOperationResult(OperationStatus status = default, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, CopyResult copyResult = null)
         {
-            return new CopyOperationResult(status, createdDateTime, lastUpdatedDateTime, copyResult, serializedAdditionalRawData: null);
+            return new CopyOperationResult(status, createdDateTime, lastUpdatedDateTime, copyResult);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.CopyResult"/>. </summary>
@@ -339,7 +337,7 @@ namespace Azure.AI.FormRecognizer.Models
         {
             errors ??= new List<ErrorInformation>();
 
-            return new CopyResult(modelId, errors?.ToList(), serializedAdditionalRawData: null);
+            return new CopyResult(modelId, errors?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.Models"/>. </summary>
@@ -351,7 +349,7 @@ namespace Azure.AI.FormRecognizer.Models
         {
             modelList ??= new List<ModelInfo>();
 
-            return new Models(summary, modelList?.ToList(), nextLink, serializedAdditionalRawData: null);
+            return new Models(summary, modelList?.ToList(), nextLink);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.ModelsSummary"/>. </summary>
@@ -361,7 +359,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <returns> A new <see cref="FormRecognizer.Models.ModelsSummary"/> instance for mocking. </returns>
         public static ModelsSummary ModelsSummary(int count = default, int limit = default, DateTimeOffset lastUpdatedDateTime = default)
         {
-            return new ModelsSummary(count, limit, lastUpdatedDateTime, serializedAdditionalRawData: null);
+            return new ModelsSummary(count, limit, lastUpdatedDateTime);
         }
     }
 }

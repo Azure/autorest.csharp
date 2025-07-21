@@ -5,60 +5,37 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    public partial class GuestConfigurationAssignmentData : IUtf8JsonSerializable, IJsonModel<GuestConfigurationAssignmentData>
+    public partial class GuestConfigurationAssignmentData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<GuestConfigurationAssignmentData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<GuestConfigurationAssignmentData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<GuestConfigurationAssignmentData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(GuestConfigurationAssignmentData)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties, options);
+                writer.WriteObjectValue(Properties);
             }
-        }
-
-        GuestConfigurationAssignmentData IJsonModel<GuestConfigurationAssignmentData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<GuestConfigurationAssignmentData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            if (Optional.IsDefined(Name))
             {
-                throw new FormatException($"The model {nameof(GuestConfigurationAssignmentData)} does not support reading '{format}' format.");
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeGuestConfigurationAssignmentData(document.RootElement, options);
+            if (Optional.IsDefined(Location))
+            {
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location.Value);
+            }
+            writer.WriteEndObject();
         }
 
-        internal static GuestConfigurationAssignmentData DeserializeGuestConfigurationAssignmentData(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static GuestConfigurationAssignmentData DeserializeGuestConfigurationAssignmentData(JsonElement element)
         {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -68,8 +45,6 @@ namespace MgmtMockAndSample
             string name = default;
             AzureLocation? location = default;
             ResourceType? type = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -78,7 +53,7 @@ namespace MgmtMockAndSample
                     {
                         continue;
                     }
-                    properties = GuestConfigurationAssignmentProperties.DeserializeGuestConfigurationAssignmentProperties(property.Value, options);
+                    properties = GuestConfigurationAssignmentProperties.DeserializeGuestConfigurationAssignmentProperties(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -109,50 +84,8 @@ namespace MgmtMockAndSample
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new GuestConfigurationAssignmentData(
-                id,
-                name,
-                location,
-                type,
-                serializedAdditionalRawData,
-                properties);
+            return new GuestConfigurationAssignmentData(id, name, location, type, properties);
         }
-
-        BinaryData IPersistableModel<GuestConfigurationAssignmentData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<GuestConfigurationAssignmentData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(GuestConfigurationAssignmentData)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        GuestConfigurationAssignmentData IPersistableModel<GuestConfigurationAssignmentData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<GuestConfigurationAssignmentData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeGuestConfigurationAssignmentData(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(GuestConfigurationAssignmentData)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<GuestConfigurationAssignmentData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

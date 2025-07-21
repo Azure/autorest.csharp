@@ -5,132 +5,36 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ServiceStatistics : IUtf8JsonSerializable, IJsonModel<ServiceStatistics>
+    public partial class ServiceStatistics
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ServiceStatistics>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<ServiceStatistics>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static ServiceStatistics DeserializeServiceStatistics(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ServiceStatistics>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ServiceStatistics)} does not support writing '{format}' format.");
-            }
-
-            writer.WritePropertyName("counters"u8);
-            writer.WriteObjectValue(Counters, options);
-            writer.WritePropertyName("limits"u8);
-            writer.WriteObjectValue(Limits, options);
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        ServiceStatistics IJsonModel<ServiceStatistics>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ServiceStatistics>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ServiceStatistics)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeServiceStatistics(document.RootElement, options);
-        }
-
-        internal static ServiceStatistics DeserializeServiceStatistics(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             ServiceCounters counters = default;
             ServiceLimits limits = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("counters"u8))
                 {
-                    counters = ServiceCounters.DeserializeServiceCounters(property.Value, options);
+                    counters = ServiceCounters.DeserializeServiceCounters(property.Value);
                     continue;
                 }
                 if (property.NameEquals("limits"u8))
                 {
-                    limits = ServiceLimits.DeserializeServiceLimits(property.Value, options);
+                    limits = ServiceLimits.DeserializeServiceLimits(property.Value);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new ServiceStatistics(counters, limits, serializedAdditionalRawData);
+            return new ServiceStatistics(counters, limits);
         }
-
-        BinaryData IPersistableModel<ServiceStatistics>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ServiceStatistics>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(ServiceStatistics)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        ServiceStatistics IPersistableModel<ServiceStatistics>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ServiceStatistics>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeServiceStatistics(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(ServiceStatistics)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ServiceStatistics>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -138,14 +42,6 @@ namespace CognitiveSearch.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeServiceStatistics(document.RootElement);
-        }
-
-        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
-            return content;
         }
     }
 }

@@ -5,72 +5,26 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class Analyzer : IUtf8JsonSerializable, IJsonModel<Analyzer>
+    public partial class Analyzer : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Analyzer>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<Analyzer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Analyzer>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(Analyzer)} does not support writing '{format}' format.");
-            }
-
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
+            writer.WriteEndObject();
         }
 
-        Analyzer IJsonModel<Analyzer>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static Analyzer DeserializeAnalyzer(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Analyzer>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(Analyzer)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeAnalyzer(document.RootElement, options);
-        }
-
-        internal static Analyzer DeserializeAnalyzer(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -79,45 +33,14 @@ namespace CognitiveSearch.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "#Microsoft.Azure.Search.CustomAnalyzer": return CustomAnalyzer.DeserializeCustomAnalyzer(element, options);
-                    case "#Microsoft.Azure.Search.PatternAnalyzer": return PatternAnalyzer.DeserializePatternAnalyzer(element, options);
-                    case "#Microsoft.Azure.Search.StandardAnalyzer": return StandardAnalyzer.DeserializeStandardAnalyzer(element, options);
-                    case "#Microsoft.Azure.Search.StopAnalyzer": return StopAnalyzer.DeserializeStopAnalyzer(element, options);
+                    case "#Microsoft.Azure.Search.CustomAnalyzer": return CustomAnalyzer.DeserializeCustomAnalyzer(element);
+                    case "#Microsoft.Azure.Search.PatternAnalyzer": return PatternAnalyzer.DeserializePatternAnalyzer(element);
+                    case "#Microsoft.Azure.Search.StandardAnalyzer": return StandardAnalyzer.DeserializeStandardAnalyzer(element);
+                    case "#Microsoft.Azure.Search.StopAnalyzer": return StopAnalyzer.DeserializeStopAnalyzer(element);
                 }
             }
-            return UnknownAnalyzer.DeserializeUnknownAnalyzer(element, options);
+            return UnknownAnalyzer.DeserializeUnknownAnalyzer(element);
         }
-
-        BinaryData IPersistableModel<Analyzer>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Analyzer>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(Analyzer)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        Analyzer IPersistableModel<Analyzer>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Analyzer>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeAnalyzer(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(Analyzer)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<Analyzer>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -131,7 +54,7 @@ namespace CognitiveSearch.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 
 namespace MgmtMockAndSample.Models
@@ -20,15 +19,9 @@ namespace MgmtMockAndSample.Models
         /// <param name="newStringSerializeProperty"></param>
         /// <param name="newArraySerializedProperty"></param>
         /// <param name="newDictionarySerializedProperty"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownFirewallPolicyRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, IDictionary<string, string> newDictionarySerializedProperty, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(name, description, ruleType, newStringSerializeProperty, newArraySerializedProperty, newDictionarySerializedProperty, serializedAdditionalRawData)
+        internal UnknownFirewallPolicyRule(string name, string description, FirewallPolicyRuleType ruleType, string newStringSerializeProperty, IList<string> newArraySerializedProperty, IDictionary<string, string> newDictionarySerializedProperty) : base(name, description, ruleType, newStringSerializeProperty, newArraySerializedProperty, newDictionarySerializedProperty)
         {
             RuleType = ruleType;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="UnknownFirewallPolicyRule"/> for deserialization. </summary>
-        internal UnknownFirewallPolicyRule()
-        {
         }
     }
 }

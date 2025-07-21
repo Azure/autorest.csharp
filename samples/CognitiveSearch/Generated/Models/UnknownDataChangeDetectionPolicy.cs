@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace CognitiveSearch.Models
 {
     /// <summary> Unknown version of DataChangeDetectionPolicy. </summary>
@@ -15,15 +12,9 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of <see cref="UnknownDataChangeDetectionPolicy"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the data change detection policy. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownDataChangeDetectionPolicy(string odataType, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, serializedAdditionalRawData)
+        internal UnknownDataChangeDetectionPolicy(string odataType) : base(odataType)
         {
             OdataType = odataType ?? "Unknown";
-        }
-
-        /// <summary> Initializes a new instance of <see cref="UnknownDataChangeDetectionPolicy"/> for deserialization. </summary>
-        internal UnknownDataChangeDetectionPolicy()
-        {
         }
     }
 }

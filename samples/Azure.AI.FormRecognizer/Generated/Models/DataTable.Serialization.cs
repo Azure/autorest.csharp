@@ -5,79 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class DataTable : IUtf8JsonSerializable, IJsonModel<DataTable>
+    public partial class DataTable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataTable>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<DataTable>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static DataTable DeserializeDataTable(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<DataTable>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(DataTable)} does not support writing '{format}' format.");
-            }
-
-            writer.WritePropertyName("rows"u8);
-            writer.WriteNumberValue(Rows);
-            writer.WritePropertyName("columns"u8);
-            writer.WriteNumberValue(Columns);
-            writer.WritePropertyName("cells"u8);
-            writer.WriteStartArray();
-            foreach (var item in Cells)
-            {
-                writer.WriteObjectValue(item, options);
-            }
-            writer.WriteEndArray();
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        DataTable IJsonModel<DataTable>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<DataTable>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(DataTable)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeDataTable(document.RootElement, options);
-        }
-
-        internal static DataTable DeserializeDataTable(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -85,8 +21,6 @@ namespace Azure.AI.FormRecognizer.Models
             int rows = default;
             int columns = default;
             IReadOnlyList<DataTableCell> cells = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("rows"u8))
@@ -104,50 +38,14 @@ namespace Azure.AI.FormRecognizer.Models
                     List<DataTableCell> array = new List<DataTableCell>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DataTableCell.DeserializeDataTableCell(item, options));
+                        array.Add(DataTableCell.DeserializeDataTableCell(item));
                     }
                     cells = array;
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new DataTable(rows, columns, cells, serializedAdditionalRawData);
+            return new DataTable(rows, columns, cells);
         }
-
-        BinaryData IPersistableModel<DataTable>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<DataTable>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureAIFormRecognizerContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(DataTable)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        DataTable IPersistableModel<DataTable>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<DataTable>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeDataTable(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(DataTable)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<DataTable>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -155,14 +53,6 @@ namespace Azure.AI.FormRecognizer.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeDataTable(document.RootElement);
-        }
-
-        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
-            return content;
         }
     }
 }

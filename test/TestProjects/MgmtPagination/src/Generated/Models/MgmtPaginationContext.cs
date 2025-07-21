@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
-using MgmtPagination.Models;
 
 namespace MgmtPagination
 {
@@ -14,22 +13,6 @@ namespace MgmtPagination
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(PageSizeDecimalModelListResult))]
-    [ModelReaderWriterBuildable(typeof(PageSizeDecimalModelResource))]
-    [ModelReaderWriterBuildable(typeof(PageSizeDoubleModelListResult))]
-    [ModelReaderWriterBuildable(typeof(PageSizeDoubleModelResource))]
-    [ModelReaderWriterBuildable(typeof(PageSizeFloatModelListResult))]
-    [ModelReaderWriterBuildable(typeof(PageSizeFloatModelResource))]
-    [ModelReaderWriterBuildable(typeof(PageSizeInt32ModelListResult))]
-    [ModelReaderWriterBuildable(typeof(PageSizeInt32ModelResource))]
-    [ModelReaderWriterBuildable(typeof(PageSizeInt64ModelListResult))]
-    [ModelReaderWriterBuildable(typeof(PageSizeInt64ModelResource))]
-    [ModelReaderWriterBuildable(typeof(PageSizeIntegerModelListResult))]
-    [ModelReaderWriterBuildable(typeof(PageSizeIntegerModelResource))]
-    [ModelReaderWriterBuildable(typeof(PageSizeNumericModelListResult))]
-    [ModelReaderWriterBuildable(typeof(PageSizeNumericModelResource))]
-    [ModelReaderWriterBuildable(typeof(PageSizeStringModelListResult))]
-    [ModelReaderWriterBuildable(typeof(PageSizeStringModelResource))]
     public partial class MgmtPaginationContext : ModelReaderWriterContext
     {
     }

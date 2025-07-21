@@ -5,60 +5,31 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class AsciiFoldingTokenFilter : IUtf8JsonSerializable, IJsonModel<AsciiFoldingTokenFilter>
+    public partial class AsciiFoldingTokenFilter : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AsciiFoldingTokenFilter>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<AsciiFoldingTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AsciiFoldingTokenFilter>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(AsciiFoldingTokenFilter)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(PreserveOriginal))
             {
                 writer.WritePropertyName("preserveOriginal"u8);
                 writer.WriteBooleanValue(PreserveOriginal.Value);
             }
+            writer.WritePropertyName("@odata.type"u8);
+            writer.WriteStringValue(OdataType);
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            writer.WriteEndObject();
         }
 
-        AsciiFoldingTokenFilter IJsonModel<AsciiFoldingTokenFilter>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static AsciiFoldingTokenFilter DeserializeAsciiFoldingTokenFilter(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<AsciiFoldingTokenFilter>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(AsciiFoldingTokenFilter)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeAsciiFoldingTokenFilter(document.RootElement, options);
-        }
-
-        internal static AsciiFoldingTokenFilter DeserializeAsciiFoldingTokenFilter(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -66,8 +37,6 @@ namespace CognitiveSearch.Models
             bool? preserveOriginal = default;
             string odataType = default;
             string name = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("preserveOriginal"u8))
@@ -89,45 +58,9 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new AsciiFoldingTokenFilter(odataType, name, serializedAdditionalRawData, preserveOriginal);
+            return new AsciiFoldingTokenFilter(odataType, name, preserveOriginal);
         }
-
-        BinaryData IPersistableModel<AsciiFoldingTokenFilter>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AsciiFoldingTokenFilter>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(AsciiFoldingTokenFilter)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        AsciiFoldingTokenFilter IPersistableModel<AsciiFoldingTokenFilter>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AsciiFoldingTokenFilter>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeAsciiFoldingTokenFilter(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(AsciiFoldingTokenFilter)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<AsciiFoldingTokenFilter>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -141,7 +74,7 @@ namespace CognitiveSearch.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

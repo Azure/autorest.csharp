@@ -16,51 +16,34 @@ using MgmtLRO.Models;
 
 namespace MgmtLRO
 {
-    public partial class BarData : IUtf8JsonSerializable, IJsonModel<BarData>
+    public partial class BarData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BarData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<BarData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<BarData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(BarData)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties, options);
+                writer.WriteObjectValue(Properties);
             }
-        }
-
-        BarData IJsonModel<BarData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<BarData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            if (Optional.IsCollectionDefined(Tags))
             {
-                throw new FormatException($"The model {nameof(BarData)} does not support reading '{format}' format.");
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeBarData(document.RootElement, options);
+            writer.WritePropertyName("location"u8);
+            writer.WriteStringValue(Location);
+            writer.WriteEndObject();
         }
 
-        internal static BarData DeserializeBarData(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static BarData DeserializeBarData(JsonElement element)
         {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -72,8 +55,6 @@ namespace MgmtLRO
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -82,7 +63,7 @@ namespace MgmtLRO
                     {
                         continue;
                     }
-                    properties = BarProperties.DeserializeBarProperties(property.Value, options);
+                    properties = BarProperties.DeserializeBarProperties(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -125,15 +106,10 @@ namespace MgmtLRO
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtLROContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new BarData(
                 id,
                 name,
@@ -141,39 +117,7 @@ namespace MgmtLRO
                 systemData,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
-                properties,
-                serializedAdditionalRawData);
+                properties);
         }
-
-        BinaryData IPersistableModel<BarData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<BarData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtLROContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(BarData)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        BarData IPersistableModel<BarData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<BarData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeBarData(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(BarData)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<BarData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

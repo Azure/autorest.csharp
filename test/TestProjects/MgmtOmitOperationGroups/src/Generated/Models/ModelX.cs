@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace MgmtOmitOperationGroups.Models
 {
     /// <summary> The ModelX. </summary>
@@ -20,10 +17,9 @@ namespace MgmtOmitOperationGroups.Models
 
         /// <summary> Initializes a new instance of <see cref="ModelX"/>. </summary>
         /// <param name="e"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="c"></param>
         /// <param name="d"></param>
-        internal ModelX(string e, IDictionary<string, BinaryData> serializedAdditionalRawData, string c, string d) : base(e, serializedAdditionalRawData)
+        internal ModelX(string e, string c, string d) : base(e)
         {
             C = c;
             D = d;

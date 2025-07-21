@@ -5,91 +5,21 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    internal partial class NetworkInterfaceLoadBalancerListResult : IUtf8JsonSerializable, IJsonModel<NetworkInterfaceLoadBalancerListResult>
+    internal partial class NetworkInterfaceLoadBalancerListResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkInterfaceLoadBalancerListResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<NetworkInterfaceLoadBalancerListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static NetworkInterfaceLoadBalancerListResult DeserializeNetworkInterfaceLoadBalancerListResult(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceLoadBalancerListResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(NetworkInterfaceLoadBalancerListResult)} does not support writing '{format}' format.");
-            }
-
-            if (Optional.IsCollectionDefined(Value))
-            {
-                writer.WritePropertyName("value"u8);
-                writer.WriteStartArray();
-                foreach (var item in Value)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-            if (options.Format != "W" && Optional.IsDefined(NextLink))
-            {
-                writer.WritePropertyName("nextLink"u8);
-                writer.WriteStringValue(NextLink);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        NetworkInterfaceLoadBalancerListResult IJsonModel<NetworkInterfaceLoadBalancerListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceLoadBalancerListResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(NetworkInterfaceLoadBalancerListResult)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeNetworkInterfaceLoadBalancerListResult(document.RootElement, options);
-        }
-
-        internal static NetworkInterfaceLoadBalancerListResult DeserializeNetworkInterfaceLoadBalancerListResult(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             IReadOnlyList<LoadBalancer> value = default;
             string nextLink = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -101,7 +31,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<LoadBalancer> array = new List<LoadBalancer>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(LoadBalancer.DeserializeLoadBalancer(item, options));
+                        array.Add(LoadBalancer.DeserializeLoadBalancer(item));
                     }
                     value = array;
                     continue;
@@ -111,45 +41,9 @@ namespace Azure.Network.Management.Interface.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new NetworkInterfaceLoadBalancerListResult(value ?? new ChangeTrackingList<LoadBalancer>(), nextLink, serializedAdditionalRawData);
+            return new NetworkInterfaceLoadBalancerListResult(value ?? new ChangeTrackingList<LoadBalancer>(), nextLink);
         }
-
-        BinaryData IPersistableModel<NetworkInterfaceLoadBalancerListResult>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceLoadBalancerListResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureNetworkManagementInterfaceContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(NetworkInterfaceLoadBalancerListResult)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        NetworkInterfaceLoadBalancerListResult IPersistableModel<NetworkInterfaceLoadBalancerListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceLoadBalancerListResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeNetworkInterfaceLoadBalancerListResult(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(NetworkInterfaceLoadBalancerListResult)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<NetworkInterfaceLoadBalancerListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -157,14 +51,6 @@ namespace Azure.Network.Management.Interface.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeNetworkInterfaceLoadBalancerListResult(document.RootElement);
-        }
-
-        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
-            return content;
         }
     }
 }

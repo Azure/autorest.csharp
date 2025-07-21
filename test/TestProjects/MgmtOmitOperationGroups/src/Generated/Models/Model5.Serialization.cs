@@ -5,44 +5,21 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtOmitOperationGroups.Models
 {
-    public partial class Model5 : IUtf8JsonSerializable, IJsonModel<Model5>
+    public partial class Model5 : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Model5>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<Model5>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Model5>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(Model5)} does not support writing '{format}' format.");
-            }
-
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
-            }
-            if (options.Format != "W" && Optional.IsDefined(K))
-            {
-                writer.WritePropertyName("k"u8);
-                writer.WriteStringValue(K);
             }
             if (Optional.IsCollectionDefined(Modelqs))
             {
@@ -50,43 +27,15 @@ namespace MgmtOmitOperationGroups.Models
                 writer.WriteStartArray();
                 foreach (var item in Modelqs)
                 {
-                    writer.WriteObjectValue(item, options);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
+            writer.WriteEndObject();
         }
 
-        Model5 IJsonModel<Model5>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static Model5 DeserializeModel5(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Model5>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(Model5)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeModel5(document.RootElement, options);
-        }
-
-        internal static Model5 DeserializeModel5(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -94,8 +43,6 @@ namespace MgmtOmitOperationGroups.Models
             string id = default;
             string k = default;
             IList<ModelQ> modelqs = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -117,49 +64,13 @@ namespace MgmtOmitOperationGroups.Models
                     List<ModelQ> array = new List<ModelQ>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ModelQ.DeserializeModelQ(item, options));
+                        array.Add(ModelQ.DeserializeModelQ(item));
                     }
                     modelqs = array;
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new Model5(id, k, modelqs ?? new ChangeTrackingList<ModelQ>(), serializedAdditionalRawData);
+            return new Model5(id, k, modelqs ?? new ChangeTrackingList<ModelQ>());
         }
-
-        BinaryData IPersistableModel<Model5>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Model5>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtOmitOperationGroupsContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(Model5)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        Model5 IPersistableModel<Model5>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Model5>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeModel5(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(Model5)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<Model5>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

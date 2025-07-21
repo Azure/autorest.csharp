@@ -16,59 +16,42 @@ using MgmtConstants.Models;
 
 namespace MgmtConstants
 {
-    public partial class OptionalMachineData : IUtf8JsonSerializable, IJsonModel<OptionalMachineData>
+    public partial class OptionalMachineData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OptionalMachineData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<OptionalMachineData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<OptionalMachineData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            if (Optional.IsCollectionDefined(Tags))
             {
-                throw new FormatException($"The model {nameof(OptionalMachineData)} does not support writing '{format}' format.");
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
-
-            base.JsonModelWriteCore(writer, options);
+            writer.WritePropertyName("location"u8);
+            writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(Listener))
             {
                 writer.WritePropertyName("listener"u8);
-                writer.WriteObjectValue(Listener, options);
+                writer.WriteObjectValue(Listener);
             }
             if (Optional.IsDefined(Content))
             {
                 writer.WritePropertyName("content"u8);
-                writer.WriteObjectValue(Content, options);
+                writer.WriteObjectValue(Content);
             }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        OptionalMachineData IJsonModel<OptionalMachineData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static OptionalMachineData DeserializeOptionalMachineData(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<OptionalMachineData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(OptionalMachineData)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeOptionalMachineData(document.RootElement, options);
-        }
-
-        internal static OptionalMachineData DeserializeOptionalMachineData(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -81,8 +64,6 @@ namespace MgmtConstants
             SystemData systemData = default;
             ModelWithRequiredConstant listener = default;
             ModelWithOptionalConstant content = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"u8))
@@ -125,7 +106,7 @@ namespace MgmtConstants
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtConstantsContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -143,7 +124,7 @@ namespace MgmtConstants
                             {
                                 continue;
                             }
-                            listener = ModelWithRequiredConstant.DeserializeModelWithRequiredConstant(property0.Value, options);
+                            listener = ModelWithRequiredConstant.DeserializeModelWithRequiredConstant(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("content"u8))
@@ -152,18 +133,13 @@ namespace MgmtConstants
                             {
                                 continue;
                             }
-                            content = ModelWithOptionalConstant.DeserializeModelWithOptionalConstant(property0.Value, options);
+                            content = ModelWithOptionalConstant.DeserializeModelWithOptionalConstant(property0.Value);
                             continue;
                         }
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new OptionalMachineData(
                 id,
                 name,
@@ -172,39 +148,7 @@ namespace MgmtConstants
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
                 listener,
-                content,
-                serializedAdditionalRawData);
+                content);
         }
-
-        BinaryData IPersistableModel<OptionalMachineData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<OptionalMachineData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtConstantsContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(OptionalMachineData)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        OptionalMachineData IPersistableModel<OptionalMachineData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<OptionalMachineData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeOptionalMachineData(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(OptionalMachineData)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<OptionalMachineData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

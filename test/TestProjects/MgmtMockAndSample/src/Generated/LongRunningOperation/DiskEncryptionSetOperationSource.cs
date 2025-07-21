@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,14 +25,16 @@ namespace MgmtMockAndSample
 
         DiskEncryptionSetResource IOperationSource<DiskEncryptionSetResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<DiskEncryptionSetData>(response.Content, ModelReaderWriterOptions.Json, MgmtMockAndSampleContext.Default);
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
+            var data = DiskEncryptionSetData.DeserializeDiskEncryptionSetData(document.RootElement);
             return new DiskEncryptionSetResource(_client, data);
         }
 
         async ValueTask<DiskEncryptionSetResource> IOperationSource<DiskEncryptionSetResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<DiskEncryptionSetData>(response.Content, ModelReaderWriterOptions.Json, MgmtMockAndSampleContext.Default);
-            return await Task.FromResult(new DiskEncryptionSetResource(_client, data)).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
+            var data = DiskEncryptionSetData.DeserializeDiskEncryptionSetData(document.RootElement);
+            return new DiskEncryptionSetResource(_client, data);
         }
     }
 }

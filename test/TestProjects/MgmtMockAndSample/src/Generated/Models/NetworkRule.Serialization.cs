@@ -5,36 +5,17 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class NetworkRule : IUtf8JsonSerializable, IJsonModel<NetworkRule>
+    public partial class NetworkRule : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkRule>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<NetworkRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkRule>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(NetworkRule)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             if (Optional.IsCollectionDefined(IpProtocols))
             {
                 writer.WritePropertyName("ipProtocols"u8);
@@ -105,24 +86,46 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-        }
-
-        NetworkRule IJsonModel<NetworkRule>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkRule>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            if (Optional.IsDefined(Name))
             {
-                throw new FormatException($"The model {nameof(NetworkRule)} does not support reading '{format}' format.");
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeNetworkRule(document.RootElement, options);
+            if (Optional.IsDefined(Description))
+            {
+                writer.WritePropertyName("description"u8);
+                writer.WriteStringValue(Description);
+            }
+            writer.WritePropertyName("ruleType"u8);
+            writer.WriteStringValue(RuleType.ToString());
+            if (Optional.IsDefined(NewStringSerializeProperty))
+            {
+                writer.WritePropertyName("newStringSerializeProperty"u8);
+                writer.WriteStringValue(NewStringSerializeProperty);
+            }
+            if (Optional.IsCollectionDefined(NewArraySerializedProperty))
+            {
+                writer.WritePropertyName("newArraySerializedProperty"u8);
+                writer.WriteStartArray();
+                foreach (var item in NewArraySerializedProperty)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WritePropertyName("fakeParent"u8);
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(NewDictionarySerializedProperty))
+            {
+                writer.WritePropertyName("newDictionarySerializedProperty"u8);
+                SerializeNameValue(writer);
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
         }
 
-        internal static NetworkRule DeserializeNetworkRule(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static NetworkRule DeserializeNetworkRule(JsonElement element)
         {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -140,8 +143,6 @@ namespace MgmtMockAndSample.Models
             string newStringSerializeProperty = default;
             IList<string> newArraySerializedProperty = default;
             IDictionary<string, string> newDictionarySerializedProperty = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ipProtocols"u8))
@@ -293,12 +294,7 @@ namespace MgmtMockAndSample.Models
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new NetworkRule(
                 name,
                 description,
@@ -306,7 +302,6 @@ namespace MgmtMockAndSample.Models
                 newStringSerializeProperty,
                 newArraySerializedProperty ?? new ChangeTrackingList<string>(),
                 newDictionarySerializedProperty ?? new ChangeTrackingDictionary<string, string>(),
-                serializedAdditionalRawData,
                 ipProtocols ?? new ChangeTrackingList<FirewallPolicyRuleNetworkProtocol>(),
                 sourceAddresses ?? new ChangeTrackingList<string>(),
                 destinationAddresses ?? new ChangeTrackingList<string>(),
@@ -315,36 +310,5 @@ namespace MgmtMockAndSample.Models
                 destinationIPGroups ?? new ChangeTrackingList<string>(),
                 destinationFqdns ?? new ChangeTrackingList<string>());
         }
-
-        BinaryData IPersistableModel<NetworkRule>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkRule>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(NetworkRule)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        NetworkRule IPersistableModel<NetworkRule>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkRule>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeNetworkRule(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(NetworkRule)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<NetworkRule>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

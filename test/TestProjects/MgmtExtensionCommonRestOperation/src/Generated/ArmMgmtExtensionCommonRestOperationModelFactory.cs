@@ -35,8 +35,7 @@ namespace MgmtExtensionCommonRestOperation.Models
                 systemData,
                 tags,
                 location,
-                myType,
-                serializedAdditionalRawData: null);
+                myType);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtExtensionCommonRestOperation.TypeTwoData"/>. </summary>
@@ -59,8 +58,7 @@ namespace MgmtExtensionCommonRestOperation.Models
                 systemData,
                 tags,
                 location,
-                myType,
-                serializedAdditionalRawData: null);
+                myType);
         }
     }
 }

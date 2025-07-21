@@ -35,8 +35,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentWithAncestorWithNonResChWithLocData"/>. </summary>
@@ -59,8 +58,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NonResourceChild"/>. </summary>
@@ -69,7 +67,7 @@ namespace MgmtListMethods.Models
         /// <returns> A new <see cref="Models.NonResourceChild"/> instance for mocking. </returns>
         public static NonResourceChild NonResourceChild(string name = null, int? numberOfCores = null)
         {
-            return new NonResourceChild(name, numberOfCores, serializedAdditionalRawData: null);
+            return new NonResourceChild(name, numberOfCores);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentWithAncestorWithNonResChData"/>. </summary>
@@ -92,8 +90,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentWithAncestorWithLocData"/>. </summary>
@@ -116,8 +113,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentWithAncestorData"/>. </summary>
@@ -140,8 +136,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentWithNonResChData"/>. </summary>
@@ -164,8 +159,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentData"/>. </summary>
@@ -188,8 +182,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentWithAncestorWithNonResChWithLocData"/>. </summary>
@@ -212,8 +205,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentWithAncestorWithNonResChData"/>. </summary>
@@ -236,8 +228,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentWithAncestorWithLocData"/>. </summary>
@@ -260,8 +251,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentWithAncestorData"/>. </summary>
@@ -284,8 +274,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentWithNonResChData"/>. </summary>
@@ -308,8 +297,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentData"/>. </summary>
@@ -332,8 +320,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.SubParentWithNonResChWithLocData"/>. </summary>
@@ -356,8 +343,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.SubParentWithNonResChData"/>. </summary>
@@ -380,8 +366,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.SubParentWithLocData"/>. </summary>
@@ -404,8 +389,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.SubParentData"/>. </summary>
@@ -428,8 +412,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.MgmtGrpParentWithNonResChWithLocData"/>. </summary>
@@ -452,8 +435,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.MgmtGrpParentWithNonResChData"/>. </summary>
@@ -476,8 +458,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.MgmtGrpParentWithLocData"/>. </summary>
@@ -500,8 +481,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.MgmtGroupParentData"/>. </summary>
@@ -524,8 +504,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.TenantTestData"/>. </summary>
@@ -548,8 +527,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.TenantParentWithNonResChWithLocData"/>. </summary>
@@ -572,8 +550,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.TenantParentWithNonResChData"/>. </summary>
@@ -596,8 +573,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.TenantParentWithLocData"/>. </summary>
@@ -620,8 +596,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.TenantParentData"/>. </summary>
@@ -644,8 +619,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UpdateWorkspaceQuotas"/>. </summary>
@@ -657,13 +631,7 @@ namespace MgmtListMethods.Models
         /// <returns> A new <see cref="Models.UpdateWorkspaceQuotas"/> instance for mocking. </returns>
         public static UpdateWorkspaceQuotas UpdateWorkspaceQuotas(string id = null, string updateWorkspaceQuotasType = null, long? limit = null, QuotaUnit? unit = null, Status? status = null)
         {
-            return new UpdateWorkspaceQuotas(
-                id,
-                updateWorkspaceQuotasType,
-                limit,
-                unit,
-                status,
-                serializedAdditionalRawData: null);
+            return new UpdateWorkspaceQuotas(id, updateWorkspaceQuotasType, limit, unit, status);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeConfigurationData"/>. </summary>
@@ -686,8 +654,7 @@ namespace MgmtListMethods.Models
                 systemData,
                 tags,
                 location,
-                configValue,
-                serializedAdditionalRawData: null);
+                configValue);
         }
     }
 }

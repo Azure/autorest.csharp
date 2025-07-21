@@ -5,72 +5,26 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class Tokenizer : IUtf8JsonSerializable, IJsonModel<Tokenizer>
+    public partial class Tokenizer : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Tokenizer>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<Tokenizer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Tokenizer>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(Tokenizer)} does not support writing '{format}' format.");
-            }
-
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
+            writer.WriteEndObject();
         }
 
-        Tokenizer IJsonModel<Tokenizer>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static Tokenizer DeserializeTokenizer(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Tokenizer>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(Tokenizer)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeTokenizer(document.RootElement, options);
-        }
-
-        internal static Tokenizer DeserializeTokenizer(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -79,53 +33,22 @@ namespace CognitiveSearch.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "#Microsoft.Azure.Search.ClassicTokenizer": return ClassicTokenizer.DeserializeClassicTokenizer(element, options);
-                    case "#Microsoft.Azure.Search.EdgeNGramTokenizer": return EdgeNGramTokenizer.DeserializeEdgeNGramTokenizer(element, options);
-                    case "#Microsoft.Azure.Search.KeywordTokenizer": return KeywordTokenizer.DeserializeKeywordTokenizer(element, options);
-                    case "#Microsoft.Azure.Search.KeywordTokenizerV2": return KeywordTokenizerV2.DeserializeKeywordTokenizerV2(element, options);
-                    case "#Microsoft.Azure.Search.MicrosoftLanguageStemmingTokenizer": return MicrosoftLanguageStemmingTokenizer.DeserializeMicrosoftLanguageStemmingTokenizer(element, options);
-                    case "#Microsoft.Azure.Search.MicrosoftLanguageTokenizer": return MicrosoftLanguageTokenizer.DeserializeMicrosoftLanguageTokenizer(element, options);
-                    case "#Microsoft.Azure.Search.NGramTokenizer": return NGramTokenizer.DeserializeNGramTokenizer(element, options);
-                    case "#Microsoft.Azure.Search.PathHierarchyTokenizerV2": return PathHierarchyTokenizerV2.DeserializePathHierarchyTokenizerV2(element, options);
-                    case "#Microsoft.Azure.Search.PatternTokenizer": return PatternTokenizer.DeserializePatternTokenizer(element, options);
-                    case "#Microsoft.Azure.Search.StandardTokenizer": return StandardTokenizer.DeserializeStandardTokenizer(element, options);
-                    case "#Microsoft.Azure.Search.StandardTokenizerV2": return StandardTokenizerV2.DeserializeStandardTokenizerV2(element, options);
-                    case "#Microsoft.Azure.Search.UaxUrlEmailTokenizer": return UaxUrlEmailTokenizer.DeserializeUaxUrlEmailTokenizer(element, options);
+                    case "#Microsoft.Azure.Search.ClassicTokenizer": return ClassicTokenizer.DeserializeClassicTokenizer(element);
+                    case "#Microsoft.Azure.Search.EdgeNGramTokenizer": return EdgeNGramTokenizer.DeserializeEdgeNGramTokenizer(element);
+                    case "#Microsoft.Azure.Search.KeywordTokenizer": return KeywordTokenizer.DeserializeKeywordTokenizer(element);
+                    case "#Microsoft.Azure.Search.KeywordTokenizerV2": return KeywordTokenizerV2.DeserializeKeywordTokenizerV2(element);
+                    case "#Microsoft.Azure.Search.MicrosoftLanguageStemmingTokenizer": return MicrosoftLanguageStemmingTokenizer.DeserializeMicrosoftLanguageStemmingTokenizer(element);
+                    case "#Microsoft.Azure.Search.MicrosoftLanguageTokenizer": return MicrosoftLanguageTokenizer.DeserializeMicrosoftLanguageTokenizer(element);
+                    case "#Microsoft.Azure.Search.NGramTokenizer": return NGramTokenizer.DeserializeNGramTokenizer(element);
+                    case "#Microsoft.Azure.Search.PathHierarchyTokenizerV2": return PathHierarchyTokenizerV2.DeserializePathHierarchyTokenizerV2(element);
+                    case "#Microsoft.Azure.Search.PatternTokenizer": return PatternTokenizer.DeserializePatternTokenizer(element);
+                    case "#Microsoft.Azure.Search.StandardTokenizer": return StandardTokenizer.DeserializeStandardTokenizer(element);
+                    case "#Microsoft.Azure.Search.StandardTokenizerV2": return StandardTokenizerV2.DeserializeStandardTokenizerV2(element);
+                    case "#Microsoft.Azure.Search.UaxUrlEmailTokenizer": return UaxUrlEmailTokenizer.DeserializeUaxUrlEmailTokenizer(element);
                 }
             }
-            return UnknownTokenizer.DeserializeUnknownTokenizer(element, options);
+            return UnknownTokenizer.DeserializeUnknownTokenizer(element);
         }
-
-        BinaryData IPersistableModel<Tokenizer>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Tokenizer>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(Tokenizer)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        Tokenizer IPersistableModel<Tokenizer>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Tokenizer>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeTokenizer(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(Tokenizer)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<Tokenizer>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -139,7 +62,7 @@ namespace CognitiveSearch.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

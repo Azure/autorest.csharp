@@ -5,79 +5,14 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class KeyValuePair : IUtf8JsonSerializable, IJsonModel<KeyValuePair>
+    public partial class KeyValuePair
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<KeyValuePair>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<KeyValuePair>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static KeyValuePair DeserializeKeyValuePair(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<KeyValuePair>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(KeyValuePair)} does not support writing '{format}' format.");
-            }
-
-            if (Optional.IsDefined(Label))
-            {
-                writer.WritePropertyName("label"u8);
-                writer.WriteStringValue(Label);
-            }
-            writer.WritePropertyName("key"u8);
-            writer.WriteObjectValue(Key, options);
-            writer.WritePropertyName("value"u8);
-            writer.WriteObjectValue(Value, options);
-            writer.WritePropertyName("confidence"u8);
-            writer.WriteNumberValue(Confidence);
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        KeyValuePair IJsonModel<KeyValuePair>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<KeyValuePair>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(KeyValuePair)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeKeyValuePair(document.RootElement, options);
-        }
-
-        internal static KeyValuePair DeserializeKeyValuePair(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -86,8 +21,6 @@ namespace Azure.AI.FormRecognizer.Models
             KeyValueElement key = default;
             KeyValueElement value = default;
             float confidence = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("label"u8))
@@ -97,12 +30,12 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("key"u8))
                 {
-                    key = KeyValueElement.DeserializeKeyValueElement(property.Value, options);
+                    key = KeyValueElement.DeserializeKeyValueElement(property.Value);
                     continue;
                 }
                 if (property.NameEquals("value"u8))
                 {
-                    value = KeyValueElement.DeserializeKeyValueElement(property.Value, options);
+                    value = KeyValueElement.DeserializeKeyValueElement(property.Value);
                     continue;
                 }
                 if (property.NameEquals("confidence"u8))
@@ -110,45 +43,9 @@ namespace Azure.AI.FormRecognizer.Models
                     confidence = property.Value.GetSingle();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new KeyValuePair(label, key, value, confidence, serializedAdditionalRawData);
+            return new KeyValuePair(label, key, value, confidence);
         }
-
-        BinaryData IPersistableModel<KeyValuePair>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<KeyValuePair>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureAIFormRecognizerContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(KeyValuePair)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        KeyValuePair IPersistableModel<KeyValuePair>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<KeyValuePair>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeKeyValuePair(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(KeyValuePair)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<KeyValuePair>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -156,14 +53,6 @@ namespace Azure.AI.FormRecognizer.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeKeyValuePair(document.RootElement);
-        }
-
-        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
-            return content;
         }
     }
 }

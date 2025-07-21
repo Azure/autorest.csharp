@@ -33,9 +33,8 @@ namespace MgmtMockAndSample.Models
         /// Serialize the value of NewStringSerializeProperty.
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="options"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void SerializeNameValue(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal void SerializeNameValue(Utf8JsonWriter writer)
         {
             throw new System.NotImplementedException();
         }

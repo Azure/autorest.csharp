@@ -15,31 +15,15 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class KeyForDiskEncryptionSet : IUtf8JsonSerializable, IJsonModel<KeyForDiskEncryptionSet>
+    public partial class KeyForDiskEncryptionSet : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<KeyForDiskEncryptionSet>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<KeyForDiskEncryptionSet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<KeyForDiskEncryptionSet>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(KeyForDiskEncryptionSet)} does not support writing '{format}' format.");
-            }
-
             if (Optional.IsDefined(SourceVault))
             {
                 writer.WritePropertyName("sourceVault"u8);
-                ((IJsonModel<WritableSubResource>)SourceVault).Write(writer, options);
+                ((IJsonModel<WritableSubResource>)SourceVault).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             writer.WritePropertyName("keyUrl"u8);
             writer.WriteStringValue(KeyUri.AbsoluteUri);
@@ -58,49 +42,11 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(NewReadOnlyListProperty))
-            {
-                writer.WritePropertyName("newReadOnlyListProperty"u8);
-                writer.WriteStartArray();
-                foreach (var item in NewReadOnlyListProperty)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
+            writer.WriteEndObject();
         }
 
-        KeyForDiskEncryptionSet IJsonModel<KeyForDiskEncryptionSet>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static KeyForDiskEncryptionSet DeserializeKeyForDiskEncryptionSet(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<KeyForDiskEncryptionSet>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(KeyForDiskEncryptionSet)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeKeyForDiskEncryptionSet(document.RootElement, options);
-        }
-
-        internal static KeyForDiskEncryptionSet DeserializeKeyForDiskEncryptionSet(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -110,8 +56,6 @@ namespace MgmtMockAndSample.Models
             Uri newKeyUrl = default;
             IList<string> newListProperty = default;
             IReadOnlyList<string> newReadOnlyListProperty = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sourceVault"u8))
@@ -120,7 +64,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    sourceVault = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, MgmtMockAndSampleContext.Default);
+                    sourceVault = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("keyUrl"u8))
@@ -165,50 +109,8 @@ namespace MgmtMockAndSample.Models
                     newReadOnlyListProperty = array;
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new KeyForDiskEncryptionSet(
-                sourceVault,
-                keyUrl,
-                newKeyUrl,
-                newListProperty ?? new ChangeTrackingList<string>(),
-                newReadOnlyListProperty ?? new ChangeTrackingList<string>(),
-                serializedAdditionalRawData);
+            return new KeyForDiskEncryptionSet(sourceVault, keyUrl, newKeyUrl, newListProperty ?? new ChangeTrackingList<string>(), newReadOnlyListProperty ?? new ChangeTrackingList<string>());
         }
-
-        BinaryData IPersistableModel<KeyForDiskEncryptionSet>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<KeyForDiskEncryptionSet>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(KeyForDiskEncryptionSet)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        KeyForDiskEncryptionSet IPersistableModel<KeyForDiskEncryptionSet>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<KeyForDiskEncryptionSet>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeKeyForDiskEncryptionSet(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(KeyForDiskEncryptionSet)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<KeyForDiskEncryptionSet>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

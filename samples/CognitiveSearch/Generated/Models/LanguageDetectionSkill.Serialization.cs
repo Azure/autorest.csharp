@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -14,46 +12,47 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class LanguageDetectionSkill : IUtf8JsonSerializable, IJsonModel<LanguageDetectionSkill>
+    public partial class LanguageDetectionSkill : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LanguageDetectionSkill>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<LanguageDetectionSkill>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
+            writer.WritePropertyName("@odata.type"u8);
+            writer.WriteStringValue(OdataType);
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(Description))
+            {
+                writer.WritePropertyName("description"u8);
+                writer.WriteStringValue(Description);
+            }
+            if (Optional.IsDefined(Context))
+            {
+                writer.WritePropertyName("context"u8);
+                writer.WriteStringValue(Context);
+            }
+            writer.WritePropertyName("inputs"u8);
+            writer.WriteStartArray();
+            foreach (var item in Inputs)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("outputs"u8);
+            writer.WriteStartArray();
+            foreach (var item in Outputs)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
 
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static LanguageDetectionSkill DeserializeLanguageDetectionSkill(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<LanguageDetectionSkill>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(LanguageDetectionSkill)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
-        }
-
-        LanguageDetectionSkill IJsonModel<LanguageDetectionSkill>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<LanguageDetectionSkill>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(LanguageDetectionSkill)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeLanguageDetectionSkill(document.RootElement, options);
-        }
-
-        internal static LanguageDetectionSkill DeserializeLanguageDetectionSkill(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -64,8 +63,6 @@ namespace CognitiveSearch.Models
             string context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@odata.type"u8))
@@ -93,7 +90,7 @@ namespace CognitiveSearch.Models
                     List<InputFieldMappingEntry> array = new List<InputFieldMappingEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(InputFieldMappingEntry.DeserializeInputFieldMappingEntry(item, options));
+                        array.Add(InputFieldMappingEntry.DeserializeInputFieldMappingEntry(item));
                     }
                     inputs = array;
                     continue;
@@ -103,57 +100,20 @@ namespace CognitiveSearch.Models
                     List<OutputFieldMappingEntry> array = new List<OutputFieldMappingEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(OutputFieldMappingEntry.DeserializeOutputFieldMappingEntry(item, options));
+                        array.Add(OutputFieldMappingEntry.DeserializeOutputFieldMappingEntry(item));
                     }
                     outputs = array;
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new LanguageDetectionSkill(
                 odataType,
                 name,
                 description,
                 context,
                 inputs,
-                outputs,
-                serializedAdditionalRawData);
+                outputs);
         }
-
-        BinaryData IPersistableModel<LanguageDetectionSkill>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<LanguageDetectionSkill>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(LanguageDetectionSkill)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        LanguageDetectionSkill IPersistableModel<LanguageDetectionSkill>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<LanguageDetectionSkill>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeLanguageDetectionSkill(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(LanguageDetectionSkill)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<LanguageDetectionSkill>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -167,7 +127,7 @@ namespace CognitiveSearch.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

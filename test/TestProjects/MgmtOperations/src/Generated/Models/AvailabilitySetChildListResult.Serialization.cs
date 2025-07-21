@@ -5,88 +5,21 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtOperations.Models
 {
-    internal partial class AvailabilitySetChildListResult : IUtf8JsonSerializable, IJsonModel<AvailabilitySetChildListResult>
+    internal partial class AvailabilitySetChildListResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AvailabilitySetChildListResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<AvailabilitySetChildListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static AvailabilitySetChildListResult DeserializeAvailabilitySetChildListResult(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetChildListResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(AvailabilitySetChildListResult)} does not support writing '{format}' format.");
-            }
-
-            writer.WritePropertyName("value"u8);
-            writer.WriteStartArray();
-            foreach (var item in Value)
-            {
-                writer.WriteObjectValue(item, options);
-            }
-            writer.WriteEndArray();
-            if (Optional.IsDefined(NextLink))
-            {
-                writer.WritePropertyName("nextLink"u8);
-                writer.WriteStringValue(NextLink);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        AvailabilitySetChildListResult IJsonModel<AvailabilitySetChildListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetChildListResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(AvailabilitySetChildListResult)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeAvailabilitySetChildListResult(document.RootElement, options);
-        }
-
-        internal static AvailabilitySetChildListResult DeserializeAvailabilitySetChildListResult(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             IReadOnlyList<AvailabilitySetChildData> value = default;
             string nextLink = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -94,7 +27,7 @@ namespace MgmtOperations.Models
                     List<AvailabilitySetChildData> array = new List<AvailabilitySetChildData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AvailabilitySetChildData.DeserializeAvailabilitySetChildData(item, options));
+                        array.Add(AvailabilitySetChildData.DeserializeAvailabilitySetChildData(item));
                     }
                     value = array;
                     continue;
@@ -104,44 +37,8 @@ namespace MgmtOperations.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new AvailabilitySetChildListResult(value, nextLink, serializedAdditionalRawData);
+            return new AvailabilitySetChildListResult(value, nextLink);
         }
-
-        BinaryData IPersistableModel<AvailabilitySetChildListResult>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetChildListResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtOperationsContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(AvailabilitySetChildListResult)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        AvailabilitySetChildListResult IPersistableModel<AvailabilitySetChildListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AvailabilitySetChildListResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeAvailabilitySetChildListResult(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(AvailabilitySetChildListResult)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<AvailabilitySetChildListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

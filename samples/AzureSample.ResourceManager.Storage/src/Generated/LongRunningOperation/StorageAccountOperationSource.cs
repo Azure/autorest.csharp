@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,14 +25,16 @@ namespace AzureSample.ResourceManager.Storage
 
         StorageAccountResource IOperationSource<StorageAccountResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<StorageAccountData>(response.Content, ModelReaderWriterOptions.Json, AzureSampleResourceManagerStorageContext.Default);
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
+            var data = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
             return new StorageAccountResource(_client, data);
         }
 
         async ValueTask<StorageAccountResource> IOperationSource<StorageAccountResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<StorageAccountData>(response.Content, ModelReaderWriterOptions.Json, AzureSampleResourceManagerStorageContext.Default);
-            return await Task.FromResult(new StorageAccountResource(_client, data)).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
+            var data = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
+            return new StorageAccountResource(_client, data);
         }
     }
 }

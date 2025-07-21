@@ -6,34 +6,17 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class ManagedHsmProperties : IUtf8JsonSerializable, IJsonModel<ManagedHsmProperties>
+    public partial class ManagedHsmProperties : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagedHsmProperties>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<ManagedHsmProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ManagedHsmProperties>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ManagedHsmProperties)} does not support writing '{format}' format.");
-            }
-
             if (Optional.IsDefined(Settings))
             {
                 writer.WritePropertyName("settings"u8);
@@ -78,11 +61,6 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsDefined(HsmUri))
-            {
-                writer.WritePropertyName("hsmUri"u8);
-                writer.WriteStringValue(HsmUri.AbsoluteUri);
-            }
             if (Optional.IsDefined(EnableSoftDelete))
             {
                 writer.WritePropertyName("enableSoftDelete"u8);
@@ -103,74 +81,21 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("createMode"u8);
                 writer.WriteStringValue(CreateMode.Value.ToSerialString());
             }
-            if (options.Format != "W" && Optional.IsDefined(StatusMessage))
-            {
-                writer.WritePropertyName("statusMessage"u8);
-                writer.WriteStringValue(StatusMessage);
-            }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState"u8);
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
-            }
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
-                writer.WriteObjectValue(NetworkAcls, options);
-            }
-            if (options.Format != "W" && Optional.IsCollectionDefined(PrivateEndpointConnections))
-            {
-                writer.WritePropertyName("privateEndpointConnections"u8);
-                writer.WriteStartArray();
-                foreach (var item in PrivateEndpointConnections)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
+                writer.WriteObjectValue(NetworkAcls);
             }
             if (Optional.IsDefined(PublicNetworkAccess))
             {
                 writer.WritePropertyName("publicNetworkAccess"u8);
                 writer.WriteStringValue(PublicNetworkAccess.Value.ToString());
             }
-            if (options.Format != "W" && Optional.IsDefined(ScheduledPurgeOn))
-            {
-                writer.WritePropertyName("scheduledPurgeDate"u8);
-                writer.WriteStringValue(ScheduledPurgeOn.Value, "O");
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
+            writer.WriteEndObject();
         }
 
-        ManagedHsmProperties IJsonModel<ManagedHsmProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static ManagedHsmProperties DeserializeManagedHsmProperties(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ManagedHsmProperties>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ManagedHsmProperties)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeManagedHsmProperties(document.RootElement, options);
-        }
-
-        internal static ManagedHsmProperties DeserializeManagedHsmProperties(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -191,8 +116,6 @@ namespace MgmtMockAndSample.Models
             IReadOnlyList<MhsmPrivateEndpointConnectionItem> privateEndpointConnections = default;
             PublicNetworkAccess? publicNetworkAccess = default;
             DateTimeOffset? scheduledPurgeDate = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("settings"u8))
@@ -310,7 +233,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    networkAcls = MhsmNetworkRuleSet.DeserializeMhsmNetworkRuleSet(property.Value, options);
+                    networkAcls = MhsmNetworkRuleSet.DeserializeMhsmNetworkRuleSet(property.Value);
                     continue;
                 }
                 if (property.NameEquals("privateEndpointConnections"u8))
@@ -322,7 +245,7 @@ namespace MgmtMockAndSample.Models
                     List<MhsmPrivateEndpointConnectionItem> array = new List<MhsmPrivateEndpointConnectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MhsmPrivateEndpointConnectionItem.DeserializeMhsmPrivateEndpointConnectionItem(item, options));
+                        array.Add(MhsmPrivateEndpointConnectionItem.DeserializeMhsmPrivateEndpointConnectionItem(item));
                     }
                     privateEndpointConnections = array;
                     continue;
@@ -345,12 +268,7 @@ namespace MgmtMockAndSample.Models
                     scheduledPurgeDate = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new ManagedHsmProperties(
                 settings,
                 protectedSettings,
@@ -367,39 +285,7 @@ namespace MgmtMockAndSample.Models
                 networkAcls,
                 privateEndpointConnections ?? new ChangeTrackingList<MhsmPrivateEndpointConnectionItem>(),
                 publicNetworkAccess,
-                scheduledPurgeDate,
-                serializedAdditionalRawData);
+                scheduledPurgeDate);
         }
-
-        BinaryData IPersistableModel<ManagedHsmProperties>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ManagedHsmProperties>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(ManagedHsmProperties)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        ManagedHsmProperties IPersistableModel<ManagedHsmProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ManagedHsmProperties>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeManagedHsmProperties(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(ManagedHsmProperties)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ManagedHsmProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

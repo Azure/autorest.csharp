@@ -5,80 +5,31 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    internal partial class ExtremelyDeepSinglePropertyModel : IUtf8JsonSerializable, IJsonModel<ExtremelyDeepSinglePropertyModel>
+    internal partial class ExtremelyDeepSinglePropertyModel : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExtremelyDeepSinglePropertyModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<ExtremelyDeepSinglePropertyModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ExtremelyDeepSinglePropertyModel>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ExtremelyDeepSinglePropertyModel)} does not support writing '{format}' format.");
-            }
-
             if (Optional.IsDefined(Extreme))
             {
                 writer.WritePropertyName("extreme"u8);
-                writer.WriteObjectValue(Extreme, options);
+                writer.WriteObjectValue(Extreme);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
+            writer.WriteEndObject();
         }
 
-        ExtremelyDeepSinglePropertyModel IJsonModel<ExtremelyDeepSinglePropertyModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static ExtremelyDeepSinglePropertyModel DeserializeExtremelyDeepSinglePropertyModel(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ExtremelyDeepSinglePropertyModel>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ExtremelyDeepSinglePropertyModel)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeExtremelyDeepSinglePropertyModel(document.RootElement, options);
-        }
-
-        internal static ExtremelyDeepSinglePropertyModel DeserializeExtremelyDeepSinglePropertyModel(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             SuperDeepSinglePropertyModel extreme = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("extreme"u8))
@@ -87,47 +38,11 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    extreme = SuperDeepSinglePropertyModel.DeserializeSuperDeepSinglePropertyModel(property.Value, options);
+                    extreme = SuperDeepSinglePropertyModel.DeserializeSuperDeepSinglePropertyModel(property.Value);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new ExtremelyDeepSinglePropertyModel(extreme, serializedAdditionalRawData);
+            return new ExtremelyDeepSinglePropertyModel(extreme);
         }
-
-        BinaryData IPersistableModel<ExtremelyDeepSinglePropertyModel>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ExtremelyDeepSinglePropertyModel>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(ExtremelyDeepSinglePropertyModel)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        ExtremelyDeepSinglePropertyModel IPersistableModel<ExtremelyDeepSinglePropertyModel>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ExtremelyDeepSinglePropertyModel>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeExtremelyDeepSinglePropertyModel(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(ExtremelyDeepSinglePropertyModel)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ExtremelyDeepSinglePropertyModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

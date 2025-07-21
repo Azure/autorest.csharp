@@ -35,8 +35,7 @@ namespace MgmtOperations.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ConnectionSharedKey"/>. </summary>
@@ -59,8 +58,7 @@ namespace MgmtOperations.Models
                 systemData,
                 tags,
                 location,
-                value,
-                serializedAdditionalRawData: null);
+                value);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtOperations.AvailabilitySetChildData"/>. </summary>
@@ -83,8 +81,7 @@ namespace MgmtOperations.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtOperations.AvailabilitySetGrandChildData"/>. </summary>
@@ -107,8 +104,7 @@ namespace MgmtOperations.Models
                 systemData,
                 tags,
                 location,
-                bar,
-                serializedAdditionalRawData: null);
+                bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TestAvailabilitySet"/>. </summary>
@@ -116,7 +112,7 @@ namespace MgmtOperations.Models
         /// <returns> A new <see cref="Models.TestAvailabilitySet"/> instance for mocking. </returns>
         public static TestAvailabilitySet TestAvailabilitySet(string bar = null)
         {
-            return new TestAvailabilitySet(bar, serializedAdditionalRawData: null);
+            return new TestAvailabilitySet(bar);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtOperations.UnpatchableResourceData"/>. </summary>
@@ -139,8 +135,7 @@ namespace MgmtOperations.Models
                 systemData,
                 tags,
                 location,
-                foo,
-                serializedAdditionalRawData: null);
+                foo);
         }
     }
 }

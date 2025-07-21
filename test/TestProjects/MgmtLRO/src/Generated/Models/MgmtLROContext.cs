@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
-using MgmtLRO.Models;
 
 namespace MgmtLRO
 {
@@ -14,13 +13,6 @@ namespace MgmtLRO
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(BarPatch))]
-    [ModelReaderWriterBuildable(typeof(BarResource))]
-    [ModelReaderWriterBuildable(typeof(FakePatch))]
-    [ModelReaderWriterBuildable(typeof(FakePostResult))]
-    [ModelReaderWriterBuildable(typeof(FakeProperties))]
-    [ModelReaderWriterBuildable(typeof(FakeResource))]
-    [ModelReaderWriterBuildable(typeof(UpdateResource))]
     public partial class MgmtLROContext : ModelReaderWriterContext
     {
     }

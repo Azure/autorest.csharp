@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
-using MgmtExactMatchInheritance.Models;
 
 namespace MgmtExactMatchInheritance
 {
@@ -14,18 +13,6 @@ namespace MgmtExactMatchInheritance
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(ExactMatchModel10))]
-    [ModelReaderWriterBuildable(typeof(ExactMatchModel11))]
-    [ModelReaderWriterBuildable(typeof(ExactMatchModel1Resource))]
-    [ModelReaderWriterBuildable(typeof(ExactMatchModel2))]
-    [ModelReaderWriterBuildable(typeof(ExactMatchModel3))]
-    [ModelReaderWriterBuildable(typeof(ExactMatchModel4))]
-    [ModelReaderWriterBuildable(typeof(ExactMatchModel5Resource))]
-    [ModelReaderWriterBuildable(typeof(ExactMatchModel7))]
-    [ModelReaderWriterBuildable(typeof(ExactMatchModel8))]
-    [ModelReaderWriterBuildable(typeof(ExactMatchModel9))]
-    [ModelReaderWriterBuildable(typeof(SeparateClass))]
-    [ModelReaderWriterBuildable(typeof(UnknownSecretBase))]
     public partial class MgmtExactMatchInheritanceContext : ModelReaderWriterContext
     {
     }

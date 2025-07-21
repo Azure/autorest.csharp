@@ -6,85 +6,20 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class RetrieveBootDiagnosticsDataResult : IUtf8JsonSerializable, IJsonModel<RetrieveBootDiagnosticsDataResult>
+    public partial class RetrieveBootDiagnosticsDataResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RetrieveBootDiagnosticsDataResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<RetrieveBootDiagnosticsDataResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static RetrieveBootDiagnosticsDataResult DeserializeRetrieveBootDiagnosticsDataResult(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RetrieveBootDiagnosticsDataResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(RetrieveBootDiagnosticsDataResult)} does not support writing '{format}' format.");
-            }
-
-            if (options.Format != "W" && Optional.IsDefined(ConsoleScreenshotBlobUri))
-            {
-                writer.WritePropertyName("consoleScreenshotBlobUri"u8);
-                writer.WriteStringValue(ConsoleScreenshotBlobUri.AbsoluteUri);
-            }
-            if (options.Format != "W" && Optional.IsDefined(SerialConsoleLogBlobUri))
-            {
-                writer.WritePropertyName("serialConsoleLogBlobUri"u8);
-                writer.WriteStringValue(SerialConsoleLogBlobUri.AbsoluteUri);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        RetrieveBootDiagnosticsDataResult IJsonModel<RetrieveBootDiagnosticsDataResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RetrieveBootDiagnosticsDataResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(RetrieveBootDiagnosticsDataResult)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeRetrieveBootDiagnosticsDataResult(document.RootElement, options);
-        }
-
-        internal static RetrieveBootDiagnosticsDataResult DeserializeRetrieveBootDiagnosticsDataResult(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Uri consoleScreenshotBlobUri = default;
             Uri serialConsoleLogBlobUri = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("consoleScreenshotBlobUri"u8))
@@ -105,44 +40,8 @@ namespace MgmtAcronymMapping.Models
                     serialConsoleLogBlobUri = new Uri(property.Value.GetString());
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new RetrieveBootDiagnosticsDataResult(consoleScreenshotBlobUri, serialConsoleLogBlobUri, serializedAdditionalRawData);
+            return new RetrieveBootDiagnosticsDataResult(consoleScreenshotBlobUri, serialConsoleLogBlobUri);
         }
-
-        BinaryData IPersistableModel<RetrieveBootDiagnosticsDataResult>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RetrieveBootDiagnosticsDataResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtAcronymMappingContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(RetrieveBootDiagnosticsDataResult)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        RetrieveBootDiagnosticsDataResult IPersistableModel<RetrieveBootDiagnosticsDataResult>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RetrieveBootDiagnosticsDataResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeRetrieveBootDiagnosticsDataResult(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(RetrieveBootDiagnosticsDataResult)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<RetrieveBootDiagnosticsDataResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

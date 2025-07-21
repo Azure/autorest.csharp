@@ -5,39 +5,20 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace AzureSample.ResourceManager.Storage.Models
 {
-    public partial class Encryption : IUtf8JsonSerializable, IJsonModel<Encryption>
+    public partial class Encryption : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Encryption>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<Encryption>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Encryption>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(Encryption)} does not support writing '{format}' format.");
-            }
-
             if (Optional.IsDefined(Services))
             {
                 writer.WritePropertyName("services"u8);
-                writer.WriteObjectValue(Services, options);
+                writer.WriteObjectValue(Services);
             }
             writer.WritePropertyName("keySource"u8);
             writer.WriteStringValue(KeySource.ToString());
@@ -49,46 +30,18 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(KeyVaultProperties))
             {
                 writer.WritePropertyName("keyvaultproperties"u8);
-                writer.WriteObjectValue(KeyVaultProperties, options);
+                writer.WriteObjectValue(KeyVaultProperties);
             }
             if (Optional.IsDefined(EncryptionIdentity))
             {
                 writer.WritePropertyName("identity"u8);
-                writer.WriteObjectValue(EncryptionIdentity, options);
+                writer.WriteObjectValue(EncryptionIdentity);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
+            writer.WriteEndObject();
         }
 
-        Encryption IJsonModel<Encryption>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static Encryption DeserializeEncryption(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Encryption>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(Encryption)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeEncryption(document.RootElement, options);
-        }
-
-        internal static Encryption DeserializeEncryption(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -98,8 +51,6 @@ namespace AzureSample.ResourceManager.Storage.Models
             bool? requireInfrastructureEncryption = default;
             KeyVaultProperties keyvaultproperties = default;
             EncryptionIdentity identity = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("services"u8))
@@ -108,7 +59,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    services = EncryptionServices.DeserializeEncryptionServices(property.Value, options);
+                    services = EncryptionServices.DeserializeEncryptionServices(property.Value);
                     continue;
                 }
                 if (property.NameEquals("keySource"u8))
@@ -131,7 +82,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    keyvaultproperties = KeyVaultProperties.DeserializeKeyVaultProperties(property.Value, options);
+                    keyvaultproperties = KeyVaultProperties.DeserializeKeyVaultProperties(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))
@@ -140,53 +91,11 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    identity = EncryptionIdentity.DeserializeEncryptionIdentity(property.Value, options);
+                    identity = EncryptionIdentity.DeserializeEncryptionIdentity(property.Value);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new Encryption(
-                services,
-                keySource,
-                requireInfrastructureEncryption,
-                keyvaultproperties,
-                identity,
-                serializedAdditionalRawData);
+            return new Encryption(services, keySource, requireInfrastructureEncryption, keyvaultproperties, identity);
         }
-
-        BinaryData IPersistableModel<Encryption>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Encryption>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerStorageContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(Encryption)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        Encryption IPersistableModel<Encryption>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Encryption>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeEncryption(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(Encryption)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<Encryption>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

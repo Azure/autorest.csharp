@@ -5,93 +5,16 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
-using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class TextAnalyticsError : IUtf8JsonSerializable, IJsonModel<TextAnalyticsError>
+    public partial class TextAnalyticsError
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TextAnalyticsError>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<TextAnalyticsError>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static TextAnalyticsError DeserializeTextAnalyticsError(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<TextAnalyticsError>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(TextAnalyticsError)} does not support writing '{format}' format.");
-            }
-
-            writer.WritePropertyName("code"u8);
-            writer.WriteStringValue(Code.ToSerialString());
-            writer.WritePropertyName("message"u8);
-            writer.WriteStringValue(Message);
-            if (Optional.IsDefined(Target))
-            {
-                writer.WritePropertyName("target"u8);
-                writer.WriteStringValue(Target);
-            }
-            if (Optional.IsDefined(Innererror))
-            {
-                writer.WritePropertyName("innererror"u8);
-                writer.WriteObjectValue(Innererror, options);
-            }
-            if (Optional.IsCollectionDefined(Details))
-            {
-                writer.WritePropertyName("details"u8);
-                writer.WriteStartArray();
-                foreach (var item in Details)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        TextAnalyticsError IJsonModel<TextAnalyticsError>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<TextAnalyticsError>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(TextAnalyticsError)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeTextAnalyticsError(document.RootElement, options);
-        }
-
-        internal static TextAnalyticsError DeserializeTextAnalyticsError(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -101,8 +24,6 @@ namespace CognitiveServices.TextAnalytics.Models
             string target = default;
             InnerError innererror = default;
             IReadOnlyList<TextAnalyticsError> details = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"u8))
@@ -126,7 +47,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     {
                         continue;
                     }
-                    innererror = InnerError.DeserializeInnerError(property.Value, options);
+                    innererror = InnerError.DeserializeInnerError(property.Value);
                     continue;
                 }
                 if (property.NameEquals("details"u8))
@@ -138,56 +59,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<TextAnalyticsError> array = new List<TextAnalyticsError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeserializeTextAnalyticsError(item, options));
+                        array.Add(DeserializeTextAnalyticsError(item));
                     }
                     details = array;
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new TextAnalyticsError(
-                code,
-                message,
-                target,
-                innererror,
-                details ?? new ChangeTrackingList<TextAnalyticsError>(),
-                serializedAdditionalRawData);
+            return new TextAnalyticsError(code, message, target, innererror, details ?? new ChangeTrackingList<TextAnalyticsError>());
         }
-
-        BinaryData IPersistableModel<TextAnalyticsError>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<TextAnalyticsError>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, CognitiveServicesTextAnalyticsContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(TextAnalyticsError)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        TextAnalyticsError IPersistableModel<TextAnalyticsError>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<TextAnalyticsError>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeTextAnalyticsError(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(TextAnalyticsError)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<TextAnalyticsError>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -195,14 +74,6 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeTextAnalyticsError(document.RootElement);
-        }
-
-        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
-            return content;
         }
     }
 }

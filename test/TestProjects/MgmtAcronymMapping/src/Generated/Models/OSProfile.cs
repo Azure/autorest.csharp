@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 
 namespace MgmtAcronymMapping.Models
@@ -16,38 +15,6 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class OSProfile
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="OSProfile"/>. </summary>
         public OSProfile()
         {
@@ -91,8 +58,7 @@ namespace MgmtAcronymMapping.Models
         /// Specifies whether the guest provision signal is required to infer provision success of the virtual machine.  **Note: This property is for private testing only, and all customers must not set the property to false.**
         /// Serialized Name: OSProfile.requireGuestProvisionSignal
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal OSProfile(string computerName, string adminUsername, string adminPassword, string customData, WindowsConfiguration windowsConfiguration, LinuxConfiguration linuxConfiguration, IList<VaultSecretGroup> secrets, bool? allowExtensionOperations, bool? requireGuestProvisionSignal, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal OSProfile(string computerName, string adminUsername, string adminPassword, string customData, WindowsConfiguration windowsConfiguration, LinuxConfiguration linuxConfiguration, IList<VaultSecretGroup> secrets, bool? allowExtensionOperations, bool? requireGuestProvisionSignal)
         {
             ComputerName = computerName;
             AdminUsername = adminUsername;
@@ -103,7 +69,6 @@ namespace MgmtAcronymMapping.Models
             Secrets = secrets;
             AllowExtensionOperations = allowExtensionOperations;
             RequireGuestProvisionSignal = requireGuestProvisionSignal;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

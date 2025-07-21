@@ -76,8 +76,7 @@ namespace MgmtExactMatchInheritance.Models
                 type17,
                 type18,
                 type19,
-                type20,
-                serializedAdditionalRawData: null);
+                type20);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtExactMatchInheritance.ExactMatchModel5Data"/>. </summary>
@@ -100,8 +99,7 @@ namespace MgmtExactMatchInheritance.Models
                 systemData,
                 tags,
                 location,
-                @new,
-                serializedAdditionalRawData: null);
+                @new);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ExactMatchModel10"/>. </summary>
@@ -122,8 +120,7 @@ namespace MgmtExactMatchInheritance.Models
                 resourceType,
                 systemData,
                 location,
-                tags,
-                serializedAdditionalRawData: null);
+                tags);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ExactMatchModel11"/>. </summary>
@@ -132,7 +129,7 @@ namespace MgmtExactMatchInheritance.Models
         /// <returns> A new <see cref="Models.ExactMatchModel11"/> instance for mocking. </returns>
         public static ExactMatchModel11 ExactMatchModel11(string name = null, ResourceType? resourceType = null)
         {
-            return new ExactMatchModel11(name, resourceType, serializedAdditionalRawData: null);
+            return new ExactMatchModel11(name, resourceType);
         }
     }
 }

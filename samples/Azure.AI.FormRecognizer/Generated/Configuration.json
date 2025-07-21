@@ -8,7 +8,6 @@
   ],
   "skip-csproj-packagereference": true,
   "generation1-convenience-client": true,
-  "use-model-reader-writer": true,
   "flavor": "azure",
   "helper-namespace": "Azure.AI.FormRecognizer"
 }

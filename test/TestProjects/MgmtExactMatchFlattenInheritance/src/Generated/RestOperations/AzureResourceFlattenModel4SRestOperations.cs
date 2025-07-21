@@ -155,7 +155,7 @@ namespace MgmtExactMatchFlattenInheritance
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(azureResourceFlattenModel4, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(azureResourceFlattenModel4);
             request.Content = content;
             _userAgent.Apply(message);
             return message;

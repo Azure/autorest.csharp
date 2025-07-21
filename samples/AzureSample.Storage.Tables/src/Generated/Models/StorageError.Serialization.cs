@@ -5,110 +5,31 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
-using System.Xml;
 using System.Xml.Linq;
 using Azure;
-using Azure.Core;
 
 namespace AzureSample.Storage.Tables.Models
 {
-    internal partial class StorageError : IUtf8JsonSerializable, IJsonModel<StorageError>, IXmlSerializable
+    internal partial class StorageError
     {
-        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        internal static StorageError DeserializeStorageError(XElement element)
         {
-            writer.WriteStartElement(nameHint ?? "StorageError");
-            if (Optional.IsDefined(Message))
-            {
-                writer.WriteStartElement("Message");
-                writer.WriteValue(Message);
-                writer.WriteEndElement();
-            }
-            writer.WriteEndElement();
-        }
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, ModelSerializationExtensions.WireOptions);
-
-        internal static StorageError DeserializeStorageError(XElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             string message = default;
             if (element.Element("Message") is XElement messageElement)
             {
                 message = (string)messageElement;
             }
-            return new StorageError(message, serializedAdditionalRawData: null);
+            return new StorageError(message);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageError>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<StorageError>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static StorageError DeserializeStorageError(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<StorageError>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(StorageError)} does not support writing '{format}' format.");
-            }
-
-            if (Optional.IsDefined(Message))
-            {
-                writer.WritePropertyName("Message"u8);
-                writer.WriteStringValue(Message);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        StorageError IJsonModel<StorageError>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<StorageError>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(StorageError)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeStorageError(document.RootElement, options);
-        }
-
-        internal static StorageError DeserializeStorageError(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string message = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("Message"u8))
@@ -116,55 +37,9 @@ namespace AzureSample.Storage.Tables.Models
                     message = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new StorageError(message, serializedAdditionalRawData);
+            return new StorageError(message);
         }
-
-        BinaryData IPersistableModel<StorageError>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<StorageError>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureSampleStorageTablesContext.Default);
-                case "X":
-                    {
-                        using MemoryStream stream = new MemoryStream();
-                        using XmlWriter writer = XmlWriter.Create(stream);
-                        WriteInternal(writer, null, options);
-                        writer.Flush();
-                        return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(StorageError)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        StorageError IPersistableModel<StorageError>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<StorageError>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeStorageError(document.RootElement, options);
-                    }
-                case "X":
-                    return DeserializeStorageError(XElement.Load(data.ToStream()), options);
-                default:
-                    throw new FormatException($"The model {nameof(StorageError)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<StorageError>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -172,14 +47,6 @@ namespace AzureSample.Storage.Tables.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeStorageError(document.RootElement);
-        }
-
-        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
-            return content;
         }
     }
 }

@@ -5,40 +5,21 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class FirewallPolicyFilterRuleCollection : IUtf8JsonSerializable, IJsonModel<FirewallPolicyFilterRuleCollection>
+    public partial class FirewallPolicyFilterRuleCollection : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyFilterRuleCollection>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<FirewallPolicyFilterRuleCollection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyFilterRuleCollection>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(FirewallPolicyFilterRuleCollection)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Action))
             {
                 writer.WritePropertyName("action"u8);
-                writer.WriteObjectValue(Action, options);
+                writer.WriteObjectValue(Action);
             }
             if (Optional.IsCollectionDefined(Rules))
             {
@@ -46,28 +27,27 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Rules)
                 {
-                    writer.WriteObjectValue(item, options);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
-        }
-
-        FirewallPolicyFilterRuleCollection IJsonModel<FirewallPolicyFilterRuleCollection>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyFilterRuleCollection>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            writer.WritePropertyName("ruleCollectionType"u8);
+            writer.WriteStringValue(RuleCollectionType.ToString());
+            if (Optional.IsDefined(Name))
             {
-                throw new FormatException($"The model {nameof(FirewallPolicyFilterRuleCollection)} does not support reading '{format}' format.");
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeFirewallPolicyFilterRuleCollection(document.RootElement, options);
+            if (Optional.IsDefined(Priority))
+            {
+                writer.WritePropertyName("priority"u8);
+                writer.WriteNumberValue(Priority.Value);
+            }
+            writer.WriteEndObject();
         }
 
-        internal static FirewallPolicyFilterRuleCollection DeserializeFirewallPolicyFilterRuleCollection(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static FirewallPolicyFilterRuleCollection DeserializeFirewallPolicyFilterRuleCollection(JsonElement element)
         {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -77,8 +57,6 @@ namespace MgmtMockAndSample.Models
             FirewallPolicyRuleCollectionType ruleCollectionType = default;
             string name = default;
             int? priority = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("action"u8))
@@ -87,7 +65,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    action = FirewallPolicyFilterRuleCollectionAction.DeserializeFirewallPolicyFilterRuleCollectionAction(property.Value, options);
+                    action = FirewallPolicyFilterRuleCollectionAction.DeserializeFirewallPolicyFilterRuleCollectionAction(property.Value);
                     continue;
                 }
                 if (property.NameEquals("rules"u8))
@@ -99,7 +77,7 @@ namespace MgmtMockAndSample.Models
                     List<FirewallPolicyRule> array = new List<FirewallPolicyRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FirewallPolicyRule.DeserializeFirewallPolicyRule(item, options));
+                        array.Add(FirewallPolicyRule.DeserializeFirewallPolicyRule(item));
                     }
                     rules = array;
                     continue;
@@ -123,50 +101,8 @@ namespace MgmtMockAndSample.Models
                     priority = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new FirewallPolicyFilterRuleCollection(
-                ruleCollectionType,
-                name,
-                priority,
-                serializedAdditionalRawData,
-                action,
-                rules ?? new ChangeTrackingList<FirewallPolicyRule>());
+            return new FirewallPolicyFilterRuleCollection(ruleCollectionType, name, priority, action, rules ?? new ChangeTrackingList<FirewallPolicyRule>());
         }
-
-        BinaryData IPersistableModel<FirewallPolicyFilterRuleCollection>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyFilterRuleCollection>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(FirewallPolicyFilterRuleCollection)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        FirewallPolicyFilterRuleCollection IPersistableModel<FirewallPolicyFilterRuleCollection>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyFilterRuleCollection>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeFirewallPolicyFilterRuleCollection(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(FirewallPolicyFilterRuleCollection)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<FirewallPolicyFilterRuleCollection>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

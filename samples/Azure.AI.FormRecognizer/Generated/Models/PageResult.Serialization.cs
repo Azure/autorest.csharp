@@ -5,95 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class PageResult : IUtf8JsonSerializable, IJsonModel<PageResult>
+    public partial class PageResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PageResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<PageResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static PageResult DeserializePageResult(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PageResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(PageResult)} does not support writing '{format}' format.");
-            }
-
-            writer.WritePropertyName("page"u8);
-            writer.WriteNumberValue(Page);
-            if (Optional.IsDefined(ClusterId))
-            {
-                writer.WritePropertyName("clusterId"u8);
-                writer.WriteNumberValue(ClusterId.Value);
-            }
-            if (Optional.IsCollectionDefined(KeyValuePairs))
-            {
-                writer.WritePropertyName("keyValuePairs"u8);
-                writer.WriteStartArray();
-                foreach (var item in KeyValuePairs)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(Tables))
-            {
-                writer.WritePropertyName("tables"u8);
-                writer.WriteStartArray();
-                foreach (var item in Tables)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        PageResult IJsonModel<PageResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PageResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(PageResult)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializePageResult(document.RootElement, options);
-        }
-
-        internal static PageResult DeserializePageResult(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -102,8 +22,6 @@ namespace Azure.AI.FormRecognizer.Models
             int? clusterId = default;
             IReadOnlyList<KeyValuePair> keyValuePairs = default;
             IReadOnlyList<DataTable> tables = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("page"u8))
@@ -129,7 +47,7 @@ namespace Azure.AI.FormRecognizer.Models
                     List<KeyValuePair> array = new List<KeyValuePair>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(KeyValuePair.DeserializeKeyValuePair(item, options));
+                        array.Add(KeyValuePair.DeserializeKeyValuePair(item));
                     }
                     keyValuePairs = array;
                     continue;
@@ -143,50 +61,14 @@ namespace Azure.AI.FormRecognizer.Models
                     List<DataTable> array = new List<DataTable>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DataTable.DeserializeDataTable(item, options));
+                        array.Add(DataTable.DeserializeDataTable(item));
                     }
                     tables = array;
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new PageResult(page, clusterId, keyValuePairs ?? new ChangeTrackingList<KeyValuePair>(), tables ?? new ChangeTrackingList<DataTable>(), serializedAdditionalRawData);
+            return new PageResult(page, clusterId, keyValuePairs ?? new ChangeTrackingList<KeyValuePair>(), tables ?? new ChangeTrackingList<DataTable>());
         }
-
-        BinaryData IPersistableModel<PageResult>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PageResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureAIFormRecognizerContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(PageResult)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        PageResult IPersistableModel<PageResult>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PageResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializePageResult(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(PageResult)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<PageResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -194,14 +76,6 @@ namespace Azure.AI.FormRecognizer.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializePageResult(document.RootElement);
-        }
-
-        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
-            return content;
         }
     }
 }

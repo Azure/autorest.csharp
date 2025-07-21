@@ -1332,7 +1332,7 @@ namespace AzureSample.ResourceManager.Storage
         public virtual AsyncPageable<AzureSampleResourceManagerStoragePrivateLinkResource> GetPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _privateLinkResourcesRestClient.CreateListByStorageAccountRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => AzureSampleResourceManagerStoragePrivateLinkResource.DeserializeAzureSampleResourceManagerStoragePrivateLinkResource(e), _privateLinkResourcesClientDiagnostics, Pipeline, "StorageAccountResource.GetPrivateLinkResources", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, AzureSampleResourceManagerStoragePrivateLinkResource.DeserializeAzureSampleResourceManagerStoragePrivateLinkResource, _privateLinkResourcesClientDiagnostics, Pipeline, "StorageAccountResource.GetPrivateLinkResources", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -1357,7 +1357,7 @@ namespace AzureSample.ResourceManager.Storage
         public virtual Pageable<AzureSampleResourceManagerStoragePrivateLinkResource> GetPrivateLinkResources(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _privateLinkResourcesRestClient.CreateListByStorageAccountRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => AzureSampleResourceManagerStoragePrivateLinkResource.DeserializeAzureSampleResourceManagerStoragePrivateLinkResource(e), _privateLinkResourcesClientDiagnostics, Pipeline, "StorageAccountResource.GetPrivateLinkResources", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, AzureSampleResourceManagerStoragePrivateLinkResource.DeserializeAzureSampleResourceManagerStoragePrivateLinkResource, _privateLinkResourcesClientDiagnostics, Pipeline, "StorageAccountResource.GetPrivateLinkResources", "value", null, cancellationToken);
         }
 
         /// <summary>

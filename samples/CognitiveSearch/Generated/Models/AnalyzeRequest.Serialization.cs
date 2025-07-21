@@ -5,36 +5,16 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
-using Azure;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class AnalyzeRequest : IUtf8JsonSerializable, IJsonModel<AnalyzeRequest>
+    public partial class AnalyzeRequest : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AnalyzeRequest>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<AnalyzeRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AnalyzeRequest>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(AnalyzeRequest)} does not support writing '{format}' format.");
-            }
-
             writer.WritePropertyName("text"u8);
             writer.WriteStringValue(Text);
             if (Optional.IsDefined(Analyzer))
@@ -67,162 +47,14 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        AnalyzeRequest IJsonModel<AnalyzeRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AnalyzeRequest>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(AnalyzeRequest)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeAnalyzeRequest(document.RootElement, options);
-        }
-
-        internal static AnalyzeRequest DeserializeAnalyzeRequest(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
-            if (element.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            string text = default;
-            AnalyzerName? analyzer = default;
-            TokenizerName? tokenizer = default;
-            IList<TokenFilterName> tokenFilters = default;
-            IList<CharFilterName> charFilters = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("text"u8))
-                {
-                    text = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("analyzer"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    analyzer = new AnalyzerName(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("tokenizer"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    tokenizer = new TokenizerName(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("tokenFilters"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    List<TokenFilterName> array = new List<TokenFilterName>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(new TokenFilterName(item.GetString()));
-                    }
-                    tokenFilters = array;
-                    continue;
-                }
-                if (property.NameEquals("charFilters"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    List<CharFilterName> array = new List<CharFilterName>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(new CharFilterName(item.GetString()));
-                    }
-                    charFilters = array;
-                    continue;
-                }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
-            }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new AnalyzeRequest(
-                text,
-                analyzer,
-                tokenizer,
-                tokenFilters ?? new ChangeTrackingList<TokenFilterName>(),
-                charFilters ?? new ChangeTrackingList<CharFilterName>(),
-                serializedAdditionalRawData);
-        }
-
-        BinaryData IPersistableModel<AnalyzeRequest>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AnalyzeRequest>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(AnalyzeRequest)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        AnalyzeRequest IPersistableModel<AnalyzeRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AnalyzeRequest>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeAnalyzeRequest(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(AnalyzeRequest)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<AnalyzeRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
-
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static AnalyzeRequest FromResponse(Response response)
-        {
-            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
-            return DeserializeAnalyzeRequest(document.RootElement);
+            writer.WriteEndObject();
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

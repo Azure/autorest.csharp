@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -14,65 +13,6 @@ namespace MgmtListMethods
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(DescendantInfo))]
-    [ModelReaderWriterBuildable(typeof(DescendantListResult))]
-    [ModelReaderWriterBuildable(typeof(DescendantParentGroupInfo))]
-    [ModelReaderWriterBuildable(typeof(FakeConfigurationListResult))]
-    [ModelReaderWriterBuildable(typeof(FakeConfigurationResource))]
-    [ModelReaderWriterBuildable(typeof(FakeListResult))]
-    [ModelReaderWriterBuildable(typeof(FakeParentListResult))]
-    [ModelReaderWriterBuildable(typeof(FakeParentResource))]
-    [ModelReaderWriterBuildable(typeof(FakeParentWithAncestorListResult))]
-    [ModelReaderWriterBuildable(typeof(FakeParentWithAncestorResource))]
-    [ModelReaderWriterBuildable(typeof(FakeParentWithAncestorWithLocListResult))]
-    [ModelReaderWriterBuildable(typeof(FakeParentWithAncestorWithLocResource))]
-    [ModelReaderWriterBuildable(typeof(FakeParentWithAncestorWithNonResChListResult))]
-    [ModelReaderWriterBuildable(typeof(FakeParentWithAncestorWithNonResChResource))]
-    [ModelReaderWriterBuildable(typeof(FakeParentWithAncestorWithNonResChWithLocListResult))]
-    [ModelReaderWriterBuildable(typeof(FakeParentWithAncestorWithNonResChWithLocResource))]
-    [ModelReaderWriterBuildable(typeof(FakeParentWithNonResChListResult))]
-    [ModelReaderWriterBuildable(typeof(FakeParentWithNonResChResource))]
-    [ModelReaderWriterBuildable(typeof(FakeResource))]
-    [ModelReaderWriterBuildable(typeof(MgmtGroupParentListResult))]
-    [ModelReaderWriterBuildable(typeof(MgmtGroupParentResource))]
-    [ModelReaderWriterBuildable(typeof(MgmtGrpParentWithLocListResult))]
-    [ModelReaderWriterBuildable(typeof(MgmtGrpParentWithLocResource))]
-    [ModelReaderWriterBuildable(typeof(MgmtGrpParentWithNonResChListResult))]
-    [ModelReaderWriterBuildable(typeof(MgmtGrpParentWithNonResChResource))]
-    [ModelReaderWriterBuildable(typeof(MgmtGrpParentWithNonResChWithLocListResult))]
-    [ModelReaderWriterBuildable(typeof(MgmtGrpParentWithNonResChWithLocResource))]
-    [ModelReaderWriterBuildable(typeof(NonResourceChild))]
-    [ModelReaderWriterBuildable(typeof(QuotaBaseProperties))]
-    [ModelReaderWriterBuildable(typeof(QuotaUpdateContent))]
-    [ModelReaderWriterBuildable(typeof(ResGrpParentResource))]
-    [ModelReaderWriterBuildable(typeof(ResGrpParentWithAncestorResource))]
-    [ModelReaderWriterBuildable(typeof(ResGrpParentWithAncestorWithLocListResult))]
-    [ModelReaderWriterBuildable(typeof(ResGrpParentWithAncestorWithLocResource))]
-    [ModelReaderWriterBuildable(typeof(ResGrpParentWithAncestorWithNonResChListResult))]
-    [ModelReaderWriterBuildable(typeof(ResGrpParentWithAncestorWithNonResChResource))]
-    [ModelReaderWriterBuildable(typeof(ResGrpParentWithAncestorWithNonResChWithLocListResult))]
-    [ModelReaderWriterBuildable(typeof(ResGrpParentWithAncestorWithNonResChWithLocResource))]
-    [ModelReaderWriterBuildable(typeof(ResGrpParentWithNonResChListResult))]
-    [ModelReaderWriterBuildable(typeof(ResGrpParentWithNonResChResource))]
-    [ModelReaderWriterBuildable(typeof(SubParentListResult))]
-    [ModelReaderWriterBuildable(typeof(SubParentResource))]
-    [ModelReaderWriterBuildable(typeof(SubParentWithLocListResult))]
-    [ModelReaderWriterBuildable(typeof(SubParentWithLocResource))]
-    [ModelReaderWriterBuildable(typeof(SubParentWithNonResChListResult))]
-    [ModelReaderWriterBuildable(typeof(SubParentWithNonResChResource))]
-    [ModelReaderWriterBuildable(typeof(SubParentWithNonResChWithLocListResult))]
-    [ModelReaderWriterBuildable(typeof(SubParentWithNonResChWithLocResource))]
-    [ModelReaderWriterBuildable(typeof(TenantParentListResult))]
-    [ModelReaderWriterBuildable(typeof(TenantParentResource))]
-    [ModelReaderWriterBuildable(typeof(TenantParentWithLocListResult))]
-    [ModelReaderWriterBuildable(typeof(TenantParentWithLocResource))]
-    [ModelReaderWriterBuildable(typeof(TenantParentWithNonResChListResult))]
-    [ModelReaderWriterBuildable(typeof(TenantParentWithNonResChResource))]
-    [ModelReaderWriterBuildable(typeof(TenantParentWithNonResChWithLocListResult))]
-    [ModelReaderWriterBuildable(typeof(TenantParentWithNonResChWithLocResource))]
-    [ModelReaderWriterBuildable(typeof(TenantTestListResult))]
-    [ModelReaderWriterBuildable(typeof(TenantTestResource))]
-    [ModelReaderWriterBuildable(typeof(UpdateWorkspaceQuotas))]
     public partial class MgmtListMethodsContext : ModelReaderWriterContext
     {
     }

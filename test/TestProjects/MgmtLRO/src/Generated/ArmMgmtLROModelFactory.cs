@@ -36,8 +36,7 @@ namespace MgmtLRO.Models
                 systemData,
                 tags,
                 location,
-                properties,
-                serializedAdditionalRawData: null);
+                properties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FakePostResult"/>. </summary>
@@ -45,7 +44,7 @@ namespace MgmtLRO.Models
         /// <returns> A new <see cref="Models.FakePostResult"/> instance for mocking. </returns>
         public static FakePostResult FakePostResult(string fakePostResultBar = null)
         {
-            return new FakePostResult(fakePostResultBar != null ? new FakePostResultProperties(fakePostResultBar, serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
+            return new FakePostResult(fakePostResultBar != null ? new FakePostResultProperties(fakePostResultBar) : null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtLRO.BarData"/>. </summary>
@@ -68,8 +67,7 @@ namespace MgmtLRO.Models
                 systemData,
                 tags,
                 location,
-                barBuzz != null ? new BarProperties(barBuzz, serializedAdditionalRawData: null) : null,
-                serializedAdditionalRawData: null);
+                barBuzz != null ? new BarProperties(barBuzz) : null);
         }
     }
 }

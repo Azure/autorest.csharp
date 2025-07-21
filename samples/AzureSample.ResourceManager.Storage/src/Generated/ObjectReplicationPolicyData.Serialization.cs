@@ -16,40 +16,13 @@ using AzureSample.ResourceManager.Storage.Models;
 
 namespace AzureSample.ResourceManager.Storage
 {
-    public partial class ObjectReplicationPolicyData : IUtf8JsonSerializable, IJsonModel<ObjectReplicationPolicyData>
+    public partial class ObjectReplicationPolicyData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ObjectReplicationPolicyData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<ObjectReplicationPolicyData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ObjectReplicationPolicyData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ObjectReplicationPolicyData)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(PolicyId))
-            {
-                writer.WritePropertyName("policyId"u8);
-                writer.WriteStringValue(PolicyId);
-            }
-            if (options.Format != "W" && Optional.IsDefined(EnabledOn))
-            {
-                writer.WritePropertyName("enabledTime"u8);
-                writer.WriteStringValue(EnabledOn.Value, "O");
-            }
             if (Optional.IsDefined(SourceAccount))
             {
                 writer.WritePropertyName("sourceAccount"u8);
@@ -66,29 +39,16 @@ namespace AzureSample.ResourceManager.Storage
                 writer.WriteStartArray();
                 foreach (var item in Rules)
                 {
-                    writer.WriteObjectValue(item, options);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
+            writer.WriteEndObject();
         }
 
-        ObjectReplicationPolicyData IJsonModel<ObjectReplicationPolicyData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static ObjectReplicationPolicyData DeserializeObjectReplicationPolicyData(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ObjectReplicationPolicyData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ObjectReplicationPolicyData)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeObjectReplicationPolicyData(document.RootElement, options);
-        }
-
-        internal static ObjectReplicationPolicyData DeserializeObjectReplicationPolicyData(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -102,8 +62,6 @@ namespace AzureSample.ResourceManager.Storage
             string sourceAccount = default;
             string destinationAccount = default;
             IList<ObjectReplicationPolicyRule> rules = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -127,7 +85,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -172,7 +130,7 @@ namespace AzureSample.ResourceManager.Storage
                             List<ObjectReplicationPolicyRule> array = new List<ObjectReplicationPolicyRule>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ObjectReplicationPolicyRule.DeserializeObjectReplicationPolicyRule(item, options));
+                                array.Add(ObjectReplicationPolicyRule.DeserializeObjectReplicationPolicyRule(item));
                             }
                             rules = array;
                             continue;
@@ -180,12 +138,7 @@ namespace AzureSample.ResourceManager.Storage
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new ObjectReplicationPolicyData(
                 id,
                 name,
@@ -195,39 +148,7 @@ namespace AzureSample.ResourceManager.Storage
                 enabledTime,
                 sourceAccount,
                 destinationAccount,
-                rules ?? new ChangeTrackingList<ObjectReplicationPolicyRule>(),
-                serializedAdditionalRawData);
+                rules ?? new ChangeTrackingList<ObjectReplicationPolicyRule>());
         }
-
-        BinaryData IPersistableModel<ObjectReplicationPolicyData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ObjectReplicationPolicyData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerStorageContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(ObjectReplicationPolicyData)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        ObjectReplicationPolicyData IPersistableModel<ObjectReplicationPolicyData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ObjectReplicationPolicyData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeObjectReplicationPolicyData(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(ObjectReplicationPolicyData)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ObjectReplicationPolicyData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

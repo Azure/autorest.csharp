@@ -5,107 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class AnalyzeResult : IUtf8JsonSerializable, IJsonModel<AnalyzeResult>
+    public partial class AnalyzeResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AnalyzeResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<AnalyzeResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AnalyzeResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(AnalyzeResult)} does not support writing '{format}' format.");
-            }
-
-            writer.WritePropertyName("version"u8);
-            writer.WriteStringValue(Version);
-            writer.WritePropertyName("readResults"u8);
-            writer.WriteStartArray();
-            foreach (var item in ReadResults)
-            {
-                writer.WriteObjectValue(item, options);
-            }
-            writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(PageResults))
-            {
-                writer.WritePropertyName("pageResults"u8);
-                writer.WriteStartArray();
-                foreach (var item in PageResults)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(DocumentResults))
-            {
-                writer.WritePropertyName("documentResults"u8);
-                writer.WriteStartArray();
-                foreach (var item in DocumentResults)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(Errors))
-            {
-                writer.WritePropertyName("errors"u8);
-                writer.WriteStartArray();
-                foreach (var item in Errors)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        AnalyzeResult IJsonModel<AnalyzeResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AnalyzeResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(AnalyzeResult)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeAnalyzeResult(document.RootElement, options);
-        }
-
-        internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -115,8 +23,6 @@ namespace Azure.AI.FormRecognizer.Models
             IReadOnlyList<PageResult> pageResults = default;
             IReadOnlyList<DocumentResult> documentResults = default;
             IReadOnlyList<ErrorInformation> errors = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("version"u8))
@@ -129,7 +35,7 @@ namespace Azure.AI.FormRecognizer.Models
                     List<ReadResult> array = new List<ReadResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ReadResult.DeserializeReadResult(item, options));
+                        array.Add(ReadResult.DeserializeReadResult(item));
                     }
                     readResults = array;
                     continue;
@@ -143,7 +49,7 @@ namespace Azure.AI.FormRecognizer.Models
                     List<PageResult> array = new List<PageResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PageResult.DeserializePageResult(item, options));
+                        array.Add(PageResult.DeserializePageResult(item));
                     }
                     pageResults = array;
                     continue;
@@ -157,7 +63,7 @@ namespace Azure.AI.FormRecognizer.Models
                     List<DocumentResult> array = new List<DocumentResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DocumentResult.DeserializeDocumentResult(item, options));
+                        array.Add(DocumentResult.DeserializeDocumentResult(item));
                     }
                     documentResults = array;
                     continue;
@@ -171,56 +77,14 @@ namespace Azure.AI.FormRecognizer.Models
                     List<ErrorInformation> array = new List<ErrorInformation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ErrorInformation.DeserializeErrorInformation(item, options));
+                        array.Add(ErrorInformation.DeserializeErrorInformation(item));
                     }
                     errors = array;
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new AnalyzeResult(
-                version,
-                readResults,
-                pageResults ?? new ChangeTrackingList<PageResult>(),
-                documentResults ?? new ChangeTrackingList<DocumentResult>(),
-                errors ?? new ChangeTrackingList<ErrorInformation>(),
-                serializedAdditionalRawData);
+            return new AnalyzeResult(version, readResults, pageResults ?? new ChangeTrackingList<PageResult>(), documentResults ?? new ChangeTrackingList<DocumentResult>(), errors ?? new ChangeTrackingList<ErrorInformation>());
         }
-
-        BinaryData IPersistableModel<AnalyzeResult>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AnalyzeResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureAIFormRecognizerContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(AnalyzeResult)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        AnalyzeResult IPersistableModel<AnalyzeResult>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AnalyzeResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeAnalyzeResult(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(AnalyzeResult)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<AnalyzeResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -228,14 +92,6 @@ namespace Azure.AI.FormRecognizer.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeAnalyzeResult(document.RootElement);
-        }
-
-        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
-            return content;
         }
     }
 }

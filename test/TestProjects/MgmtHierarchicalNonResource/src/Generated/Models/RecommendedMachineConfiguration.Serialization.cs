@@ -5,86 +5,20 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    public partial class RecommendedMachineConfiguration : IUtf8JsonSerializable, IJsonModel<RecommendedMachineConfiguration>
+    public partial class RecommendedMachineConfiguration
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RecommendedMachineConfiguration>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<RecommendedMachineConfiguration>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static RecommendedMachineConfiguration DeserializeRecommendedMachineConfiguration(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RecommendedMachineConfiguration>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(RecommendedMachineConfiguration)} does not support writing '{format}' format.");
-            }
-
-            if (Optional.IsDefined(VCpus))
-            {
-                writer.WritePropertyName("vCPUs"u8);
-                writer.WriteObjectValue(VCpus, options);
-            }
-            if (Optional.IsDefined(Memory))
-            {
-                writer.WritePropertyName("memory"u8);
-                writer.WriteObjectValue(Memory, options);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        RecommendedMachineConfiguration IJsonModel<RecommendedMachineConfiguration>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RecommendedMachineConfiguration>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(RecommendedMachineConfiguration)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeRecommendedMachineConfiguration(document.RootElement, options);
-        }
-
-        internal static RecommendedMachineConfiguration DeserializeRecommendedMachineConfiguration(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             ResourceRange vCpus = default;
             ResourceRange memory = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("vCPUs"u8))
@@ -93,7 +27,7 @@ namespace MgmtHierarchicalNonResource.Models
                     {
                         continue;
                     }
-                    vCpus = ResourceRange.DeserializeResourceRange(property.Value, options);
+                    vCpus = ResourceRange.DeserializeResourceRange(property.Value);
                     continue;
                 }
                 if (property.NameEquals("memory"u8))
@@ -102,47 +36,11 @@ namespace MgmtHierarchicalNonResource.Models
                     {
                         continue;
                     }
-                    memory = ResourceRange.DeserializeResourceRange(property.Value, options);
+                    memory = ResourceRange.DeserializeResourceRange(property.Value);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new RecommendedMachineConfiguration(vCpus, memory, serializedAdditionalRawData);
+            return new RecommendedMachineConfiguration(vCpus, memory);
         }
-
-        BinaryData IPersistableModel<RecommendedMachineConfiguration>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RecommendedMachineConfiguration>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtHierarchicalNonResourceContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(RecommendedMachineConfiguration)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        RecommendedMachineConfiguration IPersistableModel<RecommendedMachineConfiguration>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RecommendedMachineConfiguration>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeRecommendedMachineConfiguration(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(RecommendedMachineConfiguration)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<RecommendedMachineConfiguration>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

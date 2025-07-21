@@ -5,18 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace AzureSample.Storage.Tables.Models
 {
-    public partial class Logging : IXmlSerializable, IPersistableModel<Logging>
+    public partial class Logging : IXmlSerializable
     {
-        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "Logging");
             writer.WriteStartElement("Version");
@@ -35,12 +32,8 @@ namespace AzureSample.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, ModelSerializationExtensions.WireOptions);
-
-        internal static Logging DeserializeLogging(XElement element, ModelReaderWriterOptions options = null)
+        internal static Logging DeserializeLogging(XElement element)
         {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             string version = default;
             bool delete = default;
             bool read = default;
@@ -66,47 +59,7 @@ namespace AzureSample.Storage.Tables.Models
             {
                 retentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicyElement);
             }
-            return new Logging(
-                version,
-                delete,
-                read,
-                write,
-                retentionPolicy,
-                serializedAdditionalRawData: null);
+            return new Logging(version, delete, read, write, retentionPolicy);
         }
-
-        BinaryData IPersistableModel<Logging>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Logging>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    {
-                        using MemoryStream stream = new MemoryStream();
-                        using XmlWriter writer = XmlWriter.Create(stream);
-                        WriteInternal(writer, null, options);
-                        writer.Flush();
-                        return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(Logging)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        Logging IPersistableModel<Logging>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Logging>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    return DeserializeLogging(XElement.Load(data.ToStream()), options);
-                default:
-                    throw new FormatException($"The model {nameof(Logging)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<Logging>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

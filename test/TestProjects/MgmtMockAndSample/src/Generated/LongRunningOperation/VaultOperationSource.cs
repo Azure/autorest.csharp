@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,14 +25,16 @@ namespace MgmtMockAndSample
 
         VaultResource IOperationSource<VaultResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<VaultData>(response.Content, ModelReaderWriterOptions.Json, MgmtMockAndSampleContext.Default);
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
+            var data = VaultData.DeserializeVaultData(document.RootElement);
             return new VaultResource(_client, data);
         }
 
         async ValueTask<VaultResource> IOperationSource<VaultResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<VaultData>(response.Content, ModelReaderWriterOptions.Json, MgmtMockAndSampleContext.Default);
-            return await Task.FromResult(new VaultResource(_client, data)).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
+            var data = VaultData.DeserializeVaultData(document.RootElement);
+            return new VaultResource(_client, data);
         }
     }
 }

@@ -5,18 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace AzureSample.Storage.Tables.Models
 {
-    public partial class Metrics : IXmlSerializable, IPersistableModel<Metrics>
+    public partial class Metrics : IXmlSerializable
     {
-        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "Metrics");
             if (Optional.IsDefined(Version))
@@ -41,12 +38,8 @@ namespace AzureSample.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, ModelSerializationExtensions.WireOptions);
-
-        internal static Metrics DeserializeMetrics(XElement element, ModelReaderWriterOptions options = null)
+        internal static Metrics DeserializeMetrics(XElement element)
         {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             string version = default;
             bool enabled = default;
             bool? includeAPIs = default;
@@ -67,41 +60,7 @@ namespace AzureSample.Storage.Tables.Models
             {
                 retentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicyElement);
             }
-            return new Metrics(version, enabled, includeAPIs, retentionPolicy, serializedAdditionalRawData: null);
+            return new Metrics(version, enabled, includeAPIs, retentionPolicy);
         }
-
-        BinaryData IPersistableModel<Metrics>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Metrics>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    {
-                        using MemoryStream stream = new MemoryStream();
-                        using XmlWriter writer = XmlWriter.Create(stream);
-                        WriteInternal(writer, null, options);
-                        writer.Flush();
-                        return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(Metrics)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        Metrics IPersistableModel<Metrics>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Metrics>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    return DeserializeMetrics(XElement.Load(data.ToStream()), options);
-                default:
-                    throw new FormatException($"The model {nameof(Metrics)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<Metrics>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

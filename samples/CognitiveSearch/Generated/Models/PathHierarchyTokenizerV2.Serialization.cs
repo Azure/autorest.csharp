@@ -5,37 +5,17 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class PathHierarchyTokenizerV2 : IUtf8JsonSerializable, IJsonModel<PathHierarchyTokenizerV2>
+    public partial class PathHierarchyTokenizerV2 : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PathHierarchyTokenizerV2>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<PathHierarchyTokenizerV2>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PathHierarchyTokenizerV2>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(PathHierarchyTokenizerV2)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(Delimiter))
             {
                 writer.WritePropertyName("delimiter"u8);
@@ -61,24 +41,15 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("skip"u8);
                 writer.WriteNumberValue(NumberOfTokensToSkip.Value);
             }
+            writer.WritePropertyName("@odata.type"u8);
+            writer.WriteStringValue(OdataType);
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            writer.WriteEndObject();
         }
 
-        PathHierarchyTokenizerV2 IJsonModel<PathHierarchyTokenizerV2>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static PathHierarchyTokenizerV2 DeserializePathHierarchyTokenizerV2(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PathHierarchyTokenizerV2>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(PathHierarchyTokenizerV2)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializePathHierarchyTokenizerV2(document.RootElement, options);
-        }
-
-        internal static PathHierarchyTokenizerV2 DeserializePathHierarchyTokenizerV2(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -90,8 +61,6 @@ namespace CognitiveSearch.Models
             int? skip = default;
             string odataType = default;
             string name = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("delimiter"u8))
@@ -149,53 +118,16 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new PathHierarchyTokenizerV2(
                 odataType,
                 name,
-                serializedAdditionalRawData,
                 delimiter,
                 replacement,
                 maxTokenLength,
                 reverse,
                 skip);
         }
-
-        BinaryData IPersistableModel<PathHierarchyTokenizerV2>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PathHierarchyTokenizerV2>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(PathHierarchyTokenizerV2)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        PathHierarchyTokenizerV2 IPersistableModel<PathHierarchyTokenizerV2>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PathHierarchyTokenizerV2>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializePathHierarchyTokenizerV2(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(PathHierarchyTokenizerV2)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<PathHierarchyTokenizerV2>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -209,7 +141,7 @@ namespace CognitiveSearch.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

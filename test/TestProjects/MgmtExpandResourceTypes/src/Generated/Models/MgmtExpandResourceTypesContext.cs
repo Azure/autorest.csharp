@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
-using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
@@ -14,34 +13,6 @@ namespace MgmtExpandResourceTypes
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(AaaaRecord))]
-    [ModelReaderWriterBuildable(typeof(ARecord))]
-    [ModelReaderWriterBuildable(typeof(CaaRecord))]
-    [ModelReaderWriterBuildable(typeof(CloudError))]
-    [ModelReaderWriterBuildable(typeof(DnsResourceReference))]
-    [ModelReaderWriterBuildable(typeof(DnsResourceReferenceContent))]
-    [ModelReaderWriterBuildable(typeof(DnsResourceReferenceResult))]
-    [ModelReaderWriterBuildable(typeof(MxRecord))]
-    [ModelReaderWriterBuildable(typeof(NsRecord))]
-    [ModelReaderWriterBuildable(typeof(PtrRecord))]
-    [ModelReaderWriterBuildable(typeof(RecordSetAaaaResource))]
-    [ModelReaderWriterBuildable(typeof(RecordSetAResource))]
-    [ModelReaderWriterBuildable(typeof(RecordSetCaaResource))]
-    [ModelReaderWriterBuildable(typeof(RecordSetCNameResource))]
-    [ModelReaderWriterBuildable(typeof(RecordSetListResult))]
-    [ModelReaderWriterBuildable(typeof(RecordSetMxResource))]
-    [ModelReaderWriterBuildable(typeof(RecordSetNsResource))]
-    [ModelReaderWriterBuildable(typeof(RecordSetPtrResource))]
-    [ModelReaderWriterBuildable(typeof(RecordSetSoaResource))]
-    [ModelReaderWriterBuildable(typeof(RecordSetSrvResource))]
-    [ModelReaderWriterBuildable(typeof(RecordSetTxtResource))]
-    [ModelReaderWriterBuildable(typeof(RecordSetUpdateParameters))]
-    [ModelReaderWriterBuildable(typeof(SoaRecord))]
-    [ModelReaderWriterBuildable(typeof(SrvRecord))]
-    [ModelReaderWriterBuildable(typeof(TxtRecord))]
-    [ModelReaderWriterBuildable(typeof(ZoneListResult))]
-    [ModelReaderWriterBuildable(typeof(ZonePatch))]
-    [ModelReaderWriterBuildable(typeof(ZoneResource))]
     public partial class MgmtExpandResourceTypesContext : ModelReaderWriterContext
     {
     }

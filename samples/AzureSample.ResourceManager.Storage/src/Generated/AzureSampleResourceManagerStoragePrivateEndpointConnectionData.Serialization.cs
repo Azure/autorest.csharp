@@ -7,7 +7,6 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -17,64 +16,29 @@ using AzureSample.ResourceManager.Storage.Models;
 
 namespace AzureSample.ResourceManager.Storage
 {
-    public partial class AzureSampleResourceManagerStoragePrivateEndpointConnectionData : IUtf8JsonSerializable, IJsonModel<AzureSampleResourceManagerStoragePrivateEndpointConnectionData>
+    public partial class AzureSampleResourceManagerStoragePrivateEndpointConnectionData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AzureSampleResourceManagerStoragePrivateEndpointConnectionData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<AzureSampleResourceManagerStoragePrivateEndpointConnectionData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AzureSampleResourceManagerStoragePrivateEndpointConnectionData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(AzureSampleResourceManagerStoragePrivateEndpointConnectionData)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(PrivateEndpoint))
             {
                 writer.WritePropertyName("privateEndpoint"u8);
-                ((IJsonModel<SubResource>)PrivateEndpoint).Write(writer, options);
+                ((IJsonModel<SubResource>)PrivateEndpoint).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(ConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                writer.WriteObjectValue(ConnectionState, options);
+                writer.WriteObjectValue(ConnectionState);
             }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState"u8);
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
-            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        AzureSampleResourceManagerStoragePrivateEndpointConnectionData IJsonModel<AzureSampleResourceManagerStoragePrivateEndpointConnectionData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static AzureSampleResourceManagerStoragePrivateEndpointConnectionData DeserializeAzureSampleResourceManagerStoragePrivateEndpointConnectionData(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<AzureSampleResourceManagerStoragePrivateEndpointConnectionData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(AzureSampleResourceManagerStoragePrivateEndpointConnectionData)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeAzureSampleResourceManagerStoragePrivateEndpointConnectionData(document.RootElement, options);
-        }
-
-        internal static AzureSampleResourceManagerStoragePrivateEndpointConnectionData DeserializeAzureSampleResourceManagerStoragePrivateEndpointConnectionData(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -86,8 +50,6 @@ namespace AzureSample.ResourceManager.Storage
             SubResource privateEndpoint = default;
             AzureSampleResourceManagerStoragePrivateLinkServiceConnectionState privateLinkServiceConnectionState = default;
             AzureSampleResourceManagerStoragePrivateEndpointConnectionProvisioningState? provisioningState = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -111,7 +73,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -129,7 +91,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            privateEndpoint = ModelReaderWriter.Read<SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), options, AzureSampleResourceManagerStorageContext.Default);
+                            privateEndpoint = ModelReaderWriter.Read<SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnectionState"u8))
@@ -138,7 +100,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            privateLinkServiceConnectionState = AzureSampleResourceManagerStoragePrivateLinkServiceConnectionState.DeserializeAzureSampleResourceManagerStoragePrivateLinkServiceConnectionState(property0.Value, options);
+                            privateLinkServiceConnectionState = AzureSampleResourceManagerStoragePrivateLinkServiceConnectionState.DeserializeAzureSampleResourceManagerStoragePrivateLinkServiceConnectionState(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))
@@ -153,12 +115,7 @@ namespace AzureSample.ResourceManager.Storage
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new AzureSampleResourceManagerStoragePrivateEndpointConnectionData(
                 id,
                 name,
@@ -166,39 +123,7 @@ namespace AzureSample.ResourceManager.Storage
                 systemData,
                 privateEndpoint,
                 privateLinkServiceConnectionState,
-                provisioningState,
-                serializedAdditionalRawData);
+                provisioningState);
         }
-
-        BinaryData IPersistableModel<AzureSampleResourceManagerStoragePrivateEndpointConnectionData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AzureSampleResourceManagerStoragePrivateEndpointConnectionData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerStorageContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(AzureSampleResourceManagerStoragePrivateEndpointConnectionData)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        AzureSampleResourceManagerStoragePrivateEndpointConnectionData IPersistableModel<AzureSampleResourceManagerStoragePrivateEndpointConnectionData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AzureSampleResourceManagerStoragePrivateEndpointConnectionData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeAzureSampleResourceManagerStoragePrivateEndpointConnectionData(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(AzureSampleResourceManagerStoragePrivateEndpointConnectionData)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<AzureSampleResourceManagerStoragePrivateEndpointConnectionData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

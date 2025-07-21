@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
-using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
@@ -14,24 +13,6 @@ namespace MgmtMultipleParentResource
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(AnotherParentChildResource))]
-    [ModelReaderWriterBuildable(typeof(AnotherParentPatch))]
-    [ModelReaderWriterBuildable(typeof(AnotherParentResource))]
-    [ModelReaderWriterBuildable(typeof(AnotherParentsListResult))]
-    [ModelReaderWriterBuildable(typeof(ApiError))]
-    [ModelReaderWriterBuildable(typeof(ApiErrorBase))]
-    [ModelReaderWriterBuildable(typeof(ChildBodiesListResult))]
-    [ModelReaderWriterBuildable(typeof(ChildBodyUpdate))]
-    [ModelReaderWriterBuildable(typeof(CloudError))]
-    [ModelReaderWriterBuildable(typeof(InnerError))]
-    [ModelReaderWriterBuildable(typeof(SubParentPatch))]
-    [ModelReaderWriterBuildable(typeof(SubParentResource))]
-    [ModelReaderWriterBuildable(typeof(SubParentsListResult))]
-    [ModelReaderWriterBuildable(typeof(TheParentPatch))]
-    [ModelReaderWriterBuildable(typeof(TheParentResource))]
-    [ModelReaderWriterBuildable(typeof(TheParentsListResult))]
-    [ModelReaderWriterBuildable(typeof(TheParentSubParentChildResource))]
-    [ModelReaderWriterBuildable(typeof(UpdateResource))]
     public partial class MgmtMultipleParentResourceContext : ModelReaderWriterContext
     {
     }

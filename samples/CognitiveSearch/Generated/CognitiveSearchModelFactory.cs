@@ -33,8 +33,7 @@ namespace CognitiveSearch.Models
                 facets,
                 nextPageParameters,
                 results?.ToList(),
-                nextLink,
-                serializedAdditionalRawData: null);
+                nextLink);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FacetResult"/>. </summary>
@@ -69,7 +68,7 @@ namespace CognitiveSearch.Models
         {
             results ??= new List<SuggestResult>();
 
-            return new SuggestDocumentsResult(results?.ToList(), coverage, serializedAdditionalRawData: null);
+            return new SuggestDocumentsResult(results?.ToList(), coverage);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SuggestResult"/>. </summary>
@@ -83,36 +82,6 @@ namespace CognitiveSearch.Models
             return new SuggestResult(text, additionalProperties);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.SuggestRequest"/>. </summary>
-        /// <param name="filter"> An OData expression that filters the documents considered for suggestions. </param>
-        /// <param name="useFuzzyMatching"> A value indicating whether to use fuzzy matching for the suggestion query. Default is false. When set to true, the query will find suggestions even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestion searches are slower and consume more resources. </param>
-        /// <param name="highlightPostTag"> A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting of suggestions is disabled. </param>
-        /// <param name="highlightPreTag"> A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting of suggestions is disabled. </param>
-        /// <param name="minimumCoverage"> A number between 0 and 100 indicating the percentage of the index that must be covered by a suggestion query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80. </param>
-        /// <param name="orderBy"> The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. </param>
-        /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
-        /// <param name="searchFields"> The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester. </param>
-        /// <param name="select"> The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results. </param>
-        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
-        /// <param name="top"> The number of suggestions to retrieve. This must be a value between 1 and 100. The default is 5. </param>
-        /// <returns> A new <see cref="Models.SuggestRequest"/> instance for mocking. </returns>
-        public static SuggestRequest SuggestRequest(string filter = null, bool? useFuzzyMatching = null, string highlightPostTag = null, string highlightPreTag = null, double? minimumCoverage = null, string orderBy = null, string searchText = null, string searchFields = null, string select = null, string suggesterName = null, int? top = null)
-        {
-            return new SuggestRequest(
-                filter,
-                useFuzzyMatching,
-                highlightPostTag,
-                highlightPreTag,
-                minimumCoverage,
-                orderBy,
-                searchText,
-                searchFields,
-                select,
-                suggesterName,
-                top,
-                serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.IndexDocumentsResult"/>. </summary>
         /// <param name="results"> The list of status information for each document in the indexing request. </param>
         /// <returns> A new <see cref="Models.IndexDocumentsResult"/> instance for mocking. </returns>
@@ -120,7 +89,7 @@ namespace CognitiveSearch.Models
         {
             results ??= new List<IndexingResult>();
 
-            return new IndexDocumentsResult(results?.ToList(), serializedAdditionalRawData: null);
+            return new IndexDocumentsResult(results?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IndexingResult"/>. </summary>
@@ -131,7 +100,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.IndexingResult"/> instance for mocking. </returns>
         public static IndexingResult IndexingResult(string key = null, string errorMessage = null, bool succeeded = default, int statusCode = default)
         {
-            return new IndexingResult(key, errorMessage, succeeded, statusCode, serializedAdditionalRawData: null);
+            return new IndexingResult(key, errorMessage, succeeded, statusCode);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AutocompleteResult"/>. </summary>
@@ -142,7 +111,7 @@ namespace CognitiveSearch.Models
         {
             results ??= new List<AutocompleteItem>();
 
-            return new AutocompleteResult(coverage, results?.ToList(), serializedAdditionalRawData: null);
+            return new AutocompleteResult(coverage, results?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AutocompleteItem"/>. </summary>
@@ -151,35 +120,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.AutocompleteItem"/> instance for mocking. </returns>
         public static AutocompleteItem AutocompleteItem(string text = null, string queryPlusText = null)
         {
-            return new AutocompleteItem(text, queryPlusText, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.AutocompleteRequest"/>. </summary>
-        /// <param name="searchText"> The search text on which to base autocomplete results. </param>
-        /// <param name="autocompleteMode"> Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms. </param>
-        /// <param name="filter"> An OData expression that filters the documents used to produce completed terms for the Autocomplete result. </param>
-        /// <param name="useFuzzyMatching"> A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will autocomplete terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources. </param>
-        /// <param name="highlightPostTag"> A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting is disabled. </param>
-        /// <param name="highlightPreTag"> A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting is disabled. </param>
-        /// <param name="minimumCoverage"> A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80. </param>
-        /// <param name="searchFields"> The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. </param>
-        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
-        /// <param name="top"> The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5. </param>
-        /// <returns> A new <see cref="Models.AutocompleteRequest"/> instance for mocking. </returns>
-        public static AutocompleteRequest AutocompleteRequest(string searchText = null, AutocompleteMode? autocompleteMode = null, string filter = null, bool? useFuzzyMatching = null, string highlightPostTag = null, string highlightPreTag = null, double? minimumCoverage = null, string searchFields = null, string suggesterName = null, int? top = null)
-        {
-            return new AutocompleteRequest(
-                searchText,
-                autocompleteMode,
-                filter,
-                useFuzzyMatching,
-                highlightPostTag,
-                highlightPreTag,
-                minimumCoverage,
-                searchFields,
-                suggesterName,
-                top,
-                serializedAdditionalRawData: null);
+            return new AutocompleteItem(text, queryPlusText);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListDataSourcesResult"/>. </summary>
@@ -189,7 +130,7 @@ namespace CognitiveSearch.Models
         {
             dataSources ??= new List<DataSource>();
 
-            return new ListDataSourcesResult(dataSources?.ToList(), serializedAdditionalRawData: null);
+            return new ListDataSourcesResult(dataSources?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListIndexersResult"/>. </summary>
@@ -199,7 +140,7 @@ namespace CognitiveSearch.Models
         {
             indexers ??= new List<Indexer>();
 
-            return new ListIndexersResult(indexers?.ToList(), serializedAdditionalRawData: null);
+            return new ListIndexersResult(indexers?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IndexerExecutionInfo"/>. </summary>
@@ -212,7 +153,7 @@ namespace CognitiveSearch.Models
         {
             executionHistory ??= new List<IndexerExecutionResult>();
 
-            return new IndexerExecutionInfo(status, lastResult, executionHistory?.ToList(), limits, serializedAdditionalRawData: null);
+            return new IndexerExecutionInfo(status, lastResult, executionHistory?.ToList(), limits);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IndexerExecutionResult"/>. </summary>
@@ -242,8 +183,7 @@ namespace CognitiveSearch.Models
                 itemCount,
                 failedItemCount,
                 initialTrackingState,
-                finalTrackingState,
-                serializedAdditionalRawData: null);
+                finalTrackingState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ItemError"/>. </summary>
@@ -262,8 +202,7 @@ namespace CognitiveSearch.Models
                 statusCode,
                 name,
                 details,
-                documentationLink,
-                serializedAdditionalRawData: null);
+                documentationLink);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ItemWarning"/>. </summary>
@@ -275,13 +214,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.ItemWarning"/> instance for mocking. </returns>
         public static ItemWarning ItemWarning(string key = null, string message = null, string name = null, string details = null, string documentationLink = null)
         {
-            return new ItemWarning(
-                key,
-                message,
-                name,
-                details,
-                documentationLink,
-                serializedAdditionalRawData: null);
+            return new ItemWarning(key, message, name, details, documentationLink);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IndexerLimits"/>. </summary>
@@ -291,7 +224,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.IndexerLimits"/> instance for mocking. </returns>
         public static IndexerLimits IndexerLimits(TimeSpan? maxRunTime = null, long? maxDocumentExtractionSize = null, long? maxDocumentContentCharactersToExtract = null)
         {
-            return new IndexerLimits(maxRunTime, maxDocumentExtractionSize, maxDocumentContentCharactersToExtract, serializedAdditionalRawData: null);
+            return new IndexerLimits(maxRunTime, maxDocumentExtractionSize, maxDocumentContentCharactersToExtract);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListSkillsetsResult"/>. </summary>
@@ -301,7 +234,7 @@ namespace CognitiveSearch.Models
         {
             skillsets ??= new List<Skillset>();
 
-            return new ListSkillsetsResult(skillsets?.ToList(), serializedAdditionalRawData: null);
+            return new ListSkillsetsResult(skillsets?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SynonymMap"/>. </summary>
@@ -313,13 +246,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.SynonymMap"/> instance for mocking. </returns>
         public static SynonymMap SynonymMap(string name = null, SynonymMapFormat format = default, string synonyms = null, EncryptionKey encryptionKey = null, string eTag = null)
         {
-            return new SynonymMap(
-                name,
-                format,
-                synonyms,
-                encryptionKey,
-                eTag,
-                serializedAdditionalRawData: null);
+            return new SynonymMap(name, format, synonyms, encryptionKey, eTag);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListSynonymMapsResult"/>. </summary>
@@ -329,7 +256,7 @@ namespace CognitiveSearch.Models
         {
             synonymMaps ??= new List<SynonymMap>();
 
-            return new ListSynonymMapsResult(synonymMaps?.ToList(), serializedAdditionalRawData: null);
+            return new ListSynonymMapsResult(synonymMaps?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListIndexesResult"/>. </summary>
@@ -339,7 +266,7 @@ namespace CognitiveSearch.Models
         {
             indexes ??= new List<Index>();
 
-            return new ListIndexesResult(indexes?.ToList(), serializedAdditionalRawData: null);
+            return new ListIndexesResult(indexes?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GetIndexStatisticsResult"/>. </summary>
@@ -348,28 +275,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.GetIndexStatisticsResult"/> instance for mocking. </returns>
         public static GetIndexStatisticsResult GetIndexStatisticsResult(long documentCount = default, long storageSize = default)
         {
-            return new GetIndexStatisticsResult(documentCount, storageSize, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.AnalyzeRequest"/>. </summary>
-        /// <param name="text"> The text to break into tokens. </param>
-        /// <param name="analyzer"> The name of the analyzer to use to break the given text. If this parameter is not specified, you must specify a tokenizer instead. The tokenizer and analyzer parameters are mutually exclusive. </param>
-        /// <param name="tokenizer"> The name of the tokenizer to use to break the given text. If this parameter is not specified, you must specify an analyzer instead. The tokenizer and analyzer parameters are mutually exclusive. </param>
-        /// <param name="tokenFilters"> An optional list of token filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter. </param>
-        /// <param name="charFilters"> An optional list of character filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter. </param>
-        /// <returns> A new <see cref="Models.AnalyzeRequest"/> instance for mocking. </returns>
-        public static AnalyzeRequest AnalyzeRequest(string text = null, AnalyzerName? analyzer = null, TokenizerName? tokenizer = null, IEnumerable<TokenFilterName> tokenFilters = null, IEnumerable<CharFilterName> charFilters = null)
-        {
-            tokenFilters ??= new List<TokenFilterName>();
-            charFilters ??= new List<CharFilterName>();
-
-            return new AnalyzeRequest(
-                text,
-                analyzer,
-                tokenizer,
-                tokenFilters?.ToList(),
-                charFilters?.ToList(),
-                serializedAdditionalRawData: null);
+            return new GetIndexStatisticsResult(documentCount, storageSize);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AnalyzeResult"/>. </summary>
@@ -379,7 +285,7 @@ namespace CognitiveSearch.Models
         {
             tokens ??= new List<TokenInfo>();
 
-            return new AnalyzeResult(tokens?.ToList(), serializedAdditionalRawData: null);
+            return new AnalyzeResult(tokens?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TokenInfo"/>. </summary>
@@ -390,16 +296,26 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.TokenInfo"/> instance for mocking. </returns>
         public static TokenInfo TokenInfo(string token = null, int startOffset = default, int endOffset = default, int position = default)
         {
-            return new TokenInfo(token, startOffset, endOffset, position, serializedAdditionalRawData: null);
+            return new TokenInfo(token, startOffset, endOffset, position);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ServiceStatistics"/>. </summary>
         /// <param name="counters"> Service level resource counters. </param>
         /// <param name="limits"> Service level general limits. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="counters"/> or <paramref name="limits"/> is null. </exception>
         /// <returns> A new <see cref="Models.ServiceStatistics"/> instance for mocking. </returns>
         public static ServiceStatistics ServiceStatistics(ServiceCounters counters = null, ServiceLimits limits = null)
         {
-            return new ServiceStatistics(counters, limits, serializedAdditionalRawData: null);
+            if (counters == null)
+            {
+                throw new ArgumentNullException(nameof(counters));
+            }
+            if (limits == null)
+            {
+                throw new ArgumentNullException(nameof(limits));
+            }
+
+            return new ServiceStatistics(counters, limits);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ServiceCounters"/>. </summary>
@@ -410,9 +326,39 @@ namespace CognitiveSearch.Models
         /// <param name="storageSizeCounter"> Total size of used storage in bytes. </param>
         /// <param name="synonymMapCounter"> Total number of synonym maps. </param>
         /// <param name="skillsetCounter"> Total number of skillsets. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="documentCounter"/>, <paramref name="indexCounter"/>, <paramref name="indexerCounter"/>, <paramref name="dataSourceCounter"/>, <paramref name="storageSizeCounter"/>, <paramref name="synonymMapCounter"/> or <paramref name="skillsetCounter"/> is null. </exception>
         /// <returns> A new <see cref="Models.ServiceCounters"/> instance for mocking. </returns>
         public static ServiceCounters ServiceCounters(ResourceCounter documentCounter = null, ResourceCounter indexCounter = null, ResourceCounter indexerCounter = null, ResourceCounter dataSourceCounter = null, ResourceCounter storageSizeCounter = null, ResourceCounter synonymMapCounter = null, ResourceCounter skillsetCounter = null)
         {
+            if (documentCounter == null)
+            {
+                throw new ArgumentNullException(nameof(documentCounter));
+            }
+            if (indexCounter == null)
+            {
+                throw new ArgumentNullException(nameof(indexCounter));
+            }
+            if (indexerCounter == null)
+            {
+                throw new ArgumentNullException(nameof(indexerCounter));
+            }
+            if (dataSourceCounter == null)
+            {
+                throw new ArgumentNullException(nameof(dataSourceCounter));
+            }
+            if (storageSizeCounter == null)
+            {
+                throw new ArgumentNullException(nameof(storageSizeCounter));
+            }
+            if (synonymMapCounter == null)
+            {
+                throw new ArgumentNullException(nameof(synonymMapCounter));
+            }
+            if (skillsetCounter == null)
+            {
+                throw new ArgumentNullException(nameof(skillsetCounter));
+            }
+
             return new ServiceCounters(
                 documentCounter,
                 indexCounter,
@@ -420,8 +366,7 @@ namespace CognitiveSearch.Models
                 dataSourceCounter,
                 storageSizeCounter,
                 synonymMapCounter,
-                skillsetCounter,
-                serializedAdditionalRawData: null);
+                skillsetCounter);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceCounter"/>. </summary>
@@ -430,7 +375,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.ResourceCounter"/> instance for mocking. </returns>
         public static ResourceCounter ResourceCounter(long usage = default, long? quota = null)
         {
-            return new ResourceCounter(usage, quota, serializedAdditionalRawData: null);
+            return new ResourceCounter(usage, quota);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ServiceLimits"/>. </summary>
@@ -441,7 +386,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.ServiceLimits"/> instance for mocking. </returns>
         public static ServiceLimits ServiceLimits(int? maxFieldsPerIndex = null, int? maxFieldNestingDepthPerIndex = null, int? maxComplexCollectionFieldsPerIndex = null, int? maxComplexObjectsInCollectionsPerDocument = null)
         {
-            return new ServiceLimits(maxFieldsPerIndex, maxFieldNestingDepthPerIndex, maxComplexCollectionFieldsPerIndex, maxComplexObjectsInCollectionsPerDocument, serializedAdditionalRawData: null);
+            return new ServiceLimits(maxFieldsPerIndex, maxFieldNestingDepthPerIndex, maxComplexCollectionFieldsPerIndex, maxComplexObjectsInCollectionsPerDocument);
         }
     }
 }

@@ -6,112 +6,14 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class AvailablePatchSummary : IUtf8JsonSerializable, IJsonModel<AvailablePatchSummary>
+    public partial class AvailablePatchSummary
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AvailablePatchSummary>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<AvailablePatchSummary>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static AvailablePatchSummary DeserializeAvailablePatchSummary(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AvailablePatchSummary>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(AvailablePatchSummary)} does not support writing '{format}' format.");
-            }
-
-            if (options.Format != "W" && Optional.IsDefined(Status))
-            {
-                writer.WritePropertyName("status"u8);
-                writer.WriteStringValue(Status.Value.ToString());
-            }
-            if (options.Format != "W" && Optional.IsDefined(AssessmentActivityId))
-            {
-                writer.WritePropertyName("assessmentActivityId"u8);
-                writer.WriteStringValue(AssessmentActivityId);
-            }
-            if (options.Format != "W" && Optional.IsDefined(RebootPending))
-            {
-                writer.WritePropertyName("rebootPending"u8);
-                writer.WriteBooleanValue(RebootPending.Value);
-            }
-            if (options.Format != "W" && Optional.IsDefined(CriticalAndSecurityPatchCount))
-            {
-                writer.WritePropertyName("criticalAndSecurityPatchCount"u8);
-                writer.WriteNumberValue(CriticalAndSecurityPatchCount.Value);
-            }
-            if (options.Format != "W" && Optional.IsDefined(OtherPatchCount))
-            {
-                writer.WritePropertyName("otherPatchCount"u8);
-                writer.WriteNumberValue(OtherPatchCount.Value);
-            }
-            if (Optional.IsDefined(Uri))
-            {
-                writer.WritePropertyName("uri"u8);
-                writer.WriteStringValue(Uri.AbsoluteUri);
-            }
-            if (options.Format != "W" && Optional.IsDefined(StartOn))
-            {
-                writer.WritePropertyName("startTime"u8);
-                writer.WriteStringValue(StartOn.Value, "O");
-            }
-            if (options.Format != "W" && Optional.IsDefined(LastModifiedOn))
-            {
-                writer.WritePropertyName("lastModifiedTime"u8);
-                writer.WriteStringValue(LastModifiedOn.Value, "O");
-            }
-            if (options.Format != "W" && Optional.IsDefined(Error))
-            {
-                writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue(Error, options);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        AvailablePatchSummary IJsonModel<AvailablePatchSummary>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AvailablePatchSummary>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(AvailablePatchSummary)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeAvailablePatchSummary(document.RootElement, options);
-        }
-
-        internal static AvailablePatchSummary DeserializeAvailablePatchSummary(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -125,8 +27,6 @@ namespace MgmtAcronymMapping.Models
             DateTimeOffset? startTime = default;
             DateTimeOffset? lastModifiedTime = default;
             ApiError error = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"u8))
@@ -203,15 +103,10 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    error = ApiError.DeserializeApiError(property.Value, options);
+                    error = ApiError.DeserializeApiError(property.Value);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new AvailablePatchSummary(
                 status,
                 assessmentActivityId,
@@ -221,39 +116,7 @@ namespace MgmtAcronymMapping.Models
                 uri,
                 startTime,
                 lastModifiedTime,
-                error,
-                serializedAdditionalRawData);
+                error);
         }
-
-        BinaryData IPersistableModel<AvailablePatchSummary>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AvailablePatchSummary>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtAcronymMappingContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(AvailablePatchSummary)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        AvailablePatchSummary IPersistableModel<AvailablePatchSummary>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AvailablePatchSummary>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeAvailablePatchSummary(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(AvailablePatchSummary)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<AvailablePatchSummary>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

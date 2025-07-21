@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -25,14 +25,16 @@ namespace MgmtLRO
 
         BarResource IOperationSource<BarResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<BarData>(response.Content, ModelReaderWriterOptions.Json, MgmtLROContext.Default);
+            using var document = JsonDocument.Parse(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions);
+            var data = BarData.DeserializeBarData(document.RootElement);
             return new BarResource(_client, data);
         }
 
         async ValueTask<BarResource> IOperationSource<BarResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            var data = ModelReaderWriter.Read<BarData>(response.Content, ModelReaderWriterOptions.Json, MgmtLROContext.Default);
-            return await Task.FromResult(new BarResource(_client, data)).ConfigureAwait(false);
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, ModelSerializationExtensions.JsonDocumentOptions, cancellationToken).ConfigureAwait(false);
+            var data = BarData.DeserializeBarData(document.RootElement);
+            return new BarResource(_client, data);
         }
     }
 }

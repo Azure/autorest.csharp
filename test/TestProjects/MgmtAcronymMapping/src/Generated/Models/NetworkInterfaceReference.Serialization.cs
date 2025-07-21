@@ -5,36 +5,21 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class NetworkInterfaceReference : IUtf8JsonSerializable, IJsonModel<NetworkInterfaceReference>
+    public partial class NetworkInterfaceReference : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkInterfaceReference>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<NetworkInterfaceReference>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceReference>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            if (Optional.IsDefined(Id))
             {
-                throw new FormatException($"The model {nameof(NetworkInterfaceReference)} does not support writing '{format}' format.");
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-
-            base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(Primary))
@@ -43,32 +28,17 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteBooleanValue(Primary.Value);
             }
             writer.WriteEndObject();
+            writer.WriteEndObject();
         }
 
-        NetworkInterfaceReference IJsonModel<NetworkInterfaceReference>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static NetworkInterfaceReference DeserializeNetworkInterfaceReference(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceReference>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(NetworkInterfaceReference)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeNetworkInterfaceReference(document.RootElement, options);
-        }
-
-        internal static NetworkInterfaceReference DeserializeNetworkInterfaceReference(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string id = default;
             bool? primary = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -97,44 +67,8 @@ namespace MgmtAcronymMapping.Models
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new NetworkInterfaceReference(id, serializedAdditionalRawData, primary);
+            return new NetworkInterfaceReference(id, primary);
         }
-
-        BinaryData IPersistableModel<NetworkInterfaceReference>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceReference>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtAcronymMappingContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(NetworkInterfaceReference)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        NetworkInterfaceReference IPersistableModel<NetworkInterfaceReference>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceReference>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeNetworkInterfaceReference(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(NetworkInterfaceReference)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<NetworkInterfaceReference>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

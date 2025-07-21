@@ -5,36 +5,17 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class ApplicationRule : IUtf8JsonSerializable, IJsonModel<ApplicationRule>
+    public partial class ApplicationRule : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ApplicationRule>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<ApplicationRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ApplicationRule>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ApplicationRule)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             if (Optional.IsCollectionDefined(SourceAddresses))
             {
                 writer.WritePropertyName("sourceAddresses"u8);
@@ -61,7 +42,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Protocols)
                 {
-                    writer.WriteObjectValue(item, options);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -135,26 +116,48 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NewGeneratedTypeSerializeProperty))
             {
                 writer.WritePropertyName("newGeneratedTypeSerializeProperty"u8);
-                writer.WriteObjectValue<VaultKey>(NewGeneratedTypeSerializeProperty, options);
+                writer.WriteObjectValue<VaultKey>(NewGeneratedTypeSerializeProperty);
             }
-        }
-
-        ApplicationRule IJsonModel<ApplicationRule>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ApplicationRule>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            if (Optional.IsDefined(Name))
             {
-                throw new FormatException($"The model {nameof(ApplicationRule)} does not support reading '{format}' format.");
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeApplicationRule(document.RootElement, options);
+            if (Optional.IsDefined(Description))
+            {
+                writer.WritePropertyName("description"u8);
+                writer.WriteStringValue(Description);
+            }
+            writer.WritePropertyName("ruleType"u8);
+            writer.WriteStringValue(RuleType.ToString());
+            if (Optional.IsDefined(NewStringSerializeProperty))
+            {
+                writer.WritePropertyName("newStringSerializeProperty"u8);
+                writer.WriteStringValue(NewStringSerializeProperty);
+            }
+            if (Optional.IsCollectionDefined(NewArraySerializedProperty))
+            {
+                writer.WritePropertyName("newArraySerializedProperty"u8);
+                writer.WriteStartArray();
+                foreach (var item in NewArraySerializedProperty)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WritePropertyName("fakeParent"u8);
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(NewDictionarySerializedProperty))
+            {
+                writer.WritePropertyName("newDictionarySerializedProperty"u8);
+                SerializeNameValue(writer);
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
         }
 
-        internal static ApplicationRule DeserializeApplicationRule(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static ApplicationRule DeserializeApplicationRule(JsonElement element)
         {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -176,8 +179,6 @@ namespace MgmtMockAndSample.Models
             string newStringSerializeProperty = default;
             IList<string> newArraySerializedProperty = default;
             IDictionary<string, string> newDictionarySerializedProperty = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sourceAddresses"u8))
@@ -217,7 +218,7 @@ namespace MgmtMockAndSample.Models
                     List<FirewallPolicyRuleApplicationProtocol> array = new List<FirewallPolicyRuleApplicationProtocol>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FirewallPolicyRuleApplicationProtocol.DeserializeFirewallPolicyRuleApplicationProtocol(item, options));
+                        array.Add(FirewallPolicyRuleApplicationProtocol.DeserializeFirewallPolicyRuleApplicationProtocol(item));
                     }
                     protocols = array;
                     continue;
@@ -317,7 +318,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    newGeneratedTypeSerializeProperty = VaultKey.DeserializeVaultKey(property.Value, options);
+                    newGeneratedTypeSerializeProperty = VaultKey.DeserializeVaultKey(property.Value);
                     continue;
                 }
                 if (property.NameEquals("name"u8))
@@ -371,12 +372,7 @@ namespace MgmtMockAndSample.Models
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new ApplicationRule(
                 name,
                 description,
@@ -384,7 +380,6 @@ namespace MgmtMockAndSample.Models
                 newStringSerializeProperty,
                 newArraySerializedProperty ?? new ChangeTrackingList<string>(),
                 newDictionarySerializedProperty ?? new ChangeTrackingDictionary<string, string>(),
-                serializedAdditionalRawData,
                 sourceAddresses ?? new ChangeTrackingList<string>(),
                 destinationAddresses ?? new ChangeTrackingList<string>(),
                 protocols ?? new ChangeTrackingList<FirewallPolicyRuleApplicationProtocol>(),
@@ -397,36 +392,5 @@ namespace MgmtMockAndSample.Models
                 newIntSerializeProperty,
                 newGeneratedTypeSerializeProperty);
         }
-
-        BinaryData IPersistableModel<ApplicationRule>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ApplicationRule>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(ApplicationRule)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        ApplicationRule IPersistableModel<ApplicationRule>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ApplicationRule>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeApplicationRule(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(ApplicationRule)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ApplicationRule>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

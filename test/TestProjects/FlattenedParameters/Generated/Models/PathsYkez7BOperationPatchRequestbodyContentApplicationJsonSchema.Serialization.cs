@@ -5,36 +5,16 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
-using Azure;
 using Azure.Core;
 
 namespace FlattenedParameters.Models
 {
-    internal partial class PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable, IJsonModel<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>
+    internal partial class PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema)} does not support writing '{format}' format.");
-            }
-
             if (Optional.IsCollectionDefined(Items))
             {
                 if (Items != null)
@@ -52,115 +32,14 @@ namespace FlattenedParameters.Models
                     writer.WriteNull("items");
                 }
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema IJsonModel<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializePathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(document.RootElement, options);
-        }
-
-        internal static PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema DeserializePathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
-            if (element.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            IList<string> items = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("items"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetString());
-                    }
-                    items = array;
-                    continue;
-                }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
-            }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(items ?? new ChangeTrackingList<string>(), serializedAdditionalRawData);
-        }
-
-        BinaryData IPersistableModel<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, FlattenedParametersContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema IPersistableModel<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializePathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
-
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema FromResponse(Response response)
-        {
-            using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
-            return DeserializePathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(document.RootElement);
+            writer.WriteEndObject();
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

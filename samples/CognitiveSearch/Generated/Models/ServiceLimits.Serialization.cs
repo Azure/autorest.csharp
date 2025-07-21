@@ -5,117 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
-using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ServiceLimits : IUtf8JsonSerializable, IJsonModel<ServiceLimits>
+    public partial class ServiceLimits
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ServiceLimits>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<ServiceLimits>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static ServiceLimits DeserializeServiceLimits(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ServiceLimits>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ServiceLimits)} does not support writing '{format}' format.");
-            }
-
-            if (Optional.IsDefined(MaxFieldsPerIndex))
-            {
-                if (MaxFieldsPerIndex != null)
-                {
-                    writer.WritePropertyName("maxFieldsPerIndex"u8);
-                    writer.WriteNumberValue(MaxFieldsPerIndex.Value);
-                }
-                else
-                {
-                    writer.WriteNull("maxFieldsPerIndex");
-                }
-            }
-            if (Optional.IsDefined(MaxFieldNestingDepthPerIndex))
-            {
-                if (MaxFieldNestingDepthPerIndex != null)
-                {
-                    writer.WritePropertyName("maxFieldNestingDepthPerIndex"u8);
-                    writer.WriteNumberValue(MaxFieldNestingDepthPerIndex.Value);
-                }
-                else
-                {
-                    writer.WriteNull("maxFieldNestingDepthPerIndex");
-                }
-            }
-            if (Optional.IsDefined(MaxComplexCollectionFieldsPerIndex))
-            {
-                if (MaxComplexCollectionFieldsPerIndex != null)
-                {
-                    writer.WritePropertyName("maxComplexCollectionFieldsPerIndex"u8);
-                    writer.WriteNumberValue(MaxComplexCollectionFieldsPerIndex.Value);
-                }
-                else
-                {
-                    writer.WriteNull("maxComplexCollectionFieldsPerIndex");
-                }
-            }
-            if (Optional.IsDefined(MaxComplexObjectsInCollectionsPerDocument))
-            {
-                if (MaxComplexObjectsInCollectionsPerDocument != null)
-                {
-                    writer.WritePropertyName("maxComplexObjectsInCollectionsPerDocument"u8);
-                    writer.WriteNumberValue(MaxComplexObjectsInCollectionsPerDocument.Value);
-                }
-                else
-                {
-                    writer.WriteNull("maxComplexObjectsInCollectionsPerDocument");
-                }
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        ServiceLimits IJsonModel<ServiceLimits>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ServiceLimits>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ServiceLimits)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeServiceLimits(document.RootElement, options);
-        }
-
-        internal static ServiceLimits DeserializeServiceLimits(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -124,8 +22,6 @@ namespace CognitiveSearch.Models
             int? maxFieldNestingDepthPerIndex = default;
             int? maxComplexCollectionFieldsPerIndex = default;
             int? maxComplexObjectsInCollectionsPerDocument = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxFieldsPerIndex"u8))
@@ -168,45 +64,9 @@ namespace CognitiveSearch.Models
                     maxComplexObjectsInCollectionsPerDocument = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new ServiceLimits(maxFieldsPerIndex, maxFieldNestingDepthPerIndex, maxComplexCollectionFieldsPerIndex, maxComplexObjectsInCollectionsPerDocument, serializedAdditionalRawData);
+            return new ServiceLimits(maxFieldsPerIndex, maxFieldNestingDepthPerIndex, maxComplexCollectionFieldsPerIndex, maxComplexObjectsInCollectionsPerDocument);
         }
-
-        BinaryData IPersistableModel<ServiceLimits>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ServiceLimits>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(ServiceLimits)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        ServiceLimits IPersistableModel<ServiceLimits>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ServiceLimits>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeServiceLimits(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(ServiceLimits)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ServiceLimits>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -214,14 +74,6 @@ namespace CognitiveSearch.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeServiceLimits(document.RootElement);
-        }
-
-        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
-            return content;
         }
     }
 }

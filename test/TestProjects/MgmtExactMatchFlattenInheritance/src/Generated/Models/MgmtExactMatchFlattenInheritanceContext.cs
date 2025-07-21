@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
-using MgmtExactMatchFlattenInheritance.Models;
 
 namespace MgmtExactMatchFlattenInheritance
 {
@@ -14,16 +13,6 @@ namespace MgmtExactMatchFlattenInheritance
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel1Resource))]
-    [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel2))]
-    [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel3))]
-    [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel4))]
-    [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel5))]
-    [ModelReaderWriterBuildable(typeof(AzureResourceFlattenModel7))]
-    [ModelReaderWriterBuildable(typeof(CustomModel2Resource))]
-    [ModelReaderWriterBuildable(typeof(CustomModel3Resource))]
-    [ModelReaderWriterBuildable(typeof(SubResourceModel))]
-    [ModelReaderWriterBuildable(typeof(TrackedResourceModel))]
     public partial class MgmtExactMatchFlattenInheritanceContext : ModelReaderWriterContext
     {
     }

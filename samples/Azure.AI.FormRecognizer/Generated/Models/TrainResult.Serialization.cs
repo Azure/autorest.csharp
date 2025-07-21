@@ -5,100 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class TrainResult : IUtf8JsonSerializable, IJsonModel<TrainResult>
+    public partial class TrainResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TrainResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<TrainResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static TrainResult DeserializeTrainResult(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<TrainResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(TrainResult)} does not support writing '{format}' format.");
-            }
-
-            writer.WritePropertyName("trainingDocuments"u8);
-            writer.WriteStartArray();
-            foreach (var item in TrainingDocuments)
-            {
-                writer.WriteObjectValue(item, options);
-            }
-            writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(Fields))
-            {
-                writer.WritePropertyName("fields"u8);
-                writer.WriteStartArray();
-                foreach (var item in Fields)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsDefined(AverageModelAccuracy))
-            {
-                writer.WritePropertyName("averageModelAccuracy"u8);
-                writer.WriteNumberValue(AverageModelAccuracy.Value);
-            }
-            if (Optional.IsCollectionDefined(Errors))
-            {
-                writer.WritePropertyName("errors"u8);
-                writer.WriteStartArray();
-                foreach (var item in Errors)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        TrainResult IJsonModel<TrainResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<TrainResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(TrainResult)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeTrainResult(document.RootElement, options);
-        }
-
-        internal static TrainResult DeserializeTrainResult(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -107,8 +22,6 @@ namespace Azure.AI.FormRecognizer.Models
             IReadOnlyList<FormFieldsReport> fields = default;
             float? averageModelAccuracy = default;
             IReadOnlyList<ErrorInformation> errors = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("trainingDocuments"u8))
@@ -116,7 +29,7 @@ namespace Azure.AI.FormRecognizer.Models
                     List<TrainingDocumentInfo> array = new List<TrainingDocumentInfo>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TrainingDocumentInfo.DeserializeTrainingDocumentInfo(item, options));
+                        array.Add(TrainingDocumentInfo.DeserializeTrainingDocumentInfo(item));
                     }
                     trainingDocuments = array;
                     continue;
@@ -130,7 +43,7 @@ namespace Azure.AI.FormRecognizer.Models
                     List<FormFieldsReport> array = new List<FormFieldsReport>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FormFieldsReport.DeserializeFormFieldsReport(item, options));
+                        array.Add(FormFieldsReport.DeserializeFormFieldsReport(item));
                     }
                     fields = array;
                     continue;
@@ -153,50 +66,14 @@ namespace Azure.AI.FormRecognizer.Models
                     List<ErrorInformation> array = new List<ErrorInformation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ErrorInformation.DeserializeErrorInformation(item, options));
+                        array.Add(ErrorInformation.DeserializeErrorInformation(item));
                     }
                     errors = array;
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new TrainResult(trainingDocuments, fields ?? new ChangeTrackingList<FormFieldsReport>(), averageModelAccuracy, errors ?? new ChangeTrackingList<ErrorInformation>(), serializedAdditionalRawData);
+            return new TrainResult(trainingDocuments, fields ?? new ChangeTrackingList<FormFieldsReport>(), averageModelAccuracy, errors ?? new ChangeTrackingList<ErrorInformation>());
         }
-
-        BinaryData IPersistableModel<TrainResult>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<TrainResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureAIFormRecognizerContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(TrainResult)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        TrainResult IPersistableModel<TrainResult>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<TrainResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeTrainResult(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(TrainResult)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<TrainResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -204,14 +81,6 @@ namespace Azure.AI.FormRecognizer.Models
         {
             using var document = JsonDocument.Parse(response.Content, ModelSerializationExtensions.JsonDocumentOptions);
             return DeserializeTrainResult(document.RootElement);
-        }
-
-        /// <summary> Convert into a <see cref="RequestContent"/>. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
-            return content;
         }
     }
 }

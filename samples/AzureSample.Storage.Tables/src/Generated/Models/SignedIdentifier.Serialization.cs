@@ -5,18 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace AzureSample.Storage.Tables.Models
 {
-    public partial class SignedIdentifier : IXmlSerializable, IPersistableModel<SignedIdentifier>
+    public partial class SignedIdentifier : IXmlSerializable
     {
-        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "SignedIdentifier");
             writer.WriteStartElement("Id");
@@ -26,12 +23,8 @@ namespace AzureSample.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, ModelSerializationExtensions.WireOptions);
-
-        internal static SignedIdentifier DeserializeSignedIdentifier(XElement element, ModelReaderWriterOptions options = null)
+        internal static SignedIdentifier DeserializeSignedIdentifier(XElement element)
         {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             string id = default;
             AccessPolicy accessPolicy = default;
             if (element.Element("Id") is XElement idElement)
@@ -42,41 +35,7 @@ namespace AzureSample.Storage.Tables.Models
             {
                 accessPolicy = AccessPolicy.DeserializeAccessPolicy(accessPolicyElement);
             }
-            return new SignedIdentifier(id, accessPolicy, serializedAdditionalRawData: null);
+            return new SignedIdentifier(id, accessPolicy);
         }
-
-        BinaryData IPersistableModel<SignedIdentifier>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SignedIdentifier>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    {
-                        using MemoryStream stream = new MemoryStream();
-                        using XmlWriter writer = XmlWriter.Create(stream);
-                        WriteInternal(writer, null, options);
-                        writer.Flush();
-                        return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(SignedIdentifier)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        SignedIdentifier IPersistableModel<SignedIdentifier>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SignedIdentifier>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    return DeserializeSignedIdentifier(XElement.Load(data.ToStream()), options);
-                default:
-                    throw new FormatException($"The model {nameof(SignedIdentifier)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<SignedIdentifier>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

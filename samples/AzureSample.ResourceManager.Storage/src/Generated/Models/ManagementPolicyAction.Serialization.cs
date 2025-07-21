@@ -5,83 +5,36 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace AzureSample.ResourceManager.Storage.Models
 {
-    public partial class ManagementPolicyAction : IUtf8JsonSerializable, IJsonModel<ManagementPolicyAction>
+    public partial class ManagementPolicyAction : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagementPolicyAction>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<ManagementPolicyAction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ManagementPolicyAction>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ManagementPolicyAction)} does not support writing '{format}' format.");
-            }
-
             if (Optional.IsDefined(BaseBlob))
             {
                 writer.WritePropertyName("baseBlob"u8);
-                writer.WriteObjectValue(BaseBlob, options);
+                writer.WriteObjectValue(BaseBlob);
             }
             if (Optional.IsDefined(Snapshot))
             {
                 writer.WritePropertyName("snapshot"u8);
-                writer.WriteObjectValue(Snapshot, options);
+                writer.WriteObjectValue(Snapshot);
             }
             if (Optional.IsDefined(Version))
             {
                 writer.WritePropertyName("version"u8);
-                writer.WriteObjectValue(Version, options);
+                writer.WriteObjectValue(Version);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
+            writer.WriteEndObject();
         }
 
-        ManagementPolicyAction IJsonModel<ManagementPolicyAction>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static ManagementPolicyAction DeserializeManagementPolicyAction(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ManagementPolicyAction>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ManagementPolicyAction)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeManagementPolicyAction(document.RootElement, options);
-        }
-
-        internal static ManagementPolicyAction DeserializeManagementPolicyAction(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -89,8 +42,6 @@ namespace AzureSample.ResourceManager.Storage.Models
             ManagementPolicyBaseBlob baseBlob = default;
             ManagementPolicySnapShot snapshot = default;
             ManagementPolicyVersion version = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("baseBlob"u8))
@@ -99,7 +50,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    baseBlob = ManagementPolicyBaseBlob.DeserializeManagementPolicyBaseBlob(property.Value, options);
+                    baseBlob = ManagementPolicyBaseBlob.DeserializeManagementPolicyBaseBlob(property.Value);
                     continue;
                 }
                 if (property.NameEquals("snapshot"u8))
@@ -108,7 +59,7 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    snapshot = ManagementPolicySnapShot.DeserializeManagementPolicySnapShot(property.Value, options);
+                    snapshot = ManagementPolicySnapShot.DeserializeManagementPolicySnapShot(property.Value);
                     continue;
                 }
                 if (property.NameEquals("version"u8))
@@ -117,47 +68,11 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    version = ManagementPolicyVersion.DeserializeManagementPolicyVersion(property.Value, options);
+                    version = ManagementPolicyVersion.DeserializeManagementPolicyVersion(property.Value);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new ManagementPolicyAction(baseBlob, snapshot, version, serializedAdditionalRawData);
+            return new ManagementPolicyAction(baseBlob, snapshot, version);
         }
-
-        BinaryData IPersistableModel<ManagementPolicyAction>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ManagementPolicyAction>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerStorageContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(ManagementPolicyAction)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        ManagementPolicyAction IPersistableModel<ManagementPolicyAction>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ManagementPolicyAction>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeManagementPolicyAction(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(ManagementPolicyAction)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ManagementPolicyAction>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

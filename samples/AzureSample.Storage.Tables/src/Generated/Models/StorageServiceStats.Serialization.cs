@@ -5,73 +5,20 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.IO;
-using System.Xml;
 using System.Xml.Linq;
-using Azure.Core;
 
 namespace AzureSample.Storage.Tables.Models
 {
-    public partial class StorageServiceStats : IXmlSerializable, IPersistableModel<StorageServiceStats>
+    public partial class StorageServiceStats
     {
-        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        internal static StorageServiceStats DeserializeStorageServiceStats(XElement element)
         {
-            writer.WriteStartElement(nameHint ?? "StorageServiceStats");
-            if (Optional.IsDefined(GeoReplication))
-            {
-                writer.WriteObjectValue(GeoReplication, "GeoReplication");
-            }
-            writer.WriteEndElement();
-        }
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, ModelSerializationExtensions.WireOptions);
-
-        internal static StorageServiceStats DeserializeStorageServiceStats(XElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             GeoReplication geoReplication = default;
             if (element.Element("GeoReplication") is XElement geoReplicationElement)
             {
                 geoReplication = GeoReplication.DeserializeGeoReplication(geoReplicationElement);
             }
-            return new StorageServiceStats(geoReplication, serializedAdditionalRawData: null);
+            return new StorageServiceStats(geoReplication);
         }
-
-        BinaryData IPersistableModel<StorageServiceStats>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<StorageServiceStats>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    {
-                        using MemoryStream stream = new MemoryStream();
-                        using XmlWriter writer = XmlWriter.Create(stream);
-                        WriteInternal(writer, null, options);
-                        writer.Flush();
-                        return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(StorageServiceStats)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        StorageServiceStats IPersistableModel<StorageServiceStats>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<StorageServiceStats>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    return DeserializeStorageServiceStats(XElement.Load(data.ToStream()), options);
-                default:
-                    throw new FormatException($"The model {nameof(StorageServiceStats)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<StorageServiceStats>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

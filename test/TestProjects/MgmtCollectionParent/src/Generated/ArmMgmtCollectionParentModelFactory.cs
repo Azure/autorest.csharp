@@ -37,8 +37,7 @@ namespace MgmtCollectionParent.Models
                 systemData,
                 orderItemIds?.ToList(),
                 currentStage,
-                orderStageHistory?.ToList(),
-                serializedAdditionalRawData: null);
+                orderStageHistory?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.StageDetails"/>. </summary>
@@ -49,7 +48,7 @@ namespace MgmtCollectionParent.Models
         /// <returns> A new <see cref="Models.StageDetails"/> instance for mocking. </returns>
         public static StageDetails StageDetails(StageStatus? stageStatus = null, StageName? stageName = null, string displayName = null, DateTimeOffset? startOn = null)
         {
-            return new StageDetails(stageStatus, stageName, displayName, startOn, serializedAdditionalRawData: null);
+            return new StageDetails(stageStatus, stageName, displayName, startOn);
         }
     }
 }

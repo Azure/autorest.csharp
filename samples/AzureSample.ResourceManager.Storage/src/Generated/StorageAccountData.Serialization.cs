@@ -17,38 +17,11 @@ using AzureSample.ResourceManager.Storage.Models;
 
 namespace AzureSample.ResourceManager.Storage
 {
-    public partial class StorageAccountData : IUtf8JsonSerializable, IJsonModel<StorageAccountData>
+    public partial class StorageAccountData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageAccountData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<StorageAccountData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<StorageAccountData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(StorageAccountData)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
-            if (options.Format != "W" && Optional.IsDefined(Sku))
-            {
-                writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku, options);
-            }
-            if (options.Format != "W" && Optional.IsDefined(Kind))
-            {
-                writer.WritePropertyName("kind"u8);
-                writer.WriteStringValue(Kind.Value.ToString());
-            }
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
@@ -57,139 +30,47 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(ExtendedLocation))
             {
                 writer.WritePropertyName("extendedLocation"u8);
-                ((IJsonModel<ExtendedLocation>)ExtendedLocation).Write(writer, options);
+                ((IJsonModel<ExtendedLocation>)ExtendedLocation).Write(writer, ModelSerializationExtensions.WireOptions);
             }
+            if (Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WritePropertyName("location"u8);
+            writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState"u8);
-                writer.WriteStringValue(ProvisioningState.Value.ToSerialString());
-            }
-            if (options.Format != "W" && Optional.IsDefined(PrimaryEndpoints))
-            {
-                writer.WritePropertyName("primaryEndpoints"u8);
-                writer.WriteObjectValue(PrimaryEndpoints, options);
-            }
-            if (options.Format != "W" && Optional.IsDefined(PrimaryLocation))
-            {
-                writer.WritePropertyName("primaryLocation"u8);
-                writer.WriteStringValue(PrimaryLocation);
-            }
-            if (options.Format != "W" && Optional.IsDefined(StatusOfPrimary))
-            {
-                writer.WritePropertyName("statusOfPrimary"u8);
-                writer.WriteStringValue(StatusOfPrimary.Value.ToSerialString());
-            }
-            if (options.Format != "W" && Optional.IsDefined(LastGeoFailoverOn))
-            {
-                writer.WritePropertyName("lastGeoFailoverTime"u8);
-                writer.WriteStringValue(LastGeoFailoverOn.Value, "O");
-            }
-            if (options.Format != "W" && Optional.IsDefined(SecondaryLocation))
-            {
-                writer.WritePropertyName("secondaryLocation"u8);
-                writer.WriteStringValue(SecondaryLocation);
-            }
-            if (options.Format != "W" && Optional.IsDefined(StatusOfSecondary))
-            {
-                writer.WritePropertyName("statusOfSecondary"u8);
-                writer.WriteStringValue(StatusOfSecondary.Value.ToSerialString());
-            }
-            if (options.Format != "W" && Optional.IsDefined(CreatedOn))
-            {
-                writer.WritePropertyName("creationTime"u8);
-                writer.WriteStringValue(CreatedOn.Value, "O");
-            }
-            if (options.Format != "W" && Optional.IsDefined(CustomDomain))
-            {
-                writer.WritePropertyName("customDomain"u8);
-                writer.WriteObjectValue(CustomDomain, options);
-            }
-            if (options.Format != "W" && Optional.IsDefined(SasPolicy))
-            {
-                writer.WritePropertyName("sasPolicy"u8);
-                writer.WriteObjectValue(SasPolicy, options);
-            }
-            if (options.Format != "W" && Optional.IsDefined(KeyPolicy))
-            {
-                writer.WritePropertyName("keyPolicy"u8);
-                writer.WriteObjectValue(KeyPolicy, options);
-            }
-            if (options.Format != "W" && Optional.IsDefined(KeyCreationTime))
-            {
-                writer.WritePropertyName("keyCreationTime"u8);
-                writer.WriteObjectValue(KeyCreationTime, options);
-            }
-            if (options.Format != "W" && Optional.IsDefined(SecondaryEndpoints))
-            {
-                writer.WritePropertyName("secondaryEndpoints"u8);
-                writer.WriteObjectValue(SecondaryEndpoints, options);
-            }
-            if (options.Format != "W" && Optional.IsDefined(Encryption))
-            {
-                writer.WritePropertyName("encryption"u8);
-                writer.WriteObjectValue(Encryption, options);
-            }
-            if (options.Format != "W" && Optional.IsDefined(AccessTier))
-            {
-                writer.WritePropertyName("accessTier"u8);
-                writer.WriteStringValue(AccessTier.Value.ToSerialString());
-            }
             if (Optional.IsDefined(AzureFilesIdentityBasedAuthentication))
             {
                 writer.WritePropertyName("azureFilesIdentityBasedAuthentication"u8);
-                writer.WriteObjectValue(AzureFilesIdentityBasedAuthentication, options);
+                writer.WriteObjectValue(AzureFilesIdentityBasedAuthentication);
             }
             if (Optional.IsDefined(EnableHttpsTrafficOnly))
             {
                 writer.WritePropertyName("supportsHttpsTrafficOnly"u8);
                 writer.WriteBooleanValue(EnableHttpsTrafficOnly.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(NetworkRuleSet))
-            {
-                writer.WritePropertyName("networkAcls"u8);
-                writer.WriteObjectValue(NetworkRuleSet, options);
-            }
             if (Optional.IsDefined(IsHnsEnabled))
             {
                 writer.WritePropertyName("isHnsEnabled"u8);
                 writer.WriteBooleanValue(IsHnsEnabled.Value);
-            }
-            if (options.Format != "W" && Optional.IsDefined(GeoReplicationStats))
-            {
-                writer.WritePropertyName("geoReplicationStats"u8);
-                writer.WriteObjectValue(GeoReplicationStats, options);
-            }
-            if (options.Format != "W" && Optional.IsDefined(FailoverInProgress))
-            {
-                writer.WritePropertyName("failoverInProgress"u8);
-                writer.WriteBooleanValue(FailoverInProgress.Value);
             }
             if (Optional.IsDefined(LargeFileSharesState))
             {
                 writer.WritePropertyName("largeFileSharesState"u8);
                 writer.WriteStringValue(LargeFileSharesState.Value.ToString());
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(PrivateEndpointConnections))
-            {
-                writer.WritePropertyName("privateEndpointConnections"u8);
-                writer.WriteStartArray();
-                foreach (var item in PrivateEndpointConnections)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
             if (Optional.IsDefined(RoutingPreference))
             {
                 writer.WritePropertyName("routingPreference"u8);
-                writer.WriteObjectValue(RoutingPreference, options);
-            }
-            if (options.Format != "W" && Optional.IsDefined(BlobRestoreStatus))
-            {
-                writer.WritePropertyName("blobRestoreStatus"u8);
-                writer.WriteObjectValue(BlobRestoreStatus, options);
+                writer.WriteObjectValue(RoutingPreference);
             }
             if (Optional.IsDefined(AllowBlobPublicAccess))
             {
@@ -229,27 +110,14 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
-                writer.WriteObjectValue(ImmutableStorageWithVersioning, options);
+                writer.WriteObjectValue(ImmutableStorageWithVersioning);
             }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        StorageAccountData IJsonModel<StorageAccountData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static StorageAccountData DeserializeStorageAccountData(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<StorageAccountData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(StorageAccountData)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeStorageAccountData(document.RootElement, options);
-        }
-
-        internal static StorageAccountData DeserializeStorageAccountData(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -297,8 +165,6 @@ namespace AzureSample.ResourceManager.Storage
             bool? defaultToOAuthAuthentication = default;
             PublicNetworkAccess? publicNetworkAccess = default;
             ImmutableStorageAccount immutableStorageWithVersioning = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -307,7 +173,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    sku = AzureSampleResourceManagerStorageSku.DeserializeAzureSampleResourceManagerStorageSku(property.Value, options);
+                    sku = AzureSampleResourceManagerStorageSku.DeserializeAzureSampleResourceManagerStorageSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("kind"u8))
@@ -325,7 +191,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"), AzureSampleResourceManagerStorageContext.Default);
+                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"));
                     continue;
                 }
                 if (property.NameEquals("extendedLocation"u8))
@@ -334,7 +200,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    extendedLocation = ModelReaderWriter.Read<ExtendedLocation>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), options, AzureSampleResourceManagerStorageContext.Default);
+                    extendedLocation = ModelReaderWriter.Read<ExtendedLocation>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -377,7 +243,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -404,7 +270,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            primaryEndpoints = Endpoints.DeserializeEndpoints(property0.Value, options);
+                            primaryEndpoints = Endpoints.DeserializeEndpoints(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("primaryLocation"u8))
@@ -459,7 +325,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            customDomain = CustomDomain.DeserializeCustomDomain(property0.Value, options);
+                            customDomain = CustomDomain.DeserializeCustomDomain(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("sasPolicy"u8))
@@ -468,7 +334,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            sasPolicy = SasPolicy.DeserializeSasPolicy(property0.Value, options);
+                            sasPolicy = SasPolicy.DeserializeSasPolicy(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("keyPolicy"u8))
@@ -477,7 +343,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            keyPolicy = KeyPolicy.DeserializeKeyPolicy(property0.Value, options);
+                            keyPolicy = KeyPolicy.DeserializeKeyPolicy(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("keyCreationTime"u8))
@@ -486,7 +352,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            keyCreationTime = KeyCreationTime.DeserializeKeyCreationTime(property0.Value, options);
+                            keyCreationTime = KeyCreationTime.DeserializeKeyCreationTime(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("secondaryEndpoints"u8))
@@ -495,7 +361,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            secondaryEndpoints = Endpoints.DeserializeEndpoints(property0.Value, options);
+                            secondaryEndpoints = Endpoints.DeserializeEndpoints(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("encryption"u8))
@@ -504,7 +370,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            encryption = Encryption.DeserializeEncryption(property0.Value, options);
+                            encryption = Encryption.DeserializeEncryption(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("accessTier"u8))
@@ -522,7 +388,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            azureFilesIdentityBasedAuthentication = AzureFilesIdentityBasedAuthentication.DeserializeAzureFilesIdentityBasedAuthentication(property0.Value, options);
+                            azureFilesIdentityBasedAuthentication = AzureFilesIdentityBasedAuthentication.DeserializeAzureFilesIdentityBasedAuthentication(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("supportsHttpsTrafficOnly"u8))
@@ -540,7 +406,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            networkAcls = NetworkRuleSet.DeserializeNetworkRuleSet(property0.Value, options);
+                            networkAcls = NetworkRuleSet.DeserializeNetworkRuleSet(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("isHnsEnabled"u8))
@@ -558,7 +424,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            geoReplicationStats = GeoReplicationStats.DeserializeGeoReplicationStats(property0.Value, options);
+                            geoReplicationStats = GeoReplicationStats.DeserializeGeoReplicationStats(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("failoverInProgress"u8))
@@ -588,7 +454,7 @@ namespace AzureSample.ResourceManager.Storage
                             List<AzureSampleResourceManagerStoragePrivateEndpointConnectionData> array = new List<AzureSampleResourceManagerStoragePrivateEndpointConnectionData>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(AzureSampleResourceManagerStoragePrivateEndpointConnectionData.DeserializeAzureSampleResourceManagerStoragePrivateEndpointConnectionData(item, options));
+                                array.Add(AzureSampleResourceManagerStoragePrivateEndpointConnectionData.DeserializeAzureSampleResourceManagerStoragePrivateEndpointConnectionData(item));
                             }
                             privateEndpointConnections = array;
                             continue;
@@ -599,7 +465,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            routingPreference = RoutingPreference.DeserializeRoutingPreference(property0.Value, options);
+                            routingPreference = RoutingPreference.DeserializeRoutingPreference(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("blobRestoreStatus"u8))
@@ -608,7 +474,7 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            blobRestoreStatus = BlobRestoreStatus.DeserializeBlobRestoreStatus(property0.Value, options);
+                            blobRestoreStatus = BlobRestoreStatus.DeserializeBlobRestoreStatus(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("allowBlobPublicAccess"u8))
@@ -680,18 +546,13 @@ namespace AzureSample.ResourceManager.Storage
                             {
                                 continue;
                             }
-                            immutableStorageWithVersioning = ImmutableStorageAccount.DeserializeImmutableStorageAccount(property0.Value, options);
+                            immutableStorageWithVersioning = ImmutableStorageAccount.DeserializeImmutableStorageAccount(property0.Value);
                             continue;
                         }
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new StorageAccountData(
                 id,
                 name,
@@ -735,39 +596,7 @@ namespace AzureSample.ResourceManager.Storage
                 allowCrossTenantReplication,
                 defaultToOAuthAuthentication,
                 publicNetworkAccess,
-                immutableStorageWithVersioning,
-                serializedAdditionalRawData);
+                immutableStorageWithVersioning);
         }
-
-        BinaryData IPersistableModel<StorageAccountData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<StorageAccountData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerStorageContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(StorageAccountData)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        StorageAccountData IPersistableModel<StorageAccountData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<StorageAccountData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeStorageAccountData(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(StorageAccountData)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<StorageAccountData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

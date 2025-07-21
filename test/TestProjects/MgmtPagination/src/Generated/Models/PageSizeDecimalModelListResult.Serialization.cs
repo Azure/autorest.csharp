@@ -5,91 +5,21 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtPagination.Models
 {
-    internal partial class PageSizeDecimalModelListResult : IUtf8JsonSerializable, IJsonModel<PageSizeDecimalModelListResult>
+    internal partial class PageSizeDecimalModelListResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PageSizeDecimalModelListResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<PageSizeDecimalModelListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static PageSizeDecimalModelListResult DeserializePageSizeDecimalModelListResult(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PageSizeDecimalModelListResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(PageSizeDecimalModelListResult)} does not support writing '{format}' format.");
-            }
-
-            if (options.Format != "W" && Optional.IsCollectionDefined(Value))
-            {
-                writer.WritePropertyName("value"u8);
-                writer.WriteStartArray();
-                foreach (var item in Value)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-            if (options.Format != "W" && Optional.IsDefined(NextLink))
-            {
-                writer.WritePropertyName("nextLink"u8);
-                writer.WriteStringValue(NextLink);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        PageSizeDecimalModelListResult IJsonModel<PageSizeDecimalModelListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PageSizeDecimalModelListResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(PageSizeDecimalModelListResult)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializePageSizeDecimalModelListResult(document.RootElement, options);
-        }
-
-        internal static PageSizeDecimalModelListResult DeserializePageSizeDecimalModelListResult(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             IReadOnlyList<PageSizeDecimalModelData> value = default;
             string nextLink = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -101,7 +31,7 @@ namespace MgmtPagination.Models
                     List<PageSizeDecimalModelData> array = new List<PageSizeDecimalModelData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(item, options));
+                        array.Add(PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(item));
                     }
                     value = array;
                     continue;
@@ -111,44 +41,8 @@ namespace MgmtPagination.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new PageSizeDecimalModelListResult(value ?? new ChangeTrackingList<PageSizeDecimalModelData>(), nextLink, serializedAdditionalRawData);
+            return new PageSizeDecimalModelListResult(value ?? new ChangeTrackingList<PageSizeDecimalModelData>(), nextLink);
         }
-
-        BinaryData IPersistableModel<PageSizeDecimalModelListResult>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PageSizeDecimalModelListResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtPaginationContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(PageSizeDecimalModelListResult)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        PageSizeDecimalModelListResult IPersistableModel<PageSizeDecimalModelListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PageSizeDecimalModelListResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializePageSizeDecimalModelListResult(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(PageSizeDecimalModelListResult)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<PageSizeDecimalModelListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

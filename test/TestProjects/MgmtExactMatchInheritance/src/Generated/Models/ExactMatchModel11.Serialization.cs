@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
@@ -15,78 +13,22 @@ using Azure.Core;
 namespace MgmtExactMatchInheritance.Models
 {
     [JsonConverter(typeof(ExactMatchModel11Converter))]
-    public partial class ExactMatchModel11 : IUtf8JsonSerializable, IJsonModel<ExactMatchModel11>
+    public partial class ExactMatchModel11 : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExactMatchModel11>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<ExactMatchModel11>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
             writer.WriteEndObject();
         }
 
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static ExactMatchModel11 DeserializeExactMatchModel11(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ExactMatchModel11>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ExactMatchModel11)} does not support writing '{format}' format.");
-            }
-
-            if (options.Format != "W" && Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            if (options.Format != "W" && Optional.IsDefined(ResourceType))
-            {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(ResourceType.Value);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        ExactMatchModel11 IJsonModel<ExactMatchModel11>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ExactMatchModel11>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ExactMatchModel11)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeExactMatchModel11(document.RootElement, options);
-        }
-
-        internal static ExactMatchModel11 DeserializeExactMatchModel11(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string name = default;
             ResourceType? type = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -103,51 +45,15 @@ namespace MgmtExactMatchInheritance.Models
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new ExactMatchModel11(name, type, serializedAdditionalRawData);
+            return new ExactMatchModel11(name, type);
         }
-
-        BinaryData IPersistableModel<ExactMatchModel11>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ExactMatchModel11>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtExactMatchInheritanceContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(ExactMatchModel11)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        ExactMatchModel11 IPersistableModel<ExactMatchModel11>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ExactMatchModel11>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeExactMatchModel11(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(ExactMatchModel11)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ExactMatchModel11>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         internal partial class ExactMatchModel11Converter : JsonConverter<ExactMatchModel11>
         {
             public override void Write(Utf8JsonWriter writer, ExactMatchModel11 model, JsonSerializerOptions options)
             {
-                writer.WriteObjectValue(model, ModelSerializationExtensions.WireOptions);
+                writer.WriteObjectValue(model);
             }
 
             public override ExactMatchModel11 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

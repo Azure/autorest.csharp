@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace CognitiveSearch.Models
 {
     /// <summary> An empty object that represents the default cognitive service resource for a skillset. </summary>
@@ -22,8 +19,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="DefaultCognitiveServicesAccount"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the cognitive service resource attached to a skillset. </param>
         /// <param name="description"> Description of the cognitive service resource attached to a skillset. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal DefaultCognitiveServicesAccount(string odataType, string description, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, description, serializedAdditionalRawData)
+        internal DefaultCognitiveServicesAccount(string odataType, string description) : base(odataType, description)
         {
             OdataType = odataType ?? "#Microsoft.Azure.Search.DefaultCognitiveServices";
         }

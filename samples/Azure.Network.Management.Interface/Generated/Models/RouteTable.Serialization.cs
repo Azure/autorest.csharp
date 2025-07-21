@@ -5,40 +5,37 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class RouteTable : IUtf8JsonSerializable, IJsonModel<RouteTable>
+    public partial class RouteTable : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RouteTable>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<RouteTable>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RouteTable>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            if (Optional.IsDefined(Id))
             {
-                throw new FormatException($"The model {nameof(RouteTable)} does not support writing '{format}' format.");
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-
-            base.JsonModelWriteCore(writer, options);
-            if (options.Format != "W" && Optional.IsDefined(Etag))
+            if (Optional.IsDefined(Location))
             {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location);
+            }
+            if (Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -48,17 +45,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Routes)
                 {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-            if (options.Format != "W" && Optional.IsCollectionDefined(Subnets))
-            {
-                writer.WritePropertyName("subnets"u8);
-                writer.WriteStartArray();
-                foreach (var item in Subnets)
-                {
-                    writer.WriteObjectValue(item, options);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -67,30 +54,12 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("disableBgpRoutePropagation"u8);
                 writer.WriteBooleanValue(DisableBgpRoutePropagation.Value);
             }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState"u8);
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
-            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        RouteTable IJsonModel<RouteTable>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static RouteTable DeserializeRouteTable(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<RouteTable>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(RouteTable)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeRouteTable(document.RootElement, options);
-        }
-
-        internal static RouteTable DeserializeRouteTable(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -105,8 +74,6 @@ namespace Azure.Network.Management.Interface.Models
             IReadOnlyList<Subnet> subnets = default;
             bool? disableBgpRoutePropagation = default;
             ProvisioningState? provisioningState = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -166,7 +133,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<Route> array = new List<Route>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(Route.DeserializeRoute(item, options));
+                                array.Add(Route.DeserializeRoute(item));
                             }
                             routes = array;
                             continue;
@@ -180,7 +147,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<Subnet> array = new List<Subnet>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(Subnet.DeserializeSubnet(item, options));
+                                array.Add(Subnet.DeserializeSubnet(item));
                             }
                             subnets = array;
                             continue;
@@ -206,56 +173,19 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new RouteTable(
                 id,
                 name,
                 type,
                 location,
                 tags ?? new ChangeTrackingDictionary<string, string>(),
-                serializedAdditionalRawData,
                 etag,
                 routes ?? new ChangeTrackingList<Route>(),
                 subnets ?? new ChangeTrackingList<Subnet>(),
                 disableBgpRoutePropagation,
                 provisioningState);
         }
-
-        BinaryData IPersistableModel<RouteTable>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RouteTable>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureNetworkManagementInterfaceContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(RouteTable)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        RouteTable IPersistableModel<RouteTable>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RouteTable>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeRouteTable(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(RouteTable)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<RouteTable>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -269,7 +199,7 @@ namespace Azure.Network.Management.Interface.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

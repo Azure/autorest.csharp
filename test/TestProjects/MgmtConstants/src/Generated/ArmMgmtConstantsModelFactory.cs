@@ -36,8 +36,7 @@ namespace MgmtConstants.Models
                 tags,
                 location,
                 listener,
-                content,
-                serializedAdditionalRawData: null);
+                content);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelWithRequiredConstant"/>. </summary>
@@ -48,7 +47,7 @@ namespace MgmtConstants.Models
         /// <returns> A new <see cref="Models.ModelWithRequiredConstant"/> instance for mocking. </returns>
         public static ModelWithRequiredConstant ModelWithRequiredConstant(StringConstant requiredStringConstant = default, IntConstant requiredIntConstant = default, bool requiredBooleanConstant = default, FloatConstant requiredFloatConstant = default)
         {
-            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant, serializedAdditionalRawData: null);
+            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant);
         }
     }
 }

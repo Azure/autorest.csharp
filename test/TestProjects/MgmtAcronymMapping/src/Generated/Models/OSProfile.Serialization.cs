@@ -5,35 +5,17 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class OSProfile : IUtf8JsonSerializable, IJsonModel<OSProfile>
+    public partial class OSProfile : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OSProfile>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<OSProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<OSProfile>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(OSProfile)} does not support writing '{format}' format.");
-            }
-
             if (Optional.IsDefined(ComputerName))
             {
                 writer.WritePropertyName("computerName"u8);
@@ -57,12 +39,12 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(WindowsConfiguration))
             {
                 writer.WritePropertyName("windowsConfiguration"u8);
-                writer.WriteObjectValue(WindowsConfiguration, options);
+                writer.WriteObjectValue(WindowsConfiguration);
             }
             if (Optional.IsDefined(LinuxConfiguration))
             {
                 writer.WritePropertyName("linuxConfiguration"u8);
-                writer.WriteObjectValue(LinuxConfiguration, options);
+                writer.WriteObjectValue(LinuxConfiguration);
             }
             if (Optional.IsCollectionDefined(Secrets))
             {
@@ -70,7 +52,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in Secrets)
                 {
-                    writer.WriteObjectValue(item, options);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
@@ -84,39 +66,11 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("requireGuestProvisionSignal"u8);
                 writer.WriteBooleanValue(RequireGuestProvisionSignal.Value);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
+            writer.WriteEndObject();
         }
 
-        OSProfile IJsonModel<OSProfile>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static OSProfile DeserializeOSProfile(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<OSProfile>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(OSProfile)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeOSProfile(document.RootElement, options);
-        }
-
-        internal static OSProfile DeserializeOSProfile(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -130,8 +84,6 @@ namespace MgmtAcronymMapping.Models
             IList<VaultSecretGroup> secrets = default;
             bool? allowExtensionOperations = default;
             bool? requireGuestProvisionSignal = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("computerName"u8))
@@ -160,7 +112,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    windowsConfiguration = WindowsConfiguration.DeserializeWindowsConfiguration(property.Value, options);
+                    windowsConfiguration = WindowsConfiguration.DeserializeWindowsConfiguration(property.Value);
                     continue;
                 }
                 if (property.NameEquals("linuxConfiguration"u8))
@@ -169,7 +121,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    linuxConfiguration = LinuxConfiguration.DeserializeLinuxConfiguration(property.Value, options);
+                    linuxConfiguration = LinuxConfiguration.DeserializeLinuxConfiguration(property.Value);
                     continue;
                 }
                 if (property.NameEquals("secrets"u8))
@@ -181,7 +133,7 @@ namespace MgmtAcronymMapping.Models
                     List<VaultSecretGroup> array = new List<VaultSecretGroup>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VaultSecretGroup.DeserializeVaultSecretGroup(item, options));
+                        array.Add(VaultSecretGroup.DeserializeVaultSecretGroup(item));
                     }
                     secrets = array;
                     continue;
@@ -204,12 +156,7 @@ namespace MgmtAcronymMapping.Models
                     requireGuestProvisionSignal = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new OSProfile(
                 computerName,
                 adminUsername,
@@ -219,39 +166,7 @@ namespace MgmtAcronymMapping.Models
                 linuxConfiguration,
                 secrets ?? new ChangeTrackingList<VaultSecretGroup>(),
                 allowExtensionOperations,
-                requireGuestProvisionSignal,
-                serializedAdditionalRawData);
+                requireGuestProvisionSignal);
         }
-
-        BinaryData IPersistableModel<OSProfile>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<OSProfile>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtAcronymMappingContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(OSProfile)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        OSProfile IPersistableModel<OSProfile>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<OSProfile>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeOSProfile(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(OSProfile)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<OSProfile>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

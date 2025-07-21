@@ -5,80 +5,31 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace AzureSample.ResourceManager.Storage.Models
 {
-    public partial class BlobRestoreRange : IUtf8JsonSerializable, IJsonModel<BlobRestoreRange>
+    public partial class BlobRestoreRange : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BlobRestoreRange>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<BlobRestoreRange>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<BlobRestoreRange>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(BlobRestoreRange)} does not support writing '{format}' format.");
-            }
-
             writer.WritePropertyName("startRange"u8);
             writer.WriteStringValue(StartRange);
             writer.WritePropertyName("endRange"u8);
             writer.WriteStringValue(EndRange);
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
+            writer.WriteEndObject();
         }
 
-        BlobRestoreRange IJsonModel<BlobRestoreRange>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static BlobRestoreRange DeserializeBlobRestoreRange(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<BlobRestoreRange>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(BlobRestoreRange)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeBlobRestoreRange(document.RootElement, options);
-        }
-
-        internal static BlobRestoreRange DeserializeBlobRestoreRange(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string startRange = default;
             string endRange = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("startRange"u8))
@@ -91,44 +42,8 @@ namespace AzureSample.ResourceManager.Storage.Models
                     endRange = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new BlobRestoreRange(startRange, endRange, serializedAdditionalRawData);
+            return new BlobRestoreRange(startRange, endRange);
         }
-
-        BinaryData IPersistableModel<BlobRestoreRange>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<BlobRestoreRange>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerStorageContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(BlobRestoreRange)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        BlobRestoreRange IPersistableModel<BlobRestoreRange>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<BlobRestoreRange>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeBlobRestoreRange(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(BlobRestoreRange)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<BlobRestoreRange>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

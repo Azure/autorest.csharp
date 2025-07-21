@@ -5,18 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace AzureSample.Storage.Tables.Models
 {
-    public partial class CorsRule : IXmlSerializable, IPersistableModel<CorsRule>
+    public partial class CorsRule : IXmlSerializable
     {
-        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "CorsRule");
             writer.WriteStartElement("AllowedOrigins");
@@ -37,12 +34,8 @@ namespace AzureSample.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, ModelSerializationExtensions.WireOptions);
-
-        internal static CorsRule DeserializeCorsRule(XElement element, ModelReaderWriterOptions options = null)
+        internal static CorsRule DeserializeCorsRule(XElement element)
         {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             string allowedOrigins = default;
             string allowedMethods = default;
             string allowedHeaders = default;
@@ -68,47 +61,7 @@ namespace AzureSample.Storage.Tables.Models
             {
                 maxAgeInSeconds = (int)maxAgeInSecondsElement;
             }
-            return new CorsRule(
-                allowedOrigins,
-                allowedMethods,
-                allowedHeaders,
-                exposedHeaders,
-                maxAgeInSeconds,
-                serializedAdditionalRawData: null);
+            return new CorsRule(allowedOrigins, allowedMethods, allowedHeaders, exposedHeaders, maxAgeInSeconds);
         }
-
-        BinaryData IPersistableModel<CorsRule>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<CorsRule>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    {
-                        using MemoryStream stream = new MemoryStream();
-                        using XmlWriter writer = XmlWriter.Create(stream);
-                        WriteInternal(writer, null, options);
-                        writer.Flush();
-                        return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(CorsRule)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        CorsRule IPersistableModel<CorsRule>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<CorsRule>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    return DeserializeCorsRule(XElement.Load(data.ToStream()), options);
-                default:
-                    throw new FormatException($"The model {nameof(CorsRule)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<CorsRule>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

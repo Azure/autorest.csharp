@@ -6,34 +6,16 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace AzureSample.ResourceManager.Storage.Models
 {
-    public partial class ResourceAccessRule : IUtf8JsonSerializable, IJsonModel<ResourceAccessRule>
+    public partial class ResourceAccessRule : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceAccessRule>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<ResourceAccessRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceAccessRule>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ResourceAccessRule)} does not support writing '{format}' format.");
-            }
-
             if (Optional.IsDefined(TenantId))
             {
                 writer.WritePropertyName("tenantId"u8);
@@ -44,47 +26,17 @@ namespace AzureSample.ResourceManager.Storage.Models
                 writer.WritePropertyName("resourceId"u8);
                 writer.WriteStringValue(ResourceId);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
+            writer.WriteEndObject();
         }
 
-        ResourceAccessRule IJsonModel<ResourceAccessRule>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static ResourceAccessRule DeserializeResourceAccessRule(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceAccessRule>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ResourceAccessRule)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeResourceAccessRule(document.RootElement, options);
-        }
-
-        internal static ResourceAccessRule DeserializeResourceAccessRule(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Guid? tenantId = default;
             string resourceId = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tenantId"u8))
@@ -101,44 +53,8 @@ namespace AzureSample.ResourceManager.Storage.Models
                     resourceId = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new ResourceAccessRule(tenantId, resourceId, serializedAdditionalRawData);
+            return new ResourceAccessRule(tenantId, resourceId);
         }
-
-        BinaryData IPersistableModel<ResourceAccessRule>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceAccessRule>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerStorageContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(ResourceAccessRule)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        ResourceAccessRule IPersistableModel<ResourceAccessRule>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceAccessRule>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeResourceAccessRule(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(ResourceAccessRule)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ResourceAccessRule>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

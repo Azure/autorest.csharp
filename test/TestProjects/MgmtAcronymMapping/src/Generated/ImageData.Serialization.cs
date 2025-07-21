@@ -17,44 +17,35 @@ using MgmtAcronymMapping.Models;
 
 namespace MgmtAcronymMapping
 {
-    public partial class ImageData : IUtf8JsonSerializable, IJsonModel<ImageData>
+    public partial class ImageData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImageData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<ImageData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ImageData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            if (Optional.IsCollectionDefined(Tags))
             {
-                throw new FormatException($"The model {nameof(ImageData)} does not support writing '{format}' format.");
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
-
-            base.JsonModelWriteCore(writer, options);
+            writer.WritePropertyName("location"u8);
+            writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(SourceVirtualMachine))
             {
                 writer.WritePropertyName("sourceVirtualMachine"u8);
-                ((IJsonModel<WritableSubResource>)SourceVirtualMachine).Write(writer, options);
+                ((IJsonModel<WritableSubResource>)SourceVirtualMachine).Write(writer, ModelSerializationExtensions.WireOptions);
             }
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                writer.WriteObjectValue(StorageProfile, options);
-            }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState"u8);
-                writer.WriteStringValue(ProvisioningState);
+                writer.WriteObjectValue(StorageProfile);
             }
             if (Optional.IsDefined(HyperVGeneration))
             {
@@ -62,24 +53,11 @@ namespace MgmtAcronymMapping
                 writer.WriteStringValue(HyperVGeneration.Value.ToString());
             }
             writer.WriteEndObject();
+            writer.WriteEndObject();
         }
 
-        ImageData IJsonModel<ImageData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static ImageData DeserializeImageData(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ImageData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ImageData)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeImageData(document.RootElement, options);
-        }
-
-        internal static ImageData DeserializeImageData(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -94,8 +72,6 @@ namespace MgmtAcronymMapping
             ImageStorageProfile storageProfile = default;
             string provisioningState = default;
             HyperVGenerationType? hyperVGeneration = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"u8))
@@ -138,7 +114,7 @@ namespace MgmtAcronymMapping
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, MgmtAcronymMappingContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -156,7 +132,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            sourceVirtualMachine = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), options, MgmtAcronymMappingContext.Default);
+                            sourceVirtualMachine = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                             continue;
                         }
                         if (property0.NameEquals("storageProfile"u8))
@@ -165,7 +141,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            storageProfile = ImageStorageProfile.DeserializeImageStorageProfile(property0.Value, options);
+                            storageProfile = ImageStorageProfile.DeserializeImageStorageProfile(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))
@@ -185,12 +161,7 @@ namespace MgmtAcronymMapping
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new ImageData(
                 id,
                 name,
@@ -201,39 +172,7 @@ namespace MgmtAcronymMapping
                 sourceVirtualMachine,
                 storageProfile,
                 provisioningState,
-                hyperVGeneration,
-                serializedAdditionalRawData);
+                hyperVGeneration);
         }
-
-        BinaryData IPersistableModel<ImageData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ImageData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtAcronymMappingContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(ImageData)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        ImageData IPersistableModel<ImageData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ImageData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeImageData(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(ImageData)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ImageData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

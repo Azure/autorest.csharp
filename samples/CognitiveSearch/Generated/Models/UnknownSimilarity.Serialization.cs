@@ -5,62 +5,29 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    internal partial class UnknownSimilarity : IUtf8JsonSerializable, IJsonModel<Similarity>
+    internal partial class UnknownSimilarity : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Similarity>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<Similarity>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
+            writer.WritePropertyName("@odata.type"u8);
+            writer.WriteStringValue(OdataType);
             writer.WriteEndObject();
         }
 
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static UnknownSimilarity DeserializeUnknownSimilarity(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Similarity>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(Similarity)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
-        }
-
-        Similarity IJsonModel<Similarity>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Similarity>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(Similarity)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeSimilarity(document.RootElement, options);
-        }
-
-        internal static UnknownSimilarity DeserializeUnknownSimilarity(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string odataType = "Unknown";
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@odata.type"u8))
@@ -68,45 +35,9 @@ namespace CognitiveSearch.Models
                     odataType = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new UnknownSimilarity(odataType, serializedAdditionalRawData);
+            return new UnknownSimilarity(odataType);
         }
-
-        BinaryData IPersistableModel<Similarity>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Similarity>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(Similarity)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        Similarity IPersistableModel<Similarity>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Similarity>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeSimilarity(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(Similarity)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<Similarity>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -120,7 +51,7 @@ namespace CognitiveSearch.Models
         internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue<Similarity>(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue<Similarity>(this);
             return content;
         }
     }

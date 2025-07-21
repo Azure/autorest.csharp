@@ -5,36 +5,16 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtOmitOperationGroups.Models
 {
-    public partial class ModelX : IUtf8JsonSerializable, IJsonModel<ModelX>
+    public partial class ModelX : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelX>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<ModelX>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelX>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(ModelX)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             if (Optional.IsDefined(C))
             {
                 writer.WritePropertyName("c"u8);
@@ -45,24 +25,16 @@ namespace MgmtOmitOperationGroups.Models
                 writer.WritePropertyName("d"u8);
                 writer.WriteStringValue(D);
             }
-        }
-
-        ModelX IJsonModel<ModelX>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelX>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            if (Optional.IsDefined(E))
             {
-                throw new FormatException($"The model {nameof(ModelX)} does not support reading '{format}' format.");
+                writer.WritePropertyName("e"u8);
+                writer.WriteStringValue(E);
             }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeModelX(document.RootElement, options);
+            writer.WriteEndObject();
         }
 
-        internal static ModelX DeserializeModelX(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static ModelX DeserializeModelX(JsonElement element)
         {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -70,8 +42,6 @@ namespace MgmtOmitOperationGroups.Models
             string c = default;
             string d = default;
             string e = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("c"u8))
@@ -89,44 +59,8 @@ namespace MgmtOmitOperationGroups.Models
                     e = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new ModelX(e, serializedAdditionalRawData, c, d);
+            return new ModelX(e, c, d);
         }
-
-        BinaryData IPersistableModel<ModelX>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelX>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtOmitOperationGroupsContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(ModelX)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        ModelX IPersistableModel<ModelX>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelX>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeModelX(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(ModelX)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ModelX>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

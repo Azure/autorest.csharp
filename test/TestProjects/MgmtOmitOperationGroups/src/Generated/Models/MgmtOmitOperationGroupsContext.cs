@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
-using MgmtOmitOperationGroups.Models;
 
 namespace MgmtOmitOperationGroups
 {
@@ -14,13 +13,6 @@ namespace MgmtOmitOperationGroups
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
-    [ModelReaderWriterBuildable(typeof(Model2Resource))]
-    [ModelReaderWriterBuildable(typeof(Model4))]
-    [ModelReaderWriterBuildable(typeof(Model5))]
-    [ModelReaderWriterBuildable(typeof(ModelQ))]
-    [ModelReaderWriterBuildable(typeof(ModelX))]
-    [ModelReaderWriterBuildable(typeof(ModelY))]
-    [ModelReaderWriterBuildable(typeof(ModelZ))]
     public partial class MgmtOmitOperationGroupsContext : ModelReaderWriterContext
     {
     }

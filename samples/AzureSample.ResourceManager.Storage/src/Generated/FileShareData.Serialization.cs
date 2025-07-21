@@ -17,40 +17,13 @@ using AzureSample.ResourceManager.Storage.Models;
 
 namespace AzureSample.ResourceManager.Storage
 {
-    public partial class FileShareData : IUtf8JsonSerializable, IJsonModel<FileShareData>
+    public partial class FileShareData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FileShareData>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<FileShareData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<FileShareData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(FileShareData)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
-            if (options.Format != "W" && Optional.IsDefined(Etag))
-            {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag.Value.ToString());
-            }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(LastModifiedOn))
-            {
-                writer.WritePropertyName("lastModifiedTime"u8);
-                writer.WriteStringValue(LastModifiedOn.Value, "O");
-            }
             if (Optional.IsCollectionDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
@@ -77,60 +50,10 @@ namespace AzureSample.ResourceManager.Storage
                 writer.WritePropertyName("rootSquash"u8);
                 writer.WriteStringValue(RootSquash.Value.ToString());
             }
-            if (options.Format != "W" && Optional.IsDefined(Version))
-            {
-                writer.WritePropertyName("version"u8);
-                writer.WriteStringValue(Version);
-            }
-            if (options.Format != "W" && Optional.IsDefined(Deleted))
-            {
-                writer.WritePropertyName("deleted"u8);
-                writer.WriteBooleanValue(Deleted.Value);
-            }
-            if (options.Format != "W" && Optional.IsDefined(DeletedOn))
-            {
-                writer.WritePropertyName("deletedTime"u8);
-                writer.WriteStringValue(DeletedOn.Value, "O");
-            }
-            if (options.Format != "W" && Optional.IsDefined(RemainingRetentionDays))
-            {
-                writer.WritePropertyName("remainingRetentionDays"u8);
-                writer.WriteNumberValue(RemainingRetentionDays.Value);
-            }
             if (Optional.IsDefined(AccessTier))
             {
                 writer.WritePropertyName("accessTier"u8);
                 writer.WriteStringValue(AccessTier.Value.ToString());
-            }
-            if (options.Format != "W" && Optional.IsDefined(AccessTierChangeOn))
-            {
-                writer.WritePropertyName("accessTierChangeTime"u8);
-                writer.WriteStringValue(AccessTierChangeOn.Value, "O");
-            }
-            if (options.Format != "W" && Optional.IsDefined(AccessTierStatus))
-            {
-                writer.WritePropertyName("accessTierStatus"u8);
-                writer.WriteStringValue(AccessTierStatus);
-            }
-            if (options.Format != "W" && Optional.IsDefined(ShareUsageBytes))
-            {
-                writer.WritePropertyName("shareUsageBytes"u8);
-                writer.WriteNumberValue(ShareUsageBytes.Value);
-            }
-            if (options.Format != "W" && Optional.IsDefined(LeaseStatus))
-            {
-                writer.WritePropertyName("leaseStatus"u8);
-                writer.WriteStringValue(LeaseStatus.Value.ToString());
-            }
-            if (options.Format != "W" && Optional.IsDefined(LeaseState))
-            {
-                writer.WritePropertyName("leaseState"u8);
-                writer.WriteStringValue(LeaseState.Value.ToString());
-            }
-            if (options.Format != "W" && Optional.IsDefined(LeaseDuration))
-            {
-                writer.WritePropertyName("leaseDuration"u8);
-                writer.WriteStringValue(LeaseDuration.Value.ToString());
             }
             if (Optional.IsCollectionDefined(SignedIdentifiers))
             {
@@ -138,34 +61,16 @@ namespace AzureSample.ResourceManager.Storage
                 writer.WriteStartArray();
                 foreach (var item in SignedIdentifiers)
                 {
-                    writer.WriteObjectValue(item, options);
+                    writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && Optional.IsDefined(SnapshotOn))
-            {
-                writer.WritePropertyName("snapshotTime"u8);
-                writer.WriteStringValue(SnapshotOn.Value, "O");
-            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        FileShareData IJsonModel<FileShareData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static FileShareData DeserializeFileShareData(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FileShareData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(FileShareData)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeFileShareData(document.RootElement, options);
-        }
-
-        internal static FileShareData DeserializeFileShareData(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -193,8 +98,6 @@ namespace AzureSample.ResourceManager.Storage
             LeaseDuration? leaseDuration = default;
             IList<SignedIdentifier> signedIdentifiers = default;
             DateTimeOffset? snapshotTime = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -227,7 +130,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions, AzureSampleResourceManagerStorageContext.Default);
+                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -389,7 +292,7 @@ namespace AzureSample.ResourceManager.Storage
                             List<SignedIdentifier> array = new List<SignedIdentifier>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(SignedIdentifier.DeserializeSignedIdentifier(item, options));
+                                array.Add(SignedIdentifier.DeserializeSignedIdentifier(item));
                             }
                             signedIdentifiers = array;
                             continue;
@@ -406,12 +309,7 @@ namespace AzureSample.ResourceManager.Storage
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
             return new FileShareData(
                 id,
                 name,
@@ -435,39 +333,7 @@ namespace AzureSample.ResourceManager.Storage
                 leaseDuration,
                 signedIdentifiers ?? new ChangeTrackingList<SignedIdentifier>(),
                 snapshotTime,
-                etag,
-                serializedAdditionalRawData);
+                etag);
         }
-
-        BinaryData IPersistableModel<FileShareData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<FileShareData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerStorageContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(FileShareData)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        FileShareData IPersistableModel<FileShareData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<FileShareData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeFileShareData(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(FileShareData)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<FileShareData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

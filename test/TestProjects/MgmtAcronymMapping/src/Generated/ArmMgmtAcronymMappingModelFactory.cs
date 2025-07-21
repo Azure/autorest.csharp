@@ -132,27 +132,26 @@ namespace MgmtAcronymMapping.Models
                 plan,
                 identity,
                 zones?.ToList(),
-                hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, serializedAdditionalRawData: null) : null,
+                hardwareVmSize != null ? new HardwareProfile(hardwareVmSize) : null,
                 storageProfile,
-                ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, serializedAdditionalRawData: null) : null,
+                ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null,
                 osProfile,
-                networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), serializedAdditionalRawData: null) : null,
-                encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, serializedAdditionalRawData: null) : null,
-                bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, serializedAdditionalRawData: null) : null,
+                networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList()) : null,
+                encryptionAtHost != null ? new SecurityProfile(encryptionAtHost) : null,
+                bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics) : null,
                 availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null,
                 virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null,
                 proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null,
                 priority,
                 evictionPolicy,
-                billingMaxPrice != null ? new BillingProfile(billingMaxPrice, serializedAdditionalRawData: null) : null,
+                billingMaxPrice != null ? new BillingProfile(billingMaxPrice) : null,
                 hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null,
                 hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null,
                 provisioningState,
                 instanceView,
                 licenseType,
                 vmId,
-                extensionsTimeBudget,
-                serializedAdditionalRawData: null);
+                extensionsTimeBudget);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ImageReference"/>. </summary>
@@ -185,7 +184,6 @@ namespace MgmtAcronymMapping.Models
         {
             return new ImageReference(
                 id,
-                serializedAdditionalRawData: null,
                 publisher,
                 offer,
                 sku,
@@ -248,8 +246,8 @@ namespace MgmtAcronymMapping.Models
             return new DataDisk(
                 lun,
                 name,
-                vhdUri != null ? new VirtualHardDisk(vhdUri, serializedAdditionalRawData: null) : null,
-                imageUri != null ? new VirtualHardDisk(imageUri, serializedAdditionalRawData: null) : null,
+                vhdUri != null ? new VirtualHardDisk(vhdUri) : null,
+                imageUri != null ? new VirtualHardDisk(imageUri) : null,
                 caching,
                 writeAcceleratorEnabled,
                 createOption,
@@ -257,8 +255,7 @@ namespace MgmtAcronymMapping.Models
                 managedDisk,
                 toBeDetached,
                 diskIopsReadWrite,
-                diskMBpsReadWrite,
-                serializedAdditionalRawData: null);
+                diskMBpsReadWrite);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineInstanceView"/>. </summary>
@@ -339,12 +336,11 @@ namespace MgmtAcronymMapping.Models
                 vmAgent,
                 maintenanceRedeployStatus,
                 disks?.ToList(),
-                vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, serializedAdditionalRawData: null) : null,
+                vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus) : null,
                 bootDiagnostics,
                 assignedHost,
                 statuses?.ToList(),
-                patchStatus,
-                serializedAdditionalRawData: null);
+                patchStatus);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineAgentInstanceView"/>. </summary>
@@ -366,7 +362,7 @@ namespace MgmtAcronymMapping.Models
             extensionHandlers ??= new List<VirtualMachineExtensionHandlerInstanceView>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new VirtualMachineAgentInstanceView(vmAgentVersion, extensionHandlers?.ToList(), statuses?.ToList(), serializedAdditionalRawData: null);
+            return new VirtualMachineAgentInstanceView(vmAgentVersion, extensionHandlers?.ToList(), statuses?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineExtensionHandlerInstanceView"/>. </summary>
@@ -385,7 +381,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.VirtualMachineExtensionHandlerInstanceView"/> instance for mocking. </returns>
         public static VirtualMachineExtensionHandlerInstanceView VirtualMachineExtensionHandlerInstanceView(string virtualMachineExtensionHandlerInstanceViewType = null, string typeHandlerVersion = null, InstanceViewStatus status = null)
         {
-            return new VirtualMachineExtensionHandlerInstanceView(virtualMachineExtensionHandlerInstanceViewType, typeHandlerVersion, status, serializedAdditionalRawData: null);
+            return new VirtualMachineExtensionHandlerInstanceView(virtualMachineExtensionHandlerInstanceViewType, typeHandlerVersion, status);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MaintenanceRedeployStatus"/>. </summary>
@@ -427,8 +423,7 @@ namespace MgmtAcronymMapping.Models
                 maintenanceWindowStartOn,
                 maintenanceWindowEndOn,
                 lastOperationResultCode,
-                lastOperationMessage,
-                serializedAdditionalRawData: null);
+                lastOperationMessage);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DiskInstanceView"/>. </summary>
@@ -450,7 +445,7 @@ namespace MgmtAcronymMapping.Models
             encryptionSettings ??= new List<DiskEncryptionSettings>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new DiskInstanceView(name, encryptionSettings?.ToList(), statuses?.ToList(), serializedAdditionalRawData: null);
+            return new DiskInstanceView(name, encryptionSettings?.ToList(), statuses?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BootDiagnosticsInstanceView"/>. </summary>
@@ -469,7 +464,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.BootDiagnosticsInstanceView"/> instance for mocking. </returns>
         public static BootDiagnosticsInstanceView BootDiagnosticsInstanceView(Uri consoleScreenshotBlobUri = null, Uri serialConsoleLogBlobUri = null, InstanceViewStatus status = null)
         {
-            return new BootDiagnosticsInstanceView(consoleScreenshotBlobUri, serialConsoleLogBlobUri, status, serializedAdditionalRawData: null);
+            return new BootDiagnosticsInstanceView(consoleScreenshotBlobUri, serialConsoleLogBlobUri, status);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachinePatchStatus"/>. </summary>
@@ -484,7 +479,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.VirtualMachinePatchStatus"/> instance for mocking. </returns>
         public static VirtualMachinePatchStatus VirtualMachinePatchStatus(AvailablePatchSummary availablePatchSummary = null, LastPatchInstallationSummary lastPatchInstallationSummary = null)
         {
-            return new VirtualMachinePatchStatus(availablePatchSummary, lastPatchInstallationSummary, serializedAdditionalRawData: null);
+            return new VirtualMachinePatchStatus(availablePatchSummary, lastPatchInstallationSummary);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AvailablePatchSummary"/>. </summary>
@@ -536,8 +531,7 @@ namespace MgmtAcronymMapping.Models
                 uri,
                 startOn,
                 lastModifiedOn,
-                error,
-                serializedAdditionalRawData: null);
+                error);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ApiError"/>. </summary>
@@ -566,13 +560,7 @@ namespace MgmtAcronymMapping.Models
         {
             details ??= new List<ApiErrorBase>();
 
-            return new ApiError(
-                details?.ToList(),
-                innererror,
-                code,
-                target,
-                message,
-                serializedAdditionalRawData: null);
+            return new ApiError(details?.ToList(), innererror, code, target, message);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ApiErrorBase"/>. </summary>
@@ -591,7 +579,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.ApiErrorBase"/> instance for mocking. </returns>
         public static ApiErrorBase ApiErrorBase(string code = null, string target = null, string message = null)
         {
-            return new ApiErrorBase(code, target, message, serializedAdditionalRawData: null);
+            return new ApiErrorBase(code, target, message);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.InnerError"/>. </summary>
@@ -606,7 +594,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.InnerError"/> instance for mocking. </returns>
         public static InnerError InnerError(string exceptiontype = null, string errordetail = null)
         {
-            return new InnerError(exceptiontype, errordetail, serializedAdditionalRawData: null);
+            return new InnerError(exceptiontype, errordetail);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.LastPatchInstallationSummary"/>. </summary>
@@ -678,8 +666,7 @@ namespace MgmtAcronymMapping.Models
                 startOn,
                 lastModifiedOn,
                 startedBy,
-                error,
-                serializedAdditionalRawData: null);
+                error);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtAcronymMapping.ImageData"/>. </summary>
@@ -720,42 +707,6 @@ namespace MgmtAcronymMapping.Models
                 sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null,
                 storageProfile,
                 provisioningState,
-                hyperVGeneration,
-                serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ImagePatch"/>. </summary>
-        /// <param name="tags">
-        /// Resource tags
-        /// Serialized Name: UpdateResource.tags
-        /// </param>
-        /// <param name="sourceVirtualMachineId">
-        /// The source virtual machine from which Image is created.
-        /// Serialized Name: ImageUpdate.properties.sourceVirtualMachine
-        /// </param>
-        /// <param name="storageProfile">
-        /// Specifies the storage settings for the virtual machine disks.
-        /// Serialized Name: ImageUpdate.properties.storageProfile
-        /// </param>
-        /// <param name="provisioningState">
-        /// The provisioning state.
-        /// Serialized Name: ImageUpdate.properties.provisioningState
-        /// </param>
-        /// <param name="hyperVGeneration">
-        /// Gets the HyperVGenerationType of the VirtualMachine created from the image
-        /// Serialized Name: ImageUpdate.properties.hyperVGeneration
-        /// </param>
-        /// <returns> A new <see cref="Models.ImagePatch"/> instance for mocking. </returns>
-        public static ImagePatch ImagePatch(IDictionary<string, string> tags = null, ResourceIdentifier sourceVirtualMachineId = null, ImageStorageProfile storageProfile = null, string provisioningState = null, HyperVGenerationType? hyperVGeneration = null)
-        {
-            tags ??= new Dictionary<string, string>();
-
-            return new ImagePatch(
-                tags,
-                serializedAdditionalRawData: null,
-                sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null,
-                storageProfile,
-                provisioningState,
                 hyperVGeneration);
         }
 
@@ -785,145 +736,7 @@ namespace MgmtAcronymMapping.Models
         {
             resources ??= new List<BinaryData>();
 
-            return new VirtualMachineCaptureResult(
-                id,
-                serializedAdditionalRawData: null,
-                schema,
-                contentVersion,
-                parameters,
-                resources?.ToList());
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.VirtualMachinePatch"/>. </summary>
-        /// <param name="tags">
-        /// Resource tags
-        /// Serialized Name: UpdateResource.tags
-        /// </param>
-        /// <param name="plan">
-        /// Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**.
-        /// Serialized Name: VirtualMachineUpdate.plan
-        /// </param>
-        /// <param name="identity">
-        /// The identity of the virtual machine, if configured.
-        /// Serialized Name: VirtualMachineUpdate.identity
-        /// </param>
-        /// <param name="zones">
-        /// The virtual machine zones.
-        /// Serialized Name: VirtualMachineUpdate.zones
-        /// </param>
-        /// <param name="hardwareVmSize">
-        /// Specifies the hardware settings for the virtual machine.
-        /// Serialized Name: VirtualMachineUpdate.properties.hardwareProfile
-        /// </param>
-        /// <param name="storageProfile">
-        /// Specifies the storage settings for the virtual machine disks.
-        /// Serialized Name: VirtualMachineUpdate.properties.storageProfile
-        /// </param>
-        /// <param name="ultraSSDEnabled">
-        /// Specifies additional capabilities enabled or disabled on the virtual machine.
-        /// Serialized Name: VirtualMachineUpdate.properties.additionalCapabilities
-        /// </param>
-        /// <param name="osProfile">
-        /// Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned.
-        /// Serialized Name: VirtualMachineUpdate.properties.osProfile
-        /// </param>
-        /// <param name="networkInterfaces">
-        /// Specifies the network interfaces of the virtual machine.
-        /// Serialized Name: VirtualMachineUpdate.properties.networkProfile
-        /// </param>
-        /// <param name="encryptionAtHost">
-        /// Specifies the Security related profile settings for the virtual machine.
-        /// Serialized Name: VirtualMachineUpdate.properties.securityProfile
-        /// </param>
-        /// <param name="bootDiagnostics">
-        /// Specifies the boot diagnostic settings state. &lt;br&gt;&lt;br&gt;Minimum api-version: 2015-06-15.
-        /// Serialized Name: VirtualMachineUpdate.properties.diagnosticsProfile
-        /// </param>
-        /// <param name="availabilitySetId">
-        /// Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). &lt;br&gt;&lt;br&gt; For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Currently, a VM can only be added to availability set at creation time. The availability set to which the VM is being added should be under the same resource group as the availability set resource. An existing VM cannot be added to an availability set. &lt;br&gt;&lt;br&gt;This property cannot exist along with a non-null properties.virtualMachineScaleSet reference.
-        /// Serialized Name: VirtualMachineUpdate.properties.availabilitySet
-        /// </param>
-        /// <param name="virtualMachineScaleSetId">
-        /// Specifies information about the virtual machine scale set that the virtual machine should be assigned to. Virtual machines specified in the same virtual machine scale set are allocated to different nodes to maximize availability. Currently, a VM can only be added to virtual machine scale set at creation time. An existing VM cannot be added to a virtual machine scale set. &lt;br&gt;&lt;br&gt;This property cannot exist along with a non-null properties.availabilitySet reference. &lt;br&gt;&lt;br&gt;Minimum api‐version: 2019‐03‐01
-        /// Serialized Name: VirtualMachineUpdate.properties.virtualMachineScaleSet
-        /// </param>
-        /// <param name="proximityPlacementGroupId">
-        /// Specifies information about the proximity placement group that the virtual machine should be assigned to. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-04-01.
-        /// Serialized Name: VirtualMachineUpdate.properties.proximityPlacementGroup
-        /// </param>
-        /// <param name="priority">
-        /// Specifies the priority for the virtual machine. &lt;br&gt;&lt;br&gt;Minimum api-version: 2019-03-01
-        /// Serialized Name: VirtualMachineUpdate.properties.priority
-        /// </param>
-        /// <param name="evictionPolicy">
-        /// Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. &lt;br&gt;&lt;br&gt;For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. &lt;br&gt;&lt;br&gt;For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview.
-        /// Serialized Name: VirtualMachineUpdate.properties.evictionPolicy
-        /// </param>
-        /// <param name="billingMaxPrice">
-        /// Specifies the billing related details of a Azure Spot virtual machine. &lt;br&gt;&lt;br&gt;Minimum api-version: 2019-03-01.
-        /// Serialized Name: VirtualMachineUpdate.properties.billingProfile
-        /// </param>
-        /// <param name="hostId">
-        /// Specifies information about the dedicated host that the virtual machine resides in. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-10-01.
-        /// Serialized Name: VirtualMachineUpdate.properties.host
-        /// </param>
-        /// <param name="hostGroupId">
-        /// Specifies information about the dedicated host group that the virtual machine resides in. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01. &lt;br&gt;&lt;br&gt;NOTE: User cannot specify both host and hostGroup properties.
-        /// Serialized Name: VirtualMachineUpdate.properties.hostGroup
-        /// </param>
-        /// <param name="provisioningState">
-        /// The provisioning state, which only appears in the response.
-        /// Serialized Name: VirtualMachineUpdate.properties.provisioningState
-        /// </param>
-        /// <param name="instanceView">
-        /// The virtual machine instance view.
-        /// Serialized Name: VirtualMachineUpdate.properties.instanceView
-        /// </param>
-        /// <param name="licenseType">
-        /// Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; Windows_Client &lt;br&gt;&lt;br&gt; Windows_Server &lt;br&gt;&lt;br&gt; If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. &lt;br&gt;&lt;br&gt; For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Minimum api-version: 2015-06-15
-        /// Serialized Name: VirtualMachineUpdate.properties.licenseType
-        /// </param>
-        /// <param name="vmId">
-        /// Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
-        /// Serialized Name: VirtualMachineUpdate.properties.vmId
-        /// </param>
-        /// <param name="extensionsTimeBudget">
-        /// Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). &lt;br&gt;&lt;br&gt; Minimum api-version: 2020-06-01
-        /// Serialized Name: VirtualMachineUpdate.properties.extensionsTimeBudget
-        /// </param>
-        /// <returns> A new <see cref="Models.VirtualMachinePatch"/> instance for mocking. </returns>
-        public static VirtualMachinePatch VirtualMachinePatch(IDictionary<string, string> tags = null, MgmtAcronymMappingPlan plan = null, ManagedServiceIdentity identity = null, IEnumerable<string> zones = null, VirtualMachineSizeType? hardwareVmSize = null, StorageProfile storageProfile = null, bool? ultraSSDEnabled = null, OSProfile osProfile = null, IEnumerable<NetworkInterfaceReference> networkInterfaces = null, bool? encryptionAtHost = null, BootDiagnostics bootDiagnostics = null, ResourceIdentifier availabilitySetId = null, ResourceIdentifier virtualMachineScaleSetId = null, ResourceIdentifier proximityPlacementGroupId = null, VirtualMachinePriorityType? priority = null, VirtualMachineEvictionPolicyType? evictionPolicy = null, double? billingMaxPrice = null, ResourceIdentifier hostId = null, ResourceIdentifier hostGroupId = null, string provisioningState = null, VirtualMachineInstanceView instanceView = null, string licenseType = null, string vmId = null, string extensionsTimeBudget = null)
-        {
-            tags ??= new Dictionary<string, string>();
-            zones ??= new List<string>();
-            networkInterfaces ??= new List<NetworkInterfaceReference>();
-
-            return new VirtualMachinePatch(
-                tags,
-                serializedAdditionalRawData: null,
-                plan,
-                identity,
-                zones?.ToList(),
-                hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, serializedAdditionalRawData: null) : null,
-                storageProfile,
-                ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, serializedAdditionalRawData: null) : null,
-                osProfile,
-                networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), serializedAdditionalRawData: null) : null,
-                encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, serializedAdditionalRawData: null) : null,
-                bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, serializedAdditionalRawData: null) : null,
-                availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null,
-                virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null,
-                proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null,
-                priority,
-                evictionPolicy,
-                billingMaxPrice != null ? new BillingProfile(billingMaxPrice, serializedAdditionalRawData: null) : null,
-                hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null,
-                hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null,
-                provisioningState,
-                instanceView,
-                licenseType,
-                vmId,
-                extensionsTimeBudget);
+            return new VirtualMachineCaptureResult(id, schema, contentVersion, parameters, resources?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineSize"/>. </summary>
@@ -960,8 +773,7 @@ namespace MgmtAcronymMapping.Models
                 osDiskSizeInMB,
                 resourceDiskSizeInMB,
                 memoryInMB,
-                maxDataDiskCount,
-                serializedAdditionalRawData: null);
+                maxDataDiskCount);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RetrieveBootDiagnosticsDataResult"/>. </summary>
@@ -976,7 +788,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.RetrieveBootDiagnosticsDataResult"/> instance for mocking. </returns>
         public static RetrieveBootDiagnosticsDataResult RetrieveBootDiagnosticsDataResult(Uri consoleScreenshotBlobUri = null, Uri serialConsoleLogBlobUri = null)
         {
-            return new RetrieveBootDiagnosticsDataResult(consoleScreenshotBlobUri, serialConsoleLogBlobUri, serializedAdditionalRawData: null);
+            return new RetrieveBootDiagnosticsDataResult(consoleScreenshotBlobUri, serialConsoleLogBlobUri);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineAssessPatchesResult"/>. </summary>
@@ -1025,8 +837,7 @@ namespace MgmtAcronymMapping.Models
                 otherPatchCount,
                 startOn,
                 patches?.ToList(),
-                error,
-                serializedAdditionalRawData: null);
+                error);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineSoftwarePatchProperties"/>. </summary>
@@ -1085,8 +896,7 @@ namespace MgmtAcronymMapping.Models
                 activityId,
                 publishedOn,
                 lastModifiedOn,
-                assessmentState,
-                serializedAdditionalRawData: null);
+                assessmentState);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtAcronymMapping.VirtualMachineScaleSetData"/>. </summary>
@@ -1213,9 +1023,8 @@ namespace MgmtAcronymMapping.Models
                 platformFaultDomainCount,
                 proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null,
                 hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null,
-                ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, serializedAdditionalRawData: null) : null,
-                scaleInRules != null ? new ScaleInPolicy(scaleInRules?.ToList(), serializedAdditionalRawData: null) : null,
-                serializedAdditionalRawData: null);
+                ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null,
+                scaleInRules != null ? new ScaleInPolicy(scaleInRules?.ToList()) : null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtAcronymMapping.VirtualMachineScaleSetExtensionData"/>. </summary>
@@ -1278,7 +1087,6 @@ namespace MgmtAcronymMapping.Models
 
             return new VirtualMachineScaleSetExtensionData(
                 id,
-                serializedAdditionalRawData: null,
                 name,
                 resourceType,
                 forceUpdateTag,
@@ -1301,7 +1109,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.SubResourceReadOnly"/> instance for mocking. </returns>
         public static SubResourceReadOnly SubResourceReadOnly(string id = null)
         {
-            return new SubResourceReadOnly(id, serializedAdditionalRawData: null);
+            return new SubResourceReadOnly(id);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetInstanceView"/>. </summary>
@@ -1329,7 +1137,7 @@ namespace MgmtAcronymMapping.Models
             statuses ??= new List<InstanceViewStatus>();
             orchestrationServices ??= new List<OrchestrationServiceSummary>();
 
-            return new VirtualMachineScaleSetInstanceView(virtualMachineStatusesSummary != null ? new VirtualMachineScaleSetInstanceViewStatusesSummary(virtualMachineStatusesSummary?.ToList(), serializedAdditionalRawData: null) : null, extensions?.ToList(), statuses?.ToList(), orchestrationServices?.ToList(), serializedAdditionalRawData: null);
+            return new VirtualMachineScaleSetInstanceView(virtualMachineStatusesSummary != null ? new VirtualMachineScaleSetInstanceViewStatusesSummary(virtualMachineStatusesSummary?.ToList()) : null, extensions?.ToList(), statuses?.ToList(), orchestrationServices?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineStatusCodeCount"/>. </summary>
@@ -1344,7 +1152,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.VirtualMachineStatusCodeCount"/> instance for mocking. </returns>
         public static VirtualMachineStatusCodeCount VirtualMachineStatusCodeCount(string code = null, int? count = null)
         {
-            return new VirtualMachineStatusCodeCount(code, count, serializedAdditionalRawData: null);
+            return new VirtualMachineStatusCodeCount(code, count);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetVmExtensionsSummary"/>. </summary>
@@ -1361,7 +1169,7 @@ namespace MgmtAcronymMapping.Models
         {
             statusesSummary ??= new List<VirtualMachineStatusCodeCount>();
 
-            return new VirtualMachineScaleSetVmExtensionsSummary(name, statusesSummary?.ToList(), serializedAdditionalRawData: null);
+            return new VirtualMachineScaleSetVmExtensionsSummary(name, statusesSummary?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.OrchestrationServiceSummary"/>. </summary>
@@ -1376,7 +1184,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.OrchestrationServiceSummary"/> instance for mocking. </returns>
         public static OrchestrationServiceSummary OrchestrationServiceSummary(OrchestrationServiceName? serviceName = null, OrchestrationServiceState? serviceState = null)
         {
-            return new OrchestrationServiceSummary(serviceName, serviceState, serializedAdditionalRawData: null);
+            return new OrchestrationServiceSummary(serviceName, serviceState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetExtensionPatch"/>. </summary>
@@ -1443,8 +1251,7 @@ namespace MgmtAcronymMapping.Models
                 settings,
                 protectedSettings,
                 provisioningState,
-                provisionAfterExtensions?.ToList(),
-                serializedAdditionalRawData: null);
+                provisionAfterExtensions?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetSku"/>. </summary>
@@ -1463,7 +1270,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.VirtualMachineScaleSetSku"/> instance for mocking. </returns>
         public static VirtualMachineScaleSetSku VirtualMachineScaleSetSku(string resourceType = null, MgmtAcronymMappingSku sku = null, VirtualMachineScaleSetSkuCapacity capacity = null)
         {
-            return new VirtualMachineScaleSetSku(resourceType, sku, capacity, serializedAdditionalRawData: null);
+            return new VirtualMachineScaleSetSku(resourceType, sku, capacity);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetSkuCapacity"/>. </summary>
@@ -1486,7 +1293,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.VirtualMachineScaleSetSkuCapacity"/> instance for mocking. </returns>
         public static VirtualMachineScaleSetSkuCapacity VirtualMachineScaleSetSkuCapacity(long? minimum = null, long? maximum = null, long? defaultCapacity = null, VirtualMachineScaleSetSkuScaleType? scaleType = null)
         {
-            return new VirtualMachineScaleSetSkuCapacity(minimum, maximum, defaultCapacity, scaleType, serializedAdditionalRawData: null);
+            return new VirtualMachineScaleSetSkuCapacity(minimum, maximum, defaultCapacity, scaleType);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UpgradeOperationHistoricalStatusInfo"/>. </summary>
@@ -1505,7 +1312,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.UpgradeOperationHistoricalStatusInfo"/> instance for mocking. </returns>
         public static UpgradeOperationHistoricalStatusInfo UpgradeOperationHistoricalStatusInfo(UpgradeOperationHistoricalStatusInfoProperties properties = null, ResourceType? upgradeOperationHistoricalStatusInfoType = null, AzureLocation? location = null)
         {
-            return new UpgradeOperationHistoricalStatusInfo(properties, upgradeOperationHistoricalStatusInfoType, location, serializedAdditionalRawData: null);
+            return new UpgradeOperationHistoricalStatusInfo(properties, upgradeOperationHistoricalStatusInfoType, location);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UpgradeOperationHistoricalStatusInfoProperties"/>. </summary>
@@ -1542,8 +1349,7 @@ namespace MgmtAcronymMapping.Models
                 error,
                 startedBy,
                 targetImageReference,
-                rollbackInfo,
-                serializedAdditionalRawData: null);
+                rollbackInfo);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UpgradeOperationHistoryStatus"/>. </summary>
@@ -1562,7 +1368,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.UpgradeOperationHistoryStatus"/> instance for mocking. </returns>
         public static UpgradeOperationHistoryStatus UpgradeOperationHistoryStatus(UpgradeState? code = null, DateTimeOffset? startOn = null, DateTimeOffset? endOn = null)
         {
-            return new UpgradeOperationHistoryStatus(code, startOn, endOn, serializedAdditionalRawData: null);
+            return new UpgradeOperationHistoryStatus(code, startOn, endOn);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RollingUpgradeProgressInfo"/>. </summary>
@@ -1585,7 +1391,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.RollingUpgradeProgressInfo"/> instance for mocking. </returns>
         public static RollingUpgradeProgressInfo RollingUpgradeProgressInfo(int? successfulInstanceCount = null, int? failedInstanceCount = null, int? inProgressInstanceCount = null, int? pendingInstanceCount = null)
         {
-            return new RollingUpgradeProgressInfo(successfulInstanceCount, failedInstanceCount, inProgressInstanceCount, pendingInstanceCount, serializedAdditionalRawData: null);
+            return new RollingUpgradeProgressInfo(successfulInstanceCount, failedInstanceCount, inProgressInstanceCount, pendingInstanceCount);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RollbackStatusInfo"/>. </summary>
@@ -1604,7 +1410,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.RollbackStatusInfo"/> instance for mocking. </returns>
         public static RollbackStatusInfo RollbackStatusInfo(int? successfullyRolledbackInstanceCount = null, int? failedRolledbackInstanceCount = null, ApiError rollbackError = null)
         {
-            return new RollbackStatusInfo(successfullyRolledbackInstanceCount, failedRolledbackInstanceCount, rollbackError, serializedAdditionalRawData: null);
+            return new RollbackStatusInfo(successfullyRolledbackInstanceCount, failedRolledbackInstanceCount, rollbackError);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtAcronymMapping.VirtualMachineScaleSetRollingUpgradeData"/>. </summary>
@@ -1645,8 +1451,7 @@ namespace MgmtAcronymMapping.Models
                 policy,
                 runningStatus,
                 progress,
-                error,
-                serializedAdditionalRawData: null);
+                error);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RollingUpgradeRunningStatus"/>. </summary>
@@ -1669,7 +1474,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.RollingUpgradeRunningStatus"/> instance for mocking. </returns>
         public static RollingUpgradeRunningStatus RollingUpgradeRunningStatus(RollingUpgradeStatusCode? code = null, DateTimeOffset? startOn = null, RollingUpgradeActionType? lastAction = null, DateTimeOffset? lastActionOn = null)
         {
-            return new RollingUpgradeRunningStatus(code, startOn, lastAction, lastActionOn, serializedAdditionalRawData: null);
+            return new RollingUpgradeRunningStatus(code, startOn, lastAction, lastActionOn);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RecoveryWalkResponse"/>. </summary>
@@ -1684,7 +1489,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.RecoveryWalkResponse"/> instance for mocking. </returns>
         public static RecoveryWalkResponse RecoveryWalkResponse(bool? walkPerformed = null, int? nextPlatformUpdateDomain = null)
         {
-            return new RecoveryWalkResponse(walkPerformed, nextPlatformUpdateDomain, serializedAdditionalRawData: null);
+            return new RecoveryWalkResponse(walkPerformed, nextPlatformUpdateDomain);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtAcronymMapping.VirtualMachineScaleSetVmData"/>. </summary>
@@ -1796,20 +1601,19 @@ namespace MgmtAcronymMapping.Models
                 latestModelApplied,
                 vmId,
                 instanceView,
-                hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, serializedAdditionalRawData: null) : null,
+                hardwareVmSize != null ? new HardwareProfile(hardwareVmSize) : null,
                 storageProfile,
-                ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, serializedAdditionalRawData: null) : null,
+                ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null,
                 osProfile,
-                encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, serializedAdditionalRawData: null) : null,
-                networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), serializedAdditionalRawData: null) : null,
-                networkInterfaceConfigurations != null ? new VirtualMachineScaleSetVmNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList(), serializedAdditionalRawData: null) : null,
-                bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, serializedAdditionalRawData: null) : null,
+                encryptionAtHost != null ? new SecurityProfile(encryptionAtHost) : null,
+                networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList()) : null,
+                networkInterfaceConfigurations != null ? new VirtualMachineScaleSetVmNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList()) : null,
+                bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics) : null,
                 availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null,
                 provisioningState,
                 licenseType,
                 modelDefinitionApplied,
-                protectionPolicy,
-                serializedAdditionalRawData: null);
+                protectionPolicy);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetVmInstanceView"/>. </summary>
@@ -1870,93 +1674,11 @@ namespace MgmtAcronymMapping.Models
                 vmAgent,
                 maintenanceRedeployStatus,
                 disks?.ToList(),
-                vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, serializedAdditionalRawData: null) : null,
+                vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus) : null,
                 bootDiagnostics,
                 statuses?.ToList(),
                 assignedHost,
-                placementGroupId,
-                serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.RequestRateByIntervalContent"/>. </summary>
-        /// <param name="blobContainerSasUri">
-        /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
-        /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
-        /// </param>
-        /// <param name="fromTime">
-        /// From time of the query
-        /// Serialized Name: LogAnalyticsInputBase.fromTime
-        /// </param>
-        /// <param name="toTime">
-        /// To time of the query
-        /// Serialized Name: LogAnalyticsInputBase.toTime
-        /// </param>
-        /// <param name="groupByThrottlePolicy">
-        /// Group query result by Throttle Policy applied.
-        /// Serialized Name: LogAnalyticsInputBase.groupByThrottlePolicy
-        /// </param>
-        /// <param name="groupByOperationName">
-        /// Group query result by Operation Name.
-        /// Serialized Name: LogAnalyticsInputBase.groupByOperationName
-        /// </param>
-        /// <param name="groupByResourceName">
-        /// Group query result by Resource Name.
-        /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
-        /// </param>
-        /// <param name="intervalLength">
-        /// Interval value in minutes used to create LogAnalytics call rate logs.
-        /// Serialized Name: RequestRateByIntervalInput.intervalLength
-        /// </param>
-        /// <returns> A new <see cref="Models.RequestRateByIntervalContent"/> instance for mocking. </returns>
-        public static RequestRateByIntervalContent RequestRateByIntervalContent(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null, IntervalInMin intervalLength = default)
-        {
-            return new RequestRateByIntervalContent(
-                blobContainerSasUri,
-                fromTime,
-                toTime,
-                groupByThrottlePolicy,
-                groupByOperationName,
-                groupByResourceName,
-                serializedAdditionalRawData: null,
-                intervalLength);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.LogAnalyticsInputBase"/>. </summary>
-        /// <param name="blobContainerSasUri">
-        /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
-        /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
-        /// </param>
-        /// <param name="fromTime">
-        /// From time of the query
-        /// Serialized Name: LogAnalyticsInputBase.fromTime
-        /// </param>
-        /// <param name="toTime">
-        /// To time of the query
-        /// Serialized Name: LogAnalyticsInputBase.toTime
-        /// </param>
-        /// <param name="groupByThrottlePolicy">
-        /// Group query result by Throttle Policy applied.
-        /// Serialized Name: LogAnalyticsInputBase.groupByThrottlePolicy
-        /// </param>
-        /// <param name="groupByOperationName">
-        /// Group query result by Operation Name.
-        /// Serialized Name: LogAnalyticsInputBase.groupByOperationName
-        /// </param>
-        /// <param name="groupByResourceName">
-        /// Group query result by Resource Name.
-        /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
-        /// </param>
-        /// <returns> A new <see cref="Models.LogAnalyticsInputBase"/> instance for mocking. </returns>
-        public static LogAnalyticsInputBase LogAnalyticsInputBase(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null)
-        {
-            return new LogAnalyticsInputBase(
-                blobContainerSasUri,
-                fromTime,
-                toTime,
-                groupByThrottlePolicy,
-                groupByOperationName,
-                groupByResourceName,
-                serializedAdditionalRawData: null);
+                placementGroupId);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.LogAnalytics"/>. </summary>
@@ -1983,51 +1705,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.LogAnalytics"/> instance for mocking. </returns>
         public static LogAnalytics LogAnalytics(string logAnalyticsOutput = null, ContentType? contentType = null, BinaryData content = null, RequestMethod? requestMethod = null, Uri basePathUri = null)
         {
-            return new LogAnalytics(
-                logAnalyticsOutput != null ? new LogAnalyticsOutput(logAnalyticsOutput, serializedAdditionalRawData: null) : null,
-                contentType,
-                content,
-                requestMethod,
-                basePathUri,
-                serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ThrottledRequestsContent"/>. </summary>
-        /// <param name="blobContainerSasUri">
-        /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
-        /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
-        /// </param>
-        /// <param name="fromTime">
-        /// From time of the query
-        /// Serialized Name: LogAnalyticsInputBase.fromTime
-        /// </param>
-        /// <param name="toTime">
-        /// To time of the query
-        /// Serialized Name: LogAnalyticsInputBase.toTime
-        /// </param>
-        /// <param name="groupByThrottlePolicy">
-        /// Group query result by Throttle Policy applied.
-        /// Serialized Name: LogAnalyticsInputBase.groupByThrottlePolicy
-        /// </param>
-        /// <param name="groupByOperationName">
-        /// Group query result by Operation Name.
-        /// Serialized Name: LogAnalyticsInputBase.groupByOperationName
-        /// </param>
-        /// <param name="groupByResourceName">
-        /// Group query result by Resource Name.
-        /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
-        /// </param>
-        /// <returns> A new <see cref="Models.ThrottledRequestsContent"/> instance for mocking. </returns>
-        public static ThrottledRequestsContent ThrottledRequestsContent(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null)
-        {
-            return new ThrottledRequestsContent(
-                blobContainerSasUri,
-                fromTime,
-                toTime,
-                groupByThrottlePolicy,
-                groupByOperationName,
-                groupByResourceName,
-                serializedAdditionalRawData: null);
+            return new LogAnalytics(logAnalyticsOutput != null ? new LogAnalyticsOutput(logAnalyticsOutput) : null, contentType, content, requestMethod, basePathUri);
         }
     }
 }

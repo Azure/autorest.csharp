@@ -5,35 +5,16 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace AzureSample.ResourceManager.Storage.Models
 {
-    public partial class SignedIdentifier : IUtf8JsonSerializable, IJsonModel<SignedIdentifier>
+    public partial class SignedIdentifier : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SignedIdentifier>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<SignedIdentifier>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SignedIdentifier>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(SignedIdentifier)} does not support writing '{format}' format.");
-            }
-
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
@@ -42,49 +23,19 @@ namespace AzureSample.ResourceManager.Storage.Models
             if (Optional.IsDefined(AccessPolicy))
             {
                 writer.WritePropertyName("accessPolicy"u8);
-                writer.WriteObjectValue(AccessPolicy, options);
+                writer.WriteObjectValue(AccessPolicy);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
+            writer.WriteEndObject();
         }
 
-        SignedIdentifier IJsonModel<SignedIdentifier>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static SignedIdentifier DeserializeSignedIdentifier(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SignedIdentifier>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(SignedIdentifier)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeSignedIdentifier(document.RootElement, options);
-        }
-
-        internal static SignedIdentifier DeserializeSignedIdentifier(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string id = default;
             AccessPolicy accessPolicy = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -98,47 +49,11 @@ namespace AzureSample.ResourceManager.Storage.Models
                     {
                         continue;
                     }
-                    accessPolicy = AccessPolicy.DeserializeAccessPolicy(property.Value, options);
+                    accessPolicy = AccessPolicy.DeserializeAccessPolicy(property.Value);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new SignedIdentifier(id, accessPolicy, serializedAdditionalRawData);
+            return new SignedIdentifier(id, accessPolicy);
         }
-
-        BinaryData IPersistableModel<SignedIdentifier>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SignedIdentifier>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, AzureSampleResourceManagerStorageContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(SignedIdentifier)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        SignedIdentifier IPersistableModel<SignedIdentifier>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SignedIdentifier>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeSignedIdentifier(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(SignedIdentifier)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<SignedIdentifier>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

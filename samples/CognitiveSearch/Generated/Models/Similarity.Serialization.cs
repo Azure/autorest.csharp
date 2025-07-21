@@ -5,70 +5,24 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class Similarity : IUtf8JsonSerializable, IJsonModel<Similarity>
+    public partial class Similarity : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Similarity>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<Similarity>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
+            writer.WritePropertyName("@odata.type"u8);
+            writer.WriteStringValue(OdataType);
             writer.WriteEndObject();
         }
 
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static Similarity DeserializeSimilarity(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Similarity>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(Similarity)} does not support writing '{format}' format.");
-            }
-
-            writer.WritePropertyName("@odata.type"u8);
-            writer.WriteStringValue(OdataType);
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        Similarity IJsonModel<Similarity>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Similarity>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(Similarity)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeSimilarity(document.RootElement, options);
-        }
-
-        internal static Similarity DeserializeSimilarity(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -77,43 +31,12 @@ namespace CognitiveSearch.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "#Microsoft.Azure.Search.BM25Similarity": return BM25Similarity.DeserializeBM25Similarity(element, options);
-                    case "#Microsoft.Azure.Search.ClassicSimilarity": return ClassicSimilarity.DeserializeClassicSimilarity(element, options);
+                    case "#Microsoft.Azure.Search.BM25Similarity": return BM25Similarity.DeserializeBM25Similarity(element);
+                    case "#Microsoft.Azure.Search.ClassicSimilarity": return ClassicSimilarity.DeserializeClassicSimilarity(element);
                 }
             }
-            return UnknownSimilarity.DeserializeUnknownSimilarity(element, options);
+            return UnknownSimilarity.DeserializeUnknownSimilarity(element);
         }
-
-        BinaryData IPersistableModel<Similarity>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Similarity>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, CognitiveSearchContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(Similarity)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        Similarity IPersistableModel<Similarity>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Similarity>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeSimilarity(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(Similarity)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<Similarity>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -127,7 +50,7 @@ namespace CognitiveSearch.Models
         internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this, ModelSerializationExtensions.WireOptions);
+            content.JsonWriter.WriteObjectValue(this);
             return content;
         }
     }

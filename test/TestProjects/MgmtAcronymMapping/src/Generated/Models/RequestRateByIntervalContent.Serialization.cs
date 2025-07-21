@@ -5,164 +5,40 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class RequestRateByIntervalContent : IUtf8JsonSerializable, IJsonModel<RequestRateByIntervalContent>
+    public partial class RequestRateByIntervalContent : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RequestRateByIntervalContent>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<RequestRateByIntervalContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RequestRateByIntervalContent>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(RequestRateByIntervalContent)} does not support writing '{format}' format.");
-            }
-
-            base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("intervalLength"u8);
             writer.WriteStringValue(IntervalLength.ToSerialString());
-        }
-
-        RequestRateByIntervalContent IJsonModel<RequestRateByIntervalContent>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RequestRateByIntervalContent>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            writer.WritePropertyName("blobContainerSasUri"u8);
+            writer.WriteStringValue(BlobContainerSasUri.AbsoluteUri);
+            writer.WritePropertyName("fromTime"u8);
+            writer.WriteStringValue(FromTime, "O");
+            writer.WritePropertyName("toTime"u8);
+            writer.WriteStringValue(ToTime, "O");
+            if (Optional.IsDefined(GroupByThrottlePolicy))
             {
-                throw new FormatException($"The model {nameof(RequestRateByIntervalContent)} does not support reading '{format}' format.");
+                writer.WritePropertyName("groupByThrottlePolicy"u8);
+                writer.WriteBooleanValue(GroupByThrottlePolicy.Value);
             }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeRequestRateByIntervalContent(document.RootElement, options);
-        }
-
-        internal static RequestRateByIntervalContent DeserializeRequestRateByIntervalContent(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
-            if (element.ValueKind == JsonValueKind.Null)
+            if (Optional.IsDefined(GroupByOperationName))
             {
-                return null;
+                writer.WritePropertyName("groupByOperationName"u8);
+                writer.WriteBooleanValue(GroupByOperationName.Value);
             }
-            IntervalInMin intervalLength = default;
-            Uri blobContainerSasUri = default;
-            DateTimeOffset fromTime = default;
-            DateTimeOffset toTime = default;
-            bool? groupByThrottlePolicy = default;
-            bool? groupByOperationName = default;
-            bool? groupByResourceName = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in element.EnumerateObject())
+            if (Optional.IsDefined(GroupByResourceName))
             {
-                if (property.NameEquals("intervalLength"u8))
-                {
-                    intervalLength = property.Value.GetString().ToIntervalInMin();
-                    continue;
-                }
-                if (property.NameEquals("blobContainerSasUri"u8))
-                {
-                    blobContainerSasUri = new Uri(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("fromTime"u8))
-                {
-                    fromTime = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("toTime"u8))
-                {
-                    toTime = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("groupByThrottlePolicy"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    groupByThrottlePolicy = property.Value.GetBoolean();
-                    continue;
-                }
-                if (property.NameEquals("groupByOperationName"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    groupByOperationName = property.Value.GetBoolean();
-                    continue;
-                }
-                if (property.NameEquals("groupByResourceName"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    groupByResourceName = property.Value.GetBoolean();
-                    continue;
-                }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
+                writer.WritePropertyName("groupByResourceName"u8);
+                writer.WriteBooleanValue(GroupByResourceName.Value);
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new RequestRateByIntervalContent(
-                blobContainerSasUri,
-                fromTime,
-                toTime,
-                groupByThrottlePolicy,
-                groupByOperationName,
-                groupByResourceName,
-                serializedAdditionalRawData,
-                intervalLength);
+            writer.WriteEndObject();
         }
-
-        BinaryData IPersistableModel<RequestRateByIntervalContent>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RequestRateByIntervalContent>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtAcronymMappingContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(RequestRateByIntervalContent)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        RequestRateByIntervalContent IPersistableModel<RequestRateByIntervalContent>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RequestRateByIntervalContent>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeRequestRateByIntervalContent(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(RequestRateByIntervalContent)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<RequestRateByIntervalContent>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

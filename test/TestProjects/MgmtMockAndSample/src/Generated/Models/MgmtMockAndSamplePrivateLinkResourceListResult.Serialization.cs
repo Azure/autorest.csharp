@@ -5,85 +5,20 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    internal partial class MgmtMockAndSamplePrivateLinkResourceListResult : IUtf8JsonSerializable, IJsonModel<MgmtMockAndSamplePrivateLinkResourceListResult>
+    internal partial class MgmtMockAndSamplePrivateLinkResourceListResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtMockAndSamplePrivateLinkResourceListResult>)this).Write(writer, ModelSerializationExtensions.WireOptions);
-
-        void IJsonModel<MgmtMockAndSamplePrivateLinkResourceListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static MgmtMockAndSamplePrivateLinkResourceListResult DeserializeMgmtMockAndSamplePrivateLinkResourceListResult(JsonElement element)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<MgmtMockAndSamplePrivateLinkResourceListResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(MgmtMockAndSamplePrivateLinkResourceListResult)} does not support writing '{format}' format.");
-            }
-
-            if (Optional.IsCollectionDefined(Value))
-            {
-                writer.WritePropertyName("value"u8);
-                writer.WriteStartArray();
-                foreach (var item in Value)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value, ModelSerializationExtensions.JsonDocumentOptions))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-        }
-
-        MgmtMockAndSamplePrivateLinkResourceListResult IJsonModel<MgmtMockAndSamplePrivateLinkResourceListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<MgmtMockAndSamplePrivateLinkResourceListResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(MgmtMockAndSamplePrivateLinkResourceListResult)} does not support reading '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeMgmtMockAndSamplePrivateLinkResourceListResult(document.RootElement, options);
-        }
-
-        internal static MgmtMockAndSamplePrivateLinkResourceListResult DeserializeMgmtMockAndSamplePrivateLinkResourceListResult(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= ModelSerializationExtensions.WireOptions;
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             IReadOnlyList<MgmtMockAndSamplePrivateLinkResource> value = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -95,49 +30,13 @@ namespace MgmtMockAndSample.Models
                     List<MgmtMockAndSamplePrivateLinkResource> array = new List<MgmtMockAndSamplePrivateLinkResource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MgmtMockAndSamplePrivateLinkResource.DeserializeMgmtMockAndSamplePrivateLinkResource(item, options));
+                        array.Add(MgmtMockAndSamplePrivateLinkResource.DeserializeMgmtMockAndSamplePrivateLinkResource(item));
                     }
                     value = array;
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = rawDataDictionary;
-            return new MgmtMockAndSamplePrivateLinkResourceListResult(value ?? new ChangeTrackingList<MgmtMockAndSamplePrivateLinkResource>(), serializedAdditionalRawData);
+            return new MgmtMockAndSamplePrivateLinkResourceListResult(value ?? new ChangeTrackingList<MgmtMockAndSamplePrivateLinkResource>());
         }
-
-        BinaryData IPersistableModel<MgmtMockAndSamplePrivateLinkResourceListResult>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<MgmtMockAndSamplePrivateLinkResourceListResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options, MgmtMockAndSampleContext.Default);
-                default:
-                    throw new FormatException($"The model {nameof(MgmtMockAndSamplePrivateLinkResourceListResult)} does not support writing '{options.Format}' format.");
-            }
-        }
-
-        MgmtMockAndSamplePrivateLinkResourceListResult IPersistableModel<MgmtMockAndSamplePrivateLinkResourceListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<MgmtMockAndSamplePrivateLinkResourceListResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data, ModelSerializationExtensions.JsonDocumentOptions);
-                        return DeserializeMgmtMockAndSamplePrivateLinkResourceListResult(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(MgmtMockAndSamplePrivateLinkResourceListResult)} does not support reading '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<MgmtMockAndSamplePrivateLinkResourceListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }
