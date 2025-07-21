@@ -8,5 +8,4 @@ input-file: $(this-folder)/SingleTopLevelClientWithOperations.json
 security: AzureKey
 security-header-name: Fake-Subscription-Key
 single-top-level-client: true
-use-model-reader-writer: true
 ```

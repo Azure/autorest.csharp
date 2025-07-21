@@ -9,7 +9,6 @@ title: MgmtExactMatchInheritance
 require: $(this-folder)/../../../../readme.md
 azure-arm: true
 model-namespace: false
-use-model-reader-writer: true
 input-file: $(this-folder)/../MgmtExactMatchInheritance.json
 namespace: MgmtExactMatchInheritance
 format-by-name-rules:

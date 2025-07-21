@@ -11,7 +11,6 @@ input-file:
   - https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/searchindex.json
   - https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/search/data-plane/Azure.Search/preview/2019-05-06-preview/searchservice.json
 namespace: Azure.CognitiveSearch
-use-model-reader-writer: true
 
 suppress-abstract-base-class:
 - Analyzer

@@ -9,5 +9,4 @@ azure-arm: true
 require: $(this-folder)/../../../../readme.md
 input-file: $(this-folder)/../MgmtExtensionCommonRestOperation.json
 namespace: MgmtExtensionCommonRestOperation
-use-model-reader-writer: true
 ```

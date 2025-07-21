@@ -9,7 +9,6 @@ title: MgmtParamOrdering
 require: $(this-folder)/../../../../readme.md
 azure-arm: true
 model-namespace: false
-use-model-reader-writer: true
 input-file: $(this-folder)/../MgmtParamOrdering.json
 namespace: MgmtParamOrdering
 modelerfour:

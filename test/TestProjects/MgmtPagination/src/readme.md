@@ -11,5 +11,4 @@ azure-arm: true
 require: $(this-folder)/../../../../readme.md
 input-file: $(this-folder)/../PageSize.json
 namespace: MgmtPagination
-use-model-reader-writer: true
 ```

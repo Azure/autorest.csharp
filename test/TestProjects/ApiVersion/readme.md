@@ -8,5 +8,4 @@ generation1-convenience-client: true
 require: $(this-folder)/../../../readme.md
 input-file: $(this-folder)/ApiVersion.json
 namespace: Azure.ApiVersion
-use-model-reader-writer: true
 ```

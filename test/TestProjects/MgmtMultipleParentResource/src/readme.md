@@ -9,7 +9,6 @@ azure-arm: true
 require: $(this-folder)/../../../../readme.md
 input-file: $(this-folder)/../mgmtMultipleParentResource.json
 namespace: MgmtMultipleParentResource
-use-model-reader-writer: true
 modelerfour:
   lenient-model-deduplication: true
 format-by-name-rules:

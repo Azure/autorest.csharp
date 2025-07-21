@@ -10,7 +10,6 @@ title: MgmtNoTypeReplacement
 require: $(this-folder)/../../../../readme.md
 azure-arm: true
 model-namespace: false
-use-model-reader-writer: true
 input-file: $(this-folder)/../MgmtNoTypeReplacement.json
 namespace: MgmtNoTypeReplacement
 clean-output-folder: true

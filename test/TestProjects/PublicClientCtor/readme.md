@@ -8,7 +8,6 @@ generation1-convenience-client: true
 require: $(this-folder)/../../../readme.md
 input-file: $(this-folder)/PublicClientCtor.json
 namespace: Azure.PublicClientCtor
-use-model-reader-writer: true
 security: [AzureKey, AADToken]
 security-header-name: fake-key
 security-scopes:

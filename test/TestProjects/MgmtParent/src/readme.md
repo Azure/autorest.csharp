@@ -12,7 +12,6 @@ namespace: MgmtParent
 model-namespace: false
 public-clients: false
 head-as-boolean: false
-use-model-reader-writer: true
 modelerfour:
   lenient-model-deduplication: true
 

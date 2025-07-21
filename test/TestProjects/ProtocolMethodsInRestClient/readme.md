@@ -16,5 +16,4 @@ protocol-method-list:
   - firstTemplate_Create
   - firstTemplate_Get
   - secondTemplate_Get
-use-model-reader-writer: true
 ```

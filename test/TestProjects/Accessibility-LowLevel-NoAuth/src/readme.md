@@ -8,5 +8,4 @@
 require: $(this-folder)/../../../../readme.md
 input-file: $(this-folder)/../../Accessibility-LowLevel/src/Accessibility-LowLevel.json
 library-name: AccessibilityNoAuth
-use-model-reader-writer: true
 ```
