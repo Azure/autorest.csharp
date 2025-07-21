@@ -60,8 +60,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             bool ShouldExcludeAttribute(AttributeSyntax attr)
             {
-                var attributeArgmentNames = attr.ArgumentList?.Arguments.Select(x => ((x.Expression as TypeOfExpressionSyntax)?.Type as QualifiedNameSyntax)?.Right.Identifier.Text);
-                return attributeArgmentNames != null && attributeArgmentNames.Any(name => name is not null && _suppressedTypeNames.Contains(name));
+                var attributeArgumentNames = attr.ArgumentList?.Arguments.Select(x => ((x.Expression as TypeOfExpressionSyntax)?.Type as QualifiedNameSyntax)?.Right.Identifier.Text);
+                return attributeArgumentNames != null && attributeArgumentNames.Any(name => name is not null && _suppressedTypeNames.Contains(name));
             }
         }
 
