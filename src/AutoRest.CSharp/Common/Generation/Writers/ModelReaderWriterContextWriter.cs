@@ -89,13 +89,29 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             {
                 buildableTypes.Add(type);
 
-                if (model is not null)
+                if (model is null)
                 {
-                    // Process properties recursively to find their types
-                    foreach (var property in model.Properties)
+                    return;
+                }
+
+                // Process properties recursively to find their types
+                foreach (var property in model.Properties)
+                {
+                    var propertyType = property.Declaration.Type.IsCollection ? GetInnerMostElement(property.Declaration.Type) : property.Declaration.Type;
+                    ProcessModel(propertyType, visitedTypes, buildableTypes, modelDictionary);
+                }
+
+                var baseModels = model.EnumerateHierarchy().Skip(1).ToList();
+                foreach (var baseModel in baseModels)
+                {
+                    // Process base model properties recursively
+                    if (baseModel is SystemObjectType || baseModel is SerializableObjectType)
                     {
-                        var propertyType = property.Declaration.Type.IsCollection ? GetInnerMostElement(property.Declaration.Type) : property.Declaration.Type;
-                        ProcessModel(propertyType, visitedTypes, buildableTypes, modelDictionary);
+                        foreach (var baseProperty in baseModel.Properties)
+                        {
+                            var basePropertyType = baseProperty.Declaration.Type.IsCollection ? GetInnerMostElement(baseProperty.Declaration.Type) : baseProperty.Declaration.Type;
+                            ProcessModel(basePropertyType, visitedTypes, buildableTypes, modelDictionary);
+                        }
                     }
                 }
             }

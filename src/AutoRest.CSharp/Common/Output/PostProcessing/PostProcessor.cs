@@ -140,10 +140,21 @@ internal class PostProcessor
         }
 
         var modelNamesToRemove = nodesToInternalize.Keys.Select(item => item.Identifier.Text).Concat(suppressedTypeNames);
+        var modelFullNamesToRemove = nodesToInternalize.Keys.Select(item => GetFullName(item)).ToHashSet();
         project = await RemoveMethodsFromModelFactoryAsync(project, definitions, modelNamesToRemove.ToHashSet());
-        project = await RemoveAttributesFromModelRreaderWriterContext(project, modelNamesToRemove.ToHashSet());
+        project = await RemoveAttributesFromModelRreaderWriterContext(project, modelFullNamesToRemove);
 
         return project;
+
+        string GetFullName(BaseTypeDeclarationSyntax item)
+        {
+            var parent = item.Parent;
+            if (parent is NamespaceDeclarationSyntax namespaceDeclaration)
+            {
+                return $"global::{namespaceDeclaration.Name}.{item.Identifier.Text}";
+            }
+            return item.Identifier.Text;
+        }
     }
 
     private async Task<Project> RemoveAttributesFromModelRreaderWriterContext(Project project, HashSet<string> namesToRemove)
@@ -203,7 +214,7 @@ internal class PostProcessor
 
         bool ShouldRemoveAttribute(AttributeSyntax attr)
         {
-            var attributeArgumentNames = attr.ArgumentList?.Arguments.Select(x => ((x.Expression as TypeOfExpressionSyntax)?.Type as QualifiedNameSyntax)?.Right.Identifier.Text);
+            var attributeArgumentNames = attr.ArgumentList?.Arguments.Select(x => ((x.Expression as TypeOfExpressionSyntax)?.Type as QualifiedNameSyntax)?.ToString());
             return attributeArgumentNames != null && attributeArgumentNames.Any(name => name is not null && namesToRemove.Contains(name));
         }
     }
