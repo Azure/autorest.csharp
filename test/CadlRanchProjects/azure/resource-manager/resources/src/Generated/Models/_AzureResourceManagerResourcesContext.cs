@@ -8,7 +8,6 @@
 using System.ClientModel.Primitives;
 using Azure.ResourceManager.Models;
 using _Azure.ResourceManager.Resources.Models;
-using Azure;
 
 namespace _Azure.ResourceManager.Resources
 {
@@ -33,7 +32,6 @@ namespace _Azure.ResourceManager.Resources
     [ModelReaderWriterBuildable(typeof(TopLevelTrackedResource))]
     [ModelReaderWriterBuildable(typeof(TopLevelTrackedResourceData))]
     [ModelReaderWriterBuildable(typeof(TopLevelTrackedResourceProperties))]
-    [ModelReaderWriterBuildable(typeof(ResponseError))]
     public partial class _AzureResourceManagerResourcesContext : ModelReaderWriterContext
     {
     }

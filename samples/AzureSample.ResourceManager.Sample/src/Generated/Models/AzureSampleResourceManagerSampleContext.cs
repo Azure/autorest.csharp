@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure.ResourceManager.Models;
 using AzureSample.ResourceManager.Sample.Models;
 
 namespace AzureSample.ResourceManager.Sample
@@ -19,6 +20,7 @@ namespace AzureSample.ResourceManager.Sample
     [ModelReaderWriterBuildable(typeof(ApiErrorBase))]
     [ModelReaderWriterBuildable(typeof(AutomaticOSUpgradePolicy))]
     [ModelReaderWriterBuildable(typeof(AutomaticRepairsPolicy))]
+    [ModelReaderWriterBuildable(typeof(AvailabilitySetData))]
     [ModelReaderWriterBuildable(typeof(AvailabilitySetListResult))]
     [ModelReaderWriterBuildable(typeof(AvailabilitySetPatch))]
     [ModelReaderWriterBuildable(typeof(AvailabilitySetResource))]
@@ -33,6 +35,8 @@ namespace AzureSample.ResourceManager.Sample
     [ModelReaderWriterBuildable(typeof(DataDisk))]
     [ModelReaderWriterBuildable(typeof(DataDiskImage))]
     [ModelReaderWriterBuildable(typeof(DedicatedHostAllocatableVm))]
+    [ModelReaderWriterBuildable(typeof(DedicatedHostData))]
+    [ModelReaderWriterBuildable(typeof(DedicatedHostGroupData))]
     [ModelReaderWriterBuildable(typeof(DedicatedHostGroupListResult))]
     [ModelReaderWriterBuildable(typeof(DedicatedHostGroupPatch))]
     [ModelReaderWriterBuildable(typeof(DedicatedHostGroupResource))]
@@ -44,6 +48,7 @@ namespace AzureSample.ResourceManager.Sample
     [ModelReaderWriterBuildable(typeof(DiffDiskSettings))]
     [ModelReaderWriterBuildable(typeof(DiskEncryptionSettings))]
     [ModelReaderWriterBuildable(typeof(DiskInstanceView))]
+    [ModelReaderWriterBuildable(typeof(ImageData))]
     [ModelReaderWriterBuildable(typeof(ImageDataDisk))]
     [ModelReaderWriterBuildable(typeof(ImageDisk))]
     [ModelReaderWriterBuildable(typeof(ImageListResult))]
@@ -68,6 +73,7 @@ namespace AzureSample.ResourceManager.Sample
     [ModelReaderWriterBuildable(typeof(OrchestrationServiceSummary))]
     [ModelReaderWriterBuildable(typeof(OSDisk))]
     [ModelReaderWriterBuildable(typeof(OSProfile))]
+    [ModelReaderWriterBuildable(typeof(ProximityPlacementGroupData))]
     [ModelReaderWriterBuildable(typeof(ProximityPlacementGroupListResult))]
     [ModelReaderWriterBuildable(typeof(ProximityPlacementGroupPatch))]
     [ModelReaderWriterBuildable(typeof(ProximityPlacementGroupResource))]
@@ -79,6 +85,7 @@ namespace AzureSample.ResourceManager.Sample
     [ModelReaderWriterBuildable(typeof(RollingUpgradePolicy))]
     [ModelReaderWriterBuildable(typeof(RollingUpgradeProgressInfo))]
     [ModelReaderWriterBuildable(typeof(RollingUpgradeRunningStatus))]
+    [ModelReaderWriterBuildable(typeof(SshPublicKeyData))]
     [ModelReaderWriterBuildable(typeof(SshPublicKeyGenerateKeyPairResult))]
     [ModelReaderWriterBuildable(typeof(SshPublicKeyInfo))]
     [ModelReaderWriterBuildable(typeof(SshPublicKeyPatch))]
@@ -89,6 +96,7 @@ namespace AzureSample.ResourceManager.Sample
     [ModelReaderWriterBuildable(typeof(SubResourceReadOnly))]
     [ModelReaderWriterBuildable(typeof(SubResourceWithColocationStatus))]
     [ModelReaderWriterBuildable(typeof(SubscriptionResourceGetVirtualMachineImagesOptions))]
+    [ModelReaderWriterBuildable(typeof(SystemData))]
     [ModelReaderWriterBuildable(typeof(TerminateNotificationProfile))]
     [ModelReaderWriterBuildable(typeof(ThrottledRequestsContent))]
     [ModelReaderWriterBuildable(typeof(UpdateResource))]
@@ -102,7 +110,10 @@ namespace AzureSample.ResourceManager.Sample
     [ModelReaderWriterBuildable(typeof(VirtualMachineAssessPatchesResult))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineCaptureContent))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineCaptureResult))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineData))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineExtensionData))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineExtensionHandlerInstanceView))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineExtensionImageData))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineExtensionImageResource))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineExtensionInstanceView))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineExtensionResource))]
@@ -115,7 +126,9 @@ namespace AzureSample.ResourceManager.Sample
     [ModelReaderWriterBuildable(typeof(VirtualMachinePatchStatus))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineReimageContent))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineResource))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetData))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetDataDisk))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetExtensionData))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetExtensionListResult))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetExtensionPatch))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetExtensionProfile))]
@@ -136,6 +149,7 @@ namespace AzureSample.ResourceManager.Sample
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetPublicIPAddressConfiguration))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetReimageContent))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetResource))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetRollingUpgradeData))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetRollingUpgradeResource))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetSku))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetSkuCapacity))]
@@ -149,6 +163,7 @@ namespace AzureSample.ResourceManager.Sample
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetUpdateStorageProfile))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetUpdateVmProfile))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetVirtualMachineExtensionResource))]
+    [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetVmData))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetVmExtensionsSummary))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetVmInstanceIds))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineScaleSetVmInstanceRequiredIds))]

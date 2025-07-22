@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure.ResourceManager.Models;
 using _Azure.ResourceManager.CommonProperties.Models;
 
 namespace _Azure.ResourceManager.CommonProperties
@@ -15,8 +16,11 @@ namespace _Azure.ResourceManager.CommonProperties
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
     [ModelReaderWriterBuildable(typeof(ConfidentialResource))]
+    [ModelReaderWriterBuildable(typeof(ConfidentialResourceData))]
     [ModelReaderWriterBuildable(typeof(ConfidentialResourceProperties))]
     [ModelReaderWriterBuildable(typeof(ManagedIdentityTrackedResource))]
+    [ModelReaderWriterBuildable(typeof(ManagedIdentityTrackedResourceData))]
+    [ModelReaderWriterBuildable(typeof(SystemData))]
     public partial class _AzureResourceManagerCommonPropertiesContext : ModelReaderWriterContext
     {
     }

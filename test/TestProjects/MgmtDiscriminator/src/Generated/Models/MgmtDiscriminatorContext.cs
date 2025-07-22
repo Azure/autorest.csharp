@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure.ResourceManager.Models;
 using MgmtDiscriminator.Models;
 
 namespace MgmtDiscriminator
@@ -14,6 +15,7 @@ namespace MgmtDiscriminator
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ArtifactData))]
     [ModelReaderWriterBuildable(typeof(ArtifactList))]
     [ModelReaderWriterBuildable(typeof(ArtifactResource))]
     [ModelReaderWriterBuildable(typeof(BaseModel))]
@@ -24,6 +26,7 @@ namespace MgmtDiscriminator
     [ModelReaderWriterBuildable(typeof(DeliveryRuleCacheExpirationAction))]
     [ModelReaderWriterBuildable(typeof(DeliveryRuleCacheKeyQueryStringAction))]
     [ModelReaderWriterBuildable(typeof(DeliveryRuleCondition))]
+    [ModelReaderWriterBuildable(typeof(DeliveryRuleData))]
     [ModelReaderWriterBuildable(typeof(DeliveryRuleProperties))]
     [ModelReaderWriterBuildable(typeof(DeliveryRuleQueryStringCondition))]
     [ModelReaderWriterBuildable(typeof(DeliveryRuleRemoteAddressCondition))]
@@ -47,6 +50,7 @@ namespace MgmtDiscriminator
     [ModelReaderWriterBuildable(typeof(RoleAssignmentArtifact))]
     [ModelReaderWriterBuildable(typeof(RouteConfigurationOverrideActionParameters))]
     [ModelReaderWriterBuildable(typeof(Shell))]
+    [ModelReaderWriterBuildable(typeof(SystemData))]
     [ModelReaderWriterBuildable(typeof(TemplateArtifact))]
     [ModelReaderWriterBuildable(typeof(Unflattened))]
     [ModelReaderWriterBuildable(typeof(UnknownArtifact))]
