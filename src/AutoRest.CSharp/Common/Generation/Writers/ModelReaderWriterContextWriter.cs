@@ -5,6 +5,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
@@ -39,13 +40,34 @@ namespace AutoRest.CSharp.Common.Generation.Writers
                 {
                     foreach (var type in buildableTypes)
                     {
-                        writer.Line($"[{typeof(ModelReaderWriterBuildableAttribute)}(typeof({type}))]");
+                        if (IsObsolete(type))
+                        {
+                            writer.Line($"#pragma warning disable CS0618 // Type or member is obsolete");
+                            writer.Line($"[{typeof(ModelReaderWriterBuildableAttribute)}(typeof({type}))]");
+                            writer.Line($"#pragma warning disable CS0618 // Type or member is obsolete");
+                        }
+                        else
+                        {
+                            writer.Line($"[{typeof(ModelReaderWriterBuildableAttribute)}(typeof({type}))]");
+                        }
                     }
                 }
 
                 using (writer.Scope($"public partial class {Name} : {typeof(ModelReaderWriterContext)}"))
                 {
                 }
+            }
+        }
+
+        private static bool IsObsolete(CSharpType type)
+        {
+            if (type.IsFrameworkType)
+            {
+                return type.FrameworkType.GetCustomAttributes().Any(a => a.GetType() == typeof(ObsoleteAttribute));
+            }
+            else
+            {
+                return type.Implementation.IsObsolete();
             }
         }
 
@@ -81,6 +103,12 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             // Skip if already processed
             if (visitedTypes.Contains(type))
                 return;
+
+            if (!type.IsFrameworkType && type.Implementation.Declaration.Accessibility != "public")
+            {
+                // Skip non-public types
+                return;
+            }
 
             visitedTypes.Add(type);
 

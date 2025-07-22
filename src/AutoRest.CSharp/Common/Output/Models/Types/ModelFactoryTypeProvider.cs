@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             : base(defaultNamespace, sourceInputModel)
         {
             _typeFactory = typeFactory;
-            _models = objectTypes;
+            _models = objectTypes.Where(o => !o.IsObsolete());
             DefaultName = $"{defaultClientName}ModelFactory".ToCleanName();
             DefaultAccessibility = "public";
             ExistingModelFactoryMethods = typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet();

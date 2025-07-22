@@ -86,6 +86,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             return defaultNamespace;
         }
 
+        public bool IsObsolete()
+        {
+            if (_sourceInputModel is null)
+                return false;
+            return _sourceInputModel.IsObsolete(Type);
+        }
+
         public override bool Equals(object? obj)
         {
             if (obj is null)
