@@ -20,7 +20,6 @@
   <ItemGroup>
     <Compile Include="../../src/assets/**/*.cs" />
     <Compile Include="../../test/TestProjects/FirstTest-TypeSpec/src/Generated/Internal/**/*.cs" Link="Generated/Helpers/%(RecursiveDir)/%(Filename)%(Extension)" />
-    <Compile Include="../../test/TestProjects/FirstTest-TypeSpec/src/Generated/Models/FirstTestTypeSpecContext.cs" Link="Generated/Helpers/%(RecursiveDir)/%(Filename)%(Extension)" />
   </ItemGroup>
 
 </Project>

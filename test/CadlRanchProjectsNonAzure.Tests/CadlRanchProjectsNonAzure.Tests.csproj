@@ -39,7 +39,6 @@
     <Compile Include="../../src/assets/Azure.Core.Shared/HttpMessageSanitizer.cs" LinkBase="Shared/Core" />
     <Compile Include="../../src/assets/Azure.Core.Shared/AppContextSwitchHelper.cs" LinkBase="Shared/Core" />
     <Compile Include="..\UnbrandedProjects\Unbranded-TypeSpec\src\Generated\Internal\*.cs" LinkBase="Shared/Internal" />
-    <Compile Include="..\UnbrandedProjects\Unbranded-TypeSpec\src\Generated\Models\UnbrandedTypeSpecContext.cs" LinkBase="Shared/Internal" />
   </ItemGroup>
 
 </Project>
