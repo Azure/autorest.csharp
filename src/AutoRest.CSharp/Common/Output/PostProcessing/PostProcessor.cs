@@ -27,6 +27,7 @@ internal class PostProcessor
     private readonly string? _aspExtensionClassName;
     private readonly ImmutableHashSet<string> _modelsToKeep;
     private INamedTypeSymbol? _mrwContextTypeSymbol;
+    private HashSet<Document>? _mrwContextDocuments;
 
     public PostProcessor(ImmutableHashSet<string> modelsToKeep, string? modelFactoryFullName = null, string? aspExtensionClassName = null)
     {
@@ -51,6 +52,7 @@ internal class PostProcessor
         var declarationCache = new Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>>(SymbolEqualityComparer.Default);
         var documentCache = new Dictionary<Document, HashSet<INamedTypeSymbol>>();
         _mrwContextTypeSymbol = compilation.GetTypeByMetadataName($"{Configuration.Namespace}.{ModelReaderWriterContextWriter.Name}");
+        _mrwContextDocuments = project.Documents.Where(d => d.Name.Contains(ModelReaderWriterContextWriter.Name)).ToHashSet();
 
         INamedTypeSymbol? modelFactorySymbol = null;
         if (_modelFactoryFullName != null)
@@ -117,7 +119,7 @@ internal class PostProcessor
         // first get all the declared symbols
         var definitions = await GetTypeSymbolsAsync(compilation, project, true);
         // build the reference map
-        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator).BuildPublicReferenceMapAsync(definitions.DeclaredSymbols, definitions.DeclaredNodesCache);
+        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator, _mrwContextDocuments!).BuildPublicReferenceMapAsync(definitions.DeclaredSymbols, definitions.DeclaredNodesCache);
         // get the root symbols
         var rootSymbols = GetRootSymbols(project, definitions);
         // traverse all the root and recursively add all the things we met
@@ -290,7 +292,7 @@ internal class PostProcessor
         // find all the declarations, including non-public declared
         var definitions = await GetTypeSymbolsAsync(compilation, project, false);
         // build reference map
-        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator).BuildAllReferenceMapAsync(definitions.DeclaredSymbols, definitions.DocumentsCache);
+        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator, _mrwContextDocuments!).BuildAllReferenceMapAsync(definitions.DeclaredSymbols, definitions.DocumentsCache);
         // get root symbols
         var rootSymbols = GetRootSymbols(project, definitions);
         // traverse the map to determine the declarations that we are about to remove, starting from root nodes

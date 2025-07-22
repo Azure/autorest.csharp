@@ -104,11 +104,6 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             if (visitedTypes.Contains(type))
                 return;
 
-            if (!type.IsFrameworkType && type.Implementation.Declaration.Accessibility != "public")
-            {
-                // Skip non-public types
-                return;
-            }
 
             visitedTypes.Add(type);
 

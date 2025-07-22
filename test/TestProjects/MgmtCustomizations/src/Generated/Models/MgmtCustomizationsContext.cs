@@ -17,8 +17,6 @@ namespace MgmtCustomizations
     /// </summary>
     [ModelReaderWriterBuildable(typeof(Cat))]
     [ModelReaderWriterBuildable(typeof(Dog))]
-    [ModelReaderWriterBuildable(typeof(ErrorAdditionalInfo))]
-    [ModelReaderWriterBuildable(typeof(ErrorResponse))]
     [ModelReaderWriterBuildable(typeof(Pet))]
     [ModelReaderWriterBuildable(typeof(PetStoreData))]
     [ModelReaderWriterBuildable(typeof(PetStoreProperties))]

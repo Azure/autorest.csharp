@@ -37,8 +37,6 @@ namespace MgmtDiscriminator
     [ModelReaderWriterBuildable(typeof(DeliveryRuleRouteConfigurationOverrideAction))]
     [ModelReaderWriterBuildable(typeof(DerivedModel))]
     [ModelReaderWriterBuildable(typeof(Dog))]
-    [ModelReaderWriterBuildable(typeof(ErrorAdditionalInfo))]
-    [ModelReaderWriterBuildable(typeof(ErrorResponse))]
     [ModelReaderWriterBuildable(typeof(HeaderActionParameters))]
     [ModelReaderWriterBuildable(typeof(OriginGroupOverride))]
     [ModelReaderWriterBuildable(typeof(OriginGroupOverrideAction))]
