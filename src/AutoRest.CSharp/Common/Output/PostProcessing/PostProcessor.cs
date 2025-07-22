@@ -487,7 +487,7 @@ internal class PostProcessor
 
         if (invalidAttributes.Count > 0)
         {
-            cu = cu.RemoveNodes(invalidAttributes, SyntaxRemoveOptions.KeepNoTrivia)!;
+            cu = cu.RemoveNodes(invalidAttributes, SyntaxRemoveOptions.KeepLeadingTrivia)!;
             solution = solution.WithDocumentSyntaxRoot(documentId, cu);
         }
 
