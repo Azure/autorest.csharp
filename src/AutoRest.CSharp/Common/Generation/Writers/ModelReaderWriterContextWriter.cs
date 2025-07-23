@@ -157,6 +157,12 @@ namespace AutoRest.CSharp.Common.Generation.Writers
                 return true;
             }
 
+            // If the type is SystemObjectType, it should always implement IPersistableModel or IJsonModel
+            if (!type.IsFrameworkType && type.Implementation is SystemObjectType)
+            {
+                return true;
+            }
+
             if (!type.IsFrameworkType || type.IsEnum || type.IsLiteral)
                 return false;
 

@@ -7,6 +7,7 @@
 
 using System.ClientModel.Primitives;
 using AuthoringTypeSpec.Models;
+using Azure;
 
 namespace AuthoringTypeSpec
 {
@@ -16,6 +17,7 @@ namespace AuthoringTypeSpec
     /// </summary>
     [ModelReaderWriterBuildable(typeof(DeploymentJob))]
     [ModelReaderWriterBuildable(typeof(JobWarning))]
+    [ModelReaderWriterBuildable(typeof(ResponseError))]
     [ModelReaderWriterBuildable(typeof(SwapDeploymentsJob))]
     public partial class AuthoringTypeSpecContext : ModelReaderWriterContext
     {

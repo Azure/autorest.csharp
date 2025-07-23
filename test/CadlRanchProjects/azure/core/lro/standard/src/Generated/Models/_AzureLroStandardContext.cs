@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure;
 using _Azure.Lro.Standard.Models;
 
 namespace _Azure.Lro.Standard
@@ -15,6 +16,7 @@ namespace _Azure.Lro.Standard
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
     [ModelReaderWriterBuildable(typeof(ExportedUser))]
+    [ModelReaderWriterBuildable(typeof(ResponseError))]
     [ModelReaderWriterBuildable(typeof(User))]
     public partial class _AzureLroStandardContext : ModelReaderWriterContext
     {

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure;
 using FirstTestTypeSpec.Models;
 
 namespace FirstTestTypeSpec
@@ -29,6 +30,7 @@ namespace FirstTestTypeSpec
     [ModelReaderWriterBuildable(typeof(ModelWithProjectedEnum))]
     [ModelReaderWriterBuildable(typeof(ModelWithRequiredNullableProperties))]
     [ModelReaderWriterBuildable(typeof(ProjectedModel))]
+    [ModelReaderWriterBuildable(typeof(ResponseError))]
     [ModelReaderWriterBuildable(typeof(ReturnsAnonymousModelResponse))]
     [ModelReaderWriterBuildable(typeof(RoundTripModel))]
     [ModelReaderWriterBuildable(typeof(ThereLevelElement))]

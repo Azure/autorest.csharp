@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure;
 using Azure.ResourceManager.Models;
 using _Azure.ResourceManager.Resources.Models;
 
@@ -25,6 +26,7 @@ namespace _Azure.ResourceManager.Resources
     [ModelReaderWriterBuildable(typeof(NestedProxyResourceData))]
     [ModelReaderWriterBuildable(typeof(NestedProxyResourceProperties))]
     [ModelReaderWriterBuildable(typeof(NotificationDetails))]
+    [ModelReaderWriterBuildable(typeof(ResponseError))]
     [ModelReaderWriterBuildable(typeof(SingletonTrackedResource))]
     [ModelReaderWriterBuildable(typeof(SingletonTrackedResourceData))]
     [ModelReaderWriterBuildable(typeof(SingletonTrackedResourceProperties))]

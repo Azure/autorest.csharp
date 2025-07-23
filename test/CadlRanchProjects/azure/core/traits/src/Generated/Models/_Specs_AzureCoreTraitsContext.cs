@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure;
 using _Specs_.Azure.Core.Traits.Models;
 
 namespace _Specs_.Azure.Core.Traits
@@ -14,6 +15,7 @@ namespace _Specs_.Azure.Core.Traits
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ResponseError))]
     [ModelReaderWriterBuildable(typeof(User))]
     [ModelReaderWriterBuildable(typeof(UserActionParam))]
     [ModelReaderWriterBuildable(typeof(UserActionResponse))]

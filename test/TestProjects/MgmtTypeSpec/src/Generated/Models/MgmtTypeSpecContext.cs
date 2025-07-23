@@ -6,7 +6,9 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure;
 using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources.Models;
 using MgmtTypeSpec.Models;
 
 namespace MgmtTypeSpec
@@ -15,14 +17,18 @@ namespace MgmtTypeSpec
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ExtendedLocation))]
     [ModelReaderWriterBuildable(typeof(FooData))]
     [ModelReaderWriterBuildable(typeof(FooProperties))]
     [ModelReaderWriterBuildable(typeof(FooResource))]
+    [ModelReaderWriterBuildable(typeof(ManagedServiceIdentity))]
     [ModelReaderWriterBuildable(typeof(MgmtTypeSpecPrivateLinkResourceData))]
     [ModelReaderWriterBuildable(typeof(MgmtTypeSpecPrivateLinkResourceProperties))]
     [ModelReaderWriterBuildable(typeof(Models.OperationStatusResult))]
+    [ModelReaderWriterBuildable(typeof(ResponseError))]
     [ModelReaderWriterBuildable(typeof(StartContent))]
     [ModelReaderWriterBuildable(typeof(SystemData))]
+    [ModelReaderWriterBuildable(typeof(UserAssignedIdentity))]
     public partial class MgmtTypeSpecContext : ModelReaderWriterContext
     {
     }
