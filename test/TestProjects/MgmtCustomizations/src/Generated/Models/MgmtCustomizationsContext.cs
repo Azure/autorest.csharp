@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure;
 using Azure.ResourceManager.Models;
 using MgmtCustomizations.Models;
 
@@ -21,6 +22,7 @@ namespace MgmtCustomizations
     [ModelReaderWriterBuildable(typeof(PetStoreData))]
     [ModelReaderWriterBuildable(typeof(PetStoreProperties))]
     [ModelReaderWriterBuildable(typeof(PetStoreResource))]
+    [ModelReaderWriterBuildable(typeof(ResponseError))]
     [ModelReaderWriterBuildable(typeof(SystemData))]
     [ModelReaderWriterBuildable(typeof(UnknownPet))]
     public partial class MgmtCustomizationsContext : ModelReaderWriterContext

@@ -7,6 +7,7 @@
 
 using System.ClientModel.Primitives;
 using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources.Models;
 using AzureSample.ResourceManager.Sample.Models;
 
 namespace AzureSample.ResourceManager.Sample
@@ -47,6 +48,7 @@ namespace AzureSample.ResourceManager.Sample
     [ModelReaderWriterBuildable(typeof(DiffDiskSettings))]
     [ModelReaderWriterBuildable(typeof(DiskEncryptionSettings))]
     [ModelReaderWriterBuildable(typeof(DiskInstanceView))]
+    [ModelReaderWriterBuildable(typeof(ExtendedLocation))]
     [ModelReaderWriterBuildable(typeof(ImageData))]
     [ModelReaderWriterBuildable(typeof(ImageDataDisk))]
     [ModelReaderWriterBuildable(typeof(ImageDisk))]
@@ -67,6 +69,7 @@ namespace AzureSample.ResourceManager.Sample
     [ModelReaderWriterBuildable(typeof(LogAnalyticsInputBase))]
     [ModelReaderWriterBuildable(typeof(MaintenanceRedeployStatus))]
     [ModelReaderWriterBuildable(typeof(ManagedDiskParameters))]
+    [ModelReaderWriterBuildable(typeof(ManagedServiceIdentity))]
     [ModelReaderWriterBuildable(typeof(NetworkInterfaceReference))]
     [ModelReaderWriterBuildable(typeof(OrchestrationServiceStateContent))]
     [ModelReaderWriterBuildable(typeof(OrchestrationServiceSummary))]
@@ -91,7 +94,8 @@ namespace AzureSample.ResourceManager.Sample
     [ModelReaderWriterBuildable(typeof(SshPublicKeyResource))]
     [ModelReaderWriterBuildable(typeof(SshPublicKeysGroupListResult))]
     [ModelReaderWriterBuildable(typeof(StorageProfile))]
-    [ModelReaderWriterBuildable(typeof(SubResource))]
+    [ModelReaderWriterBuildable(typeof(Models.SubResource))]
+    [ModelReaderWriterBuildable(typeof(Azure.ResourceManager.Resources.Models.SubResource))]
     [ModelReaderWriterBuildable(typeof(SubResourceReadOnly))]
     [ModelReaderWriterBuildable(typeof(SubResourceWithColocationStatus))]
     [ModelReaderWriterBuildable(typeof(SubscriptionResourceGetVirtualMachineImagesOptions))]
@@ -103,6 +107,7 @@ namespace AzureSample.ResourceManager.Sample
     [ModelReaderWriterBuildable(typeof(UpgradeOperationHistoricalStatusInfoProperties))]
     [ModelReaderWriterBuildable(typeof(UpgradeOperationHistoryStatus))]
     [ModelReaderWriterBuildable(typeof(UpgradePolicy))]
+    [ModelReaderWriterBuildable(typeof(UserAssignedIdentity))]
     [ModelReaderWriterBuildable(typeof(VaultCertificate))]
     [ModelReaderWriterBuildable(typeof(VaultSecretGroup))]
     [ModelReaderWriterBuildable(typeof(VirtualMachineAgentInstanceView))]
@@ -179,6 +184,7 @@ namespace AzureSample.ResourceManager.Sample
     [ModelReaderWriterBuildable(typeof(VmScaleSetConvertToSinglePlacementGroupContent))]
     [ModelReaderWriterBuildable(typeof(WindowsConfiguration))]
     [ModelReaderWriterBuildable(typeof(WinRMListener))]
+    [ModelReaderWriterBuildable(typeof(WritableSubResource))]
     public partial class AzureSampleResourceManagerSampleContext : ModelReaderWriterContext
     {
     }

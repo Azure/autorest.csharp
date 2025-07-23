@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure;
 using _Azure.Lro.Rpc.Models;
 
 namespace _Azure.Lro.Rpc
@@ -16,6 +17,7 @@ namespace _Azure.Lro.Rpc
     /// </summary>
     [ModelReaderWriterBuildable(typeof(GenerationOptions))]
     [ModelReaderWriterBuildable(typeof(GenerationResult))]
+    [ModelReaderWriterBuildable(typeof(ResponseError))]
     public partial class _AzureLroRpcContext : ModelReaderWriterContext
     {
     }

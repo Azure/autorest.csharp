@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure;
 using _Specs_.Azure.Core.Page.Models;
 
 namespace _Specs_.Azure.Core.Page
@@ -16,6 +17,7 @@ namespace _Specs_.Azure.Core.Page
     /// </summary>
     [ModelReaderWriterBuildable(typeof(FirstItem))]
     [ModelReaderWriterBuildable(typeof(ListItemInputBody))]
+    [ModelReaderWriterBuildable(typeof(ResponseError))]
     [ModelReaderWriterBuildable(typeof(SecondItem))]
     [ModelReaderWriterBuildable(typeof(User))]
     [ModelReaderWriterBuildable(typeof(UserOrder))]

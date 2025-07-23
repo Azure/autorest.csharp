@@ -6,7 +6,9 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure;
 using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources.Models;
 using MgmtDiscriminator.Models;
 
 namespace MgmtDiscriminator
@@ -45,6 +47,7 @@ namespace MgmtDiscriminator
     [ModelReaderWriterBuildable(typeof(QueryStringMatchConditionParameters))]
     [ModelReaderWriterBuildable(typeof(RemoteAddressMatchConditionParameters))]
     [ModelReaderWriterBuildable(typeof(RequestMethodMatchConditionParameters))]
+    [ModelReaderWriterBuildable(typeof(ResponseError))]
     [ModelReaderWriterBuildable(typeof(RoleAssignmentArtifact))]
     [ModelReaderWriterBuildable(typeof(RouteConfigurationOverrideActionParameters))]
     [ModelReaderWriterBuildable(typeof(Shell))]
@@ -62,6 +65,7 @@ namespace MgmtDiscriminator
     [ModelReaderWriterBuildable(typeof(UrlSigningAction))]
     [ModelReaderWriterBuildable(typeof(UrlSigningActionParameters))]
     [ModelReaderWriterBuildable(typeof(UrlSigningParamIdentifier))]
+    [ModelReaderWriterBuildable(typeof(WritableSubResource))]
     public partial class MgmtDiscriminatorContext : ModelReaderWriterContext
     {
     }
