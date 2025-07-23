@@ -37,7 +37,6 @@
   <ItemGroup>
     <None Include="../swaggers/*.json" LinkBase="swaggers" />
     <Compile Include="..\CadlRanchProjects\authentication\api-key\src\Generated\Internal\*.cs" LinkBase="Shared/Internal" />
-    <Compile Include="..\CadlRanchProjects\authentication\api-key\src\Generated\Models\AuthenticationApiKeyContext.cs" LinkBase="Shared/Internal" />
 
     <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" LinkBase="Shared/Infrastructure" />
     <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" LinkBase="Shared/Infrastructure" />

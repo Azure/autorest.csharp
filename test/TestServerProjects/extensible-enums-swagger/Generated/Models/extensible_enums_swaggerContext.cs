@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using extensible_enums_swagger.Models;
 
 namespace extensible_enums_swagger
 {
@@ -13,6 +14,7 @@ namespace extensible_enums_swagger
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Pet))]
     public partial class extensible_enums_swaggerContext : ModelReaderWriterContext
     {
     }

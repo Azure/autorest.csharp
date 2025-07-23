@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using _Specs_.Azure.ClientGenerator.Core.Usage.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Usage
 {
@@ -13,6 +14,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(InputModel))]
+    [ModelReaderWriterBuildable(typeof(OrphanModel))]
+    [ModelReaderWriterBuildable(typeof(OutputModel))]
+    [ModelReaderWriterBuildable(typeof(ResultModel))]
+    [ModelReaderWriterBuildable(typeof(RoundTripModel))]
     public partial class _Specs_AzureClientGeneratorCoreUsageContext : ModelReaderWriterContext
     {
     }

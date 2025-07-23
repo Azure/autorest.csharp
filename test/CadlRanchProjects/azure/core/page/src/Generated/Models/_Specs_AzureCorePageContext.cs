@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using _Specs_.Azure.Core.Page.Models;
 
 namespace _Specs_.Azure.Core.Page
 {
@@ -13,6 +14,11 @@ namespace _Specs_.Azure.Core.Page
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(FirstItem))]
+    [ModelReaderWriterBuildable(typeof(ListItemInputBody))]
+    [ModelReaderWriterBuildable(typeof(SecondItem))]
+    [ModelReaderWriterBuildable(typeof(User))]
+    [ModelReaderWriterBuildable(typeof(UserOrder))]
     public partial class _Specs_AzureCorePageContext : ModelReaderWriterContext
     {
     }

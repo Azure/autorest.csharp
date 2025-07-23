@@ -3,6 +3,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Scm._Type.Property.Nullable.Models;
 
 namespace Scm._Type.Property.Nullable
 {
@@ -10,6 +11,14 @@ namespace Scm._Type.Property.Nullable
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(BytesProperty))]
+    [ModelReaderWriterBuildable(typeof(CollectionsByteProperty))]
+    [ModelReaderWriterBuildable(typeof(CollectionsModelProperty))]
+    [ModelReaderWriterBuildable(typeof(CollectionsStringProperty))]
+    [ModelReaderWriterBuildable(typeof(DatetimeProperty))]
+    [ModelReaderWriterBuildable(typeof(DurationProperty))]
+    [ModelReaderWriterBuildable(typeof(InnerModel))]
+    [ModelReaderWriterBuildable(typeof(StringProperty))]
     public partial class Scm_TypePropertyNullableContext : ModelReaderWriterContext
     {
     }

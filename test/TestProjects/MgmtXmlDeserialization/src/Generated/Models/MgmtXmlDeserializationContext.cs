@@ -6,6 +6,8 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure.ResourceManager.Models;
+using MgmtXmlDeserialization.Models;
 
 namespace MgmtXmlDeserialization
 {
@@ -13,6 +15,10 @@ namespace MgmtXmlDeserialization
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(SystemData))]
+    [ModelReaderWriterBuildable(typeof(XmlCollection))]
+    [ModelReaderWriterBuildable(typeof(XmlInstanceData))]
+    [ModelReaderWriterBuildable(typeof(XmlInstanceResource))]
     public partial class MgmtXmlDeserializationContext : ModelReaderWriterContext
     {
     }

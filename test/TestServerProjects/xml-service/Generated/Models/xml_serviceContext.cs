@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using xml_service.Models;
 
 namespace xml_service
 {
@@ -13,6 +14,35 @@ namespace xml_service
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(AccessPolicy))]
+    [ModelReaderWriterBuildable(typeof(AppleBarrel))]
+    [ModelReaderWriterBuildable(typeof(Banana))]
+    [ModelReaderWriterBuildable(typeof(Blob))]
+    [ModelReaderWriterBuildable(typeof(BlobPrefix))]
+    [ModelReaderWriterBuildable(typeof(BlobProperties))]
+    [ModelReaderWriterBuildable(typeof(Blobs))]
+    [ModelReaderWriterBuildable(typeof(ComplexTypeNoMeta))]
+    [ModelReaderWriterBuildable(typeof(ComplexTypeWithMeta))]
+    [ModelReaderWriterBuildable(typeof(Container))]
+    [ModelReaderWriterBuildable(typeof(ContainerProperties))]
+    [ModelReaderWriterBuildable(typeof(CorsRule))]
+    [ModelReaderWriterBuildable(typeof(Error))]
+    [ModelReaderWriterBuildable(typeof(JsonInput))]
+    [ModelReaderWriterBuildable(typeof(JsonOutput))]
+    [ModelReaderWriterBuildable(typeof(ListBlobsResponse))]
+    [ModelReaderWriterBuildable(typeof(ListContainersResponse))]
+    [ModelReaderWriterBuildable(typeof(Logging))]
+    [ModelReaderWriterBuildable(typeof(Metrics))]
+    [ModelReaderWriterBuildable(typeof(ModelWithByteProperty))]
+    [ModelReaderWriterBuildable(typeof(ModelWithUrlProperty))]
+    [ModelReaderWriterBuildable(typeof(ObjectWithXMsTextProperty))]
+    [ModelReaderWriterBuildable(typeof(RetentionPolicy))]
+    [ModelReaderWriterBuildable(typeof(RootWithRefAndMeta))]
+    [ModelReaderWriterBuildable(typeof(RootWithRefAndNoMeta))]
+    [ModelReaderWriterBuildable(typeof(SignedIdentifier))]
+    [ModelReaderWriterBuildable(typeof(Slide))]
+    [ModelReaderWriterBuildable(typeof(Slideshow))]
+    [ModelReaderWriterBuildable(typeof(StorageServiceProperties))]
     public partial class xml_serviceContext : ModelReaderWriterContext
     {
     }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using paging.Models;
 
 namespace paging
 {
@@ -13,6 +14,19 @@ namespace paging
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(BodyParam))]
+    [ModelReaderWriterBuildable(typeof(CustomParameterGroup))]
+    [ModelReaderWriterBuildable(typeof(OdataProductResult))]
+    [ModelReaderWriterBuildable(typeof(Models.OperationResult))]
+    [ModelReaderWriterBuildable(typeof(PagingGetMultiplePagesLroOptions))]
+    [ModelReaderWriterBuildable(typeof(PagingGetMultiplePagesOptions))]
+    [ModelReaderWriterBuildable(typeof(PagingGetMultiplePagesWithOffsetOptions))]
+    [ModelReaderWriterBuildable(typeof(PagingGetOdataMultiplePagesOptions))]
+    [ModelReaderWriterBuildable(typeof(Product))]
+    [ModelReaderWriterBuildable(typeof(ProductProperties))]
+    [ModelReaderWriterBuildable(typeof(ProductResult))]
+    [ModelReaderWriterBuildable(typeof(ProductResultValue))]
+    [ModelReaderWriterBuildable(typeof(ProductResultValueWithXMSClientName))]
     public partial class pagingContext : ModelReaderWriterContext
     {
     }

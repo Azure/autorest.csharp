@@ -5,6 +5,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -31,15 +32,24 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
                 return JsonSerializerExpression.Deserialize(element, type);
             }
 
+            IReadOnlyList<ValueExpression> readBody =
+            [
+                New.Instance(
+                    typeof(BinaryData),
+                    [
+                        new MemberExpression(typeof(Encoding), nameof(Encoding.UTF8)).Invoke(nameof(UTF8Encoding.GetBytes),
+                            [
+                                element.GetRawText()
+                            ])
+                    ]),
+                useManagedServiceIdentityV3 ? ModelReaderWriterOptionsExpression.UsingSystemAssignedUserAssignedV3(options) : options ?? ModelReaderWriterOptionsExpression.Wire
+            ];
+
             return new InvokeStaticMethodExpression(
-                        typeof(ModelReaderWriter),
-                        nameof(ModelReaderWriter.Read),
-                        [
-                            New.Instance(typeof(BinaryData), [new MemberExpression(typeof(Encoding), nameof(Encoding.UTF8)).Invoke(nameof(UTF8Encoding.GetBytes), [element.GetRawText()])]),
-                            useManagedServiceIdentityV3 ? ModelReaderWriterOptionsExpression.UsingSystemAssignedUserAssignedV3(options) : options ?? ModelReaderWriterOptionsExpression.Wire,
-                            ModelReaderWriterContextExpression.Default
-                        ],
-                        TypeArguments: [type]);
+                typeof(ModelReaderWriter),
+                nameof(ModelReaderWriter.Read),
+                Configuration.UseModelReaderWriter ? [.. readBody, ModelReaderWriterContextExpression.Default] : readBody,
+                TypeArguments: [type]);
         }
 
         // MRW can't handle DataFactoryElement<> for now, so we use JsonSerializerExpression directly

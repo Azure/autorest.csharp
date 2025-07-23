@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using _Type.Property.Optionality.Models;
 
 namespace _Type.Property.Optionality
 {
@@ -13,6 +14,22 @@ namespace _Type.Property.Optionality
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(BooleanLiteralProperty))]
+    [ModelReaderWriterBuildable(typeof(BytesProperty))]
+    [ModelReaderWriterBuildable(typeof(CollectionsByteProperty))]
+    [ModelReaderWriterBuildable(typeof(CollectionsModelProperty))]
+    [ModelReaderWriterBuildable(typeof(DatetimeProperty))]
+    [ModelReaderWriterBuildable(typeof(DurationProperty))]
+    [ModelReaderWriterBuildable(typeof(FloatLiteralProperty))]
+    [ModelReaderWriterBuildable(typeof(IntLiteralProperty))]
+    [ModelReaderWriterBuildable(typeof(PlainDateProperty))]
+    [ModelReaderWriterBuildable(typeof(PlainTimeProperty))]
+    [ModelReaderWriterBuildable(typeof(RequiredAndOptionalProperty))]
+    [ModelReaderWriterBuildable(typeof(StringLiteralProperty))]
+    [ModelReaderWriterBuildable(typeof(StringProperty))]
+    [ModelReaderWriterBuildable(typeof(UnionFloatLiteralProperty))]
+    [ModelReaderWriterBuildable(typeof(UnionIntLiteralProperty))]
+    [ModelReaderWriterBuildable(typeof(UnionStringLiteralProperty))]
     public partial class _TypePropertyOptionalityContext : ModelReaderWriterContext
     {
     }

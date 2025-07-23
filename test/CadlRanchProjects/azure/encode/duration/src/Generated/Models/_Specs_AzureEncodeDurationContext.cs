@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using _Specs_.Azure.Encode.Duration.Models;
 
 namespace _Specs_.Azure.Encode.Duration
 {
@@ -13,6 +14,7 @@ namespace _Specs_.Azure.Encode.Duration
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(DurationModel))]
     public partial class _Specs_AzureEncodeDurationContext : ModelReaderWriterContext
     {
     }

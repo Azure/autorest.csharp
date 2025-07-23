@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using body_complex.Models;
 
 namespace body_complex
 {
@@ -13,6 +14,41 @@ namespace body_complex
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ArrayWrapper))]
+    [ModelReaderWriterBuildable(typeof(Basic))]
+    [ModelReaderWriterBuildable(typeof(BooleanWrapper))]
+    [ModelReaderWriterBuildable(typeof(ByteWrapper))]
+    [ModelReaderWriterBuildable(typeof(Cat))]
+    [ModelReaderWriterBuildable(typeof(Cookiecuttershark))]
+    [ModelReaderWriterBuildable(typeof(Datetimerfc1123Wrapper))]
+    [ModelReaderWriterBuildable(typeof(DatetimeWrapper))]
+    [ModelReaderWriterBuildable(typeof(DateWrapper))]
+    [ModelReaderWriterBuildable(typeof(DictionaryWrapper))]
+    [ModelReaderWriterBuildable(typeof(Dog))]
+    [ModelReaderWriterBuildable(typeof(DotFish))]
+    [ModelReaderWriterBuildable(typeof(DotFishMarket))]
+    [ModelReaderWriterBuildable(typeof(DotSalmon))]
+    [ModelReaderWriterBuildable(typeof(DoubleWrapper))]
+    [ModelReaderWriterBuildable(typeof(DurationWrapper))]
+    [ModelReaderWriterBuildable(typeof(Error))]
+    [ModelReaderWriterBuildable(typeof(Fish))]
+    [ModelReaderWriterBuildable(typeof(FloatWrapper))]
+    [ModelReaderWriterBuildable(typeof(Goblinshark))]
+    [ModelReaderWriterBuildable(typeof(IntWrapper))]
+    [ModelReaderWriterBuildable(typeof(LongWrapper))]
+    [ModelReaderWriterBuildable(typeof(MyBaseType))]
+    [ModelReaderWriterBuildable(typeof(MyDerivedType))]
+    [ModelReaderWriterBuildable(typeof(Pet))]
+    [ModelReaderWriterBuildable(typeof(ReadonlyObj))]
+    [ModelReaderWriterBuildable(typeof(Salmon))]
+    [ModelReaderWriterBuildable(typeof(Sawshark))]
+    [ModelReaderWriterBuildable(typeof(Shark))]
+    [ModelReaderWriterBuildable(typeof(Siamese))]
+    [ModelReaderWriterBuildable(typeof(SmartSalmon))]
+    [ModelReaderWriterBuildable(typeof(StringWrapper))]
+    [ModelReaderWriterBuildable(typeof(UnknownDotFish))]
+    [ModelReaderWriterBuildable(typeof(UnknownFish))]
+    [ModelReaderWriterBuildable(typeof(UnknownMyBaseType))]
     public partial class body_complexContext : ModelReaderWriterContext
     {
     }

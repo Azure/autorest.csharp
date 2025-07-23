@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using model_flattening.Models;
 
 namespace model_flattening
 {
@@ -13,6 +14,17 @@ namespace model_flattening
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(BaseProduct))]
+    [ModelReaderWriterBuildable(typeof(Error))]
+    [ModelReaderWriterBuildable(typeof(FlattenedProduct))]
+    [ModelReaderWriterBuildable(typeof(FlattenParameterGroup))]
+    [ModelReaderWriterBuildable(typeof(GenericUrl))]
+    [ModelReaderWriterBuildable(typeof(ProductUrl))]
+    [ModelReaderWriterBuildable(typeof(ProductWrapper))]
+    [ModelReaderWriterBuildable(typeof(Resource))]
+    [ModelReaderWriterBuildable(typeof(ResourceCollection))]
+    [ModelReaderWriterBuildable(typeof(SimpleProduct))]
+    [ModelReaderWriterBuildable(typeof(WrappedProduct))]
     public partial class model_flatteningContext : ModelReaderWriterContext
     {
     }

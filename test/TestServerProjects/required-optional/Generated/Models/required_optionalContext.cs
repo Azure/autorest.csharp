@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using required_optional.Models;
 
 namespace required_optional
 {
@@ -13,6 +14,16 @@ namespace required_optional
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ArrayOptionalWrapper))]
+    [ModelReaderWriterBuildable(typeof(ArrayWrapper))]
+    [ModelReaderWriterBuildable(typeof(ClassOptionalWrapper))]
+    [ModelReaderWriterBuildable(typeof(ClassWrapper))]
+    [ModelReaderWriterBuildable(typeof(Error))]
+    [ModelReaderWriterBuildable(typeof(IntOptionalWrapper))]
+    [ModelReaderWriterBuildable(typeof(IntWrapper))]
+    [ModelReaderWriterBuildable(typeof(Product))]
+    [ModelReaderWriterBuildable(typeof(StringOptionalWrapper))]
+    [ModelReaderWriterBuildable(typeof(StringWrapper))]
     public partial class required_optionalContext : ModelReaderWriterContext
     {
     }

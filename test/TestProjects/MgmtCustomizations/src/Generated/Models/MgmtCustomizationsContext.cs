@@ -6,6 +6,8 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure.ResourceManager.Models;
+using MgmtCustomizations.Models;
 
 namespace MgmtCustomizations
 {
@@ -13,6 +15,14 @@ namespace MgmtCustomizations
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Cat))]
+    [ModelReaderWriterBuildable(typeof(Dog))]
+    [ModelReaderWriterBuildable(typeof(Pet))]
+    [ModelReaderWriterBuildable(typeof(PetStoreData))]
+    [ModelReaderWriterBuildable(typeof(PetStoreProperties))]
+    [ModelReaderWriterBuildable(typeof(PetStoreResource))]
+    [ModelReaderWriterBuildable(typeof(SystemData))]
+    [ModelReaderWriterBuildable(typeof(UnknownPet))]
     public partial class MgmtCustomizationsContext : ModelReaderWriterContext
     {
     }

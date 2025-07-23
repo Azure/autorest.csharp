@@ -3,6 +3,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Scm._Type.Model.Inheritance.NotDiscriminated.Models;
 
 namespace Scm._Type.Model.Inheritance.NotDiscriminated
 {
@@ -10,6 +11,9 @@ namespace Scm._Type.Model.Inheritance.NotDiscriminated
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Cat))]
+    [ModelReaderWriterBuildable(typeof(Pet))]
+    [ModelReaderWriterBuildable(typeof(Siamese))]
     public partial class Scm_TypeModelInheritanceNotDiscriminatedContext : ModelReaderWriterContext
     {
     }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using body_formdata.Models;
 
 namespace body_formdata
 {
@@ -13,6 +14,9 @@ namespace body_formdata
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Error))]
+    [ModelReaderWriterBuildable(typeof(Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema))]
+    [ModelReaderWriterBuildable(typeof(Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema))]
     public partial class body_formdataContext : ModelReaderWriterContext
     {
     }

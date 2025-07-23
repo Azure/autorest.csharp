@@ -3,6 +3,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Scm._Type.Property.AdditionalProperties.Models;
 
 namespace Scm._Type.Property.AdditionalProperties
 {
@@ -10,6 +11,45 @@ namespace Scm._Type.Property.AdditionalProperties
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(DifferentSpreadFloatDerived))]
+    [ModelReaderWriterBuildable(typeof(DifferentSpreadFloatRecord))]
+    [ModelReaderWriterBuildable(typeof(DifferentSpreadModelArrayDerived))]
+    [ModelReaderWriterBuildable(typeof(DifferentSpreadModelArrayRecord))]
+    [ModelReaderWriterBuildable(typeof(DifferentSpreadModelDerived))]
+    [ModelReaderWriterBuildable(typeof(DifferentSpreadModelRecord))]
+    [ModelReaderWriterBuildable(typeof(DifferentSpreadStringDerived))]
+    [ModelReaderWriterBuildable(typeof(DifferentSpreadStringRecord))]
+    [ModelReaderWriterBuildable(typeof(ExtendsFloatAdditionalProperties))]
+    [ModelReaderWriterBuildable(typeof(ExtendsModelAdditionalProperties))]
+    [ModelReaderWriterBuildable(typeof(ExtendsModelArrayAdditionalProperties))]
+    [ModelReaderWriterBuildable(typeof(ExtendsStringAdditionalProperties))]
+    [ModelReaderWriterBuildable(typeof(ExtendsUnknownAdditionalProperties))]
+    [ModelReaderWriterBuildable(typeof(ExtendsUnknownAdditionalPropertiesDerived))]
+    [ModelReaderWriterBuildable(typeof(ExtendsUnknownAdditionalPropertiesDiscriminated))]
+    [ModelReaderWriterBuildable(typeof(ExtendsUnknownAdditionalPropertiesDiscriminatedDerived))]
+    [ModelReaderWriterBuildable(typeof(IsFloatAdditionalProperties))]
+    [ModelReaderWriterBuildable(typeof(IsModelAdditionalProperties))]
+    [ModelReaderWriterBuildable(typeof(IsModelArrayAdditionalProperties))]
+    [ModelReaderWriterBuildable(typeof(IsStringAdditionalProperties))]
+    [ModelReaderWriterBuildable(typeof(IsUnknownAdditionalProperties))]
+    [ModelReaderWriterBuildable(typeof(IsUnknownAdditionalPropertiesDerived))]
+    [ModelReaderWriterBuildable(typeof(IsUnknownAdditionalPropertiesDiscriminated))]
+    [ModelReaderWriterBuildable(typeof(IsUnknownAdditionalPropertiesDiscriminatedDerived))]
+    [ModelReaderWriterBuildable(typeof(ModelForRecord))]
+    [ModelReaderWriterBuildable(typeof(MultipleSpreadRecord))]
+    [ModelReaderWriterBuildable(typeof(SpreadFloatRecord))]
+    [ModelReaderWriterBuildable(typeof(SpreadModelArrayRecord))]
+    [ModelReaderWriterBuildable(typeof(SpreadModelRecord))]
+    [ModelReaderWriterBuildable(typeof(SpreadRecordForNonDiscriminatedUnion))]
+    [ModelReaderWriterBuildable(typeof(SpreadRecordForNonDiscriminatedUnion2))]
+    [ModelReaderWriterBuildable(typeof(SpreadRecordForNonDiscriminatedUnion3))]
+    [ModelReaderWriterBuildable(typeof(SpreadRecordForUnion))]
+    [ModelReaderWriterBuildable(typeof(SpreadStringRecord))]
+    [ModelReaderWriterBuildable(typeof(UnknownExtendsUnknownAdditionalPropertiesDiscriminated))]
+    [ModelReaderWriterBuildable(typeof(UnknownIsUnknownAdditionalPropertiesDiscriminated))]
+    [ModelReaderWriterBuildable(typeof(WidgetData0))]
+    [ModelReaderWriterBuildable(typeof(WidgetData1))]
+    [ModelReaderWriterBuildable(typeof(WidgetData2))]
     public partial class Scm_TypePropertyAdditionalPropertiesContext : ModelReaderWriterContext
     {
     }

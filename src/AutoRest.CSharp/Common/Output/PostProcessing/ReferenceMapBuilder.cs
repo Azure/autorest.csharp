@@ -22,12 +22,14 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
         private readonly Compilation _compilation;
         private readonly Project _project;
         private readonly HasDiscriminatorDelegate _hasDiscriminatorFunc;
+        private readonly HashSet<Document> _documentsToSkip;
 
-        public ReferenceMapBuilder(Compilation compilation, Project project, HasDiscriminatorDelegate hasDiscriminatorFunc)
+        public ReferenceMapBuilder(Compilation compilation, Project project, HasDiscriminatorDelegate hasDiscriminatorFunc, HashSet<Document> documentsToSkip)
         {
             _compilation = compilation;
             _project = project;
             _hasDiscriminatorFunc = hasDiscriminatorFunc;
+            _documentsToSkip = documentsToSkip;
         }
 
         public async Task<ReferenceMap> BuildPublicReferenceMapAsync(IEnumerable<INamedTypeSymbol> definitions, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> nodeCache)
@@ -160,6 +162,9 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             foreach (var location in reference.Locations)
             {
                 var document = location.Document;
+
+                if (_documentsToSkip.Contains(document))
+                    continue;
 
                 // skip this reference if it comes from a document that does not define any symbol
                 if (!documentCache.TryGetValue(document, out var candidateReferenceSymbols))

@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         {
                             _writer.Line($"_operation = new {_operationInternalType}({nextLinkOperation}, clientDiagnostics, {Configuration.ApiTypes.ResponseParameterName}, {_name:L}, fallbackStrategy: new {typeof(SequentialDelayStrategy)}());");
                         }
-                        }
+                    }
                     _writer.Line();
 
                     using (_writer.Scope($"private string GetOperationId(RehydrationToken? rehydrationToken)"))
@@ -113,7 +113,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         {
                             _writer.Line($"return null;");
                         }
-                        _writer.Line($"var data = {typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Write)}(rehydrationToken, ModelReaderWriterOptions.Json, {ModelReaderWriterContextExpression.Default});");
+
+                        if (Configuration.UseModelReaderWriter)
+                        {
+                            _writer.Line($"var data = {typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Write)}(rehydrationToken, ModelReaderWriterOptions.Json, {ModelReaderWriterContextExpression.Default});");
+                        }
+                        else
+                        {
+                            _writer.Line($"var data = {typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Write)}(rehydrationToken, ModelReaderWriterOptions.Json);");
+                        }
+
                         _writer.Line($"using var document = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(data);");
                         _writer.Line($"var lroDetails = document.RootElement;");
                         _writer.Line($"return lroDetails.{nameof(JsonElement.GetProperty)}(\"id\").{nameof(JsonElement.GetString)}();");

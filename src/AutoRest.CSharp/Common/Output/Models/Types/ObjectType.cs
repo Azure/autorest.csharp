@@ -69,8 +69,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (initCtorParameterCount > 0 && serializationCtorParameterCount > 0)
             {
-                var accessibility = IsStruct ? MethodSignatureModifiers.Public :
-                    IsInheritableCommonType ? MethodSignatureModifiers.Protected : MethodSignatureModifiers.Internal;
+                var accessibility = IsStruct
+                    ? MethodSignatureModifiers.Public
+                    : IsInheritableCommonType
+                        ? MethodSignatureModifiers.Protected | MethodSignatureModifiers.Internal
+                        : MethodSignatureModifiers.Internal;
                 return new(
                     new ConstructorSignature(Type, null, $"Initializes a new instance of {Type:C} for deserialization.", accessibility, Array.Empty<Parameter>()),
                     Array.Empty<ObjectPropertyInitializer>(),

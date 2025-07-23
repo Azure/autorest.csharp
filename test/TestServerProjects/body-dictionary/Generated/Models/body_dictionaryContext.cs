@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using body_dictionary.Models;
 
 namespace body_dictionary
 {
@@ -13,6 +14,8 @@ namespace body_dictionary
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(Error))]
+    [ModelReaderWriterBuildable(typeof(Widget))]
     public partial class body_dictionaryContext : ModelReaderWriterContext
     {
     }

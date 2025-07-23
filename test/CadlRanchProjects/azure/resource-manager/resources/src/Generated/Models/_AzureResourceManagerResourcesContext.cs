@@ -6,6 +6,8 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using Azure.ResourceManager.Models;
+using _Azure.ResourceManager.Resources.Models;
 
 namespace _Azure.ResourceManager.Resources
 {
@@ -13,6 +15,23 @@ namespace _Azure.ResourceManager.Resources
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ExtensionsResource))]
+    [ModelReaderWriterBuildable(typeof(ExtensionsResourceData))]
+    [ModelReaderWriterBuildable(typeof(ExtensionsResourceProperties))]
+    [ModelReaderWriterBuildable(typeof(LocationResource))]
+    [ModelReaderWriterBuildable(typeof(LocationResourceData))]
+    [ModelReaderWriterBuildable(typeof(LocationResourceProperties))]
+    [ModelReaderWriterBuildable(typeof(NestedProxyResource))]
+    [ModelReaderWriterBuildable(typeof(NestedProxyResourceData))]
+    [ModelReaderWriterBuildable(typeof(NestedProxyResourceProperties))]
+    [ModelReaderWriterBuildable(typeof(NotificationDetails))]
+    [ModelReaderWriterBuildable(typeof(SingletonTrackedResource))]
+    [ModelReaderWriterBuildable(typeof(SingletonTrackedResourceData))]
+    [ModelReaderWriterBuildable(typeof(SingletonTrackedResourceProperties))]
+    [ModelReaderWriterBuildable(typeof(SystemData))]
+    [ModelReaderWriterBuildable(typeof(TopLevelTrackedResource))]
+    [ModelReaderWriterBuildable(typeof(TopLevelTrackedResourceData))]
+    [ModelReaderWriterBuildable(typeof(TopLevelTrackedResourceProperties))]
     public partial class _AzureResourceManagerResourcesContext : ModelReaderWriterContext
     {
     }

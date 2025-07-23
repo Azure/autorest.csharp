@@ -60,7 +60,7 @@ namespace MgmtExpandResourceTypes
             {
                 return null;
             }
-            var data = ModelReaderWriter.Write(rehydrationToken, ModelReaderWriterOptions.Json, MgmtExpandResourceTypesContext.Default);
+            var data = ModelReaderWriter.Write(rehydrationToken, ModelReaderWriterOptions.Json);
             using var document = JsonDocument.Parse(data);
             var lroDetails = document.RootElement;
             return lroDetails.GetProperty("id").GetString();

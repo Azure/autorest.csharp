@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.ClientModel.Primitives;
+using _Type.Model.Visibility.Models;
 
 namespace _Type.Model.Visibility
 {
@@ -13,6 +14,8 @@ namespace _Type.Model.Visibility
     /// Context class which will be filled in by the System.ClientModel.SourceGeneration.
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
+    [ModelReaderWriterBuildable(typeof(ReadOnlyModel))]
+    [ModelReaderWriterBuildable(typeof(VisibilityModel))]
     public partial class _TypeModelVisibilityContext : ModelReaderWriterContext
     {
     }

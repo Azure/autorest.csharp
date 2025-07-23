@@ -6,14 +6,14 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using AutoRest.CSharp.AutoRest.Plugins;
 using System.Threading.Tasks;
+using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using Azure.Core;
 using Microsoft.Build.Construction;
 using Microsoft.CodeAnalysis;
 using NuGet.Configuration;
-using AutoRest.CSharp.Common.Input;
 
 namespace AutoRest.CSharp.Input.Source
 {
@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.Input.Source
         private readonly CompilationInput? _existingCompilation;
         private readonly CodeGenAttributes _codeGenAttributes;
         private readonly Dictionary<string, INamedTypeSymbol> _nameMap = new Dictionary<string, INamedTypeSymbol>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<CSharpType, bool> _isObsoleteCache = new Dictionary<CSharpType, bool>();
 
         public Compilation Customization { get; }
         public Compilation? PreviousContract { get; }
@@ -46,6 +47,16 @@ namespace AutoRest.CSharp.Input.Source
                     }
                 }
             }
+        }
+
+        public bool IsObsolete(CSharpType type)
+        {
+            if (_isObsoleteCache.TryGetValue(type, out var isObsolete))
+            {
+                return isObsolete;
+            }
+            var customTypeSymbol = Customization.GetTypeByMetadataName($"{type.Namespace}.{type.Name}");
+            return customTypeSymbol?.GetAttributes().Any(attr => attr.AttributeClass?.Name == "ObsoleteAttribute" || attr.AttributeClass?.Name == "Obsolete") == true;
         }
 
         public IReadOnlyList<string>? GetServiceVersionOverrides()

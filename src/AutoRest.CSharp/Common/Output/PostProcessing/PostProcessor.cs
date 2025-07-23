@@ -9,6 +9,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Generation.Writers;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
@@ -24,6 +26,8 @@ internal class PostProcessor
     private readonly string? _modelFactoryFullName;
     private readonly string? _aspExtensionClassName;
     private readonly ImmutableHashSet<string> _modelsToKeep;
+    private INamedTypeSymbol? _mrwContextTypeSymbol;
+    private HashSet<Document>? _mrwContextDocuments;
 
     public PostProcessor(ImmutableHashSet<string> modelsToKeep, string? modelFactoryFullName = null, string? aspExtensionClassName = null)
     {
@@ -47,6 +51,8 @@ internal class PostProcessor
         var result = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         var declarationCache = new Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>>(SymbolEqualityComparer.Default);
         var documentCache = new Dictionary<Document, HashSet<INamedTypeSymbol>>();
+        _mrwContextTypeSymbol = compilation.GetTypeByMetadataName($"{Configuration.Namespace}.{ModelReaderWriterContextWriter.Name}");
+        _mrwContextDocuments = project.Documents.Where(d => d.Name.Contains(ModelReaderWriterContextWriter.Name)).ToHashSet();
 
         INamedTypeSymbol? modelFactorySymbol = null;
         if (_modelFactoryFullName != null)
@@ -113,7 +119,7 @@ internal class PostProcessor
         // first get all the declared symbols
         var definitions = await GetTypeSymbolsAsync(compilation, project, true);
         // build the reference map
-        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator).BuildPublicReferenceMapAsync(definitions.DeclaredSymbols, definitions.DeclaredNodesCache);
+        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator, _mrwContextDocuments!).BuildPublicReferenceMapAsync(definitions.DeclaredSymbols, definitions.DeclaredNodesCache);
         // get the root symbols
         var rootSymbols = GetRootSymbols(project, definitions);
         // traverse all the root and recursively add all the things we met
@@ -136,9 +142,83 @@ internal class PostProcessor
         }
 
         var modelNamesToRemove = nodesToInternalize.Keys.Select(item => item.Identifier.Text).Concat(suppressedTypeNames);
+        var modelFullNamesToRemove = nodesToInternalize.Keys.Select(item => GetFullName(item)).ToHashSet();
         project = await RemoveMethodsFromModelFactoryAsync(project, definitions, modelNamesToRemove.ToHashSet());
+        project = await RemoveAttributesFromModelRreaderWriterContext(project, modelFullNamesToRemove);
 
         return project;
+
+        string GetFullName(BaseTypeDeclarationSyntax item)
+        {
+            var parent = item.Parent;
+            if (parent is NamespaceDeclarationSyntax namespaceDeclaration)
+            {
+                return $"global::{namespaceDeclaration.Name}.{item.Identifier.Text}";
+            }
+            return item.Identifier.Text;
+        }
+    }
+
+    private async Task<Project> RemoveAttributesFromModelRreaderWriterContext(Project project, HashSet<string> namesToRemove)
+    {
+        if (_mrwContextTypeSymbol is null)
+        {
+            return project;
+        }
+
+        var updatedAttributeLists = new List<AttributeListSyntax>();
+        var mrwContextClassNode = _mrwContextTypeSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as ClassDeclarationSyntax;
+        if (mrwContextClassNode is null)
+        {
+            return project;
+        }
+
+        var root = await mrwContextClassNode.SyntaxTree.GetRootAsync();
+        var updated = false;
+        foreach (var attributeList in mrwContextClassNode!.AttributeLists)
+        {
+            var updatedAttributes = new List<AttributeSyntax>();
+            foreach (var attribute in attributeList.Attributes)
+            {
+                if (!ShouldRemoveAttribute(attribute))
+                {
+                    updatedAttributes.Add(attribute);
+                }
+            }
+
+            if (updatedAttributes.Count != attributeList.Attributes.Count)
+            {
+                updated = true;
+                if (updatedAttributes.Count == 0)
+                {
+                    continue; // skip empty attribute lists
+                }
+                updatedAttributeLists.Add(SyntaxFactory.AttributeList(SyntaxFactory.SeparatedList(updatedAttributes)));
+            }
+            else
+            {
+                updatedAttributeLists.Add(attributeList);
+            }
+        }
+
+        if (updated)
+        {
+            var leadingTrivia = mrwContextClassNode.GetLeadingTrivia();
+            var newClassNode = mrwContextClassNode.WithAttributeLists(SyntaxFactory.List(updatedAttributeLists)).WithLeadingTrivia(leadingTrivia);
+            var newRoot = root.ReplaceNode(mrwContextClassNode, newClassNode);
+
+            var mrwContextDocument = project.GetDocument(mrwContextClassNode.SyntaxTree)!;
+            mrwContextDocument = mrwContextDocument.WithSyntaxRoot(newRoot);
+            return mrwContextDocument.Project;
+        }
+
+        return project;
+
+        bool ShouldRemoveAttribute(AttributeSyntax attr)
+        {
+            var attributeArgumentNames = attr.ArgumentList?.Arguments.Select(x => ((x.Expression as TypeOfExpressionSyntax)?.Type as QualifiedNameSyntax)?.ToString());
+            return attributeArgumentNames != null && attributeArgumentNames.Any(name => name is not null && namesToRemove.Contains(name));
+        }
     }
 
     private async Task<Project> RemoveMethodsFromModelFactoryAsync(Project project, TypeSymbols definitions, HashSet<string> namesToRemove)
@@ -212,7 +292,7 @@ internal class PostProcessor
         // find all the declarations, including non-public declared
         var definitions = await GetTypeSymbolsAsync(compilation, project, false);
         // build reference map
-        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator).BuildAllReferenceMapAsync(definitions.DeclaredSymbols, definitions.DocumentsCache);
+        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator, _mrwContextDocuments!).BuildAllReferenceMapAsync(definitions.DeclaredSymbols, definitions.DocumentsCache);
         // get root symbols
         var rootSymbols = GetRootSymbols(project, definitions);
         // traverse the map to determine the declarations that we are about to remove, starting from root nodes
@@ -295,6 +375,7 @@ internal class PostProcessor
     {
         // accumulate the definitions from the same document together
         var documents = new Dictionary<Document, HashSet<BaseTypeDeclarationSyntax>>();
+
         foreach (var model in unusedModels)
         {
             var document = project.GetDocument(model.SyntaxTree);
@@ -309,6 +390,9 @@ internal class PostProcessor
         {
             project = await RemoveModelsFromDocumentAsync(project, models);
         }
+
+        // remove what are now invalid references due to the models being removed
+        project = await RemoveInvalidRefs(project);
 
         return project;
     }
@@ -336,6 +420,78 @@ internal class PostProcessor
         root = root.RemoveNodes(models, SyntaxRemoveOptions.KeepNoTrivia);
         document = document.WithSyntaxRoot(root!);
         return document.Project;
+    }
+
+    private async Task<Project> RemoveInvalidRefs(Project project)
+    {
+        var solution = project.Solution;
+
+        // Process each document for invalid attributes (with fresh semantic models)
+        foreach (var documentId in project.DocumentIds)
+        {
+            solution = await RemoveInvalidAttributes(solution, documentId);
+        }
+
+        // Process each document for invalid usings
+        foreach (var documentId in project.DocumentIds)
+        {
+            solution = await RemoveInvalidUsings(solution, documentId);
+        }
+
+        return solution.GetProject(project.Id)!;
+    }
+
+    private async Task<Solution> RemoveInvalidUsings(Solution solution, DocumentId documentId)
+    {
+        var document = solution.GetDocument(documentId)!;
+        var root = await document.GetSyntaxRootAsync();
+        var model = await document.GetSemanticModelAsync();
+
+        if (root is not CompilationUnitSyntax cu || model == null)
+            return solution;
+
+        var invalidUsings = cu.Usings
+            .Where(u =>
+            {
+                var info = model.GetSymbolInfo(u.Name!);
+                var sym = info.Symbol as INamespaceSymbol;
+                return sym is null || !sym.GetMembers().Any();
+            })
+            .ToList();
+
+        if (invalidUsings.Count > 0)
+        {
+            cu = cu.RemoveNodes(invalidUsings, SyntaxRemoveOptions.KeepNoTrivia)!;
+            solution = solution.WithDocumentSyntaxRoot(documentId, cu);
+        }
+
+        return solution;
+    }
+
+    private async Task<Solution> RemoveInvalidAttributes(Solution solution, DocumentId documentId)
+    {
+        var document = solution.GetDocument(documentId)!;
+        var root = await document.GetSyntaxRootAsync();
+        var model = await document.GetSemanticModelAsync();
+
+        if (root is not CompilationUnitSyntax cu || model == null)
+            return solution;
+
+        var invalidAttributes = cu.DescendantNodes()
+            .OfType<AttributeListSyntax>()
+            .Where(attr => attr.Attributes.Any(attribute =>
+                attribute.ArgumentList?.Arguments.Any(arg =>
+                    arg.Expression is TypeOfExpressionSyntax typeOfExpr &&
+                    model.GetTypeInfo(typeOfExpr.Type).Type?.TypeKind == TypeKind.Error) == true))
+            .ToList();
+
+        if (invalidAttributes.Count > 0)
+        {
+            cu = cu.RemoveNodes(invalidAttributes, SyntaxRemoveOptions.KeepLeadingTrivia)!;
+            solution = solution.WithDocumentSyntaxRoot(documentId, cu);
+        }
+
+        return solution;
     }
 
     protected HashSet<INamedTypeSymbol> GetRootSymbols(Project project, TypeSymbols modelSymbols)

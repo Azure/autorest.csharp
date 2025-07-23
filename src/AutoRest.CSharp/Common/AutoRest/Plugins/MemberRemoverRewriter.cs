@@ -7,7 +7,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Utilities;
-using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -37,6 +36,33 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             var visitedNode = base.VisitCompilationUnit(node);
             return visitedNode is CompilationUnitSyntax cu && !cu.Members.Any() ? SyntaxFactory.CompilationUnit() : visitedNode;
+        }
+
+        public override SyntaxNode? VisitAttributeList(AttributeListSyntax node)
+        {
+            var updatedAttributes = new List<AttributeSyntax>();
+            foreach (var attr in node.Attributes)
+            {
+                if (!ShouldExcludeAttribute(attr))
+                {
+                    updatedAttributes.Add(attr);
+                }
+            }
+            if (updatedAttributes.Count != node.Attributes.Count)
+            {
+                if (updatedAttributes.Count == 0)
+                {
+                    return null; // Remove the entire attribute list if no attributes remain
+                }
+                return node.Update(node.OpenBracketToken, node.Target, SyntaxFactory.SeparatedList(updatedAttributes), node.CloseBracketToken);
+            }
+            return base.VisitAttributeList(node);
+
+            bool ShouldExcludeAttribute(AttributeSyntax attr)
+            {
+                var attributeArgumentNames = attr.ArgumentList?.Arguments.Select(x => ((x.Expression as TypeOfExpressionSyntax)?.Type as QualifiedNameSyntax)?.Right.Identifier.Text);
+                return attributeArgumentNames != null && attributeArgumentNames.Any(name => name is not null && _suppressedTypeNames.Contains(name));
+            }
         }
 
         public override SyntaxNode? VisitNamespaceDeclaration(NamespaceDeclarationSyntax node)

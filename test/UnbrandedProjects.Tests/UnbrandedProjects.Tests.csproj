@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <Compile Include="..\UnbrandedProjects\Unbranded-TypeSpec\src\Generated\Internal\*.cs" LinkBase="Shared/Internal" />
-    <Compile Include="..\UnbrandedProjects\Unbranded-TypeSpec\src\Generated\Models\UnbrandedTypeSpecContext.cs" LinkBase="Shared/Internal" />
     <Compile Include="..\AutoRest.TestServer.Tests\Infrastructure\BinaryDataAssert.cs" LinkBase="Shared/Infrastructure" />
   </ItemGroup>
 </Project>

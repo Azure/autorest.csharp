@@ -240,7 +240,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var contextWriter = new CodeWriter();
                 var contextWriterInstance = new ModelReaderWriterContextWriter();
-                contextWriterInstance.Write(contextWriter);
+                var allModels = MgmtContext.Library.Models.Concat(MgmtContext.Library.PropertyBagModels).Concat(MgmtContext.Library.ArmResources).Concat(MgmtContext.Library.ResourceData);
+                contextWriterInstance.Write(contextWriter, allModels);
                 project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
             }
 
