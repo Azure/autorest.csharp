@@ -5,10 +5,7 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -40,7 +37,7 @@ namespace MgmtSafeFlatten
             if (Optional.IsDefined(LayerOneConflict))
             {
                 writer.WritePropertyName("layerOneConflict"u8);
-                ((IJsonModel<WritableSubResource>)LayerOneConflict).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, LayerOneConflict);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -105,7 +102,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    layerOneConflict = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                    layerOneConflict = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -148,7 +145,7 @@ namespace MgmtSafeFlatten
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
             }

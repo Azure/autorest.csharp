@@ -5,10 +5,8 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtExpandResourceTypes.Models
 {
@@ -25,7 +23,7 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WriteStartArray();
                 foreach (var item in TargetResources)
                 {
-                    ((IJsonModel<WritableSubResource>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
