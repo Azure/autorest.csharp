@@ -19,10 +19,12 @@ namespace MgmtTypeSpec
     /// </summary>
     [ModelReaderWriterBuildable(typeof(ExtendedLocation))]
     [ModelReaderWriterBuildable(typeof(FooData))]
+    [ModelReaderWriterBuildable(typeof(FooListResult))]
     [ModelReaderWriterBuildable(typeof(FooProperties))]
     [ModelReaderWriterBuildable(typeof(FooResource))]
     [ModelReaderWriterBuildable(typeof(ManagedServiceIdentity))]
     [ModelReaderWriterBuildable(typeof(MgmtTypeSpecPrivateLinkResourceData))]
+    [ModelReaderWriterBuildable(typeof(MgmtTypeSpecPrivateLinkResourceListResult))]
     [ModelReaderWriterBuildable(typeof(MgmtTypeSpecPrivateLinkResourceProperties))]
     [ModelReaderWriterBuildable(typeof(Models.OperationStatusResult))]
     [ModelReaderWriterBuildable(typeof(ResponseError))]
