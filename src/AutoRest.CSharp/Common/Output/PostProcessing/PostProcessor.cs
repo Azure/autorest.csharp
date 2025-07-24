@@ -144,7 +144,6 @@ internal class PostProcessor
         var modelNamesToRemove = nodesToInternalize.Keys.Select(item => item.Identifier.Text).Concat(suppressedTypeNames);
         var modelFullNamesToRemove = nodesToInternalize.Keys.Select(item => GetFullName(item)).ToHashSet();
         project = await RemoveMethodsFromModelFactoryAsync(project, definitions, modelNamesToRemove.ToHashSet());
-        project = await RemoveAttributesFromModelRreaderWriterContext(project, modelFullNamesToRemove);
 
         return project;
 
@@ -156,68 +155,6 @@ internal class PostProcessor
                 return $"global::{namespaceDeclaration.Name}.{item.Identifier.Text}";
             }
             return item.Identifier.Text;
-        }
-    }
-
-    private async Task<Project> RemoveAttributesFromModelRreaderWriterContext(Project project, HashSet<string> namesToRemove)
-    {
-        if (_mrwContextTypeSymbol is null)
-        {
-            return project;
-        }
-
-        var updatedAttributeLists = new List<AttributeListSyntax>();
-        var mrwContextClassNode = _mrwContextTypeSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as ClassDeclarationSyntax;
-        if (mrwContextClassNode is null)
-        {
-            return project;
-        }
-
-        var root = await mrwContextClassNode.SyntaxTree.GetRootAsync();
-        var updated = false;
-        foreach (var attributeList in mrwContextClassNode!.AttributeLists)
-        {
-            var updatedAttributes = new List<AttributeSyntax>();
-            foreach (var attribute in attributeList.Attributes)
-            {
-                if (!ShouldRemoveAttribute(attribute))
-                {
-                    updatedAttributes.Add(attribute);
-                }
-            }
-
-            if (updatedAttributes.Count != attributeList.Attributes.Count)
-            {
-                updated = true;
-                if (updatedAttributes.Count == 0)
-                {
-                    continue; // skip empty attribute lists
-                }
-                updatedAttributeLists.Add(SyntaxFactory.AttributeList(SyntaxFactory.SeparatedList(updatedAttributes)));
-            }
-            else
-            {
-                updatedAttributeLists.Add(attributeList);
-            }
-        }
-
-        if (updated)
-        {
-            var leadingTrivia = mrwContextClassNode.GetLeadingTrivia();
-            var newClassNode = mrwContextClassNode.WithAttributeLists(SyntaxFactory.List(updatedAttributeLists)).WithLeadingTrivia(leadingTrivia);
-            var newRoot = root.ReplaceNode(mrwContextClassNode, newClassNode);
-
-            var mrwContextDocument = project.GetDocument(mrwContextClassNode.SyntaxTree)!;
-            mrwContextDocument = mrwContextDocument.WithSyntaxRoot(newRoot);
-            return mrwContextDocument.Project;
-        }
-
-        return project;
-
-        bool ShouldRemoveAttribute(AttributeSyntax attr)
-        {
-            var attributeArgumentNames = attr.ArgumentList?.Arguments.Select(x => ((x.Expression as TypeOfExpressionSyntax)?.Type as QualifiedNameSyntax)?.ToString());
-            return attributeArgumentNames != null && attributeArgumentNames.Any(name => name is not null && namesToRemove.Contains(name));
         }
     }
 
