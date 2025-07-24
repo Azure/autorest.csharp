@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -27,7 +24,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(DiskEncryptionSet))
             {
                 writer.WritePropertyName("diskEncryptionSet"u8);
-                ((IJsonModel<WritableSubResource>)DiskEncryptionSet).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, DiskEncryptionSet);
             }
             writer.WriteEndObject();
         }
@@ -57,7 +54,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    diskEncryptionSet = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                    diskEncryptionSet = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;
                 }
             }

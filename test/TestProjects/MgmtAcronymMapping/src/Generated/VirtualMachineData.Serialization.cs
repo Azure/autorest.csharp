@@ -5,10 +5,7 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -30,7 +27,7 @@ namespace MgmtAcronymMapping
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Identity);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -95,17 +92,17 @@ namespace MgmtAcronymMapping
             if (Optional.IsDefined(AvailabilitySet))
             {
                 writer.WritePropertyName("availabilitySet"u8);
-                ((IJsonModel<WritableSubResource>)AvailabilitySet).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, AvailabilitySet);
             }
             if (Optional.IsDefined(VirtualMachineScaleSet))
             {
                 writer.WritePropertyName("virtualMachineScaleSet"u8);
-                ((IJsonModel<WritableSubResource>)VirtualMachineScaleSet).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, VirtualMachineScaleSet);
             }
             if (Optional.IsDefined(ProximityPlacementGroup))
             {
                 writer.WritePropertyName("proximityPlacementGroup"u8);
-                ((IJsonModel<WritableSubResource>)ProximityPlacementGroup).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, ProximityPlacementGroup);
             }
             if (Optional.IsDefined(Priority))
             {
@@ -125,12 +122,12 @@ namespace MgmtAcronymMapping
             if (Optional.IsDefined(Host))
             {
                 writer.WritePropertyName("host"u8);
-                ((IJsonModel<WritableSubResource>)Host).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Host);
             }
             if (Optional.IsDefined(HostGroup))
             {
                 writer.WritePropertyName("hostGroup"u8);
-                ((IJsonModel<WritableSubResource>)HostGroup).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, HostGroup);
             }
             if (Optional.IsDefined(LicenseType))
             {
@@ -198,7 +195,7 @@ namespace MgmtAcronymMapping
                     {
                         continue;
                     }
-                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("zones"u8))
@@ -255,7 +252,7 @@ namespace MgmtAcronymMapping
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -336,7 +333,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            availabilitySet = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                            availabilitySet = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
                             continue;
                         }
                         if (property0.NameEquals("virtualMachineScaleSet"u8))
@@ -345,7 +342,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            virtualMachineScaleSet = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                            virtualMachineScaleSet = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
                             continue;
                         }
                         if (property0.NameEquals("proximityPlacementGroup"u8))
@@ -354,7 +351,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            proximityPlacementGroup = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                            proximityPlacementGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
                             continue;
                         }
                         if (property0.NameEquals("priority"u8))
@@ -390,7 +387,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            host = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                            host = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
                             continue;
                         }
                         if (property0.NameEquals("hostGroup"u8))
@@ -399,7 +396,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            hostGroup = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                            hostGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

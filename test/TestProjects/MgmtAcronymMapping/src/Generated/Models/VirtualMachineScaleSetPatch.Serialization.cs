@@ -5,11 +5,8 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -31,7 +28,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Identity);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -89,7 +86,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(ProximityPlacementGroup))
             {
                 writer.WritePropertyName("proximityPlacementGroup"u8);
-                ((IJsonModel<WritableSubResource>)ProximityPlacementGroup).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, ProximityPlacementGroup);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

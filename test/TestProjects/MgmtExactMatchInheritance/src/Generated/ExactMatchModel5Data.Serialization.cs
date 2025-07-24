@@ -6,9 +6,7 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
@@ -103,7 +101,7 @@ namespace MgmtExactMatchInheritance
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
             }

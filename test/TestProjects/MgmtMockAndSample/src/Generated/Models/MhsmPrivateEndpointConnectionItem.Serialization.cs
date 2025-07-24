@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.ResourceManager.Resources.Models;
 
@@ -41,7 +38,7 @@ namespace MgmtMockAndSample.Models
                             {
                                 continue;
                             }
-                            privateEndpoint = ModelReaderWriter.Read<Azure.ResourceManager.Resources.Models.SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                            privateEndpoint = JsonSerializer.Deserialize<Azure.ResourceManager.Resources.Models.SubResource>(property0.Value.GetRawText());
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceConnectionState"u8))

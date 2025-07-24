@@ -6,9 +6,7 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -25,12 +23,12 @@ namespace AzureSample.ResourceManager.Storage
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                ((IJsonModel<ManagedServiceIdentity>)Identity).Write(writer, new ModelReaderWriterOptions("W|v3"));
+                JsonSerializer.Serialize(writer, Identity);
             }
             if (Optional.IsDefined(ExtendedLocation))
             {
                 writer.WritePropertyName("extendedLocation"u8);
-                ((IJsonModel<ExtendedLocation>)ExtendedLocation).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, ExtendedLocation);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -191,7 +189,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    identity = ModelReaderWriter.Read<ManagedServiceIdentity>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), new ModelReaderWriterOptions("W|v3"));
+                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("extendedLocation"u8))
@@ -200,7 +198,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    extendedLocation = ModelReaderWriter.Read<ExtendedLocation>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                    extendedLocation = JsonSerializer.Deserialize<ExtendedLocation>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -243,7 +241,7 @@ namespace AzureSample.ResourceManager.Storage
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

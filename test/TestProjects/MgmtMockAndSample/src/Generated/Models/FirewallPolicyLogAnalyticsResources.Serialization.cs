@@ -5,10 +5,7 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -33,7 +30,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(DefaultWorkspaceId))
             {
                 writer.WritePropertyName("defaultWorkspaceId"u8);
-                ((IJsonModel<WritableSubResource>)DefaultWorkspaceId).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, DefaultWorkspaceId);
             }
             writer.WriteEndObject();
         }
@@ -68,7 +65,7 @@ namespace MgmtMockAndSample.Models
                     {
                         continue;
                     }
-                    defaultWorkspaceId = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                    defaultWorkspaceId = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;
                 }
             }

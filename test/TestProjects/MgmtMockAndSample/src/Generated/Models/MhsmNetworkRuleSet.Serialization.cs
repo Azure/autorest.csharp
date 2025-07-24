@@ -5,10 +5,7 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -46,7 +43,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualNetworkRules)
                 {
-                    ((IJsonModel<WritableSubResource>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
@@ -106,7 +103,7 @@ namespace MgmtMockAndSample.Models
                     List<WritableSubResource> array = new List<WritableSubResource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions));
+                        array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
                     }
                     virtualNetworkRules = array;
                     continue;

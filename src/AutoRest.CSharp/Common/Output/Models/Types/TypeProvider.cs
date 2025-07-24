@@ -88,6 +88,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool IsObsolete()
         {
+            if (Deprecated is not null)
+            {
+                return true;
+            }
             if (_sourceInputModel is null)
                 return false;
             return _sourceInputModel.IsObsolete(Type);

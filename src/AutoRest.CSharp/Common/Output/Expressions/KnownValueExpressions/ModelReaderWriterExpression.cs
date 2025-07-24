@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public static ValueExpression Read(CSharpType type, JsonElementExpression element, ModelReaderWriterOptionsExpression? options = null, bool useManagedServiceIdentityV3 = false)
         {
-            if (IsDataFactoryType(type))
+            if (!Configuration.UseModelReaderWriter || IsDataFactoryType(type))
             {
                 return JsonSerializerExpression.Deserialize(element, type);
             }
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public static MethodBodyStatement Write(ValueExpression value, CSharpType type, Utf8JsonWriterExpression writer, ModelReaderWriterOptionsExpression? options = null, bool useManagedServiceIdentityV3 = false)
         {
-            if (IsDataFactoryType(type))
+            if (!Configuration.UseModelReaderWriter || IsDataFactoryType(type))
             {
                 return JsonSerializerExpression.Serialize(writer, value).ToStatement();
             }

@@ -5,10 +5,8 @@
 
 #nullable disable
 
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtAcronymMapping.Models
 {
@@ -33,7 +31,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(SourceVirtualMachine))
             {
                 writer.WritePropertyName("sourceVirtualMachine"u8);
-                ((IJsonModel<WritableSubResource>)SourceVirtualMachine).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, SourceVirtualMachine);
             }
             if (Optional.IsDefined(StorageProfile))
             {

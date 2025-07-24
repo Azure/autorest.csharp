@@ -5,10 +5,7 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -85,7 +82,7 @@ namespace MgmtAcronymMapping
             if (Optional.IsDefined(AvailabilitySet))
             {
                 writer.WritePropertyName("availabilitySet"u8);
-                ((IJsonModel<WritableSubResource>)AvailabilitySet).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, AvailabilitySet);
             }
             if (Optional.IsDefined(LicenseType))
             {
@@ -212,7 +209,7 @@ namespace MgmtAcronymMapping
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -325,7 +322,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            availabilitySet = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                            availabilitySet = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))

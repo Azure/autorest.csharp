@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -23,7 +20,7 @@ namespace MgmtNoTypeReplacement
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
-                ((IJsonModel<SubResource>)Foo).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Foo);
             }
             writer.WriteEndObject();
         }
@@ -47,7 +44,7 @@ namespace MgmtNoTypeReplacement
                     {
                         continue;
                     }
-                    foo = ModelReaderWriter.Read<SubResource>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                    foo = JsonSerializer.Deserialize<SubResource>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -71,7 +68,7 @@ namespace MgmtNoTypeReplacement
                     {
                         continue;
                     }
-                    systemData = ModelReaderWriter.Read<SystemData>(new BinaryData(Encoding.UTF8.GetBytes(property.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
             }

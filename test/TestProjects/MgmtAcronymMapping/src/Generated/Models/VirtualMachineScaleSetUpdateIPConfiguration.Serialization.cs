@@ -5,10 +5,7 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -35,7 +32,7 @@ namespace MgmtAcronymMapping.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                ((IJsonModel<WritableSubResource>)Subnet).Write(writer, ModelSerializationExtensions.WireOptions);
+                JsonSerializer.Serialize(writer, Subnet);
             }
             if (Optional.IsDefined(Primary))
             {
@@ -58,7 +55,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in ApplicationGatewayBackendAddressPools)
                 {
-                    ((IJsonModel<WritableSubResource>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
@@ -68,7 +65,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in ApplicationSecurityGroups)
                 {
-                    ((IJsonModel<WritableSubResource>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
@@ -78,7 +75,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancerBackendAddressPools)
                 {
-                    ((IJsonModel<WritableSubResource>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
@@ -88,7 +85,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancerInboundNatPools)
                 {
-                    ((IJsonModel<WritableSubResource>)item).Write(writer, ModelSerializationExtensions.WireOptions);
+                    JsonSerializer.Serialize(writer, item);
                 }
                 writer.WriteEndArray();
             }
@@ -139,7 +136,7 @@ namespace MgmtAcronymMapping.Models
                             {
                                 continue;
                             }
-                            subnet = ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(property0.Value.GetRawText())), ModelSerializationExtensions.WireOptions);
+                            subnet = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
                             continue;
                         }
                         if (property0.NameEquals("primary"u8))
@@ -178,7 +175,7 @@ namespace MgmtAcronymMapping.Models
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions));
+                                array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
                             }
                             applicationGatewayBackendAddressPools = array;
                             continue;
@@ -192,7 +189,7 @@ namespace MgmtAcronymMapping.Models
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions));
+                                array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
                             }
                             applicationSecurityGroups = array;
                             continue;
@@ -206,7 +203,7 @@ namespace MgmtAcronymMapping.Models
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions));
+                                array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
                             }
                             loadBalancerBackendAddressPools = array;
                             continue;
@@ -220,7 +217,7 @@ namespace MgmtAcronymMapping.Models
                             List<WritableSubResource> array = new List<WritableSubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(ModelReaderWriter.Read<WritableSubResource>(new BinaryData(Encoding.UTF8.GetBytes(item.GetRawText())), ModelSerializationExtensions.WireOptions));
+                                array.Add(JsonSerializer.Deserialize<WritableSubResource>(item.GetRawText()));
                             }
                             loadBalancerInboundNatPools = array;
                             continue;
