@@ -88,10 +88,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
             }
 
-            var contextWriter = new CodeWriter();
-            var contextWriterInstance = new ModelReaderWriterContextWriter();
-            contextWriterInstance.Write(contextWriter, library.Models);
-            project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
+            if (Configuration.UseModelReaderWriter)
+            {
+                var contextWriter = new CodeWriter();
+                var contextWriterInstance = new ModelReaderWriterContextWriter();
+                contextWriterInstance.Write(contextWriter, library.Models);
+                project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
+            }
         }
     }
 }
