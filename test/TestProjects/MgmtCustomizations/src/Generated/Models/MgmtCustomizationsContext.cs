@@ -20,6 +20,7 @@ namespace MgmtCustomizations
     [ModelReaderWriterBuildable(typeof(Dog))]
     [ModelReaderWriterBuildable(typeof(Pet))]
     [ModelReaderWriterBuildable(typeof(PetStoreData))]
+    [ModelReaderWriterBuildable(typeof(PetStoreListResult))]
     [ModelReaderWriterBuildable(typeof(PetStoreProperties))]
     [ModelReaderWriterBuildable(typeof(PetStoreResource))]
     [ModelReaderWriterBuildable(typeof(ResponseError))]

@@ -21,6 +21,7 @@ namespace _Azure.ResourceManager.CommonProperties
     [ModelReaderWriterBuildable(typeof(ConfidentialResourceProperties))]
     [ModelReaderWriterBuildable(typeof(ManagedIdentityTrackedResource))]
     [ModelReaderWriterBuildable(typeof(ManagedIdentityTrackedResourceData))]
+    [ModelReaderWriterBuildable(typeof(ManagedIdentityTrackedResourceProperties))]
     [ModelReaderWriterBuildable(typeof(ManagedServiceIdentity))]
     [ModelReaderWriterBuildable(typeof(ResponseError))]
     [ModelReaderWriterBuildable(typeof(SystemData))]
