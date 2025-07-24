@@ -267,6 +267,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static bool ShouldEmitContextClass()
         {
+            if (!Configuration.UseModelReaderWriter)
+            {
+                return false;
+            }
+
             // Only Azure.ResourceManager is special here since it will have 3 generations
             // that get combined into one package.
             if (!Configuration.MgmtConfiguration.IsArmCore)
