@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -56,14 +54,7 @@ namespace MgmtResourceName
 
         private string GetOperationId(RehydrationToken? rehydrationToken)
         {
-            if (rehydrationToken is null)
-            {
-                return null;
-            }
-            var data = ModelReaderWriter.Write(rehydrationToken, ModelReaderWriterOptions.Json);
-            using var document = JsonDocument.Parse(data);
-            var lroDetails = document.RootElement;
-            return lroDetails.GetProperty("id").GetString();
+            return rehydrationToken?.Id;
         }
         /// <inheritdoc />
         public override string Id => _operationId ?? NextLinkOperationImplementation.NotSet;

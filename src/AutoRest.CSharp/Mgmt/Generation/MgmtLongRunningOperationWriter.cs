@@ -109,23 +109,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     using (_writer.Scope($"private string GetOperationId(RehydrationToken? rehydrationToken)"))
                     {
-                        using (_writer.Scope($"if (rehydrationToken is null)"))
-                        {
-                            _writer.Line($"return null;");
-                        }
-
-                        if (Configuration.UseModelReaderWriter)
-                        {
-                            _writer.Line($"var data = {typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Write)}(rehydrationToken, ModelReaderWriterOptions.Json, {ModelReaderWriterContextExpression.Default});");
-                        }
-                        else
-                        {
-                            _writer.Line($"var data = {typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Write)}(rehydrationToken, ModelReaderWriterOptions.Json);");
-                        }
-
-                        _writer.Line($"using var document = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(data);");
-                        _writer.Line($"var lroDetails = document.RootElement;");
-                        _writer.Line($"return lroDetails.{nameof(JsonElement.GetProperty)}(\"id\").{nameof(JsonElement.GetString)}();");
+                        _writer.Line($"return rehydrationToken?.Id;");
                     }
 
                     _writer.WriteXmlDocumentationInheritDoc();
