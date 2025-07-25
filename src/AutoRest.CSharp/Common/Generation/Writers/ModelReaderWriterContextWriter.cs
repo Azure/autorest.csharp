@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
                 buildableTypes.Add(resource.Type);
             }
 
-            var modelDictionary = models.OfType<SerializableObjectType>().ToDictionary(m => m.Type, m => m, new CSharpTypeNameComparer());
+            var modelDictionary = models.OfType<SerializableObjectType>().ToDictionary(m => m.Type, m => m);
 
             foreach (var model in modelDictionary.Values)
             {
