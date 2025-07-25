@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
         private IEnumerable<CSharpType> CollectBuildableTypes(IEnumerable<TypeProvider> models)
         {
             var buildableTypes = new HashSet<CSharpType>(new CSharpTypeNameComparer());
-            var visitedTypes = new HashSet<CSharpType>(new CSharpTypeNameComparer());
+            var visitedTypes = new HashSet<CSharpType>();
 
             // for all Resource types, just add them directly to buildableTypes
             foreach (var resource in models.OfType<Resource>())
@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
                 buildableTypes.Add(resource.Type);
             }
 
-            var modelDictionary = models.OfType<SerializableObjectType>().ToDictionary(m => m.Type, m => m, new CSharpTypeNameComparer());
+            var modelDictionary = models.OfType<SerializableObjectType>().ToDictionary(m => m.Type, m => m);
 
             foreach (var model in modelDictionary.Values)
             {
