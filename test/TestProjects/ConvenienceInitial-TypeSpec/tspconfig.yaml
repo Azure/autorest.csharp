@@ -4,4 +4,4 @@ emit: [
 options:
   "@azure-tools/typespec-csharp":
     flavor: "azure"
-    existing-project-folder: ../ConvenienceInitial-Typespec/Generated
+    existing-project-folder: ../ConvenienceInitial-TypeSpec/Generated
