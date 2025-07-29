@@ -4,7 +4,6 @@
 using System.ClientModel.Primitives;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Output.Models.Types;
-using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
@@ -18,10 +17,10 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         {
             if (options == Json)
             {
-                return New.Instance(typeof(ModelReaderWriterOptions), Literal("J|v3"));
+                return ModelSerializationExtensionsProvider.Instance.JsonV3Options;
             }
 
-            return New.Instance(typeof(ModelReaderWriterOptions), Literal("W|v3"));
+            return ModelSerializationExtensionsProvider.Instance.WireV3Options;
         }
 
         public ValueExpression Format => new MemberExpression(this, nameof(ModelReaderWriterOptions.Format));

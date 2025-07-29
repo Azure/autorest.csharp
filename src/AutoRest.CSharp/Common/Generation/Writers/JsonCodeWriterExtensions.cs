@@ -166,14 +166,14 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
-                    var optionalSerializeOptions = options == JsonSerializationOptions.UseManagedServiceIdentityV3 ? "\"W|v3\"" : "\"W\"";
-                    return $"{typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Read)}<{implementation.Type}>(new {typeof(BinaryData)}({typeof(Encoding)}.{nameof(Encoding.UTF8)}.{nameof(Encoding.UTF8.GetBytes)}({element}.GetRawText())), new {typeof(ModelReaderWriterOptions)}({optionalSerializeOptions}), {ModelReaderWriterContextExpression.Default})";
+                    var optionalSerializeOptions = options == JsonSerializationOptions.UseManagedServiceIdentityV3 ? ModelSerializationExtensionsProvider.Instance.WireV3Options : ModelSerializationExtensionsProvider.Instance.WireOptions;
+                    return $"{typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Read)}<{implementation.Type}>(new {typeof(BinaryData)}({typeof(Encoding)}.{nameof(Encoding.UTF8)}.{nameof(Encoding.UTF8.GetBytes)}({element}.GetRawText())), {optionalSerializeOptions}, {ModelReaderWriterContextExpression.Default})";
 
                 case Resource { ResourceData: SerializableObjectType { Serialization.Json: { }, IncludeDeserializer: true } resourceDataType } resource:
                     return $"new {resource.Type}(Client, {resourceDataType.Type}.Deserialize{resourceDataType.Declaration.Name}({element}))";
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.InputModel):
-                    return $"{typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Read)}<{implementation.Type}>(new {typeof(BinaryData)}({typeof(Encoding)}.{nameof(Encoding.UTF8)}.{nameof(Encoding.UTF8.GetBytes)}({element}.GetRawText())), new {typeof(ModelReaderWriterOptions)}(\"W\"), {ModelReaderWriterContextExpression.Default})";
+                    return $"{typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Read)}<{implementation.Type}>(new {typeof(BinaryData)}({typeof(Encoding)}.{nameof(Encoding.UTF8)}.{nameof(Encoding.UTF8.GetBytes)}({element}.GetRawText())), {ModelSerializationExtensionsProvider.Instance.WireOptions}, {ModelReaderWriterContextExpression.Default})";
 
                 case SerializableObjectType { Serialization.Json: { }, IncludeDeserializer: true } type:
                     return $"{type.Type}.Deserialize{type.Declaration.Name}({element})";
