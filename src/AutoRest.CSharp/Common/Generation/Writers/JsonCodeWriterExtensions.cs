@@ -2,11 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.ClientModel.Primitives;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -162,14 +165,14 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
-                    var optionalSerializeOptions = options == JsonSerializationOptions.UseManagedServiceIdentityV3 ? ", serializeOptions" : string.Empty;
-                    return $"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Deserialize)}<{implementation.Type}>({element}.GetRawText(){optionalSerializeOptions})";
+                    var optionalSerializeOptions = options == JsonSerializationOptions.UseManagedServiceIdentityV3 ? ModelSerializationExtensionsProvider.Instance.WireV3Options : ModelSerializationExtensionsProvider.Instance.WireOptions;
+                    return $"{typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Read)}<{implementation.Type}>(new {typeof(BinaryData)}({typeof(Encoding)}.{nameof(Encoding.UTF8)}.{nameof(Encoding.UTF8.GetBytes)}({element}.GetRawText())), {optionalSerializeOptions}, {ModelReaderWriterContextExpression.Default})";
 
                 case Resource { ResourceData: SerializableObjectType { Serialization.Json: { }, IncludeDeserializer: true } resourceDataType } resource:
                     return $"new {resource.Type}(Client, {resourceDataType.Type}.Deserialize{resourceDataType.Declaration.Name}({element}))";
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.InputModel):
-                    return $"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Deserialize)}<{implementation.Type}>({element}.GetRawText())";
+                    return $"{typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Read)}<{implementation.Type}>(new {typeof(BinaryData)}({typeof(Encoding)}.{nameof(Encoding.UTF8)}.{nameof(Encoding.UTF8.GetBytes)}({element}.GetRawText())), {ModelSerializationExtensionsProvider.Instance.WireOptions}, {ModelReaderWriterContextExpression.Default})";
 
                 case SerializableObjectType { Serialization.Json: { }, IncludeDeserializer: true } type:
                     return $"{type.Type}.Deserialize{type.Declaration.Name}({element})";

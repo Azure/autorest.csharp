@@ -43,6 +43,22 @@ namespace AutoRest.CSharp.Output.Models.Types
                 InitializationValue = New.Instance(typeof(ModelReaderWriterOptions), Literal("W"))
             };
 
+            _wireV3OptionsField = new FieldDeclaration(
+                modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
+                type: typeof(ModelReaderWriterOptions),
+                name: _wireV3OptionsName)
+            {
+                InitializationValue = New.Instance(typeof(ModelReaderWriterOptions), Literal("W|v3"))
+            };
+
+            _jsonV3OptionsField = new FieldDeclaration(
+                modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
+                type: typeof(ModelReaderWriterOptions),
+                name: _jsonV3OptionsName)
+            {
+                InitializationValue = New.Instance(typeof(ModelReaderWriterOptions), Literal("J|v3"))
+            };
+
             _jsonDocumentOptionsField = new FieldDeclaration(
                 modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
                 type: typeof(JsonDocumentOptions),
@@ -66,14 +82,24 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private const string _wireOptionsName = "WireOptions";
+        private const string _wireV3OptionsName = "WireV3Options";
+        private const string _jsonV3OptionsName = "JsonV3Options";
         private const string _jsonDocumentOptionsName = "JsonDocumentOptions";
         private readonly FieldDeclaration _wireOptionsField;
+        private readonly FieldDeclaration _wireV3OptionsField;
+        private readonly FieldDeclaration _jsonV3OptionsField;
         private readonly FieldDeclaration _jsonDocumentOptionsField;
         private const string _sentinelBinaryDataName = "SentinelValue";
         private readonly FieldDeclaration? _sentinelBinaryDataField;
 
         private ModelReaderWriterOptionsExpression? _wireOptions;
         public ModelReaderWriterOptionsExpression WireOptions => _wireOptions ??= new ModelReaderWriterOptionsExpression(new MemberExpression(Type, _wireOptionsName));
+
+        private ModelReaderWriterOptionsExpression? _wireV3Options;
+        public ModelReaderWriterOptionsExpression WireV3Options => _wireV3Options ??= new ModelReaderWriterOptionsExpression(new MemberExpression(Type, _wireV3OptionsName));
+
+        private ModelReaderWriterOptionsExpression? _jsonV3Options;
+        public ModelReaderWriterOptionsExpression JsonV3Options => _jsonV3Options ??= new ModelReaderWriterOptionsExpression(new MemberExpression(Type, _jsonV3OptionsName));
 
         private ValueExpression? _jsonDocumentOptions;
         public ValueExpression JsonDocumentOptions => _jsonDocumentOptions ??= new MemberExpression(Type, _jsonDocumentOptionsName);
@@ -84,6 +110,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             yield return _jsonDocumentOptionsField;
             yield return _wireOptionsField;
+            yield return _wireV3OptionsField;
+            yield return _jsonV3OptionsField;
 
             if (_sentinelBinaryDataField != null)
             {
