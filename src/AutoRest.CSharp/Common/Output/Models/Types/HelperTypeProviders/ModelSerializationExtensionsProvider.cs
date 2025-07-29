@@ -110,6 +110,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             yield return _jsonDocumentOptionsField;
             yield return _wireOptionsField;
+            yield return _wireV3OptionsField;
+            yield return _jsonV3OptionsField;
 
             if (_sentinelBinaryDataField != null)
             {
