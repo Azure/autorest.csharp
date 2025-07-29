@@ -1,4 +1,4 @@
-import "../ConvenienceInitial-Typespec/main.tsp";
+import "../ConvenienceInitial-TypeSpec/main.tsp";
 
 namespace ConvenienceInCadl;
 
