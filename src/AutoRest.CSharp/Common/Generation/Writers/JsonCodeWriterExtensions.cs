@@ -166,7 +166,7 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
-                    var optionalSerializeOptions = options == JsonSerializationOptions.UseManagedServiceIdentityV3 ? "\"W|V3\"" : "\"W\"";
+                    var optionalSerializeOptions = options == JsonSerializationOptions.UseManagedServiceIdentityV3 ? "\"W|v3\"" : "\"W\"";
                     return $"{typeof(ModelReaderWriter)}.{nameof(ModelReaderWriter.Read)}<{implementation.Type}>(new {typeof(BinaryData)}({typeof(Encoding)}.{nameof(Encoding.UTF8)}.{nameof(Encoding.UTF8.GetBytes)}({element}.GetRawText())), new {typeof(ModelReaderWriterOptions)}({optionalSerializeOptions}), {ModelReaderWriterContextExpression.Default})";
 
                 case Resource { ResourceData: SerializableObjectType { Serialization.Json: { }, IncludeDeserializer: true } resourceDataType } resource:
