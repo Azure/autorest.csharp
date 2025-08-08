@@ -17,7 +17,10 @@ import { Logger } from "./mtgEmitter/lib/logger.js";
 import { createCSharpEmitterContext } from "./mtgEmitter/sdk-context.js";
 import { createModel } from "./mtgEmitter/lib/client-model-builder.js";
 import { writeCodeModel } from "./mtgEmitter/code-model-writer.js";
-import { configurationFileName, tspOutputFileName } from "./mtgEmitter/constants.js";
+import {
+    configurationFileName,
+    tspOutputFileName
+} from "./mtgEmitter/constants.js";
 
 export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
     const program: Program = context.program;
