@@ -1,11 +1,6 @@
 import { EmitContext, JSONSchemaType } from "@typespec/compiler";
-import {
-    CSharpEmitterOptions,
-    CSharpEmitterOptionsSchema,
-    defaultOptions,
-    resolveOptions
-} from "@typespec/http-client-csharp";
 import { dllFilePath } from "@autorest/csharp";
+import { CSharpEmitterOptions, CSharpEmitterOptionsSchema, defaultOptions, resolveOptions } from "./mtgEmitter/options.js";
 
 export interface AzureCSharpEmitterOptions extends CSharpEmitterOptions {
     csharpGeneratorPath?: string;

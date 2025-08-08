@@ -6,14 +6,6 @@ import { EmitContext, Program, resolvePath } from "@typespec/compiler";
 import { execSync } from "child_process";
 import fs, { existsSync } from "fs";
 import path from "node:path";
-import {
-    Logger,
-    configurationFileName,
-    createCSharpEmitterContext,
-    createModel,
-    tspOutputFileName,
-    writeCodeModel
-} from "@typespec/http-client-csharp";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
     AzureCSharpEmitterOptions,
@@ -21,6 +13,11 @@ import {
 } from "./options.js";
 import { azureSDKContextOptions } from "./sdk-context-options.js";
 import { transformCodeModel } from "./backward-compatibility.js";
+import { Logger } from "./mtgEmitter/lib/logger.js";
+import { createCSharpEmitterContext } from "./mtgEmitter/sdk-context.js";
+import { createModel } from "./mtgEmitter/lib/client-model-builder.js";
+import { writeCodeModel } from "./mtgEmitter/code-model-writer.js";
+import { configurationFileName, tspOutputFileName } from "./mtgEmitter/constants.js";
 
 export async function $onEmit(context: EmitContext<AzureCSharpEmitterOptions>) {
     const program: Program = context.program;
