@@ -77,7 +77,7 @@ function processJsonRpc(context: CSharpEmitterContext, message: string) {
         case "trace":
             context.logger.trace(params.level, params.message);
             break;
-        case "diagnostic":
+        case "diagnostic": {
             let crossLanguageDefinitionId: string | undefined;
             if ("crossLanguageDefinitionId" in params) {
                 crossLanguageDefinitionId = params.crossLanguageDefinitionId;
@@ -91,6 +91,7 @@ function processJsonRpc(context: CSharpEmitterContext, message: string) {
                 target: findTarget(crossLanguageDefinitionId) ?? NoTarget
             });
             break;
+        }
     }
 
     function findTarget(

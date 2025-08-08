@@ -85,12 +85,11 @@ export function fromSdkType<T extends SdkType>(
 
     switch (sdkType.kind) {
         case "nullable":
-            const nullableType: InputNullableType = {
+            retVar = {
                 kind: "nullable",
                 type: fromSdkType(sdkContext, sdkType.type),
                 namespace: sdkType.namespace
             };
-            retVar = nullableType;
             break;
         case "model":
             retVar = fromSdkModelType(sdkContext, sdkType);
@@ -126,13 +125,12 @@ export function fromSdkType<T extends SdkType>(
                 format: { sdkType: "tuple" },
                 target: sdkType.__raw ?? NoTarget
             });
-            const tupleType: InputPrimitiveType = {
+            retVar = {
                 kind: "unknown",
                 name: "tuple",
                 crossLanguageDefinitionId: "",
                 decorators: sdkType.decorators
             };
-            retVar = tupleType;
             break;
         // TODO -- endpoint and credential are handled separately in emitter, since we have specific locations for them in input model.
         // We can handle unify the way we handle them in the future, probably by chaning the input model schema and do the conversion in generator.
@@ -145,13 +143,12 @@ export function fromSdkType<T extends SdkType>(
                 format: { sdkType: "credential" },
                 target: sdkType.__raw ?? NoTarget
             });
-            const credentialType: InputPrimitiveType = {
+            retVar = {
                 kind: "unknown",
                 name: "credential",
                 crossLanguageDefinitionId: "",
                 decorators: sdkType.decorators
             };
-            retVar = credentialType;
             break;
         default:
             retVar = fromSdkBuiltInType(sdkContext, sdkType);

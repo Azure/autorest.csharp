@@ -64,7 +64,7 @@ export function fromSdkServiceMethod(
     const methodKind = sdkMethod.kind;
 
     switch (methodKind) {
-        case "basic":
+        case "basic": {
             method = createServiceMethod<InputBasicServiceMethod>(
                 sdkContext,
                 sdkMethod,
@@ -72,7 +72,8 @@ export function fromSdkServiceMethod(
                 rootApiVersions
             );
             break;
-        case "paging":
+        }
+        case "paging": {
             const pagingServiceMethod =
                 createServiceMethod<InputPagingServiceMethod>(
                     sdkContext,
@@ -88,7 +89,8 @@ export function fromSdkServiceMethod(
             );
             method = pagingServiceMethod;
             break;
-        case "lro":
+        }
+        case "lro": {
             const lroServiceMethod =
                 createServiceMethod<InputLongRunningServiceMethod>(
                     sdkContext,
@@ -102,7 +104,8 @@ export function fromSdkServiceMethod(
             );
             method = lroServiceMethod;
             break;
-        case "lropaging":
+        }
+        case "lropaging": {
             const lroPagingMethod =
                 createServiceMethod<InputLongRunningPagingServiceMethod>(
                     sdkContext,
@@ -122,7 +125,8 @@ export function fromSdkServiceMethod(
             );
             method = lroPagingMethod;
             break;
-        default:
+        }
+        default: {
             sdkContext.logger.reportDiagnostic({
                 code: "unsupported-service-method",
                 format: { methodKind: methodKind },
@@ -130,6 +134,7 @@ export function fromSdkServiceMethod(
             });
             method = undefined;
             break;
+        }
     }
 
     if (method) {
