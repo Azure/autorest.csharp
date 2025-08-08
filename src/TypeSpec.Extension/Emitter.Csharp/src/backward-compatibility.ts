@@ -7,7 +7,8 @@ import {
     SdkBuiltInKinds,
     UsageFlags
 } from "@azure-tools/typespec-client-generator-core";
-import { CodeModel, InputClient } from "@typespec/http-client-csharp";
+import { CodeModel } from "./mtgEmitter/type/code-model.js";
+import { InputClient } from "./mtgEmitter/type/input-type.js";
 
 /*
  * This function transforms the code model for backward compatibility to avoid massive code on autorest.csharp's csharp part.
