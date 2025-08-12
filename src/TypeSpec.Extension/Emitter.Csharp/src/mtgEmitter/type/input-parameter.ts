@@ -7,25 +7,24 @@ import { InputParameterKind } from "./input-parameter-kind.js";
 import { InputType } from "./input-type.js";
 import { RequestLocation } from "./request-location.js";
 
-// TO-DO: we should replace `InputParameter` with those `InputQueryParameter`, etc. https://github.com/microsoft/typespec/issues/8085
 export interface InputParameter {
-  name: string;
-  nameInRequest: string;
-  summary?: string;
-  doc?: string;
-  type: InputType;
-  location: RequestLocation;
-  defaultValue?: InputConstant;
-  groupedBy?: InputParameter;
-  kind: InputParameterKind;
-  isRequired: boolean;
-  isApiVersion: boolean;
-  isContentType: boolean;
-  isEndpoint: boolean;
-  skipUrlEncoding: boolean;
-  explode: boolean;
-  arraySerializationDelimiter?: string;
-  headerCollectionPrefix?: string;
-  decorators?: DecoratorInfo[];
-  serverUrlTemplate?: string;
+    name: string;
+    nameInRequest: string;
+    summary?: string;
+    doc?: string;
+    type: InputType;
+    location: RequestLocation;
+    defaultValue?: InputConstant;
+    groupedBy?: InputParameter;
+    kind: InputParameterKind;
+    isRequired: boolean;
+    isApiVersion: boolean;
+    isContentType: boolean;
+    isEndpoint: boolean;
+    skipUrlEncoding: boolean;
+    explode: boolean;
+    arraySerializationDelimiter?: string;
+    headerCollectionPrefix?: string;
+    decorators?: DecoratorInfo[];
+    serverUrlTemplate?: string;
 }
