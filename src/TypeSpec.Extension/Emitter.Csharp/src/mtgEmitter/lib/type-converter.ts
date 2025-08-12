@@ -3,7 +3,6 @@
 
 import {
     SdkArrayType,
-    SdkBodyModelPropertyType,
     SdkBuiltInType,
     SdkConstantType,
     SdkDateTimeType,
@@ -13,6 +12,7 @@ import {
     SdkEnumValueType,
     SdkHeaderParameter,
     SdkModelPropertyType,
+    SdkModelPropertyTypeBase,
     SdkModelType,
     SdkPathParameter,
     SdkQueryParameter,
@@ -220,35 +220,46 @@ function fromSdkModelType(
 
     function fromSdkModelProperty(
         sdkContext: CSharpEmitterContext,
-        sdkProperty: SdkModelPropertyType
+        sdkProperty: SdkModelPropertyType | SdkHeaderParameter | SdkQueryParameter | SdkPathParameter
     ): InputProperty | undefined {
         // TODO -- this returns undefined because some properties we do not support yet.
-        let property = sdkContext.__typeCache.properties.get(sdkProperty) as
-            | InputProperty
-            | undefined;
+        
+        // Type guard to check if it's an SdkModelPropertyType
+        const isModelProperty = (prop: any): prop is SdkModelPropertyType => 
+            prop && typeof prop === 'object' && 'type' in prop && 'isGeneratedName' in prop;
+        
+        let property = isModelProperty(sdkProperty) 
+            ? sdkContext.__typeCache.properties.get(sdkProperty) as InputProperty | undefined
+            : undefined;
         if (property) {
             return property;
         }
-        switch (sdkProperty.kind) {
-            case "property":
-                property = fromSdkBodyModelProperty(sdkContext, sdkProperty);
-                break;
-            case "header":
-                property = fromSdkHeaderParameter(sdkContext, sdkProperty);
-                break;
-            case "query":
-                property = fromSdkQueryParameter(sdkContext, sdkProperty);
-                break;
-            case "path":
-                property = fromSdkPathParameter(sdkContext, sdkProperty);
-                break;
+        
+        if (isModelProperty(sdkProperty)) {
+            property = fromSdkBodyModelProperty(sdkContext, sdkProperty);
+        } else {
+            // Type guards for different parameter types
+            if ("correspondingMethodParams" in sdkProperty) {
+                if ("explode" in sdkProperty && "style" in sdkProperty && "allowReserved" in sdkProperty) {
+                    // SdkPathParameter
+                    property = fromSdkPathParameter(sdkContext, sdkProperty as SdkPathParameter);
+                } else if ("explode" in sdkProperty) {
+                    // SdkQueryParameter
+                    property = fromSdkQueryParameter(sdkContext, sdkProperty as SdkQueryParameter);
+                } else {
+                    // SdkHeaderParameter
+                    property = fromSdkHeaderParameter(sdkContext, sdkProperty as SdkHeaderParameter);
+                }
+            }
         }
 
         if (property) {
-            sdkContext.__typeCache.updateSdkPropertyReferences(
-                sdkProperty,
-                property
-            );
+            if (isModelProperty(sdkProperty)) {
+                sdkContext.__typeCache.updateSdkPropertyReferences(
+                    sdkProperty,
+                    property
+                );
+            }
         }
 
         return property;
@@ -318,11 +329,11 @@ function fromSdkModelType(
 
     function fromSdkBodyModelProperty(
         sdkContext: CSharpEmitterContext,
-        property: SdkBodyModelPropertyType
+        property: SdkModelPropertyType
     ): InputModelProperty {
         let targetType = property.type;
         if (targetType.kind === "model") {
-            const body = targetType.properties.find((x) => x.kind === "body");
+            const body = targetType.properties.find((x) => "isGeneratedName" in x && x.serializedName === "body");
             if (body) targetType = body.type;
         }
 
@@ -528,8 +539,12 @@ function fromSdkEndpointType(): InputPrimitiveType {
     };
 }
 
-function isReadOnly(prop: SdkModelPropertyType): boolean {
-    if (prop.kind === "property") {
+function isReadOnly(prop: SdkModelPropertyType | SdkHeaderParameter | SdkQueryParameter | SdkPathParameter): boolean {
+    // Type guard to check if it's an SdkModelPropertyType
+    const isModelProperty = (p: any): p is SdkModelPropertyType => 
+        p && typeof p === 'object' && 'type' in p && 'isGeneratedName' in p;
+    
+    if (isModelProperty(prop)) {
         return tcgcIsReadOnly(prop);
     }
 

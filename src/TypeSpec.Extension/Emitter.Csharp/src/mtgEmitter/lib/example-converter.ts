@@ -68,10 +68,16 @@ export function fromSdkHttpExamples(
     function fromSdkParameterExample(
         parameter: SdkHttpParameterExampleValue
     ): InputParameterExampleValue {
+        // Type guard to check if it's an SdkModelPropertyType
+        const isModelProperty = (prop: any): prop is any => 
+            prop && typeof prop === 'object' && 'type' in prop && 'isGeneratedName' in prop;
+        
+        const cachedParameter = isModelProperty(parameter.parameter) 
+            ? sdkContext.__typeCache.properties.get(parameter.parameter as any) as InputParameter
+            : null;
+            
         return {
-            parameter: sdkContext.__typeCache.properties.get(
-                parameter.parameter
-            ) as InputParameter,
+            parameter: cachedParameter || { name: parameter.parameter.name || "unknown" } as InputParameter,
             value: fromSdkExample(parameter.value)
         };
     }

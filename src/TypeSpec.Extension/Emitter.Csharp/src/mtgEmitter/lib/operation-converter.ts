@@ -3,15 +3,22 @@
 
 import {
     getHttpOperationParameter,
+    SdkBodyParameter,
     SdkBuiltInKinds,
     SdkContext,
+    SdkCookieParameter,
+    SdkHeaderParameter,
     SdkHttpOperation,
+    SdkHttpParameter,
     SdkHttpResponse,
     SdkLroPagingServiceMethod,
     SdkLroServiceMethod,
+    SdkMethodParameter,
     SdkMethodResponse,
     SdkModelPropertyType,
     SdkPagingServiceMethod,
+    SdkPathParameter,
+    SdkQueryParameter,
     SdkServiceMethod,
     SdkServiceResponseHeader,
     SdkType,
@@ -342,7 +349,7 @@ function fromSdkServiceMethodParameters(
 function updateMethodParameter(
     sdkContext: CSharpEmitterContext,
     methodParameter: InputParameter,
-    operationHttpParameter: SdkModelPropertyType
+    operationHttpParameter: SdkHttpParameter | SdkModelPropertyType
 ): void {
     // Update the location based on the operation parameter
     methodParameter.location = getParameterLocation(operationHttpParameter);
@@ -403,27 +410,31 @@ function fromSdkOperationParameters(
 
 export function fromParameter(
     sdkContext: CSharpEmitterContext,
-    p: SdkModelPropertyType,
+    p: SdkModelPropertyType | SdkPathParameter | SdkQueryParameter | SdkHeaderParameter | SdkBodyParameter | SdkCookieParameter | SdkMethodParameter,
     rootApiVersions: string[]
 ): InputParameter {
-    let retVar = sdkContext.__typeCache.properties.get(p);
+    // Type guard to check if it's an SdkModelPropertyType
+    const isModelProperty = (prop: any): prop is SdkModelPropertyType => 
+        prop && typeof prop === 'object' && 'type' in prop && 'isGeneratedName' in prop;
+    
+    let retVar = isModelProperty(p) ? sdkContext.__typeCache.properties.get(p) : undefined;
     if (retVar) {
         return retVar as InputParameter;
     }
 
     const isContentType =
-        p.kind === "header" &&
+        "serializedName" in p &&
         p.serializedName.toLocaleLowerCase() === "content-type";
     const parameterType = fromSdkType(sdkContext, p.type);
     const format =
-        p.kind === "header" || p.kind === "query"
+        "collectionFormat" in p
             ? p.collectionFormat
             : undefined;
 
     // use serializedName if available, but fallback to name
     // special case for body as the name is incorrectly set to "body" https://github.com/Azure/typespec-azure/issues/2292
     const serializedName =
-        "serializedName" in p && p.kind !== "body"
+        "serializedName" in p && !("contentTypes" in p)
             ? (p.serializedName ?? p.name)
             : p.name;
 
@@ -459,10 +470,12 @@ export function fromParameter(
             parameterType
         ),
         decorators: p.decorators,
-        skipUrlEncoding: p.kind === "path" ? p.allowReserved : false
+        skipUrlEncoding: "allowReserved" in p ? p.allowReserved : false
     };
 
-    sdkContext.__typeCache.updateSdkPropertyReferences(p, retVar);
+    if (isModelProperty(p)) {
+        sdkContext.__typeCache.updateSdkPropertyReferences(p, retVar);
+    }
     return retVar;
 }
 
@@ -487,8 +500,7 @@ function loadLongRunningMetadata(
                           method.lroMetadata.finalResponse.envelopeResult
                       )
                     : undefined
-        } as OperationResponse,
-        resultPath: method.lroMetadata.finalResponse?.resultPath
+        } as OperationResponse
     };
 }
 
@@ -692,10 +704,16 @@ function loadPagingServiceMetadata(
     };
 }
 
-function getResponseSegmentName(segment: SdkModelPropertyType): string {
-    return segment.kind === "responseheader" || segment.kind === "body"
-        ? segment.serializedName
-        : segment.name;
+function getResponseSegmentName(segment: SdkModelPropertyType | SdkServiceResponseHeader): string {
+    // Type guard for SdkServiceResponseHeader
+    const isResponseHeader = (seg: any): seg is SdkServiceResponseHeader => 
+        seg && typeof seg === 'object' && 'type' in seg && !('isGeneratedName' in seg);
+    
+    if (isResponseHeader(segment)) {
+        return segment.serializedName;
+    } else {
+        return segment.name;
+    }
 }
 
 function getResponseLocation(
@@ -703,51 +721,50 @@ function getResponseLocation(
     method:
         | SdkPagingServiceMethod<SdkHttpOperation>
         | SdkLroPagingServiceMethod<SdkHttpOperation>,
-    p: SdkModelPropertyType
+    p: SdkModelPropertyType | SdkServiceResponseHeader
 ): ResponseLocation {
-    switch (p?.kind) {
-        case "responseheader":
-            return ResponseLocation.Header;
-        case "property":
-            return ResponseLocation.Body;
-        default:
-            context.logger.reportDiagnostic({
-                code: "unsupported-continuation-location",
-                format: {
-                    crossLanguageDefinitionId: method.crossLanguageDefinitionId
-                },
-                target: NoTarget
-            });
-            return ResponseLocation.None;
+    // Type guard for SdkServiceResponseHeader
+    const isResponseHeader = (seg: any): seg is SdkServiceResponseHeader => 
+        seg && typeof seg === 'object' && 'type' in seg && !('isGeneratedName' in seg);
+    
+    if (isResponseHeader(p)) {
+        return ResponseLocation.Header;
+    } else {
+        return ResponseLocation.Body;
     }
 }
 
 // TODO: https://github.com/Azure/typespec-azure/issues/1441
-function getParameterLocation(p: SdkModelPropertyType): RequestLocation {
-    switch (p?.kind) {
-        case "path":
-            return RequestLocation.Path;
-        case "header":
-            return RequestLocation.Header;
-        case "query":
-            return RequestLocation.Query;
-        case "property":
-        case "body":
-            return RequestLocation.Body;
-        default:
-            return RequestLocation.None;
+function getParameterLocation(p: SdkModelPropertyType | SdkPathParameter | SdkQueryParameter | SdkHeaderParameter | SdkBodyParameter | SdkCookieParameter | SdkMethodParameter): RequestLocation {
+    // Use property checks instead of kind checks
+    if ("allowReserved" in p && "style" in p) {
+        return RequestLocation.Path;
     }
+    if ("explode" in p && !("allowReserved" in p) && !("correspondingMethodParams" in p)) {
+        return RequestLocation.Query;
+    }
+    if ("correspondingMethodParams" in p && !("explode" in p)) {
+        return RequestLocation.Header;
+    }
+    if ("contentTypes" in p) {
+        return RequestLocation.Body;
+    }
+    if ("type" in p && "isGeneratedName" in p) {
+        return RequestLocation.Body;
+    }
+    return RequestLocation.None;
 }
 
 function getParameterKind(
-    p: SdkModelPropertyType,
+    p: SdkModelPropertyType | SdkPathParameter | SdkQueryParameter | SdkHeaderParameter | SdkBodyParameter | SdkCookieParameter | SdkMethodParameter,
     type: InputType,
     hasGlobalApiVersion: boolean
 ): InputParameterKind {
-    if (p.kind === "body") {
+    if ("contentTypes" in p) {
         /** TODO: remove this and use the spread metadata of parameter when https://github.com/Azure/typespec-azure/issues/1513 is resolved */
         if (
             type.kind === "model" &&
+            "correspondingMethodParams" in p &&
             p.type !== p.correspondingMethodParams[0]?.type
         ) {
             return InputParameterKind.Spread;
@@ -803,6 +820,6 @@ function normalizeHeaderName(name: string): string {
     }
 }
 
-function isExplodedParameter(p: SdkModelPropertyType): boolean {
-    return (p.kind === "path" || p.kind === "query") && p.explode === true;
+function isExplodedParameter(p: SdkModelPropertyType | SdkPathParameter | SdkQueryParameter | SdkHeaderParameter | SdkBodyParameter | SdkCookieParameter | SdkMethodParameter): boolean {
+    return "explode" in p && p.explode === true;
 }
