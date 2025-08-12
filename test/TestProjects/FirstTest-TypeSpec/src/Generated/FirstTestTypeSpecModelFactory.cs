@@ -75,17 +75,6 @@ namespace FirstTestTypeSpec.Models
             return new ProjectedModel(name, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.PagedThing"/>. </summary>
-        /// <param name="value"> The Thing items on this page. </param>
-        /// <param name="nextLink"> The link to the next page of items. </param>
-        /// <returns> A new <see cref="Models.PagedThing"/> instance for mocking. </returns>
-        public static PagedThing PagedThing(IEnumerable<Thing> value = null, Uri nextLink = null)
-        {
-            value ??= new List<Thing>();
-
-            return new PagedThing(value?.ToList(), nextLink, serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.Extension"/>. </summary>
         /// <param name="extension"></param>
         /// <param name="level"></param>

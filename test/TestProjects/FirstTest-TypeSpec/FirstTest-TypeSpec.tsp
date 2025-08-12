@@ -370,6 +370,7 @@ op returnsAnonymousModel(): {@body body: {}};
 @doc("List the metric values for a load test run.")
 @route("/listWithOptionalBody")
 @post
+@list
 op listWithOptionalBody is Azure.Core.Foundations.Operation<
   {
     @doc("Metric dimension filter ")
