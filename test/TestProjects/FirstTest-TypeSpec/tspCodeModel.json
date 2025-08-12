@@ -5839,7 +5839,7 @@
         },
         {
           "$id": "468",
-          "kind": "basic",
+          "kind": "paging",
           "name": "listWithOptionalBody",
           "accessibility": "public",
           "apiVersions": [
@@ -6024,13 +6024,27 @@
           ],
           "response": {
             "type": {
-              "$ref": "254"
-            }
+              "$ref": "256"
+            },
+            "resultSegments": [
+              "value"
+            ]
           },
           "isOverride": false,
           "generateConvenient": true,
           "generateProtocol": true,
-          "crossLanguageDefinitionId": "FirstTestTypeSpec.listWithOptionalBody"
+          "crossLanguageDefinitionId": "FirstTestTypeSpec.listWithOptionalBody",
+          "pagingMetadata": {
+            "itemPropertySegments": [
+              "value"
+            ],
+            "nextLink": {
+              "responseSegments": [
+                "nextLink"
+              ],
+              "responseLocation": "Body"
+            }
+          }
         },
         {
           "$id": "479",
