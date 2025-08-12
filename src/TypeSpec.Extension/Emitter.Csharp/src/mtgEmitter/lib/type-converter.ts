@@ -10,11 +10,8 @@ import {
     SdkDurationType,
     SdkEnumType,
     SdkEnumValueType,
-    SdkHeaderParameter,
     SdkModelPropertyType,
     SdkModelType,
-    SdkPathParameter,
-    SdkQueryParameter,
     SdkType,
     SdkUnionType,
     UsageFlags,
@@ -232,7 +229,9 @@ function fromSdkModelProperty(
         sdkProperty.serializationOptions?.xml?.name ??
         sdkProperty.serializationOptions?.multipart?.name;
     property = {
-        kind: isHttpMetadata(sdkContext, sdkProperty) ? "header" : sdkProperty.kind, // workaround to set kind to "header" to avoid this property get generated in the model when it is http metadata
+        kind: isHttpMetadata(sdkContext, sdkProperty)
+            ? "header"
+            : sdkProperty.kind, // workaround to set kind to "header" to avoid this property get generated in the model when it is http metadata
         name: sdkProperty.name,
         serializedName: serializedName,
         summary: sdkProperty.summary,

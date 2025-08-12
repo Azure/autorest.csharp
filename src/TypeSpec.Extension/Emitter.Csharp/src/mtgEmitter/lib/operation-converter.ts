@@ -75,7 +75,7 @@ export function fromSdkServiceMethod(
                 rootApiVersions
             );
             break;
-        case "paging":
+        case "paging": {
             const pagingServiceMethod =
                 createServiceMethod<InputPagingServiceMethod>(
                     sdkContext,
@@ -91,7 +91,8 @@ export function fromSdkServiceMethod(
             );
             method = pagingServiceMethod;
             break;
-        case "lro":
+        }
+        case "lro": {
             const lroServiceMethod =
                 createServiceMethod<InputLongRunningServiceMethod>(
                     sdkContext,
@@ -105,7 +106,8 @@ export function fromSdkServiceMethod(
             );
             method = lroServiceMethod;
             break;
-        case "lropaging":
+        }
+        case "lropaging": {
             const lroPagingMethod =
                 createServiceMethod<InputLongRunningPagingServiceMethod>(
                     sdkContext,
@@ -125,6 +127,7 @@ export function fromSdkServiceMethod(
             );
             method = lroPagingMethod;
             break;
+        }
         default:
             sdkContext.logger.reportDiagnostic({
                 code: "unsupported-service-method",
