@@ -4,6 +4,6 @@
 import { InputType } from "./input-type.js";
 
 export interface InputConstant {
-    value?: any;
-    type: InputType;
+  value?: any;
+  type: InputType;
 }

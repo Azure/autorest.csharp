@@ -16,20 +16,14 @@ import { Configuration } from "./type/configuration.js";
  * @beta
  */
 export async function writeCodeModel(
-    context: CSharpEmitterContext,
-    codeModel: CodeModel,
-    outputFolder: string
+  context: CSharpEmitterContext,
+  codeModel: CodeModel,
+  outputFolder: string,
 ) {
-    await context.program.host.writeFile(
-        resolvePath(outputFolder, tspOutputFileName),
-        prettierOutput(
-            JSON.stringify(
-                buildJson(context, codeModel),
-                transformJSONProperties,
-                2
-            )
-        )
-    );
+  await context.program.host.writeFile(
+    resolvePath(outputFolder, tspOutputFileName),
+    prettierOutput(JSON.stringify(buildJson(context, codeModel), transformJSONProperties, 2)),
+  );
 }
 
 /**
@@ -38,111 +32,109 @@ export async function writeCodeModel(
  * @param codeModel - The code model to build
  */
 function buildJson(context: CSharpEmitterContext, codeModel: CodeModel): any {
-    const objectsIds = new Map<any, string>();
-    const stack: any[] = [];
+  const objectsIds = new Map<any, string>();
+  const stack: any[] = [];
 
-    return doBuildJson(codeModel, stack);
+  return doBuildJson(codeModel, stack);
 
-    function doBuildJson(obj: any, stack: any[]): any {
-        // check if this is a primitive type or null or undefined
-        if (!obj || typeof obj !== "object") {
-            return obj;
-        }
-        // we switch here for object, arrays and primitives
-        if (Array.isArray(obj)) {
-            // array types
-            return obj.map((item) => doBuildJson(item, stack));
+  function doBuildJson(obj: any, stack: any[]): any {
+    // check if this is a primitive type or null or undefined
+    if (!obj || typeof obj !== "object") {
+      return obj;
+    }
+    // we switch here for object, arrays and primitives
+    if (Array.isArray(obj)) {
+      // array types
+      return obj.map((item) => doBuildJson(item, stack));
+    } else {
+      // this is an object
+      if (shouldHaveRef(obj)) {
+        // we will add the $id property to the object if this is the first time we see it
+        // or returns a $ref if we have seen it before
+        let id = objectsIds.get(obj);
+        if (id) {
+          // we have seen this object before
+          return {
+            $ref: id,
+          };
         } else {
-            // this is an object
-            if (shouldHaveRef(obj)) {
-                // we will add the $id property to the object if this is the first time we see it
-                // or returns a $ref if we have seen it before
-                let id = objectsIds.get(obj);
-                if (id) {
-                    // we have seen this object before
-                    return {
-                        $ref: id
-                    };
-                } else {
-                    // this is the first time we see this object
-                    id = (objectsIds.size + 1).toString();
-                    objectsIds.set(obj, id);
-                    return handleObject(obj, id, stack);
-                }
-            } else {
-                // this is not an object to ref
-                return handleObject(obj, undefined, stack);
-            }
+          // this is the first time we see this object
+          id = (objectsIds.size + 1).toString();
+          objectsIds.set(obj, id);
+          return handleObject(obj, id, stack);
         }
+      } else {
+        // this is not an object to ref
+        return handleObject(obj, undefined, stack);
+      }
+    }
+  }
+
+  function handleObject(obj: any, id: string | undefined, stack: any[]): any {
+    if (stack.includes(obj)) {
+      // we have a cyclical reference, we should not continue
+      context.logger.warn(`Cyclical reference detected in the code model (id: ${id}).`);
+      return undefined;
     }
 
-    function handleObject(obj: any, id: string | undefined, stack: any[]): any {
-        if (stack.includes(obj)) {
-            // we have a cyclical reference, we should not continue
-            context.logger.warn(
-                `Cyclical reference detected in the code model (id: ${id}).`
-            );
-            return undefined;
-        }
+    const result: any = id === undefined ? {} : { $id: id };
+    stack.push(obj);
 
-        const result: any = id === undefined ? {} : { $id: id };
-        stack.push(obj);
-
-        for (const property in obj) {
-            if (property === "__raw") {
-                continue; // skip __raw property
-            }
-            const v = obj[property];
-            result[property] = doBuildJson(v, stack);
-        }
-
-        stack.pop();
-        return result;
+    for (const property in obj) {
+      if (property === "__raw") {
+        continue; // skip __raw property
+      }
+      const v = obj[property];
+      result[property] = doBuildJson(v, stack);
     }
 
-    function shouldHaveRef(obj: any): boolean {
-        // we only add reference to those types with a crossLanguageDefinitionId or a kind property.
-        // TODO -- crossLanguageDefinitionId should be enough but there is something that should be referenced but does not have it.
-        return "crossLanguageDefinitionId" in obj || "kind" in obj;
-    }
+    stack.pop();
+    return result;
+  }
+
+  function shouldHaveRef(obj: any): boolean {
+    // we only add reference to those types with a crossLanguageDefinitionId or a kind property.
+    // TODO -- crossLanguageDefinitionId should be enough but there is something that should be referenced but does not have it.
+    return "crossLanguageDefinitionId" in obj || "kind" in obj;
+  }
 }
 
 export async function writeConfiguration(
-    context: CSharpEmitterContext,
-    configurations: Configuration,
-    outputFolder: string
+  context: CSharpEmitterContext,
+  configurations: Configuration,
+  outputFolder: string,
 ) {
-    await context.program.host.writeFile(
-        resolvePath(outputFolder, configurationFileName),
-        prettierOutput(JSON.stringify(configurations, null, 2))
-    );
+  await context.program.host.writeFile(
+    resolvePath(outputFolder, configurationFileName),
+    prettierOutput(JSON.stringify(configurations, null, 2)),
+  );
 }
 
 function transformJSONProperties(this: any, key: string, value: any): any {
-    // convertUsageNumbersToStrings
-    if (key === "usage" && typeof value === "number") {
-        if (value === 0) {
-            return "None";
-        }
-        const result: string[] = [];
-        for (const prop in UsageFlags) {
-            if (!isNaN(Number(prop))) {
-                if ((value & Number(prop)) !== 0) {
-                    result.push(UsageFlags[prop]);
-                }
-            }
-        }
-        return result.join(",");
+  // convertUsageNumbersToStrings
+  if (key === "usage" && typeof value === "number") {
+    if (value === 0) {
+      return "None";
     }
-
-    // skip __raw if there is one
-    if (key === "__raw") {
-        return undefined;
+    const result: string[] = [];
+    for (const prop in UsageFlags) {
+      if (!isNaN(Number(prop))) {
+        if ((value & Number(prop)) !== 0) {
+          result.push(UsageFlags[prop]);
+        }
+      }
     }
+    return result.join(",");
+  }
 
-    return value;
+  // skip __raw if there is one
+  if (key === "__raw") {
+    return undefined;
+  }
+
+  return value;
 }
 
 function prettierOutput(output: string) {
-    return output + "\n";
+  return output + "\n";
 }

@@ -6,7 +6,7 @@
  * @beta
  */
 export enum LoggerLevel {
-    INFO = "info",
-    DEBUG = "debug",
-    VERBOSE = "verbose"
+  INFO = "info",
+  DEBUG = "debug",
+  VERBOSE = "verbose",
 }
