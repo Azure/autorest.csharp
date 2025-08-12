@@ -220,13 +220,6 @@ function Add-TestProjects-Directory($directory) {
         if ($directory.FullName.Contains(".NewProject.")) {
             $launchSettingsArgs = "-n"
         }
-        if ($directory.FullName.Contains("\UnbrandedProjects\")) {
-            if ($directoryToUse.Name -ne "src") {
-                $directoryToUse = Join-Path $directoryToUse "src"
-            }
-            $launchSettingsArgs = "-n"
-            $options = "--option @azure-tools/typespec-csharp.new-project=true"
-        }
         Add-TypeSpec $testName $directoryToUse "" $options $launchSettingsArgs
     }
     elseif (Test-Path $readmeConfigurationPath) {
@@ -248,15 +241,6 @@ function Add-TestProjects-Directory($directory) {
 if (!($Exclude -contains "TestProjects")) {
     # Local test projects
     $testProjectRoot = Join-Path $repoRoot 'test' 'TestProjects'
-
-    foreach ($directory in Get-ChildItem $testProjectRoot -Directory) {
-        Add-TestProjects-Directory $directory
-    }
-}
-
-if (!($Exclude -contains "UnbrandedProjects")) {
-    # Local test projects
-    $testProjectRoot = Join-Path $repoRoot 'test' 'UnbrandedProjects'
 
     foreach ($directory in Get-ChildItem $testProjectRoot -Directory) {
         Add-TestProjects-Directory $directory

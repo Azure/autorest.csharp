@@ -5,11 +5,13 @@ import {
   SdkClientType,
   SdkConstantType,
   SdkContext,
+  SdkEnumType,
   SdkHttpOperation,
   SdkHttpParameter,
   SdkHttpResponse,
   SdkMethodParameter,
   SdkModelPropertyType,
+  SdkModelType,
   SdkServiceMethod,
   SdkType,
 } from "@azure-tools/typespec-client-generator-core";
@@ -19,7 +21,7 @@ import { CSharpEmitterOptions } from "./options.js";
 import { InputOperation } from "./type/input-operation.js";
 import { InputParameter } from "./type/input-parameter.js";
 import { InputServiceMethod } from "./type/input-service-method.js";
-import { InputClient, InputLiteralType, InputModelProperty, InputType } from "./type/input-type.js";
+import { InputClient, InputEnumType, InputLiteralType, InputModelProperty, InputModelType, InputType } from "./type/input-type.js";
 import { OperationResponse } from "./type/operation-response.js";
 
 /**
@@ -57,6 +59,8 @@ class SdkTypeCache {
   properties: Map<SdkModelPropertyType, InputModelProperty>;
   responses: Map<SdkHttpResponse, OperationResponse>;
   types: Map<SdkType, InputType>;
+  models: Map<string, InputModelType>;
+  enums: Map<string, InputEnumType>;
   constants: Map<SdkConstantType, InputLiteralType>;
   crossLanguageDefinitionIds: Map<string, Type | undefined>;
 
@@ -69,6 +73,8 @@ class SdkTypeCache {
     this.properties = new Map<SdkModelPropertyType, InputModelProperty>();
     this.responses = new Map<SdkHttpResponse, OperationResponse>();
     this.types = new Map<SdkType, InputType>();
+    this.models = new Map<string, InputModelType>();
+    this.enums = new Map<string, InputEnumType>();
     this.constants = new Map<SdkConstantType, InputLiteralType>();
     this.crossLanguageDefinitionIds = new Map<string, Type | undefined>();
   }
@@ -129,7 +135,13 @@ class SdkTypeCache {
     }
   }
 
-  updateConstantCache(sdkType: SdkConstantType, type: InputLiteralType) {
-    this.constants.set(sdkType, type);
+  updateTypeCache(sdkType: SdkModelType | SdkEnumType | SdkConstantType, type: InputType) {
+    if (type.kind === "model" && sdkType.kind === "model") {
+      this.models.set(sdkType.name, type);
+    } else if (type.kind === "enum" && sdkType.kind === "enum") {
+      this.enums.set(sdkType.name, type);
+    } else if (type.kind === "constant" && sdkType.kind === "constant") {
+      this.constants.set(sdkType, type);
+    }
   }
 }

@@ -228,7 +228,7 @@ function fromSdkModelProperty(
     sdkProperty.serializationOptions?.xml?.name ??
     sdkProperty.serializationOptions?.multipart?.name;
   property = {
-    kind: sdkProperty.kind,
+    kind: isHttpMetadata(sdkContext, sdkProperty) ? "header" : sdkProperty.kind, // workaround to set kind to "header" to avoid this property get generated in the model when it is http metadata
     name: sdkProperty.name,
     serializedName: serializedName,
     summary: sdkProperty.summary,
@@ -354,7 +354,7 @@ function fromSdkConstantType(
     decorators: constantType.decorators,
   };
 
-  sdkContext.__typeCache.updateConstantCache(constantType, literalType);
+  sdkContext.__typeCache.updateTypeCache(constantType, literalType);
 
   return literalType;
 }
