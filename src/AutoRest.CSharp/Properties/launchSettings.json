@@ -208,10 +208,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Customizations-TypeSpec\\src\\Generated -n"
     },
-    "Customized-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\UnbrandedProjects\\Customized-TypeSpec\\src\\Generated -n"
-    },
     "dpg-customization-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-customization\\src\\Generated"
@@ -488,17 +484,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\NoDocs-TypeSpec\\src\\Generated -n"
     },
-    "NoDocsUnbranded-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\UnbrandedProjects\\NoDocsUnbranded-TypeSpec\\src\\Generated -n"
-    },
     "non-string-enum": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\non-string-enum\\Generated"
-    },
-    "NoTest-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\UnbrandedProjects\\NoTest-TypeSpec\\src\\Generated -n"
     },
     "object-type": {
       "commandName": "Project",
@@ -967,10 +955,6 @@
     "typespec-versioning/typeChangedFrom": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\versioning\\typeChangedFrom\\src\\Generated -n"
-    },
-    "Unbranded-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\UnbrandedProjects\\Unbranded-TypeSpec\\src\\Generated -n"
     },
     "url": {
       "commandName": "Project",

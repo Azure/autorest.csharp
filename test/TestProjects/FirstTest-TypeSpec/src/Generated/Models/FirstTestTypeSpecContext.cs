@@ -29,6 +29,7 @@ namespace FirstTestTypeSpec
     [ModelReaderWriterBuildable(typeof(ModelWithFormat))]
     [ModelReaderWriterBuildable(typeof(ModelWithProjectedEnum))]
     [ModelReaderWriterBuildable(typeof(ModelWithRequiredNullableProperties))]
+    [ModelReaderWriterBuildable(typeof(PagedThing))]
     [ModelReaderWriterBuildable(typeof(ProjectedModel))]
     [ModelReaderWriterBuildable(typeof(ResponseError))]
     [ModelReaderWriterBuildable(typeof(ReturnsAnonymousModelResponse))]

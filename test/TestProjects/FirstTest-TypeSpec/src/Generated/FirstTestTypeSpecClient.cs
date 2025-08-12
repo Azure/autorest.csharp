@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -990,6 +989,104 @@ namespace FirstTestTypeSpec
             try
             {
                 using HttpMessage message = CreateReturnsAnonymousModelRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> This is a list operation with an optional body. </summary>
+        /// <param name="body"> Metric dimension filter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List the metric values for a load test run. </remarks>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetWithOptionalBodyAsync(ListBody,CancellationToken)']/*" />
+        public virtual async Task<Response<PagedThing>> GetWithOptionalBodyAsync(ListBody body = null, CancellationToken cancellationToken = default)
+        {
+            using RequestContent content = body?.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetWithOptionalBodyAsync(content, context).ConfigureAwait(false);
+            return Response.FromValue(PagedThing.FromResponse(response), response);
+        }
+
+        /// <summary> This is a list operation with an optional body. </summary>
+        /// <param name="body"> Metric dimension filter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List the metric values for a load test run. </remarks>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetWithOptionalBody(ListBody,CancellationToken)']/*" />
+        public virtual Response<PagedThing> GetWithOptionalBody(ListBody body = null, CancellationToken cancellationToken = default)
+        {
+            using RequestContent content = body?.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetWithOptionalBody(content, context);
+            return Response.FromValue(PagedThing.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] This is a list operation with an optional body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetWithOptionalBodyAsync(ListBody,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetWithOptionalBodyAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> GetWithOptionalBodyAsync(RequestContent content, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.GetWithOptionalBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetWithOptionalBodyRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] This is a list operation with an optional body.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetWithOptionalBody(ListBody,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetWithOptionalBody(RequestContent,RequestContext)']/*" />
+        public virtual Response GetWithOptionalBody(RequestContent content, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.GetWithOptionalBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetWithOptionalBodyRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -2399,88 +2496,6 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> This is a list operation with an optional body. </summary>
-        /// <param name="body"> Metric dimension filter. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> List the metric values for a load test run. </remarks>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetWithOptionalBodyAsync(ListBody,CancellationToken)']/*" />
-        public virtual AsyncPageable<Thing> GetWithOptionalBodyAsync(ListBody body = null, CancellationToken cancellationToken = default)
-        {
-            RequestContent content = body?.ToRequestContent();
-            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithOptionalBodyRequest(content, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithOptionalBodyNextPageRequest(nextLink, content, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => Thing.DeserializeThing(e), ClientDiagnostics, _pipeline, "FirstTestTypeSpecClient.GetWithOptionalBody", "value", "nextLink", context);
-        }
-
-        /// <summary> This is a list operation with an optional body. </summary>
-        /// <param name="body"> Metric dimension filter. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> List the metric values for a load test run. </remarks>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetWithOptionalBody(ListBody,CancellationToken)']/*" />
-        public virtual Pageable<Thing> GetWithOptionalBody(ListBody body = null, CancellationToken cancellationToken = default)
-        {
-            RequestContent content = body?.ToRequestContent();
-            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithOptionalBodyRequest(content, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithOptionalBodyNextPageRequest(nextLink, content, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => Thing.DeserializeThing(e), ClientDiagnostics, _pipeline, "FirstTestTypeSpecClient.GetWithOptionalBody", "value", "nextLink", context);
-        }
-
-        /// <summary>
-        /// [Protocol Method] This is a list operation with an optional body.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="GetWithOptionalBodyAsync(ListBody,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetWithOptionalBodyAsync(RequestContent,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetWithOptionalBodyAsync(RequestContent content, RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithOptionalBodyRequest(content, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithOptionalBodyNextPageRequest(nextLink, content, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "FirstTestTypeSpecClient.GetWithOptionalBody", "value", "nextLink", context);
-        }
-
-        /// <summary>
-        /// [Protocol Method] This is a list operation with an optional body.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="GetWithOptionalBody(ListBody,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetWithOptionalBody(RequestContent,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetWithOptionalBody(RequestContent content, RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithOptionalBodyRequest(content, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithOptionalBodyNextPageRequest(nextLink, content, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "FirstTestTypeSpecClient.GetWithOptionalBody", "value", "nextLink", context);
-        }
-
         private Hello _cachedHello;
         private EnumTest _cachedEnumTest;
         private ProtocolAndConvenient _cachedProtocolAndConvenient;
@@ -2859,19 +2874,6 @@ namespace FirstTestTypeSpec
             request.Headers.Add("regen-location", regenLocation);
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            return message;
-        }
-
-        internal HttpMessage CreateGetWithOptionalBodyNextPageRequest(string nextLink, RequestContent content, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
