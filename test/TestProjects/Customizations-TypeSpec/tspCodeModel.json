@@ -407,7 +407,8 @@
             "json": {
               "name": "propertyExtensibleEnum"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "38",
@@ -448,7 +449,8 @@
                   "json": {
                     "name": "requiredInt"
                   }
-                }
+                },
+                "isHttpMetadata": false
               }
             ]
           },
@@ -462,7 +464,8 @@
             "json": {
               "name": "propertyModelToMakeInternal"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "42",
@@ -503,7 +506,8 @@
                   "json": {
                     "name": "requiredIntOnBase"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "46",
@@ -528,7 +532,8 @@
                   "json": {
                     "name": "optionalInt"
                   }
-                }
+                },
+                "isHttpMetadata": false
               }
             ]
           },
@@ -542,7 +547,8 @@
             "json": {
               "name": "propertyModelToRename"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "48",
@@ -583,7 +589,8 @@
                   "json": {
                     "name": "requiredInt"
                   }
-                }
+                },
+                "isHttpMetadata": false
               }
             ]
           },
@@ -597,7 +604,8 @@
             "json": {
               "name": "propertyModelToChangeNamespace"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "52",
@@ -638,7 +646,8 @@
                   "json": {
                     "name": "propertyToMakeInternal"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "56",
@@ -663,7 +672,8 @@
                   "json": {
                     "name": "propertyToRename"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "58",
@@ -688,7 +698,8 @@
                   "json": {
                     "name": "propertyToMakeFloat"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "60",
@@ -713,7 +724,8 @@
                   "json": {
                     "name": "propertyToMakeInt"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "62",
@@ -738,7 +750,8 @@
                   "json": {
                     "name": "propertyToMakeDuration"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "64",
@@ -771,7 +784,8 @@
                   "json": {
                     "name": "propertyToMakeString"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "67",
@@ -796,7 +810,8 @@
                   "json": {
                     "name": "propertyToMakeJsonElement"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "69",
@@ -821,7 +836,8 @@
                   "json": {
                     "name": "propertyToField"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "71",
@@ -853,7 +869,8 @@
                   "json": {
                     "name": "badListName"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "74",
@@ -890,7 +907,8 @@
                   "json": {
                     "name": "badDictionaryName"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "78",
@@ -918,7 +936,8 @@
                   "json": {
                     "name": "badListOfListName"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "80",
@@ -946,7 +965,8 @@
                   "json": {
                     "name": "badListOfDictionaryName"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "82",
@@ -978,7 +998,8 @@
                   "json": {
                     "name": "vector"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "85",
@@ -999,7 +1020,8 @@
                   "json": {
                     "name": "vectorOptional"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "86",
@@ -1013,7 +1035,7 @@
                   "type": {
                     "$ref": "83"
                   },
-                  "namespace": ""
+                  "namespace": "CustomizationsInTsp"
                 },
                 "optional": false,
                 "readOnly": false,
@@ -1025,7 +1047,8 @@
                   "json": {
                     "name": "vectorNullable"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "88",
@@ -1039,7 +1062,7 @@
                   "type": {
                     "$ref": "83"
                   },
-                  "namespace": ""
+                  "namespace": "CustomizationsInTsp"
                 },
                 "optional": true,
                 "readOnly": false,
@@ -1051,7 +1074,8 @@
                   "json": {
                     "name": "vectorOptionalNullable"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "90",
@@ -1072,7 +1096,8 @@
                   "json": {
                     "name": "vectorReadOnly"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "91",
@@ -1093,7 +1118,8 @@
                   "json": {
                     "name": "vectorOptionalReadOnly"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "92",
@@ -1107,7 +1133,7 @@
                   "type": {
                     "$ref": "83"
                   },
-                  "namespace": ""
+                  "namespace": "CustomizationsInTsp"
                 },
                 "optional": false,
                 "readOnly": true,
@@ -1119,7 +1145,8 @@
                   "json": {
                     "name": "vectorNullableReadOnly"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "94",
@@ -1133,7 +1160,7 @@
                   "type": {
                     "$ref": "83"
                   },
-                  "namespace": ""
+                  "namespace": "CustomizationsInTsp"
                 },
                 "optional": true,
                 "readOnly": true,
@@ -1145,7 +1172,8 @@
                   "json": {
                     "name": "vectorOptionalNullableReadOnly"
                   }
-                }
+                },
+                "isHttpMetadata": false
               }
             ]
           },
@@ -1159,7 +1187,8 @@
             "json": {
               "name": "propertyModelWithCustomizedProperties"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "96",
@@ -1180,7 +1209,8 @@
             "json": {
               "name": "propertyEnumToRename"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "97",
@@ -1201,7 +1231,8 @@
             "json": {
               "name": "propertyEnumWithValueToRename"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "98",
@@ -1222,7 +1253,8 @@
             "json": {
               "name": "propertyEnumToBeMadeExtensible"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "99",
@@ -1266,7 +1298,8 @@
                   "json": {
                     "name": "requiredInt"
                   }
-                }
+                },
+                "isHttpMetadata": false
               }
             ]
           },
@@ -1280,7 +1313,8 @@
             "json": {
               "name": "propertyModelToAddAdditionalSerializableProperty"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "103",
@@ -1301,7 +1335,8 @@
             "json": {
               "name": "propertyToMoveToCustomization"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "104",
@@ -1342,7 +1377,8 @@
                   "json": {
                     "name": "requiredInt"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "108",
@@ -1367,7 +1403,8 @@
                   "json": {
                     "name": "optionalInt"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "110",
@@ -1392,7 +1429,8 @@
                   "json": {
                     "name": "optionalString"
                   }
-                }
+                },
+                "isHttpMetadata": false
               }
             ]
           },
@@ -1406,7 +1444,8 @@
             "json": {
               "name": "propertyModelStruct"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     },
@@ -1552,14 +1591,14 @@
             {
               "$id": "119",
               "name": "contentType",
-              "nameInRequest": "contentType",
+              "nameInRequest": "Content-Type",
               "doc": "Body parameter's content type. Known values are application/json",
               "type": {
                 "$ref": "24"
               },
               "location": "Header",
               "isApiVersion": false,
-              "isContentType": false,
+              "isContentType": true,
               "isEndpoint": false,
               "explode": false,
               "isRequired": true,
@@ -1570,7 +1609,7 @@
             {
               "$id": "120",
               "name": "accept",
-              "nameInRequest": "accept",
+              "nameInRequest": "Accept",
               "type": {
                 "$ref": "26"
               },
@@ -1710,14 +1749,14 @@
             {
               "$id": "127",
               "name": "contentType",
-              "nameInRequest": "contentType",
+              "nameInRequest": "Content-Type",
               "doc": "Body parameter's content type. Known values are application/json",
               "type": {
                 "$ref": "28"
               },
               "location": "Header",
               "isApiVersion": false,
-              "isContentType": false,
+              "isContentType": true,
               "isEndpoint": false,
               "explode": false,
               "isRequired": true,
@@ -1728,7 +1767,7 @@
             {
               "$id": "128",
               "name": "accept",
-              "nameInRequest": "accept",
+              "nameInRequest": "Accept",
               "type": {
                 "$ref": "30"
               },
@@ -1895,14 +1934,14 @@
             {
               "$id": "138",
               "name": "contentType",
-              "nameInRequest": "contentType",
+              "nameInRequest": "Content-Type",
               "doc": "Body parameter's content type. Known values are application/json",
               "type": {
                 "$ref": "32"
               },
               "location": "Header",
               "isApiVersion": false,
-              "isContentType": false,
+              "isContentType": true,
               "isEndpoint": false,
               "explode": false,
               "isRequired": true,
@@ -1913,7 +1952,7 @@
             {
               "$id": "139",
               "name": "accept",
-              "nameInRequest": "accept",
+              "nameInRequest": "Accept",
               "type": {
                 "$ref": "34"
               },

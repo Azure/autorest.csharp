@@ -154,7 +154,6 @@ namespace Scm.Authentication.Http.Custom
             uri.Reset(_endpoint);
             uri.AppendPath("/authentication/http/custom/invalid", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }

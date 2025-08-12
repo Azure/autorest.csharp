@@ -378,7 +378,8 @@
                 "json": {
                   "name": "id"
                 }
-              }
+              },
+              "isHttpMetadata": false
             },
             {
               "$id": "37",
@@ -403,7 +404,8 @@
                 "json": {
                   "name": "name"
                 }
-              }
+              },
+              "isHttpMetadata": false
             },
             {
               "$id": "39",
@@ -435,7 +437,8 @@
                 "json": {
                   "name": "type"
                 }
-              }
+              },
+              "isHttpMetadata": false
             },
             {
               "$id": "42",
@@ -476,7 +479,8 @@
                       "json": {
                         "name": "createdBy"
                       }
-                    }
+                    },
+                    "isHttpMetadata": false
                   },
                   {
                     "$id": "46",
@@ -497,7 +501,8 @@
                       "json": {
                         "name": "createdByType"
                       }
-                    }
+                    },
+                    "isHttpMetadata": false
                   },
                   {
                     "$id": "47",
@@ -530,7 +535,8 @@
                       "json": {
                         "name": "createdAt"
                       }
-                    }
+                    },
+                    "isHttpMetadata": false
                   },
                   {
                     "$id": "50",
@@ -555,7 +561,8 @@
                       "json": {
                         "name": "lastModifiedBy"
                       }
-                    }
+                    },
+                    "isHttpMetadata": false
                   },
                   {
                     "$id": "52",
@@ -576,7 +583,8 @@
                       "json": {
                         "name": "lastModifiedByType"
                       }
-                    }
+                    },
+                    "isHttpMetadata": false
                   },
                   {
                     "$id": "53",
@@ -609,7 +617,8 @@
                       "json": {
                         "name": "lastModifiedAt"
                       }
-                    }
+                    },
+                    "isHttpMetadata": false
                   }
                 ]
               },
@@ -623,7 +632,8 @@
                 "json": {
                   "name": "systemData"
                 }
-              }
+              },
+              "isHttpMetadata": false
             }
           ]
         },
@@ -663,7 +673,8 @@
               "json": {
                 "name": "tags"
               }
-            }
+            },
+            "isHttpMetadata": false
           },
           {
             "$id": "60",
@@ -688,7 +699,8 @@
               "json": {
                 "name": "location"
               }
-            }
+            },
+            "isHttpMetadata": false
           }
         ]
       },
@@ -732,7 +744,8 @@
                   "json": {
                     "name": "provisioningState"
                   }
-                }
+                },
+                "isHttpMetadata": false
               }
             ]
           },
@@ -746,11 +759,12 @@
             "json": {
               "name": "properties"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "66",
-          "kind": "path",
+          "kind": "header",
           "name": "name",
           "serializedName": "name",
           "doc": "arm resource name for path",
@@ -763,12 +777,16 @@
           },
           "optional": false,
           "readOnly": true,
+          "discriminator": false,
+          "flatten": false,
           "decorators": [],
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonProperties.ManagedIdentityTrackedResource.name",
-          "explode": false,
-          "style": "simple",
-          "allowReserved": false,
-          "correspondingMethodParams": []
+          "serializationOptions": {
+            "json": {
+              "name": "name"
+            }
+          },
+          "isHttpMetadata": true
         },
         {
           "$id": "68",
@@ -816,7 +834,8 @@
                   "json": {
                     "name": "principalId"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "73",
@@ -848,7 +867,8 @@
                   "json": {
                     "name": "tenantId"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "76",
@@ -869,7 +889,8 @@
                   "json": {
                     "name": "type"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "77",
@@ -927,7 +948,8 @@
                           "json": {
                             "name": "principalId"
                           }
-                        }
+                        },
+                        "isHttpMetadata": false
                       },
                       {
                         "$id": "84",
@@ -959,7 +981,8 @@
                           "json": {
                             "name": "clientId"
                           }
-                        }
+                        },
+                        "isHttpMetadata": false
                       }
                     ]
                   },
@@ -975,7 +998,8 @@
                   "json": {
                     "name": "userAssignedIdentities"
                   }
-                }
+                },
+                "isHttpMetadata": false
               }
             ]
           },
@@ -989,7 +1013,8 @@
             "json": {
               "name": "identity"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     },
@@ -1061,7 +1086,8 @@
                   "json": {
                     "name": "code"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "92",
@@ -1086,7 +1112,8 @@
                   "json": {
                     "name": "message"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "94",
@@ -1111,7 +1138,8 @@
                   "json": {
                     "name": "target"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "96",
@@ -1139,7 +1167,8 @@
                   "json": {
                     "name": "details"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "98",
@@ -1184,7 +1213,8 @@
                           "json": {
                             "name": "type"
                           }
-                        }
+                        },
+                        "isHttpMetadata": false
                       },
                       {
                         "$id": "103",
@@ -1209,7 +1239,8 @@
                           "json": {
                             "name": "info"
                           }
-                        }
+                        },
+                        "isHttpMetadata": false
                       }
                     ]
                   },
@@ -1226,7 +1257,8 @@
                   "json": {
                     "name": "additionalInfo"
                   }
-                }
+                },
+                "isHttpMetadata": false
               }
             ]
           },
@@ -1240,7 +1272,8 @@
             "json": {
               "name": "error"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     },
@@ -1302,7 +1335,8 @@
                   "json": {
                     "name": "provisioningState"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "110",
@@ -1326,7 +1360,8 @@
                   "json": {
                     "name": "username"
                   }
-                }
+                },
+                "isHttpMetadata": false
               }
             ]
           },
@@ -1340,11 +1375,12 @@
             "json": {
               "name": "properties"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "112",
-          "kind": "path",
+          "kind": "header",
           "name": "name",
           "serializedName": "name",
           "doc": "The name of the ConfidentialResource",
@@ -1357,12 +1393,16 @@
           },
           "optional": false,
           "readOnly": true,
+          "discriminator": false,
+          "flatten": false,
           "decorators": [],
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonProperties.ConfidentialResource.name",
-          "explode": false,
-          "style": "simple",
-          "allowReserved": false,
-          "correspondingMethodParams": []
+          "serializationOptions": {
+            "json": {
+              "name": "name"
+            }
+          },
+          "isHttpMetadata": true
         }
       ]
     },
@@ -1438,7 +1478,8 @@
                           "json": {
                             "name": "code"
                           }
-                        }
+                        },
+                        "isHttpMetadata": false
                       },
                       {
                         "$id": "122",
@@ -1463,7 +1504,8 @@
                           "json": {
                             "name": "target"
                           }
-                        }
+                        },
+                        "isHttpMetadata": false
                       },
                       {
                         "$id": "124",
@@ -1488,7 +1530,8 @@
                           "json": {
                             "name": "message"
                           }
-                        }
+                        },
+                        "isHttpMetadata": false
                       }
                     ]
                   },
@@ -1505,7 +1548,8 @@
                   "json": {
                     "name": "details"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "126",
@@ -1546,7 +1590,8 @@
                         "json": {
                           "name": "exceptiontype"
                         }
-                      }
+                      },
+                      "isHttpMetadata": false
                     },
                     {
                       "$id": "130",
@@ -1571,7 +1616,8 @@
                         "json": {
                           "name": "errordetail"
                         }
-                      }
+                      },
+                      "isHttpMetadata": false
                     }
                   ]
                 },
@@ -1585,7 +1631,8 @@
                   "json": {
                     "name": "innererror"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "132",
@@ -1610,7 +1657,8 @@
                   "json": {
                     "name": "code"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "134",
@@ -1635,7 +1683,8 @@
                   "json": {
                     "name": "target"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "136",
@@ -1660,7 +1709,8 @@
                   "json": {
                     "name": "message"
                   }
-                }
+                },
+                "isHttpMetadata": false
               }
             ]
           },
@@ -1674,7 +1724,8 @@
             "json": {
               "name": "error"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     },
@@ -1948,7 +1999,7 @@
                 {
                   "$id": "159",
                   "name": "accept",
-                  "nameInRequest": "accept",
+                  "nameInRequest": "Accept",
                   "type": {
                     "$ref": "16"
                   },
@@ -2246,14 +2297,14 @@
                 {
                   "$id": "179",
                   "name": "contentType",
-                  "nameInRequest": "contentType",
+                  "nameInRequest": "Content-Type",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
                     "$ref": "18"
                   },
                   "location": "Header",
                   "isApiVersion": false,
-                  "isContentType": false,
+                  "isContentType": true,
                   "isEndpoint": false,
                   "explode": false,
                   "isRequired": true,
@@ -2264,7 +2315,7 @@
                 {
                   "$id": "180",
                   "name": "accept",
-                  "nameInRequest": "accept",
+                  "nameInRequest": "Accept",
                   "type": {
                     "$ref": "20"
                   },
@@ -2549,14 +2600,14 @@
                 {
                   "$id": "200",
                   "name": "contentType",
-                  "nameInRequest": "contentType",
+                  "nameInRequest": "Content-Type",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
                     "$ref": "22"
                   },
                   "location": "Header",
                   "isApiVersion": false,
-                  "isContentType": false,
+                  "isContentType": true,
                   "isEndpoint": false,
                   "explode": false,
                   "isRequired": true,
@@ -2567,7 +2618,7 @@
                 {
                   "$id": "201",
                   "name": "accept",
-                  "nameInRequest": "accept",
+                  "nameInRequest": "Accept",
                   "type": {
                     "$ref": "24"
                   },
@@ -2848,7 +2899,7 @@
                 {
                   "$id": "222",
                   "name": "accept",
-                  "nameInRequest": "accept",
+                  "nameInRequest": "Accept",
                   "type": {
                     "$ref": "26"
                   },
@@ -3146,14 +3197,14 @@
                 {
                   "$id": "242",
                   "name": "contentType",
-                  "nameInRequest": "contentType",
+                  "nameInRequest": "Content-Type",
                   "doc": "Body parameter's content type. Known values are application/json",
                   "type": {
                     "$ref": "28"
                   },
                   "location": "Header",
                   "isApiVersion": false,
-                  "isContentType": false,
+                  "isContentType": true,
                   "isEndpoint": false,
                   "explode": false,
                   "isRequired": true,
@@ -3164,7 +3215,7 @@
                 {
                   "$id": "243",
                   "name": "accept",
-                  "nameInRequest": "accept",
+                  "nameInRequest": "Accept",
                   "type": {
                     "$ref": "30"
                   },

@@ -1522,7 +1522,7 @@
       "properties": [
         {
           "$id": "129",
-          "kind": "property",
+          "kind": "header",
           "name": "x-ms-error-code",
           "serializedName": "x-ms-error-code",
           "doc": "Error code.",

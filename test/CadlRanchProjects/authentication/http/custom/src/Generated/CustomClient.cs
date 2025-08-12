@@ -203,7 +203,6 @@ namespace Authentication.Http.Custom
             uri.Reset(_endpoint);
             uri.AppendPath("/authentication/http/custom/invalid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

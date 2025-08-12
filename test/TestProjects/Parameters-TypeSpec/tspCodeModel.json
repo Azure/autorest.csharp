@@ -104,7 +104,8 @@
             "json": {
               "name": "id"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     }
@@ -334,7 +335,7 @@
                 {
                   "$id": "29",
                   "name": "accept",
-                  "nameInRequest": "accept",
+                  "nameInRequest": "Accept",
                   "type": {
                     "$ref": "4"
                   },
@@ -503,7 +504,7 @@
                 {
                   "$id": "41",
                   "name": "accept",
-                  "nameInRequest": "accept",
+                  "nameInRequest": "Accept",
                   "type": {
                     "$ref": "6"
                   },

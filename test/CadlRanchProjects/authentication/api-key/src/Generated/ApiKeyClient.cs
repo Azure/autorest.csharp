@@ -202,7 +202,6 @@ namespace Authentication.ApiKey
             uri.Reset(_endpoint);
             uri.AppendPath("/authentication/api-key/invalid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
