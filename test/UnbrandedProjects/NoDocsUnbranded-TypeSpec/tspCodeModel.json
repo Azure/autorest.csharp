@@ -351,7 +351,8 @@
             "json": {
               "name": "name"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "34",
@@ -393,7 +394,7 @@
                 "decorators": []
               }
             ],
-            "namespace": "",
+            "namespace": "NoDocsUnbrandedTypeSpec",
             "decorators": []
           },
           "optional": false,
@@ -406,7 +407,8 @@
             "json": {
               "name": "requiredUnion"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "40",
@@ -427,7 +429,8 @@
             "json": {
               "name": "requiredLiteralString"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "41",
@@ -448,7 +451,8 @@
             "json": {
               "name": "requiredLiteralInt"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "42",
@@ -469,7 +473,8 @@
             "json": {
               "name": "requiredLiteralFloat"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "43",
@@ -490,7 +495,8 @@
             "json": {
               "name": "requiredLiteralBool"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "44",
@@ -511,7 +517,8 @@
             "json": {
               "name": "optionalLiteralString"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "45",
@@ -532,7 +539,8 @@
             "json": {
               "name": "optionalLiteralInt"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "46",
@@ -553,7 +561,8 @@
             "json": {
               "name": "optionalLiteralFloat"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "47",
@@ -574,7 +583,8 @@
             "json": {
               "name": "optionalLiteralBool"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "48",
@@ -599,7 +609,8 @@
             "json": {
               "name": "requiredBadDescription"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "50",
@@ -624,7 +635,7 @@
               "crossLanguageDefinitionId": "TypeSpec.Array",
               "decorators": []
             },
-            "namespace": ""
+            "namespace": "NoDocsUnbrandedTypeSpec"
           },
           "optional": true,
           "readOnly": false,
@@ -636,7 +647,8 @@
             "json": {
               "name": "optionalNullableList"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "54",
@@ -650,7 +662,7 @@
             "type": {
               "$ref": "52"
             },
-            "namespace": ""
+            "namespace": "NoDocsUnbrandedTypeSpec"
           },
           "optional": false,
           "readOnly": false,
@@ -662,7 +674,8 @@
             "json": {
               "name": "requiredNullableList"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     }
@@ -861,7 +874,7 @@
             {
               "$id": "72",
               "name": "accept",
-              "nameInRequest": "accept",
+              "nameInRequest": "Accept",
               "type": {
                 "$ref": "29"
               },
