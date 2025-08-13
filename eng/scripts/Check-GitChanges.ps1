@@ -14,6 +14,7 @@ $diffExcludes = @(
     'package.json'
     'package-lock.json'
     'src/TypeSpec.Extension/Emitter.Csharp/package.json'
+    'test/UnbrandedProjects/package.json'
 ) | ForEach-Object { "`":(exclude)$_`"" } | Join-String -Separator ' '
 
 Invoke-LoggedCommand "git -c core.safecrlf=false diff --ignore-space-at-eol --exit-code -- $diffExcludes" -IgnoreExitCode
