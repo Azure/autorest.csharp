@@ -1,0 +1,5 @@
+options:
+  "@azure-tools/typespec-csharp":
+    deserialize-null-collection-as-null-value: true
+    head-as-boolean: true
+    disable-xml-docs: true

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>$(CurrentDotnetFramework)</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <Nullable>annotations</Nullable>
+    <IncludeSharedSourceInLocalBuild>false</IncludeSharedSourceInLocalBuild>
+    <NoWarn>$(NoWarn);CS0618</NoWarn>
+    <IncludeUnbrandedProjects>true</IncludeUnbrandedProjects>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ClientModel" />
+    <PackageReference Include="nunit" />
+    <PackageReference Include="NUnit3TestAdapter" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TestProjects\Inheritance\Inheritance.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\UnbrandedProjects\Unbranded-TypeSpec\src\Generated\Internal\*.cs" LinkBase="Shared/Internal" />
+    <Compile Include="..\AutoRest.TestServer.Tests\Infrastructure\BinaryDataAssert.cs" LinkBase="Shared/Infrastructure" />
+  </ItemGroup>
+</Project>
