@@ -69,7 +69,7 @@ export function fromSdkHttpExamples(
         parameter: SdkHttpParameterExampleValue
     ): InputParameterExampleValue {
         return {
-            parameter: sdkContext.__typeCache.properties.get(
+            parameter: sdkContext.__typeCache.operationParameters.get(
                 parameter.parameter
             ) as InputParameter,
             value: fromSdkExample(parameter.value)

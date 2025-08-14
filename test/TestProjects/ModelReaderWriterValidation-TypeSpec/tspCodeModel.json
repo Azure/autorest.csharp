@@ -682,7 +682,8 @@
             "json": {
               "name": "id"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     },
@@ -718,7 +719,8 @@
             "json": {
               "name": "name"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "70",
@@ -750,7 +752,8 @@
             "json": {
               "name": "fields"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "73",
@@ -775,7 +778,8 @@
             "json": {
               "name": "nullProperty"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "75",
@@ -812,7 +816,8 @@
             "json": {
               "name": "keyValuePairs"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "79",
@@ -837,7 +842,8 @@
             "json": {
               "name": "xProperty"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     },
@@ -873,7 +879,8 @@
           "json": {
             "name": "kind"
           }
-        }
+        },
+        "isHttpMetadata": false
       },
       "properties": [
         {
@@ -902,7 +909,8 @@
             "json": {
               "name": "name"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ],
       "discriminatedSubtypes": {
@@ -938,7 +946,8 @@
                 "json": {
                   "name": "kind"
                 }
-              }
+              },
+              "isHttpMetadata": false
             },
             {
               "$id": "88",
@@ -959,7 +968,8 @@
                 "json": {
                   "name": "fields"
                 }
-              }
+              },
+              "isHttpMetadata": false
             },
             {
               "$id": "89",
@@ -984,7 +994,8 @@
                 "json": {
                   "name": "nullProperty"
                 }
-              }
+              },
+              "isHttpMetadata": false
             },
             {
               "$id": "91",
@@ -1005,7 +1016,8 @@
                 "json": {
                   "name": "keyValuePairs"
                 }
-              }
+              },
+              "isHttpMetadata": false
             },
             {
               "$id": "92",
@@ -1030,7 +1042,8 @@
                 "json": {
                   "name": "xProperty"
                 }
-              }
+              },
+              "isHttpMetadata": false
             }
           ]
         },
@@ -1066,7 +1079,8 @@
                 "json": {
                   "name": "kind"
                 }
-              }
+              },
+              "isHttpMetadata": false
             },
             {
               "$id": "96",
@@ -1091,7 +1105,8 @@
                 "json": {
                   "name": "yProperty"
                 }
-              }
+              },
+              "isHttpMetadata": false
             }
           ]
         }
@@ -1145,7 +1160,8 @@
               "json": {
                 "name": "id"
               }
-            }
+            },
+            "isHttpMetadata": false
           },
           {
             "$id": "102",
@@ -1170,7 +1186,8 @@
               "json": {
                 "name": "name"
               }
-            }
+            },
+            "isHttpMetadata": false
           },
           {
             "$id": "104",
@@ -1195,7 +1212,8 @@
               "json": {
                 "name": "type"
               }
-            }
+            },
+            "isHttpMetadata": false
           },
           {
             "$id": "106",
@@ -1220,7 +1238,8 @@
               "json": {
                 "name": "location"
               }
-            }
+            },
+            "isHttpMetadata": false
           },
           {
             "$id": "108",
@@ -1241,7 +1260,8 @@
               "json": {
                 "name": "tags"
               }
-            }
+            },
+            "isHttpMetadata": false
           }
         ]
       },
@@ -1284,7 +1304,8 @@
                   "json": {
                     "name": "name"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "113",
@@ -1309,7 +1330,8 @@
                   "json": {
                     "name": "tier"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "115",
@@ -1334,7 +1356,8 @@
                   "json": {
                     "name": "capacity"
                   }
-                }
+                },
+                "isHttpMetadata": false
               }
             ]
           },
@@ -1348,7 +1371,8 @@
             "json": {
               "name": "sku"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "117",
@@ -1409,7 +1433,8 @@
                           "json": {
                             "name": "id"
                           }
-                        }
+                        },
+                        "isHttpMetadata": false
                       }
                     ]
                   },
@@ -1426,7 +1451,8 @@
                   "json": {
                     "name": "virtualMachines"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "124",
@@ -1451,7 +1477,8 @@
                   "json": {
                     "name": "platformFaultDomainCount"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "126",
@@ -1476,7 +1503,8 @@
                   "json": {
                     "name": "platformUpdateDomainCount"
                   }
-                }
+                },
+                "isHttpMetadata": false
               }
             ]
           },
@@ -1490,7 +1518,8 @@
             "json": {
               "name": "properties"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     },
@@ -1539,7 +1568,8 @@
             "json": {
               "name": "id"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "131",
@@ -1564,7 +1594,8 @@
             "json": {
               "name": "namespace"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "133",
@@ -1589,7 +1620,8 @@
             "json": {
               "name": "registrationState"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "135",
@@ -1614,7 +1646,8 @@
             "json": {
               "name": "registrationPolicy"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "137",
@@ -1658,7 +1691,8 @@
                     "json": {
                       "name": "resourceType"
                     }
-                  }
+                  },
+                  "isHttpMetadata": false
                 },
                 {
                   "$id": "142",
@@ -1679,7 +1713,8 @@
                     "json": {
                       "name": "locations"
                     }
-                  }
+                  },
+                  "isHttpMetadata": false
                 },
                 {
                   "$id": "143",
@@ -1724,7 +1759,8 @@
                             "json": {
                               "name": "location"
                             }
-                          }
+                          },
+                          "isHttpMetadata": false
                         },
                         {
                           "$id": "148",
@@ -1749,7 +1785,8 @@
                             "json": {
                               "name": "type"
                             }
-                          }
+                          },
+                          "isHttpMetadata": false
                         },
                         {
                           "$id": "150",
@@ -1770,7 +1807,8 @@
                             "json": {
                               "name": "extendedLocations"
                             }
-                          }
+                          },
+                          "isHttpMetadata": false
                         }
                       ]
                     },
@@ -1787,7 +1825,8 @@
                     "json": {
                       "name": "locationMappings"
                     }
-                  }
+                  },
+                  "isHttpMetadata": false
                 },
                 {
                   "$id": "151",
@@ -1832,7 +1871,8 @@
                             "json": {
                               "name": "name"
                             }
-                          }
+                          },
+                          "isHttpMetadata": false
                         },
                         {
                           "$id": "156",
@@ -1877,7 +1917,8 @@
                                     "json": {
                                       "name": "path"
                                     }
-                                  }
+                                  },
+                                  "isHttpMetadata": false
                                 },
                                 {
                                   "$id": "161",
@@ -1898,7 +1939,8 @@
                                     "json": {
                                       "name": "apiVersions"
                                     }
-                                  }
+                                  },
+                                  "isHttpMetadata": false
                                 },
                                 {
                                   "$id": "162",
@@ -1939,7 +1981,8 @@
                                           "json": {
                                             "name": "phrase"
                                           }
-                                        }
+                                        },
+                                        "isHttpMetadata": false
                                       },
                                       {
                                         "$id": "166",
@@ -1964,7 +2007,8 @@
                                           "json": {
                                             "name": "variable"
                                           }
-                                        }
+                                        },
+                                        "isHttpMetadata": false
                                       },
                                       {
                                         "$id": "168",
@@ -1985,7 +2029,8 @@
                                           "json": {
                                             "name": "patternType"
                                           }
-                                        }
+                                        },
+                                        "isHttpMetadata": false
                                       }
                                     ]
                                   },
@@ -1999,7 +2044,8 @@
                                     "json": {
                                       "name": "pattern"
                                     }
-                                  }
+                                  },
+                                  "isHttpMetadata": false
                                 },
                                 {
                                   "$id": "169",
@@ -2036,7 +2082,8 @@
                                           "json": {
                                             "name": "tokenType"
                                           }
-                                        }
+                                        },
+                                        "isHttpMetadata": false
                                       },
                                       {
                                         "$id": "172",
@@ -2057,7 +2104,8 @@
                                           "json": {
                                             "name": "attributes"
                                           }
-                                        }
+                                        },
+                                        "isHttpMetadata": false
                                       }
                                     ]
                                   },
@@ -2071,7 +2119,8 @@
                                     "json": {
                                       "name": "metadata"
                                     }
-                                  }
+                                  },
+                                  "isHttpMetadata": false
                                 }
                               ]
                             },
@@ -2088,7 +2137,8 @@
                             "json": {
                               "name": "paths"
                             }
-                          }
+                          },
+                          "isHttpMetadata": false
                         },
                         {
                           "$id": "173",
@@ -2109,7 +2159,8 @@
                             "json": {
                               "name": "aliasType"
                             }
-                          }
+                          },
+                          "isHttpMetadata": false
                         },
                         {
                           "$id": "174",
@@ -2134,7 +2185,8 @@
                             "json": {
                               "name": "defaultPath"
                             }
-                          }
+                          },
+                          "isHttpMetadata": false
                         },
                         {
                           "$id": "176",
@@ -2155,7 +2207,8 @@
                             "json": {
                               "name": "defaultPattern"
                             }
-                          }
+                          },
+                          "isHttpMetadata": false
                         },
                         {
                           "$id": "177",
@@ -2176,7 +2229,8 @@
                             "json": {
                               "name": "defaultMetadata"
                             }
-                          }
+                          },
+                          "isHttpMetadata": false
                         }
                       ]
                     },
@@ -2193,7 +2247,8 @@
                     "json": {
                       "name": "aliases"
                     }
-                  }
+                  },
+                  "isHttpMetadata": false
                 },
                 {
                   "$id": "178",
@@ -2214,7 +2269,8 @@
                     "json": {
                       "name": "apiVersions"
                     }
-                  }
+                  },
+                  "isHttpMetadata": false
                 },
                 {
                   "$id": "179",
@@ -2239,7 +2295,8 @@
                     "json": {
                       "name": "defaultApiVersion"
                     }
-                  }
+                  },
+                  "isHttpMetadata": false
                 },
                 {
                   "$id": "181",
@@ -2284,7 +2341,8 @@
                             "json": {
                               "name": "location"
                             }
-                          }
+                          },
+                          "isHttpMetadata": false
                         },
                         {
                           "$id": "186",
@@ -2305,7 +2363,8 @@
                             "json": {
                               "name": "zones"
                             }
-                          }
+                          },
+                          "isHttpMetadata": false
                         }
                       ]
                     },
@@ -2322,7 +2381,8 @@
                     "json": {
                       "name": "zoneMappings"
                     }
-                  }
+                  },
+                  "isHttpMetadata": false
                 },
                 {
                   "$id": "187",
@@ -2366,7 +2426,8 @@
                             "json": {
                               "name": "profileVersion"
                             }
-                          }
+                          },
+                          "isHttpMetadata": false
                         },
                         {
                           "$id": "192",
@@ -2391,7 +2452,8 @@
                             "json": {
                               "name": "apiVersion"
                             }
-                          }
+                          },
+                          "isHttpMetadata": false
                         }
                       ]
                     },
@@ -2408,7 +2470,8 @@
                     "json": {
                       "name": "apiProfiles"
                     }
-                  }
+                  },
+                  "isHttpMetadata": false
                 },
                 {
                   "$id": "194",
@@ -2433,7 +2496,8 @@
                     "json": {
                       "name": "capabilities"
                     }
-                  }
+                  },
+                  "isHttpMetadata": false
                 },
                 {
                   "$id": "196",
@@ -2454,7 +2518,8 @@
                     "json": {
                       "name": "properties"
                     }
-                  }
+                  },
+                  "isHttpMetadata": false
                 }
               ]
             },
@@ -2471,7 +2536,8 @@
             "json": {
               "name": "resourceTypes"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "197",
@@ -2492,7 +2558,8 @@
             "json": {
               "name": "providerAuthorizationConsentState"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     },
@@ -2559,7 +2626,8 @@
             "json": {
               "name": "id"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "202",
@@ -2584,7 +2652,8 @@
             "json": {
               "name": "name"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "204",
@@ -2609,7 +2678,8 @@
             "json": {
               "name": "age"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     },
@@ -2655,7 +2725,8 @@
             "json": {
               "name": "id"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "210",
@@ -2680,7 +2751,8 @@
             "json": {
               "name": "name"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "212",
@@ -2705,7 +2777,8 @@
             "json": {
               "name": "age"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     },
@@ -2748,7 +2821,8 @@
             "json": {
               "name": "id"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "218",
@@ -2773,7 +2847,8 @@
             "json": {
               "name": "name"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "220",
@@ -2798,7 +2873,8 @@
             "json": {
               "name": "age"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     }
@@ -2924,14 +3000,14 @@
             {
               "$id": "229",
               "name": "contentType",
-              "nameInRequest": "contentType",
+              "nameInRequest": "Content-Type",
               "doc": "Body parameter's content type. Known values are application/json",
               "type": {
                 "$ref": "34"
               },
               "location": "Header",
               "isApiVersion": false,
-              "isContentType": false,
+              "isContentType": true,
               "isEndpoint": false,
               "explode": false,
               "isRequired": true,
@@ -2942,7 +3018,7 @@
             {
               "$id": "230",
               "name": "accept",
-              "nameInRequest": "accept",
+              "nameInRequest": "Accept",
               "type": {
                 "$ref": "36"
               },
@@ -3080,14 +3156,14 @@
             {
               "$id": "237",
               "name": "contentType",
-              "nameInRequest": "contentType",
+              "nameInRequest": "Content-Type",
               "doc": "Body parameter's content type. Known values are application/json",
               "type": {
                 "$ref": "38"
               },
               "location": "Header",
               "isApiVersion": false,
-              "isContentType": false,
+              "isContentType": true,
               "isEndpoint": false,
               "explode": false,
               "isRequired": true,
@@ -3098,7 +3174,7 @@
             {
               "$id": "238",
               "name": "accept",
-              "nameInRequest": "accept",
+              "nameInRequest": "Accept",
               "type": {
                 "$ref": "40"
               },
@@ -3236,14 +3312,14 @@
             {
               "$id": "245",
               "name": "contentType",
-              "nameInRequest": "contentType",
+              "nameInRequest": "Content-Type",
               "doc": "Body parameter's content type. Known values are application/json",
               "type": {
                 "$ref": "42"
               },
               "location": "Header",
               "isApiVersion": false,
-              "isContentType": false,
+              "isContentType": true,
               "isEndpoint": false,
               "explode": false,
               "isRequired": true,
@@ -3254,7 +3330,7 @@
             {
               "$id": "246",
               "name": "accept",
-              "nameInRequest": "accept",
+              "nameInRequest": "Accept",
               "type": {
                 "$ref": "44"
               },
@@ -3392,14 +3468,14 @@
             {
               "$id": "253",
               "name": "contentType",
-              "nameInRequest": "contentType",
+              "nameInRequest": "Content-Type",
               "doc": "Body parameter's content type. Known values are application/json",
               "type": {
                 "$ref": "46"
               },
               "location": "Header",
               "isApiVersion": false,
-              "isContentType": false,
+              "isContentType": true,
               "isEndpoint": false,
               "explode": false,
               "isRequired": true,
@@ -3410,7 +3486,7 @@
             {
               "$id": "254",
               "name": "accept",
-              "nameInRequest": "accept",
+              "nameInRequest": "Accept",
               "type": {
                 "$ref": "48"
               },
@@ -3493,7 +3569,7 @@
             {
               "$id": "258",
               "name": "accept",
-              "nameInRequest": "accept",
+              "nameInRequest": "Accept",
               "type": {
                 "$ref": "50"
               },
@@ -3631,14 +3707,14 @@
             {
               "$id": "265",
               "name": "contentType",
-              "nameInRequest": "contentType",
+              "nameInRequest": "Content-Type",
               "doc": "Body parameter's content type. Known values are application/json",
               "type": {
                 "$ref": "52"
               },
               "location": "Header",
               "isApiVersion": false,
-              "isContentType": false,
+              "isContentType": true,
               "isEndpoint": false,
               "explode": false,
               "isRequired": true,
@@ -3649,7 +3725,7 @@
             {
               "$id": "266",
               "name": "accept",
-              "nameInRequest": "accept",
+              "nameInRequest": "Accept",
               "type": {
                 "$ref": "54"
               },
@@ -3787,14 +3863,14 @@
             {
               "$id": "273",
               "name": "contentType",
-              "nameInRequest": "contentType",
+              "nameInRequest": "Content-Type",
               "doc": "Body parameter's content type. Known values are application/json",
               "type": {
                 "$ref": "56"
               },
               "location": "Header",
               "isApiVersion": false,
-              "isContentType": false,
+              "isContentType": true,
               "isEndpoint": false,
               "explode": false,
               "isRequired": true,
@@ -3805,7 +3881,7 @@
             {
               "$id": "274",
               "name": "accept",
-              "nameInRequest": "accept",
+              "nameInRequest": "Accept",
               "type": {
                 "$ref": "58"
               },
@@ -3943,14 +4019,14 @@
             {
               "$id": "281",
               "name": "contentType",
-              "nameInRequest": "contentType",
+              "nameInRequest": "Content-Type",
               "doc": "Body parameter's content type. Known values are application/json",
               "type": {
                 "$ref": "60"
               },
               "location": "Header",
               "isApiVersion": false,
-              "isContentType": false,
+              "isContentType": true,
               "isEndpoint": false,
               "explode": false,
               "isRequired": true,
@@ -3961,7 +4037,7 @@
             {
               "$id": "282",
               "name": "accept",
-              "nameInRequest": "accept",
+              "nameInRequest": "Accept",
               "type": {
                 "$ref": "62"
               },

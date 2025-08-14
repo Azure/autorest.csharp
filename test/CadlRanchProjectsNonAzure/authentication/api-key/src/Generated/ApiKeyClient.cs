@@ -153,7 +153,6 @@ namespace Scm.Authentication.ApiKey
             uri.Reset(_endpoint);
             uri.AppendPath("/authentication/api-key/invalid", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }

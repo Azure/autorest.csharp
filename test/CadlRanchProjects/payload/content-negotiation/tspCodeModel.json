@@ -255,15 +255,22 @@
           "$id": "30",
           "kind": "header",
           "name": "contentType",
-          "serializedName": "content-type",
+          "serializedName": "contentType",
           "type": {
             "$ref": "4"
           },
           "optional": false,
           "readOnly": false,
+          "discriminator": false,
+          "flatten": false,
           "decorators": [],
           "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson.contentType",
-          "correspondingMethodParams": []
+          "serializationOptions": {
+            "json": {
+              "name": "contentType"
+            }
+          },
+          "isHttpMetadata": true
         },
         {
           "$id": "31",
@@ -288,7 +295,8 @@
             "json": {
               "name": "content"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     }
@@ -413,7 +421,7 @@
                 {
                   "$id": "42",
                   "name": "accept",
-                  "nameInRequest": "accept",
+                  "nameInRequest": "Accept",
                   "type": {
                     "$ref": "9"
                   },
@@ -508,7 +516,7 @@
                 {
                   "$id": "47",
                   "name": "accept",
-                  "nameInRequest": "accept",
+                  "nameInRequest": "Accept",
                   "type": {
                     "$ref": "15"
                   },
@@ -649,7 +657,7 @@
                 {
                   "$id": "56",
                   "name": "accept",
-                  "nameInRequest": "accept",
+                  "nameInRequest": "Accept",
                   "type": {
                     "$ref": "21"
                   },
@@ -740,7 +748,7 @@
                 {
                   "$id": "60",
                   "name": "accept",
-                  "nameInRequest": "accept",
+                  "nameInRequest": "Accept",
                   "type": {
                     "$ref": "27"
                   },

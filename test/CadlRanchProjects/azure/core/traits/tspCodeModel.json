@@ -173,7 +173,8 @@
             "json": {
               "name": "id"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "17",
@@ -198,7 +199,8 @@
             "json": {
               "name": "name"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     },
@@ -251,7 +253,8 @@
                   "json": {
                     "name": "code"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "24",
@@ -276,7 +279,8 @@
                   "json": {
                     "name": "message"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "26",
@@ -301,7 +305,8 @@
                   "json": {
                     "name": "target"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "28",
@@ -329,7 +334,8 @@
                   "json": {
                     "name": "details"
                   }
-                }
+                },
+                "isHttpMetadata": false
               },
               {
                 "$id": "30",
@@ -344,7 +350,7 @@
                   "namespace": "Azure.Core.Foundations",
                   "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
                   "usage": "Json,Exception",
-                  "doc": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+                  "doc": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
                   "decorators": [],
                   "properties": [
                     {
@@ -370,7 +376,8 @@
                         "json": {
                           "name": "code"
                         }
-                      }
+                      },
+                      "isHttpMetadata": false
                     },
                     {
                       "$id": "34",
@@ -391,7 +398,8 @@
                         "json": {
                           "name": "innererror"
                         }
-                      }
+                      },
+                      "isHttpMetadata": false
                     }
                   ]
                 },
@@ -405,7 +413,8 @@
                   "json": {
                     "name": "innererror"
                   }
-                }
+                },
+                "isHttpMetadata": false
               }
             ]
           },
@@ -419,13 +428,14 @@
             "json": {
               "name": "error"
             }
-          }
+          },
+          "isHttpMetadata": false
         },
         {
           "$id": "35",
           "kind": "header",
           "name": "errorCode",
-          "serializedName": "x-ms-error-code",
+          "serializedName": "errorCode",
           "doc": "String error code indicating what went wrong.",
           "type": {
             "$id": "36",
@@ -436,9 +446,16 @@
           },
           "optional": true,
           "readOnly": false,
+          "discriminator": false,
+          "flatten": false,
           "decorators": [],
           "crossLanguageDefinitionId": "Azure.Core.Foundations.ErrorResponse.errorCode",
-          "correspondingMethodParams": []
+          "serializationOptions": {
+            "json": {
+              "name": "errorCode"
+            }
+          },
+          "isHttpMetadata": true
         }
       ]
     },
@@ -481,7 +498,8 @@
             "json": {
               "name": "userActionValue"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     },
@@ -518,7 +536,8 @@
             "json": {
               "name": "userActionResult"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     }
@@ -1021,7 +1040,7 @@
             {
               "$id": "88",
               "name": "accept",
-              "nameInRequest": "accept",
+              "nameInRequest": "Accept",
               "type": {
                 "$ref": "8"
               },
@@ -1353,14 +1372,14 @@
             {
               "$id": "112",
               "name": "contentType",
-              "nameInRequest": "contentType",
+              "nameInRequest": "Content-Type",
               "doc": "Body parameter's content type. Known values are application/json",
               "type": {
                 "$ref": "10"
               },
               "location": "Header",
               "isApiVersion": false,
-              "isContentType": false,
+              "isContentType": true,
               "isEndpoint": false,
               "explode": false,
               "isRequired": true,
@@ -1371,7 +1390,7 @@
             {
               "$id": "113",
               "name": "accept",
-              "nameInRequest": "accept",
+              "nameInRequest": "Accept",
               "type": {
                 "$ref": "12"
               },

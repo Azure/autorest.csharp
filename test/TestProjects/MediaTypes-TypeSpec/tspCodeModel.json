@@ -42,7 +42,7 @@
           "decorators": []
         }
       ],
-      "namespace": "",
+      "namespace": "MultipleMediaTypes",
       "isFixed": true,
       "isFlags": false,
       "usage": "Input",
@@ -101,7 +101,7 @@
           "decorators": []
         }
       ],
-      "namespace": "",
+      "namespace": "MultipleMediaTypes",
       "isFixed": true,
       "isFlags": false,
       "usage": "Input",
@@ -174,7 +174,8 @@
             "json": {
               "name": "id"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     }
@@ -287,13 +288,13 @@
             {
               "$id": "25",
               "name": "contentType",
-              "nameInRequest": "content-type",
+              "nameInRequest": "Content-Type",
               "type": {
                 "$ref": "1"
               },
               "location": "Header",
               "isApiVersion": false,
-              "isContentType": false,
+              "isContentType": true,
               "isEndpoint": false,
               "explode": false,
               "isRequired": true,
@@ -407,13 +408,13 @@
             {
               "$id": "33",
               "name": "contentType",
-              "nameInRequest": "content-type",
+              "nameInRequest": "Content-Type",
               "type": {
                 "$ref": "5"
               },
               "location": "Header",
               "isApiVersion": false,
-              "isContentType": false,
+              "isContentType": true,
               "isEndpoint": false,
               "explode": false,
               "isRequired": true,
@@ -517,13 +518,13 @@
             {
               "$id": "39",
               "name": "contentType",
-              "nameInRequest": "content-type",
+              "nameInRequest": "Content-Type",
               "type": {
                 "$ref": "12"
               },
               "location": "Header",
               "isApiVersion": false,
-              "isContentType": false,
+              "isContentType": true,
               "isEndpoint": false,
               "explode": false,
               "isRequired": true,

@@ -124,7 +124,7 @@ export function isInputUnionType(type: InputType): type is InputUnionType {
  */
 export interface InputModelType extends InputTypeBase {
     kind: "model";
-    properties: InputProperty[];
+    properties: InputModelProperty[];
     name: string;
     crossLanguageDefinitionId: string;
     access?: AccessFlags;
@@ -133,7 +133,7 @@ export interface InputModelType extends InputTypeBase {
     additionalProperties?: InputType;
     discriminatorValue?: string;
     discriminatedSubtypes?: Record<string, InputModelType>;
-    discriminatorProperty?: InputProperty;
+    discriminatorProperty?: InputModelProperty;
     baseModel?: InputModelType;
     serializationOptions: SerializationOptions;
 }
@@ -159,6 +159,7 @@ export interface InputModelProperty extends InputPropertyTypeBase {
     serializedName: string;
     serializationOptions: SerializationOptions;
     flatten: boolean;
+    isHttpMetadata: boolean;
 }
 
 export type InputProperty = InputModelProperty | InputHttpParameter;

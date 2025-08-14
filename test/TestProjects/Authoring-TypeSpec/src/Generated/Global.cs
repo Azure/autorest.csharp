@@ -6,7 +6,7 @@
 #nullable disable
 
 using System;
-using Autorest.CSharp.Core;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -55,18 +55,27 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
+        /// <param name="top"> The <see cref="int"/>? to use. </param>
         /// <param name="skip"> The <see cref="int"/>? to use. </param>
         /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Global.xml" path="doc/members/member[@name='GetSupportedLanguagesAsync(int?,int?,int?,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetSupportedLanguagesAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
+        public virtual async Task<Response> GetSupportedLanguagesAsync(int? top = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSupportedLanguagesRequest(maxCount, skip, pageSizeHint, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSupportedLanguagesNextPageRequest(nextLink, maxCount, skip, pageSizeHint, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "Global.GetSupportedLanguages", "value", "nextLink", maxpagesize, context);
+            using var scope = ClientDiagnostics.CreateScope("Global.GetSupportedLanguages");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetSupportedLanguagesRequest(top, skip, maxpagesize, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary>
@@ -79,18 +88,27 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
+        /// <param name="top"> The <see cref="int"/>? to use. </param>
         /// <param name="skip"> The <see cref="int"/>? to use. </param>
         /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Global.xml" path="doc/members/member[@name='GetSupportedLanguages(int?,int?,int?,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetSupportedLanguages(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
+        public virtual Response GetSupportedLanguages(int? top = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSupportedLanguagesRequest(maxCount, skip, pageSizeHint, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSupportedLanguagesNextPageRequest(nextLink, maxCount, skip, pageSizeHint, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "Global.GetSupportedLanguages", "value", "nextLink", maxpagesize, context);
+            using var scope = ClientDiagnostics.CreateScope("Global.GetSupportedLanguages");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetSupportedLanguagesRequest(top, skip, maxpagesize, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary>
@@ -103,18 +121,27 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
+        /// <param name="top"> The <see cref="int"/>? to use. </param>
         /// <param name="skip"> The <see cref="int"/>? to use. </param>
         /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Global.xml" path="doc/members/member[@name='GetTrainingConfigVersionsAsync(int?,int?,int?,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetTrainingConfigVersionsAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
+        public virtual async Task<Response> GetTrainingConfigVersionsAsync(int? top = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTrainingConfigVersionsRequest(maxCount, skip, pageSizeHint, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, pageSizeHint, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "Global.GetTrainingConfigVersions", "value", "nextLink", maxpagesize, context);
+            using var scope = ClientDiagnostics.CreateScope("Global.GetTrainingConfigVersions");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetTrainingConfigVersionsRequest(top, skip, maxpagesize, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary>
@@ -127,21 +154,30 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
+        /// <param name="top"> The <see cref="int"/>? to use. </param>
         /// <param name="skip"> The <see cref="int"/>? to use. </param>
         /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Global.xml" path="doc/members/member[@name='GetTrainingConfigVersions(int?,int?,int?,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetTrainingConfigVersions(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
+        public virtual Response GetTrainingConfigVersions(int? top = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTrainingConfigVersionsRequest(maxCount, skip, pageSizeHint, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetTrainingConfigVersionsNextPageRequest(nextLink, maxCount, skip, pageSizeHint, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "Global.GetTrainingConfigVersions", "value", "nextLink", maxpagesize, context);
+            using var scope = ClientDiagnostics.CreateScope("Global.GetTrainingConfigVersions");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetTrainingConfigVersionsRequest(top, skip, maxpagesize, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
-        internal HttpMessage CreateGetSupportedLanguagesRequest(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
+        internal HttpMessage CreateGetSupportedLanguagesRequest(int? top, int? skip, int? maxpagesize, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -150,9 +186,9 @@ namespace AuthoringTypeSpec
             uri.Reset(_endpoint);
             uri.AppendRaw("/language", false);
             uri.AppendPath("/authoring/analyze-text/projects/global/languages", false);
-            if (maxCount != null)
+            if (top != null)
             {
-                uri.AppendQuery("top", maxCount.Value, true);
+                uri.AppendQuery("top", top.Value, true);
             }
             if (skip != null)
             {
@@ -168,7 +204,7 @@ namespace AuthoringTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateGetTrainingConfigVersionsRequest(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
+        internal HttpMessage CreateGetTrainingConfigVersionsRequest(int? top, int? skip, int? maxpagesize, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -177,9 +213,9 @@ namespace AuthoringTypeSpec
             uri.Reset(_endpoint);
             uri.AppendRaw("/language", false);
             uri.AppendPath("/authoring/analyze-text/projects/global/training-config-versions", false);
-            if (maxCount != null)
+            if (top != null)
             {
-                uri.AppendQuery("top", maxCount.Value, true);
+                uri.AppendQuery("top", top.Value, true);
             }
             if (skip != null)
             {
@@ -190,34 +226,6 @@ namespace AuthoringTypeSpec
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreateGetSupportedLanguagesNextPageRequest(string nextLink, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/language", false);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreateGetTrainingConfigVersionsNextPageRequest(string nextLink, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/language", false);
-            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

@@ -202,7 +202,6 @@ namespace Authentication.OAuth2
             uri.Reset(_endpoint);
             uri.AppendPath("/authentication/oauth2/invalid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

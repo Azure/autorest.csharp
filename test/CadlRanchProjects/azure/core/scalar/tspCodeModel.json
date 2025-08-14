@@ -193,7 +193,8 @@
             "json": {
               "name": "location"
             }
-          }
+          },
+          "isHttpMetadata": false
         }
       ]
     }
@@ -330,7 +331,7 @@
                 {
                   "$id": "32",
                   "name": "accept",
-                  "nameInRequest": "accept",
+                  "nameInRequest": "Accept",
                   "type": {
                     "$ref": "4"
                   },
@@ -443,13 +444,13 @@
                 {
                   "$id": "39",
                   "name": "contentType",
-                  "nameInRequest": "content-type",
+                  "nameInRequest": "Content-Type",
                   "type": {
                     "$ref": "10"
                   },
                   "location": "Header",
                   "isApiVersion": false,
-                  "isContentType": false,
+                  "isContentType": true,
                   "isEndpoint": false,
                   "explode": false,
                   "isRequired": true,
@@ -593,13 +594,13 @@
                 {
                   "$id": "48",
                   "name": "contentType",
-                  "nameInRequest": "content-type",
+                  "nameInRequest": "Content-Type",
                   "type": {
                     "$ref": "16"
                   },
                   "location": "Header",
                   "isApiVersion": false,
-                  "isContentType": false,
+                  "isContentType": true,
                   "isEndpoint": false,
                   "explode": false,
                   "isRequired": true,
@@ -628,7 +629,7 @@
                 {
                   "$id": "50",
                   "name": "accept",
-                  "nameInRequest": "accept",
+                  "nameInRequest": "Accept",
                   "type": {
                     "$ref": "14"
                   },
