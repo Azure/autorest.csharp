@@ -1496,6 +1496,7 @@
           "$id": "132",
           "kind": "property",
           "name": "projectName",
+          "serializedName": "projectName",
           "type": {
             "$id": "133",
             "kind": "string",
@@ -1516,6 +1517,7 @@
           "$id": "134",
           "kind": "property",
           "name": "projectKind",
+          "serializedName": "projectKind",
           "doc": "The project kind.",
           "type": {
             "$ref": "13"
@@ -1533,6 +1535,7 @@
           "$id": "135",
           "kind": "property",
           "name": "storageInputContainerName",
+          "serializedName": "storageInputContainerName",
           "doc": "The storage container name.",
           "type": {
             "$id": "136",
@@ -1554,6 +1557,7 @@
           "$id": "137",
           "kind": "property",
           "name": "settings",
+          "serializedName": "settings",
           "doc": "The project settings.",
           "type": {
             "$id": "138",
@@ -1586,6 +1590,7 @@
           "$id": "140",
           "kind": "property",
           "name": "multilingual",
+          "serializedName": "multilingual",
           "doc": "Whether the project would be used for multiple languages or not.",
           "type": {
             "$id": "141",
@@ -1607,6 +1612,7 @@
           "$id": "142",
           "kind": "property",
           "name": "description",
+          "serializedName": "description",
           "doc": "The project description.",
           "type": {
             "$id": "143",
@@ -1628,6 +1634,7 @@
           "$id": "144",
           "kind": "property",
           "name": "language",
+          "serializedName": "language",
           "doc": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
           "type": {
             "$id": "145",
@@ -1649,6 +1656,7 @@
           "$id": "146",
           "kind": "property",
           "name": "createdDateTime",
+          "serializedName": "createdDateTime",
           "doc": "Represents the project creation datetime.",
           "type": {
             "$id": "147",
@@ -1678,6 +1686,7 @@
           "$id": "149",
           "kind": "property",
           "name": "lastModifiedDateTime",
+          "serializedName": "lastModifiedDateTime",
           "doc": "Represents the project last modification datetime.",
           "type": {
             "$id": "150",
@@ -1707,6 +1716,7 @@
           "$id": "152",
           "kind": "property",
           "name": "lastTrainedDateTime",
+          "serializedName": "lastTrainedDateTime",
           "doc": "Represents the project last training datetime.",
           "type": {
             "$id": "153",
@@ -1736,6 +1746,7 @@
           "$id": "155",
           "kind": "property",
           "name": "lastDeployedDateTime",
+          "serializedName": "lastDeployedDateTime",
           "doc": "Represents the project last deployment datetime.",
           "type": {
             "$id": "156",
@@ -1780,6 +1791,7 @@
           "$id": "159",
           "kind": "property",
           "name": "id",
+          "serializedName": "id",
           "doc": "The unique ID of the operation.",
           "type": {
             "$id": "160",
@@ -1801,6 +1813,7 @@
           "$id": "161",
           "kind": "property",
           "name": "status",
+          "serializedName": "status",
           "doc": "The status of the operation",
           "type": {
             "$ref": "18"
@@ -1818,6 +1831,7 @@
           "$id": "162",
           "kind": "property",
           "name": "error",
+          "serializedName": "error",
           "doc": "Error object that describes the error when status is \"Failed\".",
           "type": {
             "$ref": "75"
@@ -1847,6 +1861,7 @@
           "$id": "164",
           "kind": "property",
           "name": "value",
+          "serializedName": "value",
           "doc": "The Project items on this page",
           "type": {
             "$id": "165",
@@ -1871,6 +1886,7 @@
           "$id": "166",
           "kind": "property",
           "name": "nextLink",
+          "serializedName": "nextLink",
           "doc": "The link to the next page of items",
           "type": {
             "$id": "167",
@@ -1911,6 +1927,7 @@
           "$id": "170",
           "kind": "property",
           "name": "modelLabel",
+          "serializedName": "modelLabel",
           "type": {
             "$id": "171",
             "kind": "string",
@@ -1942,6 +1959,7 @@
           "$id": "173",
           "kind": "property",
           "name": "name",
+          "serializedName": "name",
           "type": {
             "$id": "174",
             "kind": "string",
@@ -1974,6 +1992,7 @@
           "$id": "176",
           "kind": "property",
           "name": "value",
+          "serializedName": "value",
           "doc": "The Deployment items on this page",
           "type": {
             "$id": "177",
@@ -1998,6 +2017,7 @@
           "$id": "178",
           "kind": "property",
           "name": "nextLink",
+          "serializedName": "nextLink",
           "doc": "The link to the next page of items",
           "type": {
             "$id": "179",
@@ -2037,6 +2057,7 @@
           "$id": "182",
           "kind": "property",
           "name": "firstDeploymentName",
+          "serializedName": "firstDeploymentName",
           "doc": "Represents the first deployment name.",
           "type": {
             "$id": "183",
@@ -2058,6 +2079,7 @@
           "$id": "184",
           "kind": "property",
           "name": "secondDeploymentName",
+          "serializedName": "secondDeploymentName",
           "doc": "Represents the second deployment name.",
           "type": {
             "$id": "185",
@@ -2091,6 +2113,7 @@
           "$id": "187",
           "kind": "property",
           "name": "value",
+          "serializedName": "value",
           "doc": "The SupportedLanguage items on this page",
           "type": {
             "$id": "188",
@@ -2110,6 +2133,7 @@
                   "$id": "190",
                   "kind": "property",
                   "name": "languageName",
+                  "serializedName": "languageName",
                   "doc": "The language name.",
                   "type": {
                     "$id": "191",
@@ -2131,6 +2155,7 @@
                   "$id": "192",
                   "kind": "property",
                   "name": "languageCode",
+                  "serializedName": "languageCode",
                   "doc": "The language code. This is BCP-47 representation of a language. For example, \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
                   "type": {
                     "$id": "193",
@@ -2166,6 +2191,7 @@
           "$id": "194",
           "kind": "property",
           "name": "nextLink",
+          "serializedName": "nextLink",
           "doc": "The link to the next page of items",
           "type": {
             "$id": "195",
@@ -2209,6 +2235,7 @@
           "$id": "198",
           "kind": "property",
           "name": "value",
+          "serializedName": "value",
           "doc": "The TrainingConfigVersion items on this page",
           "type": {
             "$id": "199",
@@ -2228,6 +2255,7 @@
                   "$id": "201",
                   "kind": "property",
                   "name": "trainingConfigVersionStr",
+                  "serializedName": "trainingConfigVersionStr",
                   "doc": "Represents the version of the config.",
                   "type": {
                     "$id": "202",
@@ -2249,6 +2277,7 @@
                   "$id": "203",
                   "kind": "property",
                   "name": "modelExpirationDate",
+                  "serializedName": "modelExpirationDate",
                   "doc": "Represents the training config version expiration date.",
                   "type": {
                     "$id": "204",
@@ -2284,6 +2313,7 @@
           "$id": "205",
           "kind": "property",
           "name": "nextLink",
+          "serializedName": "nextLink",
           "doc": "The link to the next page of items",
           "type": {
             "$id": "206",
