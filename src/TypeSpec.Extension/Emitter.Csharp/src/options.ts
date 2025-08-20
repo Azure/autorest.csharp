@@ -36,7 +36,7 @@ export interface AzureCSharpEmitterOptions extends CSharpEmitterOptions {
 export const AzureCSharpEmitterOptionsSchema: JSONSchemaType<AzureCSharpEmitterOptions> =
     {
         type: "object",
-        additionalProperties: false,
+        additionalProperties: true,
         properties: {
             ...CSharpEmitterOptionsSchema.properties,
             csharpGeneratorPath: {
