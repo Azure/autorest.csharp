@@ -227,7 +227,8 @@ function fromSdkModelProperty(
     const serializedName =
         sdkProperty.serializationOptions?.json?.name ??
         sdkProperty.serializationOptions?.xml?.name ??
-        sdkProperty.serializationOptions?.multipart?.name;
+        sdkProperty.serializationOptions?.multipart?.name ??
+        sdkProperty.__raw?.name; // we always fall back to wire name for json serialization
     property = {
         kind: isHttpMetadata(sdkContext, sdkProperty)
             ? "header"

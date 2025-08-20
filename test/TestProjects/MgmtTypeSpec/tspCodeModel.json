@@ -1967,6 +1967,7 @@
           "$id": "160",
           "kind": "property",
           "name": "body",
+          "serializedName": "body",
           "doc": "SAP Application server instance start request body.",
           "type": {
             "$id": "161",

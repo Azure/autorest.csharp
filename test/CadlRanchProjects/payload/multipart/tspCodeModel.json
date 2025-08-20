@@ -1048,6 +1048,7 @@
                   "$id": "95",
                   "kind": "property",
                   "name": "contentType",
+                  "serializedName": "contentType",
                   "summary": "The allowed media (MIME) types of the file contents.",
                   "doc": "The allowed media (MIME) types of the file contents.\n\nIn file bodies, this value comes from the `Content-Type` header of the request or response. In JSON bodies,\nthis value is serialized as a field in the response.\n\nNOTE: this is not _necessarily_ the same as the `Content-Type` header of the request or response, but\nit will be for file bodies. It may be different if the file is serialized as a JSON object. It always refers to the\n_contents_ of the file, and not necessarily the way the file itself is transmitted or serialized.",
                   "type": {
@@ -1070,6 +1071,7 @@
                   "$id": "97",
                   "kind": "property",
                   "name": "filename",
+                  "serializedName": "filename",
                   "summary": "The name of the file, if any.",
                   "doc": "The name of the file, if any.\n\nIn file bodies, this value comes from the `filename` parameter of the `Content-Disposition` header of the response\nor multipart payload. In JSON bodies, this value is serialized as a field in the response.\n\nNOTE: By default, `filename` cannot be sent in request payloads and can only be sent in responses and multipart\npayloads, as the `Content-Disposition` header is not valid in requests. If you want to send the `filename` in a request,\nyou must extend the `File` model and override the `filename` property with a different location defined by HTTP metadata\ndecorators.",
                   "type": {
@@ -1092,6 +1094,7 @@
                   "$id": "99",
                   "kind": "property",
                   "name": "contents",
+                  "serializedName": "contents",
                   "summary": "The contents of the file.",
                   "doc": "The contents of the file.\n\nIn file bodies, this value comes from the body of the request, response, or multipart payload. In JSON bodies,\nthis value is serialized as a field in the response.",
                   "type": {
@@ -1118,6 +1121,7 @@
                 "$id": "101",
                 "kind": "property",
                 "name": "filename",
+                "serializedName": "filename",
                 "type": {
                   "$id": "102",
                   "kind": "string",
@@ -1138,6 +1142,7 @@
                 "$id": "103",
                 "kind": "property",
                 "name": "contentType",
+                "serializedName": "contentType",
                 "type": {
                   "$id": "104",
                   "kind": "string",
@@ -1353,6 +1358,7 @@
                 "$id": "116",
                 "kind": "property",
                 "name": "filename",
+                "serializedName": "filename",
                 "type": {
                   "$id": "117",
                   "kind": "string",
@@ -1373,6 +1379,7 @@
                 "$id": "118",
                 "kind": "property",
                 "name": "contentType",
+                "serializedName": "contentType",
                 "type": {
                   "$ref": "4"
                 },
@@ -1559,6 +1566,7 @@
                 "$id": "129",
                 "kind": "property",
                 "name": "filename",
+                "serializedName": "filename",
                 "type": {
                   "$id": "130",
                   "kind": "string",
