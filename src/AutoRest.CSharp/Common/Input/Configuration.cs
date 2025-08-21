@@ -68,7 +68,6 @@ namespace AutoRest.CSharp.Common.Input
             public const string DisableXmlDocs = "disable-xml-docs";
             public const string CustomHeader = "custom-header";
             public const string UseAzurePlugin = "azure-plugin";
-            // TODO -- this is temporary
         }
 
         public enum UnreferencedTypesHandlingOption
