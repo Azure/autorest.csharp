@@ -51,8 +51,9 @@ internal class PostProcessor
         var result = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         var declarationCache = new Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>>(SymbolEqualityComparer.Default);
         var documentCache = new Dictionary<Document, HashSet<INamedTypeSymbol>>();
-        _mrwContextTypeSymbol = compilation.GetTypeByMetadataName($"{Configuration.Namespace}.{ModelReaderWriterContextWriter.Name}");
-        _mrwContextDocuments = project.Documents.Where(d => d.Name.Contains(ModelReaderWriterContextWriter.Name)).ToHashSet();
+        var mrwContextType = CSharpGen.ModelReaderWriterContextType;
+        _mrwContextTypeSymbol = compilation.GetTypeByMetadataName($"{mrwContextType.Namespace}.{mrwContextType.Name}");
+        _mrwContextDocuments = project.Documents.Where(d => d.Name.Contains(mrwContextType.Name)).ToHashSet();
 
         INamedTypeSymbol? modelFactorySymbol = null;
         if (_modelFactoryFullName != null)

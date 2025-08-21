@@ -110,12 +110,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var contextWriter = new CodeWriter();
                 var contextWriterInstance = new ModelReaderWriterContextWriter();
-                contextWriterInstance.Write(contextWriter, library.AllModels);
-                project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
+                contextWriterInstance.Write(contextWriter, CSharpGen.ModelReaderWriterContextType, library.AllModels);
+                project.AddGeneratedFile($"Models/{CSharpGen.ModelReaderWriterContextType.Name}.cs", contextWriter.ToString());
             }
 
 
-            IEnumerable<string> modelsToKeep = [.. library.AccessOverriddenModels, ModelReaderWriterContextWriter.Name];
+            IEnumerable<string> modelsToKeep = [.. library.AccessOverriddenModels, CSharpGen.ModelReaderWriterContextType.Name];
             await project.PostProcessAsync(new PostProcessor(
                 modelsToKeep: modelsToKeep.ToImmutableHashSet(),
                 modelFactoryFullName: modelFactoryProvider?.FullName,

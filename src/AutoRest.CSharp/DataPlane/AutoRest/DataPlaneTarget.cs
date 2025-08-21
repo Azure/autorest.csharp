@@ -92,8 +92,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var contextWriter = new CodeWriter();
                 var contextWriterInstance = new ModelReaderWriterContextWriter();
-                contextWriterInstance.Write(contextWriter, library.Models);
-                project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
+                contextWriterInstance.Write(contextWriter, CSharpGen.ModelReaderWriterContextType, library.Models);
+                project.AddGeneratedFile($"Models/{CSharpGen.ModelReaderWriterContextType.Name}.cs", contextWriter.ToString());
             }
         }
     }
