@@ -18,6 +18,8 @@ namespace AutoRest.CSharp.Common.Generation.Writers
 {
     internal class ModelReaderWriterContextWriter
     {
+        private static string Namespace = Configuration.Namespace;
+
         public void Write(CodeWriter writer, IEnumerable<TypeProvider>? models = null)
         {
             IEnumerable<CSharpType>? buildableTypes = null;
@@ -28,7 +30,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
                 buildableTypes = CollectBuildableTypes(models);
             }
 
-            using (writer.Namespace($"{Configuration.Namespace}"))
+            using (writer.Namespace($"{Namespace}"))
             {
                 writer.Line($"/// <summary>");
                 writer.Line($"/// Context class which will be filled in by the System.ClientModel.SourceGeneration.");
@@ -169,7 +171,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             return type.FrameworkType.GetInterfaces().Any(i => i.Name == "IPersistableModel`1" || i.Name == "IJsonModel`1");
         }
 
-        public static string Name => $"{Configuration.Namespace.RemovePeriods()}Context";
+        public static string Name = $"{Configuration.Namespace.RemovePeriods()}Context";
 
         private class CSharpTypeNameComparer : IEqualityComparer<CSharpType>
         {
