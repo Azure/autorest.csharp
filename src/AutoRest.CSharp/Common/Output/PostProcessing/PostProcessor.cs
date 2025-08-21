@@ -9,8 +9,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
-using AutoRest.CSharp.Common.Generation.Writers;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
@@ -22,16 +20,16 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing;
 
 internal class PostProcessor
 {
-    private const string AspDotNetExtensionNamespace = "Microsoft.Extensions.Azure";
+    private readonly string _modelReaderWriterContextName;
     private readonly string? _modelFactoryFullName;
     private readonly string? _aspExtensionClassName;
     private readonly ImmutableHashSet<string> _modelsToKeep;
-    private INamedTypeSymbol? _mrwContextTypeSymbol;
     private HashSet<Document>? _mrwContextDocuments;
 
-    public PostProcessor(ImmutableHashSet<string> modelsToKeep, string? modelFactoryFullName = null, string? aspExtensionClassName = null)
+    public PostProcessor(ImmutableHashSet<string> modelsToKeep, string modelReaderWriterContextName, string? modelFactoryFullName = null, string? aspExtensionClassName = null)
     {
         _modelsToKeep = modelsToKeep;
+        _modelReaderWriterContextName = modelReaderWriterContextName;
         _modelFactoryFullName = modelFactoryFullName;
         _aspExtensionClassName = aspExtensionClassName;
     }
@@ -51,9 +49,9 @@ internal class PostProcessor
         var result = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         var declarationCache = new Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>>(SymbolEqualityComparer.Default);
         var documentCache = new Dictionary<Document, HashSet<INamedTypeSymbol>>();
-        var mrwContextType = CSharpGen.ModelReaderWriterContextType;
-        _mrwContextTypeSymbol = compilation.GetTypeByMetadataName($"{mrwContextType.Namespace}.{mrwContextType.Name}");
-        _mrwContextDocuments = project.Documents.Where(d => d.Name.Contains(mrwContextType.Name)).ToHashSet();
+        // TODO -- potentially this could be problematic that we assert a document's name "contains" something to determine if it is a MRW context document,
+        // but we leave this to the future to fix if it actually causes a trouble.
+        _mrwContextDocuments = project.Documents.Where(d => d.Name.Contains(_modelReaderWriterContextName)).ToHashSet();
 
         INamedTypeSymbol? modelFactorySymbol = null;
         if (_modelFactoryFullName != null)

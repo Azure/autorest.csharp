@@ -247,7 +247,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             List<string> modelsToKeepList = [.. Configuration.MgmtConfiguration.KeepOrphanedModels, CSharpGen.ModelReaderWriterContextType.Name];
             var modelsToKeep = modelsToKeepList.ToImmutableHashSet();
-            await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
+            await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, CSharpGen.ModelReaderWriterContextType.Name, modelFactoryProvider?.FullName));
 
             // write samples if enabled
             if (Configuration.MgmtTestConfiguration?.Sample ?? Configuration.GenerateSampleProject)

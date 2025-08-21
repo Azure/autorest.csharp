@@ -118,6 +118,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             IEnumerable<string> modelsToKeep = [.. library.AccessOverriddenModels, CSharpGen.ModelReaderWriterContextType.Name];
             await project.PostProcessAsync(new PostProcessor(
                 modelsToKeep: modelsToKeep.ToImmutableHashSet(),
+                modelReaderWriterContextName: CSharpGen.ModelReaderWriterContextType.Name,
                 modelFactoryFullName: modelFactoryProvider?.FullName,
                 aspExtensionClassName: library.AspDotNetExtension.FullName));
         }
