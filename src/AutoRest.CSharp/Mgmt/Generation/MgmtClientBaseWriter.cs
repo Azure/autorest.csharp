@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public virtual void Write()
         {
-            using (_writer.Namespace(This.Namespace))
+            using (_writer.Namespace(This.Declaration.Namespace))
             {
                 WriteClassDeclaration();
                 using (_writer.Scope())

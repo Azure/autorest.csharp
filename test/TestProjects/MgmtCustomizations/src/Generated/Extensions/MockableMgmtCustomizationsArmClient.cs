@@ -7,6 +7,7 @@
 
 using Azure.Core;
 using Azure.ResourceManager;
+using MgmtCustomizations.Pets;
 
 namespace MgmtCustomizations.Mocking
 {

@@ -13,6 +13,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using MgmtCustomizations.Mocking;
+using MgmtCustomizations.Pets;
 
 namespace MgmtCustomizations
 {
