@@ -14,7 +14,7 @@ internal class PostProcessorTests
 {
     internal class TestPostProcessor : PostProcessor
     {
-        public TestPostProcessor(ImmutableHashSet<string> modelsToKeep) : base(modelsToKeep)
+        public TestPostProcessor(ImmutableHashSet<string> modelsToKeep, string modelReaderWriterContextName) : base(modelsToKeep, modelReaderWriterContextName)
         {
         }
 
@@ -47,7 +47,7 @@ internal class PostProcessorTests
     [TestCase("TestSDK.PageableItem", true, false)]
     public async Task ValidateTypeAccessibility(string typeFullName, bool exist, bool? isInternal)
     {
-        var postProcessor = new TestPostProcessor(ImmutableHashSet<string>.Empty);
+        var postProcessor = new TestPostProcessor(ImmutableHashSet<string>.Empty, "TestSdkContext");
 
         _project = await postProcessor.InternalizeAsync(_project);
 

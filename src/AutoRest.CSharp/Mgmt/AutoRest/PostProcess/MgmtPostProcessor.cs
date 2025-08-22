@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
 {
     internal sealed class MgmtPostProcessor : PostProcessor
     {
-        public MgmtPostProcessor(ImmutableHashSet<string> modelsToKeep, string? modelFactoryFullName) : base(modelsToKeep, modelFactoryFullName) { }
+        public MgmtPostProcessor(ImmutableHashSet<string> modelsToKeep, string modelReaderWriterContextName, string? modelFactoryFullName) : base(modelsToKeep, modelReaderWriterContextName, modelFactoryFullName) { }
 
         protected override bool IsRootDocument(Document document)
         {

@@ -271,7 +271,6 @@
     <ProjectReference Include="..\TestProjects\Customizations-TypeSpec\src\CustomizationsInTsp.csproj" />
     <ProjectReference Include="..\TestProjects\FirstTest-TypeSpec\src\FirstTestTypeSpec.csproj" />
     <ProjectReference Include="..\TestProjects\MediaTypes-TypeSpec\src\MultipleMediaTypes.csproj" />
-    <ProjectReference Include="..\TestProjects\MgmtTypeSpec\samples\MgmtTypeSpec.Samples.csproj" />
     <ProjectReference Include="..\TestProjects\MgmtTypeSpec\src\MgmtTypeSpec.csproj" />
     <ProjectReference Include="..\TestProjects\ModelReaderWriterValidation-TypeSpec\src\ModelReaderWriterValidationTypeSpec.csproj" />
     <ProjectReference Include="..\TestProjects\NoDocs-TypeSpec\src\NoDocsTypeSpec.csproj" />

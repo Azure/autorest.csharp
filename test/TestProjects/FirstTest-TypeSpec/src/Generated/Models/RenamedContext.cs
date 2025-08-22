@@ -36,7 +36,7 @@ namespace FirstTestTypeSpec
     [ModelReaderWriterBuildable(typeof(ThereLevelElement))]
     [ModelReaderWriterBuildable(typeof(ThereLevelExtension))]
     [ModelReaderWriterBuildable(typeof(Thing))]
-    public partial class FirstTestTypeSpecContext : ModelReaderWriterContext
+    public partial class RenamedContext : ModelReaderWriterContext
     {
     }
 }
