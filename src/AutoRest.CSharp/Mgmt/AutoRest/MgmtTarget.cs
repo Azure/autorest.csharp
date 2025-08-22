@@ -241,13 +241,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var contextWriter = new CodeWriter();
                 var contextWriterInstance = new ModelReaderWriterContextWriter();
                 var allModels = MgmtContext.Library.Models.Concat(MgmtContext.Library.PropertyBagModels).Concat(MgmtContext.Library.ArmResources).Concat(MgmtContext.Library.ResourceData);
-                contextWriterInstance.Write(contextWriter, allModels);
-                project.AddGeneratedFile($"Models/{ModelReaderWriterContextWriter.Name}.cs", contextWriter.ToString());
+                contextWriterInstance.Write(contextWriter, CSharpGen.ModelReaderWriterContextType, allModels);
+                project.AddGeneratedFile($"Models/{CSharpGen.ModelReaderWriterContextType.Name}.cs", contextWriter.ToString());
             }
 
-            List<string> modelsToKeepList = [.. Configuration.MgmtConfiguration.KeepOrphanedModels, ModelReaderWriterContextWriter.Name];
+            List<string> modelsToKeepList = [.. Configuration.MgmtConfiguration.KeepOrphanedModels, CSharpGen.ModelReaderWriterContextType.Name];
             var modelsToKeep = modelsToKeepList.ToImmutableHashSet();
-            await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
+            await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, CSharpGen.ModelReaderWriterContextType.Name, modelFactoryProvider?.FullName));
 
             // write samples if enabled
             if (Configuration.MgmtTestConfiguration?.Sample ?? Configuration.GenerateSampleProject)

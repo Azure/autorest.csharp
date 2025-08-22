@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Common.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Utilities;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -23,6 +25,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     [PluginName("csharpgen")]
     internal class CSharpGen : IPlugin
     {
+        private static Lazy<ModelReaderWriterContextProvider> _modelReaderWriterContextProvider = null!; // we will ensure this is initialized before use it
+        public static CSharpType ModelReaderWriterContextType => _modelReaderWriterContextProvider.Value.Type;
+
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(CodeModel codeModel)
         {
             ValidateConfiguration();
@@ -30,6 +35,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
+            _modelReaderWriterContextProvider = new Lazy<ModelReaderWriterContextProvider>(() => new ModelReaderWriterContextProvider(Configuration.Namespace, sourceInputModel));
 
             var schemaUsageProvider = new SchemaUsageProvider(codeModel); // Create schema usage before transformation applied
             if (Configuration.Generation1ConvenienceClient)
@@ -86,6 +92,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync(), await ProtocolCompilationInput.TryCreate());
+            _modelReaderWriterContextProvider = new Lazy<ModelReaderWriterContextProvider>(() => new ModelReaderWriterContextProvider(Configuration.Namespace, sourceInputModel));
 
             if (Configuration.AzureArm)
             {

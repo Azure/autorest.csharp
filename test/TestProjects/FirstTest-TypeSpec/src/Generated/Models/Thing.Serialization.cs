@@ -333,7 +333,7 @@ namespace FirstTestTypeSpec.Models
             switch (format)
             {
                 case "J":
-                    return ModelReaderWriter.Write(this, options, FirstTestTypeSpecContext.Default);
+                    return ModelReaderWriter.Write(this, options, RenamedContext.Default);
                 default:
                     throw new FormatException($"The model {nameof(Thing)} does not support writing '{options.Format}' format.");
             }
