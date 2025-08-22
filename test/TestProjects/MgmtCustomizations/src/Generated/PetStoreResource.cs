@@ -15,7 +15,7 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 
-namespace MgmtCustomizations
+namespace MgmtCustomizations.Pets
 {
     /// <summary>
     /// A Class representing a PetStore along with the instance operations that can be performed on it.
@@ -61,7 +61,7 @@ namespace MgmtCustomizations
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal PetStoreResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _petStoreClientDiagnostics = new ClientDiagnostics("MgmtCustomizations", ResourceType.Namespace, Diagnostics);
+            _petStoreClientDiagnostics = new ClientDiagnostics("MgmtCustomizations.Pets", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string petStoreApiVersion);
             _petStoreRestClient = new PetStoresRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, petStoreApiVersion);
 #if DEBUG

@@ -9,7 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Text.Json;
 
-namespace MgmtCustomizations
+namespace MgmtCustomizations.Pets
 {
     public partial class PetStoreResource : IJsonModel<PetStoreData>
     {

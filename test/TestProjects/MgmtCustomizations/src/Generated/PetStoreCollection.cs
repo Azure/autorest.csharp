@@ -18,7 +18,7 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 
-namespace MgmtCustomizations
+namespace MgmtCustomizations.Pets
 {
     /// <summary>
     /// A class representing a collection of <see cref="PetStoreResource"/> and their operations.
@@ -40,7 +40,7 @@ namespace MgmtCustomizations
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal PetStoreCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _petStoreClientDiagnostics = new ClientDiagnostics("MgmtCustomizations", PetStoreResource.ResourceType.Namespace, Diagnostics);
+            _petStoreClientDiagnostics = new ClientDiagnostics("MgmtCustomizations.Pets", PetStoreResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(PetStoreResource.ResourceType, out string petStoreApiVersion);
             _petStoreRestClient = new PetStoresRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, petStoreApiVersion);
 #if DEBUG
