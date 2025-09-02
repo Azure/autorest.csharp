@@ -9,6 +9,7 @@ using System.ClientModel.Primitives;
 using Azure;
 using Azure.ResourceManager.Models;
 using MgmtCustomizations.Models;
+using MgmtCustomizations.Pets;
 
 namespace MgmtCustomizations
 {
