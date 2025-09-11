@@ -1047,7 +1047,7 @@
         {
           "$id": "80",
           "kind": "client",
-          "name": "ClientModel",
+          "name": "ModelClient",
           "namespace": "Client.Naming.Model",
           "methods": [
             {
