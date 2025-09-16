@@ -635,13 +635,13 @@ namespace Client.Naming
             }
         }
 
-        private ClientModel _cachedClientModel;
+        private Model _cachedModel;
         private UnionEnum _cachedUnionEnum;
 
-        /// <summary> Initializes a new instance of ClientModel. </summary>
-        public virtual ClientModel GetClientModelClient()
+        /// <summary> Initializes a new instance of Model. </summary>
+        public virtual Model GetModelClient()
         {
-            return Volatile.Read(ref _cachedClientModel) ?? Interlocked.CompareExchange(ref _cachedClientModel, new ClientModel(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedClientModel;
+            return Volatile.Read(ref _cachedModel) ?? Interlocked.CompareExchange(ref _cachedModel, new Model(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedModel;
         }
 
         /// <summary> Initializes a new instance of UnionEnum. </summary>

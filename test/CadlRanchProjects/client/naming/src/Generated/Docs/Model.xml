@@ -5,16 +5,16 @@
       <example>
 This sample shows how to call ClientAsync.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
-Models.ClientModel body = new Models.ClientModel(true);
+ClientModel body = new ClientModel(true);
 Response response = await client.ClientAsync(body);
 ]]></code>
 This sample shows how to call ClientAsync with all parameters.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
-Models.ClientModel body = new Models.ClientModel(true);
+ClientModel body = new ClientModel(true);
 Response response = await client.ClientAsync(body);
 ]]></code></example>
     </member>
@@ -22,16 +22,16 @@ Response response = await client.ClientAsync(body);
       <example>
 This sample shows how to call Client.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
-Models.ClientModel body = new Models.ClientModel(true);
+ClientModel body = new ClientModel(true);
 Response response = client.Client(body);
 ]]></code>
 This sample shows how to call Client with all parameters.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
-Models.ClientModel body = new Models.ClientModel(true);
+ClientModel body = new ClientModel(true);
 Response response = client.Client(body);
 ]]></code></example>
     </member>
@@ -39,7 +39,7 @@ Response response = client.Client(body);
       <example>
 This sample shows how to call ClientAsync.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -51,7 +51,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ClientAsync with all request content.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -66,7 +66,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Client.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -78,7 +78,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Client with all request content.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -93,14 +93,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call LanguageAsync.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
 CSModel body = new CSModel(true);
 Response response = await client.LanguageAsync(body);
 ]]></code>
 This sample shows how to call LanguageAsync with all parameters.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
 CSModel body = new CSModel(true);
 Response response = await client.LanguageAsync(body);
@@ -110,14 +110,14 @@ Response response = await client.LanguageAsync(body);
       <example>
 This sample shows how to call Language.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
 CSModel body = new CSModel(true);
 Response response = client.Language(body);
 ]]></code>
 This sample shows how to call Language with all parameters.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
 CSModel body = new CSModel(true);
 Response response = client.Language(body);
@@ -127,7 +127,7 @@ Response response = client.Language(body);
       <example>
 This sample shows how to call LanguageAsync.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -139,7 +139,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call LanguageAsync with all request content.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -154,7 +154,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Language.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -166,7 +166,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Language with all request content.
 <code><![CDATA[
-ClientModel client = new NamingClient().GetClientModelClient();
+Model client = new NamingClient().GetModelClient();
 
 using RequestContent content = RequestContent.Create(new
 {
