@@ -31,39 +31,39 @@ namespace MgmtTypeSpec
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="FooResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FooResource.CreateResourceIdentifier" /> to create a <see cref="FooResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="BarResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="BarResource.CreateResourceIdentifier" /> to create a <see cref="BarResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableMgmtTypeSpecArmClient.GetFooResource(ResourceIdentifier)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtTypeSpecArmClient.GetBarResource(ResourceIdentifier)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="FooResource"/> object. </returns>
-        public static FooResource GetFooResource(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="BarResource"/> object. </returns>
+        public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
 
-            return GetMockableMgmtTypeSpecArmClient(client).GetFooResource(id);
+            return GetMockableMgmtTypeSpecArmClient(client).GetBarResource(id);
         }
 
         /// <summary>
-        /// Gets a collection of FooResources in the ResourceGroupResource.
+        /// Gets a collection of BarResources in the ResourceGroupResource.
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableMgmtTypeSpecResourceGroupResource.GetFoos()"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtTypeSpecResourceGroupResource.GetBars()"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
-        /// <returns> An object representing collection of FooResources and their operations over a FooResource. </returns>
-        public static FooCollection GetFoos(this ResourceGroupResource resourceGroupResource)
+        /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
+        public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
             Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
-            return GetMockableMgmtTypeSpecResourceGroupResource(resourceGroupResource).GetFoos();
+            return GetMockableMgmtTypeSpecResourceGroupResource(resourceGroupResource).GetBars();
         }
 
         /// <summary>
@@ -83,12 +83,12 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Resource</term>
-        /// <description><see cref="FooResource"/></description>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableMgmtTypeSpecResourceGroupResource.GetFooAsync(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtTypeSpecResourceGroupResource.GetBarAsync(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -97,11 +97,11 @@ namespace MgmtTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="fooName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public static async Task<Response<FooResource>> GetFooAsync(this ResourceGroupResource resourceGroupResource, string fooName, CancellationToken cancellationToken = default)
+        public static async Task<Response<BarResource>> GetBarAsync(this ResourceGroupResource resourceGroupResource, string fooName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
-            return await GetMockableMgmtTypeSpecResourceGroupResource(resourceGroupResource).GetFooAsync(fooName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtTypeSpecResourceGroupResource(resourceGroupResource).GetBarAsync(fooName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -121,12 +121,12 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Resource</term>
-        /// <description><see cref="FooResource"/></description>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableMgmtTypeSpecResourceGroupResource.GetFoo(string,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtTypeSpecResourceGroupResource.GetBar(string,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -135,11 +135,11 @@ namespace MgmtTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="fooName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public static Response<FooResource> GetFoo(this ResourceGroupResource resourceGroupResource, string fooName, CancellationToken cancellationToken = default)
+        public static Response<BarResource> GetBar(this ResourceGroupResource resourceGroupResource, string fooName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
-            return GetMockableMgmtTypeSpecResourceGroupResource(resourceGroupResource).GetFoo(fooName, cancellationToken);
+            return GetMockableMgmtTypeSpecResourceGroupResource(resourceGroupResource).GetBar(fooName, cancellationToken);
         }
 
         /// <summary>

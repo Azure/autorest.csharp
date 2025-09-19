@@ -17,7 +17,7 @@ using NUnit.Framework;
 
 namespace MgmtTypeSpec.Samples
 {
-    public partial class Sample_FooCollection
+    public partial class Sample_BarCollection
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -38,8 +38,8 @@ namespace MgmtTypeSpec.Samples
             ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
-            // get the collection of this FooResource
-            FooCollection collection = resourceGroupResource.GetFoos();
+            // get the collection of this BarResource
+            BarCollection collection = resourceGroupResource.GetBars();
 
             // invoke the operation
             string fooName = "myFoo";
@@ -54,8 +54,8 @@ namespace MgmtTypeSpec.Samples
                     DoubleValue = 1.2,
                 },
             };
-            ArmOperation<FooResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, fooName, data);
-            FooResource result = lro.Value;
+            ArmOperation<BarResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, fooName, data);
+            BarResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -83,12 +83,12 @@ namespace MgmtTypeSpec.Samples
             ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
-            // get the collection of this FooResource
-            FooCollection collection = resourceGroupResource.GetFoos();
+            // get the collection of this BarResource
+            BarCollection collection = resourceGroupResource.GetBars();
 
             // invoke the operation
             string fooName = "myFoo";
-            FooResource result = await collection.GetAsync(fooName);
+            BarResource result = await collection.GetAsync(fooName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -116,8 +116,8 @@ namespace MgmtTypeSpec.Samples
             ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
-            // get the collection of this FooResource
-            FooCollection collection = resourceGroupResource.GetFoos();
+            // get the collection of this BarResource
+            BarCollection collection = resourceGroupResource.GetBars();
 
             // invoke the operation
             string fooName = "myFoo";
@@ -145,13 +145,13 @@ namespace MgmtTypeSpec.Samples
             ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
             ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
 
-            // get the collection of this FooResource
-            FooCollection collection = resourceGroupResource.GetFoos();
+            // get the collection of this BarResource
+            BarCollection collection = resourceGroupResource.GetBars();
 
             // invoke the operation
             string fooName = "myFoo";
-            NullableResponse<FooResource> response = await collection.GetIfExistsAsync(fooName);
-            FooResource result = response.HasValue ? response.Value : null;
+            NullableResponse<BarResource> response = await collection.GetIfExistsAsync(fooName);
+            BarResource result = response.HasValue ? response.Value : null;
 
             if (result == null)
             {

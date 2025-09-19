@@ -21,28 +21,28 @@ using Azure.ResourceManager.Resources;
 namespace MgmtTypeSpec
 {
     /// <summary>
-    /// A class representing a collection of <see cref="FooResource"/> and their operations.
-    /// Each <see cref="FooResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
-    /// To get a <see cref="FooCollection"/> instance call the GetFoos method from an instance of <see cref="ResourceGroupResource"/>.
+    /// A class representing a collection of <see cref="BarResource"/> and their operations.
+    /// Each <see cref="BarResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="BarCollection"/> instance call the GetBars method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
-    public partial class FooCollection : ArmCollection, IEnumerable<FooResource>, IAsyncEnumerable<FooResource>
+    public partial class BarCollection : ArmCollection, IEnumerable<BarResource>, IAsyncEnumerable<BarResource>
     {
-        private readonly ClientDiagnostics _fooClientDiagnostics;
-        private readonly FoosRestOperations _fooRestClient;
+        private readonly ClientDiagnostics _barFoosClientDiagnostics;
+        private readonly FoosRestOperations _barFoosRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="FooCollection"/> class for mocking. </summary>
-        protected FooCollection()
+        /// <summary> Initializes a new instance of the <see cref="BarCollection"/> class for mocking. </summary>
+        protected BarCollection()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="FooCollection"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BarCollection"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal FooCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal BarCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _fooClientDiagnostics = new ClientDiagnostics("MgmtTypeSpec", FooResource.ResourceType.Namespace, Diagnostics);
-            TryGetApiVersion(FooResource.ResourceType, out string fooApiVersion);
-            _fooRestClient = new FoosRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, fooApiVersion);
+            _barFoosClientDiagnostics = new ClientDiagnostics("MgmtTypeSpec", BarResource.ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(BarResource.ResourceType, out string barFoosApiVersion);
+            _barFoosRestClient = new FoosRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, barFoosApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -71,7 +71,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Resource</term>
-        /// <description><see cref="FooResource"/></description>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -81,17 +81,17 @@ namespace MgmtTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> or <paramref name="data"/> is null. </exception>
-        public virtual async Task<ArmOperation<FooResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string fooName, FooData data, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<BarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string fooName, FooData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _fooClientDiagnostics.CreateScope("FooCollection.CreateOrUpdate");
+            using var scope = _barFoosClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _fooRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, fooName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtTypeSpecArmOperation<FooResource>(new FooOperationSource(Client), _fooClientDiagnostics, Pipeline, _fooRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fooName, data).Request, response, OperationFinalStateVia.AzureAsyncOperation);
+                var response = await _barFoosRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, fooName, data, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtTypeSpecArmOperation<BarResource>(new BarOperationSource(Client), _barFoosClientDiagnostics, Pipeline, _barFoosRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fooName, data).Request, response, OperationFinalStateVia.AzureAsyncOperation);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -120,7 +120,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Resource</term>
-        /// <description><see cref="FooResource"/></description>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -130,17 +130,17 @@ namespace MgmtTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> or <paramref name="data"/> is null. </exception>
-        public virtual ArmOperation<FooResource> CreateOrUpdate(WaitUntil waitUntil, string fooName, FooData data, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<BarResource> CreateOrUpdate(WaitUntil waitUntil, string fooName, FooData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _fooClientDiagnostics.CreateScope("FooCollection.CreateOrUpdate");
+            using var scope = _barFoosClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _fooRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, fooName, data, cancellationToken);
-                var operation = new MgmtTypeSpecArmOperation<FooResource>(new FooOperationSource(Client), _fooClientDiagnostics, Pipeline, _fooRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fooName, data).Request, response, OperationFinalStateVia.AzureAsyncOperation);
+                var response = _barFoosRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, fooName, data, cancellationToken);
+                var operation = new MgmtTypeSpecArmOperation<BarResource>(new BarOperationSource(Client), _barFoosClientDiagnostics, Pipeline, _barFoosRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fooName, data).Request, response, OperationFinalStateVia.AzureAsyncOperation);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -169,7 +169,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Resource</term>
-        /// <description><see cref="FooResource"/></description>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -177,18 +177,18 @@ namespace MgmtTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
-        public virtual async Task<Response<FooResource>> GetAsync(string fooName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BarResource>> GetAsync(string fooName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
 
-            using var scope = _fooClientDiagnostics.CreateScope("FooCollection.Get");
+            using var scope = _barFoosClientDiagnostics.CreateScope("BarCollection.Get");
             scope.Start();
             try
             {
-                var response = await _fooRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fooName, cancellationToken).ConfigureAwait(false);
+                var response = await _barFoosRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fooName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -214,7 +214,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Resource</term>
-        /// <description><see cref="FooResource"/></description>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -222,18 +222,18 @@ namespace MgmtTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
-        public virtual Response<FooResource> Get(string fooName, CancellationToken cancellationToken = default)
+        public virtual Response<BarResource> Get(string fooName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
 
-            using var scope = _fooClientDiagnostics.CreateScope("FooCollection.Get");
+            using var scope = _barFoosClientDiagnostics.CreateScope("BarCollection.Get");
             scope.Start();
             try
             {
-                var response = _fooRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fooName, cancellationToken);
+                var response = _barFoosRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fooName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -259,17 +259,17 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Resource</term>
-        /// <description><see cref="FooResource"/></description>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FooResource"/> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<FooResource> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="BarResource"/> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<BarResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => _fooRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fooRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FooResource(Client, FooData.DeserializeFooData(e)), _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "value", "nextLink", cancellationToken);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _barFoosRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _barFoosRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new BarResource(Client, FooData.DeserializeFooData(e)), _barFoosClientDiagnostics, Pipeline, "BarCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -289,17 +289,17 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Resource</term>
-        /// <description><see cref="FooResource"/></description>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FooResource"/> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<FooResource> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="BarResource"/> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<BarResource> GetAll(CancellationToken cancellationToken = default)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => _fooRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fooRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FooResource(Client, FooData.DeserializeFooData(e)), _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "value", "nextLink", cancellationToken);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _barFoosRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _barFoosRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new BarResource(Client, FooData.DeserializeFooData(e)), _barFoosClientDiagnostics, Pipeline, "BarCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -319,7 +319,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Resource</term>
-        /// <description><see cref="FooResource"/></description>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -331,11 +331,11 @@ namespace MgmtTypeSpec
         {
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
 
-            using var scope = _fooClientDiagnostics.CreateScope("FooCollection.Exists");
+            using var scope = _barFoosClientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
             try
             {
-                var response = await _fooRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fooName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _barFoosRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fooName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -362,7 +362,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Resource</term>
-        /// <description><see cref="FooResource"/></description>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -374,11 +374,11 @@ namespace MgmtTypeSpec
         {
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
 
-            using var scope = _fooClientDiagnostics.CreateScope("FooCollection.Exists");
+            using var scope = _barFoosClientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
             try
             {
-                var response = _fooRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fooName, cancellationToken: cancellationToken);
+                var response = _barFoosRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fooName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -405,7 +405,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Resource</term>
-        /// <description><see cref="FooResource"/></description>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -413,18 +413,18 @@ namespace MgmtTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
-        public virtual async Task<NullableResponse<FooResource>> GetIfExistsAsync(string fooName, CancellationToken cancellationToken = default)
+        public virtual async Task<NullableResponse<BarResource>> GetIfExistsAsync(string fooName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
 
-            using var scope = _fooClientDiagnostics.CreateScope("FooCollection.GetIfExists");
+            using var scope = _barFoosClientDiagnostics.CreateScope("BarCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _fooRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fooName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _barFoosRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fooName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return new NoValueResponse<FooResource>(response.GetRawResponse());
-                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
+                    return new NoValueResponse<BarResource>(response.GetRawResponse());
+                return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -450,7 +450,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Resource</term>
-        /// <description><see cref="FooResource"/></description>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -458,18 +458,18 @@ namespace MgmtTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
-        public virtual NullableResponse<FooResource> GetIfExists(string fooName, CancellationToken cancellationToken = default)
+        public virtual NullableResponse<BarResource> GetIfExists(string fooName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fooName, nameof(fooName));
 
-            using var scope = _fooClientDiagnostics.CreateScope("FooCollection.GetIfExists");
+            using var scope = _barFoosClientDiagnostics.CreateScope("BarCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _fooRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fooName, cancellationToken: cancellationToken);
+                var response = _barFoosRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fooName, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return new NoValueResponse<FooResource>(response.GetRawResponse());
-                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
+                    return new NoValueResponse<BarResource>(response.GetRawResponse());
+                return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -478,7 +478,7 @@ namespace MgmtTypeSpec
             }
         }
 
-        IEnumerator<FooResource> IEnumerable<FooResource>.GetEnumerator()
+        IEnumerator<BarResource> IEnumerable<BarResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -488,7 +488,7 @@ namespace MgmtTypeSpec
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<FooResource> IAsyncEnumerable<FooResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<BarResource> IAsyncEnumerable<BarResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

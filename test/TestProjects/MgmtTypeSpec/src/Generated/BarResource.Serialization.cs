@@ -11,7 +11,7 @@ using System.Text.Json;
 
 namespace MgmtTypeSpec
 {
-    public partial class FooResource : IJsonModel<FooData>
+    public partial class BarResource : IJsonModel<FooData>
     {
         private static FooData s_dataDeserializationInstance;
         private static FooData DataDeserializationInstance => s_dataDeserializationInstance ??= new();

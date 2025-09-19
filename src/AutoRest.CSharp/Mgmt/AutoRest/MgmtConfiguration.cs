@@ -312,6 +312,23 @@ namespace AutoRest.CSharp.Input
                 operationsToLroApiVersionOverride: autoRest.GetValue<JsonElement?>("operations-to-lro-api-version-override").GetAwaiter().GetResult());
         }
 
+        internal void Update(IReadOnlyDictionary<string, object> configurations)
+        {
+            // we only write the supported values here
+            if (configurations.TryGetValue("request-path-to-resource-name", out var value))
+            {
+                if (value is object[] array && array.Length == 2)
+                {
+                    var requestPath = array[0] as string;
+                    var resourceName = array[1] as string;
+                    if (requestPath != null && resourceName != null)
+                    {
+                        ((Dictionary<string, string>)RequestPathToResourceName)[requestPath] = resourceName;
+                    }
+                }
+            }
+        }
+
         private static JsonElement? GetAcronymMappingConfig(IPluginCommunication autoRest)
         {
             var newValue = autoRest.GetValue<JsonElement?>(TransformTypeName.AcronymMapping).GetAwaiter().GetResult();

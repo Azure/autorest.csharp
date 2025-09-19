@@ -14,25 +14,25 @@ using Azure.ResourceManager;
 
 namespace MgmtTypeSpec
 {
-    internal class FooOperationSource : IOperationSource<FooResource>
+    internal class BarOperationSource : IOperationSource<BarResource>
     {
         private readonly ArmClient _client;
 
-        internal FooOperationSource(ArmClient client)
+        internal BarOperationSource(ArmClient client)
         {
             _client = client;
         }
 
-        FooResource IOperationSource<FooResource>.CreateResult(Response response, CancellationToken cancellationToken)
+        BarResource IOperationSource<BarResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             var data = ModelReaderWriter.Read<FooData>(response.Content, ModelReaderWriterOptions.Json, MgmtTypeSpecContext.Default);
-            return new FooResource(_client, data);
+            return new BarResource(_client, data);
         }
 
-        async ValueTask<FooResource> IOperationSource<FooResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<BarResource> IOperationSource<BarResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             var data = ModelReaderWriter.Read<FooData>(response.Content, ModelReaderWriterOptions.Json, MgmtTypeSpecContext.Default);
-            return await Task.FromResult(new FooResource(_client, data)).ConfigureAwait(false);
+            return await Task.FromResult(new BarResource(_client, data)).ConfigureAwait(false);
         }
     }
 }
