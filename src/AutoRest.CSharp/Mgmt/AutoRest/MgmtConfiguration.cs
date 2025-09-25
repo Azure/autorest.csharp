@@ -10,6 +10,7 @@ using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Report;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Input
 {
@@ -282,7 +283,7 @@ namespace AutoRest.CSharp.Input
                 noResourceSuffix: autoRest.GetValue<string[]?>(TransformTypeName.NoResourceSuffix).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 schemasToPrependRPPrefix: autoRest.GetValue<string[]?>(TransformTypeName.PrependRpPrefix).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 generateArmResourceExtensions: autoRest.GetValue<string[]?>("generate-arm-resource-extensions").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                parameterizedScopes: autoRest.GetValue<string[]?>("parameterized-scopes").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                parameterizedScopes: autoRest.GetValue<List<string>?>("parameterized-scopes").GetAwaiter().GetResult() ?? new List<string>(),
                 operationsToSkipLroApiVersionOverride: autoRest.GetValue<string[]?>("operations-to-skip-lro-api-version-override").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
@@ -325,6 +326,14 @@ namespace AutoRest.CSharp.Input
                     {
                         ((Dictionary<string, string>)RequestPathToResourceName)[requestPath] = resourceName;
                     }
+                }
+            }
+            if (configurations.TryGetValue("parameterized-scopes", out var parameterizedScopeValue))
+            {
+                if (value is object[] array)
+                {
+                    var scopes = array.Select(i => i as string).WhereNotNull();
+                    ((List<string>)RawParameterizedScopes).AddRange(scopes);
                 }
             }
         }
