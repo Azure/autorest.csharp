@@ -313,27 +313,37 @@ namespace AutoRest.CSharp.Input
                 operationsToLroApiVersionOverride: autoRest.GetValue<JsonElement?>("operations-to-lro-api-version-override").GetAwaiter().GetResult());
         }
 
-        internal void Update(IReadOnlyDictionary<string, object> configurations)
+        internal void Update(IReadOnlyList<(string Name, object Value)> configurations)
         {
-            // we only write the supported values here
-            if (configurations.TryGetValue("request-path-to-resource-name", out var value))
+            foreach (var (name, value) in configurations)
             {
-                if (value is object[] array && array.Length == 2)
-                {
-                    var requestPath = array[0] as string;
-                    var resourceName = array[1] as string;
-                    if (requestPath != null && resourceName != null)
-                    {
-                        ((Dictionary<string, string>)RequestPathToResourceName)[requestPath] = resourceName;
-                    }
-                }
+                HandleConfiguration(name, value);
             }
-            if (configurations.TryGetValue("parameterized-scopes", out var parameterizedScopeValue))
+
+            void HandleConfiguration(string name, object value)
             {
-                if (value is object[] array)
+                switch (name)
                 {
-                    var scopes = array.Select(i => i as string).WhereNotNull();
-                    ((List<string>)RawParameterizedScopes).AddRange(scopes);
+                    case "request-path-to-resource-name":
+                        // update the request-path-to-resource-name mapping, this is a dictionary, therefore we expect the values here are array with 2 string elements.
+                        if (value is object[] array && array.Length == 2)
+                        {
+                            var requestPath = array[0] as string;
+                            var resourceName = array[1] as string;
+                            if (requestPath != null && resourceName != null)
+                            {
+                                ((Dictionary<string, string>)RequestPathToResourceName)[requestPath] = resourceName;
+                            }
+                        }
+                        break;
+                    case "parameterized-scopes":
+                        // update the parameterized scopes, this is a list of strings
+                        if (value is object[] array2)
+                        {
+                            var scopes = array2.Select(i => i as string).WhereNotNull();
+                            ((List<string>)RawParameterizedScopes).AddRange(scopes);
+                        }
+                        break;
                 }
             }
         }

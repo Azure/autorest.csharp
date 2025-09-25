@@ -181,15 +181,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 .ToImmutableHashSet();
         }
 
-        internal static IReadOnlyDictionary<string, object> GetConfigurationsFromAttribute(Compilation compilation)
+        internal static IReadOnlyList<(string Name, object Value)> GetConfigurationsFromAttribute(Compilation compilation)
         {
             var configAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenConfigAttribute).FullName!)!;
             var attributes = compilation.Assembly.GetAttributes()
                 .Where(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, configAttribute));
 
-            return attributes.ToDictionary(
-                a => (string)a.ConstructorArguments[0].Value!,
-                a => ParseValue(a.ConstructorArguments[1]));
+            return attributes.Select(a =>
+                (
+                    Name: (string)a.ConstructorArguments[0].Value!,
+                    Value: ParseValue(a.ConstructorArguments[1])
+                )).ToList();
 
             static object ParseValue(TypedConstant value)
             {
