@@ -244,7 +244,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyDictionary<string, string[]> OperationPositions { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
         public IReadOnlyDictionary<string, string> PartialResources { get; }
-        public IReadOnlyList<string> RawParameterizedScopes { get; }
+        public IReadOnlyList<string> RawParameterizedScopes { get; private set; }
         private ImmutableHashSet<RequestPath>? _parameterizedScopes;
         internal ImmutableHashSet<RequestPath> ParameterizedScopes
             => _parameterizedScopes ??= RawParameterizedScopes.Select(scope => RequestPath.FromString(scope)).ToImmutableHashSet();
@@ -283,7 +283,7 @@ namespace AutoRest.CSharp.Input
                 noResourceSuffix: autoRest.GetValue<string[]?>(TransformTypeName.NoResourceSuffix).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 schemasToPrependRPPrefix: autoRest.GetValue<string[]?>(TransformTypeName.PrependRpPrefix).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 generateArmResourceExtensions: autoRest.GetValue<string[]?>("generate-arm-resource-extensions").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                parameterizedScopes: autoRest.GetValue<List<string>?>("parameterized-scopes").GetAwaiter().GetResult() ?? new List<string>(),
+                parameterizedScopes: autoRest.GetValue<string[]?>("parameterized-scopes").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 operationsToSkipLroApiVersionOverride: autoRest.GetValue<string[]?>("operations-to-skip-lro-api-version-override").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
@@ -341,7 +341,9 @@ namespace AutoRest.CSharp.Input
                         if (value is object[] array2)
                         {
                             var scopes = array2.Select(i => i as string).WhereNotNull();
-                            ((List<string>)RawParameterizedScopes).AddRange(scopes);
+                            List<string> rawScopes = RawParameterizedScopes is List<string> s ? s : new List<string>(RawParameterizedScopes);
+                            rawScopes.AddRange(scopes);
+                            RawParameterizedScopes = rawScopes;
                         }
                         break;
                 }
