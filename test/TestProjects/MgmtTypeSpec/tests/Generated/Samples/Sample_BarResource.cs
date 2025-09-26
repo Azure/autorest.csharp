@@ -16,7 +16,7 @@ using NUnit.Framework;
 
 namespace MgmtTypeSpec.Samples
 {
-    public partial class Sample_FooResource
+    public partial class Sample_BarResource
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -30,16 +30,16 @@ namespace MgmtTypeSpec.Samples
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // this example assumes you already have this FooResource created on azure
-            // for more information of creating FooResource, please refer to the document of FooResource
+            // this example assumes you already have this BarResource created on azure
+            // for more information of creating BarResource, please refer to the document of BarResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "myRg";
             string fooName = "myFoo";
-            ResourceIdentifier fooResourceId = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
-            FooResource foo = client.GetFooResource(fooResourceId);
+            ResourceIdentifier barResourceId = BarResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
+            BarResource bar = client.GetBarResource(barResourceId);
 
             // invoke the operation
-            FooResource result = await foo.GetAsync();
+            BarResource result = await bar.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -60,13 +60,13 @@ namespace MgmtTypeSpec.Samples
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // this example assumes you already have this FooResource created on azure
-            // for more information of creating FooResource, please refer to the document of FooResource
+            // this example assumes you already have this BarResource created on azure
+            // for more information of creating BarResource, please refer to the document of BarResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "myRg";
             string fooName = "myFoo";
-            ResourceIdentifier fooResourceId = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
-            FooResource foo = client.GetFooResource(fooResourceId);
+            ResourceIdentifier barResourceId = BarResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
+            BarResource bar = client.GetBarResource(barResourceId);
 
             // invoke the operation
             FooData data = new FooData(default)
@@ -80,8 +80,8 @@ namespace MgmtTypeSpec.Samples
                     DoubleValue = 1.2,
                 },
             };
-            ArmOperation<FooResource> lro = await foo.UpdateAsync(WaitUntil.Completed, data);
-            FooResource result = lro.Value;
+            ArmOperation<BarResource> lro = await bar.UpdateAsync(WaitUntil.Completed, data);
+            BarResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance

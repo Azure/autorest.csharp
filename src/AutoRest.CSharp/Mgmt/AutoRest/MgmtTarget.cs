@@ -63,6 +63,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         public static async Task ExecuteAsync(GeneratedCodeWorkspace project)
         {
+            // populate configurations read from the attribute
+            var configurations = GeneratedCodeWorkspace.GetConfigurationsFromAttribute(await project.GetCompilationAsync());
+            Configuration.MgmtConfiguration.Update(configurations);
+
             var addedFilenames = new HashSet<string>();
             var serializeWriter = new SerializationWriter();
             var isArmCore = Configuration.MgmtConfiguration.IsArmCore;

@@ -181,6 +181,32 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 .ToImmutableHashSet();
         }
 
+        internal static IReadOnlyList<(string Name, object Value)> GetConfigurationsFromAttribute(Compilation compilation)
+        {
+            var configAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenConfigAttribute).FullName!)!;
+            var attributes = compilation.Assembly.GetAttributes()
+                .Where(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, configAttribute));
+
+            return attributes.Select(a =>
+                (
+                    Name: (string)a.ConstructorArguments[0].Value!,
+                    Value: ParseValue(a.ConstructorArguments[1])
+                )).ToList();
+
+            static object ParseValue(TypedConstant value)
+            {
+                switch (value.Kind)
+                {
+                    case TypedConstantKind.Primitive:
+                        return value.Value!;
+                    case TypedConstantKind.Array:
+                        return value.Values.Select(ParseValue).ToArray();
+                    default:
+                        throw new InvalidOperationException($"Unsupported type of argument {value}");
+                }
+            }
+        }
+
         /// <summary>
         /// Add some additional files into this project
         /// </summary>

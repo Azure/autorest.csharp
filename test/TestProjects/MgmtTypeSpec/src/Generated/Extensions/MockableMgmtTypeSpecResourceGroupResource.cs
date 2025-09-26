@@ -44,11 +44,11 @@ namespace MgmtTypeSpec.Mocking
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of FooResources in the ResourceGroupResource. </summary>
-        /// <returns> An object representing collection of FooResources and their operations over a FooResource. </returns>
-        public virtual FooCollection GetFoos()
+        /// <summary> Gets a collection of BarResources in the ResourceGroupResource. </summary>
+        /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
+        public virtual BarCollection GetBars()
         {
-            return GetCachedClient(client => new FooCollection(client, Id));
+            return GetCachedClient(client => new BarCollection(client, Id));
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Resource</term>
-        /// <description><see cref="FooResource"/></description>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -77,9 +77,9 @@ namespace MgmtTypeSpec.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public virtual async Task<Response<FooResource>> GetFooAsync(string fooName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BarResource>> GetBarAsync(string fooName, CancellationToken cancellationToken = default)
         {
-            return await GetFoos().GetAsync(fooName, cancellationToken).ConfigureAwait(false);
+            return await GetBars().GetAsync(fooName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Resource</term>
-        /// <description><see cref="FooResource"/></description>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -108,9 +108,9 @@ namespace MgmtTypeSpec.Mocking
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
-        public virtual Response<FooResource> GetFoo(string fooName, CancellationToken cancellationToken = default)
+        public virtual Response<BarResource> GetBar(string fooName, CancellationToken cancellationToken = default)
         {
-            return GetFoos().Get(fooName, cancellationToken);
+            return GetBars().Get(fooName, cancellationToken);
         }
 
         /// <summary>

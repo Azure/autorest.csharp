@@ -10,6 +10,7 @@ using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Report;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Input
 {
@@ -243,7 +244,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyDictionary<string, string[]> OperationPositions { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
         public IReadOnlyDictionary<string, string> PartialResources { get; }
-        public IReadOnlyList<string> RawParameterizedScopes { get; }
+        public IReadOnlyList<string> RawParameterizedScopes { get; private set; }
         private ImmutableHashSet<RequestPath>? _parameterizedScopes;
         internal ImmutableHashSet<RequestPath> ParameterizedScopes
             => _parameterizedScopes ??= RawParameterizedScopes.Select(scope => RequestPath.FromString(scope)).ToImmutableHashSet();
@@ -310,6 +311,43 @@ namespace AutoRest.CSharp.Input
                 partialResources: autoRest.GetValue<JsonElement?>("partial-resources").GetAwaiter().GetResult(),
                 privilegedOperations: autoRest.GetValue<JsonElement?>("privileged-operations").GetAwaiter().GetResult(),
                 operationsToLroApiVersionOverride: autoRest.GetValue<JsonElement?>("operations-to-lro-api-version-override").GetAwaiter().GetResult());
+        }
+
+        internal void Update(IReadOnlyList<(string Name, object Value)> configurations)
+        {
+            foreach (var (name, value) in configurations)
+            {
+                HandleConfiguration(name, value);
+            }
+
+            void HandleConfiguration(string name, object value)
+            {
+                switch (name)
+                {
+                    case "request-path-to-resource-name":
+                        // update the request-path-to-resource-name mapping, this is a dictionary, therefore we expect the values here are array with 2 string elements.
+                        if (value is object[] array && array.Length == 2)
+                        {
+                            var requestPath = array[0] as string;
+                            var resourceName = array[1] as string;
+                            if (requestPath != null && resourceName != null)
+                            {
+                                ((Dictionary<string, string>)RequestPathToResourceName)[requestPath] = resourceName;
+                            }
+                        }
+                        break;
+                    case "parameterized-scopes":
+                        // update the parameterized scopes, this is a list of strings
+                        if (value is object[] array2)
+                        {
+                            var scopes = array2.Select(i => i as string).WhereNotNull();
+                            List<string> rawScopes = RawParameterizedScopes is List<string> s ? s : new List<string>(RawParameterizedScopes);
+                            rawScopes.AddRange(scopes);
+                            RawParameterizedScopes = rawScopes;
+                        }
+                        break;
+                }
+            }
         }
 
         private static JsonElement? GetAcronymMappingConfig(IPluginCommunication autoRest)
