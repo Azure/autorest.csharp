@@ -17,7 +17,6 @@ import "@azure-tools/typespec-azure-core";
 @useAuth(
     OAuth2Auth<[AuthFlow]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">
 )
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace NewProjectTypeSpec;
 
 @doc("The auth flow model")

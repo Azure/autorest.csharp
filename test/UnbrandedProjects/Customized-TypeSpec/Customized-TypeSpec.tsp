@@ -26,7 +26,6 @@ using Azure.Core;
 namespace CustomizedTypeSpec;
 
 enum Versions {
-    @useDependency(Azure.Core.Versions.v1_0_Preview_1)
     "2022-05-15-preview"
 }
 
