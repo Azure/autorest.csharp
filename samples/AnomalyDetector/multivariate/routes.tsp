@@ -50,6 +50,7 @@ op TrainMultivariateModel(
 @route("/multivariate/models")
 @summary("List Multivariate Models")
 @doc("List models of a resource.")
+@list
 // To improve CADL implementation apply: https://github.com/Azure/azure-rest-api-specs/issues/21527
 op ListMultivariateModels(
   @doc("Skip indicates how many models will be skipped.")
