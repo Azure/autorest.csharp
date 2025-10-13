@@ -524,6 +524,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return utf8JsonWriter.WriteNumberValue(InvokeConvert.ToDouble(new TimeSpanExpression(value).InvokeToString(format)));
                 }
 
+                if (valueSerialization.Format is SerializationFormat.Duration_Milliseconds)
+                {
+                    return utf8JsonWriter.WriteNumberValue(InvokeConvert.ToInt32(new TimeSpanExpression(value).InvokeToString(format)));
+                }
+
+                if (valueSerialization.Format is SerializationFormat.Duration_Milliseconds_Float or SerializationFormat.Duration_Milliseconds_Double)
+                {
+                    return utf8JsonWriter.WriteNumberValue(InvokeConvert.ToDouble(new TimeSpanExpression(value).InvokeToString(format)));
+                }
+
                 if (valueSerialization.Format is SerializationFormat.DateTime_Unix)
                 {
                     return utf8JsonWriter.WriteNumberValue(value, format);
@@ -1256,6 +1266,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 if (format is SerializationFormat.Duration_Seconds_Float or SerializationFormat.Duration_Seconds_Double)
                 {
                     return TimeSpanExpression.FromSeconds(element.GetDouble());
+                }
+
+                if (format is SerializationFormat.Duration_Milliseconds)
+                {
+                    return TimeSpanExpression.FromMilliseconds(element.GetInt32());
+                }
+
+                if (format is SerializationFormat.Duration_Milliseconds_Float or SerializationFormat.Duration_Milliseconds_Double)
+                {
+                    return TimeSpanExpression.FromMilliseconds(element.GetDouble());
                 }
 
                 return element.GetTimeSpan(format.ToFormatSpecifier());

@@ -93,6 +93,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Samples
                             if (rawValue.RawValue is int or float or double)
                                 return new InvokeStaticMethodExpression(typeof(TimeSpan), nameof(TimeSpan.FromSeconds), new[] { Literal(rawValue.RawValue) });
                             break;
+                        case SerializationFormat.Duration_Milliseconds or SerializationFormat.Duration_Milliseconds_Float or SerializationFormat.Duration_Milliseconds_Double:
+                            if (rawValue.RawValue is int or float or double)
+                                return new InvokeStaticMethodExpression(typeof(TimeSpan), nameof(TimeSpan.FromMilliseconds), new[] { Literal(rawValue.RawValue) });
+                            break;
                         case SerializationFormat.Duration_ISO8601:
                             if (rawValue.RawValue is string duration)
                                 return new InvokeStaticMethodExpression(typeof(XmlConvert), nameof(XmlConvert.ToTimeSpan), new[] { Literal(duration) });

@@ -584,6 +584,330 @@ namespace Encode.Duration
             }
         }
 
+        /// <summary> Int 32 milliseconds. </summary>
+        /// <param name="body"> The <see cref="Int32MillisecondsDurationProperty"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Int32MillisecondsAsync(Int32MillisecondsDurationProperty,CancellationToken)']/*" />
+        public virtual async Task<Response<Int32MillisecondsDurationProperty>> Int32MillisecondsAsync(Int32MillisecondsDurationProperty body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await Int32MillisecondsAsync(content, context).ConfigureAwait(false);
+            return Response.FromValue(Int32MillisecondsDurationProperty.FromResponse(response), response);
+        }
+
+        /// <summary> Int 32 milliseconds. </summary>
+        /// <param name="body"> The <see cref="Int32MillisecondsDurationProperty"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Int32Milliseconds(Int32MillisecondsDurationProperty,CancellationToken)']/*" />
+        public virtual Response<Int32MillisecondsDurationProperty> Int32Milliseconds(Int32MillisecondsDurationProperty body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Int32Milliseconds(content, context);
+            return Response.FromValue(Int32MillisecondsDurationProperty.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] Int 32 milliseconds.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Int32MillisecondsAsync(Int32MillisecondsDurationProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Int32MillisecondsAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> Int32MillisecondsAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Property.Int32Milliseconds");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInt32MillisecondsRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Int 32 milliseconds.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Int32Milliseconds(Int32MillisecondsDurationProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Int32Milliseconds(RequestContent,RequestContext)']/*" />
+        public virtual Response Int32Milliseconds(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Property.Int32Milliseconds");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInt32MillisecondsRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Float milliseconds. </summary>
+        /// <param name="body"> The <see cref="FloatMillisecondsDurationProperty"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatMillisecondsAsync(FloatMillisecondsDurationProperty,CancellationToken)']/*" />
+        public virtual async Task<Response<FloatMillisecondsDurationProperty>> FloatMillisecondsAsync(FloatMillisecondsDurationProperty body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await FloatMillisecondsAsync(content, context).ConfigureAwait(false);
+            return Response.FromValue(FloatMillisecondsDurationProperty.FromResponse(response), response);
+        }
+
+        /// <summary> Float milliseconds. </summary>
+        /// <param name="body"> The <see cref="FloatMillisecondsDurationProperty"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatMilliseconds(FloatMillisecondsDurationProperty,CancellationToken)']/*" />
+        public virtual Response<FloatMillisecondsDurationProperty> FloatMilliseconds(FloatMillisecondsDurationProperty body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = FloatMilliseconds(content, context);
+            return Response.FromValue(FloatMillisecondsDurationProperty.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] Float milliseconds.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="FloatMillisecondsAsync(FloatMillisecondsDurationProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatMillisecondsAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> FloatMillisecondsAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Property.FloatMilliseconds");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloatMillisecondsRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Float milliseconds.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="FloatMilliseconds(FloatMillisecondsDurationProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatMilliseconds(RequestContent,RequestContext)']/*" />
+        public virtual Response FloatMilliseconds(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Property.FloatMilliseconds");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloatMillisecondsRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Float 64 milliseconds. </summary>
+        /// <param name="body"> The <see cref="Float64MillisecondsDurationProperty"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Float64MillisecondsAsync(Float64MillisecondsDurationProperty,CancellationToken)']/*" />
+        public virtual async Task<Response<Float64MillisecondsDurationProperty>> Float64MillisecondsAsync(Float64MillisecondsDurationProperty body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await Float64MillisecondsAsync(content, context).ConfigureAwait(false);
+            return Response.FromValue(Float64MillisecondsDurationProperty.FromResponse(response), response);
+        }
+
+        /// <summary> Float 64 milliseconds. </summary>
+        /// <param name="body"> The <see cref="Float64MillisecondsDurationProperty"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Float64Milliseconds(Float64MillisecondsDurationProperty,CancellationToken)']/*" />
+        public virtual Response<Float64MillisecondsDurationProperty> Float64Milliseconds(Float64MillisecondsDurationProperty body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Float64Milliseconds(content, context);
+            return Response.FromValue(Float64MillisecondsDurationProperty.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] Float 64 milliseconds.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Float64MillisecondsAsync(Float64MillisecondsDurationProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Float64MillisecondsAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> Float64MillisecondsAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Property.Float64Milliseconds");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloat64MillisecondsRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Float 64 milliseconds.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Float64Milliseconds(Float64MillisecondsDurationProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Float64Milliseconds(RequestContent,RequestContext)']/*" />
+        public virtual Response Float64Milliseconds(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Property.Float64Milliseconds");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloat64MillisecondsRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Float seconds array. </summary>
         /// <param name="body"> The <see cref="FloatSecondsDurationArrayProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -692,6 +1016,114 @@ namespace Encode.Duration
             }
         }
 
+        /// <summary> Float milliseconds array. </summary>
+        /// <param name="body"> The <see cref="FloatMillisecondsDurationArrayProperty"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatMillisecondsArrayAsync(FloatMillisecondsDurationArrayProperty,CancellationToken)']/*" />
+        public virtual async Task<Response<FloatMillisecondsDurationArrayProperty>> FloatMillisecondsArrayAsync(FloatMillisecondsDurationArrayProperty body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await FloatMillisecondsArrayAsync(content, context).ConfigureAwait(false);
+            return Response.FromValue(FloatMillisecondsDurationArrayProperty.FromResponse(response), response);
+        }
+
+        /// <summary> Float milliseconds array. </summary>
+        /// <param name="body"> The <see cref="FloatMillisecondsDurationArrayProperty"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatMillisecondsArray(FloatMillisecondsDurationArrayProperty,CancellationToken)']/*" />
+        public virtual Response<FloatMillisecondsDurationArrayProperty> FloatMillisecondsArray(FloatMillisecondsDurationArrayProperty body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            using RequestContent content = body.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = FloatMillisecondsArray(content, context);
+            return Response.FromValue(FloatMillisecondsDurationArrayProperty.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] Float milliseconds array.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="FloatMillisecondsArrayAsync(FloatMillisecondsDurationArrayProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatMillisecondsArrayAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> FloatMillisecondsArrayAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Property.FloatMillisecondsArray");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloatMillisecondsArrayRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Float milliseconds array.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="FloatMillisecondsArray(FloatMillisecondsDurationArrayProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatMillisecondsArray(RequestContent,RequestContext)']/*" />
+        public virtual Response FloatMillisecondsArray(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("Property.FloatMillisecondsArray");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloatMillisecondsArrayRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateDefaultRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -767,6 +1199,51 @@ namespace Encode.Duration
             return message;
         }
 
+        internal HttpMessage CreateInt32MillisecondsRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/encode/duration/property/int32-milliseconds", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateFloatMillisecondsRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/encode/duration/property/float-milliseconds", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateFloat64MillisecondsRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/encode/duration/property/float64-milliseconds", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
         internal HttpMessage CreateFloatSecondsArrayRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -775,6 +1252,21 @@ namespace Encode.Duration
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/duration/property/float-seconds-array", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateFloatMillisecondsArrayRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/encode/duration/property/float-milliseconds-array", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

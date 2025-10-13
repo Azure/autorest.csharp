@@ -433,6 +433,268 @@ namespace Encode.Duration
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
+        /// <summary>
+        /// [Protocol Method] Int 32 milliseconds.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="duration"> The <see cref="TimeSpan"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Int32MillisecondsAsync(TimeSpan,RequestContext)']/*" />
+        public virtual async Task<Response> Int32MillisecondsAsync(TimeSpan duration, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("Header.Int32Milliseconds");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInt32MillisecondsRequest(duration, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
+        /// <summary>
+        /// [Protocol Method] Int 32 milliseconds.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="duration"> The <see cref="TimeSpan"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Int32Milliseconds(TimeSpan,RequestContext)']/*" />
+        public virtual Response Int32Milliseconds(TimeSpan duration, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("Header.Int32Milliseconds");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInt32MillisecondsRequest(duration, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
+        /// <summary>
+        /// [Protocol Method] Float milliseconds.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="duration"> The <see cref="TimeSpan"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='FloatMillisecondsAsync(TimeSpan,RequestContext)']/*" />
+        public virtual async Task<Response> FloatMillisecondsAsync(TimeSpan duration, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("Header.FloatMilliseconds");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloatMillisecondsRequest(duration, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
+        /// <summary>
+        /// [Protocol Method] Float milliseconds.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="duration"> The <see cref="TimeSpan"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='FloatMilliseconds(TimeSpan,RequestContext)']/*" />
+        public virtual Response FloatMilliseconds(TimeSpan duration, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("Header.FloatMilliseconds");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloatMillisecondsRequest(duration, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
+        /// <summary>
+        /// [Protocol Method] Float 64 milliseconds.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="duration"> The <see cref="TimeSpan"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Float64MillisecondsAsync(TimeSpan,RequestContext)']/*" />
+        public virtual async Task<Response> Float64MillisecondsAsync(TimeSpan duration, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("Header.Float64Milliseconds");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloat64MillisecondsRequest(duration, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
+        /// <summary>
+        /// [Protocol Method] Float 64 milliseconds.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="duration"> The <see cref="TimeSpan"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Float64Milliseconds(TimeSpan,RequestContext)']/*" />
+        public virtual Response Float64Milliseconds(TimeSpan duration, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("Header.Float64Milliseconds");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateFloat64MillisecondsRequest(duration, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
+        /// <summary>
+        /// [Protocol Method] Int 32 milliseconds array.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="duration"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="TimeSpan"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="duration"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Int32MillisecondsArrayAsync(IEnumerable{TimeSpan},RequestContext)']/*" />
+        public virtual async Task<Response> Int32MillisecondsArrayAsync(IEnumerable<TimeSpan> duration, RequestContext context = null)
+        {
+            Argument.AssertNotNull(duration, nameof(duration));
+
+            using var scope = ClientDiagnostics.CreateScope("Header.Int32MillisecondsArray");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInt32MillisecondsArrayRequest(duration, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
+        /// <summary>
+        /// [Protocol Method] Int 32 milliseconds array.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="duration"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="TimeSpan"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="duration"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/Header.xml" path="doc/members/member[@name='Int32MillisecondsArray(IEnumerable{TimeSpan},RequestContext)']/*" />
+        public virtual Response Int32MillisecondsArray(IEnumerable<TimeSpan> duration, RequestContext context = null)
+        {
+            Argument.AssertNotNull(duration, nameof(duration));
+
+            using var scope = ClientDiagnostics.CreateScope("Header.Int32MillisecondsArray");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateInt32MillisecondsArrayRequest(duration, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateDefaultRequest(TimeSpan duration, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -508,6 +770,58 @@ namespace Encode.Duration
             uri.AppendPath("/encode/duration/header/float64-seconds", false);
             request.Uri = uri;
             request.Headers.Add("duration", duration, "s\\.FFFFFF");
+            return message;
+        }
+
+        internal HttpMessage CreateInt32MillisecondsRequest(TimeSpan duration, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/encode/duration/header/int32-milliseconds", false);
+            request.Uri = uri;
+            request.Headers.Add("duration", duration, "%s");
+            return message;
+        }
+
+        internal HttpMessage CreateFloatMillisecondsRequest(TimeSpan duration, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/encode/duration/header/float-milliseconds", false);
+            request.Uri = uri;
+            request.Headers.Add("duration", duration, "s\\.FFF");
+            return message;
+        }
+
+        internal HttpMessage CreateFloat64MillisecondsRequest(TimeSpan duration, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/encode/duration/header/float64-milliseconds", false);
+            request.Uri = uri;
+            request.Headers.Add("duration", duration, "s\\.FFFFFF");
+            return message;
+        }
+
+        internal HttpMessage CreateInt32MillisecondsArrayRequest(IEnumerable<TimeSpan> duration, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/encode/duration/header/int32-milliseconds-array", false);
+            request.Uri = uri;
+            request.Headers.AddDelimited("duration", duration, ",", "%s");
             return message;
         }
 

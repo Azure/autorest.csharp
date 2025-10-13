@@ -229,5 +229,157 @@ Response response = client.Float64Seconds(TimeSpan.FromSeconds(3.141592));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
+    <member name="Int32MillisecondsAsync(TimeSpan,RequestContext)">
+      <example>
+This sample shows how to call Int32MillisecondsAsync.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = await client.Int32MillisecondsAsync(default);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Int32MillisecondsAsync with all parameters.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = await client.Int32MillisecondsAsync(default);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Int32Milliseconds(TimeSpan,RequestContext)">
+      <example>
+This sample shows how to call Int32Milliseconds.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = client.Int32Milliseconds(default);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Int32Milliseconds with all parameters.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = client.Int32Milliseconds(default);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="FloatMillisecondsAsync(TimeSpan,RequestContext)">
+      <example>
+This sample shows how to call FloatMillisecondsAsync.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = await client.FloatMillisecondsAsync(default);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FloatMillisecondsAsync with all parameters.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = await client.FloatMillisecondsAsync(default);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="FloatMilliseconds(TimeSpan,RequestContext)">
+      <example>
+This sample shows how to call FloatMilliseconds.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = client.FloatMilliseconds(default);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FloatMilliseconds with all parameters.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = client.FloatMilliseconds(default);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Float64MillisecondsAsync(TimeSpan,RequestContext)">
+      <example>
+This sample shows how to call Float64MillisecondsAsync.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = await client.Float64MillisecondsAsync(default);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Float64MillisecondsAsync with all parameters.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = await client.Float64MillisecondsAsync(default);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Float64Milliseconds(TimeSpan,RequestContext)">
+      <example>
+This sample shows how to call Float64Milliseconds.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = client.Float64Milliseconds(default);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Float64Milliseconds with all parameters.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = client.Float64Milliseconds(default);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Int32MillisecondsArrayAsync(IEnumerable{TimeSpan},RequestContext)">
+      <example>
+This sample shows how to call Int32MillisecondsArrayAsync.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = await client.Int32MillisecondsArrayAsync(new TimeSpan[] { default });
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Int32MillisecondsArrayAsync with all parameters.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = await client.Int32MillisecondsArrayAsync(new TimeSpan[] { default });
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Int32MillisecondsArray(IEnumerable{TimeSpan},RequestContext)">
+      <example>
+This sample shows how to call Int32MillisecondsArray.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = client.Int32MillisecondsArray(new TimeSpan[] { default });
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Int32MillisecondsArray with all parameters.
+<code><![CDATA[
+Header client = new DurationClient().GetHeaderClient();
+
+Response response = client.Int32MillisecondsArray(new TimeSpan[] { default });
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
   </members>
 </doc>

@@ -80,13 +80,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (frameworkType == typeof(TimeSpan))
             {
-                if (format is SerializationFormat.Duration_Seconds)
+                switch (format)
                 {
-                    return $"{typeof(TimeSpan)}.FromSeconds({element}.GetInt32())";
-                }
-                else if (format is SerializationFormat.Duration_Seconds_Float or SerializationFormat.Duration_Seconds_Double)
-                {
-                    return $"{typeof(TimeSpan)}.FromSeconds({element}.GetDouble())";
+                    case SerializationFormat.Duration_Seconds:
+                        return $"{typeof(TimeSpan)}.FromSeconds({element}.GetInt32())";
+                    case SerializationFormat.Duration_Seconds_Float or SerializationFormat.Duration_Seconds_Double:
+                        return $"{typeof(TimeSpan)}.FromSeconds({element}.GetDouble())";
+                    case SerializationFormat.Duration_Milliseconds:
+                        return $"{typeof(TimeSpan)}.FromMilliseconds({element}.GetInt32())";
+                    case SerializationFormat.Duration_Milliseconds_Float or SerializationFormat.Duration_Milliseconds_Double:
+                        return $"{typeof(TimeSpan)}.FromMilliseconds({element}.GetDouble())";
                 }
             }
 

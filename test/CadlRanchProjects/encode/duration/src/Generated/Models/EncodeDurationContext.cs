@@ -15,9 +15,13 @@ namespace Encode.Duration
     /// For more information see 'https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/System.ClientModel/src/docs/ModelReaderWriterContext.md'
     /// </summary>
     [ModelReaderWriterBuildable(typeof(DefaultDurationProperty))]
+    [ModelReaderWriterBuildable(typeof(Float64MillisecondsDurationProperty))]
     [ModelReaderWriterBuildable(typeof(Float64SecondsDurationProperty))]
+    [ModelReaderWriterBuildable(typeof(FloatMillisecondsDurationArrayProperty))]
+    [ModelReaderWriterBuildable(typeof(FloatMillisecondsDurationProperty))]
     [ModelReaderWriterBuildable(typeof(FloatSecondsDurationArrayProperty))]
     [ModelReaderWriterBuildable(typeof(FloatSecondsDurationProperty))]
+    [ModelReaderWriterBuildable(typeof(Int32MillisecondsDurationProperty))]
     [ModelReaderWriterBuildable(typeof(Int32SecondsDurationProperty))]
     [ModelReaderWriterBuildable(typeof(ISO8601DurationProperty))]
     public partial class EncodeDurationContext : ModelReaderWriterContext

@@ -15,6 +15,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public static TimeSpanExpression FromSeconds(ValueExpression value) => new(InvokeStatic(nameof(TimeSpan.FromSeconds), value));
 
+        public static TimeSpanExpression FromMilliseconds(ValueExpression value) => new(InvokeStatic(nameof(TimeSpan.FromMilliseconds), value));
+
         public static TimeSpanExpression ParseExact(ValueExpression value, ValueExpression format, ValueExpression formatProvider)
             => new(new InvokeStaticMethodExpression(typeof(TimeSpan), nameof(TimeSpan.ParseExact), new[] { value, format, formatProvider }));
     }
