@@ -114,7 +114,7 @@
                 "decorators": []
               },
               "location": "Query",
-              "isApiVersion": true,
+              "isApiVersion": false,
               "isContentType": false,
               "isEndpoint": false,
               "explode": false,
@@ -195,7 +195,7 @@
                 "decorators": []
               },
               "location": "Path",
-              "isApiVersion": true,
+              "isApiVersion": false,
               "isContentType": false,
               "isEndpoint": false,
               "explode": false,

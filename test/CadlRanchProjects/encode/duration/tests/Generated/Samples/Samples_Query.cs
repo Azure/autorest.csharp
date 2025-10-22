@@ -238,6 +238,138 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Query_Int32Milliseconds_ShortVersion()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = client.Int32Milliseconds(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Query_Int32Milliseconds_ShortVersion_Async()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = await client.Int32MillisecondsAsync(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Query_Int32Milliseconds_AllParameters()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = client.Int32Milliseconds(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Query_Int32Milliseconds_AllParameters_Async()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = await client.Int32MillisecondsAsync(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Query_FloatMilliseconds_ShortVersion()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = client.FloatMilliseconds(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Query_FloatMilliseconds_ShortVersion_Async()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = await client.FloatMillisecondsAsync(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Query_FloatMilliseconds_AllParameters()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = client.FloatMilliseconds(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Query_FloatMilliseconds_AllParameters_Async()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = await client.FloatMillisecondsAsync(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Query_Float64Milliseconds_ShortVersion()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = client.Float64Milliseconds(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Query_Float64Milliseconds_ShortVersion_Async()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = await client.Float64MillisecondsAsync(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Query_Float64Milliseconds_AllParameters()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = client.Float64Milliseconds(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Query_Float64Milliseconds_AllParameters_Async()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = await client.Float64MillisecondsAsync(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Query_Int32SecondsArray_ShortVersion()
         {
             Query client = new DurationClient().GetQueryClient();
@@ -276,6 +408,50 @@ namespace Encode.Duration.Samples
             Query client = new DurationClient().GetQueryClient();
 
             Response response = await client.Int32SecondsArrayAsync(new TimeSpan[] { TimeSpan.FromSeconds(10) });
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Query_Int32MillisecondsArray_ShortVersion()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = client.Int32MillisecondsArray(new TimeSpan[] { default });
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Query_Int32MillisecondsArray_ShortVersion_Async()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = await client.Int32MillisecondsArrayAsync(new TimeSpan[] { default });
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Query_Int32MillisecondsArray_AllParameters()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = client.Int32MillisecondsArray(new TimeSpan[] { default });
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Query_Int32MillisecondsArray_AllParameters_Async()
+        {
+            Query client = new DurationClient().GetQueryClient();
+
+            Response response = await client.Int32MillisecondsArrayAsync(new TimeSpan[] { default });
 
             Console.WriteLine(response.Status);
         }

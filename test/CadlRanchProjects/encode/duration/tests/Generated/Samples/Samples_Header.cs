@@ -279,5 +279,181 @@ namespace Encode.Duration.Samples
 
             Console.WriteLine(response.Status);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Header_Int32Milliseconds_ShortVersion()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = client.Int32Milliseconds(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Header_Int32Milliseconds_ShortVersion_Async()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = await client.Int32MillisecondsAsync(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Header_Int32Milliseconds_AllParameters()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = client.Int32Milliseconds(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Header_Int32Milliseconds_AllParameters_Async()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = await client.Int32MillisecondsAsync(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Header_FloatMilliseconds_ShortVersion()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = client.FloatMilliseconds(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Header_FloatMilliseconds_ShortVersion_Async()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = await client.FloatMillisecondsAsync(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Header_FloatMilliseconds_AllParameters()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = client.FloatMilliseconds(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Header_FloatMilliseconds_AllParameters_Async()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = await client.FloatMillisecondsAsync(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Header_Float64Milliseconds_ShortVersion()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = client.Float64Milliseconds(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Header_Float64Milliseconds_ShortVersion_Async()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = await client.Float64MillisecondsAsync(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Header_Float64Milliseconds_AllParameters()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = client.Float64Milliseconds(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Header_Float64Milliseconds_AllParameters_Async()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = await client.Float64MillisecondsAsync(default);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Header_Int32MillisecondsArray_ShortVersion()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = client.Int32MillisecondsArray(new TimeSpan[] { default });
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Header_Int32MillisecondsArray_ShortVersion_Async()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = await client.Int32MillisecondsArrayAsync(new TimeSpan[] { default });
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Header_Int32MillisecondsArray_AllParameters()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = client.Int32MillisecondsArray(new TimeSpan[] { default });
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Header_Int32MillisecondsArray_AllParameters_Async()
+        {
+            Header client = new DurationClient().GetHeaderClient();
+
+            Response response = await client.Int32MillisecondsArrayAsync(new TimeSpan[] { default });
+
+            Console.WriteLine(response.Status);
+        }
     }
 }

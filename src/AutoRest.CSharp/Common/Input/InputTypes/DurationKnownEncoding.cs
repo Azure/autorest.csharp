@@ -5,5 +5,5 @@ namespace AutoRest.CSharp.Common.Input;
 
 internal enum DurationKnownEncoding
 {
-    Iso8601, Seconds, DurationConstant
+    Iso8601, Seconds, DurationConstant, Milliseconds
 }

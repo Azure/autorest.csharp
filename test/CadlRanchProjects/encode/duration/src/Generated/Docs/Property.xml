@@ -461,6 +461,246 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code></example>
     </member>
+    <member name="Int32MillisecondsAsync(Int32MillisecondsDurationProperty,CancellationToken)">
+      <example>
+This sample shows how to call Int32MillisecondsAsync.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+Int32MillisecondsDurationProperty body = new Int32MillisecondsDurationProperty(default);
+Response<Int32MillisecondsDurationProperty> response = await client.Int32MillisecondsAsync(body);
+]]></code>
+This sample shows how to call Int32MillisecondsAsync with all parameters.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+Int32MillisecondsDurationProperty body = new Int32MillisecondsDurationProperty(default);
+Response<Int32MillisecondsDurationProperty> response = await client.Int32MillisecondsAsync(body);
+]]></code></example>
+    </member>
+    <member name="Int32Milliseconds(Int32MillisecondsDurationProperty,CancellationToken)">
+      <example>
+This sample shows how to call Int32Milliseconds.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+Int32MillisecondsDurationProperty body = new Int32MillisecondsDurationProperty(default);
+Response<Int32MillisecondsDurationProperty> response = client.Int32Milliseconds(body);
+]]></code>
+This sample shows how to call Int32Milliseconds with all parameters.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+Int32MillisecondsDurationProperty body = new Int32MillisecondsDurationProperty(default);
+Response<Int32MillisecondsDurationProperty> response = client.Int32Milliseconds(body);
+]]></code></example>
+    </member>
+    <member name="Int32MillisecondsAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Int32MillisecondsAsync and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = await client.Int32MillisecondsAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code>
+This sample shows how to call Int32MillisecondsAsync with all request content and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = await client.Int32MillisecondsAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
+    </member>
+    <member name="Int32Milliseconds(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Int32Milliseconds and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = client.Int32Milliseconds(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code>
+This sample shows how to call Int32Milliseconds with all request content and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = client.Int32Milliseconds(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
+    </member>
+    <member name="FloatMillisecondsAsync(FloatMillisecondsDurationProperty,CancellationToken)">
+      <example>
+This sample shows how to call FloatMillisecondsAsync.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+FloatMillisecondsDurationProperty body = new FloatMillisecondsDurationProperty(default);
+Response<FloatMillisecondsDurationProperty> response = await client.FloatMillisecondsAsync(body);
+]]></code>
+This sample shows how to call FloatMillisecondsAsync with all parameters.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+FloatMillisecondsDurationProperty body = new FloatMillisecondsDurationProperty(default);
+Response<FloatMillisecondsDurationProperty> response = await client.FloatMillisecondsAsync(body);
+]]></code></example>
+    </member>
+    <member name="FloatMilliseconds(FloatMillisecondsDurationProperty,CancellationToken)">
+      <example>
+This sample shows how to call FloatMilliseconds.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+FloatMillisecondsDurationProperty body = new FloatMillisecondsDurationProperty(default);
+Response<FloatMillisecondsDurationProperty> response = client.FloatMilliseconds(body);
+]]></code>
+This sample shows how to call FloatMilliseconds with all parameters.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+FloatMillisecondsDurationProperty body = new FloatMillisecondsDurationProperty(default);
+Response<FloatMillisecondsDurationProperty> response = client.FloatMilliseconds(body);
+]]></code></example>
+    </member>
+    <member name="FloatMillisecondsAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call FloatMillisecondsAsync and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = await client.FloatMillisecondsAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code>
+This sample shows how to call FloatMillisecondsAsync with all request content and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = await client.FloatMillisecondsAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
+    </member>
+    <member name="FloatMilliseconds(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call FloatMilliseconds and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = client.FloatMilliseconds(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code>
+This sample shows how to call FloatMilliseconds with all request content and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = client.FloatMilliseconds(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
+    </member>
+    <member name="Float64MillisecondsAsync(Float64MillisecondsDurationProperty,CancellationToken)">
+      <example>
+This sample shows how to call Float64MillisecondsAsync.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+Float64MillisecondsDurationProperty body = new Float64MillisecondsDurationProperty(default);
+Response<Float64MillisecondsDurationProperty> response = await client.Float64MillisecondsAsync(body);
+]]></code>
+This sample shows how to call Float64MillisecondsAsync with all parameters.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+Float64MillisecondsDurationProperty body = new Float64MillisecondsDurationProperty(default);
+Response<Float64MillisecondsDurationProperty> response = await client.Float64MillisecondsAsync(body);
+]]></code></example>
+    </member>
+    <member name="Float64Milliseconds(Float64MillisecondsDurationProperty,CancellationToken)">
+      <example>
+This sample shows how to call Float64Milliseconds.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+Float64MillisecondsDurationProperty body = new Float64MillisecondsDurationProperty(default);
+Response<Float64MillisecondsDurationProperty> response = client.Float64Milliseconds(body);
+]]></code>
+This sample shows how to call Float64Milliseconds with all parameters.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+Float64MillisecondsDurationProperty body = new Float64MillisecondsDurationProperty(default);
+Response<Float64MillisecondsDurationProperty> response = client.Float64Milliseconds(body);
+]]></code></example>
+    </member>
+    <member name="Float64MillisecondsAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Float64MillisecondsAsync and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = await client.Float64MillisecondsAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code>
+This sample shows how to call Float64MillisecondsAsync with all request content and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = await client.Float64MillisecondsAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
+    </member>
+    <member name="Float64Milliseconds(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Float64Milliseconds and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = client.Float64Milliseconds(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code>
+This sample shows how to call Float64Milliseconds with all request content and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = client.Float64Milliseconds(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
+    </member>
     <member name="FloatSecondsArrayAsync(FloatSecondsDurationArrayProperty,CancellationToken)">
       <example>
 This sample shows how to call FloatSecondsArrayAsync.
@@ -560,6 +800,110 @@ using RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.FloatSecondsArray(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
+]]></code></example>
+    </member>
+    <member name="FloatMillisecondsArrayAsync(FloatMillisecondsDurationArrayProperty,CancellationToken)">
+      <example>
+This sample shows how to call FloatMillisecondsArrayAsync.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+FloatMillisecondsDurationArrayProperty body = new FloatMillisecondsDurationArrayProperty(new TimeSpan[] { default });
+Response<FloatMillisecondsDurationArrayProperty> response = await client.FloatMillisecondsArrayAsync(body);
+]]></code>
+This sample shows how to call FloatMillisecondsArrayAsync with all parameters.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+FloatMillisecondsDurationArrayProperty body = new FloatMillisecondsDurationArrayProperty(new TimeSpan[] { default });
+Response<FloatMillisecondsDurationArrayProperty> response = await client.FloatMillisecondsArrayAsync(body);
+]]></code></example>
+    </member>
+    <member name="FloatMillisecondsArray(FloatMillisecondsDurationArrayProperty,CancellationToken)">
+      <example>
+This sample shows how to call FloatMillisecondsArray.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+FloatMillisecondsDurationArrayProperty body = new FloatMillisecondsDurationArrayProperty(new TimeSpan[] { default });
+Response<FloatMillisecondsDurationArrayProperty> response = client.FloatMillisecondsArray(body);
+]]></code>
+This sample shows how to call FloatMillisecondsArray with all parameters.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+FloatMillisecondsDurationArrayProperty body = new FloatMillisecondsDurationArrayProperty(new TimeSpan[] { default });
+Response<FloatMillisecondsDurationArrayProperty> response = client.FloatMillisecondsArray(body);
+]]></code></example>
+    </member>
+    <member name="FloatMillisecondsArrayAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call FloatMillisecondsArrayAsync and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    value = new object[]
+    {
+        null
+    },
+});
+Response response = await client.FloatMillisecondsArrayAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
+]]></code>
+This sample shows how to call FloatMillisecondsArrayAsync with all request content and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    value = new object[]
+    {
+        null
+    },
+});
+Response response = await client.FloatMillisecondsArrayAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
+]]></code></example>
+    </member>
+    <member name="FloatMillisecondsArray(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call FloatMillisecondsArray and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    value = new object[]
+    {
+        null
+    },
+});
+Response response = client.FloatMillisecondsArray(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
+]]></code>
+This sample shows how to call FloatMillisecondsArray with all request content and parse the result.
+<code><![CDATA[
+Property client = new DurationClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    value = new object[]
+    {
+        null
+    },
+});
+Response response = client.FloatMillisecondsArray(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());

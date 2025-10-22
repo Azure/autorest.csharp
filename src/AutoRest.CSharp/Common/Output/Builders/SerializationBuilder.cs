@@ -72,6 +72,12 @@ namespace AutoRest.CSharp.Output.Builders
                     InputPrimitiveTypeKind.Float or InputPrimitiveTypeKind.Float32 => SerializationFormat.Duration_Seconds_Float,
                     _ => SerializationFormat.Duration_Seconds_Double
                 },
+                DurationKnownEncoding.Milliseconds => durationType.WireType.Kind switch
+                {
+                    InputPrimitiveTypeKind.Int32 => SerializationFormat.Duration_Milliseconds,
+                    InputPrimitiveTypeKind.Float or InputPrimitiveTypeKind.Float32 => SerializationFormat.Duration_Milliseconds_Float,
+                    _ => SerializationFormat.Duration_Milliseconds_Double
+                },
                 DurationKnownEncoding.DurationConstant => SerializationFormat.Duration_Constant,
                 _ => throw new IndexOutOfRangeException($"unknown encode {durationType.Encode}")
             },

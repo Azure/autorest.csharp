@@ -541,6 +541,282 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Property_Int32Milliseconds_ShortVersion()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = client.Int32Milliseconds(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_Int32Milliseconds_ShortVersion_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = await client.Int32MillisecondsAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_Int32Milliseconds_ShortVersion_Convenience()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            Int32MillisecondsDurationProperty body = new Int32MillisecondsDurationProperty(default);
+            Response<Int32MillisecondsDurationProperty> response = client.Int32Milliseconds(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_Int32Milliseconds_ShortVersion_Convenience_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            Int32MillisecondsDurationProperty body = new Int32MillisecondsDurationProperty(default);
+            Response<Int32MillisecondsDurationProperty> response = await client.Int32MillisecondsAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_Int32Milliseconds_AllParameters()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = client.Int32Milliseconds(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_Int32Milliseconds_AllParameters_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = await client.Int32MillisecondsAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_Int32Milliseconds_AllParameters_Convenience()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            Int32MillisecondsDurationProperty body = new Int32MillisecondsDurationProperty(default);
+            Response<Int32MillisecondsDurationProperty> response = client.Int32Milliseconds(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_Int32Milliseconds_AllParameters_Convenience_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            Int32MillisecondsDurationProperty body = new Int32MillisecondsDurationProperty(default);
+            Response<Int32MillisecondsDurationProperty> response = await client.Int32MillisecondsAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_FloatMilliseconds_ShortVersion()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = client.FloatMilliseconds(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_FloatMilliseconds_ShortVersion_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = await client.FloatMillisecondsAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_FloatMilliseconds_ShortVersion_Convenience()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            FloatMillisecondsDurationProperty body = new FloatMillisecondsDurationProperty(default);
+            Response<FloatMillisecondsDurationProperty> response = client.FloatMilliseconds(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_FloatMilliseconds_ShortVersion_Convenience_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            FloatMillisecondsDurationProperty body = new FloatMillisecondsDurationProperty(default);
+            Response<FloatMillisecondsDurationProperty> response = await client.FloatMillisecondsAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_FloatMilliseconds_AllParameters()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = client.FloatMilliseconds(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_FloatMilliseconds_AllParameters_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = await client.FloatMillisecondsAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_FloatMilliseconds_AllParameters_Convenience()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            FloatMillisecondsDurationProperty body = new FloatMillisecondsDurationProperty(default);
+            Response<FloatMillisecondsDurationProperty> response = client.FloatMilliseconds(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_FloatMilliseconds_AllParameters_Convenience_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            FloatMillisecondsDurationProperty body = new FloatMillisecondsDurationProperty(default);
+            Response<FloatMillisecondsDurationProperty> response = await client.FloatMillisecondsAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_Float64Milliseconds_ShortVersion()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = client.Float64Milliseconds(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_Float64Milliseconds_ShortVersion_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = await client.Float64MillisecondsAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_Float64Milliseconds_ShortVersion_Convenience()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            Float64MillisecondsDurationProperty body = new Float64MillisecondsDurationProperty(default);
+            Response<Float64MillisecondsDurationProperty> response = client.Float64Milliseconds(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_Float64Milliseconds_ShortVersion_Convenience_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            Float64MillisecondsDurationProperty body = new Float64MillisecondsDurationProperty(default);
+            Response<Float64MillisecondsDurationProperty> response = await client.Float64MillisecondsAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_Float64Milliseconds_AllParameters()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = client.Float64Milliseconds(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_Float64Milliseconds_AllParameters_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = await client.Float64MillisecondsAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_Float64Milliseconds_AllParameters_Convenience()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            Float64MillisecondsDurationProperty body = new Float64MillisecondsDurationProperty(default);
+            Response<Float64MillisecondsDurationProperty> response = client.Float64Milliseconds(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_Float64Milliseconds_AllParameters_Convenience_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            Float64MillisecondsDurationProperty body = new Float64MillisecondsDurationProperty(default);
+            Response<Float64MillisecondsDurationProperty> response = await client.Float64MillisecondsAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Property_FloatSecondsArray_ShortVersion()
         {
             Property client = new DurationClient().GetPropertyClient();
@@ -653,6 +929,122 @@ namespace Encode.Duration.Samples
 
             FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[] { TimeSpan.FromSeconds(10F) });
             Response<FloatSecondsDurationArrayProperty> response = await client.FloatSecondsArrayAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_FloatMillisecondsArray_ShortVersion()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                value = new object[]
+            {
+null
+            },
+            });
+            Response response = client.FloatMillisecondsArray(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_FloatMillisecondsArray_ShortVersion_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                value = new object[]
+            {
+null
+            },
+            });
+            Response response = await client.FloatMillisecondsArrayAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_FloatMillisecondsArray_ShortVersion_Convenience()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            FloatMillisecondsDurationArrayProperty body = new FloatMillisecondsDurationArrayProperty(new TimeSpan[] { default });
+            Response<FloatMillisecondsDurationArrayProperty> response = client.FloatMillisecondsArray(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_FloatMillisecondsArray_ShortVersion_Convenience_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            FloatMillisecondsDurationArrayProperty body = new FloatMillisecondsDurationArrayProperty(new TimeSpan[] { default });
+            Response<FloatMillisecondsDurationArrayProperty> response = await client.FloatMillisecondsArrayAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_FloatMillisecondsArray_AllParameters()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                value = new object[]
+            {
+null
+            },
+            });
+            Response response = client.FloatMillisecondsArray(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_FloatMillisecondsArray_AllParameters_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                value = new object[]
+            {
+null
+            },
+            });
+            Response response = await client.FloatMillisecondsArrayAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Property_FloatMillisecondsArray_AllParameters_Convenience()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            FloatMillisecondsDurationArrayProperty body = new FloatMillisecondsDurationArrayProperty(new TimeSpan[] { default });
+            Response<FloatMillisecondsDurationArrayProperty> response = client.FloatMillisecondsArray(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Property_FloatMillisecondsArray_AllParameters_Convenience_Async()
+        {
+            Property client = new DurationClient().GetPropertyClient();
+
+            FloatMillisecondsDurationArrayProperty body = new FloatMillisecondsDurationArrayProperty(new TimeSpan[] { default });
+            Response<FloatMillisecondsDurationArrayProperty> response = await client.FloatMillisecondsArrayAsync(body);
         }
     }
 }
