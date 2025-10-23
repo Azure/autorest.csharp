@@ -27,6 +27,7 @@ jobs:
         WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
         Commitish: refs/heads/${{ parameters.BranchName}}
       SkipCheckoutNone: true
+  - task: NuGetAuthenticate@1
   - task: UseDotNet@2
     displayName: 'Use .NET Core SDK'
     inputs:
