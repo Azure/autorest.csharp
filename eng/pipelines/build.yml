@@ -35,6 +35,7 @@ extends:
                 fetchDepth: 1
               - checkout: azure-sdk-tools
                 fetchDepth: 1
+              - task: NuGetAuthenticate@1
               - task: UseDotNet@2
                 displayName: 'Use .NET Core SDK'
                 retryCountOnTaskFailure: 3
