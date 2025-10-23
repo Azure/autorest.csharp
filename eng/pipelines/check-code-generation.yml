@@ -21,6 +21,7 @@ jobs:
       displayName: 'Install Node.js'
       inputs:
         version: $(NODE_VERSION)
+    - task: NuGetAuthenticate@1
     - task: UseDotNet@2
       displayName: 'Use .NET Core SDK'
       inputs:
