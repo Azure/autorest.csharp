@@ -3,6 +3,7 @@
     <Description>Azure Resource Manager client SDK for Azure resource provider NonResources.</Description>
     <Version>1.0.0-beta.1</Version>
     <PackageTags>azure;management;arm;resource manager;nonresources</PackageTags>
+    <IncludeAutorestDependency>true</IncludeAutorestDependency>
     <PackageId>_Azure.ResourceManager.NonResources</PackageId>
   </PropertyGroup>
 </Project>
