@@ -3,6 +3,7 @@
     <Description>Azure Resource Manager client SDK for Azure resource provider MgmtExactMatchFlattenInheritance.</Description>
     <Version>1.0.0-beta.1</Version>
     <PackageTags>azure;management;arm;resource manager;mgmtexactmatchflatteninheritance</PackageTags>
+    <IncludeAutorestDependency>true</IncludeAutorestDependency>
     <PackageId>MgmtExactMatchFlattenInheritance</PackageId>
   </PropertyGroup>
 </Project>
