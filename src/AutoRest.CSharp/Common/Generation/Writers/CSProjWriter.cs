@@ -47,6 +47,8 @@ internal class CSProjWriter
 
     public CSProjProperty? IncludeGeneratorSharedCode { get; init; }
 
+    public CSProjProperty? IncludeAutorestDependency { get; init; }
+
     public CSProjProperty? DefineConstants { get; init; }
 
     public CSProjProperty? RestoreAdditionalProjectSources { get; init; }

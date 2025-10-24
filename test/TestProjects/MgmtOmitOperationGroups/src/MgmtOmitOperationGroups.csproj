@@ -3,6 +3,7 @@
     <Description>Azure Resource Manager client SDK for Azure resource provider MgmtOmitOperationGroups.</Description>
     <Version>1.0.0-beta.1</Version>
     <PackageTags>azure;management;arm;resource manager;mgmtomitoperationgroups</PackageTags>
+    <IncludeAutorestDependency>true</IncludeAutorestDependency>
     <PackageId>MgmtOmitOperationGroups</PackageId>
   </PropertyGroup>
 </Project>

@@ -3,6 +3,7 @@
     <Description>Azure Resource Manager client SDK for Azure resource provider MgmtMockAndSample.</Description>
     <Version>1.0.0-beta.1</Version>
     <PackageTags>azure;management;arm;resource manager;mgmtmockandsample</PackageTags>
+    <IncludeAutorestDependency>true</IncludeAutorestDependency>
     <PackageId>MgmtMockAndSample</PackageId>
   </PropertyGroup>
 </Project>

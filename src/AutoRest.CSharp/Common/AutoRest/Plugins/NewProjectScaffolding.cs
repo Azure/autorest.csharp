@@ -150,6 +150,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 PackageTags = !Configuration.AzureArm ? Configuration.Namespace : $"azure;management;arm;resource manager;{Configuration.Namespace.Split('.').Last().ToLower()}",
                 TargetFrameworks = !Configuration.AzureArm ? new CSProjProperty("$(RequiredTargetFrameworks)") : null,
                 IncludeOperationsSharedSource = !Configuration.AzureArm ? new CSProjProperty("true") : null,
+                IncludeAutorestDependency = Configuration.AzureArm ? new CSProjProperty("true") : null,
             };
             if (Configuration.AzureArm)
             {

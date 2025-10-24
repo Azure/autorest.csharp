@@ -3,6 +3,7 @@
     <Description>Azure Resource Manager client SDK for Azure resource provider MgmtParent.</Description>
     <Version>1.0.0-beta.1</Version>
     <PackageTags>azure;management;arm;resource manager;mgmtparent</PackageTags>
+    <IncludeAutorestDependency>true</IncludeAutorestDependency>
     <PackageId>MgmtParent</PackageId>
   </PropertyGroup>
 </Project>

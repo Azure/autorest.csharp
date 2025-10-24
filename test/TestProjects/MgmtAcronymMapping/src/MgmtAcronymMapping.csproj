@@ -3,6 +3,7 @@
     <Description>Azure Resource Manager client SDK for Azure resource provider MgmtAcronymMapping.</Description>
     <Version>1.0.0-beta.1</Version>
     <PackageTags>azure;management;arm;resource manager;mgmtacronymmapping</PackageTags>
+    <IncludeAutorestDependency>true</IncludeAutorestDependency>
     <PackageId>MgmtAcronymMapping</PackageId>
   </PropertyGroup>
 </Project>
