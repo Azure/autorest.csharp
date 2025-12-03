@@ -30,9 +30,11 @@ steps:
     & ${{ parameters.ToolsRepositoryPath }}/eng/scripts/autorest/New-EmitterPackageJson.ps1 `
       -PackageJsonPath '${{ parameters.EmitterPackageJsonPath }}' `
       -OverridesPath $overridesPath `
-      -OutputDirectory '${{ parameters.OutputDirectory }}'
+      -OutputDirectory '${{ parameters.OutputDirectory }}' `
+      -PackageJsonFileName 'legacy-emitter-package.json'
 
     & ${{ parameters.ToolsRepositoryPath }}/eng/scripts/autorest/New-EmitterPackageLock.ps1 `
-      -EmitterPackageJsonPath '${{ parameters.OutputDirectory }}/emitter-package.json' `
-      -OutputDirectory '${{ parameters.OutputDirectory }}'
-  displayName: Create emitter-package.json
+      -EmitterPackageJsonPath '${{ parameters.OutputDirectory }}/legacy-emitter-package.json' `
+      -OutputDirectory '${{ parameters.OutputDirectory }}' `
+      -LockFileName 'legacy-emitter-package-lock.json'
+  displayName: Create legacy-emitter-package.json
