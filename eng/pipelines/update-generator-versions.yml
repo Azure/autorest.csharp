@@ -27,12 +27,12 @@ jobs:
   - download: current
     artifact: build_artifacts
   - pwsh: |
-        Write-Host "Deleting existing emitter-package files"
-        Remove-Item emitter-package*.json -Force
+        Write-Host "Deleting existing legacy-emitter-package files"
+        Remove-Item legacy-emitter-package*.json -Force
 
-        Write-Host "Copying emitter-package files"
-        Copy-Item $(Pipeline.Workspace)/build_artifacts/emitter-package*.json .
-    displayName: Copy emitter-package files
+        Write-Host "Copying legacy-emitter-package files"
+        Copy-Item $(Pipeline.Workspace)/build_artifacts/legacy-emitter-package*.json .
+    displayName: Copy legacy-emitter-package files
     workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net/eng
   - task: Powershell@2
     displayName: Update SDK Generator Versions

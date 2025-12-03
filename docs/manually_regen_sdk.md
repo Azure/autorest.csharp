@@ -12,7 +12,7 @@ When the automatic PR is created for azure-sdk-for-net if there are any issues f
 - If your generator PR needs to apply to typespec projects, or your generator PR changes anything in our emitter (the `src\TypeSpec.Extension\Emitter.Csharp` project), you will need to
   1. Update the `version` in `src\TypeSpec.Extension\Emitter.Csharp\package.json`
   2. Run `npm pack` command in `src\TypeSpec.Extension\Emitter.Csharp` directory. This will produce a pack like `src\TypeSpec.Extension\Emitter.Csharp\azure-tools-typespec-csharp-x.y.z.tgz` where `x.y.z` is the version number you set in step 1.
-  3. Change the emitter version used in our `azure-sdk-for-net` repo in this file `eng\emitter-package.json` like this:
+  3. Change the emitter version used in our `azure-sdk-for-net` repo in this file `eng\legacy-emitter-package.json` like this:
   ```diff
   {
     "main": "dist/src/index.js",
