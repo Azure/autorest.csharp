@@ -20,7 +20,7 @@ steps:
     $overrides = @{}
 
     if($useInternalFeed) {
-      $feedUrl = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest@local/npm/registry"
+      $feedUrl = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js/npm/registry"
       $overrides["@autorest/csharp"] = "$feedUrl/@autorest/csharp/-/csharp-${{ parameters.AutorestCSharpVersion }}.tgz"
       $overrides["@azure-tools/typespec-csharp"] = "$feedUrl/@azure-tools/typespec-csharp/-/typespec-csharp-${{ parameters.TypeSpecEmitterVersion }}.tgz"
     }
