@@ -3,8 +3,8 @@
 ################
 
 # Git Hub bot rules
-/.github/CODEOWNERS                           @jsquire @ronniegeraghty
-/.github/fabricbot.json                       @jsquire @ronniegeraghty
+/.github/CODEOWNERS                           @jsquire
+/.github/fabricbot.json                       @jsquire
 
 #####################
 # Code Generation
