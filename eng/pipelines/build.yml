@@ -95,12 +95,16 @@ extends:
                   command: custom
                   customCommand: run build
                   workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
+              - template: /eng/common/pipelines/templates/steps/login-to-github.yml
+                parameters:
+                  TokenOwners:
+                    - Azure
               - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
                 - pwsh: >
                     ./eng/PublishRelease.ps1
                     -AutorestArtifactDirectory ./artifacts/bin/AutoRest.CSharp/Release/net9.0/
                     -TypeSpecEmitterDirectory ./src/TypeSpec.Extension/Emitter.Csharp
-                    -GitHubToken $(azuresdk-github-pat)
+                    -GitHubToken $(GH_TOKEN)
                     -NpmToken $(azure-sdk-npm-token)
                     -BuildNumber $(Build.BuildNumber)
                     -Sha $(Build.SourceVersion)
@@ -249,6 +253,10 @@ extends:
                     Write-Host "Setting variable PrTitle to '$prTitle'"
                     Write-Host "##vso[task.setvariable variable=PrTitle]$prTitle"
                   displayName: 'Build PR Title'
+                - template: /eng/common/pipelines/templates/steps/login-to-github.yml
+                  parameters:
+                    TokenOwners:
+                      - Azure
                 - task: PowerShell@2
                   displayName: Create pull request
                   inputs:
@@ -260,6 +268,6 @@ extends:
                       -BaseBranch "main"
                       -PROwner "azure-sdk"
                       -PRBranch $(BranchName)
-                      -AuthToken "$(azuresdk-github-pat)"
+                      -AuthToken "$(GH_TOKEN)"
                       -PRTitle "$(PrTitle)"
                       -PRBody "Update AutoRest C# version to $(AutorestCSharpVersion)"

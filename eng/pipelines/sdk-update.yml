@@ -214,6 +214,7 @@ extends:
                   Write-Host "Setting variable PrTitle to '$prTitle'"
                   Write-Host "##vso[task.setvariable variable=PrTitle]$prTitle"
                 displayName: 'Build PR Title'
+              - template: /eng/common/pipelines/templates/steps/login-to-github.yml
               - task: PowerShell@2
                 displayName: Create pull request
                 inputs:
@@ -225,7 +226,7 @@ extends:
                     -BaseBranch "main"
                     -PROwner "azure-sdk"
                     -PRBranch "$(BranchName)"
-                    -AuthToken "$(azuresdk-github-pat)"
+                    -AuthToken "$(GH_TOKEN)"
                     -PRTitle "$(PrTitle)"
                     -PRBody "Triggered from $(PRUrl.PRUrl)"
                     -OpenAsDraft $true
